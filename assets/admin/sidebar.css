@@ -317,7 +317,7 @@ svg#fb-global-panel-icon {
   width: 26px;
 }
 .fb-responsive-device-wrapper.fb-device-switchers-open .fb-responsive-device-inner-wrapper {
-  background: #f2f2f2;
+  background: #dcdcde;
   border-radius: 2px;
   position: relative;
   z-index: 11;
@@ -343,12 +343,98 @@ svg#fb-global-panel-icon {
   z-index: 2;
 }
 .fb-responsive-device-wrapper .fb-device-switcher.active {
-  background: #f2f2f2;
+  background: #dcdcde;
   border-radius: 50%;
   height: 26px;
   opacity: 1;
   transform: scale(1);
   width: 26px;
+}
+.fb-responsive-device-wrapper .fb-device-switcher:hover {
+  background: #dcdcde;
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/range/editor.lazy.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+.fb-range-control .fb-range-control__mobile-controls {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-base-control.components-range-control {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-right: 20px;
+  position: relative;
+  width: 100%;
+  margin-bottom: 0;
+  max-height: 30px;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-base-control.components-range-control .components-range-control__tooltip {
+  left: 45%;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-input-control__container {
+  flex: 0 0 0%;
+  width: 100%;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-number-control {
+  width: 35%;
+  margin-left: 10px;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-number-control .components-input-control__input {
+  padding: 0 1px 0 6px !important;
+  text-align: left;
+  font-size: 14px;
+}
+.fb-range-control .fb-range-control__mobile-controls .components-range-control__marks {
+  top: 13px;
+}
+
+.fb-setting-units-type {
+  position: relative;
+  display: inline-block;
+}
+.fb-setting-units-type .fb-setting-units-current {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: #dcdcde;
+  cursor: pointer;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fb-setting-units-type .fb-setting-units-dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option {
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option.active {
+  font-weight: bold;
+  color: #007cba;
+}
+.fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option:hover {
+  background: #dcdcde;
 }
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/typography-control/editor.lazy.scss ***!

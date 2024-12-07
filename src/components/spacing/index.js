@@ -7,6 +7,7 @@ import {
 } from '@wordpress/components';
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_RangeUnitsType from '@Components/unit-control';
 import './editor.lazy.scss';
 
 export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spacingUnits, spacingDesktop, spacingTablet, spacingMobile, handleSpacingUnitHandler, spacingCombineBtn, spacingCombineBtnHandler, setAttributes} ) {
@@ -43,31 +44,20 @@ export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spa
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
-				{/* Margin */}
 				<div className="fb-setting-spacing-label-container">
-					{/*eslint-disable-next-line @wordpress/i18n-no-variables*/}
 					<FB_ResponsiveControl
 						labelText={ __( label, 'frontis-blocks' )}
 						device={deviceType}
 						deviceHandler={( newDevice ) => setAttributes( {deviceType: newDevice} )}
 					/>
-					<div className="fb-setting-units-type">
-						<ButtonGroup className="fb-setting-units-type-wrap">
-							{UNIT_TYPES.map( ( item, key ) => (
-								<Button
-									key={key}
-									onClick={() => setSpacingUnit(item.value)}
-									className={`fb-setting-units-type-switcher ${spacingUnits[deviceType] === item.value ? 'active' : ''}`}
-								>
-									{item.label}
-								</Button>
-							) )}
-						</ButtonGroup>
-					</div>
+					<FB_RangeUnitsType
+						currentUnit={spacingUnits[deviceType]}
+						unitTypes={UNIT_TYPES}
+						onUnitChange={setSpacingUnit}
+					/>
 				</div>
 				<div className="fb-setting-spacing-input-container">
 					<div className="fb-setting-spacing-input-wrapper">
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="fb-setting-spacing-input-label">{__( 'Top', 'frontis-blocks' )}</label>
 						<input
 							type="number"
@@ -77,7 +67,6 @@ export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spa
 						/>
 					</div>
 					<div className="fb-setting-spacing-input-wrapper">
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="fb-setting-spacing-input-label">{__( 'Right', 'frontis-blocks' )}</label>
 						<input
 							type="number"
@@ -87,7 +76,6 @@ export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spa
 						/>
 					</div>
 					<div className="fb-setting-spacing-input-wrapper">
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="fb-setting-spacing-input-label">{__( 'Bottom', 'frontis-blocks' )}</label>
 						<input
 							type="number"
@@ -97,7 +85,6 @@ export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spa
 						/>
 					</div>
 					<div className="fb-setting-spacing-input-wrapper">
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="fb-setting-spacing-input-label">{__( 'Left', 'frontis-blocks' )}</label>
 						<input
 							type="number"
@@ -107,7 +94,6 @@ export default function FB_Spacing( {label, deviceType, spacingUnitsHandler, spa
 						/>
 					</div>
 					<div className="fb-setting-spacing-input-wrapper">
-						{/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
 						<label className="fb-setting-spacing-input-label"></label>
 						<span
 							className={`dashicons ${spacingCombineBtn ? 'dashicons-admin-links' : 'dashicons-editor-unlink'} ${spacingCombineBtn ? 'is-checked' : ''}`}
