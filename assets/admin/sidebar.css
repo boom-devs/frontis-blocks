@@ -353,43 +353,22 @@ svg#fb-global-panel-icon {
 .fb-responsive-device-wrapper .fb-device-switcher:hover {
   background: #dcdcde;
 }
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/range/editor.lazy.scss ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
-.fb-range-control .fb-range-control__mobile-controls {
-  display: flex;
-  width: 100%;
-  align-items: center;
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/unit-control/editor.lazy.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+.fb-setting-fontsize-wrapper .components-range-control__reset, .fb-setting-letterspacing-wrapper .components-range-control__reset, .fb-setting-lineheight-wrapper .components-range-control__reset {
+  position: absolute;
+  top: -33px;
+  right: 80px;
+  box-shadow: unset;
+  font-size: 10px;
 }
-.fb-range-control .fb-range-control__mobile-controls .components-base-control.components-range-control {
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
-  align-items: flex-start;
-  justify-content: flex-start;
-  margin-right: 20px;
-  position: relative;
-  width: 100%;
-  margin-bottom: 0;
-  max-height: 30px;
+.fb-setting-fontsize-wrapper .components-range-control__reset:hover, .fb-setting-letterspacing-wrapper .components-range-control__reset:hover, .fb-setting-lineheight-wrapper .components-range-control__reset:hover {
+  box-shadow: unset !important;
 }
-.fb-range-control .fb-range-control__mobile-controls .components-base-control.components-range-control .components-range-control__tooltip {
-  left: 45%;
-}
-.fb-range-control .fb-range-control__mobile-controls .components-input-control__container {
-  flex: 0 0 0%;
-  width: 100%;
-}
-.fb-range-control .fb-range-control__mobile-controls .components-number-control {
-  width: 35%;
-  margin-left: 10px;
-}
-.fb-range-control .fb-range-control__mobile-controls .components-number-control .components-input-control__input {
-  padding: 0 1px 0 6px !important;
-  text-align: left;
-  font-size: 14px;
-}
-.fb-range-control .fb-range-control__mobile-controls .components-range-control__marks {
-  top: 13px;
+.fb-setting-fontsize-wrapper .components-range-control__reset:focus, .fb-setting-letterspacing-wrapper .components-range-control__reset:focus, .fb-setting-lineheight-wrapper .components-range-control__reset:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .fb-setting-units-type {
@@ -435,6 +414,32 @@ svg#fb-global-panel-icon {
 }
 .fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option:hover {
   background: #dcdcde;
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/range/editor.lazy.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************/
+.fb-unit-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.fb-unit-wrapper .fb-reset-control-container .fb-reset-button {
+  align-items: center;
+  background-color: #dcdcde;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer !important;
+  display: flex;
+  height: 26px !important;
+  justify-content: center;
+  min-width: auto !important;
+  opacity: 1 !important;
+  padding: 6px !important;
+  width: 26px !important;
+}
+.fb-unit-wrapper .fb-reset-control-container .fb-reset-button svg {
+  display: block;
+  fill: none;
 }
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/typography-control/editor.lazy.scss ***!
