@@ -281,9 +281,9 @@ const attributes = {
     headingFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '18',
-			Mobile: '16'
+			Desktop: '72',
+			Tablet: '56',
+			Mobile: '38'
 		}
 	},
 	headingFontSizeUnits: {
@@ -384,7 +384,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 24,
             left: 0,
             right: 0,
         },
@@ -393,7 +393,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 18,
             left: 0,
             right: 0,
         },
@@ -402,7 +402,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 16,
             left: 0,
             right: 0,
         },
@@ -541,8 +541,8 @@ const attributes = {
     SubHeadingFontSize: {
         type: 'object',
 		default: {
-			Desktop: '16',
-			Tablet: '16',
+			Desktop: '24',
+			Tablet: '18',
 			Mobile: '16'
 		}
     },
@@ -642,7 +642,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 42,
             left: 0,
             right: 0,
         },
@@ -651,7 +651,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 32,
             left: 0,
             right: 0,
         },
@@ -660,7 +660,7 @@ const attributes = {
         type: "object",
         default: {
             top: 0,
-            bottom: 0,
+            bottom: 24,
             left: 0,
             right: 0,
         },
@@ -786,7 +786,7 @@ const attributes = {
             top: 0,
             bottom: 0,
             left: 0,
-            right: 0,
+            right: 10,
         },
     },
     btnOneTabMargin: {
@@ -868,19 +868,19 @@ const attributes = {
     btnOneDesktopBorderRadius: {
         type: "object",
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            top: 50,
+            left: 50,
+            bottom: 50,
+            right: 50,
         },
     },
     btnOneTabBorderRadius: {
         type: "object",
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
         },
     },
     btnOneMobileBorderRadius: {
@@ -1442,8 +1442,8 @@ const attributes = {
         default: {
             top: 120,
             bottom: 120,
-            left: 0,
-            right: 0,
+            left: 20,
+            right: 20,
         },
     },
     globalPaddingTablet: {
@@ -1451,8 +1451,8 @@ const attributes = {
         default: {
             top: 80,
             bottom: 80,
-            left: 0,
-            right: 0,
+            left: 20,
+            right: 20,
         },
     },
     globalPaddingMobile: {
@@ -1460,8 +1460,8 @@ const attributes = {
         default: {
             top: 60,
             bottom: 60,
-            left: 0,
-            right: 0,
+            left: 15,
+            right: 15,
         },
     },
     globalPaddingLink : {

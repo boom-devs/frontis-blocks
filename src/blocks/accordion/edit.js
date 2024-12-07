@@ -200,6 +200,55 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         titleBgHoverImageRepeat,
         titleBgHoverImageSize,
 
+        // Accordion Item Content
+        contentBorder,
+        contentBorderColor,
+        contentBorderHoverColor,
+        contentBorderColorSwitcher,
+        contentBorderUnits,
+        contentDesktopBorderWidth,
+        contentTabBorderWidth,
+        contentMobileBorderWidth,
+        contentBorderLink,
+        contentBorderRadiusUnits,
+        contentDesktopBorderRadiusWidth,
+        contentTabBorderRadiusWidth,
+        contentMobileBorderRadiusWidth,
+        contentBorderRadiusLink,
+        contentDesktopSwitcher,
+        contentTabletSwitcher,
+        contentMobileSwitcher,
+
+        // Item Box Shadow
+        contentBoxShadowValues,
+        contentBoxShadowCssValue,
+
+        // Item Backgorund
+        contentBgColorSwitcher,
+        contentBgType,
+        contentBgClassicColor,
+        contentBgGradientColor,
+        contentBgCustomGradientSwitcher,
+        contentBgCustomGradientInputValue,
+        contentBgImageUrl,
+        contentBgImageAlt,
+        contentBgImageID,
+        contentBgImagePosition,
+        contentBgImageAttachment,
+        contentBgImageRepeat,
+        contentBgImageSize,
+        contentBgHoverType,
+        contentBgHoverClassicColor,
+        contentBgHoverGradientColor,
+        contentBgHoverCustomGradientSwitcher,
+        contentBgHoverCustomGradientInputValue,
+        contentBgHoverImageUrl,
+        contentBgHoverImageAlt,
+        contentBgHoverImageID,
+        contentBgHoverImagePosition,
+        contentBgHoverImageAttachment,
+        contentBgHoverImageRepeat,
+        contentBgHoverImageSize,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -291,6 +340,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const accordionBorderRadiusDesktopWidth = `${accordionDesktopBorderRadiusWidth.top}${accordionBorderRadiusUnits[deviceType]} ${accordionDesktopBorderRadiusWidth.right}${accordionBorderRadiusUnits[deviceType]} ${accordionDesktopBorderRadiusWidth.bottom}${accordionBorderRadiusUnits[deviceType]} ${accordionDesktopBorderRadiusWidth.left}${accordionBorderRadiusUnits[deviceType]}`;
     const accordionBorderRadiusTabletWidth = `${accordionTabBorderRadiusWidth.top}${accordionBorderRadiusUnits[deviceType]} ${accordionTabBorderRadiusWidth.right}${accordionBorderRadiusUnits[deviceType]} ${accordionTabBorderRadiusWidth.bottom}${accordionBorderRadiusUnits[deviceType]} ${accordionTabBorderRadiusWidth.left}${accordionBorderRadiusUnits[deviceType]}`;
     const accordionBorderRadiusMobileWidth = `${accordionMobileBorderRadiusWidth.top}${accordionBorderRadiusUnits[deviceType]} ${accordionMobileBorderRadiusWidth.right}${accordionBorderRadiusUnits[deviceType]} ${accordionMobileBorderRadiusWidth.bottom}${accordionBorderRadiusUnits[deviceType]} ${accordionMobileBorderRadiusWidth.left}${accordionBorderRadiusUnits[deviceType]}`;
+
+    const contentBorderDesktopWidth = `${contentDesktopBorderWidth.top}${contentBorderUnits[deviceType]} ${contentDesktopBorderWidth.right}${contentBorderUnits[deviceType]} ${contentDesktopBorderWidth.bottom}${contentBorderUnits[deviceType]} ${contentDesktopBorderWidth.left}${contentBorderUnits[deviceType]}`;
+    const contentBorderTabletWidth = `${contentTabBorderWidth.top}${contentBorderUnits[deviceType]} ${contentTabBorderWidth.right}${contentBorderUnits[deviceType]} ${contentTabBorderWidth.bottom}${contentBorderUnits[deviceType]} ${contentTabBorderWidth.left}${contentBorderUnits[deviceType]}`;
+    const contentBorderMobileWidth = `${contentMobileBorderWidth.top}${contentBorderUnits[deviceType]} ${contentMobileBorderWidth.right}${contentBorderUnits[deviceType]} ${contentMobileBorderWidth.bottom}${contentBorderUnits[deviceType]} ${contentMobileBorderWidth.left}${contentBorderUnits[deviceType]}`;
+
+    const contentBorderRadiusDesktopWidth = `${contentDesktopBorderRadiusWidth.top}${contentBorderRadiusUnits[deviceType]} ${contentDesktopBorderRadiusWidth.right}${contentBorderRadiusUnits[deviceType]} ${contentDesktopBorderRadiusWidth.bottom}${contentBorderRadiusUnits[deviceType]} ${contentDesktopBorderRadiusWidth.left}${contentBorderRadiusUnits[deviceType]}`;
+    const contentBorderRadiusTabletWidth = `${contentTabBorderRadiusWidth.top}${contentBorderRadiusUnits[deviceType]} ${contentTabBorderRadiusWidth.right}${contentBorderRadiusUnits[deviceType]} ${contentTabBorderRadiusWidth.bottom}${contentBorderRadiusUnits[deviceType]} ${contentTabBorderRadiusWidth.left}${contentBorderRadiusUnits[deviceType]}`;
+    const contentBorderRadiusMobileWidth = `${contentMobileBorderRadiusWidth.top}${contentBorderRadiusUnits[deviceType]} ${contentMobileBorderRadiusWidth.right}${contentBorderRadiusUnits[deviceType]} ${contentMobileBorderRadiusWidth.bottom}${contentBorderRadiusUnits[deviceType]} ${contentMobileBorderRadiusWidth.left}${contentBorderRadiusUnits[deviceType]}`;
 
     
 
@@ -506,6 +563,54 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 object-fit: cover !important;
             }
 
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+            ${
+            contentBgType === "gradient"
+                ? `background: ${
+                    contentBgCustomGradientSwitcher && contentBgCustomGradientInputValue
+                    ? contentBgCustomGradientInputValue
+                    : contentBgGradientColor
+                };`
+                : contentBgImageUrl !== undefined && contentBgImageUrl !== null && contentBgImageUrl !== ""
+                ? `
+                ${contentBgImageUrl !== undefined ? `background-image: url(${contentBgImageUrl});` : ''}
+                ${contentBgImagePosition !== undefined ? `background-position: ${contentBgImagePosition};` : ''}
+                ${contentBgImageAttachment !== undefined ? `background-attachment: ${contentBgImageAttachment};` : ''}
+                ${contentBgImageRepeat !== undefined ? `background-repeat: ${contentBgImageRepeat};` : ''}
+                ${contentBgImageSize !== undefined ? `background-size: ${contentBgImageSize};` : ''}
+                `
+                : `background: ${contentBgClassicColor};`
+            }
+            ${contentBoxShadowCssValue ? `box-shadow: ${contentBoxShadowCssValue};` : ''}
+            ${contentBorder !== undefined ? `border-style: ${contentBorder};` : ''}
+            ${contentBorderDesktopWidth !== undefined ? `border-width: ${contentBorderDesktopWidth};` : ''}
+            ${contentBorderColor !== undefined ? `border-color: ${contentBorderColor};` : ''}
+            ${contentBorderRadiusDesktopWidth !== undefined ? `border-radius: ${contentBorderRadiusDesktopWidth};` : ''}
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper:hover {
+            ${
+                contentBgHoverType === "gradient"
+                ? `background: ${
+                    contentBgHoverCustomGradientSwitcher && contentBgHoverCustomGradientInputValue
+                        ? contentBgHoverCustomGradientInputValue
+                        : contentBgHoverGradientColor
+                    };`
+                : contentBgHoverImageUrl !== undefined && contentBgHoverImageUrl !== null && contentBgHoverImageUrl !== ""
+                ? `
+                    ${contentBgHoverImageUrl !== undefined ? `background-image: url(${contentBgHoverImageUrl});` : ''}
+                    ${contentBgHoverImagePosition !== undefined ? `background-position: ${contentBgHoverImagePosition};` : ''}
+                    ${contentBgHoverImageAttachment !== undefined ? `background-attachment: ${contentBgHoverImageAttachment};` : ''}
+                    ${contentBgHoverImageRepeat !== undefined ? `background-repeat: ${contentBgHoverImageRepeat};` : ''}
+                    ${contentBgHoverImageSize !== undefined ? `background-size: ${contentBgHoverImageSize};` : ''}
+                `
+                : `background: ${contentBgHoverClassicColor};`
+            }
+            ${contentBorderHoverColor !== undefined ? `border-color: ${contentBorderHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
       
         @media only screen and (max-width: 1024px) {
             .fb-accordion-main-wrapper.${blockID} {
@@ -573,8 +678,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     ? `width: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet}; height: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet};` 
                     : ''}
             }
-        
-        
+            
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+                ${contentBorderTabletWidth !== undefined ? `border-width: ${contentBorderTabletWidth};` : ''}
+                ${contentBorderRadiusTabletWidth !== undefined ? `border-radius: ${contentBorderRadiusTabletWidth};` : ''}
+            }
         }
       
         @media only screen and (max-width: 767px) {
@@ -641,6 +749,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 ${titleSuffixIconSize?.Mobile !== undefined 
                     ? `width: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile}; height: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile};` 
                     : ''}
+            }
+            
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+                ${contentBorderMobileWidth !== undefined ? `border-width: ${contentBorderMobileWidth};` : ''}
+                ${contentBorderRadiusMobileWidth !== undefined ? `border-radius: ${contentBorderRadiusMobileWidth};` : ''}
             }
         }
 
@@ -815,20 +928,72 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         titleBgHoverImageAttachment,
         titleBgHoverImageRepeat,
         titleBgHoverImageSize,
+
+        // Accordion Item Content
+        contentBorder,
+        contentBorderColor,
+        contentBorderHoverColor,
+        contentBorderColorSwitcher,
+        contentBorderUnits,
+        contentDesktopBorderWidth,
+        contentTabBorderWidth,
+        contentMobileBorderWidth,
+        contentBorderLink,
+        contentBorderRadiusUnits,
+        contentDesktopBorderRadiusWidth,
+        contentTabBorderRadiusWidth,
+        contentMobileBorderRadiusWidth,
+        contentBorderRadiusLink,
+        contentDesktopSwitcher,
+        contentTabletSwitcher,
+        contentMobileSwitcher,
+
+        // Item Box Shadow
+        contentBoxShadowValues,
+        contentBoxShadowCssValue,
+
+        // Item Backgorund
+        contentBgColorSwitcher,
+        contentBgType,
+        contentBgClassicColor,
+        contentBgGradientColor,
+        contentBgCustomGradientSwitcher,
+        contentBgCustomGradientInputValue,
+        contentBgImageUrl,
+        contentBgImageAlt,
+        contentBgImageID,
+        contentBgImagePosition,
+        contentBgImageAttachment,
+        contentBgImageRepeat,
+        contentBgImageSize,
+        contentBgHoverType,
+        contentBgHoverClassicColor,
+        contentBgHoverGradientColor,
+        contentBgHoverCustomGradientSwitcher,
+        contentBgHoverCustomGradientInputValue,
+        contentBgHoverImageUrl,
+        contentBgHoverImageAlt,
+        contentBgHoverImageID,
+        contentBgHoverImagePosition,
+        contentBgHoverImageAttachment,
+        contentBgHoverImageRepeat,
+        contentBgHoverImageSize,
       ]);
       
       useEffect(() => {
         setAttributes({
-          blockStyle: fbaccordionItemstyle,
+          blockStyle: fbaccordionItemstyle.replace(/\s+/g, ' ').trim(),
         });
       }, [fbaccordionItemstyle]);
+
+      const editorStyle = fbaccordionItemstyle.replace(/\s+/g, ' ').trim();
       
 
     return (
         <>
             <style>
 			{`
-				${blockStyle}
+				${editorStyle}
             `}
 			</style>
             {/* <style>
