@@ -36,9 +36,3 @@ function wm_frontis_blocks(){
 
 //Kick of the plugin.
 wm_frontis_blocks();
-
-$options_data = get_option("fb_global_colors");
-
-// echo "<pre>";
-// var_dump($options_data);
-// echo "</pre>";

@@ -351,7 +351,7 @@ const attributes = {
     },
     pricingIcon: {
 		type: 'string',
-		default: 'check',
+		default: 'bookmark',
 	},
 	/** End Header */
 
@@ -472,20 +472,6 @@ const attributes = {
 		}
 	},
 	/** End Button */
-	/** Start Ribbon */	
-	priceRibbonSwitcher: {
-		type: "boolean",
-		default: false
-	},
-	priceRibbonText: {
-		type: "string",
-		default: "Featured"
-	},
-	priceRibbonPosition: {
-		type: "string",
-		default: "right"
-	},
-	/** End Ribbon */
 	/** End General Settings */
 
 
@@ -650,7 +636,7 @@ const attributes = {
 	},
 	priceIconColor : { 
 		type: "string",
-		default: "#fff"
+		default: "#399CFF"
 	},
 	priceIconHoverColor: {
 		type: 'string',
@@ -662,7 +648,7 @@ const attributes = {
 	},
 	priceIconBgColor : {
 		type: "string",
-		default: "#F72585"
+		default: ""
 	},
 	priceIconBgHoverColor: {
 		type: 'string',
@@ -671,9 +657,9 @@ const attributes = {
 	priceIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '50',
-			Tablet: '50',
-			Mobile: '50'
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30'
 		}
 	},
 	priceIconSizeUnits: {
@@ -687,9 +673,9 @@ const attributes = {
 	priceIconBgSize: {
 		type: 'object',
 		default: {
-			Desktop: '80',
-			Tablet: '80',
-			Mobile: '80',
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30',
 		}
 	},
 	priceIconBgSizeUnits: {
@@ -700,7 +686,42 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-
+	priceIconPositionSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	priceIconPositionTop: {
+		type: "object",
+		default: {
+			Desktop: '5',
+			Tablet: '5',
+			Mobile: '4',
+		}
+	},
+	priceIconPositionTopUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	priceIconPositionLeft: {
+		type: "object",
+		default: {
+			Desktop: '90',
+			Tablet: '90',
+			Mobile: '85',
+		}
+	},
+	priceIconPositionLeftUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
 	/** Start Border */
 	priceIconBorder: {
 		type: 'string',
@@ -769,28 +790,28 @@ const attributes = {
 	priceIconBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	priceIconBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	priceIconBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	priceIconBorderRadiusLink : {
