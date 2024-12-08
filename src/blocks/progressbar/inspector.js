@@ -174,8 +174,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID} .progress-bar-wrapper {
+            ${progressGlobalZIndex.Desktop ? `z-index: ${progressGlobalZIndex.Desktop};` : ''}
             position: relative;
-            z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
             ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
@@ -250,6 +250,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 1024px) {
+
+            .${blockID} .progress-bar-wrapper {
+                ${progressGlobalZIndex.Tablet ? `z-index: ${progressGlobalZIndex.Tablet};` : ''}
+                position: relative;
+            }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -265,6 +270,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
+
+            .${blockID} .progress-bar-wrapper {
+                ${progressGlobalZIndex.Mobile ? `z-index: ${progressGlobalZIndex.Mobile};` : ''}
+                position: relative;
+            }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -569,14 +579,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={progressGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+                                                    <FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={100}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={progressGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
                                             </div>

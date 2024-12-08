@@ -2040,7 +2040,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	priceGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	/** Start Padding */
 	priceGlobalPaddingUnits: {
