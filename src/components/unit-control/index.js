@@ -11,6 +11,9 @@ const FB_RangeUnitsType = ({
 		{ label: 'px', value: 'px' },
 		{ label: '%', value: '%' },
 		{ label: 'em', value: 'em' },
+		{ label: 'rem', value: 'rem' },
+		{ label: 'vh', value: 'vh' },
+		{ label: 'vw', value: 'vw' },
 	];
 
 	/** State to manage dropdown visibility */
