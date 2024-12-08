@@ -2,8 +2,9 @@ import { __ } from '@wordpress/i18n';
 import { useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import './editor.lazy.scss';
+import {useEffect} from "@wordpress/element";
 
-const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => { 
+const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	const { setDeviceType } = useDispatch(editorStore);
 
 	const handleDevice = (deviceName) => {
@@ -16,6 +17,9 @@ const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 		wrapper.classList.toggle('fb-device-switchers-open');
 	}
 
+	useEffect(() => {
+		// setDeviceType('Desktop');
+	}, [])
 	return (
 		<>
 			<div className="fb-setting-device-label-wrapper">

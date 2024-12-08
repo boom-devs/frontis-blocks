@@ -1,3 +1,4 @@
+import { __ } from "@wordpress/i18n";
 import FB_Range from "@Components/range";
 import { InspectorControls } from "@wordpress/block-editor";
 import {
@@ -10,7 +11,6 @@ import {
 	RangeControl,
 	SelectControl
 } from "@wordpress/components";
-import { __ } from "@wordpress/i18n";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -55,6 +55,13 @@ const Inspector = ({ attributes, setAttributes }) => {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/flex-start';
     }
 
+	// Reset breakpoint value
+	const DEVICE_BREAKPOINT = {
+		'Desktop': FrontisBlocksData.desktop_breakpoint,
+		'Mobile': FrontisBlocksData.mobile_breakpoint,
+		'Tablet': FrontisBlocksData.tablet_breakpoint
+	}
+
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
 		{ label: __('Boxed', 'frontis-blocks'), value: "boxed" },
@@ -88,11 +95,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
-		console.log(width)
+		setAttributes({fullWidthContentBoxedWidth: width});
 	}
 
 	const fullWidthContentBoxedWidthUnitsFn = (units) => {
-
+		setAttributes({fullWidthContentBoxedWidthUnits: units});
 	}
 
 	return (
@@ -180,7 +187,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 															units={fullWidthContentBoxedWidthUnits}
 															setAttributes={setAttributes}
 															rangeStep={1}
-															resetFallbackValue={1200}
+															resetFallbackValue={DEVICE_BREAKPOINT[deviceType]}
 															units_types_arr={[
 																{ label: 'px', value: 'px' },
 																{ label: '%', value: '%' },
@@ -190,7 +197,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													</BaseControl>
 												</>
 											)}
-											
+
 											<FB_Range
 												min={1}
 												max={2000}
@@ -227,7 +234,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														key={key}
 														onClick={() =>
 															setAttributes({
-																
+
 															})
 														}
 														className={`fb-advanced-alignment-single-btn ${
@@ -255,7 +262,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														key={key}
 														onClick={() =>
 															setAttributes({
-																
+
 															})
 														}
 														className={`fb-advanced-alignment-single-btn ${
@@ -278,7 +285,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														key={key}
 														onClick={() =>
 															setAttributes({
-																
+
 															})
 														}
 														className={`fb-advanced-alignment-single-btn ${
@@ -336,7 +343,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														value={''}
 														onChange={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														min={1}
@@ -411,7 +418,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setNormalCustomGradientSwitcher={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														normalCustomGradientInputValue={
@@ -419,7 +426,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setNormalCustomGradientInputValue={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														normalBackgroundImageUrl={''}
@@ -439,7 +446,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setNormalBackgroundImagePosition={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														normalBackgroundImageAttachment={
@@ -447,7 +454,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setNormalBackgroundImageAttachment={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														normalBackgroundImageRepeat={
@@ -455,7 +462,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setNormalBackgroundImageRepeat={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														normalBackgroundImageSize={''}
@@ -479,7 +486,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setHoverCustomGradientSwitcher={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														hoverCustomGradientInputValue={
@@ -487,7 +494,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setHoverCustomGradientInputValue={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														hoverBackgroundImageUrl={''}
@@ -507,7 +514,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setHoverBackgroundImagePosition={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														hoverBackgroundImageAttachment={
@@ -515,7 +522,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setHoverBackgroundImageAttachment={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														hoverBackgroundImageRepeat={
@@ -523,7 +530,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 														setHoverBackgroundImageRepeat={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 														hoverBackgroundImageSize={''}
@@ -605,7 +612,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														initialShadowValue={''}
 														onBoxShadowStyleChange={(value) =>
 															setAttributes({
-																
+
 															})
 														}
 													/>
