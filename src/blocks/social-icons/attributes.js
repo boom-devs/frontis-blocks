@@ -398,6 +398,10 @@ const attributes = {
             right: '10',
         },
     },
+    socialIconPaddingLink : {
+        type : "boolean",
+        default: true
+    },
     /*End Icon Styles */
 
     /** Title Styles */
