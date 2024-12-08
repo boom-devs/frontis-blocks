@@ -119,7 +119,7 @@ const FB_TypographyControl = ({
                                 onChange={handleFontFamilyChange}
                             />
 							<FB_Range
-								min={1}
+								min={0}
 								max={200}
 								label={__("Font Size", "frontis-blocks")}
 								rangeValue={fontSize}
@@ -156,7 +156,7 @@ const FB_TypographyControl = ({
                                 onChange={handleTextDecorationChange}
                             />
                             <FB_Range
-                                min={1}
+                                min={0}
                                 max={100}
                                 label={__("Letter Spacing", "frontis-blocks")}
                                 rangeValue={letterSpacing}
@@ -169,7 +169,7 @@ const FB_TypographyControl = ({
                                 resetFallbackValue={''}
                             />
                             <FB_Range
-                                min={1}
+                                min={0}
                                 max={200}
                                 label={__("Line Height", "frontis-blocks")}
                                 rangeValue={lineHeight}

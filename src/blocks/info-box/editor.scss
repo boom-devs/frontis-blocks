@@ -207,22 +207,6 @@ $white_color: #ffffff;
 	}
 }
 
-.fb-setting-fontsize-wrapper, .fb-setting-letterspacing-wrapper, .fb-setting-lineheight-wrapper {
-	.components-range-control__reset {
-		position: absolute;
-		top: -33px;
-		right: 50px;
-		box-shadow: unset;
-		font-size: 10px;
-		&:hover {
-			box-shadow: unset !important;
-		}
-		&:focus {
-			outline: none !important;
-			box-shadow: none !important;
-		}
-	}
-}
 
 .fb-setting-color-panel-wrapper {
 	.fb-setting-color-panel-btn {

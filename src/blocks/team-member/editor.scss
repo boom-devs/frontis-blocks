@@ -123,30 +123,6 @@ $white_color: #ffffff;
 	display: flex;
 }
 
-.fb-setting-spacing-container {
-    position: relative;
-
-	.fb-setting-spacing-inner-container {
-		margin-bottom: 0 !important;
-	}
-
-	button {
-		&.components-button.components-range-control__reset {
-			position: absolute;
-			top: -43px;
-			right: 50px;
-			box-shadow: unset;
-			font-size: 10px;
-			&:hover {
-				box-shadow: unset !important;
-			}
-			&:focus {
-				outline: none !important;
-				box-shadow: none !important;
-			}
-		}
-	}
-}
 
 .fb-image-upload-field-wrapper {
 	.components-base-control__field {
