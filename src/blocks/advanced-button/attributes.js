@@ -478,7 +478,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	buttonGlobalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
     },
 	/** Start Padding */
 	buttonGlobalPaddingUnits: {
