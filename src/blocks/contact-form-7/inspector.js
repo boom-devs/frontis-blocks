@@ -1838,7 +1838,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 	
         .${blockID}.fb-contact-form-wrapper {
-            ${contactFormGlobalZIndex != "" ? `z-index: ${contactFormGlobalZIndex};` : ''}
+			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
             position: relative;
         }
 
@@ -3114,18 +3114,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={contactFormGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+													<FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={''}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={contactFormGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
 

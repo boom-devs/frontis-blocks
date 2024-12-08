@@ -2412,7 +2412,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		const allBlockStyle = useMemo(() => `
 			.${blockID}.fb-social-wrapper {
-				${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
+				${socialGlobalZIndex.Desktop ? `z-index: ${socialGlobalZIndex.Desktop};` : ''}
 				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
 				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -2485,6 +2485,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 1024px) {
 				.${blockID}.fb-social-wrapper {
+					${socialGlobalZIndex.Tablet ? `z-index: ${socialGlobalZIndex.Tablet};` : ''}
 					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
 					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -2521,6 +2522,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 767px) {
 				.${blockID}.fb-social-wrapper {
+					${socialGlobalZIndex.Mobile ? `z-index: ${socialGlobalZIndex.Mobile};` : ''}
 					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
 					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -3078,15 +3080,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={socialGlobalZIndex}
-														onChange={(value) => setAttributes({ socialGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={socialGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ socialGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>

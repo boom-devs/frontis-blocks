@@ -746,7 +746,12 @@ const attributes = {
 
     /*Global Styles */
     socialGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
     socialGlobalPaddingUnits: {
 		type: 'object',

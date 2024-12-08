@@ -8,7 +8,12 @@ const attributes = {
         default: "Desktop"
     },
     progressGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
     progressTextPosition: {
         type: "string",

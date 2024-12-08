@@ -1596,7 +1596,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-testimonial-main-wrapper {
-            z-index: ${TestimonialGlobalZIndex !== undefined ? TestimonialGlobalZIndex : ''} !important;
+            ${TestimonialGlobalZIndex.Desktop ? `z-index: ${TestimonialGlobalZIndex.Desktop};` : ''}
             position: relative;
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
@@ -1733,6 +1733,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 1024px) {
+            .${blockID}.fb-testimonial-main-wrapper {
+                ${TestimonialGlobalZIndex.Tablet ? `z-index: ${TestimonialGlobalZIndex.Tablet};` : ''}
+                position: relative;
+            }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                 ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                 ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
@@ -1784,6 +1788,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         }
         @media only screen and (max-width: 767px) {
+            .${blockID}.fb-testimonial-main-wrapper {
+                ${TestimonialGlobalZIndex.Mobile ? `z-index: ${TestimonialGlobalZIndex.Mobile};` : ''}
+                position: relative;
+            }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                 ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                 ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
@@ -2975,14 +2983,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={true}
                                                 className='fb-setting-z-index-header'
                                             >
-                                                <RangeControl
-                                                    value={TestimonialGlobalZIndex}
-                                                    onChange={(value) => setAttributes({ TestimonialGlobalZIndex: value === 0 ? undefined : value })}
+                                                <FB_Range
                                                     min={0}
                                                     max={10000000}
-                                                    step={1}
-                                                    allowReset
-                                                    resetFallbackValue={''}
+                                                    label={__("Z Index", "frontis-blocks")}
+                                                    rangeValue={TestimonialGlobalZIndex}
+                                                    onChangeHandler={(value) => setAttributes({ TestimonialGlobalZIndex: value === 0 ? undefined : value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                    isRangeUnit={false}
+
                                                 />
                                             </PanelBody>
 
