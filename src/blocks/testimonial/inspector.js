@@ -32,11 +32,12 @@ import {
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 
 import './editor.scss';
 
@@ -2395,16 +2396,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                 />
 
-                                                <FB_Color
-                                                    label={__("Rating Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialRatingIconColorSwitcher}
-                                                    globalColor={TestimonialRatingIconColor}
-                                                    globalHoverColor={TestimonialRatingIconHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialRatingIconColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                                                <FB_SwitcherControl
+                                                        label={__("Rating Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialRatingIconColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
                                                 />
 
+                                                {TestimonialRatingIconColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialRatingIconColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialRatingIconColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialRatingIconHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
@@ -2485,15 +2497,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Color
-                                                    label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialTitleColorSwitcher}
-                                                    globalColor={TestimonialTitleColor}
-                                                    globalHoverColor={TestimonialTitleHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialTitleColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
+
+                                                <FB_SwitcherControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialTitleColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
                                                 />
+
+                                                {TestimonialTitleColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialTitleColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialTitleColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialTitleColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialTitleHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
+                                                    />
+                                                )}
+
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -2554,15 +2580,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
-                                            <FB_Color
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={TestimonialDescColorSwitcher}
-                                                globalColor={TestimonialDescColor}
-                                                globalHoverColor={TestimonialDescHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ TestimonialDescColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ TestimonialDescColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDescHoverColor: value })}
+
+                                            <FB_SwitcherControl
+                                                    label={__("Color", "frontis-blocks")}
+                                                    globalSwitcher={TestimonialDescColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ TestimonialDescColorSwitcher: value })}
                                             />
+
+                                            {TestimonialDescColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={TestimonialDescColor}
+                                                    setGlobalColor={(value) => setAttributes({ TestimonialDescColor: value })}
+                                                />
+                                            )}
+
+                                            {TestimonialDescColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={TestimonialDescHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ TestimonialDescHoverColor: value })}
+                                                />
+                                            )}
+
                                             <FB_Spacing
                                                 label={__("Margin", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -2709,15 +2749,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Color
-                                                    label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialAuthorColorSwitcher}
-                                                    globalColor={TestimonialAuthorColor}
-                                                    globalHoverColor={TestimonialAuthorHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialAuthorColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
+
+                                                <FB_SwitcherControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialAuthorColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
                                                 />
+
+                                                {TestimonialDescColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialAuthorColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialDescColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialAuthorHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
+                                                    />
+                                                )}
+
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -2778,15 +2832,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Color
-                                                    label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialDesignationColorSwitcher}
-                                                    globalColor={TestimonialDesignationColor}
-                                                    globalHoverColor={TestimonialDesignationHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialDesignationColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialDesignationColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
+
+                                                <FB_SwitcherControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialDesignationColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialDesignationColorSwitcher: value })}
                                                 />
+
+                                                {TestimonialDesignationColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialDesignationColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialDesignationColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialDesignationHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
@@ -2824,15 +2891,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                 />
 
-                                                <FB_Color
-                                                    label={__("Icon Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialQuoteIconColorSwitcher}
-                                                    globalColor={TestimonialQuoteIconColor}
-                                                    globalHoverColor={TestimonialQuoteIconHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                                                <FB_SwitcherControl
+                                                        label={__("Icon Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialQuoteIconColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
                                                 />
+
+                                                {TestimonialQuoteIconColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialQuoteIconColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialQuoteIconColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialQuoteIconHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                                                    />
+                                                )}
+
                                                 <FB_Spacing
                                                     label={__("Margin", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -2935,19 +3015,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             </PanelBody>
 
-                                            <PanelBody title="Background Color" initialOpen={false} >
-                                                <FB_Color
-                                                    label={__("Background Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialGlobalBgColorSwitcher}
-                                                    globalColor={TestimonialGlobalBgColor}
-                                                    globalHoverColor={TestimonialGlobalBgHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialGlobalBgColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialGlobalBgHoverColor: value })}
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false} 
+                                            >
+                                                <FB_SwitcherControl
+                                                        label={__("Background Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
                                                 />
-                                            </PanelBody>
-                                            <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
+                                                {TestimonialGlobalBgColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialGlobalBgColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBgColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialGlobalBgColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialGlobalBgHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBgHoverColor: value })}
+                                                    />
+                                                )}
+                                            </PanelBody>
+                                            <PanelBody
+                                                title={__("Border and Shadow", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
                                                 <SelectControl
                                                         label={__("Border Style", "frontis-blocks")}
                                                         value={TestimonialGlobalBorder}
@@ -2955,15 +3052,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ TestimonialGlobalBorder: value })}
                                                 />
 
-                                                <FB_Color
-                                                    label={__("Border Color", "frontis-blocks")}
-                                                    globalColorSwitcher={TestimonialGlobalBorderColorSwitcher}
-                                                    globalColor={TestimonialGlobalBorderColor}
-                                                    globalHoverColor={TestimonialGlobalBorderHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ TestimonialGlobalBorderColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ TestimonialGlobalBorderColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value })}
+                                                <FB_SwitcherControl
+                                                        label={__("Border Color", "frontis-blocks")}
+                                                        globalSwitcher={TestimonialGlobalBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBorderColorSwitcher: value })}
                                                 />
+
+                                                {TestimonialGlobalBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={TestimonialGlobalBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderColor: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialGlobalBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={TestimonialGlobalBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing 
                                                     label={__("Border", "frontis-blocks")}

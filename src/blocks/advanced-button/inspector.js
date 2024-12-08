@@ -32,7 +32,6 @@ import {
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Range from '@Components/range';

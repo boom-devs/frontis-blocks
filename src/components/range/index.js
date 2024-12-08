@@ -40,7 +40,6 @@ const FB_Range = ({
 
 	const resetRangeValue = () => {
 		setRangeValue(resetFallbackValue);
-		setRangeUnit('px');
 	};
 
 	return (
