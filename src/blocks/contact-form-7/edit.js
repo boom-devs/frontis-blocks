@@ -45,8 +45,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const pluginInstallUrl = FrontisBlocksData.contact_form7_install_url;
 
-	console.log(FrontisBlocksData.contact_form_active + 'hello');
-
 
 	return (
 		<>
