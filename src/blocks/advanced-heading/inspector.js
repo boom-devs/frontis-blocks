@@ -42,11 +42,14 @@ import {
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import FB_Spacing from '@Components/spacing';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -1566,7 +1569,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 : ''}
         }
         .${blockId}.fb-advanced-wrapper {
-            ${headingGlobalZIndex ? `z-index: ${headingGlobalZIndex};` : ''}
+            ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
             ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
@@ -1638,6 +1641,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}
             }
             .${blockId}.fb-advanced-wrapper {
+                ${headingGlobalZIndex.Tablet ? `z-index: ${headingGlobalZIndex.Tablet};` : ''}
                 ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                 ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -1696,6 +1700,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}
             }
             .${blockId}.fb-advanced-wrapper {
+                ${headingGlobalZIndex.Mobile ? `z-index: ${headingGlobalZIndex.Mobile};` : ''}
                 ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                 ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -1904,49 +1909,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
                                                 </BaseControl>
 
-                                                <BaseControl
+                                                <FB_AlignmentControl
                                                     label={__("Alignment", "frontis-blocks")}
-                                                    id="fb-setting-text-alignment"
-                                                    className="fb-setting-text-alignment"
-                                                >
-                                                    <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                    >
-                                                        {TEXT_ALIGN.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ headingAlignment: item.value })}
-                                                                className={`fb-setting-text-alignment-single-btn ${headingAlignment === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalAlignment={headingAlignment}
+                                                    setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
+                                                />
                                             </PanelBody>
                                             <PanelBody
                                                 title={__("Heading", "frontis-blocks")}
                                                 initialOpen={false}
                                             >
-                                                <BaseControl
+                                                <FB_HtmlTagControl
                                                     label={__("Heading Tag", "frontis-blocks")}
-                                                        id="fb-setting-text-alignment"
-                                                        className="fb-setting-text-alignment"
-                                                >
-                                                    <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                     >
-                                                        {HEADING.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ headingTag: item.value })}
-                                                                className={`fb-setting-text-alignment-single-btn ${ headingTag === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalHtmlTag={headingTag}
+                                                    setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+                                                />
 
                                                 <TextareaControl
                                                     label={__("Heading Text", "frontis-blocks")}
@@ -1971,23 +1948,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             onChange={(value) => setAttributes({ subHeadingPosition: value})}
                                                         />
                                                     </BaseControl>
-                                                    <BaseControl
-                                                        label={__("Sub Heading Tag", "frontis-blocks")}
-                                                        className="fb-setting-text-alignment"
-                                                    >
-                                                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                                            {HEADING.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ subHeadingTag: item.value })}
-                                                                    className={`fb-setting-text-alignment-single-btn ${subHeadingTag === item.value ? 'active' : ''}`}
-                                                                >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
 
-                                                    </BaseControl>
+                                                    <FB_HtmlTagControl
+                                                        label={__("Sub Heading Tag", "frontis-blocks")}
+                                                        globalHtmlTag={subHeadingTag}
+                                                        setGlobalHtmlTag={(value) => setAttributes({ subHeadingTag: value })}
+                                                    />
 
                                                     <TextareaControl
                                                         label={__("Sub Heading Text", "frontis-blocks")}
@@ -2124,37 +2090,78 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 min={0}
                                                 max={10}
                                                 step={1}
-                                                allowReset={true}
                                                 resetFallbackValue={''}
 
                                             />
-                                            <FB_Color
+
+                                            <FB_SwitcherControl
                                                 label={__("Text Stroke Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingTextStrokeColorSwitcher}
-                                                globalColor={headingTextStrokeColor}
-                                                globalHoverColor={headingTextStrokeHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingTextStrokeColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingHoverColor: value })}
+                                                globalSwitcher={headingTextStrokeColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
                                             />
-                                            <FB_Color
+
+                                            {headingTextStrokeColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingTextStrokeColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingTextStrokeColor: value })}
+                                                />
+                                            )}
+
+                                            {headingTextStrokeColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingTextStrokeHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingTextStrokeHoverColor: value })}
+                                                />
+                                            )}
+
+
+                                            <FB_SwitcherControl
                                                 label={__("Text Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingColorSwitcher}
-                                                globalColor={headingColor}
-                                                globalHoverColor={headingHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingHoverColor: value })}
+                                                globalSwitcher={headingColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingColorSwitcher: value })}
                                             />
-                                            <FB_Color
+
+                                            {headingColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingColor: value })}
+                                                />
+                                            )}
+
+                                            {headingColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingHoverColor: value })}
+                                                />
+                                            )}
+
+                                            
+                                            <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingBgColorSwitcher}
-                                                globalColor={headingBgColor}
-                                                globalHoverColor={headingBgColorHover}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingBgColorHover: value })}
+                                                globalSwitcher={headingBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingBgColorSwitcher: value })}
                                             />
+
+                                            {headingBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingBgColor: value })}
+                                                />
+                                            )}
+
+                                            {headingBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingBgColorHover}
+                                                    setGlobalColor={(value) => setAttributes({ headingBgColorHover: value })}
+                                                />
+                                            )}
+
                                             <ToggleControl
                                                 label={__("Enable Background Image", "frontis-blocks")}
                                                 checked={headingBackgroundImageEnabled}
@@ -2253,52 +2260,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                             {activeLineSwitcher && (
                                                 <>
-                                                    <BaseControl
+
+                                                    <FB_ColorControl
                                                         label={__("Before Line Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={activeLineBeforeColor}
-                                                                                onChange={(value) => setAttributes({ activeLineBeforeColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={activeLineBeforeColor}
-                                                                                onChange={(value) => setAttributes({ activeLineBeforeColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
+                                                        globalColor={activeLineBeforeColor}
+                                                        setGlobalColor={(value) => setAttributes({ activeLineBeforeColor: value })}
+                                                    />
                                                     <FB_Range
                                                         min={0}
                                                         max={100}
@@ -2327,52 +2294,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         resetFallbackValue={""}
                                                     />
 
-                                                    <BaseControl
+                                                    <FB_ColorControl
                                                         label={__("After Line Color", "frontis-blocks")}
-                                                        className="fb-setting-color-setting-wrapper"
-                                                    >
-                                                        <Dropdown
-                                                            className="fb-setting-color-setting-icon-dropdown"
-                                                            contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                                                            popoverProps={{ placement: 'bottom-start' }}
-                                                            renderToggle={({ isOpen, onToggle }) => (
-                                                                <Button
-                                                                    variant="primary"
-                                                                    onClick={onToggle}
-                                                                    aria-expanded={isOpen}
-                                                                    className="fb-setting-color-setting-icon-btn"
-                                                                >
-                                                                    <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-                                                                </Button>
-                                                            )}
-                                                            renderContent={() => (
-                                                                <div className="fb-setting-color-setting-icon-popup">
-                                                                    <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                                                        <div className="fb-setting-normal-color">
-                                                                            <ColorPicker
-                                                                                color={activeLineAfterColor}
-                                                                                onChange={(value) => setAttributes({ activeLineAfterColor: value })}
-                                                                                enableAlpha={true}
-                                                                            />
-                                                                            <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-                                                                            <ColorPalette
-                                                                                colors={[
-                                                                                    { color: '#F72585' },
-                                                                                    { color: '#7209B7' },
-                                                                                    { color: '#3A0CA3' },
-                                                                                    { color: '#4361EE' },
-                                                                                    { color: '#4CC9F0' },
-                                                                                ]}
-                                                                                disableCustomColors={true}
-                                                                                value={activeLineAfterColor}
-                                                                                onChange={(value) => setAttributes({ activeLineAfterColor: value })}
-                                                                            />
-                                                                        </div>
-                                                                    </BaseControl>
-                                                                </div>
-                                                            )}
-                                                        />
-                                                    </BaseControl>
+                                                        globalColor={activeLineAfterColor}
+                                                        setGlobalColor={(value) => setAttributes({ activeLineAfterColor: value })}
+                                                    />
                                                     <FB_Range
                                                         min={0}
                                                         max={100}
@@ -2408,15 +2334,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 options={BORDER_STYLES}
                                                 onChange={(value) => setAttributes({ headingBorder: value })}
                                             />
-                                            <FB_Color
+
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingBorderColorSwitcher}
-                                                globalColor={headingBorderColor}
-                                                globalHoverColor={headingBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingBorderHoverColor: value })}
+                                                globalSwitcher={headingBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingBorderColorSwitcher: value })}
                                             />
+
+                                            {headingBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {headingBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingBorderHoverColor: value })}
+                                                />
+                                            )}
+
                                             <FB_Spacing
                                                 label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -2482,156 +2422,196 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         {subHeadingSwitcher && (
                                             <PanelBody
                                                 title={__("Sub Heading", "frontis-blocks")}
-                                            initialOpen={false}
-                                        >
-                                            <FB_TypographyControl
-                                                fontFamily={subHeadingFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value })}
+                                                initialOpen={false}
+                                            >
+                                                <FB_TypographyControl
+                                                    fontFamily={subHeadingFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value })}
 
-                                                fontSize={subHeadingFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value })}
+                                                    fontSize={subHeadingFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value })}
 
-                                                fontSizeUnits={subHeadingFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
+                                                    fontSizeUnits={subHeadingFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
 
-                                                fontWeight={subHeadingFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value })}
+                                                    fontWeight={subHeadingFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value })}
 
-                                                fontStyle={subHeadingFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value })}
+                                                    fontStyle={subHeadingFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value })}
 
-                                                textTransform={subHeadingTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value })}
+                                                    textTransform={subHeadingTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value })}
 
-                                                textDecoration={subHeadingTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value })}
+                                                    textDecoration={subHeadingTextDecoration}
+                                                    onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value })}
 
-                                                letterSpacing={subHeadingLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value })}
+                                                    letterSpacing={subHeadingLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value })}
 
-                                                letterSpacingUnits={subHeadingLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
+                                                    letterSpacingUnits={subHeadingLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
 
-                                                lineHeight={subHeadingLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value })}
+                                                    lineHeight={subHeadingLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value })}
 
-                                                lineHeightUnits={subHeadingLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
+                                                    lineHeightUnits={subHeadingLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_BoxShadowControl
-                                                label={__("Text Shadow", "frontis-blocks")}
-                                                onBoxShadowChange={(value) => setAttributes({ subHeadingTextShadowValues: value })}
-                                                initialShadowValue={subHeadingTextShadowValues}
-                                                onBoxShadowStyleChange={(value) => setAttributes({ subHeadingTextShadowCssValue: value })}
-                                                isBoxShadow={false}
-                                            />
-                                            <RangeControl
-                                                label={__("Text Stroke", "frontis-blocks")}
-                                                value={subHeadingTextStroke}
-                                                onChange={(value) => setAttributes({ subHeadingTextStroke: value })}
-                                                min={1}
-                                                max={10}
-                                                step={1}
-                                                allowReset={true}
-                                                resetFallbackValue={''}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_BoxShadowControl
+                                                    label={__("Text Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ subHeadingTextShadowValues: value })}
+                                                    initialShadowValue={subHeadingTextShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ subHeadingTextShadowCssValue: value })}
+                                                    isBoxShadow={false}
+                                                />
+                                                <RangeControl
+                                                    label={__("Text Stroke", "frontis-blocks")}
+                                                    value={subHeadingTextStroke}
+                                                    onChange={(value) => setAttributes({ subHeadingTextStroke: value })}
+                                                    min={1}
+                                                    max={10}
+                                                    step={1}
+                                                    allowReset={true}
+                                                    resetFallbackValue={''}
+                                                />
 
-                                            />
-                                            <FB_Color
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalColorSwitcher={subHeadingColorSwitcher}
-                                                globalColor={subHeadingColor}
-                                                globalHoverColor={subHeadingHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ subHeadingColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ subHeadingColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ subHeadingHoverColor: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={subHeadingBgColorSwitcher}
-                                                globalColor={subHeadingBgColor}
-                                                globalHoverColor={subHeadingBgColorHover}
-                                                handleColorSwitcherChange={(value) => setAttributes({ subHeadingBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ subHeadingBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ subHeadingBgColorHover: value })}
-                                            />
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={subHeadingBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ subHeadingBorder: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={subHeadingBorderColorSwitcher}
-                                                globalColor={subHeadingBorderColor}
-                                                globalHoverColor={subHeadingBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ subHeadingBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ subHeadingBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ subHeadingBorderHoverColor: value })}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={subHeadingBorderUnitsHandler}
-                                                spacingUnits={subHeadingBorderUnits}
-                                                spacingDesktop={subHeadingDesktopBorder}
-                                                spacingTablet={subHeadingTabBorder}
-                                                spacingMobile={subHeadingMobileBorder}
-                                                handleSpacingUnitHandler={subHeadingBorderUnitsChange}
-                                                spacingCombineBtn={subHeadingBorderLink}
-                                                spacingCombineBtnHandler={subHeadingBorderLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={subHeadingBorderRadiusUnitsHandler}
-                                                spacingUnits={subHeadingBorderRadiusUnits}
-                                                spacingDesktop={subHeadingDesktopBorderRadius}
-                                                spacingTablet={subHeadingTabBorderRadius}
-                                                spacingMobile={subHeadingMobileBorderRadius}
-                                                handleSpacingUnitHandler={subHeadingBorderRadiusUnitsChange}
-                                                spacingCombineBtn={subHeadingBorderRadiusLink}
-                                                spacingCombineBtnHandler={subHeadingBorderRadiusLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
+                                                <FB_SwitcherControl
+                                                    label={__("Text Color", "frontis-blocks")}
+                                                    globalSwitcher={subHeadingColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ subHeadingColorSwitcher: value })}
+                                                />
 
-                                            <FB_BoxShadowControl
-                                                label={__("Box Shadow", "frontis-blocks")}
-                                                onBoxShadowChange={(value) => setAttributes({ subHeadingBoxShadowValues: value })}
-                                                initialShadowValue={subHeadingBoxShadowValues}
-                                                onBoxShadowStyleChange={(value) => setAttributes({ subHeadingBoxShadowCssValue: value })}
-                                            />
+                                                {subHeadingColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={subHeadingColor}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingColor: value })}
+                                                    />
+                                                )}
 
-                                            <FB_Spacing
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={subHeadingPaddingUnitsHandler}
-                                                spacingUnits={subHeadingPaddingUnits}
-                                                spacingDesktop={subHeadingDesktopPadding}
-                                                spacingTablet={subHeadingTabPadding}
-                                                spacingMobile={subHeadingMobilePadding}
-                                                handleSpacingUnitHandler={subHeadingPaddingUnitsChange}
-                                                spacingCombineBtn={subHeadingPaddingLink}
-                                                spacingCombineBtnHandler={subHeadingPaddingLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={subHeadingMarginUnitsHandler}
-                                                spacingUnits={subHeadingMarginUnits}
-                                                spacingDesktop={subHeadingDesktopMargin}
-                                                spacingTablet={subHeadingTabMargin}
-                                                spacingMobile={subHeadingMobileMargin}
-                                                handleSpacingUnitHandler={subHeadingMarginUnitsChange}
-                                                spacingCombineBtn={subHeadingMarginLink}
-                                                spacingCombineBtnHandler={subHeadingMarginLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
+                                                {subHeadingColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={subHeadingHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_SwitcherControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalSwitcher={subHeadingBgColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ subHeadingBgColorSwitcher: value })}
+                                                />
+
+                                                {subHeadingBgColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={subHeadingBgColor}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingBgColor: value })}
+                                                    />
+                                                )}
+
+                                                {subHeadingBgColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={subHeadingBgColorHover}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingBgColorHover: value })}
+                                                    />
+                                                )}
+
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={subHeadingBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ subHeadingBorder: value })}
+                                                />
+
+                                                <FB_SwitcherControl
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalSwitcher={subHeadingBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ subHeadingBorderColorSwitcher: value })}
+                                                />
+
+                                                {subHeadingBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={subHeadingBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingBorderColor: value })}
+                                                    />
+                                                )}
+
+                                                {subHeadingBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={subHeadingBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ subHeadingBorderHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_Spacing
+                                                    label={__("Border", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={subHeadingBorderUnitsHandler}
+                                                    spacingUnits={subHeadingBorderUnits}
+                                                    spacingDesktop={subHeadingDesktopBorder}
+                                                    spacingTablet={subHeadingTabBorder}
+                                                    spacingMobile={subHeadingMobileBorder}
+                                                    handleSpacingUnitHandler={subHeadingBorderUnitsChange}
+                                                    spacingCombineBtn={subHeadingBorderLink}
+                                                    spacingCombineBtnHandler={subHeadingBorderLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={subHeadingBorderRadiusUnitsHandler}
+                                                    spacingUnits={subHeadingBorderRadiusUnits}
+                                                    spacingDesktop={subHeadingDesktopBorderRadius}
+                                                    spacingTablet={subHeadingTabBorderRadius}
+                                                    spacingMobile={subHeadingMobileBorderRadius}
+                                                    handleSpacingUnitHandler={subHeadingBorderRadiusUnitsChange}
+                                                    spacingCombineBtn={subHeadingBorderRadiusLink}
+                                                    spacingCombineBtnHandler={subHeadingBorderRadiusLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_BoxShadowControl
+                                                    label={__("Box Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ subHeadingBoxShadowValues: value })}
+                                                    initialShadowValue={subHeadingBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ subHeadingBoxShadowCssValue: value })}
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={subHeadingPaddingUnitsHandler}
+                                                    spacingUnits={subHeadingPaddingUnits}
+                                                    spacingDesktop={subHeadingDesktopPadding}
+                                                    spacingTablet={subHeadingTabPadding}
+                                                    spacingMobile={subHeadingMobilePadding}
+                                                    handleSpacingUnitHandler={subHeadingPaddingUnitsChange}
+                                                    spacingCombineBtn={subHeadingPaddingLink}
+                                                    spacingCombineBtnHandler={subHeadingPaddingLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={subHeadingMarginUnitsHandler}
+                                                    spacingUnits={subHeadingMarginUnits}
+                                                    spacingDesktop={subHeadingDesktopMargin}
+                                                    spacingTablet={subHeadingTabMargin}
+                                                    spacingMobile={subHeadingMobileMargin}
+                                                    handleSpacingUnitHandler={subHeadingMarginUnitsChange}
+                                                    spacingCombineBtn={subHeadingMarginLink}
+                                                    spacingCombineBtnHandler={subHeadingMarginLinkBtn}
+                                                    setAttributes={setAttributes}
+                                                />
                                             </PanelBody>
                                         )}
 
@@ -2640,15 +2620,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 title={__("Separator", "frontis-blocks")}
                                                 initialOpen={false}
                                             >
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={separatorColorSwitcher}
-                                                    globalColor={separatorColor}
-                                                    globalHoverColor={separatorHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ separatorColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ separatorColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ separatorHoverColor: value })}
+                                                    globalSwitcher={separatorColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ separatorColorSwitcher: value })}
                                                 />
+
+                                                {separatorColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={separatorColor}
+                                                        setGlobalColor={(value) => setAttributes({ separatorColor: value })}
+                                                    />
+                                                )}
+
+                                                {separatorColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={separatorHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ separatorHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 {separator !== 'zigzag' && (
                                                     <>
@@ -2731,25 +2723,49 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 resetFallbackValue={""}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingIconColorSwitcher}
-                                                globalColor={headingIconColor}
-                                                globalHoverColor={headingIconHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingIconColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingIconColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingIconHoverColor: value })}
+                                                globalSwitcher={headingIconColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingIconColorSwitcher: value })}
                                             />
 
-                                            <FB_Color
+                                            {headingIconColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingIconColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconColor: value })}
+                                                />
+                                            )}
+
+                                            {headingIconColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingIconHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingIconBgColorSwitcher}
-                                                globalColor={headingIconBgColor}
-                                                globalHoverColor={headingIconBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingIconBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingIconBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingIconBgHoverColor: value })}
+                                                globalSwitcher={headingIconBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingIconBgColorSwitcher: value })}
                                             />
+
+                                            {headingIconBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingIconBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconBgColor: value })}
+                                                />
+                                            )}
+
+                                            {headingIconBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingIconBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconBgHoverColor: value })}
+                                                />
+                                            )}
 
                                             <SelectControl
                                                     label={__("Border Style", "frontis-blocks")}
@@ -2758,15 +2774,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     onChange={(value) => setAttributes({ headingIconBorder: value })}
                                             />
 
-                                            <FB_Color
+
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={headingIconBorderColorSwitcher}
-                                                globalColor={headingIconBorderColor}
-                                                globalHoverColor={headingIconBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ headingIconBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ headingIconBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ headingIconBorderHoverColor: value })}
+                                                globalSwitcher={headingIconBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ headingIconBorderColorSwitcher: value })}
                                             />
+
+                                            {headingIconBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={headingIconBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {headingIconBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={headingIconBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ headingIconBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing
                                                 label={__("Border", "frontis-blocks")}
@@ -2810,15 +2839,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={headingGlobalZIndex}
-														onChange={(value) => setAttributes({ headingGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={headingGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ headingGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -2850,18 +2883,36 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</PanelBody>
 
-												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_Color
-														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={headingGlobalBgColorSwitcher}
-														globalColor={headingGlobalBgColor}
-														globalHoverColor={headingGlobalBgHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ headingGlobalBgColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ headingGlobalBgHoverColor: value })}
-													/>
+												<PanelBody 
+                                                    title={__("Background Color", "frontis-blocks")}
+                                                    initialOpen={false} 
+                                                >
+                                                    <FB_SwitcherControl
+                                                        label={__("Background Color", "frontis-blocks")}
+                                                        globalSwitcher={headingGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
+                                                    />
+
+                                                    {headingGlobalBgColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={headingGlobalBgColor}
+                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBgColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {headingGlobalBgColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={headingGlobalBgHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverColor: value })}
+                                                        />
+                                                    )}
 												</PanelBody>
-												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+												<PanelBody
+                                                    title={__("Border and Shadow", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
 
 													<SelectControl
 															label={__("Border Style", "frontis-blocks")}
@@ -2870,15 +2921,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 															onChange={(value) => setAttributes({ headingGlobalBorder: value })}
 													/>
 
-													<FB_Color
-														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={headingGlobalBorderColorSwitcher}
-														globalColor={headingGlobalBorderColor}
-														globalHoverColor={headingGlobalBorderHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ headingGlobalBorderColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ headingGlobalBorderColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ headingGlobalBorderHoverColor: value })}
-													/>
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Border Color", "frontis-blocks")}
+                                                        globalSwitcher={headingGlobalBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ headingGlobalBorderColorSwitcher: value })}
+                                                    />
+
+                                                    {headingGlobalBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={headingGlobalBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBorderColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {headingGlobalBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={headingGlobalBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBorderHoverColor: value })}
+                                                        />
+                                                    )}
 
 													<FB_Spacing
 														label={__("Border", "frontis-blocks")}
