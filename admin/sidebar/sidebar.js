@@ -26,37 +26,37 @@ const defaultsColors = [
 	},
 	{
 		"name": __("Secondary Color", "frontis-blocks"),
-		"color": '#0f0',
+		"color": '#399CFF',
 		"slug": 'secondary-color',
 	},
 	{
 		"name": __("Tertiary Color", "frontis-blocks"),
-		"color": '#00f',
+		"color": '#F72585',
 		"slug": 'tertiary-color',
 	},
 	{
 		"name": __("Accent Color", "frontis-blocks"),
-		"color": "#00f",
+		"color": "#7209B7",
 		"slug": 'accent-color',
 	},
 	{
 		"name": __("Text Color", "frontis-blocks"),
-		"color": '#000',
+		"color": '#3A0CA3',
 		"slug": 'text-color',
 	},
 	{
 		"name": __("Link Color", "frontis-blocks"),
-		"color": '#00f',
+		"color": '#4361EE',
 		"slug": 'link-color',
 	},
 	{
 		"name": __("Link Hover Color", "frontis-blocks"),
-		"color": '#00f',
+		"color": '#4CC9F0',
 		"slug": 'link-hover-color',
 	},
 	{
 		"name": __("Background Color", "frontis-blocks"),
-		"color": '#000',
+		"color": '#393E46',
 		"slug": 'background-color',
 	},
 	{
@@ -112,7 +112,7 @@ function FrontisBlocksSidebar(props) {
 
 	const defaultTypos = {
 		body: {
-			fontFamily: 'default',
+			fontFamily: 'inherit',
 			lineHeight: {
 				Desktop: 0,
 				Tablet: 0,
@@ -149,7 +149,7 @@ function FrontisBlocksSidebar(props) {
 			}
 		},
 		link: {
-			fontFamily: 'default',
+			fontFamily: 'inherit',
 			lineHeight: {
 				Desktop: 0,
 				Tablet: 0,
@@ -186,7 +186,7 @@ function FrontisBlocksSidebar(props) {
 			}
 		},
 		button: {
-			fontFamily: 'default',
+			fontFamily: 'inherit',
 			lineHeight: {
 				Desktop: 0,
 				Tablet: 0,
@@ -224,7 +224,7 @@ function FrontisBlocksSidebar(props) {
 		},
 		heading: {
 			h1: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,
@@ -261,7 +261,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h2: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,
@@ -298,7 +298,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h3: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,
@@ -335,7 +335,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h4: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,
@@ -372,7 +372,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h5: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,
@@ -409,7 +409,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h6: {
-				fontFamily: "default",
+				fontFamily: "inherit",
 				lineHeight: {
 					Desktop: 0,
 					Tablet: 0,

@@ -116,7 +116,6 @@ const VersionControl = () => {
 
   const handleRollback = () => {
     // I will Add rollback logic here
-    console.log('Rollback triggered for version:', options.selected_version);
     saveOption('selected_version', options.selected_version);
   };
 
