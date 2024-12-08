@@ -29,26 +29,6 @@ $white_color: #ffffff;
     }
 }
 
-.fb-setting-spacing-container {
-    position: relative;
-	button {
-		&.components-button.components-range-control__reset {
-			position: absolute;
-			top: -43px;
-			right: 50px;
-			box-shadow: unset;
-			font-size: 10px;
-			&:hover {
-				box-shadow: unset !important;
-			}
-			&:focus {
-				outline: none !important;
-				box-shadow: none !important;
-			}
-		}
-	}
-}
-
 /** End General scss for Advanced Button **/
 .sh_heading_spacing_container {
     display: flex;
