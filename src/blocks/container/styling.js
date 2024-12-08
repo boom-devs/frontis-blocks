@@ -565,6 +565,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'width': '100%',
 	};
 
+
+	console.log(contentWidth)
+	console.log('alignfull' === contentWidth && 'alignwide' === innerContentWidth)
 	if ( 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ) {
 		widthSelectorsDesktop[
 			`.block-editor-block-list__block.wp-block-frontis-blocks-container${ gbsWidthSelector } > .frontis-blocks-container-inner-blocks-wrap`
