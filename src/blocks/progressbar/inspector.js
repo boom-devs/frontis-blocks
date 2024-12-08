@@ -18,8 +18,9 @@ import {
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 
 import './editor.scss';
 
@@ -475,33 +476,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
-                                            <FB_Color
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressColorSwitcher}
-                                                globalColor={progressColor}
-                                                globalHoverColor={progressHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressHoverColor: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Label Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressTextColorSwitcher}
-                                                globalColor={progressTextColor}
-                                                globalHoverColor={progressTextHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressTextColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressTextColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressTextHoverColor: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Base Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressBgColorSwitcher}
-                                                globalColor={progressBgColor}
-                                                globalHoverColor={progressBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressBgHoverColor: value })}
-                                            />
+
+                                            <FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={progressColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressColorSwitcher: value })}
+											/>
+
+											{progressColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressColor}
+													setGlobalColor={(value) => setAttributes({ progressColor: value })}
+												/>
+											)}
+
+											{progressColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressHoverColor: value })}
+												/>
+											)}
+
+                                            <FB_SwitcherControl
+													label={__("Label Color", "frontis-blocks")}
+													globalSwitcher={progressTextColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressTextColorSwitcher: value })}
+											/>
+
+											{progressTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressTextColor}
+													setGlobalColor={(value) => setAttributes({ progressTextColor: value })}
+												/>
+											)}
+
+											{progressTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressTextHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressTextHoverColor: value })}
+												/>
+											)}
+
+                                            <FB_SwitcherControl
+													label={__("Base Color", "frontis-blocks")}
+													globalSwitcher={progressBgColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressBgColorSwitcher: value })}
+											/>
+
+											{progressBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressBgColor}
+													setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
+												/>
+											)}
+
+											{progressBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressBgHoverColor: value })}
+												/>
+											)}
+
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
                                                 deviceType={deviceType}
