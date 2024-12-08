@@ -2,31 +2,21 @@ import { __ } from "@wordpress/i18n";
 
 import {
 	useBlockProps,
-	RichText,
 	InspectorControls,
 	MediaUploadCheck,
 	MediaUpload,
-	URLInput,
 } from "@wordpress/block-editor";
 
 import {
 	SelectControl,
 	PanelBody,
-	TextControl,
 	TabPanel,
 	BaseControl,
 	Button,
 	ButtonGroup,
 	ToggleControl,
 	TextareaControl,
-	Dropdown,
-	Dashicon,
 	RangeControl,
-	ColorPicker,
-	ColorPalette,
-	GradientPicker,
-	CircularOptionPicker,
-	ResponsiveWrapper,
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
@@ -36,7 +26,6 @@ import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FBIconPicker from "../../components/icon-picker";
-import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_UrlControl from "@Components/url-control";
@@ -46,12 +35,9 @@ import FB_UrlControl from "@Components/url-control";
 import {
 	TEXT_ALIGN,
 	HEADING,
-	CLASSIC_GRADIENT,
 	BORDER_STYLES,
 	mediaType,
-	ICON_POSITION,
 	INFO_ICON_POSITION,
-	BG_TYPE,
 	INFO_ICON_VERTICAL_POSITION
 } from "./constants/constants";
 
@@ -68,7 +54,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
-		Sub_Heading_Position,
 		Heading_Font_Family,
 		Heading_Font_Size,
 		Heading_Font_size_units,
@@ -92,11 +77,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_Border_Width,
 		Heading_Tab_Border_Width,
 		Heading_Mobile_Border_Width,
-		activeBorderDevice,
 		Heading_Desktop_Border_radius_Width,
 		Heading_Tab_Border_radius_Width,
 		Heading_Mobile_Border_radius_Width,
-		activeBorderRadiusDevice,
 		borderRadiusLink,
 		borderLink,
 		Heading_padding_units,
@@ -110,16 +93,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_Margin,
 		Heading_Tab_Margin,
 		Heading_Mobile_Margin,
-		Heading_Active_Margin_Device,
 		Heading_Margin_Link,
 
-		info_Button_Switcher,
-		info_Button_Text,
-		info_Button_Link,
 		wrapperAlignment,
 		descAlignment,
-		buttonAlignment,
-		infoBoxBg,
 
 		SubHeadingPaddingUnits,
 		SubHeadingDesktopPadding,
@@ -146,27 +123,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		descActiveMarginDevice,
 		descMarginLink,
 
-		infoBoxPaddingUnits,
-		infoBoxDesktopPadding,
-		infoBoxTabPadding,
-		infoBoxMobilePadding,
-
-		infoButtonPaddingUnits,
-		infoButtonDesktopPadding,
-		infoButtonTabPadding,
-		infoButtonMobilePadding,
 		icon,
-		btnIcon,
 		width,
-		mediaSwitcher,
-		contentAlignment,
 
-		infoButtonBorder,
-		infoBoxMarginUnits,
-		infoBoxDesktopMargin,
-		infoBoxTabMargin,
-		infoBoxMobileMargin,
-		infoBoxMarginLink,
+		mediaSwitcher,
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
@@ -234,13 +194,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaBorderRadiusMobile,
 		mediaBorderRadiusLink,
 
-		btnIconSize,
-		btnIconSizeUnits,
-		buttonIconSwitcher,
-		btnIconColor,
-		btnIconHoverColor,
-		btnIconColorSwitcher,
-		btnIconPosition,
 		infoIconPosition,
 
 		mediaBgWidth,

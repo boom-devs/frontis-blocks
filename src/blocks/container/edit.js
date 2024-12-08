@@ -149,7 +149,7 @@ const Edit = (props) => {
 		}
 	}, [ hasDynamicContent, context?.postId ] )
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.DeviceType ), [ attributes, attributes.DeviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.deviceType ), [ attributes, attributes.deviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
