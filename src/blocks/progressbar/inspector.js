@@ -21,6 +21,7 @@ import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 
@@ -575,7 +576,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
