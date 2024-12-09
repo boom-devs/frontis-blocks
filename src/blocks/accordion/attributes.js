@@ -615,9 +615,13 @@ const attributes = {
         default: true
     },
 
-
     accordionZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     
     accordionPaddingUnits : {

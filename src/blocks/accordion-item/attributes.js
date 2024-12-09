@@ -125,21 +125,31 @@ const attributes = {
 
     titlePrefixImgUrl: {
         type: "string",
-        default: ''
-    },
-    titlePrefixImgId: {
-        type: "number",
-        default: 0
+        default: ""
     },
     titlePrefixImgAlt: {
         type: "string",
-        default: ''
+        default: ""
     },
-    titlePrefixImgWidth: {
-        type: "number",
+    titlePrefixImgID: {
+        type: "string",
+        default: ""
     },
-    titlePrefixImgHeight: {
-        type: "number",
+    titlePrefixImgPosition: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgAttachment: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgRepeat: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgSize: {
+        type: "string",
+        default: ""
     },
 
     titleSuffixType: {
@@ -162,21 +172,31 @@ const attributes = {
 
     titleSuffixImgUrl: {
         type: "string",
-        default: ''
-    },
-    titleSuffixImgId: {
-        type: "number",
-        default: 0
+        default: ""
     },
     titleSuffixImgAlt: {
         type: "string",
-        default: ''
+        default: ""
     },
-    titleSuffixImgWidth: {
-        type: "number",
+    titleSuffixImgID: {
+        type: "string",
+        default: ""
     },
-    titleSuffixImgHeight: {
-        type: "number",
+    titleSuffixImgPosition: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgAttachment: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgRepeat: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgSize: {
+        type: "string",
+        default: ""
     },
     
     
@@ -190,7 +210,12 @@ const attributes = {
     },
 
     accordionItemZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
 
     accordionItemPaddingUnits : {

@@ -24,6 +24,8 @@ import { SelectControl } from "@wordpress/components";
 import { useEffect, useMemo } from "@wordpress/element";
 import FB_BoxShadowControl from "../../components/box-shadow";
 import FB_BackgroundColorControl from "../../components/background-color-control";
+import FB_Range from "../../components/range";
+import FB_ImageControl from "../../components/image-control";
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -37,16 +39,22 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         titlePrefixType,
         titlePrefixIcon,
         titlePrefixImgUrl,
-        titlePrefixImgId,
-        titlePrefixImgWidth,
-        titlePrefixImgHeight,
+        titlePrefixImgAlt,
+        titlePrefixImgID,
+        titlePrefixImgPosition,
+        titlePrefixImgAttachment,
+        titlePrefixImgRepeat,
+        titlePrefixImgSize,
 
         titleSuffixType,
         titleSuffixIcon,
         titleSuffixImgUrl,
-        titleSuffixImgId,
-        titleSuffixImgWidth,
-        titleSuffixImgHeight,
+        titleSuffixImgAlt,
+        titleSuffixImgID,
+        titleSuffixImgPosition,
+        titleSuffixImgAttachment,
+        titleSuffixImgRepeat,
+        titleSuffixImgSize,
 
         titlePrefixColorSwitcher,
         titlePrefixColor,
@@ -68,6 +76,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemTabMargin,
         accordionItemMobileMargin,
         accordionItemMarginLink,
+
+        accordionItemDesktopSwitcher,
+        accordionItemTabletSwitcher,
+        accordionItemMobileSwitcher
     } = attributes;
 
 
@@ -534,75 +546,24 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 )}
 
                                             {titlePrefixType === "image" && (
-                                                    <BaseControl className="fb-accordion-item-image-upload-wrapper">
-															<MediaUploadCheck>
-																<MediaUpload
-                                                                    onSelect={(media) =>
-                                                                        setAttributes({
-                                                                            titlePrefixImgUrl: media.url,
-                                                                            titlePrefixImgId: media.id,
-                                                                            titlePrefixImgAlt: media.alt,
-                                                                        })
-                                                                    }
-																	type="image"
-																	value={titlePrefixImgId}
-																	render={({open}) => {
-																		return (
-																			<Button
-																				className={titlePrefixImgId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																				onClick={open}
-																			>
-																				{titlePrefixImgId == 0 && __('Select Image', 'frontis-block')}
-																				{titlePrefixImgId != 0 &&
-																					<ResponsiveWrapper
-																						naturalWidth={titlePrefixImgWidth}
-																						naturalHeight={titlePrefixImgHeight}>
-																						<img
-																							src={titlePrefixImgUrl}/>
-																					</ResponsiveWrapper>
-																				}
-																			</Button>
-																		);
-																	}}
-																/>
-															</MediaUploadCheck>
-															{titlePrefixImgId != 0 &&
-																<HStack className='editor-post-featured-image__actions'>
-																	<Button
-																		className='editor-post-featured-image__action'
-                                                                        onSelect={() =>
-                                                                            setAttributes({
-                                                                                titlePrefixImgUrl: '',
-                                                                                titlePrefixImgId: 0,
-                                                                                titlePrefixImgAlt: '',
-                                                                            })
-                                                                        }
-                                                                    >
-                                                                        {__('Remove', 'frontis-block')}
-                                                                    </Button>
-																	<MediaUploadCheck>
-																		<MediaUpload
-																			title={__('Replace image', 'frontis-block')}
-																			value={titlePrefixImgId}
-                                                                            onSelect={(media) =>
-                                                                                setAttributes({
-                                                                                    titlePrefixImgUrl: media.url,
-                                                                                    titlePrefixImgId: media.id,
-                                                                                    titlePrefixImgAlt: media.alt,
-                                                                                })
-                                                                            }
-																			type="image"
-																			render={({open}) => (
-																				<Button
-																					className='editor-post-featured-image__action'
-																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																			)}
-																		/>
-																	</MediaUploadCheck>
-																</HStack>
-															}
-														</BaseControl>
-                                                )}
+                                                <FB_ImageControl
+                                                    globalBackgroundImageUrl={titlePrefixImgUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ titlePrefixImgUrl: value })}
+                                                    globalBackgroundImageAlt={titlePrefixImgAlt}
+                                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ titlePrefixImgAlt: value })}
+                                                    globalBackgroundImageID={titlePrefixImgID}
+                                                    setGlobalBackgroundImageID={(value) => setAttributes({ titlePrefixImgID: value })}
+                                                    globalBackgroundImagePosition={titlePrefixImgPosition}
+                                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ titlePrefixImgPosition: value })}
+                                                    globalBackgroundImageAttachment={titlePrefixImgAttachment} 
+                                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ titlePrefixImgAttachment: value })}
+                                                    globalBackgroundImageRepeat={titlePrefixImgRepeat}
+                                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ titlePrefixImgRepeat: value })}
+                                                    globalBackgroundImageSize={titlePrefixImgSize}
+                                                    setGlobalBackgroundImageSize={(value) => setAttributes({ titlePrefixImgSize: value })}
+                                                />
+                                                    
+                                            )}
                                         </>
                                     )}
                                 </PanelBody>
@@ -654,75 +615,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 )}
 
                                             {titleSuffixType === "image" && (
-                                                        <BaseControl className="fb-accordion-item-image-upload-wrapper">
-															<MediaUploadCheck>
-																<MediaUpload
-                                                                    onSelect={(media) =>
-                                                                        setAttributes({
-                                                                            titleSuffixImgUrl: media.url,
-                                                                            titleSuffixImgId: media.id,
-                                                                            titleSuffixImgAlt: media.alt,
-                                                                        })
-                                                                    }
-																	type="image"
-																	value={titleSuffixImgId}
-																	render={({open}) => {
-																		return (
-																			<Button
-																				className={titleSuffixImgId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																				onClick={open}
-																			>
-																				{titleSuffixImgId == 0 && __('Select Image', 'frontis-block')}
-																				{titleSuffixImgId != 0 &&
-																					<ResponsiveWrapper
-																						naturalWidth={titleSuffixImgWidth}
-																						naturalHeight={titleSuffixImgHeight}>
-																						<img
-																							src={titleSuffixImgUrl}/>
-																					</ResponsiveWrapper>
-																				}
-																			</Button>
-																		);
-																	}}
-																/>
-															</MediaUploadCheck>
-															{titleSuffixImgId != 0 &&
-																<HStack className='editor-post-featured-image__actions'>
-																	<Button
-																		className='editor-post-featured-image__action'
-                                                                        onSelect={() =>
-                                                                            setAttributes({
-                                                                                titleSuffixImgUrl: '',
-                                                                                titleSuffixImgId: 0,
-                                                                                titleSuffixImgAlt: '',
-                                                                            })
-                                                                        }
-                                                                    >
-                                                                        {__('Remove', 'frontis-block')}
-                                                                    </Button>
-																	<MediaUploadCheck>
-																		<MediaUpload
-																			title={__('Replace image', 'frontis-block')}
-																			value={titleSuffixImgId}
-                                                                            onSelect={(media) =>
-                                                                                setAttributes({
-                                                                                    titleSuffixImgUrl: media.url,
-                                                                                    titleSuffixImgId: media.id,
-                                                                                    titleSuffixImgAlt: media.alt,
-                                                                                })
-                                                                            }
-																			type="image"
-																			render={({open}) => (
-																				<Button
-																					className='editor-post-featured-image__action'
-																					onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																			)}
-																		/>
-																	</MediaUploadCheck>
-																</HStack>
-															}
-														</BaseControl>
-                                                )}
+                                                <FB_ImageControl 
+                                                    globalBackgroundImageUrl={titleSuffixImgUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ titleSuffixImgUrl: value })}
+                                                    globalBackgroundImageAlt={titleSuffixImgAlt}
+                                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ titleSuffixImgAlt: value })}
+                                                    globalBackgroundImageID={titleSuffixImgID}
+                                                    setGlobalBackgroundImageID={(value) => setAttributes({ titleSuffixImgID: value })}
+                                                    globalBackgroundImagePosition={titleSuffixImgPosition}
+                                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ titleSuffixImgPosition: value })}
+                                                    globalBackgroundImageAttachment={titleSuffixImgAttachment} 
+                                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ titleSuffixImgAttachment: value })}
+                                                    globalBackgroundImageRepeat={titleSuffixImgRepeat}
+                                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ titleSuffixImgRepeat: value })}
+                                                    globalBackgroundImageSize={titleSuffixImgSize}
+                                                    setGlobalBackgroundImageSize={(value) => setAttributes({ titleSuffixImgSize: value })}
+                                                />
+                                            )}
                                         </>
                                     )}
                                 </PanelBody>
@@ -740,14 +649,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             initialOpen={true}
                                             className='fb-setting-z-index-header'
                                         >
-                                            <RangeControl
-                                                value={accordionItemZIndex}
-                                                onChange={(value) => setAttributes({ accordionItemZIndex: value === 0 ? undefined : value })}
-                                                min={1}
-                                                max={100}
-                                                step={1}
-                                                allowReset
-                                                resetFallbackValue={undefined}
+                                            <FB_Range
+                                                min={0}
+                                                max={10000000}
+                                                label={__("Z Index", "frontis-blocks")}
+                                                rangeValue={accordionItemZIndex}
+                                                onChangeHandler={(value) => setAttributes({ accordionItemZIndex: value === 0 ? undefined : value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+
                                             />
                                         </PanelBody>
 
