@@ -3,7 +3,6 @@ import { __ } from "@wordpress/i18n";
 import {
 	useBlockProps,
 	InspectorControls,
-	MediaUploadCheck,
 	MediaUpload,
 } from "@wordpress/block-editor";
 
@@ -29,6 +28,9 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_UrlControl from "@Components/url-control";
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+
 /**
  * Internal depencencies
  */
@@ -1876,31 +1878,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("Icon/Image", "frontis-block")}
 												initialOpen={true}
 											>
-												<BaseControl
-													label={__("Alignment", "frontis-block")}
-													id="fb-setting-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup className="fb-advanced-alignment-group-btn">
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({
-																		wrapperAlignment: item.value,
-																	})
-																}
-																className={`fb-advanced-alignment-single-btn ${
-																	wrapperAlignment === item.value
-																		? "active"
-																		: ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_AlignmentControl
+													label={__("Alignment", "frontis-blocks")}
+													globalAlignment={wrapperAlignment}
+													setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+												/>
 
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
@@ -2115,48 +2098,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("Title", "frontis-block")}
 												initialOpen={false}
 											>
-												<BaseControl
-													label={__("Heading Alignment", "frontis-block")}
-													id="fb-setting-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup className="fb-advanced-alignment-group-btn">
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Alignment: item.value })
-																}
-																className={`fb-advanced-alignment-single-btn ${
-																	Alignment === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_AlignmentControl
+													label={__("Alignment", "frontis-blocks")}
+													globalAlignment={Alignment}
+													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+												/>
 
-												<BaseControl
-													label={__("Heading Tag", "frontis-block")}
-													className="fb-setting-tag-wrapper"
-												>
-													<ButtonGroup className="fb-setting-tag-inner-wrapper">
-														{HEADING.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Heading_Tag: item.value })
-																}
-																className={`fb-setting-tag-single-btn ${
-																	Heading_Tag === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_HtmlTagControl
+													label={__("Title Tag", "frontis-blocks")}
+													globalHtmlTag={Heading_Tag}
+													setGlobalHtmlTag={(value) => setAttributes({ Heading_Tag: value })}
+												/>
 
 												<TextareaControl
 													label={__("Heading Text", "frontis-block")}
@@ -2201,31 +2155,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												{Sub_Heading_Switcher && (
 													<>
-														<BaseControl
-															label={__("Alignment", "frontis-block")}
-															id="fb-media-alignment"
-															className="fb-advanced-alignment"
-														>
-															<ButtonGroup className="fb-advanced-alignment-group-btn">
-																{TEXT_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				descAlignment: item.value,
-																			})
-																		}
-																		className={`fb-advanced-alignment-single-btn ${
-																			descAlignment === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+														
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={descAlignment}
+															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+														/>
 
 														<TextareaControl
 															label={__("Sub Heading Text", "frontis-block")}
