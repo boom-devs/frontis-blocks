@@ -713,7 +713,7 @@ const attributes = {
     },
     headingIcon: {
 		type: 'string',
-		default: 'check',
+		default: 'bookmark',
 	},
     headingIconSize: {
         type: 'object',
@@ -871,7 +871,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	headingGlobalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
 	/** Start Padding */
 	headingGlobalPaddingUnits: {

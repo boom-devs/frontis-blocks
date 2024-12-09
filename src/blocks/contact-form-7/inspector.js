@@ -1838,7 +1838,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 	
         .${blockID}.fb-contact-form-wrapper {
-            ${contactFormGlobalZIndex != "" ? `z-index: ${contactFormGlobalZIndex};` : ''}
+			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
             position: relative;
         }
 
@@ -2044,6 +2044,428 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
             ${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
         }
+
+        @media only screen and (max-width: 1024px) {
+
+			.${blockID}.fb-contact-form-wrapper {
+				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
+				position: relative;
+			}
+
+			.${blockID}.fb-contact-form-wrapper {
+				${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
+				${TabletPadding != "" ? `padding: ${TabletPadding};` : ""}
+				${TabletMargin != "" ? `margin: ${TabletMargin};` : ""}
+				${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
+				${BorderTabletWidth != "" ? `border-width: ${BorderTabletWidth};` : ""}
+				${BorderRadiusTabletWidth != "" ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ""}
+				${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
+				transition: all .3s ease-in-out;
+			}
+			.${blockID}.fb-contact-form-wrapper:hover {
+				${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
+				${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-error-message .wpcf7-not-valid-tip {
+				display: none;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input::-webkit-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea::-webkit-input-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input::-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea::-moz-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input:-ms-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea:-ms-input-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input:-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea:-moz-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
+				${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
+				${contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
+				${contactFormLabelFontSize.Tablet != "" ? `font-size: ${contactFormLabelFontSize.Tablet}${contactFormLabelFontSizeUnits.Tablet};` : ''}
+				${contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
+				${contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
+				${contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
+				${contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
+				${contactFormLabelLetterSpacing.Tablet && contactFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormLabelLetterSpacing.Tablet}${contactFormLabelLetterSpacingUnits.Tablet};` : ''}
+				${contactFormLabelLineHeight.Tablet && contactFormLabelLineHeightUnits.Tablet ? `line-height: ${contactFormLabelLineHeight.Tablet}${contactFormLabelLineHeightUnits.Tablet};` : ''}
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
+				${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+			}
+
+
+			.${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+			.${blockID}.fb-contact-form-wrapper textarea, 
+			.${blockID}.fb-contact-form-wrapper select {
+				${contactFormInputBgColor ? `background-color: ${contactFormInputBgColor};` : ""}
+				${contactFormInputColor ? `color: ${contactFormInputColor};` : ""}
+				${contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
+				${contactFormInputFontSize.Tablet != "" ? `font-size: ${contactFormInputFontSize.Tablet}${contactFormInputFontSizeUnits.Tablet};` : ''}
+				${contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
+				${contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
+				${contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
+				${contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
+				${contactFormInputLetterSpacing.Tablet != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Tablet}${contactFormInputLetterSpacingUnits.Tablet};` : ''}
+				${contactFormInputLineHeight.Tablet != "" ? `line-height: ${contactFormInputLineHeight.Tablet}${contactFormInputLineHeightUnits.Tablet};` : ''}
+				${contactFormTextIndentSize.Tablet != "" ? `text-indent: ${contactFormTextIndentSize.Tablet}${contactFormTextIndentSizeUnits.Tablet};` : ""}
+				${contactFormInputWidthSize.Tablet != "" ? `width: ${contactFormInputWidthSize.Tablet}${contactFormInputWidthSizeUnits.Tablet};` : ""}
+				${contactFormInputHeightSize.Tablet != "" ? `height: ${contactFormInputHeightSize.Tablet}${contactFormInputHeightSizeUnits.Tablet};` : ""}
+				${contactFormTabletPadding != "" ? `padding: ${contactFormTabletPadding};` : ""}
+				${contactFormBorder ? `border: ${contactFormBorder};` : ""}
+				${contactFormBorderTabletWidth != "" ? `border-width: ${contactFormBorderTabletWidth};` : ""}
+				${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
+				${contactFormBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormBorderRadiusTabletWidth};` : ""}
+				transition: all .3s ease-in-out;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+			.${blockID}.fb-contact-form-wrapper textarea:focus, 
+			.${blockID}.fb-contact-form-wrapper select:focus {
+				${contactFormFocusBorder ? `border: ${contactFormFocusBorder};` : ""}
+				${contactFormFocusBorderTabletWidth != "" ? `border-width: ${contactFormFocusBorderTabletWidth};` : ""}
+				${contactFormFocusBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusTabletWidth};` : ""}
+				${contactFormInputFocusColor ? `border-color: ${contactFormInputFocusColor};` : ""}
+				box-shadow: none;
+				outline: none;
+			}
+
+			.${blockID}.fb-contact-form-wrapper textarea {
+				${contactFormTextareaWidthSize.Tablet != "" ? `width: ${contactFormTextareaWidthSize.Tablet}${contactFormTextareaWidthSizeUnits.Tablet};` : ""}
+				${contactFormTextareaHeightSize.Tablet != "" ? `height: ${contactFormTextareaHeightSize.Tablet}${contactFormTextareaHeightSizeUnits.Tablet};` : ""}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form p {
+				${contactFormSpacingSize.Tablet != "" ? `margin: ${contactFormSpacingSize.Tablet}${contactFormSpacingUnits.Tablet} 0;` : ""} 
+			}
+
+			.${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
+				${contactFormSubmitAlignment === 'center' ? 'margin: 0 auto; display: block;' : ''}
+				${contactFormSubmitAlignment === 'right' ? 'margin-left: auto; display: block;' : ''}
+				${contactFormSubmitAlignment === 'left' ? 'margin-right: auto; display: block;' : ''}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit { 
+				${contactFormSubmitHeight.Tablet ? `height: ${contactFormSubmitHeight.Tablet}${contactFormSubmitHeightUnits.Tablet};` : ""}
+				${contactFormSubmitColor ? `color: ${contactFormSubmitColor};` : ""}
+				${contactFormSubmitBgColor ? `background: ${contactFormSubmitBgColor};` : ""}
+				${contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
+				${contactFormSubmitFontSize.Tablet && contactFormSubmitFontSizeUnits.Tablet ? `font-size: ${contactFormSubmitFontSize.Tablet}${contactFormSubmitFontSizeUnits.Tablet};` : ''} 
+				${contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
+				${contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
+				${contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
+				${contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
+				${contactFormSubmitLetterSpacing.Tablet && contactFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSubmitLetterSpacing.Tablet}${contactFormSubmitLetterSpacingUnits.Tablet};` : ''}
+				${contactFormSubmitLineHeight.Tablet && contactFormSubmitLineHeightUnits.Tablet ? `line-height: ${contactFormSubmitLineHeight.Tablet}${contactFormSubmitLineHeightUnits.Tablet};` : ''} 
+				${contactFormSubmitTabletPadding ? `padding: ${contactFormSubmitTabletPadding};` : ""}
+				${contactFormSubmitTabletMargin ? `margin: ${contactFormSubmitTabletMargin};` : ""}
+
+				${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
+				${contactFormSubmitTabletBorderWidth ? `border-width: ${contactFormSubmitTabletBorderWidth};` : ""}
+				${contactFormSubmitBorderColor ? `border-color: ${contactFormSubmitBorderColor};` : ""}
+				${contactFormSubmitTabletBorderRadiusWidth ? `border-radius: ${contactFormSubmitTabletBorderRadiusWidth};` : ""}
+				cursor: pointer;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit:hover {
+				${contactFormSubmitHoverColor ? `color: ${contactFormSubmitHoverColor};` : ""}
+				${contactFormSubmitBgHoverColor ? `background: ${contactFormSubmitBgHoverColor};` : ""}
+				${contactFormSubmitBorderHoverColor ? `border-color: ${contactFormSubmitBorderHoverColor};` : ""}
+				opacity: 0.8;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
+				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth.Tablet 
+				? `width: ${contactFormSubmitWidth.Tablet}${contactFormSubmitWidthUnits.Tablet};` 
+				: ''}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
+				${contactFormErrorColor ? `color: ${contactFormErrorColor};` : ""}
+				${contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
+				${contactFormErrorFontSize.Tablet && contactFormErrorFontSizeUnits.Tablet ? `font-size: ${contactFormErrorFontSize.Tablet}${contactFormErrorFontSizeUnits.Tablet};` : ''} 
+				${contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
+				${contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
+				${contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
+				${contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
+				${contactFormErrorLetterSpacing.Tablet && contactFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormErrorLetterSpacing.Tablet}${contactFormErrorLetterSpacingUnits.Tablet};` : ''}
+				${contactFormErrorLineHeight.Tablet && contactFormErrorLineHeightUnits.Tablet ? `line-height: ${contactFormErrorLineHeight.Tablet}${contactFormErrorLineHeightUnits.Tablet};` : ''} 
+				${contactFormErrorTabletPadding ? `padding: ${contactFormErrorTabletPadding};` : ""}
+				${contactFormErrorTabletMargin ? `margin: ${contactFormErrorTabletMargin};` : ""}
+				margin-top: 4px;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
+				${contactFormSuccessColor ? `color: ${contactFormSuccessColor};` : ""}
+				${contactFormSuccessBgColor ? `background: ${contactFormSuccessBgColor};` : ""}
+				${contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
+				${contactFormSuccessFontSize.Tablet && contactFormSuccessFontSizeUnits.Tablet ? `font-size: ${contactFormSuccessFontSize.Tablet}${contactFormSuccessFontSizeUnits.Tablet};` : ''} 
+				${contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
+				${contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
+				${contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
+				${contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
+				${contactFormSuccessLetterSpacing.Tablet && contactFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSuccessLetterSpacing.Tablet}${contactFormSuccessLetterSpacingUnits.Tablet};` : ''}
+				${contactFormSuccessLineHeight.Tablet && contactFormSuccessLineHeightUnits.Tablet ? `line-height: ${contactFormSuccessLineHeight.Tablet}${contactFormSuccessLineHeightUnits.Tablet};` : ''}
+				${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
+				${contactFormSuccessTabletBorderWidth ? `border-width: ${contactFormSuccessTabletBorderWidth};` : ""}
+				${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
+				${contactFormSuccessTabletBorderRadiusWidth ? `border-radius: ${contactFormSuccessTabletBorderRadiusWidth};` : ""}
+				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+				padding: 10px 15px;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
+				${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
+			}
+			
+		}
+
+		@media only screen and (max-width: 767px) {
+				.${blockID}.fb-contact-form-wrapper {
+				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
+				position: relative;
+			}
+
+			.${blockID}.fb-contact-form-wrapper {
+				${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
+				${MobilePadding != "" ? `padding: ${MobilePadding};` : ""} 
+				${MobileMargin != "" ? `margin: ${MobileMargin};` : ""}
+				${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
+				${BorderMobileWidth != "" ? `border-width: ${BorderMobileWidth};` : ""}
+				${BorderRadiusMobileWidth != "" ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""}
+				${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
+				transition: all .3s ease-in-out;
+			}
+			.${blockID}.fb-contact-form-wrapper:hover {
+				${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
+				${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-error-message .wpcf7-not-valid-tip {
+				display: none;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input::-webkit-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea::-webkit-input-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input::-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea::-moz-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input:-ms-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea:-ms-input-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder input:-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-placeholder textarea:-moz-placeholder {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
+				${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
+				${contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
+				${contactFormLabelFontSize.Mobile != "" ? `font-size: ${contactFormLabelFontSize.Mobile}${contactFormLabelFontSizeUnits.Mobile};` : ''}
+				${contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
+				${contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
+				${contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
+				${contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
+				${contactFormLabelLetterSpacing.Mobile && contactFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormLabelLetterSpacing.Mobile}${contactFormLabelLetterSpacingUnits.Mobile};` : ''}
+				${contactFormLabelLineHeight.Mobile && contactFormLabelLineHeightUnits.Mobile ? `line-height: ${contactFormLabelLineHeight.Mobile}${contactFormLabelLineHeightUnits.Mobile};` : ''}
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
+				${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+			}
+
+
+			.${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+			.${blockID}.fb-contact-form-wrapper textarea, 
+			.${blockID}.fb-contact-form-wrapper select {
+				${contactFormInputBgColor ? `background-color: ${contactFormInputBgColor};` : ""}
+				${contactFormInputColor ? `color: ${contactFormInputColor};` : ""}
+				${contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
+				${contactFormInputFontSize.Mobile != "" ? `font-size: ${contactFormInputFontSize.Mobile}${contactFormInputFontSizeUnits.Mobile};` : ''}
+				${contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
+				${contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
+				${contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
+				${contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
+				${contactFormInputLetterSpacing.Mobile != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Mobile}${contactFormInputLetterSpacingUnits.Mobile};` : ''}
+				${contactFormInputLineHeight.Mobile != "" ? `line-height: ${contactFormInputLineHeight.Mobile}${contactFormInputLineHeightUnits.Mobile};` : ''}
+				${contactFormTextIndentSize.Mobile != "" ? `text-indent: ${contactFormTextIndentSize.Mobile}${contactFormTextIndentSizeUnits.Mobile};` : ""}
+				${contactFormInputWidthSize.Mobile != "" ? `width: ${contactFormInputWidthSize.Mobile}${contactFormInputWidthSizeUnits.Mobile};` : ""}
+				${contactFormInputHeightSize.Mobile != "" ? `height: ${contactFormInputHeightSize.Mobile}${contactFormInputHeightSizeUnits.Mobile};` : ""}
+				${contactFormMobilePadding != "" ? `padding: ${contactFormMobilePadding};` : ""}
+				${contactFormBorder ? `border: ${contactFormBorder};` : ""}
+				${contactFormBorderMobileWidth != "" ? `border-width: ${contactFormBorderMobileWidth};` : ""}
+				${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
+				${contactFormBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormBorderRadiusMobileWidth};` : ""}
+				transition: all .3s ease-in-out;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
+			.${blockID}.fb-contact-form-wrapper textarea:focus, 
+			.${blockID}.fb-contact-form-wrapper select:focus {
+				${contactFormFocusBorder ? `border: ${contactFormFocusBorder};` : ""}
+				${contactFormFocusBorderMobileWidth != "" ? `border-width: ${contactFormFocusBorderMobileWidth};` : ""}
+				${contactFormFocusBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusMobileWidth};` : ""}
+				${contactFormInputFocusColor ? `border-color: ${contactFormInputFocusColor};` : ""}
+				box-shadow: none;
+				outline: none;
+			}
+
+			.${blockID}.fb-contact-form-wrapper textarea {
+				${contactFormTextareaWidthSize.Mobile != "" ? `width: ${contactFormTextareaWidthSize.Mobile}${contactFormTextareaWidthSizeUnits.Mobile};` : ""}
+				${contactFormTextareaHeightSize.Mobile != "" ? `height: ${contactFormTextareaHeightSize.Mobile}${contactFormTextareaHeightSizeUnits.Mobile};` : ""}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form p {
+				${contactFormSpacingSize.Tablet != "" ? `margin: ${contactFormSpacingSize.Tablet}${contactFormSpacingUnits.Tablet} 0;` : ""} 
+			}
+
+			.${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
+			.${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
+				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
+				font-weight: 300;
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
+				${contactFormSubmitAlignment === 'center' ? 'margin: 0 auto; display: block;' : ''}
+				${contactFormSubmitAlignment === 'right' ? 'margin-left: auto; display: block;' : ''}
+				${contactFormSubmitAlignment === 'left' ? 'margin-right: auto; display: block;' : ''}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit { 
+				${contactFormSubmitHeight.Mobile ? `height: ${contactFormSubmitHeight.Mobile}${contactFormSubmitHeightUnits.Mobile};` : ""}
+				${contactFormSubmitColor ? `color: ${contactFormSubmitColor};` : ""}
+				${contactFormSubmitBgColor ? `background: ${contactFormSubmitBgColor};` : ""}
+				${contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
+				${contactFormSubmitFontSize.Mobile && contactFormSubmitFontSizeUnits.Mobile ? `font-size: ${contactFormSubmitFontSize.Mobile}${contactFormSubmitFontSizeUnits.Mobile};` : ''} 
+				${contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
+				${contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
+				${contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
+				${contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
+				${contactFormSubmitLetterSpacing.Mobile && contactFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSubmitLetterSpacing.Mobile}${contactFormSubmitLetterSpacingUnits.Mobile};` : ''}
+				${contactFormSubmitLineHeight.Mobile && contactFormSubmitLineHeightUnits.Mobile ? `line-height: ${contactFormSubmitLineHeight.Mobile}${contactFormSubmitLineHeightUnits.Mobile};` : ''} 
+				${contactFormSubmitMobilePadding ? `padding: ${contactFormSubmitMobilePadding};` : ""}
+				${contactFormSubmitMobileMargin ? `margin: ${contactFormSubmitMobileMargin};` : ""}
+
+				${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
+				${contactFormSubmitMobileBorderWidth ? `border-width: ${contactFormSubmitMobileBorderWidth};` : ""}
+				${contactFormSubmitBorderColor ? `border-color: ${contactFormSubmitBorderColor};` : ""}
+				${contactFormSubmitMobileBorderRadiusWidth ? `border-radius: ${contactFormSubmitMobileBorderRadiusWidth};` : ""}
+				cursor: pointer;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit:hover {
+				${contactFormSubmitHoverColor ? `color: ${contactFormSubmitHoverColor};` : ""}
+				${contactFormSubmitBgHoverColor ? `background: ${contactFormSubmitBgHoverColor};` : ""}
+				${contactFormSubmitBorderHoverColor ? `border-color: ${contactFormSubmitBorderHoverColor};` : ""}
+				opacity: 0.8;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
+				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
+				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth.Mobile 
+				? `width: ${contactFormSubmitWidth.Mobile}${contactFormSubmitWidthUnits.Mobile};` 
+				: ''}
+			}
+
+			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
+				${contactFormErrorColor ? `color: ${contactFormErrorColor};` : ""}
+				${contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
+				${contactFormErrorFontSize.Mobile && contactFormErrorFontSizeUnits.Mobile ? `font-size: ${contactFormErrorFontSize.Mobile}${contactFormErrorFontSizeUnits.Mobile};` : ''} 
+				${contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
+				${contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
+				${contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
+				${contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
+				${contactFormErrorLetterSpacing.Mobile && contactFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormErrorLetterSpacing.Mobile}${contactFormErrorLetterSpacingUnits.Mobile};` : ''}
+				${contactFormErrorLineHeight.Mobile && contactFormErrorLineHeightUnits.Mobile ? `line-height: ${contactFormErrorLineHeight.Mobile}${contactFormErrorLineHeightUnits.Mobile};` : ''} 
+				${contactFormErrorMobilePadding ? `padding: ${contactFormErrorMobilePadding};` : ""}
+				${contactFormErrorMobileMargin ? `margin: ${contactFormErrorMobileMargin};` : ""}
+				margin-top: 4px;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
+				${contactFormSuccessColor ? `color: ${contactFormSuccessColor};` : ""}
+				${contactFormSuccessBgColor ? `background: ${contactFormSuccessBgColor};` : ""}
+				${contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
+				${contactFormSuccessFontSize.Mobile && contactFormSuccessFontSizeUnits.Mobile ? `font-size: ${contactFormSuccessFontSize.Mobile}${contactFormSuccessFontSizeUnits.Mobile};` : ''} 
+				${contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
+				${contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
+				${contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
+				${contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
+				${contactFormSuccessLetterSpacing.Mobile && contactFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSuccessLetterSpacing.Mobile}${contactFormSuccessLetterSpacingUnits.Mobile};` : ''}
+				${contactFormSuccessLineHeight.Mobile && contactFormSuccessLineHeightUnits.Mobile ? `line-height: ${contactFormSuccessLineHeight.Mobile}${contactFormSuccessLineHeightUnits.Mobile};` : ''}
+				${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
+				${contactFormSuccessMobileBorderWidth ? `border-width: ${contactFormSuccessMobileBorderWidth};` : ""}
+				${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
+				${contactFormSuccessMobileBorderRadiusWidth ? `border-radius: ${contactFormSuccessMobileBorderRadiusWidth};` : ""}
+				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+				padding: 10px 15px;
+			}
+			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
+				${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
+			}
+		}
 
     `, [
 		blockID,
@@ -3114,18 +3536,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={contactFormGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+													<FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={''}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={contactFormGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
 

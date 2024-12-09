@@ -2439,7 +2439,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
 			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-			${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+			${priceGlobalZIndex.Desktop ? `z-index: ${priceGlobalZIndex.Desktop};` : ''}
 			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
 			transition: background-color 0.3s ease, border-color 0.3s ease;
 			position: relative;
@@ -2787,7 +2787,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+				${priceGlobalZIndex.Tablet ? `z-index: ${priceGlobalZIndex.Tablet};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
 				transition: background-color 0.3s ease, border-color 0.3s ease;
 				position: relative;
@@ -2994,7 +2994,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-				${priceGlobalZIndex ? `z-index: ${priceGlobalZIndex};` : ''}
+				${priceGlobalZIndex.Mobile ? `z-index: ${priceGlobalZIndex.Mobile};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
 				transition: background-color 0.3s ease, border-color 0.3s ease;
 				position: relative;
@@ -5539,19 +5539,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={priceGlobalZIndex}
-														onChange={(value) => setAttributes({ priceGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={priceGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ priceGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>

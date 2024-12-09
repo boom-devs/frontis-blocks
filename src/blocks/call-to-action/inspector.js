@@ -74,6 +74,7 @@ import FB_Color from "@Components/color";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
+import { title } from "@wordpress/icons";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -2344,7 +2345,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Title", "frontis-block")}
-												initialOpen={false}
+												initialOpen={true}
 											>
 												<BaseControl
 													label={__("Heading Alignment", "frontis-block")}
@@ -2634,7 +2635,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{/*Heading Style*/}
 										<PanelBody
 											title={__("Title", "frontis-block")}
-											initialOpen={false}
+											initialOpen={true}
 										>
 											<FB_TypographyControl
                                                 fontFamily={headingFontFamily}
@@ -3008,7 +3009,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{btnTwoSwitcher && (
 											<PanelBody
 												title={__("Button Two", "frontis-blocks")}
-												initialOpen={true}
+												initialOpen={false}
 											>
 												<FB_TypographyControl
 													fontFamily={buttonTwoFontFamily}

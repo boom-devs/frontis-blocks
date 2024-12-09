@@ -35,8 +35,6 @@ export const getSettings = async (settingType) => {
 		if (!response.success) {
 			throw new Error(response.data || 'Fetch failed');
 		}
-		console.log("Global getSettings")
-		console.log(response.data)
 		return response.data; // Ensure this returns the resolved data
 	} catch (error) {
 		console.error('Ajax error:', error);
