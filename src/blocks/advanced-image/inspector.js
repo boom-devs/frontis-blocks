@@ -28,8 +28,6 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-	HEADING,
-	TEXT_ALIGN,
 } from "../advanced-image/constants/constants";
 import "./editor.scss";
 
