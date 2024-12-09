@@ -8,7 +8,7 @@ if (!function_exists('sanitize_text_field') || !function_exists('rest_sanitize_b
 }
 
 $block_attributes               = $block['attrs'];
-$block_id                        = isset($block_attributes['blockID']) ? sanitize_text_field($block_attributes['blockID']) : '';
+$blockId                        = isset($block_attributes['blockID']) ? sanitize_text_field($block_attributes['blockID']) : '';
 $blockStyle                     = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
 
-EnqueueBlocksCss::enqueue_block_asset(css_content: $blockStyle, block_name: $single_block['slug'], block_id: $block_id);
+EnqueueBlocksCss::enqueue_block_asset( $blockStyle, $single_block['slug'], $blockId);
