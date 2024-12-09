@@ -263,7 +263,7 @@ const FB_Color = ({
                 label={__(label, 'frontis-blocks')}
                 className="fb-setting-color-panel-wrapper"
             >
-                <ButtonGroup className="fb-setting-color-panel-btn">
+                <ButtonGroup className="fb-setting-color-panel-btn fb-btn-group-text-only">
                     {NORMAL_HOVER.map((item) => (
                         <Button
                             key={item.value}
