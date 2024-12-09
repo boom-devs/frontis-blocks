@@ -18,8 +18,10 @@ import {
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 
@@ -173,8 +175,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID} .progress-bar-wrapper {
+            ${progressGlobalZIndex.Desktop ? `z-index: ${progressGlobalZIndex.Desktop};` : ''}
             position: relative;
-            z-index: ${progressGlobalZIndex !== undefined ? progressGlobalZIndex : ''};
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
             ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
@@ -249,6 +251,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 1024px) {
+
+            .${blockID} .progress-bar-wrapper {
+                ${progressGlobalZIndex.Tablet ? `z-index: ${progressGlobalZIndex.Tablet};` : ''}
+                position: relative;
+            }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -264,6 +271,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
+
+            .${blockID} .progress-bar-wrapper {
+                ${progressGlobalZIndex.Mobile ? `z-index: ${progressGlobalZIndex.Mobile};` : ''}
+                position: relative;
+            }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -475,33 +487,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
-                                            <FB_Color
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressColorSwitcher}
-                                                globalColor={progressColor}
-                                                globalHoverColor={progressHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressHoverColor: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Label Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressTextColorSwitcher}
-                                                globalColor={progressTextColor}
-                                                globalHoverColor={progressTextHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressTextColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressTextColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressTextHoverColor: value })}
-                                            />
-                                            <FB_Color
-                                                label={__("Base Color", "frontis-blocks")}
-                                                globalColorSwitcher={progressBgColorSwitcher}
-                                                globalColor={progressBgColor}
-                                                globalHoverColor={progressBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ progressBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ progressBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ progressBgHoverColor: value })}
-                                            />
+
+                                            <FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={progressColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressColorSwitcher: value })}
+											/>
+
+											{progressColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressColor}
+													setGlobalColor={(value) => setAttributes({ progressColor: value })}
+												/>
+											)}
+
+											{progressColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressHoverColor: value })}
+												/>
+											)}
+
+                                            <FB_SwitcherControl
+													label={__("Label Color", "frontis-blocks")}
+													globalSwitcher={progressTextColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressTextColorSwitcher: value })}
+											/>
+
+											{progressTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressTextColor}
+													setGlobalColor={(value) => setAttributes({ progressTextColor: value })}
+												/>
+											)}
+
+											{progressTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressTextHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressTextHoverColor: value })}
+												/>
+											)}
+
+                                            <FB_SwitcherControl
+													label={__("Base Color", "frontis-blocks")}
+													globalSwitcher={progressBgColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ progressBgColorSwitcher: value })}
+											/>
+
+											{progressBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={progressBgColor}
+													setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
+												/>
+											)}
+
+											{progressBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={progressBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ progressBgHoverColor: value })}
+												/>
+											)}
+
                                             <FB_Spacing 
                                                 label={__("Radius Border", "frontis-blocks")}
                                                 deviceType={deviceType}
@@ -524,18 +576,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={progressGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+                                                    <FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={100}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={progressGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
                                             </div>

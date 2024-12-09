@@ -919,7 +919,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	TestimonialGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	/** Start Padding */
 	TestimonialGlobalPaddingUnits: {

@@ -383,28 +383,28 @@ const attributes = {
     headingDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 24,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
         },
     },
     headingTabPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 18,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '18',
+            left: '0',
+            right: '0',
         },
     },
     headingMobilePadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 16,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '16',
+            left: '0',
+            right: '0',
         },
     },
     headingPaddingLink : {

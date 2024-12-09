@@ -2040,31 +2040,31 @@ var defaultsColors = [{
   "slug": 'primary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#0f0',
+  "color": '#399CFF',
   "slug": 'secondary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#F72585',
   "slug": 'tertiary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
-  "color": "#00f",
+  "color": "#7209B7",
   "slug": 'accent-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
-  "color": '#000',
+  "color": '#3A0CA3',
   "slug": 'text-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#4361EE',
   "slug": 'link-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#4CC9F0',
   "slug": 'link-hover-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
-  "color": '#000',
+  "color": '#393E46',
   "slug": 'background-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Color", "frontis-blocks"),
@@ -2139,7 +2139,7 @@ function FrontisBlocksSidebar(props) {
     setFontfamilies = _useState20[1];
   var defaultTypos = {
     body: {
-      fontFamily: 'default',
+      fontFamily: 'inherit',
       lineHeight: {
         Desktop: 0,
         Tablet: 0,
@@ -2176,7 +2176,7 @@ function FrontisBlocksSidebar(props) {
       }
     },
     link: {
-      fontFamily: 'default',
+      fontFamily: 'inherit',
       lineHeight: {
         Desktop: 0,
         Tablet: 0,
@@ -2213,7 +2213,7 @@ function FrontisBlocksSidebar(props) {
       }
     },
     button: {
-      fontFamily: 'default',
+      fontFamily: 'inherit',
       lineHeight: {
         Desktop: 0,
         Tablet: 0,
@@ -2251,7 +2251,7 @@ function FrontisBlocksSidebar(props) {
     },
     heading: {
       h1: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -2288,7 +2288,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h2: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -2325,7 +2325,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h3: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -2362,7 +2362,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h4: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -2399,7 +2399,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h5: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -2436,7 +2436,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h6: {
-        fontFamily: "default",
+        fontFamily: "inherit",
         lineHeight: {
           Desktop: 0,
           Tablet: 0,
@@ -3115,6 +3115,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -3133,6 +3136,9 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    // setDeviceType('Desktop');
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
@@ -6503,6 +6509,20 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     setAttributes = _ref.setAttributes;
+  var storedTypography = localStorage.getItem('fb_typography');
+  var typographySettings = storedTypography ? JSON.parse(storedTypography) : {};
+  var bodyTypography = typographySettings.body;
+  var globalBodyFontFamily = bodyTypography.fontFamily;
+  var globalBodyFontSize = bodyTypography.fontSize;
+  var globalBodyFontSizeUnit = bodyTypography.fontSizeUnit;
+  var globalBodyFontStyle = bodyTypography.fontStyle;
+  var globalBodyFontWeight = bodyTypography.fontWeight;
+  var globalBodyLetterSpacing = bodyTypography.letterSpacing;
+  var globalBodyLetterSpacingUnit = bodyTypography.letterSpacingUnit;
+  var globalBodyLineHeight = bodyTypography.lineHeight;
+  var globalBodyLineHeightUnit = bodyTypography.lineHeightUnit;
+  var globalBodyTextTransform = bodyTypography.textTransform;
+  var globalBodyTextDecoration = bodyTypography.textDecoration;
   var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
     onChangeFontFamily(newFontFamily);
   };

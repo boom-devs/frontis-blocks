@@ -20,13 +20,13 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
-	DeviceType: {
+	deviceType: {
 		type: 'string',
 		default: 'Desktop'
 	},
 	containerType: {
 		type: 'string',
-		default: 'boxed'
+		default: 'full-width'
 	},
 	containerTypeFull: {
 		type: 'string',
@@ -129,10 +129,6 @@ const attributes = {
 	alignItemsDesktop: {
 		type: 'string',
 		default: 'center',
-		isGBSStyle: true,
-		UAGCopyPaste: {
-			styleType: 'container-align-items-desktop',
-		},
 	},
 	alignItemsTablet: {
 		type: 'string',

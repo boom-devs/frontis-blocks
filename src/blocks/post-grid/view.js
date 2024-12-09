@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
-				console.log(filterPost.limit * (currentPage - 1))
-
 				filterPost.offset = filterPost.limit * (currentPage - 1);
 				filterPost.category = cat ? cat.split(',') : [];
 				filterPost.post_tag = tag ? tag.split(',') : [];
@@ -166,11 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					loadingElement.style.display = 'none';
 				}
 
-				console.log("After")
 				currentPage = currentPage + 1;
-				console.log("current page");
-				console.log(currentPage);
-				console.log(filterPost.limit * (currentPage - 1))
 
 				// Re-attach the Load More button if more pages are available
 				// if (currentPage < posts.data.total_pages) {
