@@ -1677,24 +1677,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															className="fb-setting-text-alignment"
 														>
 															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-																{ICON_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				buttonIconAlign: item.value,
-																			})
-																		}
-																		className={`fb-setting-text-alignment-single-btn ${
-																			buttonIconAlign === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
+															{ICON_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			buttonIconAlign: item.value,
+																		})
+																	}
+																	className={`fb-setting-text-alignment-single-btn ${
+																		buttonIconAlign === item.value
+																			? "active"
+																			: ""
+																	}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+														
 															{(buttonIconAlign === "icon-text" ||
 																buttonIconAlign === "icon-only") && (
 																<FBIconPicker
