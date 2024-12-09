@@ -65,7 +65,11 @@ export default function save({ attributes }) {
                 {pricingSectionTopSwitcher && (
                     <div className="fb-pricing-inner-wrapper">
                         <div className="fb-pricing-top-wrapper">
-                            <span className="fb-pricing-top-text">{pricingSectionTopText}</span>
+                            <RichText.Content
+                                tagName="span"
+                                className="fb-pricing-top-text"
+                                value={pricingSectionTopText}
+                            />
                         </div>
                     </div>
                 )}
@@ -93,29 +97,55 @@ export default function save({ attributes }) {
                         <div className="fb-pricing-price-wrapper">
                             <div className="fb-pricing-price-inner-wrapper">
                                 <span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
-                                    <span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-                                    {normalPrice}
-                                    <span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-                                    
+                                    <span className="price-currency">
+                                        {priceCurrencyPosition === 'left' ? (
+                                            <RichText.Content tagName="span" value={priceCurrency} />
+                                        ) : ''}
+                                    </span>
+                                    <RichText.Content tagName="span" value={normalPrice} />
+                                    <span className="price-currency">
+                                        {priceCurrencyPosition === 'right' ? (
+                                            <RichText.Content tagName="span" value={priceCurrency} />
+                                        ) : ''}
+                                    </span>
                                     {!salePriceSwitcher && (
-                                        <span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+                                        <span className="price-period">
+                                            <RichText.Content tagName="span" value={pricePeriodSeparator} />
+                                            <RichText.Content tagName="span" value={pricePeriod} />
+                                        </span>
                                     )}
                                 </span>
                                 {salePriceSwitcher && (
                                     <span className="fb-pricing-sale-price">
-                                        <span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-                                        {salePrice}
-                                        <span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-                                        <span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+                                        <span className="price-currency">
+                                            {priceCurrencyPosition === 'left' ? (
+                                                <RichText.Content tagName="span" value={priceCurrency} />
+                                            ) : ''}
+                                        </span>
+                                        <RichText.Content tagName="span" value={salePrice} />
+                                        <span className="price-currency">
+                                            {priceCurrencyPosition === 'right' ? (
+                                                <RichText.Content tagName="span" value={priceCurrency} />
+                                            ) : ''}
+                                        </span>
+                                        <span className="price-period">
+                                            <RichText.Content tagName="span" value={pricePeriodSeparator} />
+                                            <RichText.Content tagName="span" value={pricePeriod} />
+                                        </span>
                                     </span>
                                 )}
-                            </div>  
+                            </div>
                             {priceAfterTextSwitcher && (
                                 <div className="fb-pricing-after-text-wrapper">
-                                    <div className="fb-pricing-after-text">{priceAfterText}</div>
+                                    <RichText.Content
+                                        tagName="span"
+                                        className="fb-pricing-after-text"
+                                        value={priceAfterText}
+                                    />
                                 </div>
                             )}
                         </div>
+
                     </div>
                     <div className="fb-pricing-content">
                         <div className="fb-pricing-features-wrapper">
@@ -142,7 +172,11 @@ export default function save({ attributes }) {
                         </div>
                         {priceFeatureAfterTextSwitcher && (
                             <div className="fb-pricing-feature-after-text-wrapper">
-                                <span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
+                                <RichText.Content
+                                    tagName="span"
+                                    className="fb-pricing-feature-after-text"
+                                    value={priceFeatureAfterText}
+                                />
                             </div>
                         )}
                     </div>

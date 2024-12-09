@@ -153,6 +153,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 														</Button>
 													))}
 												</ButtonGroup>
+												<ButtonGroup className="fb-setting-switcher-panel-btn">
+												{DIRECTION.map((item, key) => (
+													<Button
+														key={key}
+														onClick={() => setAttributes({  })}
+														className={`fb-setting-switcher-panel-btn-switcher ${""}`}
+													>
+														{item.label}
+													</Button>
+												))}
+												</ButtonGroup>
 											</BaseControl>
 
 											{ containerType === 'full-width' && (
@@ -162,19 +173,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 														id="fb-setting-text-alignment"
 														className="fb-setting-text-alignment"
 													>
-														<ButtonGroup
-															className="fb-setting-text-alignment-group-btn"
-														>
+									
+														<ButtonGroup className="fb-setting-switcher-panel-btn">
 															{CONTAINER_TYPE_FULL.map((item, key) => (
 																<Button
 																	key={key}
 																	onClick={() => setAttributes({ containerTypeFull: item.value })}
-																	className={`fb-setting-text-alignment-single-btn ${containerTypeFull === item.value ? 'active' : ''}`}
+																	className={`fb-setting-switcher-panel-btn-switcher ${containerTypeFull === item.value ? 'active' : ''}`}
 																>
 																	{item.label}
 																</Button>
 															))}
 														</ButtonGroup>
+
 														<div style={{marginTop: '10px'}}></div>
 														<FB_Range
 															min={1}
@@ -228,18 +239,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											id="fb-setting-alignment"
 											className="fb-advanced-alignment"
 										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
+											<ButtonGroup className="fb-setting-switcher-panel-btn">
 												{DIRECTION.map((item, key) => (
 													<Button
 														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
+														onClick={() => setAttributes({  })}
+														className={`fb-setting-switcher-panel-btn-switcher ${""}`}
 													>
 														{item.label}
 													</Button>
@@ -256,18 +261,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 											id="fb-setting-alignment"
 											className="fb-advanced-alignment"
 										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
+											
+											<ButtonGroup className="fb-setting-switcher-panel-btn">
 												{JUSTIFY_CONTENT.map((item, key) => (
 													<Button
 														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
+														onClick={() => setAttributes({  })}
+														className={`fb-setting-switcher-panel-btn-switcher ${""}`}
 													>
 														{item.label}
 													</Button>
@@ -279,23 +279,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 											id="fb-setting-alignment"
 											className="fb-advanced-alignment"
 										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
+											
+											<ButtonGroup className="fb-setting-switcher-panel-btn">
 												{WRAP.map((item, key) => (
 													<Button
 														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
+														onClick={() => setAttributes({  })}
+														className={`fb-setting-switcher-panel-btn-switcher ${""}`}
 													>
 														{item.label}
 													</Button>
 												))}
 											</ButtonGroup>
+
 										</BaseControl>
 										</PanelBody>
 									</div>
