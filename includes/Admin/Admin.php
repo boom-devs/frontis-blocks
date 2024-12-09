@@ -45,15 +45,12 @@ class Admin {
     }
 
     public function enqueue_styles($hook){
-        if('toplevel_page_frontis-blocks' != $hook){
-            return;
+
+        if('toplevel_page_frontis-blocks' == $hook || 'post.php' == $hook || 'post-new.php' == $hook){
+            $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
+
+            wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.css', array(), '1.0.0');
         }
-
-        $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
-
-        wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.css', array(), '1.0.0');
-
-
     }
 
     public function enqueue_scripts($hook){

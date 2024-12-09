@@ -3042,6 +3042,7 @@ var FB_Range = function FB_Range(_ref) {
   };
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
+    setRangeUnit('px');
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
@@ -6668,6 +6669,15 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   }, {
     label: 'em',
     value: 'em'
+  }, {
+    label: 'rem',
+    value: 'rem'
+  }, {
+    label: 'vh',
+    value: 'vh'
+  }, {
+    label: 'vw',
+    value: 'vw'
   }];
 
   /** State to manage dropdown visibility */
@@ -10231,7 +10241,7 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 /*!********************************!*\
   !*** ./admin/sidebar/index.js ***!
