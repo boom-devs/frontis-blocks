@@ -1721,7 +1721,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-dual-button-connenctor-wrapper">
 												<PanelBody
 													title={__("Connector", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 												>
 													<ToggleControl
 														label={__("Show Connector", "frontis-block")}
@@ -1746,7 +1746,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-dual-button-two-wrapper">
 												<PanelBody
 													title={__("Button Two", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 												>
 													<TextControl
 														label={__("Text", "frontis-blocks")}
@@ -1865,7 +1865,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										<PanelBody
 											title={__("Buttons", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<FB_Range
 													min={0}

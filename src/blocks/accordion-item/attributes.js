@@ -269,28 +269,28 @@ const attributes = {
     accordionItemDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMarginLink : {
@@ -325,28 +325,28 @@ const attributes = {
     accordionItemDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemBorderLink : {
@@ -365,28 +365,28 @@ const attributes = {
     accordionItemDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemBorderRadiusLink : {
