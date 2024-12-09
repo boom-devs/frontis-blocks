@@ -364,6 +364,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureItemPaddingLink,
 		/** End Feature Item Padding */
 
+		/** Start Feature Margin */
+		priceFeatureItemMarginUnits,
+		priceFeatureItemDesktopMargin,
+		priceFeatureItemTabMargin,
+		priceFeatureItemMobileMargin,
+		priceFeatureItemMarginLink,
+		/** End Feature Margin */
+
+		/** Start Feature Border */
+		priceFeatureItemBorderBottom,
+		priceFeatureItemBorder,
+		priceFeatureItemBorderColorSwitcher,
+		priceFeatureItemBorderColor,
+		priceFeatureItemBorderHoverColor,
+
+		priceFeatureItemBorderUnits,
+		priceFeatureItemDesktopBorder,
+		priceFeatureItemTabBorder,
+		priceFeatureItemMobileBorder,
+		priceFeatureItemBorderLink,
+		/** End Feature Border */
+
+		/** Start Feature Border Radius */
+		priceFeatureItemBorderRadiusUnits,
+		priceFeatureItemDesktopBorderRadius,
+		priceFeatureItemTabBorderRadius,
+		priceFeatureItemMobileBorderRadius,
+		priceFeatureItemBorderRadiusLink,
+		/** End Feature Border Radius */
+
 		/** Start Feature Padding */
 		priceFeaturePaddingUnits,
 		priceFeatureDesktopPadding,
@@ -371,10 +401,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureMobilePadding,
 		priceFeaturePaddingLink,
 		/** End Feature Padding */
-
-
-
-
 
 		/** Start price Button */
 		priceButtonAlignment,
@@ -1135,6 +1161,223 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceFeatureItemTabPaddingWidth 		= `${priceFeatureItemTabPadding.top}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.right}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.bottom}${priceFeatureItemPaddingUnits.Tablet} ${priceFeatureItemTabPadding.left}${priceFeatureItemPaddingUnits.Tablet}`;
 	const priceFeatureItemMobilePaddingWidth 	= `${priceFeatureItemMobilePadding.top}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.right}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.bottom}${priceFeatureItemPaddingUnits.Mobile} ${priceFeatureItemMobilePadding.left}${priceFeatureItemPaddingUnits.Mobile}`;
 	/** End Feature Item Padding */
+
+	/** Start Feature Item Margin */ 
+	const handleFeatureItemMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeatureItemMarginLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureItemDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureItemTabMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureItemMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureItemDesktopMargin: {...priceFeatureItemDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureItemTabMargin: {...priceFeatureItemTabMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureItemMobileMargin: {...priceFeatureItemMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureItemMarginCombineBtn = () => {
+		setAttributes( {priceFeatureItemMarginLink: !priceFeatureItemMarginLink} );
+	}
+
+	const handleFeatureItemMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeatureItemMarginUnits: {
+				...priceFeatureItemMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureItemDesktopMarginWidth 	= `${priceFeatureItemDesktopMargin.top}${priceFeatureItemMarginUnits.Desktop} ${priceFeatureItemDesktopMargin.right}${priceFeatureItemMarginUnits.Desktop} ${priceFeatureItemDesktopMargin.bottom}${priceFeatureItemMarginUnits.Desktop} ${priceFeatureItemDesktopMargin.left}${priceFeatureItemMarginUnits.Desktop}`;
+	const priceFeatureItemTabMarginWidth 		= `${priceFeatureItemTabMargin.top}${priceFeatureItemMarginUnits.Tablet} ${priceFeatureItemTabMargin.right}${priceFeatureItemMarginUnits.Tablet} ${priceFeatureItemTabMargin.bottom}${priceFeatureItemMarginUnits.Tablet} ${priceFeatureItemTabMargin.left}${priceFeatureItemMarginUnits.Tablet}`;
+	const priceFeatureItemMobileMarginWidth 	= `${priceFeatureItemMobileMargin.top}${priceFeatureItemMarginUnits.Mobile} ${priceFeatureItemMobileMargin.right}${priceFeatureItemMarginUnits.Mobile} ${priceFeatureItemMobileMargin.bottom}${priceFeatureItemMarginUnits.Mobile} ${priceFeatureItemMobileMargin.left}${priceFeatureItemMarginUnits.Mobile}`;
+	/** End Feature Item Margin */
+
+	/** Start Feature Item Border */ 
+	const handleFeatureItemBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeatureItemBorderLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureItemDesktopBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureItemTabBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureItemMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureItemDesktopBorder: {...priceFeatureItemDesktopBorder, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureItemTabBorder: {...priceFeatureItemTabBorder, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureItemMobileBorder: {...priceFeatureItemMobileBorder, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureItemBorderCombineBtn = () => {
+		setAttributes( {priceFeatureItemBorderLink: !priceFeatureItemBorderLink} );
+	}
+
+	const handleFeatureItemBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeatureItemBorderUnits: {
+				...priceFeatureItemBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureItemDesktopBorderWidth 	= `${priceFeatureItemDesktopBorder.top}${priceFeatureItemBorderUnits.Desktop} ${priceFeatureItemDesktopBorder.right}${priceFeatureItemBorderUnits.Desktop} ${priceFeatureItemDesktopBorder.bottom}${priceFeatureItemBorderUnits.Desktop} ${priceFeatureItemDesktopBorder.left}${priceFeatureItemBorderUnits.Desktop}`;
+	const priceFeatureItemTabBorderWidth 		= `${priceFeatureItemTabBorder.top}${priceFeatureItemBorderUnits.Tablet} ${priceFeatureItemTabBorder.right}${priceFeatureItemBorderUnits.Tablet} ${priceFeatureItemTabBorder.bottom}${priceFeatureItemBorderUnits.Tablet} ${priceFeatureItemTabBorder.left}${priceFeatureItemBorderUnits.Tablet}`;
+	const priceFeatureItemMobileBorderWidth 	= `${priceFeatureItemMobileBorder.top}${priceFeatureItemBorderUnits.Mobile} ${priceFeatureItemMobileBorder.right}${priceFeatureItemBorderUnits.Mobile} ${priceFeatureItemMobileBorder.bottom}${priceFeatureItemBorderUnits.Mobile} ${priceFeatureItemMobileBorder.left}${priceFeatureItemBorderUnits.Mobile}`;
+	/** End Feature Item Border */
+
+
+	/** Start Feature Item Border Radius  */ 
+	const handleFeatureItemBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( priceFeatureItemBorderRadiusLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						priceFeatureItemDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						priceFeatureItemTabBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						priceFeatureItemMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {priceFeatureItemDesktopBorderRadius: {...priceFeatureItemDesktopBorderRadius, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {priceFeatureItemTabBorderRadius: {...priceFeatureItemTabBorderRadius, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {priceFeatureItemMobileBorderRadius: {...priceFeatureItemMobileBorderRadius, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureItemBorderRadiusCombineBtn = () => {
+		setAttributes( {priceFeatureItemBorderRadiusLink: !priceFeatureItemBorderRadiusLink} );
+	}
+
+	const handleFeatureItemBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			priceFeatureItemBorderRadiusUnits: {
+				...priceFeatureItemBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const priceFeatureItemDesktopBorderRadiusWidth 	= `${priceFeatureItemDesktopBorderRadius.top}${priceFeatureItemBorderRadiusUnits.Desktop} ${priceFeatureItemDesktopBorderRadius.right}${priceFeatureItemBorderRadiusUnits.Desktop} ${priceFeatureItemDesktopBorderRadius.bottom}${priceFeatureItemBorderRadiusUnits.Desktop} ${priceFeatureItemDesktopBorderRadius.left}${priceFeatureItemBorderRadiusUnits.Desktop}`;
+	const priceFeatureItemTabBorderRadiusWidth 		= `${priceFeatureItemTabBorderRadius.top}${priceFeatureItemBorderRadiusUnits.Tablet} ${priceFeatureItemTabBorderRadius.right}${priceFeatureItemBorderRadiusUnits.Tablet} ${priceFeatureItemTabBorderRadius.bottom}${priceFeatureItemBorderRadiusUnits.Tablet} ${priceFeatureItemTabBorderRadius.left}${priceFeatureItemBorderRadiusUnits.Tablet}`;
+	const priceFeatureItemMobileBorderRadiusWidth 	= `${priceFeatureItemMobileBorderRadius.top}${priceFeatureItemBorderRadiusUnits.Mobile} ${priceFeatureItemMobileBorderRadius.right}${priceFeatureItemBorderRadiusUnits.Mobile} ${priceFeatureItemMobileBorderRadius.bottom}${priceFeatureItemBorderRadiusUnits.Mobile} ${priceFeatureItemMobileBorderRadius.left}${priceFeatureItemBorderRadiusUnits.Mobile}`;
+	/** End Feature Item Border Radius */
 	
 	/** Start Feature Padding */ 
 	const handleFeaturePaddingUnitChange = ( event, position ) => {
@@ -2631,6 +2874,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockId} .fb-pricing-feature-item {
 			${priceFeatureItemDesktopPaddingWidth ? `padding: ${priceFeatureItemDesktopPaddingWidth};` : ''}
+			${priceFeatureItemDesktopMarginWidth ? `margin: ${priceFeatureItemDesktopMarginWidth};` : ''}
+			${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
+			${priceFeatureItemBorderColor ? `border-color: ${priceFeatureItemBorderColor};` : ''}
+			${priceFeatureItemDesktopBorderWidth ? `border-width: ${priceFeatureItemDesktopBorderWidth};` : ''}
+			${priceFeatureItemDesktopBorderRadiusWidth ? `border-radius: ${priceFeatureItemDesktopBorderRadiusWidth};` : ''} 
+		}
+		
+		.${blockId} .fb-pricing-feature-item:hover {
+			${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
+		}
+
+		.${blockId} .fb-pricing-feature-item:last-child {
+			${priceFeatureItemBorderBottom ? `border-bottom: none;` : ''}
 		}
 
 		.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
@@ -2845,6 +3101,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockId} .fb-pricing-feature-item {
 				${priceFeatureItemTabPaddingWidth ? `padding: ${priceFeatureItemTabPaddingWidth};` : ''}
+				${priceFeatureItemTabMarginWidth ? `margin: ${priceFeatureItemTabMarginWidth};` : ''}
+				${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
+				${priceFeatureItemBorderColor ? `border-color: ${priceFeatureItemBorderColor};` : ''}
+				${priceFeatureItemTabBorderWidth ? `border-width: ${priceFeatureItemTabBorderWidth};` : ''}
+				${priceFeatureItemTabBorderRadiusWidth ? `border-radius: ${priceFeatureItemTabBorderRadiusWidth};` : ''} 
+			}
+			.${blockId} .fb-pricing-feature-item:hover {
+				${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
 			}
 
 			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
@@ -3024,6 +3288,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockId} .fb-pricing-feature-item {
 				${priceFeatureItemMobilePaddingWidth ? `padding: ${priceFeatureItemMobilePaddingWidth};` : ''}
+				${priceFeatureItemMobileMarginWidth ? `margin: ${priceFeatureItemMobileMarginWidth};` : ''}
+				${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
+				${priceFeatureItemBorderColor ? `border-color: ${priceFeatureItemBorderColor};` : ''}
+				${priceFeatureItemMobileBorderWidth ? `border-width: ${priceFeatureItemMobileBorderWidth};` : ''}
+				${priceFeatureItemMobileBorderRadiusWidth ? `border-radius: ${priceFeatureItemMobileBorderRadiusWidth};` : ''} 
+			}
+			.${blockId} .fb-pricing-feature-item:hover {
+				${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
 			}
 
 			.${blockId} .fb-pricing-feature-item, .${blockId} .fb-pricing-feature-after-text {
@@ -3362,6 +3634,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureItemDesktopPaddingWidth,
 		priceFeatureItemTabPaddingWidth,
 		priceFeatureItemMobilePaddingWidth,
+
+		priceFeatureItemMarginUnits,
+		priceFeatureItemDesktopMargin,
+		priceFeatureItemTabMargin,
+		priceFeatureItemMobileMargin,
+		priceFeatureItemMarginLink,
+		priceFeatureItemDesktopMarginWidth,
+		priceFeatureItemTabMarginWidth,
+		priceFeatureItemMobileMarginWidth,
+
+		priceFeatureItemBorderBottom,
+		priceFeatureItemBorder,
+		priceFeatureItemBorderColorSwitcher,
+		priceFeatureItemBorderColor,
+		priceFeatureItemBorderHoverColor,
+
+		priceFeatureItemBorderUnits,
+		priceFeatureItemDesktopBorder,
+		priceFeatureItemTabBorder,
+		priceFeatureItemMobileBorder,
+		priceFeatureItemBorderLink,
+		priceFeatureItemDesktopBorderWidth,
+		priceFeatureItemTabBorderWidth,
+		priceFeatureItemMobileBorderWidth,
+
+		priceFeatureItemBorderRadiusUnits,
+		priceFeatureItemDesktopBorderRadius,
+		priceFeatureItemTabBorderRadius,
+		priceFeatureItemMobileBorderRadius,
+		priceFeatureItemBorderRadiusLink,
+		priceFeatureItemDesktopBorderRadiusWidth,
+		priceFeatureItemTabBorderRadiusWidth,
+		priceFeatureItemMobileBorderRadiusWidth,
+
 
 		priceFeaturePaddingUnits, 
 		priceFeatureDesktopPadding,
@@ -3850,7 +4156,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({priceAfterTextSwitcher: value})}
 											/>
 											{priceAfterTextSwitcher && (
-												<TextControl
+												<TextareaControl
 													value={priceAfterText}
 													onChange={(value) => setAttributes({ priceAfterText: value })}
 												/>
@@ -3905,7 +4211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({priceFeatureAfterTextSwitcher: value})}
 											/>
 											{priceFeatureAfterTextSwitcher && (
-												<TextControl
+												<TextareaControl
 													value={priceFeatureAfterText}
 													onChange={(value) => setAttributes({ priceFeatureAfterText: value })}
 												/>
@@ -5054,25 +5360,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Feature", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<BaseControl
+
+											<FB_AlignmentControl
 												label={__("Alignment", "frontis-blocks")}
-												id="fb-setting-text-alignment"
-												className="fb-setting-text-alignment"
-											>
-													<ButtonGroup
-														className="fb-setting-text-alignment-group-btn"
-													>
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({ priceFeatureAlignment: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${priceFeatureAlignment === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-											</BaseControl>
+												globalAlignment={priceFeatureAlignment}
+												setGlobalAlignment={(value) => setAttributes({ priceFeatureAlignment: value })}
+											/>
 
 											<FB_SwitcherControl
 												label={__("Feature Icon Color", "frontis-blocks")}
@@ -5184,6 +5477,81 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
+											<FB_Spacing 
+												label={__("Item Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeatureItemMarginUnitsHandler}
+												spacingUnits={priceFeatureItemMarginUnits}
+												spacingDesktop={priceFeatureItemDesktopMargin}
+												spacingTablet={priceFeatureItemTabMargin}
+												spacingMobile={priceFeatureItemMobileMargin}
+												handleSpacingUnitHandler={handleFeatureItemMarginUnitChange}
+												spacingCombineBtn={priceFeatureItemMarginLink}
+												spacingCombineBtnHandler={handleFeatureItemMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<SelectControl
+												label={__("Item Border Style", "frontis-blocks")}
+												value={priceFeatureItemBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ priceFeatureItemBorder: value })}
+											/>
+											<ToggleControl
+												label={__("Hide Last Item Border", "frontis-blocks")}
+												checked={priceFeatureItemBorderBottom}
+												onChange={(value) => setAttributes({priceFeatureItemBorderBottom: value})}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Item Border Color", "frontis-blocks")}
+												globalSwitcher={priceFeatureItemBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ priceFeatureItemBorderColorSwitcher: value })}
+											/>
+
+											{priceFeatureItemBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Nomal Color", "frontis-blocks")}
+													globalColor={priceFeatureItemBorderColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderColor: value })}
+												/>
+											)}
+
+											{priceFeatureItemBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={priceFeatureItemBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing 
+												label={__("Item Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeatureItemBorderUnitsHandler}
+												spacingUnits={priceFeatureItemBorderUnits}
+												spacingDesktop={priceFeatureItemDesktopBorder}  
+												spacingTablet={priceFeatureItemTabBorder}
+												spacingMobile={priceFeatureItemMobileBorder}
+												handleSpacingUnitHandler={handleFeatureItemBorderUnitChange}
+												spacingCombineBtn={priceFeatureItemBorderLink}
+												spacingCombineBtnHandler={handleFeatureItemBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing 
+												label={__("Item Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleFeatureItemBorderRadiusUnitsHandler}
+												spacingUnits={priceFeatureItemBorderRadiusUnits}
+												spacingDesktop={priceFeatureItemDesktopBorderRadius}
+												spacingTablet={priceFeatureItemTabBorderRadius}
+												spacingMobile={priceFeatureItemMobileBorderRadius}
+												handleSpacingUnitHandler={handleFeatureItemBorderRadiusUnitChange}
+												spacingCombineBtn={priceFeatureItemBorderRadiusLink}
+												spacingCombineBtnHandler={handleFeatureItemBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
 
 											<FB_Spacing 
 												label={__("Padding", "frontis-blocks")}

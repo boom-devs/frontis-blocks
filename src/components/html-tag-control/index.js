@@ -20,7 +20,7 @@ const FB_HtmlTagControl = ({ label, globalHtmlTag, setGlobalHtmlTag }) => {
 			id="fb-setting-text-alignment"
 			className="fb-setting-text-alignment"
 		>
-			<ButtonGroup className="fb-setting-text-alignment-group-btn">
+			<ButtonGroup className="fb-setting-text-alignment-group-btn fb-btn-group-html-tag">
 				{HEADING_OPTIONS.map((item) => (
 					<Button
 						key={item.value}
