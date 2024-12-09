@@ -9,26 +9,28 @@ $background_color: #D7EBFF;
         margin-bottom: 24px;
         background-color: $neutral-color-50;
         border-radius: 8px;
+		justify-content: space-between;
         .fb-tab {
+			display: inline-block;
             font-family: $heading-font-family;
             font-weight: 600;
             font-size: $small-font-size;
             line-height: $heading-line-height;
-            border: none;
+            border: 1px solid transparent;
             border-radius: 0;
             box-shadow: none;
             cursor: pointer;
             height: 46px;
-            padding: 8px 18px;
+            padding: 10px 16px;
             &.general,
             &.styles,
-            &.advanced {
+            &.advance,
+			&.advanced {
                 &.active-tab {
                     background: $primary-color-100;
                     border: 1px solid $primary-color-300 !important;
                     border-radius: 8px;
                     color: $neutral-color-950;
-                    width: 100%;
                 }
             }
         }
@@ -83,6 +85,7 @@ $background_color: #D7EBFF;
                 border-radius: 8px;
                 background: $neutral-color-50;
                 margin-bottom: 24px;
+				flex-wrap: wrap;
                 .components-button{
                     padding: 10px 25px;
                     margin-bottom: 0;

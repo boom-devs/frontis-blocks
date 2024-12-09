@@ -108,28 +108,28 @@ const attributes = {
 	imageBorderDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderLink: {
@@ -147,28 +147,28 @@ const attributes = {
 	imageBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	imageBorderRadiusLink: {
@@ -327,28 +327,28 @@ const attributes = {
 	HeadingDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingBorderLink : {
@@ -362,16 +362,16 @@ const attributes = {
 	HeadingDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
+			top: "0",
 			bottom: 0,
 			left: 0,
 			right: 0,
@@ -380,10 +380,10 @@ const attributes = {
 	HeadingMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingBorderRadiusLink : {
@@ -410,19 +410,19 @@ const attributes = {
 	HeadingTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingPaddingLink : {
@@ -440,28 +440,28 @@ const attributes = {
 	HeadingDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	HeadingMarginLink : {
@@ -577,10 +577,10 @@ const attributes = {
 	normalBorderRad: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	normalBorderRadiusLink : {

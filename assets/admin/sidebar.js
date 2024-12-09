@@ -3042,7 +3042,6 @@ var FB_Range = function FB_Range(_ref) {
   };
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
-    setRangeUnit('px');
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
