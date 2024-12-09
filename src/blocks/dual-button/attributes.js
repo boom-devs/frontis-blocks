@@ -155,28 +155,28 @@ const attributes = {
 	ButtonDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonBorderLink: {
@@ -194,28 +194,28 @@ const attributes = {
 	ButtonDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonBorderRadiusLink: {
@@ -242,19 +242,19 @@ const attributes = {
 	ButtonTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonPaddingLink: {
@@ -272,28 +272,28 @@ const attributes = {
 	ButtonDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonMarginLink: {
@@ -643,28 +643,28 @@ const attributes = {
 	ButtonTwoDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoActiveBorderDevice: {
@@ -686,28 +686,28 @@ const attributes = {
 	ButtonTwoDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoActiveBorderRadiusDevice: {
@@ -740,19 +740,19 @@ const attributes = {
 	ButtonTwoTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoPaddingLink: {
@@ -771,28 +771,28 @@ const attributes = {
 	ButtonTwoDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	ButtonTwoMarginLink: {
