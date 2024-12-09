@@ -4,9 +4,9 @@ $background_color: #D7EBFF;
 
 /** Start Admin Panel scss **/
 .fb-inspector-control {
-    padding: 8px;
+    padding: 16px;
     .components-tab-panel__tabs{
-        margin-bottom: 24px;
+        margin-bottom: 16px;
         background-color: $neutral-color-50;
         border-radius: 8px;
 		justify-content: space-between;
@@ -36,11 +36,14 @@ $background_color: #D7EBFF;
         }
     }
 	
-    
     .components-panel__body{
+		&.is-opened{
+			padding: 0;
+		}
         border-top: none;
         margin-top: 0;
         .components-panel__body-title{
+			margin: 0;
             &:hover{
                 background: none;
             }
@@ -52,7 +55,7 @@ $background_color: #D7EBFF;
             padding: 12px 16px;
             height: 50px;
             margin-bottom: 10px;
-            font-family: $heading-font-family;
+            font-family: $body-font-family;
             font-size: $medium-font-size;
             font-weight: 600;
             line-height: $body-line-height;
@@ -68,12 +71,21 @@ $background_color: #D7EBFF;
                 min-height: auto;
                 text-transform: capitalize !important;
             }
+            .components-text-control__input,
+			.components-textarea-control__input{
+				font-family: $body-font-family;
+				font-size: $medium-font-size;
+                background: $neutral-color-50;
+                border: 1px solid $neutral-color-200;
+				color: $neutral-color;
+            }
             .components-text-control__input{
                 height: 52px;
                 border-radius: 10px;
-                background: $neutral-color-50;
-                border: 1px solid $neutral-color-200;
             }
+			.components-textarea-control__input{
+				border-radius: 8px;
+			}
             .components-input-control__container{
                 border-radius: 8px;
                 .components-select-control__input{
@@ -85,13 +97,16 @@ $background_color: #D7EBFF;
                 border-radius: 8px;
                 background: $neutral-color-50;
                 margin-bottom: 24px;
+				display: flex;
 				flex-wrap: wrap;
+				justify-content: space-between;
                 .components-button{
-                    padding: 10px 25px;
+                    padding: 10px;
                     margin-bottom: 0;
                     box-shadow: none;
                     border-radius: 0;
                     background: none;
+					border: 1px solid transparent;
                     &.active{
                         border-radius: 8px;
                         border: 1px solid #B0D7FF;
@@ -103,6 +118,7 @@ $background_color: #D7EBFF;
                 .components-button{
                     margin-bottom: 0;
                     height: 52px;
+					justify-content: center;
                     &:hover{
                         background: $primary-color-100;
                         color: $primary-color;
@@ -118,8 +134,31 @@ $background_color: #D7EBFF;
                 }
             }
         }
+		.components-button-group.fb-setting-switcher-panel-btn{
+			display: flex;
+			flex-wrap: nowrap;
+			.components-button{
+				border: 1px solid transparent;
+			}
+		}
+		.components-button-group.fb-btn-group-text-only{
+			flex-wrap: nowrap;
+		}
+		.components-button-group.fb-btn-group-html-tag{
+			display: flex;
+			justify-content: space-between;
+			.components-button{
+				padding: 8px 16px;
+				&.active{
+					border-radius: 0;
+					border: none;
+				}
+			}
+		}
+		
         
     }
+	
     
 }
 .fb-setting-switcher-container, .fb-setting-color-container{
