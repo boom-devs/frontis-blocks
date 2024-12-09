@@ -210,28 +210,28 @@ const attributes = {
     lightboxDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     lightboxTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     lightboxMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     lightboxBorderLink : {
@@ -375,9 +375,9 @@ const attributes = {
     GalleryButtonLetterSpacing: {
         type: "object",
         default: {
-			Desktop: 0,
-			Tablet: 0,
-			Mobile: 0
+			Desktop: '0',
+			Tablet: '0',
+			Mobile: '0'
 		}
     },
     GalleryButtonLetterSpacingUnits : {
@@ -459,28 +459,28 @@ const attributes = {
     ButtonDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonTabPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonMobilePadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonPaddingLink : {
@@ -499,28 +499,28 @@ const attributes = {
     ButtonDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonMarginLink : {
@@ -540,28 +540,28 @@ const attributes = {
     ButtonDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonBorderLink : {
@@ -580,28 +580,28 @@ const attributes = {
     ButtonDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     ButtonBorderRadiusLink : {
@@ -624,28 +624,28 @@ const attributes = {
     GalleryDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryTabPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryMobilePadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryPaddingLink : {
@@ -664,28 +664,28 @@ const attributes = {
     GalleryDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryMarginLink : {
@@ -732,28 +732,28 @@ const attributes = {
     GalleryDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryBorderLink : {
@@ -772,28 +772,28 @@ const attributes = {
     GalleryBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     GalleryBorderRadiusLink : {
@@ -839,28 +839,28 @@ const attributes = {
     imageDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageBorderLink : {
@@ -879,28 +879,28 @@ const attributes = {
     imageDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     imageBorderRadiusLink : {
