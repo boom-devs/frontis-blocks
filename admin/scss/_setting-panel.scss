@@ -35,7 +35,6 @@ $background_color: #D7EBFF;
             }
         }
     }
-	
     .components-panel__body{
 		&.is-opened{
 			padding: 0;
@@ -94,13 +93,16 @@ $background_color: #D7EBFF;
                 }
             }
             .components-button-group{
-                border-radius: 8px;
-                background: $neutral-color-50;
-                margin-bottom: 24px;
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-between;
+				border-radius: 8px;
+                background: $neutral-color-50;
+                margin-bottom: 24px;
                 .components-button{
+					font-weight: 400;
+					flex-grow: 1;
+					justify-content: center;
                     padding: 10px;
                     margin-bottom: 0;
                     box-shadow: none;
@@ -149,6 +151,7 @@ $background_color: #D7EBFF;
 			justify-content: space-between;
 			.components-button{
 				padding: 8px 16px;
+				border: none;
 				&.active{
 					border-radius: 0;
 					border: none;
