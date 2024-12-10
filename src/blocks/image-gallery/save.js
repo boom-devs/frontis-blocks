@@ -28,7 +28,7 @@ export default function Save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-image-gallery-wrapper">
+                <div className="fb-parent-wrapper fb-image-gallery-wrapper">
                     <div className="fb-image-gallery-items" data-id={blockID}>
                         {GalleryItems.map(item => 
                             item?.image?.url && (

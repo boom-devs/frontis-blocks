@@ -1374,7 +1374,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</InspectorControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-flip-box-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID}`}>
 					<div className={`fb-flip-box-item ${flipBoxTypeSwitcher === 'back' ? 'active' : ''}`}>
 						<div className="fb-flip-box-front">
 							<div className="fb-flip-box-content" style={{textAlign: flipBoxItemFrontAlignment}}>

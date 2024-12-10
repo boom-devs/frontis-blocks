@@ -104,7 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
+                <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
                     <div className={`fb-testimonial-wrapper ${blockID}`}>
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>

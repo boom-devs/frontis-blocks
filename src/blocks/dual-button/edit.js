@@ -62,7 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
 
             <div {...blockProps} id={blockID}>
-                <div className={`fb-dual-button-container ${blockID}`} >
+                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} >
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 
 						flexDirection:

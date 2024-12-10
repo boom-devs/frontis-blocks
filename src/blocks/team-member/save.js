@@ -30,7 +30,7 @@ export default function save({ attributes }) {
 		<>
 			
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-team-member-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image-overlay`}></div>
