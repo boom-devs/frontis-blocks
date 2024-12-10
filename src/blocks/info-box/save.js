@@ -38,7 +38,7 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-info-box-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-info-box-content-wrapper ${blockID}`}>
 					<div
 						className={`fb-info-box-content-wrapper-inner ${blockID}`}
 						style={{

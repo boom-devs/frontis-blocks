@@ -25,7 +25,7 @@ $_wrapper_classes = [
 
 $_form_wrapper_classes = [
     $blockID,
-    'fb-fluent-form-wrapper',
+    'fb-parent-wrapper fb-fluent-form-wrapper',
     !$showLabels ? 'fb-fluent-form-hide-label' : '',
     !$showPlaceholder ? 'fb-fluent-form-hide-placeholder' : '',
     !$showErrorMessage ? 'fb-fluent-form-hide-error-message' : '',

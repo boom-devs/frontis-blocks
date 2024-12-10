@@ -46,7 +46,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className={`fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
+            <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
                 <div className={`fb-testimonial-wrapper ${blockID}`}>
                     <div className="fb-testimonial-inner-wrapper">
                         <div className="fb-testimonial-container">

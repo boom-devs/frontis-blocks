@@ -156,7 +156,7 @@ export default function save({ attributes }) {
 			{/*</style>*/}
 
 			<div {...blockProps} data-target-date={targetDate}>
-				<div className={`fb-count-down-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`}>
 					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time days`}>0</span>
 						<span className={`fb-count-down-label`}>
