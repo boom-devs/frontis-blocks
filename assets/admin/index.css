@@ -1825,14 +1825,17 @@
   height: 40px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-button-group {
-  border-radius: 8px;
-  background: #F7F7F7;
-  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  border-radius: 8px;
+  background: #F7F7F7;
+  margin-bottom: 24px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-button-group .components-button {
+  font-weight: 400;
+  flex-grow: 1;
+  justify-content: center;
   padding: 10px;
   margin-bottom: 0;
   box-shadow: none;
@@ -1873,6 +1876,7 @@
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-btn-group-html-tag .components-button {
   padding: 8px 16px;
+  border: none;
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-btn-group-html-tag .components-button.active {
   border-radius: 0;
