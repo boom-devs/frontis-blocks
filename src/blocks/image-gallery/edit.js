@@ -43,7 +43,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-image-gallery-wrapper">
+                <div className="fb-parent-wrapper fb-image-gallery-wrapper">
                         <div className="fb-image-gallery-items">
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (

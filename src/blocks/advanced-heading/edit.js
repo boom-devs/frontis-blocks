@@ -64,7 +64,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                         {headingIconAlign === 'icon' && headingIconSwitcher && (

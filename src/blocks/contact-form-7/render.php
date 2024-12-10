@@ -5,7 +5,7 @@ $show_placeholder = isset( $attributes['showPlaceholder'] ) ? $attributes['showP
 $show_error_message = isset( $attributes['showErrorMessage'] ) ? $attributes['showErrorMessage'] : true;
 
 $wrapper_classes = [
-	'fb-contact-form-wrapper',
+	'fb-parent-wrapper fb-contact-form-wrapper',
 	$block_id,
 	!$show_placeholder ? 'fb-contact-form-hide-placeholder' : '',
 	!$show_error_message ? 'fb-contact-form-hide-error-message' : '',
