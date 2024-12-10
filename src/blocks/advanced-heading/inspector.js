@@ -284,6 +284,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 
+
+
+    const storedTypography = localStorage.getItem('fb_typography');
+    const typographySettings = storedTypography ? JSON.parse(storedTypography) : {};
+
+    const bodyTypography = typographySettings.body;
+
+    const globalBodyFontFamily = bodyTypography.fontFamily;
+    const globalBodyFontSize = bodyTypography.fontSize;
+    const globalBodyFontSizeUnit = bodyTypography.fontSizeUnit;
+    const globalBodyFontStyle = bodyTypography.fontStyle;
+    const globalBodyFontWeight = bodyTypography.fontWeight;
+    const globalBodyLetterSpacing = bodyTypography.letterSpacing;
+    const globalBodyLetterSpacingUnit = bodyTypography.letterSpacingUnit;
+    const globalBodyLineHeight = bodyTypography.lineHeight;
+    const globalBodyLineHeightUnit = bodyTypography.lineHeightUnit;
+    const globalBodyTextTransform = bodyTypography.textTransform;
+    const globalBodyTextDecoration = bodyTypography.textDecoration;
+
+    console.log(globalBodyFontFamily);
+
+
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -1444,6 +1467,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     }, [subHeadingFontFamily]);
 
     const allBlockStyle = useMemo(() => `
+
+
+        .fb-parent-wrapper p {
+            font-family: ${globalBodyFontFamily} !important;
+            display: block !important;
+        }
+
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
             ${headingColor ? `color: ${headingColor};` : ''}
             ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
@@ -1717,6 +1747,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     `, [
     blockId,
+    globalBodyFontFamily,
     deviceType,
     headingText,
     headingTag,
