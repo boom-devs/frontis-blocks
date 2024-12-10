@@ -3,6 +3,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     deviceType: {
         type: "string",
         default: "Desktop"
@@ -279,6 +283,14 @@ const attributes = {
         default: true
     },
 
+    GalleryColumnNumber: {
+        type: "object",
+        default: {
+			Desktop: 3,
+			Tablet: 2,
+			Mobile: 1
+		}
+    },
     GalleryColumnNumberDesktop: {
         type: "number",
         default: 3
@@ -610,8 +622,14 @@ const attributes = {
     },
     
     GalleryZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
+    
 
     GalleryPaddingUnits : {
         type: 'object',
