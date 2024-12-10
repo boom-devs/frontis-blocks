@@ -2000,7 +2000,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const lightboxIconHandler = (IconName) => {
 		setAttributes({lightboxIcon: IconName})
 	}
+
+    // const imageSpanStyle = GalleryItems.map(item => `
+    //         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+    //             grid-column: span ${item.column.desktop};
+    //             grid-row: span ${item.row.desktop};
+    //         }
+    //         @media only screen and (max-width: 1024px) {
+    //             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+    //                 grid-column: span ${item.column.tablet};
+    //                 grid-row: span ${item.row.tablet};
+    //             }
+    //         }
+    //         @media only screen and (max-width: 767px) {
+    //             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+    //                 grid-column: span ${item.column.mobile};
+    //                 grid-row: span ${item.row.mobile};
+    //             }
+    //         }
+
+    //     `)
     
+        // console.log(imageSpanStyle)
 
     return (
         <>
@@ -2031,6 +2052,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     grid-auto-rows: ${deviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
                 }
                 
+                
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
                     position: relative;
                     width: 100%;
@@ -2041,6 +2063,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     border-color: ${imageBorderColor};
                     border-radius: ${imageDesktopBorderRadius};
                 }
+
                 .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
                     position: absolute;
                     top: 0;

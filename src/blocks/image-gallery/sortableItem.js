@@ -13,6 +13,7 @@ import {
 	ResponsiveWrapper, __experimentalHStack as HStack,
 } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_Range from '../../components/range';
 
 
 export default function SortableItem({ deviceType, GalleryColumnNumberMobile, GalleryColumnNumberTablet, GalleryColumnNumberDesktop, GalleryType, id, item, handleChangeItem, handleDeleteItem, handleRemoveMedia, setAttributes }) {
@@ -132,7 +133,29 @@ export default function SortableItem({ deviceType, GalleryColumnNumberMobile, Ga
 																	/>
 																</div>
 															</div>
+														// <FB_Range
+														// 	label={__("Column Span", "frontis-blocks")}
+														// 	min={1}
+														// 	max={deviceType === "Desktop" ? GalleryColumnNumberDesktop : deviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
+														// 	rangeValue={deviceType === "Desktop" ? item.column?.desktop : deviceType === "Tablet" ? item.column?.tablet : item.column?.mobile}
+														// 	onChangeHandler={(value) => {
+														// 		if (deviceType === "Desktop") {
+														// 			handleChangeItem(item.id, 'column', {...item.column, desktop: value});
+														// 		} else if (deviceType === "Tablet") {
+														// 			handleChangeItem(item.id, 'column', {...item.column, tablet: value});
+														// 		} else if (deviceType === "Mobile") {
+														// 			handleChangeItem(item.id, 'column', {...item.column, mobile: value});
+														// 		}
+														// 	}}
+														// 	deviceType={deviceType}
+														// 	setAttributes={setAttributes}
+														// 	rangeStep={1}
+														// 	resetFallbackValue={0}
+														// 	isRangeUnit={false}
+														// />
+															
 														}
+														
 
 														{ GalleryType == 'mesonry' &&
 															<div className="fb-setting-columns-wrapper">

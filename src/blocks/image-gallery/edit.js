@@ -48,7 +48,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (
                                         <a key={item.id} 
-                                            className="fb-image-gallery-item" 
+                                            className={`fb-image-gallery-item ${item.id}`} 
                                             style={{
                                                 ...(GalleryType === 'mesonry' && {
                                                   gridRow: deviceType === 'Desktop'
