@@ -61,16 +61,12 @@
 		top: 0;
 		left: 0;
 		z-index: 10;
-		border: 1px solid #ccc;
-		background: white;
-		border-radius: 2px;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		background: $neutral-color-50;
 		overflow: hidden;
-
+        width: 100%;
 		.fb-setting-units-option {
 			cursor: pointer;
 			transition: background 0.2s;
-			width: 26px;
 			height: 26px;
 			display: flex;
 			align-items: center;
