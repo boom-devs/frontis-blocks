@@ -52,6 +52,31 @@ const attributes = {
 		type: 'string',
 		default: 'alignwide',
 	},
+	customWidth: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+	customWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	resetFallBackCustomWidth: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+
 	widthDesktop: {
 		type: 'number',
 		default: 100,

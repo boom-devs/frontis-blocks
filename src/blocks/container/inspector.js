@@ -11,6 +11,7 @@ import {
 	RangeControl,
 	SelectControl
 } from "@wordpress/components";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -18,7 +19,7 @@ import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 
-const Inspector = ({ attributes, setAttributes }) => {
+const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 	const {
 		htmlTag,
 		containerWidth,
@@ -43,11 +44,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 		marginRight,
 		marginBottom,
 		marginLeft,
-		deviceType,
 		containerType,
 		containerTypeFull,
 		fullWidthContentBoxedWidth,
-		fullWidthContentBoxedWidthUnits
+		fullWidthContentBoxedWidthUnits,
+		isBlockRootParent,
+		customWidth,
+		widthType,
+		variationSelected,
+		resetFallBackCustomWidth,
+		customWidthUnits,
+		deviceType
 	} = attributes;
 
 	let defaultImageUrl = '';
@@ -60,6 +67,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 		'Desktop': FrontisBlocksData.desktop_breakpoint,
 		'Mobile': FrontisBlocksData.mobile_breakpoint,
 		'Tablet': FrontisBlocksData.tablet_breakpoint
+	}
+
+	// Reset custom width value
+	let CUSTOM_DEVICE_BREAKPOINT = {
+		'Desktop': 100,
+		'Mobile': 100,
+		'Tablet': 100
 	}
 
 	const CONTAINER_TYPE = [
@@ -102,6 +116,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setAttributes({fullWidthContentBoxedWidthUnits: units});
 	}
 
+	// Handle custom width each row
+	const customContentWidthFn = (width) => {
+		setAttributes({customWidth: width});
+	}
+
+	const customContentWidthFnUnitsFn = (units) => {
+		setAttributes({customWidthUnits: units});
+	}
+
+	console.log("Attributes")
+	console.log(attributes)
+
 	return (
 		<InspectorControls key="controls">
 			<div className="fb-inspector-control">
@@ -135,27 +161,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 											title={__("Container Type", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<BaseControl
-												label={__("Container Width", "frontis-blocks")}
-												id="fb-setting-text-alignment"
-												className="fb-setting-text-alignment"
-											>
-												<ButtonGroup
-													className="fb-setting-text-alignment-group-btn"
+											{isBlockRootParent &&
+												<BaseControl
+													label={__("Container Width", "frontis-blocks")}
+													id="fb-setting-text-alignment"
+													className="fb-setting-text-alignment"
 												>
-													{CONTAINER_TYPE.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ containerType: item.value })}
-															className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-											</BaseControl>
+													<ButtonGroup
+														className="fb-setting-text-alignment-group-btn"
+													>
+														{CONTAINER_TYPE.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() => setAttributes({ containerType: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
+											}
 
-											{ containerType === 'full-width' && (
+											{ (containerType === 'full-width' && isBlockRootParent) && (
 												<>
 													<BaseControl
 														label={__("Content Width", "frontis-blocks")}
@@ -178,7 +206,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 														<div style={{marginTop: '10px'}}></div>
 														<FB_Range
 															min={1}
-															max={2000}
+															max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
 															label={__("Content Box Width", "frontis-blocks")}
 															rangeValue={fullWidthContentBoxedWidth}
 															onChangeHandler={fullWidthContentBoxedWidthFn}
@@ -187,7 +215,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 															units={fullWidthContentBoxedWidthUnits}
 															setAttributes={setAttributes}
 															rangeStep={1}
-															resetFallbackValue={DEVICE_BREAKPOINT[deviceType]}
+															resetFallbackValue={resetFallBackCustomWidth[deviceType]}
 															units_types_arr={[
 																{ label: 'px', value: 'px' },
 																{ label: '%', value: '%' },
@@ -197,6 +225,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 													</BaseControl>
 												</>
 											)}
+
+											{!isBlockRootParent &&
+												<>
+													<FB_Range
+														min={1}
+														max={customWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+														label={__("Custom Width", "frontis-blocks")}
+														rangeValue={customWidth}
+														onChangeHandler={customContentWidthFn}
+														rangeUnitHandler={customContentWidthFnUnitsFn}
+														deviceType={deviceType}
+														units={customWidthUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: '%', value: '%' },
+															{ label: 'vw', value: 'vw' },
+														]}
+													/>
+												</>
+											}
 
 											<FB_Range
 												min={1}
@@ -218,88 +269,83 @@ const Inspector = ({ attributes, setAttributes }) => {
 											/>
 										</PanelBody>
 									</div>
-									<div className="fb-flex-properties-wrapper">
-										<PanelBody
-											title={__("Flex Properties", "frontis-blocks")}
-											initialOpen={true}
-										>
-										<BaseControl
-											label={__("Direction", "frontis-block")}
-											id="fb-setting-alignment"
-											className="fb-advanced-alignment"
-										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
-												{DIRECTION.map((item, key) => (
-													<Button
-														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
-													>
-														{item.label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl>
-										<FB_AlignmentControl
-											label={__("Align Items", "frontis-blocks")}
-											globalAlignment={ "" }
-											setGlobalAlignment={(value) => setAttributes({  })}
-										/>
-										<BaseControl
-											label={__("Justify Content", "frontis-block")}
-											id="fb-setting-alignment"
-											className="fb-advanced-alignment"
-										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
-												{JUSTIFY_CONTENT.map((item, key) => (
-													<Button
-														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
-													>
-														{item.label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl>
-										<BaseControl
-											label={__("Wrap", "frontis-block")}
-											id="fb-setting-alignment"
-											className="fb-advanced-alignment"
-										>
-											<ButtonGroup className="fb-advanced-alignment-group-btn">
-												{WRAP.map((item, key) => (
-													<Button
-														key={key}
-														onClick={() =>
-															setAttributes({
-
-															})
-														}
-														className={`fb-advanced-alignment-single-btn ${
-															""
-														}`}
-													>
-														{item.label}
-													</Button>
-												))}
-											</ButtonGroup>
-										</BaseControl>
-										</PanelBody>
-									</div>
-
+									{isBlockRootParent &&
+										<div className="fb-flex-properties-wrapper">
+											<PanelBody
+												title={__("Flex Properties", "frontis-blocks")}
+												initialOpen={true}
+											>
+												<BaseControl
+													label={__("Direction", "frontis-block")}
+													id="fb-setting-alignment"
+													className="fb-advanced-alignment"
+												>
+													<ButtonGroup className="fb-advanced-alignment-group-btn">
+														{DIRECTION.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() =>
+																	setAttributes({})
+																}
+																className={`fb-advanced-alignment-single-btn ${
+																	""
+																}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
+												<FB_AlignmentControl
+													label={__("Align Items", "frontis-blocks")}
+													globalAlignment={""}
+													setGlobalAlignment={(value) => setAttributes({})}
+												/>
+												<BaseControl
+													label={__("Justify Content", "frontis-block")}
+													id="fb-setting-alignment"
+													className="fb-advanced-alignment"
+												>
+													<ButtonGroup className="fb-advanced-alignment-group-btn">
+														{JUSTIFY_CONTENT.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() =>
+																	setAttributes({})
+																}
+																className={`fb-advanced-alignment-single-btn ${
+																	""
+																}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
+												<BaseControl
+													label={__("Wrap", "frontis-block")}
+													id="fb-setting-alignment"
+													className="fb-advanced-alignment"
+												>
+													<ButtonGroup className="fb-advanced-alignment-group-btn">
+														{WRAP.map((item, key) => (
+															<Button
+																key={key}
+																onClick={() =>
+																	setAttributes({})
+																}
+																className={`fb-advanced-alignment-single-btn ${
+																	""
+																}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
+											</PanelBody>
+										</div>
+									}
 								</>
 							)}
 
@@ -309,77 +355,75 @@ const Inspector = ({ attributes, setAttributes }) => {
 										title={__("Container Gap", "frontis-blocks")}
 										initialOpen={true}
 									>
-									<FB_Range
-										min={1}
-										max={2000}
-										label={__("Gap", "frontis-blocks")}
-										rangeValue={fullWidthContentBoxedWidth}
-										onChangeHandler={fullWidthContentBoxedWidthFn}
-										rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-										deviceType={deviceType}
-										units={fullWidthContentBoxedWidthUnits}
-										setAttributes={setAttributes}
-										rangeStep={1}
-										resetFallbackValue={1200}
-										units_types_arr={[
-											{ label: 'px', value: 'px' },
-											{ label: '%', value: '%' },
-											{ label: 'vw', value: 'vw' },
-										]}
-									/>
+										<FB_Range
+											min={1}
+											max={2000}
+											label={__("Gap", "frontis-blocks")}
+											rangeValue={fullWidthContentBoxedWidth}
+											onChangeHandler={fullWidthContentBoxedWidthFn}
+											rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+											deviceType={deviceType}
+											units={fullWidthContentBoxedWidthUnits}
+											setAttributes={setAttributes}
+											rangeStep={1}
+											resetFallbackValue={1200}
+											units_types_arr={[
+												{label: 'px', value: 'px'},
+												{label: '%', value: '%'},
+												{label: 'vw', value: 'vw'},
+											]}
+										/>
 									</PanelBody>
 								</>
 							)}
 							{tab.name === "advanced" && (
 								<>
 									<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-inner-wrapper">
-												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
-													initialOpen={true}
-													className="fb-setting-z-index-header"
-												>
-													<RangeControl
-														value={''}
-														onChange={(value) =>
-															setAttributes({
-
-															})
-														}
-														min={1}
-														max={10000}
-														step={1}
-														allowReset
-														resetFallbackValue={100}
-													/>
-												</PanelBody>
-												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_Spacing
-														label={__("Padding", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															''
-														}
-														spacingUnits={''}
-														spacingDesktop={''}
-														spacingTablet={''}
-														spacingMobile={''}
-														handleSpacingUnitHandler={
-															''
-														}
-														spacingCombineBtn={''}
-														spacingCombineBtnHandler={
-															''
-														}
-														setAttributes={setAttributes}
-													/>
-													<FB_Spacing
-														label={__("Margin", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={''}
+										<div className="fb-setting-inner-wrapper">
+											<PanelBody
+												title={__("Z Index", "frontis-blocks")}
+												initialOpen={true}
+												className="fb-setting-z-index-header"
+											>
+												<RangeControl
+													value={''}
+													onChange={(value) =>
+														setAttributes({})
+													}
+													min={1}
+													max={10000}
+													step={1}
+													allowReset
+													resetFallbackValue={100}
+												/>
+											</PanelBody>
+											<PanelBody
+												title={__("Padding and Margin", "frontis-blocks")}
+												initialOpen={false}
+											>
+												<FB_Spacing
+													label={__("Padding", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={
+														''
+													}
+													spacingUnits={''}
+													spacingDesktop={''}
+													spacingTablet={''}
+													spacingMobile={''}
+													handleSpacingUnitHandler={
+														''
+													}
+													spacingCombineBtn={''}
+													spacingCombineBtnHandler={
+														''
+													}
+													setAttributes={setAttributes}
+												/>
+												<FB_Spacing
+													label={__("Margin", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={''}
 														spacingUnits={''}
 														spacingDesktop={''}
 														spacingTablet={''}
