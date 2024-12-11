@@ -1961,6 +1961,180 @@
   margin-bottom: 10px;
 }
 
+.fb-setting-typography .components-base-control__field {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  align-items: center;
+}
+.fb-setting-typography .components-base-control__field .components-dropdown.fb-setting-dropdown-icon-wrapper .components-button.fb-setting-dropdown-icon-btn {
+  height: auto;
+  padding: 6px;
+}
+.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn {
+  margin: 0;
+  height: 28px;
+  width: 28px;
+  padding: 5px;
+  border: 1px solid #e6e7e9;
+  border-radius: 14px;
+  color: #50575e;
+  background: #FFFFFF;
+}
+.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn .fb-setting-typography-icon {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.fb-setting-typography-popup {
+  padding: 0.2rem;
+  min-width: 220px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner {
+  position: relative;
+  z-index: 99999;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field label {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: block;
+  color: #0B0C0E !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 16px !important;
+  margin: 10px 0 !important;
+  min-height: auto;
+  text-transform: capitalize !important;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-label {
+  display: block;
+  color: #C3C8D2;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-right: 5px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
+  color: #4B9DEF;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-label {
+  display: block;
+  color: #C3C8D2;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-right: 5px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
+  color: #4B9DEF;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-label {
+  display: block;
+  color: #C3C8D2;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
+  min-height: auto;
+  text-transform: capitalize;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap {
+  direction: initial;
+  display: flex;
+  align-items: center;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher {
+  box-shadow: unset;
+  font-size: 10px;
+  padding: 0;
+  text-transform: uppercase;
+  padding-right: 5px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
+  color: #4B9DEF;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__input {
+  border: 1px solid #93C4F5;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__input:focus {
+  outline: none;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input {
+  background: #F7F7F7;
+  height: unset;
+  border-radius: 8px;
+  padding: 12px;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input:focus {
+  outline: none;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__backdrop {
+  border: none;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper span:nth-child(2) {
+  height: 2px;
+  background: #C3C8D2;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper span:nth-child(3) {
+  height: 2px;
+  background: #399CFF;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper .components-range-control__thumb-wrapper span {
+  background-color: #399CFF;
+}
+
 /** Start Admin Panel scss **/
 .fb-inspector-control {
   padding: 16px;
@@ -2219,176 +2393,6 @@
 .fb-setting-switcher-container .components-button-group .components-button.active, .fb-setting-color-container .components-button-group .components-button.active {
   border: 1px solid #A6ACBB !important;
   background: #C3C8D2 !important;
-}
-
-.fb-setting-typography .components-base-control__field {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  margin: 0;
-  align-items: center;
-}
-.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn {
-  margin: 0;
-  height: 28px;
-  width: 28px;
-  padding: 5px;
-  border: 1px solid #e6e7e9;
-  border-radius: 14px;
-  color: #50575e;
-  background: #FFFFFF;
-}
-.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn:focus {
-  outline: none;
-  box-shadow: none;
-}
-.fb-setting-typography .components-base-control__field .fb-setting-typography-icon-dropdown .fb-setting-typography-icon-btn .fb-setting-typography-icon {
-  font-size: 15px;
-  line-height: 20px;
-}
-
-.fb-setting-typography-popup {
-  padding: 0.2rem;
-  min-width: 220px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner {
-  position: relative;
-  z-index: 99999;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field label {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  display: block;
-  color: #0B0C0E !important;
-  font-size: 12px !important;
-  font-weight: 400 !important;
-  line-height: 16px !important;
-  margin: 10px 0 !important;
-  min-height: auto;
-  text-transform: capitalize !important;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-label {
-  display: block;
-  color: #C3C8D2;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-right: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
-  color: #4B9DEF;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-label {
-  display: block;
-  color: #C3C8D2;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-right: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
-  color: #4B9DEF;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-label {
-  display: block;
-  color: #C3C8D2;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 10px 0;
-  min-height: auto;
-  text-transform: capitalize;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap {
-  direction: initial;
-  display: flex;
-  align-items: center;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher {
-  box-shadow: unset;
-  font-size: 10px;
-  padding: 0;
-  text-transform: uppercase;
-  padding-right: 5px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
-  color: #4B9DEF;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__input {
-  border: 1px solid #93C4F5;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__input:focus {
-  outline: none;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input {
-  background: #F7F7F7;
-  height: unset;
-  border-radius: 8px;
-  padding: 12px;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input:focus {
-  outline: none;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__backdrop {
-  border: none;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper span:nth-child(2) {
-  height: 2px;
-  background: #C3C8D2;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper span:nth-child(3) {
-  height: 2px;
-  background: #399CFF;
-}
-.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper .components-range-control__thumb-wrapper span {
-  background-color: #399CFF;
 }
 
 .fb-setting-fontsize-wrapper .components-range-control__reset, .fb-setting-letterspacing-wrapper .components-range-control__reset, .fb-setting-lineheight-wrapper .components-range-control__reset {
