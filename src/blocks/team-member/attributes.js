@@ -3,13 +3,22 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
 	deviceType: {
 		type: "string",
 		default: "Desktop"
 	},
 
 	teamMemberZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 
     teamMemberPaddingUnits : {
@@ -23,28 +32,28 @@ const attributes = {
     teamMemberDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberTabPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberMobilePadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberPaddingLink : {
@@ -63,28 +72,28 @@ const attributes = {
     teamMemberDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberMarginLink : {
@@ -102,7 +111,6 @@ const attributes = {
     teamMemberBGHoverColor: {
         type: 'string',
     },
-
 
 
     teamMemberBorder: {
@@ -131,28 +139,28 @@ const attributes = {
     teamMemberDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberBorderLink : {
@@ -171,28 +179,28 @@ const attributes = {
     teamMemberDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     teamMemberBorderRadiusLink : {
@@ -233,28 +241,28 @@ const attributes = {
 	BoxDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	BoxTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	BoxMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	HeadingActiveBorderDevice: {
@@ -272,28 +280,28 @@ const attributes = {
 	BoxDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	BoxTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	BoxMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	HeadingActiveBorderRadiusDevice: {
@@ -375,28 +383,28 @@ const attributes = {
 	teamMemberContentMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentMarginTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentMarginLink : {
@@ -434,28 +442,28 @@ const attributes = {
 	teamMemberContentBorderDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentBorderTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentBorderMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentBorderLink : {
@@ -591,7 +599,7 @@ const attributes = {
 	},
 
 
-	// margin
+	// Designation margin
 	teamMemberDesignationMarginUnits : {
 		type: 'object',
 		default: {
@@ -603,28 +611,28 @@ const attributes = {
 	teamMemberDesignationMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberDesignationMarginTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberDesignationMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberDesignationMarginLink : {
@@ -731,28 +739,28 @@ const attributes = {
 	teamMemberImageMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageMarginTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageMarginLink : {
@@ -787,28 +795,28 @@ const attributes = {
 	teamMemberImageBorderDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageBorderTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageBorderMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberImageBorderLink : {
@@ -987,28 +995,28 @@ const attributes = {
 	teamMemberNameMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberNameMarginTab: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberNameMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberNameMarginLink : {
@@ -1107,6 +1115,19 @@ const attributes = {
 	teamMemberIconsHoverColor: {
 		type : "string",
 		default: "#000000"
+	},
+
+	teamMemberSocialType: {
+		type : "string",
+		default: "content"
+	},
+	teamMemberSocialAnimationType: {
+		type : "string",
+		default: "default"
+	},
+	teamMemberSocialPosition: {
+		type : "string",
+		default: "bottom"
 	},
 
 	teamMemberSocialTag: {
@@ -1220,171 +1241,130 @@ const attributes = {
 	},
 
 
+	teamMemberDescSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	teamMemberDesc: {
+		type: "string",
+		default: "Lorem ipsum dolor sit amet consectetur Aliquam mauris bibendum.",
+	},
 
-
-	teamMemberSocialTitleFontFamily: {
+	teamMemberDescFontFamily: {
 		type: "string",
 		default: "inherit",
 	},
-	teamMemberSocialTitleFontSizeDesktop: {
+	teamMemberDescFontSizeDesktop: {
 		type: "number",
 		default: 18
 	},
-	teamMemberSocialTitleFontSizeTablet: {
+	teamMemberDescFontSizeTablet: {
 		type: "number",
 		default: 18
 	},
-	teamMemberSocialTitleFontSizeMobile: {
+	teamMemberDescFontSizeMobile: {
 		type: "number",
 		default: 18
 	},
-	teamMemberSocialTitleFontSizeUnits: {
+	teamMemberDescFontSizeUnits: {
 		type: "string",
 		default: "px"
 	},
-	teamMemberSocialTitleFontWeight : {
+	teamMemberDescFontWeight : {
 		type: "string",
 		default: "600"
 	},
-	teamMemberSocialTitleFontStyle : {
+	teamMemberDescFontStyle : {
 		type: "string",
 		default: "normal"
 	},
-	teamMemberSocialTitleTextTransform : {
+	teamMemberDescTextTransform : {
 		type: "string",
 		default: "none"
 	},
-	teamMemberSocialTitleTextDecoration : {
+	teamMemberDescTextDecoration : {
 		type: "string",
 		default: "none"
 	},
-	teamMemberSocialTitleLetterSpacingDesktop: {
+	teamMemberDescLetterSpacingDesktop: {
 		type: "number",
 		default: 0
 	},
-	teamMemberSocialTitleLetterSpacingTablet: {
+	teamMemberDescLetterSpacingTablet: {
 		type: "number",
 		default: 0
 	},
-	teamMemberSocialTitleLetterSpacingMobile: {
+	teamMemberDescLetterSpacingMobile: {
 		type: "number",
 		default: 0
 	},
-	teamMemberSocialTitleLetterSpacingUnits : {
+	teamMemberDescLetterSpacingUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberSocialTitleLineHeightDesktop: {
+	teamMemberDescLineHeightDesktop: {
 		type: "number",
 		default: "inherit",
 	},
-	teamMemberSocialTitleLineHeightTablet: {
+	teamMemberDescLineHeightTablet: {
 		type: "number",
 		default: "inherit",
 	},
-	teamMemberSocialTitleLineHeightMobile: {
+	teamMemberDescLineHeightMobile: {
 		type: "number",
 		default: "inherit",
 	},
-	teamMemberSocialTitleLineHeightUnits : {
+	teamMemberDescLineHeightUnits : {
 		type: "string",
 		default: "px"
 	},
-	teamMemberSocialTitleColorSwitcher : {
+
+	teamMemberDescColor : {
 		type: "string",
-		default: "normal"
-	},
-	teamMemberSocialTitleColor : {
-		type: "string",
-		default: "#000"
-	},
-	teamMemberSocialTitleHoverColor: {
-		type: 'string',
 		default: "#000"
 	},
 
-	teamMemberSocialDescFontFamily: {
-		type: "string",
-		default: "inherit",
+	// Designation margin
+	teamMemberDescMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	teamMemberSocialDescFontSizeDesktop: {
-		type: "number",
-		default: 14
+	teamMemberDescMarginDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
 	},
-	teamMemberSocialDescFontSizeTablet: {
-		type: "number",
-		default: 14
+	teamMemberDescMarginTab: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
 	},
-	teamMemberSocialDescFontSizeMobile: {
-		type: "number",
-		default: 14
+	teamMemberDescMarginMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
 	},
-	teamMemberSocialDescFontSizeUnits: {
-		type: "string",
-		default: "px"
-	},
-	teamMemberSocialDescFontWeight : {
-		type: "string",
-		default: "400"
-	},
-	teamMemberSocialDescFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	teamMemberSocialDescTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	teamMemberSocialDescTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	teamMemberSocialDescLetterSpacingDesktop : {
-		type: "number",
-	},
-	teamMemberSocialDescLetterSpacingTablet : {
-		type: "number",
-	},
-	teamMemberSocialDescLetterSpacingMobile : {
-		type: "number",
-	},
-	teamMemberSocialDescLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	teamMemberSocialDescLineHeightDesktop : {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberSocialDescLineHeightTablet : {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberSocialDescLineHeightMobile : {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberSocialDescLineHeightUnits : {
-		type: "string",
-		default: "px"
-	},
-	teamMemberSocialDescColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	teamMemberSocialDescColor : {
-		type: "string",
-		default: "#000"
-	},
-	teamMemberSocialDescHoverColor: {
-		type: 'string',
-		default: "#000"
+	teamMemberDescMarginLink : {
+		type : "boolean",
+		default: true
 	},
 
-
-	teamMemberSocialZIndex : {
-		type: "number",
-	},
 	teamMemberSocialPaddingUnits : {
 		type: "string",
 		default: "px"
@@ -1392,28 +1372,28 @@ const attributes = {
 	teamMemberSocialDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialPaddingLink : {
@@ -1427,28 +1407,28 @@ const attributes = {
 	teamMemberSocialDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialMarginLink : {
@@ -1488,28 +1468,28 @@ const attributes = {
 	teamMemberSocialDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialBorderLink : {
@@ -1523,28 +1503,28 @@ const attributes = {
 	teamMemberSocialDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberSocialBorderRadiusLink : {
