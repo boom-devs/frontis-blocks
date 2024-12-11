@@ -66,7 +66,17 @@ const FB_ColorControl = ({
                             aria-expanded={isOpen}
                             className="fb-setting-color-setting-icon-btn"
                         >
-                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className="fb-setting-color-hex">
+                                    {globalColor || '#000'} 
+                                </span>
+                                <div
+                                className="fb-setting-color-display"
+                                style={{
+                                    backgroundColor: globalColor || '#000',
+                                }}
+                                />
+                            </div>
                         </Button>
                     )}
                     renderContent={() => (
