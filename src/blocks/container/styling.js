@@ -224,6 +224,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		customOrderDesktop,
 		customOrderTablet,
 		customOrderMobile,
+
+		// Custom attributes from fb
+		fullWidthContentBoxedWidth,
+		fullWidthContentBoxedWidthUnits,
+		customWidth
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -232,11 +237,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const isLayoutGrid = 'grid' === layout;
 
 	const innerContentCustomWidthDesktopFallback = getFallbackNumber(
-		innerContentCustomWidthDesktop,
+		fullWidthContentBoxedWidth[deviceType],
 		'innerContentCustomWidthDesktop',
 		blockName
 	);
-	const widthDesktopFallback = getFallbackNumber( widthDesktop, 'widthDesktop', blockName );
+	const widthDesktopFallback = getFallbackNumber( customWidth[deviceType], 'customWidth', blockName );
+
 	const rowGapDesktopFallback = getFallbackNumber( rowGapDesktop, 'rowGapDesktop', blockName );
 	const columnGapDesktopFallback = getFallbackNumber( columnGapDesktop, 'columnGapDesktop', blockName );
 
@@ -565,14 +571,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'width': '100%',
 	};
 
-
-	console.log(contentWidth)
-	console.log('alignfull' === contentWidth && 'alignwide' === innerContentWidth)
 	if ( 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ) {
 		widthSelectorsDesktop[
 			`.block-editor-block-list__block.wp-block-frontis-blocks-container${ gbsWidthSelector } > .frontis-blocks-container-inner-blocks-wrap`
 			] = {
-			'--inner-content-custom-width': `min(${ containerFullWidth },${ innerContentCustomWidthDesktopFallback }${ innerContentCustomWidthType })`,
+			'--inner-content-custom-width': `min(${ containerFullWidth },${ innerContentCustomWidthDesktopFallback }${ fullWidthContentBoxedWidthUnits[deviceType] })`,
 			'max-width': 'var(--inner-content-custom-width)',
 			'width': '100%',
 			'margin-left': 'auto',
