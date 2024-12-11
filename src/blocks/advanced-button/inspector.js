@@ -1003,7 +1003,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
-			${buttonFontFamily ? `font-family: ${buttonFontFamily};` : ''}
+			${buttonFontFamily && buttonFontFamily !== 'Default' ? `font-family: ${buttonFontFamily};` : ''}
 			${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
 			${buttonFontWeight ? `font-weight: ${buttonFontWeight};` : ''}
 			${buttonFontStyle ? `font-style: ${buttonFontStyle};` : ''}
