@@ -46,28 +46,6 @@ const FB_TypographyControl = ({
     setAttributes,
 }) => {
 
-
-
-    const storedTypography = localStorage.getItem('fb_typography');
-    const typographySettings = storedTypography ? JSON.parse(storedTypography) : {};
-
-    const bodyTypography = typographySettings.body;
-
-    const globalBodyFontFamily = bodyTypography.fontFamily;
-    const globalBodyFontSize = bodyTypography.fontSize;
-    const globalBodyFontSizeUnit = bodyTypography.fontSizeUnit;
-    const globalBodyFontStyle = bodyTypography.fontStyle;
-    const globalBodyFontWeight = bodyTypography.fontWeight;
-    const globalBodyLetterSpacing = bodyTypography.letterSpacing;
-    const globalBodyLetterSpacingUnit = bodyTypography.letterSpacingUnit;
-    const globalBodyLineHeight = bodyTypography.lineHeight;
-    const globalBodyLineHeightUnit = bodyTypography.lineHeightUnit;
-    const globalBodyTextTransform = bodyTypography.textTransform;
-    const globalBodyTextDecoration = bodyTypography.textDecoration;
-
-
-
-
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
 	};

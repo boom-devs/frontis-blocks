@@ -261,7 +261,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h2: {
-				fontFamily: "inherit",
+				fontFamily: "Default",
 				lineHeight: {
 					Desktop: '',
 					Tablet: '',
@@ -298,7 +298,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h3: {
-				fontFamily: "inherit",
+				fontFamily: "Default",
 				lineHeight: {
 					Desktop: '',
 					Tablet: '',
@@ -335,7 +335,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h4: {
-				fontFamily: "inherit",
+				fontFamily: "Default",
 				lineHeight: {
 					Desktop: '',
 					Tablet: '',
@@ -372,7 +372,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h5: {
-				fontFamily: "inherit",
+				fontFamily: "Default",
 				lineHeight: {
 					Desktop: '',
 					Tablet: '',
@@ -409,7 +409,7 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h6: {
-				fontFamily: "inherit",
+				fontFamily: "Default",
 				lineHeight: {
 					Desktop: '',
 					Tablet: '',

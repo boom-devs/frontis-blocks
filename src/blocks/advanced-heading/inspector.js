@@ -1579,42 +1579,56 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const bodyTypography = typographySettings.body;
 
-    const globalBodyStyles = {
-        fontFamily: bodyTypography.fontFamily,
-        fontSize: `${bodyTypography.fontSize.Desktop}${bodyTypography.fontSizeUnit.Desktop}`,
-        fontWeight: bodyTypography.fontWeight,
-        fontStyle: bodyTypography.fontStyle,
-        textTransform: bodyTypography.textTransform,
-        textDecoration: bodyTypography.textDecoration,
-        letterSpacing: `${bodyTypography.letterSpacing.Desktop}${bodyTypography.letterSpacingUnit.Desktop}`,
-        lineHeight: `${bodyTypography.lineHeight.Desktop}${bodyTypography.lineHeightUnits.Desktop}`
-    };
+    let globalBodyStyles = {};
+    
+    if (bodyTypography && Object.keys(bodyTypography).length > 0) {
+        globalBodyStyles = {
+            fontFamily: bodyTypography.fontFamily,
+            fontSize: `${bodyTypography.fontSize.Desktop}${bodyTypography.fontSizeUnit.Desktop}`,
+            fontWeight: bodyTypography.fontWeight,
+            fontStyle: bodyTypography.fontStyle,
+            textTransform: bodyTypography.textTransform,
+            textDecoration: bodyTypography.textDecoration,
+            letterSpacing: `${bodyTypography.letterSpacing.Desktop}${bodyTypography.letterSpacingUnit.Desktop}`,
+            lineHeight: `${bodyTypography.lineHeight.Desktop}${bodyTypography.lineHeightUnits.Desktop}`
+        };
+    }
 
     const linkTypography = typographySettings.link;
 
-    const globalLinkStyles = {
-        fontFamily: linkTypography.fontFamily,
-        fontSize: `${linkTypography.fontSize.Desktop}${linkTypography.fontSizeUnit.Desktop}`,
-        fontWeight: linkTypography.fontWeight,
-        fontStyle: linkTypography.fontStyle,
-        textTransform: linkTypography.textTransform,
-        textDecoration: linkTypography.textDecoration,
-        letterSpacing: `${linkTypography.letterSpacing.Desktop}${linkTypography.letterSpacingUnit.Desktop}`,
-        lineHeight: `${linkTypography.lineHeight.Desktop}${linkTypography.lineHeightUnits.Desktop}`
-    };
+    let globalLinkStyles = {};
+    
+    if (linkTypography && Object.keys(linkTypography).length > 0) {
+        globalLinkStyles = {
+            fontFamily: linkTypography.fontFamily,
+            fontSize: `${linkTypography.fontSize.Desktop}${linkTypography.fontSizeUnit.Desktop}`,
+            fontWeight: linkTypography.fontWeight,
+            fontStyle: linkTypography.fontStyle,
+            textTransform: linkTypography.textTransform,
+            textDecoration: linkTypography.textDecoration,
+            letterSpacing: `${linkTypography.letterSpacing.Desktop}${linkTypography.letterSpacingUnit.Desktop}`,
+            lineHeight: `${linkTypography.lineHeight.Desktop}${linkTypography.lineHeightUnits.Desktop}`
+        };
+    }    
 
     const headingTypography = typographySettings.heading;
 
-    const globalHeadingStyles = (headingLevel) => ({
-        fontFamily: headingTypography[headingLevel].fontFamily,
-        fontSize: `${headingTypography[headingLevel].fontSize.Desktop}${headingTypography[headingLevel].fontSizeUnit.Desktop}`,
-        fontWeight: headingTypography[headingLevel].fontWeight,
-        fontStyle: headingTypography[headingLevel].fontStyle,
-        textTransform: headingTypography[headingLevel].textTransform,
-        textDecoration: headingTypography[headingLevel].textDecoration,
-        letterSpacing: `${headingTypography[headingLevel].letterSpacing.Desktop}${headingTypography[headingLevel].letterSpacingUnit.Desktop}`,
-        lineHeight: `${headingTypography[headingLevel].lineHeight.Desktop}${headingTypography[headingLevel].lineHeightUnits.Desktop}`
-    });
+    const globalHeadingStyles = (headingLevel) => {
+        if (headingTypography && headingTypography[headingLevel]) {
+            return {
+                fontFamily: headingTypography[headingLevel].fontFamily,
+                fontSize: `${headingTypography[headingLevel].fontSize.Desktop}${headingTypography[headingLevel].fontSizeUnit.Desktop}`,
+                fontWeight: headingTypography[headingLevel].fontWeight,
+                fontStyle: headingTypography[headingLevel].fontStyle,
+                textTransform: headingTypography[headingLevel].textTransform,
+                textDecoration: headingTypography[headingLevel].textDecoration,
+                letterSpacing: `${headingTypography[headingLevel].letterSpacing.Desktop}${headingTypography[headingLevel].letterSpacingUnit.Desktop}`,
+                lineHeight: `${headingTypography[headingLevel].lineHeight.Desktop}${headingTypography[headingLevel].lineHeightUnits.Desktop}`
+            };
+        }
+    
+        return {};
+    };
 
     const headingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
