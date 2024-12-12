@@ -3042,6 +3042,7 @@ var FB_Range = function FB_Range(_ref) {
   };
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
+    setRangeUnit('px');
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
@@ -3114,6 +3115,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -3124,6 +3128,8 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     deviceHandler = _ref.deviceHandler;
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
     setDeviceType = _useDispatch.setDeviceType;
+  console.log("Test device type");
+  console.log(device);
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
@@ -3132,6 +3138,10 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    // setDeviceType('Desktop');
+    console.log("Hello world responsive");
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
@@ -6668,6 +6678,15 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   }, {
     label: 'em',
     value: 'em'
+  }, {
+    label: 'rem',
+    value: 'rem'
+  }, {
+    label: 'vh',
+    value: 'vh'
+  }, {
+    label: 'vw',
+    value: 'vw'
   }];
 
   /** State to manage dropdown visibility */
