@@ -1424,7 +1424,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
 			${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : ''}
             width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
-            height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
+        	height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
 			border-width: ${connectorTabletBorderWidth};
 			border-radius: ${connectorTabletBorderRadius};
         }
@@ -1465,9 +1465,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-width: ${connectorMobileBorderWidth};
 			border-radius: ${connectorMobileBorderRadius};
         }
-		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-            width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
-        }
+		
 	}
 	`,
 		[
@@ -2409,6 +2407,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														step={1}
 														allowReset
 														resetFallbackValue={""}
+														className="default-range"
 													/>
 												</PanelBody>
 
