@@ -31,6 +31,7 @@ import FB_TypographyControl from '../../components/typography-control/index.js';
 import FB_ColorControl from '../../components/color-control/index.js';
 import FB_ImageControl from '../../components/image-control/index.js';
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
+import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -165,9 +166,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Team Content
 		teamMemberContentAlignment,
-		teamMemberContentBGColorSwitcher,
-		teamMemberContentBGColor,
-		teamMemberContentBGHoverColor,
 
 		// Team Content Padding
 		teamMemberContentPaddingUnits,
@@ -202,6 +200,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberContentBorderRadiusLink,
 
 		// Social Icons
+		teamMemberIconStyleSwitcher,
         teamMemberIconsSize,
         teamMemberIconsSizeUnits,
         teamMemberIconsSpacing,
@@ -209,6 +208,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberIconsColorSwitcher,
 		teamMemberIconsColor,
 		teamMemberIconsHoverColor,
+		teamMemberIconsBGColorSwitcher,
+		teamMemberIconsBGColor,
+		teamMemberIconsBGHoverColor,
+		teamMemberIconsBorder,
+		teamMemberIconsBorderColor,
+		teamMemberIconsBorderHoverColor,
+		teamMemberIconsBorderColorSwitcher,
+		teamMemberIconsPaddingUnits,
+		teamMemberIconsDesktopPadding,
+		teamMemberIconsTabPadding,
+		teamMemberIconsMobilePadding,
+		teamMemberIconsPaddingLink,
+		teamMemberIconsBorderUnits,
+		teamMemberIconsDesktopBorderWidth,
+		teamMemberIconsTabBorderWidth,
+		teamMemberIconsMobileBorderWidth,
+		teamMemberIconsBorderLink,
+		teamMemberIconsBorderRadiusUnits,
+		teamMemberIconsDesktopBorderRadiusWidth,
+		teamMemberIconsTabBorderRadiusWidth,
+		teamMemberIconsMobileBorderRadiusWidth,
+		teamMemberIconsBorderRadiusLink,
 
 		// Team Member
 		teamMemberZIndex,
@@ -222,9 +243,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberTabMargin,
 		teamMemberMobileMargin,
 		teamMemberMarginLink,
-		teamMemberBGColorSwitcher,
-		teamMemberBGColor,
-		teamMemberBGHoverColor,
 		teamMemberBorder,
 		teamMemberBorderColor,
 		teamMemberBorderHoverColor,
@@ -279,6 +297,60 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialIconBtnTabBorderRadiusWidth,
 		socialIconBtnMobileBorderRadiusWidth,
 		socialIconBtnBorderRadiusLink,
+
+		// Advance Backgorund
+		teamMemberBgColorSwitcher,
+		teamMemberBgType,
+		teamMemberBgClassicColor,
+		teamMemberBgGradientColor,
+		teamMemberBgCustomGradientSwitcher,
+		teamMemberBgCustomGradientInputValue,
+		teamMemberBgImageUrl,
+		teamMemberBgImageAlt,
+		teamMemberBgImageID,
+		teamMemberBgImagePosition,
+		teamMemberBgImageAttachment,
+		teamMemberBgImageRepeat,
+		teamMemberBgImageSize,
+		teamMemberBgHoverType,
+		teamMemberBgHoverClassicColor,
+		teamMemberBgHoverGradientColor,
+		teamMemberBgHoverCustomGradientSwitcher,
+		teamMemberBgHoverCustomGradientInputValue,
+		teamMemberBgHoverImageUrl,
+		teamMemberBgHoverImageAlt,
+		teamMemberBgHoverImageID,
+		teamMemberBgHoverImagePosition,
+		teamMemberBgHoverImageAttachment,
+		teamMemberBgHoverImageRepeat,
+		teamMemberBgHoverImageSize,
+
+		// Content Backgorund
+		teamMemberContentBgColorSwitcher,
+		teamMemberContentBgType,
+		teamMemberContentBgClassicColor,
+		teamMemberContentBgGradientColor,
+		teamMemberContentBgCustomGradientSwitcher,
+		teamMemberContentBgCustomGradientInputValue,
+		teamMemberContentBgImageUrl,
+		teamMemberContentBgImageAlt,
+		teamMemberContentBgImageID,
+		teamMemberContentBgImagePosition,
+		teamMemberContentBgImageAttachment,
+		teamMemberContentBgImageRepeat,
+		teamMemberContentBgImageSize,
+		teamMemberContentBgHoverType,
+		teamMemberContentBgHoverClassicColor,
+		teamMemberContentBgHoverGradientColor,
+		teamMemberContentBgHoverCustomGradientSwitcher,
+		teamMemberContentBgHoverCustomGradientInputValue,
+		teamMemberContentBgHoverImageUrl,
+		teamMemberContentBgHoverImageAlt,
+		teamMemberContentBgHoverImageID,
+		teamMemberContentBgHoverImagePosition,
+		teamMemberContentBgHoverImageAttachment,
+		teamMemberContentBgHoverImageRepeat,
+		teamMemberContentBgHoverImageSize,
 
 	} = attributes;
 
@@ -1620,108 +1692,235 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const socialIconBtnMobileBorderRadius = `${socialIconBtnMobileBorderRadiusWidth.top}${socialIconBtnBorderRadiusUnits[deviceType]} ${socialIconBtnMobileBorderRadiusWidth.right}${socialIconBtnBorderRadiusUnits[deviceType]} ${socialIconBtnMobileBorderRadiusWidth.bottom}${socialIconBtnBorderRadiusUnits[deviceType]} ${socialIconBtnMobileBorderRadiusWidth.left}${socialIconBtnBorderRadiusUnits[deviceType]}`;
 
 
-	/** Icon size */
-	const teamMemberIconsSizeHandler = (value) => {
-        setAttributes({ teamMemberIconsSize: value });
-    };
+	// teamMemberIcons Padding Functionb
+	const handleTeamMemberIconsPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberIconsPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberIconsDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberIconsTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberIconsMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberIconsDesktopPadding: {...teamMemberIconsDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberIconsTabPadding: {...teamMemberIconsTabPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberIconsMobilePadding: {...teamMemberIconsMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
-    const teamMemberIconsSizeUnitsHandler = (value) => {
-        setAttributes({ teamMemberIconsSizeUnits: value });
-    };
+	}
 
-	/** Icon gap */
-	const teamMemberIconsSpacingHandler = (value) => {
-        setAttributes({ teamMemberIconsSpacing: value });
-    };
+	const handleTeamMemberIconsPaddingCombineBtn = () => {
+		setAttributes( {teamMemberIconsPaddingLink: !teamMemberIconsPaddingLink} );
+	}
 
-    const teamMemberIconsSpacingUnitsHandler = (value) => {
-        setAttributes({ teamMemberIconsSpacingUnits: value });
-    };
+	const handleTeamMemberIconsPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberIconsPaddingUnits: {
+				...teamMemberIconsPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
 
-	/** Icon Color */
-    const handleTeamMemberIconsColorSwitcherChange = (value) => {
-        setAttributes({ teamMemberIconsColorSwitcher: value });
-    };
-    const handleTeamMemberIconsColorChange = (value) => {
-        setAttributes({ teamMemberIconsColor: value });
-    };
-    const handleTeamMemberIconsHoverColorChange = (value) => {
-        setAttributes({ teamMemberIconsHoverColor: value });
-    };
+	const teamMemberIconsDesktopPaddingWidth = `${teamMemberIconsDesktopPadding.top}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsDesktopPadding.right}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsDesktopPadding.bottom}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsDesktopPadding.left}${teamMemberIconsPaddingUnits[deviceType]}`;
+	const teamMemberIconsTabPaddingWidth = `${teamMemberIconsTabPadding.top}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsTabPadding.right}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsTabPadding.bottom}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsTabPadding.left}${teamMemberIconsPaddingUnits[deviceType]}`;
+	const teamMemberIconsMobilePaddingWidth = `${teamMemberIconsMobilePadding.top}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsMobilePadding.right}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsMobilePadding.bottom}${teamMemberIconsPaddingUnits[deviceType]} ${teamMemberIconsMobilePadding.left}${teamMemberIconsPaddingUnits[deviceType]}`;
 
 
-	/** Image border Color */
-    const handleTeamMemberImageBorderColorSwitcherChange = (value) => {
-        setAttributes({ teamMemberImageBorderColorSwitcher: value });
-    };
-    const handleTeamMemberImageBorderColorChange = (value) => {
-        setAttributes({ teamMemberImageBorderColor: value });
-    };
-    const handleTeamMemberImageBorderHoverColorChange = (value) => {
-        setAttributes({ teamMemberImageBorderHoverColor: value });
-    };
+	// teamMemberIcons BorderWidth Function
+	const handleTeamMemberIconsBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberIconsBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberIconsDesktopBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberIconsTabBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberIconsMobileBorderWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberIconsDesktopBorderWidth: {...teamMemberIconsDesktopBorderWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberIconsTabBorderWidth: {...teamMemberIconsTabBorderWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberIconsMobileBorderWidth: {...teamMemberIconsMobileBorderWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
-	/** Image border Color */
-    const handleTeamMemberImageBGColorSwitcherChange = (value) => {
-        setAttributes({ teamMemberImageBGColorSwitcher: value });
-    };
-    const handleTeamMemberImageBGColorChange = (value) => {
-        setAttributes({ teamMemberImageBGColor: value });
-    };
-    const handleTeamMemberImageBGHoverColorChange = (value) => {
-        setAttributes({ teamMemberImageBGHoverColor: value });
-    };
+	}
+
+	const handleTeamMemberIconsBorderCombineBtn = () => {
+		setAttributes( {teamMemberIconsBorderLink: !teamMemberIconsBorderLink} );
+	}
+
+	const handleTeamMemberIconsBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberIconsBorderUnits: {
+				...teamMemberIconsBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const teamMemberIconsDesktopBorder = `${teamMemberIconsDesktopBorderWidth.top}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsDesktopBorderWidth.right}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsDesktopBorderWidth.bottom}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsDesktopBorderWidth.left}${teamMemberIconsBorderUnits[deviceType]}`;
+	const teamMemberIconsTabBorder = `${teamMemberIconsTabBorderWidth.top}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsTabBorderWidth.right}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsTabBorderWidth.bottom}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsTabBorderWidth.left}${teamMemberIconsBorderUnits[deviceType]}`;
+	const teamMemberIconsMobileBorder = `${teamMemberIconsMobileBorderWidth.top}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsMobileBorderWidth.right}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsMobileBorderWidth.bottom}${teamMemberIconsBorderUnits[deviceType]} ${teamMemberIconsMobileBorderWidth.left}${teamMemberIconsBorderUnits[deviceType]}`;
 
 
-	/** Content border Color */
-    const handleTeamMemberContentBorderColorSwitcherChange = (value) => {
-        setAttributes({ teamMemberContentBorderColorSwitcher: value });
-    };
-    const handleTeamMemberContentBorderColorChange = (value) => {
-        setAttributes({ teamMemberContentBorderColor: value });
-    };
-    const handleTeamMemberContentBorderHoverColorChange = (value) => {
-        setAttributes({ teamMemberContentBorderHoverColor: value });
-    };
+	// teamMemberIcons BorderRadiusWidth Function
+	const handleTeamMemberIconsBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberIconsBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberIconsDesktopBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberIconsTabBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberIconsMobileBorderRadiusWidth: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberIconsDesktopBorderRadiusWidth: {...teamMemberIconsDesktopBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberIconsTabBorderRadiusWidth: {...teamMemberIconsTabBorderRadiusWidth, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberIconsMobileBorderRadiusWidth: {...teamMemberIconsMobileBorderRadiusWidth, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
-	/** Content border Color */
-    const handleTeamMemberContentBGColorSwitcherChange = (value) => {
-        setAttributes({ teamMemberContentBGColorSwitcher: value });
-    };
-    const handleTeamMemberContentBGColorChange = (value) => {
-        setAttributes({ teamMemberContentBGColor: value });
-    };
-    const handleTeamMemberContentBGHoverColorChange = (value) => {
-        setAttributes({ teamMemberContentBGHoverColor: value });
-    };
+	}
 
-	/** Team member bg Color */
-	const handleteamMemberBGColorSwitcherChange = (value) => {
-		setAttributes({ teamMemberBGColorSwitcher: value });
-	};
-	const handleteamMemberBGColorChange = (value) => {
-		setAttributes({ teamMemberBGColor: value });
-	};
-	const handleteamMemberBGHoverColorChange = (value) => {
-		setAttributes({ teamMemberBGHoverColor: value });
-	};
+	const handleTeamMemberIconsBorderRadiusCombineBtn = () => {
+		setAttributes( {teamMemberIconsBorderRadiusLink: !teamMemberIconsBorderRadiusLink} );
+	}
 
-	/** Team member border Color */
-	const handleTeamMemberBorderColorSwitcherChange = (value) => {
-		setAttributes({ teamMemberBorderColorSwitcher: value });
-	};
-	const handleTeamMemberBorderColorChange = (value) => {
-		setAttributes({ teamMemberBorderColor: value });
-	};
-	const handleTeamMemberBorderHoverColorChange = (value) => {
-		setAttributes({ teamMemberBorderHoverColor: value });
-	};
+	const handleTeamMemberIconsBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberIconsBorderRadiusUnits: {
+				...teamMemberIconsBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
 
+	const teamMemberIconsDesktopBorderRadius = `${teamMemberIconsDesktopBorderRadiusWidth.top}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsDesktopBorderRadiusWidth.right}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsDesktopBorderRadiusWidth.bottom}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsDesktopBorderRadiusWidth.left}${teamMemberIconsBorderRadiusUnits[deviceType]}`;
+	const teamMemberIconsTabBorderRadius = `${teamMemberIconsTabBorderRadiusWidth.top}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsTabBorderRadiusWidth.right}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsTabBorderRadiusWidth.bottom}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsTabBorderRadiusWidth.left}${teamMemberIconsBorderRadiusUnits[deviceType]}`;
+	const teamMemberIconsMobileBorderRadius = `${teamMemberIconsMobileBorderRadiusWidth.top}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsMobileBorderRadiusWidth.right}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsMobileBorderRadiusWidth.bottom}${teamMemberIconsBorderRadiusUnits[deviceType]} ${teamMemberIconsMobileBorderRadiusWidth.left}${teamMemberIconsBorderRadiusUnits[deviceType]}`;
+
+
+
+	
 	const fbTeamMemberStyle = useMemo(
 		() => `
 			.fb-team-member-main-wrapper.${blockID} {
 				position: relative;
-				${teamMemberBGColor !== undefined ? `background-color: ${teamMemberBGColor};` : ''}
+				${teamMemberBgClassicColor !== undefined ? `background-color: ${teamMemberBgClassicColor};` : ''}
 				${teamMemberPaddingDesktopWidth !== undefined ? `padding: ${teamMemberPaddingDesktopWidth};` : ''}
 				${teamMemberMarginDesktopWidth !== undefined ? `margin: ${teamMemberMarginDesktopWidth};` : ''}
 				${teamMemberBorder !== undefined ? `border-style: ${teamMemberBorder};` : ''}
@@ -1732,7 +1931,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-main-wrapper.${blockID}:hover {
-				${teamMemberBGHoverColor !== undefined ? `background-color: ${teamMemberBGHoverColor};` : ''}
+				${teamMemberBgHoverClassicColor !== undefined ? `background-color: ${teamMemberBgHoverClassicColor};` : ''}
 				${teamMemberBorderHoverColor !== undefined ? `border-color: ${teamMemberBorderHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -1771,12 +1970,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberContentBorderRadiusGetDesktop !== undefined ? `border-radius: ${teamMemberContentBorderRadiusGetDesktop};` : ''}
 				${teamMemberContentMarginGetDesktop !== undefined ? `margin: ${teamMemberContentMarginGetDesktop};` : ''}
 				${teamMemberContentPaddingGetDesktop !== undefined ? `padding: ${teamMemberContentPaddingGetDesktop};` : ''}
-				${teamMemberContentBGColor !== undefined ? `background: ${teamMemberContentBGColor};` : ''}
+				${teamMemberContentBgClassicColor !== undefined ? `background: ${teamMemberContentBgClassicColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-content {
 				${teamMemberContentBorderHoverColor !== undefined ? `border-color: ${teamMemberContentBorderHoverColor};` : ''}
-				${teamMemberContentBGHoverColor !== undefined ? `background: ${teamMemberContentBGHoverColor};` : ''}
+				${teamMemberContentBgHoverClassicColor !== undefined ? `background: ${teamMemberContentBgHoverClassicColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper .fb-team-member-image-overlay {
@@ -1932,7 +2131,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		`,
 		[
 			blockID,
-			teamMemberBGColor,
 			teamMemberPaddingDesktopWidth,
 			teamMemberMarginDesktopWidth,
 			teamMemberBorder,
@@ -1940,7 +2138,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberBorderColor,
 			teamMemberBorderRadiusDesktopWidth,
 			teamMemberZIndex,
-			teamMemberBGHoverColor,
 			teamMemberBorderHoverColor,
 			teamMemberImageWidth,
 			teamMemberImageWidthUnits,
@@ -1959,8 +2156,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberContentBorderRadiusGetDesktop,
 			teamMemberContentMarginGetDesktop,
 			teamMemberContentPaddingGetDesktop,
-			teamMemberContentBGColor,
-			teamMemberContentBGHoverColor,
 			teamMemberContentBorderHoverColor,
 			teamMemberImageBGColor,
 			teamMemberImageBGHoverColor,
@@ -2168,15 +2363,149 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setGlobalAlignment={(value) => setAttributes({ teamMemberContentAlignment: value })}
                                             />
 
-											<FB_Color
-												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={teamMemberContentBGColorSwitcher}
-												globalColor={teamMemberContentBGColor}
-												globalHoverColor={teamMemberContentBGHoverColor}
-												handleColorSwitcherChange={handleTeamMemberContentBGColorSwitcherChange}
-												handleGlobalColorChange={handleTeamMemberContentBGColorChange}
-												handleGlobalHoverColorChange={handleTeamMemberContentBGHoverColorChange}
-											/>
+											<FB_BackgroundColorControl
+                                                		label={__("Background Color", "frontis-blocks")}
+														bgColorSwitcher={teamMemberContentBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ teamMemberContentBgColorSwitcher: value })
+														}
+														normalBackgroundType={teamMemberContentBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ teamMemberContentBgType: value })
+														}
+														normalClassicColor={teamMemberContentBgClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ teamMemberContentBgClassicColor: value })
+														}
+														normalGradientColor={teamMemberContentBgGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ teamMemberContentBgGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															teamMemberContentBgCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																teamMemberContentBgCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															teamMemberContentBgCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																teamMemberContentBgCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={teamMemberContentBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ teamMemberContentBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={teamMemberContentBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ teamMemberContentBgImageAlt: value })
+														}
+														normalBackgroundImageID={teamMemberContentBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ teamMemberContentBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															teamMemberContentBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																teamMemberContentBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															teamMemberContentBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																teamMemberContentBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															teamMemberContentBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																teamMemberContentBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={teamMemberContentBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ teamMemberContentBgImageSize: value })
+														}
+														hoverBackgroundType={teamMemberContentBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ teamMemberContentBgHoverType: value })
+														}
+														hoverClassicColor={teamMemberContentBgHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ teamMemberContentBgHoverClassicColor: value })
+														}
+														hoverGradientColor={teamMemberContentBgHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ teamMemberContentBgHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															teamMemberContentBgHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																teamMemberContentBgHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															teamMemberContentBgHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																teamMemberContentBgHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={teamMemberContentBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ teamMemberContentBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={teamMemberContentBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ teamMemberContentBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={teamMemberContentBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ teamMemberContentBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															teamMemberContentBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																teamMemberContentBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															teamMemberContentBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																teamMemberContentBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															teamMemberContentBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																teamMemberContentBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={teamMemberContentBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ teamMemberContentBgHoverImageSize: value })
+														}
+													/>
 
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
@@ -2190,9 +2519,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={teamMemberContentBorderColorSwitcher}
 												globalColor={teamMemberContentBorderColor}
 												globalHoverColor={teamMemberContentBorderHoverColor}
-												handleColorSwitcherChange={handleTeamMemberContentBorderColorSwitcherChange}
-												handleGlobalColorChange={handleTeamMemberContentBorderColorChange}
-												handleGlobalHoverColorChange={handleTeamMemberContentBorderHoverColorChange}
+												handleColorSwitcherChange={(value) => setAttributes({ teamMemberContentBorderColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ teamMemberContentBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberContentBorderHoverColor: value })}
 											/>
 
 											<FB_Spacing
@@ -2288,9 +2617,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={teamMemberImageBGColorSwitcher}
 												globalColor={teamMemberImageBGColor}
 												globalHoverColor={teamMemberImageBGHoverColor}
-												handleColorSwitcherChange={handleTeamMemberImageBGColorSwitcherChange}
-												handleGlobalColorChange={handleTeamMemberImageBGColorChange}
-												handleGlobalHoverColorChange={handleTeamMemberImageBGHoverColorChange}
+												handleColorSwitcherChange={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ teamMemberImageBGColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
 											/>
 
 											<SelectControl
@@ -2305,9 +2634,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={teamMemberImageBorderColorSwitcher}
 												globalColor={teamMemberImageBorderColor}
 												globalHoverColor={teamMemberImageBorderHoverColor}
-												handleColorSwitcherChange={handleTeamMemberImageBorderColorSwitcherChange}
-												handleGlobalColorChange={handleTeamMemberImageBorderColorChange}
-												handleGlobalHoverColorChange={handleTeamMemberImageBorderHoverColorChange}
+												handleColorSwitcherChange={(value) => setAttributes({ teamMemberImageBorderColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ teamMemberImageBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
 											/>
 
 											<FB_Spacing
@@ -2667,8 +2996,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												max={100}
 												label={__("Icon Size", "frontis-blocks")}
 												rangeValue={teamMemberIconsSize}
-												onChangeHandler={teamMemberIconsSizeHandler}
-												rangeUnitHandler={teamMemberIconsSizeUnitsHandler}
+												onChangeHandler={(value) => setAttributes({ teamMemberIconsSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ teamMemberIconsSizeUnits: value })}
 												deviceType={deviceType}
 												units={teamMemberIconsSizeUnits}
 												setAttributes={setAttributes}
@@ -2681,8 +3010,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												max={100}
 												label={__("Icon Spacing", "frontis-blocks")}
 												rangeValue={teamMemberIconsSpacing}
-												onChangeHandler={teamMemberIconsSpacingHandler}
-												rangeUnitHandler={teamMemberIconsSpacingUnitsHandler}
+												onChangeHandler={(value) => setAttributes({ teamMemberIconsSpacing: value })}
+												rangeUnitHandler={(value) => setAttributes({ teamMemberIconsSpacingUnits: value })}
 												deviceType={deviceType}
 												units={teamMemberIconsSpacingUnits}
 												setAttributes={setAttributes}
@@ -2695,10 +3024,86 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												globalColorSwitcher={teamMemberIconsColorSwitcher}
 												globalColor={teamMemberIconsColor}
 												globalHoverColor={teamMemberIconsHoverColor}
-												handleColorSwitcherChange={handleTeamMemberIconsColorSwitcherChange}
-												handleGlobalColorChange={handleTeamMemberIconsColorChange}
-												handleGlobalHoverColorChange={handleTeamMemberIconsHoverColorChange}
+												handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsColorSwitcher: value })}
+												handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsHoverColor: value })}
 											/>
+
+											<ToggleControl
+												label={__("Description Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberIconStyleSwitcher}
+												onChange={(value) => setAttributes({ teamMemberIconStyleSwitcher: value })}
+											/>
+
+												<FB_Color
+													label={__("Background Color", "frontis-blocks")}
+													globalColorSwitcher={teamMemberIconsBGColorSwitcher}
+													globalColor={teamMemberIconsBGColor}
+													globalHoverColor={teamMemberIconsBGHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsBGColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsBGColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsBGHoverColor: value })}
+												/> 
+												
+												<FB_Spacing
+													label={__("Padding", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTeamMemberIconsPaddingUnitsHandler}
+													spacingUnits={teamMemberIconsPaddingUnits}
+													spacingDesktop={teamMemberIconsDesktopPadding}
+													spacingTablet={teamMemberIconsTabPadding}
+													spacingMobile={teamMemberIconsMobilePadding}
+													handleSpacingUnitHandler={handleTeamMemberIconsPaddingUnitChange}
+													spacingCombineBtn={teamMemberIconsPaddingLink}
+													spacingCombineBtnHandler={handleTeamMemberIconsPaddingCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={teamMemberIconsBorder}
+													options={BORDER_STYLES}
+													onChange={(value) => setAttributes({ teamMemberIconsBorder: value })}
+												/>
+
+												<FB_Color
+													label={__("Border Color", "frontis-blocks")}
+													globalColorSwitcher={teamMemberIconsBorderColorSwitcher}
+													globalColor={teamMemberIconsBorderColor}
+													globalHoverColor={teamMemberIconsBorderHoverColor}
+													handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsBorderColorSwitcher: value })}
+													handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsBorderColor: value })}
+													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsBorderHoverColor: value })}
+												/>
+
+												<FB_Spacing 
+													label={__("Border Width", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTeamMemberIconsBorderUnitsHandler}
+													spacingUnits={teamMemberIconsBorderUnits}
+													spacingDesktop={teamMemberIconsDesktopBorderWidth}
+													spacingTablet={teamMemberIconsTabBorderWidth}
+													spacingMobile={teamMemberIconsMobileBorderWidth}
+													handleSpacingUnitHandler={handleTeamMemberIconsBorderUnitChange}
+													spacingCombineBtn={teamMemberIconsBorderLink}
+													spacingCombineBtnHandler={handleTeamMemberIconsBorderCombineBtn}
+													setAttributes={setAttributes}
+												/>
+
+												<FB_Spacing 
+													label={__("Border Radius Width", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={handleTeamMemberIconsBorderRadiusUnitsHandler}
+													spacingUnits={teamMemberIconsBorderRadiusUnits}
+													spacingDesktop={teamMemberIconsDesktopBorderRadiusWidth}
+													spacingTablet={teamMemberIconsTabBorderRadiusWidth}
+													spacingMobile={teamMemberIconsMobileBorderRadiusWidth}
+													handleSpacingUnitHandler={handleTeamMemberIconsBorderRadiusUnitChange}
+													spacingCombineBtn={teamMemberIconsBorderRadiusLink}
+													spacingCombineBtnHandler={handleTeamMemberIconsBorderRadiusCombineBtn}
+													setAttributes={setAttributes}
+												/>
 										</PanelBody>
 									</>
 								)}
@@ -2762,13 +3167,148 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_Color
-														globalColorSwitcher={teamMemberBGColorSwitcher}
-														globalColor={teamMemberBGColor}
-														globalHoverColor={teamMemberBGHoverColor}
-														handleColorSwitcherChange={handleteamMemberBGColorSwitcherChange}
-														handleGlobalColorChange={handleteamMemberBGColorChange}
-														handleGlobalHoverColorChange={handleteamMemberBGHoverColorChange}
+													<FB_BackgroundColorControl
+                                                		label={__("Background Color", "frontis-blocks")}
+														bgColorSwitcher={teamMemberBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ teamMemberBgColorSwitcher: value })
+														}
+														normalBackgroundType={teamMemberBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ teamMemberBgType: value })
+														}
+														normalClassicColor={teamMemberBgClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ teamMemberBgClassicColor: value })
+														}
+														normalGradientColor={teamMemberBgGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ teamMemberBgGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															teamMemberBgCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																teamMemberBgCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															teamMemberBgCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																teamMemberBgCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={teamMemberBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ teamMemberBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={teamMemberBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ teamMemberBgImageAlt: value })
+														}
+														normalBackgroundImageID={teamMemberBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ teamMemberBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															teamMemberBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																teamMemberBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															teamMemberBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																teamMemberBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															teamMemberBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																teamMemberBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={teamMemberBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ teamMemberBgImageSize: value })
+														}
+														hoverBackgroundType={teamMemberBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ teamMemberBgHoverType: value })
+														}
+														hoverClassicColor={teamMemberBgHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ teamMemberBgHoverClassicColor: value })
+														}
+														hoverGradientColor={teamMemberBgHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ teamMemberBgHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															teamMemberBgHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																teamMemberBgHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															teamMemberBgHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																teamMemberBgHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={teamMemberBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ teamMemberBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={teamMemberBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ teamMemberBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={teamMemberBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ teamMemberBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															teamMemberBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																teamMemberBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															teamMemberBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																teamMemberBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															teamMemberBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																teamMemberBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={teamMemberBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ teamMemberBgHoverImageSize: value })
+														}
 													/>
 												</PanelBody>
 
@@ -2788,9 +3328,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														globalColorSwitcher={teamMemberBorderColorSwitcher}
 														globalColor={teamMemberBorderColor}
 														globalHoverColor={teamMemberBorderHoverColor}
-														handleColorSwitcherChange={handleTeamMemberBorderColorSwitcherChange}
-														handleGlobalColorChange={handleTeamMemberBorderColorChange}
-														handleGlobalHoverColorChange={handleTeamMemberBorderHoverColorChange}
+														handleColorSwitcherChange={(value) => setAttributes({ teamMemberBorderColorSwitcher: value })}
+														handleGlobalColorChange={(value) => setAttributes({ teamMemberBorderColor: value })}
+														handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
 													/>
 
 													<FB_Spacing 
