@@ -1400,7 +1400,6 @@ var TypographySettings = function TypographySettings(props) {
     }();
     handleUpdateSettings();
   }, [isAfterSave]);
-  console.log(fontFamilies);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -3084,10 +3083,8 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
-  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
-  , {
-    value: rangeValue[deviceType] !== undefined && rangeValue[deviceType] !== '' ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,
