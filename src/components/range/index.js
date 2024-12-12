@@ -42,6 +42,7 @@ const FB_Range = ({
 		setRangeValue(resetFallbackValue);
 	};
 
+
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
@@ -72,7 +73,10 @@ const FB_Range = ({
 					</div>
 				</div>
 				<RangeControl
-					value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+					// value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+					value={rangeValue[deviceType] !== undefined && rangeValue[deviceType] !== ''
+						? parseInt(rangeValue[deviceType])
+						: undefined}
 					onChange={setRangeValue}
 					min={min}
 					max={max}
