@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
@@ -36,10 +36,12 @@ import FB_Color from '../../components/color';
 import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
+import FB_AlignmentControl from '../../components/alignment-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
+        blockStyle,
         deviceType,
 
         GalleryPresetStyle,
@@ -53,9 +55,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ImageOverlayStyleType,
         ImageOverlayColor,
 
-        GalleryColumnNumberDesktop,
-        GalleryColumnNumberTablet,
-        GalleryColumnNumberMobile,
+        GalleryColumnNumber,
 
         GalleryImageGap,
         GalleryImageGapUnits,
@@ -350,9 +350,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: 20,
                     left: 20
                 },
-                GalleryColumnNumberDesktop: 3,
-                GalleryColumnNumberTablet: 2,
-                GalleryColumnNumberMobile: 1,
+                GalleryColumnNumber: {
+                    Desktop: 3,
+                    Tablet: 2,
+                    Mobile: 1
+                },
                 GalleryImageGap: {
                     Desktop: 30,
                     Tablet: 15,
@@ -475,9 +477,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: 20,
                     left: 20
                 },
-                GalleryColumnNumberDesktop: 3,
-                GalleryColumnNumberTablet: 2,
-                GalleryColumnNumberMobile: 1,
+                GalleryColumnNumber: {
+                    Desktop: 3,
+                    Tablet: 2,
+                    Mobile: 1
+                },
                 GalleryImageGap: {
                     Desktop: 6,
                     Tablet: 15,
@@ -584,7 +588,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         Tablet: 410,
                         Mobile: 410
                     },
-                    GalleryColumnNumberDesktop: 4,
+                    GalleryColumnNumber: {
+                        Desktop: 4,
+                    },
                     GalleryImageGap: {
                         Desktop: 30,
                         Tablet: 30,
@@ -739,7 +745,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ImageOverlayStyle: "overlay",
                 ImageOverlayStyleType: "top",
                 ImageOverlayColor: "rgba(0 0 0 / 0.7)",
-                GalleryColumnNumberDesktop: 4,
+                GalleryColumnNumber: {
+                    Desktop: 4,
+                },
                 GalleryImageGap: {
                     Desktop: 30,
                     Tablet: 30,
@@ -857,7 +865,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ImageOverlayStyle: "overlay",
                 ImageOverlayStyleType: "bottom",
                 ImageOverlayColor: "rgba(0 0 0 / 0.7)",
-                GalleryColumnNumberDesktop: 3,
+                GalleryColumnNumber: {
+                    Desktop: 3,
+                    Tablet: 2,
+                    Mobile: 1
+                },
                 GalleryImageGap: {
                     Desktop: 30,
                     Tablet: 30,
@@ -2002,233 +2014,453 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
     
 
+
+    const fbGalleryStyle = useMemo(() => `
+        .fb-gallery-main-wrapper.${blockID} {
+            position: relative;
+            overflow: hidden;
+            ${GalleryBgColor !== undefined ? `background-color: ${GalleryBgColor};` : ''}
+            ${GalleryPaddingDesktopWidth !== undefined ? `padding: ${GalleryPaddingDesktopWidth};` : ''}
+            ${GalleryMarginDesktopWidth !== undefined ? `margin: ${GalleryMarginDesktopWidth};` : ''}
+            ${GalleryBorder !== undefined ? `border-style: ${GalleryBorder};` : ''}
+            ${GalleryBorderDesktopWidth !== undefined ? `border-width: ${GalleryBorderDesktopWidth};` : ''}
+            ${GalleryBorderColor !== undefined ? `border-color: ${GalleryBorderColor};` : ''}
+            ${GalleryBorderRadiusDesktopWidth !== undefined ? `border-radius: ${GalleryBorderRadiusDesktopWidth};` : ''}
+            ${GalleryZIndex?.Desktop !== undefined ? `z-index: ${GalleryZIndex.Desktop};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .fb-gallery-main-wrapper.${blockID}:hover {
+            ${GalleryBgHoverColor !== undefined ? `background-color: ${GalleryBgHoverColor};` : ''}
+            ${GalleryBorderHoverColor !== undefined ? `border-color: ${GalleryBorderHoverColor};` : ''}
+        }
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
+            display: grid;
+            ${GalleryColumnNumber.Desktop !== undefined ? `grid-template-columns: repeat(${GalleryColumnNumber.Desktop}, 1fr);` : ''}
+            ${GalleryImageGap.Desktop !== undefined ? `grid-gap: ${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop};` : ''}
+            ${GalleryItemHeight.Desktop !== undefined ? `grid-auto-rows: ${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop};` : ''}
+        }
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            ${imageBorder !== undefined ? `border-style: ${imageBorder};` : ''}
+            ${imageDesktopBorder !== undefined ? `border-width: ${imageDesktopBorder};` : ''}
+            ${imageBorderColor !== undefined ? `border-color: ${imageBorderColor};` : ''}
+            ${imageDesktopBorderRadius !== undefined ? `border-radius: ${imageDesktopBorderRadius};` : ''}
+        }
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+            position: absolute;
+            top: 0;
+            ${ImageAlignment === 'left' ? 'left: 0;' : ''}
+            ${ImageAlignment === 'right' ? 'right: 0; left: unset;' : ''}
+            ${ImageAlignment === 'center' && ImageOverlayStyleType !== 'zoominout' ? 'left: 50%; transform: translateX(-50%);' : ''}
+            ${ImageWidth.Desktop !== undefined ? `width: ${ImageWidth.Desktop}${ImageWidthUnits.Desktop};` : ''}
+            ${ImageHeight.Desktop !== undefined ? `height: ${ImageHeight.Desktop}${ImageHeightUnits.Desktop};` : ''}
+            ${ImageFitCover === true ? 'object-fit: cover;' : ''}
+            ${ImageOverlayStyle === 'black_white' ? 'filter: grayscale(100%);' : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
+            ${ImageOverlayStyle !== undefined && ImageOverlayStyle === 'black_white' ? 'filter: grayscale(0);' : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper {
+            ${GalleryButtonSwitcher === true ? 'display: flex;' : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonAlignment !== undefined ? `justify-content: ${GalleryButtonAlignment};` : ''}
+        }
+
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+            ${GalleryButtonSwitcher === true && ButtonBorder !== undefined ? `border-style: ${ButtonBorder};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher !== undefined ? `border-color: ${ButtonBorderColor};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderDesktopWidth !== undefined ? `border-width: ${ButtonBorderDesktopWidth};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderRadiusDesktopWidth !== undefined ? `border-radius: ${ButtonBorderRadiusDesktopWidth};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonMarginDesktopWidth !== undefined ? `margin: ${ButtonMarginDesktopWidth};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonPaddingDesktopWidth !== undefined ? `padding: ${ButtonPaddingDesktopWidth};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonFontFamily !== undefined ? `font-family: ${GalleryButtonFontFamily};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Desktop !== undefined ? 
+                `font-size: ${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonFontWeight !== undefined ? `font-weight: ${GalleryButtonFontWeight};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonFontStyle !== undefined ? `font-style: ${GalleryButtonFontStyle};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonTextTransform !== undefined ? `text-transform: ${GalleryButtonTextTransform};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonTextDecoration !== undefined ? `text-decoration: ${GalleryButtonTextDecoration};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Desktop !== undefined ? 
+                `letter-spacing: ${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop};` : ''}
+            ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Desktop !== undefined ? 
+                `line-height: ${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'normal' && GalleryButtonColor !== undefined ? 
+                `color: ${GalleryButtonColor};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'normal' && GalleryButtonBGColor !== undefined ? 
+                `background-color: ${GalleryButtonBGColor};` : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn:hover {
+            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'hover' && GalleryButtonHoverColor !== undefined ? 
+                `color: ${GalleryButtonHoverColor};` : ''}
+            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'hover' && GalleryButtonBGHoverColor !== undefined ? 
+                `background-color: ${GalleryButtonBGHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        @media only screen and (max-width: 1024px) {
+            .fb-gallery-main-wrapper.${blockID} {
+                padding: ${GalleryPaddingTabletWidth !== undefined ? `${GalleryPaddingTabletWidth}` : ''};
+                margin: ${GalleryMarginTabletWidth !== undefined ? `${GalleryMarginTabletWidth}` : ''};
+                border-radius: ${GalleryBorderRadiusTabletWidth !== undefined ? `${GalleryBorderRadiusTabletWidth}` : ''};
+                ${GalleryZIndex?.Tablet !== undefined ? `z-index: ${GalleryZIndex.Tablet};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
+                display: grid;
+                grid-template-columns: ${GalleryColumnNumber.Tablet !== undefined ? `repeat(${GalleryColumnNumber.Tablet}, 1fr)` : ''};
+                grid-gap: ${GalleryImageGap.Tablet !== undefined ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : ''};
+                grid-auto-rows: ${GalleryItemHeight.Tablet !== undefined ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : ''};
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                ${ImageWidth.Tablet !== undefined ? `width: ${ImageWidth.Tablet}${ImageWidthUnits.Tablet};` : ''}
+                ${ImageHeight.Tablet !== undefined ? `height: ${ImageHeight.Tablet}${ImageHeightUnits.Tablet};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                ${GalleryButtonSwitcher === true && ButtonBorderRadiusTabletWidth !== undefined ? `border-radius: ${ButtonBorderRadiusTabletWidth};` : ''}
+                ${GalleryButtonSwitcher === true && ButtonMarginTabletWidth !== undefined ? `margin: ${ButtonMarginTabletWidth};` : ''}
+                ${GalleryButtonSwitcher === true && ButtonPaddingTabletWidth !== undefined ? `padding: ${ButtonPaddingTabletWidth};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Tablet !== undefined ? 
+                    `font-size: ${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Tablet !== undefined ? 
+                    `letter-spacing: ${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Tablet !== undefined ? 
+                    `line-height: ${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                ${imageTabBorder !== undefined ? `border-width: ${imageTabBorder};` : ''}
+                ${imageTabBorderRadius !== undefined ? `border-radius: ${imageTabBorderRadius};` : ''}
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .fb-gallery-main-wrapper.${blockID} {
+                padding: ${GalleryPaddingMobileWidth !== undefined ? `${GalleryPaddingMobileWidth}` : ''};
+                margin: ${GalleryMarginMobileWidth !== undefined ? `${GalleryMarginMobileWidth}` : ''};
+                border-radius: ${GalleryBorderRadiusMobileWidth !== undefined ? `${GalleryBorderRadiusMobileWidth}` : ''};
+                ${GalleryZIndex?.Mobile !== undefined ? `z-index: ${GalleryZIndex.Mobile};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
+                display: grid;
+                grid-template-columns: ${GalleryColumnNumber.Mobile !== undefined ? `repeat(${GalleryColumnNumber.Mobile}, 1fr)` : ''};
+                grid-gap: ${GalleryImageGap.Mobile !== undefined ? `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}` : ''};
+                grid-auto-rows: ${GalleryItemHeight.Mobile !== undefined ? `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}` : ''};
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                ${ImageWidth.Mobile !== undefined ? `width: ${ImageWidth.Mobile}${ImageWidthUnits.Mobile};` : ''}
+                ${ImageHeight.Mobile !== undefined ? `height: ${ImageHeight.Mobile}${ImageHeightUnits.Mobile};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                ${GalleryButtonSwitcher === true && ButtonBorderRadiusMobileWidth !== undefined ? `border-radius: ${ButtonBorderRadiusMobileWidth};` : ''}
+                ${GalleryButtonSwitcher === true && ButtonMarginMobileWidth !== undefined ? `margin: ${ButtonMarginMobileWidth};` : ''}
+                ${GalleryButtonSwitcher === true && ButtonPaddingMobileWidth !== undefined ? `padding: ${ButtonPaddingMobileWidth};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Mobile !== undefined ? 
+                    `font-size: ${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Mobile !== undefined ? 
+                    `letter-spacing: ${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile};` : ''}
+                ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Mobile !== undefined ? 
+                    `line-height: ${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile};` : ''}
+            }
+
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
+                ${imageMobileBorder !== undefined ? `border-width: ${imageMobileBorder};` : ''}
+                ${imageMobileBorderRadius !== undefined ? `border-radius: ${imageMobileBorderRadius};` : ''}
+            }
+        }
+
+        ${ImageOverlayStyle === 'overlay' && `
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.001);' : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
+                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.05);' : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-overlay {
+                position: absolute;
+                content: '';
+                ${ImageOverlayStyleType === 'top' ? 'top: -100%; left: 0;' : ''}
+                ${ImageOverlayStyleType === 'bottom' ? 'top: 100%; left: 0;' : ''}
+                ${ImageOverlayStyleType === 'left' ? 'top: 0; left: -100%;' : ''}
+                ${ImageOverlayStyleType === 'right' ? 'top: 0; left: 100%;' : ''}
+                width: 100%;
+                height: 100%;
+                ${ImageOverlayColor !== undefined ? `background-color: ${ImageOverlayColor};` : ''}
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+            }  
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-overlay {
+                ${ImageOverlayStyleType === 'top' ? 'top: 0;' : ''}
+                ${ImageOverlayStyleType === 'bottom' ? 'top: 0;' : ''}
+                ${ImageOverlayStyleType === 'left' ? 'left: 0;' : ''}
+                ${ImageOverlayStyleType === 'right' ? 'left: 0;' : ''}
+                visibility: visible;
+                opacity: 1;
+                transition: all 0.3s ease-in-out;
+            }
+        `}
+        
+        ${lightboxIconSwitcher === true && `
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                ${lightboxDesktopPaddingWidth !== undefined ? `padding: ${lightboxDesktopPaddingWidth};` : ''}
+                ${lightboxBGColor !== undefined ? `background-color: ${lightboxBGColor};` : ''}
+                ${lightboxBorder !== undefined ? `border-style: ${lightboxBorder};` : ''}
+                ${lightboxDesktopBorder !== undefined ? `border-width: ${lightboxDesktopBorder};` : ''}
+                ${lightboxBorderColor !== undefined ? `border-color: ${lightboxBorderColor};` : ''}
+                ${lightboxDesktopBorderRadius !== undefined ? `border-radius: ${lightboxDesktopBorderRadius};` : ''}
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-lightbox-icon-wrapper {
+                visibility: visible;
+                opacity: 1;
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover {
+                ${lightboxBGHoverColor !== undefined ? `background-color: ${lightboxBGHoverColor};` : ''}
+                ${lightboxBorderHoverColor !== undefined ? `border-color: ${lightboxBorderHoverColor};` : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                ${lightboxColor !== undefined ? `fill: ${lightboxColor};` : ''}
+                ${lightboxIconSize?.Desktop !== undefined ? `width: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};` : ''}
+                ${lightboxIconSize?.Desktop !== undefined ? `height: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};` : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover .fb-lightbox-icon {
+                ${lightboxHoverColor !== undefined ? `fill: ${lightboxHoverColor};` : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon svg {
+                width: 100%;
+                height: 100%;
+            }
+            
+            @media only screen and (max-width: 1024px) {
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                    ${lightboxTabPaddingWidth !== undefined ? `padding: ${lightboxTabPaddingWidth};` : ''}
+                    ${lightboxTabBorder !== undefined ? `border-width: ${lightboxTabBorder};` : ''}
+                    ${lightboxTabBorderRadius !== undefined ? `border-radius: ${lightboxTabBorderRadius};` : ''}
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                    ${lightboxIconSize?.Tablet !== undefined ? `width: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};` : ''}
+                    ${lightboxIconSize?.Tablet !== undefined ? `height: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};` : ''}
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
+                    ${lightboxMobilePaddingWidth !== undefined ? `padding: ${lightboxMobilePaddingWidth};` : ''}
+                    ${lightboxMobileBorder !== undefined ? `border-width: ${lightboxMobileBorder};` : ''}
+                    ${lightboxMobileBorderRadius !== undefined ? `border-radius: ${lightboxMobileBorderRadius};` : ''}
+                }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
+                    ${lightboxIconSize?.Mobile !== undefined ? `width: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};` : ''}
+                    ${lightboxIconSize?.Mobile !== undefined ? `height: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};` : ''}
+                }
+            }
+        `}
+        
+    `,
+    [
+        blockID,
+        deviceType,
+
+        GalleryPresetStyle,
+        GalleryType,
+        GalleryItems,
+
+        GalleryItemHeight,
+        GalleryItemHeightUnits,
+
+        ImageOverlayStyle,
+        ImageOverlayStyleType,
+        ImageOverlayColor,
+
+        GalleryColumnNumber,
+
+        GalleryImageGap,
+        GalleryImageGapUnits,
+
+        GalleryButtonSwitcher,
+        GalleryButtonText,
+        GalleryButtonLink,
+
+        ImageAlignment,
+        ImageFitCover,
+
+        ImageWidth,
+        ImageWidthUnits,
+
+        ImageHeight,
+        ImageHeightUnits,
+
+        GalleryButtonAlignment,
+        GalleryButtonFontFamily,
+        GalleryButtonFontSize,
+        GalleryButtonFontSizeUnits,
+        GalleryButtonFontWeight,
+        GalleryButtonFontStyle,
+        GalleryButtonTextTransform,
+        GalleryButtonTextDecoration,
+        GalleryButtonLetterSpacing,
+        GalleryButtonLetterSpacingUnits,
+        GalleryButtonLineHeight,
+        GalleryButtonLineHeightUnits,
+        GalleryButtonColorSwitcher,
+        GalleryButtonColor,
+        GalleryButtonHoverColor,
+        GalleryButtonBGColorSwitcher,
+        GalleryButtonBGColor,
+        GalleryButtonBGHoverColor,
+
+        ButtonBorder,
+        ButtonBorderColor,
+        ButtonBorderHoverColor,
+        ButtonBorderColorSwitcher,
+
+        ButtonPaddingUnits,
+        ButtonDesktopPadding,
+        ButtonTabPadding,
+        ButtonMobilePadding,
+        ButtonPaddingLink,
+        ButtonMarginUnits,
+        ButtonDesktopMargin,
+        ButtonTabMargin,
+        ButtonMobileMargin,
+        ButtonMarginLink,
+        ButtonBorderUnits,
+        ButtonDesktopBorderWidth,
+        ButtonTabBorderWidth,
+        ButtonMobileBorderWidth,
+        ButtonBorderLink,
+        ButtonBorderRadiusUnits,
+        ButtonDesktopBorderRadiusWidth,
+        ButtonTabBorderRadiusWidth,
+        ButtonMobileBorderRadiusWidth,
+        ButtonBorderRadiusLink,
+        
+        GalleryZIndex,
+        GalleryPaddingUnits,
+        GalleryDesktopPadding,
+        GalleryTabPadding,
+        GalleryMobilePadding,
+        GalleryPaddingLink,
+        GalleryMarginUnits,
+        GalleryDesktopMargin,
+        GalleryTabMargin,
+        GalleryMobileMargin,
+        GalleryMarginLink,
+
+        GalleryBgColorSwitcher,
+        GalleryBgColor,
+        GalleryBgHoverColor,
+
+        GalleryBorder,
+        GalleryBorderColor,
+        GalleryBorderHoverColor,
+        GalleryBorderColorSwitcher,
+        GalleryBorderUnits,
+        GalleryDesktopBorderWidth,
+        GalleryTabBorderWidth,
+        GalleryMobileBorderWidth,
+        GalleryBorderLink,
+        GalleryBorderRadiusUnits,
+        GalleryBorderRadiusDesktop,
+        GalleryBorderRadiusTablet,
+        GalleryBorderRadiusMobile,
+        GalleryBorderRadiusLink,
+
+        GalleryDesktopSwitcher,
+        GalleryTabletSwitcher,
+        GalleryMobileSwitcher,
+
+        // Image border
+        imageBorder,
+        imageBorderColor,
+        imageBorderHoverColor,
+        imageBorderColorSwitcher,
+        imageBorderUnits,
+        imageDesktopBorderWidth,
+        imageTabBorderWidth,
+        imageMobileBorderWidth,
+        imageBorderLink,
+        imageBorderRadiusUnits,
+        imageDesktopBorderRadiusWidth,
+        imageTabBorderRadiusWidth,
+        imageMobileBorderRadiusWidth,
+        imageBorderRadiusLink,
+
+        // Lightbox Icon
+        lightboxIconSwitcher,
+        lightboxIcon,
+        lightboxIconSize,
+        lightboxIconSizeUnits,
+        lightboxColorSwitcher,
+        lightboxColor,
+        lightboxHoverColor,
+        lightboxBGColorSwitcher,
+        lightboxBGColor,
+        lightboxBGHoverColor,
+        lightboxBorder,
+        lightboxBorderColor,
+        lightboxBorderHoverColor,
+        lightboxBorderColorSwitcher,
+        lightboxPaddingUnits,
+        lightboxDesktopPadding,
+        lightboxTabPadding,
+        lightboxMobilePadding,
+        lightboxPaddingLink,
+        lightboxBorderUnits,
+        lightboxDesktopBorderWidth,
+        lightboxTabBorderWidth,
+        lightboxMobileBorderWidth,
+        lightboxBorderLink,
+        lightboxBorderRadiusUnits,
+        lightboxDesktopBorderRadiusWidth,
+        lightboxTabBorderRadiusWidth,
+        lightboxMobileBorderRadiusWidth,
+        lightboxBorderRadiusLink,
+    ]
+);
+
+useEffect(() => {
+    setAttributes({
+        blockStyle: fbGalleryStyle.replace(/\s+/g, ' ').trim(),
+    });
+}, [fbGalleryStyle]);
+
+const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
+
+
     return (
         <>
             <style>
-            {`
-                .fb-gallery-main-wrapper.${blockID} {
-                    position: relative;
-                    overflow: hidden;
-                    ${GalleryBgColor !== undefined ? `background-color: ${GalleryBgColor};` : ''};
-                    padding: ${GalleryPaddingDesktopWidth};
-                    margin: ${GalleryMarginDesktopWidth};
-                    border-style: ${GalleryBorder};
-                    border-width: ${GalleryBorderDesktopWidth};
-                    ${GalleryBorderColor !== undefined ? `border-color: ${GalleryBorderColor};` : ''};
-                    border-radius: ${GalleryBorderRadiusDesktopWidth};
-                    transition: all .3s ease-in-out;
-                    ${GalleryZIndex !== undefined ? `z-index: ${GalleryZIndex}` : ''};
-                }
-                .fb-gallery-main-wrapper.${blockID}:hover {
-                    ${GalleryBgHoverColor !== undefined ? `background-color: ${GalleryBgHoverColor};` : ''};
-                    ${GalleryBorderHoverColor !== undefined ? `border-color: ${GalleryBorderHoverColor};` : ''};
-                }
-
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
-                    display: grid;
-                    grid-template-columns: repeat(${deviceType == 'Desktop' ? GalleryColumnNumberDesktop : deviceType == 'Tablet' ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}, 1fr);
-                    grid-gap: ${deviceType == 'Desktop' ? `${GalleryImageGap.Desktop}${GalleryImageGapUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryImageGap.Tablet}${GalleryImageGapUnits.Tablet}` : `${GalleryImageGap.Mobile}${GalleryImageGapUnits.Mobile}`};
-                    grid-auto-rows: ${deviceType == 'Desktop' ? `${GalleryItemHeight.Desktop}${GalleryItemHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryItemHeight.Tablet}${GalleryItemHeightUnits.Tablet}` : `${GalleryItemHeight.Mobile}${GalleryItemHeightUnits.Mobile}`};
-                }
-                
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    border-style: ${imageBorder};
-                    border-width: ${imageDesktopBorder};
-                    border-color: ${imageBorderColor};
-                    border-radius: ${imageDesktopBorderRadius};
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
-                    position: absolute;
-                    top: 0;
-                    ${ImageAlignment === 'left' && 'left: 0'};
-                    ${ImageAlignment === 'right' && 'right: 0; left: unset'};
-                    ${ImageAlignment === 'center' && 'left: 50%'};
-                    ${ImageAlignment === 'center' && 'transform: translateX(-50%);'};
-                    width: ${deviceType == 'Desktop' ? `${ImageWidth.Desktop}${ImageWidthUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageWidth.Tablet}${ImageWidthUnits.Tablet}` : `${ImageWidth.Mobile}${ImageWidthUnits.Mobile}`};
-                    height: ${deviceType == 'Desktop' ? `${ImageHeight.Desktop}${ImageHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${ImageHeight.Tablet}${ImageHeightUnits.Tablet}` : `${ImageHeight.Mobile}${ImageHeightUnits.Mobile}`};
-                    ${ImageFitCover === true && 'object-fit: cover'};
-                    ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(100%)'};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
-                    ${ImageOverlayStyle == 'black_white' && 'filter: grayscale(0)'};
-                    transition: all 0.3s ease-in-out;
-                }
-
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper {
-                    ${GalleryButtonSwitcher == true && 'display: flex'};
-                    ${GalleryButtonSwitcher == true && `justify-content: ${GalleryButtonAlignment}`};
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-                    ${GalleryButtonSwitcher == true && `border-style: ${ButtonBorder}`};
-                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher !== undefined && `border-color: ${ButtonBorderColor}`};
-                    ${GalleryButtonSwitcher == true && `border-width: ${ButtonBorderDesktopWidth}`};
-                    ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusDesktopWidth}`};
-                    ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginDesktopWidth}`};
-                    ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingDesktopWidth}`};
-                    ${GalleryButtonSwitcher == true && `font-family: ${GalleryButtonFontFamily}`};
-                    ${GalleryButtonSwitcher == true && `font-size: ${deviceType == 'Desktop' ? `${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet}` : `${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile}`}`};
-                    ${GalleryButtonSwitcher == true && `font-weight: ${GalleryButtonFontWeight}`};
-                    ${GalleryButtonSwitcher == true && `font-style: ${GalleryButtonFontStyle}`};
-                    ${GalleryButtonSwitcher == true && `text-transform: ${GalleryButtonTextTransform}`};
-                    ${GalleryButtonSwitcher == true && `text-decoration: ${GalleryButtonTextDecoration}`};
-                    ${GalleryButtonSwitcher == true && `letter-spacing: ${deviceType == 'Desktop' ? `${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet}` : `${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile}`}`};
-                    ${GalleryButtonSwitcher == true && `line-height: ${deviceType == 'Desktop' ? `${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop}` : deviceType == 'Tablet' ? `${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet}` : `${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile}`}`};
-                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `color: ${GalleryButtonColor}`};
-                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'normal' && `background-color: ${GalleryButtonBGColor}`};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn:hover {
-                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'hover' && `color: ${GalleryButtonHoverColor}`};
-                    ${GalleryButtonSwitcher == true && ButtonBorderColorSwitcher == 'hover' && `background-color: ${GalleryButtonBGHoverColor}`};
-                    transition: all 0.3s ease-in-out;
-                }
-                    
-                @media only screen and (max-width: 1024px) {
-                    .fb-gallery-main-wrapper.${blockID} {
-                        padding: ${GalleryPaddingTabletWidth};
-                        margin: ${GalleryMarginTabletWidth};
-                        border-radius: ${GalleryBorderRadiusTabletWidth};
-                    }
-
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-                        ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusTabletWidth}`};
-                        ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginTabletWidth}`};
-                        ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingTabletWidth}`};
-                    }
-
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
-                        border-width: ${imageTabBorder};
-                        border-radius: ${imageTabBorderRadius};
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-gallery-main-wrapper.${blockID} {
-                        padding: ${GalleryPaddingMobileWidth};
-                        margin: ${GalleryMarginMobileWidth};
-                        border-radius: ${GalleryBorderRadiusMobileWidth};
-                    }
-
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-                        ${GalleryButtonSwitcher == true && `border-radius: ${ButtonBorderRadiusMobileWidth}`};
-                        ${GalleryButtonSwitcher == true && `margin: ${ButtonMarginMobileWidth}`};
-                        ${GalleryButtonSwitcher == true && `padding: ${ButtonPaddingMobileWidth}`};
-                    }
-
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
-                        border-width: ${imageMobileBorder};
-                        border-radius: ${imageMobileBorderRadius};
-                    }
-                }
-
-            `}
-            { ImageOverlayStyle === 'overlay' && `
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
-                    ${ImageOverlayStyleType === 'zoominout' && 'transform: scale(1.001)'};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
-                    ${ImageOverlayStyleType === 'zoominout' && 'transform: scale(1.05)'};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-overlay {
-                    position: absolute;
-                    content: '';
-                    ${ImageOverlayStyleType === 'top' && 'top: -100%'};
-                    ${ImageOverlayStyleType === 'top' && 'left: 0'};
-                    ${ImageOverlayStyleType === 'bottom' && 'top: 100%'};
-                    ${ImageOverlayStyleType === 'bottom' && 'left: 0'};
-                    ${ImageOverlayStyleType === 'left' && 'top: 0'};
-                    ${ImageOverlayStyleType === 'left' && 'left: -100%'};
-                    ${ImageOverlayStyleType === 'right' && 'top: 0'};
-                    ${ImageOverlayStyleType === 'right' && 'left: 100%'};
-                    width: 100%;
-                    height: 100%;
-                    background-color: ${ImageOverlayColor};
-                    visibility: hidden;
-                    opacity: 0;
-                    transition: all 0.3s ease-in-out;
-                }  
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-overlay {
-                    ${ImageOverlayStyleType == 'top' && 'top: 0'};
-                    ${ImageOverlayStyleType == 'bottom' && 'top: 0'};
-                    ${ImageOverlayStyleType == 'left' && 'left: 0'};
-                    ${ImageOverlayStyleType == 'right' && 'left: 0'};
-                    visibility: visible;
-                    opacity: 1;
-                    transition: all 0.3s ease-in-out;
-                }
-            `}
-            { lightboxIconSwitcher === true && `
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    padding: ${lightboxDesktopPaddingWidth};
-                    background-color: ${lightboxBGColor};
-                    border-style: ${lightboxBorder};
-                    border-width: ${lightboxDesktopBorder};
-                    border-color: ${lightboxBorderColor};
-                    border-radius: ${lightboxDesktopBorderRadius};
-                    visibility: hidden;
-                    opacity: 0;
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-lightbox-icon-wrapper {
-                    visibility: visible;
-                    opacity: 1;
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover {
-                    background-color: ${lightboxBGHoverColor};
-                    border-color: ${lightboxBorderHoverColor};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
-                    fill: ${lightboxColor};
-                    width: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
-                    height: ${lightboxIconSize.Desktop}${lightboxIconSizeUnits.Desktop};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper:hover .fb-lightbox-icon {
-                    fill: ${lightboxHoverColor};
-                    transition: all 0.3s ease-in-out;
-                }
-                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon svg {
-                    width: 100%;
-                    height: 100%;
-                }
-                
-                @media only screen and (max-width: 1024px) {
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
-                        padding: ${lightboxTabPaddingWidth};
-                        border-width: ${lightboxTabBorder};
-                        border-radius: ${lightboxTabBorderRadius};
-                    }
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
-                        width: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
-                        height: ${lightboxIconSize.Tablet}${lightboxIconSizeUnits.Tablet};
-                    }
-                }
-                @media only screen and (max-width: 767px) {
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
-                        padding: ${lightboxMobilePaddingWidth};
-                        border-width: ${lightboxMobileBorder};
-                        border-radius: ${lightboxMobileBorderRadius};
-                    }
-                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper .fb-lightbox-icon {
-                        width: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
-                        height: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};
-                    }
-                }
-            ` }
+                {`
+                    ${editorStyle}
+                `}
             </style>
+            
 
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
@@ -2298,33 +2530,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             </BaseControl>
 
-                                            <div className="fb-setting-spacing-container">
-                                                <div className="fb-setting-spacing-inner-container">
-                                                    <FB_ResponsiveControl
-                                                        labelText={__("Columns", "frontis-blocks")}
-                                                        device={deviceType}
-                                                        deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
-                                                    />
-                                                </div>
-                                                <div className="fb-setting-columns-rangecontrol">
-                                                    <RangeControl
-                                                        value={deviceType === "Desktop" ? GalleryColumnNumberDesktop : deviceType === "Tablet" ? GalleryColumnNumberTablet : GalleryColumnNumberMobile}
-                                                        onChange={(value) => {
-                                                            if (deviceType === "Desktop") {
-                                                                setAttributes({ GalleryColumnNumberDesktop: value });
-                                                            } else if (deviceType === "Tablet") {
-                                                                setAttributes({ GalleryColumnNumberTablet: value });
-                                                            } else if (deviceType === "Mobile") {
-                                                                setAttributes({ GalleryColumnNumberMobile: value });
-                                                            }
-                                                        }}
-                                                        min={1}
-                                                        max={12}
-                                                        allowReset
-                                                        resetFallbackValue={3}
-                                                    />
-                                                </div>
-                                            </div>
+                                            <FB_Range
+                                                min={1}
+                                                max={12}
+                                                label={__("Columns", "frontis-blocks")}
+                                                rangeValue={GalleryColumnNumber}
+                                                onChangeHandler={(value) => setAttributes({GalleryColumnNumber: value})}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={3}
+                                                isRangeUnit={false}
+                                            />
 
                                             <FB_Range
                                                 min={1}
@@ -2375,9 +2592,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     setAttributes={setAttributes}
                                                                     deviceType={deviceType}
                                                                     GalleryType={GalleryType}
-                                                                    GalleryColumnNumberMobile={GalleryColumnNumberMobile}
-                                                                    GalleryColumnNumberTablet={GalleryColumnNumberTablet}
-                                                                    GalleryColumnNumberDesktop={GalleryColumnNumberDesktop}
+                                                                    GalleryColumnNumber={GalleryColumnNumber}
                                                                     handleChangeItem={handleChangeItem}
                                                                     handleDeleteItem={handleDeleteItem}
                                                                     handleRemoveMedia={handleRemoveMedia}
@@ -2452,25 +2667,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             title={__("Image Setting", "frontis-blocks")}
                                             initialOpen={false}
                                         >
-                                            <BaseControl
+                                            <FB_AlignmentControl
                                                 label={__("Alignment", "frontis-blocks")}
-                                                id="fb-setting-image-alignment"
-                                                className="fb-setting-image-alignment"
-                                            >
-                                                <ButtonGroup
-                                                    className="fb-setting-image-alignment-group-btn"
-                                                >
-                                                    {TEXT_ALIGN.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ ImageAlignment: item.value })}
-                                                            className={`fb-setting-image-alignment-single-btn ${ImageAlignment === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalAlignment={ImageAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ ImageAlignment: value })}
+                                            />
 
                                             <FB_Range
                                                 min={1}
@@ -2511,7 +2712,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 title={__("Border & Border radius", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-border-setting-wrapper"
-                                                >
+                                            >
                                                 <SelectControl
                                                     label={__("Border Style", "frontis-blocks")}
                                                     value={imageBorder}
@@ -2639,25 +2840,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={false}
                                                 className="fb-setting-gallery-button-wrapper"
                                             >
-                                                <BaseControl
+                                                <FB_AlignmentControl
                                                     label={__("Alignment", "frontis-blocks")}
-                                                    id="fb-setting-image-alignment"
-                                                    className="fb-setting-image-alignment"
-                                                >
-                                                    <ButtonGroup
-                                                        className="fb-setting-image-alignment-group-btn"
-                                                    >
-                                                        {TEXT_ALIGN.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ GalleryButtonAlignment: item.value })}
-                                                                className={`fb-setting-image-alignment-single-btn ${GalleryButtonAlignment === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalAlignment={GalleryButtonAlignment}
+                                                    setGlobalAlignment={(value) => setAttributes({ GalleryButtonAlignment: value })}
+                                                />
 
                                                 <FB_TypographyControl
                                                     fontFamily={GalleryButtonFontFamily}
@@ -2923,14 +3110,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={true}
                                                 className='fb-setting-z-index-header'
                                             >
-                                                <RangeControl
-                                                    value={GalleryZIndex}
-                                                    onChange={(value) => setAttributes({ GalleryZIndex: value === 0 ? undefined : value })}
-                                                    min={1}
-                                                    max={100}
-                                                    step={1}
-                                                    allowReset
-                                                    resetFallbackValue={undefined}
+                                                <FB_Range
+                                                    min={-10}
+                                                    max={100000000}
+                                                    label={__("Z Index", "frontis-blocks")}
+                                                    rangeValue={GalleryZIndex}
+                                                    onChangeHandler={(value) => setAttributes({GalleryZIndex: value})}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={''}
+                                                    isRangeUnit={false}
                                                 />
                                             </PanelBody>
                                             <PanelBody

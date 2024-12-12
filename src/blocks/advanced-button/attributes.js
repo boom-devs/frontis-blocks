@@ -41,7 +41,7 @@ const attributes = {
 	},
     buttonFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     buttonFontSize: {
 		type: 'object',
