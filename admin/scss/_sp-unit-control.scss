@@ -4,6 +4,7 @@
 	align-items: center;
     border-radius: 6px;
     background: $neutral-color-50;
+	height: 28px;
 	.fb-reset-control-container {
         padding: 6px 10px;
         border-right: 1px solid $white-color;
@@ -51,9 +52,11 @@
 		border: none;
 		cursor: pointer;
 		text-align: center;
+		text-transform: uppercase;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		color: $primary-color-base;
 	}
 
 	.fb-setting-units-dropdown {
@@ -73,8 +76,8 @@
 			justify-content: center;
 
 			&.active {
-				font-weight: bold;
-				color: #007cba;
+				font-weight: 700;
+				color: $primary-color-base;
 			}
 
 			&:hover {

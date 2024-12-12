@@ -101,15 +101,112 @@ const attributes = {
         default: true
     },
 
-    teamMemberBGColorSwitcher : {
+
+	teamMemberBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    teamMemberBGColor : {
-        type: "string"
+    teamMemberBgType: {
+        type: "string",
+        default: "classic"
     },
-    teamMemberBGHoverColor: {
-        type: 'string',
+    teamMemberBgClassicColor: {
+        type: "string",
+        default: "#EBF5FF"
+    },
+    teamMemberBgGradientColor: {
+        type: "string",
+    },
+    teamMemberBgCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    teamMemberBgCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgColorStyle: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageUrl: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageAlt: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageID: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImagePosition: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageSize: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverType: {
+        type: "string",
+        default: "classic"
+    },
+    teamMemberBgHoverClassicColor: {
+        type: "string",
+        default: "#399CFF"
+    },
+    teamMemberBgHoverGradientColor: {
+        type: "string",
+    },
+    teamMemberBgHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    teamMemberBgHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverColorStyle: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageUrl: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageAlt: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageID: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImagePosition: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageSize: {
+        type: "string",
+        default: ""
+    },
+    teamMemberBgHoverImageRepeat: {
+        type: "string",
+        default: ""
     },
 
 
@@ -322,17 +419,112 @@ const attributes = {
 		type: "string",
 		default: "left"
 	},
-	teamMemberContentBGColorSwitcher : {
+
+	teamMemberContentBgColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	teamMemberContentBGColor : {
+	teamMemberContentBgType: {
 		type: "string",
-		default: "transparent"
+		default: "classic"
 	},
-	teamMemberContentBGHoverColor : {
+	teamMemberContentBgClassicColor: {
 		type: "string",
-		default: "transparent"
+		default: "#EBF5FF"
+	},
+	teamMemberContentBgGradientColor: {
+		type: "string",
+	},
+	teamMemberContentBgCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	teamMemberContentBgCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgColorStyle: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageUrl: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageAlt: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageID: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImagePosition: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageSize: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgImageRepeat: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverType: {
+		type: "string",
+		default: "classic"
+	},
+	teamMemberContentBgHoverClassicColor: {
+		type: "string",
+		default: "#399CFF"
+	},
+	teamMemberContentBgHoverGradientColor: {
+		type: "string",
+	},
+	teamMemberContentBgHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	teamMemberContentBgHoverCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverColorStyle: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageUrl: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageAlt: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageID: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImagePosition: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageSize: {
+		type: "string",
+		default: ""
+	},
+	teamMemberContentBgHoverImageRepeat: {
+		type: "string",
+		default: ""
 	},
 
 	// Padding
@@ -1114,6 +1306,8 @@ const attributes = {
 		}
 	},
 
+
+
 	teamMemberIconsColorSwitcher: {
 		type : "string",
 		default: "normal"
@@ -1126,6 +1320,164 @@ const attributes = {
 		type : "string",
 		default: "#000000"
 	},
+
+
+	teamMemberIconStyleSwitcher: {
+		type: "boolean",
+		default: false
+	},
+
+	teamMemberIconsBGColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	teamMemberIconsBGColor: {
+		type: "string",
+		default: "#fff"
+	},
+	teamMemberIconsBGHoverColor: {
+		type: 'string',
+		default: "#fff"
+	},
+	
+	teamMemberIconsBorder: {
+		type: 'string',
+		default: "none",
+	},
+	teamMemberIconsBorderColor: {
+		type: 'string',
+		default: "#000"
+	},
+	teamMemberIconsBorderHoverColor: {
+		type: 'string',
+		default: "#000"
+	},
+	teamMemberIconsBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	
+	
+	teamMemberIconsPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberIconsDesktopPadding: {
+		type: "object", 
+		default: {
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
+		},
+	},
+	teamMemberIconsTabPadding: {
+		type: "object", 
+		default: {
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
+		},
+	},
+	teamMemberIconsMobilePadding: {
+		type: "object", 
+		default: {
+			top: 20,
+			bottom: 20,
+			left: 20,
+			right: 20,
+		},
+	},
+	teamMemberIconsPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	
+	teamMemberIconsBorderUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberIconsDesktopBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsTabBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsMobileBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	
+	teamMemberIconsBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
+	teamMemberIconsDesktopBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
+		},
+	},
+	teamMemberIconsTabBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
+		},
+	},
+	teamMemberIconsMobileBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
+		},
+	},
+	teamMemberIconsBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+
 
 	teamMemberSocialType: {
 		type : "string",
@@ -1334,7 +1686,7 @@ const attributes = {
 		type : "string",
 		default: "h3"
 	},
-	teamMemberSocialIconShape: {
+	teamMemberteamMemberIconshape: {
 		type: "string",
 		default: "circle"
 	},
@@ -1390,19 +1742,19 @@ const attributes = {
 		default: "#000"
 	},
 
-	teamMemberSocialIconSizeDesktop: {
+	teamMemberteamMemberIconsizeDesktop: {
 		type: "number",
 		default: 25
 	},
-	teamMemberSocialIconSizeTablet: {
+	teamMemberteamMemberIconsizeTablet: {
 		type: "number",
 		default: 25
 	},
-	teamMemberSocialIconSizeMobile: {
+	teamMemberteamMemberIconsizeMobile: {
 		type: "number",
 		default: 25
 	},
-	teamMemberSocialIconSizeUnits: {
+	teamMemberteamMemberIconsizeUnits: {
 		type: "string",
 		default: "px"
 	},
@@ -1423,19 +1775,19 @@ const attributes = {
 		default: "px"
 	},
 
-	teamMemberSocialIconSpacingDesktop: {
+	teamMemberteamMemberIconspacingDesktop: {
 		type: "number",
 		default: 20
 	},
-	teamMemberSocialIconSpacingTablet: {
+	teamMemberteamMemberIconspacingTablet: {
 		type: "number",
 		default: 20
 	},
-	teamMemberSocialIconSpacingMobile: {
+	teamMemberteamMemberIconspacingMobile: {
 		type: "number",
 		default: 20
 	},
-	teamMemberSocialIconSpacingUnits: {
+	teamMemberteamMemberIconspacingUnits: {
 		type: "string",
 		default: "px"
 	},
