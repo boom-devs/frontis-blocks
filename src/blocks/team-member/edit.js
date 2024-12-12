@@ -13,7 +13,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		blockID,
 
 		// Photo
-		teamMemberImageMediaUrl,
+		teamMemberImageUrl,
 
 		// Team Name
 		teamMemberName,
@@ -48,8 +48,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image-overlay`}></div>
-							{teamMemberImageMediaUrl && (
-								<img src={teamMemberImageMediaUrl}/>
+							{teamMemberImageUrl && (
+								<img src={teamMemberImageUrl}/>
 							)}
 							{ teamMemberSocialType === 'image' && <div className={`fb-team-member-social-profile`}>
 								{teamMemberSocialItems.map(item => (
