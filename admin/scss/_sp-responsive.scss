@@ -14,9 +14,10 @@
 	}
 }
 .fb-responsive-device-wrapper {
-    height: 26px;
+    height: 28px;
     position: relative;
     width: 34px;
+    margin-right: 10px;
     &.fb-device-switchers-open {
         .fb-responsive-device-inner-wrapper {
             background: $neutral-color-50;
@@ -25,7 +26,7 @@
             z-index: 11;
         }
         .fb-device-switcher {
-            height: 26px;
+            height: 28px;
             opacity: 1;
             transform: scale(1);
             
@@ -46,7 +47,7 @@
         width: 100% !important;
         z-index: 2;
         &.active {
-            height: 26px;
+            height: 28px;
             width: 26px;
             background: $neutral-color-50;
             border-radius: 6px;

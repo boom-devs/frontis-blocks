@@ -3,6 +3,8 @@
 @import "sp-unit-control";
 @import "sp-spacing-unit-input";
 @import "sp-typography";
+@import "sp-toggle-control";
+@import "sp-box-shadow";
 
 
 /** Start Admin Panel scss **/
@@ -74,26 +76,7 @@
                 min-height: auto;
                 text-transform: capitalize !important;
             }
-			.components-form-toggle{
-				&.is-checked{
-					.components-form-toggle__track{
-						background: $primary-color-base;
-						border-color: $primary-color-base ;
-					}
-				} 
-				.components-form-toggle__track{
-					background: $neutral-color-400;
-				}
-				.components-form-toggle__thumb{
-					background-color: $white-color;
-				}
-			}
 			
-			.components-toggle-control{
-				label{
-					margin: 0 !important;
-				}
-			}
             .components-text-control__input,
 			.components-textarea-control__input{
 				font-family: $body-font-family;
@@ -114,6 +97,7 @@
 					border: 1px solid $primary-color-300;
 					&:focus{
 						outline: none;
+						border: 1px solid transparent;
 					}
 				}
                 .components-select-control__input{
@@ -286,6 +270,14 @@
 		}
 		.components-range-control.default-range{
 			padding-top: 40px;
+		}
+		.fb-setting-spacing-container{
+			.components-range-control__root {
+				position: relative;
+				.components-range-control__number{
+					margin-right: 0;
+				}
+			}
 		}
     }
 	

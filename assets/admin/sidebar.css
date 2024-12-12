@@ -151,6 +151,42 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: #E1E3E8;
   margin-bottom: 30px;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input {
+  border: 1px solid #93C4F5;
+  margin-left: 10px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
+  outline: none;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input {
+  background: #F7F7F7;
+  height: unset;
+  border-radius: 8px;
+  padding: 12px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input:focus {
+  outline: none;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__backdrop {
+  border: none;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper span:nth-child(2) {
+  height: 2px;
+  background: #C3C8D2;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper span:nth-child(3) {
+  height: 2px;
+  background: #399CFF;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper .components-range-control__thumb-wrapper span {
+  background-color: #399CFF;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .fb-setting-spacing-label-container {
+  margin: 14px 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
+  margin: 10px 0;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control {
   width: auto;
   margin-left: 0;
