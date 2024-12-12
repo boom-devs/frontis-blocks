@@ -2288,7 +2288,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h2: {
-        fontFamily: "inherit",
+        fontFamily: "Default",
         lineHeight: {
           Desktop: '',
           Tablet: '',
@@ -2325,7 +2325,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h3: {
-        fontFamily: "inherit",
+        fontFamily: "Default",
         lineHeight: {
           Desktop: '',
           Tablet: '',
@@ -2362,7 +2362,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h4: {
-        fontFamily: "inherit",
+        fontFamily: "Default",
         lineHeight: {
           Desktop: '',
           Tablet: '',
@@ -2399,7 +2399,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h5: {
-        fontFamily: "inherit",
+        fontFamily: "Default",
         lineHeight: {
           Desktop: '',
           Tablet: '',
@@ -2436,7 +2436,7 @@ function FrontisBlocksSidebar(props) {
         }
       },
       h6: {
-        fontFamily: "inherit",
+        fontFamily: "Default",
         lineHeight: {
           Desktop: '',
           Tablet: '',
@@ -3084,8 +3084,10 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
+  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+  , {
+    value: rangeValue[deviceType] !== undefined && rangeValue[deviceType] !== '' ? parseInt(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,
@@ -6508,20 +6510,6 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     setAttributes = _ref.setAttributes;
-  var storedTypography = localStorage.getItem('fb_typography');
-  var typographySettings = storedTypography ? JSON.parse(storedTypography) : {};
-  var bodyTypography = typographySettings.body;
-  var globalBodyFontFamily = bodyTypography.fontFamily;
-  var globalBodyFontSize = bodyTypography.fontSize;
-  var globalBodyFontSizeUnit = bodyTypography.fontSizeUnit;
-  var globalBodyFontStyle = bodyTypography.fontStyle;
-  var globalBodyFontWeight = bodyTypography.fontWeight;
-  var globalBodyLetterSpacing = bodyTypography.letterSpacing;
-  var globalBodyLetterSpacingUnit = bodyTypography.letterSpacingUnit;
-  var globalBodyLineHeight = bodyTypography.lineHeight;
-  var globalBodyLineHeightUnit = bodyTypography.lineHeightUnit;
-  var globalBodyTextTransform = bodyTypography.textTransform;
-  var globalBodyTextDecoration = bodyTypography.textDecoration;
   var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
     onChangeFontFamily(newFontFamily);
   };
