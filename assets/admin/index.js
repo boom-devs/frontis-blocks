@@ -579,7 +579,6 @@ var CustomIcons = function CustomIcons() {
         keys: keys
       },
       success: function success(response) {
-        console.log(response);
         if (response.success) {
           // setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
         } else {
@@ -2674,7 +2673,6 @@ var VersionControl = function VersionControl() {
   };
   var handleRollback = function handleRollback() {
     // I will Add rollback logic here
-    console.log('Rollback triggered for version:', options.selected_version);
     saveOption('selected_version', options.selected_version);
   };
 
@@ -2903,8 +2901,6 @@ var ConfirmationModal = function ConfirmationModal(_ref) {
     onConfirm = _ref.onConfirm,
     title = _ref.title,
     message = _ref.message;
-  //   console.log('ConfirmationModal rendered, isOpen:', isOpen);
-
   if (!isOpen) return null;
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-modal-overlay"
@@ -4872,7 +4868,7 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
 /*!************************!*\

@@ -8,7 +8,12 @@ const attributes = {
         default: "Desktop"
     },
 	fluentFormGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	formId: {
 		type: 'string'

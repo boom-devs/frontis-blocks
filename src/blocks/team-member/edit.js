@@ -663,8 +663,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes({ teamMemberBorderHoverColor: value });
 	};
 
-	console.log(attributes);
-
 	return (
 		<>
 			<style>
