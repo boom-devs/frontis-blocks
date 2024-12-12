@@ -1479,7 +1479,9 @@ const attributes = {
 			Mobile: "px"
 		}
 	},
+	/** End Feature Title */
 
+	/** Start Feature Item Padding */
 	priceFeatureItemPaddingUnits: {
 		type: 'object',
 		default: {
@@ -1519,7 +1521,158 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
+	/** End Feature Item Padding */
 
+	/** Start Feature Margin */
+	priceFeatureItemMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureItemDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemTabMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemMobileMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemMarginLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Feature Margin */
+
+	/** Start Feature Border */
+	priceFeatureItemBorderBottom: {
+		type: "boolean",
+		default: true
+	},
+	priceFeatureItemBorder: {
+		type: 'string',
+		default: "solid",
+	},
+	priceFeatureItemBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	priceFeatureItemBorderColor: {
+		type: "string",
+		default: "#E1E3E8"
+	},
+	priceFeatureItemBorderHoverColor: {
+		type: "string",
+		default: ""
+	},
+	/** End Feature Border */
+
+	/** Start Feature Border */
+	priceFeatureItemBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureItemDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '1',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemTabBorder: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '1',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemMobileBorder: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '1',
+			left: '0',
+			right: '0',
+		},
+	},
+	priceFeatureItemBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Feature Border */
+
+	/** Start Feature Border */
+	priceFeatureItemBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureItemDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemTabBorderRadius: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureItemBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Feature Border Radius */
+
+	/** Start Feature Padding */
 	priceFeaturePaddingUnits: {
 		type: 'object',
 		default: {

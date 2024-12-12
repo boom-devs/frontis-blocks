@@ -68,7 +68,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<Card className={`fb-info-box-content-wrapper ${blockID}`}>
+				<Card className={`fb-parent-wrapper fb-info-box-content-wrapper ${blockID}`}>
 					<div className={`fb-info-box-content-wrapper-inner ${blockID}`} style={{
                         display: "flex",
                         flexDirection: infoIconPosition === "left" ? "row" : infoIconPosition === "right" ? "row-reverse" : infoIconPosition === "top" ? "column" : "column-reverse",

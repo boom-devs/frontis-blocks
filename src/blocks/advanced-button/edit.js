@@ -54,7 +54,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps} id={blockId}>
-                <div className={`fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 

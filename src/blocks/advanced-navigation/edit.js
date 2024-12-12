@@ -68,7 +68,7 @@ export default function Edit({ attributes, setAttributes, className, clientId, i
                 />
             )}
             <div {...blockProps}>
-                <div className={`frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
+                <div className={`fb-parent-wrapper frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
                     <div
                         className={`${blockId} frontis-advanced-navigation-wrapper ${layout} ${layoutPreset} ${
                             layout === "is-horizontal" ? navAlign : navVerticalAlign
