@@ -2033,7 +2033,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     //     `)
     
-        // console.log(imageSpanStyle)
 
 
     const fbGalleryStyle = useMemo(() => `

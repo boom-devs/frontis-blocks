@@ -35,6 +35,8 @@ export default function save({ attributes }) {
 		postAuthorAvatarSwitcher,
 		postSwitcher,
 		postImageSize,
+		loadMoreSwitcher,
+		loadMoreText,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -66,8 +68,11 @@ export default function save({ attributes }) {
 				data-post-author-prefix={postAuthorPrefix}
 				data-show-date-switcher={showDateSwitcher}
 				data-post-image-size={postImageSize}
+				data-show-load-more-switcher={loadMoreSwitcher}
+				data-load-more-text={loadMoreText}
 			>
-				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}></div>
+				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}>
+				</div>
 				<div className="loading post">
 					{placeholders.map((item) => (
 						<div key={item} className={`post-card skeleton skeleton-item ${blockId}`}>
@@ -77,7 +82,6 @@ export default function save({ attributes }) {
 						</div>
 					))}
 				</div>
-				<section id="pagination" className="pagination"></section>
 			</div>
 		</>
 	);

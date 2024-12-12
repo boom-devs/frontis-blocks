@@ -53,6 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postAuthorAvatarSwitcher = parentElement.getAttribute("data-post-author-avatar-switcher");
 				const postImageSize = parentElement.getAttribute("data-post-image-size");
 
+				const showLoadMoreSwitcher = parentElement.getAttribute("data-show-load-more-switcher");
+				const loadMoreText = parentElement.getAttribute("data-load-more-text");
+				
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -82,10 +86,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
 
 				filterPost.postImageSize = postImageSize ? postImageSize : 'full';
+				
+				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
+				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
+
 
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText);
 			}
 		}
 	});
@@ -102,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -131,6 +139,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
 		filterPost.postImageSize = postImageSize ? postImageSize : 'full';
 
+		filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;	
+		filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
+
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
 
@@ -147,8 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(posts => {
 				const postGridElement = document.getElementById(blockId);
 				const postListElement = postGridElement.querySelector('.fb_post_grid_container'); 
-				// const loadMoreLoader = postGridElement.querySelector('.fb_load_more_loader');
-				// loadMoreLoader.classList.remove('active');
 
 				// Remove any existing Load More button to avoid duplication
 				const existingLoadMore = postListElement.querySelector('.fb_load_more_wrapper');
@@ -164,21 +173,25 @@ document.addEventListener('DOMContentLoaded', function() {
 					loadingElement.style.display = 'none';
 				}
 
+				
+
 				currentPage = currentPage + 1;
-
-				// Re-attach the Load More button if more pages are available
-				// if (currentPage < posts.data.total_pages) {
-				// 	let loadMoreButton = document.createElement('div');
-				// 	loadMoreButton.className = 'fb_load_more';
-				// 	loadMoreButton.textContent = 'Load more';
-				// 	postListElement.appendChild(loadMoreButton);
-				// }
-
-				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
-				if (loadMore) {
-					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
-					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
+				
+				const loadMoreWrapper = postListElement.querySelector('.fb_load_more');
+				if (loadMoreWrapper) {
+					loadMoreWrapper.innerHTML = `
+						${loadMoreText}
+						<span class="load_more_button_icon_wrap">
+							<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512">
+								<path d="M246.6 233.4l-160-160c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L178.8 256l-137.4 137.4c-12.5 12.5-12.5 32.75 0 45.25C47.63 444.9 55.81 448 64 448s16.38-3.125 22.62-9.375l160-160C259.1 266.1 259.1 245.9 246.6 233.4zM438.6 233.4l-160-160c-12.5-12.5-32.75-12.5-45.25 0s-12.5 32.75 0 45.25L370.8 256l-137.4 137.4c-12.5 12.5-12.5 32.75 0 45.25C239.6 444.9 247.8 448 256 448s16.38-3.125 22.62-9.375l160-160C451.1 266.1 451.1 245.9 438.6 233.4z"></path>
+							</svg>
+							<div class="fb_load_more_outter_wrap">
+								<span class="fb_load_more_loader"></span>
+							</div>
+						</span>
+					`;
 				}
+				
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
@@ -193,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size')); 
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size'), block.getAttribute('data-show-load-more-switcher'), block.getAttribute('data-load-more-text')); 
 	});
 
 

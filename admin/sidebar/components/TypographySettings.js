@@ -618,9 +618,6 @@ const TypographySettings = (props) => {
 		handleUpdateSettings();
 	}, [isAfterSave]);
 
-
-	console.log(fontFamilies)
-
 	return (
 		<TabPanel
 			className="fb-blocks-color-tabs"

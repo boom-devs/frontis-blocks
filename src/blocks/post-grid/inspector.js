@@ -413,6 +413,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalBoxShadowCssValue,
         /** End Global Setting */
 
+        /** Start Load More */
+        loadMoreSwitcher,
+        loadMoreText,
+        /** End Load More */
+
 	} = attributes;
 
     useEffect(() => {
@@ -3691,6 +3696,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         checked={showDateSwitcher}
                                                         onChange={(value) => setAttributes({ showDateSwitcher: value })}
                                                     />
+                                                    <ToggleControl
+                                                        label={__("Show Load More", "frontis-blocks")}
+                                                        checked={loadMoreSwitcher}
+                                                        onChange={(value) => setAttributes({ loadMoreSwitcher: value })}
+                                                    />
                                                 </BaseControl>
                                                 
                                             </PanelBody> 
@@ -5025,6 +5035,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setGlobalColor={(value) => setAttributes({ postDateHoverColor: value })}
                                                     />
                                                 )}
+                                            </PanelBody>
+                                        )}
+
+                                        {loadMoreSwitcher && (
+                                            <PanelBody
+                                                title={__("Load More", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <TextControl
+                                                    label={__("Load More Text", "frontis-blocks")}
+                                                    value={loadMoreText}
+                                                    onChange={(value) => setAttributes({ loadMoreText: value })}
+                                                />
                                             </PanelBody>
                                         )}
 
