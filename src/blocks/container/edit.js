@@ -162,6 +162,9 @@ const Edit = (props) => {
 		console.log(device)
 	}
 
+	console.log("Chekcing props")
+	console.log(props);
+
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
