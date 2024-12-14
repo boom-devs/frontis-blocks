@@ -2518,6 +2518,9 @@
 .fb-inspector-control .components-panel__body .fb-setting-spacing-container .components-range-control__root .components-range-control__number {
   margin-right: 0;
 }
+.fb-inspector-control .components-panel__body .fb-image-upload-btn {
+  margin-bottom: 10px;
+}
 
 .fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper, .fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
   margin-bottom: 24px;
