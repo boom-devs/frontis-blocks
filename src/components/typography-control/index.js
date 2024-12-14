@@ -45,6 +45,7 @@ const FB_TypographyControl = ({
     deviceType,
     setAttributes,
 }) => {
+
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
 	};

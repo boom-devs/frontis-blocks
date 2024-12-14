@@ -68,7 +68,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-icon-box-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-icon-box-content-wrapper ${blockID}`}>
 					<div className={`fb-icon-box-content-wrapper-inner ${blockID}`} style={{
                         display: "flex",
                         flexDirection:

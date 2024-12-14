@@ -67,7 +67,7 @@ export default function save({ attributes }) {
 				data-show-date-switcher={showDateSwitcher}
 				data-post-image-size={postImageSize}
 			>
-				<div className={`fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}></div>
+				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}></div>
 				<div className="loading post">
 					{placeholders.map((item) => (
 						<div key={item} className={`post-card skeleton skeleton-item ${blockId}`}>

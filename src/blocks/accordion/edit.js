@@ -355,7 +355,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         let styles = `
           .fb-accordion-main-wrapper.${blockID} {
                 position: relative;
-                ${accordionZIndex !== undefined ? `z-index: ${accordionZIndex};` : ''}
+                ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
                 ${accordionPaddingDesktopWidth !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
                 ${accordionMarginDesktopWidth !== undefined ? `margin: ${accordionMarginDesktopWidth};` : ''}
                 ${accordionBorder !== undefined ? `border-style: ${accordionBorder};` : ''}
@@ -614,6 +614,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
       
         @media only screen and (max-width: 1024px) {
             .fb-accordion-main-wrapper.${blockID} {
+                ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
                 ${accordionPaddingTabletWidth !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
                 ${accordionMarginTabletWidth !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
                 ${accordionBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionBorderRadiusTabletWidth};` : ''}
@@ -687,6 +688,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
       
         @media only screen and (max-width: 767px) {
             .fb-accordion-main-wrapper.${blockID} {
+                ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
                 ${accordionPaddingMobileWidth !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}
                 ${accordionBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionBorderRadiusMobileWidth};` : ''}
@@ -996,211 +998,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 				${editorStyle}
             `}
 			</style>
-            {/* <style>
-                {`
-                    .fb-accordion-main-wrapper.${blockID} {
-                        position: relative;
-                        ${accordionZIndex && `z-index: ${accordionZIndex}`};
-                        ${accordionBgColor !== undefined ? `background-color: ${accordionBgColor};` : ''};
-                        padding: ${accordionPaddingDesktopWidth};
-                        margin: ${accordionMarginDesktopWidth};
-                        border-style: ${accordionBorder};
-                        border-width: ${accordionBorderDesktopWidth};
-                        ${accordionBorderColor !== undefined ? `border-color: ${accordionBorderColor};` : ''};
-                        border-radius: ${accordionBorderRadiusDesktopWidth};
-                        overflow: hidden;
-                        transition: all .3s ease-in-out;
-                    }
-                    .fb-accordion-main-wrapper.${blockID}:hover {
-                        ${accordionBgHoverColor !== undefined ? `background-color: ${accordionBgHoverColor};` : ''};
-                        ${accordionBorderHoverColor !== undefined ? `border-color: ${accordionBorderHoverColor};` : ''};
-                        transition: all .3s ease-in-out;
-                    }
-
-
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper {
-                        background-color: ${titleBGColor};
-                    }
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover {
-                        background-color: ${titleBGHoverColor};
-                    }
-
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
-                        width: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop};
-                        height: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop};
-                    }
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon svg {
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
-                        color: ${titleColor};
-                        font-family: ${titleFontFamily !== 'default' ? titleFontFamily : titleFontFamily};
-                        font-size: ${titleFontSize !== undefined ? `${titleFontSize.Desktop}${titleFontSizeUnits.Desktop}` : ''};
-                        font-weight: ${titleFontWeight};
-                        font-style: ${titleFontStyle};
-                        text-transform: ${titleTextTransform};
-                        text-decoration: ${titleTextDecoration};
-                        ${titleLetterSpacing !== undefined ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
-                        ${titleLineHeight !== undefined ? `line-height: ${titleLineHeight.Desktop}${titleLineHeightUnits.Desktop};` : ''}
-                        margin: 0;
-                    }
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title {
-                        color: ${titleHoverColor};
-                    }
-
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
-                        fill: ${titleIconColor};
-                    }
-                    .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-icon {
-                        fill: ${titleIconHoverColor};
-                    }
-
-
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
-                        display: flex;
-                        flex-direction: column;
-                        gap: ${accordionItemGap.Desktop}${accordionItemGapUnits.Desktop};
-                        padding: 0;
-                        margin: 0;
-                    }
-                    
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper {
-                        display: flex;
-                        align-items: center;
-                        gap: ${titleSpacing.Desktop}${titleSpacingUnits.Desktop};
-                        ${titleAlignment === 'left' && 'justify-content: left'};
-                        ${titleAlignment === 'center' && 'justify-content: center'};
-                        ${titleAlignment === 'right' && 'justify-content: right'};
-                        ${titleAlignment === 'between' && 'justify-content: space-between'};
-                        ${iconPosition === 'left' && 'flex-direction: row-reverse'};
-                        ${iconPosition === 'right' && 'flex-direction: row'};
-                        padding: ${accordionItemsPaddingDesktopWidth};
-                        border-style: ${accordionItemsBorder};
-                        border-width: ${accordionItemsBorderDesktopWidth};
-                        ${accordionItemsBorderColor !== undefined ? `border-color: ${accordionItemsBorderColor};` : ''};
-                        border-radius: ${accordionItemsBorderRadiusDesktopWidth};
-                    }
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper:hover {
-                        ${accordionItemsBorderHoverColor !== undefined ? `border-color: ${accordionItemsBorderHoverColor};` : ''};
-                    }
-
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
-                        display: inline-flex;
-                        align-items: center;
-                        gap: ${prefixSuffixSpacing.Desktop}${prefixSuffixSpacingUnits.Desktop};
-                    }
-
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-                        width: ${titlePrefixIconSize.Desktop}${titlePrefixIconSizeUnits.Desktop};
-                        height: ${titlePrefixIconSize.Desktop}${titlePrefixIconSizeUnits.Desktop};
-                    }
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-                        width: ${titleSuffixIconSize.Desktop}${titleSuffixIconSizeUnits.Desktop};
-                        height: ${titleSuffixIconSize.Desktop}${titleSuffixIconSizeUnits.Desktop};
-                    }
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix img,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix svg,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix img,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix svg, {
-                        margin: 0;
-                        padding: 0;
-                        min-width: 100%;
-                        width: 100%;
-                        height: 100%;
-                    }
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix img,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix .components-button,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix img,
-                    .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix .components-button {
-                        margin: 0 !important;
-                        padding: 0 !important;
-                        min-width: 100% !important;
-                        width: 100% !important;
-                        height: 100% !important;
-                        object-fix: cover !important;
-                    }
-
-                    @media only screen and (max-width: 1024px) {
-                        .fb-accordion-main-wrapper.${blockID} {
-                            padding: ${accordionPaddingTabletWidth};
-                            margin: ${accordionMarginTabletWidth};
-                            border-radius: ${accordionBorderRadiusTabletWidth};
-                        }
-                        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
-                            width: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet};
-                            height: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet};
-                        }
-                        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
-                            font-size: ${titleFontSize !== undefined ? `${titleFontSize.Tablet}${titleFontSizeUnits.Tablet}` : ''};
-                            ${titleLetterSpacing !== undefined ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` : ''}
-                            ${titleLineHeight !== undefined ? `line-height: ${titleLineHeight.Tablet}${titleLineHeightUnits.Tablet};` : ''}
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
-                            gap: ${accordionItemGap.Tablet}${accordionItemGapUnits.Tablet};
-                        }
-                        
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper {
-                            gap: ${titleSpacing.Tablet}${titleSpacingUnits.Tablet};
-                            padding: ${accordionItemsPaddingTabletWidth};
-                            border-width: ${accordionItemsBorderTabletWidth};
-                            border-radius: ${accordionItemsBorderRadiusTabletWidth};
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
-                            gap: ${prefixSuffixSpacing.Tablet}${prefixSuffixSpacingUnits.Tablet};
-                        }
-
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-                            width: ${titlePrefixIconSize.Tablet}${titlePrefixIconSizeUnits.Tablet};
-                            height: ${titlePrefixIconSize.Tablet}${titlePrefixIconSizeUnits.Tablet};
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-                            width: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet};
-                            height: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet};
-                        }
-                    }
-
-                    @media only screen and (max-width: 767px) {
-                        .fb-accordion-main-wrapper.${blockID} {
-                            padding: ${accordionPaddingMobileWidth};
-                            margin: ${accordionMarginMobileWidth};
-                            border-radius: ${accordionBorderRadiusMobileWidth};
-                        }
-                        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
-                            width: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile};
-                            height: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile};
-                        }
-                        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
-                            font-size: ${titleFontSize !== undefined ? `${titleFontSize.Mobile}${titleFontSizeUnits.Mobile}` : ''};
-                            ${titleLetterSpacing !== undefined ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` : ''}
-                            ${titleLineHeight !== undefined ? `line-height: ${titleLineHeight.Mobile}${titleLineHeightUnits.Mobile};` : ''}
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
-                            gap: ${accordionItemGap.Mobile}${accordionItemGapUnits.Mobile};
-                        }
-                        
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper {
-                            gap: ${titleSpacing.Mobile}${titleSpacingUnits.Mobile};
-                            padding: ${accordionItemsPaddingMobileWidth};
-                            border-width: ${accordionItemsBorderMobileWidth};
-                            border-radius: ${accordionItemsBorderRadiusMobileWidth};
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
-                            gap: ${prefixSuffixSpacing.Mobile}${prefixSuffixSpacingUnits.Mobile};
-                        }
-
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-                            width: ${titlePrefixIconSize.Mobile}${titlePrefixIconSizeUnits.Mobile};
-                            height: ${titlePrefixIconSize.Mobile}${titlePrefixIconSizeUnits.Mobile};
-                        }
-                        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-                            width: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile};
-                            height: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile};
-                        }
-                    }
-                `}
-            </style> */}
 
             {isSelected && <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />}
 

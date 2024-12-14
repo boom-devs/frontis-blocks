@@ -29,7 +29,7 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-dual-button-container ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`}>
 					<div
 						className="fb-dual-button-wrapper"
 						style={{

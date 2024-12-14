@@ -58,9 +58,9 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 	} = attributes;
 
 	let defaultImageUrl = '';
-    if (typeof FrontisBlocksData !== 'undefined') {
-        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/flex-start';
-    }
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/flex-start';
+	}
 
 	// Reset breakpoint value
 	const DEVICE_BREAKPOINT = {
@@ -424,245 +424,245 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													label={__("Margin", "frontis-blocks")}
 													deviceType={deviceType}
 													spacingUnitsHandler={''}
-														spacingUnits={''}
-														spacingDesktop={''}
-														spacingTablet={''}
-														spacingMobile={''}
-														handleSpacingUnitHandler={
-															''
-														}
-														spacingCombineBtn={''}
-														spacingCombineBtnHandler={
-															''
-														}
-														setAttributes={setAttributes}
-													/>
-												</PanelBody>
+													spacingUnits={''}
+													spacingDesktop={''}
+													spacingTablet={''}
+													spacingMobile={''}
+													handleSpacingUnitHandler={
+														''
+													}
+													spacingCombineBtn={''}
+													spacingCombineBtnHandler={
+														''
+													}
+													setAttributes={setAttributes}
+												/>
+											</PanelBody>
 
-												<PanelBody title="Background" initialOpen={false}>
-													<FB_BackgroundColorControl
-														bgColorSwitcher={''}
-														setBgColorSwitcher={(value) =>
-															setAttributes({  })
-														}
-														normalBackgroundType={''}
-														setNormalBackgroundType={(value) =>
-															setAttributes({  })
-														}
-														normalClassicColor={''}
-														setNormalClassicColor={(value) =>
-															setAttributes({  })
-														}
-														normalGradientColor={''}
-														setNormalGradientColor={(value) =>
-															setAttributes({  })
-														}
-														normalCustomGradientSwitcher={
-															''
-														}
-														setNormalCustomGradientSwitcher={(value) =>
-															setAttributes({
+											<PanelBody title="Background" initialOpen={false}>
+												<FB_BackgroundColorControl
+													bgColorSwitcher={''}
+													setBgColorSwitcher={(value) =>
+														setAttributes({  })
+													}
+													normalBackgroundType={''}
+													setNormalBackgroundType={(value) =>
+														setAttributes({  })
+													}
+													normalClassicColor={''}
+													setNormalClassicColor={(value) =>
+														setAttributes({  })
+													}
+													normalGradientColor={''}
+													setNormalGradientColor={(value) =>
+														setAttributes({  })
+													}
+													normalCustomGradientSwitcher={
+														''
+													}
+													setNormalCustomGradientSwitcher={(value) =>
+														setAttributes({
 
-															})
-														}
-														normalCustomGradientInputValue={
-															''
-														}
-														setNormalCustomGradientInputValue={(value) =>
-															setAttributes({
+														})
+													}
+													normalCustomGradientInputValue={
+														''
+													}
+													setNormalCustomGradientInputValue={(value) =>
+														setAttributes({
 
-															})
-														}
-														normalBackgroundImageUrl={''}
-														setNormalBackgroundImageUrl={(value) =>
-															setAttributes({  })
-														}
-														normalBackgroundImageAlt={''}
-														setNormalBackgroundImageAlt={(value) =>
-															setAttributes({  })
-														}
-														normalBackgroundImageID={''}
-														setNormalBackgroundImageID={(value) =>
-															setAttributes({  })
-														}
-														normalBackgroundImagePosition={
-															''
-														}
-														setNormalBackgroundImagePosition={(value) =>
-															setAttributes({
+														})
+													}
+													normalBackgroundImageUrl={''}
+													setNormalBackgroundImageUrl={(value) =>
+														setAttributes({  })
+													}
+													normalBackgroundImageAlt={''}
+													setNormalBackgroundImageAlt={(value) =>
+														setAttributes({  })
+													}
+													normalBackgroundImageID={''}
+													setNormalBackgroundImageID={(value) =>
+														setAttributes({  })
+													}
+													normalBackgroundImagePosition={
+														''
+													}
+													setNormalBackgroundImagePosition={(value) =>
+														setAttributes({
 
-															})
-														}
-														normalBackgroundImageAttachment={
-															''
-														}
-														setNormalBackgroundImageAttachment={(value) =>
-															setAttributes({
+														})
+													}
+													normalBackgroundImageAttachment={
+														''
+													}
+													setNormalBackgroundImageAttachment={(value) =>
+														setAttributes({
 
-															})
-														}
-														normalBackgroundImageRepeat={
-															''
-														}
-														setNormalBackgroundImageRepeat={(value) =>
-															setAttributes({
+														})
+													}
+													normalBackgroundImageRepeat={
+														''
+													}
+													setNormalBackgroundImageRepeat={(value) =>
+														setAttributes({
 
-															})
-														}
-														normalBackgroundImageSize={''}
-														setNormalBackgroundImageSize={(value) =>
-															setAttributes({  })
-														}
-														hoverBackgroundType={''}
-														setHoverBackgroundType={(value) =>
-															setAttributes({  })
-														}
-														hoverClassicColor={''}
-														setHoverClassicColor={(value) =>
-															setAttributes({  })
-														}
-														hoverGradientColor={''}
-														setHoverGradientColor={(value) =>
-															setAttributes({  })
-														}
-														hoverCustomGradientSwitcher={
-															''
-														}
-														setHoverCustomGradientSwitcher={(value) =>
-															setAttributes({
+														})
+													}
+													normalBackgroundImageSize={''}
+													setNormalBackgroundImageSize={(value) =>
+														setAttributes({  })
+													}
+													hoverBackgroundType={''}
+													setHoverBackgroundType={(value) =>
+														setAttributes({  })
+													}
+													hoverClassicColor={''}
+													setHoverClassicColor={(value) =>
+														setAttributes({  })
+													}
+													hoverGradientColor={''}
+													setHoverGradientColor={(value) =>
+														setAttributes({  })
+													}
+													hoverCustomGradientSwitcher={
+														''
+													}
+													setHoverCustomGradientSwitcher={(value) =>
+														setAttributes({
 
-															})
-														}
-														hoverCustomGradientInputValue={
-															''
-														}
-														setHoverCustomGradientInputValue={(value) =>
-															setAttributes({
+														})
+													}
+													hoverCustomGradientInputValue={
+														''
+													}
+													setHoverCustomGradientInputValue={(value) =>
+														setAttributes({
 
-															})
-														}
-														hoverBackgroundImageUrl={''}
-														setHoverBackgroundImageUrl={(value) =>
-															setAttributes({  })
-														}
-														hoverBackgroundImageAlt={''}
-														setHoverBackgroundImageAlt={(value) =>
-															setAttributes({  })
-														}
-														hoverBackgroundImageID={''}
-														setHoverBackgroundImageID={(value) =>
-															setAttributes({  })
-														}
-														hoverBackgroundImagePosition={
-															''
-														}
-														setHoverBackgroundImagePosition={(value) =>
-															setAttributes({
+														})
+													}
+													hoverBackgroundImageUrl={''}
+													setHoverBackgroundImageUrl={(value) =>
+														setAttributes({  })
+													}
+													hoverBackgroundImageAlt={''}
+													setHoverBackgroundImageAlt={(value) =>
+														setAttributes({  })
+													}
+													hoverBackgroundImageID={''}
+													setHoverBackgroundImageID={(value) =>
+														setAttributes({  })
+													}
+													hoverBackgroundImagePosition={
+														''
+													}
+													setHoverBackgroundImagePosition={(value) =>
+														setAttributes({
 
-															})
-														}
-														hoverBackgroundImageAttachment={
-															''
-														}
-														setHoverBackgroundImageAttachment={(value) =>
-															setAttributes({
+														})
+													}
+													hoverBackgroundImageAttachment={
+														''
+													}
+													setHoverBackgroundImageAttachment={(value) =>
+														setAttributes({
 
-															})
-														}
-														hoverBackgroundImageRepeat={
-															''
-														}
-														setHoverBackgroundImageRepeat={(value) =>
-															setAttributes({
+														})
+													}
+													hoverBackgroundImageRepeat={
+														''
+													}
+													setHoverBackgroundImageRepeat={(value) =>
+														setAttributes({
 
-															})
-														}
-														hoverBackgroundImageSize={''}
-														setHoverBackgroundImageSize={(value) =>
-															setAttributes({  })
-														}
-													/>
-												</PanelBody>
-												<PanelBody
-													title={__("Border and Shadow", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<SelectControl
-														label={__("Border Style", "frontis-blocks")}
-														value={''}
-														options={''}
-														onChange={(value) =>
-															setAttributes({ })
-														}
-													/>
+														})
+													}
+													hoverBackgroundImageSize={''}
+													setHoverBackgroundImageSize={(value) =>
+														setAttributes({  })
+													}
+												/>
+											</PanelBody>
+											<PanelBody
+												title={__("Border and Shadow", "frontis-blocks")}
+												initialOpen={false}
+											>
+												<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={''}
+													options={''}
+													onChange={(value) =>
+														setAttributes({ })
+													}
+												/>
 
-													<FB_Color
-														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={''}
-														globalColor={''}
-														globalHoverColor={''}
-														handleColorSwitcherChange={
-															''
-														}
-														handleGlobalColorChange={
-															''
-														}
-														handleGlobalHoverColorChange={
-															''
-														}
-													/>
+												<FB_Color
+													label={__("Border Color", "frontis-blocks")}
+													globalColorSwitcher={''}
+													globalColor={''}
+													globalHoverColor={''}
+													handleColorSwitcherChange={
+														''
+													}
+													handleGlobalColorChange={
+														''
+													}
+													handleGlobalHoverColorChange={
+														''
+													}
+												/>
 
-													<FB_Spacing
-														label={__("Border", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={''}
-														spacingUnits={''}
-														spacingDesktop={''}
-														spacingTablet={''}
-														spacingMobile={''}
-														handleSpacingUnitHandler={
-															''
-														}
-														spacingCombineBtn={''}
-														spacingCombineBtnHandler={
-															''
-														}
-														setAttributes={setAttributes}
-													/>
+												<FB_Spacing
+													label={__("Border", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={''}
+													spacingUnits={''}
+													spacingDesktop={''}
+													spacingTablet={''}
+													spacingMobile={''}
+													handleSpacingUnitHandler={
+														''
+													}
+													spacingCombineBtn={''}
+													spacingCombineBtnHandler={
+														''
+													}
+													setAttributes={setAttributes}
+												/>
 
-													<FB_Spacing
-														label={__("Border Radius", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															''
-														}
-														spacingUnits={''}
-														spacingDesktop={''}
-														spacingTablet={''}
-														spacingMobile={''}
-														handleSpacingUnitHandler={
-															''
-														}
-														spacingCombineBtn={''}
-														spacingCombineBtnHandler={
-															''
-														}
-														setAttributes={setAttributes}
-													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({  })
-														}
-														initialShadowValue={''}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
+												<FB_Spacing
+													label={__("Border Radius", "frontis-blocks")}
+													deviceType={deviceType}
+													spacingUnitsHandler={
+														''
+													}
+													spacingUnits={''}
+													spacingDesktop={''}
+													spacingTablet={''}
+													spacingMobile={''}
+													handleSpacingUnitHandler={
+														''
+													}
+													spacingCombineBtn={''}
+													spacingCombineBtnHandler={
+														''
+													}
+													setAttributes={setAttributes}
+												/>
+												<FB_BoxShadowControl
+													onBoxShadowChange={(value) =>
+														setAttributes({  })
+													}
+													initialShadowValue={''}
+													onBoxShadowStyleChange={(value) =>
+														setAttributes({
 
-															})
-														}
-													/>
-												</PanelBody>
-											</div>
+														})
+													}
+												/>
+											</PanelBody>
 										</div>
+									</div>
 								</>
 							)}
 						</div>

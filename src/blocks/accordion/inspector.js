@@ -43,6 +43,7 @@ import FB_TypographyControl from '../../components/typography-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_ImageControl from '../../components/image-control';
+import FB_HtmlTagControl from '../../components/html-tag-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -1252,31 +1253,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                 <>
                                    <PanelBody initialOpen={true}>
-                                       <BaseControl
-                                           label={__(
-                                               "Accordion Items Title Tag",
-                                               "frontis-blocks"
-                                           )}
-                                           className="fb-setting-text-alignment"
-                                        >
-                                           <div className="fb-setting-switcher-container">
-                                                <BaseControl
-                                                    className="fb-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                                        {HEADING.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ tagName: item.value })} 
-                                                                className={`fb-setting-switcher-panel-btn-switcher ${tagName === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
-                                       </BaseControl>
+                                       <FB_HtmlTagControl
+                                            label={__("Accordion Items Title Tag", "frontis-blocks")}
+                                            globalHtmlTag={tagName}
+                                            setGlobalHtmlTag={(value) => setAttributes({ tagName: value })}
+                                        />
+
                                        <FB_Range
                                             min={1}
                                             max={100}
@@ -1425,36 +1407,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             "Icon Position",
                                                             "frontis-blocks"
                                                         )}
+                                                        id="fb-setting-text-alignment"
                                                         className="fb-setting-text-alignment"
                                                     >
-                                                        <ButtonGroup id="fb-icon-pos-btgrp" className="fb-setting-text-alignment-group-btn">
-                                                            {ICON_POSITIONS.map(
-                                                                (item, key) => (
-                                                                    <Button
-                                                                        className="fb-setting-text-alignment-single-btn"
-                                                                        key={key}
-                                                                        // isLarge
-                                                                        isSecondary={
-                                                                            iconPosition !==
-                                                                            item.value
-                                                                        }
-                                                                        isPrimary={
-                                                                            iconPosition ===
-                                                                            item.value
-                                                                        }
-                                                                        onClick={() =>
-                                                                            setAttributes(
-                                                                                {
-                                                                                    iconPosition:
-                                                                                        item.value,
-                                                                                }
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                )
-                                                            )}
+                                                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
+                                                            {ICON_POSITIONS.map((item) => (
+                                                                <Button
+                                                                    key={item.value}
+                                                                    onClick={() => setAttributes({ iconPosition: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${iconPosition === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
                                                         </ButtonGroup>
                                                     </BaseControl>
 
@@ -1494,38 +1459,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     "Title Align ",
                                                     "frontis-blocks"
                                                 )}
+                                                id="fb-setting-text-alignment"
                                                 className="fb-setting-text-alignment"
                                             >
                                                 <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                                    {TITLE_ALIGNMENT.map(
-                                                        (item, key) => (
-                                                            <Button
-                                                                className="fb-setting-text-alignment-single-btn"
-                                                                key={key}
-                                                                isSecondary={
-                                                                    titleAlignment !==
-                                                                    item.value
-                                                                }
-                                                                isPrimary={
-                                                                    titleAlignment ===
-                                                                    item.value
-                                                                }
-                                                                onClick={() =>
-                                                                    setAttributes({
-                                                                        titleAlignment:
-                                                                            item.value,
-                                                                    })
-                                                                }
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        )
-                                                    )}
+                                                    {TITLE_ALIGNMENT.map((item) => (
+                                                        <Button
+                                                            key={item.value}
+                                                            onClick={() => setAttributes({ titleAlignment: item.value })}
+                                                            className={`fb-setting-text-alignment-single-btn ${titleAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
                                                 </ButtonGroup>
                                             </BaseControl>
                     
-                                                <FB_TypographyControl
-                                                    fontFamily={titleFontFamily}
+                                            <FB_TypographyControl
+                                                fontFamily={titleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
                                                     
                                                     fontSize={titleFontSize}
@@ -1559,8 +1510,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
                                                     
                                                     deviceType={deviceType}
-                                                    setAttributes={setAttributes}
-                                                />
+                                                setAttributes={setAttributes}
+                                            />
+
                                             <FB_Color
                                                 label={__("Text Color", "frontis-blocks")}
                                                 globalColorSwitcher={titleColorSwitcher}
@@ -2068,14 +2020,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={accordionZIndex}
-                                                        onChange={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
-                                                        max={100}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={undefined}
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={accordionZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
         

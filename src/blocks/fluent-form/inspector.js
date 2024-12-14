@@ -2325,10 +2325,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-fluent-form-wrapper {
-            ${fluentFormGlobalZIndex ? `z-index: ${fluentFormGlobalZIndex};` : ''}
-            position: relative;
-        }
-        .${blockID}.fb-fluent-form-wrapper {
             ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
             padding: ${DesktopPadding};
             margin: ${DesktopMargin};
@@ -2336,6 +2332,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-width: ${BorderDesktopWidth};
             border-radius: ${BorderRadiusDesktopWidth} !important;
             ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+            ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
+            position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper:hover {
@@ -2615,6 +2613,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderTabletWidth};
                 border-radius: ${BorderRadiusTabletWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormGlobalZIndex.Tablet ? `z-index: ${fluentFormGlobalZIndex.Tablet};` : ''}
+                position: relative;
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
@@ -2862,6 +2862,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderMobileWidth};
                 border-radius: ${BorderRadiusMobileWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormGlobalZIndex.Mobile ? `z-index: ${fluentFormGlobalZIndex.Mobile};` : ''}
+                position: relative; 
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
@@ -4672,18 +4674,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={fluentFormGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+                                                    <FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={''}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={fluentFormGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
 

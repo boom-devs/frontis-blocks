@@ -1269,10 +1269,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => {
         let style = `
-            .fb-feature-main-wrapper.${blockID} {
-                z-index: ${FeatureGlobalZIndex !== undefined ? FeatureGlobalZIndex : ''};
-                position: relative;
-            }
+
             .fb-feature-main-wrapper.${blockID} {
                 ${FeatureGlobalNormalBackgroundType === 'gradient' ? `
                     background: ${FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue ? FeatureGlobalNormalCustomGradientInputValue : FeatureGlobalNormalGradientColor};
@@ -1292,6 +1289,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
                 ${FeatureGlobalBorderColor ? `border-color: ${FeatureGlobalBorderColor};` : ''}
                 ${FeatureGlobalBoxShadowCssValue ? `box-shadow: ${FeatureGlobalBoxShadowCssValue};` : ''}
+                ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ''}
+                position: relative;
                 transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID}:hover {
@@ -1403,6 +1402,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             @media only screen and (max-width: 1024px) {
                 .fb-feature-main-wrapper.${blockID} {
+                    ${FeatureGlobalZIndex.Tablet ? `z-index: ${FeatureGlobalZIndex.Tablet};` : ''}
                     ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                     ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
                     ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -1455,6 +1455,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             @media only screen and (max-width: 767px) {
                 .fb-feature-main-wrapper.${blockID} {
+                    ${FeatureGlobalZIndex.Mobile ? `z-index: ${FeatureGlobalZIndex.Mobile};` : ''}
                     ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                     ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
                     ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -2312,19 +2313,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={FeatureGlobalZIndex}
-														onChange={(value) => setAttributes({ FeatureGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={FeatureGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ FeatureGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>

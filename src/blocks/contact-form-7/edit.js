@@ -45,8 +45,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const pluginInstallUrl = FrontisBlocksData.contact_form7_install_url;
 
-	console.log(FrontisBlocksData.contact_form_active + 'hello');
-
 
 	return (
 		<>
@@ -73,7 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</p>
 				</div>
 				) : (
-				<div className="fb-contact-form-render">
+				<div className="fb-parent-wrapper fb-contact-form-render">
 					{selectedForm ? (
 						<div dangerouslySetInnerHTML={{ __html: selectedForm }} />
 				) : (
