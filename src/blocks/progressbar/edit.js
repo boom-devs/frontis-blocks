@@ -21,10 +21,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			outSideprogressBarRef.current.style.width = '0%';
 	
 			setTimeout(() => {
-				outSideprogressBarRef.current.style.width = `${progressNumber}%`;
+				if (outSideprogressBarRef.current) {
+					outSideprogressBarRef.current.style.width = `${progressNumber}%`;
 	
-				const percentageLabel = outSideprogressBarRef.current.querySelector('.progress-bar-number');
-				percentageLabel.style.left = `${progressNumber}%`;
+					const percentageLabel = outSideprogressBarRef.current.querySelector('.progress-bar-number');
+					if (percentageLabel) {
+						percentageLabel.style.left = `${progressNumber}%`;
+					}
+				}
 			}, 100);
 		}
 	}, [progressNumber, progressTextPosition]);
