@@ -44,7 +44,7 @@ const attributes = {
 	},
     headingFontWeight : {
         type: "string",
-        default: "600"
+        default: ""
     },
     headingFontStyle : {
         type: "string",
@@ -77,9 +77,9 @@ const attributes = {
     headingLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '42',
-			Tablet: '42',
-			Mobile: '42'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	headingLineHeightUnits: {
