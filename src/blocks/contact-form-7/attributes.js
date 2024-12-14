@@ -27,7 +27,12 @@ export const attributes = {
 		default: "Desktop"
 	},
 	contactFormGlobalZIndex : {
-		type: "number",
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
 	},
 	showPlaceholder: {
 		type: "boolean",

@@ -2,31 +2,20 @@ import { __ } from "@wordpress/i18n";
 
 import {
 	useBlockProps,
-	RichText,
 	InspectorControls,
-	MediaUploadCheck,
 	MediaUpload,
-	URLInput,
 } from "@wordpress/block-editor";
 
 import {
 	SelectControl,
 	PanelBody,
-	TextControl,
 	TabPanel,
 	BaseControl,
 	Button,
 	ButtonGroup,
 	ToggleControl,
 	TextareaControl,
-	Dropdown,
-	Dashicon,
 	RangeControl,
-	ColorPicker,
-	ColorPalette,
-	GradientPicker,
-	CircularOptionPicker,
-	ResponsiveWrapper,
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
@@ -36,41 +25,22 @@ import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FBIconPicker from "../../components/icon-picker";
-import FB_ResponsiveControl from "@Components/responsive-control";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_UrlControl from "@Components/url-control";
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+
 /**
  * Internal depencencies
  */
 import {
-	WRAPPER_BG,
-	WRAPPER_MARGIN,
-	WRAPPER_PADDING,
-	WRAPPER_BORDER_SHADOW,
-	TITLE_MARGIN,
-	SUBTITLE_MARGIN,
-	separator_MARGIN,
-	separator_LINE_SIZE,
-	separator_ICON_SIZE,
-	separator_WIDTH,
-	separator_POSITION,
-	subheading_POSITION,
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	separator_UNIT_TYPES,
-	PRESETS,
 	TEXT_ALIGN,
 	HEADING,
-	SEPERATOR_STYLES,
-	separator_TYPE,
-	FONT_FAMILYS,
-	CLASSIC_GRADIENT,
 	BORDER_STYLES,
 	mediaType,
-	ICON_POSITION,
 	INFO_ICON_POSITION,
-	BG_TYPE,
+	INFO_ICON_VERTICAL_POSITION
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -86,7 +56,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
-		Sub_Heading_Position,
 		Heading_Font_Family,
 		Heading_Font_Size,
 		Heading_Font_size_units,
@@ -110,11 +79,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_Border_Width,
 		Heading_Tab_Border_Width,
 		Heading_Mobile_Border_Width,
-		activeBorderDevice,
 		Heading_Desktop_Border_radius_Width,
 		Heading_Tab_Border_radius_Width,
 		Heading_Mobile_Border_radius_Width,
-		activeBorderRadiusDevice,
 		borderRadiusLink,
 		borderLink,
 		Heading_padding_units,
@@ -128,16 +95,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_Margin,
 		Heading_Tab_Margin,
 		Heading_Mobile_Margin,
-		Heading_Active_Margin_Device,
 		Heading_Margin_Link,
 
-		info_Button_Switcher,
-		info_Button_Text,
-		info_Button_Link,
 		wrapperAlignment,
 		descAlignment,
-		buttonAlignment,
-		infoBoxBg,
 
 		SubHeadingPaddingUnits,
 		SubHeadingDesktopPadding,
@@ -164,27 +125,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		descActiveMarginDevice,
 		descMarginLink,
 
-		infoBoxPaddingUnits,
-		infoBoxDesktopPadding,
-		infoBoxTabPadding,
-		infoBoxMobilePadding,
-
-		infoButtonPaddingUnits,
-		infoButtonDesktopPadding,
-		infoButtonTabPadding,
-		infoButtonMobilePadding,
 		icon,
-		btnIcon,
 		width,
-		mediaSwitcher,
-		contentAlignment,
 
-		infoButtonBorder,
-		infoBoxMarginUnits,
-		infoBoxDesktopMargin,
-		infoBoxTabMargin,
-		infoBoxMobileMargin,
-		infoBoxMarginLink,
+		mediaSwitcher,
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
@@ -252,13 +196,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaBorderRadiusMobile,
 		mediaBorderRadiusLink,
 
-		btnIconSize,
-		btnIconSizeUnits,
-		buttonIconSwitcher,
-		btnIconColor,
-		btnIconHoverColor,
-		btnIconColorSwitcher,
-		btnIconPosition,
 		infoIconPosition,
 
 		mediaBgWidth,
@@ -317,7 +254,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingUrlSwitcher,
 		wrapperLink,
 		wrapperTargetUrl,
-		wrapperUrlSwitcher
+		wrapperUrlSwitcher,
+		infoIconVerticalPosition
 	} = attributes;
 
 	useEffect(() => {
@@ -1940,31 +1878,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("Icon/Image", "frontis-block")}
 												initialOpen={true}
 											>
-												<BaseControl
-													label={__("Alignment", "frontis-block")}
-													id="fb-setting-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup className="fb-advanced-alignment-group-btn">
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({
-																		wrapperAlignment: item.value,
-																	})
-																}
-																className={`fb-advanced-alignment-single-btn ${
-																	wrapperAlignment === item.value
-																		? "active"
-																		: ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_AlignmentControl
+													label={__("Alignment", "frontis-blocks")}
+													globalAlignment={wrapperAlignment}
+													setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+												/>
 
 												<BaseControl className="fb-sub-heading-position">
 													<SelectControl
@@ -1987,6 +1906,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 												</BaseControl>
+
+												{(infoIconPosition === 'left' || infoIconPosition === 'right') && (
+												<BaseControl className="fb-media-vertical-position">
+													<SelectControl
+														label={__("Vertical Position", "frontis-block")}
+														value={infoIconVerticalPosition}
+														options={INFO_ICON_VERTICAL_POSITION}
+														onChange={(value) =>
+															setAttributes({ infoIconVerticalPosition: value })
+														}
+													/>
+												</BaseControl>
+												)}
 
 												<div className="fb-image-upload-field-wrapper">
 													{mediaSwitcher === "image" && (
@@ -2166,48 +2098,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("Title", "frontis-block")}
 												initialOpen={false}
 											>
-												<BaseControl
-													label={__("Heading Alignment", "frontis-block")}
-													id="fb-setting-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup className="fb-advanced-alignment-group-btn">
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Alignment: item.value })
-																}
-																className={`fb-advanced-alignment-single-btn ${
-																	Alignment === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_AlignmentControl
+													label={__("Alignment", "frontis-blocks")}
+													globalAlignment={Alignment}
+													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+												/>
 
-												<BaseControl
-													label={__("Heading Tag", "frontis-block")}
-													className="fb-setting-tag-wrapper"
-												>
-													<ButtonGroup className="fb-setting-tag-inner-wrapper">
-														{HEADING.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Heading_Tag: item.value })
-																}
-																className={`fb-setting-tag-single-btn ${
-																	Heading_Tag === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_HtmlTagControl
+													label={__("Title Tag", "frontis-blocks")}
+													globalHtmlTag={Heading_Tag}
+													setGlobalHtmlTag={(value) => setAttributes({ Heading_Tag: value })}
+												/>
 
 												<TextareaControl
 													label={__("Heading Text", "frontis-block")}
@@ -2252,31 +2155,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												{Sub_Heading_Switcher && (
 													<>
-														<BaseControl
-															label={__("Alignment", "frontis-block")}
-															id="fb-media-alignment"
-															className="fb-advanced-alignment"
-														>
-															<ButtonGroup className="fb-advanced-alignment-group-btn">
-																{TEXT_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				descAlignment: item.value,
-																			})
-																		}
-																		className={`fb-advanced-alignment-single-btn ${
-																			descAlignment === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+														
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={descAlignment}
+															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+														/>
 
 														<TextareaControl
 															label={__("Sub Heading Text", "frontis-block")}

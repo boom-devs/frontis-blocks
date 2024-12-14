@@ -570,7 +570,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</InspectorControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-counter-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
 					<div className="fb-counter-item">
 						<div className={`fb-counter-icon-wrapper`}>
 							{mediaSwitcher === 'image' && attributes.counterMediaUrl && (

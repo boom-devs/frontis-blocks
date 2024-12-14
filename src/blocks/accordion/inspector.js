@@ -43,6 +43,7 @@ import FB_TypographyControl from '../../components/typography-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_ImageControl from '../../components/image-control';
+import FB_HtmlTagControl from '../../components/html-tag-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -269,6 +270,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         titleBgHoverImageAttachment,
         titleBgHoverImageRepeat,
         titleBgHoverImageSize,
+
+        // Accordion Item Content
+        contentBorder,
+        contentBorderColor,
+        contentBorderHoverColor,
+        contentBorderColorSwitcher,
+        contentBorderUnits,
+        contentDesktopBorderWidth,
+        contentTabBorderWidth,
+        contentMobileBorderWidth,
+        contentBorderLink,
+        contentBorderRadiusUnits,
+        contentDesktopBorderRadiusWidth,
+        contentTabBorderRadiusWidth,
+        contentMobileBorderRadiusWidth,
+        contentBorderRadiusLink,
+        contentDesktopSwitcher,
+        contentTabletSwitcher,
+        contentMobileSwitcher,
+
+        // Item Box Shadow
+        contentBoxShadowValues,
+        contentBoxShadowCssValue,
+
+        // Item Backgorund
+        contentBgColorSwitcher,
+        contentBgType,
+        contentBgClassicColor,
+        contentBgGradientColor,
+        contentBgCustomGradientSwitcher,
+        contentBgCustomGradientInputValue,
+        contentBgImageUrl,
+        contentBgImageAlt,
+        contentBgImageID,
+        contentBgImagePosition,
+        contentBgImageAttachment,
+        contentBgImageRepeat,
+        contentBgImageSize,
+        contentBgHoverType,
+        contentBgHoverClassicColor,
+        contentBgHoverGradientColor,
+        contentBgHoverCustomGradientSwitcher,
+        contentBgHoverCustomGradientInputValue,
+        contentBgHoverImageUrl,
+        contentBgHoverImageAlt,
+        contentBgHoverImageID,
+        contentBgHoverImagePosition,
+        contentBgHoverImageAttachment,
+        contentBgHoverImageRepeat,
+        contentBgHoverImageSize,
     } = attributes;
 
 
@@ -933,6 +984,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
+
+    // content BorderWidth Function
+    const handleContentBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( contentBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        contentDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        contentTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        contentMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {contentDesktopBorderWidth: {...contentDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {contentTabBorderWidth: {...contentTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {contentMobileBorderWidth: {...contentMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleContentBorderCombineBtn = () => {
+        setAttributes( {contentBorderLink: !contentBorderLink} );
+    }
+
+    const handleContentBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            contentBorderUnits: {
+                ...contentBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+
+    // content BorderRadiusWidth Function
+    const handleContentBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( contentBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        contentDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        contentTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        contentMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {contentDesktopBorderRadiusWidth: {...contentDesktopBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {contentTabBorderRadiusWidth: {...contentTabBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {contentMobileBorderRadiusWidth: {...contentMobileBorderRadiusWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleContentBorderRadiusCombineBtn = () => {
+        setAttributes( {contentBorderRadiusLink: !contentBorderRadiusLink} );
+    }
+
+    const handleContentBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            contentBorderRadiusUnits: {
+                ...contentBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    
+    // FB_Color for content Border
+    const contentBorderColorSwitcherChange = (value) => {
+        setAttributes({ contentBorderColorSwitcher: value });
+    };
+    const contentBorderColorChange = (value) => {
+        setAttributes({ contentBorderColor: value });
+    };
+    const contentBorderHoverColorChange = (value) => {
+        setAttributes({ contentBorderHoverColor: value });
+    };
     
 
     return (
@@ -1051,31 +1253,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                 <>
                                    <PanelBody initialOpen={true}>
-                                       <BaseControl
-                                           label={__(
-                                               "Accordion Items Title Tag",
-                                               "frontis-blocks"
-                                           )}
-                                           className="fb-setting-text-alignment"
-                                        >
-                                           <div className="fb-setting-switcher-container">
-                                                <BaseControl
-                                                    className="fb-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                                        {HEADING.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ tagName: item.value })} 
-                                                                className={`fb-setting-switcher-panel-btn-switcher ${tagName === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
-                                       </BaseControl>
+                                       <FB_HtmlTagControl
+                                            label={__("Accordion Items Title Tag", "frontis-blocks")}
+                                            globalHtmlTag={tagName}
+                                            setGlobalHtmlTag={(value) => setAttributes({ tagName: value })}
+                                        />
+
                                        <FB_Range
                                             min={1}
                                             max={100}
@@ -1224,36 +1407,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             "Icon Position",
                                                             "frontis-blocks"
                                                         )}
+                                                        id="fb-setting-text-alignment"
                                                         className="fb-setting-text-alignment"
                                                     >
-                                                        <ButtonGroup id="fb-icon-pos-btgrp" className="fb-setting-text-alignment-group-btn">
-                                                            {ICON_POSITIONS.map(
-                                                                (item, key) => (
-                                                                    <Button
-                                                                        className="fb-setting-text-alignment-single-btn"
-                                                                        key={key}
-                                                                        // isLarge
-                                                                        isSecondary={
-                                                                            iconPosition !==
-                                                                            item.value
-                                                                        }
-                                                                        isPrimary={
-                                                                            iconPosition ===
-                                                                            item.value
-                                                                        }
-                                                                        onClick={() =>
-                                                                            setAttributes(
-                                                                                {
-                                                                                    iconPosition:
-                                                                                        item.value,
-                                                                                }
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                )
-                                                            )}
+                                                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
+                                                            {ICON_POSITIONS.map((item) => (
+                                                                <Button
+                                                                    key={item.value}
+                                                                    onClick={() => setAttributes({ iconPosition: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${iconPosition === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
                                                         </ButtonGroup>
                                                     </BaseControl>
 
@@ -1293,38 +1459,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     "Title Align ",
                                                     "frontis-blocks"
                                                 )}
+                                                id="fb-setting-text-alignment"
                                                 className="fb-setting-text-alignment"
                                             >
                                                 <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                                    {TITLE_ALIGNMENT.map(
-                                                        (item, key) => (
-                                                            <Button
-                                                                className="fb-setting-text-alignment-single-btn"
-                                                                key={key}
-                                                                isSecondary={
-                                                                    titleAlignment !==
-                                                                    item.value
-                                                                }
-                                                                isPrimary={
-                                                                    titleAlignment ===
-                                                                    item.value
-                                                                }
-                                                                onClick={() =>
-                                                                    setAttributes({
-                                                                        titleAlignment:
-                                                                            item.value,
-                                                                    })
-                                                                }
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        )
-                                                    )}
+                                                    {TITLE_ALIGNMENT.map((item) => (
+                                                        <Button
+                                                            key={item.value}
+                                                            onClick={() => setAttributes({ titleAlignment: item.value })}
+                                                            className={`fb-setting-text-alignment-single-btn ${titleAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
                                                 </ButtonGroup>
                                             </BaseControl>
                     
-                                                <FB_TypographyControl
-                                                    fontFamily={titleFontFamily}
+                                            <FB_TypographyControl
+                                                fontFamily={titleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
                                                     
                                                     fontSize={titleFontSize}
@@ -1358,8 +1510,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
                                                     
                                                     deviceType={deviceType}
-                                                    setAttributes={setAttributes}
-                                                />
+                                                setAttributes={setAttributes}
+                                            />
+
                                             <FB_Color
                                                 label={__("Text Color", "frontis-blocks")}
                                                 globalColorSwitcher={titleColorSwitcher}
@@ -1569,7 +1722,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     
                                         <PanelBody
                                             title={__(
-                                                "Items Spacing",
+                                                "Items Title Spacing",
                                                 "frontis-blocks"
                                             )}
                                             initialOpen={false}
@@ -1591,12 +1744,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody
                                             title={__(
-                                                "Items Border & Radius",
+                                                "Items Title Border & Radius",
                                                 "frontis-blocks"
                                             )}
                                             initialOpen={false}
                                         >
-                                            <SelectControl
+                                                    <SelectControl
                                                         label={__("Border Style", "frontis-blocks")}
                                                         value={accordionItemsBorder}
                                                         options={BORDER_STYLES}
@@ -1653,6 +1806,208 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
                                         </PanelBody>
+
+                                        <PanelBody title="Item Content" initialOpen={false} >
+                                            <FB_BackgroundColorControl
+														bgColorSwitcher={contentBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ contentBgColorSwitcher: value })
+														}
+														normalBackgroundType={contentBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ contentBgType: value })
+														}
+														normalClassicColor={contentBgClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ contentBgClassicColor: value })
+														}
+														normalGradientColor={contentBgGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ contentBgGradientColor: value })
+														}
+														normalCustomGradientSwitcher={
+															contentBgCustomGradientSwitcher
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																contentBgCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={
+															contentBgCustomGradientInputValue
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																contentBgCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={contentBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ contentBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={contentBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ contentBgImageAlt: value })
+														}
+														normalBackgroundImageID={contentBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ contentBgImageID: value })
+														}
+														normalBackgroundImagePosition={
+															contentBgImagePosition
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																contentBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={
+															contentBgImageAttachment
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																contentBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={
+															contentBgImageRepeat
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																contentBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={contentBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ contentBgImageSize: value })
+														}
+														hoverBackgroundType={contentBgHoverType}
+														setBgHoverType={(value) =>
+															setAttributes({ contentBgHoverType: value })
+														}
+														hoverClassicColor={contentBgHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ contentBgHoverClassicColor: value })
+														}
+														hoverGradientColor={contentBgHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ contentBgHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={
+															contentBgHoverCustomGradientSwitcher
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																contentBgHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={
+															contentBgHoverCustomGradientInputValue
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																contentBgHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={contentBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ contentBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={contentBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ contentBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={contentBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ contentBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={
+															contentBgHoverImagePosition
+														}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																contentBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={
+															contentBgHoverImageAttachment
+														}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																contentBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={
+															contentBgHoverImageRepeat
+														}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																contentBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={contentBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ contentBgHoverImageSize: value })
+														}
+											/>
+
+                                            <SelectControl
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={contentBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ contentBorder: value })}
+                                            />
+
+                                            <FB_Color
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalColorSwitcher={contentBorderColorSwitcher}
+                                                globalColor={contentBorderColor}
+                                                globalHoverColor={contentBorderHoverColor}
+                                                handleColorSwitcherChange={contentBorderColorSwitcherChange}
+                                                handleGlobalColorChange={contentBorderColorChange}
+                                                handleGlobalHoverColorChange={contentBorderHoverColorChange}
+                                            />
+
+                                            <FB_Spacing
+                                                label={__("Border Width", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleContentBorderUnitsHandler}
+                                                spacingUnits={contentBorderUnits}
+                                                spacingDesktop={contentDesktopBorderWidth}
+                                                spacingTablet={contentTabBorderWidth}
+                                                spacingMobile={contentMobileBorderWidth}
+                                                handleSpacingUnitHandler={handleContentBorderUnitChange}
+                                                spacingCombineBtn={contentBorderLink}
+                                                spacingCombineBtnHandler={handleContentBorderCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleContentBorderRadiusUnitsHandler}
+                                                spacingUnits={contentBorderRadiusUnits}
+                                                spacingDesktop={contentDesktopBorderRadiusWidth}
+                                                spacingTablet={contentTabBorderRadiusWidth}
+                                                spacingMobile={contentMobileBorderRadiusWidth}
+                                                handleSpacingUnitHandler={handleContentBorderRadiusUnitChange}
+                                                spacingCombineBtn={contentBorderRadiusLink}
+                                                spacingCombineBtnHandler={handleContentBorderRadiusCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_BoxShadowControl
+												onBoxShadowChange={(value) =>
+													setAttributes({ contentBoxShadowValues: value })
+												}
+												initialShadowValue={contentBoxShadowValues}
+												onBoxShadowStyleChange={(value) =>
+													setAttributes({
+														contentBoxShadowCssValue: value,
+													})
+												}
+											/>
+                                        </PanelBody>
                                     </>
                                 )}
 
@@ -1665,14 +2020,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={accordionZIndex}
-                                                        onChange={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
-                                                        max={100}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={undefined}
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={accordionZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
         

@@ -12,21 +12,13 @@ import {
 import {
 	SelectControl,
 	PanelBody,
-	TextControl,
 	TabPanel,
 	BaseControl,
 	Button,
 	ButtonGroup,
 	ToggleControl,
 	TextareaControl,
-	Dropdown,
-	Dashicon,
 	RangeControl,
-	ColorPicker,
-	ColorPalette,
-	GradientPicker,
-	CircularOptionPicker,
-	ResponsiveWrapper,
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
@@ -66,20 +58,20 @@ import {
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
-import FB_ResponsiveControl from "@Components/responsive-control";
-import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Heading_Background_Color,
 		Alignment,
 		Sub_Heading_Switcher,
@@ -1938,7 +1930,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
 				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
-				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${testClassicColor};` }
+				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-heading {
 				${Heading_Color ? `color: ${Heading_Color};` : ""}
@@ -2048,6 +2040,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
 			}
 			@media only screen and (max-width: 1024px) {
+				.fb-cta-content-wrapper.${blockID} {
+				${TabletPadding ? `padding: ${TabletPadding};` : ""}
+				${TabletMargin ? `margin: ${TabletMargin};` : ""}
+				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
+				${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
 					${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
@@ -2086,6 +2084,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			}
 			@media only screen and (max-width: 767px) {
+				.fb-cta-content-wrapper.${blockID} {
+					${MobilePadding ? `padding: ${MobilePadding};` : ""}
+					${MobileMargin ? `margin: ${MobileMargin};` : ""}
+					${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
+					${BorderRadiusMobileWidth ? `border-radius: ${BorderRadiusMobileWidth} !important;` : "" }
+				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
 					${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
@@ -2141,6 +2145,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			testBackgroundImageRepeat,
 			testBackgroundImageSize,
 			testClassicColor,
+			hoverBackgroundType,
+			hoverCustomGradientSwitcher,
+			hoverCustomGradientInputValue,
+			hoverGradientColor,
+			hoverBackgroundImageUrl,
+			hoverBackgroundImagePosition,
+			hoverBackgroundImageAttachment,
+			hoverBackgroundImageRepeat,
+			hoverBackgroundImageSize,
+			hoverClassicColor,
 			globalBgHoverColor,
 			globalBorderHoverColor,
 			infoBoxTabPadding,
@@ -2322,51 +2336,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Title", "frontis-block")}
-												initialOpen={false}
+												initialOpen={true}
 											>
-												<BaseControl
-													label={__("Heading Alignment", "frontis-block")}
-													id="fb-setting-alignment"
-													className="fb-advanced-alignment"
-												>
-													<ButtonGroup className="fb-advanced-alignment-group-btn">
-														{TEXT_ALIGN.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Alignment: item.value })
-																}
-																className={`fb-advanced-alignment-single-btn ${
-																	Alignment === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
+												
+												<FB_AlignmentControl
+													label={__("Heading Alignment", "frontis-blocks")}
+													globalAlignment={Alignment}
+													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+												/>
 
-												<BaseControl
-													label={__("Heading Tag", "frontis-block")}
-													className="fb-setting-tag-wrapper"
-												>
-													<ButtonGroup className="fb-setting-tag-inner-wrapper">
-														{HEADING.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() =>
-																	setAttributes({ Heading_Tag: item.value })
-																}
-																className={`fb-setting-tag-single-btn ${
-																	Heading_Tag === item.value ? "active" : ""
-																}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
-
+												<FB_HtmlTagControl
+													label={__("Heading Tag", "frontis-blocks")}
+													globalHtmlTag={headingTag}
+													setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+												/>
+											
 												<TextareaControl
 													label={__("Heading Text", "frontis-block")}
 													value={Heading_Text}
@@ -2392,31 +2376,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												{Sub_Heading_Switcher && (
 													<>
-														<BaseControl
-															label={__("Alignment", "frontis-block")}
-															id="fb-media-alignment"
-															className="fb-advanced-alignment"
-														>
-															<ButtonGroup className="fb-advanced-alignment-group-btn">
-																{TEXT_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				descAlignment: item.value,
-																			})
-																		}
-																		className={`fb-advanced-alignment-single-btn ${
-																			descAlignment === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+														
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={descAlignment}
+															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+														/>
 
 														<TextareaControl
 															label={__("Sub Heading Text", "frontis-block")}
@@ -2447,31 +2412,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												{info_Button_Switcher && (
 													<>
-														<BaseControl
-															label={__("Alignment", "frontis-block")}
-															id="fb-media-alignment"
-															className="fb-advanced-alignment"
-														>
-															<ButtonGroup className="fb-advanced-alignment-group-btn">
-																{TEXT_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				buttonAlignment: item.value,
-																			})
-																		}
-																		className={`fb-advanced-alignment-single-btn ${
-																			buttonAlignment === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+														
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={buttonAlignment}
+															setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+														/>
 														<TextareaControl
 															label={__("Button Text", "frontis-block")}
 															value={info_Button_Text}
@@ -2612,7 +2558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{/*Heading Style*/}
 										<PanelBody
 											title={__("Title", "frontis-block")}
-											initialOpen={false}
+											initialOpen={true}
 										>
 											<FB_TypographyControl
                                                 fontFamily={headingFontFamily}
@@ -2986,7 +2932,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{btnTwoSwitcher && (
 											<PanelBody
 												title={__("Button Two", "frontis-blocks")}
-												initialOpen={true}
+												initialOpen={false}
 											>
 												<FB_TypographyControl
 													fontFamily={buttonTwoFontFamily}

@@ -82,6 +82,9 @@ const Edit = (props) => {
 		}
 	}, [ parentAttributes?.layout ] );
 
+	console.log("Parent Blocks")
+	console.log(parentBlocks);
+
 	useEffect( () => {
 		// Check if a parent of this container is one of these special blocks.
 		const attributesToUpdate = {};
@@ -147,18 +150,22 @@ const Edit = (props) => {
 				context,
 			} ) );
 		}
-	}, [ hasDynamicContent, context?.postId ] )
+	}, [ hasDynamicContent, context?.postId ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.DeviceType ), [ attributes, attributes.DeviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.deviceType ), [ attributes, attributes.deviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
+	const handleResponsive = (device) => {
+		console.log(device)
+	}
+
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{isSelected && <Inspector attributes={attributes} setAttributes={setAttributes} /> }
+			{isSelected && <Inspector { ...props } /> }
 			<Render { ...props } />
 		</>
 	);
