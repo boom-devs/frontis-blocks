@@ -2246,13 +2246,13 @@
 }
 .fb-box-shadow-wrapper .components-base-control__field .components-base-control__field .components-base-control__label {
   display: block;
-  color: #5f5f5f !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  line-height: 16px !important;
-  margin: 10px 0 !important;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
   min-height: auto;
-  text-transform: capitalize !important;
+  text-transform: capitalize;
 }
 
 .fb-box-shadow-icon-dropdown .fb-box-shadow-icon-btn {
@@ -2388,7 +2388,7 @@
   font-weight: 400;
   flex-grow: 1;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 5px;
   margin-bottom: 0;
   box-shadow: none;
   border-radius: 0;
@@ -2421,7 +2421,12 @@
   flex-wrap: nowrap;
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-setting-switcher-panel-btn .components-button {
+  font-size: 14px !important;
+  color: #555E72 !important;
   border: 1px solid transparent;
+}
+.fb-inspector-control .components-panel__body .components-button-group.fb-setting-switcher-panel-btn .components-button.active {
+  color: #0B0C0E !important;
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-btn-group-text-only {
   flex-wrap: nowrap;
