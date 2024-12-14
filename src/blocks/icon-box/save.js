@@ -37,7 +37,7 @@ export default function save({ attributes }) {
 						target={wrapperTargetUrl ? "_blank" : undefined}
 						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
 					>
-						<div className={`fb-icon-box-content-wrapper ${blockID}`}>
+						<div className={`fb-parent-wrapper fb-icon-box-content-wrapper ${blockID}`}>
 							<div
 								className={`fb-icon-box-content-wrapper-inner ${blockID}`}
 								style={{

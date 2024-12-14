@@ -247,8 +247,6 @@ export default function FBIconPicker(props) {
 				currentIcon === insertIcon && 'selected',
 			] );
 
-			console.log(svgIcon)
-
 			const actualTitle = svgIcon[currentIcon] ?.label
 				? svgIcon[currentIcon].label
 				: '';

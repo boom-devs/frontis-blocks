@@ -32,11 +32,14 @@ import {
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Range from '@Components/range';
 import FB_UrlControl from '@Components/url-control';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 
 import './editor.scss';
 
@@ -981,177 +984,179 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 	const allBlockStyle = useMemo(() => `
-				.${blockId}.fb-advanced-button-wrapper {
-                    ${buttonGlobalZIndex ? `z-index: ${buttonGlobalZIndex};` : ''}
-                    ${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
-                    ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-                    ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
-                    ${buttonGlobalBorder ? `border: ${buttonGlobalBorder};` : ''} 
-                    ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-                    ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-                    ${buttonGlobalBorderColor ? `border-color: ${buttonGlobalBorderColor};` : ''}
-                    ${buttonGlobalBoxShadowCssValue ? `box-shadow: ${buttonGlobalBoxShadowCssValue};` : ''}
-                    transition: all .3s ease-in-out;
-                    position: relative;
-                }
-                .${blockId}.fb-advanced-button-wrapper:hover {
-                    ${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
-                    ${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
-                }
-                .${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
-                    ${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
-                    ${buttonFontFamily ? `font-family: ${buttonFontFamily};` : ''}
-                    ${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
-                    ${buttonFontWeight ? `font-weight: ${buttonFontWeight};` : ''}
-                    ${buttonFontStyle ? `font-style: ${buttonFontStyle};` : ''}
-                    ${buttonTextTransform ? `text-transform: ${buttonTextTransform};` : ''}
-                    ${buttonTextDecoration ? `text-decoration: ${buttonTextDecoration};` : ''}
-                    ${buttonLetterSpacing.Desktop && buttonLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
-                    ${buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
-                    ${buttonDesktopPaddingStr ? `padding: ${buttonDesktopPaddingStr};` : ''}
-                    ${buttonDesktopMarginStr ? `margin: ${buttonDesktopMarginStr};` : ''}
-                    ${buttonBorder ? `border: ${buttonBorder};` : ''}
-                    ${buttonDesktopBorderWidthStr ? `border-width: ${buttonDesktopBorderWidthStr};` : ''}
-                    ${buttonDesktopBorderRadiusStr ? `border-radius: ${buttonDesktopBorderRadiusStr};` : ''}
-                    ${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-                    ${buttonBoxShadowCssValue ? `box-shadow: ${buttonBoxShadowCssValue};` : ''} 
-                    ${buttonWidth.Desktop && buttonWidthUnits.Desktop ? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};` : ''}
-                    display: ${buttonAlignment === 'justify' ? 'flex' : 'inline-flex'};
-                    transition: all 0.3s ease;
-                }
+		.${blockId}.fb-advanced-button-wrapper {
+			${buttonGlobalZIndex.Desktop ? `z-index: ${buttonGlobalZIndex.Desktop};` : ''}
+			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
+			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
+			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+			${buttonGlobalBorder ? `border: ${buttonGlobalBorder};` : ''} 
+			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+			${buttonGlobalBorderColor ? `border-color: ${buttonGlobalBorderColor};` : ''}
+			${buttonGlobalBoxShadowCssValue ? `box-shadow: ${buttonGlobalBoxShadowCssValue};` : ''}
+			transition: all .3s ease-in-out;
+			position: relative;
+		}
+		.${blockId}.fb-advanced-button-wrapper:hover {
+			${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
+			${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
+			${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
+			${buttonFontFamily && buttonFontFamily !== 'Default' ? `font-family: ${buttonFontFamily};` : ''}
+			${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
+			${buttonFontWeight ? `font-weight: ${buttonFontWeight};` : ''}
+			${buttonFontStyle ? `font-style: ${buttonFontStyle};` : ''}
+			${buttonTextTransform ? `text-transform: ${buttonTextTransform};` : ''}
+			${buttonTextDecoration ? `text-decoration: ${buttonTextDecoration};` : ''}
+			${buttonLetterSpacing.Desktop && buttonLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
+			${buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
+			${buttonDesktopPaddingStr ? `padding: ${buttonDesktopPaddingStr};` : ''}
+			${buttonDesktopMarginStr ? `margin: ${buttonDesktopMarginStr};` : ''}
+			${buttonBorder ? `border: ${buttonBorder};` : ''}
+			${buttonDesktopBorderWidthStr ? `border-width: ${buttonDesktopBorderWidthStr};` : ''}
+			${buttonDesktopBorderRadiusStr ? `border-radius: ${buttonDesktopBorderRadiusStr};` : ''}
+			${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
+			${buttonBoxShadowCssValue ? `box-shadow: ${buttonBoxShadowCssValue};` : ''} 
+			${buttonWidth.Desktop && buttonWidthUnits.Desktop ? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};` : ''}
+			display: ${buttonAlignment === 'justify' ? 'flex' : 'inline-flex'};
+			transition: all 0.3s ease;
+		}
 
-                .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
-                    ${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
-                    ${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
-                }
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
+			${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
+			${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
+		}
 
-                .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
-                    ${buttonColor !== undefined ? `color: ${buttonColor};` : ''}
-                }
-                .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-                    ${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
-                }
-				
-				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
-					${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
-					${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
-					${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ''}
-					${buttonIconBorder ? `border: ${buttonIconBorder};` : ''}
-					${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ''}
-					${buttonIconBorderDesktopWidth ? `border-width: ${buttonIconBorderDesktopWidth};` : ''}
-					${buttonIconBorderRadiusDesktopWidth ? `border-radius: ${buttonIconBorderRadiusDesktopWidth};` : ''}
-				}
-				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
-					${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
-					${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
-				}
-				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
-					${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
-					${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
-					${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
-				}
-				.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-					${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-				}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
+			${buttonColor !== undefined ? `color: ${buttonColor};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
+			${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
+		}
+		
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
+			${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
+			${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
+			${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ''}
+			${buttonIconBorder ? `border: ${buttonIconBorder};` : ''}
+			${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ''}
+			${buttonIconBorderDesktopWidth ? `border-width: ${buttonIconBorderDesktopWidth};` : ''}
+			${buttonIconBorderRadiusDesktopWidth ? `border-radius: ${buttonIconBorderRadiusDesktopWidth};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
+			${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
+			${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
+			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
+			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
+			${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+			${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+		}
 
-                @media only screen and (max-width: 1024px) {
-                    .${blockId}.fb-advanced-button-wrapper {
-                        ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                        ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-                        ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-                        ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
-                        ${buttonTabletPaddingStr ? `padding: ${buttonTabletPaddingStr};` : ''}
-                        ${buttonTabletMarginStr ? `margin: ${buttonTabletMarginStr};` : ''}
-                        ${buttonBorder ? `border: ${buttonBorder};` : ''}
-                        ${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-                        ${buttonTabletBorderWidthStr ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
-                        ${buttonTabletBorderRadiusStr ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
-                        ${buttonWidth.Tablet && buttonWidthUnits.Tablet ? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};` : ''}
-                        ${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
-                        ${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
-                        ${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
-                        ${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
-                        ${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-                        ${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
-                        ${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
-                        ${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper:hover {
-						${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
-						${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
-					}
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-                        ${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-                    }
+		@media only screen and (max-width: 1024px) {
+			.${blockId}.fb-advanced-button-wrapper {
+				${buttonGlobalZIndex.Tablet ? `z-index: ${buttonGlobalZIndex.Tablet};` : ''}
+				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
+				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonTabletPaddingStr ? `padding: ${buttonTabletPaddingStr};` : ''}
+				${buttonTabletMarginStr ? `margin: ${buttonTabletMarginStr};` : ''}
+				${buttonBorder ? `border: ${buttonBorder};` : ''}
+				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
+				${buttonTabletBorderWidthStr ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
+				${buttonTabletBorderRadiusStr ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
+				${buttonWidth.Tablet && buttonWidthUnits.Tablet ? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};` : ''}
+				${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
+				${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
+				${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
+				${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
+				${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
+				${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
+				${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
+				${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper:hover {
+				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
+				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+			}
 
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
-                        ${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
-                        ${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
-                        ${buttonIconBorderTabletWidth ? `border-width: ${buttonIconBorderTabletWidth};` : ''}
-                        ${buttonIconBorderRadiusTabletWidth ? `border-radius: ${buttonIconBorderRadiusTabletWidth};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
-                        ${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
-                        ${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
-                    }
-                }
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
+				${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
+				${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
+				${buttonIconBorderTabletWidth ? `border-width: ${buttonIconBorderTabletWidth};` : ''}
+				${buttonIconBorderRadiusTabletWidth ? `border-radius: ${buttonIconBorderRadiusTabletWidth};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
+				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
+				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
+			}
+		}
 
-                @media only screen and (max-width: 767px) {
-                    .${blockId}.fb-advanced-button-wrapper {
-                        ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                        ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-                        ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-                        ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
-                        ${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
-                        ${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-                        ${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
-                        ${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
-                        ${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
-                    }
-					.${blockId}.fb-advanced-button-wrapper:hover {
-						${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
-						${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
-					}
-					.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-                        ${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
-                        ${buttonMobilePaddingStr ? `padding: ${buttonMobilePaddingStr};` : ''}
-                        ${buttonMobileMarginStr ? `margin: ${buttonMobileMarginStr};` : ''}
-                        ${buttonBorder ? `border: ${buttonBorder};` : ''}
-                        ${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-                        ${buttonMobileBorderWidthStr ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
-                        ${buttonMobileBorderRadiusStr ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
-                        ${buttonWidth.Mobile && buttonWidthUnits.Mobile ? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};` : ''}
-                        ${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
-                        ${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
-                        ${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
-                        ${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
-                        ${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
-                        ${buttonIconBorderMobileWidth ? `border-width: ${buttonIconBorderMobileWidth};` : ''}
-                        ${buttonIconBorderRadiusMobileWidth ? `border-radius: ${buttonIconBorderRadiusMobileWidth};` : ''}
-                    }
-                    .${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
-                        ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
-                        ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
-                    }
-                }
+		@media only screen and (max-width: 767px) {
+			.${blockId}.fb-advanced-button-wrapper {
+				${buttonGlobalZIndex.Mobile ? `z-index: ${buttonGlobalZIndex.Mobile};` : ''}
+				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
+				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
+				${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
+				${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
+				${buttonHoverColor !== undefined ? `color: ${buttonHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
+				${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ''}
+				${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper:hover {
+				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
+				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonMobilePaddingStr ? `padding: ${buttonMobilePaddingStr};` : ''}
+				${buttonMobileMarginStr ? `margin: ${buttonMobileMarginStr};` : ''}
+				${buttonBorder ? `border: ${buttonBorder};` : ''}
+				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
+				${buttonMobileBorderWidthStr ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
+				${buttonMobileBorderRadiusStr ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
+				${buttonWidth.Mobile && buttonWidthUnits.Mobile ? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};` : ''}
+				${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
+				${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
+				${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
+				${buttonIconPosition === 'left' ? `margin-right: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
+				${buttonIconPosition === 'right' ? `margin-left: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
+				${buttonIconBorderMobileWidth ? `border-width: ${buttonIconBorderMobileWidth};` : ''}
+				${buttonIconBorderRadiusMobileWidth ? `border-radius: ${buttonIconBorderRadiusMobileWidth};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
+				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
+				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
+			}
+		}
 	`, [
 		blockId,
 		buttonGlobalZIndex,
@@ -1412,25 +1417,49 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 												setAttributes={setAttributes}
 											/>
 
-											<FB_Color
-												label={__("Color", "frontis-blocks")}
-												globalColorSwitcher={buttonColorSwitcher}
-												globalColor={buttonColor}
-												globalHoverColor={buttonHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ buttonColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ buttonColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ buttonHoverColor: value })}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={buttonColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+                                            />
 
-											<FB_Color
-												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={buttonBgColorSwitcher}
-												globalColor={buttonBgColor}
-												globalHoverColor={buttonBgHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ buttonBgColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ buttonBgColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ buttonBgHoverColor: value })}
-											/>
+                                            {buttonColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={buttonColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonColor: value })}
+                                                />
+                                            )}
+
+                                            {buttonColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={buttonHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={buttonBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+                                            />
+
+                                            {buttonBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={buttonBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
+                                                />
+                                            )}
+
+                                            {buttonBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={buttonBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+                                                />
+                                            )}
 
                                         </PanelBody>
                                         <PanelBody title="Padding and Margin" initialOpen={false}>
@@ -1473,15 +1502,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     onChange={(value) => setAttributes({ buttonBorder: value })}
                                                 />
 
-                                                <FB_Color
-                                                    label={__("Border Color", "frontis-blocks")}
-                                                    globalColorSwitcher={buttonBorderColorSwitcher}
-                                                    globalColor={buttonBorderColor}
-                                                    globalHoverColor={buttonBorderHoverColor}
-                                                    handleColorSwitcherChange={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
-                                                    handleGlobalColorChange={(value) => setAttributes({ buttonBorderColor: value })}
-                                                    handleGlobalHoverColorChange={(value) => setAttributes({ buttonBorderHoverColor: value })}
-                                                />
+
+												<FB_SwitcherControl
+													label={__("Border Color", "frontis-blocks")}
+													globalSwitcher={buttonBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+												/>
+
+												{buttonBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={buttonBorderColor}
+														setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
+													/>
+												)}
+
+												{buttonBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={buttonBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
+													/>
+												)}
+
                                                 <FB_Spacing
                                                     label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -1540,25 +1583,50 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													resetFallbackValue={25}
 												/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Icon Color", "frontis-blocks")}
-													globalColorSwitcher={buttonIconColorSwitcher}
-													globalColor={buttonIconColor}
-													globalHoverColor={buttonIconHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ buttonIconColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ buttonIconColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ buttonIconHoverColor: value })}
+													globalSwitcher={buttonIconColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonIconColorSwitcher: value })}
 												/>
 
-												<FB_Color
+												{buttonIconColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={buttonIconColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconColor: value })}
+													/>
+												)}
+
+												{buttonIconColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={buttonIconHoverColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value })}
+													/>
+												)}
+
+												<FB_SwitcherControl
 													label={__("Background Color", "frontis-blocks")}
-													globalColorSwitcher={buttonIconBgColorSwitcher}
-													globalColor={buttonIconBgColor}
-													globalHoverColor={buttonIconBgHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ buttonIconBgColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ buttonIconBgColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ buttonIconBgHoverColor: value })}
+													globalSwitcher={buttonIconBgColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonIconBgColorSwitcher: value })}
 												/>
+
+												{buttonIconBgColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={buttonIconBgColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconBgColor: value })}
+													/>
+												)}
+
+												{buttonIconBgColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={buttonIconBgHoverColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconBgHoverColor: value })}
+													/>
+												)}
+
 												<SelectControl
 													label={__("Border Style", "frontis-blocks")}
 													value={buttonIconBorder}
@@ -1566,15 +1634,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													onChange={(value) => setAttributes({ buttonIconBorder: value })}
 												/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Border Color", "frontis-blocks")}
-													globalColorSwitcher={buttonIconBorderColorSwitcher}
-													globalColor={buttonIconBorderColor}
-													globalHoverColor={buttonIconBorderHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ buttonIconBorderColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ buttonIconBorderColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ buttonIconBorderHoverColor: value })}
+													globalSwitcher={buttonIconBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonIconBorderColorSwitcher: value })}
 												/>
+
+												{buttonIconBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={buttonIconBorderColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconBorderColor: value })}
+													/>
+												)}
+
+												{buttonIconBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={buttonIconBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ buttonIconBorderHoverColor: value })}
+													/>
+												)}
 
 												<FB_Spacing 
 													label={__("Border", "frontis-blocks")}
@@ -1624,19 +1704,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={buttonGlobalZIndex}
-														onChange={(value) => setAttributes({ buttonGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={buttonGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ buttonGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -1668,18 +1752,37 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</PanelBody>
 
-												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_Color
+												<PanelBody 
+													title={__("Background Color", "frontis-blocks")}
+													initialOpen={false} 
+												>
+
+													<FB_SwitcherControl
 														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={buttonGlobalBgColorSwitcher}
-														globalColor={buttonGlobalBgColor}
-														globalHoverColor={buttonGlobalBgHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ buttonGlobalBgColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ buttonGlobalBgHoverColor: value })}
+														globalSwitcher={buttonGlobalBgColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
 													/>
+
+													{buttonGlobalBgColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={buttonGlobalBgColor}
+															setGlobalColor={(value) => setAttributes({ buttonGlobalBgColor: value })}
+														/>
+													)}
+
+													{buttonGlobalBgColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={buttonGlobalBgHoverColor}
+															setGlobalColor={(value) => setAttributes({ buttonGlobalBgHoverColor: value })}
+														/>
+													)}
 												</PanelBody>
-												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+												<PanelBody
+													title={__("Border and Shadow", "frontis-blocks")}
+													initialOpen={false}
+												>
 
 													<SelectControl
 															label={__("Border Style", "frontis-blocks")}
@@ -1688,15 +1791,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 															onChange={(value) => setAttributes({ buttonGlobalBorder: value })}
 													/>
 
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={buttonGlobalBorderColorSwitcher}
-														globalColor={buttonGlobalBorderColor}
-														globalHoverColor={buttonGlobalBorderHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ buttonGlobalBorderColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ buttonGlobalBorderColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ buttonGlobalBorderHoverColor: value })}
+														globalSwitcher={buttonGlobalBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBorderColorSwitcher: value })}
 													/>
+
+													{buttonGlobalBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={buttonGlobalBorderColor}
+															setGlobalColor={(value) => setAttributes({ buttonGlobalBorderColor: value })}
+														/>
+													)}
+
+													{buttonGlobalBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={buttonGlobalBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value })}
+														/>
+													)}
 
 													<FB_Spacing 
 														label={__("Border", "frontis-blocks")}

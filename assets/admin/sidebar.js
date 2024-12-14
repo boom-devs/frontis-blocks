@@ -2040,31 +2040,31 @@ var defaultsColors = [{
   "slug": 'primary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#0f0',
+  "color": '#399CFF',
   "slug": 'secondary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#F72585',
   "slug": 'tertiary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
-  "color": "#00f",
+  "color": "#7209B7",
   "slug": 'accent-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
-  "color": '#000',
+  "color": '#3A0CA3',
   "slug": 'text-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#4361EE',
   "slug": 'link-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#00f',
+  "color": '#4CC9F0',
   "slug": 'link-hover-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
-  "color": '#000',
+  "color": '#393E46',
   "slug": 'background-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Color", "frontis-blocks"),
@@ -2139,337 +2139,337 @@ function FrontisBlocksSidebar(props) {
     setFontfamilies = _useState20[1];
   var defaultTypos = {
     body: {
-      fontFamily: 'default',
+      fontFamily: 'Default',
       lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       lineHeightUnits: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
       fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       fontSizeUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
       letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       letterSpacingUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       }
     },
     link: {
-      fontFamily: 'default',
+      fontFamily: 'Default',
       lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       lineHeightUnits: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
       fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       fontSizeUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
       letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       letterSpacingUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       }
     },
     button: {
-      fontFamily: 'default',
+      fontFamily: 'inherit',
       lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       lineHeightUnits: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
       fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       fontSizeUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
+      fontWeight: '',
+      fontStyle: '',
+      textTransform: '',
+      textDecoration: '',
       letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
       },
       letterSpacingUnit: {
         Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
+        Tablet: 'px',
+        Mobile: 'px'
       }
     },
     heading: {
       h1: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 10,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       h2: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 50,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       h3: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       h4: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       h5: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       h6: {
-        fontFamily: "default",
+        fontFamily: "Default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
         fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
+          Tablet: 'px',
+          Mobile: 'px'
         }
       }
     }
@@ -3084,8 +3084,10 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
+  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+  , {
+    value: rangeValue[deviceType] !== undefined && rangeValue[deviceType] !== '' ? parseInt(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,
@@ -3114,6 +3116,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -3124,6 +3129,8 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     deviceHandler = _ref.deviceHandler;
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
     setDeviceType = _useDispatch.setDeviceType;
+  console.log("Test device type");
+  console.log(device);
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
@@ -3132,6 +3139,10 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    // setDeviceType('Desktop');
+    console.log("Hello world responsive");
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
@@ -6668,6 +6679,15 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   }, {
     label: 'em',
     value: 'em'
+  }, {
+    label: 'rem',
+    value: 'rem'
+  }, {
+    label: 'vh',
+    value: 'vh'
+  }, {
+    label: 'vw',
+    value: 'vw'
   }];
 
   /** State to manage dropdown visibility */

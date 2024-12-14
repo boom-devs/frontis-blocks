@@ -16,7 +16,7 @@ const FB_AlignmentControl = ({ label, globalAlignment, setGlobalAlignment }) => 
 			id="fb-setting-text-alignment"
 			className="fb-setting-text-alignment"
 		>
-			<ButtonGroup className="fb-setting-text-alignment-group-btn">
+			<ButtonGroup className="fb-setting-text-alignment-group-btn fb-btn-group-icon-only">
 				{TEXT_ALIGN.map((item) => (
 					<Button
 						key={item.value}

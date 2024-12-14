@@ -2343,7 +2343,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockId}.fb_post_grid_container {
-            ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
+            ${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ''}
             ${postGlobalDesktopPaddingWidth ? `padding: ${postGlobalDesktopPaddingWidth};` : ''}
             ${postGlobalDesktopMarginWidth ? `margin: ${postGlobalDesktopMarginWidth};` : ''} 
             ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -2633,7 +2633,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.fb_post_grid_container {
-                ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
+                ${postGlobalZIndex.Tablet ? `z-index: ${postGlobalZIndex.Tablet};` : ''}
                 ${postGlobalTabletPaddingWidth ? `padding: ${postGlobalTabletPaddingWidth};` : ''} 
                 ${postGlobalTabletMarginWidth ? `margin: ${postGlobalTabletMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -2904,7 +2904,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
             .${blockId}.fb_post_grid_container {
-                ${postGlobalZIndex ? `z-index: ${postGlobalZIndex};` : ''}
+                ${postGlobalZIndex.Mobile ? `z-index: ${postGlobalZIndex.Mobile};` : ''}
                 ${postGlobalMobilePaddingWidth ? `padding: ${postGlobalMobilePaddingWidth};` : ''} 
                 ${postGlobalMobileMarginWidth ? `margin: ${postGlobalMobileMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -5035,19 +5035,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={postGlobalZIndex}
-														onChange={(value) => setAttributes({ postGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={postGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ postGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>

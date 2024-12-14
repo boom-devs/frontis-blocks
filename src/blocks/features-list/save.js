@@ -22,7 +22,7 @@ export default function Save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-feature-wrapper">
+                <div className="fb-parent-wrapper fb-feature-wrapper">
                     <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
