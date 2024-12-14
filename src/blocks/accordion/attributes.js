@@ -381,7 +381,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    taImageAlt: {
+    expandedImageAlt: {
         type: "string",
         default: ""
     },

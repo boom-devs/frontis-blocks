@@ -1,0 +1,200 @@
+.fb-setting-typography {
+	.components-base-control__field {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		margin: 0;
+		align-items: center;
+        .components-dropdown.fb-setting-dropdown-icon-wrapper{
+            .components-button.fb-setting-dropdown-icon-btn{
+                height: auto;
+                padding: 6px;
+            }
+        }
+		.fb-setting-typography-icon-dropdown {
+			.fb-setting-typography-icon-btn {
+				margin: 0;
+				height: 28px;
+				width: 28px;
+				padding: 5px;
+				border: 1px solid #e6e7e9;
+				border-radius: 14px;
+				color: #50575e;
+				background: $white_color;
+				&:focus {
+					outline: none;
+					box-shadow: none;
+				}
+				.fb-setting-typography-icon {
+					font-size: 15px;
+					line-height: 20px;
+				}
+			}
+		}
+	}
+}
+
+.fb-setting-typography-popup {
+	padding: 0.2rem;
+	min-width: 220px;
+	.fb-setting-typography-popup-inner {
+		position: relative;
+		z-index: 99999;
+		.components-base-control__field {
+			display: flex;
+			flex-direction: column;
+			gap: 15px;
+			label {
+				font-family: $heading-font-family;
+				display: block;
+				color: $neutral-color-950 !important;
+				font-size: 12px !important;
+				font-weight: 400 !important;
+				line-height: 16px !important;
+				margin: 10px 0 !important;
+				min-height: auto;
+				text-transform: capitalize !important;
+			}
+		}
+		.fb-setting-fontsize-wrapper {
+			.fb-setting-fontsize-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.fb-setting-fontsize-label {
+					display: block;
+					color: $neutral-color-200;
+					font-size: 12px;
+					font-weight: 500;
+					line-height: 16px;
+					margin: 10px 0;
+					min-height: auto;
+					text-transform: capitalize;
+				}
+				.fb-setting-fontsize-units {
+
+					.fb-setting-fontsize-units-wrap {
+						direction: initial;
+						display: flex;
+						align-items: center;
+						.fb-setting-fontsize-units-switcher {
+							box-shadow: unset;
+							font-size: 10px;
+							padding: 0;
+							text-transform: uppercase;
+							padding-right: 5px;
+							&.active {
+								color: $primary-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		.fb-setting-letterspacing-wrapper {
+			.fb-setting-letterspacing-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.fb-setting-letterspacing-label {
+					display: block;
+					color: $neutral-color-200;
+					font-size: 12px;
+					font-weight: 500;
+					line-height: 16px;
+					margin: 10px 0;
+					min-height: auto;
+					text-transform: capitalize;
+				}
+				.fb-setting-letterspacing-units {
+					.fb-setting-letterspacing-units-wrap {
+						direction: initial;
+						display: flex;
+						align-items: center;
+						.fb-setting-letterspacing-units-switcher {
+							box-shadow: unset;
+							font-size: 10px;
+							padding: 0;
+							text-transform: uppercase;
+							padding-right: 5px;
+							&.active {
+								color: $primary-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		.fb-setting-lineheight-wrapper {
+			.fb-setting-lineheight-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.fb-setting-lineheight-label {
+					display: block;
+					color: $neutral-color-200;
+					font-size: 12px;
+					font-weight: 500;
+					line-height: 16px;
+					margin: 10px 0;
+					min-height: auto;
+					text-transform: capitalize;
+				}
+				.fb-setting-lineheight-units {
+					.fb-setting-lineheight-units-wrap {
+						direction: initial;
+						display: flex;
+						align-items: center;
+						.fb-setting-lineheight-units-switcher {
+							box-shadow: unset;
+							font-size: 10px;
+							padding: 0;
+							text-transform: uppercase;
+							padding-right: 5px;
+							&.active {
+								color: $primary-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		.components-input-control__container{
+			.components-input-control__input{
+				border: 1px solid $primary-color-300;
+				&:focus{
+					outline: none;
+				}
+			}
+			.components-select-control__input{
+				background: $neutral-color-50;
+				height: unset;
+				border-radius: 8px;
+				padding: 12px;
+				&:focus{
+					outline: none;
+				}
+			}
+			.components-input-control__backdrop{
+				border: none;
+			}
+		}
+		.components-range-control__wrapper{
+			span{
+				&:nth-child(2){
+					height: 2px;
+					background: $neutral-color-200;
+				}
+				&:nth-child(3){
+					height: 2px;
+					background: $primary-color-base;
+				}
+			}
+			.components-range-control__thumb-wrapper{
+				span{
+					background-color: $primary-color-base;
+				}
+			}
+		}
+	}
+}
