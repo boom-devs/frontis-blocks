@@ -20,6 +20,12 @@ export const variations = [
 		icon: rowIcons[ '100' ],
 		attributes: {
 			variationSelected: true,
+			deviceType: 'Desktop',
+			customWidth: {
+				Desktop: 100,
+				Tablet: 100,
+				Mobile: 100,
+			},
 		},
 		scope: [ 'block' ],
 	},
@@ -30,11 +36,22 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		isDefault: true,
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true } ],
 		],
 		scope: [ 'block' ],
 	},
@@ -45,11 +62,42 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -60,12 +108,53 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -77,12 +166,37 @@ export const variations = [
 			directionDesktop: 'row',
 			wrapDesktop: 'wrap',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 50,
+					Tablet: 50,
+					Mobile: 100,
+				}, widthSetByUser: true }
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -93,10 +207,31 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 75,
+						Tablet: 75,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -108,14 +243,75 @@ export const variations = [
 			directionDesktop: 'row',
 			wrapDesktop: 'wrap',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 33.3333333333, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 33.3333333333,
+						Tablet: 33.3333333333,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -126,11 +322,42 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 16.6666666667, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 66, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 16.6666666667, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 16.6666666667,
+						Tablet: 16.6666666667,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 66,
+						Tablet: 66,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 16.6666666667,
+						Tablet: 16.6666666667,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -141,11 +368,42 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 50,
+						Tablet: 50,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -156,10 +414,31 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 75,
+						Tablet: 75,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -170,11 +449,42 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 50,
+						Tablet: 50,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -185,11 +495,42 @@ export const variations = [
 			variationSelected: true,
 			directionDesktop: 'row',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 50,
+						Tablet: 50,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -201,12 +542,53 @@ export const variations = [
 			directionDesktop: 'row',
 			wrapDesktop: 'wrap',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 75,
+						Tablet: 75,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 25,
+						Tablet: 25,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
+			[
+				'frontis-blocks/container',
+				{
+					customWidth: {
+						Desktop: 75,
+						Tablet: 75,
+						Mobile: 100,
+					},
+					widthSetByUser: true
+				}
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -218,17 +600,47 @@ export const variations = [
 			directionDesktop: 'row',
 			wrapDesktop: 'wrap',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop'
 		},
 		innerBlocks: [
 			[
 				'frontis-blocks/container',
-				{ widthDesktop: 100, widthSetByUser: true, directionDesktop: 'row' },
+				{
+					customWidth: {
+						Desktop: 100,
+						Tablet: 100,
+						Mobile: 100,
+					},
+					widthSetByUser: true,
+					directionDesktop: 'row' },
+
 				[
-					[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
-					[ 'frontis-blocks/container', { widthDesktop: 50, widthMobile: 100, widthSetByUser: true } ],
+					[ 'frontis-blocks/container', {
+						customWidth: {
+							Desktop: 50,
+							Tablet: 50,
+							Mobile: 100,
+						},
+						widthSetByUser: true
+					} ],
+					[ 'frontis-blocks/container', {
+						customWidth: {
+							Desktop: 50,
+							Tablet: 50,
+							Mobile: 100,
+						},
+						widthSetByUser: true }
+					],
 				],
 			],
-			[ 'frontis-blocks/container', { widthDesktop: 100, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 100,
+					Tablet: 100,
+					Mobile: 100,
+				},
+				widthSetByUser: true }
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -240,12 +652,41 @@ export const variations = [
 			directionDesktop: 'row',
 			wrapDesktop: 'wrap',
 			wrapMobile: 'wrap',
+			deviceType: 'Desktop',
 		},
 		innerBlocks: [
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 75, widthMobile: 100, widthSetByUser: true } ],
-			[ 'frontis-blocks/container', { widthDesktop: 25, widthMobile: 100, widthSetByUser: true } ],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 25,
+					Tablet: 25,
+					Mobile: 100,
+				},
+				widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 75,
+					Tablet: 75,
+					Mobile: 100,
+				},
+				widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 75,
+					Tablet: 75,
+					Mobile: 100,
+				},
+				widthSetByUser: true }
+			],
+			[ 'frontis-blocks/container', {
+				customWidth: {
+					Desktop: 25,
+					Tablet: 25,
+					Mobile: 100,
+				},
+				widthSetByUser: true }
+			],
 		],
 		scope: [ 'block' ],
 	},
@@ -258,6 +699,8 @@ export const VariationPicker = ( props ) => {
 	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
 		if ( nextVariation.attributes ) {
 			setAttributes( nextVariation.attributes );
+			console.log(props)
+			setAttributes({resetFallBackCustomWidth: props.attributes.customWidth });
 		}
 
 		if ( nextVariation.innerBlocks && 'one-column' !== nextVariation.name ) {

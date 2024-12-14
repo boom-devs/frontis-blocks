@@ -280,7 +280,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeColor,
 
         blockStyle,
-        globalParagraphFontFamily, 
+        globalParagraphFontFamily,
         globalLinkFontFamily,
         globalHeading1FontFamily,
         globalHeading2FontFamily,
@@ -1428,7 +1428,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalTabletBorderRadiusWidth = `${headingGlobalBorderRadiusTablet.top}${headingGlobalBorderRadiusUnits.Tablet} ${headingGlobalBorderRadiusTablet.right}${headingGlobalBorderRadiusUnits.Tablet} ${headingGlobalBorderRadiusTablet.bottom}${headingGlobalBorderRadiusUnits.Tablet} ${headingGlobalBorderRadiusTablet.left}${headingGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${headingGlobalBorderRadiusMobile.top}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.right}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.bottom}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.left}${headingGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
-    
+
 
     // Load google font
     const loadGoogleFont = (font) => {
@@ -1482,7 +1482,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH1FontSize          = h1Typography.fontSize;
     // const globalH1FontSizeUnit      = h1Typography.fontSizeUnit;
     // const globalH1FontStyle         = h1Typography.fontStyle;
-    // const globalH1FontWeight        = h1Typography.fontWeight; 
+    // const globalH1FontWeight        = h1Typography.fontWeight;
     // const globalH1LetterSpacing     = h1Typography.letterSpacing;
     // const globalH1LetterSpacingUnit = h1Typography.letterSpacingUnit;
     // const globalH1LineHeight        = h1Typography.lineHeight;
@@ -1494,7 +1494,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH2FontSize          = h2Typography.fontSize;
     // const globalH2FontSizeUnit      = h2Typography.fontSizeUnit;
     // const globalH2FontStyle         = h2Typography.fontStyle;
-    // const globalH2FontWeight        = h2Typography.fontWeight; 
+    // const globalH2FontWeight        = h2Typography.fontWeight;
     // const globalH2LetterSpacing     = h2Typography.letterSpacing;
     // const globalH2LetterSpacingUnit = h2Typography.letterSpacingUnit;
     // const globalH2LineHeight        = h2Typography.lineHeight;
@@ -1506,7 +1506,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH3FontSize          = h3Typography.fontSize;
     // const globalH3FontSizeUnit      = h3Typography.fontSizeUnit;
     // const globalH3FontStyle         = h3Typography.fontStyle;
-    // const globalH3FontWeight        = h3Typography.fontWeight; 
+    // const globalH3FontWeight        = h3Typography.fontWeight;
     // const globalH3LetterSpacing     = h3Typography.letterSpacing;
     // const globalH3LetterSpacingUnit = h3Typography.letterSpacingUnit;
     // const globalH3LineHeight        = h3Typography.lineHeight;
@@ -1518,7 +1518,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH4FontSize          = h4Typography.fontSize;
     // const globalH4FontSizeUnit      = h4Typography.fontSizeUnit;
     // const globalH4FontStyle         = h4Typography.fontStyle;
-    // const globalH4FontWeight        = h4Typography.fontWeight; 
+    // const globalH4FontWeight        = h4Typography.fontWeight;
     // const globalH4LetterSpacing     = h4Typography.letterSpacing;
     // const globalH4LetterSpacingUnit = h4Typography.letterSpacingUnit;
     // const globalH4LineHeight        = h4Typography.lineHeight;
@@ -1530,7 +1530,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH5FontSize          = h5Typography.fontSize;
     // const globalH5FontSizeUnit      = h5Typography.fontSizeUnit;
     // const globalH5FontStyle         = h5Typography.fontStyle;
-    // const globalH5FontWeight        = h5Typography.fontWeight; 
+    // const globalH5FontWeight        = h5Typography.fontWeight;
     // const globalH5LetterSpacing     = h5Typography.letterSpacing;
     // const globalH5LetterSpacingUnit = h5Typography.letterSpacingUnit;
     // const globalH5LineHeight        = h5Typography.lineHeight;
@@ -1538,11 +1538,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // const globalH5TextTransform     = h5Typography.textTransform;
     // const globalH5TextDecoration    = h5Typography.textDecoration;
 
-    // const globalH6FontFamily        = h6Typography.fontFamily; 
+    // const globalH6FontFamily        = h6Typography.fontFamily;
     // const globalH6FontSize          = h6Typography.fontSize;
     // const globalH6FontSizeUnit      = h6Typography.fontSizeUnit;
     // const globalH6FontStyle         = h6Typography.fontStyle;
-    // const globalH6FontWeight        = h6Typography.fontWeight; 
+    // const globalH6FontWeight        = h6Typography.fontWeight;
     // const globalH6LetterSpacing     = h6Typography.letterSpacing;
     // const globalH6LetterSpacingUnit = h6Typography.letterSpacingUnit;
     // const globalH6LineHeight        = h6Typography.lineHeight;
@@ -1564,12 +1564,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     //     })
     // }, [
-    //     globalBodyFontFamily, 
-    //     globalH1FontFamily, 
-    //     globalH2FontFamily, 
-    //     globalH3FontFamily, 
-    //     globalH4FontFamily, 
-    //     globalH5FontFamily, 
+    //     globalBodyFontFamily,
+    //     globalH1FontFamily,
+    //     globalH2FontFamily,
+    //     globalH3FontFamily,
+    //     globalH4FontFamily,
+    //     globalH5FontFamily,
     //     globalH6FontFamily
     // ]);
 
@@ -1580,7 +1580,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const bodyTypography = typographySettings.body;
 
     let globalBodyStyles = {};
-    
+
     if (bodyTypography && Object.keys(bodyTypography).length > 0) {
         globalBodyStyles = {
             fontFamily: bodyTypography.fontFamily,
@@ -1597,7 +1597,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const linkTypography = typographySettings.link;
 
     let globalLinkStyles = {};
-    
+
     if (linkTypography && Object.keys(linkTypography).length > 0) {
         globalLinkStyles = {
             fontFamily: linkTypography.fontFamily,
@@ -1609,7 +1609,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             letterSpacing: `${linkTypography.letterSpacing.Desktop}${linkTypography.letterSpacingUnit.Desktop}`,
             lineHeight: `${linkTypography.lineHeight.Desktop}${linkTypography.lineHeightUnits.Desktop}`
         };
-    }    
+    }
 
     const headingTypography = typographySettings.heading;
 
@@ -1626,90 +1626,90 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 lineHeight: `${headingTypography[headingLevel].lineHeight.Desktop}${headingTypography[headingLevel].lineHeightUnits.Desktop}`
             };
         }
-    
+
         return {};
     };
 
     const headingLevels = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
-    useEffect(() => {
-        setAttributes({
-            globalParagraphFontFamily: globalBodyStyles.fontFamily,
-            globalLinkFontFamily: globalLinkStyles.fontFamily,
-            globalHeading1FontFamily: globalHeadingStyles('h1').fontFamily,
-            globalHeading2FontFamily: globalHeadingStyles('h2').fontFamily,
-            globalHeading3FontFamily: globalHeadingStyles('h3').fontFamily,
-            globalHeading4FontFamily: globalHeadingStyles('h4').fontFamily,
-            globalHeading5FontFamily: globalHeadingStyles('h5').fontFamily,
-            globalHeading6FontFamily: globalHeadingStyles('h6').fontFamily
-        });
-    }, [
-        globalBodyStyles.fontFamily, 
-        globalLinkStyles.fontFamily,
-        globalHeadingStyles('h1').fontFamily, 
-        globalHeadingStyles('h2').fontFamily, 
-        globalHeadingStyles('h3').fontFamily, 
-        globalHeadingStyles('h4').fontFamily, 
-        globalHeadingStyles('h5').fontFamily, 
-        globalHeadingStyles('h6').fontFamily
-    ]);
+    // useEffect(() => {
+    //     // setAttributes({
+    //     //     globalParagraphFontFamily: globalBodyStyles.fontFamily,
+    //     //     globalLinkFontFamily: globalLinkStyles.fontFamily,
+    //     //     globalHeading1FontFamily: globalHeadingStyles('h1').fontFamily,
+    //     //     globalHeading2FontFamily: globalHeadingStyles('h2').fontFamily,
+    //     //     globalHeading3FontFamily: globalHeadingStyles('h3').fontFamily,
+    //     //     globalHeading4FontFamily: globalHeadingStyles('h4').fontFamily,
+    //     //     globalHeading5FontFamily: globalHeadingStyles('h5').fontFamily,
+    //     //     globalHeading6FontFamily: globalHeadingStyles('h6').fontFamily
+    //     // });
+    // }, [
+    //     globalBodyStyles.fontFamily,
+    //     globalLinkStyles.fontFamily,
+    //     globalHeadingStyles('h1').fontFamily,
+    //     globalHeadingStyles('h2').fontFamily,
+    //     globalHeadingStyles('h3').fontFamily,
+    //     globalHeadingStyles('h4').fontFamily,
+    //     globalHeadingStyles('h5').fontFamily,
+    //     globalHeadingStyles('h6').fontFamily
+    // ]);
 
 
-    const globalBlockStyle = useMemo(() => `
-        .fb-parent-wrapper p {
-            ${globalBodyStyles.fontFamily ? `font-family: ${globalBodyStyles.fontFamily};` : ''}
-            ${globalBodyStyles.fontSize ? `font-size: ${globalBodyStyles.fontSize};` : ''}
-            ${globalBodyStyles.fontWeight ? `font-weight: ${globalBodyStyles.fontWeight};` : ''}
-            ${globalBodyStyles.fontStyle ? `font-style: ${globalBodyStyles.fontStyle};` : ''}
-            ${globalBodyStyles.textTransform ? `text-transform: ${globalBodyStyles.textTransform};` : ''}
-            ${globalBodyStyles.textDecoration ? `text-decoration: ${globalBodyStyles.textDecoration};` : ''}
-            ${globalBodyStyles.letterSpacing ? `letter-spacing: ${globalBodyStyles.letterSpacing};` : ''}
-            ${globalBodyStyles.lineHeight ? `line-height: ${globalBodyStyles.lineHeight};` : ''}
-        }
-
-        .fb-parent-wrapper a {
-            ${globalLinkStyles.fontFamily ? `font-family: ${globalLinkStyles.fontFamily};` : ''}
-            ${globalLinkStyles.fontSize ? `font-size: ${globalLinkStyles.fontSize};` : ''}
-            ${globalLinkStyles.fontWeight ? `font-weight: ${globalLinkStyles.fontWeight};` : ''}
-            ${globalLinkStyles.fontStyle ? `font-style: ${globalLinkStyles.fontStyle};` : ''}
-            ${globalLinkStyles.textTransform ? `text-transform: ${globalLinkStyles.textTransform};` : ''}
-            ${globalLinkStyles.textDecoration ? `text-decoration: ${globalLinkStyles.textDecoration};` : ''}
-            ${globalLinkStyles.letterSpacing ? `letter-spacing: ${globalLinkStyles.letterSpacing};` : ''}
-            ${globalLinkStyles.lineHeight ? `line-height: ${globalLinkStyles.lineHeight};` : ''}
-        }
-
-        ${headingLevels.map((level) => `
-            .fb-parent-wrapper ${level} {
-                ${globalHeadingStyles(level).fontFamily ? `font-family: ${globalHeadingStyles(level).fontFamily};` : ''}
-                ${globalHeadingStyles(level).fontSize ? `font-size: ${globalHeadingStyles(level).fontSize};` : ''}
-                ${globalHeadingStyles(level).fontWeight ? `font-weight: ${globalHeadingStyles(level).fontWeight};` : ''}
-                ${globalHeadingStyles(level).fontStyle ? `font-style: ${globalHeadingStyles(level).fontStyle};` : ''}
-                ${globalHeadingStyles(level).textTransform ? `text-transform: ${globalHeadingStyles(level).textTransform};` : ''}
-                ${globalHeadingStyles(level).textDecoration ? `text-decoration: ${globalHeadingStyles(level).textDecoration};` : ''}
-                ${globalHeadingStyles(level).letterSpacing ? `letter-spacing: ${globalHeadingStyles(level).letterSpacing};` : ''}
-                ${globalHeadingStyles(level).lineHeight ? `line-height: ${globalHeadingStyles(level).lineHeight};` : ''}
-            }
-        `).join('')}
-    `, [
-        globalBodyStyles.fontFamily,
-        globalBodyStyles.fontSize,
-        globalBodyStyles.fontWeight,
-        globalBodyStyles.fontStyle,
-        globalBodyStyles.textTransform,
-        globalBodyStyles.textDecoration,
-        globalBodyStyles.letterSpacing,
-        globalBodyStyles.lineHeight,
-        ...headingLevels.map((level) => [
-            globalHeadingStyles(level).fontFamily,
-            globalHeadingStyles(level).fontSize,
-            globalHeadingStyles(level).fontWeight,
-            globalHeadingStyles(level).fontStyle,
-            globalHeadingStyles(level).textTransform,
-            globalHeadingStyles(level).textDecoration,
-            globalHeadingStyles(level).letterSpacing,
-            globalHeadingStyles(level).lineHeight
-        ]).flat()
-    ]);
+    // const globalBlockStyle = useMemo(() => `
+    //     .fb-parent-wrapper p {
+    //         ${globalBodyStyles.fontFamily ? `font-family: ${globalBodyStyles.fontFamily};` : ''}
+    //         ${globalBodyStyles.fontSize ? `font-size: ${globalBodyStyles.fontSize};` : ''}
+    //         ${globalBodyStyles.fontWeight ? `font-weight: ${globalBodyStyles.fontWeight};` : ''}
+    //         ${globalBodyStyles.fontStyle ? `font-style: ${globalBodyStyles.fontStyle};` : ''}
+    //         ${globalBodyStyles.textTransform ? `text-transform: ${globalBodyStyles.textTransform};` : ''}
+    //         ${globalBodyStyles.textDecoration ? `text-decoration: ${globalBodyStyles.textDecoration};` : ''}
+    //         ${globalBodyStyles.letterSpacing ? `letter-spacing: ${globalBodyStyles.letterSpacing};` : ''}
+    //         ${globalBodyStyles.lineHeight ? `line-height: ${globalBodyStyles.lineHeight};` : ''}
+    //     }
+	//
+    //     .fb-parent-wrapper a {
+    //         ${globalLinkStyles.fontFamily ? `font-family: ${globalLinkStyles.fontFamily};` : ''}
+    //         ${globalLinkStyles.fontSize ? `font-size: ${globalLinkStyles.fontSize};` : ''}
+    //         ${globalLinkStyles.fontWeight ? `font-weight: ${globalLinkStyles.fontWeight};` : ''}
+    //         ${globalLinkStyles.fontStyle ? `font-style: ${globalLinkStyles.fontStyle};` : ''}
+    //         ${globalLinkStyles.textTransform ? `text-transform: ${globalLinkStyles.textTransform};` : ''}
+    //         ${globalLinkStyles.textDecoration ? `text-decoration: ${globalLinkStyles.textDecoration};` : ''}
+    //         ${globalLinkStyles.letterSpacing ? `letter-spacing: ${globalLinkStyles.letterSpacing};` : ''}
+    //         ${globalLinkStyles.lineHeight ? `line-height: ${globalLinkStyles.lineHeight};` : ''}
+    //     }
+	//
+    //     ${headingLevels.map((level) => `
+    //         .fb-parent-wrapper ${level} {
+    //             ${globalHeadingStyles(level).fontFamily ? `font-family: ${globalHeadingStyles(level).fontFamily};` : ''}
+    //             ${globalHeadingStyles(level).fontSize ? `font-size: ${globalHeadingStyles(level).fontSize};` : ''}
+    //             ${globalHeadingStyles(level).fontWeight ? `font-weight: ${globalHeadingStyles(level).fontWeight};` : ''}
+    //             ${globalHeadingStyles(level).fontStyle ? `font-style: ${globalHeadingStyles(level).fontStyle};` : ''}
+    //             ${globalHeadingStyles(level).textTransform ? `text-transform: ${globalHeadingStyles(level).textTransform};` : ''}
+    //             ${globalHeadingStyles(level).textDecoration ? `text-decoration: ${globalHeadingStyles(level).textDecoration};` : ''}
+    //             ${globalHeadingStyles(level).letterSpacing ? `letter-spacing: ${globalHeadingStyles(level).letterSpacing};` : ''}
+    //             ${globalHeadingStyles(level).lineHeight ? `line-height: ${globalHeadingStyles(level).lineHeight};` : ''}
+    //         }
+    //     `).join('')}
+    // `, [
+    //     globalBodyStyles.fontFamily,
+    //     globalBodyStyles.fontSize,
+    //     globalBodyStyles.fontWeight,
+    //     globalBodyStyles.fontStyle,
+    //     globalBodyStyles.textTransform,
+    //     globalBodyStyles.textDecoration,
+    //     globalBodyStyles.letterSpacing,
+    //     globalBodyStyles.lineHeight,
+    //     ...headingLevels.map((level) => [
+    //         globalHeadingStyles(level).fontFamily,
+    //         globalHeadingStyles(level).fontSize,
+    //         globalHeadingStyles(level).fontWeight,
+    //         globalHeadingStyles(level).fontStyle,
+    //         globalHeadingStyles(level).textTransform,
+    //         globalHeadingStyles(level).textDecoration,
+    //         globalHeadingStyles(level).letterSpacing,
+    //         globalHeadingStyles(level).lineHeight
+    //     ]).flat()
+    // ]);
 
 
     const allBlockStyle = useMemo(() => `
@@ -2107,11 +2107,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     ]);
 
     useEffect(() => {
-    setAttributes({blockStyle: `${allBlockStyle + globalBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, globalBlockStyle]);
+    setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle]);
 
 
-    const editorStyle = allBlockStyle + globalBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -2408,7 +2408,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 />
                                             )}
 
-                                            
+
                                             <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
                                                 globalSwitcher={headingBgColorSwitcher}
@@ -3152,9 +3152,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</PanelBody>
 
-												<PanelBody 
+												<PanelBody
                                                     title={__("Background Color", "frontis-blocks")}
-                                                    initialOpen={false} 
+                                                    initialOpen={false}
                                                 >
                                                     <FB_SwitcherControl
                                                         label={__("Background Color", "frontis-blocks")}

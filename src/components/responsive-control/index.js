@@ -17,9 +17,6 @@ const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 		wrapper.classList.toggle('fb-device-switchers-open');
 	}
 
-	useEffect(() => {
-		// setDeviceType('Desktop');
-	}, [])
 	return (
 		<>
 			<div className="fb-setting-device-label-wrapper">
