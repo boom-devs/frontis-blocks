@@ -4061,7 +4061,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDateColor,
         postDateHoverColor,
 
-
         postGlobalZIndex,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
