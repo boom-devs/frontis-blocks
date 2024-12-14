@@ -13,6 +13,6 @@ registerBlockType(metadata.name, {
 	icon: FB_Block_Icons.container,
 	attributes,
 	variations,
-	edit: Edit,
+	edit: ( props ) => <Edit { ...props } />,
 	save,
 });

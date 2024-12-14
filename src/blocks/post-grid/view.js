@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (event.target.closest('.fb_load_more')) {
 			const parentElement = event.target.closest(".wp-block-frontis-blocks-post-grid");
 			document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
-			document.querySelector('.fb_post_grid_container .fb_load_more .load_more_button_icon_wrap svg').style.display = 'none';
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
@@ -53,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postAuthorAvatarSwitcher = parentElement.getAttribute("data-post-author-avatar-switcher");
 				const postImageSize = parentElement.getAttribute("data-post-image-size");
 
+				const showLoadMoreSwitcher = parentElement.getAttribute("data-show-load-more-switcher");
+				const loadMoreText = parentElement.getAttribute("data-load-more-text");
+				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
+				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -82,10 +86,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
 
 				filterPost.postImageSize = postImageSize ? postImageSize : 'full';
+				
+				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
+
+				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
+				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
+				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign);
 			}
 		}
 	});
@@ -102,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -131,6 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.postAuthorAvatarSwitcher = postAuthorAvatarSwitcher ? postAuthorAvatarSwitcher : false;
 		filterPost.postImageSize = postImageSize ? postImageSize : 'full';
 
+		filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
+
+		filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
+		filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
+		filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
+
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
 
@@ -147,8 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			.then(posts => {
 				const postGridElement = document.getElementById(blockId);
 				const postListElement = postGridElement.querySelector('.fb_post_grid_container'); 
-				// const loadMoreLoader = postGridElement.querySelector('.fb_load_more_loader');
-				// loadMoreLoader.classList.remove('active');
 
 				// Remove any existing Load More button to avoid duplication
 				const existingLoadMore = postListElement.querySelector('.fb_load_more_wrapper');
@@ -165,27 +179,27 @@ document.addEventListener('DOMContentLoaded', function() {
 				}
 
 				currentPage = currentPage + 1;
-
-				// Re-attach the Load More button if more pages are available
-				// if (currentPage < posts.data.total_pages) {
-				// 	let loadMoreButton = document.createElement('div');
-				// 	loadMoreButton.className = 'fb_load_more';
-				// 	loadMoreButton.textContent = 'Load more';
-				// 	postListElement.appendChild(loadMoreButton);
-				// }
-
-				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
-				if (loadMore) {
-					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
-					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
+				
+				const loadMoreWrapper = postListElement.querySelector('.fb_load_more');
+				const loadMoreIconWrapper = postListElement.querySelector('.load_more_button_icon');
+				if (loadMoreWrapper) {
+					loadMoreWrapper.innerHTML = `
+						${loadMoreText}
+						<span class="load_more_button_icon_wrap">
+							${loadMoreIconAlign === 'icon' ? loadMoreIconWrapper?.outerHTML || '' : ''}
+							<div class="fb_load_more_outter_wrap">
+								<span class="fb_load_more_loader"></span>
+							</div>
+						</span>
+					`;
 				}
+				
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
 				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
 				if (loadMore) {
-					loadMore.querySelector('.load_more_button_icon_wrap svg').style.display = 'block';
-					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
+					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'block';
 				}
 			});
 	}
@@ -193,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size')); 
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size'), block.getAttribute('data-show-load-more-switcher'), block.getAttribute('data-load-more-text'), block.getAttribute('data-load-more-icon'), block.getAttribute('data-load-more-icon-align')); 
 	});
 
 

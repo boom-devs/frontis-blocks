@@ -36,3 +36,5 @@ function wm_frontis_blocks(){
 
 //Kick of the plugin.
 wm_frontis_blocks();
+
+// var_dump("Hello world");
