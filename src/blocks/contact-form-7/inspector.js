@@ -2038,7 +2038,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormSuccessDesktopBorderWidth ? `border-width: ${contactFormSuccessDesktopBorderWidth};` : ""}
             ${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
             ${contactFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${contactFormSuccessDesktopBorderRadiusWidth};` : ""}
-			box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 			padding: 10px 15px;
 		}
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
