@@ -610,7 +610,7 @@ const attributes = {
     /** Start Title */
     FeatureTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     FeatureTitleFontSize: {
 		type: 'object',
@@ -694,7 +694,7 @@ const attributes = {
     /** Start Description */
     FeatureDescFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     FeatureDescFontSize: {
         type: 'object',
@@ -747,9 +747,9 @@ const attributes = {
     FeatureDescLineHeight: {
         type: 'object',
         default: {
-            Desktop: 'inherit',
-            Tablet: 'inherit',
-            Mobile: 'inherit'
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     FeatureDescLineHeightUnits: {

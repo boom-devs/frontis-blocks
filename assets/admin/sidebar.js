@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./admin/icons/index.js":
@@ -8,6 +7,7 @@
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   All: () => (/* binding */ All),
@@ -400,6 +400,7 @@ var ThemeFontIcon = function ThemeFontIcon() {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -480,6 +481,7 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -617,6 +619,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -754,6 +757,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -901,6 +905,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1736,6 +1741,7 @@ var TypographySettings = function TypographySettings(props) {
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getGlobalStyle: () => (/* binding */ getGlobalStyle),
@@ -1861,6 +1867,7 @@ var getGlobalStyle = /*#__PURE__*/function () {
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getFbLocalStorage: () => (/* binding */ getFbLocalStorage),
@@ -1986,6 +1993,7 @@ var toastSuccess = function toastSuccess(msg) {
   \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2983,6 +2991,7 @@ function FrontisBlocksSidebar(props) {
   \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2994,6 +3003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
+/* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Components_unit_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/unit-control */ "./src/components/unit-control/index.js");
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -3048,7 +3058,7 @@ var FB_Range = function FB_Range(_ref) {
     className: "fb-setting-spacing-inner-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-label-container"
-  }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, /*#__PURE__*/React.createElement((_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3___default()), {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
     device: deviceType,
     deviceHandler: function deviceHandler(newDevice) {
@@ -3071,9 +3081,7 @@ var FB_Range = function FB_Range(_ref) {
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
     d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
-    stroke: "#555E72",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    stroke: "#555E72"
   })))), isRangeUnit && /*#__PURE__*/React.createElement(_Components_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
@@ -3095,89 +3103,9 @@ var FB_Range = function FB_Range(_ref) {
 /*!****************************************************!*\
   !*** ./src/components/responsive-control/index.js ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
-  var labelText = _ref.labelText,
-    device = _ref.device,
-    deviceHandler = _ref.deviceHandler;
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
-    setDeviceType = _useDispatch.setDeviceType;
-  var handleDevice = function handleDevice(deviceName) {
-    deviceHandler(deviceName);
-    setDeviceType(deviceName);
-  };
-  var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
-    var wrapper = e.currentTarget;
-    wrapper.classList.toggle('fb-device-switchers-open');
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-device-label-wrapper"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "fb-setting-label-text"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(labelText, 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
-    className: "fb-responsive-device-wrapper",
-    onClick: toggleDeviceVisibility
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-responsive-device-inner-wrapper"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-device-switcher fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
-    onClick: function onClick() {
-      return handleDevice('Desktop');
-    }
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    "clip-rule": "evenodd",
-    d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
-    fill: "#555E72"
-  }))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
-    onClick: function onClick() {
-      return handleDevice('Tablet');
-    }
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "6",
-    height: "7",
-    viewBox: "0 0 6 7"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-  }))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-device-switcher fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
-    onClick: function onClick() {
-      return handleDevice('Mobile');
-    }
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "4",
-    height: "7",
-    viewBox: "0 0 4 7"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-  })))))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_ResponsiveControl);
+throw new Error("Module build failed (from ./node_modules/@wordpress/scripts/node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\src\\components\\responsive-control\\index.js: Unexpected token (28:1)\n\n\u001b[0m \u001b[90m 26 |\u001b[39m \t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33mbutton\u001b[39m className\u001b[33m=\u001b[39m{\u001b[32m`fb-device-switcher fb-responsive-desktop-device ${device === 'Desktop' ? 'active' : ''}`\u001b[39m} onClick\u001b[33m=\u001b[39m{() \u001b[33m=>\u001b[39m handleDevice(\u001b[32m'Desktop'\u001b[39m)}\u001b[33m>\u001b[39m\n \u001b[90m 27 |\u001b[39m \t\t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33msvg\u001b[39m xmlns\u001b[33m=\u001b[39m\u001b[32m\"http://www.w3.org/2000/svg\"\u001b[39m width\u001b[33m=\u001b[39m\u001b[32m\"16\"\u001b[39m height\u001b[33m=\u001b[39m\u001b[32m\"16\"\u001b[39m viewBox\u001b[33m=\u001b[39m\u001b[32m\"0 0 16 16\"\u001b[39m fill\u001b[33m=\u001b[39m\u001b[32m\"none\"\u001b[39m\u001b[33m>\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 28 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 29 |\u001b[39m \t\t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33mpath\u001b[39m clip\u001b[33m-\u001b[39mrule\u001b[33m=\u001b[39m\u001b[32m\"evenodd\"\u001b[39m d\u001b[33m=\u001b[39m\u001b[32m\"M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z\"\u001b[39m fill\u001b[33m=\u001b[39m\u001b[32m\"#555E72\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 30 |\u001b[39m \u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 31 |\u001b[39m \t\t\t\t\t\t\t\u001b[33m<\u001b[39m\u001b[33mpath\u001b[39m d\u001b[33m=\u001b[39m\u001b[32m\"M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z\"\u001b[39m fill\u001b[33m=\u001b[39m\u001b[32m\"#555E72\"\u001b[39m\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n    at constructor (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at JSXParserMixin.raise (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at JSXParserMixin.unexpected (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at JSXParserMixin.jsxParseIdentifier (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6623:12)\n    at JSXParserMixin.jsxParseNamespacedName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6630:23)\n    at JSXParserMixin.jsxParseElementName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6639:21)\n    at JSXParserMixin.jsxParseOpeningElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6715:22)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6740:33)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6752:32)\n    at JSXParserMixin.jsxParseElement (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6803:17)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6813:19)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11951:12)\n    at JSXParserMixin.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)\n    at JSXParserMixin.parseParenAndDistinguishExpression (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11210:28)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10863:23)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6818:20)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at JSXParserMixin.parseExpressionBase (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10333:23)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10329:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at JSXParserMixin.parseExpression (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10329:17)\n    at JSXParserMixin.parseReturnStatement (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12636:28)\n    at JSXParserMixin.parseStatementContent (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12288:21)\n    at JSXParserMixin.parseStatementLike (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at JSXParserMixin.parseStatementListItem (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12237:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12810:61)\n    at JSXParserMixin.parseBlockBody (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at JSXParserMixin.parseBlock (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12791:10)\n    at JSXParserMixin.parseFunctionBody (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11634:24)\n    at JSXParserMixin.parseArrowExpression (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11609:10)\n    at JSXParserMixin.parseParenAndDistinguishExpression (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11222:12)");
 
 /***/ }),
 
@@ -3187,6 +3115,7 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
   \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BORDER_STYLES: () => (/* binding */ BORDER_STYLES),
@@ -6460,6 +6389,7 @@ var FONT_FAMILYS = [{
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -6562,8 +6492,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         fill: "none"
       }, /*#__PURE__*/React.createElement("path", {
         d: "M2.66699 14.666H13.3337",
-        stroke: "#1C274C",
-        "stroke-linecap": "round"
+        stroke: "#1C274C"
       }), /*#__PURE__*/React.createElement("path", {
         d: "M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291",
         stroke: "#1C274C"
@@ -6649,6 +6578,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -6731,6 +6661,7 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BORDER_STYLES: () => (/* binding */ BORDER_STYLES),
@@ -10004,6 +9935,7 @@ var FONT_FAMILYS = [{
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -10016,18 +9948,7 @@ __webpack_require__.r(__webpack_exports__);
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/components/responsive-control/editor.lazy.scss":
-/*!************************************************************!*\
-  !*** ./src/components/responsive-control/editor.lazy.scss ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -10040,6 +9961,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -10052,6 +9974,7 @@ __webpack_require__.r(__webpack_exports__);
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -10064,6 +9987,7 @@ __webpack_require__.r(__webpack_exports__);
   \************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["React"];
 
 /***/ }),
@@ -10074,6 +9998,7 @@ module.exports = window["React"];
   \*************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["blockEditor"];
 
 /***/ }),
@@ -10084,6 +10009,7 @@ module.exports = window["wp"]["blockEditor"];
   \************************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["components"];
 
 /***/ }),
@@ -10094,6 +10020,7 @@ module.exports = window["wp"]["components"];
   \******************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["data"];
 
 /***/ }),
@@ -10104,6 +10031,7 @@ module.exports = window["wp"]["data"];
   \********************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["editor"];
 
 /***/ }),
@@ -10114,6 +10042,7 @@ module.exports = window["wp"]["editor"];
   \*********************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["element"];
 
 /***/ }),
@@ -10124,6 +10053,7 @@ module.exports = window["wp"]["element"];
   \******************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["i18n"];
 
 /***/ }),
@@ -10134,6 +10064,7 @@ module.exports = window["wp"]["i18n"];
   \*********************************/
 /***/ ((module) => {
 
+"use strict";
 module.exports = window["wp"]["plugins"];
 
 /***/ }),
@@ -10144,6 +10075,7 @@ module.exports = window["wp"]["plugins"];
   \*****************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   clsx: () => (/* binding */ clsx),
@@ -10159,6 +10091,7 @@ function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else i
   \*****************************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Bounce: () => (/* binding */ H),
@@ -10251,8 +10184,9 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
+"use strict";
 /*!********************************!*\
   !*** ./admin/sidebar/index.js ***!
   \********************************/
