@@ -2024,6 +2024,19 @@ const attributes = {
 		default: '',
 	},
 
+
+
+	/** Start Load More */
+	loadMoreSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	loadMoreText: {
+		type: "string",
+		default: "Load More"
+	},
+	/** End Load More */
+
 };
 
 export default attributes;

@@ -2012,28 +2012,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const lightboxIconHandler = (IconName) => {
 		setAttributes({lightboxIcon: IconName})
 	}
-
-    // const imageSpanStyle = GalleryItems.map(item => `
-    //         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-    //             grid-column: span ${item.column.desktop};
-    //             grid-row: span ${item.row.desktop};
-    //         }
-    //         @media only screen and (max-width: 1024px) {
-    //             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-    //                 grid-column: span ${item.column.tablet};
-    //                 grid-row: span ${item.row.tablet};
-    //             }
-    //         }
-    //         @media only screen and (max-width: 767px) {
-    //             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-    //                 grid-column: span ${item.column.mobile};
-    //                 grid-row: span ${item.row.mobile};
-    //             }
-    //         }
-
-    //     `)
     
-        // console.log(imageSpanStyle)
 
 
     const fbGalleryStyle = useMemo(() => `

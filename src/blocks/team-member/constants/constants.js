@@ -39,6 +39,40 @@ export const separator_TYPE = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 ];
 
+export const CONTENT_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+    { label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const SOCIAL_ICON_TYPE = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const SOCIAL_ICON_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const SOCIAL_ICON_BUTTON = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Button", "frontis-block"), value: "button" },
+];
+
+export const SOCIAL_ICON_ANIMATION = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Circle", "frontis-block"), value: "circle" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
 export const separator_POSITION = [
 	{ label: __("Top", "frontis-block"), value: "top" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
