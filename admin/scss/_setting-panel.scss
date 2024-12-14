@@ -124,7 +124,7 @@
 					font-weight: 400;
 					flex-grow: 1;
 					justify-content: center;
-                    padding: 10px;
+                    padding: 10px 5px;
                     margin-bottom: 0;
                     box-shadow: none;
                     border-radius: 0;
@@ -164,7 +164,12 @@
 			display: flex;
 			flex-wrap: nowrap;
 			.components-button{
+				font-size: 14px !important;
+				color: $neutral-color-600 !important;
 				border: 1px solid transparent;
+				&.active{
+					color: $neutral-color-950 !important;
+				}
 			}
 		}
 		.components-button-group.fb-btn-group-text-only{
@@ -279,6 +284,9 @@
 				}
 			}
 		}
+		.fb-image-upload-btn{
+			margin-bottom: 10px;
+		}
     }
 	
     
@@ -371,6 +379,7 @@
 				}
 				.fb-setting-color-hex{
 					text-transform: uppercase;
+					font-weight: 400;
 				}
 				.fb-setting-color-display{
 					width: 24px;
