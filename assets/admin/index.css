@@ -2008,6 +2008,9 @@
   flex-direction: column;
   gap: 15px;
 }
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field .components-flex {
+  gap: 0;
+}
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field label {
   font-family: "Plus Jakarta Sans", sans-serif;
   display: block;
@@ -2119,7 +2122,7 @@
   background: #F7F7F7;
   height: unset;
   border-radius: 8px;
-  padding: 12px;
+  padding: 6px 12px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -2606,6 +2609,7 @@
 }
 .fb-setting-color-setting-wrapper .components-base-control__field .fb-setting-color-setting-icon-dropdown .fb-setting-color-setting-icon-btn .fb-setting-color-hex {
   text-transform: uppercase;
+  font-weight: 400;
 }
 .fb-setting-color-setting-wrapper .components-base-control__field .fb-setting-color-setting-icon-dropdown .fb-setting-color-setting-icon-btn .fb-setting-color-display {
   width: 24px;
