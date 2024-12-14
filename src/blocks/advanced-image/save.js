@@ -52,7 +52,7 @@ export default function save({ attributes }) {
 		<>
 			
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-advanced-image-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`}>
 					<div
 						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
 						<div className="fb-advanced-image-inner">

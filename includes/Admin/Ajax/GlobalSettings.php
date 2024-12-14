@@ -25,12 +25,16 @@ class GlobalSettings extends AjaxBase {
             'update_custom_colors',
             'update_custom_gradient_colors',
             'update_typography',
+            'update_custom_typography',
+            'update_fontfamilies',
             'get_global_colors',
             'get_gradient_colors',
             'get_custom_colors',
             'get_custom_gradient_colors',
             'get_typography',
-            'get_custom_css'
+            'get_custom_typography',
+            'get_custom_css',
+            'get_fontfamilies'
         ];
 
         $this->init_ajax_events($events);
@@ -56,6 +60,14 @@ class GlobalSettings extends AjaxBase {
         $this->handle_option_update('typography', 'array');
     }
 
+ 	public function update_custom_typography() {
+        $this->handle_option_update('custom_typography', 'array');
+    }
+
+	public function update_fontfamilies() {
+        $this->handle_option_update('fontfamilies', 'array');
+    }
+
     public function get_global_colors() {
         $global_colors = get_option('fb_global_colors');
         wp_send_json_success($global_colors);
@@ -63,28 +75,69 @@ class GlobalSettings extends AjaxBase {
 
     public function get_gradient_colors() {
         $global_gradient_colors = get_option('fb_gradient_colors');
-        wp_send_json_success($global_gradient_colors);
+
+		if($global_gradient_color) {
+			wp_send_json_success($global_gradient_colors);
+		}
+
+		wp_send_json_error('Gradient color not found.');
     }
 
     public function get_custom_colors() {
         $custom_colors = get_option('fb_custom_colors');
-        wp_send_json_success($custom_colors);
+        if($custom_colors) {
+			wp_send_json_success($custom_colors);
+        }
+
+		wp_send_json_error('Custom color not found.');
+
     }
 
     public function get_custom_gradient_colors() {
         $custom_gradient_colors = get_option('fb_custom_gradient_colors');
-        wp_send_json_success($custom_gradient_colors);
+        if($custom_gradient_colors) {
+			wp_send_json_success($custom_gradient_colors);
+        }
+
+		wp_send_json_error('Custom gradient color not found.');
     }
 
     public function get_typography() {
         $typography = get_option('fb_typography');
-        wp_send_json_success($typography);
+        if($typography) {
+			wp_send_json_success($typography);
+		}
+
+		wp_send_json_error('Typography not found.');
+    }
+
+	public function get_custom_typography() {
+        $typography = get_option('fb_custom_typography');
+        if($typography) {
+			wp_send_json_success($typography);
+		}
+
+		wp_send_json_error('Typography not found.');
+    }
+
+	public function get_fontfamilies() {
+        $font_families = get_option('fb_fontfamilies');
+        if($font_families) {
+			wp_send_json_success($font_families);
+		}
+
+		wp_send_json_error('Font families not found.');
     }
 
     public function get_custom_css() {
-        return get_option('fb_custom_css');
-    }
+        $custom_css = get_option('fb_custom_css');
 
+        if($custom_css) {
+			wp_send_json_success($custom_css);
+		}
+
+		wp_send_json_error('Custom css not found.');
+    }
 
     /**
      * handle_option_update
@@ -137,10 +190,11 @@ class GlobalSettings extends AjaxBase {
 				'option_name' => $option_name,
 				'data' => $global_colors
 			);
+
 			wp_send_json_success($data);
 		}
 
-		wp_send_json_error('Global colors not found.');
+		wp_send_json_error('Update failed.');
     }
     /**
      * sanitize_option_value

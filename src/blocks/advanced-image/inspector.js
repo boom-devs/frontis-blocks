@@ -22,12 +22,12 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_UrlControl from "@Components/url-control";
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-	HEADING,
-	TEXT_ALIGN,
 } from "../advanced-image/constants/constants";
 import "./editor.scss";
 
@@ -970,7 +970,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
 			transition: all .3s ease-in-out;
 			${headingDesktopPadding ? `padding: ${headingDesktopPadding};` : ""}
-			${headingDesktopMargin ? `padding: ${headingDesktopMargin};` : ""}
+			${headingDesktopMargin ? `margin: ${headingDesktopMargin};` : ""}
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
 		}
@@ -994,7 +994,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 			${headingTabletPadding ? `padding: ${headingTabletPadding};` : ""}
-			${headingTabletMargin ? `padding: ${headingTabletMargin};` : ""}
+			${headingTabletMargin ? `margin: ${headingTabletMargin};` : ""}
 		}
 		}
 		@media all and (max-width: 767px) {
@@ -1018,7 +1018,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 			${headingMobilePadding ? `padding: ${headingMobilePadding};` : ""}
-			${headingMobileMargin ? `padding: ${headingMobileMargin};` : ""}
+			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
 		}
 	`,
@@ -1099,6 +1099,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingLineHeight,
 			headingLineHeightUnits,
 			HeadingBorder,
+			headingDesktopPadding,
+			headingTabletPadding,
+			headingMobilePadding,
+			headingDesktopMargin,
+			headingTabletMargin,
+			headingMobileMargin,
 		],
 	);
 
@@ -1145,7 +1151,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("General", "frontis-blocks")}
-												initialOpen={true}
+												initialOpen={false}
 											>
 											{/** Image Uploader **/}
 											<BaseControl
@@ -1322,31 +1328,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												{displayCaption && (
 													<>
-														<BaseControl
-															label={__("Caption Alignment", "frontis-blocks")}
-															id="fb-setting-text-alignment"
-															className="fb-setting-text-alignment"
-														>
-															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-																{TEXT_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				captionAlignment: item.value,
-																			})
-																		}
-																		className={`fb-setting-text-alignment-single-btn ${
-																			captionAlignment === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={captionAlignment}
+															setGlobalAlignment={(value) => setAttributes({ captionAlignment: value })}
+														/>
 													</>
 												)}
 												{/* Title */}
@@ -1368,27 +1354,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															className="fb-advance-title"
 															placeholder={__("Enter Title", "frontis-blocks")}
 														/>
-														<BaseControl
+														
+														<FB_HtmlTagControl
 															label={__("Title Tag", "frontis-blocks")}
-															id="fb-setting-text-alignment"
-															className="fb-setting-text-alignment"
-														>
-															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-																{HEADING.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({ titleTag: item.value })
-																		}
-																		className={`fb-setting-text-alignment-single-btn ${
-																			titleTag === item.value ? "active" : ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-														</BaseControl>
+															globalHtmlTag={titleTag}
+															setGlobalHtmlTag={(value) => setAttributes({ titleTag: value })}
+														/>
 														<SelectControl
 															label={__("Title Position", "frontis-blocks")}
 															value={titlePosition || "center"}
@@ -1521,7 +1492,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{displayTitle && (
 											<PanelBody
 											title={__("Title", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<FB_TypographyControl
                                                 fontFamily={headingFontFamily}
@@ -1615,7 +1586,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{/*	Image Style*/}
 										<PanelBody
 											title={__("Image", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 										<FB_Range
 											min={1}
@@ -1744,7 +1715,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{showOverlay && (
 										<PanelBody
 											title={__("Overlay", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 										
 									<FB_BackgroundColorControl
@@ -1798,7 +1769,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-setting-z-index-wrapper">
 												<PanelBody
 													title={__("Z Index", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 													className="fb-setting-z-index-header"
 												>
 													<RangeControl

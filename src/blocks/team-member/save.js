@@ -30,12 +30,12 @@ export default function save({ attributes }) {
 		<>
 			
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-team-member-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image-overlay`}></div>
-							{attributes.teamMemberImageMediaUrl && (
-								<img src={attributes.teamMemberImageMediaUrl}/>
+							{attributes.teamMemberImageUrl && (
+								<img src={attributes.teamMemberImageUrl}/>
 							)}
 						</div>
 						<div className={`fb-team-member-content-wrapper`}>
@@ -59,7 +59,7 @@ export default function save({ attributes }) {
 									<div className={`fb-team-member-social-profile`}>
 										{teamMemberSocialItems.map(item => (
 											<a href={item.link} key={item.id} className="fb-team-member-social-icon">
-												{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
+												{/* {item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''} */}
 											</a>
 										))}
 									</div>

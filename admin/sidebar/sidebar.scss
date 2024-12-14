@@ -189,6 +189,83 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					}
 				}
 			}
+
+
+			.fb-global-typography-element-content {
+				padding-top: 10px;
+
+				.fb-typography-settings {
+					padding: 0 12px;
+					margin-top: 10px;
+
+					.font_preview_box {
+						padding: 20px;
+						text-align: center;
+						background: $neutral-color-100;
+						margin-bottom: 30px;
+					}
+					.components-input-control__container{
+						.components-input-control__input{
+							border: 1px solid $primary-color-300;
+							margin-left: 10px;
+							&:focus{
+								outline: none;
+							}
+						}
+						.components-select-control__input{
+							background: $neutral-color-50;
+							height: unset;
+							border-radius: 8px;
+							padding: 12px;
+							&:focus{
+								outline: none;
+							}
+						}
+						.components-input-control__backdrop{
+							border: none;
+						}
+					}
+					.components-range-control__wrapper{
+						span{
+							&:nth-child(2){
+								height: 2px;
+								background: $neutral-color-200;
+							}
+							&:nth-child(3){
+								height: 2px;
+								background: $primary-color-base;
+							}
+						}
+						.components-range-control__thumb-wrapper{
+							span{
+								background-color: $primary-color-base;
+							}
+						}
+						
+					}
+					.fb-setting-spacing-label-container{
+						margin: 14px 0;
+					}
+					.components-input-control__label{
+						margin: 10px 0;
+					}
+				}
+
+				.components-base-control {
+					width: auto;
+					margin-left: 0;
+
+					.fb-global-typography-headings-wrap {
+						max-width: 200px;
+						margin: 0 auto;
+						margin-top: 12px;
+					}
+				}
+
+				&:empty {
+					display: none;
+				}
+			}
 		}
 	}
 }
@@ -220,6 +297,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 .fb-custom-color-item .actions {
 	cursor: pointer;
+	margin-right: 0;
+	margin-left: auto;
 
 	.dashicons-trash:before {
 		color: $error-color;
@@ -284,4 +363,95 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 		}
 	}
+}
+
+.fb-gradient-color-popup {
+	.fb-gradient-color-popup-content {
+		padding: 10px;
+	}
+
+	.components-circular-option-picker {
+		.components-circular-option-picker__swatches {
+			display: none !important;
+		}
+	}
+}
+
+.fb-global-typo-elements-wrap {
+	// background: $neutral-color-50;
+
+	.components-navigator-back-button {
+		&:focus {
+			outline: none !important;
+			box-shadow: none !important;
+		}
+	}
+
+	.fb-custom-element {
+		border-bottom: 1px solid $neutral-color-100;
+		padding: 14px 12px;
+
+		button {
+			padding: 0;
+			width: 100%;
+			gap: 10px;
+			font-size: 14px;
+			font-weight: 400;
+			color: $neutral-color-700;
+			height: auto;
+
+			&:focus {
+				outline: none !important;
+			box-shadow: none !important;
+			}
+
+			.font_preview {
+				background: $neutral-color-100;
+				padding: 6px;
+				border-radius: 4px;
+				font-size: 12px;
+				min-height: 26px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		&.fb-global-typography-element {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+
+	.components-navigator-screen {
+		//padding-top: 15px;
+	}
+
+	.fb-typography-settings {
+		.components-base-control {
+			width: auto !important;
+			margin-left: 0 !important;
+		}
+	}
+
+	.fb-delete-custom-typo {
+		margin-left: auto;
+		margin-right: 0;
+		width: 20px !important;
+
+		.dashicons-trash {
+			&:before {
+				color: $error-color;
+			}
+		}
+	}
+}
+
+svg#fb-global-panel-icon {
+	height: 25px;
 }

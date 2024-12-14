@@ -32,7 +32,6 @@ const CustomIcons = () => {
 				keys: keys,
 			},
 			success: function(response) {
-				console.log(response)
 				if (response.success) {
 					// setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
 				} else {

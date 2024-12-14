@@ -72,6 +72,9 @@ class Blocks
 						'all_cats' => Helper::get_related_taxonomy(),
 						'all_authors' => Helper::get_all_authors_with_posts(),
 						'image_sizes' => Helper::get_image_sizes(),
+						'desktop_breakpoint' => 1200,
+						'tablet_breakpoint' => 1024,
+						'mobile_breakpoint' => 768
 					];
 
 					$localize_array = array_merge($localize_array, $admin_localize_array);

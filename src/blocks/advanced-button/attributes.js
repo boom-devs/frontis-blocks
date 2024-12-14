@@ -41,7 +41,7 @@ const attributes = {
 	},
     buttonFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     buttonFontSize: {
 		type: 'object',
@@ -478,7 +478,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	buttonGlobalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
     },
 	/** Start Padding */
 	buttonGlobalPaddingUnits: {

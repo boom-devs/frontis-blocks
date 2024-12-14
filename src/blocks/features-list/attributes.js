@@ -983,7 +983,12 @@ const attributes = {
 
     /** Start Global Setting */
 	FeatureGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	/** Start Padding */
 	FeatureGlobalPaddingUnits: {

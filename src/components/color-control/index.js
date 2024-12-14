@@ -27,8 +27,8 @@ const FB_ColorControl = ({
 
     useEffect(() => {
         // Retrieve colors from local storage
-        const storedColors = localStorage.getItem('fb_update_global_colors');
-        const storedCustomColors = localStorage.getItem('fb_update_custom_colors');
+        const storedColors = localStorage.getItem('fb_global_colors');
+        const storedCustomColors = localStorage.getItem('fb_custom_colors');
         let combinedColors = [];
         if (storedColors) {
             try {
@@ -66,7 +66,17 @@ const FB_ColorControl = ({
                             aria-expanded={isOpen}
                             className="fb-setting-color-setting-icon-btn"
                         >
-                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className="fb-setting-color-hex">
+                                    {globalColor || '#000'} 
+                                </span>
+                                <div
+                                className="fb-setting-color-display"
+                                style={{
+                                    backgroundColor: globalColor || '#000',
+                                }}
+                                />
+                            </div>
                         </Button>
                     )}
                     renderContent={() => (

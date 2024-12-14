@@ -107,6 +107,12 @@ export const INFO_ICON_POSITION = [
 	
 ];
 
+export const INFO_ICON_VERTICAL_POSITION = [
+    { label: __("Top", "frontis-block"), value: "v-top" },
+    { label: __("Middle", "frontis-block"), value: "v-middle" },
+	{ label: __("Bottom", "frontis-block"), value: "v-bottom" },
+];
+
 export const BG_TYPE = [
     { label: __("Image", "frontis-block"), value: "image" },
     { label: __("Color", "frontis-block"), value: "color" },

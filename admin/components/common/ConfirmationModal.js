@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, title, message }) => {
-//   console.log('ConfirmationModal rendered, isOpen:', isOpen);
   
   if (!isOpen) return null;
 

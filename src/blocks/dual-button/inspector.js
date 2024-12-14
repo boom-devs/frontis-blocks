@@ -1424,7 +1424,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
 			${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : ''}
             width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
-            height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
+        	height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
 			border-width: ${connectorTabletBorderWidth};
 			border-radius: ${connectorTabletBorderRadius};
         }
@@ -1465,9 +1465,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-width: ${connectorMobileBorderWidth};
 			border-radius: ${connectorMobileBorderRadius};
         }
-		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-            width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
-        }
+		
 	}
 	`,
 		[
@@ -1677,24 +1675,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															className="fb-setting-text-alignment"
 														>
 															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-																{ICON_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				buttonIconAlign: item.value,
-																			})
-																		}
-																		className={`fb-setting-text-alignment-single-btn ${
-																			buttonIconAlign === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
+															{ICON_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			buttonIconAlign: item.value,
+																		})
+																	}
+																	className={`fb-setting-text-alignment-single-btn ${
+																		buttonIconAlign === item.value
+																			? "active"
+																			: ""
+																	}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+														
 															{(buttonIconAlign === "icon-text" ||
 																buttonIconAlign === "icon-only") && (
 																<FBIconPicker
@@ -1720,7 +1719,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-dual-button-connenctor-wrapper">
 												<PanelBody
 													title={__("Connector", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 												>
 													<ToggleControl
 														label={__("Show Connector", "frontis-block")}
@@ -1745,7 +1744,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-dual-button-two-wrapper">
 												<PanelBody
 													title={__("Button Two", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 												>
 													<TextControl
 														label={__("Text", "frontis-blocks")}
@@ -1864,7 +1863,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										<PanelBody
 											title={__("Buttons", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<FB_Range
 													min={0}
@@ -2408,6 +2407,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														step={1}
 														allowReset
 														resetFallbackValue={""}
+														className="default-range"
 													/>
 												</PanelBody>
 
