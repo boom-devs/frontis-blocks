@@ -12,32 +12,22 @@ class GenerateGlobalTypography {
 		self::enqueue_fonts();
 	}
 
-	public static function generate_fonts_array($fonts) {
-		$fontFamilies = array();
-
-		foreach ($fonts as $key => $value) {
-			if (is_array($value)) {
-				// If the value is an array, recursively process it
-				self::generate_fonts_array($value, $fontFamilies);
-			} else {
-				// If it's a string, add it to the font families array
-				$fontFamilies[$value] = $value;
-			}
-		}
-
-		return $fontFamilies;
-	}
-
-	private static function generate_fonts() {
-		// Extract font families into an array
-        $fonts = [];
-        foreach ($data as $style) {
-            if (!empty($style['fontFamily'])) {
-                $fonts[$style['fontFamily']] = $style['fontFamily'];
-            }
-        }
-        return array_unique($fonts);
-	}
+// 	private static function generate_fonts($data) {
+// 		// Extract font families into an array
+// 		$fonts = [];
+// 		foreach ($data as $style) {
+// 			if (!empty($style['fontFamily']) && $style !== 'heading') {
+// 				$fonts[$style['fontFamily']] = $style['fontFamily'];
+// 			} else {
+// 				foreach($style as $single_heading) {
+// 					if(isset($single_heading['fontFamily']) && !empty(isset($single_heading['fontFamily'])) ) {
+// 						$fonts[$single_heading['fontFamily']] = $single_heading['fontFamily'];
+// 					}
+// 				}
+// 			}
+// 		}
+// 		return array_unique($fonts);
+// 	}
 
 	private static function generate_css_file($data, $devices) {
 		$css = '';
@@ -200,6 +190,8 @@ class GenerateGlobalTypography {
 				$css_file_name = 'frontis-global-typography.css';
 				$css_file = $css_dir . $css_file_name;
 				file_put_contents( $css_file, $css_content );
+
+				update_option('fb_global_typo_css', $css_content);
 			}
 		}
 	}

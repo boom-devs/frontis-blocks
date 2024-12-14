@@ -6,10 +6,6 @@ import {useEffect} from "@wordpress/element";
 
 const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	const { setDeviceType } = useDispatch(editorStore);
-
-	console.log("Test device type")
-	console.log(device)
-
 	const handleDevice = (deviceName) => {
 		deviceHandler(deviceName);
 		setDeviceType(deviceName);
