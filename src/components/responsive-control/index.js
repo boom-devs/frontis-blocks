@@ -6,7 +6,6 @@ import {useEffect} from "@wordpress/element";
 
 const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	const { setDeviceType } = useDispatch(editorStore);
-
 	const handleDevice = (deviceName) => {
 		deviceHandler(deviceName);
 		setDeviceType(deviceName);
@@ -17,6 +16,10 @@ const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 		wrapper.classList.toggle('fb-device-switchers-open');
 	}
 
+	useEffect(() => {
+		// setDeviceType('Desktop');
+		console.log("Hello world responsive")
+	}, [])
 	return (
 		<>
 			<div className="fb-setting-device-label-wrapper">
