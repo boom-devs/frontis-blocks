@@ -151,6 +151,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: #E1E3E8;
   margin-bottom: 30px;
 }
+
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input {
+  border: 1px solid #93C4F5;
+  margin-left: 10px;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
   outline: none;
 }
@@ -158,6 +163,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: #F7F7F7;
   height: unset;
   padding: 6px 12px;
+  border-radius: 8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input:focus {
   outline: none;
