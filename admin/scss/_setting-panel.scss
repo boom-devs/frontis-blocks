@@ -205,7 +205,7 @@
 			height: unset !important;
 			padding: 5px;
 		}
-		.fb-feature-wrapper{
+		
 			.dnd-items-wrapper{
 				li.sortable-item{
 					.sortable-header{
@@ -228,14 +228,17 @@
 					}
 				}
 			}
-			.components-button.is-primary{
-				font-weight: 500;
-				background: $primary-color-base;
-				color: $white-color;
-				padding: 10px 16px;
-				border-radius: 8px;
+			.fb-feature-wrapper{
+				.components-button.is-primary{
+					font-weight: 500;
+					background: $primary-color-base;
+					color: $white-color;
+					padding: 10px 16px;
+					border-radius: 8px;
+				}
 			}
-		}   
+			
+		  
 		.components-range-control{
 			.components-range-control__root {
 				position: relative;

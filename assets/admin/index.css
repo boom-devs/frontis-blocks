@@ -2464,7 +2464,7 @@
   height: unset !important;
   padding: 5px;
 }
-.fb-inspector-control .components-panel__body .fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header {
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2473,10 +2473,10 @@
   border: none;
   border-radius: 8px;
 }
-.fb-inspector-control .components-panel__body .fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort, .fb-inspector-control .components-panel__body .fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete {
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort, .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete {
   border: none;
 }
-.fb-inspector-control .components-panel__body .fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button, .fb-inspector-control .components-panel__body .fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button {
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button, .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button {
   background: none;
   margin-bottom: 0;
   padding: 0;

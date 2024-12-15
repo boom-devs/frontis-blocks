@@ -82,7 +82,7 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 	return (
 	<>
 		<FB_Spacing
-			label={ 'Border Radius' }
+			label={ 'Border Radius'}
 			deviceType={deviceType}
 			spacingUnitsHandler={counterItemBorderRadiusUnitsHandler}
 			spacingUnits={counterItemBorderRadiusUnits}
@@ -93,7 +93,6 @@ export default function CounterItemBorderRadiusControl ({ attributes, setAttribu
 			spacingCombineBtn={counterItemBorderRadiusLink}
 			spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
 		/>
-
 	</>
 	);
 };
