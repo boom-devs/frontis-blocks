@@ -1374,7 +1374,7 @@ const attributes = {
 	},
 	priceFeatureIconColor: {
 		type: "string",
-		default: ""
+		default: "#6A758E"
 	},
 	priceFeatureIconHoverColor: {
 		type: "string",

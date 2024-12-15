@@ -2465,21 +2465,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																					stroke="#4D4D4D"
 																					stroke-width="1.5"
 																					stroke-linecap="round"
-																					stroke-linejoin="round"
 																				></path>
 																				<path
 																					d="M15 9L9 15"
 																					stroke="#4D4D4D"
 																					stroke-width="1.5"
 																					stroke-linecap="round"
-																					stroke-linejoin="round"
 																				></path>
 																				<path
 																					d="M9 9L15 15"
 																					stroke="#4D4D4D"
 																					stroke-width="1.5"
 																					stroke-linecap="round"
-																					stroke-linejoin="round"
 																				></path>
 																			</svg>
 																		</button>
