@@ -1749,6 +1749,12 @@
 }
 .fb-setting-device-label-wrapper p.fb-setting-label-text {
   flex: 1;
+  color: #0B0C0E;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: capitalize !important;
 }
 
 .fb-responsive-device-wrapper {
@@ -2325,6 +2331,10 @@
 .fb-inspector-control .components-panel__body .components-panel__body-title:hover {
   background: none;
 }
+.fb-inspector-control .components-panel__body .components-panel__body-title .components-button {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+}
 .fb-inspector-control .components-panel__body .components-button {
   color: #0B0C0E;
   border-radius: 6px;
@@ -2341,7 +2351,7 @@
   color: #0B0C0E;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.4;
   margin: 14px 0 10px 0;
   min-height: auto;
