@@ -2508,6 +2508,9 @@
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__number {
   margin-right: -8px;
 }
+.fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__number .components-input-control__container {
+  width: 100%;
+}
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__wrapper span:nth-child(2) {
   height: 2px;
   background: #C3C8D2;
@@ -2538,6 +2541,9 @@
 }
 .fb-inspector-control .components-panel__body .fb-setting-spacing-container .components-range-control__root .components-range-control__number {
   margin-right: 0;
+}
+.fb-inspector-control .components-panel__body .fb-setting-spacing-container .components-range-control__root .components-range-control__number .components-input-control__container {
+  width: 100%;
 }
 .fb-inspector-control .components-panel__body .fb-image-upload-btn {
   margin-bottom: 10px;
