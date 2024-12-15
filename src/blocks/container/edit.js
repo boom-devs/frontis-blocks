@@ -82,9 +82,6 @@ const Edit = (props) => {
 		}
 	}, [ parentAttributes?.layout ] );
 
-	console.log("Parent Blocks")
-	console.log(parentBlocks);
-
 	useEffect( () => {
 		// Check if a parent of this container is one of these special blocks.
 		const attributesToUpdate = {};
