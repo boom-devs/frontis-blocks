@@ -863,6 +863,11 @@ const attributes = {
         default: ""
     },
 
+
+	teamMemberImageOverlaySwitcher: {
+		type: "boolean",
+		default: false
+	},
 	teamMemberImageBGColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -1393,6 +1398,46 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	teamMemberIconsMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberIconsDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsTabMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsMobileMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	
 	teamMemberIconsBorderUnits : {
 		type: 'object',
@@ -1593,6 +1638,46 @@ const attributes = {
 		},
 	},
 	socialIconBtnPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	socialIconBtnMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialIconBtnDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnTabMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnMobileMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnMarginLink : {
 		type : "boolean",
 		default: true
 	},
