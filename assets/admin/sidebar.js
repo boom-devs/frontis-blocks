@@ -1400,7 +1400,6 @@ var TypographySettings = function TypographySettings(props) {
     }();
     handleUpdateSettings();
   }, [isAfterSave]);
-  console.log(fontFamilies);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -3079,10 +3078,8 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
-  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
-  , {
-    value: rangeValue[deviceType] !== undefined && rangeValue[deviceType] !== '' ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,
@@ -3124,6 +3121,8 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     deviceHandler = _ref.deviceHandler;
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
     setDeviceType = _useDispatch.setDeviceType;
+  console.log("Test device type");
+  console.log(device);
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
@@ -3134,6 +3133,7 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     // setDeviceType('Desktop');
+    console.log("Hello world responsive");
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
