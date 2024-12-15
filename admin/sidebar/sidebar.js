@@ -106,11 +106,7 @@ function FrontisBlocksSidebar(props) {
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
 	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
-	const [typography, setTypography] = useState({});
-	const [customTypography, setCustomTypography] = useState({});
-	const [fontfamilies, setFontfamilies] = useState({})
-
-	const defaultTypos = {
+	const [typography, setTypography] = useState({
 		body: {
 			fontFamily: 'Default',
 			lineHeight: {
@@ -446,7 +442,9 @@ function FrontisBlocksSidebar(props) {
 				}
 			}
 		}
-	};
+	});
+	const [customTypography, setCustomTypography] = useState({});
+	const [fontfamilies, setFontfamilies] = useState({})
 
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
@@ -549,8 +547,7 @@ function FrontisBlocksSidebar(props) {
 						if(localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_typography');
 							if(!res.success) {
-								setTypography(defaultTypos);
-								localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+								localStorage.setItem('fb_typography', JSON.stringify(typography));
 							} else {
 								setTypography(res.data);
 								localStorage.setItem('fb_typography', JSON.stringify(res.data));
@@ -783,7 +780,7 @@ function FrontisBlocksSidebar(props) {
 														onClick={() => setNewCustomColorFn()}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
 														</svg>
 													</span>
 													</Button>
@@ -830,7 +827,7 @@ function FrontisBlocksSidebar(props) {
 														])}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
 														</svg>
 													</span>
 													</Button>
