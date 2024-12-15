@@ -106,11 +106,7 @@ function FrontisBlocksSidebar(props) {
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
 	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
-	const [typography, setTypography] = useState({});
-	const [customTypography, setCustomTypography] = useState({});
-	const [fontfamilies, setFontfamilies] = useState({})
-
-	const defaultTypos = {
+	const [typography, setTypography] = useState({
 		body: {
 			fontFamily: 'Default',
 			lineHeight: {
@@ -446,7 +442,9 @@ function FrontisBlocksSidebar(props) {
 				}
 			}
 		}
-	};
+	});
+	const [customTypography, setCustomTypography] = useState({});
+	const [fontfamilies, setFontfamilies] = useState({})
 
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
@@ -549,8 +547,7 @@ function FrontisBlocksSidebar(props) {
 						if(localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_typography');
 							if(!res.success) {
-								setTypography(defaultTypos);
-								localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+								localStorage.setItem('fb_typography', JSON.stringify(typography));
 							} else {
 								setTypography(res.data);
 								localStorage.setItem('fb_typography', JSON.stringify(res.data));
