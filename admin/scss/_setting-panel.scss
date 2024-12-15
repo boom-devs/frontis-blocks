@@ -249,6 +249,9 @@
 				position: relative;
 				.components-range-control__number{
 					margin-right: -8px;
+					.components-input-control__container{
+						width: 100%;
+					}
 				}
 				.components-range-control__wrapper{
 					span{
@@ -289,6 +292,9 @@
 				position: relative;
 				.components-range-control__number{
 					margin-right: 0;
+					.components-input-control__container{
+						width: 100%;
+					}
 				}
 			}
 		}
