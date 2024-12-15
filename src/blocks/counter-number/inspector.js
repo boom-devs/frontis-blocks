@@ -33,10 +33,10 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_TypographyControl from '@Components/typography-control';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import CounterIconControl from "@Blocks/counter-number/style-control/counter-icon-control";
-import CounterItemBgColorControl from "@Blocks/counter-number/style-control/counter-item-bg-color-control";
-import CounterItemBorderTypeControl from "@Blocks/counter-number/style-control/counter-item-border-type-control";
 import CounterItemBorderRadiusControl from "@Blocks/counter-number/style-control/counter-item-border-radius-control";
 import CounterNumberTypographyControl from "@Blocks/counter-number/style-control/counter-number-typograpy-control";
 import CounterNumberMarginControl from "@Blocks/counter-number/style-control/counter-number-margin-control";
@@ -58,7 +58,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		counterItemSize,
 		counterItemSizeUnits,
-		// Border Type
+
+		// Item Border Type
 		counterItemBorder,
 		counterItemBorderColor,
 		counterItemBackgroundColor,
@@ -68,14 +69,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterItemBorderTypeTablet,
 		counterItemBorderTypeMobile,
 		counterItemBorderTypeLink,
+        counterItemBorderBorder,
 
-		// Border Radius
+		// Item Border Radius
 		counterItemBorderRadiusUnits,
 		counterItemBorderRadiusDesktop,
 		counterItemBorderRadiusTablet,
 		counterItemBorderRadiusMobile,
 		counterItemBorderRadiusLink,
 
+        // Item Background Control
 		counterItemBgColorSwitcher,
 		counterItemBgColor,
 		counterItemBgHoverColor,
@@ -115,11 +118,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterNumberMarginMobile,
 		counterNumberMarginLink,
 
-
-		counterNumberTitleFontColorSwitcher,
-		counterNumberTitleFontColor,
-		counterNumberTitleFontHoverColor,
-
 		counterNumberTitleFontFamily,
 		counterNumberTitleFontSize,
 		counterNumberTitleFontSizeUnits,
@@ -131,6 +129,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterNumberTitleLetterSpacingUnits,
 		counterNumberTitleLineHeight,
 		counterNumberTitleLineHeightUnits,
+
+        counterNumberTitleFontColorSwitcher,
+		counterNumberTitleFontColor,
+		counterNumberTitleFontHoverColor,
 
 		counterNumberTitleMarginUnits,
 		counterNumberTitleMarginDesktop,
@@ -249,6 +251,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
+    /** Counter Item Border Radius **/
+    const handleItemBorderRadiusUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( counterItemBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						counterItemBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						counterItemBorderRadiusTab: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						counterItemBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {counterItemBorderRadiusDesktop: {...counterItemBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {counterItemBorderRadiusTab: {...counterItemBorderRadiusTab, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {counterItemBorderRadiusMobile: {...counterItemBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const counterItemBorderRadiusCombineBtnHandler = () => {
+		setAttributes( {counterItemBorderRadiusLink: !counterItemBorderRadiusLink} );
+	}
+
+	const counterItemBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			counterItemBorderRadiusUnits: {
+				...counterItemBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
     const handleSpacingUnitHandlerFn = ( event, position ) => {
 		const value = event.target.value;
 		if ( counterItemBorderTypeLink ) {
@@ -302,7 +372,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 	}
-	const spacingCombineBtnHandlerFn = () => {
+	const counterItemBorderCombineBtnHandler = () => {
 		setAttributes( {counterItemBorderTypeLink: !counterItemBorderTypeLink} );
 	}
 
@@ -315,6 +385,148 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 	
+    /** Counter Number Margin**/
+    const handleCounterNumberMarginUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( counterNumberMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						counterNumberMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						counterNumberMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						counterNumberMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {counterNumberMarginDesktop: {...counterNumberMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {counterNumberMarginTablet: {...counterNumberMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {counterNumberMarginMobile: {...counterNumberMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const CounterNumberMarginCombineBtnHandler = () => {
+		setAttributes( {counterNumberMarginLink: !counterNumberMarginLink} );
+	}
+
+	const counterNumberMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			counterNumberMarginUnits: {
+				...counterNumberMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+    const counterNumberDesktopMargin = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits.Desktop}`;
+    const counterNumberTabletMargin = `${counterNumberMarginTablet.top}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.right}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.bottom}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.left}${counterNumberMarginUnits.Tablet}`;
+    const counterNumberMobileMargin = `${counterNumberMarginMobile.top}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.right}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.left}${counterNumberMarginUnits.Mobile}`;
+
+    const handleCounterNumberTitleMarginUnitHandler = ( event, position ) => {
+        const value = event.target.value;
+        if ( counterNumberTitleMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        counterNumberTitleMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        counterNumberTitleMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        counterNumberTitleMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {counterNumberTitleMarginDesktop: {...counterNumberTitleMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {counterNumberTitleMarginTablet: {...counterNumberTitleMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {counterNumberTitleMarginMobile: {...counterNumberTitleMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    
+    }
+    const counterNumberTitleMarginCombineBtnHandler = () => {
+        setAttributes( {counterNumberTitleMarginLink: !counterNumberTitleMarginLink} );
+    }
+    
+    const counterNumberTitleMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            counterNumberTitleMarginUnits: {
+                ...counterNumberTitleMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const counterNumberTitleDesktopMargin = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits.Desktop} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits.Desktop} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits.Desktop} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits.Desktop}`;
+    const counterNumberTitleTabletMargin = `${counterNumberTitleMarginTablet.top}${counterNumberTitleMarginUnits.Tablet} ${counterNumberTitleMarginTablet.right}${counterNumberTitleMarginUnits.Tablet} ${counterNumberTitleMarginTablet.bottom}${counterNumberTitleMarginUnits.Tablet} ${counterNumberTitleMarginTablet.left}${counterNumberTitleMarginUnits.Tablet}`;
+    const counterNumberTitleMobileMargin = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits.Mobile} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits.Mobile} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits.Mobile} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits.Mobile}`;
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
@@ -661,6 +873,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterItemSize[deviceType] ? `width: ${counterItemSize[deviceType]}${counterItemSizeUnits[deviceType]};` : ''}
         ${counterItemSize[deviceType] ? `height: ${counterItemSize[deviceType]}${counterItemSizeUnits[deviceType]};` : ''}
         ${counterItemBorder ? `border: ${counterItemBorder};` : ''}
+        ${counterItemBorder ? `border-width: ${counterItemBorder};` : ''}
         ${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
@@ -933,7 +1146,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
+                                                label={__("Background Color", "frontis-blocks")}
                                                 globalSwitcher={counterItemBgColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ counterItemBgColorSwitcher: value })}
                                             />
@@ -961,6 +1174,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ counterItemBorder: value })}
                                             />
                                     
+                                            <FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={counterItemBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ counterItemBgColorSwitcher: value })}
+                                            />
+
+                                            {counterItemBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={counterItemBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterItemBgColor: value })}
+                                                />
+                                            )}
+
+                                            {counterItemBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={counterItemBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterItemBgHoverColor: value })}
+                                                />
+                                            )}
+
                                             <FB_Spacing
                                                 label={ 'Border' }
                                                 deviceType={deviceType}
@@ -971,13 +1206,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingMobile={counterItemBorderTypeMobile}
                                                 handleSpacingUnitHandler={handleSpacingUnitHandlerFn}
                                                 spacingCombineBtn={counterItemBorderTypeLink}
-                                                spacingCombineBtnHandler={spacingCombineBtnHandlerFn} setAttributes={setAttributes}
+                                                spacingCombineBtnHandler={counterItemBorderCombineBtnHandler} 
+                                                setAttributes={setAttributes}
                                             />
+
 											<CounterItemBorderRadiusControl
 												attributes={attributes}
 												setAttributes={setAttributes}
 												clientId ={clientId}
 											/>
+                                            <FB_Spacing
+                                                label={ 'Border Radius'}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={counterItemBorderRadiusUnitsHandler}
+                                                spacingUnits={counterItemBorderRadiusUnits}
+                                                spacingDesktop={counterItemBorderRadiusDesktop}
+                                                spacingTablet={counterItemBorderRadiusTab}
+                                                spacingMobile={counterItemBorderRadiusMobile}
+                                                handleSpacingUnitHandler={handleItemBorderRadiusUnitHandler}
+                                                spacingCombineBtn={counterItemBorderRadiusLink}
+                                                spacingCombineBtnHandler={counterItemBorderRadiusCombineBtnHandler} 
+                                                setAttributes={setAttributes}
+                                            />
 
 										</PanelBody>
 
@@ -995,31 +1245,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Counter Number", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<CounterNumberTypographyControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<CounterNumberMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={counterNumberFontColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ counterNumberFontColorSwitcher: value })}
+                                            />
+
+                                            {counterNumberFontColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={counterNumberFontColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterNumberFontColor: value })}
+                                                />
+                                            )}
+
+                                            {counterNumberFontColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={counterNumberFontHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterNumberFontHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_TypographyControl
+                                                fontFamily={counterNumberFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value })}
+                                
+                                                fontSize={counterNumberFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ counterNumberFontSize: value })}
+                                
+                                                fontSizeUnits={counterNumberFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ counterNumberFontSizeUnits: value })}
+                                
+                                                fontWeight={counterNumberFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ counterNumberFontWeight: value })}
+                                
+                                                fontStyle={counterNumberFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ counterNumberFontStyle: value })}
+                                
+                                                textTransform={counterNumberTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTextTransform: value })}
+                                
+                                                textDecoration={counterNumberTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTextDecoration: value })}
+                                
+                                                letterSpacing={counterNumberLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberLetterSpacing: value })}
+                                
+                                                letterSpacingUnits={counterNumberLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberLetterSpacingUnits: value })}
+                                
+                                                lineHeight={counterNumberLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ counterNumberLineHeight: value })}
+                                
+                                                lineHeightUnits={counterNumberLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ counterNumberLineHeightUnits: value })}
+                                
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+											<FB_Spacing
+                                                label={ 'Margin' }
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={counterNumberMarginUnitsHandler}
+                                                spacingUnits={counterNumberMarginUnits}
+                                                spacingDesktop={counterNumberMarginDesktop}
+                                                spacingTablet={counterNumberMarginTablet}
+                                                spacingMobile={counterNumberMarginMobile}
+                                                handleSpacingUnitHandler={handleCounterNumberMarginUnitHandler}
+                                                spacingCombineBtn={counterNumberMarginLink}
+                                                spacingCombineBtnHandler={counterNumberMarginCombineBtnHandler} 
+                                                setAttributes={setAttributes}
+                                            />
 										</PanelBody>
 										<PanelBody
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<CounterNumberTitleTypographyControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
-											<CounterNumberTitleMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+											
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={counterNumberTitleFontColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ counterNumberTitleFontColorSwitcher: value })}
+                                            />
+
+                                            {counterNumberTitleFontColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={counterNumberTitleFontColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterNumberTitleFontColor: value })}
+                                                />
+                                            )}
+
+                                            {counterNumberTitleFontColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={counterNumberTitleFontHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ counterNumberTitleFontHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_TypographyControl
+                                                fontFamily={counterNumberTitleFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value })}
+                                
+                                                fontSize={counterNumberTitleFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ counterNumberTitleFontSize: value })}
+                                
+                                                fontSizeUnits={counterNumberTitleFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ counterNumberTitleFontSizeUnits: value })}
+                                
+                                                fontWeight={counterNumberTitleFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ counterNumberTitleFontWeight: value })}
+                                
+                                                fontStyle={counterNumberTitleFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ counterNumberTitleFontStyle: value })}
+                                
+                                                textTransform={counterNumberTitleTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTitleTextTransform: value })}
+                                
+                                                textDecoration={counterNumberTitleTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTitleTextDecoration: value })}
+                                
+                                                letterSpacing={counterNumberTitleLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberTitleLetterSpacing: value })}
+                                
+                                                letterSpacingUnits={counterNumberTitleLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberTitleLetterSpacingUnits: value })}
+                                
+                                                lineHeight={counterNumberTitleLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ counterNumberTitleLineHeight: value })}
+                                
+                                                lineHeightUnits={counterNumberTitleLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ counterNumberTitleLineHeightUnits: value })}
+                                
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing
+                                                label={ 'Margin' }
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={counterNumberTitleMarginUnitsHandler}
+                                                spacingUnits={counterNumberTitleMarginUnits}
+                                                spacingDesktop={counterNumberTitleMarginDesktop}
+                                                spacingTablet={counterNumberTitleMarginTablet}
+                                                spacingMobile={counterNumberTitleMarginMobile}
+                                                handleSpacingUnitHandler={handleCounterNumberTitleMarginUnitHandler}
+                                                spacingCombineBtn={counterNumberTitleMarginLink}
+                                                spacingCombineBtnHandler={counterNumberTitleMarginCombineBtnHandler} 
+                                                setAttributes={setAttributes}
+                                            />
 										</PanelBody>
 									</>
 								)}
