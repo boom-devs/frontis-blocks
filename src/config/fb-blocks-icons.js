@@ -913,7 +913,7 @@ const FB_Block_Icons = {
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
-			.st1{fill:none;stroke:#399CFF;stroke-linecap:round;stroke-miterlimit:10;}
+			.st1{fill:none;stroke:#399CFF;strokeLinecap:round;stroke-miterlimit:10;}
 		`),
 		fb('g', null,
 			fb('path', { className: 'st0', d: `M20.5,1.98c1.1,0,2,0.9,2,2s-0.9,2-2,2h-17c-1.1,0-2-0.9-2-2s0.9-2,2-2H20.5 M20.5,0.48h-17

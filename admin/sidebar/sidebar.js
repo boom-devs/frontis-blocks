@@ -780,7 +780,7 @@ function FrontisBlocksSidebar(props) {
 														onClick={() => setNewCustomColorFn()}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
 														</svg>
 													</span>
 													</Button>
@@ -827,7 +827,7 @@ function FrontisBlocksSidebar(props) {
 														])}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
 														</svg>
 													</span>
 													</Button>
