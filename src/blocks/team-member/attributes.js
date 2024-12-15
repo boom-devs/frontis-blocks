@@ -112,7 +112,7 @@ const attributes = {
     },
     teamMemberBgClassicColor: {
         type: "string",
-        default: "#EBF5FF"
+        default: ""
     },
     teamMemberBgGradientColor: {
         type: "string",
@@ -163,7 +163,7 @@ const attributes = {
     },
     teamMemberBgHoverClassicColor: {
         type: "string",
-        default: "#399CFF"
+        default: ""
     },
     teamMemberBgHoverGradientColor: {
         type: "string",
@@ -430,7 +430,7 @@ const attributes = {
 	},
 	teamMemberContentBgClassicColor: {
 		type: "string",
-		default: "#EBF5FF"
+		default: ""
 	},
 	teamMemberContentBgGradientColor: {
 		type: "string",
@@ -481,7 +481,7 @@ const attributes = {
 	},
 	teamMemberContentBgHoverClassicColor: {
 		type: "string",
-		default: "#399CFF"
+		default: ""
 	},
 	teamMemberContentBgHoverGradientColor: {
 		type: "string",
@@ -1274,6 +1274,7 @@ const attributes = {
 		type : "string",
 		default: "left"
 	},
+
 	teamMemberIconsSize: {
 		type : "object",
 		default: {

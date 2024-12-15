@@ -201,6 +201,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberContentBorderRadiusLink,
 
 		// Social Icons
+		teamMemberIconsAlignment,
 		teamMemberIconStyleSwitcher,
         teamMemberIconsSize,
         teamMemberIconsSizeUnits,
@@ -2305,12 +2306,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper {
 				display: flex;
 				align-items: center;
+				${teamMemberSocialIconAnimationType === 'left' ? 'flex-direction: row-reverse;' : ''}
+				${teamMemberSocialIconAnimationType === 'top' ? 'flex-direction: column-reverse;' : ''}
+				${teamMemberSocialIconAnimationType === 'bottom' ? 'flex-direction: column;' : ''}
+				${teamMemberIconsAlignment === 'left' ? 'justify-content: start;' : ''}
+				${teamMemberIconsAlignment === 'center' ? 'justify-content: center;' : ''}
+				${teamMemberIconsAlignment === 'right' ? 'justify-content: end;' : ''}
 				${teamMemberIconsDesktopMarginWidth !== undefined ? `margin: ${teamMemberIconsDesktopMarginWidth};` : ''}
+				overflow: hidden;
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile {
 				display: flex;
 				align-items: center;
+				${teamMemberSocialIconAnimationType === 'top' ? 'flex-direction: column;' : ''}
+				${teamMemberSocialIconAnimationType === 'bottom' ? 'flex-direction: column;' : ''}
 				${teamMemberIconsSpacing.Desktop ? `gap: ${teamMemberIconsSpacing.Desktop}${teamMemberIconsSpacingUnits.Desktop};` : ''}
+				${teamMemberSocialIconAnimationType !== 'default' ? 'visibility: hidden; opacity: 0;' : ''}
+				${teamMemberSocialIconAnimationType === 'top' ? 'transform: translateY(100px);' : ''}
+				${teamMemberSocialIconAnimationType === 'right' ? 'transform: translateX(-100px);' : ''}
+				${teamMemberSocialIconAnimationType === 'bottom' ? 'transform: translateY(-100px);' : ''}
+				${teamMemberSocialIconAnimationType === 'left' ? 'transform: translateX(100px);' : ''}
+				transition: all 0.5s ease-in-out;
+			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile {
+				${teamMemberSocialIconAnimationType !== 'default' ? 'visibility: visible; opacity: 1; transform: translate(0);' : ''}
+				transition: all 0.5s ease-in-out;
 			}
 			${teamMemberIconStyleSwitcher === false ? `
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile {
@@ -2663,6 +2683,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberContentBorderRadiusMobile,
 
 			// Social Icons
+			teamMemberIconsAlignment,
 			teamMemberIconStyleSwitcher,
 			teamMemberIconsSize,
 			teamMemberIconsSizeUnits,
@@ -2914,12 +2935,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ teamMemberSocialType: value })}
                                             />
 
+											{ teamMemberSocialType === 'content' &&
+												<FB_AlignmentControl
+													label={__("Alignment", "frontis-blocks")}
+													globalAlignment={teamMemberIconsAlignment}
+													setGlobalAlignment={(value) => setAttributes({ teamMemberIconsAlignment: value })}
+												/>
+											}
+
 											<SelectControl
                                                 label={__("Icon Position", "frontis-blocks")}
                                                 value={teamMemberSocialPosition}
                                                 options={teamMemberSocialType === 'content' ? CONTENT_SOCIAL_ICON_POSITION : IMAGE_SOCIAL_ICON_POSITION}
                                                 onChange={(value) => setAttributes({ teamMemberSocialPosition: value })}
                                             />
+
 											<ToggleControl
 												label={__("Icon Wrapper Button", "frontis-blocks")}
 												className="fb-setting-responsive-control"
