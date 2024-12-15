@@ -52,6 +52,10 @@
             &:hover{
                 background: none;
             }
+			.components-button{
+				font-family: $heading-font-family;
+				font-weight: 600;
+			}
         }
         .components-button{
             color: $neutral-color-950;
@@ -70,7 +74,7 @@
                 color: $neutral-color-950;
                 font-family: $heading-font-family;
                 font-size: $medium-font-size;
-                font-weight: 600;
+                font-weight: 400;
                 line-height: $body-line-height;
                 margin: 14px 0 10px 0;
                 min-height: auto;

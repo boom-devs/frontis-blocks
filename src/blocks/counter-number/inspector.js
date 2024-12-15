@@ -301,7 +301,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 			}
 		}
-
 	}
 	const spacingCombineBtnHandlerFn = () => {
 		setAttributes( {counterItemBorderTypeLink: !counterItemBorderTypeLink} );
@@ -315,35 +314,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-
-    
-
-	{/* Inspector Controls */}
-	{/* Counter Item Control */}
-	const counterItemBorderTypeGetDesktop = `${counterItemBorderTypeDesktop.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeDesktop.left}${counterItemBorderTypeUnits[deviceType]}`;
-	const counterItemBorderTypeGetTablet = `${counterItemBorderTypeTablet.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTablet.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTablet.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeTablet.left}${counterItemBorderTypeUnits[deviceType]}`;
-	const counterItemBorderTypeGetMobile = `${counterItemBorderTypeMobile.top}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.right}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.bottom}${counterItemBorderTypeUnits[deviceType]} ${counterItemBorderTypeMobile.left}${counterItemBorderTypeUnits[deviceType]}`;
-
-
-	const counterItemBorderRadiusGetDesktop = `${counterItemBorderRadiusDesktop.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusDesktop.left}${counterItemBorderRadiusUnits[deviceType]}`;
-	const counterItemBorderRadiusGetTablet = `${counterItemBorderRadiusTablet.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTablet.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTablet.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusTablet.left}${counterItemBorderRadiusUnits[deviceType]}`;
-	const counterItemBorderRadiusGetMobile = `${counterItemBorderRadiusMobile.top}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.right}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.bottom}${counterItemBorderRadiusUnits[deviceType]} ${counterItemBorderRadiusMobile.left}${counterItemBorderRadiusUnits[deviceType]}`;
-
-
-	/* Counter Icon */
-	const counterIconMarginGetDesktop = `${counterIconMarginDesktop.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginDesktop.left}${counterIconMarginUnits[deviceType]}`;
-	const counterIconMarginGetTablet = `${counterIconMarginTablet.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginTablet.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginTablet.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginTablet.left}${counterIconMarginUnits[deviceType]}`;
-	const counterIconMarginGetMobile = `${counterIconMarginMobile.top}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.right}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.bottom}${counterIconMarginUnits[deviceType]} ${counterIconMarginMobile.left}${counterIconMarginUnits[deviceType]}`;
-
-	/* Counter Number */
-	const counterNumberMarginGetDesktop = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits[deviceType]}`;
-	const counterNumberMarginGetTablet = `${counterNumberMarginTablet.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTablet.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTablet.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginTablet.left}${counterNumberMarginUnits[deviceType]}`;
-	const counterNumberMarginGetMobile = `${counterNumberMarginMobile.top}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.right}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits[deviceType]} ${counterNumberMarginMobile.left}${counterNumberMarginUnits[deviceType]}`;
-
-	/* Counter Title */
-	const counterNumberTitleMarginGetDesktop = `${counterNumberTitleMarginDesktop.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginDesktop.left}${counterNumberTitleMarginUnits[deviceType]}`;
-	const counterNumberTitleMarginGetTablet = `${counterNumberTitleMarginTablet.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTablet.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTablet.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginTablet.left}${counterNumberTitleMarginUnits[deviceType]}`;
-	const counterNumberTitleMarginGetMobile = `${counterNumberTitleMarginMobile.top}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.right}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.bottom}${counterNumberTitleMarginUnits[deviceType]} ${counterNumberTitleMarginMobile.left}${counterNumberTitleMarginUnits[deviceType]}`;
+	
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
@@ -672,6 +643,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const counterBlockStyle = useMemo(() => `
+    .fb-counter-wrapper.${blockID}{
+        ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
+        ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
+        ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""}
+        ${counterGlobalBorderColor ? `border: ${counterGlobalBorderColor};` : "" } 
+        ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ""}
+        ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
+        ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
+    }
+    .fb-counter-wrapper.${blockID}:hover{
+        ${counterGlobalBgHoverColor ? `background: ${counterGlobalBgHoverColor};` : ''}
+        ${counterGlobalBorderHoverColor ? `border: ${counterGlobalBorderHoverColor};` : "" }
+    }
     .fb-counter-wrapper.${blockID} .fb-counter-item {
         ${counterItemBgColor ? `background: ${counterItemBgColor};` : ''}
         ${counterItemSize[deviceType] ? `width: ${counterItemSize[deviceType]}${counterItemSizeUnits[deviceType]};` : ''}
@@ -708,7 +692,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterNumberTitleTextDecoration ? `text-decoration: ${counterNumberTitleTextDecoration};` : ''}
         ${counterNumberTitleLetterSpacing[deviceType] ? `letter-spacing: ${counterNumberTitleLetterSpacing[deviceType]}${counterNumberTitleLetterSpacingUnits[deviceType]};` : ''}
         ${counterNumberTitleLineHeight[deviceType] ? `line-height: ${counterNumberTitleLineHeight[deviceType]}${counterNumberTitleLineHeightUnits[deviceType]};` : ''}
-        
+    }
+    @media only screen and (max-width: 1024px) {
+        .fb-counter-wrapper.${blockID}{
+            ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
+            ${globalTabletPadding ? `margin: ${globalTabletPadding};` : ""}
+            ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ""}
+            ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .fb-counter-wrapper.${blockID}{
+            ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ""}
+            ${globalMobilePadding ? `margin: ${globalMobilePadding};` : ""}
+            ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ""}
+            ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+        }
     }
     `, [
         blockID,
@@ -745,6 +744,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberTitleLetterSpacingUnits,
         counterNumberTitleLineHeight,
         counterNumberTitleLineHeightUnits,
+        counterGlobalBgColor,
+        globalDesktopPadding,
+        globalDesktopMargin,
+        counterGlobalBorderColor,
+        globalDesktopBorderWidth,
+        globalDesktopBorderRadiusWidth,
+        counterGlobalBgHoverColor,
+        counterGlobalBorderHoverColor,
+        counterGlobalBoxShadowCssValue
     ]);
  
     useEffect(() => {
