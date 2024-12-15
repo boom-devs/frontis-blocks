@@ -61,12 +61,13 @@
 
 	.fb-setting-units-dropdown {
 		position: absolute;
-		top: 0;
+		top: 2px;
 		left: 0;
 		z-index: 10;
-		background: $neutral-color-50;
+		background: #F7F7F7;
 		overflow: hidden;
-        width: 100%;
+		width: 100%;
+		border-radius: 8px;
 		.fb-setting-units-option {
 			cursor: pointer;
 			transition: background 0.2s;
@@ -74,14 +75,13 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-
+			text-transform: uppercase;
 			&.active {
-				font-weight: 700;
+				font-weight: 400;
 				color: $primary-color-base;
 			}
-
 			&:hover {
-				background: #dcdcde;
+				background: $neutral-color-100;
 			}
 		}
 	}
