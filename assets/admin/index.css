@@ -1860,12 +1860,13 @@
 }
 .fb-setting-units-type .fb-setting-units-dropdown {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   z-index: 10;
   background: #F7F7F7;
   overflow: hidden;
   width: 100%;
+  border-radius: 8px;
 }
 .fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option {
   cursor: pointer;
@@ -1874,13 +1875,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-transform: uppercase;
 }
 .fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option.active {
-  font-weight: 700;
+  font-weight: 400;
   color: #399CFF;
 }
 .fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option:hover {
-  background: #dcdcde;
+  background: #E1E3E8;
 }
 
 .fb-setting-spacing-container {
