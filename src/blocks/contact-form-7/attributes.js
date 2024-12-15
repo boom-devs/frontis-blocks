@@ -55,14 +55,14 @@ export const attributes = {
 	},
 	contactFormLabelFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormLabelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '18',
-			Tablet: '18',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormLabelFontSizeUnits: {
@@ -75,7 +75,7 @@ export const attributes = {
 	},
 	contactFormLabelFontWeight : {
 		type: "string",
-		default: "500"
+		default: ""
 	},
 	contactFormLabelFontStyle : {
 		type: "string",
@@ -137,7 +137,7 @@ export const attributes = {
 	},
 	contactFormInputFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormInputFontSize: {
 		type: "object",
@@ -611,14 +611,14 @@ export const attributes = {
 	},
 	contactFormSubmitFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormSubmitFontSize: {
 		type: "object",
 		default: {
-			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormSubmitFontSizeUnits: {
@@ -858,7 +858,7 @@ export const attributes = {
 	},
 	contactFormSuccessFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormSuccessFontSize: {
 		type: "object",
@@ -1024,14 +1024,14 @@ export const attributes = {
 	},
 	contactFormErrorFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormErrorFontSize: {
 		type: "object",
 		default: {
-			Desktop: '13',
-			Tablet: '13',
-			Mobile: '13'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormErrorFontSizeUnits: {
