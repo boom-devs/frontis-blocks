@@ -1404,11 +1404,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	// Description Margin Functionb
 	const handleDescMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
-		if ( teamMemberDesignationMarginLink ) {
+		if ( teamMemberDescMarginLink ) {
 			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
-						teamMemberDesignationMarginDesktop: {
+						teamMemberDescMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -1418,7 +1418,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case 'Tablet':
 					setAttributes( {
-						teamMemberDesignationMarginTab: {
+						teamMemberDescMarginTab: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -1428,7 +1428,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case 'Mobile':
 					setAttributes( {
-						teamMemberDesignationMarginMobile: {
+						teamMemberDescMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -1442,13 +1442,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		} else {
 			switch ( deviceType ) {
 				case 'Desktop':
-					setAttributes( {teamMemberDesignationMarginDesktop: {...teamMemberDesignationMarginDesktop, [position]: value}} );
+					setAttributes( {teamMemberDescMarginDesktop: {...teamMemberDescMarginDesktop, [position]: value}} );
 					break;
 				case 'Tablet':
-					setAttributes( {teamMemberDesignationMarginTab: {...teamMemberDesignationMarginTab, [position]: value}} );
+					setAttributes( {teamMemberDescMarginTab: {...teamMemberDescMarginTab, [position]: value}} );
 					break;
 				case 'Mobile':
-					setAttributes( {teamMemberDesignationMarginMobile: {...teamMemberDesignationMarginMobile, [position]: value}} );
+					setAttributes( {teamMemberDescMarginMobile: {...teamMemberDescMarginMobile, [position]: value}} );
 					break;
 				default:
 					break;
@@ -1458,17 +1458,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 	const handleDescMarginCombineBtn = () => {
-		setAttributes( {teamMemberDesignationMarginLink: !teamMemberDesignationMarginLink} );
+		setAttributes( {teamMemberDescMarginLink: !teamMemberDescMarginLink} );
 	}
 
 	const handleDescMarginUnitsHandler = (unit) => {
 		setAttributes( {
-			teamMemberDesignationMarginUnits: {
-				...teamMemberDesignationMarginUnits,
+			teamMemberDescMarginUnits: {
+				...teamMemberDescMarginUnits,
 				[deviceType]: unit
 			}
 		})
 	}
+
+	{/* Team Member Description Control */}
+	const teamMemberDescMarginGetDesktop = `${teamMemberDescMarginDesktop.top}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginDesktop.right}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginDesktop.bottom}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginDesktop.left}${teamMemberDescMarginUnits[deviceType]}`;
+	const teamMemberDescMarginGetTab = `${teamMemberDescMarginTab.top}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginTab.right}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginTab.bottom}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginTab.left}${teamMemberDescMarginUnits[deviceType]}`;
+	const teamMemberDescMarginGetMobile = `${teamMemberDescMarginMobile.top}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginMobile.right}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginMobile.bottom}${teamMemberDescMarginUnits[deviceType]} ${teamMemberDescMarginMobile.left}${teamMemberDescMarginUnits[deviceType]}`;
+
 
 	// socialIconBtn Padding Functionb
 	const handleSocialIconBtnPaddingUnitChange = ( event, position ) => {
@@ -1920,7 +1926,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 			.fb-team-member-main-wrapper.${blockID} {
 				position: relative;
-				${teamMemberBgClassicColor !== undefined ? `background-color: ${teamMemberBgClassicColor};` : ''}
+				${
+                    teamMemberBgType === "gradient"
+                      ? `background: ${
+                          teamMemberBgCustomGradientSwitcher && teamMemberBgCustomGradientInputValue
+                            ? teamMemberBgCustomGradientInputValue
+                            : teamMemberBgGradientColor
+                        };`
+                      : teamMemberBgImageUrl !== undefined && teamMemberBgImageUrl !== null && teamMemberBgImageUrl !== ""
+                      ? `
+                        ${teamMemberBgImageUrl !== undefined ? `background-image: url(${teamMemberBgImageUrl});` : ''}
+                        ${teamMemberBgImagePosition !== undefined ? `background-position: ${teamMemberBgImagePosition};` : ''}
+                        ${teamMemberBgImageAttachment !== undefined ? `background-attachment: ${teamMemberBgImageAttachment};` : ''}
+                        ${teamMemberBgImageRepeat !== undefined ? `background-repeat: ${teamMemberBgImageRepeat};` : ''}
+                        ${teamMemberBgImageSize !== undefined ? `background-size: ${teamMemberBgImageSize};` : ''}
+                      `
+                      : `background: ${teamMemberBgClassicColor};`
+                }
 				${teamMemberPaddingDesktopWidth !== undefined ? `padding: ${teamMemberPaddingDesktopWidth};` : ''}
 				${teamMemberMarginDesktopWidth !== undefined ? `margin: ${teamMemberMarginDesktopWidth};` : ''}
 				${teamMemberBorder !== undefined ? `border-style: ${teamMemberBorder};` : ''}
@@ -1931,7 +1953,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-main-wrapper.${blockID}:hover {
-				${teamMemberBgHoverClassicColor !== undefined ? `background-color: ${teamMemberBgHoverClassicColor};` : ''}
+				${
+					teamMemberBgHoverType === "gradient"
+					  ? `background: ${
+						  teamMemberBgHoverCustomGradientSwitcher && teamMemberBgHoverCustomGradientInputValue
+							? teamMemberBgHoverCustomGradientInputValue
+							: teamMemberBgHoverGradientColor
+						};`
+					  : teamMemberBgHoverImageUrl !== undefined && teamMemberBgHoverImageUrl !== null && teamMemberBgHoverImageUrl !== ""
+					  ? `
+						${teamMemberBgHoverImageUrl !== undefined ? `background-image: url(${teamMemberBgHoverImageUrl});` : ''}
+						${teamMemberBgHoverImagePosition !== undefined ? `background-position: ${teamMemberBgHoverImagePosition};` : ''}
+						${teamMemberBgHoverImageAttachment !== undefined ? `background-attachment: ${teamMemberBgHoverImageAttachment};` : ''}
+						${teamMemberBgHoverImageRepeat !== undefined ? `background-repeat: ${teamMemberBgHoverImageRepeat};` : ''}
+						${teamMemberBgHoverImageSize !== undefined ? `background-size: ${teamMemberBgHoverImageSize};` : ''}
+					  `
+					  : `background: ${teamMemberBgHoverClassicColor};`
+				}
 				${teamMemberBorderHoverColor !== undefined ? `border-color: ${teamMemberBorderHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -1950,20 +1988,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 
-			.fb-team-member-wrapper.${blockID} .fb-team-member-content-wrapper {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				z-index: 9;
-			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-content {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item {
 				position: relative;
+				overflow: hidden;
 				display: flex;
-				flex-direction: column;
-				${teamMemberContentAlignment === 'left' ? 'align-items: start;' : ''}
-				${teamMemberContentAlignment === 'center' ? 'align-items: center;' : ''}
-				${teamMemberContentAlignment === 'right' ? 'align-items: end;' : ''}
+				${teamMemberContentPosition === 'top' ? 'flex-direction: column-reverse;' : ''}
+				${teamMemberContentPosition === 'bottom' ? 'flex-direction: column;' : ''}
+				${teamMemberContentPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
+				${teamMemberContentPosition === 'right' ? 'flex-direction: row;' : ''}
+				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'left' ? 'align-items: start;' : ''}
+				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'center' ? 'align-items: center;' : ''}
+				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'right' ? 'align-items: end;' : ''}
+			}
+
+			.fb-team-member-wrapper.${blockID} .fb-team-member-content-wrapper {
+				${ teamMemberContentPosition === 'image' ? `
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					z-index: 5;
+				` : `
+					position: relative;
+				` }
+				height: fit-content;
+				display: flex;
+				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'top' ? 'flex-direction: column-reverse;' : ''}
+				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'bottom' ? 'flex-direction: column;' : ''}
+				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
+				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'right' ? 'flex-direction: row;' : ''}
 				${teamMemberContentBorder !== undefined ? `border: ${teamMemberContentBorder};` : ''}
 				${teamMemberContentBorderColor !== undefined ? `border-color: ${teamMemberContentBorderColor};` : ''}
 				${teamMemberContentBorderTypeGetDesktop !== undefined ? `border-width: ${teamMemberContentBorderTypeGetDesktop};` : ''}
@@ -1971,13 +2024,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberContentMarginGetDesktop !== undefined ? `margin: ${teamMemberContentMarginGetDesktop};` : ''}
 				${teamMemberContentPaddingGetDesktop !== undefined ? `padding: ${teamMemberContentPaddingGetDesktop};` : ''}
 				${teamMemberContentBgClassicColor !== undefined ? `background: ${teamMemberContentBgClassicColor};` : ''}
+				${
+                    teamMemberContentBgType === "gradient"
+                      ? `background: ${
+                          teamMemberContentBgCustomGradientSwitcher && teamMemberContentBgCustomGradientInputValue
+                            ? teamMemberContentBgCustomGradientInputValue
+                            : teamMemberContentBgGradientColor
+                        };`
+                      : teamMemberContentBgImageUrl !== undefined && teamMemberContentBgImageUrl !== null && teamMemberContentBgImageUrl !== ""
+                      ? `
+                        ${teamMemberContentBgImageUrl !== undefined ? `background-image: url(${teamMemberContentBgImageUrl});` : ''}
+                        ${teamMemberContentBgImagePosition !== undefined ? `background-position: ${teamMemberContentBgImagePosition};` : ''}
+                        ${teamMemberContentBgImageAttachment !== undefined ? `background-attachment: ${teamMemberContentBgImageAttachment};` : ''}
+                        ${teamMemberContentBgImageRepeat !== undefined ? `background-repeat: ${teamMemberContentBgImageRepeat};` : ''}
+                        ${teamMemberContentBgImageSize !== undefined ? `background-size: ${teamMemberContentBgImageSize};` : ''}
+                      `
+                      : `background: ${teamMemberContentBgClassicColor};`
+                }
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-content {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-content-wrapper {
+				${
+					teamMemberContentBgHoverType === "gradient"
+					  ? `background: ${
+						  teamMemberContentBgHoverCustomGradientSwitcher && teamMemberContentBgHoverCustomGradientInputValue
+							? teamMemberContentBgHoverCustomGradientInputValue
+							: teamMemberContentBgHoverGradientColor
+						};`
+					  : teamMemberContentBgHoverImageUrl !== undefined && teamMemberContentBgHoverImageUrl !== null && teamMemberContentBgHoverImageUrl !== ""
+					  ? `
+						${teamMemberContentBgHoverImageUrl !== undefined ? `background-image: url(${teamMemberContentBgHoverImageUrl});` : ''}
+						${teamMemberContentBgHoverImagePosition !== undefined ? `background-position: ${teamMemberContentBgHoverImagePosition};` : ''}
+						${teamMemberContentBgHoverImageAttachment !== undefined ? `background-attachment: ${teamMemberContentBgHoverImageAttachment};` : ''}
+						${teamMemberContentBgHoverImageRepeat !== undefined ? `background-repeat: ${teamMemberContentBgHoverImageRepeat};` : ''}
+						${teamMemberContentBgHoverImageSize !== undefined ? `background-size: ${teamMemberContentBgHoverImageSize};` : ''}
+					  `
+					  : `background: ${teamMemberContentBgHoverClassicColor};`
+				}
 				${teamMemberContentBorderHoverColor !== undefined ? `border-color: ${teamMemberContentBorderHoverColor};` : ''}
-				${teamMemberContentBgHoverClassicColor !== undefined ? `background: ${teamMemberContentBgHoverClassicColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+
+			.fb-team-member-wrapper.${blockID} .fb-team-member-content-wrapper .fb-team-member-content {
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'left' ? 'text-align: left;' : ''}
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'center' ? 'text-align: center;' : ''}
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'right' ? 'text-align: right;' : ''}
+			}
+			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-image-wrapper .fb-team-member-image-overlay {
 				${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
 				transition: all 0.3s ease-in-out;
@@ -2016,11 +2109,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberDesignationMarginGetDesktop !== undefined ? `margin: ${teamMemberDesignationMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-desc {
+				${teamMemberDescFontFamily !== 'default' ? `font-family: ${teamMemberDescFontFamily}` : ''};
+				${teamMemberDescFontSize?.Desktop ? `font-size: ${teamMemberDescFontSize.Desktop}${teamMemberDescFontSizeUnits.Desktop};` : ''}
+				${teamMemberDescFontWeight !== undefined ? `font-weight: ${teamMemberDescFontWeight};` : ''}
+				${teamMemberDescFontStyle !== undefined ? `font-style: ${teamMemberDescFontStyle};` : ''}
+				${teamMemberDescTextTransform !== undefined ? `text-transform: ${teamMemberDescTextTransform};` : ''}
+				${teamMemberDescTextDecoration !== undefined ? `text-decoration: ${teamMemberDescTextDecoration};` : ''}
+				${teamMemberDescLetterSpacing?.Desktop !== undefined ? `letter-spacing: ${teamMemberDescLetterSpacing.Desktop}${teamMemberDescLetterSpacingUnits.Desktop};` : ''}
+				${teamMemberDescLineHeight?.Desktop !== undefined ? `line-height: ${teamMemberDescLineHeight.Desktop}${teamMemberDescLineHeightUnits.Desktop};` : ''}
+				${teamMemberDescColor !== undefined ? `color: ${teamMemberDescColor};` : ''}
+				${teamMemberDescMarginGetDesktop !== undefined ? `margin: ${teamMemberDescMarginGetDesktop};` : ''}
+				transition: all 0.3s ease-in-out;
+			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile {
 				display: flex;
 				${teamMemberIconsSpacing.Desktop ? `gap: ${teamMemberIconsSpacing.Desktop}${teamMemberIconsSpacingUnits.Desktop};` : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				${teamMemberIconsDesktopPaddingWidth !== undefined ? `padding: ${teamMemberIconsDesktopPaddingWidth};` : ''}
+				${teamMemberIconsBGColor !== undefined ? `background-color: ${teamMemberIconsBGColor};` : ''}
+				${teamMemberIconsBorder !== undefined ? `border-style: ${teamMemberIconsBorder};` : ''}
+				${teamMemberIconsDesktopBorder !== undefined ? `border-width: ${teamMemberIconsDesktopBorder};` : ''}
+				${teamMemberIconsBorderColor !== undefined ? `border-color: ${teamMemberIconsBorderColor};` : ''}
+				${teamMemberIconsDesktopBorderRadius !== undefined ? `border-radius: ${teamMemberIconsDesktopBorderRadius};` : ''}
+				transition: all 0.3s ease-in-out;
+			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon {
+				${teamMemberIconsBGHoverColor !== undefined ? `background-color: ${teamMemberIconsBGHoverColor};` : ''}
+				${teamMemberIconsBorderHoverColor !== undefined ? `border-color: ${teamMemberIconsBorderHoverColor};` : ''}
+				transition: all 0.3s ease-in-out;
+			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-social-profile .fb-team-member-social-icon svg {
 				${teamMemberIconsSize.Desktop ? `width: ${teamMemberIconsSize.Desktop}${teamMemberIconsSizeUnits.Desktop};` : ''}
 				${teamMemberIconsSize.Desktop ? `height: ${teamMemberIconsSize.Desktop}${teamMemberIconsSizeUnits.Desktop};` : ''}
 				${teamMemberIconsColor !== undefined ? `fill: ${teamMemberIconsColor};` : ''}
@@ -2030,6 +2153,61 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberIconsHoverColor !== undefined ? `fill: ${teamMemberIconsHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+
+
+			${socialIconBtnSwitcher === true && `
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					${socialIconBtnDesktopPaddingWidth !== undefined ? `padding: ${socialIconBtnDesktopPaddingWidth};` : ''}
+					${socialIconBtnBGColor !== undefined ? `background-color: ${socialIconBtnBGColor};` : ''}
+					${socialIconBtnBorder !== undefined ? `border-style: ${socialIconBtnBorder};` : ''}
+					${socialIconBtnDesktopBorder !== undefined ? `border-width: ${socialIconBtnDesktopBorder};` : ''}
+					${socialIconBtnBorderColor !== undefined ? `border-color: ${socialIconBtnBorderColor};` : ''}
+					${socialIconBtnDesktopBorderRadius !== undefined ? `border-radius: ${socialIconBtnDesktopBorderRadius};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+					${socialIconBtnBGHoverColor !== undefined ? `background-color: ${socialIconBtnBGHoverColor};` : ''}
+					${socialIconBtnBorderHoverColor !== undefined ? `border-color: ${socialIconBtnBorderHoverColor};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn svg {
+					${socialIconBtnColor !== undefined ? `fill: ${socialIconBtnColor};` : ''}
+					${socialIconBtnIconSize?.Desktop !== undefined ? `width: ${socialIconBtnIconSize.Desktop}${socialIconBtnIconSizeUnits.Desktop};` : ''}
+					${socialIconBtnIconSize?.Desktop !== undefined ? `height: ${socialIconBtnIconSize.Desktop}${socialIconBtnIconSizeUnits.Desktop};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+					${socialIconBtnHoverColor !== undefined ? `fill: ${socialIconBtnHoverColor};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				
+				@media only screen and (max-width: 1024px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+						${socialIconBtnTabPaddingWidth !== undefined ? `padding: ${socialIconBtnTabPaddingWidth};` : ''}
+						${socialIconBtnTabBorder !== undefined ? `border-width: ${socialIconBtnTabBorder};` : ''}
+						${socialIconBtnTabBorderRadius !== undefined ? `border-radius: ${socialIconBtnTabBorderRadius};` : ''}
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn svg {
+						${socialIconBtnIconSize?.Tablet !== undefined ? `width: ${socialIconBtnIconSize.Tablet}${socialIconBtnIconSizeUnits.Tablet};` : ''}
+						${socialIconBtnIconSize?.Tablet !== undefined ? `height: ${socialIconBtnIconSize.Tablet}${socialIconBtnIconSizeUnits.Tablet};` : ''}
+					}
+				}
+				@media only screen and (max-width: 767px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+						${socialIconBtnMobilePaddingWidth !== undefined ? `padding: ${socialIconBtnMobilePaddingWidth};` : ''}
+						${socialIconBtnMobileBorder !== undefined ? `border-width: ${socialIconBtnMobileBorder};` : ''}
+						${socialIconBtnMobileBorderRadius !== undefined ? `border-radius: ${socialIconBtnMobileBorderRadius};` : ''}
+					}
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn svg {
+						${socialIconBtnIconSize?.Mobile !== undefined ? `width: ${socialIconBtnIconSize.Mobile}${socialIconBtnIconSizeUnits.Mobile};` : ''}
+						${socialIconBtnIconSize?.Mobile !== undefined ? `height: ${socialIconBtnIconSize.Mobile}${socialIconBtnIconSizeUnits.Mobile};` : ''}
+					}
+				}
+			`}
+
 
 			@media only screen and (max-width: 1024px) {
 				.fb-team-member-main-wrapper.${blockID} {
@@ -2131,34 +2309,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		`,
 		[
 			blockID,
-			teamMemberPaddingDesktopWidth,
-			teamMemberMarginDesktopWidth,
-			teamMemberBorder,
-			teamMemberBorderDesktopWidth,
-			teamMemberBorderColor,
-			teamMemberBorderRadiusDesktopWidth,
-			teamMemberZIndex,
-			teamMemberBorderHoverColor,
-			teamMemberImageWidth,
+			deviceType,
+
+			// Photo
+			teamMemberImagePosition,
+			teamMemberImageAttachment,
+			teamMemberImageRepeat,
+			teamMemberImageSize,
+
 			teamMemberImageWidthUnits,
-			teamMemberImageHeight,
+			teamMemberImageWidth,
+
 			teamMemberImageHeightUnits,
+			teamMemberImageHeight,
+
+			// Team Image Margin
+			teamMemberImageMarginUnits,
+			teamMemberImageMarginDesktop,
+			teamMemberImageMarginTab,
+			teamMemberImageMarginMobile,
+
+			// Team Image Border Type
 			teamMemberImageBorder,
 			teamMemberImageBorderColor,
-			teamMemberImageBorderTypeGetDesktop,
-			teamMemberImageBorderRadiusGetDesktop,
-			teamMemberImageMarginGetDesktop,
 			teamMemberImageBorderHoverColor,
-			teamMemberContentAlignment,
-			teamMemberContentBorder,
-			teamMemberContentBorderColor,
-			teamMemberContentBorderTypeGetDesktop,
-			teamMemberContentBorderRadiusGetDesktop,
-			teamMemberContentMarginGetDesktop,
-			teamMemberContentPaddingGetDesktop,
-			teamMemberContentBorderHoverColor,
 			teamMemberImageBGColor,
 			teamMemberImageBGHoverColor,
+
+			teamMemberImageBorderUnits,
+			teamMemberImageBorderDesktop,
+			teamMemberImageBorderTab,
+			teamMemberImageBorderMobile,
+
+			// Team Image Border Radius
+			teamMemberImageBorderRadiusUnits,
+			teamMemberImageBorderRadiusDesktop,
+			teamMemberImageBorderRadiusTab,
+			teamMemberImageBorderRadiusMobile,
+
+			// Content
+			teamMemberContentPosition,
+
+			// Team Name
+			teamMemberName,
+			teamMemberNameHeadingTag,
+
+			teamMemberNameColorSwitcher,
+			teamMemberNameColor,
+			teamMemberNameHoverColor,
+
 			teamMemberNameFontFamily,
 			teamMemberNameFontSize,
 			teamMemberNameFontSizeUnits,
@@ -2170,9 +2369,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberNameLetterSpacingUnits,
 			teamMemberNameLineHeight,
 			teamMemberNameLineHeightUnits,
-			teamMemberNameColor,
-			teamMemberNameMarginGetDesktop,
-			teamMemberNameHoverColor,
+			teamMemberNameLoadGoogleFonts,
+
+			// Team Name Margin
+			teamMemberNameMarginUnits,
+			teamMemberNameMarginDesktop,
+			teamMemberNameMarginTab,
+			teamMemberNameMarginMobile,
+			teamMemberNameMarginLink,
+
+			// Team Designation Typography
+			teamMemberDesignation,
+			teamMemberDesignationHeadingTag,
+			teamMemberDesignationColor,
+			teamMemberDesignationLoadGoogleFonts,
 			teamMemberDesignationFontFamily,
 			teamMemberDesignationFontSize,
 			teamMemberDesignationFontSizeUnits,
@@ -2184,14 +2394,185 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberDesignationLetterSpacingUnits,
 			teamMemberDesignationLineHeight,
 			teamMemberDesignationLineHeightUnits,
-			teamMemberDesignationColor,
-			teamMemberDesignationMarginGetDesktop,
-			teamMemberIconsSpacing,
-			teamMemberIconsSpacingUnits,
+
+			// Team Designation Margin
+			teamMemberDesignationMarginUnits,
+			teamMemberDesignationMarginDesktop,
+			teamMemberDesignationMarginTab,
+			teamMemberDesignationMarginMobile,
+
+			// Team Desc Typography
+			teamMemberDesc,
+			teamMemberDescColor,
+			teamMemberDescLoadGoogleFonts,
+			teamMemberDescFontFamily,
+			teamMemberDescFontSize,
+			teamMemberDescFontSizeUnits,
+			teamMemberDescFontWeight,
+			teamMemberDescFontStyle,
+			teamMemberDescTextTransform,
+			teamMemberDescTextDecoration,
+			teamMemberDescLetterSpacing,
+			teamMemberDescLetterSpacingUnits,
+			teamMemberDescLineHeight,
+			teamMemberDescLineHeightUnits,
+
+			// Team Desc Margin
+			teamMemberDescMarginUnits,
+			teamMemberDescMarginDesktop,
+			teamMemberDescMarginTab,
+			teamMemberDescMarginMobile,
+
+			// Team Content
+			teamMemberContentAlignment,
+
+			// Team Content Padding
+			teamMemberContentPaddingUnits,
+			teamMemberContentPaddingDesktop,
+			teamMemberContentPaddingTab,
+			teamMemberContentPaddingMobile,
+
+			// Team Content Margin
+			teamMemberContentMarginUnits,
+			teamMemberContentMarginDesktop,
+			teamMemberContentMarginTab,
+			teamMemberContentMarginMobile,
+
+			// Team Content Border
+			teamMemberContentBorder,
+			teamMemberContentBorderColorSwitcher,
+			teamMemberContentBorderColor,
+			teamMemberContentBorderHoverColor,
+			teamMemberContentBorderUnits,
+			teamMemberContentBorderDesktop,
+			teamMemberContentBorderTab,
+			teamMemberContentBorderMobile,
+
+			// Team Content Border Radius
+			teamMemberContentBorderRadiusUnits,
+			teamMemberContentBorderRadiusDesktop,
+			teamMemberContentBorderRadiusTab,
+			teamMemberContentBorderRadiusMobile,
+
+			// Social Icons
 			teamMemberIconsSize,
 			teamMemberIconsSizeUnits,
+			teamMemberIconsSpacing,
+			teamMemberIconsSpacingUnits,
 			teamMemberIconsColor,
 			teamMemberIconsHoverColor,
+			teamMemberIconsBGColor,
+			teamMemberIconsBGHoverColor,
+			teamMemberIconsBorder,
+			teamMemberIconsBorderColor,
+			teamMemberIconsBorderHoverColor,
+			teamMemberIconsPaddingUnits,
+			teamMemberIconsDesktopPadding,
+			teamMemberIconsTabPadding,
+			teamMemberIconsMobilePadding,
+			teamMemberIconsBorderUnits,
+			teamMemberIconsDesktopBorderWidth,
+			teamMemberIconsTabBorderWidth,
+			teamMemberIconsMobileBorderWidth,
+			teamMemberIconsBorderRadiusUnits,
+			teamMemberIconsDesktopBorderRadiusWidth,
+			teamMemberIconsTabBorderRadiusWidth,
+			teamMemberIconsMobileBorderRadiusWidth,
+
+			// Team Member
+			teamMemberZIndex,
+			teamMemberPaddingUnits,
+			teamMemberDesktopPadding,
+			teamMemberTabPadding,
+			teamMemberMobilePadding,
+			teamMemberMarginUnits,
+			teamMemberDesktopMargin,
+			teamMemberTabMargin,
+			teamMemberMobileMargin,
+			teamMemberBorder,
+			teamMemberBorderColor,
+			teamMemberBorderHoverColor,
+			teamMemberBorderUnits,
+			teamMemberDesktopBorderWidth,
+			teamMemberTabBorderWidth,
+			teamMemberMobileBorderWidth,
+			teamMemberBorderRadiusUnits,
+			teamMemberDesktopBorderRadiusWidth,
+			teamMemberTabBorderRadiusWidth,
+			teamMemberMobileBorderRadiusWidth,
+			teamMemberDesktopSwitcher,
+			teamMemberTabletSwitcher,
+			teamMemberMobileSwitcher,
+
+			// Social Profile
+			teamMemberSocialItems,
+			teamMemberSocialType,
+			teamMemberSocialPosition,
+			socialIconBtnSwitcher,
+			teamMemberSocialIconAnimationType,
+
+			// Social Icon Wrapper Btn
+			socialIconBtnIconSize,
+			socialIconBtnIconSizeUnits,
+			socialIconBtnColor,
+			socialIconBtnHoverColor,
+			socialIconBtnBGColor,
+			socialIconBtnBGHoverColor,
+			socialIconBtnBorder,
+			socialIconBtnBorderColor,
+			socialIconBtnBorderHoverColor,
+			socialIconBtnPaddingUnits,
+			socialIconBtnDesktopPadding,
+			socialIconBtnTabPadding,
+			socialIconBtnMobilePadding,
+			socialIconBtnBorderUnits,
+			socialIconBtnDesktopBorderWidth,
+			socialIconBtnTabBorderWidth,
+			socialIconBtnMobileBorderWidth,
+			socialIconBtnBorderRadiusUnits,
+			socialIconBtnDesktopBorderRadiusWidth,
+			socialIconBtnTabBorderRadiusWidth,
+			socialIconBtnMobileBorderRadiusWidth,
+
+			// Advance Backgorund
+			teamMemberBgClassicColor,
+			teamMemberBgGradientColor,
+			teamMemberBgCustomGradientSwitcher,
+			teamMemberBgCustomGradientInputValue,
+			teamMemberBgImageUrl,
+			teamMemberBgImagePosition,
+			teamMemberBgImageAttachment,
+			teamMemberBgImageRepeat,
+			teamMemberBgImageSize,
+			teamMemberBgHoverClassicColor,
+			teamMemberBgHoverGradientColor,
+			teamMemberBgHoverCustomGradientSwitcher,
+			teamMemberBgHoverCustomGradientInputValue,
+			teamMemberBgHoverImageUrl,
+			teamMemberBgHoverImagePosition,
+			teamMemberBgHoverImageAttachment,
+			teamMemberBgHoverImageRepeat,
+			teamMemberBgHoverImageSize,
+
+			// Content Backgorund
+			teamMemberContentBgClassicColor,
+			teamMemberContentBgGradientColor,
+			teamMemberContentBgCustomGradientSwitcher,
+			teamMemberContentBgCustomGradientInputValue,
+			teamMemberContentBgImageUrl,
+			teamMemberContentBgImagePosition,
+			teamMemberContentBgImageAttachment,
+			teamMemberContentBgImageRepeat,
+			teamMemberContentBgImageSize,
+			teamMemberContentBgHoverClassicColor,
+			teamMemberContentBgHoverGradientColor,
+			teamMemberContentBgHoverCustomGradientSwitcher,
+			teamMemberContentBgHoverCustomGradientInputValue,
+			teamMemberContentBgHoverImageUrl,
+			teamMemberContentBgHoverImagePosition,
+			teamMemberContentBgHoverImageAttachment,
+			teamMemberContentBgHoverImageRepeat,
+			teamMemberContentBgHoverImageSize,
 		]
 	);
 	
@@ -2261,7 +2642,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 										</PanelBody>
 
-										<PanelBody title={__("Content", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("Content", "frontis-blocks")} initialOpen={false}>
 											<SelectControl
                                                 label={__("Content Position", "frontis-blocks")}
                                                 value={teamMemberContentPosition}
@@ -2303,7 +2684,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>}
 										</PanelBody>
 
-										<PanelBody title={__("Social Profiles", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("Social Profiles", "frontis-blocks")} initialOpen={false}>
 											<SelectControl
                                                 label={__("Icon Type", "frontis-blocks")}
                                                 value={teamMemberSocialType}

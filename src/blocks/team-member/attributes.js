@@ -713,10 +713,6 @@ const attributes = {
 		type: "string",
 		default: "Creative Director"
 	},
-	teamMemberDesignationHeadingTag: {
-		type : "string",
-		default: "h2"
-	},
 	teamMemberDesignationColor : {
 		type: "string",
 		default: "#FFFFFF"
@@ -1801,82 +1797,86 @@ const attributes = {
 		type: "string",
 		default: "Lorem ipsum dolor sit amet consectetur Aliquam mauris bibendum.",
 	},
-
-	teamMemberDescFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	teamMemberDescFontSizeDesktop: {
-		type: "number",
-		default: 18
-	},
-	teamMemberDescFontSizeTablet: {
-		type: "number",
-		default: 18
-	},
-	teamMemberDescFontSizeMobile: {
-		type: "number",
-		default: 18
-	},
-	teamMemberDescFontSizeUnits: {
-		type: "string",
-		default: "px"
-	},
-	teamMemberDescFontWeight : {
-		type: "string",
-		default: "600"
-	},
-	teamMemberDescFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	teamMemberDescTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	teamMemberDescTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	teamMemberDescLetterSpacingDesktop: {
-		type: "number",
-		default: 0
-	},
-	teamMemberDescLetterSpacingTablet: {
-		type: "number",
-		default: 0
-	},
-	teamMemberDescLetterSpacingMobile: {
-		type: "number",
-		default: 0
-	},
-	teamMemberDescLetterSpacingUnits : {
-		type: "string",
-		default: "px"
-	},
-	teamMemberDescLineHeightDesktop: {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberDescLineHeightTablet: {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberDescLineHeightMobile: {
-		type: "number",
-		default: "inherit",
-	},
-	teamMemberDescLineHeightUnits : {
-		type: "string",
-		default: "px"
-	},
-
 	teamMemberDescColor : {
 		type: "string",
-		default: "#000"
+		default: "#FFFFFF"
 	},
-
-	// Designation margin
+	// Typography
+	teamMemberDescFontFamily: {
+		type: "string",
+		default: "",
+	},
+	teamMemberDescFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberDescFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberDescFontWeight: {
+		type: "string",
+		default: "",
+	},
+	teamMemberDescFontStyle: {
+		type: "string",
+		default: "",
+	},
+	teamMemberDescTextTransform: {
+		type: "string",
+		default: "",
+	},
+	teamMemberDescTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	teamMemberDescLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberDescLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberDescLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberDescLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberDescLoadGoogleFonts: {
+		type: 'boolean',
+		default: false,
+	},
+	
+	
+	// Desc margin
 	teamMemberDescMarginUnits : {
 		type: 'object',
 		default: {
@@ -1916,6 +1916,7 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+
 
 	teamMemberSocialPaddingUnits : {
 		type: "string",

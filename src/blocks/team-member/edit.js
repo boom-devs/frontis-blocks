@@ -28,6 +28,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		// Social Profile
 		teamMemberSocialItems,
 		teamMemberSocialType,
+		socialIconBtnSwitcher,
+		socialIconBtnIcon,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -51,12 +53,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{teamMemberImageUrl && (
 								<img src={teamMemberImageUrl}/>
 							)}
-							{ teamMemberSocialType === 'image' && <div className={`fb-team-member-social-profile`}>
-								{teamMemberSocialItems.map(item => (
-									<a href={item.link} key={item.id} className="fb-team-member-social-icon">
-										{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
-									</a>
-								))}
+							{ teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
+								{socialIconBtnSwitcher === true && 
+									<button className="fb-team-member-social-icon-wrapper-btn">
+										{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
+									</button>
+								}
+								<div className={`fb-team-member-social-profile`}>
+									{teamMemberSocialItems.map(item => (
+										<a href={item.link} key={item.id} className="fb-team-member-social-icon">
+											{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
+										</a>
+									))}
+								</div> 
 							</div> }
 						</div>
 						<div className="fb-team-member-content-wrapper">
@@ -83,14 +92,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									className="fb-team-member-desc"
 								/> }
 
-								{ teamMemberSocialType === 'content' && <div className={`fb-team-member-social-profile`}>
+							</div>
+							{ teamMemberSocialType === 'content' && <div className="fb-team-member-social-profile-wrapper">
+								{socialIconBtnSwitcher === true && 
+									<button className="fb-team-member-social-icon-wrapper-btn">
+										{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
+									</button>
+								}
+								<div className={`fb-team-member-social-profile`}>
 									{teamMemberSocialItems.map(item => (
 										<a href={item.link} key={item.id} className="fb-team-member-social-icon">
 											{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 										</a>
 									))}
-								</div> }
-							</div>
+								</div> 
+							</div> }
 						</div>
 					</div>
 				</div>
