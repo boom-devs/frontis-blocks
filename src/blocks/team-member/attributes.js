@@ -112,7 +112,7 @@ const attributes = {
     },
     teamMemberBgClassicColor: {
         type: "string",
-        default: "#EBF5FF"
+        default: ""
     },
     teamMemberBgGradientColor: {
         type: "string",
@@ -163,7 +163,7 @@ const attributes = {
     },
     teamMemberBgHoverClassicColor: {
         type: "string",
-        default: "#399CFF"
+        default: ""
     },
     teamMemberBgHoverGradientColor: {
         type: "string",
@@ -430,7 +430,7 @@ const attributes = {
 	},
 	teamMemberContentBgClassicColor: {
 		type: "string",
-		default: "#EBF5FF"
+		default: ""
 	},
 	teamMemberContentBgGradientColor: {
 		type: "string",
@@ -481,7 +481,7 @@ const attributes = {
 	},
 	teamMemberContentBgHoverClassicColor: {
 		type: "string",
-		default: "#399CFF"
+		default: ""
 	},
 	teamMemberContentBgHoverGradientColor: {
 		type: "string",
@@ -863,6 +863,11 @@ const attributes = {
         default: ""
     },
 
+
+	teamMemberImageOverlaySwitcher: {
+		type: "boolean",
+		default: false
+	},
 	teamMemberImageBGColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -1269,6 +1274,7 @@ const attributes = {
 		type : "string",
 		default: "left"
 	},
+
 	teamMemberIconsSize: {
 		type : "object",
 		default: {
@@ -1390,6 +1396,46 @@ const attributes = {
 		},
 	},
 	teamMemberIconsPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	teamMemberIconsMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberIconsDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsTabMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsMobileMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberIconsMarginLink : {
 		type : "boolean",
 		default: true
 	},
@@ -1593,6 +1639,46 @@ const attributes = {
 		},
 	},
 	socialIconBtnPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	socialIconBtnMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialIconBtnDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnTabMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnMobileMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialIconBtnMarginLink : {
 		type : "boolean",
 		default: true
 	},
