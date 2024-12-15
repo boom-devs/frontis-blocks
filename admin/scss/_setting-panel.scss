@@ -20,7 +20,7 @@
             font-family: $heading-font-family;
             font-weight: 600;
             font-size: $small-font-size;
-            line-height: $heading-line-height;
+            line-height: 14px;
             border: 1px solid transparent;
             border-radius: 0;
             box-shadow: none;
@@ -55,6 +55,7 @@
 			.components-button{
 				font-family: $heading-font-family;
 				font-weight: 600;
+				line-height: 16px;
 			}
         }
         .components-button{
@@ -72,7 +73,7 @@
         .components-base-control__field {
             .components-base-control__label, label{
                 color: $neutral-color-950;
-                font-family: $heading-font-family;
+                font-family: $body-font-family;
                 font-size: $medium-font-size;
                 font-weight: 400;
                 line-height: $body-line-height;

@@ -1750,7 +1750,7 @@
 .fb-setting-device-label-wrapper p.fb-setting-label-text {
   flex: 1;
   color: #0B0C0E;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -2016,6 +2016,9 @@
   flex-direction: column;
   gap: 15px;
 }
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field .components-flex {
+  gap: 0;
+}
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field label {
   font-family: "Plus Jakarta Sans", sans-serif;
   display: block;
@@ -2127,7 +2130,7 @@
   background: #F7F7F7;
   height: unset;
   border-radius: 8px;
-  padding: 12px;
+  padding: 6px 12px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -2254,13 +2257,13 @@
 }
 .fb-box-shadow-wrapper .components-base-control__field .components-base-control__field .components-base-control__label {
   display: block;
-  color: #5f5f5f !important;
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  line-height: 16px !important;
-  margin: 10px 0 !important;
+  color: #5f5f5f;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 10px 0;
   min-height: auto;
-  text-transform: capitalize !important;
+  text-transform: capitalize;
 }
 
 .fb-box-shadow-icon-dropdown .fb-box-shadow-icon-btn {
@@ -2301,7 +2304,7 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
   font-size: 12px;
-  line-height: 1.3;
+  line-height: 14px;
   border: 1px solid transparent;
   border-radius: 0;
   box-shadow: none;
@@ -2331,6 +2334,7 @@
 .fb-inspector-control .components-panel__body .components-panel__body-title .components-button {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
+  line-height: 16px;
 }
 .fb-inspector-control .components-panel__body .components-button {
   color: #0B0C0E;
@@ -2346,7 +2350,7 @@
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label, .fb-inspector-control .components-panel__body .components-base-control__field label {
   color: #0B0C0E;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -2400,7 +2404,7 @@
   font-weight: 400;
   flex-grow: 1;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 5px;
   margin-bottom: 0;
   box-shadow: none;
   border-radius: 0;
@@ -2433,7 +2437,12 @@
   flex-wrap: nowrap;
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-setting-switcher-panel-btn .components-button {
+  font-size: 14px !important;
+  color: #555E72 !important;
   border: 1px solid transparent;
+}
+.fb-inspector-control .components-panel__body .components-button-group.fb-setting-switcher-panel-btn .components-button.active {
+  color: #0B0C0E !important;
 }
 .fb-inspector-control .components-panel__body .components-button-group.fb-btn-group-text-only {
   flex-wrap: nowrap;
@@ -2530,6 +2539,9 @@
 .fb-inspector-control .components-panel__body .fb-setting-spacing-container .components-range-control__root .components-range-control__number {
   margin-right: 0;
 }
+.fb-inspector-control .components-panel__body .fb-image-upload-btn {
+  margin-bottom: 10px;
+}
 
 .fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper, .fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
   margin-bottom: 24px;
@@ -2610,6 +2622,7 @@
 }
 .fb-setting-color-setting-wrapper .components-base-control__field .fb-setting-color-setting-icon-dropdown .fb-setting-color-setting-icon-btn .fb-setting-color-hex {
   text-transform: uppercase;
+  font-weight: 400;
 }
 .fb-setting-color-setting-wrapper .components-base-control__field .fb-setting-color-setting-icon-dropdown .fb-setting-color-setting-icon-btn .fb-setting-color-display {
   width: 24px;
