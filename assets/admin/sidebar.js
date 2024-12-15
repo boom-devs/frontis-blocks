@@ -2723,6 +2723,21 @@ function FrontisBlocksSidebar(props) {
     colors[index].color = color;
     setGlobalColors(_toConsumableArray(colors));
     setFbGlobalSettingsLoading(true);
+
+    // // Select the Save button and update its aria-disabled attribute
+    // const saveButton = document.querySelector(
+    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
+    // );
+
+    // if (saveButton) {
+    // 	// Set aria-disabled to false when color is updated
+    // 	saveButton.setAttribute('aria-disabled', 'false');
+
+    // 	// Add a click event listener to set aria-disabled back to true
+    // 	saveButton.addEventListener('click', () => {
+    // 		saveButton.setAttribute('aria-disabled', 'true');
+    // 	});
+    // }
   };
 
   //Update Gradient Colors
@@ -2925,7 +2940,7 @@ function FrontisBlocksSidebar(props) {
       stroke: "white",
       strokeWidth: "1.5",
       strokeLinecap: "round",
-      "stroke-linejoin": "round"
+      strokeLinejoin: "round"
     })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__["default"], {
       title: "Gradient Colors",
       colors: gradientColors,
@@ -2965,7 +2980,7 @@ function FrontisBlocksSidebar(props) {
       stroke: "white",
       strokeWidth: "1.5",
       strokeLinecap: "round",
-      "stroke-linejoin": "round"
+      strokeLinejoin: "round"
     })))))));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks"),
