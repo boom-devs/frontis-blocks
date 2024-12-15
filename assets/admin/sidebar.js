@@ -828,6 +828,8 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   var handleLineHeightUnitChange = function handleLineHeightUnitChange(newLineHeightUnit) {
     onChangeLineHeightUnit(newLineHeightUnit);
   };
+  console.log("Checking device type");
+  console.log(deviceType);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
     options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
@@ -984,6 +986,7 @@ var TypographySettings = function TypographySettings(props) {
     var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var result = {};
     if (_typeof(font) === 'object' && Object.keys(font).length > 0) {
+      var _font$letterSpacing, _font$letterSpacingUn, _font$fontSize, _font$fontSizeUnit, _font$lineHeight, _font$lineHeightUnits;
       result = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, font.fontFamily && {
         fontFamily: font.fontFamily
       }), font.fontWeight && {
@@ -995,11 +998,11 @@ var TypographySettings = function TypographySettings(props) {
       }), font.textDecoration && {
         textDecoration: font.textDecoration
       }), font.letterSpacing && {
-        letterSpacing: "".concat(font.letterSpacing[deviceType]).concat(font.letterSpacingUnit[deviceType] || 'px')
+        letterSpacing: "".concat((_font$letterSpacing = font.letterSpacing) === null || _font$letterSpacing === void 0 ? void 0 : _font$letterSpacing[deviceType]).concat(((_font$letterSpacingUn = font.letterSpacingUnit) === null || _font$letterSpacingUn === void 0 ? void 0 : _font$letterSpacingUn[deviceType]) || 'px')
       }), size && font.fontSize && {
-        fontSize: "".concat(font.fontSize[deviceType]).concat(font.fontSizeUnit[deviceType] || 'px')
+        fontSize: "".concat((_font$fontSize = font.fontSize) === null || _font$fontSize === void 0 ? void 0 : _font$fontSize[deviceType]).concat(((_font$fontSizeUnit = font.fontSizeUnit) === null || _font$fontSizeUnit === void 0 ? void 0 : _font$fontSizeUnit[deviceType]) || 'px')
       }), font.lineHeight && {
-        lineHeight: "".concat(font.lineHeight[deviceType]).concat(font.lineHeightUnits[deviceType] || 'px')
+        lineHeight: "".concat((_font$lineHeight = font.lineHeight) === null || _font$lineHeight === void 0 ? void 0 : _font$lineHeight[deviceType]).concat(((_font$lineHeightUnits = font.lineHeightUnits) === null || _font$lineHeightUnits === void 0 ? void 0 : _font$lineHeightUnits[deviceType]) || 'px')
       });
     }
     return result;
@@ -1400,6 +1403,8 @@ var TypographySettings = function TypographySettings(props) {
     }();
     handleUpdateSettings();
   }, [isAfterSave]);
+  console.log("Checking device type inside typography settings");
+  console.log(deviceType);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -2124,7 +2129,343 @@ function FrontisBlocksSidebar(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     fbGlobalSettingsLoading = _useState14[0],
     setFbGlobalSettingsLoading = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({
+      body: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      link: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      button: {
+        fontFamily: 'inherit',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      heading: {
+        h1: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h2: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h3: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h4: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h5: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h6: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        }
+      }
+    }),
     _useState16 = _slicedToArray(_useState15, 2),
     typography = _useState16[0],
     setTypography = _useState16[1];
@@ -2136,343 +2477,6 @@ function FrontisBlocksSidebar(props) {
     _useState20 = _slicedToArray(_useState19, 2),
     fontfamilies = _useState20[0],
     setFontfamilies = _useState20[1];
-  var defaultTypos = {
-    body: {
-      fontFamily: 'Default',
-      lineHeight: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontSize: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontWeight: '',
-      fontStyle: '',
-      textTransform: '',
-      textDecoration: '',
-      letterSpacing: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      }
-    },
-    link: {
-      fontFamily: 'Default',
-      lineHeight: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontSize: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontWeight: '',
-      fontStyle: '',
-      textTransform: '',
-      textDecoration: '',
-      letterSpacing: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      }
-    },
-    button: {
-      fontFamily: 'inherit',
-      lineHeight: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontSize: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      },
-      fontWeight: '',
-      fontStyle: '',
-      textTransform: '',
-      textDecoration: '',
-      letterSpacing: {
-        Desktop: '',
-        Tablet: '',
-        Mobile: ''
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'px',
-        Mobile: 'px'
-      }
-    },
-    heading: {
-      h1: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      h2: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      h3: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      h4: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      h5: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      h6: {
-        fontFamily: "Default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      }
-    }
-  };
 
   // Extract all font families into a single string
   var getAllFontFamilies = function getAllFontFamilies(fontsObject) {
@@ -2614,8 +2618,7 @@ function FrontisBlocksSidebar(props) {
             case 45:
               _res4 = _context.sent;
               if (!_res4.success) {
-                setTypography(defaultTypos);
-                localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+                localStorage.setItem('fb_typography', JSON.stringify(typography));
               } else {
                 setTypography(_res4.data);
                 localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
@@ -2920,8 +2923,8 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
       "stroke-linejoin": "round"
     })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__["default"], {
       title: "Gradient Colors",
@@ -2960,8 +2963,8 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
       "stroke-linejoin": "round"
     })))))));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -3148,8 +3151,8 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     viewBox: "0 0 16 16",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    "fill-rule": "evenodd",
-    "clip-rule": "evenodd",
+    fillRule: "evenodd",
+    clipRule: "evenodd",
     d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
     fill: "#555E72"
   }))), /*#__PURE__*/React.createElement("button", {
