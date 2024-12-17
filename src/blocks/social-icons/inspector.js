@@ -32,6 +32,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -2397,17 +2398,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Preset Style */
 
 
-	    /* set default values for the style attributes */
-		useEffect(() => {
-			if (socialTitleFontFamily) { 
-				const fontUrl = `https://fonts.googleapis.com/css?family=${socialTitleFontFamily.replace(' ', '+')}`;
-				const linkElement = document.createElement('link');
-				linkElement.rel = 'stylesheet';
-				linkElement.href = fontUrl;
-				document.head.appendChild(linkElement);
-			}
-		}, [socialTitleFontFamily]);
-
+	/** Start load font */
+	useEffect(() => {
+		loadGoogleFont(socialTitleFontFamily);
+	}, [socialTitleFontFamily]);
+	/** End load font */
 
 
 		const allBlockStyle = useMemo(() => `

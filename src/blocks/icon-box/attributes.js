@@ -235,7 +235,7 @@ const attributes = {
     },
     Heading_Font_Family: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     Heading_Font_Size: {
         type: 'object',
@@ -501,7 +501,7 @@ const attributes = {
     //Sub Heading
     SubHeadingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     SubHeadingFontSize: {
         type: 'object',
@@ -1026,7 +1026,7 @@ const attributes = {
 	// Button
 	buttonFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	buttonFontSize: {
 		type: "number",
