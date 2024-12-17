@@ -31,6 +31,8 @@ import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 import './editor.scss';
 
@@ -610,42 +612,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End order by */
 
-
-    // Helper function to load fonts
-    const loadFont = (fontFamily) => {
-        if (fontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    };
-
-    // Apply font family styles using useEffect
+    /** Start load font */
     useEffect(() => {
-        loadFont(postTitleFontFamily); 
-    }, [postTitleFontFamily]);
+        loadGoogleFont(postTitleFontFamily); 
+        loadGoogleFont(postDescriptionFontFamily);
+        loadGoogleFont(postCategoryFontFamily);
+        loadGoogleFont(postTagFontFamily);
+        loadGoogleFont(postAuthorFontFamily);
+        loadGoogleFont(postDateFontFamily);
+        loadGoogleFont(loadMoreTextFontFamily);
+    }, [postTitleFontFamily, 
+        postDescriptionFontFamily, 
+        postCategoryFontFamily, 
+        postTagFontFamily, 
+        postAuthorFontFamily, 
+        postDateFontFamily,
+        loadMoreTextFontFamily
+    ]);
+    /** End load font */
 
-    useEffect(() => {
-        loadFont(postDescriptionFontFamily); 
-    }, [postDescriptionFontFamily]);
-
-    useEffect(() => {
-        loadFont(postCategoryFontFamily); 
-    }, [postCategoryFontFamily]);
-
-    useEffect(() => {
-        loadFont(postTagFontFamily); 
-    }, [postTagFontFamily]);
-
-    useEffect(() => {
-        loadFont(postAuthorFontFamily); 
-    }, [postAuthorFontFamily]);
-
-    useEffect(() => {
-        loadFont(postDateFontFamily); 
-    }, [postDateFontFamily]);
 
     /** Start Post Grid Padding */
     const handlePostGridPaddingUnitChange = ( event, position ) => {
