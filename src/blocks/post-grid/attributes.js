@@ -563,7 +563,7 @@ const attributes = {
 	},
 	postTitleFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postTitleFontSize: {
 		type: 'object',
@@ -692,7 +692,7 @@ const attributes = {
 	},
 	postDescriptionFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postDescriptionFontSize: {
 		type: 'object',
@@ -825,7 +825,7 @@ const attributes = {
 	},
 	postCategoryFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postCategoryFontSize: {
 		type: 'object',
@@ -1116,7 +1116,7 @@ const attributes = {
 	},
 	postTagFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postTagFontSize: {
 		type: 'object',
@@ -1582,7 +1582,7 @@ const attributes = {
 
 	postAuthorFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postAuthorFontSize: {
 		type: 'object',
@@ -1692,7 +1692,7 @@ const attributes = {
 
 	postDateFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	postDateFontSize: {
 		type: 'object',

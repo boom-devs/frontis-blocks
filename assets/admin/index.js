@@ -130,35 +130,17 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.BlockIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blocks", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Blocks, null)
-}
-// {
-//     id: 'settings',
-//     icon: <OptionsIcon />,
-//     label: __("Settings", "frontis-blocks"),
-//     comp: <Settings />
-// },
-// {
-//     id: 'integrations',
-//     icon: <IntegrationsIcon />,
-//     label: __("Integrations", "frontis-blocks"),
-//     comp: <Integration />
-// },
-// {
-// 	id: 'custom_icons',
-// 	icon: <IntegrationsIcon />,
-// 	label: __("Custom icons", "frontis-blocks"),
-// 	comp: <CustomIcons />
-// }
-]);
-// Add pricing tab if not pro
-// if (window.frontisBlocksAdmin.isProActive === 'false') {
-//     TabMenus.push({
-//       id: 'pricing',
-//       icon: <PricingIcon />,
-//       label: __("Pricing", "frontis-blocks"),
-//       comp: <Pricing />
-//     });
-// }
+}, {
+  id: 'settings',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.OptionsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Settings, null)
+}, {
+  id: 'integrations',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
+}]);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
@@ -1488,7 +1470,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data4;
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -1499,7 +1481,7 @@ var AssetsGeneration = function AssetsGeneration() {
         }
       },
       error: function error(xhr, status, _error3) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
+        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

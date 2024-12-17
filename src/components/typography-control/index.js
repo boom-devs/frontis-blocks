@@ -7,6 +7,8 @@ import {
 	Dashicon,
 } from '@wordpress/components';
 
+import { useEffect } from '@wordpress/element';
+
 import {
     FONT_FAMILYS,
 	FONT_WEIGHT,
@@ -16,6 +18,7 @@ import {
 } from "./constants/constants";
 
 import FB_Range from '@Components/range';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.lazy.scss';
 
 const FB_TypographyControl = ({
@@ -46,8 +49,18 @@ const FB_TypographyControl = ({
     setAttributes,
 }) => {
 
+    useEffect(() => {
+		if (fontFamily !== 'Default') {
+			loadGoogleFont(fontFamily);
+		}
+	}, [fontFamily]);
+
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
+
+        if (newFontFamily !== 'Default') {
+            loadGoogleFont(newFontFamily);
+        }
 	};
 
 	const handleFontSizeChange = (newFontSize) => {

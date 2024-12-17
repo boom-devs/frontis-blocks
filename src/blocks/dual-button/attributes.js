@@ -44,7 +44,7 @@ const attributes = {
 	},
 	ButtonFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	ButtonFontSize: {
 		type: 'object',
@@ -322,7 +322,7 @@ const attributes = {
 	},
 	connectorFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	connectorFontSize: {
 		type: 'object',
@@ -558,7 +558,7 @@ const attributes = {
 	},
 	ButtonTwoFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	ButtonTwoFontSize: {
 		type: "number",

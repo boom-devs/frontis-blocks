@@ -22,6 +22,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_Range from '@Components/range';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import './editor.scss';
 
@@ -79,21 +80,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [blockID, clientId, setAttributes]);
 
-    // Helper function to load fonts
-    const loadFont = (fontFamily) => {
-        if (fontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    };
-
-    // Apply font family styles using useEffect
+    /** Start load font */
     useEffect(() => {
-        loadFont(progressFontFamily);
+        loadGoogleFont(progressFontFamily); 
     }, [progressFontFamily]);
+    /** End load font */
 
     /** Start Progress Border Radius */
     const progressBorderRadiusUnitsChange = (event, position) => {
