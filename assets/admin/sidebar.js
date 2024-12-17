@@ -2723,6 +2723,21 @@ function FrontisBlocksSidebar(props) {
     colors[index].color = color;
     setGlobalColors(_toConsumableArray(colors));
     setFbGlobalSettingsLoading(true);
+
+    // // Select the Save button and update its aria-disabled attribute
+    // const saveButton = document.querySelector(
+    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
+    // );
+
+    // if (saveButton) {
+    // 	// Set aria-disabled to false when color is updated
+    // 	saveButton.setAttribute('aria-disabled', 'false');
+
+    // 	// Add a click event listener to set aria-disabled back to true
+    // 	saveButton.addEventListener('click', () => {
+    // 		saveButton.setAttribute('aria-disabled', 'true');
+    // 	});
+    // }
   };
 
   //Update Gradient Colors
@@ -2923,9 +2938,9 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
     })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__["default"], {
       title: "Gradient Colors",
       colors: gradientColors,
@@ -2963,9 +2978,9 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
     })))))));
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks"),
@@ -3130,10 +3145,6 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    // setDeviceType('Desktop');
-    console.log("Hello world responsive");
-  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
@@ -3155,8 +3166,8 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     viewBox: "0 0 16 16",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    "fill-rule": "evenodd",
-    "clip-rule": "evenodd",
+    fillRule: "evenodd",
+    clipRule: "evenodd",
     d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
     fill: "#555E72"
   }))), /*#__PURE__*/React.createElement("button", {

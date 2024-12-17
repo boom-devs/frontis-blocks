@@ -14,6 +14,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// Photo
 		teamMemberImageUrl,
+		teamMemberImageOverlaySwitcher,
 
 		// Team Name
 		teamMemberName,
@@ -49,7 +50,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
-							<div className={`fb-team-member-image-overlay`}></div>
+							{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 							{teamMemberImageUrl && (
 								<img src={teamMemberImageUrl}/>
 							)}
