@@ -1,21 +1,16 @@
 import {__} from "@wordpress/i18n";
 import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/editor";
-import {
-	PanelBody,
-	Button,
-	TabPanel,
-	TextareaControl
-} from "@wordpress/components";
-import {
-	PanelColorSettings,
-} from "@wordpress/block-editor";
+import {useDispatch, useSelect} from '@wordpress/data';
+
+import {Button, PanelBody, TabPanel} from "@wordpress/components";
+import {PanelColorSettings,} from "@wordpress/block-editor";
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
-import {useState, useEffect} from "@wordpress/element";
+import {useEffect, useState} from "@wordpress/element";
 import "./sidebar.scss";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
-import {getFbLocalStorage, useAfterSave, loadGoogleFont} from "./helper";
-import {updateGlobalStyle, getGlobalStyle} from "./fetch";
+import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
+import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 
 const defaultsColors = [
@@ -99,6 +94,8 @@ const gradientDefaults = [
 ];
 
 function FrontisBlocksSidebar(props) {
+
+	// Set state
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
 	const [gradientColors, setGradientColors] = useState([]);
@@ -444,7 +441,7 @@ function FrontisBlocksSidebar(props) {
 		}
 	});
 	const [customTypography, setCustomTypography] = useState({});
-	const [fontfamilies, setFontfamilies] = useState({})
+	const [fontfamilies, setFontfamilies] = useState({});
 
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
@@ -680,6 +677,9 @@ function FrontisBlocksSidebar(props) {
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
+		console.log("Chekcing is after saving")
+		console.log(isAfterSave)
+
 		const handleUpdateSettings = async () => {
 			if (isAfterSave && fbGlobalSettingsLoading) {
 				try {

@@ -101,7 +101,18 @@ class Settings extends AjaxBase {
     }
 
     public function file_generation() {
-        $this->handle_option_update('file_generation', 'boolean');
+    	if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+
+//         $this->handle_option_update('file_generation', 'boolean');
     }
 
     public function generate_assets() {
