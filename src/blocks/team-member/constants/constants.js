@@ -52,7 +52,18 @@ export const SOCIAL_ICON_TYPE = [
 	{ label: __("In Image", "frontis-block"), value: "image" },
 ];
 
-export const SOCIAL_ICON_POSITION = [
+export const IMAGE_SOCIAL_ICON_POSITION = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+export const CONTENT_SOCIAL_ICON_POSITION = [
 	{ label: __("Top", "frontis-block"), value: "top" },
 	{ label: __("Right", "frontis-block"), value: "right" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
