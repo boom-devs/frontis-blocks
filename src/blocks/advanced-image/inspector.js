@@ -24,6 +24,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
@@ -214,6 +215,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
+
+	useEffect(() => {
+		if (headingFontFamily) {
+			loadGoogleFont(headingFontFamily);
+		}
+	}, [headingFontFamily]);
 
 	// Handle device
 	const handleDevice = (device) => {
