@@ -9,10 +9,6 @@
 		overflow: hidden;
 
 		.fb-team-member-image-wrapper {
-			position: relative;
-			overflow: hidden;
-			z-index: 2;
-
 			.fb-team-member-image-overlay {
 				position: absolute;
 				top: 0;
@@ -31,12 +27,5 @@
 				object-fit: cover;
 			}
 		}
-
-		.fb-team-member-social-icon {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
 	}
 }
