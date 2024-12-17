@@ -142,7 +142,7 @@ const AssetsGeneration = () => {
             draggable: true,
           });
         } else {
-          toast.error(__(`Failed to generate assets: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+          toast.error(__(`Failed to regenerate files: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -153,7 +153,7 @@ const AssetsGeneration = () => {
         }
       },
       error: function(xhr, status, error) {
-        toast.error(__(`Failed to generate assets: ${status} - ${error}`, 'frontis-blocks'), {
+        toast.error(__(`Failed to regenerate files: ${status} - ${error}`, 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
