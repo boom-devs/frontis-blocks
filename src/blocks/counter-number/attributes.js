@@ -39,6 +39,79 @@ const attributes = {
         type: "boolean",
         default: true
     },
+	// Icon Size
+	counterIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '60',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	// Icon Color
+	counterIconColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	counterIconColor: {
+		type: "string",
+		default: "#1C274C"
+	},
+	counterIconHoverColor: {
+		type: 'string',
+		default: "#1C274C"
+	},
+
+	// margin
+	counterIconMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterIconMarginDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	counterIconMarginTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	counterIconMarginMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	counterIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Counter Number */
 	counterNumberFontColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -131,28 +204,28 @@ const attributes = {
 	counterNumberMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberMarginTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberMarginLink : {
@@ -253,28 +326,28 @@ const attributes = {
 	counterNumberTitleMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberTitleMarginTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberTitleMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterNumberTitleMarginLink : {
@@ -294,12 +367,21 @@ const attributes = {
 		type: 'string',
 		default: ""
 	},
-	counterItemBorderBorder: {
+	counterItemBorder: {
 		type: 'string',
 		default: "none",
 	},
+	counterItemBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
 	counterItemBorderColor: {
 		type: 'string',
+		default: ""
+	},
+	counterItemBorderHoverColor: {
+		type: 'string',
+		default: ""
 	},
 	counterItemBorderTypeUnits : {
 		type: 'object',
@@ -312,28 +394,28 @@ const attributes = {
 	counterItemBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterItemBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterItemBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
 	},
 	counterItemBorderTypeLink : {
