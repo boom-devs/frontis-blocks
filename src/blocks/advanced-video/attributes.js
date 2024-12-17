@@ -370,12 +370,6 @@ const attributes = {
     },
     /** End Border */
 
-
-
-
-
-
-
     /** Start Global Style */
 
     videoGlobalPaddingUnits: {
