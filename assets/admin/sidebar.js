@@ -6485,9 +6485,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
-/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
+/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
+/* harmony import */ var _Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Utils/loadGoogleFont */ "./src/utils/loadGoogleFont.js");
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+
+
 
 
 
@@ -6520,8 +6525,16 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     setAttributes = _ref.setAttributes;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (fontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(fontFamily);
+    }
+  }, [fontFamily]);
   var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
     onChangeFontFamily(newFontFamily);
+    if (newFontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(newFontFamily);
+    }
   };
   var handleFontSizeChange = function handleFontSizeChange(newFontSize) {
     onChangeFontSize(newFontSize);
@@ -6592,10 +6605,10 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
         value: fontFamily,
         onChange: handleFontFamilyChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
@@ -6609,25 +6622,25 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         resetFallbackValue: ''
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT,
         value: fontWeight,
         onChange: handleFontWeightChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_STYLE,
         value: fontStyle,
         onChange: handleFontStyleChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_TRANSFORM,
         value: textTransform,
         onChange: handleTextTransformChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_DECORATION,
         value: textDecoration,
         onChange: handleTextDecorationChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 100,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
@@ -6639,7 +6652,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         setAttributes: setAttributes,
         rangeStep: 1,
         resetFallbackValue: ''
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
@@ -10011,6 +10024,47 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
+
+/***/ }),
+
+/***/ "./src/utils/loadGoogleFont.js":
+/*!*************************************!*\
+  !*** ./src/utils/loadGoogleFont.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var loadGoogleFont = function loadGoogleFont(font) {
+  if (font !== 'Default') {
+    var fontUrl = "https://fonts.googleapis.com/css?family=".concat(font.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+
+    // Add font to the main document
+    var linkElement = document.createElement('link');
+    linkElement.rel = 'stylesheet';
+    linkElement.href = fontUrl;
+    document.head.appendChild(linkElement);
+
+    // If an iframe is provided, add the font to its head
+    var iframe = document.querySelector('iframe[name="editor-canvas"]');
+    if (iframe) {
+      try {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        if (iframeDoc) {
+          var iframeLinkElement = iframeDoc.createElement('link');
+          iframeLinkElement.rel = 'stylesheet';
+          iframeLinkElement.href = fontUrl;
+          iframeDoc.head.appendChild(iframeLinkElement);
+        }
+      } catch (error) {
+        console.error('Failed to access iframe document:', error);
+      }
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadGoogleFont);
 
 /***/ }),
 

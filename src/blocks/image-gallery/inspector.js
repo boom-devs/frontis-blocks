@@ -37,6 +37,7 @@ import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_AlignmentControl from '../../components/alignment-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
@@ -2012,6 +2013,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const lightboxIconHandler = (IconName) => {
 		setAttributes({lightboxIcon: IconName})
 	}
+
+    useEffect(() => {
+        loadGoogleFont(GalleryButtonFontFamily);
+    }, [GalleryButtonFontFamily]);
     
 
 

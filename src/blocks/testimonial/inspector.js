@@ -38,6 +38,9 @@ import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 import './editor.scss';
 
@@ -248,47 +251,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [clientId]);
 
 
+    /** Start load font */
     useEffect(() => {
-		if (TestimonialTitleFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialTitleFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [TestimonialTitleFontFamily]);
-
-    useEffect(() => {
-		if (TestimonialDescFontFamily) { 
-			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialDescFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [TestimonialDescFontFamily]);
-
-    useEffect(() => {
-		if (TestimonialAuthorFontFamily) { 
-			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialAuthorFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [TestimonialAuthorFontFamily]);
-
-
-    useEffect(() => {
-		if (TestimonialDesignationFontFamily) { 
-			const fontUrl = `https://fonts.googleapis.com/css?family=${TestimonialDesignationFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [TestimonialDesignationFontFamily]);
-
+        loadGoogleFont(TestimonialTitleFontFamily);
+        loadGoogleFont(TestimonialDescFontFamily);
+        loadGoogleFont(TestimonialAuthorFontFamily);
+        loadGoogleFont(TestimonialDesignationFontFamily);
+    }, [TestimonialTitleFontFamily, 
+        TestimonialDescFontFamily, 
+        TestimonialAuthorFontFamily, 
+        TestimonialDesignationFontFamily
+    ]);
+    /** End load font */
 
 
     const quoteIconHandler = (IconName) => {
@@ -2455,25 +2429,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 className="fb-setting-testimonial-title-wrapper"
                                             >
 
-                                                <BaseControl
+                                                <FB_HtmlTagControl
                                                     label={__("Title Tag", "frontis-blocks")}
-                                                        id="fb-setting-text-alignment"
-                                                        className="fb-setting-text-alignment"
-                                                >
-                                                    <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                     >
-                                                        {HEADING.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ TestimonialTitleTag: item.value })}
-                                                                className={`fb-setting-text-alignment-single-btn ${ TestimonialTitleTag === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
+                                                    globalHtmlTag={TestimonialTitleTag}
+                                                    setGlobalHtmlTag={(value) => setAttributes({ TestimonialTitleTag: value })}
+                                                />
+
                                                 <FB_TypographyControl
                                                     fontFamily={TestimonialTitleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value })}

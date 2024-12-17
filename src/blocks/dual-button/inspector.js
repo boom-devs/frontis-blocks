@@ -43,6 +43,7 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -1260,24 +1261,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-
 	const globalDesktopBorderRadiusWidth = `${dualButtonGlobalBorderRadiusDesktop.top}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.right}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.bottom}${dualButtonGlobalBorderRadiusUnits.Desktop} ${dualButtonGlobalBorderRadiusDesktop.left}${dualButtonGlobalBorderRadiusUnits.Desktop}`;
 	const globalTabletBorderRadiusWidth = `${dualButtonGlobalBorderRadiusTablet.top}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.right}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.bottom}${dualButtonGlobalBorderRadiusUnits.Tablet} ${dualButtonGlobalBorderRadiusTablet.left}${dualButtonGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${dualButtonGlobalBorderRadiusMobile.top}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.right}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.bottom}${dualButtonGlobalBorderRadiusUnits.Mobile} ${dualButtonGlobalBorderRadiusMobile.left}${dualButtonGlobalBorderRadiusUnits.Mobile}`;
 
-	/* set default values for the style attributes */
+	/* Load Google Fonts */
 	useEffect(() => {
-		if (ButtonFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${ButtonFontFamily.replace(
-				" ",
-				"+",
-			)}`;
-			const linkElement = document.createElement("link");
-			linkElement.rel = "stylesheet";
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [ButtonFontFamily]);
+		loadGoogleFont(ButtonFontFamily);
+		loadGoogleFont(connectorFontFamily);
+	}, [ButtonFontFamily, connectorFontFamily]); 
+	/* End Load Google Fonts */
 
 	const iconHandler = (IconName) => {
 		setAttributes({ ButtonIcon: IconName });

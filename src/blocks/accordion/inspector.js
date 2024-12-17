@@ -44,6 +44,7 @@ import FB_BackgroundColorControl from '../../components/background-color-control
 import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_ImageControl from '../../components/image-control';
 import FB_HtmlTagControl from '../../components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {

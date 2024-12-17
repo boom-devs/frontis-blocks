@@ -45,6 +45,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import './editor.scss';
 
@@ -2626,6 +2627,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalTabletBorderRadiusWidth = `${priceGlobalBorderRadiusTablet.top}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.right}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.bottom}${priceGlobalBorderRadiusUnits.Tablet} ${priceGlobalBorderRadiusTablet.left}${priceGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile.top}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.right}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.bottom}${priceGlobalBorderRadiusUnits.Mobile} ${priceGlobalBorderRadiusMobile.left}${priceGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
+
+	/** Start load font */
+	useEffect(() => {
+		loadGoogleFont(pricingTopSectionTextFontFamily);
+		loadGoogleFont(normalPricingFontFamily);
+		loadGoogleFont(salePricingFontFamily);
+		loadGoogleFont(priceCurrencyFontFamily);
+		loadGoogleFont(pricePeriodFontFamily);
+		loadGoogleFont(pricingTitleFontFamily);
+		loadGoogleFont(pricingSubtitleFontFamily);
+		loadGoogleFont(priceAfterTextFontFamily);
+		loadGoogleFont(pricingfeatureTitleFontFamily);
+		loadGoogleFont(priceButtonFontFamily);
+		loadGoogleFont(priceFeatureAfterTextFontFamily);
+	}, [pricingTopSectionTextFontFamily,
+		 normalPricingFontFamily, 
+		 salePricingFontFamily, 
+		 priceCurrencyFontFamily, 
+		 pricePeriodFontFamily, 
+		 pricingTitleFontFamily, 
+		 pricingSubtitleFontFamily, 
+		 priceAfterTextFontFamily, 
+		 pricingfeatureTitleFontFamily, 
+		 priceButtonFontFamily, 
+		 priceFeatureAfterTextFontFamily]);
+	/** End load font */
 
 
 
