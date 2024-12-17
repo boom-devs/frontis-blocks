@@ -32,28 +32,28 @@ const attributes = {
     teamMemberDesktopPadding: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: 42,
+            bottom: 42,
+            left: 32,
+            right: 32,
         },
     },
     teamMemberTabPadding: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: 42,
+            bottom: 42,
+            left: 32,
+            right: 32,
         },
     },
     teamMemberMobilePadding: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: 42,
+            bottom: 42,
+            left: 32,
+            right: 32,
         },
     },
     teamMemberPaddingLink : {
@@ -112,7 +112,7 @@ const attributes = {
     },
     teamMemberBgClassicColor: {
         type: "string",
-        default: ""
+        default: "#FFF"
     },
     teamMemberBgGradientColor: {
         type: "string",
@@ -163,7 +163,7 @@ const attributes = {
     },
     teamMemberBgHoverClassicColor: {
         type: "string",
-        default: ""
+        default: "#EBF5FF"
     },
     teamMemberBgHoverGradientColor: {
         type: "string",
@@ -212,13 +212,15 @@ const attributes = {
 
     teamMemberBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     teamMemberBorderColor: {
         type: 'string',
+		default: '#E1E3E8'
     },
     teamMemberBorderHoverColor: {
         type: 'string',
+		default: '#EBF5FF'
     },
     teamMemberBorderColorSwitcher : {
         type: "string",
@@ -236,28 +238,28 @@ const attributes = {
     teamMemberDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     teamMemberTabBorderWidth: {
         type: "object", 
-        default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+		default: {
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     teamMemberMobileBorderWidth: {
         type: "object", 
-        default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+		default: {
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     teamMemberBorderLink : {
@@ -276,28 +278,28 @@ const attributes = {
     teamMemberDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '12',
+            bottom: '12',
+            left: '12',
+            right: '12',
         },
     },
     teamMemberTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '12',
+            bottom: '12',
+            left: '12',
+            right: '12',
         },
     },
     teamMemberMobileBorderRadiusWidth: {
         type: "object", 
-        default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+		default: {
+            top: '12',
+            bottom: '12',
+            left: '12',
+            right: '12',
         },
     },
     teamMemberBorderRadiusLink : {
@@ -539,28 +541,28 @@ const attributes = {
 	teamMemberContentPaddingDesktop: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 30,
-			right: 30,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentPaddingTab: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 30,
-			right: 30,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentPaddingMobile: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 30,
-			right: 30,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	teamMemberContentPaddingLink : {
@@ -720,14 +722,14 @@ const attributes = {
 	// Typography
 	teamMemberDesignationFontFamily: {
         type: "string",
-        default: "",
+        default: "Work Sans",
     },
     teamMemberDesignationFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '18'
         }
     },
     teamMemberDesignationFontSizeUnits: {
@@ -740,7 +742,7 @@ const attributes = {
     },
     teamMemberDesignationFontWeight: {
         type: "string",
-        default: "",
+        default: "400",
     },
     teamMemberDesignationFontStyle: {
         type: "string",
@@ -773,9 +775,9 @@ const attributes = {
     teamMemberDesignationLineHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '25',
+            Tablet: '25',
+            Mobile: '25'
         }
     },
     teamMemberDesignationLineHeightUnits: {
@@ -866,7 +868,7 @@ const attributes = {
 
 	teamMemberImageOverlaySwitcher: {
 		type: "boolean",
-		default: true
+		default: false
 	},
 	teamMemberImageBGColorSwitcher: {
 		type: "string",
@@ -885,17 +887,17 @@ const attributes = {
 	teamMemberImageWidthUnits : {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%'
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
 	teamMemberImageWidth: {
 		type: 'object',
 		default: {
-			Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+			Desktop: 260,
+			Tablet: 260,
+			Mobile: 260
 		}
 	},
 
@@ -910,44 +912,10 @@ const attributes = {
 	teamMemberImageHeight: {
 		type: 'object',
 		default: {
-			Desktop: 410,
-			Tablet: 410,
-			Mobile: 410
+			Desktop: 260,
+			Tablet: 260,
+			Mobile: 260
 		}
-	},
-	teamMemberImageSizeWidthDesktop: {
-		type: "number",
-		default: 100
-	},
-	teamMemberImageSizeWidthTab: {
-		type: "number",
-		default: 100
-	},
-	teamMemberImageSizeWidthMobile: {
-		type: "number",
-		default: 100
-	},
-
-	// Image Height Size
-	teamMemberImageSizeHeightUnits : {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	teamMemberImageSizeHeightDesktop: {
-		type: "number",
-		default: 416
-	},
-	teamMemberImageSizeHeightTab: {
-		type: "number",
-		default: 416
-	},
-	teamMemberImageSizeHeightMobile: {
-		type: "number",
-		default: 416
 	},
 
 
@@ -1052,39 +1020,39 @@ const attributes = {
 	teamMemberImageBorderRadiusUnits : {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
 		}
 	},
 	teamMemberImageBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
 		},
 	},
 	teamMemberImageBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
 		},
 	},
 	teamMemberImageBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: 50,
+			bottom: 50,
+			left: 50,
+			right: 50,
 		},
 	},
-	teamMemberImageBorderRadiusLink : {
+	teamMemberImageBorderRadiusLink: {
 		type : "boolean",
 		default: true
 	},
@@ -1095,7 +1063,7 @@ const attributes = {
 	},
 	teamMemberNameHeadingTag: {
 		type : "string",
-		default: "h2"
+		default: "h3"
 	},
 
 
@@ -1107,7 +1075,7 @@ const attributes = {
 		type: "string",
 		default: "#000"
 	},
-	teamMemberNameHoverColor : {
+	teamMemberNameHoverColor: {
 		type: "string",
 		default: "#000"
 	},
@@ -1222,7 +1190,7 @@ const attributes = {
 			right: '0',
 		},
 	},
-	teamMemberNameMarginLink : {
+	teamMemberNameMarginLink: {
 		type : "boolean",
 		default: true
 	},
@@ -1241,6 +1209,18 @@ const attributes = {
 				Title: 'Twitter',
 				link: '#',
 				teamMemberSocialIcon: 'twitter',
+			},
+			{
+				id: 'item-3',
+				Title: 'Instagram',
+				link: '#',
+				teamMemberSocialIcon: 'instagram',
+			},
+			{
+				id: 'item-4',
+				Title: 'Linkedin',
+				link: '#',
+				teamMemberSocialIcon: 'linkedin',
 			},
 		],
 		items: {
@@ -1278,9 +1258,9 @@ const attributes = {
 	teamMemberIconsSize: {
 		type : "object",
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: 18,
+			Tablet: 18,
+			Mobile: 18
 		}
 	},
 	teamMemberIconsSizeUnits: {
@@ -1358,6 +1338,23 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
+
+	teamMemberSocialProfileBorder: {
+		type: 'string',
+		default: "none",
+	},
+	teamMemberSocialProfileBorderColor: {
+		type: 'string',
+		default: "#000"
+	},
+	teamMemberSocialProfileBorderHoverColor: {
+		type: 'string',
+		default: "#000"
+	},
+	teamMemberSocialProfileBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
 	
 	
 	teamMemberIconsPaddingUnits: {
@@ -1371,28 +1368,28 @@ const attributes = {
 	teamMemberIconsDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: 16,
+			bottom: 16,
+			left: 16,
+			right: 16,
 		},
 	},
 	teamMemberIconsTabPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: 16,
+			bottom: 16,
+			left: 16,
+			right: 16,
 		},
 	},
 	teamMemberIconsMobilePadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: 16,
+			bottom: 16,
+			left: 16,
+			right: 16,
 		},
 	},
 	teamMemberIconsPaddingLink : {
@@ -1479,40 +1476,80 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	teamMemberSocialProfileBorderUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberSocialProfileDesktopBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberSocialProfileTabBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberSocialProfileMobileBorderWidth: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberSocialProfileBorderLink : {
+		type : "boolean",
+		default: true
+	},
 	
 	teamMemberIconsBorderRadiusUnits : {
 		type: 'object',
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%'
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
 	teamMemberIconsDesktopBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: 150,
+			bottom: 150,
+			left: 150,
+			right: 150,
 		},
 	},
 	teamMemberIconsTabBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: 150,
+			bottom: 150,
+			left: 150,
+			right: 150,
 		},
 	},
 	teamMemberIconsMobileBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: 150,
+			bottom: 150,
+			left: 150,
+			right: 150,
 		},
 	},
 	teamMemberIconsBorderRadiusLink : {
@@ -1545,9 +1582,9 @@ const attributes = {
 	socialIconBtnIconSize: {
 		type: "object",
 		default: {
-			Desktop: 24,
-			Tablet: 24,
-			Mobile: 24
+			Desktop: 20,
+			Tablet: 20,
+			Mobile: 20
 		},
 	},
 	socialIconBtnIconSizeUnits: {
@@ -1824,22 +1861,6 @@ const attributes = {
 		default: "#000"
 	},
 
-	teamMemberteamMemberIconsizeDesktop: {
-		type: "number",
-		default: 25
-	},
-	teamMemberteamMemberIconsizeTablet: {
-		type: "number",
-		default: 25
-	},
-	teamMemberteamMemberIconsizeMobile: {
-		type: "number",
-		default: 25
-	},
-	teamMemberteamMemberIconsizeUnits: {
-		type: "string",
-		default: "px"
-	},
 	teamMemberSocialIconBgSizeDesktop: {
 		type: "number",
 		default: 60
