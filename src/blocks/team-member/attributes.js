@@ -715,7 +715,7 @@ const attributes = {
 	},
 	teamMemberDesignationColor : {
 		type: "string",
-		default: "#FFFFFF"
+		default: "#000"
 	},
 	// Typography
 	teamMemberDesignationFontFamily: {
@@ -866,7 +866,7 @@ const attributes = {
 
 	teamMemberImageOverlaySwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 	teamMemberImageBGColorSwitcher: {
 		type: "string",
@@ -1105,11 +1105,11 @@ const attributes = {
 	},
 	teamMemberNameColor : {
 		type: "string",
-		default: "#FFF"
+		default: "#000"
 	},
 	teamMemberNameHoverColor : {
 		type: "string",
-		default: "#FFF"
+		default: "#000"
 	},
 
 	// Typography
@@ -1885,7 +1885,7 @@ const attributes = {
 	},
 	teamMemberDescColor : {
 		type: "string",
-		default: "#FFFFFF"
+		default: "#000"
 	},
 	// Typography
 	teamMemberDescFontFamily: {
