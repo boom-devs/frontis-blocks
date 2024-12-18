@@ -1024,6 +1024,7 @@ const attributes = {
 		},
 	},
 
+
 	//Global style attribute
 	globalZIndex : {
         type: "number",
