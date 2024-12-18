@@ -1,21 +1,9 @@
 .fb-blocks-pricing {
   max-width: 100%;
   margin: 0 auto;
-  padding: 24px;
   background-color: $white-color;
   border-radius: 14px;
-
-  h2 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-
-  .fb-pricing-table {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-  }
+  overflow: hidden;
 
   .fb-pricing-header,
   .fb-pricing-row {
@@ -24,9 +12,8 @@
 
   .fb-pricing-column {
     flex: 1;
-    padding: 15px;
-    text-align: center;
-    border-right: 1px solid #e0e0e0;
+    padding: 25px 32px;
+    border-right: 1px solid $neutral-color-100;
 
     &:last-child {
       border-right: none;
@@ -34,19 +21,83 @@
   }
 
   .fb-pricing-header {
-    background-color: #f5f5f5;
+    background-color: $white-color;
     font-weight: bold;
+    border-bottom: 1px solid $neutral-color-100;
 
-    h2 {
+    .fb-pricing-column {
+      padding: 42px 42px;
+      display: flex;
+      align-items: start;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      max-width: 310px;
+
+      &:first-child {
+        display: block;
+        padding: 42px 52px 42px 32px;
+        max-width: 100%
+      }
+
+      &:nth-child(2) {
+        background-color: $success-color-50;
+      }
+
+      .fb-pricing-type {
+        font-family: $heading-font-family;
         font-size: 24px;
         font-weight: 600;
+        line-height: 31px;
+        color: $primary-color-base;
+        margin: 0;
+      }
+      .fb-pricing-price {
         font-family: $heading-font-family;
+        font-size: 32px;
+        font-weight: 600px;
+        line-height: 41px;
+        color: $neutral-color-900;
+        margin: 0;
+
+        span {
+          font-family: $body-font-family;
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 25px;
+          color: $neutral-color;
+        }
+      }
+      .fb-button {
+        width: 226px;
+        padding: 14px;
+        font-family: $body-font-family;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 25px;
+        color: $white-color;
+        border-radius: 14px;
+        margin-top: 14px;
+      }
+    }  
+
+    h2 {
+      font-family: $heading-font-family;
+      font-size: 42px;
+      line-height: 54px;
+      font-weight: 700;
+      color: $neutral-color-900;
+      margin-bottom: 10px;
+      margin-top: 0;
     }
 
     p {
-        font-size: 14px;
-        font-weight: 400;
-        font-family: $body-font-family;
+      font-family: $body-font-family;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      color: $neutral-color-600;
+      margin: 0;
     }
   }
 
@@ -92,20 +143,39 @@
 
   .fb-pricing-body {
     .fb-pricing-row {
-      &:nth-child(even) {
-        background-color: #f9f9f9;
+      border-bottom: 1px solid $neutral-color-100;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .fb-pricing-column {
+        text-align: center;
+        font-family: $body-font-family;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 25px;
+        color: $neutral-color-600;
+        max-width: 310px;
       }
 
       .fb-pricing-column:first-child {
         text-align: left;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+        max-width: 100%;
+      }
+      .fb-pricing-column:nth-child(2) {
+        background-color: $success-color-50;
       }
     }
   }
 
   .fb-pricing-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     position: relative;
 
@@ -119,7 +189,8 @@
     }
 
     &-check {
-      background-color: #4CAF50;
+      background-color: $success-color;
+
       &::before {
         width: 6px;
         height: 10px;

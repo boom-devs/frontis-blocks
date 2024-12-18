@@ -24,8 +24,10 @@ const BlockCard = ({ block, onChange }) => {
             </div>
             <div className="fb-block-card-content">
                 <div>
-                    <h3 className="fb-block-card-title">{ block.title }</h3>
-                    {block.badge && <span className="fb-block-card-badge">{block.badge}</span>}
+                    <h3 className="fb-block-card-title">
+                        {block.title}
+                        {block.badge !== 'free' && <span className={`fb-block-card-badge ${block.badge}`}>{block.badge}</span>}
+                    </h3>
                 </div>
                 <div className="fb-block-card-links">
                     <a href={block.doc ? block.doc : 'https://frontis.com'} target="_blank" rel="noopener noreferrer" className="fb-block-card-link fb-block-card-doc">
