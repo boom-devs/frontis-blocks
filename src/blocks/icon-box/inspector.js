@@ -35,8 +35,6 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
  * Internal depencencies
  */
 import {
-	TEXT_ALIGN,
-	HEADING,
 	BORDER_STYLES,
 	mediaType,
 	INFO_ICON_POSITION,
