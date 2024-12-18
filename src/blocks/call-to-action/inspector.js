@@ -66,6 +66,7 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -1885,25 +1886,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/* set default values for the style attributes */
 	useEffect(() => {
 		if (headingFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${headingFontFamily.replace(
-				" ",
-				"+",
-			)}`;
-			const linkElement = document.createElement("link");
-			linkElement.rel = "stylesheet";
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
+			loadGoogleFont(headingFontFamily);
 		}
-	}, [headingFontFamily]);
-
-	// Define the CSS as a string
-	const css = `
-        #${blockID} {
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    `;
+		if (buttonFontFamily) {
+			loadGoogleFont(buttonFontFamily);
+		}
+		if (SubHeadingFontFamily) {
+			loadGoogleFont(SubHeadingFontFamily);
+		}
+		if (buttonTwoFontFamily) {
+			loadGoogleFont(buttonTwoFontFamily);
+		}
+	}, [headingFontFamily, buttonFontFamily, SubHeadingFontFamily, buttonTwoFontFamily]);
 
 	const ctaContentStyle = useMemo(
 		() => `

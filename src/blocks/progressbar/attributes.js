@@ -112,7 +112,7 @@ const attributes = {
 
     progressFontFamily: {
         type: "string",
-        default: "",
+        default: "Default",
     },
     progressFontSize: {
 		type: 'object',
