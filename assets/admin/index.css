@@ -2548,6 +2548,19 @@
 .fb-inspector-control .components-panel__body .fb-image-upload-btn {
   margin-bottom: 10px;
 }
+.fb-inspector-control .components-panel__body .components-datetime__time .components-base-control {
+  margin-bottom: 0;
+}
+.fb-inspector-control .components-panel__body .components-datetime__date {
+  margin-bottom: 10px;
+}
+.fb-inspector-control .components-panel__body .components-datetime__date .components-button.components-datetime__date__day {
+  padding: 0;
+  font-weight: 500;
+}
+.fb-inspector-control .components-panel__body .components-datetime__date > div:nth-child(2) {
+  gap: 2px;
+}
 
 .fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper, .fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
   margin-bottom: 24px;
