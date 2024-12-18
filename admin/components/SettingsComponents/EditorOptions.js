@@ -3,6 +3,7 @@ import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
 import { toast } from 'react-toastify';
+import { log } from 'grunt';
 
 const EditorOptions = () => {
   const [options, setOptions] = useState({
@@ -142,6 +143,8 @@ const EditorOptions = () => {
       <span className="fb-option-input-px">px</span>
     </div>
   );
+
+  console.log(options.default_content_width); 
 
   return (
     <div className="fb-blocks-settings-options">
