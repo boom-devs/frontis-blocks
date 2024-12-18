@@ -15,13 +15,13 @@ import {
     TextControl,
 } from '@wordpress/components';
 
-import { BORDER_STYLES, POST_SWITCHER } from './constants/constants';
+import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN } from './constants/constants';
 
 /**
  * External Dependencies
  */
 import Select2 from "react-select";
-
+import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_ColorControl from '@Components/color-control';
 import FB_TypographyControl from '@Components/typography-control';
@@ -31,6 +31,8 @@ import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 import './editor.scss';
 
@@ -413,6 +415,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalBoxShadowCssValue,
         /** End Global Setting */
 
+        /** Start Load More */
+        loadMoreSwitcher,
+        loadMoreText,
+        loadMoreIconAlign,
+        loadMoreIcon,
+
+        loadMoreButtonBgColorSwitcher,
+        loadMoreButtonNormalBackgroundType,
+        loadMoreButtonNormalClassicColor,
+        loadMoreButtonNormalGradientColor,
+        loadMoreButtonNormalCustomGradientSwitcher,
+        loadMoreButtonNormalCustomGradientInputValue,
+        loadMoreButtonHoverBackgroundType,
+        loadMoreButtonHoverClassicColor,
+        loadMoreButtonHoverGradientColor,
+        loadMoreButtonHoverCustomGradientSwitcher,
+        loadMoreButtonHoverCustomGradientInputValue,
+
+        loadMoreButtonPaddingUnits,
+        loadMoreButtonDesktopPadding,
+        loadMoreButtonTabletPadding,
+        loadMoreButtonMobilePadding,
+        loadMoreButtonPaddingLink,
+
+        loadMoreButtonBorder,
+        loadMoreButtonBorderColorSwitcher,
+        loadMoreButtonBorderColor,
+        loadMoreButtonBorderHoverColor,
+
+        loadMoreButtonBorderUnits,
+        loadMoreButtonDesktopBorder,
+        loadMoreButtonTabletBorder,
+        loadMoreButtonMobileBorder,
+        loadMoreButtonBorderLink,
+
+        loadMoreButtonBorderRadiusUnits,
+        loadMoreButtonDesktopBorderRadius,
+        loadMoreButtonTabletBorderRadius,
+        loadMoreButtonMobileBorderRadius,
+        loadMoreButtonBorderRadiusLink,
+
+        loadMoreTextFontFamily,
+        loadMoreTextFontSize,
+        loadMoreTextFontSizeUnits,
+        loadMoreTextFontWeight,
+        loadMoreTextFontStyle,
+        loadMoreTextTransform,
+        loadMoreTextDecoration,
+        loadMoreTextLetterSpacing,
+        loadMoreTextLetterSpacingUnits,
+        loadMoreTextLineHeight,
+        loadMoreTextLineHeightUnits,
+
+        loadMoreTextColorSwitcher,
+        loadMoreTextColor,
+        loadMoreTextHoverColor,
+
+        loadMoreIconSize,
+        loadMoreIconSizeUnits,
+        loadMoreIconColorSwitcher,
+        loadMoreIconColor,
+        loadMoreIconHoverColor,
+        loadMoreIconMarginUnits,
+        loadMoreIconDesktopMargin,
+        loadMoreIconTabletMargin,
+        loadMoreIconMobileMargin,
+        loadMoreIconMarginLink,
+        /** End Load More */
+
+
 	} = attributes;
 
     useEffect(() => {
@@ -540,42 +612,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End order by */
 
-
-    // Helper function to load fonts
-    const loadFont = (fontFamily) => {
-        if (fontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    };
-
-    // Apply font family styles using useEffect
+    /** Start load font */
     useEffect(() => {
-        loadFont(postTitleFontFamily); 
-    }, [postTitleFontFamily]);
+        loadGoogleFont(postTitleFontFamily); 
+        loadGoogleFont(postDescriptionFontFamily);
+        loadGoogleFont(postCategoryFontFamily);
+        loadGoogleFont(postTagFontFamily);
+        loadGoogleFont(postAuthorFontFamily);
+        loadGoogleFont(postDateFontFamily);
+        loadGoogleFont(loadMoreTextFontFamily);
+    }, [postTitleFontFamily, 
+        postDescriptionFontFamily, 
+        postCategoryFontFamily, 
+        postTagFontFamily, 
+        postAuthorFontFamily, 
+        postDateFontFamily,
+        loadMoreTextFontFamily
+    ]);
+    /** End load font */
 
-    useEffect(() => {
-        loadFont(postDescriptionFontFamily); 
-    }, [postDescriptionFontFamily]);
-
-    useEffect(() => {
-        loadFont(postCategoryFontFamily); 
-    }, [postCategoryFontFamily]);
-
-    useEffect(() => {
-        loadFont(postTagFontFamily); 
-    }, [postTagFontFamily]);
-
-    useEffect(() => {
-        loadFont(postAuthorFontFamily); 
-    }, [postAuthorFontFamily]);
-
-    useEffect(() => {
-        loadFont(postDateFontFamily); 
-    }, [postDateFontFamily]);
 
     /** Start Post Grid Padding */
     const handlePostGridPaddingUnitChange = ( event, position ) => {
@@ -2331,13 +2386,315 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	/** end Global border */
+	/** end Global border */ 
 
 	/** End Global Border Radius */
 	const postGlobalDesktopBorderRadiusWidth = `${postGlobalBorderRadiusDesktop.top}${postGlobalBorderRadiusUnits.Desktop} ${postGlobalBorderRadiusDesktop.right}${postGlobalBorderRadiusUnits.Desktop} ${postGlobalBorderRadiusDesktop.bottom}${postGlobalBorderRadiusUnits.Desktop} ${postGlobalBorderRadiusDesktop.left}${postGlobalBorderRadiusUnits.Desktop}`;
 	const postGlobalTabletBorderRadiusWidth = `${postGlobalBorderRadiusTablet.top}${postGlobalBorderRadiusUnits.Tablet} ${postGlobalBorderRadiusTablet.right}${postGlobalBorderRadiusUnits.Tablet} ${postGlobalBorderRadiusTablet.bottom}${postGlobalBorderRadiusUnits.Tablet} ${postGlobalBorderRadiusTablet.left}${postGlobalBorderRadiusUnits.Tablet}`;
 	const postGlobalMobileBorderRadiusWidth = `${postGlobalBorderRadiusMobile.top}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.right}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.bottom}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.left}${postGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */  
+
+    /** Start Load More Button Padding */
+	const handleLoadMoreButtonPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( loadMoreButtonPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						loadMoreButtonDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						loadMoreButtonTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						loadMoreButtonMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {loadMoreButtonDesktopPadding: {...loadMoreButtonDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {loadMoreButtonTabletPadding: {...loadMoreButtonTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {loadMoreButtonMobilePadding: {...loadMoreButtonMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleLoadMoreButtonPaddingCombineBtn = () => {
+		setAttributes( {loadMoreButtonPaddingLink: !loadMoreButtonPaddingLink} );
+	}
+
+	const handleLoadMoreButtonPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			loadMoreButtonPaddingUnits: {
+				...loadMoreButtonPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const loadMoreButtonDesktopPaddingWidth    = `${loadMoreButtonDesktopPadding.top}${loadMoreButtonPaddingUnits.Desktop} ${loadMoreButtonDesktopPadding.right}${loadMoreButtonPaddingUnits.Desktop} ${loadMoreButtonDesktopPadding.bottom}${loadMoreButtonPaddingUnits.Desktop} ${loadMoreButtonDesktopPadding.left}${loadMoreButtonPaddingUnits.Desktop}`;
+	const loadMoreButtonTabletPaddingWidth     = `${loadMoreButtonTabletPadding.top}${loadMoreButtonPaddingUnits.Tablet} ${loadMoreButtonTabletPadding.right}${loadMoreButtonPaddingUnits.Tablet} ${loadMoreButtonTabletPadding.bottom}${loadMoreButtonPaddingUnits.Tablet} ${loadMoreButtonTabletPadding.left}${loadMoreButtonPaddingUnits.Tablet}`;
+	const loadMoreButtonMobilePaddingWidth     = `${loadMoreButtonMobilePadding.top}${loadMoreButtonPaddingUnits.Mobile} ${loadMoreButtonMobilePadding.right}${loadMoreButtonPaddingUnits.Mobile} ${loadMoreButtonMobilePadding.bottom}${loadMoreButtonPaddingUnits.Mobile} ${loadMoreButtonMobilePadding.left}${loadMoreButtonPaddingUnits.Mobile}`;
+	/** End Load More Button Padding */
+
+
+	/** Start Load More Button Border */
+	const handleLoadMoreButtonBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( loadMoreButtonBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						loadMoreButtonDesktopBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						loadMoreButtonTabletBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						loadMoreButtonMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {loadMoreButtonDesktopBorder: {...loadMoreButtonDesktopBorder, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {loadMoreButtonTabletBorder: {...loadMoreButtonTabletBorder, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {loadMoreButtonMobileBorder: {...loadMoreButtonMobileBorder, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleLoadMoreButtonBorderCombineBtn = () => {
+		setAttributes( {loadMoreButtonBorderLink: !loadMoreButtonBorderLink} );
+	}
+
+	const handleLoadMoreButtonBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			loadMoreButtonBorderUnits: {
+				...loadMoreButtonBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const loadMoreButtonDesktopBorderWidth = `${loadMoreButtonDesktopBorder.top}${loadMoreButtonBorderUnits.Desktop} ${loadMoreButtonDesktopBorder.right}${loadMoreButtonBorderUnits.Desktop} ${loadMoreButtonDesktopBorder.bottom}${loadMoreButtonBorderUnits.Desktop} ${loadMoreButtonDesktopBorder.left}${loadMoreButtonBorderUnits.Desktop}`;
+	const loadMoreButtonTabletBorderWidth = `${loadMoreButtonTabletBorder.top}${loadMoreButtonBorderUnits.Tablet} ${loadMoreButtonTabletBorder.right}${loadMoreButtonBorderUnits.Tablet} ${loadMoreButtonTabletBorder.bottom}${loadMoreButtonBorderUnits.Tablet} ${loadMoreButtonTabletBorder.left}${loadMoreButtonBorderUnits.Tablet}`;
+	const loadMoreButtonMobileBorderWidth = `${loadMoreButtonMobileBorder.top}${loadMoreButtonBorderUnits.Mobile} ${loadMoreButtonMobileBorder.right}${loadMoreButtonBorderUnits.Mobile} ${loadMoreButtonMobileBorder.bottom}${loadMoreButtonBorderUnits.Mobile} ${loadMoreButtonMobileBorder.left}${loadMoreButtonBorderUnits.Mobile}`;
+	/** End Load More Button Border */
+
+	/** Start Load More Button Border Radius*/
+	const handleLoadMoreButtonBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( loadMoreButtonBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						loadMoreButtonDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						loadMoreButtonTabletBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						loadMoreButtonMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {loadMoreButtonDesktopBorderRadius: {...loadMoreButtonDesktopBorderRadius, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {loadMoreButtonTabletBorderRadius: {...loadMoreButtonTabletBorderRadius, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {loadMoreButtonMobileBorderRadius: {...loadMoreButtonMobileBorderRadius, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleLoadMoreButtonBorderRadiusCombineBtn = () => {
+		setAttributes( {loadMoreButtonBorderRadiusLink: !loadMoreButtonBorderRadiusLink} );
+	}
+
+	const handleLoadMoreButtonBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			loadMoreButtonBorderRadiusUnits: {
+				...loadMoreButtonBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Load More Button Border */
+
+	/** End Load More Button Border Radius */
+	const loadMoreButtonDesktopBorderRadiusWidth = `${loadMoreButtonDesktopBorderRadius.top}${loadMoreButtonBorderRadiusUnits.Desktop} ${loadMoreButtonDesktopBorderRadius.right}${loadMoreButtonBorderRadiusUnits.Desktop} ${loadMoreButtonDesktopBorderRadius.bottom}${loadMoreButtonBorderRadiusUnits.Desktop} ${loadMoreButtonDesktopBorderRadius.left}${loadMoreButtonBorderRadiusUnits.Desktop}`;
+	const loadMoreButtonTabletBorderRadiusWidth = `${loadMoreButtonTabletBorderRadius.top}${loadMoreButtonBorderRadiusUnits.Tablet} ${loadMoreButtonTabletBorderRadius.right}${loadMoreButtonBorderRadiusUnits.Tablet} ${loadMoreButtonTabletBorderRadius.bottom}${loadMoreButtonBorderRadiusUnits.Tablet} ${loadMoreButtonTabletBorderRadius.left}${loadMoreButtonBorderRadiusUnits.Tablet}`;
+	const loadMoreButtonMobileBorderRadiusWidth = `${loadMoreButtonMobileBorderRadius.top}${loadMoreButtonBorderRadiusUnits.Mobile} ${loadMoreButtonMobileBorderRadius.right}${loadMoreButtonBorderRadiusUnits.Mobile} ${loadMoreButtonMobileBorderRadius.bottom}${loadMoreButtonBorderRadiusUnits.Mobile} ${loadMoreButtonMobileBorderRadius.left}${loadMoreButtonBorderRadiusUnits.Mobile}`;
+	/** End Border Radius */
+    
+
+    /** Start Load More Icon Margin */
+	const handleLoadMoreIconMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( loadMoreIconMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						loadMoreIconDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						loadMoreIconTabletMargin: { 
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						loadMoreIconMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {loadMoreIconDesktopMargin: {...loadMoreIconDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {loadMoreIconTabletMargin: {...loadMoreIconTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {loadMoreIconMobileMargin: {...loadMoreIconMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleLoadMoreIconMarginCombineBtn = () => { 
+		setAttributes( {loadMoreIconMarginLink: !loadMoreIconMarginLink} );
+	}
+
+	const handleLoadMoreIconMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			loadMoreIconMarginUnits: {
+				...loadMoreIconMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const loadMoreIconDesktopMarginWidth    = `${loadMoreIconDesktopMargin.top}${loadMoreIconMarginUnits.Desktop} ${loadMoreIconDesktopMargin.right}${loadMoreIconMarginUnits.Desktop} ${loadMoreIconDesktopMargin.bottom}${loadMoreIconMarginUnits.Desktop} ${loadMoreIconDesktopMargin.left}${loadMoreIconMarginUnits.Desktop}`;
+	const loadMoreIconTabletMarginWidth     = `${loadMoreIconTabletMargin.top}${loadMoreIconMarginUnits.Tablet} ${loadMoreIconTabletMargin.right}${loadMoreIconMarginUnits.Tablet} ${loadMoreIconTabletMargin.bottom}${loadMoreIconMarginUnits.Tablet} ${loadMoreIconTabletMargin.left}${loadMoreIconMarginUnits.Tablet}`;
+	const loadMoreIconMobileMarginWidth     = `${loadMoreIconMobileMargin.top}${loadMoreIconMarginUnits.Mobile} ${loadMoreIconMobileMargin.right}${loadMoreIconMarginUnits.Mobile} ${loadMoreIconMobileMargin.bottom}${loadMoreIconMarginUnits.Mobile} ${loadMoreIconMobileMargin.left}${loadMoreIconMarginUnits.Mobile}`;
+	/** End Load More Icon Margin */
+
+
+    const iconHandler = (IconName) => {
+		setAttributes({loadMoreIcon: IconName})
+	}
 
 
     const allBlockStyle = useMemo(() => `
@@ -2377,6 +2734,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
             grid-column: span ${gridColumnsPerSection.Desktop};
         }
+
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
+        	${loadMoreTextFontFamily && loadMoreTextFontFamily !== 'Default' ? `font-family: ${loadMoreTextFontFamily};` : ''}
+			${loadMoreTextFontSize.Desktop ? `font-size: ${loadMoreTextFontSize.Desktop}${loadMoreTextFontSizeUnits.Desktop};` : ''} 
+			${loadMoreTextFontWeight ? `font-weight: ${loadMoreTextFontWeight};` : ''}
+			${loadMoreTextFontStyle ? `font-style: ${loadMoreTextFontStyle};` : ''} 
+			${loadMoreTextTransform ? `text-transform: ${loadMoreTextTransform};` : ''}
+			${loadMoreTextDecoration ? `text-decoration: ${loadMoreTextDecoration};` : ''} 
+			${loadMoreTextLetterSpacing.Desktop ? `letter-spacing: ${loadMoreTextLetterSpacing.Desktop}${loadMoreTextLetterSpacingUnits.Desktop};` : ''}
+			${loadMoreTextLineHeight.Desktop ? `line-height: ${loadMoreTextLineHeight.Desktop}${loadMoreTextLineHeightUnits.Desktop};` : ''}
+            ${loadMoreButtonDesktopPaddingWidth ? `padding: ${loadMoreButtonDesktopPaddingWidth};` : ''}
+            ${loadMoreButtonBorder ? `border: ${loadMoreButtonBorder};` : ''} 
+            ${loadMoreButtonDesktopBorderWidth ? `border-width: ${loadMoreButtonDesktopBorderWidth};` : ''}
+            ${loadMoreButtonDesktopBorderRadiusWidth ? `border-radius: ${loadMoreButtonDesktopBorderRadiusWidth};` : ''}
+            ${loadMoreButtonBorderColor ? `border-color: ${loadMoreButtonBorderColor};` : ''}
+            ${loadMoreTextColor ? `color: ${loadMoreTextColor};` : ''}
+            ${loadMoreButtonNormalBackgroundType === 'gradient' ? `   
+                background: ${loadMoreButtonNormalCustomGradientSwitcher && loadMoreButtonNormalCustomGradientInputValue ? loadMoreButtonNormalCustomGradientInputValue : loadMoreButtonNormalGradientColor};
+            `: `
+                background: ${loadMoreButtonNormalClassicColor};
+            `}
+
+        }
+
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover {
+            ${loadMoreButtonHoverBackgroundType === 'gradient' ? `   
+                background: ${loadMoreButtonHoverCustomGradientSwitcher && loadMoreButtonHoverCustomGradientInputValue ? loadMoreButtonHoverCustomGradientInputValue : loadMoreButtonHoverGradientColor};
+            `: `
+                background: ${loadMoreButtonHoverClassicColor};
+            `}
+            ${loadMoreTextHoverColor ? `color: ${loadMoreTextHoverColor};` : ''} 
+            ${loadMoreButtonBorderHoverColor ? `border-color: ${loadMoreButtonBorderHoverColor};` : ''}
+        }
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
+            width: ${loadMoreIconSize.Desktop ? `${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''};
+            height: ${loadMoreIconSize.Desktop ? `${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''};
+            fill: ${loadMoreIconColor ? `${loadMoreIconColor};` : ''};
+            ${loadMoreIconDesktopMarginWidth ? `margin: ${loadMoreIconDesktopMarginWidth};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg:hover{
+            fill: ${loadMoreIconHoverColor ? loadMoreIconHoverColor : ''};
+        }
+
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -2898,6 +3299,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postDateHoverColor ? `color: ${postDateHoverColor};` : ''}
             }
 
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
+                ${loadMoreTextFontFamily && loadMoreTextFontFamily !== 'Default' ? `font-family: ${loadMoreTextFontFamily};` : ''}
+                ${loadMoreTextFontSize.Tablet ? `font-size: ${loadMoreTextFontSize.Tablet}${loadMoreTextFontSizeUnits.Tablet};` : ''}  
+                ${loadMoreTextFontWeight ? `font-weight: ${loadMoreTextFontWeight};` : ''}
+                ${loadMoreTextFontStyle ? `font-style: ${loadMoreTextFontStyle};` : ''} 
+                ${loadMoreTextTransform ? `text-transform: ${loadMoreTextTransform};` : ''}
+                ${loadMoreTextDecoration ? `text-decoration: ${loadMoreTextDecoration};` : ''} 
+                ${loadMoreTextLetterSpacing.Tablet ? `letter-spacing: ${loadMoreTextLetterSpacing.Tablet}${loadMoreTextLetterSpacingUnits.Tablet};` : ''}
+                ${loadMoreTextLineHeight.Tablet ? `line-height: ${loadMoreTextLineHeight.Tablet}${loadMoreTextLineHeightUnits.Tablet};` : ''}
+                ${loadMoreButtonTabletPaddingWidth ? `padding: ${loadMoreButtonTabletPaddingWidth};` : ''}
+                ${loadMoreButtonBorder ? `border: ${loadMoreButtonBorder};` : ''} 
+                ${loadMoreButtonTabletBorderWidth ? `border-width: ${loadMoreButtonTabletBorderWidth};` : ''}
+                ${loadMoreButtonTabletBorderRadiusWidth ? `border-radius: ${loadMoreButtonTabletBorderRadiusWidth};` : ''}
+                ${loadMoreButtonBorderColor ? `border-color: ${loadMoreButtonBorderColor};` : ''}
+                ${loadMoreTextColor ? `color: ${loadMoreTextColor};` : ''}
+                ${loadMoreButtonNormalBackgroundType === 'gradient' ? `   
+                    background: ${loadMoreButtonNormalCustomGradientSwitcher && loadMoreButtonNormalCustomGradientInputValue ? loadMoreButtonNormalCustomGradientInputValue : loadMoreButtonNormalGradientColor};
+                `: `
+                    background: ${loadMoreButtonNormalClassicColor};
+                `}
+            }
+
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover {
+                ${loadMoreButtonHoverBackgroundType === 'gradient' ? `   
+                    background: ${loadMoreButtonHoverCustomGradientSwitcher && loadMoreButtonHoverCustomGradientInputValue ? loadMoreButtonHoverCustomGradientInputValue : loadMoreButtonHoverGradientColor};
+                `: `
+                    background: ${loadMoreButtonHoverClassicColor};
+                `}
+                ${loadMoreTextHoverColor ? `color: ${loadMoreTextHoverColor};` : ''} 
+                ${loadMoreButtonBorderHoverColor ? `border-color: ${loadMoreButtonBorderHoverColor};` : ''}
+            }
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
+                width: ${loadMoreIconSize.Tablet ? `${loadMoreIconSize.Tablet}${loadMoreIconSizeUnits.Tablet};` : ''};
+                height: ${loadMoreIconSize.Tablet ? `${loadMoreIconSize.Tablet}${loadMoreIconSizeUnits.Tablet};` : ''};
+                fill: ${loadMoreIconColor ? `${loadMoreIconColor};` : ''};
+                ${loadMoreIconTabletMarginWidth ? `margin: ${loadMoreIconTabletMarginWidth};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg:hover{
+                fill: ${loadMoreIconHoverColor ? loadMoreIconHoverColor : ''};
+            }
+
         }
 
         @media only screen and (max-width: 767px) {
@@ -3185,6 +3628,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb_post_grid_container .fb_post_grid_date:hover {
                 ${postDateHoverColor ? `color: ${postDateHoverColor};` : ''}
+            }
+
+
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
+                ${loadMoreTextFontFamily && loadMoreTextFontFamily !== 'Default' ? `font-family: ${loadMoreTextFontFamily};` : ''}
+                ${loadMoreTextFontSize.Mobile ? `font-size: ${loadMoreTextFontSize.Mobile}${loadMoreTextFontSizeUnits.Mobile};` : ''}  
+                ${loadMoreTextFontWeight ? `font-weight: ${loadMoreTextFontWeight};` : ''}
+                ${loadMoreTextFontStyle ? `font-style: ${loadMoreTextFontStyle};` : ''} 
+                ${loadMoreTextTransform ? `text-transform: ${loadMoreTextTransform};` : ''}
+                ${loadMoreTextDecoration ? `text-decoration: ${loadMoreTextDecoration};` : ''} 
+                ${loadMoreTextLetterSpacing.Mobile ? `letter-spacing: ${loadMoreTextLetterSpacing.Mobile}${loadMoreTextLetterSpacingUnits.Mobile};` : ''}
+                ${loadMoreTextLineHeight.Mobile ? `line-height: ${loadMoreTextLineHeight.Mobile}${loadMoreTextLineHeightUnits.Mobile};` : ''}
+                ${loadMoreButtonMobilePaddingWidth ? `padding: ${loadMoreButtonMobilePaddingWidth};` : ''}
+                ${loadMoreButtonBorder ? `border: ${loadMoreButtonBorder};` : ''} 
+                ${loadMoreButtonMobileBorderWidth ? `border-width: ${loadMoreButtonMobileBorderWidth};` : ''}
+                ${loadMoreButtonMobileBorderRadiusWidth ? `border-radius: ${loadMoreButtonMobileBorderRadiusWidth};` : ''}
+                ${loadMoreButtonBorderColor ? `border-color: ${loadMoreButtonBorderColor};` : ''}
+                ${loadMoreTextColor ? `color: ${loadMoreTextColor};` : ''}
+                ${loadMoreButtonNormalBackgroundType === 'gradient' ? `   
+                    background: ${loadMoreButtonNormalCustomGradientSwitcher && loadMoreButtonNormalCustomGradientInputValue ? loadMoreButtonNormalCustomGradientInputValue : loadMoreButtonNormalGradientColor};
+                `: `
+                    background: ${loadMoreButtonNormalClassicColor};
+                `}
+            }
+
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover {
+                ${loadMoreButtonHoverBackgroundType === 'gradient' ? `   
+                    background: ${loadMoreButtonHoverCustomGradientSwitcher && loadMoreButtonHoverCustomGradientInputValue ? loadMoreButtonHoverCustomGradientInputValue : loadMoreButtonHoverGradientColor};
+                `: `
+                    background: ${loadMoreButtonHoverClassicColor};
+                `}
+                ${loadMoreTextHoverColor ? `color: ${loadMoreTextHoverColor};` : ''} 
+                ${loadMoreButtonBorderHoverColor ? `border-color: ${loadMoreButtonBorderHoverColor};` : ''}
+            }
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
+                width: ${loadMoreIconSize.Mobile ? `${loadMoreIconSize.Mobile}${loadMoreIconSizeUnits.Mobile};` : ''};
+                height: ${loadMoreIconSize.Mobile ? `${loadMoreIconSize.Mobile}${loadMoreIconSizeUnits.Mobile};` : ''};
+                fill: ${loadMoreIconColor ? `${loadMoreIconColor};` : ''};
+                ${loadMoreIconMobileMarginWidth ? `margin: ${loadMoreIconMobileMarginWidth};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg:hover{
+                fill: ${loadMoreIconHoverColor ? loadMoreIconHoverColor : ''};
             }
         }
 
@@ -3560,7 +4046,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDateColor,
         postDateHoverColor,
 
-
         postGlobalZIndex,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
@@ -3618,6 +4103,85 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         postGlobalBoxShadowValues,
         postGlobalBoxShadowCssValue,
+
+        loadMoreSwitcher,
+        loadMoreText,
+        loadMoreIconAlign,
+        loadMoreIcon,
+
+        loadMoreButtonBgColorSwitcher,
+        loadMoreButtonNormalBackgroundType,
+        loadMoreButtonNormalClassicColor,
+        loadMoreButtonNormalGradientColor,
+        loadMoreButtonNormalCustomGradientSwitcher,
+        loadMoreButtonNormalCustomGradientInputValue,
+        loadMoreButtonHoverBackgroundType,
+        loadMoreButtonHoverClassicColor,
+        loadMoreButtonHoverGradientColor,
+        loadMoreButtonHoverCustomGradientSwitcher,
+        loadMoreButtonHoverCustomGradientInputValue,
+
+        loadMoreButtonPaddingUnits,
+        loadMoreButtonDesktopPadding,
+        loadMoreButtonTabletPadding,
+        loadMoreButtonMobilePadding,
+        loadMoreButtonPaddingLink,
+        loadMoreButtonDesktopPaddingWidth,
+        loadMoreButtonTabletPaddingWidth,
+        loadMoreButtonMobilePaddingWidth,
+
+        loadMoreButtonBorder,
+        loadMoreButtonBorderColorSwitcher,
+        loadMoreButtonBorderColor,
+        loadMoreButtonBorderHoverColor,
+
+        loadMoreButtonBorderUnits,
+        loadMoreButtonDesktopBorder,
+        loadMoreButtonTabletBorder,
+        loadMoreButtonMobileBorder,
+        loadMoreButtonBorderLink,
+        loadMoreButtonDesktopBorderWidth,
+        loadMoreButtonTabletBorderWidth,
+        loadMoreButtonMobileBorderWidth,
+
+        loadMoreButtonBorderRadiusUnits,
+        loadMoreButtonDesktopBorderRadius,
+        loadMoreButtonTabletBorderRadius,
+        loadMoreButtonMobileBorderRadius,
+        loadMoreButtonBorderRadiusLink,
+        loadMoreButtonDesktopBorderRadiusWidth,
+        loadMoreButtonTabletBorderRadiusWidth,
+        loadMoreButtonMobileBorderRadiusWidth,
+
+        loadMoreTextFontFamily,
+        loadMoreTextFontSize,
+        loadMoreTextFontSizeUnits,
+        loadMoreTextFontWeight,
+        loadMoreTextFontStyle,
+        loadMoreTextTransform,
+        loadMoreTextDecoration,
+        loadMoreTextLetterSpacing,
+        loadMoreTextLetterSpacingUnits,
+        loadMoreTextLineHeight,
+        loadMoreTextLineHeightUnits,
+
+        loadMoreTextColorSwitcher,
+        loadMoreTextColor,
+        loadMoreTextHoverColor,
+        
+        loadMoreIconSize,
+        loadMoreIconSizeUnits,
+        loadMoreIconColorSwitcher,
+        loadMoreIconColor,
+        loadMoreIconHoverColor,
+        loadMoreIconMarginUnits,
+        loadMoreIconDesktopMargin,
+        loadMoreIconTabletMargin,
+        loadMoreIconMobileMargin,
+        loadMoreIconMarginLink,
+        loadMoreIconDesktopMarginWidth,
+        loadMoreIconTabletMarginWidth,
+        loadMoreIconMobileMarginWidth,
     ]);
 
     useEffect(() => {
@@ -3690,6 +4254,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         label={__("Show Date", "frontis-blocks")}
                                                         checked={showDateSwitcher}
                                                         onChange={(value) => setAttributes({ showDateSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
+                                                        label={__("Show Load More Button", "frontis-blocks")}
+                                                        checked={loadMoreSwitcher}
+                                                        onChange={(value) => setAttributes({ loadMoreSwitcher: value })}
                                                     />
                                                 </BaseControl>
                                                 
@@ -3968,6 +4537,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </>
                                                 )}
                                             </PanelBody>
+                                            {loadMoreSwitcher && (
+                                                <PanelBody
+                                                    title={__("Load More Button", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <TextControl
+                                                        label={__("Load More Text", "frontis-blocks")}
+                                                        value={loadMoreText}
+                                                        onChange={(value) => setAttributes({ loadMoreText: value })}
+                                                    />
+                                                    <BaseControl
+                                                        label={__("Icon", "frontis-blocks")}
+                                                            id="fb-setting-text-alignment"
+                                                            className="fb-setting-text-alignment"
+                                                    >
+                                                        <ButtonGroup
+                                                            className="fb-setting-text-alignment-group-btn"
+                                                        >
+                                                            {ICON_ALIGN.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ loadMoreIconAlign: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${loadMoreIconAlign === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                        {(loadMoreIconAlign === 'icon') && (
+                                                            <FBIconPicker value={loadMoreIcon} setIconHandler={iconHandler} /> 
+                                                        )}
+                                                    </BaseControl>
+                                                </PanelBody>
+                                            )}  
                                         </div>
                                     </>
                                 )}
@@ -5028,6 +5631,221 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </PanelBody>
                                         )}
 
+                                        {loadMoreSwitcher && (
+                                            <PanelBody title={__("Load More Button", "frontis-blocks")} initialOpen={false}>
+
+                                                <FB_TypographyControl
+                                                    fontFamily={loadMoreTextFontFamily}
+                                                    onChangeFontFamily={(value) => setAttributes({ loadMoreTextFontFamily: value })}
+
+                                                    fontSize={loadMoreTextFontSize}
+                                                    onChangeFontSize={(value) => setAttributes({ loadMoreTextFontSize: value })}
+
+                                                    fontSizeUnits={loadMoreTextFontSizeUnits}
+                                                    onChangeFontSizeUnit={(value) => setAttributes({ loadMoreTextFontSizeUnits: value })}
+
+                                                    fontWeight={loadMoreTextFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ loadMoreTextFontWeight: value })}
+
+                                                    fontStyle={loadMoreTextFontStyle}
+                                                    onChangeFontStyle={(value) => setAttributes({ loadMoreTextFontStyle: value })}
+
+                                                    textTransform={loadMoreTextTransform}
+                                                    onChangeTextTransform={(value) => setAttributes({ loadMoreTextTransform: value })}
+
+                                                    textDecoration={loadMoreTextDecoration} 
+                                                    onChangeTextDecoration={(value) => setAttributes({ loadMoreTextDecoration: value })}
+
+                                                    letterSpacing={loadMoreTextLetterSpacing}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ loadMoreTextLetterSpacing: value })}
+
+                                                    letterSpacingUnits={loadMoreTextLetterSpacingUnits}
+                                                    onChangeLetterSpacingUnit={(value) => setAttributes({ loadMoreTextLetterSpacingUnits: value })}
+
+                                                    lineHeight={loadMoreTextLineHeight}
+                                                    onChangeLineHeight={(value) => setAttributes({ loadMoreTextLineHeight: value })}
+
+                                                    lineHeightUnits={loadMoreTextLineHeightUnits}
+                                                    onChangeLineHeightUnit={(value) => setAttributes({ loadMoreTextLineHeightUnits: value })}
+
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_SwitcherControl
+                                                    label={__("Text Color", "frontis-blocks")}
+                                                    globalSwitcher={loadMoreTextColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ loadMoreTextColorSwitcher: value })}
+                                                />
+
+                                                {loadMoreTextColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={loadMoreTextColor} 
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreTextColor: value })}
+                                                    />
+                                                )}
+
+                                                {loadMoreTextColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={loadMoreTextHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreTextHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_Range
+                                                    min={1}
+                                                    max={200}
+                                                    label={__("Icon Size", "frontis-blocks")}
+                                                    rangeValue={loadMoreIconSize}
+                                                    onChangeHandler={(value) => setAttributes({ loadMoreIconSize: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({ loadMoreIconSizeUnits: value })} 
+                                                    deviceType={deviceType}
+                                                    units={loadMoreIconSizeUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={"20"}
+                                                />
+
+                                                <FB_SwitcherControl
+                                                    label={__("Icon Color", "frontis-blocks")}
+                                                    globalSwitcher={loadMoreIconColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ loadMoreIconColorSwitcher: value })}
+                                                />
+
+                                                {loadMoreIconColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={loadMoreIconColor} 
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreIconColor: value })}
+                                                    />
+                                                )}
+
+                                                {loadMoreIconColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={loadMoreIconHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreIconHoverColor: value })}
+                                                    />
+                                                )}
+                                                <FB_Spacing
+                                                    label={__("Icon Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLoadMoreIconMarginUnitsHandler}
+                                                    spacingUnits={loadMoreIconMarginUnits}
+                                                    spacingDesktop={loadMoreIconDesktopMargin}
+                                                    spacingTablet={loadMoreIconTabletMargin}
+                                                    spacingMobile={loadMoreIconMobileMargin}
+                                                    handleSpacingUnitHandler={handleLoadMoreIconMarginUnitChange}
+                                                    spacingCombineBtn={loadMoreIconMarginLink}
+                                                    spacingCombineBtnHandler={handleLoadMoreIconMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            
+                                                <FB_BackgroundColorControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    bgColorSwitcher={loadMoreButtonBgColorSwitcher}  
+                                                    setBgColorSwitcher={(value) => setAttributes({ loadMoreButtonBgColorSwitcher: value })}
+                                                    
+                                                    normalBackgroundType={loadMoreButtonNormalBackgroundType}
+                                                    setNormalBackgroundType={(value) => setAttributes({ loadMoreButtonNormalBackgroundType: value })}
+                                                    normalClassicColor={loadMoreButtonNormalClassicColor}
+                                                    setNormalClassicColor={(value) => setAttributes({ loadMoreButtonNormalClassicColor: value })}
+                                                    normalGradientColor={loadMoreButtonNormalGradientColor}
+                                                    setNormalGradientColor={(value) => setAttributes({ loadMoreButtonNormalGradientColor: value })}
+                                                    normalCustomGradientSwitcher={loadMoreButtonNormalCustomGradientSwitcher}
+                                                    setNormalCustomGradientSwitcher={(value) => setAttributes({ loadMoreButtonNormalCustomGradientSwitcher: value })}
+                                                    normalCustomGradientInputValue={loadMoreButtonNormalCustomGradientInputValue}
+                                                    setNormalCustomGradientInputValue={(value) => setAttributes({ loadMoreButtonNormalCustomGradientInputValue: value })}
+
+                                                    hoverBackgroundType={loadMoreButtonHoverBackgroundType} 
+                                                    setHoverBackgroundType={(value) => setAttributes({ loadMoreButtonHoverBackgroundType: value })}
+                                                    hoverClassicColor={loadMoreButtonHoverClassicColor}
+                                                    setHoverClassicColor={(value) => setAttributes({ loadMoreButtonHoverClassicColor: value })}
+                                                    hoverGradientColor={loadMoreButtonHoverGradientColor} 
+                                                    setHoverGradientColor={(value) => setAttributes({ loadMoreButtonHoverGradientColor: value })}
+                                                    hoverCustomGradientSwitcher={loadMoreButtonHoverCustomGradientSwitcher}
+                                                    setHoverCustomGradientSwitcher={(value) => setAttributes({ loadMoreButtonHoverCustomGradientSwitcher: value })}
+                                                    hoverCustomGradientInputValue={loadMoreButtonHoverCustomGradientInputValue}
+                                                    setHoverCustomGradientInputValue={(value) => setAttributes({ loadMoreButtonHoverCustomGradientInputValue: value })}
+
+                                                    isBackgroundImage={false}
+
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLoadMoreButtonPaddingUnitsHandler}
+                                                    spacingUnits={loadMoreButtonPaddingUnits}
+                                                    spacingDesktop={loadMoreButtonDesktopPadding}
+                                                    spacingTablet={loadMoreButtonTabletPadding}
+                                                    spacingMobile={loadMoreButtonMobilePadding}
+                                                    handleSpacingUnitHandler={handleLoadMoreButtonPaddingUnitChange}
+                                                    spacingCombineBtn={loadMoreButtonPaddingLink}
+                                                    spacingCombineBtnHandler={handleLoadMoreButtonPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <SelectControl
+                                                        label={__("Border Style", "frontis-blocks")}
+                                                        value={loadMoreButtonBorder}
+                                                        options={BORDER_STYLES}
+                                                        onChange={(value) => setAttributes({ loadMoreButtonBorder: value })}
+                                                />
+
+                                                <FB_SwitcherControl
+                                                    label={__("Border", "frontis-blocks")}
+                                                    globalSwitcher={loadMoreButtonBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ loadMoreButtonBorderColorSwitcher: value })}
+                                                />
+
+                                                {loadMoreButtonBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={loadMoreButtonBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreButtonBorderColor: value })}
+                                                    />
+                                                )}
+
+                                                {loadMoreButtonBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={loadMoreButtonBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreButtonBorderHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_Spacing
+                                                    label={__("Border", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLoadMoreButtonBorderUnitsHandler}
+                                                    spacingUnits={loadMoreButtonBorderUnits}
+                                                    spacingDesktop={loadMoreButtonDesktopBorder}
+                                                    spacingTablet={loadMoreButtonTabletBorder}
+                                                    spacingMobile={loadMoreButtonMobileBorder}
+                                                    handleSpacingUnitHandler={handleLoadMoreButtonBorderUnitChange}
+                                                    spacingCombineBtn={loadMoreButtonBorderLink}
+                                                    spacingCombineBtnHandler={handleLoadMoreButtonBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                                <FB_Spacing
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleLoadMoreButtonBorderRadiusUnitsHandler}
+                                                    spacingUnits={loadMoreButtonBorderRadiusUnits}
+                                                    spacingDesktop={loadMoreButtonDesktopBorderRadius}
+                                                    spacingTablet={loadMoreButtonTabletBorderRadius}
+                                                    spacingMobile={loadMoreButtonMobileBorderRadius}
+                                                    handleSpacingUnitHandler={handleLoadMoreButtonBorderRadiusUnitChange}
+                                                    spacingCombineBtn={loadMoreButtonBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleLoadMoreButtonBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+
+                                            </PanelBody>
+                                        )}
                                     </>
                                 )}
                             {tab.name === "advanced" && (

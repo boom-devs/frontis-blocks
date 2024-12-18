@@ -30,6 +30,7 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 /**
  * Internal depencencies
@@ -1503,26 +1504,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/* set default values for the style attributes */
 	useEffect(() => {
-		if (Heading_Font_Family) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${Heading_Font_Family.replace(
-				" ",
-				"+",
-			)}`;
-			const linkElement = document.createElement("link");
-			linkElement.rel = "stylesheet";
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [Heading_Font_Family]);
+		loadGoogleFont(Heading_Font_Family);
+		loadGoogleFont(SubHeadingFontFamily);
+	}, [Heading_Font_Family, SubHeadingFontFamily]);
 
-	// Define the CSS as a string
-	const css = `
-        #${blockID} {
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    `;
 
 	const iconBoxStyle = useMemo(
 		() => `
@@ -1952,23 +1937,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																				<path
 																					d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
-																					stroke-linejoin="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																				<path
 																					d="M15 9L9 15"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
-																					stroke-linejoin="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																				<path
 																					d="M9 9L15 15"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
-																					stroke-linejoin="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																			</svg>
 																		</button>

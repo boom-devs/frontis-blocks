@@ -18,7 +18,7 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className='progress-bar-wrapper'>
+                <div className='fb-parent-wrapper progress-bar-wrapper'>
                     {progressTextPosition === 'text-outSide' && (
                         <div className="progress-bar-text-outSide-wrapper">
                             <div className="progress-bar-label">

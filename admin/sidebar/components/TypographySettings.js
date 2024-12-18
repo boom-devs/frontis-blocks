@@ -58,9 +58,9 @@ const TypographySettings = (props) => {
 				...(font.textTransform && { textTransform: font.textTransform }),
 				...(font.fontStyle && { fontStyle: font.fontStyle }),
 				...(font.textDecoration && { textDecoration: font.textDecoration }),
-				...(font.letterSpacing && { letterSpacing: `${font.letterSpacing[deviceType]}${font.letterSpacingUnit[deviceType] || 'px'}` }),
-				...((size && font.fontSize) && { fontSize: `${font.fontSize[deviceType]}${font.fontSizeUnit[deviceType] || 'px'}` }),
-				...((font.lineHeight) && { lineHeight: `${font.lineHeight[deviceType]}${font.lineHeightUnits[deviceType] || 'px'}` })
+				...(font.letterSpacing && { letterSpacing: `${font.letterSpacing?.[deviceType]}${font.letterSpacingUnit?.[deviceType] || 'px'}` }),
+				...((size && font.fontSize) && { fontSize: `${font.fontSize?.[deviceType]}${font.fontSizeUnit?.[deviceType] || 'px'}` }),
+				...((font.lineHeight) && { lineHeight: `${font.lineHeight?.[deviceType]}${font.lineHeightUnits?.[deviceType] || 'px'}` })
 			}
 		}
 
@@ -619,8 +619,8 @@ const TypographySettings = (props) => {
 	}, [isAfterSave]);
 
 
-	console.log(fontFamilies)
-
+	console.log("Checking device type inside typography settings")
+	console.log(deviceType)
 	return (
 		<TabPanel
 			className="fb-blocks-color-tabs"

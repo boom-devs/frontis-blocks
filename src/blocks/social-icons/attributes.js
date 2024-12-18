@@ -412,7 +412,7 @@ const attributes = {
 
     socialTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     socialTitleFontSize: {
 		type: 'object',

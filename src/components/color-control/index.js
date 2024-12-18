@@ -29,19 +29,30 @@ const FB_ColorControl = ({
         // Retrieve colors from local storage
         const storedColors = localStorage.getItem('fb_global_colors');
         const storedCustomColors = localStorage.getItem('fb_custom_colors');
+
         let combinedColors = [];
+
         if (storedColors) {
             try {
                 const parsedColors = JSON.parse(storedColors);
-                combinedColors = [...parsedColors];
+                if (Array.isArray(parsedColors)) {
+                    combinedColors = [...parsedColors];
+                } else {
+                    console.warn('Global colors is not an array:', parsedColors);
+                }
             } catch (error) {
                 console.error('Error parsing global colors:', error);
             }
         }
+
         if (storedCustomColors) {
             try {
                 const parsedCustomColors = JSON.parse(storedCustomColors);
-                combinedColors = [...combinedColors, ...parsedCustomColors];
+                if (Array.isArray(parsedCustomColors)) {
+                    combinedColors = [...combinedColors, ...parsedCustomColors];
+                } else {
+                    console.warn('Custom colors is not an array:', parsedCustomColors);
+                }
             } catch (error) {
                 console.error('Error parsing custom colors:', error);
             }
@@ -66,7 +77,17 @@ const FB_ColorControl = ({
                             aria-expanded={isOpen}
                             className="fb-setting-color-setting-icon-btn"
                         >
-                            <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className="fb-setting-color-hex">
+                                    {globalColor || '#000'} 
+                                </span>
+                                <div
+                                className="fb-setting-color-display"
+                                style={{
+                                    backgroundColor: globalColor || '#000',
+                                }}
+                                />
+                            </div>
                         </Button>
                     )}
                     renderContent={() => (

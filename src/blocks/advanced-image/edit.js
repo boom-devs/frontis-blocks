@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-advanced-image-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`}>
 					<div
 						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition} ${
 							showOverlay ? "overlay-simple" : ""
