@@ -28,7 +28,6 @@ import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES} from "./constants/co
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
