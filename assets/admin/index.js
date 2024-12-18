@@ -140,7 +140,21 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
+}, {
+  id: 'custom_icons',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom icons", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.CustomIcons, null)
 }]);
+// Add pricing tab if not pro
+if (window.frontisBlocksAdmin.isProActive === 'false') {
+  TabMenus.push({
+    id: 'pricing',
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.PricingIcon, null),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pricing", "frontis-blocks"),
+    comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Pricing, null)
+  });
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
@@ -1238,7 +1252,7 @@ var Settings = function Settings() {
   }).component;
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings"
-  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-tabs"
@@ -1497,7 +1511,7 @@ var AssetsGeneration = function AssetsGeneration() {
   }, []);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Assets Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
@@ -1751,292 +1765,9 @@ var EditorEnhancements = function EditorEnhancements() {
 /*!**************************************************************!*\
   !*** ./admin/components/SettingsComponents/EditorOptions.js ***!
   \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var rc_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-switch */ "./node_modules/rc-switch/es/index.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-
-var EditorOptions = function EditorOptions() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
-      default_content_width: '',
-      button_inherit_from_theme: false,
-      container_padding: '',
-      container_elements_gap: '',
-      custom_css: false,
-      copy_paste_style: false
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    options = _useState2[0],
-    setOptions = _useState2[1];
-  var _window$frontisBlocks = window.frontisBlocksAdmin,
-    nonce = _window$frontisBlocks.nonce,
-    ajaxUrl = _window$frontisBlocks.ajaxUrl;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    fetchOptions();
-  }, []);
-  var fetchOptions = function fetchOptions() {
-    var keys = Object.keys(options);
-    jQuery.ajax({
-      url: ajaxUrl,
-      type: 'POST',
-      data: {
-        action: 'fb_get_options',
-        security: nonce,
-        keys: keys
-      },
-      success: function success(response) {
-        if (response.success) {
-          setOptions(function (prevOptions) {
-            return _objectSpread(_objectSpread({}, prevOptions), response.data);
-          });
-        } else {
-          var _response$data;
-          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error'), 'frontis-blocks'), {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-          });
-        }
-      },
-      error: function error(xhr, status, _error) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(status, " - ").concat(_error), 'frontis-blocks'), {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true
-        });
-      }
-    });
-  };
-  var saveOption = function saveOption(key, value) {
-    return new Promise(function (resolve, reject) {
-      window.jQuery.ajax({
-        url: ajaxUrl,
-        type: 'POST',
-        data: {
-          action: "fb_".concat(key),
-          security: nonce,
-          value: value
-        },
-        success: function success(response) {
-          if (response.success) {
-            setOptions(function (prevOptions) {
-              return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, key, value));
-            });
-            react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true
-            });
-            resolve(true);
-          } else {
-            var _response$data2, _response$data3;
-            var errorMessage = ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message) || 'Unknown error';
-            var errorDetails = ((_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.old_value) !== undefined ? " (Old value: ".concat(JSON.stringify(response.data.old_value), ", New value: ").concat(JSON.stringify(response.data.new_value), ", Option name: ").concat(response.data.option_name, ")") : '';
-            react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage).concat(errorDetails), 'frontis-blocks'), {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true
-            });
-            reject(new Error(errorMessage));
-          }
-        },
-        error: function error(xhr, status, _error2) {
-          var errorMessage = "".concat(status, " - ").concat(_error2);
-          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage), 'frontis-blocks'), {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-          });
-          reject(new Error(errorMessage));
-        }
-      });
-    });
-  };
-  var handleNumberChange = function handleNumberChange(option, value) {
-    setOptions(function (prevOptions) {
-      return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, value));
-    });
-  };
-  var handleNumberBlur = function handleNumberBlur(option, value) {
-    saveOption(option, value);
-  };
-  var handleSwitchChange = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(option) {
-      var newValue;
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            newValue = !options[option];
-            _context.prev = 1;
-            _context.next = 4;
-            return saveOption(option, newValue ? '1' : '0');
-          case 4:
-            setOptions(function (prevOptions) {
-              return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, newValue));
-            });
-            _context.next = 10;
-            break;
-          case 7:
-            _context.prev = 7;
-            _context.t0 = _context["catch"](1);
-            // Revert the switch if saving failed
-            setOptions(function (prevOptions) {
-              return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, option, !newValue));
-            });
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee, null, [[1, 7]]);
-    }));
-    return function handleSwitchChange(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  var NumberInputWithPx = function NumberInputWithPx(_ref2) {
-    var value = _ref2.value,
-      onChange = _ref2.onChange,
-      onBlur = _ref2.onBlur,
-      min = _ref2.min,
-      max = _ref2.max;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "fb-option-input-with-px"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      type: "number",
-      min: min,
-      max: max,
-      value: value,
-      onChange: onChange,
-      onBlur: onBlur
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "fb-option-input-px"
-    }, "px"));
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "fb-blocks-settings-options"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.default_content_width,
-    onChange: function onChange(value) {
-      return handleNumberChange('default_content_width', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('default_content_width', options.default_content_width);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Button - Inherit From Theme', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Use button styles from the current theme', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.button_inherit_from_theme,
-    onChange: function onChange() {
-      return handleSwitchChange('button_inherit_from_theme');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.container_padding,
-    onChange: function onChange(value) {
-      return handleNumberChange('container_padding', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('container_padding', options.container_padding);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Elements Gap', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default gap between container elements in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.container_elements_gap,
-    onChange: function onChange(value) {
-      return handleNumberChange('container_elements_gap', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('container_elements_gap', options.container_elements_gap);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable custom CSS for blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.custom_css,
-    onChange: function onChange() {
-      return handleSwitchChange('custom_css');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Copy Paste Style', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable copy and paste style functionality', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.copy_paste_style,
-    onChange: function onChange() {
-      return handleSwitchChange('copy_paste_style');
-    }
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditorOptions);
+throw new Error("Module build failed (from ./node_modules/@wordpress/scripts/node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\admin\\components\\SettingsComponents\\EditorOptions.js: Unexpected token (6:1)\n\n\u001b[0m \u001b[90m 4 |\u001b[39m \u001b[36mimport\u001b[39m { useState\u001b[33m,\u001b[39m useEffect } \u001b[36mfrom\u001b[39m \u001b[32m'@wordpress/element'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 5 |\u001b[39m \u001b[36mimport\u001b[39m { toast } \u001b[36mfrom\u001b[39m \u001b[32m'react-toastify'\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 6 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m   |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 7 |\u001b[39m \u001b[36mimport\u001b[39m { log } \u001b[36mfrom\u001b[39m \u001b[32m'grunt'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 8 |\u001b[39m \u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\n \u001b[90m 9 |\u001b[39m \u001b[36mimport\u001b[39m { useDispatch } \u001b[36mfrom\u001b[39m \u001b[32m'@wordpress/data'\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    at constructor (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at JSXParserMixin.raise (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at JSXParserMixin.unexpected (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at JSXParserMixin.jsxParseIdentifier (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6623:12)\n    at JSXParserMixin.jsxParseNamespacedName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6630:23)\n    at JSXParserMixin.jsxParseElementName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6639:21)\n    at JSXParserMixin.jsxParseOpeningElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6715:22)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6740:33)\n    at JSXParserMixin.jsxParseElement (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6803:17)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6813:19)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at JSXParserMixin.parseExpressionBase (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10333:23)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10329:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at JSXParserMixin.parseExpression (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10329:17)\n    at JSXParserMixin.parseStatementContent (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12390:23)\n    at JSXParserMixin.parseStatementLike (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12257:17)\n    at JSXParserMixin.parseModuleItem (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12234:17)\n    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12810:36)\n    at JSXParserMixin.parseBlockBody (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12803:10)\n    at JSXParserMixin.parseProgram (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12131:10)\n    at JSXParserMixin.parseTopLevel (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:12121:25)\n    at JSXParserMixin.parse (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:13929:10)\n    at parse (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:13963:38)\n    at parser (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\core\\lib\\parser\\index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:64:37)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\core\\lib\\transformation\\index.js:22:50)\n    at run.next (<anonymous>)\n    at transform (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\core\\lib\\transform.js:22:33)\n    at transform.next (<anonymous>)\n    at step (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:261:32)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:223:11)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:189:28\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\core\\lib\\gensync-utils\\async.js:67:7\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:113:33\n    at step (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:287:14)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:273:13\n    at async.call.result.err.err (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\gensync\\index.js:223:11)");
 
 /***/ }),
 
@@ -2683,6 +2414,7 @@ var VersionControl = function VersionControl() {
     onChange: handleVersionChange
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     isPrimary: true,
+    className: "fb-button-primary",
     onClick: handleRollback,
     disabled: !options.selected_version
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rollback', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
@@ -2724,12 +2456,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AssetsGeneration: () => (/* reexport safe */ _AssetsGeneration__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   EditorEnhancements: () => (/* reexport safe */ _EditorEnhancements__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   EditorOptions: () => (/* reexport safe */ _EditorOptions__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   EditorOptions: () => (/* reexport default from dynamic */ _EditorOptions__WEBPACK_IMPORTED_MODULE_0___default.a),
 /* harmony export */   Performance: () => (/* reexport safe */ _Performance__WEBPACK_IMPORTED_MODULE_4__["default"]),
 /* harmony export */   SiteVisibility: () => (/* reexport safe */ _SiteVisibility__WEBPACK_IMPORTED_MODULE_5__["default"]),
 /* harmony export */   VersionControl: () => (/* reexport safe */ _VersionControl__WEBPACK_IMPORTED_MODULE_2__["default"])
 /* harmony export */ });
 /* harmony import */ var _EditorOptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditorOptions */ "./admin/components/SettingsComponents/EditorOptions.js");
+/* harmony import */ var _EditorOptions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_EditorOptions__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _AssetsGeneration__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AssetsGeneration */ "./admin/components/SettingsComponents/AssetsGeneration.js");
 /* harmony import */ var _VersionControl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VersionControl */ "./admin/components/SettingsComponents/VersionControl.js");
 /* harmony import */ var _EditorEnhancements__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorEnhancements */ "./admin/components/SettingsComponents/EditorEnhancements.js");
