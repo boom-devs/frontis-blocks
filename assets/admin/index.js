@@ -1484,7 +1484,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data4;
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -1495,7 +1495,7 @@ var AssetsGeneration = function AssetsGeneration() {
         }
       },
       error: function error(xhr, status, _error3) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
+        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,

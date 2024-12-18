@@ -722,7 +722,7 @@ const attributes = {
 	// Typography
 	teamMemberDesignationFontFamily: {
         type: "string",
-        default: "Work Sans",
+        default: "Default",
     },
     teamMemberDesignationFontSize: {
         type: 'object',
@@ -1083,7 +1083,7 @@ const attributes = {
 	// Typography
 	teamMemberNameFontFamily: {
         type: "string",
-        default: "",
+        default: "Default",
     },
     teamMemberNameFontSize: {
         type: 'object',
@@ -1911,7 +1911,7 @@ const attributes = {
 	// Typography
 	teamMemberDescFontFamily: {
 		type: "string",
-		default: "",
+		default: "Default",
 	},
 	teamMemberDescFontSize: {
 		type: 'object',
