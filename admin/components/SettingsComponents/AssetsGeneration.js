@@ -171,7 +171,7 @@ const AssetsGeneration = () => {
 
   return (
     <div className="fb-blocks-settings-options">
-      <h3>{__('Assets Generation', 'frontis-blocks')}</h3>
+      {/* <h3>{__('Assets Generation', 'frontis-blocks')}</h3> */}
       
       <div className="fb-option">
         <div className="fb-option-label">
