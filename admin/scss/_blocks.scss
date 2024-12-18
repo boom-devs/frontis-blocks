@@ -241,7 +241,6 @@
   display: flex;
   align-items: center;
   padding: $spacing-unit * 2.5 $spacing-unit * 2;
-  border: 1px solid $border-color;
   border-radius: $border-radius * 2.5;
   background-color: $neutral-color-50;
   transition: box-shadow $transition-duration;
@@ -305,6 +304,20 @@
     &-label {
       display: flex;
       align-items: center;
+
+      .rc-switch {
+        width: 44px;
+        height: 24px;
+        border-radius: ($border-radius * 8);
+
+        &::after {
+          left: 1px;
+          top: 1px;
+        }
+      }
+      .rc-switch-checked:after {
+        left: auto;
+      }
     }
 
     &-input {
