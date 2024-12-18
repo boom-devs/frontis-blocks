@@ -147,7 +147,7 @@ const Edit = (props) => {
 				context,
 			} ) );
 		}
-	}, [ hasDynamicContent, context?.postId ] )
+	}, [ hasDynamicContent, context?.postId ] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.deviceType ), [ attributes, attributes.deviceType ] );
 
@@ -155,10 +155,14 @@ const Edit = (props) => {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
+	const handleResponsive = (device) => {
+		console.log(device)
+	}
+
 	return (
 		<>
 			<DynamicCSSLoader { ...{ blockStyling } } />
-			{isSelected && <Inspector attributes={attributes} setAttributes={setAttributes} /> }
+			{isSelected && <Inspector { ...props } /> }
 			<Render { ...props } />
 		</>
 	);

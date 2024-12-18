@@ -18,7 +18,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps({
 		className: [
-			'fb-fluent-form-wrapper',
+			'fb-parent-wrapper fb-fluent-form-wrapper',
 			blockID,
 			!showLabels && 'fb-fluent-form-hide-label',
 			!showPlaceholder && 'fb-fluent-form-hide-placeholder',

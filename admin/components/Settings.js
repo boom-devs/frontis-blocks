@@ -13,7 +13,7 @@ const Settings = () => {
 
   return (
     <div className="fb-blocks-settings">
-      <h2>{__('Settings', 'frontis-blocks')}</h2>
+      {/* <h2>{__('Settings', 'frontis-blocks')}</h2> */}
       <div className="fb-blocks-settings-container">
         <div className="fb-blocks-settings-tabs">
           {SettingsTabs.map((tab) => (
