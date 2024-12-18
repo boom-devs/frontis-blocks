@@ -140,12 +140,14 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
-}, {
-  id: 'custom_icons',
-  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom icons", "frontis-blocks"),
-  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.CustomIcons, null)
-}]);
+}
+// {
+// 	id: 'custom_icons',
+// 	icon: <IntegrationsIcon />,
+// 	label: __("Custom icons", "frontis-blocks"),
+// 	comp: <CustomIcons />
+// }
+]);
 // Add pricing tab if not pro
 if (window.frontisBlocksAdmin.isProActive === 'false') {
   TabMenus.push({
@@ -212,9 +214,9 @@ var BlockCard = function BlockCard(_ref) {
     className: "fb-block-card-content"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "fb-block-card-title"
-  }, block.title), block.badge && /*#__PURE__*/React.createElement("span", {
-    className: "fb-block-card-badge"
-  }, block.badge)), /*#__PURE__*/React.createElement("div", {
+  }, block.title, block.badge !== 'free' && /*#__PURE__*/React.createElement("span", {
+    className: "fb-block-card-badge ".concat(block.badge)
+  }, block.badge))), /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card-links"
   }, /*#__PURE__*/React.createElement("a", {
     href: block.doc ? block.doc : 'https://frontis.com',
@@ -450,24 +452,51 @@ var Blocks = function Blocks() {
     className: "fb-blocks-search"
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search blocks...', 'frontis-blocks'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Blocks', 'frontis-blocks'),
     className: "fb-blocks-search-input",
     value: searchTerm,
     onChange: function onChange(e) {
       return setSearchTerm(e.target.value);
     }
-  }), searchTerm && /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "fb-blocks-search-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_4834_1174)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "#6A758E",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_4834_1174"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), searchTerm && /*#__PURE__*/React.createElement("button", {
     className: "fb-blocks-search-clear",
     onClick: clearSearch
   }, "\xD7"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-header-right"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-blocks-button fb-blocks-enable-all",
-    onClick: handleEnableAll
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable All', 'frontis-blocks')), /*#__PURE__*/React.createElement("button", {
     className: "fb-blocks-button fb-blocks-disable-all",
     onClick: handleDisableAll
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')), /*#__PURE__*/React.createElement("button", {
+    className: "fb-blocks-button fb-blocks-enable-all",
+    onClick: handleEnableAll
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
   }, Object.entries(categoryInfo).map(function (_ref5) {
     var _ref6 = _slicedToArray(_ref5, 2),
@@ -1003,8 +1032,9 @@ var Integration = function Integration() {
     className: "section-right"
   }, /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v2', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v2', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={__('Site key', 'frontis-blocks')}
+  , {
     value: integrations.recaptcha_v2_site_key,
     onChange: function onChange(value) {
       return handleChange(value, 'recaptcha_v2_site_key');
@@ -1013,8 +1043,9 @@ var Integration = function Integration() {
       return handleBlur('recaptcha_v2_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v2 Site Key', 'frontis-blocks')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={ __('Secret key', 'frontis-blocks') }
+  , {
     type: "password",
     value: integrations.recaptcha_v2_secret_key,
     onChange: function onChange(value) {
@@ -1029,8 +1060,9 @@ var Integration = function Integration() {
     className: "api-documentation"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('API Documentation', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v3', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v3', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={__('Site key', 'frontis-blocks')}
+  , {
     value: integrations.recaptcha_v3_site_key,
     onChange: function onChange(value) {
       return handleChange(value, 'recaptcha_v3_site_key');
@@ -1039,8 +1071,9 @@ var Integration = function Integration() {
       return handleBlur('recaptcha_v3_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v3 Site Key', 'frontis-blocks')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={ __('Secret key', 'frontis-blocks') }
+  , {
     type: "password",
     value: integrations.recaptcha_v3_secret_key,
     onChange: function onChange(value) {
@@ -1531,7 +1564,7 @@ var AssetsGeneration = function AssetsGeneration() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "fb-button-primary",
     onClick: handleAssetGeneration
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate Assets', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isOpen: isModalOpen,
     onClose: closeModal,
     onConfirm: confirmAssetGeneration,
