@@ -355,7 +355,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         let styles = `
           .fb-accordion-main-wrapper.${blockID} {
                 position: relative;
-                ${accordionZIndex !== undefined ? `z-index: ${accordionZIndex};` : ''}
+                ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
                 ${accordionPaddingDesktopWidth !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
                 ${accordionMarginDesktopWidth !== undefined ? `margin: ${accordionMarginDesktopWidth};` : ''}
                 ${accordionBorder !== undefined ? `border-style: ${accordionBorder};` : ''}
@@ -614,6 +614,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
       
         @media only screen and (max-width: 1024px) {
             .fb-accordion-main-wrapper.${blockID} {
+                ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
                 ${accordionPaddingTabletWidth !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
                 ${accordionMarginTabletWidth !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
                 ${accordionBorderRadiusTabletWidth !== undefined ? `border-radius: ${accordionBorderRadiusTabletWidth};` : ''}
@@ -687,6 +688,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
       
         @media only screen and (max-width: 767px) {
             .fb-accordion-main-wrapper.${blockID} {
+                ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
                 ${accordionPaddingMobileWidth !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}
                 ${accordionBorderRadiusMobileWidth !== undefined ? `border-radius: ${accordionBorderRadiusMobileWidth};` : ''}

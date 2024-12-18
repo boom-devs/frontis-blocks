@@ -96,6 +96,7 @@ export default function CounterIconControl ({ attributes, setAttributes}) {
 		}
 
 	}
+	
 	const spacingCombineBtnHandlerFn = () => {
 		setAttributes( {counterIconMarginLink: !counterIconMarginLink} );
 	}

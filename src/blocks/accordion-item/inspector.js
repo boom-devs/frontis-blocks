@@ -358,7 +358,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			position: relative;
 			display: block;
 			overflow: hidden;
-			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+			${accordionItemZIndex.Desktop !== undefined ? `z-index: ${accordionItemZIndex.Desktop};` : ''}
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
@@ -408,6 +408,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 
 		@media only screen and (max-width: 1024px) {
+            .fb-accordion-item-main-wrapper.${blockID} {
+                ${accordionItemZIndex.Tablet !== undefined ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
+            }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
 				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
@@ -415,6 +418,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 
 		@media only screen and (max-width: 767px) {
+            .fb-accordion-item-main-wrapper.${blockID} {
+                ${accordionItemZIndex.Mobile !== undefined ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
+            }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
 				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}

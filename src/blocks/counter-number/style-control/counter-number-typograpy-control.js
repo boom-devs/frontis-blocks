@@ -25,8 +25,6 @@ export default function CounterNumberTypographyControl ({ attributes, setAttribu
 		counterNumberLetterSpacingUnits,
 		counterNumberLineHeight,
 		counterNumberLineHeightUnits,
-
-
 	} = attributes;
 
 

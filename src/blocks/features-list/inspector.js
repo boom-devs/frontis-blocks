@@ -11,6 +11,7 @@ import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 
 import { 
@@ -1148,30 +1149,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${FeatureGlobalBorderRadiusMobile.top}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.right}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.bottom}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.left}${FeatureGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */   
 
-    /* set default values for the style attributes */
+    /* Start Load Google Fonts */
 	useEffect(() => {
-		if (FeatureTitleFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${FeatureTitleFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [FeatureTitleFontFamily]);
+		loadGoogleFont(FeatureTitleFontFamily);
+        loadGoogleFont(FeatureDescFontFamily);
+	}, [FeatureTitleFontFamily, FeatureDescFontFamily]);
 
-    /* set default values for the style attributes */
-	useEffect(() => {
-		if (FeatureDescFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${FeatureDescFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [FeatureDescFontFamily]);
+    /* End Load Google Fonts */
 
 
-    	/** Start Feature Item Color Style */
+    /** Start Feature Item Color Style */
 	const featureSingleItemStyle = useMemo(() => {
         let style = '';
         FeatureItems.forEach(item => {

@@ -18,7 +18,7 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-social-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`}>
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (

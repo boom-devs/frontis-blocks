@@ -27,7 +27,7 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps} id={blockID}>
-			<div className={`fb-counter-wrapper ${blockID}`}>
+			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
 				<div className="fb-counter-item">
 					<div className={`fb-counter-icon-wrapper`}>
 						{/* Conditionally render image or icon */}
