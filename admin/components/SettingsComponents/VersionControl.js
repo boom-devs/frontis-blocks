@@ -141,6 +141,7 @@ const VersionControl = () => {
           />
           <Button
             isPrimary
+            className="fb-button-primary"
             onClick={handleRollback}
             disabled={!options.selected_version}
           >

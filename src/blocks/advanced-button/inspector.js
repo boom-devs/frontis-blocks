@@ -40,6 +40,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import './editor.scss';
 
@@ -965,22 +966,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 
-	/* set default values for the style attributes */
+	/** Start Load Google Font */
 	useEffect(() => {
 		if (buttonFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${buttonFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
+			loadGoogleFont(buttonFontFamily);
 		}
 	}, [buttonFontFamily]);
+	/** End Load Google Font */
 
+	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
 		setAttributes({buttonIcon: IconName})
-
 	}
-
+	/** End Icon Handler */
 
 
 	const allBlockStyle = useMemo(() => `
@@ -1003,7 +1001,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
-			${buttonFontFamily ? `font-family: ${buttonFontFamily};` : ''}
+			${buttonFontFamily && buttonFontFamily !== 'Default' ? `font-family: ${buttonFontFamily};` : ''}
 			${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
 			${buttonFontWeight ? `font-weight: ${buttonFontWeight};` : ''}
 			${buttonFontStyle ? `font-style: ${buttonFontStyle};` : ''}

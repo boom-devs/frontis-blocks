@@ -37,6 +37,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import "./editor.scss";
 
@@ -1799,40 +1800,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 	// Helper function to load fonts
-	const loadFont = (fontFamily) => {
-		if (fontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(
-				" ",
-				"+",
-			)}`;
-			const linkElement = document.createElement("link");
-			linkElement.rel = "stylesheet";
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	};
-
-	// Apply font family styles using useEffect
 	useEffect(() => {
-		loadFont(contactFormLabelFontFamily);
-	}, [contactFormLabelFontFamily]);
-
-	useEffect(() => {
-		loadFont(contactFormInputFontFamily);
-	}, [contactFormInputFontFamily]);
-
-	useEffect(() => {
-		loadFont(contactFormSubmitFontFamily);
-	}, [contactFormSubmitFontFamily]);
-
-	useEffect(() => {
-		loadFont(contactFormSuccessFontFamily);
-	}, [contactFormSuccessFontFamily]);
-
-	useEffect(() => {
-		loadFont(contactFormErrorFontFamily);
-	}, [contactFormErrorFontFamily]);
-
+		loadGoogleFont(contactFormLabelFontFamily);
+		loadGoogleFont(contactFormInputFontFamily);
+		loadGoogleFont(contactFormSubmitFontFamily);
+		loadGoogleFont(contactFormSuccessFontFamily);
+		loadGoogleFont(contactFormErrorFontFamily);
+	}, [contactFormLabelFontFamily,
+		contactFormInputFontFamily,
+		contactFormSubmitFontFamily,
+		contactFormSuccessFontFamily,
+		contactFormErrorFontFamily,
+	]);
 
 
     const allBlockStyle = useMemo(() => `
@@ -2038,7 +2017,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormSuccessDesktopBorderWidth ? `border-width: ${contactFormSuccessDesktopBorderWidth};` : ""}
             ${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
             ${contactFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${contactFormSuccessDesktopBorderRadiusWidth};` : ""}
-			box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 			padding: 10px 15px;
 		}
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {

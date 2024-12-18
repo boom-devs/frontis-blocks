@@ -71,7 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</p>
 				</div>
 				) : (
-				<div className="fb-contact-form-render">
+				<div className="fb-parent-wrapper fb-contact-form-render">
 					{selectedForm ? (
 						<div dangerouslySetInnerHTML={{ __html: selectedForm }} />
 				) : (

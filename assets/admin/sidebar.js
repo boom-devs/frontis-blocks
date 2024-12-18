@@ -828,6 +828,8 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   var handleLineHeightUnitChange = function handleLineHeightUnitChange(newLineHeightUnit) {
     onChangeLineHeightUnit(newLineHeightUnit);
   };
+  console.log("Checking device type");
+  console.log(deviceType);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
     options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
@@ -984,6 +986,7 @@ var TypographySettings = function TypographySettings(props) {
     var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     var result = {};
     if (_typeof(font) === 'object' && Object.keys(font).length > 0) {
+      var _font$letterSpacing, _font$letterSpacingUn, _font$fontSize, _font$fontSizeUnit, _font$lineHeight, _font$lineHeightUnits;
       result = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, font.fontFamily && {
         fontFamily: font.fontFamily
       }), font.fontWeight && {
@@ -995,11 +998,11 @@ var TypographySettings = function TypographySettings(props) {
       }), font.textDecoration && {
         textDecoration: font.textDecoration
       }), font.letterSpacing && {
-        letterSpacing: "".concat(font.letterSpacing[deviceType]).concat(font.letterSpacingUnit[deviceType] || 'px')
+        letterSpacing: "".concat((_font$letterSpacing = font.letterSpacing) === null || _font$letterSpacing === void 0 ? void 0 : _font$letterSpacing[deviceType]).concat(((_font$letterSpacingUn = font.letterSpacingUnit) === null || _font$letterSpacingUn === void 0 ? void 0 : _font$letterSpacingUn[deviceType]) || 'px')
       }), size && font.fontSize && {
-        fontSize: "".concat(font.fontSize[deviceType]).concat(font.fontSizeUnit[deviceType] || 'px')
+        fontSize: "".concat((_font$fontSize = font.fontSize) === null || _font$fontSize === void 0 ? void 0 : _font$fontSize[deviceType]).concat(((_font$fontSizeUnit = font.fontSizeUnit) === null || _font$fontSizeUnit === void 0 ? void 0 : _font$fontSizeUnit[deviceType]) || 'px')
       }), font.lineHeight && {
-        lineHeight: "".concat(font.lineHeight[deviceType]).concat(font.lineHeightUnits[deviceType] || 'px')
+        lineHeight: "".concat((_font$lineHeight = font.lineHeight) === null || _font$lineHeight === void 0 ? void 0 : _font$lineHeight[deviceType]).concat(((_font$lineHeightUnits = font.lineHeightUnits) === null || _font$lineHeightUnits === void 0 ? void 0 : _font$lineHeightUnits[deviceType]) || 'px')
       });
     }
     return result;
@@ -1400,7 +1403,8 @@ var TypographySettings = function TypographySettings(props) {
     }();
     handleUpdateSettings();
   }, [isAfterSave]);
-  console.log(fontFamilies);
+  console.log("Checking device type inside typography settings");
+  console.log(deviceType);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -1995,19 +1999,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
-/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
-/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helper */ "./admin/sidebar/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
-/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
+/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper */ "./admin/sidebar/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
+/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -2022,6 +2028,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -2097,383 +2104,383 @@ var gradientDefaults = [{
   "var": "--fb-gradient-background-color"
 }];
 function FrontisBlocksSidebar(props) {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  // Set state
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     customColors = _useState2[0],
     setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("solid"),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)("solid"),
     _useState4 = _slicedToArray(_useState3, 2),
     activeTab = _useState4[0],
     setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState6 = _slicedToArray(_useState5, 2),
     gradientColors = _useState6[0],
     setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
     customGradientColors = _useState8[0],
     setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState10 = _slicedToArray(_useState9, 2),
     globalColors = _useState10[0],
     setGlobalColors = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
     _useState12 = _slicedToArray(_useState11, 2),
     customCSS = _useState12[0],
     setCustomCSS = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
     fbGlobalSettingsLoading = _useState14[0],
     setFbGlobalSettingsLoading = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
+      body: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      link: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      button: {
+        fontFamily: 'inherit',
+        lineHeight: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      },
+      heading: {
+        h1: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h2: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h3: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h4: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h5: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        },
+        h6: {
+          fontFamily: "Default",
+          lineHeight: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          lineHeightUnits: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontSize: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          fontSizeUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          },
+          fontWeight: '',
+          fontStyle: '',
+          textTransform: '',
+          textDecoration: '',
+          letterSpacing: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+          },
+          letterSpacingUnit: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+          }
+        }
+      }
+    }),
     _useState16 = _slicedToArray(_useState15, 2),
     typography = _useState16[0],
     setTypography = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
     _useState18 = _slicedToArray(_useState17, 2),
     customTypography = _useState18[0],
     setCustomTypography = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
     _useState20 = _slicedToArray(_useState19, 2),
     fontfamilies = _useState20[0],
     setFontfamilies = _useState20[1];
-  var defaultTypos = {
-    body: {
-      fontFamily: 'inherit',
-      lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
-      letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      }
-    },
-    link: {
-      fontFamily: 'inherit',
-      lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
-      letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      }
-    },
-    button: {
-      fontFamily: 'inherit',
-      lineHeight: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      lineHeightUnits: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontSize: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      fontSizeUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      },
-      fontWeight: 0,
-      fontStyle: 0,
-      textTransform: 0,
-      textDecoration: 0,
-      letterSpacing: {
-        Desktop: 0,
-        Tablet: 0,
-        Mobile: 0
-      },
-      letterSpacingUnit: {
-        Desktop: 'px',
-        Tablet: 'em',
-        Mobile: '%'
-      }
-    },
-    heading: {
-      h1: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 10,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      },
-      h2: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 50,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      },
-      h3: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      },
-      h4: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      },
-      h5: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      },
-      h6: {
-        fontFamily: "inherit",
-        lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
-        letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'em',
-          Mobile: '%'
-        }
-      }
-    }
-  };
 
   // Extract all font families into a single string
   var getAllFontFamilies = function getAllFontFamilies(fontsObject) {
@@ -2489,9 +2496,9 @@ function FrontisBlocksSidebar(props) {
     };
     _extractFonts(fontsObject);
     var regenerateFonts = fontFamilies.join(",");
-    (0,_helper__WEBPACK_IMPORTED_MODULE_9__.loadGoogleFont)(regenerateFonts);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_10__.loadGoogleFont)(regenerateFonts);
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies'];
     var handleUpdateState = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2507,7 +2514,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               key = _localStorageKeys[_i];
-              localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_9__.getFbLocalStorage)(key);
+              localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
               if (!(key === 'fb_global_colors')) {
                 _context.next = 14;
                 break;
@@ -2517,7 +2524,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_global_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
             case 9:
               res = _context.sent;
               if (!res.success) {
@@ -2541,7 +2548,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 18;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
             case 18:
               _res = _context.sent;
               if (!_res.success) {
@@ -2564,7 +2571,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 27;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_gradient_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
             case 27:
               _res2 = _context.sent;
               if (!_res2.success) {
@@ -2588,7 +2595,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 36;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_gradient_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
             case 36:
               _res3 = _context.sent;
               if (!_res3.success) {
@@ -2611,12 +2618,11 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 45;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
             case 45:
               _res4 = _context.sent;
               if (!_res4.success) {
-                setTypography(defaultTypos);
-                localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+                localStorage.setItem('fb_typography', JSON.stringify(typography));
               } else {
                 setTypography(_res4.data);
                 localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
@@ -2635,7 +2641,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 54;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
             case 54:
               _res5 = _context.sent;
               if (!_res5.success) {
@@ -2658,7 +2664,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 63;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_fontfamilies');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
             case 63:
               _res6 = _context.sent;
               if (!_res6.success) {
@@ -2721,6 +2727,21 @@ function FrontisBlocksSidebar(props) {
     colors[index].color = color;
     setGlobalColors(_toConsumableArray(colors));
     setFbGlobalSettingsLoading(true);
+
+    // // Select the Save button and update its aria-disabled attribute
+    // const saveButton = document.querySelector(
+    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
+    // );
+
+    // if (saveButton) {
+    // 	// Set aria-disabled to false when color is updated
+    // 	saveButton.setAttribute('aria-disabled', 'false');
+
+    // 	// Add a click event listener to set aria-disabled back to true
+    // 	saveButton.addEventListener('click', () => {
+    // 		saveButton.setAttribute('aria-disabled', 'true');
+    // 	});
+    // }
   };
 
   //Update Gradient Colors
@@ -2771,8 +2792,10 @@ function FrontisBlocksSidebar(props) {
   };
 
   // Save colors after post save
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_9__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.useAfterSave)();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    console.log("Chekcing is after saving");
+    console.log(isAfterSave);
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
@@ -2797,7 +2820,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(globalColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(globalColors, key);
             case 9:
               response = _context2.sent;
               if (response.success) {
@@ -2810,7 +2833,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(customColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customColors, key);
             case 14:
               _response = _context2.sent;
               if (_response.success) {
@@ -2823,7 +2846,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(gradientColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(gradientColors, key);
             case 19:
               _response2 = _context2.sent;
               if (_response2.success) {
@@ -2836,7 +2859,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 24;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(customGradientColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customGradientColors, key);
             case 24:
               _response3 = _context2.sent;
               if (_response3.success) {
@@ -2876,10 +2899,10 @@ function FrontisBlocksSidebar(props) {
     className: "fb-global-controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Color", "frontis-blocks"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
     onSelect: function onSelect(tabName) {
@@ -2893,21 +2916,21 @@ function FrontisBlocksSidebar(props) {
       title: "Gradient"
     }]
   }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Colors", "frontis-blocks"),
       className: "fb-color-panel fb-global-color-panel",
       initialOpen: true,
       disableAlpha: true,
       disableCustomGradients: false,
       colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
-    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__["default"], {
       colorPanelArray: colorPanelArray,
       customColors: customColors,
       setCustomColor: setCustomColor,
       setCustomColors: setCustomColors
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       className: "add-custom-color-btn",
       onClick: function onClick() {
         return setNewCustomColorFn();
@@ -2921,17 +2944,17 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
-    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
+    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
       title: "Gradient Colors",
       colors: gradientColors,
       setColor: setGradientColor,
       setColors: setGradientColors,
       wrapperClass: "fb-gradient-color-panel",
       resetAction: true
-    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__["default"], {
       title: "Custom Gradient Colors",
       colors: customGradientColors,
       setColor: setCustomGradientColor,
@@ -2942,7 +2965,7 @@ function FrontisBlocksSidebar(props) {
       onDelete: deleteCustomGradientColor
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       className: "add-custom-color-btn",
       onClick: function onClick() {
         return setCustomGradientColors([].concat(_toConsumableArray(customGradientColors), [{
@@ -2961,14 +2984,14 @@ function FrontisBlocksSidebar(props) {
     }, /*#__PURE__*/React.createElement("path", {
       d: "M7.5 0.75V13.25M13.75 7L1.25 7",
       stroke: "white",
-      "stroke-width": "1.5",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round"
     })))))));
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__["default"], {
     typography: typography,
     customTypography: customTypography
   }))))));
@@ -3065,21 +3088,14 @@ var FB_Range = function FB_Range(_ref) {
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-reset-button fb-reset-has-value"
   }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
     width: "16",
     height: "16",
     viewBox: "0 0 16 16",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
+    fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M2.75 2C3.16421 2 3.5 2.33579 3.5 2.75V6.5H7.25C7.66421 6.5 8 6.83579 8 7.25C8 7.66421 7.66421 8 7.25 8H2.75C2.33579 8 2 7.66421 2 7.25V2.75C2 2.33579 2.33579 2 2.75 2Z",
-    fill: "#4d4d4d"
-  }), /*#__PURE__*/React.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M8.29365 3.75C6.56527 3.75 5.07807 4.79769 4.42654 6.30028C4.26196 6.67984 3.82318 6.8531 3.4465 6.68726C3.06981 6.52143 2.89787 6.07929 3.06245 5.69972C3.94232 3.6705 5.95253 2.25 8.29365 2.25C11.4452 2.25 14 4.82436 14 8C14 11.1756 11.4452 13.75 8.29365 13.75C6.42651 13.75 4.76879 12.8456 3.72895 11.451C3.48203 11.1198 3.54828 10.6497 3.87693 10.4009C4.20558 10.1521 4.67217 10.2188 4.91909 10.55C5.68985 11.5837 6.91443 12.25 8.29365 12.25C10.623 12.25 12.5114 10.3472 12.5114 8C12.5114 5.65279 10.623 3.75 8.29365 3.75Z",
-    fill: "#4d4d4d"
+    d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
+    stroke: "#555E72"
   })))), isRangeUnit && /*#__PURE__*/React.createElement(_Components_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
@@ -3135,9 +3151,6 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    // setDeviceType('Desktop');
-  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-device-label-wrapper"
   }, /*#__PURE__*/React.createElement("p", {
@@ -3153,11 +3166,16 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
       return handleDevice('Desktop');
     }
   }, /*#__PURE__*/React.createElement("svg", {
-    width: "8",
-    height: "7",
-    viewBox: "0 0 8 7"
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M7.33333 0H0.666667C0.298611 0 0 0.293945 0 0.65625V5.03125C0 5.39355 0.298611 5.6875 0.666667 5.6875H3.33333L3.11111 6.34375H2.11111C1.92639 6.34375 1.77778 6.49004 1.77778 6.67188C1.77778 6.85371 1.92639 7 2.11111 7H5.88889C6.07361 7 6.22222 6.85371 6.22222 6.67188C6.22222 6.49004 6.07361 6.34375 5.88889 6.34375H4.88889L4.66667 5.6875H7.33333C7.70139 5.6875 8 5.39355 8 5.03125V0.65625C8 0.293945 7.70139 0 7.33333 0ZM7.11111 4.8125H0.888889V0.875H7.11111V4.8125Z"
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
+    fill: "#555E72"
   }))), /*#__PURE__*/React.createElement("button", {
     className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
     onClick: function onClick() {
@@ -6473,9 +6491,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
-/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
+/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
+/* harmony import */ var _Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Utils/loadGoogleFont */ "./src/utils/loadGoogleFont.js");
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+
+
 
 
 
@@ -6508,22 +6531,16 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     setAttributes = _ref.setAttributes;
-  var storedTypography = localStorage.getItem('fb_typography');
-  var typographySettings = storedTypography ? JSON.parse(storedTypography) : {};
-  var bodyTypography = typographySettings.body;
-  var globalBodyFontFamily = bodyTypography.fontFamily;
-  var globalBodyFontSize = bodyTypography.fontSize;
-  var globalBodyFontSizeUnit = bodyTypography.fontSizeUnit;
-  var globalBodyFontStyle = bodyTypography.fontStyle;
-  var globalBodyFontWeight = bodyTypography.fontWeight;
-  var globalBodyLetterSpacing = bodyTypography.letterSpacing;
-  var globalBodyLetterSpacingUnit = bodyTypography.letterSpacingUnit;
-  var globalBodyLineHeight = bodyTypography.lineHeight;
-  var globalBodyLineHeightUnit = bodyTypography.lineHeightUnit;
-  var globalBodyTextTransform = bodyTypography.textTransform;
-  var globalBodyTextDecoration = bodyTypography.textDecoration;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (fontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(fontFamily);
+    }
+  }, [fontFamily]);
   var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
     onChangeFontFamily(newFontFamily);
+    if (newFontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(newFontFamily);
+    }
   };
   var handleFontSizeChange = function handleFontSizeChange(newFontSize) {
     onChangeFontSize(newFontSize);
@@ -6573,10 +6590,19 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         "aria-expanded": isOpen,
         "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Toggle Typography Settings", "frontis-blocks"),
         className: "fb-setting-dropdown-icon-btn"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: "edit",
-        className: "fb-setting-dropdown-icon"
-      }));
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "16",
+        height: "16",
+        viewBox: "0 0 16 16",
+        fill: "none"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M2.66699 14.666H13.3337",
+        stroke: "#1C274C"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291",
+        stroke: "#1C274C"
+      })));
     },
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement("div", {
@@ -6585,10 +6611,10 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
         value: fontFamily,
         onChange: handleFontFamilyChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
@@ -6602,25 +6628,25 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         resetFallbackValue: ''
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT,
         value: fontWeight,
         onChange: handleFontWeightChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_STYLE,
         value: fontStyle,
         onChange: handleFontStyleChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_TRANSFORM,
         value: textTransform,
         onChange: handleTextTransformChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_DECORATION,
         value: textDecoration,
         onChange: handleTextDecorationChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 100,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
@@ -6632,7 +6658,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         setAttributes: setAttributes,
         rangeStep: 1,
         resetFallbackValue: ''
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
@@ -10004,6 +10030,47 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
+
+/***/ }),
+
+/***/ "./src/utils/loadGoogleFont.js":
+/*!*************************************!*\
+  !*** ./src/utils/loadGoogleFont.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var loadGoogleFont = function loadGoogleFont(font) {
+  if (font !== 'Default') {
+    var fontUrl = "https://fonts.googleapis.com/css?family=".concat(font.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+
+    // Add font to the main document
+    var linkElement = document.createElement('link');
+    linkElement.rel = 'stylesheet';
+    linkElement.href = fontUrl;
+    document.head.appendChild(linkElement);
+
+    // If an iframe is provided, add the font to its head
+    var iframe = document.querySelector('iframe[name="editor-canvas"]');
+    if (iframe) {
+      try {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        if (iframeDoc) {
+          var iframeLinkElement = iframeDoc.createElement('link');
+          iframeLinkElement.rel = 'stylesheet';
+          iframeLinkElement.href = fontUrl;
+          iframeDoc.head.appendChild(iframeLinkElement);
+        }
+      } catch (error) {
+        console.error('Failed to access iframe document:', error);
+      }
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadGoogleFont);
 
 /***/ }),
 

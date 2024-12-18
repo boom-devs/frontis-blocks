@@ -24,7 +24,7 @@ const attributes = {
     /** Start Heading Style */
     headingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     headingFontSize: {
 		type: 'object',
@@ -44,7 +44,7 @@ const attributes = {
 	},
     headingFontWeight : {
         type: "string",
-        default: "600"
+        default: ""
     },
     headingFontStyle : {
         type: "string",
@@ -77,9 +77,9 @@ const attributes = {
     headingLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '42',
-			Tablet: '42',
-			Mobile: '42'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	headingLineHeightUnits: {
@@ -341,7 +341,7 @@ const attributes = {
     /** Start Sub Heading Style */  
     subHeadingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     subHeadingFontSize: {
         type: 'object',
@@ -1184,6 +1184,39 @@ const attributes = {
         default: "#399CFF",
     },
     blockStyle: {
+        type: "string",
+        default: "",
+    },
+
+    globalParagraphFontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalLinkFontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading1FontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading2FontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading3FontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading4FontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading5FontFamily: {
+        type: "string",
+        default: "",
+    },
+    globalHeading6FontFamily: {
         type: "string",
         default: "",
     },

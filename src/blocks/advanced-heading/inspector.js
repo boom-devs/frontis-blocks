@@ -50,6 +50,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -280,6 +281,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeColor,
 
         blockStyle,
+        globalParagraphFontFamily,
+        globalLinkFontFamily,
+        globalHeading1FontFamily,
+        globalHeading2FontFamily,
+        globalHeading3FontFamily,
+        globalHeading4FontFamily,
+        globalHeading5FontFamily,
+        globalHeading6FontFamily,
     } = attributes;
 
 
@@ -1421,33 +1430,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalMobileBorderRadiusWidth = `${headingGlobalBorderRadiusMobile.top}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.right}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.bottom}${headingGlobalBorderRadiusUnits.Mobile} ${headingGlobalBorderRadiusMobile.left}${headingGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
-
-    /* set default values for the style attributes */
-    useEffect(() => {
-        if (headingFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${headingFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
+	useEffect(() => {
+        if (headingFontFamily !== 'Default') {
+            loadGoogleFont(headingFontFamily);
         }
-    }, [headingFontFamily]);
-
-    useEffect(() => {
-        if (subHeadingFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${subHeadingFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
+        if (subHeadingFontFamily !== 'Default') {
+            loadGoogleFont(subHeadingFontFamily);
         }
-    }, [subHeadingFontFamily]);
+    }, [headingFontFamily, subHeadingFontFamily]);
+
 
     const allBlockStyle = useMemo(() => `
+
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
             ${headingColor ? `color: ${headingColor};` : ''}
             ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
-            ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
+            ${headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
             ${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
             ${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
             ${headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
@@ -1497,7 +1495,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''}
-            ${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
+            ${subHeadingFontFamily && subHeadingFontFamily !== 'Default' ? `font-family: ${subHeadingFontFamily};` : ''}
             ${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
             ${subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
             ${subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
@@ -2138,7 +2136,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 />
                                             )}
 
-                                            
+
                                             <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
                                                 globalSwitcher={headingBgColorSwitcher}
@@ -2185,8 +2183,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             }}
                                                         >
                                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" stroke-width="1.5"/>
-                                                                <path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                                <path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" strokeWidth="1.5"/>
+                                                                <path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round"/>
                                                             </svg>
 
                                                         </button>
@@ -2882,9 +2880,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</PanelBody>
 
-												<PanelBody 
+												<PanelBody
                                                     title={__("Background Color", "frontis-blocks")}
-                                                    initialOpen={false} 
+                                                    initialOpen={false}
                                                 >
                                                     <FB_SwitcherControl
                                                         label={__("Background Color", "frontis-blocks")}

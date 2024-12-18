@@ -8,7 +8,6 @@ export default function CounterItemBgColorControl ({ attributes, setAttributes})
 		counterItemBgColorSwitcher,
 		counterItemBgColor,
 		counterItemBgHoverColor,
-
 	} = attributes;
 
 
