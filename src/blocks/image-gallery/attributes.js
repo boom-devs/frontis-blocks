@@ -350,14 +350,14 @@ const attributes = {
     },
     GalleryButtonFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     GalleryButtonFontSize: {
         type: "object",
         default: {
-			Desktop: 18,
-			Tablet: 18,
-			Mobile: 18
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '18'
 		}
     },
     GalleryButtonFontSizeUnits: {

@@ -385,21 +385,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	
+	/** Start load font */
 	useEffect(() => {
-		if (teamMemberDesignationFontFamily) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${teamMemberDesignationFontFamily.replace(' ', '+')}`;
-			const linkElement = document.createElement('link');
-			linkElement.rel = 'stylesheet';
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [teamMemberDesignationFontFamily]);
+		loadGoogleFont(teamMemberDesignationFontFamily);
+		loadGoogleFont(teamMemberNameFontFamily);
+		loadGoogleFont(teamMemberDescFontFamily);
+	}, [teamMemberDesignationFontFamily, teamMemberNameFontFamily, teamMemberDescFontFamily]);
+	/** End load font */
 
-
-
-	{/* Team Member Social Drag And Drop Handle Control */}
-
+	/** Start Team Member Social Drag And Drop Handle Control */
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 		if (active && over && active.id !== over.id) {
@@ -409,6 +403,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			setAttributes({ teamMemberSocialItems: updatedItems });
 		}
 	};
+	/** End Team Member Social Drag And Drop Handle Control */
+
 
 	const handleAddItem = () => {
 		const newItem = {

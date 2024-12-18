@@ -1999,19 +1999,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
-/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
-/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helper */ "./admin/sidebar/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
-/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
+/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper */ "./admin/sidebar/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
+/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -2026,6 +2028,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -2101,35 +2104,36 @@ var gradientDefaults = [{
   "var": "--fb-gradient-background-color"
 }];
 function FrontisBlocksSidebar(props) {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  // Set state
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     customColors = _useState2[0],
     setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("solid"),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)("solid"),
     _useState4 = _slicedToArray(_useState3, 2),
     activeTab = _useState4[0],
     setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState6 = _slicedToArray(_useState5, 2),
     gradientColors = _useState6[0],
     setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
     customGradientColors = _useState8[0],
     setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState10 = _slicedToArray(_useState9, 2),
     globalColors = _useState10[0],
     setGlobalColors = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
     _useState12 = _slicedToArray(_useState11, 2),
     customCSS = _useState12[0],
     setCustomCSS = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
     fbGlobalSettingsLoading = _useState14[0],
     setFbGlobalSettingsLoading = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
       body: {
         fontFamily: 'Default',
         lineHeight: {
@@ -2469,11 +2473,11 @@ function FrontisBlocksSidebar(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     typography = _useState16[0],
     setTypography = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
     _useState18 = _slicedToArray(_useState17, 2),
     customTypography = _useState18[0],
     setCustomTypography = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}),
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
     _useState20 = _slicedToArray(_useState19, 2),
     fontfamilies = _useState20[0],
     setFontfamilies = _useState20[1];
@@ -2492,9 +2496,9 @@ function FrontisBlocksSidebar(props) {
     };
     _extractFonts(fontsObject);
     var regenerateFonts = fontFamilies.join(",");
-    (0,_helper__WEBPACK_IMPORTED_MODULE_9__.loadGoogleFont)(regenerateFonts);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_10__.loadGoogleFont)(regenerateFonts);
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies'];
     var handleUpdateState = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -2510,7 +2514,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               key = _localStorageKeys[_i];
-              localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_9__.getFbLocalStorage)(key);
+              localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
               if (!(key === 'fb_global_colors')) {
                 _context.next = 14;
                 break;
@@ -2520,7 +2524,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_global_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
             case 9:
               res = _context.sent;
               if (!res.success) {
@@ -2544,7 +2548,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 18;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
             case 18:
               _res = _context.sent;
               if (!_res.success) {
@@ -2567,7 +2571,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 27;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_gradient_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
             case 27:
               _res2 = _context.sent;
               if (!_res2.success) {
@@ -2591,7 +2595,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 36;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_gradient_colors');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
             case 36:
               _res3 = _context.sent;
               if (!_res3.success) {
@@ -2614,7 +2618,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 45;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
             case 45:
               _res4 = _context.sent;
               if (!_res4.success) {
@@ -2637,7 +2641,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 54;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
             case 54:
               _res5 = _context.sent;
               if (!_res5.success) {
@@ -2660,7 +2664,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context.next = 63;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.getGlobalStyle)('fb_get_fontfamilies');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
             case 63:
               _res6 = _context.sent;
               if (!_res6.success) {
@@ -2788,8 +2792,10 @@ function FrontisBlocksSidebar(props) {
   };
 
   // Save colors after post save
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_9__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(function () {
+  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.useAfterSave)();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    console.log("Chekcing is after saving");
+    console.log(isAfterSave);
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
@@ -2814,7 +2820,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(globalColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(globalColors, key);
             case 9:
               response = _context2.sent;
               if (response.success) {
@@ -2827,7 +2833,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(customColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customColors, key);
             case 14:
               _response = _context2.sent;
               if (_response.success) {
@@ -2840,7 +2846,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(gradientColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(gradientColors, key);
             case 19:
               _response2 = _context2.sent;
               if (_response2.success) {
@@ -2853,7 +2859,7 @@ function FrontisBlocksSidebar(props) {
                 break;
               }
               _context2.next = 24;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_10__.updateGlobalStyle)(customGradientColors, key);
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customGradientColors, key);
             case 24:
               _response3 = _context2.sent;
               if (_response3.success) {
@@ -2893,10 +2899,10 @@ function FrontisBlocksSidebar(props) {
     className: "fb-global-controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Color", "frontis-blocks"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
     onSelect: function onSelect(tabName) {
@@ -2910,21 +2916,21 @@ function FrontisBlocksSidebar(props) {
       title: "Gradient"
     }]
   }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
       title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Colors", "frontis-blocks"),
       className: "fb-color-panel fb-global-color-panel",
       initialOpen: true,
       disableAlpha: true,
       disableCustomGradients: false,
       colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
-    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__["default"], {
       colorPanelArray: colorPanelArray,
       customColors: customColors,
       setCustomColor: setCustomColor,
       setCustomColors: setCustomColors
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       className: "add-custom-color-btn",
       onClick: function onClick() {
         return setNewCustomColorFn();
@@ -2941,14 +2947,14 @@ function FrontisBlocksSidebar(props) {
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round"
-    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
       title: "Gradient Colors",
       colors: gradientColors,
       setColor: setGradientColor,
       setColors: setGradientColors,
       wrapperClass: "fb-gradient-color-panel",
       resetAction: true
-    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__["default"], {
       title: "Custom Gradient Colors",
       colors: customGradientColors,
       setColor: setCustomGradientColor,
@@ -2959,7 +2965,7 @@ function FrontisBlocksSidebar(props) {
       onDelete: deleteCustomGradientColor
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       className: "add-custom-color-btn",
       onClick: function onClick() {
         return setCustomGradientColors([].concat(_toConsumableArray(customGradientColors), [{
@@ -2982,10 +2988,10 @@ function FrontisBlocksSidebar(props) {
       strokeLinecap: "round",
       strokeLinejoin: "round"
     })))))));
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Typography", "frontis-blocks"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__["default"], {
     typography: typography,
     customTypography: customTypography
   }))))));
@@ -6485,9 +6491,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
-/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _constants_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/constants */ "./src/components/typography-control/constants/constants.js");
+/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
+/* harmony import */ var _Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Utils/loadGoogleFont */ "./src/utils/loadGoogleFont.js");
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/typography-control/editor.lazy.scss");
+
+
 
 
 
@@ -6520,8 +6531,16 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     setAttributes = _ref.setAttributes;
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (fontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(fontFamily);
+    }
+  }, [fontFamily]);
   var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
     onChangeFontFamily(newFontFamily);
+    if (newFontFamily !== 'Default') {
+      (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(newFontFamily);
+    }
   };
   var handleFontSizeChange = function handleFontSizeChange(newFontSize) {
     onChangeFontSize(newFontSize);
@@ -6592,10 +6611,10 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_FAMILYS,
         value: fontFamily,
         onChange: handleFontFamilyChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
@@ -6609,25 +6628,25 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         resetFallbackValue: ''
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT,
         value: fontWeight,
         onChange: handleFontWeightChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.FONT_STYLE,
         value: fontStyle,
         onChange: handleFontStyleChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_TRANSFORM,
         value: textTransform,
         onChange: handleTextTransformChange
       }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
-        options: _constants_constants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
+        options: _constants_constants__WEBPACK_IMPORTED_MODULE_3__.TEXT_DECORATION,
         value: textDecoration,
         onChange: handleTextDecorationChange
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 100,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
@@ -6639,7 +6658,7 @@ var FB_TypographyControl = function FB_TypographyControl(_ref) {
         setAttributes: setAttributes,
         rangeStep: 1,
         resetFallbackValue: ''
-      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_4__["default"], {
         min: 0,
         max: 200,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
@@ -10011,6 +10030,47 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
+
+/***/ }),
+
+/***/ "./src/utils/loadGoogleFont.js":
+/*!*************************************!*\
+  !*** ./src/utils/loadGoogleFont.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var loadGoogleFont = function loadGoogleFont(font) {
+  if (font !== 'Default') {
+    var fontUrl = "https://fonts.googleapis.com/css?family=".concat(font.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+
+    // Add font to the main document
+    var linkElement = document.createElement('link');
+    linkElement.rel = 'stylesheet';
+    linkElement.href = fontUrl;
+    document.head.appendChild(linkElement);
+
+    // If an iframe is provided, add the font to its head
+    var iframe = document.querySelector('iframe[name="editor-canvas"]');
+    if (iframe) {
+      try {
+        var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        if (iframeDoc) {
+          var iframeLinkElement = iframeDoc.createElement('link');
+          iframeLinkElement.rel = 'stylesheet';
+          iframeLinkElement.href = fontUrl;
+          iframeDoc.head.appendChild(iframeLinkElement);
+        }
+      } catch (error) {
+        console.error('Failed to access iframe document:', error);
+      }
+    }
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadGoogleFont);
 
 /***/ }),
 

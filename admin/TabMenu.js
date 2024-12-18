@@ -58,4 +58,5 @@ if (window.frontisBlocksAdmin.isProActive === 'false') {
       comp: <Pricing />
     });
 }
+
 export default TabMenus;
