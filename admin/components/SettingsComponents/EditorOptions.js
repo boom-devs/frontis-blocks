@@ -3,12 +3,9 @@ import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
 import { toast } from 'react-toastify';
-<<<<<<< HEAD
-import { log } from 'grunt';
-=======
 import { useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
->>>>>>> 84918abbae055ce8089db9cc8cbd87f3f2d0a230
+
 
 const EditorOptions = () => {
   const [options, setOptions] = useState({
@@ -180,8 +177,6 @@ const EditorOptions = () => {
         </div>
     </div>
   );
-
-  console.log(options.default_content_width); 
 
   return (
     <div className="fb-blocks-settings-options">
