@@ -814,6 +814,13 @@ class Admin {
         return new \WP_REST_Response($health_info, 200);
     }
 
+	public function render_generated_css() {
+		$css_content = get_option('fb_global_typo_css');
+		if($css_content){
+			echo '<style id="test-global-typo" type="text/css" >'.$css_content.'</style>';
+		}
+	}
+
     public function enqueue_editor_assets() {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
@@ -821,6 +828,10 @@ class Admin {
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
         $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
 
+		// Styles from function
+		$this->render_generated_css();
+
+		// Styles loaded
         wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -828,10 +839,5 @@ class Admin {
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
-
-        $css_content = get_option('fb_global_typo_css');
-		if($css_content){
-			echo '<style id="test-global-typo" type="text/css" >'.$css_content.'</style>';
-		}
     }
 }

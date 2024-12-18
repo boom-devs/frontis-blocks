@@ -1,21 +1,16 @@
 import {__} from "@wordpress/i18n";
 import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/editor";
-import {
-	PanelBody,
-	Button,
-	TabPanel,
-	TextareaControl
-} from "@wordpress/components";
-import {
-	PanelColorSettings,
-} from "@wordpress/block-editor";
+import {useDispatch, useSelect} from '@wordpress/data';
+
+import {Button, PanelBody, TabPanel} from "@wordpress/components";
+import {PanelColorSettings,} from "@wordpress/block-editor";
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
-import {useState, useEffect} from "@wordpress/element";
+import {useEffect, useState} from "@wordpress/element";
 import "./sidebar.scss";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
-import {getFbLocalStorage, useAfterSave, loadGoogleFont} from "./helper";
-import {updateGlobalStyle, getGlobalStyle} from "./fetch";
+import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
+import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 
 const defaultsColors = [
@@ -99,6 +94,8 @@ const gradientDefaults = [
 ];
 
 function FrontisBlocksSidebar(props) {
+
+	// Set state
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
 	const [gradientColors, setGradientColors] = useState([]);
@@ -444,7 +441,7 @@ function FrontisBlocksSidebar(props) {
 		}
 	});
 	const [customTypography, setCustomTypography] = useState({});
-	const [fontfamilies, setFontfamilies] = useState({})
+	const [fontfamilies, setFontfamilies] = useState({});
 
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
@@ -622,6 +619,23 @@ function FrontisBlocksSidebar(props) {
 		colors[index].color = color;
 		setGlobalColors([...colors]);
 		setFbGlobalSettingsLoading(true);
+
+
+		// // Select the Save button and update its aria-disabled attribute
+		// const saveButton = document.querySelector(
+		// 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
+		// );
+
+		// if (saveButton) {
+		// 	// Set aria-disabled to false when color is updated
+		// 	saveButton.setAttribute('aria-disabled', 'false');
+	
+		// 	// Add a click event listener to set aria-disabled back to true
+		// 	saveButton.addEventListener('click', () => {
+		// 		saveButton.setAttribute('aria-disabled', 'true');
+		// 	});
+		// }
+
 	};
 
 	//Update Gradient Colors
@@ -680,6 +694,9 @@ function FrontisBlocksSidebar(props) {
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
+		console.log("Chekcing is after saving")
+		console.log(isAfterSave)
+
 		const handleUpdateSettings = async () => {
 			if (isAfterSave && fbGlobalSettingsLoading) {
 				try {
@@ -732,6 +749,7 @@ function FrontisBlocksSidebar(props) {
 		handleUpdateSettings();
 	}, [isAfterSave]);
 
+
 	return (
 		<>
 			<PluginSidebarMoreMenuItem target="fb_plugin_sidebar">
@@ -780,7 +798,7 @@ function FrontisBlocksSidebar(props) {
 														onClick={() => setNewCustomColorFn()}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 														</svg>
 													</span>
 													</Button>
@@ -827,7 +845,7 @@ function FrontisBlocksSidebar(props) {
 														])}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 														</svg>
 													</span>
 													</Button>

@@ -36,7 +36,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
-
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import './editor.scss';
 
@@ -2273,54 +2273,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Border Radius */
 
 
-    // Helper function to load fonts
-    const loadFont = (fontFamily) => {
-        if (fontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    };
-
-    // Apply font family styles using useEffect
+    /* Start Load Google Fonts */
     useEffect(() => {
-        loadFont(fluentFormLabelFontFamily);
-    }, [fluentFormLabelFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormInputFontFamily);
-    }, [fluentFormInputFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSectionBreakTitleFontFamily);
-    }, [fluentFormSectionBreakTitleFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSectionBreakDescFontFamily);
-    }, [fluentFormSectionBreakDescFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormHtmlFontFamily);
-    }, [fluentFormHtmlFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSubmitFontFamily);
-    }, [fluentFormSubmitFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSuccessFontFamily);
-    }, [fluentFormSuccessFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormErrorFontFamily);
-    }, [fluentFormErrorFontFamily]);
-
-
-
-
-
+        loadGoogleFont(fluentFormLabelFontFamily);
+        loadGoogleFont(fluentFormInputFontFamily);
+        loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
+        loadGoogleFont(fluentFormSectionBreakDescFontFamily);
+        loadGoogleFont(fluentFormHtmlFontFamily);
+        loadGoogleFont(fluentFormSubmitFontFamily);
+        loadGoogleFont(fluentFormSuccessFontFamily);
+        loadGoogleFont(fluentFormErrorFontFamily);
+    }, [fluentFormLabelFontFamily,
+         fluentFormInputFontFamily, 
+         fluentFormSectionBreakTitleFontFamily, 
+         fluentFormSectionBreakDescFontFamily,
+         fluentFormHtmlFontFamily, 
+         fluentFormSubmitFontFamily, 
+         fluentFormSuccessFontFamily, 
+         fluentFormErrorFontFamily] 
+    );
+    /* End Load Google Fonts */
 
     const allBlockStyle = useMemo(() => `
 
