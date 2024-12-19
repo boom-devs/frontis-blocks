@@ -192,15 +192,15 @@ const AssetsGeneration = () => {
           <p>{__('Generate assets for your blocks', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
-          {/* <Button
+          <Button
             className="fb-button-primary"
             onClick={handleAssetGeneration}
           >
+            {__('Regenerate Asset', 'frontis-blocks')}
+          </Button>
+          {/* <p className="fb-button-primary">
             {__('Coming Soon', 'frontis-blocks')}
-          </Button> */}
-          <p className="fb-button-primary">
-            {__('Coming Soon', 'frontis-blocks')}
-          </p>
+          </p> */}
         </div>
       </div>
 
