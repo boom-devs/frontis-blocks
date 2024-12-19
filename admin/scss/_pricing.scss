@@ -27,19 +27,26 @@
 
     .fb-pricing-column {
       padding: 42px 42px;
-      display: flex;
-      align-items: start;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      text-align: center;
 
       &:first-child {
-        display: block;
+        text-align: left;
         padding: 42px 52px 42px 32px;
       }
 
       &:nth-child(2) {
         background-color: $success-color-50;
+
+        .fb-pricing-type {
+          color: $success-color;
+        }
+      }
+
+      .fb-pricing-column-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
 
       .fb-pricing-type {
@@ -75,7 +82,7 @@
         line-height: 25px;
         color: $white-color;
         border-radius: 14px;
-        margin-top: 14px;
+        margin-top: 24px;
       }
     }  
 

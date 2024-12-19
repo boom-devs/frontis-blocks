@@ -27,6 +27,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/accordion.svg',
                 'doc'       => 'https://wpmessiah.com/docs/accordion',
                 'demo'      => 'https://wpmessiah.com/demo/accordion',
+                'complete'  => 'true',
             ],
             'accordion-item' => [
                 'slug'      => 'accordion-item',
@@ -38,6 +39,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
                 'doc'       => 'https://wpmessiah.com/docs/accordion-item',
                 'demo'      => 'https://wpmessiah.com/demo/accordion-item',
+                'complete'  => 'true',
             ],
             'advanced-heading' => [
                 'slug'      => 'advanced-heading',
@@ -49,6 +51,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
                 'doc'       => 'https://wpmessiah.com/docs/advanced-heading',
                 'demo'      => 'https://wpmessiah.com/demo/advanced-heading',
+                'complete'  => 'true',
             ],
             'container' => [
                 'slug'      => 'container',
@@ -60,6 +63,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/container.svg',
                 'doc'       => 'https://wpmessiah.com/docs/container',
                 'demo'      => 'https://wpmessiah.com/demo/container',
+                'complete'  => 'true',
             ],
             'advanced-image' => [
                 'slug'      => 'advanced-image',
@@ -71,6 +75,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-image.svg',
                 'doc'       => 'https://wpmessiah.com/docs/advanced-image',
                 'demo'      => 'https://wpmessiah.com/demo/advanced-image',
+                'complete'  => 'true',
             ],
             'image-gallery' => [
                 'slug'      => 'image-gallery',
@@ -82,6 +87,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/image-gallery.svg',
                 'doc'       => 'https://wpmessiah.com/docs/image-gallery',
                 'demo'      => 'https://wpmessiah.com/demo/image-gallery',
+                'complete'  => 'true',
             ],
             'info-box' => [
                 'slug'      => 'info-box',
@@ -93,6 +99,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/info-box.svg',
                 'doc'       => 'https://wpmessiah.com/docs/info-box',
                 'demo'      => 'https://wpmessiah.com/demo/info-box',
+                'complete'  => 'true',
             ],
             'icon-box' => [
                 'slug'      => 'icon-box',
@@ -104,6 +111,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/icon-box.svg',
                 'doc'       => 'https://wpmessiah.com/docs/icon-box',
                 'demo'      => 'https://wpmessiah.com/demo/icon-box',
+                'complete'  => 'true',
             ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
@@ -115,6 +123,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-button.svg',
                 'doc'       => 'https://wpmessiah.com/docs/advanced-button',
                 'demo'      => 'https://wpmessiah.com/demo/advanced-button',
+                'complete'  => 'true',
             ],
             'dual-button' => [
                 'slug'      => 'dual-button',
@@ -126,6 +135,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/dual-button.svg',
                 'doc'       => 'https://wpmessiah.com/docs/dual-button',
                 'demo'      => 'https://wpmessiah.com/demo/dual-button',
+                'complete'  => 'true',
             ],
             'advanced-navigation' => [
                 'slug'      => 'advanced-navigation',
@@ -137,6 +147,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
                 'doc'       => 'https://wpmessiah.com/docs/advanced-navigation',
                 'demo'      => 'https://wpmessiah.com/demo/advanced-navigation',
+                'complete'  => 'true',
             ],
             'advanced-video' => [
                 'slug'      => 'advanced-video',
@@ -148,6 +159,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-video.svg',
                 'doc'       => 'https://wpmessiah.com/docs/advanced-video',
                 'demo'      => 'https://wpmessiah.com/demo/advanced-video',
+                'complete'  => 'true',
             ],
              'countdown' => [
                  'slug'      => 'countdown',
@@ -159,6 +171,7 @@ class BlockList
                  'icon'      => FB_PLUGIN_URL . 'assets/icons/countdown.svg',
                  'doc'       => 'https://wpmessiah.com/docs/countdown',
                  'demo'      => 'https://wpmessiah.com/demo/countdown',
+                 'complete'  => 'true',
              ],
              'flip-box' => [
                  'slug'      => 'flip-box',
@@ -170,6 +183,7 @@ class BlockList
                  'icon'      => FB_PLUGIN_URL . 'assets/icons/flip-box.svg',
                  'doc'       => 'https://wpmessiah.com/docs/flip-box',
                  'demo'      => 'https://wpmessiah.com/demo/flip-box',
+                 'complete'  => 'true',
              ],
             'features-list' => [
                 'slug'      => 'features-list',
@@ -181,6 +195,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/features-list.svg',
                 'doc'       => 'https://wpmessiah.com/docs/features-list',
                 'demo'      => 'https://wpmessiah.com/demo/features-list',
+                'complete'  => 'true',
             ],
             'testimonial' => [
                 'slug'      => 'testimonial',
@@ -192,6 +207,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/testimonial.svg',
                 'doc'       => 'https://wpmessiah.com/docs/testimonial',
                 'demo'      => 'https://wpmessiah.com/demo/testimonial',
+                'complete'  => 'true',
             ],
             'counter-number' => [
                  'slug'      => 'counter-number',
@@ -203,6 +219,7 @@ class BlockList
                  'icon'      => FB_PLUGIN_URL . 'assets/icons/counter-number.svg',
                  'doc'       => 'https://wpmessiah.com/docs/counter-number',
                  'demo'      => 'https://wpmessiah.com/demo/counter-number',
+                 'complete'  => 'true',
              ],
             'fluent-form' => [
                 'slug'      => 'fluent-form',
@@ -214,6 +231,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/fluent-form.svg',
                 'doc'       => 'https://wpmessiah.com/docs/fluent-form',
                 'demo'      => 'https://wpmessiah.com/demo/fluent-form',
+                'complete'  => 'true',
             ],
             'contact-form-7' => [
                 'slug'      => 'contact-form-7',
@@ -225,6 +243,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/contact-form-7.svg',
                 'doc'       => 'https://wpmessiah.com/docs/contact-form-7',
                 'demo'      => 'https://wpmessiah.com/demo/contact-form-7',
+                'complete'  => 'true',
             ],
             'call-to-action' => [
                 'slug'      => 'call-to-action',
@@ -236,6 +255,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/call-to-action.svg',
                 'doc'       => 'https://wpmessiah.com/docs/call-to-action',
                 'demo'      => 'https://wpmessiah.com/demo/call-to-action',
+                'complete'  => 'true',
             ],
             'pricing-table' => [
                 'slug'      => 'pricing-table',
@@ -247,6 +267,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/pricing-table.svg',
                 'doc'       => 'https://wpmessiah.com/docs/pricing-table',
                 'demo'      => 'https://wpmessiah.com/demo/pricing-table',
+                'complete'  => 'true',
             ],
 
             // 'woo-product-grid' => [
@@ -270,6 +291,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/social-icons.svg',
                 'doc'       => 'https://wpmessiah.com/docs/social-icons',
                 'demo'      => 'https://wpmessiah.com/demo/social-icons',
+                'complete'  => 'true',
             ],
             'post-grid' => [
                 'slug'      => 'post-grid',
@@ -281,6 +303,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/post-grid.svg',
                 'doc'       => 'https://wpmessiah.com/docs/post-grid',
                 'demo'      => 'https://wpmessiah.com/demo/post-grid',
+                'complete'  => 'true',
             ],
             'team-member' => [
                 'slug'      => 'team-member',
@@ -292,6 +315,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/team-member.svg',
                 'doc'       => 'https://wpmessiah.com/docs/team-member',
                 'demo'      => 'https://wpmessiah.com/demo/team-member',
+                'complete'  => 'false',
             ],
             'progressbar' => [
                 'slug'      => 'progressbar',
@@ -303,6 +327,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/progressbar.svg',
                 'doc'       => 'https://wpmessiah.com/docs/progressbar',
                 'demo'      => 'https://wpmessiah.com/demo/progressbar',
+                'complete'  => 'true',
             ],
             // pro inactive block
             // 'pro-test' => [
