@@ -2081,6 +2081,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
                                                 isBoxShadow={false}
                                             />
+                                            
                                             <RangeControl
                                                 label={__("Text Stroke", "frontis-blocks")}
                                                 value={headingTextStroke}
@@ -2089,7 +2090,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 max={10}
                                                 step={1}
                                                 resetFallbackValue={''}
-
                                             />
 
                                             <FB_SwitcherControl
@@ -2472,7 +2472,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     min={1}
                                                     max={10}
                                                     step={1}
-                                                    allowReset={true}
                                                     resetFallbackValue={''}
                                                 />
 

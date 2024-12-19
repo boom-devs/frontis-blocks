@@ -11,6 +11,7 @@ import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
 
@@ -1779,25 +1780,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </DndContext>
                                             </div>
 
-                                            <BaseControl
+                                            <FB_HtmlTagControl
                                                 label={__("Title Tag", "frontis-blocks")}
-                                                    id="fb-setting-text-alignment"
-                                                    className="fb-setting-text-alignment"
-                                            >
-                                                <ButtonGroup
-                                                        className="fb-setting-text-alignment-group-btn"
-                                                    >
-                                                    {HEADING.map((item, key) => (
-                                                        <Button
-                                                            key={key}
-                                                            onClick={() => setAttributes({ FeatureTag: item.value })}
-                                                            className={`fb-setting-text-alignment-single-btn ${ FeatureTag === item.value ? 'active' : ''}`}
-                                                        >
-                                                            {item.label}
-                                                        </Button>
-                                                    ))}
-                                                </ButtonGroup>
-                                            </BaseControl>
+                                                globalHtmlTag={FeatureTag}
+                                                setGlobalHtmlTag={(value) => setAttributes({ FeatureTag: value })}
+                                            />
+
                                             <BaseControl
                                                 label={__("Icon Shape", "frontis-blocks")}
                                                 className="fb-setting-icon-shape-wrapper"
