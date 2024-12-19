@@ -70,16 +70,19 @@ class GlobalSettings extends AjaxBase {
 
     public function get_global_colors() {
         $global_colors = get_option('fb_global_colors');
-        wp_send_json_success($global_colors);
+        
+        if($global_colors) {
+			wp_send_json_success($global_colors);
+		}
+
+        wp_send_json_error('Global color not found.');
     }
 
     public function get_gradient_colors() {
         $global_gradient_colors = get_option('fb_gradient_colors');
-
 		if($global_gradient_color) {
 			wp_send_json_success($global_gradient_colors);
 		}
-
 		wp_send_json_error('Gradient color not found.');
     }
 

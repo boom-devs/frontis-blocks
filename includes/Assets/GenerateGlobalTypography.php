@@ -12,23 +12,6 @@ class GenerateGlobalTypography {
 		self::enqueue_fonts();
 	}
 
-// 	private static function generate_fonts($data) {
-// 		// Extract font families into an array
-// 		$fonts = [];
-// 		foreach ($data as $style) {
-// 			if (!empty($style['fontFamily']) && $style !== 'heading') {
-// 				$fonts[$style['fontFamily']] = $style['fontFamily'];
-// 			} else {
-// 				foreach($style as $single_heading) {
-// 					if(isset($single_heading['fontFamily']) && !empty(isset($single_heading['fontFamily'])) ) {
-// 						$fonts[$single_heading['fontFamily']] = $single_heading['fontFamily'];
-// 					}
-// 				}
-// 			}
-// 		}
-// 		return array_unique($fonts);
-// 	}
-
 	private static function generate_css_file($data, $devices) {
 		$css = '';
 		if($data) {
@@ -38,7 +21,7 @@ class GenerateGlobalTypography {
 				$editor_selector = '';
 
 				if(current_user_can('editor') || current_user_can('administrator')) {
-					$editor_selector = 'body .wp-block-post-content';
+					$editor_selector = 'body .wp-block-post-content, body .wp-site-blocks';
 				} else {
 					$editor_selector = 'body';
 				}

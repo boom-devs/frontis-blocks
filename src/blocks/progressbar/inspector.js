@@ -386,7 +386,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ progressNumber: value })}
                                                         min={1}
                                                         max={100}
-                                                        allowReset
                                                         resetFallbackValue={50}
                                                     />
                                                 </div>
@@ -398,7 +397,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ progressBarHeight: value })}
                                                         min={1}
                                                         max={100}
-                                                        allowReset
                                                         resetFallbackValue={30}
                                                     />
                                                 </div>
