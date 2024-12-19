@@ -34,12 +34,15 @@ class Blocks
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
+				$complete = $block['complete'];
 				if (is_array($active_blocks) && !empty($active_blocks)) {
 					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
 						continue;
 					}
 				}
-
+				if ($complete !== 'true') {
+					continue;
+				}
 				$package = $block['package'];
 				$plugin_dir = FB_PLUGIN_PATH;
 				$blocks_dir = FB_BLOCKS_DIR . $slug;

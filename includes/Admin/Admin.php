@@ -15,12 +15,19 @@ class Admin {
         add_action('admin_menu', array( $this, 'add_menu_page' ) );
         add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
+
         add_action( 'plugin_action_links', [ $this, 'fb_menu_action_links' ], 10, 2 );
+
+        // add_action( 'wp_ajax_fb_save_settings', array( $this, 'save_settings' ) );
+
+        // add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
+        // add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
 
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
 		GenerateGlobalTypography::generate_global_typography();
+// 		add_action( 'admin_enqueue_scripts', GenerateGlobalTypography::generate_global_typography() );
     }
 
     public function add_menu_page(){
@@ -814,13 +821,6 @@ class Admin {
         return new \WP_REST_Response($health_info, 200);
     }
 
-	public function render_generated_css() {
-		$css_content = get_option('fb_global_typo_css');
-		if($css_content){
-			echo '<style id="test-global-typo" type="text/css" >'.$css_content.'</style>';
-		}
-	}
-
     public function enqueue_editor_assets() {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
@@ -828,10 +828,6 @@ class Admin {
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
         $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
 
-		// Styles from function
-		$this->render_generated_css();
-
-		// Styles loaded
         wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -840,4 +836,5 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
     }
+
 }

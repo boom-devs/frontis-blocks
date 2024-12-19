@@ -33,7 +33,6 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
-
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -612,25 +611,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End order by */
 
-    /** Start load font */
-    useEffect(() => {
-        loadGoogleFont(postTitleFontFamily); 
-        loadGoogleFont(postDescriptionFontFamily);
-        loadGoogleFont(postCategoryFontFamily);
-        loadGoogleFont(postTagFontFamily);
-        loadGoogleFont(postAuthorFontFamily);
-        loadGoogleFont(postDateFontFamily);
-        loadGoogleFont(loadMoreTextFontFamily);
-    }, [postTitleFontFamily, 
-        postDescriptionFontFamily, 
-        postCategoryFontFamily, 
-        postTagFontFamily, 
-        postAuthorFontFamily, 
-        postDateFontFamily,
-        loadMoreTextFontFamily
-    ]);
-    /** End load font */
 
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (postTitleFontFamily !== 'Default') {
+            loadGoogleFont(postTitleFontFamily);
+        }
+        if (postDescriptionFontFamily !== 'Default') {
+            loadGoogleFont(postDescriptionFontFamily);
+        }
+        if (postCategoryFontFamily !== 'Default') {
+            loadGoogleFont(postCategoryFontFamily);
+        }
+        if (postTagFontFamily !== 'Default') {
+            loadGoogleFont(postTagFontFamily);
+        }
+        if (postAuthorFontFamily !== 'Default') {
+            loadGoogleFont(postAuthorFontFamily);
+        }
+        if (postDateFontFamily !== 'Default') {
+            loadGoogleFont(postDateFontFamily);
+        }
+    }, [postTitleFontFamily, postDescriptionFontFamily, postCategoryFontFamily, postTagFontFamily, postAuthorFontFamily, postDateFontFamily]);
+    /** End Load Google Font */
 
     /** Start Post Grid Padding */
     const handlePostGridPaddingUnitChange = ( event, position ) => {
@@ -4045,6 +4048,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDateColorSwitcher,
         postDateColor,
         postDateHoverColor,
+
 
         postGlobalZIndex,
         postGlobalPaddingUnits,

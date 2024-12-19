@@ -132,14 +132,14 @@ const Integration = () => {
             <div className="recaptcha-version">
               <h3>{__('reCAPTCHA v2', 'frontis-blocks')}</h3>
               <TextControl
-                label={__('Site key', 'frontis-blocks')}
+                // label={__('Site key', 'frontis-blocks')}
                 value={integrations.recaptcha_v2_site_key}
                 onChange={(value) => handleChange(value, 'recaptcha_v2_site_key')}
                 onBlur={() => handleBlur('recaptcha_v2_site_key')}
                 placeholder={__('Enter reCAPTCHA v2 Site Key', 'frontis-blocks')}
               />
               <TextControl
-                label={ __('Secret key', 'frontis-blocks') }
+                // label={ __('Secret key', 'frontis-blocks') }
                 type="password"
                 value={integrations.recaptcha_v2_secret_key}
                 onChange={(value) => handleChange(value, 'recaptcha_v2_secret_key')}
@@ -152,14 +152,14 @@ const Integration = () => {
             <div className="recaptcha-version">
               <h3>{__('reCAPTCHA v3', 'frontis-blocks')}</h3>
               <TextControl
-                label={__('Site key', 'frontis-blocks')}
+                // label={__('Site key', 'frontis-blocks')}
                 value={integrations.recaptcha_v3_site_key}
                 onChange={(value) => handleChange(value, 'recaptcha_v3_site_key')}
                 onBlur={() => handleBlur('recaptcha_v3_site_key')}
                 placeholder={__('Enter reCAPTCHA v3 Site Key', 'frontis-blocks')}
               />
               <TextControl
-                label={ __('Secret key', 'frontis-blocks') }
+                // label={ __('Secret key', 'frontis-blocks') }
                 type="password"
                 value={integrations.recaptcha_v3_secret_key}
                 onChange={(value) => handleChange(value, 'recaptcha_v3_secret_key')}

@@ -646,6 +646,43 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             </>
                         )}
 
+                        {tab.name === 'style' && (
+                            <>
+                                <PanelBody
+                                    title={__("Padding & Margin", "frontis-blocks")}
+                                    initialOpen={false}
+                                >
+                                    <FB_Spacing
+                                        label={__("Margin", "frontis-blocks")}
+                                        deviceType={deviceType}
+                                        spacingUnitsHandler={handleAccordionItemMarginUnitsHandler}
+                                        spacingUnits={accordionItemMarginUnits}
+                                        spacingDesktop={accordionItemDesktopMargin}
+                                        spacingTablet={accordionItemTabMargin}
+                                        spacingMobile={accordionItemMobileMargin}
+                                        handleSpacingUnitHandler={handleAccordionItemMarginUnitChange}
+                                        spacingCombineBtn={accordionItemMarginLink}
+                                        spacingCombineBtnHandler={handleAccordionItemMarginCombineBtn}
+                                        setAttributes={setAttributes}
+                                    />
+
+                                    <FB_Spacing 
+                                        label={__("Padding", "frontis-blocks")}
+                                        deviceType={deviceType}
+                                        spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
+                                        spacingUnits={accordionItemPaddingUnits}
+                                        spacingDesktop={accordionItemDesktopPadding}
+                                        spacingTablet={accordionItemTabPadding}
+                                        spacingMobile={accordionItemMobilePadding}
+                                        handleSpacingUnitHandler={handleAccordionItemPaddingUnitChange}
+                                        spacingCombineBtn={accordionItemPaddingLink}
+                                        spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
+                                        setAttributes={setAttributes}
+                                    />                                     
+                                </PanelBody>
+                            </>
+                        )}
+
                         {tab.name === 'advanced' && (
                             <>
                                 <div className="fb-setting-advanced-tab-wrapper">
@@ -670,41 +707,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             />
                                         </PanelBody>
 
-                                        <PanelBody
-                                        title={__("Padding & Margin", "frontis-blocks")}
-                                        initialOpen={false}
-                                        >
-
-                                            <FB_Spacing
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleAccordionItemMarginUnitsHandler}
-                                                spacingUnits={accordionItemMarginUnits}
-                                                spacingDesktop={accordionItemDesktopMargin}
-                                                spacingTablet={accordionItemTabMargin}
-                                                spacingMobile={accordionItemMobileMargin}
-                                                handleSpacingUnitHandler={handleAccordionItemMarginUnitChange}
-                                                spacingCombineBtn={accordionItemMarginLink}
-                                                spacingCombineBtnHandler={handleAccordionItemMarginCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
-                                                spacingUnits={accordionItemPaddingUnits}
-                                                spacingDesktop={accordionItemDesktopPadding}
-                                                spacingTablet={accordionItemTabPadding}
-                                                spacingMobile={accordionItemMobilePadding}
-                                                handleSpacingUnitHandler={handleAccordionItemPaddingUnitChange}
-                                                spacingCombineBtn={accordionItemPaddingLink}
-                                                spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />                                     
-                                        </PanelBody>
-
-                                        <PanelBody
+                                        {/* <PanelBody
                                             title={__("Responsive Control", "frontis-blocks")}
                                             initialOpen={false}
                                             className="fb-setting-responsive-control-wrapper"
@@ -727,7 +730,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 checked={accordionItemMobileSwitcher}
                                                 onChange={(value) => setAttributes({ accordionItemMobileSwitcher: value })}
                                             />
-                                        </PanelBody>
+                                        </PanelBody> */}
 
                                     </div>
                                 </div>
