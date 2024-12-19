@@ -222,24 +222,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [headingFontFamily]);
 
-	// Handle device
-	const handleDevice = (device) => {
-		setAttributes({ deviceType: device });
-	};
-
-	const mediaSizeHandler = (value) => {
-		setAttributes({ mediaSize: value });
-	};
-	const mediaHeightHandler = (value) => {
-		setAttributes({ mediaHeight: value });
-	};
-
-	const mediaSizeUnitsHandler = (value) => {
-		setAttributes({ mediaSizeUnits: value });
-	};
-	const mediaHeightUnitsHandler = (value) => {
-		setAttributes({ mediaHeightUnits: value });
-	};
+	
+	/** Image **/
+	if (typeof FrontisBlocksData !== 'undefined') {
+		// Map each class to its corresponding image URL
+		const imageMapping = {
+			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
+			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
+			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
+			'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
+			'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
+			'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
+			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
+		};
+	
+		// Apply the URLs dynamically to each element
+		Object.entries(imageMapping).forEach(([className, imageUrl]) => {
+			const targetElements = document.querySelectorAll(`.fb-advanced-image.${className} .fb-advanced-image-inner`);
+			targetElements.forEach(element => {
+				element.style.maskImage = `url(${imageUrl})`;
+				element.style.webkitMaskImage = `url(${imageUrl})`;
+			});
+		});
+	}
+	
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -900,6 +906,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const advancedImageStyle = useMemo(
 		() => `
 		.fb-advanced-image-wrapper.${blockID} {
+			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
 			padding: ${globalDeskPadding};
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -920,6 +927,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			transition: all .3s ease-in-out;
 		}
+		.fb-advanced-image-wrapper.${blockID}:hover{
+			${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : ""}
+			${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+			${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
+			${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
+			${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
+			${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
+			${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
+		}
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner{
 			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop}`
@@ -930,7 +946,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
 		}
-		
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
+			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
+		}
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${ overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor };
 			`
@@ -944,15 +962,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			background: ${overlayClassicColor}; `
 			}
 			opacity: ${overlayOpacity};
+			transition: all .3s ease-in-out;
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before {
-            ${overlayBackgroundType === 'gradient' ? `  
-                background: ${overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor};
-            `: `
-                background: ${overlayClassicColor};
-            `}
-        }
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before:hover{
+		
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
 			${overlayHoverBackgroundType === 'gradient' ? `  
                 background: ${overlayHoverCustomGradientSwitcher && overlayHoverCustomGradientInputValue ? overlayHoverCustomGradientInputValue : overlayHoverGradientColor};
             `: `
@@ -964,9 +977,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			text-align: ${captionAlignment};
 		}
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+			display: block;
 			${HeadingColor !== undefined ? `color: ${HeadingColor};` : ""}
-			${ HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ""
-			}
+			${HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ""}
 			${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
 			${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
 			${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
@@ -981,8 +994,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
 		}
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
+			${HeadingHoverColor !== undefined ? `color: ${HeadingHoverColor};` : ""}
+			${HeadingBorderHoverColor !== undefined ? `background-color: ${HeadingBorderHoverColor};` : ""}
+			border: ${HeadingBorderHoverColor};
+		}
 		@media all and (max-width: 1024px) {
 		.fb-advanced-image-wrapper.${blockID} {
+			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
 			padding: ${globalTabPadding};
 			margin: ${globalTabMargin};
 			border-width: ${globalTabBorder};
@@ -1006,6 +1025,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		@media all and (max-width: 767px) {
 		.fb-advanced-image-wrapper.${blockID} {
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
 			padding: ${globalMobPadding};
 			margin: ${globalMobMargin};
 			border-width: ${globalMobBorder};
@@ -1028,6 +1048,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
 		}
+		
 	`,
 		[
 			blockID,
@@ -1177,7 +1198,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 });
                                                             }}
                                                         >
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M15 9L9 15" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M9 9L15 15" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                                                            <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C"/>
+                                                                    <path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C"/>
+                                                            </svg>
                                                         </button>
                                                         <button
                                                             className='fb-image-replace-btn'
@@ -1202,7 +1226,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 mediaUploader.open();
                                                             }}
                                                         >
-                                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.827 16.379C9.77912 16.9085 8.60041 17.1235 7.43311 16.9979C6.2658 16.8722 5.15981 16.4115 4.24861 15.6711C3.33741 14.9308 2.65996 13.9426 2.29804 12.8257C1.93611 11.7088 1.90518 10.5111 2.20897 9.37703L7.62097 10.827C7.09144 9.77918 6.87652 8.60047 7.00213 7.43317C7.12774 6.26586 7.58853 5.15987 8.32886 4.24867C9.06919 3.33747 10.0574 2.66003 11.1743 2.2981C12.2912 1.93617 13.4889 1.90524 14.623 2.20903L13.173 7.62103C14.2208 7.0915 15.3995 6.87658 16.5668 7.00219C17.7341 7.1278 18.8401 7.58859 19.7513 8.32892C20.6625 9.06926 21.34 10.0575 21.7019 11.1744C22.0638 12.2912 22.0948 13.489 21.791 14.623L16.379 13.173C16.9085 14.2209 17.1234 15.3996 16.9978 16.5669C16.8722 17.7342 16.4114 18.8402 15.6711 19.7514C14.9307 20.6626 13.9425 21.34 12.8256 21.702C11.7088 22.0639 10.511 22.0948 9.37697 21.791L10.827 16.379Z" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M12 12V12.01" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+															<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"/>
+                                                                    <path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"/>
+                                                            </svg>
                                                             Replace
                                                         </button>
                                                     </div>
@@ -1725,36 +1752,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 										
-									<FB_BackgroundColorControl
-										label={__("Background Color", "frontis-blocks")}
-										bgColorSwitcher={overlayBgColorSwitcher}  
-										setBgColorSwitcher={(value) => setAttributes({ overlayBgColorSwitcher: value })}
-										
-										normalBackgroundType={overlayBackgroundType}
-										setNormalBackgroundType={(value) => setAttributes({ overlayBackgroundType: value })}
-										normalClassicColor={overlayClassicColor}
-										setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value })}
-										normalGradientColor={overlayGradientColor}
-										setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value })}
-										normalCustomGradientSwitcher={overlayCustomGradientSwitcher}
-										setNormalCustomGradientSwitcher={(value) => setAttributes({ overlayCustomGradientSwitcher: value })}
-										normalCustomGradientInputValue={overlayCustomGradientInputValue}
-										setNormalCustomGradientInputValue={(value) => setAttributes({ overlayCustomGradientInputValue: value })}
-										
-										hoverBackgroundType={overlayHoverBackgroundType} 
-										setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
-										hoverClassicColor={overlayHoverClassicColor}
-										setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value })}
-										hoverGradientColor={overlayHoverGradientColor} 
-										setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value })}
-										hoverCustomGradientSwitcher={overlayHoverCustomGradientSwitcher}
-										setHoverCustomGradientSwitcher={(value) => setAttributes({ overlayHoverCustomGradientSwitcher: value })}
-										hoverCustomGradientInputValue={overlayHoverCustomGradientInputValue}
-										setHoverCustomGradientInputValue={(value) => setAttributes({ overlayHoverCustomGradientInputValue: value })}
+										<FB_BackgroundColorControl
+											label={__("Overlay Color", "frontis-blocks")}
+											bgColorSwitcher={overlayBgColorSwitcher}  
+											setBgColorSwitcher={(value) => setAttributes({ overlayBgColorSwitcher: value })}
+											
+											normalBackgroundType={overlayBackgroundType}
+											setNormalBackgroundType={(value) => setAttributes({ overlayBackgroundType: value })}
+											normalClassicColor={overlayClassicColor}
+											setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value })}
+											normalGradientColor={overlayGradientColor}
+											setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value })}
+											normalCustomGradientSwitcher={overlayCustomGradientSwitcher}
+											setNormalCustomGradientSwitcher={(value) => setAttributes({ overlayCustomGradientSwitcher: value })}
+											normalCustomGradientInputValue={overlayCustomGradientInputValue}
+											setNormalCustomGradientInputValue={(value) => setAttributes({ overlayCustomGradientInputValue: value })}
+											
+											hoverBackgroundType={overlayHoverBackgroundType} 
+											setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
+											hoverClassicColor={overlayHoverClassicColor}
+											setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value })}
+											hoverGradientColor={overlayHoverGradientColor} 
+											setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value })}
+											hoverCustomGradientSwitcher={overlayHoverCustomGradientSwitcher}
+											setHoverCustomGradientSwitcher={(value) => setAttributes({ overlayHoverCustomGradientSwitcher: value })}
+											hoverCustomGradientInputValue={overlayHoverCustomGradientInputValue}
+											setHoverCustomGradientInputValue={(value) => setAttributes({ overlayHoverCustomGradientInputValue: value })}
 
-										isBackgroundImage={false}
+											isBackgroundImage={false}
 
-									/>
+										/>
 
 									<RangeControl
 									label="Opacity"
@@ -1779,18 +1806,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-z-index-header"
 												>
-													<RangeControl
-														value={globalZIndex}
-														onChange={(value) =>
-															setAttributes({
-																globalZIndex: value === 0 ? undefined : value,
-															})
-														}
-														min={1}
-														max={10000}
-														step={1}
-														allowReset
-														resetFallbackValue={100}
+													
+													<FB_Range
+														min={0}
+														max={10000000}
+														label={__("Z Index", "frontis-blocks")}
+														rangeValue={globalZIndex}
+														onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+
 													/>
 												</PanelBody>
 												<PanelBody

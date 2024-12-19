@@ -16,12 +16,12 @@ import TypographySettings from "./components/TypographySettings";
 const defaultsColors = [
 	{
 		"name": __("Primary Color", "frontis-blocks"),
-		"color": '#f00000',
+		"color": '#399CFF',
 		"slug": 'primary-color',
 	},
 	{
 		"name": __("Secondary Color", "frontis-blocks"),
-		"color": '#399CFF',
+		"color": '#f00000',
 		"slug": 'secondary-color',
 	},
 	{
@@ -50,47 +50,98 @@ const defaultsColors = [
 		"slug": 'link-hover-color',
 	},
 	{
-		"name": __("Background Color", "frontis-blocks"),
-		"color": '#393E46',
-		"slug": 'background-color',
-	},
-	{
-		"name": __("Button Color", "frontis-blocks"),
+		"name": __("White Color", "frontis-blocks"),
 		"color": '#FFFFFF',
-		"slug": 'button-color',
+		"slug": 'white-color',
 	},
 	{
-		"name": __("Button Background Color", "frontis-blocks"),
-		"color": '#000',
-		"slug": 'button-background-color',
+		"name": __("Black Color", "frontis-blocks"),
+		"color": '#000000',
+		"slug": 'black-color',
+	},
+	{
+		"name": __("Gray Color", "frontis-blocks"),
+		"color": '#808080',
+		"slug": 'gray-color',
 	}
 
 ];
+
 const gradientDefaults = [
 	{
-		"color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
 		"name": "Primary Color",
 		"slug": "gradientPrimary",
 		"var": "--fb-gradient-primary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, hsla(18, 76%, 85%, 1) 0%, hsla(203, 69%, 84%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
 		"name": "Secondary Color",
 		"slug": "gradientSecondary",
 		"var": "--fb-gradient-secondary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, hsla(248, 21%, 15%, 1) 0%, hsla(250, 14%, 61%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
 		"name": "Tertiary Color",
 		"slug": "gradientTertiary",
 		"var": "--fb-gradient-tertiary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, rgb(250, 250, 250) 0%, rgb(233, 233, 233) 49%, rgb(244, 243, 243) 100%)",
-		"name": "Background Color",
+		"color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
+		"name": "Accent Color",
+		"slug": "gradientAccent",
+		"var": "--fb-gradient-accent-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
+		"name": "Neutral Background",
 		"slug": "gradientBackground",
 		"var": "--fb-gradient-background-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
+		"name": "Vibrant Glow",
+		"slug": "gradientGradient",
+		"var": "--fb-gradient-gradient-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
+		"name": "Sunset Bliss",
+		"slug": "gradientSunsetBliss",
+		"var": "--fb-gradient-sunset-bliss"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
+		"name": "Ocean Breeze",
+		"slug": "gradientOceanBreeze",
+		"var": "--fb-gradient-ocean-breeze"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
+		"name": "Tangerine Dream",
+		"slug": "gradientTangerineDream",
+		"var": "--fb-gradient-tangerine-dream"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
+		"name": "Lavender Kiss",
+		"slug": "gradientLavenderKiss",
+		"var": "--fb-gradient-lavender-kiss"
+	},
+	{
+		"color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
+		"name": "Minty Fresh",
+		"slug": "gradientMintyFresh",
+		"var": "--fb-gradient-minty-fresh"
+	},
+	{
+		"color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
+		"name": "Halloween",
+		"slug": "gradientHalloween",	
+		"var": "--fb-gradient-halloween"
 	}
+
+
 ];
 
 function FrontisBlocksSidebar(props) {
@@ -481,6 +532,9 @@ function FrontisBlocksSidebar(props) {
 					if(key === 'fb_global_colors') {
 						if(localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_global_colors');
+							console.log("before console log")
+							console.log(res)
+							console.log("after console log")
 							if(!res.success) {
 								setGlobalColors(defaultsColors);
 								localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
