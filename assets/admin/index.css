@@ -1655,12 +1655,10 @@
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
-  max-width: 310px;
 }
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column:first-child {
   display: block;
   padding: 42px 52px 42px 32px;
-  max-width: 100%;
 }
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column:nth-child(2) {
   background-color: #F4FCF5;
@@ -1763,14 +1761,12 @@
   font-weight: 500;
   line-height: 25px;
   color: #555E72;
-  max-width: 310px;
 }
 .fb-blocks-pricing .fb-pricing-body .fb-pricing-row .fb-pricing-column:first-child {
   text-align: left;
   font-size: 20px;
   font-weight: 500;
   line-height: 28px;
-  max-width: 100%;
 }
 .fb-blocks-pricing .fb-pricing-body .fb-pricing-row .fb-pricing-column:nth-child(2) {
   background-color: #F4FCF5;
