@@ -129,6 +129,11 @@ const Integration = () => {
             </p>
           </div>
           <div className="section-right">
+            <div className="section-right-overlay">
+            </div>
+              <p className="fb-button-upcoming">
+                {__('Coming Soon', 'frontis-blocks')}
+              </p>
             <div className="recaptcha-version">
               <h3>{__('reCAPTCHA v2', 'frontis-blocks')}</h3>
               <TextControl
@@ -181,6 +186,11 @@ const Integration = () => {
             </p>
           </div>
           <div className="section-right">
+            <div className="section-right-overlay">
+            </div>
+              <p className="fb-button-upcoming">
+                {__('Coming Soon', 'frontis-blocks')}
+              </p>
             <TextControl
               label={__('Google Maps API Key', 'frontis-blocks')}
               value={integrations.google_maps_api_key}
@@ -202,6 +212,11 @@ const Integration = () => {
             </p>
           </div>
           <div className="section-right">
+            <div className="section-right-overlay">
+            </div>
+              <p className="fb-button-upcoming">
+                {__('Coming Soon', 'frontis-blocks')}
+              </p>
             <TextControl
               label={ __('Instagram Access Token', 'frontis-blocks') }
               type="password"

@@ -124,12 +124,15 @@ const EditorEnhancements = () => {
           <h3>{__('Enable Quick Action Bar', 'frontis-blocks')}</h3>
           <p>{__('Adds a quick action bar to the editor', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.enable_quick_action_bar}
             onChange={() => handleSwitchChange('enable_quick_action_bar')}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
       
       <div className="fb-option">
@@ -137,12 +140,15 @@ const EditorEnhancements = () => {
           <h3>{__('Collapse Panel', 'frontis-blocks')}</h3>
           <p>{__('Allows collapsing of the editor panel', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.collapse_panel}
             onChange={() => handleSwitchChange('collapse_panel')}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
       
       <div className="fb-option">
@@ -150,12 +156,15 @@ const EditorEnhancements = () => {
           <h3>{__('Enable Templates Button', 'frontis-blocks')}</h3>
           <p>{__('Adds a templates button to the editor', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.enable_templates_button}
             onChange={() => handleSwitchChange('enable_templates_button')}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
     </div>
   );

@@ -45,7 +45,7 @@ const App = () => {
                     <Logo />
                     {/* <img src={window.frontisBlocksAdmin.logo} alt="Frontis Blocks" /> */}
                 </div>
-                <div className="fb-header-top-right">
+                {/* <div className="fb-header-top-right">
                     {window.frontisBlocksAdmin.isProActive === 'false' && (
                         <a 
                             href={window.frontisBlocksAdmin.pro_url} 
@@ -56,7 +56,7 @@ const App = () => {
                             Upgrade to Pro <Crown />
                         </a>
                     )}
-                </div>
+                </div> */}
             </div>
             <div className="frontis-blocks-admin">
                 <TabPanel
