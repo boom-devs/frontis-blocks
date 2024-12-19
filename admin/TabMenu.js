@@ -50,13 +50,13 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
 	// }
 ]);
 // Add pricing tab if not pro
-if (window.frontisBlocksAdmin.isProActive === 'false') {
-    TabMenus.push({
-      id: 'pricing',
-      icon: <PricingIcon />,
-      label: __("Pricing", "frontis-blocks"),
-      comp: <Pricing />
-    });
-}
+// if (window.frontisBlocksAdmin.isProActive === 'false') {
+//     TabMenus.push({
+//       id: 'pricing',
+//       icon: <PricingIcon />,
+//       label: __("Pricing", "frontis-blocks"),
+//       comp: <Pricing />
+//     });
+// }
 
 export default TabMenus;
