@@ -196,8 +196,11 @@ const AssetsGeneration = () => {
             className="fb-button-primary"
             onClick={handleAssetGeneration}
           >
-            {__('Generate Assets', 'frontis-blocks')}
+            {__('Regenerate Asset', 'frontis-blocks')}
           </Button>
+          {/* <p className="fb-button-primary">
+            {__('Coming Soon', 'frontis-blocks')}
+          </p> */}
         </div>
       </div>
 

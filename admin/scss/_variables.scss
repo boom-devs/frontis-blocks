@@ -30,7 +30,7 @@ $neutral-color-950: #0B0C0E;
 
 // Success Color
 $success-color: #4CAF50;
-$success-color-50: #EDF7EE;
+$success-color-50: #F4FCF5;
 $success-color-100: #DBEFDC;
 $success-color-200: #B7DFB9;
 $success-color-300: #94CF96;
@@ -94,6 +94,7 @@ $border-color: $medium-gray;
 
 // Transitions
 $transition-duration: 0.3s;
+$transition: all 0.3s ease-in-out;
 
 // Z-index
 $z-index-modal: 1000;

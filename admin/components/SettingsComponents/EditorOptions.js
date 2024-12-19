@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 
+
 const EditorOptions = () => {
   const [options, setOptions] = useState({
     default_content_width: '',
