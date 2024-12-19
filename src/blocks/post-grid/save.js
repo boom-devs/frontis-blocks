@@ -70,6 +70,7 @@ export default function save({ attributes }) {
 				data-post-author-prefix-switcher={postAuthorPrefixSwitcher}
 				data-post-author-prefix={postAuthorPrefix}
 				data-show-date-switcher={showDateSwitcher}
+				data-post-author-avatar-switcher={postAuthorAvatarSwitcher}
 				data-post-image-size={postImageSize}
 				data-show-load-more-switcher={loadMoreSwitcher}
 				data-load-more-text={loadMoreText}

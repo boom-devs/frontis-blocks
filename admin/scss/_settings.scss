@@ -120,6 +120,7 @@
         }
 
         .fb-button-primary {
+          cursor: default;
           font-family: $body-font-family;
           font-size: 14px;
           font-weight: 500;
@@ -129,11 +130,11 @@
           padding: 12px 16px;
           color: $neutral-color-900;
         }
-        .fb-button-primary:hover {
-          background-color: $primary-color-50;
-          color: $primary-color-base;
-          transition: $transition;
-        }
+        // .fb-button-primary:hover {
+        //   background-color: $primary-color-50;
+        //   color: $primary-color-base;
+        //   transition: $transition;
+        // }
 
         &-wrapper {
           display: flex;
@@ -150,6 +151,7 @@
 
             .components-base-control__field {
               margin-bottom: 0;
+              margin-top: 0;
             }
 
             .components-text-control__input {

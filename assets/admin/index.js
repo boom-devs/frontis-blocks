@@ -203,6 +203,7 @@ var BlockCard = function BlockCard(_ref) {
     onChange(block.slug, checked);
     setIsChecked(checked);
   };
+  console.log(block);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -233,13 +234,15 @@ var BlockCard = function BlockCard(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "switch-".concat(block.slug),
     className: "fb-block-card-switch-label"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, block.complete === 'true' ? /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
     checked: isChecked,
     onChange: handleChange,
     className: "fb-block-card-switch-input",
     id: "switch-".concat(block.slug),
     disabled: isProActive === 'false' && block["package"] === 'pro' ? true : false
-  }))));
+  }) : /*#__PURE__*/React.createElement("span", {
+    className: "fb-block-card-upcoming"
+  }, "Upcoming"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BlockCard);
 
@@ -1212,17 +1215,23 @@ var Pricing = function Pricing() {
     className: "fb-pricing-column"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Features Comparison', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Frontis Blocks is a powerful plugin that allows you to create stunning websites with ease.', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-column"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fb-pricing-column-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-type"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Free', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-price"
-  }, "$00", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Forever', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "$00", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Forever', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "fb-button fb-button-green"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Download', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-column"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fb-pricing-column-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-type"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pro', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-price"
-  }, "$999", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Years', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "$999", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Years', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "fb-button fb-button-blue"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Buy Now', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-body"
@@ -1561,9 +1570,8 @@ var AssetsGeneration = function AssetsGeneration() {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Asset Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate assets for your blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    className: "fb-button-primary",
-    onClick: handleAssetGeneration
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-primary"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isOpen: isModalOpen,
     onClose: closeModal,

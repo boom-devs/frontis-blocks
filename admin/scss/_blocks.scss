@@ -383,6 +383,17 @@
       .rc-switch-checked:after {
         left: auto;
       }
+
+      .fb-block-card-upcoming {
+        font-family: $body-font-family;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 15.6px;
+        color: $white-color;
+        background-color: $warning-color-400;
+        padding: 6px 8px;
+        border-radius: 4px;
+      }
     }
 
     &-input {
