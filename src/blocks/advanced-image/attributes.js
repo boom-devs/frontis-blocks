@@ -468,6 +468,165 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	/** Start Caption Style */
+    captionFontFamily: {
+		type: "string",
+		default: "inherit",
+	},
+	captionFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '14',
+			Tablet: '12',
+			Mobile: '12'
+		}
+	},
+	captionFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	captionFontWeight: {
+		type: "string",
+		default: "400"
+	},
+	captionFontStyle: {
+		type: "string",
+		default: ""
+	},
+	captionTextTransform: {
+		type: "string",
+		default: ""
+	},
+	captionTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	captionLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	captionLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	captionLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	captionLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	CaptionColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	CaptionColor: {
+		type: "string",
+		default: "#000000"
+	},
+	CaptionHoverColor: {
+		type: 'string',
+	},
+	CaptionPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	CaptionDesktopPadding: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	CaptionTabPadding: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	CaptionMobilePadding: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	CaptionPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	CaptionMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	CaptionDesktopMargin: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	CaptionTabMargin: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	CaptionMobileMargin: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	CaptionMarginLink: {
+		type: "boolean",
+		default: true
+	},	
+	/** Image style attribute */
 	autoHeightSwitch: {
 		type: "boolean",
 		default: false,
@@ -713,6 +872,7 @@ const attributes = {
 	},
 	overlayClassicColor: {
 		type: "string",
+		default: "#000000"
 	},
 	overlayGradientColor: {
 		type: "string",
@@ -752,6 +912,7 @@ const attributes = {
 	},
 	overlayHoverClassicColor: {
 		type: "string",
+		default: "#000000"
 	},
 	overlayHoverGradientColor: {
 		type: "string",

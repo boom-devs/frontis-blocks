@@ -122,6 +122,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		HeadingMarginLink,
 		titlePosition,
 		titleHoverEffects,
+
+		imageCaption,
+		captionFontFamily,
+		captionFontSize,
+		captionFontSizeUnits,
+		captionFontWeight,
+		captionFontStyle,
+		captionTextTransform,
+		captionTextDecoration,
+		captionLetterSpacing,
+		captionLetterSpacingUnits,
+		captionLineHeight,
+		captionLineHeightUnits,
+		CaptionColorSwitcher,
+		CaptionColor,
+		CaptionHoverColor,
+		CaptionPaddingUnits,
+		CaptionDesktopPadding,
+		CaptionTabPadding,
+		CaptionMobilePadding,
+		CaptionPaddingLink,
+		CaptionMarginUnits,
+		CaptionDesktopMargin,
+		CaptionTabMargin,
+		CaptionMobileMargin,
+		CaptionMarginLink,
+
 		boxGlobalBoxShadowValues,
 		boxGlobalBoxShadowCssValue,
 		testBgColorSwitcher,
@@ -405,6 +432,164 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const headingTabletMargin = `${HeadingTabMargin.top}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.right}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.bottom}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.left}${HeadingMarginUnits.Tablet}`;
 	const headingMobileMargin = `${HeadingMobileMargin.top}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.right}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.bottom}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.left}${HeadingMarginUnits.Mobile}`;
 	
+	// Caption Padding
+	const handleCaptionPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (CaptionPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						CaptionDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						CaptionTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						CaptionMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						CaptionDesktopPadding: { ...CaptionDesktopPadding, [position]: value },
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						CaptionTabPadding: { ...CaptionTabPadding, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						CaptionMobilePadding: { ...CaptionMobilePadding, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleCaptionPaddingCombineBtn = () => {
+		setAttributes({ CaptionPaddingLink: !CaptionPaddingLink });
+	};
+
+	const handleCaptionPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			CaptionPaddingUnits: {
+				...CaptionPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Default padding for desktop (using desktop_padding) */
+	const captionDesktopPaddingValue = `${CaptionDesktopPadding.top}${CaptionPaddingUnits.Desktop} ${CaptionDesktopPadding.right}${CaptionPaddingUnits.Desktop} ${CaptionDesktopPadding.bottom}${CaptionPaddingUnits.Desktop} ${CaptionDesktopPadding.left}${CaptionPaddingUnits.Desktop}`;
+	const captionTabletPaddingValue = `${CaptionTabPadding.top}${CaptionPaddingUnits.Tablet} ${CaptionTabPadding.right}${CaptionPaddingUnits.Tablet} ${CaptionTabPadding.bottom}${CaptionPaddingUnits.Tablet} ${CaptionTabPadding.left}${CaptionPaddingUnits.Tablet}`;
+	const captionMobilePaddingValue = `${CaptionMobilePadding.top}${CaptionPaddingUnits.Mobile} ${CaptionMobilePadding.right}${CaptionPaddingUnits.Mobile} ${CaptionMobilePadding.bottom}${CaptionPaddingUnits.Mobile} ${CaptionMobilePadding.left}${CaptionPaddingUnits.Mobile}`;
+
+	// Caption Margin
+	const handleCaptionMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (CaptionMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						CaptionDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						CaptionTabMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						CaptionMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						CaptionDesktopMargin: { ...CaptionDesktopMargin, [position]: value },
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						CaptionTabMargin: { ...CaptionTabMargin, [position]: value },
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						CaptionMobileMargin: { ...CaptionMobileMargin, [position]: value },
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleCaptionMarginCombineBtn = () => {
+		setAttributes({ CaptionMarginLink: !CaptionMarginLink });
+	};
+
+	const handleCaptionMarginUnitsHandler = (unit) => {
+		setAttributes({
+			CaptionMarginUnits: {
+				...CaptionMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	/** Default margin for desktop (using desktop_margin) */
+	const captionDesktopMarginValue = `${CaptionDesktopMargin.top}${CaptionMarginUnits.Desktop} ${CaptionDesktopMargin.right}${CaptionMarginUnits.Desktop} ${CaptionDesktopMargin.bottom}${CaptionMarginUnits.Desktop} ${CaptionDesktopMargin.left}${CaptionMarginUnits.Desktop}`;
+	const captionTabletMarginValue = `${CaptionTabMargin.top}${CaptionMarginUnits.Tablet} ${CaptionTabMargin.right}${CaptionMarginUnits.Tablet} ${CaptionTabMargin.bottom}${CaptionMarginUnits.Tablet} ${CaptionTabMargin.left}${CaptionMarginUnits.Tablet}`;
+	const captionMobileMarginValue = `${CaptionMobileMargin.top}${CaptionMarginUnits.Mobile} ${CaptionMobileMargin.right}${CaptionMarginUnits.Mobile} ${CaptionMobileMargin.bottom}${CaptionMarginUnits.Mobile} ${CaptionMobileMargin.left}${CaptionMarginUnits.Mobile}`;
+
 	/** Start Image Border */
 	const handleImageBorderUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -949,23 +1134,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image.overlay-simple .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${ overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor };
-			`
-			: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
-			? `
-			background-image: url(${overlayBackgroundImageUrl});
-			background-position: ${overlayBackgroundImagePosition};
-			background-attachment: ${overlayBackgroundImageAttachment};
-			background-repeat: ${overlayBackgroundImageRepeat};
-			background-size: ${overlayBackgroundImageSize};` : `
-			background: ${overlayClassicColor}; `
+			`: `
+			background: ${overlayClassicColor};`
 			}
 			opacity: ${overlayOpacity};
 			transition: all .3s ease-in-out;
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image.overlay-simple .fb-advanced-image-inner:hover:before{
 			${overlayHoverBackgroundType === 'gradient' ? `  
                 background: ${overlayHoverCustomGradientSwitcher && overlayHoverCustomGradientInputValue ? overlayHoverCustomGradientInputValue : overlayHoverGradientColor};
             `: `
@@ -975,6 +1153,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
 			text-align: ${captionAlignment};
+			${CaptionColor !== undefined ? `color: ${CaptionColor};` : ""}
+			${captionFontFamily ? `font-family: ${captionFontFamily};` : ""}
+			${captionFontSize.Desktop && captionFontSizeUnits.Desktop ? `font-size: ${captionFontSize.Desktop}${captionFontSizeUnits.Desktop};` : ""}
+			${captionFontWeight ? `font-weight: ${captionFontWeight};` : ""}
+			${captionFontStyle ? `font-style: ${captionFontStyle};` : ""}
+			${captionTextTransform ? `text-transform: ${captionTextTransform};` : ""}
+			${captionTextDecoration ? `text-decoration: ${captionTextDecoration};` : ""}
+			${captionLetterSpacing.Desktop && captionLetterSpacingUnits.Desktop ? `letter-spacing: ${captionLetterSpacing.Desktop}${captionLetterSpacingUnits.Desktop};` : ""}
+			${captionLineHeight.Desktop && captionLineHeightUnits.Desktop ? `line-height: ${captionLineHeight.Desktop}${captionLineHeightUnits.Desktop};` : ""}
+			transition: all .3s ease-in-out;
+			${captionDesktopPaddingValue ? `padding: ${captionDesktopPaddingValue};` : ""}
+			${captionDesktopMarginValue ? `margin: ${captionDesktopMarginValue};` : ""}
+
 		}
 		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			display: block;
@@ -1022,6 +1213,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingTabletPadding ? `padding: ${headingTabletPadding};` : ""}
 			${headingTabletMargin ? `margin: ${headingTabletMargin};` : ""}
 		}
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
+			${captionFontSize.Tablet && captionFontSizeUnits.Tablet ? `font-size: ${captionFontSize.Tablet}${captionFontSizeUnits.Tablet};` : ""}
+			${captionLetterSpacing.Tablet && captionLetterSpacingUnits.Tablet ? `letter-spacing: ${captionLetterSpacing.Tablet}${captionLetterSpacingUnits.Tablet};` : ""}
+			${captionLineHeight.Tablet && captionLineHeightUnits.Tablet ? `line-height: ${captionLineHeight.Tablet}${captionLineHeightUnits.Tablet};` : ""}
+			transition: all .3s ease-in-out;
+			${captionTabletPaddingValue ? `padding: ${captionTabletPaddingValue};` : ""}
+			${captionTabletMarginValue ? `margin: ${captionTabletMarginValue};` : ""}
+		}
+
 		}
 		@media all and (max-width: 767px) {
 		.fb-advanced-image-wrapper.${blockID} {
@@ -1047,6 +1247,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingMobilePadding ? `padding: ${headingMobilePadding};` : ""}
 			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
+		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
+			${captionFontSize.Mobile && captionFontSizeUnits.Mobile ? `font-size: ${captionFontSize.Mobile}${captionFontSizeUnits.Mobile};` : ""}
+			${captionLetterSpacing.Mobile && captionLetterSpacingUnits.Mobile ? `letter-spacing: ${captionLetterSpacing.Mobile}${captionLetterSpacingUnits.Mobile};` : ""}
+			${captionLineHeight.Mobile && captionLineHeightUnits.Mobile ? `line-height: ${captionLineHeight.Mobile}${captionLineHeightUnits.Mobile};` : ""}
+			transition: all .3s ease-in-out;
+			${captionMobilePaddingValue ? `padding: ${captionMobilePaddingValue};` : ""}
+			${captionMobileMarginValue ? `margin: ${captionMobileMarginValue};` : ""}
+		}
+
 		}
 		
 	`,
@@ -1112,7 +1321,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			imageTabletBorderRadius,
 			imageMobileBorderRadius,
 			imageBoxShadowCssValue,
+
 			captionAlignment,
+			captionFontFamily,
+			captionFontSize,
+			captionFontSizeUnits,
+			captionFontWeight,
+			captionFontStyle,
+			captionTextTransform,
+			captionTextDecoration,
+			captionLetterSpacing,
+			captionLetterSpacingUnits,
+			captionLineHeight,
+			captionLineHeightUnits,
+			CaptionColorSwitcher,
+			CaptionColor,
+			CaptionHoverColor,
+			captionDesktopMarginValue,
+			captionTabletMarginValue,
+			captionMobileMarginValue,
+			captionDesktopPaddingValue,
+			captionTabletPaddingValue,
+			captionMobilePaddingValue,
+
 			HeadingColor,
 			HeadingBackgroundColor,
 			headingFontFamily,
@@ -1366,6 +1597,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															label={__("Alignment", "frontis-blocks")}
 															globalAlignment={captionAlignment}
 															setGlobalAlignment={(value) => setAttributes({ captionAlignment: value })}
+														/>
+
+														<TextControl
+															value={imageCaption}
+															onChange={(value) =>
+																setAttributes({ imageCaption: value })
+															}
+															className="fb-advance-title"
+															placeholder={__("Enter Caption", "frontis-blocks")}
 														/>
 													</>
 												)}
@@ -1746,6 +1986,101 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										/>
 										{/*	Overlay Style*/}
 										</PanelBody>
+										{displayCaption && (
+											<PanelBody
+											title={__("Caption", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_TypographyControl
+												fontFamily={captionFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ captionFontFamily: value })}
+
+												fontSize={captionFontSize}
+												onChangeFontSize={(value) => setAttributes({ captionFontSize: value })}
+
+												fontSizeUnits={captionFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ captionFontSizeUnits: value })}
+
+												fontWeight={captionFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ captionFontWeight: value })}
+
+												fontStyle={captionFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ captionFontStyle: value })}
+
+												textTransform={captionTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ captionTextTransform: value })}
+
+												textDecoration={captionTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ captionTextDecoration: value })}
+
+												letterSpacing={captionLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ captionLetterSpacing: value })}
+
+												letterSpacingUnits={captionLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ captionLetterSpacingUnits: value })}
+
+												lineHeight={captionLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ captionLineHeight: value })}
+
+												lineHeightUnits={captionLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ captionLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={CaptionColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ CaptionColorSwitcher: value })}
+											/>
+
+											{CaptionColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={CaptionColor}
+													setGlobalColor={(value) => setAttributes({ CaptionColor: value })}
+												/>
+											)}
+
+											{CaptionColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={CaptionHoverColor}
+													setGlobalColor={(value) => setAttributes({ CaptionHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleCaptionPaddingUnitsHandler}
+												spacingUnits={CaptionPaddingUnits}
+												spacingDesktop={CaptionDesktopPadding}
+												spacingTablet={CaptionTabPadding}
+												spacingMobile={CaptionMobilePadding}
+												handleSpacingUnitHandler={handleCaptionPaddingUnitChange}
+												spacingCombineBtn={CaptionPaddingLink}
+												spacingCombineBtnHandler={handleCaptionPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleCaptionMarginUnitsHandler}
+												spacingUnits={CaptionMarginUnits}
+												spacingDesktop={CaptionDesktopMargin}
+												spacingTablet={CaptionTabMargin}
+												spacingMobile={CaptionMobileMargin}
+												handleSpacingUnitHandler={handleCaptionMarginUnitChange}
+												spacingCombineBtn={CaptionMarginLink}
+												spacingCombineBtnHandler={handleCaptionMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+										</PanelBody>
+										)}
 										{showOverlay && (
 										<PanelBody
 											title={__("Overlay", "frontis-blocks")}
@@ -1783,16 +2118,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										/>
 
-									<RangeControl
-									label="Opacity"
-									value={overlayOpacity}
-									onChange={(value) => setAttributes({ overlayOpacity: value, }) }
-									min={0}
-									max={1}
-									step={0.1}
-									allowReset
-									resetFallbackValue={undefined}
-									/>
+										<RangeControl
+										label="Opacity"
+										value={overlayOpacity}
+										onChange={(value) => setAttributes({ overlayOpacity: value, }) }
+										min={0}
+										max={1}
+										step={0.1}
+										allowReset
+										resetFallbackValue={undefined}
+										/>
 									</PanelBody>
 									)}
 									</>
