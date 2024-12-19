@@ -228,12 +228,12 @@ const FB_Color = ({
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <span className="fb-setting-color-hex">
-                                {globalColor || '#000'} 
+                                {globalColor || 'transparent'} 
                             </span>
                             <div
                                 className="fb-setting-color-display"
                                 style={{
-                                    backgroundColor: globalColor || '#000',
+                                    backgroundColor: globalColor || 'transparent',
                                 }}
                             />
                         </div>

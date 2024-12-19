@@ -1512,6 +1512,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const iconBoxStyle = useMemo(
 		() => `
     .fb-icon-box-content-wrapper.${blockID} {
+		${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
         ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : "" }
         ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
         ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -1530,6 +1531,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     
     @media only screen and (max-width: 1024px) {
         .fb-icon-box-content-wrapper.${blockID} {
+			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
             padding: ${TabletPadding} !important;
             margin: ${TabletMargin} !important;
             border-width: ${BorderTabletWidth} !important;
@@ -1539,6 +1541,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     @media only screen and (max-width: 767px) {
         .fb-icon-box-content-wrapper.${blockID} {
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             padding: ${MobilePadding} !important;
             margin: ${MobileMargin} !important;
             border-width: ${BorderMobileWidth} !important;
@@ -2166,16 +2169,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										>
 											<FB_Range
 												min={1}
-												max={300}
+												max={1400}
 												label={__("Width", "frontis-blocks")}
 												rangeValue={mediaSize}
-												onChangeHandler={mediaSizeHandler}
-												rangeUnitHandler={mediaSizeUnitsHandler}
+												onChangeHandler={(value) => setAttributes({ mediaSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
 												deviceType={deviceType}
 												units={mediaSizeUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={50}
+												resetFallbackValue={"100"}
 											/>
 											{/*Background*/}
 											<FB_BackgroundColorControl
@@ -2693,18 +2696,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
-													<RangeControl
-														value={globalZIndex}
-														onChange={(value) =>
-															setAttributes({
-																globalZIndex: value === 0 ? undefined : value,
-															})
-														}
-														min={1}
-														max={10000}
-														step={1}
-														allowReset
-														resetFallbackValue={100}
+													
+													<FB_Range
+														min={0}
+														max={10000000}
+														label={__("Z Index", "frontis-blocks")}
+														rangeValue={globalZIndex}
+														onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
 													/>
 												</PanelBody>
 												<PanelBody

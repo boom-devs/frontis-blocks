@@ -142,7 +142,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</div>
 							</div>
 						)}
-						{displayCaption && (
+						
+					</div>
+					{displayCaption && (
 							<div className="fb-advanced-image-caption">
 								<RichText
 									tagName="figcaption"
@@ -152,7 +154,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								/>
 							</div>
 						)}
-					</div>
 				</div>
 			</div>
 		</>
