@@ -1570,9 +1570,10 @@ var AssetsGeneration = function AssetsGeneration() {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Asset Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate assets for your blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "fb-button-primary"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "fb-button-primary",
+    onClick: handleAssetGeneration
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Regenerate Asset', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isOpen: isModalOpen,
     onClose: closeModal,
     onConfirm: confirmAssetGeneration,

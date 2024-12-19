@@ -1384,9 +1384,9 @@ const attributes = {
 	priceFeatureIconSize: {
 		type: "object",
 		default: {
-			Desktop: "20",
-			Tablet: "20",
-			Mobile: "20"
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 	priceFeatureIconSizeUnits: {
