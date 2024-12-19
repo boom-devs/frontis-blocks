@@ -153,25 +153,31 @@ const SiteVisibility = () => {
           <h3>{__('Enable Coming Soon Mode', 'frontis-blocks')}</h3>
           <p>{__('Activate coming soon page for visitors', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.coming_soon_mode}
             onChange={(value) => handleChange('coming_soon_mode', value)}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
       {options.coming_soon_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
             <h3>{__('Select Coming Soon Page', 'frontis-blocks')}</h3>
           </div>
-          <div className="fb-option-input">
+          {/* <div className="fb-option-input">
             <SelectControl
               options={pageOptions}
               value={options.coming_soon_page_id}
               onChange={(value) => handleChange('coming_soon_page_id', value)}
             />
-          </div>
+          </div> */}
+          <p className="fb-button-upcoming">
+            {__('Coming Soon', 'frontis-blocks')}
+          </p>
         </div>
       )}
       <div className="fb-option">
@@ -179,25 +185,31 @@ const SiteVisibility = () => {
           <h3>{__('Enable Maintenance Mode', 'frontis-blocks')}</h3>
           <p>{__('Activate maintenance mode for visitors', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.maintenance_mode}
             onChange={(value) => handleChange('maintenance_mode', value)}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
       {options.maintenance_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
             <h3>{__('Select Maintenance Page', 'frontis-blocks')}</h3>
           </div>
-          <div className="fb-option-input">
+          {/* <div className="fb-option-input">
             <SelectControl
               options={pageOptions}
               value={options.maintenance_page_id}
               onChange={(value) => handleChange('maintenance_page_id', value)}
             />
-          </div>
+          </div> */}
+          <p className="fb-button-upcoming">
+            {__('Coming Soon', 'frontis-blocks')}
+          </p>
         </div>
       )}
     </div>
