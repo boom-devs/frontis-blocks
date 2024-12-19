@@ -61,12 +61,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-unit ($spacing-unit * 2.5);
+  padding: 16px 24px;
   background-color: $warning-color;
   color: $white-color;
   text-decoration: none;
-  border-radius: $border-radius;
-  font-weight: bold;
+  border-radius: $border-radius * 3;
+  font-family: $body-font-family;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
   transition: background-color $transition-duration;
 
   svg {
