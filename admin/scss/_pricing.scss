@@ -32,12 +32,10 @@
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      max-width: 310px;
 
       &:first-child {
         display: block;
         padding: 42px 52px 42px 32px;
-        max-width: 100%
       }
 
       &:nth-child(2) {
@@ -156,7 +154,6 @@
         font-weight: 500;
         line-height: 25px;
         color: $neutral-color-600;
-        max-width: 310px;
       }
 
       .fb-pricing-column:first-child {
@@ -164,7 +161,6 @@
         font-size: 20px;
         font-weight: 500;
         line-height: 28px;
-        max-width: 100%;
       }
       .fb-pricing-column:nth-child(2) {
         background-color: $success-color-50;
