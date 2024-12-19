@@ -2043,11 +2043,11 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 var defaultsColors = [{
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
-  "color": '#f00000',
+  "color": '#399CFF',
   "slug": 'primary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#399CFF',
+  "color": '#f00000',
   "slug": 'secondary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
@@ -2070,38 +2070,78 @@ var defaultsColors = [{
   "color": '#4CC9F0',
   "slug": 'link-hover-color'
 }, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "frontis-blocks"),
-  "color": '#393E46',
-  "slug": 'background-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Color", "frontis-blocks"),
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
   "color": '#FFFFFF',
-  "slug": 'button-color'
+  "slug": 'white-color'
 }, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Button Background Color", "frontis-blocks"),
-  "color": '#000',
-  "slug": 'button-background-color'
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
+  "color": '#000000',
+  "slug": 'black-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
+  "color": '#808080',
+  "slug": 'gray-color'
 }];
 var gradientDefaults = [{
-  "color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
+  "color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
   "name": "Primary Color",
   "slug": "gradientPrimary",
   "var": "--fb-gradient-primary-color"
 }, {
-  "color": "linear-gradient(90deg, hsla(18, 76%, 85%, 1) 0%, hsla(203, 69%, 84%, 1) 100%)",
+  "color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
   "name": "Secondary Color",
   "slug": "gradientSecondary",
   "var": "--fb-gradient-secondary-color"
 }, {
-  "color": "linear-gradient(90deg, hsla(248, 21%, 15%, 1) 0%, hsla(250, 14%, 61%, 1) 100%)",
+  "color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
   "name": "Tertiary Color",
   "slug": "gradientTertiary",
   "var": "--fb-gradient-tertiary-color"
 }, {
-  "color": "linear-gradient(90deg, rgb(250, 250, 250) 0%, rgb(233, 233, 233) 49%, rgb(244, 243, 243) 100%)",
-  "name": "Background Color",
+  "color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
+  "name": "Accent Color",
+  "slug": "gradientAccent",
+  "var": "--fb-gradient-accent-color"
+}, {
+  "color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
+  "name": "Neutral Background",
   "slug": "gradientBackground",
   "var": "--fb-gradient-background-color"
+}, {
+  "color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
+  "name": "Vibrant Glow",
+  "slug": "gradientGradient",
+  "var": "--fb-gradient-gradient-color"
+}, {
+  "color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
+  "name": "Sunset Bliss",
+  "slug": "gradientSunsetBliss",
+  "var": "--fb-gradient-sunset-bliss"
+}, {
+  "color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
+  "name": "Ocean Breeze",
+  "slug": "gradientOceanBreeze",
+  "var": "--fb-gradient-ocean-breeze"
+}, {
+  "color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
+  "name": "Tangerine Dream",
+  "slug": "gradientTangerineDream",
+  "var": "--fb-gradient-tangerine-dream"
+}, {
+  "color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
+  "name": "Lavender Kiss",
+  "slug": "gradientLavenderKiss",
+  "var": "--fb-gradient-lavender-kiss"
+}, {
+  "color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
+  "name": "Minty Fresh",
+  "slug": "gradientMintyFresh",
+  "var": "--fb-gradient-minty-fresh"
+}, {
+  "color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
+  "name": "Halloween",
+  "slug": "gradientHalloween",
+  "var": "--fb-gradient-halloween"
 }];
 function FrontisBlocksSidebar(props) {
   // Set state
@@ -2510,23 +2550,26 @@ function FrontisBlocksSidebar(props) {
               _i = 0, _localStorageKeys = localStorageKeys;
             case 2:
               if (!(_i < _localStorageKeys.length)) {
-                _context.next = 72;
+                _context.next = 75;
                 break;
               }
               key = _localStorageKeys[_i];
               localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
               if (!(key === 'fb_global_colors')) {
-                _context.next = 14;
+                _context.next = 17;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 13;
+                _context.next = 16;
                 break;
               }
               _context.next = 9;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
             case 9:
               res = _context.sent;
+              console.log("before console log");
+              console.log(res);
+              console.log("after console log");
               if (!res.success) {
                 setGlobalColors(defaultsColors);
                 localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
@@ -2534,22 +2577,22 @@ function FrontisBlocksSidebar(props) {
                 setGlobalColors(res.data);
                 localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
               }
-              _context.next = 14;
+              _context.next = 17;
               break;
-            case 13:
+            case 16:
               setGlobalColors(localStorageData);
-            case 14:
+            case 17:
               if (!(key === 'fb_custom_colors')) {
-                _context.next = 23;
+                _context.next = 26;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 22;
+                _context.next = 25;
                 break;
               }
-              _context.next = 18;
+              _context.next = 21;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
-            case 18:
+            case 21:
               _res = _context.sent;
               if (!_res.success) {
                 setCustomColors([]);
@@ -2557,22 +2600,22 @@ function FrontisBlocksSidebar(props) {
                 setCustomColors(_res.data);
                 localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
               }
-              _context.next = 23;
+              _context.next = 26;
               break;
-            case 22:
+            case 25:
               setCustomColors(localStorageData);
-            case 23:
+            case 26:
               if (!(key === 'fb_gradient_colors')) {
-                _context.next = 32;
+                _context.next = 35;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 31;
+                _context.next = 34;
                 break;
               }
-              _context.next = 27;
+              _context.next = 30;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
-            case 27:
+            case 30:
               _res2 = _context.sent;
               if (!_res2.success) {
                 setGradientColors(gradientDefaults);
@@ -2581,22 +2624,22 @@ function FrontisBlocksSidebar(props) {
                 setGradientColors(_res2.data);
                 localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
               }
-              _context.next = 32;
+              _context.next = 35;
               break;
-            case 31:
+            case 34:
               setGradientColors(localStorageData);
-            case 32:
+            case 35:
               if (!(key === 'fb_custom_gradient_colors')) {
-                _context.next = 41;
+                _context.next = 44;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 40;
+                _context.next = 43;
                 break;
               }
-              _context.next = 36;
+              _context.next = 39;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
-            case 36:
+            case 39:
               _res3 = _context.sent;
               if (!_res3.success) {
                 setCustomGradientColors([]);
@@ -2604,22 +2647,22 @@ function FrontisBlocksSidebar(props) {
                 setCustomGradientColors(_res3.data);
                 localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
               }
-              _context.next = 41;
+              _context.next = 44;
               break;
-            case 40:
+            case 43:
               setCustomGradientColors(localStorageData);
-            case 41:
+            case 44:
               if (!(key === 'fb_typography')) {
-                _context.next = 50;
+                _context.next = 53;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 49;
+                _context.next = 52;
                 break;
               }
-              _context.next = 45;
+              _context.next = 48;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
-            case 45:
+            case 48:
               _res4 = _context.sent;
               if (!_res4.success) {
                 localStorage.setItem('fb_typography', JSON.stringify(typography));
@@ -2627,22 +2670,22 @@ function FrontisBlocksSidebar(props) {
                 setTypography(_res4.data);
                 localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
               }
-              _context.next = 50;
+              _context.next = 53;
               break;
-            case 49:
+            case 52:
               setTypography(localStorageData);
-            case 50:
+            case 53:
               if (!(key === 'fb_custom_typography')) {
-                _context.next = 59;
+                _context.next = 62;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 58;
+                _context.next = 61;
                 break;
               }
-              _context.next = 54;
+              _context.next = 57;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
-            case 54:
+            case 57:
               _res5 = _context.sent;
               if (!_res5.success) {
                 setCustomTypography([]);
@@ -2650,22 +2693,22 @@ function FrontisBlocksSidebar(props) {
                 setCustomTypography(_res5.data);
                 localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
               }
-              _context.next = 59;
+              _context.next = 62;
               break;
-            case 58:
+            case 61:
               setCustomTypography(localStorageData);
-            case 59:
+            case 62:
               if (!(key === 'fb_fontfamilies')) {
-                _context.next = 69;
+                _context.next = 72;
                 break;
               }
               if (!(localStorageData.length < 1)) {
-                _context.next = 67;
+                _context.next = 70;
                 break;
               }
-              _context.next = 63;
+              _context.next = 66;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
-            case 63:
+            case 66:
               _res6 = _context.sent;
               if (!_res6.success) {
                 setFontfamilies([]);
@@ -2674,27 +2717,27 @@ function FrontisBlocksSidebar(props) {
                 getAllFontFamilies(_res6.data);
                 localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
               }
-              _context.next = 69;
+              _context.next = 72;
               break;
-            case 67:
+            case 70:
               getAllFontFamilies(localStorageData);
               setFontfamilies(localStorageData);
-            case 69:
+            case 72:
               _i++;
               _context.next = 2;
               break;
-            case 72:
-              _context.next = 77;
+            case 75:
+              _context.next = 80;
               break;
-            case 74:
-              _context.prev = 74;
+            case 77:
+              _context.prev = 77;
               _context.t0 = _context["catch"](0);
               console.error("Error fetching global colors:", _context.t0);
-            case 77:
+            case 80:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 74]]);
+        }, _callee, null, [[0, 77]]);
       }));
       return function handleUpdateState() {
         return _ref.apply(this, arguments);
