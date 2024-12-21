@@ -2167,9 +2167,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Image/Icon", "frontis-block")}
 											initialOpen={false}
 										>
+											
 											<FB_Range
-												min={1}
-												max={1400}
+												min={0}
+												max={100}
 												label={__("Width", "frontis-blocks")}
 												rangeValue={mediaSize}
 												onChangeHandler={(value) => setAttributes({ mediaSize: value })}
@@ -2178,7 +2179,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												units={mediaSizeUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={"100"}
+												resetFallbackValue={""}
 											/>
 											{/*Background*/}
 											<FB_BackgroundColorControl

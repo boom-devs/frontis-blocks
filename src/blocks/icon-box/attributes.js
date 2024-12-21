@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-	DeviceType: {
+	deviceType: {
 		type: "string",
 		default: "Desktop"
 	},
@@ -25,23 +25,24 @@ const attributes = {
     infoMediaID: {
         type: "number",
     },
-	mediaSize: {
-		type: 'object',
-		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
-		}
-	},
 	
-	mediaSizeUnits: {
+    mediaSize: {
+        type: 'object',
+        default: {
+            Desktop: '25',
+            Tablet: '25',
+            Mobile: '25'
+        }
+    },
+    mediaSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px',
+			Mobile: 'px'
 		}
 	},
+    
     mediaBgTypeImage: {
 		type: "string",
 		default: ''
