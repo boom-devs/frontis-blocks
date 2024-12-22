@@ -1364,6 +1364,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingDesktopMargin,
 			headingTabletMargin,
 			headingMobileMargin,
+			
 		],
 	);
 
