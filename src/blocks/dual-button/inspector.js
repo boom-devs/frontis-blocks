@@ -129,6 +129,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconColor,
 		btnIconHoverColor,
 
+		btnTwoIconColorSwitcher,
+		btnTwoIconColor,
+		btnTwoIconHoverColor,
+		btnTwoIconSize,
+		btnTwoIconSizeUnits,
+		
 		connectorSwitcher,
 		connectorText,
 		connectorFontFamily,
@@ -204,6 +210,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualButtonGlobalBorderRadiusLink,
 		dualButtonGlobalBoxShadowValues,
 		dualButtonGlobalBoxShadowCssValue,
+		btnTwoIconSpacing,
+		btnTwoIconSpacingUnits
 	} = attributes;
 
 	useEffect(() => {
@@ -1309,7 +1317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			margin: ${buttonDesktopMargin};
 			z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
 			${ButtonWidth.Desktop && ButtonWidthWidthUnits.Desktop ? `width: ${ButtonWidth.Desktop}${ButtonWidthWidthUnits.Desktop};` : ''}
-			gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
+			
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-wrapper {
 			gap: ${buttonsGap.Desktop}${buttonsGapUnits.Desktop};
@@ -1320,7 +1328,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ""}
 			${buttonOneBorderDesktopWidth ? `border-width: ${buttonOneBorderDesktopWidth};` : ''}
 			${buttonOneBorderRadiusDesktopWidth ? `border-radius: ${buttonOneBorderRadiusDesktopWidth};` : ''}
-			
+			gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover {
 			${ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : "" }
@@ -1332,6 +1340,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-width: ${buttonBorderDesktopWidth};
 			border-radius: ${buttonBorderRadiusDesktopWidth};
 			${ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : "" }
+			gap: ${btnTwoIconSpacing.Desktop}${btnTwoIconSpacingUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover {
 			${ButtonTwoBgHoverColor !== undefined ? `background-color: ${ButtonTwoBgHoverColor} !important;` : ""}
@@ -1376,15 +1385,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorBorderHoverColor !== undefined ? `border-color: ${connectorBorderHoverColor};` : "" }
 		}
 		
-		.fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 		}
-		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
-		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper svg {
+			${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : ""}
+			width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg{
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : ""}
 		}
-    
+		
+		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
+			${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : ""}
+		}
 		@media only screen and (max-width: 1024px) {
 		.fb-dual-button-container.${blockID} {
 		${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
@@ -1544,6 +1559,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnIconSpacingUnits,
 			buttonsGap,
 			buttonsGapUnits,
+			btnTwoIconColor,
+			btnTwoIconSize,
+			btnTwoIconHoverColor,
+			btnTwoIconSpacing,
+			btnTwoIconSpacingUnits
 		],
 	);
 
@@ -2341,11 +2361,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 										)}
 										
-										{/*	Icon Style */}
+										{/*	Icon Style One */}
 										{(buttonIconAlign === 'icon-text' || 
 										buttonIconAlign === 'icon-only') && (
 										<PanelBody
-											title={__("Icon", "frontis-blocks")}
+											title={__("Button One Icon", "frontis-blocks")}
 											initialOpen={false}
 										>
 											<FB_Range
@@ -2361,7 +2381,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={50}
 											/>
-
 											<FB_Range
 												min={1}
 												max={100}
@@ -2399,6 +2418,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
 											
+										</PanelBody>
+										)}
+
+										{/*	Icon Style Two */}
+										{(buttonTwoIconAlign === 'icon-text' || 
+										buttonTwoIconAlign === 'icon-only') && (
+										<PanelBody
+											title={__("Button Two Icon", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Icon Size", "frontis-blocks")}
+												rangeValue={btnTwoIconSize}
+												onChangeHandler={(value) => setAttributes({ btnTwoIconSize: value }) }
+												rangeUnitHandler={(value) => setAttributes({ btnTwoIconSizeUnits: value }) }
+												deviceType={deviceType}
+												units={btnTwoIconSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Spacing", "frontis-blocks")}
+												rangeValue={btnTwoIconSpacing}
+												onChangeHandler={(value) => setAttributes({ btnTwoIconSpacing: value }) }
+												rangeUnitHandler={(value) => setAttributes({ btnTwoIconSpacingUnits: value }) }
+												deviceType={deviceType}
+												units={btnTwoIconSpacingUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Icon Color", "frontis-blocks")}
+												globalSwitcher={btnTwoIconColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
+											/>
+
+											{btnTwoIconColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={btnTwoIconColor}
+													setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
+												/>
+											)}
+
+											{btnTwoIconColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={btnTwoIconHoverColor}
+													setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
+												/>
+											)}
+
 										</PanelBody>
 										)}
 									</>
