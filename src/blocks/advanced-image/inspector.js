@@ -99,17 +99,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		HeadingBorder,
 		HeadingBorderColor,
 		HeadingBorderHoverColor,
-		HeadingBorderColorSwitcher,
-		HeadingBorderUnits,
-		HeadingDesktopBorderWidth,
-		HeadingTabBorderWidth,
-		HeadingMobileBorderWidth,
-		HeadingBorderLink,
-		HeadingBorderRadiusUnits,
-		HeadingDesktopBorderRadiusWidth,
-		HeadingTabBorderRadiusWidth,
-		HeadingMobileBorderRadiusWidth,
-		HeadingBorderRadiusLink,
 		HeadingPaddingUnits,
 		HeadingDesktopPadding,
 		HeadingTabPadding,
@@ -1364,7 +1353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingDesktopMargin,
 			headingTabletMargin,
 			headingMobileMargin,
-			
+			globalZIndex
 		],
 	);
 
@@ -1942,16 +1931,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										options={BORDER_STYLES}
 										onChange={(value) => setAttributes({ imageBorder: value }) }
 										/>
-										<FB_Color
-											label={__("Border Color", "frontis-blocks")}
-											globalColorSwitcher={imageBorderColorSwitcher}
-											globalColor={imageBorderColor}
-											globalHoverColor={imageBorderHoverColor}
-											handleColorSwitcherChange={(value) => setAttributes({ imageBorderColorSwitcher: value })}
-											handleGlobalColorChange={(value) => setAttributes({ imageBorderColor: value })}
-											handleGlobalHoverColorChange={(value) => setAttributes({ imageBorderHoverColor: value })}
-										/>
 										
+										<FB_SwitcherControl
+											label={__("Border Color", "frontis-blocks")}
+											globalSwitcher={imageBorderColorSwitcher}
+											setGlobalSwitcher={(value) => setAttributes({ imageBorderColorSwitcher: value })}
+										/>
+
+										{imageBorderColorSwitcher === 'normal' && (
+											<FB_ColorControl
+												label={__("Normal Color", "frontis-blocks")}
+												globalColor={imageBorderColor}
+												setGlobalColor={(value) => setAttributes({ imageBorderColor: value })}
+											/>
+										)}
+
+										{imageBorderColorSwitcher === 'hover' && (
+											<FB_ColorControl
+												label={__("Hover Color", "frontis-blocks")}
+												globalColor={imageBorderHoverColor}
+												setGlobalColor={(value) => setAttributes({ imageBorderHoverColor: value })}
+											/>
+										)}
+
 										<FB_Spacing
 										label={__("Border Width", "frontis-blocks")}
 										deviceType={deviceType}
@@ -2266,69 +2268,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={globalBorderColorSwitcher}
-														globalColor={globalBorderColor}
-														globalHoverColor={globalBorderHoverColor}
-														handleColorSwitcherChange={
-															handleGlobalBorderColorSwitcherChange
-														}
-														handleGlobalColorChange={
-															handleGlobalBorderColorChange
-														}
-														handleGlobalHoverColorChange={
-															handleGlobalBorderHoverColorChange
-														}
+														globalSwitcher={globalBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
 													/>
 
+													{globalBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={globalBorderColor}
+															setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
+														/>
+													)}
+
+													{globalBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={globalBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+														/>
+													)}
+
 													<FB_Spacing
-														label={__("Border", "frontis-blocks")}
+														label={__("Border Width", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
 														spacingUnits={globalBorderUnits}
 														spacingDesktop={globalBorderDesktop}
 														spacingTablet={globalBorderTablet}
 														spacingMobile={globalBorderMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderUnitChange
-														}
+														handleSpacingUnitHandler={ handleGlobalBorderUnitChange }
 														spacingCombineBtn={globalBorderLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderCombineBtn
-														}
+														spacingCombineBtnHandler={ handleGlobalBorderCombineBtn }
 														setAttributes={setAttributes}
 													/>
 
 													<FB_Spacing
 														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
-														spacingUnitsHandler={
-															handleGlobalBorderRadiusUnitsHandler
-														}
+														spacingUnitsHandler={ handleGlobalBorderRadiusUnitsHandler }
 														spacingUnits={globalBorderRadiusUnits}
 														spacingDesktop={globalBorderRadiusDesktop}
 														spacingTablet={globalBorderRadiusTablet}
 														spacingMobile={globalBorderRadiusMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderRadiusUnitChange
-														}
+														handleSpacingUnitHandler={ handleGlobalBorderRadiusUnitChange }
 														spacingCombineBtn={globalBorderRadiusLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderRadiusCombineBtn
-														}
+														spacingCombineBtnHandler={ handleGlobalBorderRadiusCombineBtn }
 														setAttributes={setAttributes}
 													/>
 													<FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ boxGlobalBoxShadowValues: value })
-														}
+														onBoxShadowChange={(value) => setAttributes({ boxGlobalBoxShadowValues: value }) }
 														initialShadowValue={boxGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																boxGlobalBoxShadowCssValue: value,
-															})
-														}
+														onBoxShadowStyleChange={(value) => setAttributes({ boxGlobalBoxShadowCssValue: value, }) }
 													/>
 												</PanelBody>
 											</div>

@@ -833,6 +833,16 @@ const attributes = {
 	btnIconHoverColor: {
 		type: "string",
 	},
+	btnTwoIconColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	btnTwoIconColor: {
+		type: "string",
+	},
+	btnTwoIconHoverColor: {
+		type: "string",
+	},
 	btnIconPosition: {
 		type: "string",
 		default: "right",
@@ -873,6 +883,38 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
+	btnTwoIconSize: {
+		type: "object",
+		default: {
+			Desktop: 16,
+			Tablet: 16,
+			Mobile: 16,
+		},
+	},
+	btnTwoIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	btnTwoIconSpacing: {
+		type: "object",
+		default: {
+			Desktop: "12",
+			Tablet: "12",
+			Mobile: "12",
+		},
+	},
+	btnTwoIconSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 	buttonsDirection: {
 		type: "string",
 		default: "vertical",
@@ -881,9 +923,15 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	dualButtonGlobalZIndex : {
-        type: "number",
-    },
+	
+	dualButtonGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
 	/** Start Padding */
 	dualButtonGlobalPaddingUnits: {
 		type: 'object',
