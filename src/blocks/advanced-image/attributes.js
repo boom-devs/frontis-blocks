@@ -961,6 +961,7 @@ const attributes = {
 	/** Overlay opacity **/
 	overlayOpacity: {
         type: 'number',
+		default: '0.2'
     },
     overlayOpacityUnits: {
         type: 'object',
