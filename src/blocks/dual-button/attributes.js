@@ -881,9 +881,15 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	dualButtonGlobalZIndex : {
-        type: "number",
-    },
+	
+	dualButtonGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
 	/** Start Padding */
 	dualButtonGlobalPaddingUnits: {
 		type: 'object',
