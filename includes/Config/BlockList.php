@@ -329,6 +329,18 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
             ],
+            'slider' => [
+                'slug'      => 'slider',
+                'title'     => 'Slider',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/slider.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+            ],
             // pro inactive block
             // 'pro-test' => [
             //     'slug'      => 'pro-test',
