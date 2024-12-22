@@ -99,17 +99,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		HeadingBorder,
 		HeadingBorderColor,
 		HeadingBorderHoverColor,
-		HeadingBorderColorSwitcher,
-		HeadingBorderUnits,
-		HeadingDesktopBorderWidth,
-		HeadingTabBorderWidth,
-		HeadingMobileBorderWidth,
-		HeadingBorderLink,
-		HeadingBorderRadiusUnits,
-		HeadingDesktopBorderRadiusWidth,
-		HeadingTabBorderRadiusWidth,
-		HeadingMobileBorderRadiusWidth,
-		HeadingBorderRadiusLink,
 		HeadingPaddingUnits,
 		HeadingDesktopPadding,
 		HeadingTabPadding,
@@ -1364,7 +1353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingDesktopMargin,
 			headingTabletMargin,
 			headingMobileMargin,
-			
+			globalZIndex
 		],
 	);
 
