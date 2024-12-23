@@ -198,6 +198,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconSizeUnits,
 		btnIconSpacing,
 		btnIconSpacingUnits,
+		btnTwoIconSpacing,
+		btnTwoIconSpacingUnits,
 		btnIconPosition,
 		btnTwoIconPosition,
 		buttonsGap,
@@ -1790,7 +1792,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${iconTwoBorderHoverColor !== undefined ? `border-color: ${iconTwoBorderHoverColor};` : "" }
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
-
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			height: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
@@ -1963,6 +1964,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnTwoIconBgHoverColor,
 			iconTwoBorderColor,
 			iconTwoBorderHoverColor,
+			btnTwoIconSize,
+			btnTwoIconSizeUnits,
 
 			connectorBgColor,
 			connectorBgHoverColor,
@@ -1998,6 +2001,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnIconSpacingUnits,
 			buttonsGap,
 			buttonsGapUnits,
+			btnTwoIconSpacing,
+			btnTwoIconSpacingUnits
 		],
 	);
 
