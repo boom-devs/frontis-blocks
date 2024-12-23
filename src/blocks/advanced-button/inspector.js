@@ -1717,6 +1717,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         rangeStep={1}
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
+
                                                     />
 												</PanelBody>
 
