@@ -322,7 +322,7 @@ const attributes = {
 	},
 	connectorText: {
 		type: "string",
-		default: "Or",
+		default: "OR",
 	},
 	connectorFontFamily: {
 		type: "string",
