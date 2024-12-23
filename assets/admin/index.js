@@ -133,6 +133,7 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
+<<<<<<< HEAD
 }
 // {
 // 	id: 'custom_icons',
@@ -151,6 +152,23 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
 //     });
 // }
 
+=======
+}, {
+  id: 'custom_icons',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Custom icons", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.CustomIcons, null)
+}]);
+//Add pricing tab if not pro
+if (window.frontisBlocksAdmin.isProActive === 'false') {
+  TabMenus.push({
+    id: 'pricing',
+    icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.PricingIcon, null),
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Pricing", "frontis-blocks"),
+    comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Pricing, null)
+  });
+}
+>>>>>>> 4781b216459a417a4675c951a1740395bf234202
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
