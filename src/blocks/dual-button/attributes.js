@@ -1135,6 +1135,14 @@ const attributes = {
 		type: "string",
 		default: "vertical",
 	},
+	dualButtonGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
 	/** Start Padding */
 	dualButtonGlobalPaddingUnits: {
 		type: 'object',
