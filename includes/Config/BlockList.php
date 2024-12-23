@@ -171,7 +171,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/countdown.svg',
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
-                'complete'  => 'false',
+                'complete'  => 'true',
             ],
             'flip-box' => [
                 'slug'      => 'flip-box',
