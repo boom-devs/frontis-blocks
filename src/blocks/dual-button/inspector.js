@@ -128,12 +128,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconColorSwitcher,
 		btnIconColor,
 		btnIconHoverColor,
+		btnIconBgColorSwitcher,
+		btnIconBgColor,
+		btnIconBgHoverColor,
 
 		btnTwoIconColorSwitcher,
 		btnTwoIconColor,
 		btnTwoIconHoverColor,
 		btnTwoIconSize,
 		btnTwoIconSizeUnits,
+		btnIconTwoBgColorSwitcher,
+		btnTwoIconBgColor,
+		btnTwoIconBgHoverColor,
+
+		iconBorder,
+		iconBorderColorSwitcher,
+		iconBorderColor,
+		iconBorderHoverColor,
+		iconBorderUnits,
+		iconBorderDesktop,
+		iconBorderTablet,
+		iconBorderMobile,
+		iconBorderLink,
+		iconBorderRadiusUnits,
+		iconBorderRadiusDesktop,
+		iconBorderRadiusTablet,
+		iconBorderRadiusMobile,
+		iconBorderRadiusLink,
+
+		iconTwoBorder,
+		iconTwoBorderColorSwitcher,
+		iconTwoBorderColor,
+		iconTwoBorderHoverColor,
+		iconTwoBorderUnits,
+		iconTwoBorderDesktop,
+		iconTwoBorderTablet,
+		iconTwoBorderMobile,
+		iconTwoBorderLink,
+		iconTwoBorderRadiusUnits,
+		iconTwoBorderRadiusDesktop,
+		iconTwoBorderRadiusTablet,
+		iconTwoBorderRadiusMobile,
+		iconTwoBorderRadiusLink,
 		
 		connectorSwitcher,
 		connectorText,
@@ -915,6 +951,353 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const connectorDesktopBorderRadius = `${connectorBorderRadiusDesktop.top}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.top}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.bottom}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.bottom}${connectorBorderRadiusUnits.Desktop}`;
 	const connectorTabletBorderRadius = `${connectorBorderRadiusTablet.top}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.top}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.bottom}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.bottom}${connectorBorderRadiusUnits.Tablet}`;
 	const connectorMobileBorderRadius = `${connectorBorderRadiusMobile.top}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.top}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.bottom}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.bottom}${connectorBorderRadiusUnits.Mobile}`;	
+	
+	/** Start Icon border */
+	const iconBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (iconBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconBorderDesktop: {
+							...iconBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconBorderTablet: {
+							...iconBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconBorderMobile: {
+							...iconBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const iconBorderCombineBtn = () => {
+		setAttributes({ iconBorderLink: !iconBorderLink });
+	};
+
+	const iconBorderUnitsHandler = (unit) => {
+		setAttributes({
+			iconBorderUnits: {
+				...iconBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const iconDesktopBorderWidth = `${iconBorderDesktop.top}${iconBorderUnits.Desktop} ${iconBorderDesktop.right}${iconBorderUnits.Desktop} ${iconBorderDesktop.bottom}${iconBorderUnits.Desktop} ${iconBorderDesktop.left}${iconBorderUnits.Desktop}`;
+	const iconTabletBorderWidth = `${iconBorderTablet.top}${iconBorderUnits.Tablet} ${iconBorderTablet.right}${iconBorderUnits.Tablet} ${iconBorderTablet.bottom}${iconBorderUnits.Tablet} ${iconBorderTablet.left}${iconBorderUnits.Tablet}`;
+	const iconMobileBorderWidth = `${iconBorderMobile.top}${iconBorderUnits.Mobile} ${iconBorderMobile.right}${iconBorderUnits.Mobile} ${iconBorderMobile.bottom}${iconBorderUnits.Mobile} ${iconBorderMobile.left}${iconBorderUnits.Mobile}`;
+
+	/** Icon Border Radius **/
+	const iconBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (iconBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconBorderRadiusDesktop: {
+							...iconBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconBorderRadiusTablet: {
+							...iconBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconBorderRadiusMobile: {
+							...iconBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const iconBorderRadiusCombineBtn = () => {
+		setAttributes({ iconBorderRadiusLink: !iconBorderRadiusLink });
+	};
+
+	const iconBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			iconBorderRadiusUnits: {
+				...iconBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const iconDesktopBorderRadius = `${iconBorderRadiusDesktop.top}${iconBorderRadiusUnits.Desktop} ${iconBorderRadiusDesktop.top}${iconBorderRadiusUnits.Desktop} ${iconBorderRadiusDesktop.bottom}${iconBorderRadiusUnits.Desktop} ${iconBorderRadiusDesktop.bottom}${iconBorderRadiusUnits.Desktop}`;
+	const iconTabletBorderRadius = `${iconBorderRadiusTablet.top}${iconBorderRadiusUnits.Tablet} ${iconBorderRadiusTablet.top}${iconBorderRadiusUnits.Tablet} ${iconBorderRadiusTablet.bottom}${iconBorderRadiusUnits.Tablet} ${iconBorderRadiusTablet.bottom}${iconBorderRadiusUnits.Tablet}`;
+	const iconMobileBorderRadius = `${iconBorderRadiusMobile.top}${iconBorderRadiusUnits.Mobile} ${iconBorderRadiusMobile.top}${iconBorderRadiusUnits.Mobile} ${iconBorderRadiusMobile.bottom}${iconBorderRadiusUnits.Mobile} ${iconBorderRadiusMobile.bottom}${iconBorderRadiusUnits.Mobile}`;
+
+	/** Start Icon Two border */
+	const iconTwoBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (iconTwoBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconTwoBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconTwoBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconTwoBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconTwoBorderDesktop: {
+							...iconTwoBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconTwoBorderTablet: {
+							...iconTwoBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconTwoBorderMobile: {
+							...iconTwoBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const iconTwoBorderCombineBtn = () => {
+		setAttributes({ iconTwoBorderLink: !iconTwoBorderLink });
+	};
+
+	const iconTwoBorderUnitsHandler = (unit) => {
+		setAttributes({
+			iconTwoBorderUnits: {
+				...iconTwoBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const iconTwoDesktopBorderWidth = `${iconTwoBorderDesktop.top}${iconTwoBorderUnits.Desktop} ${iconTwoBorderDesktop.right}${iconTwoBorderUnits.Desktop} ${iconTwoBorderDesktop.bottom}${iconTwoBorderUnits.Desktop} ${iconTwoBorderDesktop.left}${iconTwoBorderUnits.Desktop}`;
+	const iconTwoTabletBorderWidth = `${iconTwoBorderTablet.top}${iconTwoBorderUnits.Tablet} ${iconTwoBorderTablet.right}${iconTwoBorderUnits.Tablet} ${iconTwoBorderTablet.bottom}${iconTwoBorderUnits.Tablet} ${iconTwoBorderTablet.left}${iconTwoBorderUnits.Tablet}`;
+	const iconTwoMobileBorderWidth = `${iconTwoBorderMobile.top}${iconTwoBorderUnits.Mobile} ${iconTwoBorderMobile.right}${iconTwoBorderUnits.Mobile} ${iconTwoBorderMobile.bottom}${iconTwoBorderUnits.Mobile} ${iconTwoBorderMobile.left}${iconTwoBorderUnits.Mobile}`;
+
+	/** Icon Two Border Radius **/
+	const iconTwoBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (iconTwoBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconTwoBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconTwoBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconTwoBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						iconTwoBorderRadiusDesktop: {
+							...iconTwoBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						iconTwoBorderRadiusTablet: {
+							...iconTwoBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						iconTwoBorderRadiusMobile: {
+							...iconTwoBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const iconTwoBorderRadiusCombineBtn = () => {
+		setAttributes({ iconTwoBorderRadiusLink: !iconTwoBorderRadiusLink });
+	};
+
+	const iconTwoBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			iconTwoBorderRadiusUnits: {
+				...iconTwoBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const iconTwoDesktopBorderRadius = `${iconTwoBorderRadiusDesktop.top}${iconTwoBorderRadiusUnits.Desktop} ${iconTwoBorderRadiusDesktop.top}${iconTwoBorderRadiusUnits.Desktop} ${iconTwoBorderRadiusDesktop.bottom}${iconTwoBorderRadiusUnits.Desktop} ${iconTwoBorderRadiusDesktop.bottom}${iconTwoBorderRadiusUnits.Desktop}`;
+	const iconTwoTabletBorderRadius = `${iconTwoBorderRadiusTablet.top}${iconTwoBorderRadiusUnits.Tablet} ${iconTwoBorderRadiusTablet.top}${iconTwoBorderRadiusUnits.Tablet} ${iconTwoBorderRadiusTablet.bottom}${iconTwoBorderRadiusUnits.Tablet} ${iconTwoBorderRadiusTablet.bottom}${iconTwoBorderRadiusUnits.Tablet}`;
+	const iconTwoMobileBorderRadius = `${iconTwoBorderRadiusMobile.top}${iconTwoBorderRadiusUnits.Mobile} ${iconTwoBorderRadiusMobile.top}${iconTwoBorderRadiusUnits.Mobile} ${iconTwoBorderRadiusMobile.bottom}${iconTwoBorderRadiusUnits.Mobile} ${iconTwoBorderRadiusMobile.bottom}${iconTwoBorderRadiusUnits.Mobile}`;
+
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -1361,37 +1744,60 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		
     	.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-        ${connectorColor !== undefined ? `color: ${connectorColor};` : ""}
-        ${connectorBgColor !== undefined ? `background-color: ${connectorBgColor};` : "" }
-        font-family: ${ connectorFontFamily !== "default" ? connectorFontFamily : connectorFontFamily };
-		${connectorFontSize.Desktop && connectorFontSizeUnits.Desktop ? `font-size: ${connectorFontSize.Desktop}${connectorFontSizeUnits.Desktop};` : ''}
-		${connectorLetterSpacing.Desktop && connectorLetterSpacingUnits.Desktop ? `letter-spacing: ${connectorLetterSpacing.Desktop}${connectorLetterSpacingUnits.Desktop};` : ''}
-		${connectorSize.Desktop && connectorSizeUnits.Desktop ? `line-height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
-        font-weight: ${connectorFontWeight};
-        font-style: ${connectorFontStyle};
-        text-transform: ${connectorTextTransform};
-        text-decoration: ${connectorTextDecoration};
-		border: ${connectorBorder};
-		border-color: ${connectorBorderColor};
-        border-width: ${connectorDesktopBorderWidth};
-        border-radius: ${connectorDesktopBorderRadius};
-        width: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
-        height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
-		transition: all .3s ease-in-out;
+			${connectorColor !== undefined ? `color: ${connectorColor};` : ""}
+			${connectorBgColor !== undefined ? `background-color: ${connectorBgColor};` : "" }
+			font-family: ${ connectorFontFamily !== "default" ? connectorFontFamily : connectorFontFamily };
+			${connectorFontSize.Desktop && connectorFontSizeUnits.Desktop ? `font-size: ${connectorFontSize.Desktop}${connectorFontSizeUnits.Desktop};` : ''}
+			${connectorLetterSpacing.Desktop && connectorLetterSpacingUnits.Desktop ? `letter-spacing: ${connectorLetterSpacing.Desktop}${connectorLetterSpacingUnits.Desktop};` : ''}
+			${connectorSize.Desktop && connectorSizeUnits.Desktop ? `line-height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
+			font-weight: ${connectorFontWeight};
+			font-style: ${connectorFontStyle};
+			text-transform: ${connectorTextTransform};
+			text-decoration: ${connectorTextDecoration};
+			border: ${connectorBorder};
+			border-color: ${connectorBorderColor};
+			border-width: ${connectorDesktopBorderWidth};
+			border-radius: ${connectorDesktopBorderRadius};
+			width: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
+			height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};
+			transition: all .3s ease-in-out;
     	}
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector:hover .fb-dual-button-connector-text {
 			${connectorHoverColor !== undefined ? `color: ${connectorHoverColor};` : "" }
 			${connectorBgHoverColor !== undefined ? `background-color: ${connectorBgHoverColor};` : "" }
 			${connectorBorderHoverColor !== undefined ? `border-color: ${connectorBorderHoverColor};` : "" }
 		}
-		
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
+			${btnIconBgColor !== undefined ? `background: ${btnIconBgColor};` : ""}
+			${iconBorder ? `border: ${iconBorder};` : "" } 
+			${iconBorderColor !== undefined ? `border-color: ${iconBorderColor};` : "" }
+            ${iconDesktopBorderWidth ? `border-width: ${iconDesktopBorderWidth};` : "" }
+            ${iconDesktopBorderRadius ? `border-radius: ${iconDesktopBorderRadius};` : "" }
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper:hover .fb-advanced-button-icon-wrapper{
+			${btnIconBgHoverColor !== undefined ? `background: ${btnIconBgHoverColor};` : ""}
+			${iconBorderHoverColor !== undefined ? `border-color: ${iconBorderHoverColor};` : "" }
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
+			${btnTwoIconBgColor !== undefined ? `background: ${btnTwoIconBgColor};` : ""}
+			${iconTwoBorder ? `border: ${iconTwoBorder};` : "" } 
+			${iconTwoBorderColor !== undefined ? `border-color: ${iconTwoBorderColor};` : "" }
+            ${iconTwoDesktopBorderWidth ? `border-width: ${iconTwoDesktopBorderWidth};` : "" }
+            ${iconTwoDesktopBorderRadius ? `border-radius: ${iconTwoDesktopBorderRadius};` : "" }
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper:hover .fb-advanced-button-icon-wrapper{
+			${btnTwoIconBgHoverColor !== undefined ? `background: ${btnTwoIconBgHoverColor};` : ""}
+			${iconTwoBorderHoverColor !== undefined ? `border-color: ${iconTwoBorderHoverColor};` : "" }
+		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
+			height: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : ""}
 			width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
+			height: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg{
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : ""}
@@ -1402,10 +1808,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		@media only screen and (max-width: 1024px) {
 		.fb-dual-button-container.${blockID} {
-		${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
-		${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""} 
-		${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : "" }
-		${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : "" }
+			${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
+			${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""} 
+			${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : "" }
+			${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : "" }
 		}
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
 			${ButtonWidth.Tablet && ButtonWidthWidthUnits.Tablet ? `width: ${ButtonWidth.Tablet}${ButtonWidthWidthUnits.Tablet};` : ''}
@@ -1434,7 +1840,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-radius: ${connectorTabletBorderRadius};
         }
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-		width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+			width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
+            ${iconTabletBorderWidth ? `border-width: ${iconTabletBorderWidth};` : "" }
+            ${iconTabletBorderRadius ? `border-radius: ${iconTabletBorderRadius};` : "" }
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
+            ${iconTwoTabletBorderWidth ? `border-width: ${iconTwoTabletBorderWidth};` : "" }
+            ${iconTwoTabletBorderRadius ? `border-radius: ${iconTwoTabletBorderRadius};` : "" }
 		}
 		}
 		@media only screen and (max-width: 767px) {
@@ -1470,6 +1884,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-width: ${connectorMobileBorderWidth};
 			border-radius: ${connectorMobileBorderRadius};
         }
+		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
+            ${iconMobileBorderWidth ? `border-width: ${iconMobileBorderWidth};` : "" }
+            ${iconMobileBorderRadius ? `border-radius: ${iconMobileBorderRadius};` : "" }
+		}
+		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
+            ${iconTwoMobileBorderWidth ? `border-width: ${iconTwoMobileBorderWidth};` : "" }
+            ${iconTwoMobileBorderRadius ? `border-radius: ${iconTwoMobileBorderRadius};` : "" }
+		}
 		
 	}
 	`,
@@ -1526,6 +1948,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			ButtonMobileBorderRadiusWidth,
 			ButtonTwoColor,
 			ButtonTwoHoverColor,
+			iconDesktopBorderWidth,
+			iconTabletBorderWidth,
+			iconMobileBorderWidth,
+			iconDesktopBorderRadius,
+			iconTabletBorderRadius,
+			iconMobileBorderRadius,
+			iconTwoDesktopBorderWidth,
+			iconTwoTabletBorderWidth,
+			iconTwoMobileBorderWidth,
+			iconTwoDesktopBorderRadius,
+			iconTwoTabletBorderRadius,
+			iconTwoMobileBorderRadius,
+			btnTwoIconBgColor,
+			btnTwoIconBgHoverColor,
+			iconTwoBorderColor,
+			iconTwoBorderHoverColor,
+
 			connectorBgColor,
 			connectorBgHoverColor,
 			connectorColor,
@@ -1552,6 +1991,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			connectorMobileBorderRadius,
 			connectorSize,
 			btnIconColor,
+			btnIconBgColor,
 			btnIconSize,
 			btnIconSizeUnits,
 			btnIconHoverColor,
@@ -2361,7 +2801,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 										)}
 										
-										{/*	Icon Style One */}
+										{/*	Icon One Style */}
 										{(buttonIconAlign === 'icon-text' || 
 										buttonIconAlign === 'icon-only') && (
 										<PanelBody
@@ -2394,7 +2834,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
-
+											{/** Icon Color **/}
 											<FB_SwitcherControl
                                                 label={__("Icon Color", "frontis-blocks")}
                                                 globalSwitcher={btnIconColorSwitcher}
@@ -2416,8 +2856,88 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
                                                 />
                                             )}
+											{/** Icon Background Color **/}
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={btnIconBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ btnIconBgColorSwitcher: value })}
+                                            />
 
-											
+                                            {btnIconBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={btnIconBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ btnIconBgColor: value })}
+                                                />
+                                            )}
+
+                                            {btnIconBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={btnIconBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ btnIconBgHoverColor: value })}
+                                                />
+                                            )}
+
+											{/** Border **/}
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={iconBorder}
+												options={BORDER_STYLES}
+												onChange={(value) =>
+													setAttributes({ iconBorder: value })
+												}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={iconBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ iconBorderColorSwitcher: value })}
+											/>
+
+											{iconBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={iconBorderColor}
+													setGlobalColor={(value) => setAttributes({ iconBorderColor: value })}
+												/>
+											)}
+
+											{iconBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={iconBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ iconBorderHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing
+												label={__("Border Width", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={iconBorderUnitsHandler}
+												spacingUnits={iconBorderUnits}
+												spacingDesktop={iconBorderDesktop}
+												spacingTablet={iconBorderTablet}
+												spacingMobile={iconBorderMobile}
+												handleSpacingUnitHandler={iconBorderUnitChange}
+												spacingCombineBtn={iconBorderLink}
+												spacingCombineBtnHandler={iconBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={iconBorderRadiusUnitsHandler}
+												spacingUnits={iconBorderRadiusUnits}
+												spacingDesktop={iconBorderRadiusDesktop}
+												spacingTablet={iconBorderRadiusTablet}
+												spacingMobile={iconBorderRadiusMobile}
+												handleSpacingUnitHandler={iconBorderRadiusUnitChange}
+												spacingCombineBtn={iconBorderRadiusLink}
+												spacingCombineBtnHandler={iconBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
 										</PanelBody>
 										)}
 
@@ -2441,7 +2961,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
-
 											<FB_Range
 												min={1}
 												max={100}
@@ -2477,7 +2996,89 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
 												/>
 											)}
+											{/** Icon Two Background Color **/}
+											<FB_SwitcherControl
+												label={__("Background Color", "frontis-blocks")}
+												globalSwitcher={btnIconTwoBgColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ btnIconTwoBgColorSwitcher: value })}
+											/>
 
+											{btnIconTwoBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={btnTwoIconBgColor}
+													setGlobalColor={(value) => setAttributes({ btnTwoIconBgColor: value })}
+												/>
+											)}
+
+											{btnIconTwoBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={btnTwoIconBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ btnTwoIconBgHoverColor: value })}
+												/>
+											)}
+
+											{/** Border **/}
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={iconTwoBorder}
+												options={BORDER_STYLES}
+												onChange={(value) =>
+													setAttributes({ iconTwoBorder: value })
+												}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={iconTwoBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ iconTwoBorderColorSwitcher: value })}
+											/>
+
+											{iconTwoBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={iconTwoBorderColor}
+													setGlobalColor={(value) => setAttributes({ iconTwoBorderColor: value })}
+												/>
+											)}
+
+											{iconTwoBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={iconTwoBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ iconTwoBorderHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing
+												label={__("Border Width", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={iconTwoBorderUnitsHandler}
+												spacingUnits={iconTwoBorderUnits}
+												spacingDesktop={iconTwoBorderDesktop}
+												spacingTablet={iconTwoBorderTablet}
+												spacingMobile={iconTwoBorderMobile}
+												handleSpacingUnitHandler={iconTwoBorderUnitChange}
+												spacingCombineBtn={iconTwoBorderLink}
+												spacingCombineBtnHandler={iconTwoBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={iconTwoBorderRadiusUnitsHandler}
+												spacingUnits={iconTwoBorderRadiusUnits}
+												spacingDesktop={iconTwoBorderRadiusDesktop}
+												spacingTablet={iconTwoBorderRadiusTablet}
+												spacingMobile={iconTwoBorderRadiusMobile}
+												handleSpacingUnitHandler={iconTwoBorderRadiusUnitChange}
+												spacingCombineBtn={iconTwoBorderRadiusLink}
+												spacingCombineBtnHandler={iconTwoBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											
 										</PanelBody>
 										)}
 									</>
