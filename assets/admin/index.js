@@ -20,7 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components */ "./admin/components/index.js");
 /* harmony import */ var _TabMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TabMenu */ "./admin/TabMenu.js");
-/* harmony import */ var _TabMenu__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_TabMenu__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icons */ "./admin/icons/index.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -71,7 +70,7 @@ var App = function App() {
     activeClass: "active-tab",
     onSelect: handleTabChange,
     initialTabName: currentTab,
-    tabs: _TabMenu__WEBPACK_IMPORTED_MODULE_5___default().map(function (tab) {
+    tabs: _TabMenu__WEBPACK_IMPORTED_MODULE_5__["default"].map(function (tab) {
       return {
         name: tab.id,
         title: tab.label,
@@ -84,7 +83,7 @@ var App = function App() {
     // const activeTabData = TabMenus.find(t => t.id === tab.name);
     return /*#__PURE__*/React.createElement("div", {
       className: "frontis-blocks-tab-content"
-    }, (_TabMenus$find = _TabMenu__WEBPACK_IMPORTED_MODULE_5___default().find(function (tab) {
+    }, (_TabMenus$find = _TabMenu__WEBPACK_IMPORTED_MODULE_5__["default"].find(function (tab) {
       return tab.id === activeTab;
     })) === null || _TabMenus$find === void 0 ? void 0 : _TabMenus$find.comp);
   })), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_2__.ToastContainer, null));
@@ -97,9 +96,62 @@ var App = function App() {
 /*!**************************!*\
   !*** ./admin/TabMenu.js ***!
   \**************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/@wordpress/scripts/node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\admin\\TabMenu.js: Unexpected token (45:1)\n\n\u001b[0m \u001b[90m 43 |\u001b[39m         comp\u001b[33m:\u001b[39m \u001b[33m<\u001b[39m\u001b[33mIntegration\u001b[39m \u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 44 |\u001b[39m     }\u001b[33m,\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 45 |\u001b[39m \u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    |\u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 46 |\u001b[39m \t\u001b[90m// {\u001b[39m\n \u001b[90m 47 |\u001b[39m \t\u001b[90m// \tid: 'custom_icons',\u001b[39m\n \u001b[90m 48 |\u001b[39m \t\u001b[90m// \ticon: <IntegrationsIcon />,\u001b[39m\u001b[0m\n    at constructor (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:359:19)\n    at JSXParserMixin.raise (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3266:19)\n    at JSXParserMixin.unexpected (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:3286:16)\n    at JSXParserMixin.jsxParseIdentifier (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6623:12)\n    at JSXParserMixin.jsxParseNamespacedName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6630:23)\n    at JSXParserMixin.jsxParseElementName (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6639:21)\n    at JSXParserMixin.jsxParseOpeningElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6715:22)\n    at JSXParserMixin.jsxParseElementAt (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6740:33)\n    at JSXParserMixin.jsxParseElement (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6803:17)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6813:19)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11951:12)\n    at JSXParserMixin.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)\n    at JSXParserMixin.parseExprListItem (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11709:18)\n    at JSXParserMixin.parseExprList (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11684:22)\n    at JSXParserMixin.parseArrayLike (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11591:26)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10872:23)\n    at JSXParserMixin.parseExprAtom (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:6818:20)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10615:23)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11951:12)\n    at JSXParserMixin.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)\n    at JSXParserMixin.parseExprListItem (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11709:18)\n    at JSXParserMixin.parseCallExpressionArguments (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10784:22)\n    at JSXParserMixin.parseCoverCallAndAsyncArrowHead (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10718:29)\n    at JSXParserMixin.parseSubscript (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10655:19)\n    at JSXParserMixin.parseSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10628:19)\n    at JSXParserMixin.parseExprSubscripts (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10619:17)\n    at JSXParserMixin.parseUpdate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10600:21)\n    at JSXParserMixin.parseMaybeUnary (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10580:23)\n    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10434:61)\n    at JSXParserMixin.parseExprOps (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10439:23)\n    at JSXParserMixin.parseMaybeConditional (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10416:23)\n    at JSXParserMixin.parseMaybeAssign (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10379:21)\n    at C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:39\n    at JSXParserMixin.allowInAnd (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:11946:16)\n    at JSXParserMixin.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\test\\wp-content\\plugins\\frontis-blocks\\node_modules\\@babel\\parser\\lib\\index.js:10349:17)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./admin/components/index.js");
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./icons */ "./admin/icons/index.js");
+
+
+
+
+var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('frontisblocks/admin/tabs', [{
+  id: 'general',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.HomeIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashboard", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Dashboard, null)
+}, {
+  id: 'blocks',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.BlockIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blocks", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Blocks, null)
+}, {
+  id: 'settings',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.OptionsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Settings, null)
+}, {
+  id: 'integrations',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
+}
+// {
+// 	id: 'custom_icons',
+// 	icon: <IntegrationsIcon />,
+// 	label: __("Custom icons", "frontis-blocks"),
+// 	comp: <CustomIcons />
+// }
+]);
+// Add pricing tab if not pro
+// if (window.frontisBlocksAdmin.isProActive === 'false') {
+//     TabMenus.push({
+//       id: 'pricing',
+//       icon: <PricingIcon />,
+//       label: __("Pricing", "frontis-blocks"),
+//       comp: <Pricing />
+//     });
+// }
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
 
@@ -4252,6 +4304,17 @@ module.exports = window["wp"]["editor"];
 
 "use strict";
 module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/hooks":
+/*!*******************************!*\
+  !*** external ["wp","hooks"] ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["hooks"];
 
 /***/ }),
 

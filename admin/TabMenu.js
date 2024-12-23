@@ -42,7 +42,6 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
         label: __("Integrations", "frontis-blocks"),
         comp: <Integration />
     },
-<<<<<<< HEAD
 	// {
 	// 	id: 'custom_icons',
 	// 	icon: <IntegrationsIcon />,
@@ -60,22 +59,4 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
 //     });
 // }
 
-=======
-	{
-		id: 'custom_icons',
-		icon: <IntegrationsIcon />,
-		label: __("Custom icons", "frontis-blocks"),
-		comp: <CustomIcons />
-	}
-]);
-//Add pricing tab if not pro
-if (window.frontisBlocksAdmin.isProActive === 'false') {
-    TabMenus.push({
-      id: 'pricing',
-      icon: <PricingIcon />,
-      label: __("Pricing", "frontis-blocks"),
-      comp: <Pricing />
-    });
-}
->>>>>>> 4781b216459a417a4675c951a1740395bf234202
 export default TabMenus;
