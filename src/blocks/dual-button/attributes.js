@@ -836,6 +836,7 @@ const attributes = {
 	btnIconHoverColor: {
 		type: "string",
 	},
+
 	btnIconBgColorSwitcher: {
 		type: "string",
 		default: "normal",

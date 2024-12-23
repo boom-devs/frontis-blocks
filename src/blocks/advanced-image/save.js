@@ -13,13 +13,37 @@ export default function save({ attributes }) {
 		displayCaption,
 		imageStyle,
 		imageSize,
+		mediaSize,
+		mediaHeight,
+		mediaSizeUnits,
+		mediaHeightUnits,
+		captionAlignment,
 		imageHover,
+		autoHeightSwitch,
 		imageFit,
 		titleText,
 		titleTag,
 		displayTitle,
 		titlePosition,
-		showOverlay
+		HeadingColor,
+		HeadingBackgroundColor,
+		HeadingFontFamily,
+		HeadingFontSize,
+		HeadingFontSizeUnits,
+		HeadingFontWeight,
+		HeadingFontStyle,
+		HeadingTextTransform,
+		HeadingTextDecoration,
+		HeadingLetterSpacing,
+		HeadingLetterSpacingUnits,
+		HeadingLineHeight,
+		HeadingLineHeightUnits,
+		padding,
+		margin,
+		HeadingBorder,
+		borderWidth,
+		borderRadiusWidth,
+		HeadingBorderColor,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -28,50 +52,46 @@ export default function save({ attributes }) {
 		<>
 			
 			<div {...blockProps} id={blockID}>
-			<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`}>
-				<div
-				className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition} ${
-					showOverlay ? "overlay-simple" : ""
-				}`}
-				>
-				<div className="fb-advanced-image-inner">
-					{imageUrl ? (
-					linkSwitch ? (
-						<a
-						href={linkUrl}
-						target={linkTargetUrl ? "_blank" : undefined}
-						rel={linkTargetUrl ? "noopener noreferrer" : undefined}
-						>
-						<img src={imageUrl} alt={imageAlt} />
-						</a>
-					) : (
-						<img src={imageUrl} alt={imageAlt} />
-					)
-					) : null}
-				</div>
-				{displayTitle && titleText && (
-					<div className="fb-advanced-image-title">
-					<div className="fb-advanced-image-title-inner">
-						<RichText.Content
-						tagName={titleTag}
-						value={titleText}
-						className="fb-advanced-title"
-						/>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`}>
+					<div
+						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
+						<div className="fb-advanced-image-inner">
+							{imageUrl ? (
+								linkSwitch ? (
+									<a
+										href={linkUrl}
+										target={linkTargetUrl ? '_blank' : undefined}
+										rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
+									>
+										<img src={imageUrl} alt={imageAlt}/>
+									</a>
+								) : (
+									<img src={imageUrl} alt={imageAlt}/>
+								)
+							) : null}
+						</div>
+						{displayTitle && titleText && (
+							<div className="fb-advanced-image-title">
+								<div className="fb-advanced-image-title-inner">
+								<RichText.Content
+									tagName={titleTag}
+									value={titleText}
+									className="fb-advanced-title"
+								/>
+								</div>
+							</div>
+						)}
+						{displayCaption && imageCaption && (
+							<div className="fb-advanced-image-caption">
+								<RichText.Content
+									tagName="figcaption"
+									value={imageCaption}
+								/>
+							</div>
+						)}
 					</div>
-					</div>
-				)}
-				{displayCaption && imageCaption && (
-					<div className="fb-advanced-image-caption">
-					<RichText.Content
-						tagName="figcaption"
-						value={imageCaption}
-					/>
-					</div>
-				)}
 				</div>
 			</div>
-			</div>
-
 		</>
 	);
 }

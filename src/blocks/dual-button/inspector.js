@@ -11,9 +11,12 @@ import {
 	ButtonGroup,
 	ToggleControl,
 	TextControl,
+	TextareaControl,
 	Dropdown,
 	Dashicon,
 	RangeControl,
+	ColorPicker,
+	ColorPalette,
 } from "@wordpress/components";
 
 /**
@@ -170,7 +173,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		iconTwoBorderRadiusTablet,
 		iconTwoBorderRadiusMobile,
 		iconTwoBorderRadiusLink,
-		
 		connectorSwitcher,
 		connectorText,
 		connectorFontFamily,
@@ -246,8 +248,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualButtonGlobalBorderRadiusLink,
 		dualButtonGlobalBoxShadowValues,
 		dualButtonGlobalBoxShadowCssValue,
-		btnTwoIconSpacing,
-		btnTwoIconSpacingUnits
 	} = attributes;
 
 	useEffect(() => {
@@ -873,30 +873,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				case "Desktop":
 					setAttributes({
 						connectorBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
+							topLeft: value,
+							topRight: value,
+							bottomRight: value,
+							bottomLeft: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
 						connectorBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
+							topLeft: value,
+							topRight: value,
+							bottomRight: value,
+							bottomLeft: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
 						connectorBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value,
+							topLeft: value,
+							topRight: value,
+							bottomRight: value,
+							bottomLeft: value,
 						},
 					});
 					break;
@@ -1671,8 +1671,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const dualButtonStyle = useMemo(
 		() => `
 		.fb-dual-button-container.${blockID} {
-            ${dualButtonGlobalZIndex.Desktop !== undefined ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : "" }
-            ${dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
+            ${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex};` : "" }
+            ${ dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""} 
             ${dualButtonGlobalBorder ? `border: ${dualButtonGlobalBorder};` : "" } 
@@ -1700,7 +1700,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			margin: ${buttonDesktopMargin};
 			z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
 			${ButtonWidth.Desktop && ButtonWidthWidthUnits.Desktop ? `width: ${ButtonWidth.Desktop}${ButtonWidthWidthUnits.Desktop};` : ''}
-			
+			gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-wrapper {
 			gap: ${buttonsGap.Desktop}${buttonsGapUnits.Desktop};
@@ -1711,7 +1711,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ButtonBorderColor !== undefined ? `border-color: ${ButtonBorderColor};` : ""}
 			${buttonOneBorderDesktopWidth ? `border-width: ${buttonOneBorderDesktopWidth};` : ''}
 			${buttonOneBorderRadiusDesktopWidth ? `border-radius: ${buttonOneBorderRadiusDesktopWidth};` : ''}
-			gap: ${btnIconSpacing.Desktop}${btnIconSpacingUnits.Desktop};
+			
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover {
 			${ButtonBgHoverColor !== undefined ? `background-color: ${ButtonBgHoverColor};` : "" }
@@ -1723,7 +1723,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-width: ${buttonBorderDesktopWidth};
 			border-radius: ${buttonBorderRadiusDesktopWidth};
 			${ButtonTwoBorderColor !== undefined ? `border-color: ${ButtonTwoBorderColor};` : "" }
-			gap: ${btnTwoIconSpacing.Desktop}${btnTwoIconSpacingUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover {
 			${ButtonTwoBgHoverColor !== undefined ? `background-color: ${ButtonTwoBgHoverColor} !important;` : ""}
@@ -1767,6 +1766,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorBgHoverColor !== undefined ? `background-color: ${connectorBgHoverColor};` : "" }
 			${connectorBorderHoverColor !== undefined ? `border-color: ${connectorBorderHoverColor};` : "" }
 		}
+
+		
+		.fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
+
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
 			${btnIconBgColor !== undefined ? `background: ${btnIconBgColor};` : ""}
 			${iconBorder ? `border: ${iconBorder};` : "" } 
@@ -1790,10 +1793,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${iconTwoBorderHoverColor !== undefined ? `border-color: ${iconTwoBorderHoverColor};` : "" }
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
+
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			height: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 		}
+
+		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
+		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
+
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : ""}
 			width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
@@ -1802,10 +1810,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg{
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : ""}
 		}
-		
-		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
-			${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : ""}
-		}
+    
 		@media only screen and (max-width: 1024px) {
 		.fb-dual-button-container.${blockID} {
 			${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
@@ -1999,11 +2004,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnIconSpacingUnits,
 			buttonsGap,
 			buttonsGapUnits,
-			btnTwoIconColor,
-			btnTwoIconSize,
-			btnTwoIconHoverColor,
-			btnTwoIconSpacing,
-			btnTwoIconSpacingUnits
 		],
 	);
 
@@ -2316,17 +2316,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 											<FB_Range
-												min={0}
-												max={100}
-												label={__("Width", "frontis-blocks")}
-												rangeValue={ButtonWidth}
-												onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
-												deviceType={deviceType}
-												units={ButtonWidthWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
+													min={0}
+													max={100}
+													label={__("Width", "frontis-blocks")}
+													rangeValue={ButtonWidth}
+													onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
+													rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
+													deviceType={deviceType}
+													units={ButtonWidthWidthUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
 											/>
 											<SelectControl
 												label={__("Direction", "frontis-blocks")}
@@ -2373,6 +2373,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
+											
 
 											{/*	Spacing */}
 											<FB_Spacing
@@ -2513,6 +2514,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={ handleButtonOneBorderCombineBtn }
 												setAttributes={setAttributes}
 											/>
+
 											<FB_Spacing
 												label={__("Border radius", "frontis-blocks")}
 												deviceType={deviceType}
@@ -2741,6 +2743,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}
 
+											
+
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
 												value={connectorBorder}
@@ -2750,30 +2754,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 											/>
 
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={connectorBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ connectorBorderColorSwitcher: value })}
-                                            />
-
-                                            {connectorBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={connectorBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {connectorBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={connectorBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBorderHoverColor: value })}
-                                                />
-                                            )}
-
+											<FB_Color
+												label={__("Border Color", "frontis-blocks")}
+												globalColorSwitcher={connectorBorderColorSwitcher}
+												globalColor={connectorBorderColor}
+												globalHoverColor={connectorBorderHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ connectorBorderColorSwitcher: value, })}
+												handleGlobalColorChange={(value) =>setAttributes({ connectorBorderColor: value })}
+												handleGlobalHoverColorChange={(value) => setAttributes({ connectorBorderHoverColor: value, })
+												}
+											/>
 											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
+												label={__("Border", "frontis-blocks")}
 												deviceType={deviceType}
 												spacingUnitsHandler={connectorBorderUnitsHandler}
 												spacingUnits={connectorBorderUnits}
@@ -2821,6 +2813,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={50}
 											/>
+
 											<FB_Range
 												min={1}
 												max={100}
@@ -2834,6 +2827,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
+
 											{/** Icon Color **/}
 											<FB_SwitcherControl
                                                 label={__("Icon Color", "frontis-blocks")}
@@ -2977,8 +2971,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											<FB_SwitcherControl
 												label={__("Icon Color", "frontis-blocks")}
-												globalSwitcher={btnTwoIconColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
+												globalColorSwitcher={btnIconColorSwitcher}
+												globalColor={btnIconColor}
+												globalHoverColor={btnIconHoverColor}
+												handleColorSwitcherChange={(value) => setAttributes({ btnIconColorSwitcher: value }) }
+												handleGlobalColorChange={(value) => setAttributes({ btnIconColor: value }) }
+												handleGlobalHoverColorChange={(value) => setAttributes({ btnIconHoverColor: value }) }
 											/>
 
 											{btnTwoIconColorSwitcher === 'normal' && (
@@ -3078,7 +3076,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											
 										</PanelBody>
 										)}
 									</>
@@ -3092,6 +3089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
+
 													<FB_Range
                                                         min={0}
                                                         max={10000000}
@@ -3104,6 +3102,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
                                                     />
+
 
 
 												</PanelBody>
@@ -3141,28 +3140,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false}>
-													
-													<FB_SwitcherControl
-														label={__("Border Color", "frontis-blocks")}
-														globalSwitcher={dualButtonGlobalBgColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ dualButtonGlobalBgColorSwitcher: value })}
+													<FB_Color
+														label={__("Background Color", "frontis-blocks")}
+														globalColorSwitcher={ dualButtonGlobalBgColorSwitcher }
+														globalColor={dualButtonGlobalBgColor}
+														globalHoverColor={dualButtonGlobalBgHoverColor}
+														handleColorSwitcherChange={(value) => setAttributes({ dualButtonGlobalBgColorSwitcher: value, })}
+														handleGlobalColorChange={(value) => setAttributes({ dualButtonGlobalBgColor: value }) }
+														handleGlobalHoverColorChange={(value) => setAttributes({ dualButtonGlobalBgHoverColor: value, })
+														}
 													/>
-
-													{dualButtonGlobalBgColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBgColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgColor: value })}
-														/>
-													)}
-
-													{dualButtonGlobalBgColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBgHoverColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgHoverColor: value })}
-														/>
-													)}
 												</PanelBody>
 												<PanelBody
 													title={__("Border and Shadow", "frontis-blocks")}
