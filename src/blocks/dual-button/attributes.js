@@ -7,9 +7,13 @@ const attributes = {
 		type: "string",
 		default: "Desktop",
 	},
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
 	DeviceType: {
 		type: "string",
-		default: "Desktop",
+		default: "Desktop", 
 	},
 	ButtonAlignment: {
 		type: "string",
@@ -306,7 +310,7 @@ const attributes = {
 	},
 	ButtonIcon: {
 		type: "string",
-		default: "circle-check",
+		default: "angle-right",
 	},
 	ButtonZIndex: {
 		type: "number",
@@ -719,7 +723,6 @@ const attributes = {
 		default: true,
 	},
 	// Padding
-
 	ButtonTwoPaddingUnits: {
 		type: "object",
 		default: {
@@ -805,7 +808,7 @@ const attributes = {
 	},
 	ButtonTwoIcon: {
 		type: "string",
-		default: "circle-check",
+		default: "angle-right",
 	},
 	ButtonTwoZIndex: {
 		type: "number",
@@ -833,6 +836,26 @@ const attributes = {
 	btnIconHoverColor: {
 		type: "string",
 	},
+	btnIconBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	btnIconBgColor: {
+		type: "string",
+	},
+	btnIconBgHoverColor: {
+		type: "string",
+	},
+	btnIconTwoBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	btnTwoIconBgColor: {
+		type: "string",
+	},
+	btnTwoIconBgHoverColor: {
+		type: "string",
+	},
 	btnTwoIconColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -854,9 +877,9 @@ const attributes = {
 	btnIconSize: {
 		type: "object",
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16,
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16",
 		},
 	},
 	btnIconSizeUnits: {
@@ -886,9 +909,9 @@ const attributes = {
 	btnTwoIconSize: {
 		type: "object",
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16,
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16",
 		},
 	},
 	btnTwoIconSizeUnits: {
@@ -915,15 +938,202 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
+	/** Icon Border */
+	iconBorder: {
+		type: "string",
+		default: "none",
+	},
+	iconBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	iconBorderColor: {
+		type: "string",
+		default: "",
+	},
+	iconBorderHoverColor: {
+		type: "string",
+	},
+	iconBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	iconBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** Border Radius **/
+	iconBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	iconBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+
+	/** Icon Two **/
+	iconTwoBorder: {
+		type: "string",
+		default: "none",
+	},
+	iconTwoBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	iconTwoBorderColor: {
+		type: "string",
+		default: "",
+	},
+	iconTwoBorderHoverColor: {
+		type: "string",
+	},
+	iconTwoBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	iconTwoBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** Border Radius **/
+	iconTwoBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	iconTwoBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	iconTwoBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},	
+	
 	buttonsDirection: {
 		type: "string",
 		default: "vertical",
 	},
-	blockStyle: {
-		type: "string",
-		default: "",
-	},
-	
 	dualButtonGlobalZIndex: {
 		type: "object",
 		default: {
