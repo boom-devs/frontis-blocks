@@ -1672,7 +1672,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 		.fb-dual-button-container.${blockID} {
             ${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex};` : "" }
-            ${ dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
+            ${dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""} 
             ${dualButtonGlobalBorder ? `border: ${dualButtonGlobalBorder};` : "" } 
@@ -1767,9 +1767,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorBorderHoverColor !== undefined ? `border-color: ${connectorBorderHoverColor};` : "" }
 		}
 
-		
-		.fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
-
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
 			${btnIconBgColor !== undefined ? `background: ${btnIconBgColor};` : ""}
 			${iconBorder ? `border: ${iconBorder};` : "" } 
@@ -1798,9 +1795,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			height: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 		}
-
-		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
-		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
 
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : ""}
