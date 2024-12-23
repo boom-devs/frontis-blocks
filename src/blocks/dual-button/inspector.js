@@ -1766,10 +1766,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorBgHoverColor !== undefined ? `background-color: ${connectorBgHoverColor};` : "" }
 			${connectorBorderHoverColor !== undefined ? `border-color: ${connectorBorderHoverColor};` : "" }
 		}
-<<<<<<< HEAD
+
 		
 		.fb-dual-button-container.${blockID} .fb-advanced-button-icon-wrapper svg {
-=======
+
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
 			${btnIconBgColor !== undefined ? `background: ${btnIconBgColor};` : ""}
 			${iconBorder ? `border: ${iconBorder};` : "" } 
@@ -1793,22 +1793,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${iconTwoBorderHoverColor !== undefined ? `border-color: ${iconTwoBorderHoverColor};` : "" }
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
->>>>>>> 0347b08b3dc066a5f8169b7ab6b572028e54e2a6
+
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : ""}
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			height: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 		}
-<<<<<<< HEAD
+
 		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg,
 		.fb-dual-button-container.${blockID} .fb-dual-button-two:hover svg {
-=======
+
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : ""}
 			width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
 			height: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one:hover svg{
->>>>>>> 0347b08b3dc066a5f8169b7ab6b572028e54e2a6
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : ""}
 		}
     
@@ -3086,20 +3085,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-z-index-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
-													<RangeControl
-														value={dualButtonGlobalZIndex}
-														onChange={(value) => setAttributes({ dualButtonGlobalZIndex: value === 0 ? undefined : value, })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={""}
-														className="default-range"
-													/>
+
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={dualButtonGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ dualButtonGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+                                                    />
+
+
+
 												</PanelBody>
 
 												<PanelBody
