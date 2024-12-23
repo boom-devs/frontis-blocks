@@ -1,12 +1,12 @@
 import { applyFilters } from "@wordpress/hooks";
-import { __ } from "@wordpress/i18n";
+import {  } from "@wordpress/i18n";
 import {
     Dashboard,
     Blocks,
     Settings,
     Integration,
     Pricing,
-	CustomIcons
+    CustomIcons
 } from "./components";
 
 import {
@@ -21,34 +21,33 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
     {
         id: 'general',
         icon: <HomeIcon />,
-        label: __("Dashboard", "frontis-blocks"),
+        label: ("Dashboard", "frontis-blocks"),
         comp: <Dashboard />
     },
     {
         id: 'blocks',
         icon: <BlockIcon />,
-        label: __("Blocks", "frontis-blocks"),
+        label: ("Blocks", "frontis-blocks"),
         comp: <Blocks />
     },
     {
         id: 'settings',
         icon: <OptionsIcon />,
-        label: __("Settings", "frontis-blocks"),
+        label: ("Settings", "frontis-blocks"),
         comp: <Settings />
     },
     {
         id: 'integrations',
         icon: <IntegrationsIcon />,
-        label: __("Integrations", "frontis-blocks"),
+        label: ("Integrations", "frontis-blocks"),
         comp: <Integration />
     },
-<<<<<<< HEAD
-	// {
-	// 	id: 'custom_icons',
-	// 	icon: <IntegrationsIcon />,
-	// 	label: __("Custom icons", "frontis-blocks"),
-	// 	comp: <CustomIcons />
-	// }
+    // {
+    //     id: 'custom_icons',
+    //     icon: <IntegrationsIcon />,
+    //     label: ("Custom icons", "frontis-blocks"),
+    //     comp: <CustomIcons />
+    // }
 ]);
 // Add pricing tab if not pro
 // if (window.frontisBlocksAdmin.isProActive === 'false') {
@@ -60,22 +59,4 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
 //     });
 // }
 
-=======
-	{
-		id: 'custom_icons',
-		icon: <IntegrationsIcon />,
-		label: __("Custom icons", "frontis-blocks"),
-		comp: <CustomIcons />
-	}
-]);
-//Add pricing tab if not pro
-if (window.frontisBlocksAdmin.isProActive === 'false') {
-    TabMenus.push({
-      id: 'pricing',
-      icon: <PricingIcon />,
-      label: __("Pricing", "frontis-blocks"),
-      comp: <Pricing />
-    });
-}
->>>>>>> 4781b216459a417a4675c951a1740395bf234202
 export default TabMenus;
