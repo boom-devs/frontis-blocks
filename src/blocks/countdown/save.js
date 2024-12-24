@@ -82,30 +82,38 @@ export default function save({ attributes }) {
 
 			<div {...blockProps} data-target-date={targetDate}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`}>
+					{showDays && (
 					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time days`}>0</span>
 						<span className={`fb-count-down-label`}>
 							{countDownLabelDay || __('Days', 'frontis-blocks')}
 						</span>
 					</div>
+					)}
+					{showHours && (
 					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time hours`}>0</span>
 						<span className={`fb-count-down-label`}>
 							{countDownLabelHour || __('Hours', 'frontis-blocks')}
 						</span>
 					</div>
+					)}
+					{showMinutes && (
 					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time minutes`}>0</span>
 						<span className={`fb-count-down-label`}>
 							{countDownLabelMinute || __('Minutes', 'frontis-blocks')}
 						</span>
 					</div>
+					)}
+					{showSeconds && (
 					<div className={`fb-count-down-item`}>
 						<span className={`fb-count-down-time seconds`}>0</span>
 						<span className={`fb-count-down-label`}>
 							{countDownLabelSecond || __('Seconds', 'frontis-blocks')}
 						</span>
 					</div>
+					)}
 				</div>
 			</div>
 
