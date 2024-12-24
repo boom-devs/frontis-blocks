@@ -17,15 +17,13 @@ import {
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
-import FBIconPicker from "../../components/icon-picker"; 
-import FB_Color from "../../components/color";
+import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
-import { SelectControl } from "@wordpress/components";
 import { useEffect, useMemo } from "@wordpress/element";
-import FB_BoxShadowControl from "../../components/box-shadow";
-import FB_BackgroundColorControl from "../../components/background-color-control";
 import FB_Range from "../../components/range";
 import FB_ImageControl from "../../components/image-control";
+import FB_SwitcherControl from "../../components/switcher-control";
+import FB_ColorControl from "../../components/color-control";
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -97,28 +95,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const titleSfIconHandler = (IconName) => {
 		setAttributes({titleSuffixIcon: IconName})
 	}
-
-    // FB_Color for Title prefix
-    const titlePfColorSwitcherChange = (value) => {
-        setAttributes({ titlePrefixColorSwitcher: value });
-    };
-    const titlePfColorChange = (value) => {
-        setAttributes({ titlePrefixColor: value });
-    };
-    const titlePfHoverColorChange = (value) => {
-        setAttributes({ titlePrefixHoverColor: value });
-    };
-
-    // FB_Color for Title Suffix
-    const titleSfColorSwitcherChange = (value) => {
-        setAttributes({ titleSuffixColorSwitcher: value });
-    };
-    const titleSfColorChange = (value) => {
-        setAttributes({ titleSuffixColor: value });
-    };
-    const titleSfHoverColorChange = (value) => {
-        setAttributes({ titleSuffixHoverColor: value });
-    };
 
     
     // accordionItem content margin
@@ -535,15 +511,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                                             {(titlePrefixType === "icon") && (
                                                     <>
-                                                        <FB_Color
+                                                        <FB_SwitcherControl
                                                             label={__("Color", "frontis-blocks")}
-                                                            globalColorSwitcher={titlePrefixColorSwitcher}
-                                                            globalColor={titlePrefixColor}
-                                                            globalHoverColor={titlePrefixHoverColor}
-                                                            handleColorSwitcherChange={titlePfColorSwitcherChange}
-                                                            handleGlobalColorChange={titlePfColorChange}
-                                                            handleGlobalHoverColorChange={titlePfHoverColorChange}
+                                                            globalSwitcher={titlePrefixColorSwitcher}
+                                                            setGlobalSwitcher={(value) => setAttributes({ titlePrefixColorSwitcher: value })}
                                                         />
+                                                        
+                                                        {titlePrefixColorSwitcher === 'normal' && (
+                                                            <FB_ColorControl
+                                                                label={__("Normal Color", "frontis-blocks")}
+                                                                globalColor={titlePrefixColor}
+                                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value })}
+                                                            />
+                                                        )}
+                                                        
+                                                        {titlePrefixColorSwitcher === 'hover' && (
+                                                            <FB_ColorControl
+                                                                label={__("Hover Color", "frontis-blocks")}
+                                                                globalColor={titlePrefixHoverColor}
+                                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value })}
+                                                            />
+                                                        )}
                                                     </>
                                                 )}
 
@@ -604,15 +592,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                                             {(titleSuffixType === "icon") && (
                                                     <>
-                                                        <FB_Color
+                                                        <FB_SwitcherControl
                                                             label={__("Color", "frontis-blocks")}
-                                                            globalColorSwitcher={titleSuffixColorSwitcher}
-                                                            globalColor={titleSuffixColor}
-                                                            globalHoverColor={titleSuffixHoverColor}
-                                                            handleColorSwitcherChange={titleSfColorSwitcherChange}
-                                                            handleGlobalColorChange={titleSfColorChange}
-                                                            handleGlobalHoverColorChange={titleSfHoverColorChange}
+                                                            globalSwitcher={titleSuffixColorSwitcher}
+                                                            setGlobalSwitcher={(value) => setAttributes({ titleSuffixColorSwitcher: value })}
                                                         />
+                                                        
+                                                        {titleSuffixColorSwitcher === 'normal' && (
+                                                            <FB_ColorControl
+                                                                label={__("Normal Color", "frontis-blocks")}
+                                                                globalColor={titleSuffixColor}
+                                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value })}
+                                                            />
+                                                        )}
+                                                        
+                                                        {titleSuffixColorSwitcher === 'hover' && (
+                                                            <FB_ColorControl
+                                                                label={__("Hover Color", "frontis-blocks")}
+                                                                globalColor={titleSuffixHoverColor}
+                                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value })}
+                                                            />
+                                                        )}
                                                     </>
                                                 )}
 

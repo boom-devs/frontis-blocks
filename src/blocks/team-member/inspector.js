@@ -435,7 +435,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
 	}
 
-	// Set default value for countDownItemBackgroundImageUrl
+	// Set default value for teamMemberBackgroundImageUrl
 	useEffect(() => {
 		if (!teamMemberImageUrl) {
 			setAttributes({ teamMemberImageUrl: defaultImageUrl });

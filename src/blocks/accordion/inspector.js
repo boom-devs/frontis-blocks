@@ -11,31 +11,18 @@ import {
     TabPanel,
     Button,
     ButtonGroup,
-    Dropdown,
-    RangeControl,
     SelectControl,
-    Dashicon,
-    TextControl,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
     BORDER_STYLES,
-    ACCORDION_TYPES,
-    HEADING,
     TITLE_ALIGNMENT,
-    CONTENT_ALIGN,
     ICON_POSITIONS,
     ICON_SWITCHER,
 } from "./constants/constants";
-import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
 
 import './editor.scss';
 import FBIconPicker from '../../components/icon-picker';
@@ -45,6 +32,8 @@ import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_ImageControl from '../../components/image-control';
 import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ColorControl from '../../components/color-control';
+import FB_SwitcherControl from '../../components/switcher-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -457,39 +446,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 
-    // FB_Color for accordion content BG
-    const accordionBGColorSwitcherChange = (value) => {
-        setAttributes({ accordionBgColorSwitcher: value });
-    };
-    const accordionBGColorChange = (value) => {
-        setAttributes({ accordionBgColor: value });
-    };
-    const accordionBGHoverColorChange = (value) => {
-        setAttributes({ accordionBgHoverColor: value });
-    };
-
-    // FB_Color for accordion Border
-    const accordionBorderColorSwitcherChange = (value) => {
-        setAttributes({ accordionBorderColorSwitcher: value });
-    };
-    const accordionBorderColorChange = (value) => {
-        setAttributes({ accordionBorderColor: value });
-    };
-    const accordionBorderHoverColorChange = (value) => {
-        setAttributes({ accordionBorderHoverColor: value });
-    };
-
-
-    // FB_Color for accordionItems Border
-    const accordionItemsBorderColorSwitcherChange = (value) => {
-        setAttributes({ accordionItemsBorderColorSwitcher: value });
-    };
-    const accordionItemsBorderColorChange = (value) => {
-        setAttributes({ accordionItemsBorderColor: value });
-    };
-    const accordionItemsBorderHoverColorChange = (value) => {
-        setAttributes({ accordionItemsBorderHoverColor: value });
-    };	
 
     // accordionItems Padding Functionb
     const handleAccordionItemsPaddingUnitChange = ( event, position ) => {
@@ -1126,17 +1082,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
     
-    // FB_Color for content Border
-    const contentBorderColorSwitcherChange = (value) => {
-        setAttributes({ contentBorderColorSwitcher: value });
-    };
-    const contentBorderColorChange = (value) => {
-        setAttributes({ contentBorderColor: value });
-    };
-    const contentBorderHoverColorChange = (value) => {
-        setAttributes({ contentBorderHoverColor: value });
-    };
-    
 
     return (
         <>
@@ -1423,16 +1368,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             ))}
                                                         </ButtonGroup>
                                                     </BaseControl>
-                    
-                                                    <FB_Color
+
+                                                    <FB_SwitcherControl
                                                         label={__("Icon Color", "frontis-blocks")}
-                                                        globalColorSwitcher={titleIconColorSwitcher}
-                                                        globalColor={titleIconColor}
-                                                        globalHoverColor={titleIconHoverColor}
-                                                        handleColorSwitcherChange={handleTitleIconColorSwitcherChange}
-                                                        handleGlobalColorChange={handleTitleIconColorChange}
-                                                        handleGlobalHoverColorChange={handleTitleIconHoverColorChange}
+                                                        globalSwitcher={titleIconColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ titleIconColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {titleIconColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={titleIconColor}
+                                                            setGlobalColor={(value) => setAttributes({ titleIconColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {titleIconColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={titleIconHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ titleIconHoverColor: value })}
+                                                        />
+                                                    )}
                                                 </>
                                             )}
                                         </PanelBody>
@@ -1514,15 +1471,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
-                                            <FB_Color
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalColorSwitcher={titleColorSwitcher}
-                                                globalColor={titleColor}
-                                                globalHoverColor={titleHoverColor}
-                                                handleColorSwitcherChange={handleTitleColorSwitcherChange}
-                                                handleGlobalColorChange={handleTitleColorChange}
-                                                handleGlobalHoverColorChange={handleTitleHoverColorChange}
+                                            <FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={titleColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
                                             />
+                                            
+                                            {titleColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={titleColor}
+                                                    setGlobalColor={(value) => setAttributes({ titleColor: value })}
+                                                />
+                                            )}
+                                            
+                                            {titleColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={titleHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ titleHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_BackgroundColorControl
                                                 label={__("Background Color", "frontis-blocks")}
@@ -1757,15 +1726,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ accordionItemsBorder: value })}
                                                     />
         
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={accordionItemsBorderColorSwitcher}
-                                                        globalColor={accordionItemsBorderColor}
-                                                        globalHoverColor={accordionItemsBorderHoverColor}
-                                                        handleColorSwitcherChange={accordionItemsBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={accordionItemsBorderColorChange}
-                                                        handleGlobalHoverColorChange={accordionItemsBorderHoverColorChange}
+                                                        globalSwitcher={accordionItemsBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionItemsBorderColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {accordionItemsBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={accordionItemsBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionItemsBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={accordionItemsBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderHoverColor: value })}
+                                                        />
+                                                    )}
         
                                                     <FB_Spacing 
                                                         label={__("Border Width", "frontis-blocks")}
@@ -1795,7 +1776,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes={setAttributes}
                                                     />
 
-                                                    <FB_BoxShadowControl
+                                                    {/* <FB_BoxShadowControl
 														onBoxShadowChange={(value) =>
 															setAttributes({ accordionItemBoxShadowValues: value })
 														}
@@ -1805,7 +1786,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																accordionItemBoxShadowCssValue: value,
 															})
 														}
-													/>
+													/> */}
                                         </PanelBody>
 
                                         <PanelBody title="Item Content" initialOpen={false} >
@@ -1959,15 +1940,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ contentBorder: value })}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={contentBorderColorSwitcher}
-                                                globalColor={contentBorderColor}
-                                                globalHoverColor={contentBorderHoverColor}
-                                                handleColorSwitcherChange={contentBorderColorSwitcherChange}
-                                                handleGlobalColorChange={contentBorderColorChange}
-                                                handleGlobalHoverColorChange={contentBorderHoverColorChange}
+                                                globalSwitcher={contentBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ contentBorderColorSwitcher: value })}
                                             />
+                                            
+                                            {contentBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={contentBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ contentBorderColor: value })}
+                                                />
+                                            )}
+                                            
+                                            {contentBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={contentBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ contentBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing
                                                 label={__("Border Width", "frontis-blocks")}
@@ -2206,15 +2199,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ accordionBorder: value })}
                                                         />
         
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={accordionBorderColorSwitcher}
-                                                        globalColor={accordionBorderColor}
-                                                        globalHoverColor={accordionBorderHoverColor}
-                                                        handleColorSwitcherChange={accordionBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={accordionBorderColorChange}
-                                                        handleGlobalHoverColorChange={accordionBorderHoverColorChange}
+                                                        globalSwitcher={accordionBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionBorderColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {accordionBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={accordionBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionBorderColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={accordionBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionBorderHoverColor: value })}
+                                                        />
+                                                    )}
         
                                                     <FB_Spacing 
                                                         label={__("Border Width", "frontis-blocks")}
