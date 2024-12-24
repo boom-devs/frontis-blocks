@@ -353,7 +353,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     const fbaccordionItemstyle = useMemo(() => {
         let styles = `
-          .fb-accordion-main-wrapper.${blockID} {
+          .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 position: relative;
                 ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
                 ${accordionPaddingDesktopWidth !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
@@ -384,7 +384,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 transition: all .3s ease-in-out;
             }
         
-            .fb-accordion-main-wrapper.${blockID}:hover {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper:hover {
                 ${
                     accordionBgHoverType === "gradient"
                       ? `background: ${
@@ -613,7 +613,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
       
         @media only screen and (max-width: 1024px) {
-            .fb-accordion-main-wrapper.${blockID} {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
                 ${accordionPaddingTabletWidth !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
                 ${accordionMarginTabletWidth !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
@@ -687,7 +687,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         }
       
         @media only screen and (max-width: 767px) {
-            .fb-accordion-main-wrapper.${blockID} {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
                 ${accordionPaddingMobileWidth !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}

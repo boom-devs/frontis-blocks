@@ -1423,20 +1423,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             ))}
                                                         </ButtonGroup>
                                                     </BaseControl>
-
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Spacing", "frontis-blocks")}
-                                                        rangeValue={titleSpacing}
-                                                        onChangeHandler={titleSpacingHandler}
-                                                        rangeUnitHandler={titleSpacingUnitsHandler}
-                                                        deviceType={deviceType}
-                                                        units={titleSpacingUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={20}
-                                                    />
                     
                                                     <FB_Color
                                                         label={__("Icon Color", "frontis-blocks")}
@@ -1475,6 +1461,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     ))}
                                                 </ButtonGroup>
                                             </BaseControl>
+
+                                            {titleAlignment !== 'between' && <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Spacing", "frontis-blocks")}
+                                                rangeValue={titleSpacing}
+                                                onChangeHandler={titleSpacingHandler}
+                                                rangeUnitHandler={titleSpacingUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={titleSpacingUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={20}
+                                            />}
                     
                                             <FB_TypographyControl
                                                 fontFamily={titleFontFamily}
@@ -1599,7 +1599,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ titleBgImageSize: value })
 														}
 														hoverBackgroundType={titleBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType ={(value) =>
 															setAttributes({ titleBgHoverType: value })
 														}
 														hoverClassicColor={titleBgHoverClassicColor}
@@ -1883,7 +1883,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ contentBgImageSize: value })
 														}
 														hoverBackgroundType={contentBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ contentBgHoverType: value })
 														}
 														hoverClassicColor={contentBgHoverClassicColor}
@@ -2134,7 +2134,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ accordionBgImageSize: value })
 														}
 														hoverBackgroundType={accordionBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ accordionBgHoverType: value })
 														}
 														hoverClassicColor={accordionBgHoverClassicColor}

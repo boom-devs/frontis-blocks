@@ -276,7 +276,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
 		}
 		
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
 			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			transition: all 0.3s ease-in-out;
@@ -307,14 +307,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
@@ -369,16 +369,20 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			height: 0;
 			visibility: hidden;
 			opacity: 0;
+            font-size: 0;
 			transition: all 0.3s ease-in-out;
 		}
-
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
-			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			height: unset;
 			visibility: visible;
 			transform: scaleY(1);
 			opacity: 1;
+            font-size: unset;
+            transition: all 0.3s ease-in-out;
+		}
+        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+            ${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 		}
 
 		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
@@ -411,7 +415,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex.Tablet !== undefined ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
@@ -421,7 +425,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex.Mobile !== undefined ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
