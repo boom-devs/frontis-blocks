@@ -5,12 +5,14 @@ import {
     BlockControls,
     AlignmentToolbar,
 } from '@wordpress/block-editor';
+import { useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings'; 
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -29,10 +31,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps();
-    
-    
 
-    // Prevent link navigation in the editor and focus on text
+    /**
+     * Manages tab button settings and switches to block settings on click
+     */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+    
+    /**
+     * Prevent link navigation in the editor and focus on text
+     */
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
@@ -54,7 +62,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps} id={blockId}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 

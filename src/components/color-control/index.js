@@ -79,13 +79,26 @@ const FB_ColorControl = ({
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {globalColor || 'transparent'} 
+                                    {globalColor || ''}
                                 </span>
                                 <div
-                                className="fb-setting-color-display"
-                                style={{
-                                    backgroundColor: globalColor || 'transparent',
-                                }}
+                                    className="fb-setting-color-display"
+                                    style={
+                                        globalColor
+                                            ? {
+                                                backgroundColor: globalColor,
+                                            }
+                                            : {
+                                                backgroundImage:
+                                                    'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
+                                                backgroundPosition: '0 0, 0 5px, 5px -5px, -5px 0',
+                                                backgroundSize: '10px 10px',
+                                                border: '1px solid #e9e9e9',
+                                                height: '22px',
+                                                padding: '0',
+                                                width: '22px',
+                                            }
+                                    }
                                 />
                             </div>
                         </Button>
