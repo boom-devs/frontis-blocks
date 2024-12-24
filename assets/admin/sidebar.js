@@ -2837,8 +2837,6 @@ function FrontisBlocksSidebar(props) {
   // Save colors after post save
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    console.log("Chekcing is after saving");
-    console.log(isAfterSave);
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;

@@ -1,9 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useRef } from '@wordpress/element';
 import Inspector from "./inspector";
 import ReactPlayer from "react-player";
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
@@ -22,6 +25,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-advanced-video-main-wrapper ${blockID}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
     return (
         <>
             <Inspector
@@ -31,7 +40,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper">
+                <div className="fb-parent-wrapper" ref={panelRef}>
                     <div className={`fb-advanced-video-wrapper ${blockID}`}>
                         <div className="fb-player-wrapper">
                             <div className="fb-player-option">

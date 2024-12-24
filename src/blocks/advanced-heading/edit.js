@@ -5,16 +5,15 @@ import {
     BlockControls,
     AlignmentToolbar,
 } from '@wordpress/block-editor';
-
-import { useEffect, useRef } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings'; 
 import './editor.scss';
-import classNames from 'classnames';
 
 export default function Edit({ attributes, setAttributes, clientId}) {
     const {
@@ -46,23 +45,11 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         className: `fb-advanced-heading-main-wrapper ${blockId}`,
     });
 
-    /* This is for the tab button */
-    const tabButtonRef = useRef(null);
-
-    useEffect(() => {
-        if (tabButtonRef.current) {
-            tabButtonRef.current.addEventListener('click', () => {
-                const tabButton = document.getElementById('tabs-1-edit-post/block');
-                const sidebarPanel = document.getElementsByClassName('interface-navigable-region interface-interface-skeleton__sidebar');
-                if (tabButton) {
-                    tabButton.click();
-                }
-                if (sidebarPanel) {
-                    sidebarPanel.click();
-                }
-            });
-        }
-    }, []);
+    /**
+     * Manages tab button settings and switches to block settings on click
+     */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
 
     return (
         <>
@@ -80,8 +67,8 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 />
             </BlockControls>
 
-            <div {...blockProps} ref={tabButtonRef}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+            <div {...blockProps}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}} ref={panelRef}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                         {headingIconAlign === 'icon' && headingIconSwitcher && (
