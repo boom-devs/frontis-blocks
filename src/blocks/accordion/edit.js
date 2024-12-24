@@ -1,12 +1,13 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, useRef } from "@wordpress/element";
 import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
 import Inspector from './inspector';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"]; 
@@ -254,6 +255,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const blockProps = useBlockProps({
         className: `fb-accordion-main-wrapper ${blockID}`,
     });
+
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
 
 
     const addAccordion = () => {
@@ -1013,7 +1020,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">

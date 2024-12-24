@@ -419,7 +419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 1",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -429,7 +429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 2",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -439,7 +439,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 3",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -449,7 +449,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 4",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -459,7 +459,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 5",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -469,7 +469,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 6",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -558,7 +558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             },
                             image: {
                                 id: 0,
-                                url: "",
+                                url: defaultImageUrl,
                                 width: 0,
                                 height: 0
                             }
@@ -578,7 +578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             },
                             image: {
                                 id: 0,
-                                url: "",
+                                url: defaultImageUrl,
                                 width: 0,
                                 height: 0
                             }
@@ -598,7 +598,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             },
                             image: {
                                 id: 0,
-                                url: "",
+                                url: defaultImageUrl,
                                 width: 0,
                                 height: 0
                             }
@@ -618,7 +618,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             },
                             image: {
                                 id: 0,
-                                url: "",
+                                url: defaultImageUrl,
                                 width: 0,
                                 height: 0
                             }
@@ -670,7 +670,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -690,7 +690,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -711,7 +711,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -732,7 +732,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -752,7 +752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -772,7 +772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -827,7 +827,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -847,7 +847,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -867,7 +867,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -887,7 +887,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         },
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
