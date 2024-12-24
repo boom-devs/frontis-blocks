@@ -6,6 +6,8 @@ import {
     AlignmentToolbar,
 } from '@wordpress/block-editor';
 
+import { useEffect, useRef } from '@wordpress/element';
+
 /**
  * Internal dependencies
  */
@@ -44,7 +46,23 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         className: `fb-advanced-heading-main-wrapper ${blockId}`,
     });
 
-    // Define the CSS as a string
+    /* This is for the tab button */
+    const tabButtonRef = useRef(null);
+
+    useEffect(() => {
+        if (tabButtonRef.current) {
+            tabButtonRef.current.addEventListener('click', () => {
+                const tabButton = document.getElementById('tabs-1-edit-post/block');
+                const sidebarPanel = document.getElementsByClassName('interface-navigable-region interface-interface-skeleton__sidebar');
+                if (tabButton) {
+                    tabButton.click();
+                }
+                if (sidebarPanel) {
+                    sidebarPanel.click();
+                }
+            });
+        }
+    }, []);
 
     return (
         <>
@@ -62,7 +80,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
                 />
             </BlockControls>
 
-            <div {...blockProps}>
+            <div {...blockProps} ref={tabButtonRef}>
                 <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
