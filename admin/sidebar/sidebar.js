@@ -748,9 +748,6 @@ function FrontisBlocksSidebar(props) {
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
-		console.log("Chekcing is after saving")
-		console.log(isAfterSave)
-
 		const handleUpdateSettings = async () => {
 			if (isAfterSave && fbGlobalSettingsLoading) {
 				try {
