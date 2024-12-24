@@ -38,6 +38,7 @@ import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_AlignmentControl from '../../components/alignment-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_BackgroundColorControl from '../../components/background-color-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
@@ -131,9 +132,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         GalleryMobileMargin,
         GalleryMarginLink,
 
+        // Boxshadow
+        GalleryGlobalBoxShadowValues,
+        GalleryGlobalBoxShadowCssValue,
+
+		// Backgorund
         GalleryBgColorSwitcher,
-        GalleryBgColor,
-        GalleryBgHoverColor,
+        GalleryBgType,
+        GalleryBgClassicColor,
+        GalleryBgGradientColor,
+        GalleryBgCustomGradientSwitcher,
+        GalleryBgCustomGradientInputValue,
+        GalleryBgImageUrl,
+        GalleryBgImageAlt,
+        GalleryBgImageID,
+        GalleryBgImagePosition,
+        GalleryBgImageAttachment,
+        GalleryBgImageRepeat,
+        GalleryBgImageSize,
+        GalleryBgHoverType,
+        GalleryBgHoverClassicColor,
+        GalleryBgHoverGradientColor,
+        GalleryBgHoverCustomGradientSwitcher,
+        GalleryBgHoverCustomGradientInputValue,
+        GalleryBgHoverImageUrl,
+        GalleryBgHoverImageAlt,
+        GalleryBgHoverImageID,
+        GalleryBgHoverImagePosition,
+        GalleryBgHoverImageAttachment,
+        GalleryBgHoverImageRepeat,
+        GalleryBgHoverImageSize,
 
         GalleryBorder,
         GalleryBorderColor,
@@ -246,6 +274,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ GalleryItems: updatedItems });
 	}
 
+    /** Member Image */
+	let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+	}
+
+	// Set default value for teamMemberBackgroundImageUrl
+	useEffect(() => {
+        const updatedItems = GalleryItems.map(item =>
+            !item?.image?.url ? { ...item, image: {...item.image, url: defaultImageUrl} } : item
+        )
+        setAttributes({ GalleryItems: updatedItems });
+	}, []);
+
      /** Start Preset Style */
      const changeGalleryPreset = (selectedPreset) => {
         const presetConfigurations = {
@@ -258,7 +300,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 1",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -268,7 +310,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 2",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -278,7 +320,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 3",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -288,7 +330,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 4",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -298,7 +340,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 5",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -308,7 +350,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         title: "Image 6",
                         image: {
                             id: 0,
-                            url: "",
+                            url: defaultImageUrl,
                             width: 0,
                             height: 0
                         }
@@ -2024,7 +2066,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-gallery-main-wrapper.${blockID} {
             position: relative;
             overflow: hidden;
-            ${GalleryBgColor !== undefined ? `background-color: ${GalleryBgColor};` : ''}
+            ${
+                GalleryBgType === "gradient"
+                  ? `background: ${
+                      GalleryBgCustomGradientSwitcher && GalleryBgCustomGradientInputValue
+                        ? GalleryBgCustomGradientInputValue
+                        : GalleryBgGradientColor
+                    };`
+                  : GalleryBgImageUrl !== undefined && GalleryBgImageUrl !== null && GalleryBgImageUrl !== ""
+                  ? `
+                    ${GalleryBgImageUrl !== undefined ? `background-image: url(${GalleryBgImageUrl});` : ''}
+                    ${GalleryBgImagePosition !== undefined ? `background-position: ${GalleryBgImagePosition};` : ''}
+                    ${GalleryBgImageAttachment !== undefined ? `background-attachment: ${GalleryBgImageAttachment};` : ''}
+                    ${GalleryBgImageRepeat !== undefined ? `background-repeat: ${GalleryBgImageRepeat};` : ''}
+                    ${GalleryBgImageSize !== undefined ? `background-size: ${GalleryBgImageSize};` : ''}
+                  `
+                  : `background: ${GalleryBgClassicColor};`
+            }
+            ${GalleryGlobalBoxShadowCssValue ? `box-shadow: ${GalleryGlobalBoxShadowCssValue};` : ''}
             ${GalleryPaddingDesktopWidth !== undefined ? `padding: ${GalleryPaddingDesktopWidth};` : ''}
             ${GalleryMarginDesktopWidth !== undefined ? `margin: ${GalleryMarginDesktopWidth};` : ''}
             ${GalleryBorder !== undefined ? `border-style: ${GalleryBorder};` : ''}
@@ -2035,8 +2094,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
         .fb-gallery-main-wrapper.${blockID}:hover {
-            ${GalleryBgHoverColor !== undefined ? `background-color: ${GalleryBgHoverColor};` : ''}
+            ${
+                GalleryBgHoverType === "gradient"
+                  ? `background: ${
+                      GalleryBgHoverCustomGradientSwitcher && GalleryBgHoverCustomGradientInputValue
+                        ? GalleryBgHoverCustomGradientInputValue
+                        : GalleryBgHoverGradientColor
+                    };`
+                  : GalleryBgHoverImageUrl !== undefined && GalleryBgHoverImageUrl !== null && GalleryBgHoverImageUrl !== ""
+                  ? `
+                    ${GalleryBgHoverImageUrl !== undefined ? `background-image: url(${GalleryBgHoverImageUrl});` : ''}
+                    ${GalleryBgHoverImagePosition !== undefined ? `background-position: ${GalleryBgHoverImagePosition};` : ''}
+                    ${GalleryBgHoverImageAttachment !== undefined ? `background-attachment: ${GalleryBgHoverImageAttachment};` : ''}
+                    ${GalleryBgHoverImageRepeat !== undefined ? `background-repeat: ${GalleryBgHoverImageRepeat};` : ''}
+                    ${GalleryBgHoverImageSize !== undefined ? `background-size: ${GalleryBgHoverImageSize};` : ''}
+                  `
+                  : `background: ${GalleryBgHoverClassicColor};`
+            }
             ${GalleryBorderHoverColor !== undefined ? `border-color: ${GalleryBorderHoverColor};` : ''}
+            transition: all .3s ease-in-out;
         }
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
             display: grid;
@@ -2377,9 +2453,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         GalleryMobileMargin,
         GalleryMarginLink,
 
+        // Boxshadow
+        GalleryGlobalBoxShadowValues,
+        GalleryGlobalBoxShadowCssValue,
+
+		// Backgorund
         GalleryBgColorSwitcher,
-        GalleryBgColor,
-        GalleryBgHoverColor,
+        GalleryBgType,
+        GalleryBgClassicColor,
+        GalleryBgGradientColor,
+        GalleryBgCustomGradientSwitcher,
+        GalleryBgCustomGradientInputValue,
+        GalleryBgImageUrl,
+        GalleryBgImageAlt,
+        GalleryBgImageID,
+        GalleryBgImagePosition,
+        GalleryBgImageAttachment,
+        GalleryBgImageRepeat,
+        GalleryBgImageSize,
+        GalleryBgHoverType,
+        GalleryBgHoverClassicColor,
+        GalleryBgHoverGradientColor,
+        GalleryBgHoverCustomGradientSwitcher,
+        GalleryBgHoverCustomGradientInputValue,
+        GalleryBgHoverImageUrl,
+        GalleryBgHoverImageAlt,
+        GalleryBgHoverImageID,
+        GalleryBgHoverImagePosition,
+        GalleryBgHoverImageAttachment,
+        GalleryBgHoverImageRepeat,
+        GalleryBgHoverImageSize,
 
         GalleryBorder,
         GalleryBorderColor,
@@ -3162,14 +3265,128 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />                                     
                                             </PanelBody>
                                             <PanelBody title="Background Color" initialOpen={false} >
-                                                <FB_Color
-                                                    globalColorSwitcher={GalleryBgColorSwitcher}
-                                                    globalColor={GalleryBgColor}
-                                                    globalHoverColor={GalleryBgHoverColor}
-                                                    handleColorSwitcherChange={handleGalleryBgColorSwitcherChange}
-                                                    handleGlobalColorChange={handleGalleryBgColorChange}
-                                                    handleGlobalHoverColorChange={handleGalleryBgHoverColorChange}
-                                                />
+                                                    <FB_BackgroundColorControl
+														bgColorSwitcher={GalleryBgColorSwitcher}
+														setBgColorSwitcher={(value) =>
+															setAttributes({ GalleryBgColorSwitcher: value })
+														}
+														normalBackgroundType={GalleryBgType}
+														setNormalBackgroundType={(value) =>
+															setAttributes({ GalleryBgType: value })
+														}
+														normalClassicColor={GalleryBgClassicColor}
+														setNormalClassicColor={(value) =>
+															setAttributes({ GalleryBgClassicColor: value })
+														}
+														normalGradientColor={GalleryBgGradientColor}
+														setNormalGradientColor={(value) =>
+															setAttributes({ GalleryBgGradientColor: value })
+														}
+														normalCustomGradientSwitcher={GalleryBgCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+																GalleryBgCustomGradientSwitcher: value,
+															})
+														}
+														normalCustomGradientInputValue={GalleryBgCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+																GalleryBgCustomGradientInputValue: value,
+															})
+														}
+														normalBackgroundImageUrl={GalleryBgImageUrl}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({ GalleryBgImageUrl: value })
+														}
+														normalBackgroundImageAlt={GalleryBgImageAlt}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({ GalleryBgImageAlt: value })
+														}
+														normalBackgroundImageID={GalleryBgImageID}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({ GalleryBgImageID: value })
+														}
+														normalBackgroundImagePosition={GalleryBgImagePosition}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+																GalleryBgImagePosition: value,
+															})
+														}
+														normalBackgroundImageAttachment={GalleryBgImageAttachment}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+																GalleryBgImageAttachment: value,
+															})
+														}
+														normalBackgroundImageRepeat={GalleryBgImageRepeat}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+																GalleryBgImageRepeat: value,
+															})
+														}
+														normalBackgroundImageSize={GalleryBgImageSize}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({ GalleryBgImageSize: value })
+														}
+														hoverBackgroundType={GalleryBgHoverType}
+														setHoverBackgroundType={(value) =>
+															setAttributes({ GalleryBgHoverType: value })
+														}
+														hoverClassicColor={GalleryBgHoverClassicColor}
+														setHoverClassicColor={(value) =>
+															setAttributes({ GalleryBgHoverClassicColor: value })
+														}
+														hoverGradientColor={GalleryBgHoverGradientColor}
+														setHoverGradientColor={(value) =>
+															setAttributes({ GalleryBgHoverGradientColor: value })
+														}
+														hoverCustomGradientSwitcher={GalleryBgHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+																GalleryBgHoverCustomGradientSwitcher: value,
+															})
+														}
+														hoverCustomGradientInputValue={GalleryBgHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+																GalleryBgHoverCustomGradientInputValue: value,
+															})
+														}
+														hoverBackgroundImageUrl={GalleryBgHoverImageUrl}
+														setBgHoverImageUrl={(value) =>
+															setAttributes({ GalleryBgHoverImageUrl: value })
+														}
+														hoverBackgroundImageAlt={GalleryBgHoverImageAlt}
+														setBgHoverImageAlt={(value) =>
+															setAttributes({ GalleryBgHoverImageAlt: value })
+														}
+														hoverBackgroundImageID={GalleryBgHoverImageID}
+														setBgHoverImageID={(value) =>
+															setAttributes({ GalleryBgHoverImageID: value })
+														}
+														hoverBackgroundImagePosition={GalleryBgHoverImagePosition}
+														setBgHoverImagePosition={(value) =>
+															setAttributes({
+																GalleryBgHoverImagePosition: value,
+															})
+														}
+														hoverBackgroundImageAttachment={GalleryBgHoverImageAttachment}
+														setBgHoverImageAttachment={(value) =>
+															setAttributes({
+																GalleryBgHoverImageAttachment: value,
+															})
+														}
+														hoverBackgroundImageRepeat={GalleryBgHoverImageRepeat}
+														setBgHoverImageRepeat={(value) =>
+															setAttributes({
+																GalleryBgHoverImageRepeat: value,
+															})
+														}
+														hoverBackgroundImageSize={GalleryBgHoverImageSize}
+														setBgHoverImageSize={(value) =>
+															setAttributes({ GalleryBgHoverImageSize: value })
+														}
+													/>
                                             </PanelBody>
 
                                             <PanelBody
