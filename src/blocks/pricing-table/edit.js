@@ -22,7 +22,7 @@ import {
 	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 import {	NORMAL_HOVER,
 	UNIT_TYPES,
@@ -33,7 +33,7 @@ import {	NORMAL_HOVER,
 } from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
-
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -92,6 +92,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `${blockId}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
 	return (
 		<>
 		    <Inspector
@@ -100,7 +106,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 			<div {...blockProps} id={blockId}>
-				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`}>
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} ref={panelRef}> 
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">
