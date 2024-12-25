@@ -3184,10 +3184,28 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     deviceHandler = _ref.deviceHandler;
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
     setDeviceType = _useDispatch.setDeviceType;
+
+  /** 
+   * Set the device type to Desktop only when the component mounts
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    deviceHandler('Desktop');
+    setDeviceType('Desktop');
+  }, []);
+
+  /**
+   * Handle the device type change
+   * @param {string} deviceName - The device type to set
+   */
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
   };
+
+  /**
+   * Toggle the device visibility
+   * @param {Event} e - The event object
+   */
   var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
