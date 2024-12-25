@@ -33,6 +33,7 @@ import FB_ImageControl from '../../components/image-control/index.js';
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_SwitcherControl from '../../components/switcher-control/index.js';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -3250,15 +3251,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ teamMemberContentBorder: value })}
 											/>
 
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={teamMemberContentBorderColorSwitcher}
-												globalColor={teamMemberContentBorderColor}
-												globalHoverColor={teamMemberContentBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ teamMemberContentBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ teamMemberContentBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberContentBorderHoverColor: value })}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberContentBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberContentBorderColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberContentBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberContentBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberContentBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberContentBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberContentBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberContentBorderHoverColor: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={ 'Border' }
@@ -3349,15 +3362,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											{ teamMemberImageOverlaySwitcher === true && 
-												<FB_Color
+											<>
+												<FB_SwitcherControl
 													label={__("Overlay Color", "frontis-blocks")}
-													globalColorSwitcher={teamMemberImageBGColorSwitcher}
-													globalColor={teamMemberImageBGColor}
-													globalHoverColor={teamMemberImageBGHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ teamMemberImageBGColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
+													globalSwitcher={teamMemberImageBGColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
 												/>
+														
+												{teamMemberImageBGColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberImageBGColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberImageBGColor: value })}
+													/>
+												)}
+														
+												{teamMemberImageBGColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberImageBGHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
+													/>
+												)}
+											</>
 											}
 
 											<SelectControl
@@ -3367,15 +3394,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ teamMemberImageBorder: value })}
 											/>
 
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={teamMemberImageBorderColorSwitcher}
-												globalColor={teamMemberImageBorderColor}
-												globalHoverColor={teamMemberImageBorderHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ teamMemberImageBorderColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ teamMemberImageBorderColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberImageBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBorderColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberImageBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberImageBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberImageBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberImageBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={ 'Border' }
@@ -3643,25 +3682,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													resetFallbackValue={20}
 												/>
 												
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Color", "frontis-blocks")}
-													globalColorSwitcher={socialIconBtnColorSwitcher}
-													globalColor={socialIconBtnColor}
-													globalHoverColor={socialIconBtnHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ socialIconBtnColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ socialIconBtnColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBtnHoverColor: value })}
+													globalSwitcher={socialIconBtnColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconBtnColorSwitcher: value })}
 												/>
+														
+												{socialIconBtnColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={socialIconBtnColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnColor: value })}
+													/>
+												)}
+														
+												{socialIconBtnColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={socialIconBtnHoverColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnHoverColor: value })}
+													/>
+												)}
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Background Color", "frontis-blocks")}
-													globalColorSwitcher={socialIconBtnBGColorSwitcher}
-													globalColor={socialIconBtnBGColor}
-													globalHoverColor={socialIconBtnBGHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ socialIconBtnBGColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ socialIconBtnBGColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBtnBGHoverColor: value })}
-												/> 
+													globalSwitcher={socialIconBtnBGColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconBtnBGColorSwitcher: value })}
+												/>
+														
+												{socialIconBtnBGColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={socialIconBtnBGColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnBGColor: value })}
+													/>
+												)}
+														
+												{socialIconBtnBGColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={socialIconBtnBGHoverColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnBGHoverColor: value })}
+													/>
+												)}
 												
 												<FB_Spacing
 													label={__("Padding", "frontis-blocks")}
@@ -3698,15 +3761,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChange={(value) => setAttributes({ socialIconBtnBorder: value })}
 												/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Border Color", "frontis-blocks")}
-													globalColorSwitcher={socialIconBtnBorderColorSwitcher}
-													globalColor={socialIconBtnBorderColor}
-													globalHoverColor={socialIconBtnBorderHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ socialIconBtnBorderColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ socialIconBtnBorderColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBtnBorderHoverColor: value })}
+													globalSwitcher={socialIconBtnBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconBtnBorderColorSwitcher: value })}
 												/>
+														
+												{socialIconBtnBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={socialIconBtnBorderColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnBorderColor: value })}
+													/>
+												)}
+														
+												{socialIconBtnBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={socialIconBtnBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ socialIconBtnBorderHoverColor: value })}
+													/>
+												)}
 
 												<FB_Spacing 
 													label={__("Border Width", "frontis-blocks")}
@@ -3771,15 +3846,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												resetFallbackValue={16}
 											/>
 
-											<FB_Color
-												label={__("Color", "frontis-blocks")}
-												globalColorSwitcher={teamMemberIconsColorSwitcher}
-												globalColor={teamMemberIconsColor}
-												globalHoverColor={teamMemberIconsHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsColorSwitcher: value })}
-												handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsColor: value })}
-												handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsHoverColor: value })}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberIconsColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberIconsColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberIconsColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberIconsColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberIconsColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberIconsColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberIconsHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberIconsHoverColor: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={__("Margin", "frontis-blocks")}
@@ -3802,15 +3889,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChange={(value) => setAttributes({ teamMemberSocialProfileBorder: value })}
 												/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Wrapper Border Color", "frontis-blocks")}
-													globalColorSwitcher={teamMemberSocialProfileBorderColorSwitcher}
-													globalColor={teamMemberSocialProfileBorderColor}
-													globalHoverColor={teamMemberSocialProfileBorderHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ teamMemberSocialProfileBorderColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ teamMemberSocialProfileBorderColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberSocialProfileBorderHoverColor: value })}
+													globalSwitcher={teamMemberSocialProfileBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberSocialProfileBorderColorSwitcher: value })}
 												/>
+														
+												{teamMemberSocialProfileBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberSocialProfileBorderColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberSocialProfileBorderColor: value })}
+													/>
+												)}
+														
+												{teamMemberSocialProfileBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberSocialProfileBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberSocialProfileBorderHoverColor: value })}
+													/>
+												)}
 
 												<FB_Spacing 
 													label={__("Wrapper Border Width", "frontis-blocks")}
@@ -3833,15 +3932,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ teamMemberIconStyleSwitcher: value })}
 											/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Background Color", "frontis-blocks")}
-													globalColorSwitcher={teamMemberIconsBGColorSwitcher}
-													globalColor={teamMemberIconsBGColor}
-													globalHoverColor={teamMemberIconsBGHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsBGColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsBGColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsBGHoverColor: value })}
-												/> 
+													globalSwitcher={teamMemberIconsBGColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberIconsBGColorSwitcher: value })}
+												/>
+														
+												{teamMemberIconsBGColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberIconsBGColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberIconsBGColor: value })}
+													/>
+												)}
+														
+												{teamMemberIconsBGColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberIconsBGHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberIconsBGHoverColor: value })}
+													/>
+												)}
 												
 												<FB_Spacing
 													label={__("Padding", "frontis-blocks")}
@@ -3864,15 +3975,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChange={(value) => setAttributes({ teamMemberIconsBorder: value })}
 												/>
 
-												<FB_Color
+												<FB_SwitcherControl
 													label={__("Border Color", "frontis-blocks")}
-													globalColorSwitcher={teamMemberIconsBorderColorSwitcher}
-													globalColor={teamMemberIconsBorderColor}
-													globalHoverColor={teamMemberIconsBorderHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ teamMemberIconsBorderColorSwitcher: value })}
-													handleGlobalColorChange={(value) => setAttributes({ teamMemberIconsBorderColor: value })}
-													handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberIconsBorderHoverColor: value })}
+													globalSwitcher={teamMemberIconsBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberIconsBorderColorSwitcher: value })}
 												/>
+														
+												{teamMemberIconsBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberIconsBorderColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderColor: value })}
+													/>
+												)}
+														
+												{teamMemberIconsBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberIconsBorderHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderHoverColor: value })}
+													/>
+												)}
 
 												<FB_Spacing 
 													label={__("Border Width", "frontis-blocks")}
@@ -4121,14 +4244,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ teamMemberBorder: value })}
 													/>
 
-													<FB_Color
-														globalColorSwitcher={teamMemberBorderColorSwitcher}
-														globalColor={teamMemberBorderColor}
-														globalHoverColor={teamMemberBorderHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ teamMemberBorderColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ teamMemberBorderColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
+													<FB_SwitcherControl
+														label={__("Border Color", "frontis-blocks")}
+														globalSwitcher={teamMemberBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ teamMemberBorderColorSwitcher: value })}
 													/>
+															
+													{teamMemberBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={teamMemberBorderColor}
+															setGlobalColor={(value) => setAttributes({ teamMemberBorderColor: value })}
+														/>
+													)}
+															
+													{teamMemberBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={teamMemberBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
+														/>
+													)}
 
 													<FB_Spacing 
 														label={__("Border Width", "frontis-blocks")}
