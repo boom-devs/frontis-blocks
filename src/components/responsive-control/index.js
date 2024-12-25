@@ -10,10 +10,10 @@ const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	/** 
 	 * Set the device type to Desktop only when the component mounts
 	 */
-	useEffect(() => {
-		deviceHandler('Desktop');
-		setDeviceType('Desktop');
-	}, []);
+	// useEffect(() => {
+	// 	deviceHandler('Desktop');
+	// 	setDeviceType('Desktop');
+	// }, []);
 
 	/**
 	 * Handle the device type change
