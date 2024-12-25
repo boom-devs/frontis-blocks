@@ -7,6 +7,9 @@ import {
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
+import { useRef } from '@wordpress/element';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -37,6 +40,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-team-member-main-wrapper ${blockID}`,
     });
 
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	return (
 		<>
@@ -47,7 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`} ref={panelRef}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
