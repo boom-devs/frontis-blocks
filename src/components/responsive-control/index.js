@@ -6,11 +6,28 @@ import {useEffect} from "@wordpress/element";
 
 const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	const { setDeviceType } = useDispatch(editorStore);
+
+	/** 
+	 * Set the device type to Desktop only when the component mounts
+	 */
+	useEffect(() => {
+		deviceHandler('Desktop');
+		setDeviceType('Desktop');
+	}, []);
+
+	/**
+	 * Handle the device type change
+	 * @param {string} deviceName - The device type to set
+	 */
 	const handleDevice = (deviceName) => {
 		deviceHandler(deviceName);
 		setDeviceType(deviceName);
 	}
 
+	/**
+	 * Toggle the device visibility
+	 * @param {Event} e - The event object
+	 */
 	const toggleDeviceVisibility = (e) => {
 		const wrapper = e.currentTarget;
 		wrapper.classList.toggle('fb-device-switchers-open');
