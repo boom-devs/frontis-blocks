@@ -470,6 +470,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreTextColorSwitcher,
         loadMoreTextColor,
         loadMoreTextHoverColor,
+        loadMoreloaderColor,
 
         loadMoreIconSize,
         loadMoreIconSizeUnits,
@@ -2781,6 +2782,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             fill: ${loadMoreIconHoverColor ? loadMoreIconHoverColor : ''};
         }
 
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more_loader {
+            border-top: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
+			border-right: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
+			border-bottom: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
+			border-left: 2px solid transparent;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			animation: loader 1s linear infinite;
+        } 
+
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -4169,6 +4181,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreTextColorSwitcher,
         loadMoreTextColor,
         loadMoreTextHoverColor,
+        loadMoreloaderColor,
         
         loadMoreIconSize,
         loadMoreIconSizeUnits,
@@ -5694,6 +5707,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setGlobalColor={(value) => setAttributes({ loadMoreTextHoverColor: value })}
                                                     />
                                                 )}
+
+                                                <FB_ColorControl
+                                                    label={__("Loader Color", "frontis-blocks")}
+                                                    globalColor={loadMoreloaderColor} 
+                                                    setGlobalColor={(value) => setAttributes({ loadMoreloaderColor: value })}
+                                                />
 
                                                 <FB_Range
                                                     min={1}
