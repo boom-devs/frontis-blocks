@@ -28,17 +28,17 @@ import {
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
-import FB_ResponsiveControl from '@Components/responsive-control';
 
 import './editor.scss';
 import FB_Spacing from '../../components/spacing';
-import FB_Color from '../../components/color';
 import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_AlignmentControl from '../../components/alignment-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
+import FB_SwitcherControl from '../../components/switcher-control';
+import FB_ColorControl from '../../components/color-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
@@ -944,105 +944,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
     /** End Preset Style */
-
-    // FB_Color for image Border
-    const imageBorderColorSwitcherChange = (value) => {
-        setAttributes({ imageBorderColorSwitcher: value });
-    };
-    const imageBorderColorChange = (value) => {
-        setAttributes({ imageBorderColor: value });
-    };
-    const imageBorderHoverColorChange = (value) => {
-        setAttributes({ imageBorderHoverColor: value });
-    };
-
-    /** GalleryBg Color */
-    const handleGalleryBgColorSwitcherChange = (value) => {
-        setAttributes({ GalleryBgColorSwitcher: value });
-    };
-    const handleGalleryBgColorChange = (value) => {
-        setAttributes({ GalleryBgColor: value });
-    };
-    const handleGalleryBgHoverColorChange = (value) => {
-        setAttributes({ GalleryBgHoverColor: value });
-    };
-    
-    /** GalleryBorder Color */
-    const handleGalleryBorderColorSwitcherChange = (value) => {
-        setAttributes({ GalleryBorderColorSwitcher: value });
-    };
-    const handleGalleryBorderColorChange = (value) => {
-        setAttributes({ GalleryBorderColor: value });
-    };
-    const handleGalleryBorderHoverColorChange = (value) => {
-        setAttributes({ GalleryBorderHoverColor: value });
-    };
-
-    /** GalleryButton Color */
-    const handleGalleryButtonColorSwitcherChange = (value) => {
-        setAttributes({ GalleryButtonColorSwitcher: value });
-    };
-    const handleGalleryButtonColorChange = (value) => {
-        setAttributes({ GalleryButtonColor: value });
-    };
-    const handleGalleryButtonHoverColorChange = (value) => {
-        setAttributes({ GalleryButtonHoverColor: value });
-    };
-
-    /** GalleryButtonBG Color */
-    const handleGalleryButtonBGColorSwitcherChange = (value) => {
-        setAttributes({ GalleryButtonBGColorSwitcher: value });
-    };
-    const handleGalleryButtonBGColorChange = (value) => {
-        setAttributes({ GalleryButtonBGColor: value });
-    };
-    const handleGalleryButtonBGHoverColorChange = (value) => {
-        setAttributes({ GalleryButtonBGHoverColor: value });
-    };
-
-    /** ButtonBorder Color */
-    const handleButtonBorderColorSwitcherChange = (value) => {
-        setAttributes({ ButtonBorderColorSwitcher: value });
-    };
-    const handleButtonBorderColorChange = (value) => {
-        setAttributes({ ButtonBorderColor: value });
-    };
-    const handleButtonBorderHoverColorChange = (value) => {
-        setAttributes({ ButtonBorderHoverColor: value });
-    };
-
-    /** lightbox Color */
-    const handleLightboxColorSwitcherChange = (value) => {
-        setAttributes({ lightboxColorSwitcher: value });
-    };
-    const handleLightboxColorChange = (value) => {
-        setAttributes({ lightboxColor: value });
-    };
-    const handleLightboxHoverColorChange = (value) => {
-        setAttributes({ lightboxHoverColor: value });
-    };
-
-    /** lightboxBG Color */
-    const handleLightboxBGColorSwitcherChange = (value) => {
-        setAttributes({ lightboxBGColorSwitcher: value });
-    };
-    const handleLightboxBGColorChange = (value) => {
-        setAttributes({ lightboxBGColor: value });
-    };
-    const handleLightboxBGHoverColorChange = (value) => {
-        setAttributes({ lightboxBGHoverColor: value });
-    };
-
-    /** lightboxBorder Color */
-    const handleLightboxBorderColorSwitcherChange = (value) => {
-        setAttributes({ lightboxBorderColorSwitcher: value });
-    };
-    const handleLightboxBorderColorChange = (value) => {
-        setAttributes({ lightboxBorderColor: value });
-    };
-    const handleLightboxBorderHoverColorChange = (value) => {
-        setAttributes({ lightboxBorderHoverColor: value });
-    };
 
     
     /** Item Height */
@@ -2263,40 +2164,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         }
 
-        ${ImageOverlayStyle === 'overlay' && `
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
-                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.001);' : ''}
-                transition: all 0.3s ease-in-out;
-            }
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
-                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.05);' : ''}
-                transition: all 0.3s ease-in-out;
-            }
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-overlay {
-                position: absolute;
-                content: '';
-                ${ImageOverlayStyleType === 'top' ? 'top: -100%; left: 0;' : ''}
-                ${ImageOverlayStyleType === 'bottom' ? 'top: 100%; left: 0;' : ''}
-                ${ImageOverlayStyleType === 'left' ? 'top: 0; left: -100%;' : ''}
-                ${ImageOverlayStyleType === 'right' ? 'top: 0; left: 100%;' : ''}
-                width: 100%;
-                height: 100%;
-                ${ImageOverlayColor !== undefined ? `background-color: ${ImageOverlayColor};` : ''}
-                visibility: hidden;
-                opacity: 0;
-                transition: all 0.3s ease-in-out;
-            }  
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-overlay {
-                ${ImageOverlayStyleType === 'top' ? 'top: 0;' : ''}
-                ${ImageOverlayStyleType === 'bottom' ? 'top: 0;' : ''}
-                ${ImageOverlayStyleType === 'left' ? 'left: 0;' : ''}
-                ${ImageOverlayStyleType === 'right' ? 'left: 0;' : ''}
-                visibility: visible;
-                opacity: 1;
-                transition: all 0.3s ease-in-out;
-            }
-        `}
-        
         ${lightboxIconSwitcher === true && `
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-lightbox-icon-wrapper {
                 position: absolute;
@@ -2359,6 +2226,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${lightboxIconSize?.Mobile !== undefined ? `width: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};` : ''}
                     ${lightboxIconSize?.Mobile !== undefined ? `height: ${lightboxIconSize.Mobile}${lightboxIconSizeUnits.Mobile};` : ''}
                 }
+            }
+        `}
+
+        ${ImageOverlayStyle === 'overlay' && `
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
+                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.001);' : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-gallery-image {
+                ${ImageOverlayStyleType === 'zoominout' ? 'transform: scale(1.05);' : ''}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-overlay {
+                position: absolute;
+                content: '';
+                ${ImageOverlayStyleType === 'top' ? 'top: -100%; left: 0;' : ''}
+                ${ImageOverlayStyleType === 'bottom' ? 'top: 100%; left: 0;' : ''}
+                ${ImageOverlayStyleType === 'left' ? 'top: 0; left: -100%;' : ''}
+                ${ImageOverlayStyleType === 'right' ? 'top: 0; left: 100%;' : ''}
+                width: 100%;
+                height: 100%;
+                ${ImageOverlayColor !== undefined ? `background-color: ${ImageOverlayColor};` : ''}
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+            }  
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item:hover .fb-image-overlay {
+                ${ImageOverlayStyleType === 'top' ? 'top: 0;' : ''}
+                ${ImageOverlayStyleType === 'bottom' ? 'top: 0;' : ''}
+                ${ImageOverlayStyleType === 'left' ? 'left: 0;' : ''}
+                ${ImageOverlayStyleType === 'right' ? 'left: 0;' : ''}
+                visibility: visible;
+                opacity: 1;
+                transition: all 0.3s ease-in-out;
             }
         `}
         
@@ -2828,15 +2729,27 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     onChange={(value) => setAttributes({ imageBorder: value })}
                                                 />
 
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Border Color", "frontis-blocks")}
-                                                    globalColorSwitcher={imageBorderColorSwitcher}
-                                                    globalColor={imageBorderColor}
-                                                    globalHoverColor={imageBorderHoverColor}
-                                                    handleColorSwitcherChange={imageBorderColorSwitcherChange}
-                                                    handleGlobalColorChange={imageBorderColorChange}
-                                                    handleGlobalHoverColorChange={imageBorderHoverColorChange}
+                                                    globalSwitcher={imageBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ imageBorderColorSwitcher: value })}
                                                 />
+                                                    
+                                                {imageBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={imageBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ imageBorderColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {imageBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={imageBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ imageBorderHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing
                                                     label={__("Border Width", "frontis-blocks")}
@@ -2992,26 +2905,49 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     setAttributes={setAttributes}
                                                 />
 
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={GalleryButtonColorSwitcher}
-                                                    globalColor={GalleryButtonColor}
-                                                    globalHoverColor={GalleryButtonHoverColor}
-                                                    handleColorSwitcherChange={handleGalleryButtonColorSwitcherChange}
-                                                    handleGlobalColorChange={handleGalleryButtonColorChange}
-                                                    handleGlobalHoverColorChange={handleGalleryButtonHoverColorChange}
+                                                    globalSwitcher={GalleryButtonColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ GalleryButtonColorSwitcher: value })}
                                                 />
+                                                    
+                                                {GalleryButtonColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={GalleryButtonColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryButtonColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {GalleryButtonColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={GalleryButtonHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryButtonHoverColor: value })}
+                                                    />
+                                                )}
 
-
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Background Color", "frontis-blocks")}
-                                                    globalColorSwitcher={GalleryButtonBGColorSwitcher}
-                                                    globalColor={GalleryButtonBGColor}
-                                                    globalHoverColor={GalleryButtonBGHoverColor}
-                                                    handleColorSwitcherChange={handleGalleryButtonBGColorSwitcherChange}
-                                                    handleGlobalColorChange={handleGalleryButtonBGColorChange}
-                                                    handleGlobalHoverColorChange={handleGalleryButtonBGHoverColorChange}
+                                                    globalSwitcher={GalleryButtonBGColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ GalleryButtonBGColorSwitcher: value })}
                                                 />
+                                                    
+                                                {GalleryButtonBGColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={GalleryButtonBGColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryButtonBGColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {GalleryButtonBGColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={GalleryButtonBGHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryButtonBGHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing 
                                                     label={__("Margin", "frontis-blocks")}
@@ -3059,15 +2995,27 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     onChange={(value) => setAttributes({ ButtonBorder: value })}
                                                 />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={ButtonBorderColorSwitcher}
-                                                globalColor={ButtonBorderColor}
-                                                globalHoverColor={ButtonBorderHoverColor}
-                                                handleColorSwitcherChange={handleButtonBorderColorSwitcherChange}
-                                                handleGlobalColorChange={handleButtonBorderColorChange}
-                                                handleGlobalHoverColorChange={handleButtonBorderHoverColorChange}
+                                                globalSwitcher={ButtonBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ ButtonBorderColorSwitcher: value })}
                                             />
+                                                    
+                                            {ButtonBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={ButtonBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ ButtonBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {ButtonBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={ButtonBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ ButtonBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing 
                                                 label={__("Border Width", "frontis-blocks")}
@@ -3120,6 +3068,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     rangeStep={1}
                                                     resetFallbackValue={100}
                                                 />
+
                                                 <FB_Spacing
                                                     label={__("Padding", "frontis-blocks")}
                                                     deviceType={deviceType}
@@ -3133,24 +3082,50 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     spacingCombineBtnHandler={handleLightboxPaddingCombineBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_Color
+
+                                                <FB_SwitcherControl
                                                     label={__("Color", "frontis-blocks")}
-                                                    globalColorSwitcher={lightboxColorSwitcher}
-                                                    globalColor={lightboxColor}
-                                                    globalHoverColor={lightboxHoverColor}
-                                                    handleColorSwitcherChange={handleLightboxColorSwitcherChange}
-                                                    handleGlobalColorChange={handleLightboxColorChange}
-                                                    handleGlobalHoverColorChange={handleLightboxHoverColorChange}
+                                                    globalSwitcher={lightboxColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ lightboxColorSwitcher: value })}
                                                 />
-												<FB_Color
+                                                    
+                                                {lightboxColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={lightboxColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {lightboxColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={lightboxHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxHoverColor: value })}
+                                                    />
+                                                )}
+
+                                                <FB_SwitcherControl
                                                     label={__("Background Color", "frontis-blocks")}
-                                                    globalColorSwitcher={lightboxBGColorSwitcher}
-                                                    globalColor={lightboxBGColor}
-                                                    globalHoverColor={lightboxBGHoverColor}
-                                                    handleColorSwitcherChange={handleLightboxBGColorSwitcherChange}
-                                                    handleGlobalColorChange={handleLightboxBGColorChange}
-                                                    handleGlobalHoverColorChange={handleLightboxBGHoverColorChange}
-                                                /> 
+                                                    globalSwitcher={lightboxBGColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ lightboxBGColorSwitcher: value })}
+                                                />
+                                                    
+                                                {lightboxBGColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={lightboxBGColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxBGColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {lightboxBGColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={lightboxBGHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxBGHoverColor: value })}
+                                                    />
+                                                )}
                                             </PanelBody>
 
                                             <PanelBody
@@ -3165,15 +3140,27 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     onChange={(value) => setAttributes({ lightboxBorder: value })}
                                                 />
 
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Border Color", "frontis-blocks")}
-                                                    globalColorSwitcher={lightboxBorderColorSwitcher}
-                                                    globalColor={lightboxBorderColor}
-                                                    globalHoverColor={lightboxBorderHoverColor}
-                                                    handleColorSwitcherChange={handleLightboxBorderColorSwitcherChange}
-                                                    handleGlobalColorChange={handleLightboxBorderColorChange}
-                                                    handleGlobalHoverColorChange={handleLightboxBorderHoverColorChange}
+                                                    globalSwitcher={lightboxBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ lightboxBorderColorSwitcher: value })}
                                                 />
+                                                    
+                                                {lightboxBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={lightboxBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxBorderColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {lightboxBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={lightboxBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ lightboxBorderHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Spacing 
                                                     label={__("Border Width", "frontis-blocks")}
@@ -3401,15 +3388,28 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     onChange={(value) => setAttributes({ GalleryBorder: value })}
                                                 />
 
-                                                <FB_Color
+                                                <FB_SwitcherControl
                                                     label={__("Border Color", "frontis-blocks")}
-                                                    globalColorSwitcher={GalleryBorderColorSwitcher}
-                                                    globalColor={GalleryBorderColor}
-                                                    globalHoverColor={GalleryBorderHoverColor}
-                                                    handleColorSwitcherChange={handleGalleryBorderColorSwitcherChange}
-                                                    handleGlobalColorChange={handleGalleryBorderColorChange}
-                                                    handleGlobalHoverColorChange={handleGalleryBorderHoverColorChange}
+                                                    globalSwitcher={GalleryBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ GalleryBorderColorSwitcher: value })}
                                                 />
+                                                    
+                                                {GalleryBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={GalleryBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryBorderColor: value })}
+                                                    />
+                                                )}
+                                                    
+                                                {GalleryBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={GalleryBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ GalleryBorderHoverColor: value })}
+                                                    />
+                                                )}
+
                                                 <FB_Spacing 
                                                     label={__("Border Width", "frontis-blocks")}
                                                     deviceType={deviceType}
