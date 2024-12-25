@@ -5,7 +5,6 @@ import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-edi
 import ServerSideRender from "@wordpress/server-side-render";
 import Inspector from "./inspector";
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -39,12 +38,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const pluginInstallUrl = FrontisBlocksData.fluent_form_install_url;
 
-    /**
-    * Manages tab button settings and switches to block settings on click
-    */
-    const panelRef = useRef(null);
-    SwitchToBlockSettings(panelRef);
-
 	return (
 		<>
 			<Inspector
@@ -55,7 +48,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.fluent_plugin_active ? (
-					<div className="fb-reusable_notice" ref={panelRef}>
+					<div className="fb-reusable_notice">
 						<h4 className="title">
 							<svg xmlns="http://www.w3.org/2000/svg" width="66" height="70" fill="none" viewBox="0 0 66 70">
 								<path fill="#399CFF" d="M46.161 30H12.84c-1.15 0-1.839.91-1.839 1.818v11.364c0 1.136.92 1.818 1.838 1.818h33.323c1.15 0 1.839-.91 1.839-1.818V31.818C48 30.91 47.31 30 46.161 30zm0 13.41H12.84V32.045H46.16v11.363z"></path>
@@ -80,7 +73,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									setAttributes({ formId: newFormId })
 								}
 								className="fb-fluent-form-select"
-								ref={panelRef}
 							/>
 						)}
 
@@ -89,7 +81,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								className="fb-fluent-form-rendered"
 								block="fluentfom/guten-block"
 								attributes={{ formId: formId }}
-								ref={panelRef}
 							/>
 						)}
 					</>
