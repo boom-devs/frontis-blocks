@@ -4,6 +4,16 @@ const countDownItemBorderTypeAttributes = {
 		type: 'string',
 		default: "none",
 	},
+	countDownItemBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	countDownItemBorderColor: {
+		type: 'string',
+	},
+	countDownItemBorderHoverColor: {
+		type: 'string',
+	},
 	countDownItemBorderColor: {
 		type: 'string',
 	},
