@@ -3,6 +3,9 @@ import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-edit
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
 import './editor.scss';
+import { useRef } from '@wordpress/element';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
@@ -26,6 +29,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-gallery-main-wrapper ${blockID}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
+    
     const handleChangeItem = (id, key, value) => {
         const updatedItems = GalleryItems.map(item => 
             item.id === id ? { ...item, [key]: value } : item
@@ -43,7 +53,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-image-gallery-wrapper">
+                <div className="fb-parent-wrapper fb-image-gallery-wrapper" ref={panelRef}>
                         <div className="fb-image-gallery-items">
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (
