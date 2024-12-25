@@ -94,13 +94,7 @@
 			cursor: pointer;
 			display: inline-flex;
 			align-items: center;
-			
-			&:hover .fb_load_more_loader {
-				border-top: 2px solid #ffffff;
-				border-right: 2px solid #cccccc;
-				border-bottom: 2px solid #999999;
-				border-left: 2px solid #666666;
-			}
+		
 			span {
 				width: 20px;
 				height: 20px;
