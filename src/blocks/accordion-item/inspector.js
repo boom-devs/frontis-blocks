@@ -17,15 +17,13 @@ import {
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
-import FBIconPicker from "../../components/icon-picker"; 
-import FB_Color from "../../components/color";
+import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
-import { SelectControl } from "@wordpress/components";
 import { useEffect, useMemo } from "@wordpress/element";
-import FB_BoxShadowControl from "../../components/box-shadow";
-import FB_BackgroundColorControl from "../../components/background-color-control";
 import FB_Range from "../../components/range";
 import FB_ImageControl from "../../components/image-control";
+import FB_SwitcherControl from "../../components/switcher-control";
+import FB_ColorControl from "../../components/color-control";
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -97,28 +95,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const titleSfIconHandler = (IconName) => {
 		setAttributes({titleSuffixIcon: IconName})
 	}
-
-    // FB_Color for Title prefix
-    const titlePfColorSwitcherChange = (value) => {
-        setAttributes({ titlePrefixColorSwitcher: value });
-    };
-    const titlePfColorChange = (value) => {
-        setAttributes({ titlePrefixColor: value });
-    };
-    const titlePfHoverColorChange = (value) => {
-        setAttributes({ titlePrefixHoverColor: value });
-    };
-
-    // FB_Color for Title Suffix
-    const titleSfColorSwitcherChange = (value) => {
-        setAttributes({ titleSuffixColorSwitcher: value });
-    };
-    const titleSfColorChange = (value) => {
-        setAttributes({ titleSuffixColor: value });
-    };
-    const titleSfHoverColorChange = (value) => {
-        setAttributes({ titleSuffixHoverColor: value });
-    };
 
     
     // accordionItem content margin
@@ -276,7 +252,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
 		}
 		
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
 			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			transition: all 0.3s ease-in-out;
@@ -307,14 +283,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
@@ -369,27 +345,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			height: 0;
 			visibility: hidden;
 			opacity: 0;
+            font-size: 0;
 			transition: all 0.3s ease-in-out;
 		}
-
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
-			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			height: unset;
 			visibility: visible;
 			transform: scaleY(1);
 			opacity: 1;
+            font-size: unset;
+            transition: all 0.3s ease-in-out;
+		}
+        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+            ${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 		}
 
-		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
-		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
-			display: none;
-		}
-
-		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
-		.${parentBlockID}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
-			display: block;
-		}
+		
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
@@ -411,7 +383,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex.Tablet !== undefined ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
@@ -421,7 +393,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex.Mobile !== undefined ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
@@ -539,15 +511,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                                             {(titlePrefixType === "icon") && (
                                                     <>
-                                                        <FB_Color
+                                                        <FB_SwitcherControl
                                                             label={__("Color", "frontis-blocks")}
-                                                            globalColorSwitcher={titlePrefixColorSwitcher}
-                                                            globalColor={titlePrefixColor}
-                                                            globalHoverColor={titlePrefixHoverColor}
-                                                            handleColorSwitcherChange={titlePfColorSwitcherChange}
-                                                            handleGlobalColorChange={titlePfColorChange}
-                                                            handleGlobalHoverColorChange={titlePfHoverColorChange}
+                                                            globalSwitcher={titlePrefixColorSwitcher}
+                                                            setGlobalSwitcher={(value) => setAttributes({ titlePrefixColorSwitcher: value })}
                                                         />
+                                                        
+                                                        {titlePrefixColorSwitcher === 'normal' && (
+                                                            <FB_ColorControl
+                                                                label={__("Normal Color", "frontis-blocks")}
+                                                                globalColor={titlePrefixColor}
+                                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value })}
+                                                            />
+                                                        )}
+                                                        
+                                                        {titlePrefixColorSwitcher === 'hover' && (
+                                                            <FB_ColorControl
+                                                                label={__("Hover Color", "frontis-blocks")}
+                                                                globalColor={titlePrefixHoverColor}
+                                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value })}
+                                                            />
+                                                        )}
                                                     </>
                                                 )}
 
@@ -608,15 +592,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                                             {(titleSuffixType === "icon") && (
                                                     <>
-                                                        <FB_Color
+                                                        <FB_SwitcherControl
                                                             label={__("Color", "frontis-blocks")}
-                                                            globalColorSwitcher={titleSuffixColorSwitcher}
-                                                            globalColor={titleSuffixColor}
-                                                            globalHoverColor={titleSuffixHoverColor}
-                                                            handleColorSwitcherChange={titleSfColorSwitcherChange}
-                                                            handleGlobalColorChange={titleSfColorChange}
-                                                            handleGlobalHoverColorChange={titleSfHoverColorChange}
+                                                            globalSwitcher={titleSuffixColorSwitcher}
+                                                            setGlobalSwitcher={(value) => setAttributes({ titleSuffixColorSwitcher: value })}
                                                         />
+                                                        
+                                                        {titleSuffixColorSwitcher === 'normal' && (
+                                                            <FB_ColorControl
+                                                                label={__("Normal Color", "frontis-blocks")}
+                                                                globalColor={titleSuffixColor}
+                                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value })}
+                                                            />
+                                                        )}
+                                                        
+                                                        {titleSuffixColorSwitcher === 'hover' && (
+                                                            <FB_ColorControl
+                                                                label={__("Hover Color", "frontis-blocks")}
+                                                                globalColor={titleSuffixHoverColor}
+                                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value })}
+                                                            />
+                                                        )}
                                                     </>
                                                 )}
 
