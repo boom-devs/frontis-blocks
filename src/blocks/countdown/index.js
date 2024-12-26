@@ -12,7 +12,7 @@ import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
 	attributes,
+	icon: FB_Block_Icons.dual_button,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.countdown,
 } );

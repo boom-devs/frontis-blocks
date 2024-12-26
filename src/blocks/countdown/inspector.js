@@ -25,22 +25,13 @@ import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import { useEffect, useState, useMemo } from '@wordpress/element';
-
-import './editor.scss';
 
 import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
 import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
 import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
-import FB_Range from "@Components/range";
-import FB_Spacing from "@Components/spacing";
-import FB_BoxShadowControl from "@Components/box-shadow";
-import FB_TypographyControl from '@Components/typography-control';
-import FB_SwitcherControl from '@Components/switcher-control';
-import FB_ColorControl from '@Components/color-control';
-
+import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
