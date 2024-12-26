@@ -31,7 +31,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={`fb-slider-list-item single-item-${item.id}`}>
+                            <div className={`fb-slider-list-item single-item-${item.id}`} ref={panelRef}>
                                 <ul className="fb-nested-items-list">
                                     {(item.nestedItems || []).map((nestedItem) => (
                                         <li key={nestedItem.id} className="fb-nested-item">

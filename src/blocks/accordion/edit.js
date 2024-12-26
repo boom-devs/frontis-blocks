@@ -1,12 +1,13 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, useRef } from "@wordpress/element";
 import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
 import Inspector from './inspector';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"]; 
@@ -255,6 +256,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-accordion-main-wrapper ${blockID}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
 
     const addAccordion = () => {
         const innerBlocks = [
@@ -353,7 +360,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     const fbaccordionItemstyle = useMemo(() => {
         let styles = `
-          .fb-accordion-main-wrapper.${blockID} {
+          .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 position: relative;
                 ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
                 ${accordionPaddingDesktopWidth !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
@@ -384,7 +391,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 transition: all .3s ease-in-out;
             }
         
-            .fb-accordion-main-wrapper.${blockID}:hover {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper:hover {
                 ${
                     accordionBgHoverType === "gradient"
                       ? `background: ${
@@ -611,9 +618,19 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             transition: all 0.3s ease-in-out;
         }
 
+
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+			display: none;
+		}
+
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+			display: block;
+		}
       
         @media only screen and (max-width: 1024px) {
-            .fb-accordion-main-wrapper.${blockID} {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
                 ${accordionPaddingTabletWidth !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
                 ${accordionMarginTabletWidth !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
@@ -687,7 +704,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         }
       
         @media only screen and (max-width: 767px) {
-            .fb-accordion-main-wrapper.${blockID} {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
                 ${accordionPaddingMobileWidth !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}
@@ -1003,7 +1020,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">

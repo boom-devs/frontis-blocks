@@ -13,19 +13,18 @@ import {
 	TabPanel,
 	SelectControl
 } from '@wordpress/components';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 
 import {
 	BORDER_STYLES,
 } from "./constants/constants";
 
-
-import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import { useEffect, useState, useMemo } from '@wordpress/element';
+
 
 import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
 import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";

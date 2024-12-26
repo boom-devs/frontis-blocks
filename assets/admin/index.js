@@ -116,29 +116,29 @@ __webpack_require__.r(__webpack_exports__);
 var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('frontisblocks/admin/tabs', [{
   id: 'general',
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.HomeIcon, null),
-  label: ("Dashboard", "frontis-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Dashboard", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Dashboard, null)
 }, {
   id: 'blocks',
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.BlockIcon, null),
-  label: ("Blocks", "frontis-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blocks", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Blocks, null)
 }, {
   id: 'settings',
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.OptionsIcon, null),
-  label: ("Settings", "frontis-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Settings, null)
 }, {
   id: 'integrations',
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
-  label: ("Integrations", "frontis-blocks"),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
 }
 // {
-//     id: 'custom_icons',
-//     icon: <IntegrationsIcon />,
-//     label: ("Custom icons", "frontis-blocks"),
-//     comp: <CustomIcons />
+// 	id: 'custom_icons',
+// 	icon: <IntegrationsIcon />,
+// 	label: __("Custom icons", "frontis-blocks"),
+// 	comp: <CustomIcons />
 // }
 ]);
 // Add pricing tab if not pro
