@@ -711,15 +711,118 @@ const attributes = {
         default: true
     },
 
-    GalleryBgColorSwitcher : {
+    
+    GalleryGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    GalleryGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    GalleryBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    GalleryBgColor : {
-        type: "string"
+    GalleryBgType: {
+        type: "string",
+        default: "classic"
     },
-    GalleryBgHoverColor: {
-        type: 'string',
+    GalleryBgClassicColor: {
+        type: "string",
+    },
+    GalleryBgGradientColor: {
+        type: "string",
+    },
+    GalleryBgCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    GalleryBgCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgColorStyle: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageUrl: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageAlt: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageID: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImagePosition: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageSize: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverType: {
+        type: "string",
+        default: "classic"
+    },
+    GalleryBgHoverClassicColor: {
+        type: "string",
+    },
+    GalleryBgHoverGradientColor: {
+        type: "string",
+    },
+    GalleryBgHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    GalleryBgHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverColorStyle: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageUrl: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageAlt: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageID: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImagePosition: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageSize: {
+        type: "string",
+        default: ""
+    },
+    GalleryBgHoverImageRepeat: {
+        type: "string",
+        default: ""
     },
 
 

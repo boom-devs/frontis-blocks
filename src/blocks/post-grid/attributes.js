@@ -2371,6 +2371,12 @@ const attributes = {
 		default: true
 	},
 
+	loadMoreloaderColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+
+
 	/** End Load More */
 
 };

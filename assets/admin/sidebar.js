@@ -2837,8 +2837,6 @@ function FrontisBlocksSidebar(props) {
   // Save colors after post save
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    console.log("Chekcing is after saving");
-    console.log(isAfterSave);
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
@@ -3186,10 +3184,28 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
     deviceHandler = _ref.deviceHandler;
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
     setDeviceType = _useDispatch.setDeviceType;
+
+  /** 
+   * Set the device type to Desktop only when the component mounts
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    deviceHandler('Desktop');
+    setDeviceType('Desktop');
+  }, []);
+
+  /**
+   * Handle the device type change
+   * @param {string} deviceName - The device type to set
+   */
   var handleDevice = function handleDevice(deviceName) {
     deviceHandler(deviceName);
     setDeviceType(deviceName);
   };
+
+  /**
+   * Toggle the device visibility
+   * @param {Event} e - The event object
+   */
   var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
     var wrapper = e.currentTarget;
     wrapper.classList.toggle('fb-device-switchers-open');
