@@ -419,7 +419,7 @@ const attributes = {
 
     teamMemberContentAlignment: {
 		type: "string",
-		default: "left"
+		default: "center"
 	},
 
 	teamMemberContentBgColorSwitcher: {
@@ -836,6 +836,10 @@ const attributes = {
 	},
 
 	/** team Image */
+	teamMemberImageAlignment: {
+		type : "string",
+		default: "center"
+	},
     teamMemberImageUrl: {
         type: "string",
         default: ""
@@ -1195,6 +1199,107 @@ const attributes = {
 		default: true
 	},
 
+	teamMemberSocialProfileSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	teamMemberSocialProfileSeparator: {
+		type: "boolean",
+		default: true,
+	},
+	teamMemberSocialProfileSeparatorPosition: {
+		type : "string",
+		default: "top"
+	},
+	socialProfileSeparatorAlignment: {
+		type : "string",
+		default: "center"
+	},
+	socialProfileSeparatorWidth: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+
+	socialProfileSeparatorWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
+	socialProfileSeparatorHeight: {
+		type: 'object',
+		default: {
+			Desktop: 1,
+			Tablet: 1,
+			Mobile: 1
+		}
+	},
+	socialProfileSeparatorHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialProfileSeparatorColorSwitcher: {
+		type : "string",
+		default: "normal"
+	},
+	socialProfileSeparatorColor: {
+		type : "string",
+		default: "#E1E3E8"
+	},
+	socialProfileSeparatorHoverColor: {
+		type : "string",
+		default: "#E1E3E8"
+	},
+	socialProfileSeparatorMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialProfileSeparatorMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginTab: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginMobile: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginLink : {
+		type : "boolean",
+		default: true
+	},
+
 	teamMemberSocialItems: {
 		type: "array",
 		default: [
@@ -1252,7 +1357,7 @@ const attributes = {
 
 	teamMemberIconsAlignment: {
 		type : "string",
-		default: "left"
+		default: "center"
 	},
 
 	teamMemberIconsSize: {
@@ -1808,14 +1913,6 @@ const attributes = {
 	teamMemberteamMemberIconshape: {
 		type: "string",
 		default: "circle"
-	},
-	teamMemberSocialAlignment: {
-		type: "string",
-		default: "left",
-	},
-	teamMemberSocialIconAlignment: {
-		type: "string",
-		default: "left",
 	},
 
 	teamMemberSocialListGapDesktop: {

@@ -69,6 +69,10 @@ export const CONTENT_SOCIAL_ICON_POSITION = [
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 	{ label: __("Left", "frontis-block"), value: "left" },
 ];
+export const SEPARATOR_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+];
 
 export const SOCIAL_ICON_BUTTON = [
 	{ label: __("Default", "frontis-block"), value: "default" },
