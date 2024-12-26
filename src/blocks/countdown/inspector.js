@@ -24,6 +24,7 @@ import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundColorControl from "@Components/background-color-control";
 
 
 import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
@@ -36,7 +37,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		deviceType,
-
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -196,6 +196,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemWrapperMarginMobile,
 		countDownItemWrapperMarginLink,
 		/** End Item Wrapper */
+		globalBgColorSwitcher,
+		globalBackgroundType,
+		globalClassicColor,
+		globalGradientColor,
+		globalCustomGradientSwitcher,
+		globalCustomGradientInputValue,
+		globalBackgroundColorStyle,
+		globalBackgroundImageUrl,
+		globalBackgroundImageAlt,
+		globalBackgroundImageID,
+		globalBackgroundImagePosition,
+		globalBackgroundImageAttachment,
+		globalBackgroundImageSize,
+		globalBackgroundImageRepeat,
+		hoverBackgroundType,
+		hoverClassicColor,
+		hoverGradientColor,
+		hoverCustomGradientSwitcher,
+		hoverCustomGradientInputValue,
+		hoverBackgroundImageUrl,
+		hoverBackgroundImageAlt,
+		hoverBackgroundImageID,
+		hoverBackgroundImagePosition,
+		hoverBackgroundImageAttachment,
+		hoverBackgroundImageSize,
+		hoverBackgroundImageRepeat
 
 	} = attributes;
 
@@ -1296,58 +1322,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												clientId ={clientId}
 											/>
 
-											<FB_BackgroundColorControl
-												bgColorSwitcher={testBgColorSwitcher}
-												setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value }) }
-												normalBackgroundType={testBackgroundType}
-												setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value }) }
-												normalClassicColor={testClassicColor}
-												setNormalClassicColor={(value) => setAttributes({ testClassicColor: value }) }
-												normalGradientColor={testGradientColor}
-												setNormalGradientColor={(value) => setAttributes({ testGradientColor: value }) }
-												normalCustomGradientSwitcher={ testCustomGradientSwitcher }
-												setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value, }) }
-												normalCustomGradientInputValue={ testCustomGradientInputValue }
-												setNormalCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value, }) }
-												normalBackgroundImageUrl={testBackgroundImageUrl}
-												setNormalBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value }) }
-												normalBackgroundImageAlt={testBackgroundImageAlt}
-												setNormalBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value }) }
-												normalBackgroundImageID={testBackgroundImageID}
-												setNormalBackgroundImageID={(value) => setAttributes({ testBackgroundImageID: value }) }
-												normalBackgroundImagePosition={ testBackgroundImagePosition }
-												setNormalBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value, }) }
-												normalBackgroundImageAttachment={ testBackgroundImageAttachment }
-												setNormalBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value, }) }
-												normalBackgroundImageRepeat={ testBackgroundImageRepeat }
-												setNormalBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value, }) }
-												normalBackgroundImageSize={testBackgroundImageSize}
-												setNormalBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value }) }
-												hoverBackgroundType={hoverBackgroundType}
-												setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
-												hoverClassicColor={hoverClassicColor}
-												setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value }) }
-												hoverGradientColor={hoverGradientColor}
-												setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value }) }
-												hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
-												setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
-												hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
-												setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, }) }
-												hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-												setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value }) }
-												hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-												setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value }) }
-												hoverBackgroundImageID={hoverBackgroundImageID}
-												setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value }) }
-												hoverBackgroundImagePosition={ hoverBackgroundImagePosition }
-												setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, }) }
-												hoverBackgroundImageAttachment={ hoverBackgroundImageAttachment }
-												setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, }) }
-												hoverBackgroundImageRepeat={ hoverBackgroundImageRepeat }
-												setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, }) }
-												hoverBackgroundImageSize={hoverBackgroundImageSize}
-												setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value }) }
-											/>
+										<FB_BackgroundColorControl
+											bgColorSwitcher={globalBgColorSwitcher}
+											setBgColorSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value }) }
+											normalBackgroundType={globalBackgroundType}
+											setNormalBackgroundType={(value) => setAttributes({ globalBackgroundType: value }) }
+											normalClassicColor={globalClassicColor}
+											setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value }) }
+											normalGradientColor={globalGradientColor}
+											setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value }) }
+											normalCustomGradientSwitcher={ globalCustomGradientSwitcher }
+											setNormalCustomGradientSwitcher={(value) => setAttributes({ globalCustomGradientSwitcher: value, }) }
+											normalCustomGradientInputValue={ globalCustomGradientInputValue }
+											setNormalCustomGradientInputValue={(value) => setAttributes({ globalCustomGradientInputValue: value, }) }
+											normalBackgroundImageUrl={globalBackgroundImageUrl}
+											setNormalBackgroundImageUrl={(value) => setAttributes({ globalBackgroundImageUrl: value }) }
+											normalBackgroundImageAlt={globalBackgroundImageAlt}
+											setNormalBackgroundImageAlt={(value) => setAttributes({ globalBackgroundImageAlt: value }) }
+											normalBackgroundImageID={globalBackgroundImageID}
+											setNormalBackgroundImageID={(value) => setAttributes({ globalBackgroundImageID: value }) }
+											normalBackgroundImagePosition={ globalBackgroundImagePosition }
+											setNormalBackgroundImagePosition={(value) => setAttributes({ globalBackgroundImagePosition: value, }) }
+											normalBackgroundImageAttachment={ globalBackgroundImageAttachment }
+											setNormalBackgroundImageAttachment={(value) => setAttributes({ globalBackgroundImageAttachment: value, }) }
+											normalBackgroundImageRepeat={ globalBackgroundImageRepeat }
+											setNormalBackgroundImageRepeat={(value) => setAttributes({ globalBackgroundImageRepeat: value, }) }
+											normalBackgroundImageSize={globalBackgroundImageSize}
+											setNormalBackgroundImageSize={(value) => setAttributes({ globalBackgroundImageSize: value }) }
+											hoverBackgroundType={hoverBackgroundType}
+											setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
+											hoverClassicColor={hoverClassicColor}
+											setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value }) }
+											hoverGradientColor={hoverGradientColor}
+											setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value }) }
+											hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
+											setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
+											hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
+											setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, }) }
+											hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+											setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value }) }
+											hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+											setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value }) }
+											hoverBackgroundImageID={hoverBackgroundImageID}
+											setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value }) }
+											hoverBackgroundImagePosition={ hoverBackgroundImagePosition }
+											setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, }) }
+											hoverBackgroundImageAttachment={ hoverBackgroundImageAttachment }
+											setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, }) }
+											hoverBackgroundImageRepeat={ hoverBackgroundImageRepeat }
+											setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, }) }
+											hoverBackgroundImageSize={hoverBackgroundImageSize}
+											setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value }) }
+										/>
+
 										</PanelBody>
 										<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
 											<CountDownItemWrapperBorderControl
