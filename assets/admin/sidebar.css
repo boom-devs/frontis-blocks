@@ -80,9 +80,52 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel {
   border-top: 0;
+  margin-top: 12px;
+  padding: 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control {
   padding: 0px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-element {
+  margin-bottom: 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
+  padding: 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon {
+  width: 24px;
+  height: 24px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #404655;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper {
+  display: flex;
+  gap: 8px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #0B0C0E;
+  text-transform: capitalize;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
+  font-family: "Work Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #0B0C0E;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body {
   border: none;

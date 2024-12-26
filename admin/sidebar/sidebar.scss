@@ -112,9 +112,53 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.fb-global-controls {
 		&.components-panel {
 			border-top: 0;
-
+			margin-top: 12px;
+			padding: 16px;
 			.fb-panel-control {
 				padding: 0px;
+				.fb-tab-element{
+					margin-bottom: 16px;
+				}
+				.components-navigator-button {
+					padding: 0;
+				}
+				.fb-tab-wrapper {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					.fb-tab-icon {
+						width: 24px;
+						height: 24px;
+					}
+					.fb-tab-title{
+						font-family: $heading-font-family;
+						font-size: $medium-font-size;
+						font-weight: 500;
+						line-height: 16px;
+						color: $neutral-color-700;
+					}
+				}
+				.fb-global-header-inner-wrapper{
+					display: flex;
+					gap: 8px;
+					.fb-global-header-inner{
+						h3{
+							font-family: $heading-font-family;
+							font-size: $medium-font-size;
+							font-weight: 600;
+							line-height: 16px;
+							color: $neutral-color-950;
+							text-transform: capitalize;
+						}
+						p{
+							font-family: $body-font-family;
+							font-size: $medium-font-size;
+							font-weight: 400;
+							line-height: 20px;
+							color: $neutral-color-950;
+						}
+					}
+				}
 			}
 			.components-panel__body {
 				border: none;
