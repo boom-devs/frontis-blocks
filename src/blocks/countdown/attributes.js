@@ -773,6 +773,107 @@ const attributes = {
 		}
 	},
 	/** End Vertical Spacing */
+	globalBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	globalBackgroundType: {
+		type: "string",
+		default: "classic"
+	},
+	globalClassicColor: {
+		type: "string",
+		default: "#15171C"
+	},
+	globalGradientColor: {
+		type: "string",
+	},
+	globalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	globalCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundColorStyle: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageUrl: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageAlt: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageID: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImagePosition: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageSize: {
+		type: "string",
+		default: ""
+	},
+	globalBackgroundImageRepeat: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundType: {
+		type: "string",
+		default: "classic"
+	},
+	hoverClassicColor: {
+		type: "string",
+	},
+	hoverGradientColor: {
+		type: "string",
+	},
+	hoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	hoverCustomGradientInputValue: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageUrl: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageAlt: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageID: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImagePosition: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageAttachment: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageSize: {
+		type: "string",
+		default: ""
+	},
+	hoverBackgroundImageRepeat: {
+		type: "string",
+		default: ""
+	},	
 	
 };
 
