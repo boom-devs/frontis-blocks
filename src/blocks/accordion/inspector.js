@@ -345,39 +345,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
 
 
-    /** Title Color */
-    const handleTitleColorSwitcherChange = (value) => {
-        setAttributes({ titleColorSwitcher: value });
-    };
-    const handleTitleColorChange = (value) => {
-        setAttributes({ titleColor: value });
-    };
-    const handleTitleHoverColorChange = (value) => {
-        setAttributes({ titleHoverColor: value });
-    };
-
-    /** Title Backgorund Color */
-    const handleTitleBGColorSwitcherChange = (value) => {
-        setAttributes({ titleBGColorSwitcher: value });
-    };
-    const handleTitleBGColorChange = (value) => {
-        setAttributes({ titleBGColor: value });
-    };
-    const handleTitleBGHoverColorChange = (value) => {
-        setAttributes({ titleBGHoverColor: value });
-    };
-
-    /** Item Icon Color */
-    const handleTitleIconColorSwitcherChange = (value) => {
-        setAttributes({ titleIconColorSwitcher: value });
-    };
-    const handleTitleIconColorChange = (value) => {
-        setAttributes({ titleIconColor: value });
-    };
-    const handleTitleIconHoverColorChange = (value) => {
-        setAttributes({ titleIconHoverColor: value });
-    };
-
+     /** Start load font */
+     useEffect(() => {
+        loadGoogleFont(titleFontFamily);
+    }, [titleFontFamily]);
+    /** End load font */
 
 
     /** Start Accordions Gap */

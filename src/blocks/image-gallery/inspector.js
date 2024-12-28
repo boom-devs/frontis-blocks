@@ -2055,7 +2055,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const fbGalleryStyle = useMemo(() => `
-        .fb-gallery-main-wrapper.${blockID} {
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
             position: relative;
             overflow: hidden;
             ${
@@ -2180,7 +2180,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         @media only screen and (max-width: 1024px) {
-            .fb-gallery-main-wrapper.${blockID} {
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingTabletWidth !== undefined ? `${GalleryPaddingTabletWidth}` : ''};
                 margin: ${GalleryMarginTabletWidth !== undefined ? `${GalleryMarginTabletWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusTabletWidth !== undefined ? `${GalleryBorderRadiusTabletWidth}` : ''};
@@ -2218,7 +2218,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
-            .fb-gallery-main-wrapper.${blockID} {
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingMobileWidth !== undefined ? `${GalleryPaddingMobileWidth}` : ''};
                 margin: ${GalleryMarginMobileWidth !== undefined ? `${GalleryMarginMobileWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusMobileWidth !== undefined ? `${GalleryBorderRadiusMobileWidth}` : ''};
