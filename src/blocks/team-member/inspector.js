@@ -410,7 +410,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		loadGoogleFont(teamMemberDesignationFontFamily);
 		loadGoogleFont(teamMemberNameFontFamily);
 		loadGoogleFont(teamMemberDescFontFamily);
-	}, [teamMemberDesignationFontFamily, teamMemberNameFontFamily, teamMemberDescFontFamily]);
+	}, [
+		teamMemberDesignationFontFamily, 
+		teamMemberNameFontFamily, 
+		teamMemberDescFontFamily]);
 	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
