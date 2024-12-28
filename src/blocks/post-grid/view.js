@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.body.addEventListener('click', function(event) {
 		if (event.target.closest('.fb_load_more')) {
 			const parentElement = event.target.closest(".wp-block-frontis-blocks-post-grid");
-			document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
+
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
@@ -96,6 +96,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				// Call function to load more posts
 				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign);
+
+				if (loadMoreIconAlign === 'icon') {
+					document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
+					document.querySelector('.fb_post_grid_container .fb_load_more .load_more_button_icon_wrap svg').style.display = 'none';
+				}
 			}
 		}
 	});
@@ -185,13 +190,33 @@ document.addEventListener('DOMContentLoaded', function() {
 				if (loadMoreWrapper) {
 					loadMoreWrapper.innerHTML = `
 						${loadMoreText}
-						<span class="load_more_button_icon_wrap">
-							${loadMoreIconAlign === 'icon' ? loadMoreIconWrapper?.outerHTML || '' : ''}
-							<div class="fb_load_more_outter_wrap">
-								<span class="fb_load_more_loader"></span>
-							</div>
-						</span>
+
+						${
+							loadMoreIconAlign === 'icon'
+								? `<span class="load_more_button_icon_wrap">
+									${loadMoreIconWrapper?.outerHTML || ''}
+									<div class="fb_load_more_outter_wrap">
+										<span class="fb_load_more_loader"></span>
+									</div>
+								</span>`
+								: ''
+						}
 					`;
+				}
+
+				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
+				if (loadMore) {
+					if (loadMoreIconAlign === 'icon') {
+						const svgElement = loadMore.querySelector('.load_more_button_icon_wrap svg');
+						if (svgElement) {
+							svgElement.style.display = 'block';
+						}
+				
+						const outerWrap = loadMore.querySelector('.fb_load_more_outter_wrap');
+						if (outerWrap) {
+							outerWrap.style.display = 'none';
+						}
+					}
 				}
 				
 			})
@@ -200,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
 				if (loadMore) {
 					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'block';
+					loadMore.querySelector('.fb_load_more_outter_wrap').style.display = 'none';
 				}
 			});
 	}

@@ -333,7 +333,7 @@ const attributes = {
     },
     tabIcon: {
         type: "string",
-        default: "angles-right",
+        default: "angle-right",
     },
 
     /** Start Tab Image */
@@ -373,7 +373,7 @@ const attributes = {
     },
     expandedIcon: {
         type: "string",
-        default: "angles-down",
+        default: "angle-down",
     },
 
     /** Start expanded Image */

@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useRef } from "@wordpress/element";
 import { Placeholder, SelectControl } from "@wordpress/components";
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";

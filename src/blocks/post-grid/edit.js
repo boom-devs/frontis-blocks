@@ -1,6 +1,6 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useRef } from "@wordpress/element";
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import {
@@ -11,6 +11,8 @@ import {
 import LayoutGrid from './layoutGrid';
 import './editor.scss';
 import Inspector from "./inspector";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -77,6 +79,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return select('core').getEntityRecords('postType', postType, query);
     } );
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
     return (
         <>
             <Inspector
@@ -88,7 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {postLists ? (
                 <div {...blockProps} id={blockId}>
                     {postLists.length > 0 ? (
-                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} > 
+                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} ref={panelRef}> 
                             {postLists.map((item, index) => {
                                 return <LayoutGrid 
                                     data={item}

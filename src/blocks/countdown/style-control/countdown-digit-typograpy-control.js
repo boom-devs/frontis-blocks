@@ -5,6 +5,8 @@ import {FONT_FAMILYS, UNIT_TYPES} from "@Blocks/advanced-heading/constants/const
 import FB_Color from "@Components/color";
 import FB_Range from '@Components/range';
 import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 
 export default function CountDownDigitTypographyControl ({ attributes, setAttributes}) {
 
@@ -25,34 +27,11 @@ export default function CountDownDigitTypographyControl ({ attributes, setAttrib
 		digitLetterSpacingUnits,
 		digitLineHeight,
 		digitLineHeightUnits,
-
-
 	} = attributes;
-
-
-	const handleColorSwitcherChange = (value) => {
-		setAttributes({ digitFontColorSwitcher: value });
-	};
-	const handleGlobalColorChange = (value) => {
-		setAttributes({ digitFontColor: value });
-	};
-	const handleGlobalHoverColorChange = (value) => {
-		setAttributes({ digitFontHoverColor: value });
-	};
 
 
 	return (
 		<>
-
-			<FB_Color
-				label={__(" Color", "frontis-blocks")}
-				globalColorSwitcher={digitFontColorSwitcher}
-				globalColor={digitFontColor}
-				globalHoverColor={digitFontHoverColor}
-				handleColorSwitcherChange={handleColorSwitcherChange}
-				handleGlobalColorChange={handleGlobalColorChange}
-				handleGlobalHoverColorChange={handleGlobalHoverColorChange}
-			/>
 
 			<FB_TypographyControl
 				fontFamily={digitFontFamily}
@@ -91,6 +70,28 @@ export default function CountDownDigitTypographyControl ({ attributes, setAttrib
 				deviceType={deviceType}
 				setAttributes={setAttributes}
 			/>
+
+			<FB_SwitcherControl
+				label={__("Color", "frontis-blocks")}
+				globalSwitcher={digitFontColorSwitcher}
+				setGlobalSwitcher={(value) => setAttributes({ digitFontColorSwitcher: value })}
+			/>
+
+			{digitFontColorSwitcher === 'normal' && (
+				<FB_ColorControl
+					label={__("Normal Color", "frontis-blocks")}
+					globalColor={digitFontColor}
+					setGlobalColor={(value) => setAttributes({ digitFontColor: value })}
+				/>
+			)}
+
+			{digitFontColorSwitcher === 'hover' && (
+				<FB_ColorControl
+					label={__("Hover Color", "frontis-blocks")}
+					globalColor={digitFontHoverColor}
+					setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value })}
+				/>
+			)}
 		</>
 	);
 };

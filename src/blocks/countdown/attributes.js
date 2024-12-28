@@ -3,7 +3,10 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
 	// Show Hide Label Attributes
 	showDays: {
 		type: 'boolean',
