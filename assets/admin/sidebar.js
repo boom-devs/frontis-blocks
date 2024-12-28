@@ -3188,10 +3188,10 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
   /** 
    * Set the device type to Desktop only when the component mounts
    */
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    deviceHandler('Desktop');
-    setDeviceType('Desktop');
-  }, []);
+  // useEffect(() => {
+  // 	deviceHandler('Desktop');
+  // 	setDeviceType('Desktop');
+  // }, []);
 
   /**
    * Handle the device type change

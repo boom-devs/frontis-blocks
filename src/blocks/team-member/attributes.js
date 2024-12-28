@@ -278,28 +278,28 @@ const attributes = {
     teamMemberDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberMobileBorderRadiusWidth: {
         type: "object", 
 		default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberBorderRadiusLink : {
@@ -419,7 +419,7 @@ const attributes = {
 
     teamMemberContentAlignment: {
 		type: "string",
-		default: "left"
+		default: "center"
 	},
 
 	teamMemberContentBgColorSwitcher: {
@@ -582,7 +582,7 @@ const attributes = {
 	teamMemberContentMarginDesktop: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -591,7 +591,7 @@ const attributes = {
 	teamMemberContentMarginTab: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -600,7 +600,7 @@ const attributes = {
 	teamMemberContentMarginMobile: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -713,11 +713,11 @@ const attributes = {
 
     teamMemberDesignation: {
 		type: "string",
-		default: "Creative Director"
+		default: "Junior Developer"
 	},
 	teamMemberDesignationColor : {
 		type: "string",
-		default: "#000"
+		default: "#555E72"
 	},
 	// Typography
 	teamMemberDesignationFontFamily: {
@@ -836,6 +836,10 @@ const attributes = {
 	},
 
 	/** team Image */
+	teamMemberImageAlignment: {
+		type : "string",
+		default: "center"
+	},
     teamMemberImageUrl: {
         type: "string",
         default: ""
@@ -1059,7 +1063,7 @@ const attributes = {
 
     teamMemberName: {
 		type: "string",
-		default: "Wade Warren"
+		default: "Md Mehedi Hasan"
 	},
 	teamMemberNameHeadingTag: {
 		type : "string",
@@ -1167,7 +1171,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
@@ -1176,7 +1180,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
@@ -1185,12 +1189,113 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
 	},
 	teamMemberNameMarginLink: {
+		type : "boolean",
+		default: true
+	},
+
+	teamMemberSocialProfileSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	teamMemberSocialProfileSeparator: {
+		type: "boolean",
+		default: true,
+	},
+	teamMemberSocialProfileSeparatorPosition: {
+		type : "string",
+		default: "top"
+	},
+	socialProfileSeparatorAlignment: {
+		type : "string",
+		default: "center"
+	},
+	socialProfileSeparatorWidth: {
+		type: 'object',
+		default: {
+			Desktop: 100,
+			Tablet: 100,
+			Mobile: 100
+		}
+	},
+
+	socialProfileSeparatorWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%'
+		}
+	},
+	socialProfileSeparatorHeight: {
+		type: 'object',
+		default: {
+			Desktop: 1,
+			Tablet: 1,
+			Mobile: 1
+		}
+	},
+	socialProfileSeparatorHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialProfileSeparatorColorSwitcher: {
+		type : "string",
+		default: "normal"
+	},
+	socialProfileSeparatorColor: {
+		type : "string",
+		default: "#E1E3E8"
+	},
+	socialProfileSeparatorHoverColor: {
+		type : "string",
+		default: "#E1E3E8"
+	},
+	socialProfileSeparatorMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialProfileSeparatorMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '24',
+			bottom: '24',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginTab: {
+		type: "object", 
+		default: {
+			top: '24',
+			bottom: '24',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginMobile: {
+		type: "object", 
+		default: {
+			top: '24',
+			bottom: '24',
+			left: '0',
+			right: '0',
+		},
+	},
+	socialProfileSeparatorMarginLink : {
 		type : "boolean",
 		default: true
 	},
@@ -1252,7 +1357,7 @@ const attributes = {
 
 	teamMemberIconsAlignment: {
 		type : "string",
-		default: "left"
+		default: "center"
 	},
 
 	teamMemberIconsSize: {
@@ -1274,9 +1379,9 @@ const attributes = {
 	teamMemberIconsSpacing: {
 		type : "object",
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: 29,
+			Tablet: 29,
+			Mobile: 29
 		}
 	},
 	teamMemberIconsSpacingUnits: {
@@ -1808,14 +1913,6 @@ const attributes = {
 	teamMemberteamMemberIconshape: {
 		type: "string",
 		default: "circle"
-	},
-	teamMemberSocialAlignment: {
-		type: "string",
-		default: "left",
-	},
-	teamMemberSocialIconAlignment: {
-		type: "string",
-		default: "left",
 	},
 
 	teamMemberSocialListGapDesktop: {

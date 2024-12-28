@@ -291,6 +291,95 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      /** Start Preset Style */
      const changeGalleryPreset = (selectedPreset) => {
         const presetConfigurations = {
+            "default": {
+                deviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                ],
+                GalleryPresetStyle: "default",
+                GalleryItemHeight: {
+                    Desktop: 300,
+                    Tablet: 300,
+                    Mobile: 250
+                },
+                ImageOverlayStyle: "none",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColor: "#fff",
+                lightboxBorder: "none",
+                lightboxBorderColor: "#000",
+                lightboxDesktopPadding: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                lightboxDesktopBorderWidth: {
+                    top: '0',
+                    right: '0',
+                    bottom: '0',
+                    left: '0'
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 50,
+                    right: 50,
+                    bottom: 50,
+                    left: 50
+                },
+                GalleryColumnNumber: {
+                    Desktop: 3,
+                    Tablet: 2,
+                    Mobile: 1
+                },
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                }
+            },
             "preset-1": {
                 deviceType: "Desktop",
                 GalleryType: "grid",
@@ -625,6 +714,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         }
                     ],
                     GalleryPresetStyle: "preset-3",
+                    ImageOverlayStyle: "overlay",
+                    ImageOverlayStyleType: "bottom",
                     lightboxIconSwitcher: false,
                     GalleryItemHeight: {
                         Desktop: 410,
