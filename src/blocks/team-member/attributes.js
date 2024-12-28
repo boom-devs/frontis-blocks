@@ -278,28 +278,28 @@ const attributes = {
     teamMemberDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberMobileBorderRadiusWidth: {
         type: "object", 
 		default: {
-            top: '12',
-            bottom: '12',
-            left: '12',
-            right: '12',
+            top: '16',
+            bottom: '16',
+            left: '16',
+            right: '16',
         },
     },
     teamMemberBorderRadiusLink : {
@@ -582,7 +582,7 @@ const attributes = {
 	teamMemberContentMarginDesktop: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -591,7 +591,7 @@ const attributes = {
 	teamMemberContentMarginTab: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -600,7 +600,7 @@ const attributes = {
 	teamMemberContentMarginMobile: {
 		type: "object",
 		default: {
-			top: '0',
+			top: '32',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -717,7 +717,7 @@ const attributes = {
 	},
 	teamMemberDesignationColor : {
 		type: "string",
-		default: "#000"
+		default: "#555E72"
 	},
 	// Typography
 	teamMemberDesignationFontFamily: {
@@ -1171,7 +1171,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
@@ -1180,7 +1180,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
@@ -1189,7 +1189,7 @@ const attributes = {
 		type: "object",
 		default: {
 			top: '0',
-			bottom: '0',
+			bottom: '8',
 			left: '0',
 			right: '0',
 		},
@@ -1271,8 +1271,8 @@ const attributes = {
 	socialProfileSeparatorMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '24',
 			left: '0',
 			right: '0',
 		},
@@ -1280,8 +1280,8 @@ const attributes = {
 	socialProfileSeparatorMarginTab: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '24',
 			left: '0',
 			right: '0',
 		},
@@ -1289,8 +1289,8 @@ const attributes = {
 	socialProfileSeparatorMarginMobile: {
 		type: "object", 
 		default: {
-			top: '0',
-			bottom: '0',
+			top: '24',
+			bottom: '24',
 			left: '0',
 			right: '0',
 		},
@@ -1379,9 +1379,9 @@ const attributes = {
 	teamMemberIconsSpacing: {
 		type : "object",
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: 29,
+			Tablet: 29,
+			Mobile: 29
 		}
 	},
 	teamMemberIconsSpacingUnits: {
