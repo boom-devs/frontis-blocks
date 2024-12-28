@@ -713,7 +713,7 @@ const attributes = {
 
     teamMemberDesignation: {
 		type: "string",
-		default: "Creative Director"
+		default: "Junior Developer"
 	},
 	teamMemberDesignationColor : {
 		type: "string",
@@ -1063,7 +1063,7 @@ const attributes = {
 
     teamMemberName: {
 		type: "string",
-		default: "Wade Warren"
+		default: "Md Mehedi Hasan"
 	},
 	teamMemberNameHeadingTag: {
 		type : "string",

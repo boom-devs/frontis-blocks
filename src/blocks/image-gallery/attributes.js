@@ -26,15 +26,15 @@ const attributes = {
 
     GalleryPresetStyle: {
         type: "string",
-        default: "none",
+        default: "default",
     },
 
     GalleryItemHeight: {
         type: "object",
         default: {
-			Desktop: 200,
-			Tablet: 200,
-			Mobile: 200
+			Desktop: 300,
+			Tablet: 300,
+			Mobile: 250
 		}
     },
     GalleryItemHeightUnits: {
@@ -307,9 +307,9 @@ const attributes = {
     GalleryImageGap: {
         type: "object",
         default: {
-			Desktop: 20,
-			Tablet: 15,
-			Mobile: 10
+			Desktop: 30,
+            Tablet: 15,
+            Mobile: 10
 		}
     },
     GalleryImageGapUnits: {
