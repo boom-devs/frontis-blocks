@@ -58,7 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (
                                     <>
-                                        <style>
+                                        {GalleryType === 'mesonry' && <style>
                                             {`
                                             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
                                                     grid-column: ${item.column?.desktop > 1 ? `span ${item.column?.desktop}` : 'unset'};
@@ -77,7 +77,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     }
                                                 } 
                                             `}
-                                        </style>
+                                        </style>}
+                                        
                                         <a key={item.id} 
                                             className={`fb-image-gallery-item ${item.id}`} 
                                         >
