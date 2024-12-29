@@ -24,7 +24,6 @@ const Edit = (props) => {
 			borderStyle,
 			borderWidth,
 			borderColor,
-			deviceType,
 			borderHoverColor,
 			borderRadius,
 			variationSelected,
@@ -40,7 +39,8 @@ const Edit = (props) => {
 		setAttributes,
 		name,
 		context,
-		hasDynamicContent
+		hasDynamicContent,
+		deviceType,
 	} = props;
 
 	const {
@@ -149,7 +149,7 @@ const Edit = (props) => {
 		}
 	}, [ hasDynamicContent, context?.postId ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.deviceType ), [ attributes, attributes.deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />

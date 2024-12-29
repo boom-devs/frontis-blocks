@@ -1,79 +1,45 @@
-import { __ } from "@wordpress/i18n";
+import {__} from "@wordpress/i18n";
 import FB_Range from "@Components/range";
-import { InspectorControls } from "@wordpress/block-editor";
+import {InspectorControls} from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
 	ButtonGroup,
 	PanelBody,
-	TabPanel,
-	Dashicon,
 	RangeControl,
-	SelectControl
+	SelectControl,
+	TabPanel
 } from "@wordpress/components";
-import { useState, useEffect, useMemo } from "@wordpress/element";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
+import {useEffect, useMemo, useRef} from '@wordpress/element';
 import FB_BackgroundColorControl from "@Components/background-color-control";
 
-const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
+const Inspector = (props) => {
 	const {
-		htmlTag,
-		containerWidth,
-		contentBoxWidth,
-		minimumHeight,
-		equalHeight,
-		overflow,
-		layoutType,
-		flexDirection,
-		flexWrap,
-		justifyContent,
-		alignItems,
-		alignContent,
-		gridTemplateColumns,
-		gridTemplateRows,
-		gridGap,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		containerType,
-		containerTypeFull,
-		fullWidthContentBoxedWidth,
-		fullWidthContentBoxedWidthUnits,
-		isBlockRootParent,
-		customWidth,
-		widthType,
-		variationSelected,
-		resetFallBackCustomWidth,
-		customWidthUnits,
-		deviceType
-	} = attributes;
+		isSelected,
+		attributes,
+		attributes: {
+			containerType,
+			containerTypeFull,
+			fullWidthContentBoxedWidth,
+			fullWidthContentBoxedWidthUnits,
+			isBlockRootParent,
+			customWidth,
+			resetFallBackCustomWidth,
+			customWidthUnits,
+		},
+		clientId,
+		deviceType,
+		setAttributes
+	} = props;
 
 	let defaultImageUrl = '';
 	if (typeof FrontisBlocksData !== 'undefined') {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/flex-start';
-	}
-
-	// Reset breakpoint value
-	const DEVICE_BREAKPOINT = {
-		'Desktop': FrontisBlocksData.desktop_breakpoint,
-		'Mobile': FrontisBlocksData.mobile_breakpoint,
-		'Tablet': FrontisBlocksData.tablet_breakpoint
-	}
-
-	// Reset custom width value
-	let CUSTOM_DEVICE_BREAKPOINT = {
-		'Desktop': 100,
-		'Mobile': 100,
-		'Tablet': 100
 	}
 
 	const CONTAINER_TYPE = [
@@ -125,9 +91,17 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 		setAttributes({customWidthUnits: units});
 	}
 
-	console.log("Attributes")
-	console.log(attributes)
+	// Handling responsive
+	const handleResponsive = (attr) => {
+		setAttributes({deviceType: attr.deviceType});
+	}
 
+	console.log("deviceType dafdsa")
+	console.log(deviceType)
+	useEffect(() => {
+		console.log("Device type call")
+		console.log(deviceType)
+	}, [deviceType])
 	return (
 		<InspectorControls key="controls">
 			<div className="fb-inspector-control">
@@ -213,7 +187,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 															rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 															deviceType={deviceType}
 															units={fullWidthContentBoxedWidthUnits}
-															setAttributes={setAttributes}
+															setAttributes={handleResponsive}
 															rangeStep={1}
 															resetFallbackValue={resetFallBackCustomWidth[deviceType]}
 															units_types_arr={[
@@ -237,7 +211,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 														rangeUnitHandler={customContentWidthFnUnitsFn}
 														deviceType={deviceType}
 														units={customWidthUnits}
-														setAttributes={setAttributes}
+														setAttributes={handleResponsive}
 														rangeStep={1}
 														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
 														units_types_arr={[
@@ -258,7 +232,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 												rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 												deviceType={deviceType}
 												units={fullWidthContentBoxedWidthUnits}
-												setAttributes={setAttributes}
+												setAttributes={handleResponsive}
 												rangeStep={1}
 												resetFallbackValue={1200}
 												units_types_arr={[
@@ -364,7 +338,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 											rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 											deviceType={deviceType}
 											units={fullWidthContentBoxedWidthUnits}
-											setAttributes={setAttributes}
+											setAttributes={handleResponsive}
 											rangeStep={1}
 											resetFallbackValue={1200}
 											units_types_arr={[
@@ -435,7 +409,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 											</PanelBody>
 
@@ -627,7 +601,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 
 												<FB_Spacing
@@ -647,7 +621,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 												<FB_BoxShadowControl
 													onBoxShadowChange={(value) =>

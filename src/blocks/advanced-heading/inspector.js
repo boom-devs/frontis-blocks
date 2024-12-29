@@ -22,6 +22,7 @@ import {
     MediaUploadCheck,
     Placeholder,
     PanelRow,
+    DropdownMenu
 } from '@wordpress/components';
 
 /**
@@ -51,9 +52,16 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {
+    more,
+    arrowLeft,
+    database
+} from '@wordpress/icons';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
+    const [isFocused, setIsFocused] = useState(false);
+
     const {
         blockId,
         deviceType,
@@ -280,6 +288,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeHeightUnits,
         activeLineBeforeColor,
 
+        dataSource,
+
         blockStyle,
         globalParagraphFontFamily,
         globalLinkFontFamily,
@@ -290,8 +300,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         globalHeading5FontFamily,
         globalHeading6FontFamily,
     } = attributes;
-
-
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -305,6 +313,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		setAttributes({headingIcon: IconName})
 
 	}
+
     let defaultImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
@@ -316,8 +325,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             setAttributes({ headingBackgroundImageUrl: defaultImageUrl });
         }
     }, []);
-
-
 
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
@@ -1841,6 +1848,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
 
+    const handleFocus = () => {
+        setIsFocused(true);
+    };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+    };
+
     return (
         <>
 
@@ -1923,12 +1938,38 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
                                                 />
 
-                                                <TextareaControl
-                                                    label={__("Heading Text", "frontis-blocks")}
-                                                    value={headingText}
-                                                    onChange={(value) => setAttributes({ headingText: value })}
-                                                    className="fb-advanced-text"
-                                                />
+                                                <div class="fb-advance-heading-text">
+                                                    {dataSource == '' && (
+                                                        <TextareaControl
+                                                            label={__("Heading Text", "frontis-blocks")}
+                                                            value={headingText}
+                                                            onFocus={handleFocus}
+                                                            onBlur={handleBlur}
+                                                            onChange={(value) => setAttributes({ headingText: value })}
+                                                            className="fb-advanced-text"
+                                                        />
+                                                    )}
+                                                    {!isFocused &&
+                                                        <div class="fb-advance-heading-dynamic-data">
+                                                            <Dropdown
+                                                                className="fb-dynamic-tags-content"
+                                                                contentClassName="fb-dynamic-tags-content-popover"
+                                                                popoverProps={ { placement: 'bottom-start' } }
+                                                                renderToggle={ ( { isOpen, onToggle } ) => (
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        onClick={ onToggle }
+                                                                        aria-expanded={ isOpen }
+                                                                        icon={'database'}
+                                                                    >
+                                                                        
+                                                                    </Button>
+                                                                ) }
+                                                                renderContent={ () => <div>This is the content of the popover.</div> }
+                                                            />
+                                                        </div>
+                                                    }
+                                                </div>
                                             </PanelBody>
                                         </div>
                                         {subHeadingSwitcher && (

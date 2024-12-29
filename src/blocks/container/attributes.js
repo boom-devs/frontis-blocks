@@ -20,10 +20,6 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
-	deviceType: {
-		type: 'string',
-		default: 'Desktop'
-	},
 	containerType: {
 		type: 'string',
 		default: 'full-width'

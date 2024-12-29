@@ -699,7 +699,6 @@ export const VariationPicker = ( props ) => {
 	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
 		if ( nextVariation.attributes ) {
 			setAttributes( nextVariation.attributes );
-			console.log(props)
 			setAttributes({resetFallBackCustomWidth: props.attributes.customWidth });
 		}
 

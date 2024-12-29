@@ -9,7 +9,6 @@ import backgroundCss from './backgroundCss';
 const Render = ( props ) => {
 
 	const { attributes, clientId, hasSliderParent, hasPopupParent } = props;
-
 	const {
 		block_id,
 		htmlTag,
