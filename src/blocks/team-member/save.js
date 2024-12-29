@@ -50,7 +50,7 @@ export default function save({ attributes }) {
 								{teamMemberImageUrl && (
 									<img src={teamMemberImageUrl}/>
 								)}
-								</div>
+								
 								{teamMemberSocialProfileSwitcher === true && 
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
@@ -69,6 +69,7 @@ export default function save({ attributes }) {
 										</div>}
 									</>
 								}
+							</div>
 						</div>
 						<div className="fb-team-member-content-wrapper">
 							<div className={`fb-team-member-content`}>

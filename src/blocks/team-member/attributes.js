@@ -32,28 +32,28 @@ const attributes = {
     teamMemberDesktopPadding: {
         type: "object", 
         default: {
-            top: 42,
-            bottom: 42,
-            left: 32,
-            right: 32,
+            top: '42',
+            bottom: '42',
+            left: '32',
+            right: '32',
         },
     },
     teamMemberTabPadding: {
         type: "object", 
         default: {
-            top: 42,
-            bottom: 42,
-            left: 32,
-            right: 32,
+            top: '42',
+            bottom: '42',
+            left: '32',
+            right: '32',
         },
     },
     teamMemberMobilePadding: {
         type: "object", 
         default: {
-            top: 42,
-            bottom: 42,
-            left: 32,
-            right: 32,
+            top: '42',
+            bottom: '42',
+            left: '32',
+            right: '32',
         },
     },
     teamMemberPaddingLink : {
@@ -682,28 +682,28 @@ const attributes = {
 	teamMemberContentBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: '8',
+			bottom: '8',
+			left: '8',
+			right: '8',
 		},
 	},
 	teamMemberContentBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: '8',
+			bottom: '8',
+			left: '8',
+			right: '8',
 		},
 	},
 	teamMemberContentBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 8,
-			bottom: 8,
-			left: 8,
-			right: 8,
+			top: '8',
+			bottom: '8',
+			left: '8',
+			right: '8',
 		},
 	},
 	teamMemberContentBorderRadiusLink : {
@@ -715,7 +715,15 @@ const attributes = {
 		type: "string",
 		default: "Junior Developer"
 	},
-	teamMemberDesignationColor : {
+	teamMemberDesignationColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	teamMemberDesignationColor: {
+		type: "string",
+		default: "#555E72"
+	},
+	teamMemberDesignationHoverColor: {
 		type: "string",
 		default: "#555E72"
 	},
@@ -886,6 +894,10 @@ const attributes = {
 		type: "string",
 		default: "#0000005e"
 	},
+	teamMemberImageOverlayOpacity: {
+		type: "string",
+		default: ""
+	},
 
 	// Image Width Size
 	teamMemberImageWidthUnits : {
@@ -899,9 +911,9 @@ const attributes = {
 	teamMemberImageWidth: {
 		type: 'object',
 		default: {
-			Desktop: 260,
-			Tablet: 260,
-			Mobile: 260
+			Desktop: '260',
+			Tablet: '260',
+			Mobile: '260'
 		}
 	},
 
@@ -916,9 +928,9 @@ const attributes = {
 	teamMemberImageHeight: {
 		type: 'object',
 		default: {
-			Desktop: 260,
-			Tablet: 260,
-			Mobile: 260
+			Desktop: '260',
+			Tablet: '260',
+			Mobile: '260'
 		}
 	},
 
@@ -968,7 +980,7 @@ const attributes = {
 		type: 'string',
 		default: "none",
 	},
-	teamMemberImageBorderSwitcher: {
+	teamMemberImageBorderColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -1032,28 +1044,28 @@ const attributes = {
 	teamMemberImageBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	teamMemberImageBorderRadiusTab: {
 		type: "object",
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	teamMemberImageBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	teamMemberImageBorderRadiusLink: {
@@ -1063,7 +1075,7 @@ const attributes = {
 
     teamMemberName: {
 		type: "string",
-		default: "Md Mehedi Hasan"
+		default: "David John"
 	},
 	teamMemberNameHeadingTag: {
 		type : "string",
@@ -1218,9 +1230,9 @@ const attributes = {
 	socialProfileSeparatorWidth: {
 		type: 'object',
 		default: {
-			Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 
@@ -1235,9 +1247,9 @@ const attributes = {
 	socialProfileSeparatorHeight: {
 		type: 'object',
 		default: {
-			Desktop: 1,
-			Tablet: 1,
-			Mobile: 1
+			Desktop: '1',
+			Tablet: '1',
+			Mobile: '1'
 		}
 	},
 	socialProfileSeparatorHeightUnits: {
@@ -1363,9 +1375,9 @@ const attributes = {
 	teamMemberIconsSize: {
 		type : "object",
 		default: {
-			Desktop: 18,
-			Tablet: 18,
-			Mobile: 18
+			Desktop: '18',
+			Tablet: '18',
+			Mobile: '18'
 		}
 	},
 	teamMemberIconsSizeUnits: {
@@ -1379,9 +1391,9 @@ const attributes = {
 	teamMemberIconsSpacing: {
 		type : "object",
 		default: {
-			Desktop: 29,
-			Tablet: 29,
-			Mobile: 29
+			Desktop: '29',
+			Tablet: '29',
+			Mobile: '29'
 		}
 	},
 	teamMemberIconsSpacingUnits: {
@@ -1473,28 +1485,28 @@ const attributes = {
 	teamMemberIconsDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 16,
-			bottom: 16,
-			left: 16,
-			right: 16,
+			top: '16',
+			bottom: '16',
+			left: '16',
+			right: '16',
 		},
 	},
 	teamMemberIconsTabPadding: {
 		type: "object", 
 		default: {
-			top: 16,
-			bottom: 16,
-			left: 16,
-			right: 16,
+			top: '16',
+			bottom: '16',
+			left: '16',
+			right: '16',
 		},
 	},
 	teamMemberIconsMobilePadding: {
 		type: "object", 
 		default: {
-			top: 16,
-			bottom: 16,
-			left: 16,
-			right: 16,
+			top: '16',
+			bottom: '16',
+			left: '16',
+			right: '16',
 		},
 	},
 	teamMemberIconsPaddingLink : {
@@ -1633,28 +1645,28 @@ const attributes = {
 	teamMemberIconsDesktopBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 150,
-			bottom: 150,
-			left: 150,
-			right: 150,
+			top: '150',
+			bottom: '150',
+			left: '150',
+			right: '150',
 		},
 	},
 	teamMemberIconsTabBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 150,
-			bottom: 150,
-			left: 150,
-			right: 150,
+			top: '150',
+			bottom: '150',
+			left: '150',
+			right: '150',
 		},
 	},
 	teamMemberIconsMobileBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 150,
-			bottom: 150,
-			left: 150,
-			right: 150,
+			top: '150',
+			bottom: '150',
+			left: '150',
+			right: '150',
 		},
 	},
 	teamMemberIconsBorderRadiusLink : {
@@ -1687,9 +1699,9 @@ const attributes = {
 	socialIconBtnIconSize: {
 		type: "object",
 		default: {
-			Desktop: 20,
-			Tablet: 20,
-			Mobile: 20
+			Desktop: '20',
+			Tablet: '20',
+			Mobile: '20'
 		},
 	},
 	socialIconBtnIconSizeUnits: {
@@ -1756,28 +1768,28 @@ const attributes = {
 	socialIconBtnDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	socialIconBtnTabPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
+			top: '20',
+			bottom: '20',
+			left: '20',
 			right: 20,
 		},
 	},
 	socialIconBtnMobilePadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	socialIconBtnPaddingLink : {
@@ -1876,28 +1888,28 @@ const attributes = {
 	socialIconBtnDesktopBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	socialIconBtnTabBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	socialIconBtnMobileBorderRadiusWidth: {
 		type: "object", 
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	socialIconBtnBorderRadiusLink : {
@@ -2001,7 +2013,15 @@ const attributes = {
 		type: "string",
 		default: "Lorem ipsum dolor sit amet consectetur Aliquam mauris bibendum.",
 	},
+	teamMemberDescColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
 	teamMemberDescColor : {
+		type: "string",
+		default: "#000"
+	},
+	teamMemberDescHoverColor: {
 		type: "string",
 		default: "#000"
 	},
