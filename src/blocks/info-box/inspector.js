@@ -50,6 +50,8 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ColorControl from "../../components/color-control";
+import FB_SwitcherControl from "../../components/switcher-control";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -341,7 +343,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	const blockProps = useBlockProps();
+	/** Info Image */
+	let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
+	}
+
+	// Set default value for teamMemberBackgroundImageUrl
+	useEffect(() => {
+		if (!infoMediaUrl) {
+			setAttributes({ infoMediaUrl: defaultImageUrl });
+		}
+	}, []);
+
+
 
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
@@ -1894,7 +1909,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
-		  .fb-info-box-content-wrapper.${blockID} {
+		  .fb-info-box-wrapper.${blockID} {
 			  ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -1906,13 +1921,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 		  }
 	  
-		  .fb-info-box-content-wrapper.${blockID}:hover {
+		  .fb-info-box-wrapper.${blockID}:hover {
 			  ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
 			  ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-content-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper-inner.${blockID} {
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -1921,7 +1936,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-info-box-content-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper-inner.${blockID} {
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -1930,7 +1945,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 	  
-		  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+		  .fb-info-box-wrapper.${blockID} .fb-heading {
 			  ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
 			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
@@ -1950,13 +1965,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  border-radius: ${headingBorderRadiusDesktopWidthValue}
 		  }
 	  
-		  .fb-info-box-content-wrapper.${blockID}:hover .fb-heading {
+		  .fb-info-box-wrapper.${blockID}:hover .fb-heading {
 			  ${Heading_Hover_Color !== undefined ? `color: ${Heading_Hover_Color};` : ""}
 			  ${ Heading_Border_Hover_Color !== undefined ? `border-color: ${Heading_Border_Hover_Color};` : "" }
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading {
 				  ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                   ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                   ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -1967,7 +1982,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		  @media only screen and (max-width: 724px) {
-			  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading {
 				  ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                   ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                   ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -1978,7 +1993,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		
-		.fb-info-box-content-wrapper.${blockID} .fb-description {
+		.fb-info-box-wrapper.${blockID} .fb-description {
 			${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ""}
 			${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
 			${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
@@ -1993,12 +2008,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-description {
+		.fb-info-box-wrapper.${blockID}:hover .fb-description {
 			${ SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : "" }
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description {
 				${ subHeadingTabPaddingValue !== undefined ? `padding: ${subHeadingTabPaddingValue};` : "" }
 				${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
 				${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
@@ -2007,14 +2022,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 757px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description {
 				${ subHeadingMobilePaddingValue !== undefined ? `padding: ${subHeadingMobilePaddingValue};` : "" }
 				${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
 				${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
 				${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
 			}
 		}
-		.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+		.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 			${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
 			${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : "" }
 			font-family: ${ buttonFontFamily !== "default" ? buttonFontFamily : buttonFontFamily };
@@ -2034,13 +2049,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-btn-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-btn-wrapper {
 			${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : "" }
 			${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : "" }
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 				${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
 				${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
 				${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
@@ -2052,7 +2067,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 				${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
 				${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
 				${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
@@ -2062,7 +2077,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonMobileBorderRadiusValue ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
 			}
 		}
-		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 			${mediaBackgroundType === "gradient" ? `
 			background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };
 			`
@@ -2086,7 +2101,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-media-wrapper {
 			${mediaHoverBackgroundType === "gradient" ? ` background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor
 			};
 			`: mediaHoverBackgroundImageUrl &&  mediaHoverBackgroundImageUrl !== "null" ? `
@@ -2096,10 +2111,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : "" }
 			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : "" } ` : `
 			background: ${mediaHoverClassicColor}; ` }
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 				padding: ${mediaTabletPadding};
 				margin: ${mediaTabletMargin};
 				border-width: ${mediaBorderTabletWidth};
@@ -2110,7 +2126,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 				padding: ${mediaMobilePadding};
 				margin: ${mediaMobileMargin};
 				border-width: ${mediaBorderMobileWidth};
@@ -2120,51 +2136,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 
-		.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+		.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
+			height: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
 			${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : ""}
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-icon-wrapper svg {
 			${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-media-wrapper {
 			${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
+				height: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
+				height: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			}
 		}
 
-		.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
+			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 				width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 				width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
 			}
 		}
@@ -2750,15 +2773,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											{/*Icon Color */}
 											{mediaSwitcher === "icon" && (
-												<FB_Color
-													label={__("Icon Color", "frontis-blocks")}
-													globalColorSwitcher={mediaIconColorSwitcher}
-													globalColor={mediaIconColor}
-													globalHoverColor={mediaIconHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ mediaIconColorSwitcher: value }) }
-													handleGlobalColorChange={(value) => setAttributes({ mediaIconColor: value }) }
-													handleGlobalHoverColorChange={(value) => setAttributes({ mediaIconHoverColor: value }) }
-												/>
+												<>
+													<FB_SwitcherControl
+														label={__("Icon Color", "frontis-blocks")}
+														globalSwitcher={mediaIconColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
+													/>
+															
+													{mediaIconColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={mediaIconColor}
+															setGlobalColor={(value) => setAttributes({ mediaIconColor: value })}
+														/>
+													)}
+															
+													{mediaIconColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={mediaIconHoverColor}
+															setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value })}
+														/>
+													)}
+												</>
 											)}
 											<FB_BackgroundColorControl
 											bgColorSwitcher={mediaBackColorSwitcher}
@@ -2830,6 +2867,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
+
 											<FB_Range
 												min={0}
 												max={500}
@@ -2910,7 +2948,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 										{/*Heading Style*/}
 										<PanelBody
-											title={__("Heading", "frontis-block")}
+											title={__("Title", "frontis-block")}
 											initialOpen={false}
 										>
 											<FB_TypographyControl
@@ -2951,21 +2989,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 											
-											<FB_Color
-												label={__("Text Color", "frontis-blocks")}
-												globalColorSwitcher={Heading_Color_Switcher}
-												globalColor={Heading_Color}
-												globalHoverColor={Heading_Hover_Color}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({ Heading_Color_Switcher: value })
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ Heading_Color: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ Heading_Hover_Color: value })
-												}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Text Color", "frontis-blocks")}
+                                                globalSwitcher={Heading_Color_Switcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
+                                            />
+                                                    
+                                            {Heading_Color_Switcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={Heading_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Color: value })}
+                                                />
+                                            )}
+                                                    
+                                            {Heading_Color_Switcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={Heading_Hover_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
