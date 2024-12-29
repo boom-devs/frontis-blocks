@@ -9,6 +9,10 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+    dataSource: {
+        type: "string",
+        default: ""
+    },
     headingAlignment: {
         type: "string",
         default: "left",
@@ -19,7 +23,7 @@ const attributes = {
     },
     headingTag: {
         type : "string",
-        default: "h2" 
+        default: "h2"
     },
     /** Start Heading Style */
     headingFontFamily: {
@@ -148,10 +152,6 @@ const attributes = {
     headingBorderHoverColor: {
         type: 'string',
     },
-    headingBorderUnits : {
-        type: "string",
-        default: "px"
-    },
     headingBorderUnits: {
 		type: 'object',
 		default: {
@@ -161,7 +161,7 @@ const attributes = {
 		}
     },
     headingDesktopBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -170,7 +170,7 @@ const attributes = {
         },
     },
     headingTabletBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -179,7 +179,7 @@ const attributes = {
         },
     },
     headingMobileBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -200,7 +200,7 @@ const attributes = {
 		}
     },
     headingDesktopBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -209,7 +209,7 @@ const attributes = {
         },
     },
     headingTabBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -218,7 +218,7 @@ const attributes = {
         },
     },
     headingMobileBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -249,7 +249,7 @@ const attributes = {
 		}
     },
     headingDesktopPadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -258,7 +258,7 @@ const attributes = {
         },
     },
     headingTabPadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -267,7 +267,7 @@ const attributes = {
         },
     },
     headingMobilePadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -288,7 +288,7 @@ const attributes = {
 		}
     },
     headingDesktopMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -297,7 +297,7 @@ const attributes = {
         },
     },
     headingTabMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -306,7 +306,7 @@ const attributes = {
         },
     },
     headingMobileMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -327,7 +327,7 @@ const attributes = {
     },
     subHeadingTag: {
         type : "string",
-        default: "p" 
+        default: "p"
     },
     subHeadingSwitcher: {
         type: "boolean",
@@ -338,7 +338,7 @@ const attributes = {
         default: "bottom",
     },
 
-    /** Start Sub Heading Style */  
+    /** Start Sub Heading Style */
     subHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -464,7 +464,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -473,7 +473,7 @@ const attributes = {
         },
     },
     subHeadingTabBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -482,7 +482,7 @@ const attributes = {
         },
     },
     subHeadingMobileBorder: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -503,7 +503,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -512,7 +512,7 @@ const attributes = {
         },
     },
     subHeadingTabBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -521,7 +521,7 @@ const attributes = {
         },
     },
     subHeadingMobileBorderRadius: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -556,7 +556,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopPadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -565,7 +565,7 @@ const attributes = {
         },
     },
     subHeadingTabPadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -574,7 +574,7 @@ const attributes = {
         },
     },
     subHeadingMobilePadding: {
-        type: "object", 
+        type: "object",
         default: {
             top: "",
             bottom: "",
@@ -595,7 +595,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -604,7 +604,7 @@ const attributes = {
         },
     },
     subHeadingTabMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -613,7 +613,7 @@ const attributes = {
         },
     },
     subHeadingMobileMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -626,7 +626,7 @@ const attributes = {
         default: true
     },
     /** End Sub Heading Spacing */
-    /** End Sub Heading Style */  
+    /** End Sub Heading Style */
 
     separator: {
         type: "string",
@@ -699,7 +699,7 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
-	}, 
+	},
 
 
     /** Start Icon */
@@ -795,7 +795,7 @@ const attributes = {
 		}
 	},
 	headingIconBorderDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -804,7 +804,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -813,7 +813,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -837,7 +837,7 @@ const attributes = {
 		}
 	},
 	headingIconBorderRadiusDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '0',
 			bottom: '0',
@@ -846,7 +846,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderRadiusTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '0',
 			bottom: '0',
@@ -855,7 +855,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderRadiusMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '0',
 			bottom: '0',
@@ -888,7 +888,7 @@ const attributes = {
 		}
 	},
 	headingGlobalPaddingDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -897,7 +897,7 @@ const attributes = {
 		},
 	},
 	headingGlobalPaddingTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -906,7 +906,7 @@ const attributes = {
 		},
 	},
 	headingGlobalPaddingMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -930,7 +930,7 @@ const attributes = {
 		}
 	},
 	headingGlobalMarginDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -939,7 +939,7 @@ const attributes = {
 		},
 	},
 	headingGlobalMarginTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -948,7 +948,7 @@ const attributes = {
 		},
 	},
 	headingGlobalMarginMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1000,7 +1000,7 @@ const attributes = {
 		}
 	},
 	headingGlobalBorderDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1009,7 +1009,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1018,7 +1018,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1042,7 +1042,7 @@ const attributes = {
 		}
 	},
 	headingGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1051,7 +1051,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -1060,7 +1060,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',

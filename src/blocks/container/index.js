@@ -13,6 +13,6 @@ registerBlockType(metadata.name, {
 	icon: FB_Block_Icons.container,
 	attributes,
 	variations,
-	edit: ( props ) => <Edit { ...props } />,
+	edit: ( props ) => <Edit { ...props } deviceType="Desktop" />,
 	save,
 });
