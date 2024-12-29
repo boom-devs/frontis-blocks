@@ -78,8 +78,6 @@ export default function save({ attributes }) {
 	{/* Inspector Controls */}
 	return (
 		<>
-			<h1>Hello world</h1>
-
 			<div {...blockProps} data-target-date={targetDate}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`}>
 					{showDays && (

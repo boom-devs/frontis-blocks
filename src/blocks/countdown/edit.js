@@ -5,23 +5,9 @@ import {
 	InspectorControls,
 } from '@wordpress/block-editor';
 
-import {
-	PanelBody,
-	DateTimePicker,
-	TextControl,
-	ColorPicker,
-	BaseControl,
-	RangeControl,
-	ToggleControl,
-	TabPanel,
-	Dropdown, Button, Dashicon, SelectControl, ButtonGroup
-} from '@wordpress/components';
-
 import { useEffect, useState } from '@wordpress/element';
 import Inspector from "./inspector";
 import './editor.scss';
-
-
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {

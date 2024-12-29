@@ -56,15 +56,29 @@ export default function CountDownItemBgColorControl ({ attributes, setAttributes
 
 	return (
 	<>
-		<FB_Color
-			label={__("Background Color", "frontis-blocks")}
-			globalColorSwitcher={countDownItemBgColorSwitcher}
-			globalColor={countDownItemBgColor}
-			globalHoverColor={countDownItemBgHoverColor}
-			handleColorSwitcherChange={handleColorSwitcherChange}
-			handleGlobalColorChange={handleGlobalColorChange}
-			handleGlobalHoverColorChange={handleGlobalHoverColorChange}
+		
+		<FB_SwitcherControl
+			label={__("Text Color", "frontis-blocks")}
+			globalSwitcher={countDownItemBgColorSwitcher}
+			setGlobalSwitcher={(value) => setAttributes({ countDownItemBgColorSwitcher: value })}
 		/>
+
+		{countDownItemBgColorSwitcher === 'normal' && (
+			<FB_ColorControl
+				label={__("Normal Color", "frontis-blocks")}
+				globalColor={countDownItemBgColor}
+				setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value })}
+			/>
+		)}
+
+		{countDownItemBgColorSwitcher === 'hover' && (
+			<FB_ColorControl
+				label={__("Hover Color", "frontis-blocks")}
+				globalColor={countDownItemBgHoverColor}
+				setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value })}
+			/>
+		)}
+
 		<ToggleControl
 			label={__("Enable Background Image", "frontis-blocks")}
 			checked={
