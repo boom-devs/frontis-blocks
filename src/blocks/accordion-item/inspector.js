@@ -266,19 +266,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			margin: 0;
 		  }
 	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
 		  }
 	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
 		  }
 	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-prefix {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
 		  }
 	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-wrapper:hover .fb-accordion-title-suffix {
+		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
 		  }
 	  
@@ -367,11 +367,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
 		}
 
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
 		}
 
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
+		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
 		}
 
@@ -402,11 +402,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			blockID,
             deviceType,
     
-            titlePrefixColorSwitcher,
             titlePrefixColor,
             titlePrefixHoverColor,
     
-            titleSuffixColorSwitcher,
             titleSuffixColor,
             titleSuffixHoverColor,
     
@@ -450,9 +448,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         className: "fb-tab general",
                     },
                     {
-                        name: "style",
-                        title: "Style",
-                        className: "fb-tab style",
+                        name: "styles",
+                        title: "Styles",
+                        className: "fb-tab styles",
                     },
                     {
                         name: "advanced",
@@ -642,11 +640,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             </>
                         )}
 
-                        {tab.name === 'style' && (
+                        {tab.name === 'styles' && (
                             <>
                                 <PanelBody
                                     title={__("Padding & Margin", "frontis-blocks")}
-                                    initialOpen={false}
+                                    initialOpen={true}
                                 >
                                     <FB_Spacing
                                         label={__("Margin", "frontis-blocks")}
