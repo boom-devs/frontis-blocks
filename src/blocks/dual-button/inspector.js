@@ -2315,17 +2315,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 											<FB_Range
-													min={0}
-													max={100}
-													label={__("Width", "frontis-blocks")}
-													rangeValue={ButtonWidth}
-													onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
-													rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
-													deviceType={deviceType}
-													units={ButtonWidthWidthUnits}
-													setAttributes={setAttributes}
-													rangeStep={1}
-													resetFallbackValue={""}
+												min={0}
+												max={100}
+												label={__("Width", "frontis-blocks")}
+												rangeValue={ButtonWidth}
+												onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
+												deviceType={deviceType}
+												units={ButtonWidthWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
 											/>
 											<SelectControl
 												label={__("Direction", "frontis-blocks")}
