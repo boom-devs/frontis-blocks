@@ -148,10 +148,6 @@ const attributes = {
     headingBorderHoverColor: {
         type: 'string',
     },
-    headingBorderUnits : {
-        type: "string",
-        default: "px"
-    },
     headingBorderUnits: {
 		type: 'object',
 		default: {
