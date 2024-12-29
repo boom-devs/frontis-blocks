@@ -49,10 +49,7 @@ import {
 	FONT_FAMILYS,
 	CLASSIC_GRADIENT,
 	BORDER_STYLES,
-	mediaType,
 	ICON_POSITION,
-	INFO_ICON_POSITION,
-	BG_TYPE,
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
@@ -1919,7 +1916,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 			.fb-cta-content-wrapper.${blockID}:hover {
-				${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
 				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
 				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
