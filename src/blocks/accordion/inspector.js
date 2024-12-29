@@ -345,39 +345,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
 
 
-    /** Title Color */
-    const handleTitleColorSwitcherChange = (value) => {
-        setAttributes({ titleColorSwitcher: value });
-    };
-    const handleTitleColorChange = (value) => {
-        setAttributes({ titleColor: value });
-    };
-    const handleTitleHoverColorChange = (value) => {
-        setAttributes({ titleHoverColor: value });
-    };
-
-    /** Title Backgorund Color */
-    const handleTitleBGColorSwitcherChange = (value) => {
-        setAttributes({ titleBGColorSwitcher: value });
-    };
-    const handleTitleBGColorChange = (value) => {
-        setAttributes({ titleBGColor: value });
-    };
-    const handleTitleBGHoverColorChange = (value) => {
-        setAttributes({ titleBGHoverColor: value });
-    };
-
-    /** Item Icon Color */
-    const handleTitleIconColorSwitcherChange = (value) => {
-        setAttributes({ titleIconColorSwitcher: value });
-    };
-    const handleTitleIconColorChange = (value) => {
-        setAttributes({ titleIconColor: value });
-    };
-    const handleTitleIconHoverColorChange = (value) => {
-        setAttributes({ titleIconHoverColor: value });
-    };
-
+     /** Start load font */
+     useEffect(() => {
+        loadGoogleFont(titleFontFamily);
+    }, [titleFontFamily]);
+    /** End load font */
 
 
     /** Start Accordions Gap */
@@ -1472,7 +1444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
+                                                label={__("Color", "frontis-blocks")}
                                                 globalSwitcher={titleColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
                                             />
@@ -1714,7 +1686,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody
                                             title={__(
-                                                "Items Title Border & Radius",
+                                                "Titles Border & Radius",
                                                 "frontis-blocks"
                                             )}
                                             initialOpen={false}
@@ -1749,7 +1721,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderUnitsHandler}
                                                         spacingUnits={accordionItemsBorderUnits}
@@ -1763,7 +1735,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionItemsBorderRadiusUnits}
@@ -1963,7 +1935,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             <FB_Spacing
-                                                label={__("Border Width", "frontis-blocks")}
+                                                label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderUnitsHandler}
                                                 spacingUnits={contentBorderUnits}
@@ -1977,7 +1949,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderRadiusUnitsHandler}
                                                 spacingUnits={contentBorderRadiusUnits}
@@ -2188,7 +2160,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
         
                                                 <PanelBody
-                                                    title={__("Border & Border radius", "frontis-blocks")}
+                                                    title={__("Border & Border Radius", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-border-setting-wrapper"
                                                     >
@@ -2222,7 +2194,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderUnitsHandler}
                                                         spacingUnits={accordionBorderUnits}
@@ -2236,7 +2208,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionBorderRadiusUnits}
