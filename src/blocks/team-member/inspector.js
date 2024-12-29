@@ -15,6 +15,7 @@ import {
 	ButtonGroup,
 	ResponsiveWrapper, __experimentalHStack as HStack,
 	TextareaControl,
+	RangeControl,
 } from '@wordpress/components';
 import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
@@ -74,6 +75,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberImageBGColorSwitcher,
 		teamMemberImageBGColor,
 		teamMemberImageBGHoverColor,
+		teamMemberImageOverlayOpacity,
 
 		teamMemberImageBorderUnits,
 		teamMemberImageBorderDesktop,
@@ -122,7 +124,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// Team Designation Typography
 		teamMemberDesignation,
 		teamMemberDesignationHeadingTag,
+		teamMemberDesignationColorSwitcher,
 		teamMemberDesignationColor,
+		teamMemberDesignationHoverColor,
 		teamMemberDesignationLoadGoogleFonts,
 		teamMemberDesignationFontFamily,
         teamMemberDesignationFontSize,
@@ -146,7 +150,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// Team Desc Typography
 		teamMemberDescSwitcher,
 		teamMemberDesc,
+		teamMemberDescColorSwitcher,
 		teamMemberDescColor,
+		teamMemberDescHoverColor,
 		teamMemberDescLoadGoogleFonts,
 		teamMemberDescFontFamily,
         teamMemberDescFontSize,
@@ -410,7 +416,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		loadGoogleFont(teamMemberDesignationFontFamily);
 		loadGoogleFont(teamMemberNameFontFamily);
 		loadGoogleFont(teamMemberDescFontFamily);
-	}, [teamMemberDesignationFontFamily, teamMemberNameFontFamily, teamMemberDescFontFamily]);
+	}, [
+		teamMemberDesignationFontFamily, 
+		teamMemberNameFontFamily, 
+		teamMemberDescFontFamily]);
 	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
@@ -2306,7 +2315,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageAlignment === 'left' ? 'justify-content: start' : ''}
 				${teamMemberImageAlignment === 'center' ? 'justify-content: center' : ''}
 				${teamMemberImageAlignment === 'right' ? 'justify-content: end' : ''}
-				${teamMemberSocialPosition !== 'left' && teamMemberSocialPosition !== 'right' && teamMemberImageAlignment === 'right' ? 'justify-content: end' : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image img {
 				${teamMemberImagePosition !== undefined ? `object-position: ${teamMemberImagePosition};` : ''}
@@ -2433,6 +2441,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
 				${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
+				${teamMemberImageOverlayOpacity !== undefined ? `opacity: ${teamMemberImageOverlayOpacity};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-image-wrapper .fb-team-member-image-overlay {
@@ -2469,6 +2478,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberDesignationMarginGetDesktop !== undefined ? `margin: ${teamMemberDesignationMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation:hover {
+				${teamMemberDesignationHoverColor !== undefined ? `color: ${teamMemberDesignationHoverColor};` : ''}
+				transition: all 0.3s ease-in-out;
+			}
+
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc {
 				${teamMemberDescFontFamily !== 'default' ? `font-family: ${teamMemberDescFontFamily}` : ''};
 				${teamMemberDescFontSize?.Desktop ? `font-size: ${teamMemberDescFontSize.Desktop}${teamMemberDescFontSizeUnits.Desktop};` : ''}
@@ -2480,6 +2494,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberDescLineHeight?.Desktop !== undefined ? `line-height: ${teamMemberDescLineHeight.Desktop}${teamMemberDescLineHeightUnits.Desktop};` : ''}
 				${teamMemberDescColor !== undefined ? `color: ${teamMemberDescColor};` : ''}
 				${teamMemberDescMarginGetDesktop !== undefined ? `margin: ${teamMemberDescMarginGetDesktop};` : ''}
+				transition: all 0.3s ease-in-out;
+			}
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc:hover {
+				${teamMemberDescHoverColor !== undefined ? `color: ${teamMemberDescHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 				
@@ -2839,6 +2857,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberImageOverlaySwitcher,
 			teamMemberImageBGColor,
 			teamMemberImageBGHoverColor,
+			teamMemberImageOverlayOpacity,
 
 			teamMemberImageBorderUnits,
 			teamMemberImageBorderDesktop,
@@ -2886,6 +2905,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberDesignation,
 			teamMemberDesignationHeadingTag,
 			teamMemberDesignationColor,
+			teamMemberDesignationHoverColor,
 			teamMemberDesignationLoadGoogleFonts,
 			teamMemberDesignationFontFamily,
 			teamMemberDesignationFontSize,
@@ -2908,6 +2928,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			// Team Desc Typography
 			teamMemberDesc,
 			teamMemberDescColor,
+			teamMemberDescHoverColor,
 			teamMemberDescLoadGoogleFonts,
 			teamMemberDescFontFamily,
 			teamMemberDescFontSize,
@@ -3159,7 +3180,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === 'general' && (
 									<>
-										<PanelBody title={__("Member Photo", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={true}>
 											<FB_ImageControl
                                                 globalBackgroundImageUrl={teamMemberImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}
@@ -3254,7 +3275,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 
 												<SelectControl
-													label={__("Icon Type", "frontis-blocks")}
+													label={__("Icon Display", "frontis-blocks")}
 													value={teamMemberSocialType}
 													options={SOCIAL_ICON_TYPE}
 													onChange={(value) => setAttributes({ teamMemberSocialType: value })}
@@ -3398,7 +3419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ teamMemberContentBgImageSize: value })
 														}
 														hoverBackgroundType={teamMemberContentBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ teamMemberContentBgHoverType: value })
 														}
 														hoverClassicColor={teamMemberContentBgHoverClassicColor}
@@ -3552,7 +3573,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 
 										<PanelBody
-											title={__("Photo", "frontis-blocks")}
+											title={__("Avatar", "frontis-blocks")}
 											initialOpen={false}
 											className="fb-setting-border-setting-wrapper"
 										>
@@ -3613,6 +3634,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
 													/>
 												)}
+
+												<RangeControl
+													label="Opacity"
+													value={teamMemberImageOverlayOpacity}
+													onChange={(value) => setAttributes({ teamMemberImageOverlayOpacity: value, }) }
+													min={0}
+													max={1}
+													step={0.1}
+													allowReset
+													resetFallbackValue={undefined}
+												/>
 											</>
 											}
 
@@ -3811,11 +3843,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											<FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={teamMemberDesignationColor}
-                                                setGlobalColor={(value) => setAttributes({ teamMemberDesignationColor: value })}
-                                            />
+											<FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={teamMemberDesignationColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberDesignationColorSwitcher: value })}
+												/>
+														
+												{teamMemberDesignationColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberDesignationColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberDesignationColor: value })}
+													/>
+												)}
+														
+												{teamMemberDesignationColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberDesignationHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberDesignationHoverColor: value })}
+													/>
+												)}
 
 											<FB_Spacing
 												label={__("Margin", "frontis-blocks")}
@@ -3875,11 +3923,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 											/>
 
-											<FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={teamMemberDescColor}
-                                                setGlobalColor={(value) => setAttributes({ teamMemberDescColor: value })}
-                                            />
+											<FB_SwitcherControl
+													label={__("Color", "frontis-blocks")}
+													globalSwitcher={teamMemberDescColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberDescColorSwitcher: value })}
+												/>
+														
+												{teamMemberDescColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberDescColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberDescColor: value })}
+													/>
+												)}
+														
+												{teamMemberDescColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberDescHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberDescHoverColor: value })}
+													/>
+												)}
 
 											<FB_Spacing
 												label={__("Margin", "frontis-blocks")}
@@ -4025,7 +4089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												)}
 
 												<FB_Spacing 
-													label={__("Border Width", "frontis-blocks")}
+													label={__("Border", "frontis-blocks")}
 													deviceType={deviceType}
 													spacingUnitsHandler={handleSocialIconBtnBorderUnitsHandler}
 													spacingUnits={socialIconBtnBorderUnits}
@@ -4039,7 +4103,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 
 												<FB_Spacing 
-													label={__("Border Radius Width", "frontis-blocks")}
+													label={__("Border Radius", "frontis-blocks")}
 													deviceType={deviceType}
 													spacingUnitsHandler={handleSocialIconBtnBorderRadiusUnitsHandler}
 													spacingUnits={socialIconBtnBorderRadiusUnits}
@@ -4094,7 +4158,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 
 												<FB_SwitcherControl
-													label={__("Overlay Color", "frontis-blocks")}
+													label={__("Color", "frontis-blocks")}
 													globalSwitcher={socialProfileSeparatorColorSwitcher}
 													setGlobalSwitcher={(value) => setAttributes({ socialProfileSeparatorColorSwitcher: value })}
 												/>
@@ -4316,7 +4380,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
 
 													<FB_Spacing 
-														label={__("Border Width", "frontis-blocks")}
+														label={__("Border", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberIconsBorderUnitsHandler}
 														spacingUnits={teamMemberIconsBorderUnits}
@@ -4330,7 +4394,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 
 													<FB_Spacing 
-														label={__("Border Radius Width", "frontis-blocks")}
+														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberIconsBorderRadiusUnitsHandler}
 														spacingUnits={teamMemberIconsBorderRadiusUnits}
@@ -4481,7 +4545,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ teamMemberBgImageSize: value })
 														}
 														hoverBackgroundType={teamMemberBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ teamMemberBgHoverType: value })
 														}
 														hoverClassicColor={teamMemberBgHoverClassicColor}
@@ -4586,7 +4650,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
 
 													<FB_Spacing 
-														label={__("Border Width", "frontis-blocks")}
+														label={__("Border", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberBorderUnitsHandler}
 														spacingUnits={teamMemberBorderUnits}
@@ -4600,7 +4664,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 
 													<FB_Spacing 
-														label={__("Border Radius Width", "frontis-blocks")}
+														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberBorderRadiusUnitsHandler}
 														spacingUnits={teamMemberBorderRadiusUnits}

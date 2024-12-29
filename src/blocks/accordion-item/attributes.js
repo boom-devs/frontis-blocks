@@ -229,28 +229,28 @@ const attributes = {
     accordionItemDesktopPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemTabPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemMobilePadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemPaddingLink : {

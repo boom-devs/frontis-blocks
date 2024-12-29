@@ -18,9 +18,9 @@ const attributes = {
     GalleryItems: {
         type: "array",
         default: [
-            { id: 'image-1', title: 'Image 1', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
-            { id: 'image-2', title: 'Image 2', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
-            { id: 'image-3', title: 'Image 3', column: {desktop: 0, tablet: 0, mobile: 0}, row: {desktop: 0, tablet: 0, mobile: 0}, image: {id: 0, url: '', alt: '', width: '', height: ''} },
+            { id: 'image-1', title: 'Image 1', column: {desktop: '0', tablet: '0', mobile: '0'}, row: {desktop: '0', tablet: '0', mobile: '0'}, image: {id: '0', url: '', alt: '', width: '', height: ''} },
+            { id: 'image-2', title: 'Image 2', column: {desktop: '0', tablet: '0', mobile: '0'}, row: {desktop: '0', tablet: '0', mobile: '0'}, image: {id: '0', url: '', alt: '', width: '', height: ''} },
+            { id: 'image-3', title: 'Image 3', column: {desktop: '0', tablet: '0', mobile: '0'}, row: {desktop: '0', tablet: '0', mobile: '0'}, image: {id: '0', url: '', alt: '', width: '', height: ''} },
         ],
     },
 
@@ -32,9 +32,9 @@ const attributes = {
     GalleryItemHeight: {
         type: "object",
         default: {
-			Desktop: 300,
-			Tablet: 300,
-			Mobile: 250
+			Desktop: '300',
+			Tablet: '300',
+			Mobile: '250'
 		}
     },
     GalleryItemHeightUnits: {
@@ -49,9 +49,9 @@ const attributes = {
     ImageWidth: {
         type: "object",
         default: {
-            Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+            Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
         },
     },
     ImageWidthUnits: {
@@ -66,9 +66,9 @@ const attributes = {
     ImageHeight: {
         type: "object",
         default: {
-            Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+            Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
         },
     },
     ImageHeightUnits: {
@@ -105,9 +105,9 @@ const attributes = {
     lightboxIconSize: {
         type: "object",
         default: {
-            Desktop: 24,
-			Tablet: 24,
-			Mobile: 24
+            Desktop: '24',
+			Tablet: '24',
+			Mobile: '24'
         },
     },
     lightboxIconSizeUnits: {
@@ -174,28 +174,28 @@ const attributes = {
     lightboxDesktopPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     lightboxTabPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     lightboxMobilePadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     lightboxPaddingLink : {
@@ -254,28 +254,28 @@ const attributes = {
     lightboxDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     lightboxTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     lightboxMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     lightboxBorderRadiusLink : {
@@ -286,9 +286,9 @@ const attributes = {
     GalleryColumnNumber: {
         type: "object",
         default: {
-			Desktop: 3,
-			Tablet: 2,
-			Mobile: 1
+			Desktop: '3',
+			Tablet: '2',
+			Mobile: '1'
 		}
     },
     GalleryColumnNumberDesktop: {
@@ -307,9 +307,9 @@ const attributes = {
     GalleryImageGap: {
         type: "object",
         default: {
-			Desktop: 30,
-            Tablet: 15,
-            Mobile: 10
+			Desktop: '30',
+            Tablet: '15',
+            Mobile: '10'
 		}
     },
     GalleryImageGapUnits: {
