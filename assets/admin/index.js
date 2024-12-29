@@ -63,14 +63,7 @@ var App = function App() {
     className: "fb-header-top"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-header-top-left"
-  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__.Logo, null)), /*#__PURE__*/React.createElement("div", {
-    className: "fb-header-top-right"
-  }, window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
-    href: window.frontisBlocksAdmin.pro_url,
-    className: "fb-upgrade-button",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "Upgrade to Pro ", /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__.Crown, null)))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_6__.Logo, null))), /*#__PURE__*/React.createElement("div", {
     className: "frontis-blocks-admin"
   }, /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_4__.TabPanel, {
     className: "frontis-blocks-tab-panel",
@@ -130,19 +123,17 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.BlockIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Blocks", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Blocks, null)
+}, {
+  id: 'settings',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.OptionsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Settings", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Settings, null)
+}, {
+  id: 'integrations',
+  icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
+  comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
 }
-// {
-//     id: 'settings',
-//     icon: <OptionsIcon />,
-//     label: __("Settings", "frontis-blocks"),
-//     comp: <Settings />
-// },
-// {
-//     id: 'integrations',
-//     icon: <IntegrationsIcon />,
-//     label: __("Integrations", "frontis-blocks"),
-//     comp: <Integration />
-// },
 // {
 // 	id: 'custom_icons',
 // 	icon: <IntegrationsIcon />,
@@ -159,6 +150,7 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
 //       comp: <Pricing />
 //     });
 // }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TabMenus);
 
 /***/ }),
@@ -205,6 +197,7 @@ var BlockCard = function BlockCard(_ref) {
     onChange(block.slug, checked);
     setIsChecked(checked);
   };
+  console.log(block);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -216,9 +209,9 @@ var BlockCard = function BlockCard(_ref) {
     className: "fb-block-card-content"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
     className: "fb-block-card-title"
-  }, block.title), block.badge && /*#__PURE__*/React.createElement("span", {
-    className: "fb-block-card-badge"
-  }, block.badge)), /*#__PURE__*/React.createElement("div", {
+  }, block.title, block.badge !== 'free' && /*#__PURE__*/React.createElement("span", {
+    className: "fb-block-card-badge ".concat(block.badge)
+  }, block.badge))), /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card-links"
   }, /*#__PURE__*/React.createElement("a", {
     href: block.doc ? block.doc : 'https://frontis.com',
@@ -235,13 +228,15 @@ var BlockCard = function BlockCard(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     htmlFor: "switch-".concat(block.slug),
     className: "fb-block-card-switch-label"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, block.complete === 'true' ? /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
     checked: isChecked,
     onChange: handleChange,
     className: "fb-block-card-switch-input",
     id: "switch-".concat(block.slug),
     disabled: isProActive === 'false' && block["package"] === 'pro' ? true : false
-  }))));
+  }) : /*#__PURE__*/React.createElement("span", {
+    className: "fb-block-card-upcoming"
+  }, "Upcoming"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BlockCard);
 
@@ -454,24 +449,51 @@ var Blocks = function Blocks() {
     className: "fb-blocks-search"
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search blocks...', 'frontis-blocks'),
+    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Blocks', 'frontis-blocks'),
     className: "fb-blocks-search-input",
     value: searchTerm,
     onChange: function onChange(e) {
       return setSearchTerm(e.target.value);
     }
-  }), searchTerm && /*#__PURE__*/React.createElement("button", {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "fb-blocks-search-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_4834_1174)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "#6A758E",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_4834_1174"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), searchTerm && /*#__PURE__*/React.createElement("button", {
     className: "fb-blocks-search-clear",
     onClick: clearSearch
   }, "\xD7"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-header-right"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-blocks-button fb-blocks-enable-all",
-    onClick: handleEnableAll
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable All', 'frontis-blocks')), /*#__PURE__*/React.createElement("button", {
     className: "fb-blocks-button fb-blocks-disable-all",
     onClick: handleDisableAll
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Disable All', 'frontis-blocks')), /*#__PURE__*/React.createElement("button", {
+    className: "fb-blocks-button fb-blocks-enable-all",
+    onClick: handleEnableAll
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable All', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-category-filter"
   }, Object.entries(categoryInfo).map(function (_ref5) {
     var _ref6 = _slicedToArray(_ref5, 2),
@@ -664,24 +686,7 @@ function ProBanner() {
     className: "fb-pro-banner"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-pro-title-flex"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    stroke: "#F89B2E",
-    strokeWidth: 4,
-    d: "m37.296 22.81.413-4.383c.324-3.442.486-5.164-.103-5.875a1.786 1.786 0 0 0-1.215-.662c-.856-.075-1.932 1.15-4.082 3.598-1.113 1.266-1.669 1.899-2.29 1.997a1.662 1.662 0 0 1-1.01-.162c-.573-.288-.955-1.07-1.72-2.636l-4.026-8.25C21.82 3.479 21.099 2 20 2c-1.098 0-1.82 1.479-3.264 4.437l-4.026 8.25c-.764 1.566-1.146 2.348-1.719 2.636-.317.16-.667.216-1.01.162-.621-.098-1.177-.731-2.29-1.997-2.15-2.449-3.226-3.673-4.082-3.598-.463.041-.896.277-1.215.662-.589.711-.427 2.433-.103 5.875l.413 4.384c.68 7.223 1.02 10.834 3.148 13.011C7.981 38 11.172 38 17.552 38h4.896c6.38 0 9.571 0 11.7-2.178 2.128-2.177 2.468-5.789 3.148-13.011Z"
-  }), /*#__PURE__*/React.createElement("path", {
-    stroke: "#F89B2E",
-    strokeLinecap: "round",
-    strokeWidth: 4,
-    d: "M14.604 30.793h10.8"
-  }))), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro for Access Premium Features!', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Unlock premium features from Frontis Blocks to elevate your Gutenberg website today! Enhance your design and functionality with ease, transforming your site effortlessly. Captivate your audience and take presence to the next level!', 'frontis-blocks')), window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
-    href: window.frontisBlocksAdmin.pro_url,
-    className: "fb-upgrade-button",
-    target: "_blank",
-    rel: "noopener noreferrer"
-  }, "Upgrade to Pro ", /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_1__.Crown, null)));
+  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Frontis Blocks – Design Smarter, Faster, and Better with Gutenberg', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frontis Blocks is your ultimate companion for enhancing the WordPress Gutenberg editor. This plugin empowers users with a diverse set of advanced blocks, designed to elevate the functionality and design of your website. Whether you\u2019re a seasoned developer or a beginner exploring WordPress, Frontis Blocks offers an intuitive and flexible solution for crafting responsive, visually stunning, and performance-optimized websites. With a wide range of customizable blocks, Frontis Blocks enables you to add dynamic elements, create engaging layouts, and deliver a professional-grade user experience, all without writing a single line of code.", 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Built with performance and usability in mind, Frontis Blocks integrates seamlessly into the Gutenberg editor. The plugin boasts blocks tailored for every need\u2014from feature-rich text formats and media integrations to interactive components like sliders, tabs, and accordions. Each block is designed to simplify your workflow while ensuring that your site loads quickly and ranks higher in search engines. Whether you\u2019re building a personal blog, a business site, or an eCommerce platform, Frontis Blocks is the perfect toolkit to bring your vision to life. Dive into the world of limitless creativity with Frontis Blocks and take your WordPress site to the next level!", 'frontis-blocks')));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProBanner);
 
@@ -775,7 +780,7 @@ var SystemRequirements = function SystemRequirements() {
     }, item.value));
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-system-requirements-note"
-  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Note: The Frontis Block is a modern content creation tool designed for WordPress, offering a flexible and intuitive way to build web pages.', 'frontis-blocks'))));
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Note: ', 'frontis-blocks')), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The Frontis Block is a modern content creation tool designed for WordPress, offering a flexible and intuitive way to build web pages.', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SystemRequirements);
 
@@ -799,16 +804,6 @@ var VideoBanner = function VideoBanner() {
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-video-banner"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-video-wrapper"
-  }, /*#__PURE__*/React.createElement("iframe", {
-    width: "100%",
-    height: "100%",
-    src: "https://www.youtube.com/embed/eroWCJodVa8",
-    title: "YouTube video player",
-    frameBorder: "0",
-    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-    allowFullScreen: true
-  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-video-banner-content"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Welcome to Frontis Blocks', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The Frontis Block is a modern content creation tool', 'frontis-blocks'))), /*#__PURE__*/React.createElement("a", {
     className: "fb-create-page-button",
@@ -1006,9 +1001,14 @@ var Integration = function Integration() {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Google reCAPTCHA is a free service that protects your website from spam and abuse.', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "section-right"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "section-right-overlay"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v2', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v2', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={__('Site key', 'frontis-blocks')}
+  , {
     value: integrations.recaptcha_v2_site_key,
     onChange: function onChange(value) {
       return handleChange(value, 'recaptcha_v2_site_key');
@@ -1017,8 +1017,9 @@ var Integration = function Integration() {
       return handleBlur('recaptcha_v2_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v2 Site Key', 'frontis-blocks')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={ __('Secret key', 'frontis-blocks') }
+  , {
     type: "password",
     value: integrations.recaptcha_v2_secret_key,
     onChange: function onChange(value) {
@@ -1033,8 +1034,9 @@ var Integration = function Integration() {
     className: "api-documentation"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('API Documentation', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "recaptcha-version"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v3', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Site key', 'frontis-blocks'),
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('reCAPTCHA v3', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={__('Site key', 'frontis-blocks')}
+  , {
     value: integrations.recaptcha_v3_site_key,
     onChange: function onChange(value) {
       return handleChange(value, 'recaptcha_v3_site_key');
@@ -1043,8 +1045,9 @@ var Integration = function Integration() {
       return handleBlur('recaptcha_v3_site_key');
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter reCAPTCHA v3 Site Key', 'frontis-blocks')
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Secret key', 'frontis-blocks'),
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl
+  // label={ __('Secret key', 'frontis-blocks') }
+  , {
     type: "password",
     value: integrations.recaptcha_v3_secret_key,
     onChange: function onChange(value) {
@@ -1067,7 +1070,11 @@ var Integration = function Integration() {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Integrate Google Maps into your website to display interactive maps and location-based information.', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "section-right"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-right-overlay"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Google Maps API Key', 'frontis-blocks'),
     value: integrations.google_maps_api_key,
     onChange: function onChange(value) {
@@ -1090,7 +1097,11 @@ var Integration = function Integration() {
     className: "description"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Display your latest Instagram posts on your website with this integration.', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "section-right"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-right-overlay"
+  }), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Instagram Access Token', 'frontis-blocks'),
     type: "password",
     value: integrations.instagram_access_token,
@@ -1183,17 +1194,23 @@ var Pricing = function Pricing() {
     className: "fb-pricing-column"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Features Comparison', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Frontis Blocks is a powerful plugin that allows you to create stunning websites with ease.', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-column"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fb-pricing-column-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-type"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Free', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-price"
-  }, "$00", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Forever', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "$00", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Forever', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "fb-button fb-button-green"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Download', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-column"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "fb-pricing-column-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-type"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pro', 'frontis-blocks')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "fb-pricing-price"
-  }, "$999", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Years', 'frontis-blocks'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "$999", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('/Years', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "fb-button fb-button-blue"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Buy Now', 'frontis-blocks')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "fb-pricing-body"
@@ -1256,7 +1273,7 @@ var Settings = function Settings() {
   }).component;
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings"
-  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-tabs"
@@ -1488,7 +1505,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data4;
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -1499,7 +1516,7 @@ var AssetsGeneration = function AssetsGeneration() {
         }
       },
       error: function error(xhr, status, _error3) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to generate assets: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
+        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -1515,18 +1532,15 @@ var AssetsGeneration = function AssetsGeneration() {
   }, []);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Assets Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('File Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable automatic file generation', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.file_generation,
-    onChange: function onChange() {
-      return handleSwitchChange('file_generation');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
@@ -1535,7 +1549,7 @@ var AssetsGeneration = function AssetsGeneration() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "fb-button-primary",
     onClick: handleAssetGeneration
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate Assets', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Regenerate Asset', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isOpen: isModalOpen,
     onClose: closeModal,
     onConfirm: confirmAssetGeneration,
@@ -1730,36 +1744,21 @@ var EditorEnhancements = function EditorEnhancements() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Quick Action Bar', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Adds a quick action bar to the editor', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.enable_quick_action_bar,
-    onChange: function onChange() {
-      return handleSwitchChange('enable_quick_action_bar');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Quick Action Bar', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Adds a quick action bar to the editor', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collapse Panel', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Allows collapsing of the editor panel', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.collapse_panel,
-    onChange: function onChange() {
-      return handleSwitchChange('collapse_panel');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Collapse Panel', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Allows collapsing of the editor panel', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Templates Button', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Adds a templates button to the editor', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.enable_templates_button,
-    onChange: function onChange() {
-      return handleSwitchChange('enable_templates_button');
-    }
-  }))));
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Templates Button', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Adds a templates button to the editor', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditorEnhancements);
 
@@ -1784,6 +1783,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -1799,6 +1802,8 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -1956,6 +1961,17 @@ var EditorOptions = function EditorOptions() {
       return _ref.apply(this, arguments);
     };
   }();
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('Desktop'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    device = _useState4[0],
+    setDevice = _useState4[1];
+  var handleDevice = function handleDevice(deviceName) {
+    setDevice(deviceName);
+  };
+  var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
+    var wrapper = e.currentTarget;
+    wrapper.classList.toggle('fb-device-switchers-open');
+  };
   var NumberInputWithPx = function NumberInputWithPx(_ref2) {
     var value = _ref2.value,
       onChange = _ref2.onChange,
@@ -1963,6 +1979,8 @@ var EditorOptions = function EditorOptions() {
       min = _ref2.min,
       max = _ref2.max;
     return /*#__PURE__*/React.createElement("div", {
+      className: "fb-option-input-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
       className: "fb-option-input-with-px"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
       type: "number",
@@ -1973,7 +1991,52 @@ var EditorOptions = function EditorOptions() {
       onBlur: onBlur
     }), /*#__PURE__*/React.createElement("span", {
       className: "fb-option-input-px"
-    }, "px"));
+    }, "px")), /*#__PURE__*/React.createElement("div", {
+      className: "fb-setting-device-label-wrapper"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-responsive-device-wrapper",
+      onClick: toggleDeviceVisibility
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "fb-responsive-device-inner-wrapper"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "fb-device-switcher fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleDevice('Desktop');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "16",
+      viewBox: "0 0 16 16",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+      d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
+      fill: "#555E72"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleDevice('Tablet');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "6",
+      height: "7",
+      viewBox: "0 0 6 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+    }))), /*#__PURE__*/React.createElement("button", {
+      className: "fb-device-switcher fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
+      onClick: function onClick() {
+        return handleDevice('Mobile');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "4",
+      height: "7",
+      viewBox: "0 0 4 7"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+    })))))));
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
@@ -1981,78 +2044,39 @@ var EditorOptions = function EditorOptions() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.default_content_width,
-    onChange: function onChange(value) {
-      return handleNumberChange('default_content_width', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('default_content_width', options.default_content_width);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Button - Inherit From Theme', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Use button styles from the current theme', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.button_inherit_from_theme,
-    onChange: function onChange() {
-      return handleSwitchChange('button_inherit_from_theme');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Button - Inherit From Theme', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Use button styles from the current theme', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.container_padding,
-    onChange: function onChange(value) {
-      return handleNumberChange('container_padding', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('container_padding', options.container_padding);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Elements Gap', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default gap between container elements in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
-    value: options.container_elements_gap,
-    onChange: function onChange(value) {
-      return handleNumberChange('container_elements_gap', value);
-    },
-    onBlur: function onBlur() {
-      return handleNumberBlur('container_elements_gap', options.container_elements_gap);
-    },
-    min: 0,
-    max: 2000
-  })), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Elements Gap', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default gap between container elements in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable custom CSS for blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.custom_css,
-    onChange: function onChange() {
-      return handleSwitchChange('custom_css');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Custom CSS', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable custom CSS for blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Copy Paste Style', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable copy and paste style functionality', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.copy_paste_style,
-    onChange: function onChange() {
-      return handleSwitchChange('copy_paste_style');
-    }
-  }))));
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Copy Paste Style', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable copy and paste style functionality', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditorOptions);
 
@@ -2209,25 +2233,15 @@ var Performance = function Performance() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Load Google Fonts Locally", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Load Google Fonts Locally for performance improvement", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.google_fonts,
-    onChange: function onChange() {
-      return handleSwitchChange("google_fonts");
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Load Google Fonts Locally", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Load Google Fonts Locally for performance improvement", "frontis-blocks"))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preload Local Fonts", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preload Local Fonts for performance improvement", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.preload_local_fonts,
-    onChange: function onChange() {
-      return handleSwitchChange("preload_local_fonts");
-    }
-  }))));
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preload Local Fonts", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Preload Local Fonts for performance improvement", "frontis-blocks"))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Performance);
 
@@ -2466,49 +2480,27 @@ var SiteVisibility = function SiteVisibility() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Coming Soon Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate coming soon page for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    checked: options.coming_soon_mode,
-    onChange: function onChange(value) {
-      return handleChange('coming_soon_mode', value);
-    }
-  }))), options.coming_soon_mode && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Coming Soon Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate coming soon page for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), options.coming_soon_mode && /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Coming Soon Page', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    options: pageOptions,
-    value: options.coming_soon_page_id,
-    onChange: function onChange(value) {
-      return handleChange('coming_soon_page_id', value);
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Coming Soon Page', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Maintenance Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate maintenance mode for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    checked: options.maintenance_mode,
-    onChange: function onChange(value) {
-      return handleChange('maintenance_mode', value);
-    }
-  }))), options.maintenance_mode && /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Maintenance Mode', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Activate maintenance mode for visitors', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), options.maintenance_mode && /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Maintenance Page', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    options: pageOptions,
-    value: options.maintenance_page_id,
-    onChange: function onChange(value) {
-      return handleChange('maintenance_page_id', value);
-    }
-  }))));
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Maintenance Page', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteVisibility);
 
@@ -2693,39 +2685,21 @@ var VersionControl = function VersionControl() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rollback To Previous Version', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a version to rollback to', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input fb-option-input-rollback"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    value: options.selected_version,
-    options: versions,
-    onChange: handleVersionChange
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    isPrimary: true,
-    onClick: handleRollback,
-    disabled: !options.selected_version
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rollback', 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rollback To Previous Version', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select a version to rollback to', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Beta', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable beta features', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.enable_beta,
-    onChange: function onChange() {
-      return handleSwitchChange('enable_beta');
-    }
-  }))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Beta', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable beta features', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Legacy Block', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable support for legacy blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
-  }, /*#__PURE__*/React.createElement(rc_switch__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    checked: options.enable_legacy_block,
-    onChange: function onChange() {
-      return handleSwitchChange('enable_legacy_block');
-    }
-  }))));
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable Legacy Block', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable support for legacy blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
+    className: "fb-button-upcoming"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VersionControl);
 
@@ -4308,6 +4282,17 @@ module.exports = window["wp"]["coreData"];
 
 "use strict";
 module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["wp"]["editor"];
 
 /***/ }),
 

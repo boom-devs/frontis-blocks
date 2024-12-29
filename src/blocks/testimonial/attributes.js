@@ -353,7 +353,7 @@ const attributes = {
     },
     TestimonialTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialTitleFontSize: {
         type: 'object',
@@ -476,7 +476,7 @@ const attributes = {
 
     TestimonialDescFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialDescFontSize: {
         type: 'object',
@@ -599,7 +599,7 @@ const attributes = {
 
     TestimonialAuthorFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialAuthorFontSize: {
         type: 'object',
@@ -723,7 +723,7 @@ const attributes = {
 
     TestimonialDesignationFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialDesignationFontSize: {
         type: 'object',

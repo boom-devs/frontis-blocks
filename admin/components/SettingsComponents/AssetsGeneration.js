@@ -142,7 +142,7 @@ const AssetsGeneration = () => {
             draggable: true,
           });
         } else {
-          toast.error(__(`Failed to generate assets: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+          toast.error(__(`Failed to regenerate files: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -153,7 +153,7 @@ const AssetsGeneration = () => {
         }
       },
       error: function(xhr, status, error) {
-        toast.error(__(`Failed to generate assets: ${status} - ${error}`, 'frontis-blocks'), {
+        toast.error(__(`Failed to regenerate files: ${status} - ${error}`, 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -171,7 +171,7 @@ const AssetsGeneration = () => {
 
   return (
     <div className="fb-blocks-settings-options">
-      <h3>{__('Assets Generation', 'frontis-blocks')}</h3>
+      {/* <h3>{__('Assets Generation', 'frontis-blocks')}</h3> */}
       
       <div className="fb-option">
         <div className="fb-option-label">
@@ -179,10 +179,13 @@ const AssetsGeneration = () => {
           <p>{__('Enable automatic file generation', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
-          <Switch
+          {/* <Switch
             checked={options.file_generation}
             onChange={() => handleSwitchChange('file_generation')}
-          />
+          /> */}
+          <p className="fb-button-upcoming">
+            {__('Coming Soon', 'frontis-blocks')}
+          </p>
         </div>
       </div>
 
@@ -196,7 +199,7 @@ const AssetsGeneration = () => {
             className="fb-button-primary"
             onClick={handleAssetGeneration}
           >
-            {__('Generate Assets', 'frontis-blocks')}
+            {__('Regenerate Asset', 'frontis-blocks')}
           </Button>
         </div>
       </div>

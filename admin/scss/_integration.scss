@@ -1,58 +1,95 @@
 .fb-blocks-integration {
-  margin: $spacing-unit * 2.5 auto;
-  padding: 24px;
-  background-color: $white-color;
-  border-radius: 14px;
-
+  
   .integration-section {
-    padding: $spacing-unit * 3;
-    border-bottom: 1px solid $border-color;
+    background-color: $white-color;
+    margin-bottom: 42px;
+    border-radius: 14px;
 
     &:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
 
     .section-content {
       display: flex;
-      flex-wrap: wrap;
-      margin: 0 -#{$spacing-unit * 1.5};
     }
 
     .section-left {
-      flex: 0 0 30%;
-      padding: 0 $spacing-unit * 1.5;
+      max-width: 450px;
+      flex-shrink: 0;
+      padding: 42px;
     }
 
     .section-right {
-      flex: 0 0 60%;
-      padding: 0 $spacing-unit * 1.5;
+      position: relative;
+      width: 100%;
+      padding: 42px;
+      
+      .section-right-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $neutral-color-50;
+        opacity: 0.6;
+      }
+      .fb-button-upcoming {
+        cursor: default;
+        position: absolute;
+        z-index: 5;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: $body-font-family;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 25px;
+        background-color: $error-color-400;
+        border-radius: $border-radius * 2;
+        padding: 12px 24px;
+        color: $white-color;
+        margin: 0;
+      }
     }
 
     h2 {
-      font-size: $base-font-size + 8px;
-      margin-bottom: $spacing-unit * 1.5;
-      color: $text-color;
+      font-family: $heading-font-family;
+      font-size: 24px;
       font-weight: 600;
+      line-height: 31px;
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: $neutral-color-900;
     }
 
     .description {
-      color: $text-muted;
+      font-family: $body-font-family;
+      font-size: 18px;
+      line-height: 25px;
+      font-weight: 400;
+      color: $neutral-color-600;
       margin-bottom: $spacing-unit * 2.5;
-      line-height: 1.5;
     }
 
     .recaptcha-version {
-      margin-bottom: $spacing-unit * 3;
+      margin-bottom: 42px;
 
       &:last-child {
         margin-bottom: 0;
       }
 
       h3 {
-        font-size: $base-font-size + 2px;
-        margin-bottom: $spacing-unit * 1.5;
-        color: $text-color;
-        font-weight: 600;
+        font-family: $body-font-family;
+        font-size: 18px;
+        line-height: 25px;
+        font-weight: 500;
+        margin-bottom: 12px;
+        margin-top: 0;
+        color: $neutral-color-900;
       }
     }
   }
@@ -61,19 +98,26 @@
     margin-bottom: $spacing-unit * 2;
 
     .components-base-control__label {
+      font-family: $body-font-family;
+      font-size: 14px;
+      line-height: 19px;
       font-weight: 500;
-      margin-bottom: $spacing-unit * 0.5;
-      display: block;
+      margin-bottom: 10px;
+      display: $neutral-color-900;
       color: $text-color;
     }
 
     .components-text-control__input {
       width: 100%;
-      padding: $input-padding;
-      border: 1px solid $input-border-color;
-      border-radius: $border-radius;
-      height: $input-height;
-      background-color: #f9f9f9;
+      padding: 14px 16px;
+      border: 1px solid $neutral-color-100;
+      border-radius: 10px;
+      background-color: $neutral-color-50;
+      font-family: $body-font-family;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      color: $neutral-color;
 
       &:focus {
         box-shadow: 0 0 0 1px $primary-color;
@@ -84,10 +128,13 @@
 
   .api-documentation {
     display: inline-block;
-    margin-top: $spacing-unit;
-    color: $primary-color;
     text-decoration: none;
-    font-size: $base-font-size - 2px;
+    font-family: $body-font-family;
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 500;
+    color: $primary-color-base;
+    text-decoration: underline;
 
     &:hover {
       text-decoration: underline;
@@ -129,7 +176,7 @@
     }
 
     .components-base-control {
-      margin-bottom: $spacing-unit * 2;
+      margin-bottom: 14px;
     }
   }
 }
