@@ -119,6 +119,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   line-height: 16px;
   color: #0B0C0E;
   text-transform: capitalize;
+  margin-top: 7px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
   font-family: "Work Sans", sans-serif;
