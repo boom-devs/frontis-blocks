@@ -4089,7 +4089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												)}
 
 												<FB_Spacing 
-													label={__("Border Width", "frontis-blocks")}
+													label={__("Border", "frontis-blocks")}
 													deviceType={deviceType}
 													spacingUnitsHandler={handleSocialIconBtnBorderUnitsHandler}
 													spacingUnits={socialIconBtnBorderUnits}
@@ -4103,7 +4103,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 
 												<FB_Spacing 
-													label={__("Border Radius Width", "frontis-blocks")}
+													label={__("Border Radius", "frontis-blocks")}
 													deviceType={deviceType}
 													spacingUnitsHandler={handleSocialIconBtnBorderRadiusUnitsHandler}
 													spacingUnits={socialIconBtnBorderRadiusUnits}
@@ -4380,7 +4380,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
 
 													<FB_Spacing 
-														label={__("Border Width", "frontis-blocks")}
+														label={__("Border", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberIconsBorderUnitsHandler}
 														spacingUnits={teamMemberIconsBorderUnits}
@@ -4394,7 +4394,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 
 													<FB_Spacing 
-														label={__("Border Radius Width", "frontis-blocks")}
+														label={__("Border Radius", "frontis-blocks")}
 														deviceType={deviceType}
 														spacingUnitsHandler={handleTeamMemberIconsBorderRadiusUnitsHandler}
 														spacingUnits={teamMemberIconsBorderRadiusUnits}
