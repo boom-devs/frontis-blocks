@@ -16,13 +16,14 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs {
   border-bottom: 1px solid #E1E3E8;
-  padding: 0 12px;
+  padding: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
+  font-family: Plus Jakarta Sans;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
   border-bottom: 2px solid transparent;
-}
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button.active-tab {
-  border-bottom: 2px solid #C3C8D2;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button:first-child {
   padding-left: 0;
@@ -90,6 +91,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   margin-bottom: 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
   padding: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper {
@@ -119,6 +124,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   line-height: 16px;
   color: #0B0C0E;
   text-transform: capitalize;
+  margin-top: 9px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
   font-family: "Work Sans", sans-serif;
@@ -247,8 +253,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: transparent;
 }
 
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
+  padding: 24px 0;
+}
+
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
-  padding: 0;
+  padding: 0 !important;
 }
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item {
   display: flex;
@@ -325,7 +335,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 .fb-global-typo-elements-wrap .fb-custom-element {
   border-bottom: 1px solid #E1E3E8;
-  padding: 14px 12px;
+  padding: 12px;
 }
 .fb-global-typo-elements-wrap .fb-custom-element button {
   padding: 0;
@@ -341,22 +351,24 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   box-shadow: none !important;
 }
 .fb-global-typo-elements-wrap .fb-custom-element button .font_preview {
-  background: #E1E3E8;
-  padding: 6px;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 12px;
-  min-height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.fb-global-typo-elements-wrap .fb-custom-element:last-child {
-  border-bottom: none;
+.fb-global-typo-elements-wrap .fb-custom-element:last-child .font_preview {
+  background: #399CFF;
+}
+.fb-global-typo-elements-wrap .fb-custom-element:last-child .font_preview svg path {
+  fill: #ffffff;
 }
 .fb-global-typo-elements-wrap .fb-custom-element.fb-global-typography-element {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-left: 1px solid #E1E3E8;
+  border-right: 1px solid #E1E3E8;
 }
 .fb-global-typo-elements-wrap .fb-typography-settings .components-base-control {
   width: auto !important;
@@ -373,6 +385,13 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 
 svg#fb-global-panel-icon {
   height: 25px;
+}
+
+.block-editor-panel-color-gradient-settings__color-name {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
 }
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/responsive-control/editor.lazy.scss ***!
