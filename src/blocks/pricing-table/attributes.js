@@ -210,6 +210,7 @@ const attributes = {
 	},
 	pricingTopSectionTextFontFamily: {
 		type: 'string',
+		default: "Default",
 	},
 	pricingTopSectionTextFontSize: {
 		type: 'object',
@@ -829,7 +830,7 @@ const attributes = {
 	},
 	normalPricingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
 	normalPricingFontSize: {
 		type: 'object',
@@ -910,7 +911,7 @@ const attributes = {
 
 	salePricingFontFamily: {
         type: "string",
-        default: "",
+        default: "Default",
     },
 	salePricingFontSize: {
 		type: 'object',
@@ -991,7 +992,7 @@ const attributes = {
 
 	priceCurrencyFontFamily: {
 		type: 'string',
-		default: 'inherit'
+		default: 'Default'
 	},
 	priceCurrencyFontSize: {
 		type: 'object',
@@ -1072,7 +1073,7 @@ const attributes = {
 
 	pricePeriodFontFamily: {
 		type: "string",
-		default: "inherit"
+		default: "Default"
 	},
 	pricePeriodFontSize: {
 		type: 'object',
@@ -1214,7 +1215,7 @@ const attributes = {
 	},
 	pricingTitleFontFamily: {
 		type: "string",
-		default: "",
+		default: "Default",
 	},
 	pricingTitleFontSize: {
 		type: 'object',
@@ -1295,7 +1296,7 @@ const attributes = {
 	},
 	pricingSubtitleFontFamily: {
 		type: "string",
-		default: "",
+		default: "Default",
 	},
 	pricingSubtitleFontSize: {
 		type: 'object',
@@ -1383,9 +1384,9 @@ const attributes = {
 	priceFeatureIconSize: {
 		type: "object",
 		default: {
-			Desktop: "20",
-			Tablet: "20",
-			Mobile: "20"
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 	priceFeatureIconSizeUnits: {
@@ -1413,7 +1414,7 @@ const attributes = {
 	},
 	pricingfeatureTitleFontFamily: {
 		type: "string",
-		default: ""
+		default: "Default"
 	},
 	pricingfeatureTitleFontSize: {
 		type: "object",
@@ -1738,7 +1739,7 @@ const attributes = {
 	},
 	priceButtonFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	priceButtonFontSize: {
 		type: 'object',
@@ -2463,7 +2464,7 @@ const attributes = {
 	},
 	priceAfterTextFontFamily: {
 		type: "string",
-		default: "",
+		default: "Default",
 	},
 	priceAfterTextFontSize: {
 		type: 'object',
@@ -2755,7 +2756,7 @@ const attributes = {
 
 	priceFeatureAfterTextFontFamily: {
 		type: "string",
-		default: "",
+		default: "Default",
 	},
 	priceFeatureAfterTextFontSize: { 
 		type: 'object',

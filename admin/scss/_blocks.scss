@@ -1,6 +1,6 @@
 .fb-blocks {
   &-container {
-    padding: 24px;
+    padding: 32px;
     background-color: $white-color;
     border-radius: 14px;
   }
@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-unit * 2.5;
+    margin-bottom: 42px;
 
     &-left, &-right {
       display: flex;
@@ -18,42 +18,57 @@
   }
 
   &-title {
-    font-size: $base-font-size * 1.7;
-    margin-right: $spacing-unit * 2.5;
+    font-family: $heading-font-family;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 56px;
+    color: $neutral-color-900;
+    margin: 0;
+    margin-right: 62px;
   }
 
   &-search {
     position: relative;
     width: $sidebar-width + $spacing-unit * 2.5;
     border: 1px solid $border-color;
-    border-radius: $border-radius;
+    border-radius: 10px;
     display: flex;
     align-items: center;
-    
-    &::before { 
-      content: '\f179';
-      font-family: dashicons;
+
+    .fb-blocks-search-icon {
       position: absolute;
       left: $spacing-unit;
       top: 50%;
+      left: 20px;
       transform: translateY(-50%);
       color: $dark-gray;
       font-size: $base-font-size * 1.4;
       z-index: 1;
       pointer-events: none;
+      width: 18px;
+      height: 18px;
+      fill: $neutral-color;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
     
     &-input[type="text"] {
       width: 100%;
-      padding: $input-padding $input-padding $input-padding ($spacing-unit * 4.5);
-      padding-right: $spacing-unit * 3.75;
+      padding: 18px 20px 18px 50px;
       border: none;
-      border-radius: $border-radius;
-      font-size: $base-font-size;
+      border-radius: 10px;
+      font-family: $body-font-family;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22px;
+      color: $neutral-color;
       background: transparent;
 
       &::placeholder {
-        color: $medium-gray;
+        color: $neutral-color;
       }
 
       &:focus {
@@ -83,11 +98,14 @@
   }
 
   &-button {
-    padding: $spacing-unit * 2 $spacing-unit * 3;
-    margin-left: $spacing-unit;
+    font-family: $body-font-family;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 500;
+    padding: 18px 32px;
     background-color: $light-gray;
     border: none;
-    border-radius: $border-radius;
+    border-radius: 12px;
     cursor: pointer;
     transition: background-color $transition-duration;
 
@@ -96,8 +114,9 @@
     }
 
     &.fb-blocks-enable-all {
-      background-color: $primary-color;
+      background-color: $primary-color-base;
       color: $white-color;
+      margin-left: 16px;
 
       &:hover {
         background-color: darken($primary-color, 5%);
@@ -117,11 +136,11 @@
   &-category-filter {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-unit * 1.5;
+    gap: $spacing-unit * 2;
     margin-bottom: $spacing-unit * 2.5;
-    padding: $spacing-unit $spacing-unit * 2;
+    padding: 14px;
     border: 1px solid $neutral-color-50;
-    border-radius: $border-radius * 4;
+    border-radius: 14px;
   }
 
   &-category-button {
@@ -143,7 +162,15 @@
     
     gap: $spacing-unit;
 
+    &-title {
+      font-family: $body-font-family;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 500;
+    }
+
     &-icon {
+      display: flex;
       svg {
         width: 20px;
         height: 20px;
@@ -151,25 +178,34 @@
     }
 
     &-count {
-      font-size: $base-font-size * 0.86;
+      font-size: 12px;
       color: $neutral-color;
       background-color: $primary-color-50;
-      padding: $spacing-unit / 2 $spacing-unit;
       border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &:hover {
       background-color: $primary-color-50;
       color: $primary-color;
+
+      .fb-blocks-category-button-count {
+        background-color: $white-color;
+        color: $neutral-color;
+      }
     }
 
     &--active {
       background-color: $primary-color-50;
       color: $primary-color;
 
-      &-count {
+      .fb-blocks-category-button-count {
         background-color: $white-color;
-        color: $primary-color;
+        color: $neutral-color;
       }
 
       &:hover {
@@ -183,10 +219,13 @@
   }
 
   &-category-title {
-    font-size: $base-font-size * 1.5;
-    font-weight: bold;
-    margin-bottom: $spacing-unit * 2.5;
-    color: $text-color;
+    font-family: $heading-font-family;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31px;
+    margin-top: 42px;
+    margin-bottom: 24px;
+    color: $neutral-color-900;
   }
 
   &-category-content {
@@ -241,8 +280,7 @@
   display: flex;
   align-items: center;
   padding: $spacing-unit * 2.5 $spacing-unit * 2;
-  border: 1px solid $border-color;
-  border-radius: $border-radius * 2.5;
+  border-radius: 14px;
   background-color: $neutral-color-50;
   transition: box-shadow $transition-duration;
 
@@ -251,11 +289,15 @@
   }
 
   &-icon {
-    flex: 0 0 $spacing-unit * 6.25;
-    margin-right: $spacing-unit * 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    margin-right: 12px;
 
     img {
-      width: 100%;
+      width: 34px;
       height: auto;
     }
   }
@@ -266,21 +308,43 @@
 
   &-title {
     font-family: $body-font-family;
-    line-height: $body-line-height;
-    font-size: $x-large-font-size;
-    color: $neutral-color-900;
-    margin: 0 0 $spacing-unit / 2;
+    line-height: 25px;
+    font-size: 18px;
     font-weight: 500;
+    color: $neutral-color-900;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+
+    .fb-block-card-badge {
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: $body-font-family;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 11px;
+      color: $primary-color-50;
+      background-color: $warning-color;
+      margin-left: 4px;
+
+      &:first-child {
+        margin-left: 8px;
+      }
+
+      &.new {
+        background-color: $primary-color-base;
+      }
+    }
   }
 
   &-links {
     display: flex;
-    gap: $spacing-unit;
+    gap: 14px;
   }
 
   &-link {
     font-size: $medium-font-size;
-    color: $text-color;
+    color: $neutral-color;
     text-decoration: none;
     display: inline-flex;
     justify-content: center;
@@ -305,6 +369,31 @@
     &-label {
       display: flex;
       align-items: center;
+
+      .rc-switch {
+        width: 44px;
+        height: 24px;
+        border-radius: ($border-radius * 8);
+
+        &::after {
+          left: 1px;
+          top: 1px;
+        }
+      }
+      .rc-switch-checked:after {
+        left: auto;
+      }
+
+      .fb-block-card-upcoming {
+        font-family: $body-font-family;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 15.6px;
+        color: $white-color;
+        background-color: $warning-color-400;
+        padding: 6px 8px;
+        border-radius: 4px;
+      }
     }
 
     &-input {

@@ -30,13 +30,12 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 /**
  * Internal depencencies
  */
 import {
-	TEXT_ALIGN,
-	HEADING,
 	BORDER_STYLES,
 	mediaType,
 	INFO_ICON_POSITION,
@@ -1505,30 +1504,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/* set default values for the style attributes */
 	useEffect(() => {
-		if (Heading_Font_Family) {
-			const fontUrl = `https://fonts.googleapis.com/css?family=${Heading_Font_Family.replace(
-				" ",
-				"+",
-			)}`;
-			const linkElement = document.createElement("link");
-			linkElement.rel = "stylesheet";
-			linkElement.href = fontUrl;
-			document.head.appendChild(linkElement);
-		}
-	}, [Heading_Font_Family]);
+		loadGoogleFont(Heading_Font_Family);
+		loadGoogleFont(SubHeadingFontFamily);
+	}, [Heading_Font_Family, SubHeadingFontFamily]);
 
-	// Define the CSS as a string
-	const css = `
-        #${blockID} {
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-        }
-    `;
 
 	const iconBoxStyle = useMemo(
 		() => `
     .fb-icon-box-content-wrapper.${blockID} {
+		${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
         ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : "" }
         ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
         ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -1547,6 +1531,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     
     @media only screen and (max-width: 1024px) {
         .fb-icon-box-content-wrapper.${blockID} {
+			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
             padding: ${TabletPadding} !important;
             margin: ${TabletMargin} !important;
             border-width: ${BorderTabletWidth} !important;
@@ -1556,6 +1541,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     @media only screen and (max-width: 767px) {
         .fb-icon-box-content-wrapper.${blockID} {
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
             padding: ${MobilePadding} !important;
             margin: ${MobileMargin} !important;
             border-width: ${BorderMobileWidth} !important;
@@ -1954,20 +1940,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																				<path
 																					d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																				<path
 																					d="M15 9L9 15"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																				<path
 																					d="M9 9L15 15"
 																					stroke="#4D4D4D"
-																					stroke-width="1.5"
-																					stroke-linecap="round"
+																					strokeWidth="1.5"
+																					strokeLinecap="round"
 																				></path>
 																			</svg>
 																		</button>
@@ -2183,16 +2169,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										>
 											<FB_Range
 												min={1}
-												max={300}
+												max={1400}
 												label={__("Width", "frontis-blocks")}
 												rangeValue={mediaSize}
-												onChangeHandler={mediaSizeHandler}
-												rangeUnitHandler={mediaSizeUnitsHandler}
+												onChangeHandler={(value) => setAttributes({ mediaSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
 												deviceType={deviceType}
 												units={mediaSizeUnits}
 												setAttributes={setAttributes}
 												rangeStep={1}
-												resetFallbackValue={50}
+												resetFallbackValue={"100"}
 											/>
 											{/*Background*/}
 											<FB_BackgroundColorControl
@@ -2710,18 +2696,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
-													<RangeControl
-														value={globalZIndex}
-														onChange={(value) =>
-															setAttributes({
-																globalZIndex: value === 0 ? undefined : value,
-															})
-														}
-														min={1}
-														max={10000}
-														step={1}
-														allowReset
-														resetFallbackValue={100}
+													
+													<FB_Range
+														min={0}
+														max={10000000}
+														label={__("Z Index", "frontis-blocks")}
+														rangeValue={globalZIndex}
+														onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
 													/>
 												</PanelBody>
 												<PanelBody

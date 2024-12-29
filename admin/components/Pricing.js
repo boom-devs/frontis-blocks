@@ -25,13 +25,17 @@ const Pricing = () => {
             <p>{__('Frontis Blocks is a powerful plugin that allows you to create stunning websites with ease.', 'frontis-blocks')}</p>
           </div>
           <div className="fb-pricing-column">
-            <span className="fb-pricing-type">{__('Free', 'frontis-blocks')}</span>
-            <span className="fb-pricing-price">$00<span>{__('/Forever', 'frontis-blocks')}</span></span>
-            {/* <button className="fb-button fb-button-green">{__('Download', 'frontis-blocks')}</button> */}
+            <div className="fb-pricing-column-title">
+              <span className="fb-pricing-type">{__('Free', 'frontis-blocks')}</span>
+              <span className="fb-pricing-price">$00<span>{__('/Forever', 'frontis-blocks')}</span></span>
+            </div>
+            <button className="fb-button fb-button-green">{__('Download', 'frontis-blocks')}</button>
           </div>
           <div className="fb-pricing-column">
-            <span className="fb-pricing-type">{__('Pro', 'frontis-blocks')}</span>
-            <span className="fb-pricing-price">$999<span>{__('/Years', 'frontis-blocks')}</span></span>
+            <div className="fb-pricing-column-title">
+              <span className="fb-pricing-type">{__('Pro', 'frontis-blocks')}</span>
+              <span className="fb-pricing-price">$999<span>{__('/Years', 'frontis-blocks')}</span></span>
+            </div>
             <button className="fb-button fb-button-blue">{__('Buy Now', 'frontis-blocks')}</button>
           </div>
         </div>

@@ -18,7 +18,7 @@ const attributes = {
 	},
 	postPerPage: {
 		type: "string",
-		default: 6
+		default: "6"
 	},
 
 	postSwitcher: {
@@ -85,9 +85,9 @@ const attributes = {
 	gridColumnsPerSection: {
 		type: "object",
 		default: {
-			Desktop: 3,
-			Tablet: 2,
-			Mobile: 1
+			Desktop: "3",
+			Tablet: "2",
+			Mobile: "1"
 		}
 	},
 	gridGapUnits: {
@@ -109,34 +109,34 @@ const attributes = {
 	gridRowGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 	gridColumnGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 
 	listRowGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 	listImageSpacing: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 30,
-			Mobile: 0
+			Desktop: "40",
+			Tablet: "30",
+			Mobile: "0"
 		}
 	},
 
@@ -1094,9 +1094,9 @@ const attributes = {
 	postCategoryGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postCategoryGapUnits: {
@@ -1385,9 +1385,9 @@ const attributes = {
 	postTagGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postTagGapUnits: {
@@ -1403,15 +1403,15 @@ const attributes = {
 	/** Start Author */
 	showAuthorSwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 
 	postAuthorGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postAuthorGapUnits: {
@@ -1431,9 +1431,9 @@ const attributes = {
 	postAuthorAvatarWidth: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '40'
 		}
 	},
 	postAuthorAvatarWidthUnits: {
@@ -1687,7 +1687,7 @@ const attributes = {
 	/** Start Date */
 	showDateSwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 
 	postDateFontFamily: {
@@ -2306,9 +2306,9 @@ const attributes = {
 	loadMoreIconSize: {
         type: 'object',
         default: {
-            Desktop: 20,
-            Tablet: 20,
-            Mobile: 20
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20'
         }
     },
     loadMoreIconSizeUnits: {
@@ -2370,6 +2370,12 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
+
+	loadMoreloaderColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+
 
 	/** End Load More */
 
