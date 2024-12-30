@@ -28,12 +28,7 @@ const Render = ( props ) => {
 		innerContentWidth,
 	} = attributes;
 
-	console.log("clientId")
-	console.log(clientId)
-	console.log("block_id")
-	console.log(block_id)
 	const direction = attributes[ 'direction'+deviceType ];
-
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
 	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
 
@@ -74,7 +69,6 @@ const Render = ( props ) => {
 	const hasChildBlocks = getBlockOrder( clientId ).length > 0;
 
 	const CustomTag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
-
 	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : '';
