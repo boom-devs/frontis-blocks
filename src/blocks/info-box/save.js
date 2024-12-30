@@ -7,7 +7,7 @@ export default function save({ attributes }) {
 		blockID,
 		wrapperAlignment,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
@@ -38,9 +38,9 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-info-box-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`}>
 					<div
-						className={`fb-info-box-content-wrapper-inner ${blockID}`}
+						className={`fb-info-box-wrapper-inner ${blockID}`}
 						style={{
 							display: "flex",
 							flexDirection:
@@ -74,7 +74,7 @@ export default function save({ attributes }) {
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText.Content
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
