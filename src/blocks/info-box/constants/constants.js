@@ -62,6 +62,13 @@ export const INFO_ICON_VERTICAL_POSITION = [
 	{ label: __("Bottom", "frontis-block"), value: "v-bottom" },
 ];
 
+export const INFO_WRAP_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
 export const BG_TYPE = [
     { label: __("Image", "frontis-block"), value: "image" },
     { label: __("Color", "frontis-block"), value: "color" },
