@@ -312,8 +312,12 @@ const attributes = {
         default: "normal"
     },
     Heading_Border_units : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_Border_Width: {
         type: "object",
