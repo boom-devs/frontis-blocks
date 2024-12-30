@@ -15,10 +15,12 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
-import {useEffect, useMemo, useRef} from '@wordpress/element';
 import FB_BackgroundColorControl from "@Components/background-color-control";
+import {useDeviceType, setDeviceType} from "@Config/displayType";
 
 const Inspector = (props) => {
+	let deviceType= useDeviceType();
+
 	const {
 		isSelected,
 		attributes,
@@ -33,7 +35,6 @@ const Inspector = (props) => {
 			customWidthUnits,
 		},
 		clientId,
-		deviceType,
 		setAttributes
 	} = props;
 
@@ -93,15 +94,9 @@ const Inspector = (props) => {
 
 	// Handling responsive
 	const handleResponsive = (attr) => {
-		setAttributes({deviceType: attr.deviceType});
+		setDeviceType(attr.deviceType, false);
 	}
 
-	console.log("deviceType dafdsa")
-	console.log(deviceType)
-	useEffect(() => {
-		console.log("Device type call")
-		console.log(deviceType)
-	}, [deviceType])
 	return (
 		<InspectorControls key="controls">
 			<div className="fb-inspector-control">

@@ -7,6 +7,8 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import shapes from './shapes';
 
 export default function save( props ) {
+	console.log("Props from save")
+	console.log(props)
 	const {
 		block_id,
 		htmlTag,

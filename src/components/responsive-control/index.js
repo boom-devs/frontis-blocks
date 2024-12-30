@@ -7,7 +7,7 @@ import {useEffect} from "@wordpress/element";
 const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
 	const { setDeviceType } = useDispatch(editorStore);
 
-	/** 
+	/**
 	 * Set the device type to Desktop only when the component mounts
 	 */
 	// useEffect(() => {

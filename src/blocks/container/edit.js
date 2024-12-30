@@ -15,8 +15,10 @@ import './editor.scss';
 import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader";
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
+import {useDeviceType} from "@Config/displayType";
 
 const Edit = (props) => {
+	let deviceType= useDeviceType();
 	const {
 		isSelected,
 		attributes,
@@ -27,9 +29,6 @@ const Edit = (props) => {
 			borderHoverColor,
 			borderRadius,
 			variationSelected,
-			UAGHideDesktop,
-			UAGHideTab,
-			UAGHideMob,
 			globalBlockStyleId,
 			backgroundType,
 			backgroundVideoOpacity,
@@ -40,7 +39,6 @@ const Edit = (props) => {
 		name,
 		context,
 		hasDynamicContent,
-		deviceType,
 	} = props;
 
 	const {
@@ -56,6 +54,9 @@ const Edit = (props) => {
 		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 
 		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
+
+		console.log("parentClientId")
+		console.log(parentClientId)
 		return {
 			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
 			variations: coreBlocks?.getBlockVariations( name ),
@@ -150,6 +151,9 @@ const Edit = (props) => {
 	}, [ hasDynamicContent, context?.postId ] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+
+	console.log("blockStyling")
+	console.log('<style>'+blockStyling+'</style>')
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
