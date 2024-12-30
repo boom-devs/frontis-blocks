@@ -20,6 +20,10 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
+	clientID: {
+		type: "string",
+		default: ""
+	},
 	containerType: {
 		type: 'string',
 		default: 'full-width'

@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
 
-export const STORE_NAME = 'frontis';
+export const STORE_NAME = 'frontisBlock';
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },

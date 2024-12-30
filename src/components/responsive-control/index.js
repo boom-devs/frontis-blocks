@@ -1,26 +1,15 @@
 import { __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
 import './editor.lazy.scss';
-import {useEffect} from "@wordpress/element";
+import {useDeviceType, setDeviceType} from "@Config/displayType";
 
 const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
-	const { setDeviceType } = useDispatch(editorStore);
-
-	/**
-	 * Set the device type to Desktop only when the component mounts
-	 */
-	// useEffect(() => {
-	// 	deviceHandler('Desktop');
-	// 	setDeviceType('Desktop');
-	// }, []);
 
 	/**
 	 * Handle the device type change
 	 * @param {string} deviceName - The device type to set
 	 */
 	const handleDevice = (deviceName) => {
-		deviceHandler(deviceName);
+		// deviceHandler(deviceName);
 		setDeviceType(deviceName);
 	}
 

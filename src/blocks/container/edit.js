@@ -1,14 +1,5 @@
-import {
-	useBlockProps,
-	InnerBlocks,
-	useInnerBlocksProps,
-	__experimentalUseInnerBlocksProps as useInnerBlocksPropsV2
-} from '@wordpress/block-editor';
-import {useSelect} from '@wordpress/data';
+import {select, useSelect} from '@wordpress/data';
 import {useEffect, useMemo, useRef} from '@wordpress/element';
-import {Icon} from '@wordpress/components';
-import {plus} from '@wordpress/icons';
-import {__} from '@wordpress/i18n';
 import Inspector from './inspector';
 import {VariationPicker} from './variationPicker';
 import './editor.scss';
@@ -16,6 +7,7 @@ import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader"
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import {useDeviceType} from "@Config/displayType";
+import {getParentBlock} from "@Utils/getParentBlock";
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -52,7 +44,6 @@ const Edit = (props) => {
 		const coreBlocks = select( 'core/blocks' );
 		const coreBlockEditor = select( 'core/block-editor' );
 		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
-
 		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
 
 		console.log("parentClientId")
@@ -66,7 +57,6 @@ const Edit = (props) => {
 			parentAttributes : coreBlockEditor.getBlockAttributes( parentClientId ),
 		};
 	} );
-
 
 	if ( isParentOfSelectedBlock ) {
 		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
@@ -152,15 +142,15 @@ const Edit = (props) => {
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
-	console.log("blockStyling")
-	console.log('<style>'+blockStyling+'</style>')
-
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
-	const handleResponsive = (device) => {
-		console.log(device)
+	const block = select('core/block-editor').getBlock(clientId);
+	if (block) {
+		const coreBlockEditord = select( 'core/block-editor' );
+		const parentClientIdd = coreBlockEditord.getBlockRootClientId( props.clientId );
+		setAttributes({block_id: parentClientIdd});
 	}
 
 	return (

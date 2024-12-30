@@ -7,8 +7,6 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import shapes from './shapes';
 
 export default function save( props ) {
-	console.log("Props from save")
-	console.log(props)
 	const {
 		block_id,
 		htmlTag,
@@ -85,7 +83,7 @@ export default function save( props ) {
 				id={ blockProps.id }
 				className={ classnames(
 					blockProps.className,
-					`frontis-blocks-block-${ block_id }`,
+					`frontis-blocks-block-test${ block_id }`,
 					isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : ''
 				) }
 			>

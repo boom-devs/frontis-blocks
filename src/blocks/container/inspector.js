@@ -21,6 +21,9 @@ import {useDeviceType, setDeviceType} from "@Config/displayType";
 const Inspector = (props) => {
 	let deviceType= useDeviceType();
 
+	console.log("Chekcing device type", deviceType);
+	console.log(deviceType)
+
 	const {
 		isSelected,
 		attributes,
@@ -94,7 +97,7 @@ const Inspector = (props) => {
 
 	// Handling responsive
 	const handleResponsive = (attr) => {
-		setDeviceType(attr.deviceType, false);
+		// setDeviceType(attr.deviceType, false);
 	}
 
 	return (
