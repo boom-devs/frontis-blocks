@@ -621,12 +621,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
-			display: none;
+            position: absolute;
+			visibility: hidden;
+            opacity: 0;
+			transition: opacity 0.3s ease-in-out;
 		}
 
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
-			display: block;
+			position: static;
+			visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
 		}
       
         @media only screen and (max-width: 1024px) {
