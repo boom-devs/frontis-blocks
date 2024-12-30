@@ -2108,7 +2108,6 @@
   transition: 0.15s;
   height: 0;
   width: 100% !important;
-  z-index: 2;
 }
 .fb-responsive-device-wrapper .fb-device-switcher.active {
   height: 28px;
@@ -2968,6 +2967,13 @@
   width: 24px;
   height: 24px;
   border-radius: 4px;
+}
+
+.fb-select2-control input {
+  box-shadow: unset;
+}
+.fb-select2-control input:focus {
+  box-shadow: unset;
 }
 
 /** End Admin Panel scss **/
