@@ -16,7 +16,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		separator,
 		Sub_Heading_Switcher,
@@ -68,8 +68,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-info-box-content-wrapper ${blockID}`}>
-					<div className={`fb-info-box-content-wrapper-inner ${blockID}`} style={{
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`}>
+					<div className={`fb-info-box-wrapper-inner ${blockID}`} style={{
                         display: "flex",
                         flexDirection: infoIconPosition === "left" ? "row" : infoIconPosition === "right" ? "row-reverse" : infoIconPosition === "top" ? "column" : "column-reverse",
 						justifyContent: "space-between"
@@ -92,7 +92,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
 								onChange={(value) => setAttributes({ text: value })}
 								placeholder={__("Info Heading", "frontis-block")}
