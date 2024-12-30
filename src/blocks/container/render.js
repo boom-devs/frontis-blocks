@@ -5,9 +5,10 @@ import { memo } from '@wordpress/element';
 import shapes from './shapes';
 import { select, useSelect } from '@wordpress/data';
 import backgroundCss from './backgroundCss';
+import {useDeviceType} from "@Config/displayType";
 
 const Render = ( props ) => {
-
+	let deviceType = useDeviceType();
 	const { attributes, clientId, hasSliderParent, hasPopupParent } = props;
 	const {
 		block_id,
@@ -27,10 +28,14 @@ const Render = ( props ) => {
 		innerContentWidth,
 	} = attributes;
 
-	const direction = attributes[ 'direction'+attributes.deviceType ];
+	console.log("clientId")
+	console.log(clientId)
+	console.log("block_id")
+	console.log(block_id)
+	const direction = attributes[ 'direction'+deviceType ];
 
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
-	const getContainerBGStyle = backgroundCss( attributes, attributes.deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
+	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
 
 	const topDividerHtml = 'none' !== topType && (
 		<div
@@ -74,7 +79,7 @@ const Render = ( props ) => {
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : '';
 	const blockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ block_id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ attributes.deviceType } ${ isRootContainerClass }`,
+		className: `frontis-blocks-block-${ block_id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
@@ -98,17 +103,6 @@ const Render = ( props ) => {
 		const { getBlockParents, getBlock } = selectStore( 'core/block-editor' );
 		return { getBlockParentsAll: getBlockParents, getBlockSingle: getBlock };
 	}, [] );
-
-	const parentBlockIds = getBlockParentsAll( clientId );
-	const parentBlockNames = parentBlockIds.map( ( id ) => getBlockSingle( id ).name );
-
-	if ( parentBlockNames.includes( 'frontis-blocks/loop-builder' ) ) {
-		const allowedBlocks = [
-			'frontis-blocks/advanced-heading',
-			'frontis-blocks/container',
-		]
-		innerBlocksParams.allowedBlocks = allowedBlocks;
-	}
 
 	return (
 		<>
