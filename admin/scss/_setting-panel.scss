@@ -420,4 +420,13 @@
 	}
 }
 
+.fb-select2-control {
+    input {
+        box-shadow: unset;
+
+        &:focus {
+            box-shadow: unset;
+        }
+    }
+}
 /** End Admin Panel scss **/
