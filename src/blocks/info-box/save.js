@@ -28,7 +28,9 @@ export default function save({ attributes }) {
 		btnIcon,
 		infoIconPosition,
 		infobtnTargetUrl,
-		infoButtonLink
+		infoButtonLink,
+		infoIconVerticalPosition,
+		infoCardAlignment
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -51,11 +53,15 @@ export default function save({ attributes }) {
 									: infoIconPosition === "top"
 									? "column"
 									: "column-reverse",
+									justifyContent: infoIconPosition !== 'top' || infoIconPosition !== 'bottom' ? infoCardAlignment : '',
 						}}
 					>
 						<div
 							className="fb-info-media-container"
-							style={{ justifyContent: wrapperAlignment }}
+							style={{ 
+								justifyContent: wrapperAlignment,
+								alignItems: infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start",
+							}}
 						>
 							<div
 								className="fb-info-media-wrapper"
@@ -90,16 +96,15 @@ export default function save({ attributes }) {
 							)}
 
 							{info_Button_Switcher && (
-								<a className="fb-info-button"
-								href={infoButtonLink} 
-								target={infobtnTargetUrl ? '_blank' : undefined}
-								rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
-								>
+								<div className="fb-info-button">
 								<div
 									className="fb-info-btn-container"
 									style={{ textAlign: buttonAlignment }}
 								>
-									<div
+									<a
+										href={infoButtonLink} 
+										target={infobtnTargetUrl ? '_blank' : undefined}
+										rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
 										className="fb-info-btn-wrapper"
 										style={{
 											flexDirection:
@@ -120,9 +125,9 @@ export default function save({ attributes }) {
 												{renderSVG(btnIcon)}
 											</div>
 										)}
-									</div>
+									</a>
 								</div>
-								</a>
+								</div>
 							)}
 						</div>
 					</div>

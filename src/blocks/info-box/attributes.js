@@ -145,6 +145,10 @@ const attributes = {
 		type: 'string',
         default: 'top'
 	},
+    infoCardAlignment: {
+		type: 'string',
+        default: 'space-between'
+	},
     height: {
         type: 'number',
         default: 50
@@ -1083,7 +1087,12 @@ const attributes = {
 		type: "string"
 	},
 	globalZIndex : {
-        type: "number",
+        type: 'object',
+        default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	globalPaddingUnits: {
 		type: 'object',

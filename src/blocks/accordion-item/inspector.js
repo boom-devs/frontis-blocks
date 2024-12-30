@@ -250,6 +250,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		.fb-accordion-item-main-wrapper.${blockID} {
 			position: relative;
 			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 		
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
@@ -268,18 +269,22 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
@@ -335,48 +340,53 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			display: block;
 			overflow: hidden;
 			${accordionItemZIndex.Desktop !== undefined ? `z-index: ${accordionItemZIndex.Desktop};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
 			margin: 0;
 			padding: 0;
-			transform-origin: top;
-			transform: scaleY(0);
-			height: 0;
+            height: 0;
+            position: absolute;
 			visibility: hidden;
-			opacity: 0;
-            font-size: 0;
 			transition: all 0.3s ease-in-out;
 		}
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
-			height: unset;
+            height: auto;
+			position: static;
 			visibility: visible;
-			transform: scaleY(1);
-			opacity: 1;
-            font-size: unset;
             transition: all 0.3s ease-in-out;
 		}
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
             ${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
 			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+            transition: all 0.3s ease-in-out;
+		}
+        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
+            margin: 0;
+            transition: all 0.3s ease-in-out;
 		}
 
 		
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
 			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
 			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
