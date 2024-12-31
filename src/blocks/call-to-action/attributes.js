@@ -342,15 +342,15 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    Heading_Color_Switcher : {
+    headingColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    Heading_Color : {
+    headingColor : {
         type: "string",
 		default: "#ffffff"
     },
-    Heading_Hover_Color: {
+    headingHoverColor: {
         type: 'string',
     },
     Heading_Background_Color: {
@@ -360,13 +360,13 @@ const attributes = {
         type: 'string',
         default: "none",
     },
-    Heading_Border_Color: {
+    headingBorderColor: {
         type: 'string',
     },
-    Heading_Border_Hover_Color: {
+    headingBorderHoverColor: {
         type: 'string',
     },
-    Heading_Border_Color_Switcher : {
+    headingBorderColorSwitcher : {
         type: "string",
         default: "normal"
     },
@@ -857,6 +857,16 @@ const attributes = {
         default: true,
     },
     /** Button One Border Radius **/
+	infoButtonBorderColor: {
+        type: 'string',
+    },
+    infoButtonHoverBorderColor: {
+        type: 'string',
+    },
+    infoButtonBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
     btnOneBorderRadiusUnits: {
         type: 'object',
         default: {
@@ -1427,7 +1437,12 @@ const attributes = {
 		type: "string"
 	},
 	globalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
 	globalPaddingUnits: {
 		type: 'object',
