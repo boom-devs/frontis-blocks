@@ -34,6 +34,7 @@ import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_SwitcherControl from '../../components/switcher-control/index.js';
+import {useDeviceType} from "@Config/displayType";
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -41,7 +42,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
-		deviceType,
+		// deviceType,
 
 		// Photo
 		teamMemberImageAlignment,
@@ -401,8 +402,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	} = attributes;
 
-	// Set blockID if it doesn't exist
+	const deviceType= useDeviceType();
 
+	// Set blockID if it doesn't exist
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
