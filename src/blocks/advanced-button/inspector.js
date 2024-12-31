@@ -176,6 +176,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     } = attributes;    
     
+	const deviceType= useDeviceType();
+	
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -183,8 +185,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             });
         }
     }, [clientId]);
-
-	const deviceType= useDeviceType();
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {

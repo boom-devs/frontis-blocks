@@ -1183,38 +1183,5 @@ const attributes = {
         type: "string",
         default: "",
     },
-
-    globalParagraphFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalLinkFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading1FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading2FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading3FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading4FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading5FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading6FontFamily: {
-        type: "string",
-        default: "",
-    },
 }
 export default attributes;
