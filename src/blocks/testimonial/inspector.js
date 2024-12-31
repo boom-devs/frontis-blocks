@@ -40,14 +40,14 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        deviceType,
+        // deviceType,
         TestimonialPresetStyle,
         TestimonialAlignment,
 
@@ -241,6 +241,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
 
     } = attributes;
+
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {

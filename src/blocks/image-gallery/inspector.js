@@ -39,12 +39,13 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         blockStyle,
-        deviceType,
+        // deviceType,
 
         GalleryPresetStyle,
         GalleryType,
@@ -231,7 +232,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
     
-
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({

@@ -4,7 +4,6 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
     const {
         blockId,
-		deviceType,
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,

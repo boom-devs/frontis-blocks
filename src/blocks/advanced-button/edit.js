@@ -18,7 +18,6 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
-        deviceType,
         buttonAlignment,
         buttonText,
         buttonUrl,

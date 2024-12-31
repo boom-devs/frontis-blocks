@@ -7,7 +7,6 @@ export default function Save({ attributes }) {
 
     const { 
         blockID,
-        deviceType,
 
         GalleryType,
         GalleryItems,
