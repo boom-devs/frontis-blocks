@@ -53,7 +53,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
-		deviceType,
+		// deviceType,
 		blockStyle,
 
 		/** Start Top Section */
@@ -115,9 +115,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTopSectionTextMobilePadding,
 		pricingTopSectionTextPaddingLink,
 
-
 		/** End Top Section */
-		
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
@@ -228,7 +226,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		/** End Icon Border Radius */
 		/** End Icon Style */
 
-
 		/** Start Pricing Style */
 		pricingAlignment,
 		normalPricingFontFamily,
@@ -291,7 +288,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricePeriodColor,
 		pricePeriodHoverColor,
 		/** End Pricing Style */
-
 
 		pricePaddingUnits, 
 		priceDesktopPadding,
@@ -591,10 +587,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextColor,
 		priceFeatureAfterTextHoverColor,
 
-
-
     } = attributes;
 
+	const deviceType= useDeviceType();
 
 	useEffect(() => {
         if (clientId && typeof clientId === 'string') {
