@@ -5651,40 +5651,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-
-
+/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
+/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
 
 
 
 var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
   var labelText = _ref.labelText,
-    device = _ref.device,
-    deviceHandler = _ref.deviceHandler;
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store),
-    setDeviceType = _useDispatch.setDeviceType;
-
-  /** 
-   * Set the device type to Desktop only when the component mounts
-   */
-  // useEffect(() => {
-  // 	deviceHandler('Desktop');
-  // 	setDeviceType('Desktop');
-  // }, []);
-
+    device = _ref.device;
   /**
-   * Handle the device type change
-   * @param {string} deviceName - The device type to set
-   */
-  var handleDevice = function handleDevice(deviceName) {
-    deviceHandler(deviceName);
-    setDeviceType(deviceName);
+  	* Handle the device type change
+  	* @param {string} deviceType - The device type to set
+  	*/
+  var handleDevice = function handleDevice(deviceType) {
+    if (!deviceType) {
+      console.error('Invalid device type:', deviceType);
+      return;
+    }
+    try {
+      (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_1__.setDeviceType)(deviceType, false);
+    } catch (error) {
+      console.error('Error setting device type:', error);
+    }
   };
 
   /**
@@ -9329,6 +9317,109 @@ var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
 
 /***/ }),
 
+/***/ "./src/config/displayType.js":
+/*!***********************************!*\
+  !*** ./src/config/displayType.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setCustomizerPreview: () => (/* binding */ setCustomizerPreview),
+/* harmony export */   setDeviceOnCustomizerAction: () => (/* binding */ setDeviceOnCustomizerAction),
+/* harmony export */   setDeviceType: () => (/* binding */ setDeviceType),
+/* harmony export */   useDeviceType: () => (/* binding */ useDeviceType)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Store */ "./src/store/index.js");
+/* harmony import */ var _Utils_customizer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Utils/customizer */ "./src/utils/customizer.js");
+
+
+
+var useDeviceType = function useDeviceType() {
+  var deviceType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(function (select) {
+    var _select, _select2, _select3;
+    var getDeviceFromStore = ((_select = select('core/edit-site')) === null || _select === void 0 ? void 0 : _select.__experimentalGetPreviewDeviceType()) || ((_select2 = select('core/edit-post')) === null || _select2 === void 0 ? void 0 : _select2.__experimentalGetPreviewDeviceType()) || ((_select3 = select(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _select3 === void 0 ? void 0 : _select3.getDeviceType());
+    return getDeviceFromStore || 'Desktop';
+  }, []);
+  return deviceType || '';
+};
+
+/**
+ * Sets the preview device type for the Gutenberg editor.
+ *
+ * @param {string} device - The value representing the device type.
+ * @param {boolean} updateInCustomizer - Whether to update the device type in the customizer preview.
+ */
+var setDeviceType = function setDeviceType(device) {
+  var _dispatch, _dispatch2, _dispatch3;
+  var updateInCustomizer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var setPreviewDeviceType = ((_dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-site')) === null || _dispatch === void 0 ? void 0 : _dispatch.__experimentalSetPreviewDeviceType) || ((_dispatch2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-post')) === null || _dispatch2 === void 0 ? void 0 : _dispatch2.__experimentalSetPreviewDeviceType) || ((_dispatch3 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _dispatch3 === void 0 ? void 0 : _dispatch3.setDeviceType);
+
+  // Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
+  if (!setPreviewDeviceType || typeof setPreviewDeviceType !== 'function') {
+    return;
+  }
+  setPreviewDeviceType(device);
+
+  // If we don't want to update the device type in the customizer preview, return.
+  if (!updateInCustomizer) {
+    return;
+  }
+
+  // This code sets the device type in the customizer preview. It's particularly useful when not using a Full Site Editing (FSE) theme.
+  setCustomizerPreview(device);
+};
+
+/**
+ * This function is used to set previewedDevice in customizer if it is customizer page.
+ *
+ * @param {string} deviceType deviceType should be string e.g. 'desktop', 'tablet', 'mobile' may be 'Desktop', 'Tablet', 'Mobile'.
+ */
+var setCustomizerPreview = function setCustomizerPreview(deviceType) {
+  if (!(0,_Utils_customizer__WEBPACK_IMPORTED_MODULE_2__.isCustomizerPage)()) {
+    return;
+  }
+
+  // deviceType should be string.
+  if (typeof deviceType !== 'string') {
+    return;
+  }
+  var deviceTypeLower = deviceType.toLowerCase();
+
+  // Check deviceType is valid.
+  if (!['desktop', 'tablet', 'mobile'].includes(deviceTypeLower)) {
+    return;
+  }
+  wp.customize.previewedDevice.set(deviceTypeLower);
+};
+
+/**
+ * This function is used to set deviceType in customizer get previewedDevice if it is customizer page and set deviceType gutenberg store.
+ */
+var setDeviceOnCustomizerAction = function setDeviceOnCustomizerAction() {
+  if (!(0,_Utils_customizer__WEBPACK_IMPORTED_MODULE_2__.isCustomizerPage)()) {
+    return;
+  }
+  window.wp.customize.bind('ready', function () {
+    window.wp.customize.previewedDevice.bind(function (device) {
+      if (!device) {
+        return;
+      }
+
+      // Check device type only mobile, tablet and desktop.
+      if (!['mobile', 'tablet', 'desktop'].includes(device)) {
+        return;
+      }
+      var deviceTypeFirstLetterUpper = device.charAt(0).toUpperCase() + device.slice(1);
+      setDeviceType(deviceTypeFirstLetterUpper, false);
+    });
+  });
+};
+
+/***/ }),
+
 /***/ "./src/fbConstants/fbConstants.js":
 /*!****************************************!*\
   !*** ./src/fbConstants/fbConstants.js ***!
@@ -9345,6 +9436,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
 /* harmony export */   NORMAL_HOVER: () => (/* binding */ NORMAL_HOVER),
 /* harmony export */   SEPERATOR_STYLES: () => (/* binding */ SEPERATOR_STYLES),
+/* harmony export */   STORE_NAME: () => (/* binding */ STORE_NAME),
 /* harmony export */   TEXT_ALIGN: () => (/* binding */ TEXT_ALIGN),
 /* harmony export */   TEXT_DECORATION: () => (/* binding */ TEXT_DECORATION),
 /* harmony export */   TEXT_TRANSFORM: () => (/* binding */ TEXT_TRANSFORM),
@@ -9356,6 +9448,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
 
 
+var STORE_NAME = 'frontis';
 var UNIT_TYPES = [{
   label: "px",
   value: "px"
@@ -12599,6 +12692,143 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
+
+/***/ }),
+
+/***/ "./src/store/actions.js":
+/*!******************************!*\
+  !*** ./src/store/actions.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   setDeviceType: () => (/* binding */ setDeviceType)
+/* harmony export */ });
+// This action is used to set the device type. If the Gutenberg stores do not provide device type support, this action serves as a fallback.
+function setDeviceType(value) {
+  return {
+    type: 'UPDATE_DEVICE_TYPE',
+    value: value
+  };
+}
+
+/***/ }),
+
+/***/ "./src/store/index.js":
+/*!****************************!*\
+  !*** ./src/store/index.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   store: () => (/* binding */ store)
+/* harmony export */ });
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./src/store/reducer.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./src/store/actions.js");
+/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectors */ "./src/store/selectors.js");
+/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
+/**
+ * WordPress dependencies
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+var store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)(_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__.STORE_NAME, {
+  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  actions: _actions__WEBPACK_IMPORTED_MODULE_2__,
+  selectors: _selectors__WEBPACK_IMPORTED_MODULE_3__
+});
+(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(store);
+
+/***/ }),
+
+/***/ "./src/store/reducer.js":
+/*!******************************!*\
+  !*** ./src/store/reducer.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var DEFAULT_STATE = {
+  deviceType: 'Desktop'
+};
+function reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  switch (action.type) {
+    case 'UPDATE_INITIAL_STATE':
+      return _objectSpread(_objectSpread({}, state), action.value);
+    case 'UPDATE_DEVICE_TYPE':
+      return _objectSpread(_objectSpread({}, state), {}, {
+        deviceType: action.value
+      });
+  }
+  return state;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reducer);
+
+/***/ }),
+
+/***/ "./src/store/selectors.js":
+/*!********************************!*\
+  !*** ./src/store/selectors.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getDeviceType: () => (/* binding */ getDeviceType),
+/* harmony export */   getState: () => (/* binding */ getState)
+/* harmony export */ });
+function getState(state) {
+  return state;
+}
+function getDeviceType(state) {
+  return state.deviceType;
+}
+
+/***/ }),
+
+/***/ "./src/utils/customizer.js":
+/*!*********************************!*\
+  !*** ./src/utils/customizer.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   isCustomizerPage: () => (/* binding */ isCustomizerPage)
+/* harmony export */ });
+var isCustomizerPage = function isCustomizerPage() {
+  var _window;
+  // We need to run this script only on customizer page.
+  if (!window.location.href.includes('/customize.php')) {
+    return false;
+  }
+  if (!((_window = window) !== null && _window !== void 0 && (_window = _window.wp) !== null && _window !== void 0 && _window.customize)) {
+    return false;
+  }
+  return true;
+};
 
 /***/ }),
 
