@@ -46,7 +46,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        deviceType,
+        // deviceType,
         blockStyle,
         FeatureItems,
         FeatureTag,
@@ -187,7 +187,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureSingleItemBoxShadowCssValue,
         /** End Single Item */
 
-
         /** Global Style */
         FeatureGlobalZIndex,
         FeatureGlobalPaddingUnits,
@@ -257,7 +256,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
     
-
+	const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
