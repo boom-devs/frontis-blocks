@@ -351,6 +351,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBorderRadiusMobile,
         fluentFormGlobalBorderRadiusLink,
 
+        fluentFormGlobalBoxShadowSwitcher,
+        fluentFormGlobalBoxShadowValues,
+        fluentFormGlobalBoxShadowCssValue,
+        fluentFormGlobalBoxShadowHoverValues,
+        fluentFormGlobalBoxShadowHoverCssValue,
+
         blockStyle,
 
     } = attributes;
@@ -2306,12 +2312,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-radius: ${BorderRadiusDesktopWidth} !important;
             ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
             ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
+            ${fluentFormGlobalBoxShadowCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowCssValue};` : ''} 
             position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper:hover {
             ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
             ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+            ${fluentFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
         .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group label:not(.ff-el-form-check-label),
@@ -3485,7 +3493,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         BorderRadiusTabletWidth,
         BorderRadiusMobileWidth,
 
-
+        fluentFormGlobalBoxShadowSwitcher,
+        fluentFormGlobalBoxShadowValues,
+        fluentFormGlobalBoxShadowCssValue,
+        fluentFormGlobalBoxShadowHoverValues,
+        fluentFormGlobalBoxShadowHoverCssValue,
 
 
     ]);
@@ -4718,7 +4730,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
                                                 </PanelBody>
-                                                <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
                                                     <SelectControl
                                                             label={__("Border Style", "frontis-blocks")}
@@ -4777,6 +4789,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
+                                                    <FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={fluentFormGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ fluentFormGlobalBoxShadowSwitcher: value })}
+													/>
+
+													{fluentFormGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ fluentFormGlobalBoxShadowValues: value })}
+															initialShadowValue={fluentFormGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ fluentFormGlobalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{fluentFormGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ fluentFormGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={fluentFormGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ fluentFormGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
                                                 </PanelBody>
 
 
