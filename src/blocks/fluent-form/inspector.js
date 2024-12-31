@@ -44,7 +44,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         fluentFormGlobalZIndex,
         formId,
         showLabels,
@@ -124,7 +124,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormFocusBorderRadiusTablet,
         fluentFormFocusBorderRadiusMobile,
         fluentFormFocusBorderRadiusLink,
-
 
         fluentFormPlaceholderColor,
 
@@ -356,7 +355,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 
-
+	const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
