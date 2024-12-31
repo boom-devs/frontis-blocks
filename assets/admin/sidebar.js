@@ -5600,12 +5600,7 @@ var FB_Range = function FB_Range(_ref) {
     className: "fb-setting-spacing-label-container"
   }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
-    device: deviceType,
-    deviceHandler: function deviceHandler(newDevice) {
-      return setAttributes({
-        deviceType: newDevice
-      });
-    }
+    device: deviceType
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-unit-wrapper"
   }, rangeValue[deviceType] && /*#__PURE__*/React.createElement("div", {

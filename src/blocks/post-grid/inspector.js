@@ -32,6 +32,7 @@ import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclu
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
