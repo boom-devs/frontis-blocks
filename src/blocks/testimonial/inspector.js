@@ -47,7 +47,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        deviceType,
+        // deviceType,
         TestimonialPresetStyle,
         TestimonialAlignment,
 
@@ -241,6 +241,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
 
     } = attributes;
+
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
