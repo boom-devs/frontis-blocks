@@ -52,6 +52,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -94,7 +95,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		deviceType,
+		// deviceType,
 		paddingLink,
 		borderLink,
 
@@ -336,6 +337,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoCardAlignment
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
