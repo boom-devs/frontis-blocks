@@ -1825,11 +1825,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const allBlockStyle = useMemo(() => `
-	
-        .${blockID}.fb-contact-form-wrapper {
-			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
-            position: relative;
-        }
 
 		.${blockID}.fb-contact-form-wrapper {
             ${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
@@ -1840,6 +1835,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${BorderRadiusDesktopWidth != "" ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ""}
             ${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 			${contactFormGlobalBoxShadowCssValue ? `box-shadow: ${contactFormGlobalBoxShadowCssValue};` : ''} 
+			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
+            position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {

@@ -1222,28 +1222,28 @@ export const attributes = {
 	contactFormGlobalMarginDesktop: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 0,
-			right: 0,
+			top: "30",
+			bottom: "30", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginTablet: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginMobile: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20",
+			left: '0',
+			right: '0',
 		},
 	},
 	contactFormGlobalMarginLink : {
