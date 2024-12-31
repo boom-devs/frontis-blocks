@@ -980,11 +980,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Single Item Box Shadow */
+    FeatureSingleItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureSingleItemBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureSingleItemBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureSingleItemBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureSingleItemBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
