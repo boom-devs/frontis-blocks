@@ -41,13 +41,14 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const {
 		blockId,
-		deviceType,
+		// deviceType,
 		buttonAlignment,
 		buttonText,
 		buttonUrl,
@@ -183,6 +184,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [clientId]);
 
+	const deviceType= useDeviceType();
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {

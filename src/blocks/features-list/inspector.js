@@ -13,7 +13,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
+import {useDeviceType} from "@Config/displayType";
 
 import { 
     SelectControl,
