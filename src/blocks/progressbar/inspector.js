@@ -30,7 +30,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
         progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,
@@ -72,6 +72,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
 
 	} = attributes;
+    
+    const deviceType= useDeviceType();
     
     useEffect(() => {
         if (!blockID) {
