@@ -981,9 +981,7 @@ function FrontisBlocksSidebar(props) {
 									</div>
 									</div>
 									<TypographySettings typography={typography} customTypography={customTypography} />
-									<div className="fb-global-font-sizes-presets">
-										
-									</div>
+									
 								</>
 							</NavigatorScreen>
 

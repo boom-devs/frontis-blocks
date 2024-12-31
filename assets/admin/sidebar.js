@@ -3025,7 +3025,21 @@ function FrontisBlocksSidebar(props) {
     customTypography: customTypography
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-font-sizes-presets"
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+  }, /*#__PURE__*/React.createElement("h3", null, "Font Sizes"), /*#__PURE__*/React.createElement("div", {
+    className: "font-size-presettes-wrapper"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, "Font size presets")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5.5 3L10.5 8L5.5 13",
+    stroke: "#404655",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
     path: "/colors"
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner-wrapper"

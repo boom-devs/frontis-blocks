@@ -5,7 +5,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.components-panel__header {
 		&.interface-complementary-area-header {
 			min-height: 58px;
-			background: $neutral-color-100;
+			background: $white-color;
 			padding: 14px 16px;
 
 			.interface-complementary-area-header__title {
@@ -165,6 +165,13 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 							line-height: 20px;
 							color: $neutral-color-950;
 						}
+					}
+				}
+				.fb-global-font-sizes-presets{
+					.font-size-presettes-wrapper{
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
 					}
 				}
 			}

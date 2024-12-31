@@ -3,7 +3,7 @@
   \***********************************************************************************************************************************************************************************************************************************************************************************/
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header {
   min-height: 58px;
-  background: #E1E3E8;
+  background: #FFFFFF;
   padding: 14px 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
@@ -132,6 +132,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-weight: 400;
   line-height: 20px;
   color: #0B0C0E;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-font-sizes-presets .font-size-presettes-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body {
   border: none;
