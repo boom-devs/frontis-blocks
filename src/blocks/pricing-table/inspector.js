@@ -517,7 +517,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalBoxShadowHoverCssValue,
 		/** End Global Settings */
 
-
 		priceAfterTextSwitcher,
 		priceAfterText,
 		priceAfterTextFontFamily,
