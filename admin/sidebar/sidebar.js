@@ -21,6 +21,7 @@ import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
 import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
+import {Coloricon, Typographyicon, Blockicon, ChevronRight, ChevronLeft} from "./../icons"
 
 const defaultsColors = [
 	{
@@ -940,11 +941,9 @@ function FrontisBlocksSidebar(props) {
 										<NavigatorButton path="/typography">
 										<div className="fb-tab-wrapper">
 											<span className="fb-tab-icon">
-											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z" fill="#15171C"/>
-											</svg>
+												<Typographyicon />
 											</span>
-											<span className="fb-tab-title">Typography</span>
+											<span className="fb-tab-title">{__("Typography", "frontis-blocks")}</span>
 										</div>
 										</NavigatorButton>
 									</div>
@@ -952,11 +951,24 @@ function FrontisBlocksSidebar(props) {
 										<NavigatorButton path="/colors">
 											<div className="fb-tab-wrapper">
 											<span className="fb-tab-icon">
-											<svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M15.6502 10.0918C15.2307 9.97762 14.7893 9.91667 14.3337 9.91667C12.2227 9.91667 10.4172 11.2249 9.68383 13.0748M15.6502 10.0918C17.7729 10.6697 19.3337 12.6109 19.3337 14.9167C19.3337 17.6781 17.0951 19.9167 14.3337 19.9167C13.0531 19.9167 11.8849 19.4352 11.0003 18.6435M15.6502 10.0918C15.8762 9.52182 16.0003 8.90042 16.0003 8.25C16.0003 5.48857 13.7617 3.25 11.0003 3.25C8.2389 3.25 6.00033 5.48857 6.00033 8.25C6.00033 8.90042 6.12452 9.52182 6.35048 10.0918M9.68383 13.0748C9.45783 13.6448 9.33366 14.2662 9.33366 14.9167C9.33366 16.3975 9.97741 17.728 11.0003 18.6435M9.68383 13.0748C8.15988 12.66 6.92557 11.5425 6.35048 10.0918M11.0003 18.6435C10.1157 19.4352 8.94758 19.9167 7.66699 19.9167C4.90557 19.9167 2.66699 17.6781 2.66699 14.9167C2.66699 12.6109 4.22778 10.6697 6.35048 10.0918" stroke="#15171C" stroke-width="1.2" stroke-linecap="round"/>
-											</svg>
+												<Coloricon />
 											</span>
-											<span className="fb-tab-title">Colors</span>
+											<span className="fb-tab-title">{__("Colors", "frontis-blocks")}</span>
+											</div>
+										</NavigatorButton>
+									</div>
+									<div className="fb-boder-full"></div>
+									<div className="fb-tab-element">
+										<p className="fb-tab-description">{__("Customize the appearance of specific blocks for the whole site.", "frontis-blocks")}</p>
+										<NavigatorButton path="/blocks">
+											<div className="fb-tab-wrapper flex-between">
+												<span>
+													<span className="fb-tab-icon">
+														<Blockicon />
+													</span>
+													<span className="fb-tab-title">{__("Blocks", "frontis-blocks")}</span>
+												</span>
+												<span className="fb-tab-icon"><ChevronRight /></span>
 											</div>
 										</NavigatorButton>
 									</div>
@@ -969,15 +981,11 @@ function FrontisBlocksSidebar(props) {
 									{/* Title and Description */}
 									<div className="fb-global-header-inner-wrapper">
 									<NavigatorButton path="/" className="back-button">
-										<span>
-											<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#404655" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-											</svg>
-										</span>
+										<ChevronLeft />
 									</NavigatorButton>
 									<div className="fb-global-header-inner">
-										<h3>Typography</h3>
-										<p>Available fonts, typographic styles, application of those styles.</p>
+										<h3>{__("Typography", "frontis-blocks")}</h3>
+										<p>{__("Available fonts, typographic styles, application of those styles.", "frontis-blocks")}</p>
 									</div>
 									</div>
 									<TypographySettings typography={typography} customTypography={customTypography} />
@@ -992,15 +1000,11 @@ function FrontisBlocksSidebar(props) {
 								<>
 									<div className="fb-global-header-inner-wrapper">
 									<NavigatorButton path="/" className="back-button">
-									<span>
-										<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#404655" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-										</svg>
-									</span>
+										<ChevronLeft />
 									</NavigatorButton>
 									<div className="fb-global-header-inner">
-										<h3>Color</h3>
-										<p>Available texts, links, Button, Headings global colors</p>
+										<h3>{__("Color", "frontis-blocks")}</h3>
+										<p>{ __("Available texts, links, Button, Headings global colors", "frontis-blocks") }</p>
 									</div>
 									</div>
 									<PanelColorSettings
@@ -1012,6 +1016,21 @@ function FrontisBlocksSidebar(props) {
 										colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
 									/>
 									
+								</>
+							</NavigatorScreen>
+							
+							{/* Blocks Screen */ }
+							<NavigatorScreen path="/blocks">
+								<>
+									<div className="fb-global-header-inner-wrapper">
+									<NavigatorButton path="/" className="back-button">
+										<ChevronLeft />
+									</NavigatorButton>
+									<div className="fb-global-header-inner">
+										<h3>{__("Blocks", "frontis-blocks")}</h3>
+										<p>{__("Customize the appearance of specific blocks for the whole site.", "frontis-blocks")}</p>
+									</div>
+									</div>
 								</>
 							</NavigatorScreen>
 
