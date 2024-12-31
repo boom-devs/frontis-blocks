@@ -6,7 +6,6 @@ export default function save({ attributes }) {
 
 	const {
 		blockID,
-		deviceType,
 
 		// Photo
 		teamMemberImageUrl,
