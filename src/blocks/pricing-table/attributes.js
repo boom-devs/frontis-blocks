@@ -1876,28 +1876,28 @@ const attributes = {
 	priceButtonDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	priceButtonTabPadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '15',
+			bottom: '15',
+			left: '20',
+			right: '20',
 		},
 	},
 	priceButtonMobilePadding: {
 		type: "object", 
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	priceButtonPaddingLink: {
@@ -2433,6 +2433,10 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+	priceGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	priceGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -2763,7 +2767,7 @@ const attributes = {
 		default: {
 			Desktop: '18',
 			Tablet: '18',
-			Mobile: '18'
+			Mobile: '16'
 		}
 	},
 	priceFeatureAfterTextFontSizeUnits: {

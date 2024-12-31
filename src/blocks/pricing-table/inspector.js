@@ -511,6 +511,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         priceGlobalBorderRadiusTablet,
         priceGlobalBorderRadiusMobile,
         priceGlobalBorderRadiusLink,
+		priceGlobalBoxShadowSwitcher,
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
 		priceGlobalBoxShadowHoverValues,
@@ -597,98 +598,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
-
-
-    /* set default values for the style attributes */
-    useEffect(() => {
-        if (normalPricingFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${normalPricingFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [normalPricingFontFamily]);
-
-	useEffect(() => {
-        if (salePricingFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${salePricingFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [salePricingFontFamily]);
-
-	useEffect(() => {
-        if (priceCurrencyFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${priceCurrencyFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [priceCurrencyFontFamily]);
-
-	useEffect(() => {
-        if (pricePeriodFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${pricePeriodFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [pricePeriodFontFamily]);
-
-	useEffect(() => {
-        if (pricingTitleFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingTitleFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [pricingTitleFontFamily]);
-
-	useEffect(() => {
-        if (pricingSubtitleFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingSubtitleFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [pricingSubtitleFontFamily]);
-
-	useEffect(() => {
-        if (pricingfeatureTitleFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${pricingfeatureTitleFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [pricingfeatureTitleFontFamily]);
-
-	useEffect(() => {
-        if (priceButtonFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${priceButtonFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [priceButtonFontFamily]);
-
-	useEffect(() => {
-        if (priceAfterTextFontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${priceAfterTextFontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    }, [priceAfterTextFontFamily]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -1591,10 +1500,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceAfterTextBorderRadiusTabletWidth = `${priceAfterTextBorderRadiusTablet.top}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.right}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.bottom}${priceAfterTextBorderRadiusUnits.Tablet} ${priceAfterTextBorderRadiusTablet.left}${priceAfterTextBorderRadiusUnits.Tablet}`;
 	const priceAfterTextBorderRadiusMobileWidth = `${priceAfterTextBorderRadiusMobile.top}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.right}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.bottom}${priceAfterTextBorderRadiusUnits.Mobile} ${priceAfterTextBorderRadiusMobile.left}${priceAfterTextBorderRadiusUnits.Mobile}`;
 	/** End After Text Border Radius */
-
-
-
-
 
 	/** Start Pricing Padding */
 	const handlePricePaddingUnitChange = ( event, position ) => {
@@ -2664,7 +2569,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTopSectionBorderDesktopWidth ? `border-width: ${pricingTopSectionBorderDesktopWidth};` : ''}
 			${pricingTopSectionBorderRadiusDesktopWidth ? `border-radius: ${pricingTopSectionBorderRadiusDesktopWidth};` : ''}
 			${pricingTopSectionDesktopPaddingWidth ? `padding: ${pricingTopSectionDesktopPaddingWidth};` : ''}
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all .3s ease-in-out;
 		}
 		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
 		    ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
@@ -2706,7 +2611,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 			${priceGlobalZIndex.Desktop ? `z-index: ${priceGlobalZIndex.Desktop};` : ''}
 			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all .3s ease-in-out;
 			position: relative;
 		}
 		.${blockId} .fb-pricing-main-wrapper:hover {
@@ -2725,7 +2630,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
 			${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
 			${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all .3s ease-in-out;
 		}
 		.${blockId} .fb-pricing-header:hover {
 			${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
@@ -2742,7 +2647,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
 			${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
 			${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-			transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all .3s ease-in-out;
 		}
 		.${blockId} .fb-pricing-ribbon-icon:hover {
 			background-color: ${priceIconBgHoverColor};
@@ -2984,7 +2889,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			`: `
 				background: ${priceButtonNormalClassicColor}; 
 			`}
-			transition: color 0.3s ease, background-color 0.3s ease;
+            transition: all .3s ease-in-out;
 		}
 		.${blockId} .fb-pricing-button:hover {
 			${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
@@ -3025,7 +2930,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionBorderTabletWidth ? `border-width: ${pricingTopSectionBorderTabletWidth};` : ''}
 				${pricingTopSectionBorderRadiusTabletWidth ? `border-radius: ${pricingTopSectionBorderRadiusTabletWidth};` : ''}
 				${pricingTopSectionTabletPaddingWidth ? `padding: ${pricingTopSectionTabletPaddingWidth};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
 				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
@@ -3067,7 +2972,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 				${priceGlobalZIndex.Tablet ? `z-index: ${priceGlobalZIndex.Tablet};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 				position: relative;
 			}
 			.${blockId} .fb-pricing-main-wrapper:hover {
@@ -3169,7 +3074,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
 				${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''} 
 				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-ribbon-icon:hover {
 				background-color: ${priceIconBgHoverColor};
@@ -3203,7 +3108,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`: `
 					background: ${priceButtonNormalClassicColor}; 
 				`}
-				transition: color 0.3s ease, background-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-button:hover {
 				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
@@ -3240,7 +3145,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionBorderMobileWidth ? `border-width: ${pricingTopSectionBorderMobileWidth};` : ''}
 				${pricingTopSectionBorderRadiusMobileWidth ? `border-radius: ${pricingTopSectionBorderRadiusMobileWidth};` : ''}
 				${pricingTopSectionMobilePaddingWidth ? `padding: ${pricingTopSectionMobilePaddingWidth};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section:hover {
 				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
@@ -3282,7 +3187,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 				${priceGlobalZIndex.Mobile ? `z-index: ${priceGlobalZIndex.Mobile};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 				position: relative;
 			}
 			.${blockId} .fb-pricing-main-wrapper:hover {
@@ -3384,7 +3289,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
 				${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''} 
 				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
-				transition: background-color 0.3s ease, border-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-ribbon-icon:hover {
 				background-color: ${priceIconBgHoverColor};
@@ -3418,7 +3323,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`: `
 					background: ${priceButtonNormalClassicColor}; 
 				`}
-				transition: color 0.3s ease, background-color 0.3s ease;
+            	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-button:hover {
 				${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
@@ -3806,6 +3711,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceGlobalBorderRadiusTablet,
 		priceGlobalBorderRadiusMobile,
 		priceGlobalBorderRadiusLink,
+		priceGlobalBoxShadowSwitcher,
 		priceGlobalBoxShadowValues,
 		priceGlobalBoxShadowCssValue,
 		priceGlobalBoxShadowHoverValues,
@@ -6071,18 +5977,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
+
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={priceGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ priceGlobalBoxShadowSwitcher: value })}
+													/>
+
+													{priceGlobalBoxShadowSwitcher === 'normal' && (
 													<FB_BoxShadowControl
-														label={__("Normal Box Shadow", "frontis-blocks")}
+														label={__("Normal Shadow", "frontis-blocks")}
 														onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowValues: value })}
 														initialShadowValue={priceGlobalBoxShadowValues}
 														onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowCssValue: value })}
 													/>
-													<FB_BoxShadowControl
-														label={__("Hover Box Shadow", "frontis-blocks")}
-														onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowHoverValues: value })}
-														initialShadowValue={priceGlobalBoxShadowHoverValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowHoverCssValue: value })}
-													/>
+													)}
+
+													{priceGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={priceGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
+
 												</PanelBody>
 											</div>
 										</div>
