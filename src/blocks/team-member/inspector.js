@@ -2350,7 +2350,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'left' ? 'align-items: start;' : ''}
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'center' ? 'align-items: center;' : ''}
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'right' ? 'align-items: end;' : ''}
-				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' ? `justify-content: ${teamMemberCardAlignment};` : ''}
+				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' ? `justify-content: ${teamMemberCardAlignment};` : ''}
 			}
 
 			${teamMemberSocialType === 'image' && `
