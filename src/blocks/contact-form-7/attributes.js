@@ -1353,4 +1353,25 @@ export const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	contactFormGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    contactFormGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    contactFormGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 }

@@ -255,6 +255,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormGlobalBorderRadiusTablet,
 		contactFormGlobalBorderRadiusMobile,
 		contactFormGlobalBorderRadiusLink,
+
+		contactFormGlobalBoxShadowSwitcher,
+		contactFormGlobalBoxShadowValues,
+		contactFormGlobalBoxShadowCssValue,
+		contactFormGlobalBoxShadowHoverValues,
+		contactFormGlobalBoxShadowHoverCssValue,
 		blockStyle,
 
 	} = attributes;
@@ -1833,11 +1839,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${BorderDesktopWidth != "" ? `border-width: ${BorderDesktopWidth};` : ""}
             ${BorderRadiusDesktopWidth != "" ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ""}
             ${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
+			${contactFormGlobalBoxShadowCssValue ? `box-shadow: ${contactFormGlobalBoxShadowCssValue};` : ''} 
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {
             ${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
             ${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
+			${contactFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${contactFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
 		.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-error-message .wpcf7-not-valid-tip {
@@ -2730,7 +2738,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         BorderRadiusTabletWidth,
         BorderRadiusMobileWidth,
 
-
+		contactFormGlobalBoxShadowSwitcher,
+		contactFormGlobalBoxShadowValues,
+		contactFormGlobalBoxShadowCssValue,
+		contactFormGlobalBoxShadowHoverValues,
+		contactFormGlobalBoxShadowHoverCssValue,
 
 
     ]);
@@ -3589,7 +3601,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
                                                 </PanelBody>
-                                                <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
                                                     <SelectControl
                                                             label={__("Border Style", "frontis-blocks")}
@@ -3648,6 +3660,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={contactFormGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBoxShadowSwitcher: value })}
+													/>
+
+													{contactFormGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowValues: value })}
+															initialShadowValue={contactFormGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{contactFormGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={contactFormGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
                                                 </PanelBody>
 
 
