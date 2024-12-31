@@ -34,11 +34,12 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
 		counterNumber,
 		counterPrefix,
 		counterSuffix,
@@ -166,6 +167,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const counterRef = useRef(null);
 	const observerRef = useRef(null);
+
+    const deviceType= useDeviceType();
 
 	useEffect(() => {
 		if (!blockID) {
