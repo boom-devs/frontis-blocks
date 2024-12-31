@@ -45,7 +45,7 @@ import "./editor.scss";
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
 		contactFormGlobalZIndex,
 		formId,
 		showPlaceholder,
@@ -258,6 +258,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 
 	} = attributes;
+
+	const deviceType= useDeviceType();
+	
 	const [wpCf7Form, setWpCf7Forms] = useState(
 		FrontisBlocksData.contact_form7_html,
 	);
