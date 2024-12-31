@@ -597,11 +597,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Icon Box Shadow */
+    FeatureIconBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureIconBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureIconBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureIconBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureIconBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1298,11 +1310,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    FeatureGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
