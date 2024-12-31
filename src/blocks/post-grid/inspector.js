@@ -104,8 +104,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridBorderRadiusMobile,
         postGridBorderRadiusLink,
 
+        postGridBoxShadowSwitcher,
         postGridBoxShadowValues,
         postGridBoxShadowCssValue,
+        postGridBoxShadowHoverValues,
+        postGridBoxShadowHoverCssValue,
         /** End grid */ 
 
         /** Start Image */
@@ -410,8 +413,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalBorderRadiusMobile,
         postGlobalBorderRadiusLink,
 
+        postGlobalBoxShadowSwitcher,
         postGlobalBoxShadowValues,
         postGlobalBoxShadowCssValue,
+        postGlobalBoxShadowHoverValues,
+        postGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
 
         /** Start Load More */
@@ -2729,6 +2735,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${postGlobalHoverClassicColor};
                 `}
             ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
+            ${postGlobalBoxShadowHoverCssValue ? `box-shadow: ${postGlobalBoxShadowHoverCssValue};` : ''}
         }
         .${blockId}.fb_post_grid_container.grid-layout {
             display: grid; 
@@ -2859,6 +2866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 background: ${postGridHoverClassicColor};
             `}
             ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
+            ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
@@ -3071,6 +3079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${postGlobalHoverClassicColor};
                 `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
+                ${postGlobalBoxShadowHoverCssValue ? `box-shadow: ${postGlobalBoxShadowHoverCssValue};` : ''}
             }
             .${blockId}.fb_post_grid_container.grid-layout {
                 display: grid; 
@@ -3124,6 +3133,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${postGridHoverClassicColor};
                 `}
                 ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
+                ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
@@ -3381,6 +3391,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${postGlobalHoverClassicColor};
                 `}
                 ${postGlobalBorderHoverColor ? `border-color: ${postGlobalBorderHoverColor};` : ''}
+                ${postGlobalBoxShadowHoverCssValue ? `box-shadow: ${postGlobalBoxShadowHoverCssValue};` : ''}
             }
             .${blockId}.fb_post_grid_container.grid-layout {
                 display: grid; 
@@ -3443,7 +3454,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postGridBorderRadiusMobileWidth ? `border-radius: ${postGridBorderRadiusMobileWidth};` : ''}
                 ${postGridBorderColor ? `border-color: ${postGridBorderColor};` : ''}
                 ${postGridBoxShadowCssValue ? `box-shadow: ${postGridBoxShadowCssValue};` : ''}
-                transition: background-color 0.3s ease, border-color 0.3s ease;
+                transition: all .3s ease-in-out;
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper:hover {
@@ -3453,6 +3464,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${postGridHoverClassicColor};
                 `}
                 ${postGridBorderHoverColor ? `border-color: ${postGridBorderHoverColor};` : ''}
+                ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
@@ -3759,8 +3771,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridBorderRadiusTabletWidth,
         postGridBorderRadiusMobileWidth,
 
+        postGridBoxShadowSwitcher,
         postGridBoxShadowValues,
         postGridBoxShadowCssValue,
+        postGridBoxShadowHoverValues,
+        postGridBoxShadowHoverCssValue,
 
         postImageWidth,
         postImageWidthUnits,
@@ -4110,8 +4125,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalTabletBorderRadiusWidth,
         postGlobalMobileBorderRadiusWidth,
 
+        postGlobalBoxShadowSwitcher,
         postGlobalBoxShadowValues,
         postGlobalBoxShadowCssValue,
+        postGlobalBoxShadowHoverValues,
+        postGlobalBoxShadowHoverCssValue,
 
         loadMoreSwitcher,
         loadMoreText,
@@ -4702,11 +4720,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={handlePostGridBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
-                                            <FB_BoxShadowControl
-                                                onBoxShadowChange={(value) => setAttributes({ postGridBoxShadowValues: value })}
-                                                initialShadowValue={postGridBoxShadowValues}
-                                                onBoxShadowStyleChange={(value) => setAttributes({ postGridBoxShadowCssValue: value })}
+
+                                            <FB_SwitcherControl
+                                                label={__("Box Shadow", "frontis-blocks")}
+                                                globalSwitcher={postGridBoxShadowSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ postGridBoxShadowSwitcher: value })}
                                             />
+
+                                            {postGridBoxShadowSwitcher === 'normal' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Normal Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ postGridBoxShadowValues: value })}
+                                                    initialShadowValue={postGridBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ postGridBoxShadowCssValue: value })}
+                                                />
+                                            )}
+
+                                            {postGridBoxShadowSwitcher === 'hover' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Hover Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ postGridBoxShadowHoverValues: value })}
+                                                    initialShadowValue={postGridBoxShadowHoverValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ postGridBoxShadowHoverCssValue: value })}
+                                                />
+                                            )}
                                         </PanelBody>
 
                                         <PanelBody title={__("Thumbnail", "frontis-blocks")} initialOpen={false}>
@@ -6008,11 +6045,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ postGlobalBoxShadowValues: value })}
-														initialShadowValue={postGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ postGlobalBoxShadowCssValue: value })}
-													/>
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={postGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ postGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {postGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ postGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={postGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ postGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {postGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ postGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={postGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ postGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
+
 												</PanelBody>
 											</div>
 										</div>
