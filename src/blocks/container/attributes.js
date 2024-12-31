@@ -20,9 +20,8 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
-	clientID: {
-		type: "string",
-		default: ""
+	p_block_id: {
+		type: 'string',
 	},
 	containerType: {
 		type: 'string',

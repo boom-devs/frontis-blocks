@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { getBlockTypes } from '@wordpress/blocks';
-import { memo } from '@wordpress/element';
+import { memo, useEffect } from '@wordpress/element';
 import shapes from './shapes';
 import { select, useSelect } from '@wordpress/data';
 import backgroundCss from './backgroundCss';
@@ -9,9 +9,9 @@ import {useDeviceType} from "@Config/displayType";
 
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
-	const { attributes, clientId, hasSliderParent, hasPopupParent } = props;
+	const { attributes, setAttributes, clientId, hasSliderParent, hasPopupParent } = props;
 	const {
-		block_id,
+		p_block_id,
 		htmlTag,
 		topType,
 		topFlip,
@@ -72,8 +72,10 @@ const Render = ( props ) => {
 	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : '';
-	const blockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ block_id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType } ${ isRootContainerClass }`,
+
+	const blockProps = useBlockProps();
+	const modifBlockProps = useBlockProps( {
+		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
@@ -98,9 +100,18 @@ const Render = ( props ) => {
 		return { getBlockParentsAll: getBlockParents, getBlockSingle: getBlock };
 	}, [] );
 
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			
+			setAttributes({
+				p_block_id: blockProps.id,
+			});
+		}
+	}, [clientId]);
+
 	return (
 		<>
-			<CustomTag { ...blockProps } key={ block_id }>
+			<CustomTag { ...modifBlockProps } key={ blockProps.id }>
 				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
 				{ 'video' === backgroundType && (
 					<div className="frontis-blocks-container__video-wrap">

@@ -7,7 +7,6 @@ import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader"
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import {useDeviceType} from "@Config/displayType";
-import {getParentBlock} from "@Utils/getParentBlock";
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -15,6 +14,7 @@ const Edit = (props) => {
 		isSelected,
 		attributes,
 		attributes: {
+			p_block_id,
 			borderStyle,
 			borderWidth,
 			borderColor,
@@ -45,9 +45,6 @@ const Edit = (props) => {
 		const coreBlockEditor = select( 'core/block-editor' );
 		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
 		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
-
-		console.log("parentClientId")
-		console.log(parentClientId)
 		return {
 			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
 			variations: coreBlocks?.getBlockVariations( name ),
@@ -143,15 +140,18 @@ const Edit = (props) => {
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
+		const block = select('core/block-editor').getBlock(clientId);
+		if (block) {
+			const coreBlockEditord = select( 'core/block-editor' );
+			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
+			setAttributes({p_block_id: parentBlockId});
+		}
+
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
-	const block = select('core/block-editor').getBlock(clientId);
-	if (block) {
-		const coreBlockEditord = select( 'core/block-editor' );
-		const parentClientIdd = coreBlockEditord.getBlockRootClientId( props.clientId );
-		setAttributes({block_id: parentClientIdd});
-	}
+	console.log("p_block_id");
+	console.log(p_block_id)
 
 	return (
 		<>

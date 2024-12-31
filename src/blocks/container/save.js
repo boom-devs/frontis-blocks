@@ -8,7 +8,7 @@ import shapes from './shapes';
 
 export default function save( props ) {
 	const {
-		block_id,
+		p_block_id,
 		htmlTag,
 		htmlTagLink,
 		contentWidth,
@@ -26,6 +26,9 @@ export default function save( props ) {
 		bottomInvert,
 		linkTarget,
 	} = props.attributes;
+
+	console.log("props props props ")
+	console.log(p_block_id);
 
 	const topDividerHtml = 'none' !== topType && (
 		<div
@@ -75,15 +78,25 @@ export default function save( props ) {
 		}
 	}
 
-	const blockProps = useBlockProps.save();
+	// let blockAtts = useBlockProps();
+
+	// console.log("blockAtts blockAtts")
+	// console.log(blockAtts)
+	const blockProps = {
+		...useBlockProps.save(),
+		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined
+	};
+
+	console.log("blockAtts blockAtts")
+	console.log(props)
 
 	return (
 		<>
 			<CustomTag
-				id={ blockProps.id }
-				className={ classnames(
+				 { ...blockProps }
+				 className={ classnames(
 					blockProps.className,
-					`frontis-blocks-block-test${ block_id }`,
+					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
 					isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : ''
 				) }
 			>
