@@ -16,7 +16,6 @@ export default function save({ attributes }) {
 		orderBy,
 		sortOrder,
 		blockStyle,
-		deviceType,
 		selectedCatSwitcher,
 		selectedTagSwitcher,
 		selectedAuthorSwitcher,

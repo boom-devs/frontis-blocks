@@ -39,7 +39,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
         blockId,
-		deviceType,
+		// deviceType,
 		blockStyle,
 		postType,
 		postPerPage,
@@ -160,7 +160,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postTitleMarginMobile,
         postTitleMarginLink,
         /** End title */
-
 
         /** Start description     */
         postDescriptionTag,
@@ -488,6 +487,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	} = attributes;
 
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
