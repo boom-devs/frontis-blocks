@@ -39,7 +39,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         socialAlignment,
         socialItems,
 
@@ -188,7 +188,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 	
-
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
