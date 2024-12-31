@@ -33,7 +33,8 @@ import {
 	mediaType,
 	ICON_POSITION,
 	INFO_ICON_POSITION,
-	INFO_ICON_VERTICAL_POSITION
+	INFO_ICON_VERTICAL_POSITION,
+	INFO_WRAP_ALIGNMENT
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
@@ -43,13 +44,15 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
-import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ColorControl from "../../components/color-control";
+import FB_SwitcherControl from "../../components/switcher-control";
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -92,7 +95,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		deviceType,
+		// deviceType,
 		paddingLink,
 		borderLink,
 
@@ -330,9 +333,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaHoverBackgroundImageRepeat,
 		blockStyle,
 		infoButtonBorderLink,
-		infoIconVerticalPosition
+		infoIconVerticalPosition,
+		infoCardAlignment
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
@@ -341,7 +347,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	const blockProps = useBlockProps();
+	/** Info Image */
+	let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
+	}
+
+	// Set default value for teamMemberBackgroundImageUrl
+	useEffect(() => {
+		if (!infoMediaUrl) {
+			setAttributes({ infoMediaUrl: defaultImageUrl });
+		}
+	}, []);
+
+
 
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
@@ -1894,7 +1913,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
-		  .fb-info-box-content-wrapper.${blockID} {
+		  .fb-info-box-wrapper.${blockID} {
+		  	  position: relative;
+			  ${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
 			  ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -1906,13 +1927,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 		  }
 	  
-		  .fb-info-box-content-wrapper.${blockID}:hover {
+		  .fb-info-box-wrapper.${blockID}:hover {
 			  ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
 			  ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-content-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper-inner.${blockID} {
+				${globalZIndex.Tablet !== undefined ? `z-index: ${globalZIndex.Tablet};` : ""}
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -1921,7 +1943,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-info-box-content-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper-inner.${blockID} {
+				${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -1930,7 +1953,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 	  
-		  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+		  .fb-info-box-wrapper.${blockID} .fb-heading {
 			  ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
 			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
@@ -1941,44 +1964,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
 			  ${headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
 			  ${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
-			  transition: all .3s ease-in-out;
 			  padding: ${headingPaddingDesktopWidthValue};
 			  margin: ${headingMarginDesktopWidthValue};
-			  border: ${Heading_Border};
-			  border-width: ${headingBorderDesktopWidthValue};
-			  ${ Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : "" }
-			  border-radius: ${headingBorderRadiusDesktopWidthValue}
-		  }
+			  ${Heading_Border !== undefined ? `border-style: ${Heading_Border};` : ''}
+			  ${headingBorderDesktopWidthValue !== undefined ? `border-width: ${headingBorderDesktopWidthValue};` : ''}
+			  ${Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : ''}
+			  ${headingBorderRadiusDesktopWidthValue !== undefined ? `border-radius: ${headingBorderRadiusDesktopWidthValue};` : ''}
+			  transition: all .3s ease-in-out;
+			}
 	  
-		  .fb-info-box-content-wrapper.${blockID}:hover .fb-heading {
+		  .fb-info-box-wrapper.${blockID}:hover .fb-heading {
 			  ${Heading_Hover_Color !== undefined ? `color: ${Heading_Hover_Color};` : ""}
 			  ${ Heading_Border_Hover_Color !== undefined ? `border-color: ${Heading_Border_Hover_Color};` : "" }
+			  transition: all .3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading {
 				  ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                   ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                   ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
 				  padding: ${headingPaddingTabWidthValue};
 				  margin: ${headingMarginTabWidthValue};
-				  border-width: ${headingBorderTabWidthValue};
-				  border-radius: ${headingBorderRadiusTabWidthValue}
+				  ${headingBorderTabWidthValue !== undefined ? `border-width: ${headingBorderTabWidthValue};` : ''}
+			  	  ${headingBorderRadiusTabWidthValue !== undefined ? `border-radius: ${headingBorderRadiusTabWidthValue};` : ''}
 			  }
 		  }
 		  @media only screen and (max-width: 724px) {
-			  .fb-info-box-content-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading {
 				  ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                   ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                   ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
 				  padding: ${headingPaddingMobileWidthValue};
 				  margin: ${headingMarginMobileWidthValue};
-				  border-width: ${headingBorderMobileWidthValue};
-				  border-radius: ${headingBorderRadiusMobileWidthValue}
+				  ${headingBorderMobileWidthValue !== undefined ? `border-width: ${headingBorderMobileWidthValue};` : ''}
+			  	  ${headingBorderRadiusMobileWidthValue !== undefined ? `border-radius: ${headingBorderRadiusMobileWidthValue};` : ''}
 			  }
 		  }
 		
-		.fb-info-box-content-wrapper.${blockID} .fb-description {
+		.fb-info-box-wrapper.${blockID} .fb-description {
 			${SubHeadingColor !== undefined ? `color: ${SubHeadingColor};` : ""}
 			${subHeadingFontFamily ? `font-family: ${subHeadingFontFamily};` : ''}
 			${subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
@@ -1993,13 +2017,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-description {
+		.fb-info-box-wrapper.${blockID}:hover .fb-description {
 			${ SubHeadingHoverColor !== undefined ? `color: ${SubHeadingHoverColor};` : "" }
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description {
 				${ subHeadingTabPaddingValue !== undefined ? `padding: ${subHeadingTabPaddingValue};` : "" }
+				${descTabMarginValue  !== undefined ? `margin: ${descTabMarginValue };` : ""}
 				${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
 				${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
 				${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
@@ -2007,14 +2032,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 757px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description {
 				${ subHeadingMobilePaddingValue !== undefined ? `padding: ${subHeadingMobilePaddingValue};` : "" }
+				${descMobileMarginValue  !== undefined ? `margin: ${descMobileMarginValue };` : ""}
 				${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
 				${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
 				${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
 			}
 		}
-		.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+		.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 			${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
 			${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : "" }
 			font-family: ${ buttonFontFamily !== "default" ? buttonFontFamily : buttonFontFamily };
@@ -2027,42 +2053,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			text-decoration: ${buttonTextDecoration};
 			padding: ${buttonDesktopPaddingValue};
 			margin: ${buttonDesktopMarginValue};
-			border: ${infoButtonBorder};
-			border-width: ${buttonDesktopBorderValue};
-			border-radius: ${buttonBorderRadiusWidth};
-			${buttonDesktopBorderRadiusValue ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
+			${infoButtonBorder !== undefined ? `border-style: ${infoButtonBorder};` : ''}
+			${infoButtonDesktopBorderWidth !== undefined ? `border-width: ${buttonDesktopBorderValue};` : ''}
+			${infoButtonBorderColor !== undefined ? `border-color: ${infoButtonBorderColor};` : ''}
+			${infoBtnDesktopBorderradiusWidth !== undefined ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-btn-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-btn-wrapper {
 			${buttonTextHoverColor !== undefined ? `color: ${buttonTextHoverColor};` : "" }
 			${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : "" }
+			${infoButtonHoverBorderColor !== undefined ? `border-color: ${infoButtonHoverBorderColor};` : ''}
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 				${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
 				${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
 				${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
 				padding: ${buttonTabPaddingValue} !important;
 				margin: ${buttonDesktopMarginValue} !important;
-				border-width: ${buttonTabBorderValue} !important;
-				${buttonTabBorderRadiusValue ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
+				${infoButtonTabBorderWidth !== undefined ? `border-width: ${buttonTabBorderValue};` : ''}
+				${infoBtnTabBorderradiusWidth !== undefined ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-btn-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
 				${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
 				${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
 				${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
 				padding: ${buttonTabPaddingValue} !important;
 				margin: ${buttonDesktopMarginValue} !important;
-				border-width: ${buttonMobileBorderValue} !important;
-				${buttonMobileBorderRadiusValue ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
+				${infoButtonMobileBorderWidth !== undefined ? `border-width: ${buttonMobileBorderValue};` : ''}
+				${infoBtnMobileBorderradiusWidth !== undefined ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
 			}
 		}
-		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 			${mediaBackgroundType === "gradient" ? `
 			background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };
 			`
@@ -2077,16 +2104,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
 			padding: ${mediaDesktopPadding};
 			margin: ${mediaDesktopMargin};
-			border: ${mediaBorder};
-			border-width: ${mediaBorderDesktopWidth};
-			border-radius: ${mediaBorderRadiusDesktopWidth};
+			${mediaBorder !== undefined ? `border-style: ${mediaBorder};` : ''}
+			${mediaBorderDesktop !== undefined ? `border-width: ${mediaBorderDesktopWidth};` : ''}
+			${mediaBorderColor !== undefined ? `border-color: ${mediaBorderColor};` : ''}
+			${mediaBorderRadiusDesktop !== undefined ? `border-radius: ${mediaBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
 			${mediaClassicColor ? `justify-content: center; ` : ''}
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-media-wrapper {
 			${mediaHoverBackgroundType === "gradient" ? ` background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor
 			};
 			`: mediaHoverBackgroundImageUrl &&  mediaHoverBackgroundImageUrl !== "null" ? `
@@ -2096,106 +2124,92 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : "" }
 			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : "" } ` : `
 			background: ${mediaHoverClassicColor}; ` }
+			${mediaBorderHoverColor !== undefined ? `border-color: ${mediaBorderHoverColor};` : ''}
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 				padding: ${mediaTabletPadding};
 				margin: ${mediaTabletMargin};
-				border-width: ${mediaBorderTabletWidth};
-				border-radius: ${mediaBorderRadiusTabletWidth};
+				${mediaBorderTablet !== undefined ? `border-width: ${mediaBorderTabletWidth};` : ''}
+				${mediaBorderRadiusTablet !== undefined ? `border-radius: ${mediaBorderRadiusTabletWidth};` : ''}
 				${mediaBgWidth.Tablet ? `width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};` : ''}
 				${mediaBgHeight.Tablet ? `height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};` : ''}
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper {
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper {
 				padding: ${mediaMobilePadding};
 				margin: ${mediaMobileMargin};
-				border-width: ${mediaBorderMobileWidth};
-				border-radius: ${mediaBorderRadiusMobileWidth};
+				${mediaBorderMobile !== undefined ? `border-width: ${mediaBorderMobileWidth};` : ''}
+				${mediaBorderRadiusMobile !== undefined ? `border-radius: ${mediaBorderRadiusMobileWidth};` : ''}
 				${mediaBgWidth.Mobile ? `width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};` : ''}
 				${mediaBgHeight.Mobile ? `height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};` : ''}
 			}
 		}
 
-		.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-		.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+		.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
+			height: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
 			${mediaIconColor !== undefined ? `fill: ${mediaIconColor};` : ""}
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-icon-wrapper svg {
 			${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-info-media-wrapper {
+		.fb-info-box-wrapper.${blockID}:hover .fb-info-media-wrapper {
 			${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
+				height: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-icon-wrapper svg,
-			.fb-info-box-content-wrapper.${blockID} .fb-info-media-wrapper img {
+			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
+				height: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			}
 		}
 
-		.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 			width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 			${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff"}
+			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-content-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
 			${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff" }
+			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 				width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-content-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 				width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
 			}
 		}
 		`,
 		[
 			blockID,
-			globalBgColor,
-			DesktopPadding,
-			DesktopMargin,
-			globalBorder,
-			BorderDesktopWidth,
-			BorderRadiusDesktopWidth,
-			globalBorderColor,
-			boxGlobalBoxShadowCssValue,
-			globalBgHoverColor,
-			globalBorderHoverColor,
-			blockID,
-			infoBoxTabPadding,
-			infoBoxPaddingUnits,
-			infoBoxTabMargin,
-			infoBoxMarginUnits,
-			infoBoxTabBorderWidth,
-			infoBoxBorderUnits,
-			infoBoxTabBorderRadiusWidth,
-			infoBoxBorderRadiusUnits,
-			infoBoxMobilePadding,
-			infoBoxMobileMargin,
-			infoBoxMobileBorderWidth,
-			infoBoxMobileBorderRadiusWidth,
-			Heading_Color,
 			Heading_Background_Color,
+			Alignment,
 			headingFontFamily,
 			headingFontSize,
 			headingFontSizeUnits,
@@ -2207,28 +2221,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingLetterSpacingUnits,
 			headingLineHeight,
 			headingLineHeightUnits,
+			Heading_Color,
+			Heading_Hover_Color,
 			Heading_Border,
 			Heading_Border_Color,
-			Heading_Hover_Color,
 			Heading_Border_Hover_Color,
-			Heading_Tab_padding,
-			Heading_padding_units,
-			headingPaddingDesktopWidthValue,
-			Heading_Tab_Margin,
-			Heading_Margin_Units,
+			Heading_Border_units,
+			Heading_Border_radius_units,
+			Heading_Desktop_Border_Width,
 			Heading_Tab_Border_Width,
-			Heading_Border_units,
-			Heading_Tab_Border_radius_Width,
-			Heading_Border_radius_units,
-			Heading_Mobile_padding,
-			Heading_padding_units,
-			Heading_Mobile_Margin,
-			Heading_Margin_Units,
 			Heading_Mobile_Border_Width,
-			Heading_Border_units,
+			Heading_Desktop_Border_radius_Width,
+			Heading_Tab_Border_radius_Width,
 			Heading_Mobile_Border_radius_Width,
-			Heading_Border_radius_units,
-			SubHeadingColor,
+			activeBorderRadiusDevice,
+			Heading_padding_units,
+			Heading_Desktop_padding,
+			Heading_Tab_padding,
+			Heading_Mobile_padding,
+			deviceType,
+
+			Heading_Margin_Units,
+			Heading_Desktop_Margin,
+			Heading_Tab_Margin,
+			Heading_Mobile_Margin,
+			Heading_Active_Margin_Device,
+
+			info_Button_Text,
+			wrapperAlignment,
+			descAlignment,
+			buttonAlignment,
+			infoBoxBg,
+
+			SubHeadingPaddingUnits,
+			SubHeadingDesktopPadding,
+			SubHeadingTabPadding,
+			SubHeadingMobilePadding,
 			subHeadingFontFamily,
 			subHeadingFontSize,
 			subHeadingFontSizeUnits,
@@ -2240,12 +2268,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			subHeadingLetterSpacingUnits,
 			subHeadingLineHeight,
 			subHeadingLineHeightUnits,
-			descTabMargin,
+			SubHeadingColor,
+			SubHeadingHoverColor,
+
 			descMarginUnits,
-			SubHeadingMobilePadding,
+			descDesktopMargin,
+			descTabMargin,
 			descMobileMargin,
-			buttonTextColor,
-			buttonBgColor,
+			descActiveMarginDevice,
+
+			infoBoxPaddingUnits,
+			infoBoxDesktopPadding,
+			infoBoxTabPadding,
+			infoBoxMobilePadding,
+			infoBoxBorderUnits,
+			infoBoxDesktopBorderWidth,
+			infoBoxTabBorderWidth,
+			infoBoxMobileBorderWidth,
+
+			infoBoxBorderRadiusUnits,
+			infoBoxDesktopBorderRadiusWidth,
+			infoBoxTabBorderRadiusWidth,
+			infoBoxMobileBorderRadiusWidth,
+
 			buttonFontFamily,
 			buttonFontSize,
 			buttonFontSizeUnits,
@@ -2253,78 +2298,152 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			buttonFontStyle,
 			buttonTextTransform,
 			buttonTextDecoration,
-			infoButtonBorder,
-			buttonBorderRadiusWidth,
+			buttonLetterSpacing,
+			buttonLetterSpacingUnits,
+			buttonLineHeight,
+			buttonLineHeightUnits,
+			buttonColorSwitcher,
+			buttonTextColor,
 			buttonTextHoverColor,
+			buttonBgColor,
 			buttonBgHoverColor,
-			infoButtonTabPadding,
+			buttonBorderRadiusWidth,
+
+			infoButtonMarginUnits,
+			infoButtonDesktopMargin,
 			infoButtonTabMargin,
-			infoButtonTabBorderWidth,
-			infoBtnTabBorderradiusWidth,
-			infoButtonMobilePadding,
 			infoButtonMobileMargin,
+			infoButtonActiveMarginDevice,
+
+			infoButtonPaddingUnits,
+			infoButtonDesktopPadding,
+			infoButtonTabPadding,
+			infoButtonMobilePadding,
+			icon,
+			btnIcon,
+			width,
+			contentAlignment,
+
+			infoButtonBorder,
+			infoBoxMarginUnits,
+			infoBoxDesktopMargin,
+			infoBoxTabMargin,
+			infoBoxMobileMargin,
+			infoButtonBorderUnits,
+			infoButtonDesktopBorderWidth,
+			infoButtonTabBorderWidth,
 			infoButtonMobileBorderWidth,
-			mediaBackgroundType,
-			mediaCustomGradientSwitcher,
-			mediaCustomGradientInputValue,
-			mediaGradientColor,
-			mediaBackgroundImageUrl,
-			mediaBackgroundImagePosition,
-			mediaBackgroundImageAttachment,
-			mediaBackgroundImageRepeat,
-			mediaBackgroundImageSize,
-			mediaClassicColor,
-			mediaHoverBackgroundType,
-			mediaHoverCustomGradientSwitcher,
-			mediaHoverCustomGradientInputValue,
-			mediaHoverGradientColor,
-			mediaHoverBackgroundImageUrl,
-			mediaHoverBackgroundImagePosition,
-			mediaHoverBackgroundImageAttachment,
-			mediaHoverBackgroundImageRepeat,
-			mediaHoverBackgroundImageSize,
-			mediaHoverClassicColor,
-			mediaDesktopPadding,
-			mediaDesktopMargin,
-			mediaBorder,
-			mediaBorderDesktopWidth,
-			mediaBorderRadiusDesktopWidth,
-			mediaTabletPadding,
-			mediaTabletMargin,
-			mediaBorderTabletWidth,
-			mediaBorderRadiusTabletWidth,
-			mediaMobilePadding,
-			mediaMobileMargin,
-			mediaBorderMobileWidth,
-			mediaBorderRadiusMobileWidth,
+			infoBtnBorderradiusUnits,
+			infoBtnDesktopBorderradiusWidth,
+			infoBtnTabBorderradiusWidth,
+			infoBtnMobileBorderradiusWidth,
+			infoButtonBorderColor,
+			infoButtonHoverBorderColor,
+			boxBgColor,
+			boxBgHoverColor,
 			mediaSize,
 			mediaSizeUnits,
-			mediaIconColor,
-			mediaIconHoverColor,
+			globalZIndex,
+			globalPaddingUnits,
+			globalPaddingDesktop,
+			globalPaddingTablet,
+			globalPaddingMobile,
+
+			globalMarginUnits,
+			globalMarginDesktop,
+			globalMarginTablet,
+			globalMarginMobile,
+
+			globalBgColorSwitcher,
+			globalBgColor,
+			globalBgHoverColor,
+
+			globalBorder,
+			globalBorderColor,
+			globalBorderHoverColor,
+			globalBorderUnits,
+			globalBorderDesktop,
+			globalBorderTablet,
+			globalBorderMobile,
+
+			globalBorderRadiusUnits,
+			globalBorderRadiusDesktop,
+			globalBorderRadiusTablet,
+			globalBorderRadiusMobile,
+
+			mediaBgWidth,
+			mediaBgWidthUnits,
+			mediaBgHeight,
+			mediaBgHeightUnits,
+
+			mediaPaddingUnits,
+			mediaPaddingDesktop,
+			mediaPaddingTablet,
+			mediaPaddingMobile,
+
+			mediaMarginUnits,
+			mediaMarginDesktop,
+			mediaMarginTablet,
+			mediaMarginMobile,
+
+			mediaBgColor,
 			mediaBgHoverColor,
+
+			mediaBorder,
+			mediaBorderColor,
+			mediaBorderHoverColor,
+			mediaBorderUnits,
+			mediaBorderDesktop,
+			mediaBorderTablet,
+			mediaBorderMobile,
+
+			mediaBorderRadiusUnits,
+			mediaBorderRadiusDesktop,
+			mediaBorderRadiusTablet,
+			mediaBorderRadiusMobile,
+
 			btnIconSize,
 			btnIconSizeUnits,
 			btnIconColor,
 			btnIconHoverColor,
-			headingBorderRadiusDesktopWidthValue,
-			headingBorderRadiusTabWidthValue,
-			headingBorderRadiusMobileWidthValue,
-			headingMarginDesktopWidthValue,
-			headingMarginTabWidthValue,
-			headingMarginMobileWidthValue,
-			headingPaddingDesktopWidthValue,
-			headingPaddingTabWidthValue,
-			headingPaddingMobileWidthValue,
-			headingBorderDesktopWidthValue,
-			headingBorderTabWidthValue,
-			headingBorderMobileWidthValue,
-			buttonDesktopPaddingValue,
-			buttonTabPaddingValue,
-			buttonMobilePaddingValue,
-			buttonTabBorderValue,
-			buttonDesktopBorderValue,
-			mediaBgWidth,
-			mediaBgHeight
+			btnIconPosition,
+			infoIconPosition,
+
+			mediaIconColor,
+			mediaIconHoverColor,
+			boxGlobalBoxShadowValues,
+			boxGlobalBoxShadowCssValue,
+			mediaBgTypeImage,
+			bgType,
+			infoMediaID,
+			infoMediaAlt,
+			infoMediaUrl,
+			mediaBackgroundType,
+			mediaClassicColor,
+			mediaGradientColor,
+			mediaCustomGradientInputValue,
+			mediaBackgroundColorStyle,
+			mediaBackgroundImageUrl,
+			mediaBackgroundImageAlt,
+			mediaBackgroundImageID,
+			mediaBackgroundImagePosition,
+			mediaBackgroundImageAttachment,
+			mediaBackgroundImageSize,
+			mediaBackgroundImageRepeat,
+			mediaHoverBackgroundType,
+			mediaHoverClassicColor,
+			mediaHoverGradientColor,
+			mediaHoverCustomGradientInputValue,
+			mediaHoverBackgroundColorStyle,
+			mediaHoverBackgroundImageUrl,
+			mediaHoverBackgroundImageAlt,
+			mediaHoverBackgroundImageID,
+			mediaHoverBackgroundImagePosition,
+			mediaHoverBackgroundImageAttachment,
+			mediaHoverBackgroundImageSize,
+			mediaHoverBackgroundImageRepeat,
+			infoIconVerticalPosition,
+			infoCardAlignment
 		],
 	);
 
@@ -2401,6 +2520,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 												</BaseControl>
+
+												{(infoIconPosition === 'left' || infoIconPosition === 'right') && (
+												<BaseControl className="fb-media-vertical-position">
+													<SelectControl
+														label={__("Card Alignment", "frontis-block")}
+														value={infoCardAlignment}
+														options={INFO_WRAP_ALIGNMENT}
+														onChange={(value) =>
+															setAttributes({ infoCardAlignment: value })
+														}
+													/>
+												</BaseControl>
+												)}
 
 												{(infoIconPosition === 'left' || infoIconPosition === 'right') && (
 												<BaseControl className="fb-media-vertical-position">
@@ -2499,28 +2631,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																				mediaUploader.open();
 																			}}
 																		>
-																			<svg
-																				width="24"
-																				height="24"
-																				viewBox="0 0 24 24"
-																				fill="none"
-																				xmlns="http://www.w3.org/2000/svg"
-																			>
-																				<path
-																					d="M10.827 16.379C9.77912 16.9085 8.60041 17.1235 7.43311 16.9979C6.2658 16.8722 5.15981 16.4115 4.24861 15.6711C3.33741 14.9308 2.65996 13.9426 2.29804 12.8257C1.93611 11.7088 1.90518 10.5111 2.20897 9.37703L7.62097 10.827C7.09144 9.77918 6.87652 8.60047 7.00213 7.43317C7.12774 6.26586 7.58853 5.15987 8.32886 4.24867C9.06919 3.33747 10.0574 2.66003 11.1743 2.2981C12.2912 1.93617 13.4889 1.90524 14.623 2.20903L13.173 7.62103C14.2208 7.0915 15.3995 6.87658 16.5668 7.00219C17.7341 7.1278 18.8401 7.58859 19.7513 8.32892C20.6625 9.06926 21.34 10.0575 21.7019 11.1744C22.0638 12.2912 22.0948 13.489 21.791 14.623L16.379 13.173C16.9085 14.2209 17.1234 15.3996 16.9978 16.5669C16.8722 17.7342 16.4114 18.8402 15.6711 19.7514C14.9307 20.6626 13.9425 21.34 12.8256 21.702C11.7088 22.0639 10.511 22.0948 9.37697 21.791L10.827 16.379Z"
-																					stroke="black"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																					strokeLinejoin="round"
-																				></path>
-																				<path
-																					d="M12 12V12.01"
-																					stroke="black"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																					strokeLinejoin="round"
-																				></path>
-																			</svg>
+																			<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
 																			Replace
 																		</button>
 																	</div>
@@ -2750,15 +2861,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											{/*Icon Color */}
 											{mediaSwitcher === "icon" && (
-												<FB_Color
-													label={__("Icon Color", "frontis-blocks")}
-													globalColorSwitcher={mediaIconColorSwitcher}
-													globalColor={mediaIconColor}
-													globalHoverColor={mediaIconHoverColor}
-													handleColorSwitcherChange={(value) => setAttributes({ mediaIconColorSwitcher: value }) }
-													handleGlobalColorChange={(value) => setAttributes({ mediaIconColor: value }) }
-													handleGlobalHoverColorChange={(value) => setAttributes({ mediaIconHoverColor: value }) }
-												/>
+												<>
+													<FB_SwitcherControl
+														label={__("Icon Color", "frontis-blocks")}
+														globalSwitcher={mediaIconColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
+													/>
+															
+													{mediaIconColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={mediaIconColor}
+															setGlobalColor={(value) => setAttributes({ mediaIconColor: value })}
+														/>
+													)}
+															
+													{mediaIconColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={mediaIconHoverColor}
+															setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value })}
+														/>
+													)}
+												</>
 											)}
 											<FB_BackgroundColorControl
 											bgColorSwitcher={mediaBackColorSwitcher}
@@ -2830,6 +2955,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
+
 											<FB_Range
 												min={0}
 												max={500}
@@ -2874,6 +3000,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={handleMediaMarginCombineBtn}
 												setAttributes={setAttributes}
 											/>
+
+											<SelectControl
+												label={__("Border Style", "frontis-block")}
+												value={mediaBorder}
+												options={BORDER_STYLES}
+												onChange={(value) =>
+													setAttributes({ mediaBorder: value })
+												}
+											/>
+											
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={mediaBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
+                                            />
+                                                    
+                                            {mediaBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={mediaBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ mediaBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {mediaBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={mediaBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value })}
+                                                />
+                                            )}
+
 											<FB_Spacing
 												label={__("Border", "frontis-blocks")}
 												deviceType={deviceType}
@@ -2910,7 +3068,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</PanelBody>
 										{/*Heading Style*/}
 										<PanelBody
-											title={__("Heading", "frontis-block")}
+											title={__("Title", "frontis-block")}
 											initialOpen={false}
 										>
 											<FB_TypographyControl
@@ -2951,21 +3109,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 											
-											<FB_Color
-												label={__("Text Color", "frontis-blocks")}
-												globalColorSwitcher={Heading_Color_Switcher}
-												globalColor={Heading_Color}
-												globalHoverColor={Heading_Hover_Color}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({ Heading_Color_Switcher: value })
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ Heading_Color: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ Heading_Hover_Color: value })
-												}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Text Color", "frontis-blocks")}
+                                                globalSwitcher={Heading_Color_Switcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
+                                            />
+                                                    
+                                            {Heading_Color_Switcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={Heading_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Color: value })}
+                                                />
+                                            )}
+                                                    
+                                            {Heading_Color_Switcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={Heading_Hover_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
@@ -3005,23 +3169,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setAttributes({ Heading_Border: value })
 												}
 											/>
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={Heading_Border_Color_Switcher}
-												globalColor={Heading_Border_Color}
-												globalHoverColor={Heading_Border_Hover_Color}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														Heading_Border_Color_Switcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ Heading_Border_Color: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ Heading_Border_Hover_Color: value })
-												}
-											/>
+											
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={Heading_Border_Color_Switcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ Heading_Border_Color_Switcher: value })}
+                                            />
+                                                    
+                                            {Heading_Border_Color_Switcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={Heading_Border_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value })}
+                                                />
+                                            )}
+                                                    
+                                            {Heading_Border_Color_Switcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={Heading_Border_Hover_Color}
+                                                    setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value })}
+                                                />
+                                            )}
 
 											<FB_Spacing
 												label={__("Border Width", "frontis-blocks")}
@@ -3104,23 +3273,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         />
 									
 										{/*Color*/}
-										<FB_Color
-											label={__("Text Color", "frontis-blocks")}
-											globalColorSwitcher={SubHeadingColorSwitcher}
-											globalColor={SubHeadingColor}
-											globalHoverColor={SubHeadingHoverColor}
-											handleColorSwitcherChange={(value) =>
-												setAttributes({
-													SubHeadingColorSwitcher: value,
-												})
-											}
-											handleGlobalColorChange={(value) =>
-												setAttributes({ SubHeadingColor: value })
-											}
-											handleGlobalHoverColorChange={(value) =>
-												setAttributes({ SubHeadingHoverColor: value })
-											}
-										/>
+										<FB_SwitcherControl
+                                                label={__("Text Color", "frontis-blocks")}
+                                                globalSwitcher={SubHeadingColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
+                                            />
+                                                    
+                                            {SubHeadingColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={SubHeadingColor}
+                                                    setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {SubHeadingColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={SubHeadingHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
+                                                />
+                                            )}
 
 										{/*Spacing*/}
 										<Heading>Spacing</Heading>
@@ -3202,65 +3375,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											
 											{/* Start Text Color*/}
-											<FB_Color
-												label={__("Text Color", "frontis-blocks")}
-												globalColorSwitcher={buttonColorSwitcher}
-												globalColor={buttonTextColor}
-												globalHoverColor={buttonTextHoverColor}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														buttonColorSwitcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ buttonTextColor: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ buttonTextHoverColor: value })
-												}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Text Color", "frontis-blocks")}
+                                                globalSwitcher={buttonColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+                                            />
+                                                    
+                                            {buttonColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={buttonTextColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {buttonColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={buttonTextHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
+                                                />
+                                            )}
+
 											{/* Start Button Bg Color*/}
-											<FB_Color
-												label={__("Background Color", "frontis-blocks")}
-												globalColorSwitcher={buttonBgColorSwitcher}
-												globalColor={buttonBgColor}
-												globalHoverColor={buttonBgHoverColor}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														buttonBgColorSwitcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ buttonBgColor: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ buttonBgHoverColor: value })
-												}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={buttonBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+                                            />
+                                                    
+                                            {buttonBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={buttonBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {buttonBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={buttonBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+                                                />
+                                            )}
 											
 											{/* Button Icon color */}
-											{buttonIconSwitcher && (
-												<>
-											<FB_Color
-												label={__("Icon Color", "frontis-blocks")}
-												globalColorSwitcher={btnIconColorSwitcher}
-												globalColor={btnIconColor}
-												globalHoverColor={btnIconHoverColor}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														btnIconColorSwitcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ btnIconColor: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ btnIconHoverColor: value })
-												}
-											/>
-
-											</>
-											)}
+											{buttonIconSwitcher && <>
+												<FB_SwitcherControl
+													label={__("Icon Color", "frontis-blocks")}
+													globalSwitcher={btnIconColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+												/>
+														
+												{btnIconColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={btnIconColor}
+														setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+													/>
+												)}
+														
+												{btnIconColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={btnIconHoverColor}
+														setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+													/>
+												)}
+											</>}
 
 											<FB_Spacing
 												label={__("Padding", "frontis-blocks")}
@@ -3299,23 +3482,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 											/>
 
-											<FB_Color
-												label={__("Border Color", "frontis-blocks")}
-												globalColorSwitcher={infoButtonBorderColorSwitcher}
-												globalColor={infoButtonBorderColor}
-												globalHoverColor={infoButtonHoverBorderColor}
-												handleColorSwitcherChange={(value) =>
-													setAttributes({
-														infoButtonBorderColorSwitcher: value,
-													})
-												}
-												handleGlobalColorChange={(value) =>
-													setAttributes({ infoButtonBorderColor: value })
-												}
-												handleGlobalHoverColorChange={(value) =>
-													setAttributes({ infoButtonHoverBorderColor: value })
-												}
-											/>
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={infoButtonBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ infoButtonBorderColorSwitcher: value })}
+                                            />
+                                                    
+                                            {infoButtonBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={infoButtonBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ infoButtonBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {infoButtonBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={infoButtonHoverBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ infoButtonHoverBorderColor: value })}
+                                                />
+                                            )}
 											
 											<FB_Spacing
 												label={__("Border Width", "frontis-blocks")}
@@ -3359,20 +3546,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
-													<RangeControl
-														value={globalZIndex}
-														onChange={(value) =>
-															setAttributes({
-																globalZIndex: value === 0 ? undefined : value,
-															})
-														}
-														min={1}
-														max={10000}
-														step={1}
-														allowReset
-														resetFallbackValue={100}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={globalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={''}
+                                                        isRangeUnit={false}
+                                                    />
 												</PanelBody>
+
 												<PanelBody
 													title={__("Padding and Margin", "frontis-blocks")}
 													initialOpen={false}
@@ -3416,19 +3603,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												</PanelBody>
 
 												<PanelBody title="Background Color" initialOpen={false}>
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={globalBgColorSwitcher}
-														globalColor={globalBgColor}
-														globalHoverColor={globalBgHoverColor}
-														handleColorSwitcherChange={
-															handleGlobalBgColorSwitcherChange
-														}
-														handleGlobalColorChange={handleGlobalBgColorChange}
-														handleGlobalHoverColorChange={
-															handleGlobalBgHoverColorChange
-														}
+														globalSwitcher={globalBgColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
 													/>
+															
+													{globalBgColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={globalBgColor}
+															setGlobalColor={(value) => setAttributes({ globalBgColor: value })}
+														/>
+													)}
+															
+													{globalBgColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={globalBgHoverColor}
+															setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value })}
+														/>
+													)}
 												</PanelBody>
 												<PanelBody
 													title={__("Border and Shadow", "frontis-blocks")}
@@ -3443,23 +3638,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={globalBorderColorSwitcher}
-														globalColor={globalBorderColor}
-														globalHoverColor={globalBorderHoverColor}
-														handleColorSwitcherChange={(value) =>
-															setAttributes({
-																globalBorderColorSwitcher: value,
-															})
-														}
-														handleGlobalColorChange={(value) =>
-															setAttributes({ globalBorderColor: value })
-														}
-														handleGlobalHoverColorChange={(value) =>
-															setAttributes({ globalBorderHoverColor: value })
-														}
+														globalSwitcher={globalBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
 													/>
+															
+													{globalBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={globalBorderColor}
+															setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
+														/>
+													)}
+															
+													{globalBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={globalBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+														/>
+													)}
 
 													<FB_Spacing
 														label={__("Border", "frontis-blocks")}

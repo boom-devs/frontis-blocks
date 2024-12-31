@@ -34,11 +34,12 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         accordionAlignment,
         accordionIconZIndex,
         accordionItems,
@@ -312,6 +313,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageSize,
     } = attributes;
 
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -1057,92 +1059,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-
-            {/* <style>
-            {`
-                .fb-accordion-main-wrapper.${blockID} {
-                    z-index: ${accordionIconZIndex !== undefined ? accordionIconZIndex : ''};
-                }
-                .fb-accordion-wrapper {
-                    ${accordionGlobalBgColor !== undefined ? `background-color: ${accordionGlobalBgColor};` : ''};
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${accordionBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${accordionBorderColor !== undefined ? `border-color: ${accordionBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-                .fb-accordion-wrapper:hover {
-                    ${accordionGlobalBgHoverColor !== undefined ? `background-color: ${accordionGlobalBgHoverColor};` : ''};
-                    ${accordionBorderHoverColor !== undefined ? `border-color: ${accordionBorderHoverColor};` : ''};
-                }
-                .fb-accordions {
-                    column-gap: ${accordionIconGapSize.Desktop}${accordionIconGapUnits.Desktop};
-                    justify-content: ${accordionAlignment};
-                }
-                .fb-accordion-list-item a {
-                    width: ${accordionIconSize.Desktop}${accordionIconSizeUnits.Desktop};
-                    height: ${accordionIconSize.Desktop}${accordionIconSizeUnits.Desktop};
-                    padding: ${IconPaddingDesktop};
-                    background-color: ${accordionBgColor};
-                    border: ${accordionIconBorder};
-                    border-width: ${IconBorderDesktopWidth};
-                    border-radius: ${IconBorderRadiusDesktopWidth} !important;
-                    ${accordionIconBorderColor !== undefined ? `border-color: ${accordionIconBorderColor};` : ''};
-                }
-                .fb-accordion-list-item a:hover {
-                    background-color: ${accordionBgHoverColor};
-                    ${accordionIconBorderHoverColor !== undefined ? `border-color: ${accordionIconBorderHoverColor};` : ''};
-                }
-                .fb-accordion-list-item a svg{
-                    fill: ${accordionIconColor};
-                }
-                .fb-accordion-list-item a:hover svg{
-                    fill: ${accordionIconHoverColor};
-                }
-
-                @media only screen and (max-width: 1024px) {
-
-                    .fb-accordion-wrapper {
-                        padding: ${TabletPadding};
-                        margin: ${TabletMargin};
-                        border-width: ${BorderTabletWidth};
-                        border-radius: ${BorderRadiusTabletWidth} !important;
-                    }
-                    .fb-accordions {
-                        column-gap: ${accordionIconGapSize.Tablet}${accordionIconGapUnits.Tablet};
-                    }
-                    .fb-accordion-list-item a {
-                        width: ${accordionIconSize.Tablet}${accordionIconSizeUnits.Tablet};
-                        height: ${accordionIconSize.Tablet}${accordionIconSizeUnits.Tablet};
-                        padding: ${IconPaddingTablet};
-                        border-width: ${IconBorderTabletWidth};
-                        border-radius: ${IconBorderRadiusTabletWidth} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-accordion-wrapper {
-                        padding: ${MobilePadding};
-                        margin: ${MobileMargin};
-                        border-width: ${BorderMobileWidth};
-                        border-radius: ${BorderRadiusMobileWidth} !important;
-                    }
-                    .fb-accordions {
-                        column-gap: ${accordionIconGapSize.Mobile}${accordionIconGapUnits.Mobile};
-                    }
-                    .fb-accordion-list-item a {
-                        width: ${accordionIconSize.Mobile}${accordionIconSizeUnits.Mobile};
-                        height: ${accordionIconSize.Mobile}${accordionIconSizeUnits.Mobile};
-                        padding: ${IconPaddingMobile};
-                        border-width: ${IconBorderMobileWidth};
-                        border-radius: ${IconBorderRadiusMobileWidth} !important;
-                    }
-                }
-
-            `}
-            </style> */}
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -1444,7 +1360,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
+                                                label={__("Color", "frontis-blocks")}
                                                 globalSwitcher={titleColorSwitcher}
                                                 setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
                                             />
@@ -1686,7 +1602,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody
                                             title={__(
-                                                "Items Title Border & Radius",
+                                                "Titles Border & Radius",
                                                 "frontis-blocks"
                                             )}
                                             initialOpen={false}
@@ -1721,7 +1637,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderUnitsHandler}
                                                         spacingUnits={accordionItemsBorderUnits}
@@ -1735,7 +1651,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionItemsBorderRadiusUnits}
@@ -1935,7 +1851,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             <FB_Spacing
-                                                label={__("Border Width", "frontis-blocks")}
+                                                label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderUnitsHandler}
                                                 spacingUnits={contentBorderUnits}
@@ -1949,7 +1865,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderRadiusUnitsHandler}
                                                 spacingUnits={contentBorderRadiusUnits}
@@ -2160,7 +2076,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
         
                                                 <PanelBody
-                                                    title={__("Border & Border radius", "frontis-blocks")}
+                                                    title={__("Border & Border Radius", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-border-setting-wrapper"
                                                     >
@@ -2194,7 +2110,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderUnitsHandler}
                                                         spacingUnits={accordionBorderUnits}
@@ -2208,7 +2124,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionBorderRadiusUnits}

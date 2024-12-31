@@ -31,7 +31,7 @@ import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
+import {useDeviceType} from "@Config/displayType";
 /**
  * Internal depencencies
  */
@@ -87,7 +87,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		deviceType,
+		// deviceType,
 		paddingLink,
 
 		Heading_Margin_Units,
@@ -257,6 +257,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoIconVerticalPosition
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({

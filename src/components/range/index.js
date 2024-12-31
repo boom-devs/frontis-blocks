@@ -49,7 +49,6 @@ const FB_Range = ({
 					<FB_ResponsiveControl
 						labelText={__(label, 'frontis-blocks')}
 						device={deviceType}
-						deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 					/>
 					<div className="fb-unit-wrapper">
 						{rangeValue[deviceType] && (

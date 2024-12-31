@@ -3,7 +3,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-	DeviceType: {
+	deviceType: {
 		type: "string",
 		default: "Desktop"
 	},
@@ -28,9 +28,9 @@ const attributes = {
 	mediaSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 20,
-			Mobile: 15
+			Desktop: '25',
+			Tablet: '20',
+			Mobile: '15'
 		}
 	},
 	mediaSizeDesktop: {
@@ -96,9 +96,9 @@ const attributes = {
 	btnIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	btnIconSizeUnits: {
@@ -135,7 +135,7 @@ const attributes = {
 	},
     btnIconPosition: {
 		type: 'string',
-        default: 'left'
+        default: 'right'
 	},
     infoIconPosition: {
 		type: 'string',
@@ -144,6 +144,10 @@ const attributes = {
     infoIconVerticalPosition: {
 		type: 'string',
         default: 'top'
+	},
+    infoCardAlignment: {
+		type: 'string',
+        default: 'space-between'
 	},
     height: {
         type: 'number',
@@ -312,8 +316,12 @@ const attributes = {
         default: "normal"
     },
     Heading_Border_units : {
-        type: "string",
-        default: "px"
+        type: "object",
+        default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
     },
     Heading_Desktop_Border_Width: {
         type: "object",
@@ -577,28 +585,28 @@ const attributes = {
     SubHeadingDesktopPadding: {
         type: "object",
         default: {
-            top: 15,
-            bottom: 15,
-            left: 0,
-            right: 0,
+            top: '15',
+            bottom: '15',
+            left: '0',
+            right: '0',
         },
     },
     SubHeadingTabPadding: {
         type: "object",
         default: {
-            top: 15,
-            bottom: 15,
-            left: 0,
-            right: 0,
+            top: '15',
+            bottom: '15',
+            left: '0',
+            right: '0',
         },
     },
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: 10,
-            bottom: 10,
-            left: 0,
-            right: 0,
+            top: '10',
+            bottom: '10',
+            left: '0',
+            right: '0',
         },
     },
 
@@ -614,28 +622,28 @@ const attributes = {
 	descDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	descTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	descMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	descMarginLink : {
@@ -673,28 +681,28 @@ const attributes = {
 	infoButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
     infoButtonMarginLink : {
@@ -713,28 +721,28 @@ const attributes = {
 	infoButtonDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonMarginLink : {
@@ -767,28 +775,28 @@ const attributes = {
 	infoButtonDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoButtonMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
     infoButtonBorderLink : {
@@ -807,28 +815,28 @@ const attributes = {
 	infoBtnDesktopBorderradiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBtnTabBorderradiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBtnMobileBorderradiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
     btnBorderRadiusLink : {
@@ -843,28 +851,28 @@ const attributes = {
 	infoBoxDesktopPadding: {
 		type: "object",
 		default: {
-			top: 40,
-			bottom: 40,
-			left: 40,
-			right: 40,
+			top: '40',
+			bottom: '40',
+			left: '40',
+			right: '40',
 		},
 	},
 	infoBoxTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// Info box margin
@@ -875,28 +883,28 @@ const attributes = {
 	infoBoxDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxActiveMarginDevice: {
@@ -929,28 +937,28 @@ const attributes = {
 	infoBoxDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// 	Info Box Border Radius
@@ -961,28 +969,28 @@ const attributes = {
 	infoBoxDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// Button
@@ -1079,7 +1087,12 @@ const attributes = {
 		type: "string"
 	},
 	globalZIndex : {
-        type: "number",
+        type: 'object',
+        default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	globalPaddingUnits: {
 		type: 'object',
@@ -1092,10 +1105,10 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: 32,
-            bottom: 32,
-            left: 32,
-            right: 32,
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
         },
     },
     globalPaddingTablet: {
@@ -1235,10 +1248,10 @@ const attributes = {
     globalBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 6,
-            bottom: 6,
-            left: 6,
-            right: 6,
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
         },
     },
     globalBorderRadiusTablet: {
@@ -1313,28 +1326,28 @@ const attributes = {
     mediaMarginDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 20,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '20',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 15,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '15',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 10,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '10',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginLink: {
@@ -1421,28 +1434,28 @@ const attributes = {
     mediaBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     mediaBorderRadiusTablet: {
         type: "object",
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     mediaBorderRadiusMobile: {
         type: "object",
         default: {
-            top: 50,
-            bottom: 50,
-            left: 50,
-            right: 50,
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     mediaBorderRadiusLink: {

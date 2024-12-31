@@ -11,12 +11,15 @@ import {
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { Card } from "@wordpress/components";
+import { useRef } from "@wordpress/element";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		separator,
 		Sub_Heading_Switcher,
@@ -42,7 +45,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         infoIconPosition,
 		infoButtonLink,
 		infobtnTargetUrl,
-		infoIconVerticalPosition
+		infoIconVerticalPosition,
+		infoCardAlignment
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -51,6 +55,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
+
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
+
 	return (
 		<>
 			<Inspector
@@ -68,11 +80,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-info-box-content-wrapper ${blockID}`}>
-					<div className={`fb-info-box-content-wrapper-inner ${blockID}`} style={{
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} ref={panelRef}>
+					<div className={`fb-info-box-wrapper-inner ${blockID}`} style={{
                         display: "flex",
                         flexDirection: infoIconPosition === "left" ? "row" : infoIconPosition === "right" ? "row-reverse" : infoIconPosition === "top" ? "column" : "column-reverse",
-						justifyContent: "space-between"
+						justifyContent: infoIconPosition !== 'top' || infoIconPosition !== 'bottom' ? infoCardAlignment : '',
                         
                     }}>
 						<div className="fb-info-media-container" style={{
@@ -92,7 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
 								onChange={(value) => setAttributes({ text: value })}
 								placeholder={__("Info Heading", "frontis-block")}
@@ -113,17 +125,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								/>
 							)}
 							{info_Button_Switcher && (
-								<a className="fb-info-button"
+								<div className="fb-info-button">
+								<div className="fb-info-btn-container"
+								style={{ textAlign: buttonAlignment }}
+								>
+								<a
+								className="fb-info-btn-wrapper"
 								href={infoButtonLink} 
 								target={infobtnTargetUrl ? '_blank' : undefined}
 								rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
 								onClick={handleButtonClick}
-								>
-								<div className="fb-info-btn-container"
-								style={{ textAlign: buttonAlignment }}
-								>
-								<div
-									className="fb-info-btn-wrapper"
 									style={{
 										flexDirection:
 											btnIconPosition === "left" ? "row-reverse" : "row",
@@ -144,9 +155,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{renderSVG(btnIcon)}
 										</div>
 									)}
-								</div>
-								</div>
 								</a>
+								</div>
+								</div>
 							)}
 						</div>
 					</div>

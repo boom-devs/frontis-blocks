@@ -597,11 +597,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Icon Box Shadow */
+    FeatureIconBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureIconBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureIconBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureIconBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureIconBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -968,11 +980,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Single Item Box Shadow */
+    FeatureSingleItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureSingleItemBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureSingleItemBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureSingleItemBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureSingleItemBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1298,11 +1322,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    FeatureGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
