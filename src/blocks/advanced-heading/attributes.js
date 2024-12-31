@@ -5,10 +5,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    deviceType: {
-        type: "string",
-        default: "Desktop"
-    },
     headingAlignment: {
         type: "string",
         default: "left",
@@ -1071,11 +1067,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    headingGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	headingGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     headingGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    headingGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    headingGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
