@@ -124,7 +124,6 @@ export default function SortableItem({ deviceType, GalleryColumnNumber, GalleryT
 																		<FB_ResponsiveControl
 																			labelText={__("Column Span", "frontis-blocks")}
 																			device={deviceType}
-																			deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 																		/>
 																	</div>
 																	<RangeControl
@@ -155,7 +154,6 @@ export default function SortableItem({ deviceType, GalleryColumnNumber, GalleryT
 																		<FB_ResponsiveControl
 																			labelText={__("Row Span", "frontis-blocks")}
 																			device={deviceType}
-																			deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 																		/>
 																	</div>
 																	<RangeControl
