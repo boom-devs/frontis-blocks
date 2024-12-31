@@ -57,7 +57,7 @@ import './editor.scss';
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const {
         blockId,
-        deviceType,
+        // deviceType,
         headingText,
         headingTag,
         headingAlignment,
@@ -122,7 +122,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** End Heading */
 
         /**Start Sub Heading */
-
         subHeadingSwitcher,
         subHeadingText,
         subHeadingTag,
@@ -282,17 +281,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeColor,
 
         blockStyle,
-        globalParagraphFontFamily,
-        globalLinkFontFamily,
-        globalHeading1FontFamily,
-        globalHeading2FontFamily,
-        globalHeading3FontFamily,
-        globalHeading4FontFamily,
-        globalHeading5FontFamily,
-        globalHeading6FontFamily,
     } = attributes;
 
-
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
