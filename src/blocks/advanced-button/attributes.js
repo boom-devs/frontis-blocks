@@ -220,11 +220,23 @@ const attributes = {
         type: "boolean",
         default: true
     },
+    buttonBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     buttonBoxShadowValues: { 
         type: 'array',
         default: [],
     },
     buttonBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    buttonBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    buttonBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -682,11 +694,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    buttonGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	buttonGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     buttonGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    buttonGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    buttonGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

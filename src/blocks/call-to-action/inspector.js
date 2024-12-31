@@ -49,10 +49,7 @@ import {
 	FONT_FAMILYS,
 	CLASSIC_GRADIENT,
 	BORDER_STYLES,
-	mediaType,
 	ICON_POSITION,
-	INFO_ICON_POSITION,
-	BG_TYPE,
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
@@ -67,6 +64,7 @@ import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -102,7 +100,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingDesktopPadding,
 		headingTabPadding,
 		headingMobilePadding,
-		deviceType,
+		// deviceType,
 		headingPaddingLink,
 		headingMarginUnits,
 		headingDesktopMargin,
@@ -388,6 +386,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoTargetUrl,
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
@@ -1919,7 +1919,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 			.fb-cta-content-wrapper.${blockID}:hover {
-				${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
 				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
 				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }

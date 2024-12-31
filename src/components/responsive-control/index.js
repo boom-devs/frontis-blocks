@@ -1,28 +1,24 @@
 import { __ } from '@wordpress/i18n';
-import { useDispatch } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
+import { setDeviceType } from '@Config/displayType';
 import './editor.lazy.scss';
-import {useEffect} from "@wordpress/element";
 
-const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
-	const { setDeviceType } = useDispatch(editorStore);
-
-	/** 
-	 * Set the device type to Desktop only when the component mounts
-	 */
-	// useEffect(() => {
-	// 	deviceHandler('Desktop');
-	// 	setDeviceType('Desktop');
-	// }, []);
+const FB_ResponsiveControl = ({labelText, device}) => {
 
 	/**
-	 * Handle the device type change
-	 * @param {string} deviceName - The device type to set
-	 */
-	const handleDevice = (deviceName) => {
-		deviceHandler(deviceName);
-		setDeviceType(deviceName);
-	}
+ 	* Handle the device type change
+ 	* @param {string} deviceType - The device type to set
+ 	*/
+	const handleDevice = (deviceType) => {
+		if (!deviceType) {
+			console.error('Invalid device type:', deviceType);
+			return;
+		}
+		try {
+			setDeviceType(deviceType, false);
+		} catch (error) {
+			console.error('Error setting device type:', error);
+		}
+	};
 
 	/**
 	 * Toggle the device visibility

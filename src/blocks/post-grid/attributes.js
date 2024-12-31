@@ -373,11 +373,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+	postGridBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	postGridBoxShadowValues: {
         type: 'array',
         default: [],
     },
     postGridBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	postGridBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    postGridBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -2015,11 +2027,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+	postGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	postGlobalBoxShadowValues: {
 		type: 'array',
 		default: [],
 	},
 	postGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	postGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	postGlobalBoxShadowHoverCssValue: {
 		type: 'string',
 		default: '',
 	},

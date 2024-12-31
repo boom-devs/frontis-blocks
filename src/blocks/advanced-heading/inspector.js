@@ -51,12 +51,13 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const {
         blockId,
-        deviceType,
+        // deviceType,
         headingText,
         headingTag,
         headingAlignment,
@@ -121,7 +122,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** End Heading */
 
         /**Start Sub Heading */
-
         subHeadingSwitcher,
         subHeadingText,
         subHeadingTag,
@@ -256,8 +256,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingGlobalBorderRadiusMobile,
         headingGlobalBorderRadiusLink,
 
+        headingGlobalBoxShadowSwitcher,
         headingGlobalBoxShadowValues,
         headingGlobalBoxShadowCssValue,
+        headingGlobalBoxShadowHoverValues,
+        headingGlobalBoxShadowHoverCssValue,
+
         /** End Global Style */
 
         /** Start Background Image */
@@ -281,17 +285,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeColor,
 
         blockStyle,
-        globalParagraphFontFamily,
-        globalLinkFontFamily,
-        globalHeading1FontFamily,
-        globalHeading2FontFamily,
-        globalHeading3FontFamily,
-        globalHeading4FontFamily,
-        globalHeading5FontFamily,
-        globalHeading6FontFamily,
     } = attributes;
 
-
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -1582,6 +1578,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         .${blockId}.fb-advanced-wrapper:hover {
             ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
+            ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
@@ -1807,7 +1804,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     globalDesktopBorderWidth,
     globalDesktopBorderRadiusWidth,
     headingGlobalBorderColor,
+    headingGlobalBoxShadowSwitcher,
+    headingGlobalBoxShadowValues,
     headingGlobalBoxShadowCssValue,
+    headingGlobalBoxShadowHoverValues,
+    headingGlobalBoxShadowHoverCssValue,
     headingGlobalBgHoverColor,
     headingGlobalBorderHoverColor,
     activeLineAfterWidth,
@@ -2967,11 +2968,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
-														initialShadowValue={headingGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
-													/>
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={headingGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ headingGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {headingGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={headingGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {headingGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={headingGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
 												</PanelBody>
 											</div>
 										</div>

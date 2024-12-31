@@ -39,12 +39,13 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         blockStyle,
-        deviceType,
+        // deviceType,
 
         GalleryPresetStyle,
         GalleryType,
@@ -231,7 +232,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
     
-
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -2117,6 +2119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             width: 100%;
             height: 100%;
             overflow: hidden;
+            outline: none;
             ${imageBorder !== undefined ? `border-style: ${imageBorder};` : ''}
             ${imageDesktopBorder !== undefined ? `border-width: ${imageDesktopBorder};` : ''}
             ${imageBorderColor !== undefined ? `border-color: ${imageBorderColor};` : ''}
@@ -2125,6 +2128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
             position: absolute;
             top: 0;
+            outline: none;
             ${ImageAlignment === 'left' ? 'left: 0;' : ''}
             ${ImageAlignment === 'right' ? 'right: 0; left: unset;' : ''}
             ${ImageAlignment === 'center' && ImageOverlayStyleType !== 'zoominout' ? 'left: 50%; transform: translateX(-50%);' : ''}
@@ -2843,7 +2847,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderUnitsHandler}
                                                     spacingUnits={imageBorderUnits}
@@ -2857,7 +2861,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
                                                     spacingUnits={imageBorderRadiusUnits}
@@ -3109,7 +3113,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             )}
 
                                             <FB_Spacing 
-                                                label={__("Border Width", "frontis-blocks")}
+                                                label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderUnitsHandler}
                                                 spacingUnits={ButtonBorderUnits}
@@ -3123,7 +3127,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
                                                 spacingUnits={ButtonBorderRadiusUnits}
@@ -3254,7 +3258,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing 
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderUnitsHandler}
                                                     spacingUnits={lightboxBorderUnits}
@@ -3268,7 +3272,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderRadiusUnitsHandler}
                                                     spacingUnits={lightboxBorderRadiusUnits}
@@ -3468,7 +3472,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             </PanelBody>
 
                                             <PanelBody
-                                                title={__("Border & Border radius", "frontis-blocks")}
+                                                title={__("Border & Border Radius", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-border-setting-wrapper"
                                                 >
@@ -3502,7 +3506,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing 
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderUnitsHandler}
                                                     spacingUnits={GalleryBorderUnits}
@@ -3516,7 +3520,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderRadiusUnitsHandler}
                                                     spacingUnits={GalleryBorderRadiusUnits}
@@ -3530,7 +3534,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
-                                            <PanelBody
+                                            {/* <PanelBody
                                                 title={__("Responsive Control", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-responsive-control-wrapper"
@@ -3553,7 +3557,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     checked={GalleryMobileSwitcher}
                                                     onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
                                                 />
-                                            </PanelBody>
+                                            </PanelBody> */}
 
                                         </div>
                                     </div>
