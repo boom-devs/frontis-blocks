@@ -1,21 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
+	"apiVersion": 2,
 	"name": "frontis-blocks/container",
 	"version": "1.0.0",
 	"title": "Container",
 	"category": "frontis-blocks",
 	"description": "Container block",
 	"example": {},
-	"attributes": {
-		"deviceType": {
-			"type": "string",
-			"default": "Desktop"
-		}
-	},
     "supports": {
         "anchor": true,
-		"html": false
+		"html": true
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
