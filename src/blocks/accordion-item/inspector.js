@@ -24,13 +24,13 @@ import FB_Range from "../../components/range";
 import FB_ImageControl from "../../components/image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_ColorControl from "../../components/color-control";
-
+import {useDeviceType} from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
 		parentBlockID,
-        deviceType,
+        // deviceType,
         clickable,
 
         title,
@@ -80,6 +80,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemMobileSwitcher
     } = attributes;
 
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {

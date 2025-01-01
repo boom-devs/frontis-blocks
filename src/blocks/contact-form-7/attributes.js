@@ -1222,28 +1222,28 @@ export const attributes = {
 	contactFormGlobalMarginDesktop: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 0,
-			right: 0,
+			top: "30",
+			bottom: "30", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginTablet: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginMobile: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20",
+			left: '0',
+			right: '0',
 		},
 	},
 	contactFormGlobalMarginLink : {
@@ -1353,4 +1353,25 @@ export const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	contactFormGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    contactFormGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    contactFormGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 }

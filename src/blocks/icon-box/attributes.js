@@ -3,10 +3,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-	deviceType: {
-		type: "string",
-		default: "Desktop"
-	},
 	iconBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'

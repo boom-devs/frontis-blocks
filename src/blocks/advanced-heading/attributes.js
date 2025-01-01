@@ -5,10 +5,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    deviceType: {
-        type: "string",
-        default: "Desktop"
-    },
     headingAlignment: {
         type: "string",
         default: "left",
@@ -1071,11 +1067,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    headingGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	headingGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     headingGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    headingGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    headingGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1180,39 +1188,6 @@ const attributes = {
         default: "#399CFF",
     },
     blockStyle: {
-        type: "string",
-        default: "",
-    },
-
-    globalParagraphFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalLinkFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading1FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading2FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading3FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading4FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading5FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading6FontFamily: {
         type: "string",
         default: "",
     },
