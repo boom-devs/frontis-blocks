@@ -2395,7 +2395,15 @@ const attributes = {
 		default: true
 	},
 
+	loadMoreloaderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
 	loadMoreloaderColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	loadMoreloaderHoverColor: {
 		type: "string",
 		default: "#FFFFFF"
 	},
