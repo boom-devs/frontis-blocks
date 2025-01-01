@@ -81,16 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<div {...blockProps} id={blockID}>
 				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} ref={panelRef}>
-					<div className={`fb-info-box-wrapper-inner ${blockID}`} style={{
-                        display: "flex",
-                        flexDirection: infoIconPosition === "left" ? "row" : infoIconPosition === "right" ? "row-reverse" : infoIconPosition === "top" ? "column" : "column-reverse",
-						justifyContent: infoIconPosition !== 'top' || infoIconPosition !== 'bottom' ? infoCardAlignment : '',
-                        
-                    }}>
-						<div className="fb-info-media-container" style={{
-								justifyContent: wrapperAlignment,
-								alignItems: infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start",
-							}}>
+					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
+						<div className="fb-info-media-container">
 						<div
 							className="fb-info-media-wrapper"
 						>
@@ -109,7 +101,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								onChange={(value) => setAttributes({ text: value })}
 								placeholder={__("Info Heading", "frontis-block")}
 								className="fb-heading"
-								style={{ textAlign: Alignment }}
 							/>
 
 							{Sub_Heading_Switcher && (
@@ -121,24 +112,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									}
 									placeholder={__("Info description", "frontis-block")}
 									className="fb-description"
-									style={{ textAlign: descAlignment }}
 								/>
 							)}
 							{info_Button_Switcher && (
 								<div className="fb-info-button">
-								<div className="fb-info-btn-container"
-								style={{ textAlign: buttonAlignment }}
-								>
+								<div className="fb-info-btn-container">
 								<a
-								className="fb-info-btn-wrapper"
-								href={infoButtonLink} 
-								target={infobtnTargetUrl ? '_blank' : undefined}
-								rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
-								onClick={handleButtonClick}
-									style={{
-										flexDirection:
-											btnIconPosition === "left" ? "row-reverse" : "row",
-									}}
+									className="fb-info-btn-wrapper"
+									href={infoButtonLink} 
+									target={infobtnTargetUrl ? '_blank' : undefined}
+									rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
+									onClick={handleButtonClick}
 								>
 									<RichText
 										value={info_Button_Text}

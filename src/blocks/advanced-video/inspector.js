@@ -22,12 +22,13 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         blockStyle,
         videoGlobalZIndex,
         videoURL,
@@ -132,11 +133,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBorderRadiusMobile,
         videoGlobalBorderRadiusLink,
 
+        videoGlobalBoxShadowSwitcher,
         videoGlobalBoxShadowValues,
         videoGlobalBoxShadowCssValue,
+        videoGlobalBoxShadowHoverValues,
+        videoGlobalBoxShadowHoverCssValue,
 
     } = attributes;
 
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -841,6 +847,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-advanced-video-wrapper:hover {
             ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
             ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
+            ${videoGlobalBoxShadowHoverCssValue ? `box-shadow: ${videoGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockID} .fb-player-wrapper {
@@ -1113,13 +1120,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBorderRadiusMobile,
         videoGlobalBorderRadiusLink,
         videoGlobalBoxShadowValues,
+        videoGlobalBoxShadowSwitcher,
+        videoGlobalBoxShadowValues,
         videoGlobalBoxShadowCssValue,
+        videoGlobalBoxShadowHoverValues,
+        videoGlobalBoxShadowHoverCssValue,
         DesktopPadding,
         DesktopMargin,
         BorderDesktopWidth,
         BorderRadiusDesktopWidth,
         videoGlobalBorderColor,
-        videoGlobalBoxShadowCssValue,
         videoGlobalBgHoverColor,
         videoGlobalBorderHoverColor,
         videoWidth,
@@ -1613,11 +1623,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
-                                                    <FB_BoxShadowControl
-                                                        onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
-                                                        initialShadowValue={videoGlobalBoxShadowValues}
-                                                        onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={videoGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBoxShadowSwitcher: value })}
                                                     />
+
+                                                    {videoGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={videoGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {videoGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={videoGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
                                                 </PanelBody>
                                             </div>
                                         </div>

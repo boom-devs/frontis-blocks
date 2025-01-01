@@ -140,8 +140,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         accordionMobileSwitcher,
 
         // Boxshadow
+        accordionGlobalBoxShadowSwitcher,
         accordionGlobalBoxShadowValues,
         accordionGlobalBoxShadowCssValue,
+        accordionGlobalHoverBoxShadowValues,
+        accordionGlobalHoverBoxShadowCssValue,
 
         // Backgorund
         accordionBgColorSwitcher,
@@ -171,8 +174,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         accordionBgHoverImageSize,
 
         // Item Box Shadow
+        accordionItemBoxShadowSwitcher,
         accordionItemBoxShadowValues,
         accordionItemBoxShadowCssValue,
+        accordionItemHoverBoxShadowValues,
+        accordionItemHoverBoxShadowCssValue,
 
         // Item Backgorund
         titleBgColorSwitcher,
@@ -221,8 +227,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         contentMobileSwitcher,
 
         // Item Box Shadow
+        contentBoxShadowSwitcher,
         contentBoxShadowValues,
         contentBoxShadowCssValue,
+        contentHoverBoxShadowValues,
+        contentHoverBoxShadowCssValue,
 
         // Item Backgorund
         contentBgColorSwitcher,
@@ -410,6 +419,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                       : `background: ${accordionBgHoverClassicColor};`
                 }
                 ${accordionBorderHoverColor !== undefined ? `border-color: ${accordionBorderHoverColor};` : ''}
+                ${accordionGlobalHoverBoxShadowCssValue ? `box-shadow: ${accordionGlobalHoverBoxShadowCssValue};` : ''}
                 transition: all .3s ease-in-out;
             }
 
@@ -460,6 +470,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                       `
                       : `background: ${titleBgHoverClassicColor};`
                 }
+                ${accordionItemHoverBoxShadowCssValue ? `box-shadow: ${accordionItemHoverBoxShadowCssValue};` : ''}
                 transition: all .3s ease-in-out;
             }
 
@@ -614,6 +625,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 `
                 : `background: ${contentBgHoverClassicColor};`
             }
+            ${contentHoverBoxShadowCssValue ? `box-shadow: ${contentHoverBoxShadowCssValue};` : ''}
             ${contentBorderHoverColor !== undefined ? `border-color: ${contentBorderHoverColor};` : ''}
             transition: all 0.3s ease-in-out;
         }
@@ -893,8 +905,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         accordionMobileSwitcher,
 
         // Boxshadow
+        accordionGlobalBoxShadowSwitcher,
         accordionGlobalBoxShadowValues,
         accordionGlobalBoxShadowCssValue,
+        accordionGlobalHoverBoxShadowValues,
+        accordionGlobalHoverBoxShadowCssValue,
 
         // Backgorund
         accordionBgColorSwitcher,
@@ -924,8 +939,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         accordionBgHoverImageSize,
 
         // Item Box Shadow
+        accordionItemBoxShadowSwitcher,
         accordionItemBoxShadowValues,
         accordionItemBoxShadowCssValue,
+        accordionItemHoverBoxShadowValues,
+        accordionItemHoverBoxShadowCssValue,
 
         // Item Backgorund
         titleBgColorSwitcher,
@@ -974,8 +992,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         contentMobileSwitcher,
 
         // Item Box Shadow
+        contentBoxShadowSwitcher,
         contentBoxShadowValues,
         contentBoxShadowCssValue,
+        contentHoverBoxShadowValues,
+        contentHoverBoxShadowCssValue,
 
         // Item Backgorund
         contentBgColorSwitcher,

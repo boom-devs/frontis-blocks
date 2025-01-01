@@ -13,7 +13,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
+import {useDeviceType} from "@Config/displayType";
 
 import { 
     SelectControl,
@@ -46,7 +46,7 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
-        deviceType,
+        // deviceType,
         blockStyle,
         FeatureItems,
         FeatureTag,
@@ -104,8 +104,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconBorderRadiusMobile,
         FeatureIconBorderRadiusLink,
 
+        FeatureIconBoxShadowSwitcher,
         FeatureIconBoxShadowValues,
         FeatureIconBoxShadowCssValue,
+        FeatureIconBoxShadowHoverValues,
+        FeatureIconBoxShadowHoverCssValue,
 
         FeatureIconSize,
         FeatureIconSizeUnits,
@@ -183,10 +186,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureSingleItemBorderRadiusTablet,
         FeatureSingleItemBorderRadiusMobile,
         FeatureSingleItemBorderRadiusLink,
+
+        FeatureSingleItemBoxShadowSwitcher,
         FeatureSingleItemBoxShadowValues,
         FeatureSingleItemBoxShadowCssValue,
+        FeatureSingleItemBoxShadowHoverValues,
+        FeatureSingleItemBoxShadowHoverCssValue,
         /** End Single Item */
-
 
         /** Global Style */
         FeatureGlobalZIndex,
@@ -251,13 +257,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureGlobalBorderRadiusMobile,
         FeatureGlobalBorderRadiusLink,
 
+        FeatureGlobalBoxShadowSwitcher,
         FeatureGlobalBoxShadowValues,
         FeatureGlobalBoxShadowCssValue,
+        FeatureGlobalBoxShadowHoverValues,
+        FeatureGlobalBoxShadowHoverCssValue,
         /** End Global Style */
 
     } = attributes;
     
-
+	const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -1294,6 +1304,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${FeatureGlobalHoverClassicColor};
                 `}
                 ${FeatureGlobalBorderHoverColor ? `border-color: ${FeatureGlobalBorderHoverColor};` : ''}
+                ${FeatureGlobalBoxShadowHoverCssValue ? `box-shadow: ${FeatureGlobalBoxShadowHoverCssValue};` : ''}
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-item {
                 ${FeatureSingleItemNormalBackgroundType === 'gradient' ? `  
@@ -1306,6 +1317,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${singleItemDesktopBorderWidth ? `border-width: ${singleItemDesktopBorderWidth};` : ''}
                 ${singleItemDesktopBorderRadiusWidth ? `border-radius: ${singleItemDesktopBorderRadiusWidth};` : ''}
                 ${FeatureSingleItemBorderColor ? `border-color: ${FeatureSingleItemBorderColor};` : ''}
+                ${FeatureSingleItemBoxShadowCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover {
                 ${FeatureSingleItemHoverBackgroundType === 'gradient' ? `  
@@ -1313,6 +1326,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `: `
                     background: ${FeatureSingleItemHoverClassicColor};
                 `}
+                ${FeatureSingleItemBorderHoverColor ? `border-color: ${FeatureSingleItemBorderHoverColor};` : ''}
+                ${FeatureSingleItemBoxShadowHoverCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowHoverCssValue};` : ''}
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
                 margin-bottom: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);
@@ -1359,6 +1374,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `: `
                     background: ${FeatureIconHoverClassicColor};
                 `}
+                ${FeatureIconBorderHoverColor ? `border-color: ${FeatureIconBorderHoverColor};` : ''}
+                ${FeatureIconBoxShadowHoverCssValue ? `box-shadow: ${FeatureIconBoxShadowHoverCssValue};` : ''}
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
                 ${FeatureTitleFontFamily ? `font-family: ${FeatureTitleFontFamily};` : ''}
@@ -1544,7 +1561,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconBorderRadiusMobile,
         FeatureIconBorderRadiusLink,
         FeatureIconBoxShadowValues,
+        FeatureIconBoxShadowSwitcher,
+        FeatureIconBoxShadowValues,
         FeatureIconBoxShadowCssValue,
+        FeatureIconBoxShadowHoverValues,
+        FeatureIconBoxShadowHoverCssValue,
         FeatureIconSize,
         FeatureIconSizeUnits,
         FeatureTitleFontFamily,
@@ -1605,8 +1626,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureSingleItemBorderRadiusTablet,
         FeatureSingleItemBorderRadiusMobile,
         FeatureSingleItemBorderRadiusLink,
+        FeatureSingleItemBoxShadowSwitcher,
         FeatureSingleItemBoxShadowValues,
         FeatureSingleItemBoxShadowCssValue,
+        FeatureSingleItemBoxShadowHoverValues,
+        FeatureSingleItemBoxShadowHoverCssValue,
         FeatureGlobalZIndex,
         FeatureGlobalPaddingUnits,
         FeatureGlobalPaddingDesktop,
@@ -1658,7 +1682,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureGlobalBorderRadiusMobile,
         FeatureGlobalBorderRadiusLink,
         FeatureGlobalBoxShadowValues,
+        FeatureGlobalBoxShadowSwitcher,
+        FeatureGlobalBoxShadowValues,
         FeatureGlobalBoxShadowCssValue,
+        FeatureGlobalBoxShadowHoverValues,
+        FeatureGlobalBoxShadowHoverCssValue,
         globalDesktopPadding,
         globalDesktopMargin,
         globalDesktopBorderWidth,
@@ -2022,11 +2050,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={handleFeatureIconBorderRadiusCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
-                                            <FB_BoxShadowControl
-                                                onBoxShadowChange={(value) => setAttributes({ FeatureIconBoxShadowValues: value })}
-                                                initialShadowValue={FeatureIconBoxShadowValues}
-                                                onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowCssValue: value })}
+
+                                            <FB_SwitcherControl
+                                                label={__("Box Shadow", "frontis-blocks")}
+                                                globalSwitcher={FeatureIconBoxShadowSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ FeatureIconBoxShadowSwitcher: value })}
                                             />
+
+                                            {FeatureIconBoxShadowSwitcher === 'normal' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Normal Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ FeatureIconBoxShadowValues: value })}
+                                                    initialShadowValue={FeatureIconBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowCssValue: value })}
+                                                />
+                                            )}
+
+                                            {FeatureIconBoxShadowSwitcher === 'hover' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Hover Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) => setAttributes({ FeatureIconBoxShadowHoverValues: value })}
+                                                    initialShadowValue={FeatureIconBoxShadowHoverValues}
+                                                    onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowHoverCssValue: value })}
+                                                />
+                                            )}
 
                                         </PanelBody>
                                         <PanelBody
@@ -2274,11 +2321,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     spacingCombineBtnHandler={handleSingleItemBorderRadiusCombineBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_BoxShadowControl
-                                                    onBoxShadowChange={(value) => setAttributes({ FeatureSingleItemBoxShadowValues: value })}
-                                                    initialShadowValue={FeatureSingleItemBoxShadowValues}
-                                                    onBoxShadowStyleChange={(value) => setAttributes({ FeatureSingleItemBoxShadowCssValue: value })}
+
+                                                <FB_SwitcherControl
+                                                    label={__("Box Shadow", "frontis-blocks")}
+                                                    globalSwitcher={FeatureSingleItemBoxShadowSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ FeatureSingleItemBoxShadowSwitcher: value })}
                                                 />
+
+                                                {FeatureSingleItemBoxShadowSwitcher === 'normal' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Normal Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ FeatureSingleItemBoxShadowValues: value })}
+                                                        initialShadowValue={FeatureSingleItemBoxShadowValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureSingleItemBoxShadowCssValue: value })}
+                                                    />
+                                                )}
+
+                                                {FeatureSingleItemBoxShadowSwitcher === 'hover' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Hover Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ FeatureSingleItemBoxShadowHoverValues: value })}
+                                                        initialShadowValue={FeatureSingleItemBoxShadowHoverValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureSingleItemBoxShadowHoverCssValue: value })}
+                                                    />
+                                                )}
                                             </PanelBody>   
 
                                     </>
@@ -2453,11 +2519,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ FeatureGlobalBoxShadowValues: value })}
-														initialShadowValue={FeatureGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowCssValue: value })}
-													/>
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={FeatureGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ FeatureGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {FeatureGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ FeatureGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={FeatureGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {FeatureGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={FeatureGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
 												</PanelBody>
 											</div>
 										</div>

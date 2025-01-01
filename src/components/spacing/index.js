@@ -83,7 +83,6 @@ export default function FB_Spacing( {
 					<FB_ResponsiveControl
 						labelText={ __( label, 'frontis-blocks' )}
 						device={deviceType}
-						deviceHandler={( newDevice ) => setAttributes( {deviceType: newDevice} )}
 					/>
 					<div className="fb-unit-wrapper">
 						{getSpacingValue('top') && getSpacingValue('right') && getSpacingValue('bottom') && getSpacingValue('left') && (

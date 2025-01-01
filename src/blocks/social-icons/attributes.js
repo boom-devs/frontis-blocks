@@ -934,12 +934,24 @@ const attributes = {
         default: true
     },
 
-    	/** Start Box Shadow */
+    /** Start Box Shadow */
+    socialGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	socialGlobalBoxShadowValues: { 
         type: 'array',
         default: [],
     },
     socialGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    socialGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    socialGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

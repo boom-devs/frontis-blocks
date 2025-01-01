@@ -39,6 +39,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -72,7 +73,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingDesktopPadding,
 		headingTabPadding,
 		headingMobilePadding,
-		deviceType,
+		// deviceType,
 		headingPaddingLink,
 		headingMarginUnits,
 		headingDesktopMargin,
@@ -332,6 +333,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoTargetUrl,
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({

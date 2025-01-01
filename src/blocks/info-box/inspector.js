@@ -52,6 +52,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -94,7 +95,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_padding,
 		Heading_Tab_padding,
 		Heading_Mobile_padding,
-		deviceType,
+		// deviceType,
 		paddingLink,
 		borderLink,
 
@@ -102,7 +103,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Desktop_Margin,
 		Heading_Tab_Margin,
 		Heading_Mobile_Margin,
-		Heading_Active_Margin_Device,
 		Heading_Margin_Link,
 
 		info_Button_Switcher,
@@ -117,6 +117,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		SubHeadingDesktopPadding,
 		SubHeadingTabPadding,
 		SubHeadingMobilePadding,
+		SubHeadingPaddingLink,
 		subHeadingFontFamily,
         subHeadingFontSize,
         subHeadingFontSizeUnits,
@@ -184,6 +185,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoButtonDesktopPadding,
 		infoButtonTabPadding,
 		infoButtonMobilePadding,
+		infoButtonPaddingLink,
 		infoButtonLink,
 		infobtnTargetUrl,
 		icon,
@@ -336,6 +338,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoCardAlignment
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
@@ -451,7 +455,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Heading Margin */
 	const handleHeadingMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (Heading_Active_Margin_Device) {
+		if (Heading_Margin_Link) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -517,7 +521,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const handleHeadingMarginCombineBtn = () => {
 		setAttributes({
-			Heading_Active_Margin_Device: !Heading_Active_Margin_Device,
+			Heading_Margin_Link: !Heading_Margin_Link,
 		});
 	};
 
@@ -623,7 +627,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Heading Border Radius */
 	const handleHeadingBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (borderLink) {
+		if (borderRadiusLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -691,7 +695,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleHeadingBorderRadiusCombineBtn = () => {
-		setAttributes({ borderLink: !borderLink });
+		setAttributes({ borderRadiusLink: !borderRadiusLink });
 	};
 
 	const handleHeadingBorderRadiusUnitsHandler = (unit) => {
@@ -711,7 +715,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Subheading Padding */
 	const handleDescPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (borderLink) {
+		if (SubHeadingPaddingLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -779,7 +783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleDescPaddingCombineBtn = () => {
-		setAttributes({ borderLink: !borderLink });
+		setAttributes({ SubHeadingPaddingLink: !SubHeadingPaddingLink });
 	};
 
 	const handleDescPaddingUnitsHandler = (unit) => {
@@ -885,7 +889,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	const handleButtonPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (borderLink) {
+		if (infoButtonPaddingLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -953,7 +957,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	
 	const handleButtonPaddingCombineBtn = () => {
-		setAttributes({ borderLink: !borderLink });
+		setAttributes({ infoButtonPaddingLink: !infoButtonPaddingLink });
 	};
 	
 	const handleButtonPaddingUnitsHandler = (unit) => {
@@ -972,7 +976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	const handleButtonMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (borderLink) {
+		if (infoButtonMarginLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -1040,7 +1044,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	
 	const handleButtonMarginCombineBtn = () => {
-		setAttributes({ borderLink: !borderLink });
+		setAttributes({ infoButtonMarginLink: !infoButtonMarginLink });
 	};
 	
 	const handleButtonMarginUnitsHandler = (unit) => {
@@ -1060,7 +1064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Start Border */
 	const handleButtonBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (borderLink) {
+		if (infoButtonBorderLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
@@ -1128,7 +1132,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	
 	const handleButtonBorderCombineBtn = () => {
-		setAttributes({ borderLink: !borderLink });
+		setAttributes({ infoButtonBorderLink: !infoButtonBorderLink });
 	};
 	
 	const handleButtonBorderUnitsHandler = (unit) => {
@@ -1888,17 +1892,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const mediaBorderRadiusTabletWidth = `${mediaBorderRadiusTablet.top}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.right}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.bottom}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.left}${mediaBorderRadiusUnits.Tablet}`;
 	const mediaBorderRadiusMobileWidth = `${mediaBorderRadiusMobile.top}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.right}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.bottom}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.left}${mediaBorderRadiusUnits.Mobile}`;
 
-	/** Start Global Bg Color */
-	const handleGlobalBgColorSwitcherChange = (value) => {
-		setAttributes({ globalBgColorSwitcher: value });
-	};
-	const handleGlobalBgColorChange = (value) => {
-		setAttributes({ globalBgColor: value });
-	};
-	const handleGlobalBgHoverColorChange = (value) => {
-		setAttributes({ globalBgHoverColor: value });
-	};
-	/** End Global Bg Color */
 
 	/* set default values for the style attributes */
 	useEffect(() => {
@@ -1918,7 +1911,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
 			  ${globalBorder ? `border: ${globalBorder};` : ""}
 			  ${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
-			  ${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
+			  ${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth};` : "" }
 			  ${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
 			  ${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
 			  transition: all .3s ease-in-out;
@@ -1927,27 +1920,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-info-box-wrapper.${blockID}:hover {
 			  ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
 			  ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
+			  transition: all .3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper.${blockID} {
 				${globalZIndex.Tablet !== undefined ? `z-index: ${globalZIndex.Tablet};` : ""}
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
-				${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+				${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth};` : "" }
 			  }
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-info-box-wrapper-inner.${blockID} {
+			  .fb-info-box-wrapper.${blockID} {
 				${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
-				${BorderRadiusMobileWidth ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""
+				${BorderRadiusMobileWidth ? `border-radius: ${BorderRadiusMobileWidth};` : ""
 				}
 			  }
+		  }
+
+		  .fb-info-box-wrapper.${blockID} .fb-info-box-wrapper-inner {
+			display: flex;
+			${infoIconPosition === 'top' ? 'flex-direction: column;' : ''}
+			${infoIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
+			${infoIconPosition === 'left' ? 'flex-direction: row;' : ''}
+			${infoIconPosition === 'right' ? 'flex-direction: row-reverse;' : ''}
+			${infoIconPosition !== 'top' || infoIconPosition !== 'bottom' ? `justify-content: ${infoCardAlignment};` : ''}
+		  }
+		  .fb-info-box-wrapper.${blockID} .fb-info-box-wrapper-inner .fb-info-media-container {
+			display: flex;
+			${wrapperAlignment !== undefined ? `justify-content: ${wrapperAlignment};` : ''}
+			align-items: ${infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start"};
 		  }
 	  
 		  .fb-info-box-wrapper.${blockID} .fb-heading {
@@ -1967,6 +1975,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${headingBorderDesktopWidthValue !== undefined ? `border-width: ${headingBorderDesktopWidthValue};` : ''}
 			  ${Heading_Border_Color !== undefined ? `border-color: ${Heading_Border_Color};` : ''}
 			  ${headingBorderRadiusDesktopWidthValue !== undefined ? `border-radius: ${headingBorderRadiusDesktopWidthValue};` : ''}
+			  ${Alignment !== undefined ? `text-align: ${Alignment};` : ''}
 			  transition: all .3s ease-in-out;
 			}
 	  
@@ -2011,6 +2020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
 			${subHeadingDesktopPaddingValue !== undefined ? `padding: ${subHeadingDesktopPaddingValue};` : "" }
 			${descDesktopMarginValue  !== undefined ? `margin: ${descDesktopMarginValue };` : ""}
+			${descAlignment !== undefined ? `text-align: ${descAlignment};` : ''}
 			transition: all .3s ease-in-out;
 		}
 
@@ -2037,19 +2047,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
 			}
 		}
+		.fb-info-box-wrapper.${blockID} .fb-info-btn-container {
+			${buttonAlignment !== undefined ? `text-align: ${buttonAlignment};` : ''}
+		}
 		.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
+			flex-direction: ${btnIconPosition === "left" ? "row-reverse" : "row"};
 			${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
 			${buttonBgColor !== undefined ? `background-color: ${buttonBgColor};` : "" }
 			font-family: ${ buttonFontFamily !== "default" ? buttonFontFamily : buttonFontFamily };
-			${buttonFontSize.Desktop && buttonFontSizeUnits.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
-			${buttonLetterSpacing.Desktop && buttonLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
-			${buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
+			${buttonFontSize.Desktop !== undefined ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
+			${buttonLetterSpacing.Desktop !== undefined ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
+			${buttonLineHeight.Desktop !== undefined ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
 			font-weight: ${buttonFontWeight};
 			font-style: ${buttonFontStyle};
 			text-transform: ${buttonTextTransform};
 			text-decoration: ${buttonTextDecoration};
-			padding: ${buttonDesktopPaddingValue};
-			margin: ${buttonDesktopMarginValue};
+			${infoButtonDesktopPadding !== undefined ? `padding: ${buttonDesktopPaddingValue};` : ''}
+			${infoButtonDesktopMargin !== undefined ? `margin: ${buttonDesktopMarginValue};` : ''}
 			${infoButtonBorder !== undefined ? `border-style: ${infoButtonBorder};` : ''}
 			${infoButtonDesktopBorderWidth !== undefined ? `border-width: ${buttonDesktopBorderValue};` : ''}
 			${infoButtonBorderColor !== undefined ? `border-color: ${infoButtonBorderColor};` : ''}
@@ -2065,11 +2079,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		@media only screen and (max-width: 1024px) {
 			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
-				${buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
-				${buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
-				${buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-				padding: ${buttonTabPaddingValue} !important;
-				margin: ${buttonDesktopMarginValue} !important;
+				${buttonFontSize.Tablet !== undefined ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
+				${buttonLetterSpacing.Tablet !== undefined ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
+				${buttonLineHeight.Tablet !== undefined ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
+				${infoButtonTabPadding !== undefined ? `padding: ${buttonTabPaddingValue};` : ''}
+				${infoButtonTabMargin !== undefined ? `margin: ${buttonTabMarginValue};` : ''}
 				${infoButtonTabBorderWidth !== undefined ? `border-width: ${buttonTabBorderValue};` : ''}
 				${infoBtnTabBorderradiusWidth !== undefined ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
 			}
@@ -2077,11 +2091,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		@media only screen and (max-width: 767px) {
 			.fb-info-box-wrapper.${blockID} .fb-info-btn-wrapper {
-				${buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
-				${buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
-				${buttonLineHeight.Mobile && buttonLineHeightUnits.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
-				padding: ${buttonTabPaddingValue} !important;
-				margin: ${buttonDesktopMarginValue} !important;
+				${buttonFontSize.Mobile !== undefined ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
+				${buttonLetterSpacing.Mobile !== undefined ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
+				${buttonLineHeight.Mobile !== undefined ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
+				${infoButtonMobilePadding !== undefined ? `padding: ${buttonMobilePaddingValue};` : ''}
+				${infoButtonMobileMargin !== undefined ? `margin: ${buttonMobileMarginValue};` : ''}
 				${infoButtonMobileBorderWidth !== undefined ? `border-width: ${buttonMobileBorderValue};` : ''}
 				${infoBtnMobileBorderradiusWidth !== undefined ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
 			}
@@ -2156,11 +2170,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.fb-info-box-wrapper.${blockID}:hover .fb-icon-wrapper svg {
 			${mediaIconHoverColor !== undefined ? `fill: ${mediaIconHoverColor};` : "#ffffff" }
-			transition: all .3s ease-in-out;
-		}
-
-		.fb-info-box-wrapper.${blockID}:hover .fb-info-media-wrapper {
-			${mediaBgHoverColor !== undefined ? `fill: ${mediaBgHoverColor};` : "#ffffff" }
 			transition: all .3s ease-in-out;
 		}
 
@@ -2242,7 +2251,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Desktop_Margin,
 			Heading_Tab_Margin,
 			Heading_Mobile_Margin,
-			Heading_Active_Margin_Device,
 
 			info_Button_Text,
 			wrapperAlignment,
@@ -3151,7 +3159,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingTablet={Heading_Tab_Margin}
 												spacingMobile={Heading_Mobile_Margin}
 												handleSpacingUnitHandler={handleHeadingMarginUnitChange}
-												spacingCombineBtn={Heading_Active_Margin_Device}
+												spacingCombineBtn={Heading_Margin_Link}
 												spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
 												setAttributes={setAttributes}
 											/>
@@ -3304,7 +3312,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											spacingTablet={SubHeadingTabPadding}
 											spacingMobile={SubHeadingMobilePadding}
 											handleSpacingUnitHandler={handleDescPaddingUnitChange}
-											spacingCombineBtn={descMarginLink}
+											spacingCombineBtn={SubHeadingPaddingLink}
 											spacingCombineBtnHandler={handleDescPaddingCombineBtn}
 											setAttributes={setAttributes}
 										/>
@@ -3451,7 +3459,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingTablet={infoButtonTabPadding}
 												spacingMobile={infoButtonMobilePadding}
 												handleSpacingUnitHandler={handleButtonPaddingUnitChange}
-												spacingCombineBtn={infoButtonMarginLink}
+												spacingCombineBtn={infoButtonPaddingLink}
 												spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
 												setAttributes={setAttributes}
 											/>
