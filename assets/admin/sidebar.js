@@ -533,6 +533,127 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
 
 /***/ }),
 
+/***/ "./admin/sidebar/components/ColorPicker.js":
+/*!*************************************************!*\
+  !*** ./admin/sidebar/components/ColorPicker.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ColorPicker_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ColorPicker.css */ "./admin/sidebar/components/ColorPicker.css");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+var ColorPicker = function ColorPicker(_ref) {
+  var _ref$defaultColor = _ref.defaultColor,
+    defaultColor = _ref$defaultColor === void 0 ? "#f9f9f9" : _ref$defaultColor,
+    _ref$variationSteps = _ref.variationSteps,
+    variationSteps = _ref$variationSteps === void 0 ? [100, 200, 300, 400, 500, 600, 700, 800, 900] : _ref$variationSteps;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultColor),
+    _useState2 = _slicedToArray(_useState, 2),
+    baseColor = _useState2[0],
+    setBaseColor = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    selectedColor = _useState4[0],
+    setSelectedColor = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    variations = _useState6[0],
+    setVariations = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isPopupVisible = _useState8[0],
+    setIsPopupVisible = _useState8[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (baseColor) {
+      generateVariations(baseColor);
+    }
+  }, [baseColor]);
+  var hexToRgb = function hexToRgb(hex) {
+    var bigint = parseInt(hex.slice(1), 16);
+    return {
+      r: bigint >> 16 & 255,
+      g: bigint >> 8 & 255,
+      b: bigint & 255
+    };
+  };
+  var rgbToHex = function rgbToHex(_ref2) {
+    var r = _ref2.r,
+      g = _ref2.g,
+      b = _ref2.b;
+    return "#".concat(((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1));
+  };
+  var getColorVariation = function getColorVariation(rgb, step) {
+    var factor = step / 1000;
+    return "rgb(".concat(Math.floor(rgb.r * (1 - factor)), ", ").concat(Math.floor(rgb.g * (1 - factor)), ", ").concat(Math.floor(rgb.b * (1 - factor)), ")");
+  };
+  var generateVariations = function generateVariations(color) {
+    var baseRgb = hexToRgb(color);
+    var newVariations = variationSteps.map(function (step) {
+      var variationColor = getColorVariation(baseRgb, step);
+      return {
+        step: step,
+        color: variationColor,
+        hex: rgbToHex(hexToRgb(variationColor))
+      };
+    });
+    setVariations(newVariations);
+  };
+  var handleBaseColorChange = function handleBaseColorChange(e) {
+    setBaseColor(e.target.value);
+    setIsPopupVisible(true);
+  };
+  var handleColorSelect = function handleColorSelect(color) {
+    setSelectedColor(color);
+    setIsPopupVisible(false);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "color-picker-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "color",
+    value: baseColor,
+    onChange: handleBaseColorChange,
+    style: {
+      marginBottom: "10px"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Base Color: ", baseColor), isPopupVisible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "color-picker-popup"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Variants"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "color-variations"
+  }, variations.map(function (_ref3) {
+    var step = _ref3.step,
+      color = _ref3.color,
+      hex = _ref3.hex;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: step,
+      className: "color-variation-box",
+      style: {
+        background: color
+      },
+      onClick: function onClick() {
+        return handleColorSelect(hex);
+      },
+      title: "Step ".concat(step, ": ").concat(hex)
+    });
+  }))), selectedColor && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "color-code-display"
+  }, "Selected Color: ", selectedColor));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPicker);
+
+/***/ }),
+
 /***/ "./admin/sidebar/components/CustomGradientPallet.js":
 /*!**********************************************************!*\
   !*** ./admin/sidebar/components/CustomGradientPallet.js ***!
@@ -2083,6 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
 /* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
 /* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./../icons */ "./admin/icons/index.js");
+/* harmony import */ var _components_ColorPicker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/ColorPicker */ "./admin/sidebar/components/ColorPicker.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -2111,46 +2233,57 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var defaultsColors = [{
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
   "color": '#399CFF',
-  "slug": 'primary-color'
+  "slug": 'primary-color',
+  "var": '--fb-primary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
   "color": '#f00000',
-  "slug": 'secondary-color'
+  "slug": 'secondary-color',
+  "var": '--fb-secondary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
   "color": '#F72585',
-  "slug": 'tertiary-color'
+  "slug": 'tertiary-color',
+  "var": '--fb-tertiary-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
   "color": "#7209B7",
-  "slug": 'accent-color'
+  "slug": 'accent-color',
+  "var": '--fb-accent-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
   "color": '#3A0CA3',
-  "slug": 'text-color'
+  "slug": 'text-color',
+  "var": '--fb-text-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
   "color": '#4361EE',
-  "slug": 'link-color'
+  "slug": 'link-color',
+  "var": '--fb-link-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
   "color": '#4CC9F0',
-  "slug": 'link-hover-color'
+  "slug": 'link-hover-color',
+  "var": '--fb-link-hover-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
   "color": '#FFFFFF',
-  "slug": 'white-color'
+  "slug": 'white-color',
+  "var": '--fb-white-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
   "color": '#000000',
-  "slug": 'black-color'
+  "slug": 'black-color',
+  "var": '--fb-black-color'
 }, {
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
   "color": '#808080',
-  "slug": 'gray-color'
+  "slug": 'gray-color',
+  "var": '--fb-gray-color'
 }];
 var gradientDefaults = [{
   "color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
@@ -2608,6 +2741,9 @@ function FrontisBlocksSidebar(props) {
     var regenerateFonts = fontFamilies.join(",");
     (0,_helper__WEBPACK_IMPORTED_MODULE_10__.loadGoogleFont)(regenerateFonts);
   };
+  var handleColorChange = function handleColorChange(color) {
+    console.log("Selected Color:", color);
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies'];
     var handleUpdateState = /*#__PURE__*/function () {
@@ -2643,9 +2779,11 @@ function FrontisBlocksSidebar(props) {
               if (!res.success) {
                 setGlobalColors(defaultsColors);
                 localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+                console.log("not found saved color");
               } else {
                 setGlobalColors(res.data);
                 localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+                console.log(res.data);
               }
               _context.next = 17;
               break;
@@ -3079,7 +3217,10 @@ function FrontisBlocksSidebar(props) {
     className: "back-button"
   }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_13__.ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Available texts, links, Button, Headings global colors", "frontis-blocks")))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Available texts, links, Button, Headings global colors", "frontis-blocks")))), /*#__PURE__*/React.createElement(_components_ColorPicker__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    defaultColor: "#3498db",
+    onColorChange: handleColorChange
+  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Colors", "frontis-blocks"),
     className: "fb-color-panel fb-global-color-panel",
     initialOpen: true,
@@ -10190,6 +10331,18 @@ var loadGoogleFont = function loadGoogleFont(font) {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadGoogleFont);
+
+/***/ }),
+
+/***/ "./admin/sidebar/components/ColorPicker.css":
+/*!**************************************************!*\
+  !*** ./admin/sidebar/components/ColorPicker.css ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 

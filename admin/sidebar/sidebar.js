@@ -21,58 +21,69 @@ import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
 import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
-import {Coloricon, Typographyicon, Blockicon, ChevronRight, ChevronLeft} from "./../icons"
+import { Coloricon, Typographyicon, Blockicon, ChevronRight, ChevronLeft } from "./../icons";
+import ColorPicker from "./components/ColorPicker";
 
 const defaultsColors = [
 	{
 		"name": __("Primary Color", "frontis-blocks"),
 		"color": '#399CFF',
 		"slug": 'primary-color',
+		"var": '--fb-primary-color'
 	},
 	{
 		"name": __("Secondary Color", "frontis-blocks"),
 		"color": '#f00000',
 		"slug": 'secondary-color',
+		"var": '--fb-secondary-color'
 	},
 	{
 		"name": __("Tertiary Color", "frontis-blocks"),
 		"color": '#F72585',
 		"slug": 'tertiary-color',
+		"var": '--fb-tertiary-color'
 	},
 	{
 		"name": __("Accent Color", "frontis-blocks"),
 		"color": "#7209B7",
 		"slug": 'accent-color',
+		"var": '--fb-accent-color'
 	},
 	{
 		"name": __("Text Color", "frontis-blocks"),
 		"color": '#3A0CA3',
 		"slug": 'text-color',
+		"var": '--fb-text-color'
 	},
 	{
 		"name": __("Link Color", "frontis-blocks"),
 		"color": '#4361EE',
 		"slug": 'link-color',
+		"var": '--fb-link-color'
 	},
 	{
 		"name": __("Link Hover Color", "frontis-blocks"),
 		"color": '#4CC9F0',
 		"slug": 'link-hover-color',
+		"var": '--fb-link-hover-color'
 	},
 	{
 		"name": __("White Color", "frontis-blocks"),
 		"color": '#FFFFFF',
 		"slug": 'white-color',
+		"var": '--fb-white-color'
 	},
 	{
 		"name": __("Black Color", "frontis-blocks"),
 		"color": '#000000',
 		"slug": 'black-color',
+		"var": '--fb-black-color'
 	},
 	{
 		"name": __("Gray Color", "frontis-blocks"),
 		"color": '#808080',
 		"slug": 'gray-color',
+		"var": '--fb-gray-color'
 	}
 
 ];
@@ -523,6 +534,10 @@ function FrontisBlocksSidebar(props) {
 		loadGoogleFont(regenerateFonts);
 	};
 
+	const handleColorChange = (color) => {
+		console.log("Selected Color:", color);
+	};
+
 	useEffect(() => {
 		const localStorageKeys = [
 			'fb_global_colors',
@@ -548,9 +563,11 @@ function FrontisBlocksSidebar(props) {
 							if(!res.success) {
 								setGlobalColors(defaultsColors);
 								localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+								console.log("not found saved color");
 							} else {
 								setGlobalColors(res.data);
 								localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+								console.log(res.data);
 							}
 						} else {
 							setGlobalColors(localStorageData);
@@ -1007,6 +1024,10 @@ function FrontisBlocksSidebar(props) {
 										<p>{ __("Available texts, links, Button, Headings global colors", "frontis-blocks") }</p>
 									</div>
 									</div>
+									<ColorPicker
+										defaultColor="#3498db"
+										onColorChange={handleColorChange}
+									/>
 									<PanelColorSettings
 										title={__("Colors", "frontis-blocks")}
 										className={"fb-color-panel fb-global-color-panel"}
