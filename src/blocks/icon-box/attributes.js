@@ -3,6 +3,11 @@ const attributes = {
         type: "string",
         default: ""
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
+    
 	iconBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'
@@ -1587,11 +1592,19 @@ const attributes = {
     mediaHoverBackgroundImageRepeat: {
         type: "string",
         default: ""
-    },    
-    blockStyle: {
-        type: "string",
-        default: "",
     },
+    wrapperLink: {
+        type: "string",
+        default: ""
+    },
+    wrapperTargetUrl: {
+        type: "boolean",
+    },
+    wrapperUrlSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    
 }
 //
 export default attributes;

@@ -335,7 +335,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		iconBoxButtonBorderLink,
 		iconBoxIconVerticalPosition,
-		iconBoxCardAlignment
+		iconBoxCardAlignment,
+
+		wrapperLink,
+		wrapperTargetUrl,
+		wrapperUrlSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3713,6 +3717,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															})
 														}
 													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Wrapper Link", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<ToggleControl
+															label={__("Enable Link", "frontis-blocks")}
+															checked={wrapperUrlSwitcher}
+															onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
+													/>
+													
+													{wrapperUrlSwitcher && (
+														<FB_UrlControl
+															url={wrapperLink}
+															onChangeUrl={(value) =>
+																setAttributes({ wrapperLink: value })
+															}
+															openInNewTab={wrapperTargetUrl}
+															onChangeOpenInNewTab={(value) =>
+																setAttributes({ wrapperTargetUrl: value })
+														}
+														/>
+													)}
 												</PanelBody>
 											</div>
 										</div>
