@@ -11,7 +11,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         GalleryItems,
-        deviceType,
         GalleryType,
 
         ImageOverlayStyle,

@@ -47,6 +47,13 @@ export const CONTENT_POSITION = [
     { label: __("In Image", "frontis-block"), value: "image" },
 ];
 
+export const CARD_WRAP_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
 export const SOCIAL_ICON_TYPE = [
 	{ label: __("In Content", "frontis-block"), value: "content" },
 	{ label: __("In Image", "frontis-block"), value: "image" },

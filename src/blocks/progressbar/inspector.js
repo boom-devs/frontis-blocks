@@ -23,13 +23,14 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
         progressGlobalZIndex,
 		progressTextPosition,
 		progressNumber,
@@ -71,6 +72,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
 
 	} = attributes;
+    
+    const deviceType= useDeviceType();
     
     useEffect(() => {
         if (!blockID) {

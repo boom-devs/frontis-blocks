@@ -31,12 +31,13 @@ import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-w
 import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
 import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -47,7 +48,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showHours,
 		showMinutes,
 		showSeconds,
-
 
 		// Countdown Separator
 		countDownSeparatorEnabled,
@@ -96,8 +96,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemBgHoverColor,
 
 		/** Background Image */
-		
-
 		// Border Type
 		countDownItemBorder,
 		countDownItemBorderColor,
@@ -225,6 +223,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	const [timeRemaining, setTimeRemaining] = useState({});
 
 	// Set default date to one week from today

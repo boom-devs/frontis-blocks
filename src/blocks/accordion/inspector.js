@@ -34,11 +34,12 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         accordionAlignment,
         accordionIconZIndex,
         accordionItems,
@@ -200,8 +201,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionMobileSwitcher,
 
         // Boxshadow
+        accordionGlobalBoxShadowSwitcher,
         accordionGlobalBoxShadowValues,
         accordionGlobalBoxShadowCssValue,
+        accordionGlobalHoverBoxShadowValues,
+        accordionGlobalHoverBoxShadowCssValue,
 
         // Backgorund
         accordionBgColorSwitcher,
@@ -231,8 +235,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionBgHoverImageSize,
 
         // Item Box Shadow
+        accordionItemBoxShadowSwitcher,
         accordionItemBoxShadowValues,
         accordionItemBoxShadowCssValue,
+        accordionItemHoverBoxShadowValues,
+        accordionItemHoverBoxShadowCssValue,
 
         // Item Backgorund
         titleBgColorSwitcher,
@@ -281,8 +288,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentMobileSwitcher,
 
         // Item Box Shadow
+        contentBoxShadowSwitcher,
         contentBoxShadowValues,
         contentBoxShadowCssValue,
+        contentHoverBoxShadowValues,
+        contentHoverBoxShadowCssValue,
 
         // Item Backgorund
         contentBgColorSwitcher,
@@ -312,6 +322,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageSize,
     } = attributes;
 
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -1662,17 +1673,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes={setAttributes}
                                                     />
 
-                                                    {/* <FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ accordionItemBoxShadowValues: value })
-														}
-														initialShadowValue={accordionItemBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																accordionItemBoxShadowCssValue: value,
-															})
-														}
-													/> */}
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={accordionItemBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionItemBoxShadowSwitcher: value })}
+                                                    />
+                                                    
+                                                    {accordionItemBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionItemBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionItemBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionItemBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionItemBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionItemHoverBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionItemHoverBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionItemHoverBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
                                         </PanelBody>
 
                                         <PanelBody title="Item Content" initialOpen={false} >
@@ -1876,17 +1911,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
-                                            <FB_BoxShadowControl
-												onBoxShadowChange={(value) =>
-													setAttributes({ contentBoxShadowValues: value })
-												}
-												initialShadowValue={contentBoxShadowValues}
-												onBoxShadowStyleChange={(value) =>
-													setAttributes({
-														contentBoxShadowCssValue: value,
-													})
-												}
-											/>
+                                            <FB_SwitcherControl
+                                                label={__("Box Shadow", "frontis-blocks")}
+                                                globalSwitcher={contentBoxShadowSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ contentBoxShadowSwitcher: value })}
+                                            />
+                                            
+                                            {contentBoxShadowSwitcher === 'normal' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Normal Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) =>
+                                                        setAttributes({ contentBoxShadowValues: value })
+                                                    }
+                                                    initialShadowValue={contentBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) =>
+                                                        setAttributes({
+                                                            contentBoxShadowCssValue: value,
+                                                        })
+                                                    }
+                                                />
+                                            )}
+                                            
+                                            {contentBoxShadowSwitcher === 'hover' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Hover Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) =>
+                                                        setAttributes({ contentHoverBoxShadowValues: value })
+                                                    }
+                                                    initialShadowValue={contentHoverBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) =>
+                                                        setAttributes({
+                                                            contentHoverBoxShadowCssValue: value,
+                                                        })
+                                                    }
+                                                />
+                                            )}
                                         </PanelBody>
                                     </>
                                 )}
@@ -2135,17 +2194,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes={setAttributes}
                                                     />
 
-                                                    <FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ accordionGlobalBoxShadowValues: value })
-														}
-														initialShadowValue={accordionGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																accordionGlobalBoxShadowCssValue: value,
-															})
-														}
-													/>
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={accordionGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionGlobalBoxShadowSwitcher: value })}
+                                                    />
+                                                    
+                                                    {accordionGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionGlobalBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionGlobalBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionGlobalHoverBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionGlobalHoverBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionGlobalHoverBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
                                                 </PanelBody>
         
                                                 {/* <PanelBody

@@ -44,11 +44,12 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
 		ButtonText,
 		ButtonUrl,
 		ButtonTargetUrl,
@@ -251,6 +252,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualButtonGlobalBoxShadowValues,
 		dualButtonGlobalBoxShadowCssValue,
 	} = attributes;
+
+	const deviceType= useDeviceType();
 
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
