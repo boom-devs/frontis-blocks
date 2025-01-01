@@ -137,6 +137,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonIconBorderRadiusLink,
         buttonIconGapSize,
         buttonIconGapUnits,
+		buttonIconRotate,
 
         /** Start Global Setting */
         buttonGlobalZIndex,
@@ -1060,6 +1061,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 			${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
@@ -1113,6 +1115,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
 			}
 		}
 
@@ -1163,6 +1166,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
 			}
 		}
 	`, [
@@ -1267,6 +1271,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconBorderLink,
 		buttonIconBorderRadiusUnits,
 		buttonIconBorderRadiusLink,
+		buttonIconRotate,
 	]);
 
 	useEffect(() => {
@@ -1729,6 +1734,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													setAttributes={setAttributes}
 													rangeStep={1}
 													resetFallbackValue={''}
+												/>
+												<FB_Range
+													min={0}
+													max={360}
+													label={__("Icon Rotation", "frontis-blocks")}
+													rangeValue={buttonIconRotate}
+													onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+													deviceType={deviceType}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
+													isRangeUnit={false}
+
 												/>
 											</PanelBody>
 										)}
