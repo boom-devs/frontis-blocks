@@ -21,6 +21,10 @@ export default function save({ attributes }) {
 		btnIcon,
 		iconBoxbtnTargetUrl,
 		iconBoxButtonLink,
+
+		wrapperLink,
+		wrapperTargetUrl,
+		wrapperUrlSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -30,66 +34,135 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
-					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
-						<div className="fb-icon-media-container">
-							<div className="fb-icon-media-wrapper">
-								{mediaSwitcher === "image" && (
-									<img
-										src={attributes.iconBoxMediaUrl}
-										alt={attributes.iconBoxMediaAlt || ""}
+				{wrapperUrlSwitcher ? (
+					<a
+						href={wrapperLink}
+						target={wrapperTargetUrl ? "_blank" : undefined}
+						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
+					>
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
+								<div className="fb-icon-media-container">
+									<div className="fb-icon-media-wrapper">
+										{mediaSwitcher === "image" && (
+											<img
+												src={attributes.iconBoxMediaUrl}
+												alt={attributes.iconBoxMediaAlt || ""}
+											/>
+										)}
+										{mediaSwitcher === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+										)}
+									</div>
+								</div>
+								<div className="fb-icon-box-content-wrapper">
+									<RichText.Content
+										tagName={headingTag}
+										value={Heading_Text}
+										className="fb-heading"
 									/>
-								)}
-								{mediaSwitcher === "icon" && (
-									<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
-								)}
+
+									{Sub_Heading_Switcher && (
+										<RichText.Content
+											tagName={Sub_Heading_Tag}
+											value={Sub_Heading_Text}
+											className="fb-description"
+										/>
+									)}
+
+									{icon_Box_Button_Switcher && (
+										<div className="fb-icon-button">
+										<div className="fb-icon-btn-container">
+											<a
+												href={iconBoxButtonLink} 
+												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
+												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
+												className="fb-icon-btn-wrapper"
+											>
+												
+
+
+													<RichText.Content
+														value={icon_Box_Button_Text}
+														tagName={"span"}
+														className="fb-icon-button"
+													/>
+												
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
+											</a>
+										</div>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
-						<div className="fb-icon-box-content-wrapper">
-							<RichText.Content
-								tagName={headingTag}
-								value={Heading_Text}
-								className="fb-heading"
-							/>
-
-							{Sub_Heading_Switcher && (
-								<RichText.Content
-									tagName={Sub_Heading_Tag}
-									value={Sub_Heading_Text}
-									className="fb-description"
-								/>
-							)}
-
-							{icon_Box_Button_Switcher && (
-								<div className="fb-icon-button">
-								<div className="fb-icon-btn-container">
-									<a
-										href={iconBoxButtonLink} 
-										target={iconBoxbtnTargetUrl ? '_blank' : undefined}
-										rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
-										className="fb-icon-btn-wrapper"
-									>
-										
-
-
-											<RichText.Content
-												value={icon_Box_Button_Text}
-												tagName={"span"}
-												className="fb-icon-button"
+					</a>
+					) : (
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
+								<div className="fb-icon-media-container">
+									<div className="fb-icon-media-wrapper">
+										{mediaSwitcher === "image" && (
+											<img
+												src={attributes.iconBoxMediaUrl}
+												alt={attributes.iconBoxMediaAlt || ""}
 											/>
-										
-										{buttonIconSwitcher && (
-											<div className="fb-btn-icon-wrapper">
-												{renderSVG(btnIcon)}
-											</div>
 										)}
-									</a>
+										{mediaSwitcher === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+										)}
+									</div>
 								</div>
+								<div className="fb-icon-box-content-wrapper">
+									<RichText.Content
+										tagName={headingTag}
+										value={Heading_Text}
+										className="fb-heading"
+									/>
+
+									{Sub_Heading_Switcher && (
+										<RichText.Content
+											tagName={Sub_Heading_Tag}
+											value={Sub_Heading_Text}
+											className="fb-description"
+										/>
+									)}
+
+									{icon_Box_Button_Switcher && (
+										<div className="fb-icon-button">
+										<div className="fb-icon-btn-container">
+											<a
+												href={iconBoxButtonLink} 
+												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
+												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
+												className="fb-icon-btn-wrapper"
+											>
+												
+
+
+													<RichText.Content
+														value={icon_Box_Button_Text}
+														tagName={"span"}
+														className="fb-icon-button"
+													/>
+												
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
+											</a>
+										</div>
+										</div>
+									)}
 								</div>
-							)}
+							</div>
 						</div>
-					</div>
-				</div>
+				)}
 			</div>
 		</>
 	);
