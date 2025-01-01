@@ -26,7 +26,6 @@ import './editor.scss';
 import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, SELECT_TYPE, iconType} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import ResponsiveControl from "../../components/responsivecontrol";
 import {HEADING} from "../info-box/constants/constants";
 import FlipBoxItemFrontControl from "@Blocks/flip-box/style-control/flip-box-item-front-control";
 import FlipBoxItemBackControl from "@Blocks/flip-box/style-control/flip-box-item-back-control";

@@ -5,20 +5,21 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { PanelBody, TabPanel, Button } from '@wordpress/components';
 import SortableItem from './sortableItem';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
-        deviceType,
         blockStyle,
         sliderItems,
 
 
     } = attributes;
     
-
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
