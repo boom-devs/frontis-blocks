@@ -251,28 +251,28 @@ const attributes = {
     buttonDesktopPadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonTabPadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonMobilePadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonPaddingLink: {
@@ -340,9 +340,9 @@ const attributes = {
     buttonIconSize: {
         type: 'object',
         default: {
-            Desktop: 16,
-            Tablet: 16,
-            Mobile: 16
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     buttonIconSizeUnits: {
@@ -473,9 +473,9 @@ const attributes = {
     buttonIconGapSize: {
         type: 'object',
         default: {
-            Desktop: 10,
-            Tablet: 10,
-            Mobile: 10
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
         }
     },
     buttonIconGapUnits: {
@@ -484,6 +484,14 @@ const attributes = {
             Desktop: 'px',
             Tablet: 'px',
             Mobile: 'px',
+        }
+    },
+    buttonIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
         }
     },
     /** End Icon Styles */
