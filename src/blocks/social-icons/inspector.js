@@ -177,8 +177,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBorderRadiusMobile,
         socialGlobalBorderRadiusLink,
 
+		socialGlobalBoxShadowSwitcher,
         socialGlobalBoxShadowValues,
         socialGlobalBoxShadowCssValue,
+		socialGlobalBoxShadowHoverValues,
+		socialGlobalBoxShadowHoverCssValue,
 
 
 		socialIconsPresetStyle,
@@ -2423,6 +2426,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-social-wrapper:hover {
 				${socialGlobalBgHoverColor ? `background-color: ${socialGlobalBgHoverColor};` : ''}
 				${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
+				${socialGlobalBoxShadowHoverCssValue  ? `box-shadow: ${socialGlobalBoxShadowHoverCssValue};` : ''}
 			}
 			.${blockID} .fb-socials {
 				grid-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
@@ -2559,7 +2563,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalDesktopBorderWidth,
 			globalDesktopBorderRadiusWidth,
 			socialGlobalBorderColor,
+			socialGlobalBoxShadowSwitcher,
+			socialGlobalBoxShadowValues,
 			socialGlobalBoxShadowCssValue,
+			socialGlobalBoxShadowHoverValues,
+			socialGlobalBoxShadowHoverCssValue,
 			socialGlobalBgHoverColor,
 			socialGlobalBorderHoverColor,
 			socialGapSize,
@@ -3204,11 +3212,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowValues: value })}
-														initialShadowValue={socialGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowCssValue: value })}
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={socialGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ socialGlobalBoxShadowSwitcher: value })}
 													/>
+
+													{socialGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowValues: value })}
+															initialShadowValue={socialGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{socialGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={socialGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
+
 												</PanelBody>
 											</div>
 										</div>
