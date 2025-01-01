@@ -6,6 +6,7 @@ $white_color: #ffffff;
 
 
 
+
 /** Start General scss for Advanced Heading **/
 .fb-setting-tag-wrapper {
 	.fb-setting-tag-inner-wrapper {
@@ -83,7 +84,7 @@ $white_color: #ffffff;
 	}
 }
 //Info Button
-.fb-icon-box-content-wrapper-inner{
+.fb-icon-box-wrapper-inner{
 	.fb-icon-wrapper{
 		line-height: 0;
 	}
@@ -95,14 +96,9 @@ $white_color: #ffffff;
 			line-height: 0;
 		}
 	}
-	.fb-icon-media-container{
-		display: flex;
-		align-items: center;
-	}
 	.fb-icon-media-wrapper{
 		display: flex;
 		align-items: center;
-		justify-content: center;
 	}
 }
 
