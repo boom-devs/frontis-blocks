@@ -235,8 +235,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalBorderRadiusMobile,
         TestimonialGlobalBorderRadiusLink,
 
+        TestimonialGlobalBoxShadowSwitcher,
         TestimonialGlobalBoxShadowValues,
         TestimonialGlobalBoxShadowCssValue,
+        TestimonialGlobalBoxShadowHoverValues,
+        TestimonialGlobalBoxShadowHoverCssValue,
 
         blockStyle,
 
@@ -1590,6 +1593,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section:hover {
             ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
             ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
+            ${TestimonialGlobalBoxShadowHoverCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockID} .fb-testimonial-image img {
@@ -2011,8 +2015,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalBorderRadiusMobile,
         TestimonialGlobalBorderRadiusLink,
 
+        TestimonialGlobalBoxShadowSwitcher,
         TestimonialGlobalBoxShadowValues,
         TestimonialGlobalBoxShadowCssValue,
+        TestimonialGlobalBoxShadowHoverValues,
+        TestimonialGlobalBoxShadowHoverCssValue,
 
 
         testimonialRatingIconDesktopMargin,
@@ -3082,11 +3089,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_BoxShadowControl
-                                                    onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowValues: value })}
-                                                    initialShadowValue={TestimonialGlobalBoxShadowValues}
-                                                    onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowCssValue: value })}
+
+                                                <FB_SwitcherControl
+                                                    label={__("Box Shadow", "frontis-blocks")}
+                                                    globalSwitcher={TestimonialGlobalBoxShadowSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBoxShadowSwitcher: value })}
                                                 />
+
+                                                {TestimonialGlobalBoxShadowSwitcher === 'normal' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Normal Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowValues: value })}
+                                                        initialShadowValue={TestimonialGlobalBoxShadowValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowCssValue: value })}
+                                                    />
+                                                )}
+
+                                                {TestimonialGlobalBoxShadowSwitcher === 'hover' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Hover Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverValues: value })}
+                                                        initialShadowValue={TestimonialGlobalBoxShadowHoverValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverCssValue: value })}
+                                                    />
+                                                )}
+
                                             </PanelBody>
                                         </div>
                                     </div>
