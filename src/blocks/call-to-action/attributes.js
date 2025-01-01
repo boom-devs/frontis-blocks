@@ -752,19 +752,19 @@ const attributes = {
     btnOneTabPadding: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '10',
+            bottom: '10',
+            left: '20',
+            right: '20',
         },
     },
     btnOneMobilePadding: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '8',
+            bottom: '8',
+            left: '15',
+            right: '15',
         },
     },
     btnOnePaddingLink: {
@@ -795,7 +795,7 @@ const attributes = {
 			top: '0',
 			bottom: '0',
 			left: '0',
-			right: '0',
+			right: '10',
 		},
     },
     btnOneMobileMargin: {
@@ -804,7 +804,7 @@ const attributes = {
 			top: '0',
 			bottom: '0',
 			left: '0',
-			right: '0',
+			right: '10',
 		},
     },
     btnOneActiveMarginDevice: {
@@ -887,19 +887,19 @@ const attributes = {
     btnOneTabBorderRadius: {
         type: "object",
         default: {
-            top: '0',
-            left: '0',
-            bottom: '0',
-            right: '0',
+            top: '50',
+            left: '50',
+            bottom: '50',
+            right: '50',
         },
     },
     btnOneMobileBorderRadius: {
         type: "object",
         default: {
-            topLeft: '0',
-            topRight: '0',
-            bottomLeft: '0',
-            bottomRight: '0',
+            top: '50',
+            left: '50',
+            bottom: '50',
+            right: '50',
         },
     },
     btnOneBorderRadiusLink: {
@@ -1039,19 +1039,19 @@ const attributes = {
 	btnTwoTabPadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '10',
+			bottom: '10',
+			left: '20',
+			right: '20',
 		},
 	},
 	btnTwoMobilePadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '8',
+			bottom: '8',
+			left: '15',
+			right: '15',
 		},
 	},
 	btnTwoPaddingLink : {
@@ -1138,19 +1138,19 @@ const attributes = {
 	btnTwoTabBorder: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2"
 		},
 	},
 	btnTwoMobileBorder: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2"
 		},
 	},
 	btnTwoBorderLink : {
@@ -1178,19 +1178,19 @@ const attributes = {
 	btnTwoTabBorderRadius: {
 		type: "object",
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	btnTwoMobileBorderRadius: {
 		type: "object",
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	btnTwoBorderRadiusLink : {

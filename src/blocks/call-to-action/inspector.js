@@ -1814,19 +1814,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const BorderRadiusMobileWidth = `${globalBorderRadiusMobile.top}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.right}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.bottom}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.left}${globalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
-	
-
-	/** Start Global Border Color */
-	const handleGlobalBorderColorSwitcherChange = (value) => {
-		setAttributes({ globalBorderColorSwitcher: value });
-	};
-	const handleGlobalBorderColorChange = (value) => {
-		setAttributes({ globalBorderColor: value });
-	};
-	const handleGlobalBorderHoverColorChange = (value) => {
-		setAttributes({ globalBorderHoverColor: value });
-	};
-
 	/* set default values for the style attributes */
 	useEffect(() => {
 		if (headingFontFamily) {
@@ -1980,11 +1967,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 1024px) {
 				.fb-cta-content-wrapper.${blockID} {
-				${globalZIndex.Tablet ? `z-index: ${globalZIndex.Desktop};` : ''}
-				${TabletPadding ? `padding: ${TabletPadding};` : ""}
-				${TabletMargin ? `margin: ${TabletMargin};` : ""}
-				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
-				${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+					${globalZIndex.Tablet ? `z-index: ${globalZIndex.Desktop};` : ''}
+					${TabletPadding ? `padding: ${TabletPadding};` : ""}
+					${TabletMargin ? `margin: ${TabletMargin};` : ""}
+					${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
+					${BorderRadiusTabletWidth ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading {
 					${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
@@ -2086,6 +2073,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBorder,
 			BorderDesktopWidth,
 			BorderRadiusDesktopWidth,
+			TabletPadding,
+			MobilePadding,
+			TabletMargin,
+			MobileMargin,
+			BorderTabletWidth,
+			BorderMobileWidth,
+			BorderRadiusTabletWidth,
+			BorderRadiusMobileWidth,
 			globalBorderColor,
 			boxGlobalBoxShadowCssValue,
 			testBackgroundType,
@@ -2241,6 +2236,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnOneDesktopBorderRadiusWidth,
 			btnOneTabletBorderRadiusWidth,
 			btnOneMobileBorderRadiusWidth,
+			globalZIndex
 
 		],
 	);
