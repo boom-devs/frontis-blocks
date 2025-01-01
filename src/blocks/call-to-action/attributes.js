@@ -193,7 +193,7 @@ const attributes = {
 	},
     btnIconPosition: {
 		type: 'string',
-        default: 'left'
+        default: 'right'
 	},
     infoIconPosition: {
 		type: 'string',
@@ -828,28 +828,28 @@ const attributes = {
     btnOneDesktopBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneTabBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneMobileBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneBorderLink: {
@@ -857,8 +857,13 @@ const attributes = {
         default: true,
     },
     /** Button One Border Radius **/
+	infoButtonBorder: {
+        type: 'string',
+		default: 'solid'
+    },
 	infoButtonBorderColor: {
         type: 'string',
+		default: 'transparent'
     },
     infoButtonHoverBorderColor: {
         type: 'string',

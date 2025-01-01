@@ -13,7 +13,6 @@ import {
 	Button,
 	ToggleControl,
 	TextareaControl,
-	RangeControl,
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
@@ -333,7 +332,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoTargetUrl,
 	} = attributes;
 
-	const deviceType= useDeviceType();
+	const deviceType = useDeviceType();
 	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
@@ -1844,15 +1843,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
 				${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
-				${testBackgroundType === "gradient" ? `background: ${ testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor };` : testBackgroundImageUrl && testBackgroundImageUrl !== "null" ? `
-				${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : "" }
-				${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : "" }
-				${ testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : "" }
-				${ testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : "" }
-				${ testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : "" } `
-				: `background: ${testClassicColor};` }
+				${testBackgroundType === "gradient" 
+					? (testCustomGradientSwitcher && testCustomGradientInputValue 
+						? `background: ${testCustomGradientInputValue};` 
+						: (testGradientColor 
+							? `background: ${testGradientColor};` 
+							: `background: ${testClassicColor};`))
+					: (testBackgroundImageUrl && testBackgroundImageUrl !== "null" 
+						? `
+							${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : "" }
+							${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : "" }
+							${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : "" }
+							${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : "" }
+							${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : "" } 
+						`
+						: `background: ${testClassicColor};`)
+				}
 				transition: all .3s ease-in-out;
 			}
+
 			.fb-cta-content-wrapper.${blockID}:hover {
 				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
 				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
@@ -1860,6 +1869,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
 				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
 				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
+				${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-heading {
 				${headingColor ? `color: ${headingColor};` : ""}
@@ -1917,6 +1927,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
 				${btnOneDesktopBorderWidth ? `border-width: ${btnOneDesktopBorderWidth};` : ""}
 				${btnOneDesktopBorderRadiusWidth ? `border-radius: ${btnOneDesktopBorderRadiusWidth};` : ""}
+				transition: all .3s ease-in-out;
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-cta-button{
 				${buttonTextColor !== undefined ? `color: ${buttonTextColor};` : ""}
@@ -1926,6 +1937,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper:hover {
 				${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : "" }
+				${infoButtonHoverBorderColor ? `border-color: ${infoButtonHoverBorderColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
 				${ buttonTwoBgColor !== undefined ? `background-color: ${buttonTwoBgColor};` : "" }
@@ -1943,6 +1955,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
 				border-width: ${btnTwoDesktopBorderWidthStyle};
 				border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};
+				transition: all .3s ease-in-out;
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button{
 				${buttonTwoTextColor !== undefined ? `color: ${buttonTwoTextColor};` : "" }
@@ -1950,8 +1963,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
 				${ buttonTwoTextHoverColor !== undefined ? `color: ${buttonTwoTextHoverColor};` : "" }
 			}
-			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper:hover .fb-cta-btn-wrapper {
+			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover {
 				${buttonTwoBgHoverColor !== undefined ? `background-color: ${buttonTwoBgHoverColor};` : "" }
+				${btnTwoHoverBorderColor ? `border-color: ${btnTwoHoverBorderColor};` : ""}
 			}
 			
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {

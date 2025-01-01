@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import { useRef } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -11,7 +12,8 @@ import {
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { Card } from "@wordpress/components";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
@@ -52,6 +54,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
 	const handleBtnClick = (e) =>{
 		e.preventDefault();
 	}
@@ -74,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} ref={panelRef}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
