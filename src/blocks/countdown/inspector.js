@@ -26,10 +26,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from "@Components/background-color-control";
-
-
-import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
-import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
@@ -420,6 +416,281 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 
+	/** Start Border Type*/
+	const handleCountDownItemWrapperBorderUnitHandlerFn = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperBorderTypeLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperBorderTypeDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperBorderTypeTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperBorderTypeMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperBorderTypeDesktop: {...countDownItemWrapperBorderTypeDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperBorderTypeTablet: {...countDownItemWrapperBorderTypeTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperBorderTypeMobile: {...countDownItemWrapperBorderTypeMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperBorderCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperBorderTypeLink: !countDownItemWrapperBorderTypeLink} );
+	}
+
+	const countDownItemWrapperBorderTypeUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperBorderTypeUnits: {
+				...countDownItemWrapperBorderTypeUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	/** Start Border Type*/
+
+	/** Start Border Radius*/
+	const countDownItemWrapperHandleSpacingUnitHandlerFn = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperBorderRadiusDesktop: {...countDownItemWrapperBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperBorderRadiusTablet: {...countDownItemWrapperBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperBorderRadiusMobile: {...countDownItemWrapperBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperBorderRadiusLink: !countDownItemWrapperBorderRadiusLink} );
+	}
+
+	const countDownItemWrapperBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperBorderRadiusUnits: {
+				...countDownItemWrapperBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	/** Start Padding */
+	const countDownItemWrapperPaddingHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperPaddingDesktop: {...countDownItemWrapperPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperPaddingTablet: {...countDownItemWrapperPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperPaddingMobile: {...countDownItemWrapperPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperPaddingLink: !countDownItemWrapperPaddingLink} );
+	}
+
+	const countDownItemWrapperPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperPaddingUnits: {
+				...countDownItemWrapperPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Padding */
+
+	/** Start Margin */
+	const countDownItemWrapperMarginHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperMarginDesktop: {...countDownItemWrapperMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperMarginTablet: {...countDownItemWrapperMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperMarginMobile: {...countDownItemWrapperMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperMarginLink: !countDownItemWrapperMarginLink} );
+	}
+
+	const countDownItemWrapperMarginSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperMarginUnits: {
+				...countDownItemWrapperMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Margin */
 	{/* Countdown Item Wrapper Control */}
 	const countDownItemWrapperBorderTypeGetDesktop = `${countDownItemWrapperBorderTypeDesktop.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
 	const countDownItemWrapperBorderTypeGetTablet = `${countDownItemWrapperBorderTypeTablet.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
@@ -1372,18 +1643,85 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										</PanelBody>
 										<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperBorderControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
+											
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={countDownItemWrapperBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ countDownItemWrapperBorder: value })}
+											/>
+											{/** Item Background Control */}
+											<FB_SwitcherControl
+												label={__("Text Color", "frontis-blocks")}
+												globalSwitcher={countDownItemWrapperBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ countDownItemWrapperBorderColorSwitcher: value })}
+											/>
+									
+											{countDownItemWrapperBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={countDownItemWrapperBorderColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value })}
+												/>
+											)}
+									
+											{countDownItemWrapperBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={countDownItemWrapperBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value })}
+												/>
+											)}
+											<FB_Spacing
+												label={ 'Border Width' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemWrapperBorderTypeUnitsHandler}
+												spacingUnits={countDownItemWrapperBorderTypeUnits}
+												spacingDesktop={countDownItemWrapperBorderTypeDesktop}
+												spacingTablet={countDownItemWrapperBorderTypeTablet}
+												spacingMobile={countDownItemWrapperBorderTypeMobile}
+												handleSpacingUnitHandler={handleCountDownItemWrapperBorderUnitHandlerFn}
+												spacingCombineBtn={countDownItemWrapperBorderTypeLink}
+												spacingCombineBtnHandler={countDownItemWrapperBorderCombineBtnHandlerFn} setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={ 'Border Radius' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemWrapperBorderRadiusUnitsHandler}
+												spacingUnits={countDownItemWrapperBorderRadiusUnits}
+												spacingDesktop={countDownItemWrapperBorderRadiusDesktop}
+												spacingTablet={countDownItemWrapperBorderRadiusTablet}
+												spacingMobile={countDownItemWrapperBorderRadiusMobile}
+												handleSpacingUnitHandler={countDownItemWrapperHandleSpacingUnitHandlerFn}
+												spacingCombineBtn={countDownItemWrapperBorderRadiusLink}
+												spacingCombineBtnHandler={countDownItemWrapperCombineBtnHandlerFn} setAttributes={setAttributes}
 											/>
 										</PanelBody>
 										<PanelBody title={__("Padding/Margin", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperPaddingMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+										<FB_Spacing
+											label={ 'Padding' }
+											deviceType={deviceType}
+											spacingUnitsHandler={countDownItemWrapperPaddingSpacingUnitsHandler}
+											spacingUnits={countDownItemWrapperPaddingUnits}
+											spacingDesktop={countDownItemWrapperPaddingDesktop}
+											spacingTablet={countDownItemWrapperPaddingTablet}
+											spacingMobile={countDownItemWrapperPaddingMobile}
+											handleSpacingUnitHandler={countDownItemWrapperPaddingHandleSpacingUnitHandler}
+											spacingCombineBtn={countDownItemWrapperPaddingLink}
+											spacingCombineBtnHandler={countDownItemWrapperPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
+										/>
+										<FB_Spacing
+											label={ 'Margin' }
+											deviceType={deviceType}
+											spacingUnitsHandler={countDownItemWrapperMarginSpacingUnitsHandler}
+											spacingUnits={countDownItemWrapperMarginUnits}
+											spacingDesktop={countDownItemWrapperMarginDesktop}
+											spacingTablet={countDownItemWrapperMarginTablet}
+											spacingMobile={countDownItemWrapperMarginMobile}
+											handleSpacingUnitHandler={countDownItemWrapperMarginHandleSpacingUnitHandler}
+											spacingCombineBtn={countDownItemWrapperMarginLink}
+											spacingCombineBtnHandler={countDownItemWrapperMarginSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
+										/>
 										</PanelBody>
 									</>
 								)}
