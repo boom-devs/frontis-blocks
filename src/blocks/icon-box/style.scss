@@ -1,4 +1,4 @@
-.fb-icon-box-content-wrapper-inner{
+.fb-icon-box-wrapper-inner{
 	.fb-icon-wrapper{
 		line-height: 0;
 	}
@@ -10,13 +10,9 @@
 			line-height: 0;
 		}
 	}
-	.fb-icon-media-container{
-		display: flex;
-		align-items: center;
-	}
 	.fb-icon-media-wrapper{
 		display: flex;
 		align-items: center;
-		justify-content: center;
 	}
 }
+
