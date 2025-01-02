@@ -95,7 +95,12 @@ const attributes = {
         default: '',
     },
     headingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     headingTextStrokeColorSwitcher: {
         type: 'string',

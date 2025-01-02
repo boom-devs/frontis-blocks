@@ -325,7 +325,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
-                headingTextStroke: "",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
             },
@@ -336,7 +340,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "0px 18px 0px #399cff1a;",
                 headingColor: "transparent",
-                headingTextStroke: "2",
+                headingTextStroke: {
+                    Desktop: "2",
+                    Tablet: "2",
+                    Mobile: "2",
+                },
                 headingTextStrokeColor: "#399CFF",
                 headingTextStrokeHoverColor: "#399CFF",
             },
@@ -349,7 +357,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
-                headingTextStroke: "",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
             },
@@ -1458,10 +1470,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
             ${headingTextStroke ? `
-                -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
             ` : ''}
             ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
 
@@ -1481,10 +1493,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
             ${headingTextStrokeHoverColor ? `
-                -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
             ` : ''}
         }
 
@@ -2082,15 +2094,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
                                                 isBoxShadow={false}
                                             />
-                                            
-                                            <RangeControl
-                                                label={__("Text Stroke", "frontis-blocks")}
-                                                value={headingTextStroke}
-                                                onChange={(value) => setAttributes({ headingTextStroke: value })}
+
+                                            <FB_Range
                                                 min={0}
                                                 max={10}
-                                                step={1}
-                                                resetFallbackValue={''}
+                                                label={__("Text Stroke", "frontis-blocks")}
+                                                rangeValue={headingTextStroke}
+                                                onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+
                                             />
 
                                             <FB_SwitcherControl
