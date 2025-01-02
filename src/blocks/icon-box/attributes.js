@@ -65,9 +65,9 @@ const attributes = {
     mediaBgWidth: {
 		type: 'object',
 		default: {
-			Desktop: '76',
-			Tablet: '50',
-			Mobile: '40'
+			Desktop: '68',
+			Tablet: '68',
+			Mobile: '68'
 		}
 	},
 	mediaBgWidthUnits: {
@@ -81,9 +81,9 @@ const attributes = {
     mediaBgHeight: {
 		type: 'object',
 		default: {
-			Desktop: '76',
-			Tablet: '50',
-			Mobile: '40'
+			Desktop: '68',
+			Tablet: '68',
+			Mobile: '68'
 		}
 	},
 	mediaBgHeightUnits: {
@@ -120,15 +120,15 @@ const attributes = {
 	},
     btnIconHoverColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: ''
 	},
     mediaIconColor: {
 		type: 'string',
-        default: '#ffffff'
+        default: '#399CFF'
 	},
     mediaIconHoverColor: {
 		type: 'string',
-        default: "#399CFF"
+        default: "#FFFFFF"
 	},
 	mediaIconColorSwitcher : {
 		type: "string",
@@ -138,11 +138,11 @@ const attributes = {
 		type: 'string',
         default: 'right'
 	},
-    iconBoxiconPosition: {
+    iconBoxIconPosition: {
 		type: 'string',
         default: 'top'
 	},
-    iconBoxiconVerticalPosition: {
+    iconBoxIconVerticalPosition: {
 		type: 'string',
         default: 'top'
 	},
@@ -160,7 +160,7 @@ const attributes = {
     },
 	icon: {
 		type: 'string',
-		default: 'swatchbook',
+		default: 'layer-group',
 	},
 	btnIcon: {
 		type: 'string',
@@ -191,23 +191,23 @@ const attributes = {
     },
     wrapperAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	contentAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	descAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
 	buttonAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     Alignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     Heading_Text: {
         type : "string",
@@ -297,7 +297,7 @@ const attributes = {
     },
     Heading_Hover_Color: {
         type: 'string',
-        default: "#ffffff"
+        default: ""
     },
     Heading_Background_Color: {
         type: 'string',
@@ -555,12 +555,11 @@ const attributes = {
     },
     SubHeadingHoverColor : {
         type: "string",
-        default: "#ffffff"
+        default: ""
     },
     Sub_Heading_Text: {
         type: "string",
-        default: "Contrary to popular belief, Lorem Ipsum is not simply random text." +
-			" It has roots in a piece of classical Latin"
+        default: "Corrupti maiores atque  possimus ratione"
     },
     Sub_Heading_Tag: {
         type : "string",
@@ -585,8 +584,8 @@ const attributes = {
     SubHeadingDesktopPadding: {
         type: "object",
         default: {
-            top: '15',
-            bottom: '15',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -594,8 +593,8 @@ const attributes = {
     SubHeadingTabPadding: {
         type: "object",
         default: {
-            top: '15',
-            bottom: '15',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -603,8 +602,8 @@ const attributes = {
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: '10',
-            bottom: '10',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -626,28 +625,28 @@ const attributes = {
 	descDesktopMargin: {
 		type: "object",
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
+			top: '14',
+			bottom: '32',
+			left: '12',
+			right: '12',
 		},
 	},
 	descTabMargin: {
 		type: "object",
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
+			top: '14',
+			bottom: '32',
+			left: '12',
+			right: '12',
 		},
 	},
 	descMobileMargin: {
 		type: "object",
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
+			top: '14',
+			bottom: '32',
+			left: '12',
+			right: '12',
 		},
 	},
 	descMarginLink : {
@@ -656,17 +655,17 @@ const attributes = {
 	},
 
     //iconBox Button
-    iconBox_Box_Button_Text: {
+    icon_Box_Button_Text: {
         type: "string",
         default: "Learn More"
     },
-    iconBox_Box_Button_Switcher: {
+    icon_Box_Button_Switcher: {
         type: "boolean",
         default: true,
     },
     buttonIconSwitcher: {
         type: "boolean",
-        default: true,
+        default: false,
     },
     iconBoxButtonLink: {
         type: "string",
@@ -729,8 +728,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '16',
-			right: '16',
+			left: '12',
+			right: '12',
 		},
 	},
 	iconBoxButtonTabMargin: {
@@ -738,8 +737,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '16',
-			right: '16',
+			left: '12',
+			right: '12',
 		},
 	},
 	iconBoxButtonMobileMargin: {
@@ -747,8 +746,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '16',
-			right: '16',
+			left: '12',
+			right: '12',
 		},
 	},
 	iconBoxButtonMarginLink : {
@@ -1081,7 +1080,7 @@ const attributes = {
 	},
 	buttonTextHoverColor : {
 		type: "string",
-        default: "#ffffff"
+        default: ""
 	},
 	buttonBgColorSwitcher : {
 		type: "string",
@@ -1113,28 +1112,28 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '24',
+            bottom: '24',
+            left: '12',
+            right: '12',
         },
     },
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '24',
+            bottom: '24',
+            left: '12',
+            right: '12',
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '24',
+            bottom: '24',
+            left: '12',
+            right: '12',
         },
     },
     globalPaddingLink : {
@@ -1186,15 +1185,15 @@ const attributes = {
     },
     globalBgColor : {
         type: "string",
-        default: '#EBF5FF'
+        default: ''
     },
     globalBgHoverColor: {
         type: "string",
-        default: "#399CFF"
+        default: "#D7EBFF"
     },
     globalBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     globalBorderColorSwitcher : {
         type: "string",
@@ -1202,9 +1201,11 @@ const attributes = {
     },
     globalBorderColor: {
         type: 'string',
+        default: "#D7EBFF"
     },
     globalBorderHoverColor: {
         type: 'string',
+        default: ""
     },
     globalBorderUnits: {
 		type: 'object',
@@ -1217,28 +1218,28 @@ const attributes = {
     globalBorderDesktop: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
     },
     globalBorderTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
     },
     globalBorderMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
 		},
     },
     globalBorderLink : {
@@ -1335,27 +1336,27 @@ const attributes = {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '32',
+            left: '12',
+            right: '12',
         },
     },
     mediaMarginTablet: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '32',
+            left: '12',
+            right: '12',
         },
     },
     mediaMarginMobile: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '32',
+            left: '12',
+            right: '12',
         },
     },
     mediaMarginLink: {
@@ -1368,7 +1369,7 @@ const attributes = {
     },
     mediaBgColor: {
         type: "string",
-        default: "#399CFF"
+        default: "#D7EBFF"
     },
     bgType: {
         type: "string",
@@ -1376,7 +1377,7 @@ const attributes = {
     },
     mediaBgHoverColor: {
         type: "string",
-        default: "#ffffff"
+        default: "#399CFF"
     },
     mediaBorder: {
         type: "string",
@@ -1442,28 +1443,28 @@ const attributes = {
     mediaBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
         },
     },
     mediaBorderRadiusTablet: {
         type: "object",
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
         },
     },
     mediaBorderRadiusMobile: {
         type: "object",
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
         },
     },
     mediaBorderRadiusLink: {
@@ -1497,7 +1498,7 @@ const attributes = {
     },
     mediaClassicColor: {
         type: "string",
-        default: "#399CFF"
+        default: "#D7EBFF"
     },
     mediaGradientColor: {
         type: "string",
@@ -1548,7 +1549,7 @@ const attributes = {
     },
     mediaHoverClassicColor: {
         type: "string",
-        default: "#ffffff"
+        default: "#399CFF"
     },
     mediaHoverGradientColor: {
         type: "string",

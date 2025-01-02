@@ -2847,7 +2847,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										{/*Image/Icon Style*/}
 										<PanelBody
-											title={__("Image/Icon", "frontis-block")}
+											title={__("Icon/Image", "frontis-block")}
 											initialOpen={false}
 										>
 											<FB_Range
