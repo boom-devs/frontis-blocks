@@ -767,6 +767,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					: ''
 				}
 			}
+			.fb-count-down-wrapper.${blockID} .fb-count-down-item:hover {
+				${countDownItemBgHoverColor ? `background: ${countDownItemBgHoverColor};` : ''}
+			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 				${
 					countDownSeparatorEnabled && 
@@ -1124,37 +1127,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												setAttributes={setAttributes}
 												rangeStep={1}
 												resetFallbackValue={""}
-											/>
-											
-											{/** Item Background Control */}
-											<FB_SwitcherControl
-												label={__("Text Color", "frontis-blocks")}
-												globalSwitcher={countDownItemBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ countDownItemBgColorSwitcher: value })}
-											/>
-									
-											{countDownItemBgColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={countDownItemBgColor}
-													setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value })}
-												/>
-											)}
-									
-											{countDownItemBgColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={countDownItemBgHoverColor}
-													setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value })}
-												/>
-											)}
-									
-											<ToggleControl
-												label={__("Enable Background Image", "frontis-blocks")}
-												checked={
-												countDownItemBgImageEnabled}
-												onChange={(value) => setAttributes({
-													countDownItemBgImageEnabled: value })}
 											/>
 											
 											<FB_SwitcherControl
