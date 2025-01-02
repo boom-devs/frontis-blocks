@@ -12,6 +12,8 @@ import {
 	SELECT_BG_IMAGE_REPEAT_TYPE, SELECT_BG_IMAGE_SIZE_TYPE
 } from "@Blocks/flip-box/constants/constants";
 import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
 export default function CountDownItemWrapperBorderControl ({ attributes, setAttributes}) {
 
 	const {

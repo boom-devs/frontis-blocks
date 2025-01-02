@@ -28,7 +28,6 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from "@Components/background-color-control";
 
 
-import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
 import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
 import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
