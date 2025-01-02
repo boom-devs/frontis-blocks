@@ -883,30 +883,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				case "Desktop":
 					setAttributes({
 						connectorBorderRadiusDesktop: {
-							topLeft: value,
-							topRight: value,
-							bottomRight: value,
-							bottomLeft: value,
+							top: value,
+							bottom: value,
+							left: value,
+							right: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
 						connectorBorderRadiusTablet: {
-							topLeft: value,
-							topRight: value,
-							bottomRight: value,
-							bottomLeft: value,
+							top: value,
+							bottom: value,
+							left: value,
+							right: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
 						connectorBorderRadiusMobile: {
-							topLeft: value,
-							topRight: value,
-							bottomRight: value,
-							bottomLeft: value,
+							top: value,
+							bottom: value,
+							left: value,
+							right: value,
 						},
 					});
 					break;
@@ -2757,8 +2757,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setGlobalColor={(value) => setAttributes({ connectorBgHoverColor: value })}
                                                 />
                                             )}
-
-											
 
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
