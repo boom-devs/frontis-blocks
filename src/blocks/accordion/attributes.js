@@ -813,6 +813,10 @@ const attributes = {
     },
 
 
+    accordionGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     accordionGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -821,6 +825,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    accordionGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    accordionGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     accordionBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -927,6 +940,10 @@ const attributes = {
     },
 
 
+    accordionItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     accordionItemBoxShadowValues: {
         type: 'array',
         default: [],
@@ -935,6 +952,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    accordionItemHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    accordionItemHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     titleBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -1230,6 +1256,10 @@ const attributes = {
         default: false,
     },
     
+    contentBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     contentBoxShadowValues: {
         type: 'array',
         default: [],
@@ -1238,6 +1268,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    contentHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    contentHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     contentBgColorSwitcher: {
         type: "string",
         default: "normal"

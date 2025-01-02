@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BORDER_STYLES, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '../../components/spacing/index.js';
@@ -93,6 +93,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Content
 		teamMemberContentPosition,
+		teamMemberCardAlignment,
 
 		// Team Name
 		teamMemberName,
@@ -2335,7 +2336,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageMarginGetDesktop !== undefined ? `margin: ${teamMemberImageMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-image {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-image {
 				${teamMemberImageBorderHoverColor !== undefined ? `border-color: ${teamMemberImageBorderHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -2351,6 +2352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'left' ? 'align-items: start;' : ''}
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'center' ? 'align-items: center;' : ''}
 				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' && teamMemberContentAlignment === 'right' ? 'align-items: end;' : ''}
+				${teamMemberContentPosition !== 'top' && teamMemberContentPosition !== 'bottom' && teamMemberContentPosition !== 'image' ? `justify-content: ${teamMemberCardAlignment};` : ''}
 			}
 
 			${teamMemberSocialType === 'image' && `
@@ -2413,7 +2415,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-content-wrapper {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-content-wrapper {
 				${
 					teamMemberContentBgHoverType === "gradient"
 					  ? `background: ${
@@ -2446,7 +2448,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageOverlayOpacity !== undefined ? `opacity: ${teamMemberImageOverlayOpacity};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
 				${teamMemberImageBGHoverColor !== undefined ? `background: ${teamMemberImageBGHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -2517,9 +2519,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${socialProfileSeparatorColor !== undefined ? `border-top-color: ${socialProfileSeparatorColor};` : ''}
 				${socialProfileSeparatorWidth.Desktop !== undefined ? `width: ${socialProfileSeparatorWidth.Desktop}${socialProfileSeparatorWidthUnits.Desktop};` : ''}
 				${socialProfileSeparatorMarginDesktopWidth !== undefined ? `margin: ${socialProfileSeparatorMarginDesktopWidth};` : ''}
+				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-separator {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-separator hr {
 				${socialProfileSeparatorHoverColor !== undefined ? `border-top-color: ${socialProfileSeparatorHoverColor};` : ''}
+				transition: all 0.3s ease-in-out;
 			}
 
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper {
@@ -2538,7 +2542,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				overflow: hidden;
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-wrapper {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-wrapper {
 				${teamMemberSocialProfileBorderHoverColor !== undefined ? `border-color: ${teamMemberSocialProfileBorderHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -2556,7 +2560,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberSocialIconAnimationType === 'left' ? 'transform: translateX(100px);' : ''}
 				transition: all 0.5s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile {
+			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile {
 				${teamMemberSocialIconAnimationType !== 'default' ? 'visibility: visible; opacity: 1; transform: translate(0);' : ''}
 				transition: all 0.5s ease-in-out;
 			}
@@ -2571,7 +2575,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberIconsDesktopBorderRadius !== undefined ? `border-radius: ${teamMemberIconsDesktopBorderRadius};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile {
+				.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile {
 					${teamMemberIconsBGHoverColor !== undefined ? `background-color: ${teamMemberIconsBGHoverColor};` : ''}
 					${teamMemberIconsBorderHoverColor !== undefined ? `border-color: ${teamMemberIconsBorderHoverColor};` : ''}
 					transition: all 0.3s ease-in-out;
@@ -2654,7 +2658,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialIconBtnDesktopBorderRadius !== undefined ? `border-radius: ${socialIconBtnDesktopBorderRadius};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+				.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
 					${socialIconBtnBGHoverColor !== undefined ? `background-color: ${socialIconBtnBGHoverColor};` : ''}
 					${socialIconBtnBorderHoverColor !== undefined ? `border-color: ${socialIconBtnBorderHoverColor};` : ''}
 					transition: all 0.3s ease-in-out;
@@ -2665,7 +2669,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialIconBtnIconSize?.Desktop !== undefined ? `height: ${socialIconBtnIconSize.Desktop}${socialIconBtnIconSizeUnits.Desktop};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+				.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
 					${socialIconBtnHoverColor !== undefined ? `fill: ${socialIconBtnHoverColor};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
@@ -2874,6 +2878,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			// Content
 			teamMemberContentPosition,
+			teamMemberCardAlignment,
 
 			// Team Name
 			teamMemberName,
@@ -3216,6 +3221,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ teamMemberContentPosition: value })}
                                             />
 
+											{teamMemberContentPosition === 'left' || teamMemberContentPosition === 'right' ? 
+												<SelectControl
+													label={__("Card Alignment", "frontis-blocks")}
+													value={teamMemberCardAlignment}
+													options={CARD_WRAP_ALIGNMENT}
+													onChange={(value) => setAttributes({ teamMemberCardAlignment: value })}
+												/>
+											: ''}
+
 											<TextControl
 												tagName={teamMemberNameHeadingTag}
 												label={__('Name', 'frontis-blocks')}
@@ -3337,8 +3351,168 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "styles" && (
 									<>
 										<PanelBody
-											title={__("Content", "frontis-blocks")}
+											title={__("Avatar", "frontis-blocks")}
 											initialOpen={true}
+											className="fb-setting-border-setting-wrapper"
+										>
+											<FB_AlignmentControl
+                                                label={__("Alignment", "frontis-blocks")}
+                                                globalAlignment={teamMemberImageAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ teamMemberImageAlignment: value })}
+                                            />
+
+											<FB_Range
+												min={1}
+												max={teamMemberImageWidthUnits[deviceType] === '%' ? 100 : 1000}
+												label={__("Width", "frontis-blocks")}
+												rangeValue={teamMemberImageWidth}
+												onChangeHandler={(value) => setAttributes({ teamMemberImageWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ teamMemberImageWidthUnits: value })}
+												deviceType={deviceType}
+												units={teamMemberImageWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={100}
+											/>
+
+											<FB_Range
+												min={1}
+												max={teamMemberImageHeightUnits[deviceType] === '%' ? 100 : 1000}
+												label={__("Height", "frontis-blocks")}
+												rangeValue={teamMemberImageHeight}
+												onChangeHandler={(value) => setAttributes({ teamMemberImageHeight: value })}
+												rangeUnitHandler={(value) => setAttributes({ teamMemberImageHeightUnits: value })}
+												deviceType={deviceType}
+												units={teamMemberImageHeightUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={100}
+											/>
+
+											{ teamMemberImageOverlaySwitcher === true && 
+											<>
+												<FB_SwitcherControl
+													label={__("Overlay Color", "frontis-blocks")}
+													globalSwitcher={teamMemberImageBGColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
+												/>
+														
+												{teamMemberImageBGColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={teamMemberImageBGColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberImageBGColor: value })}
+													/>
+												)}
+														
+												{teamMemberImageBGColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={teamMemberImageBGHoverColor}
+														setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
+													/>
+												)}
+
+												<RangeControl
+													label="Opacity"
+													value={teamMemberImageOverlayOpacity}
+													onChange={(value) => setAttributes({ teamMemberImageOverlayOpacity: value, }) }
+													min={0}
+													max={1}
+													step={0.1}
+													allowReset
+													resetFallbackValue={undefined}
+												/>
+												{/* <FB_Range
+													label={__("Opacity", "frontis-blocks")}
+													min={0}
+													max={1}
+													rangeValue={teamMemberImageOverlayOpacity}
+													onChangeHandler={(value) => setAttributes({ teamMemberImageOverlayOpacity: value })}
+													deviceType={deviceType}
+													setAttributes={setAttributes}
+													rangeStep={0.1}
+													resetFallbackValue={0.5}
+													isRangeUnit={false}
+												/> */}
+											</>
+											}
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={teamMemberImageBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ teamMemberImageBorder: value })}
+											/>
+
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberImageBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBorderColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberImageBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberImageBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberImageBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberImageBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_Spacing
+												label={ 'Border' }
+												deviceType={deviceType}
+												spacingUnitsHandler={handleImageBorderUnitChange}
+												spacingUnits={teamMemberImageBorderUnits}
+												spacingDesktop={teamMemberImageBorderDesktop}
+												spacingTablet={teamMemberImageBorderTab}
+												spacingMobile={teamMemberImageBorderMobile}
+												handleSpacingUnitHandler={handleImageBorderUnit}
+												spacingCombineBtn={teamMemberImageBorderLink}
+												spacingCombineBtnHandler={handleImageBorderCombineBtn} 
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={ 'Border Radius' }
+												deviceType={deviceType}
+												spacingUnitsHandler={handleImageBorderRadiusUnitChange}
+												spacingUnits={teamMemberImageBorderRadiusUnits}
+												spacingDesktop={teamMemberImageBorderRadiusDesktop}
+												spacingTablet={teamMemberImageBorderRadiusTab}
+												spacingMobile={teamMemberImageBorderRadiusMobile}
+												handleSpacingUnitHandler={handleImageBorderRadiusUnit}
+												spacingCombineBtn={teamMemberImageBorderRadiusLink}
+												spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn} 
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={ 'Margin' }
+												deviceType={deviceType}
+												spacingUnitsHandler={handleImageMarginUnitChange}
+												spacingUnits={teamMemberImageMarginUnits}
+												spacingDesktop={teamMemberImageMarginDesktop}
+												spacingTablet={teamMemberImageMarginTab}
+												spacingMobile={teamMemberImageMarginMobile}
+												handleSpacingUnitHandler={handleImageMarginUnit}
+												spacingCombineBtn={teamMemberImageMarginLink}
+												spacingCombineBtnHandler={handleImageMarginCombineBtn} 
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody
+											title={__("Content", "frontis-blocks")}
+											initialOpen={false}
 										>
 											<FB_AlignmentControl
                                                 label={__("Alignment", "frontis-blocks")}
@@ -3570,154 +3744,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												handleSpacingUnitHandler={handleContentPaddingUnit}
 												spacingCombineBtn={teamMemberContentPaddingLink}
 												spacingCombineBtnHandler={handleContentPaddingCombineBtn} 
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-
-										<PanelBody
-											title={__("Avatar", "frontis-blocks")}
-											initialOpen={false}
-											className="fb-setting-border-setting-wrapper"
-										>
-											<FB_AlignmentControl
-                                                label={__("Alignment", "frontis-blocks")}
-                                                globalAlignment={teamMemberImageAlignment}
-                                                setGlobalAlignment={(value) => setAttributes({ teamMemberImageAlignment: value })}
-                                            />
-
-											<FB_Range
-												min={1}
-												max={teamMemberImageWidthUnits[deviceType] === '%' ? 100 : 1000}
-												label={__("Width", "frontis-blocks")}
-												rangeValue={teamMemberImageWidth}
-												onChangeHandler={(value) => setAttributes({ teamMemberImageWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ teamMemberImageWidthUnits: value })}
-												deviceType={deviceType}
-												units={teamMemberImageWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={100}
-											/>
-
-											<FB_Range
-												min={1}
-												max={teamMemberImageHeightUnits[deviceType] === '%' ? 100 : 1000}
-												label={__("Height", "frontis-blocks")}
-												rangeValue={teamMemberImageHeight}
-												onChangeHandler={(value) => setAttributes({ teamMemberImageHeight: value })}
-												rangeUnitHandler={(value) => setAttributes({ teamMemberImageHeightUnits: value })}
-												deviceType={deviceType}
-												units={teamMemberImageHeightUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={100}
-											/>
-
-											{ teamMemberImageOverlaySwitcher === true && 
-											<>
-												<FB_SwitcherControl
-													label={__("Overlay Color", "frontis-blocks")}
-													globalSwitcher={teamMemberImageBGColorSwitcher}
-													setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
-												/>
-														
-												{teamMemberImageBGColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={teamMemberImageBGColor}
-														setGlobalColor={(value) => setAttributes({ teamMemberImageBGColor: value })}
-													/>
-												)}
-														
-												{teamMemberImageBGColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={teamMemberImageBGHoverColor}
-														setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
-													/>
-												)}
-
-												<RangeControl
-													label="Opacity"
-													value={teamMemberImageOverlayOpacity}
-													onChange={(value) => setAttributes({ teamMemberImageOverlayOpacity: value, }) }
-													min={0}
-													max={1}
-													step={0.1}
-													allowReset
-													resetFallbackValue={undefined}
-												/>
-											</>
-											}
-
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={teamMemberImageBorder}
-												options={BORDER_STYLES}
-												onChange={(value) => setAttributes({ teamMemberImageBorder: value })}
-											/>
-
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={teamMemberImageBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBorderColorSwitcher: value })}
-                                            />
-                                                    
-                                            {teamMemberImageBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={teamMemberImageBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {teamMemberImageBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={teamMemberImageBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={ 'Border' }
-												deviceType={deviceType}
-												spacingUnitsHandler={handleImageBorderUnitChange}
-												spacingUnits={teamMemberImageBorderUnits}
-												spacingDesktop={teamMemberImageBorderDesktop}
-												spacingTablet={teamMemberImageBorderTab}
-												spacingMobile={teamMemberImageBorderMobile}
-												handleSpacingUnitHandler={handleImageBorderUnit}
-												spacingCombineBtn={teamMemberImageBorderLink}
-												spacingCombineBtnHandler={handleImageBorderCombineBtn} 
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={ 'Border Radius' }
-												deviceType={deviceType}
-												spacingUnitsHandler={handleImageBorderRadiusUnitChange}
-												spacingUnits={teamMemberImageBorderRadiusUnits}
-												spacingDesktop={teamMemberImageBorderRadiusDesktop}
-												spacingTablet={teamMemberImageBorderRadiusTab}
-												spacingMobile={teamMemberImageBorderRadiusMobile}
-												handleSpacingUnitHandler={handleImageBorderRadiusUnit}
-												spacingCombineBtn={teamMemberImageBorderRadiusLink}
-												spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn} 
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={ 'Margin' }
-												deviceType={deviceType}
-												spacingUnitsHandler={handleImageMarginUnitChange}
-												spacingUnits={teamMemberImageMarginUnits}
-												spacingDesktop={teamMemberImageMarginDesktop}
-												spacingTablet={teamMemberImageMarginTab}
-												spacingMobile={teamMemberImageMarginMobile}
-												handleSpacingUnitHandler={handleImageMarginUnit}
-												spacingCombineBtn={teamMemberImageMarginLink}
-												spacingCombineBtnHandler={handleImageMarginCombineBtn} 
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>

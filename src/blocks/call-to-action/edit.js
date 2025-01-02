@@ -16,7 +16,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		separator,
 		Sub_Heading_Switcher,
@@ -79,9 +79,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 						<div className="fb-cta-content-wrapper">
 							<RichText
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
-								onChange={(value) => setAttributes({ text: value })}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}

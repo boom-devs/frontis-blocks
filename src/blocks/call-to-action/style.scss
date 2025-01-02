@@ -1,24 +1,26 @@
-//Info Button
-.fb-cta-content-wrapper-inner{
-	gap: 20px;
-	.fb-icon-wrapper{
-		line-height: 0;
-	}
-	.fb-cta-btn-wrapper{
-		display: inline-flex;
-		align-items: center;
-		gap: 10px;
-		.fb-btn-icon-wrapper{
+.fb-cta-content-wrapper{
+	position: relative;
+	.fb-cta-content-wrapper-inner{
+		gap: 20px;
+		.fb-icon-wrapper{
 			line-height: 0;
 		}
-	}
-	.fb-cta-media-wrapper{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.fb-cta-buttons-wrapper{
-		display: flex;
-		align-items: center;
+		.fb-cta-btn-wrapper{
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+			.fb-btn-icon-wrapper{
+				line-height: 0;
+			}
+		}
+		.fb-cta-media-wrapper{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.fb-cta-buttons-wrapper{
+			display: flex;
+			align-items: center;
+		}
 	}
 }
