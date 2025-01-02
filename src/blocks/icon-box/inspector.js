@@ -298,8 +298,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaIconColor,
 		mediaIconHoverColor,
 		mediaIconColorSwitcher,
+		boxGlobalBoxShadowSwitcher,
 		boxGlobalBoxShadowValues,
 		boxGlobalBoxShadowCssValue,
+		boxGlobalHoverBoxShadowValues,
+		boxGlobalHoverBoxShadowCssValue,
 		mediaBgTypeImage,
 		bgType,
 		iconBoxMediaID,
@@ -1924,6 +1927,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-icon-box-wrapper.${blockID}:hover {
 			  ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
 			  ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
+			  ${boxGlobalHoverBoxShadowCssValue ? `box-shadow: ${boxGlobalHoverBoxShadowCssValue};` : "" }
 			  transition: all .3s ease-in-out;
 		  }
 	  
@@ -2420,8 +2424,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			mediaIconColor,
 			mediaIconHoverColor,
+			boxGlobalBoxShadowSwitcher,
 			boxGlobalBoxShadowValues,
 			boxGlobalBoxShadowCssValue,
+			boxGlobalHoverBoxShadowValues,
+			boxGlobalHoverBoxShadowCssValue,
 			mediaBgTypeImage,
 			bgType,
 			iconBoxMediaID,
@@ -3706,17 +3713,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ boxGlobalBoxShadowValues: value })
-														}
-														initialShadowValue={boxGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																boxGlobalBoxShadowCssValue: value,
-															})
-														}
+
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={boxGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ boxGlobalBoxShadowSwitcher: value })}
 													/>
+													
+													{boxGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) =>
+																setAttributes({ boxGlobalBoxShadowValues: value })
+															}
+															initialShadowValue={boxGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) =>
+																setAttributes({
+																	boxGlobalBoxShadowCssValue: value,
+																})
+															}
+														/>
+													)}
+													
+													{boxGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) =>
+																setAttributes({ boxGlobalHoverBoxShadowValues: value })
+															}
+															initialShadowValue={boxGlobalHoverBoxShadowValues}
+															onBoxShadowStyleChange={(value) =>
+																setAttributes({
+																	boxGlobalHoverBoxShadowCssValue: value,
+																})
+															}
+														/>
+													)}
 												</PanelBody>
 
 												<PanelBody
