@@ -98,8 +98,7 @@ const FB_ImageControl = ({
             )}
             {globalBackgroundImageUrl && (
                 <div className="fb-image-control-setting-wrapper">
-                    <BaseControl
-                    >
+                    <BaseControl>
                         <SelectControl
                             label={__("Image Position", "frontis-blocks")}
                             className="fb-image-label"
