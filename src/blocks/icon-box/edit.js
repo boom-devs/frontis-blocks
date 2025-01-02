@@ -61,7 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
-
+	
 
 	return (
 		<>
