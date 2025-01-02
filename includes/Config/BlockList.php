@@ -173,6 +173,7 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
             ],
+            
             'flip-box' => [
                 'slug'      => 'flip-box',
                 'title'     => 'Flip Box',
