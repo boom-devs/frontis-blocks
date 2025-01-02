@@ -899,9 +899,18 @@ const attributes = {
 		type: "string",
 		default: "#0000005e"
 	},
-	teamMemberImageOverlayOpacity: {
-		type: "string",
-		default: ""
+	// teamMemberImageOverlayOpacity: {
+	// 	type: "string",
+	// 	default: ""
+	// },
+
+	teamMemberImageOverlayOpacity : {
+		type: 'object',
+		default: {
+			Desktop: '0.5',
+			Tablet: '0.5',
+			Mobile: '0.5'
+		}
 	},
 
 	// Image Width Size
