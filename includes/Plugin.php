@@ -12,6 +12,7 @@ use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
+use FrontisBlocks\Core\SupportSVG;
 
 final class Plugin
 {
@@ -192,6 +193,8 @@ final class Plugin
 		InitialActivatedBlocks::blocks();
 
 		GlobalSettings::get_instance()->register_global_settings_events();
+
+		SupportSVG::get_instance();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 

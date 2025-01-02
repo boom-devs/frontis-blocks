@@ -472,19 +472,6 @@ var prefixer = function prefixer(element, index, children, callback) {
 };
 
 var defaultStylisPlugins = [prefixer];
-var getSourceMap;
-
-{
-  var sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
-
-  getSourceMap = function getSourceMap(styles
-  /*: string */
-  ) {
-    var matches = styles.match(sourceMapPattern);
-    if (!matches) return;
-    return matches[matches.length - 1];
-  };
-}
 
 var createCache = function
   /*: EmotionCache */
@@ -606,18 +593,14 @@ createCache(options
     ) {
       currentSheet = sheet;
 
-      {
-        var sourceMap = getSourceMap(serialized.styles);
-
-        if (sourceMap) {
-          currentSheet = {
-            insert: function insert(rule
-            /*: string */
-            ) {
-              sheet.insert(rule + sourceMap);
-            }
-          };
-        }
+      if (serialized.map !== undefined) {
+        currentSheet = {
+          insert: function insert(rule
+          /*: string */
+          ) {
+            sheet.insert(rule + serialized.map);
+          }
+        };
       }
 
       stylis(selector ? selector + "{" + serialized.styles + "}" : serialized.styles);
@@ -1147,7 +1130,7 @@ var isDevelopment = true;
 
 var pkg = {
 	name: "@emotion/react",
-	version: "11.13.5",
+	version: "11.13.3",
 	main: "dist/emotion-react.cjs.js",
 	module: "dist/emotion-react.esm.js",
 	exports: {
@@ -1408,11 +1391,11 @@ var pkg = {
 	},
 	dependencies: {
 		"@babel/runtime": "^7.18.3",
-		"@emotion/babel-plugin": "^11.13.5",
-		"@emotion/cache": "^11.13.5",
-		"@emotion/serialize": "^1.3.3",
+		"@emotion/babel-plugin": "^11.12.0",
+		"@emotion/cache": "^11.13.0",
+		"@emotion/serialize": "^1.3.1",
 		"@emotion/use-insertion-effect-with-fallbacks": "^1.1.0",
-		"@emotion/utils": "^1.4.2",
+		"@emotion/utils": "^1.4.0",
 		"@emotion/weak-memoize": "^0.4.0",
 		"hoist-non-react-statics": "^3.3.1"
 	},
@@ -1426,10 +1409,10 @@ var pkg = {
 	},
 	devDependencies: {
 		"@definitelytyped/dtslint": "0.0.112",
-		"@emotion/css": "11.13.5",
+		"@emotion/css": "11.13.0",
 		"@emotion/css-prettifier": "1.1.4",
 		"@emotion/server": "11.11.0",
-		"@emotion/styled": "11.13.5",
+		"@emotion/styled": "11.13.0",
 		"html-tag-names": "^1.1.2",
 		react: "16.14.0",
 		"svg-tag-names": "^1.1.1",
@@ -1947,6 +1930,11 @@ function handleInterpolation(mergedProps, registered, interpolation) {
           }
 
           var styles = serializedStyles.styles + ";";
+
+          if (serializedStyles.map !== undefined) {
+            styles += serializedStyles.map;
+          }
+
           return styles;
         }
 
@@ -2053,8 +2041,14 @@ function createStringFromObject(mergedProps, registered, obj) {
   return string;
 }
 
-var labelPattern = /label:\s*([^\s;{]+)\s*(;|$)/g; // this is the cursor for keyframes
+var labelPattern = /label:\s*([^\s;{]+)\s*(;|$)/g;
+var sourceMapPattern;
+
+{
+  sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
+} // this is the cursor for keyframes
 // keyframes are stored on the SerializedStyles object as a linked list
+
 
 var cursor;
 function serializeStyles(args, registered, mergedProps) {
@@ -2093,6 +2087,15 @@ function serializeStyles(args, registered, mergedProps) {
 
       styles += templateStringsArr[i];
     }
+  }
+
+  var sourceMap;
+
+  {
+    styles = styles.replace(sourceMapPattern, function (match) {
+      sourceMap = match;
+      return '';
+    });
   } // using a global regex with .exec is stateful so lastIndex has to be reset each time
 
 
@@ -2110,6 +2113,7 @@ function serializeStyles(args, registered, mergedProps) {
     var devStyles = {
       name: name,
       styles: styles,
+      map: sourceMap,
       next: cursor,
       toString: function toString() {
         return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop).";
@@ -5577,8 +5581,14 @@ var FB_Range = function FB_Range(_ref) {
       onChangeHandler(newRangeValue);
     }
   }, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+
+  // const setRangeValue = (value) => {
+  // 	const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
+  // 	onChangeHandler(newRangeValue);
+  // };
+
   var setRangeValue = function setRangeValue(value) {
-    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, value || resetFallbackValue));
+    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, value !== null ? String(value) : String(resetFallbackValue)));
     onChangeHandler(newRangeValue);
   };
   var setRangeUnit = function setRangeUnit(unit) {
@@ -5617,8 +5627,10 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
+  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+  , {
+    value: rangeValue[deviceType] !== "" ? Number(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,

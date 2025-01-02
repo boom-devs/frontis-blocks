@@ -2445,7 +2445,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
 				${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
-				${teamMemberImageOverlayOpacity !== undefined ? `opacity: ${teamMemberImageOverlayOpacity};` : ''}
+				${teamMemberImageOverlayOpacity.Desktop !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Desktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
@@ -2765,6 +2765,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberIconsSize.Tablet ? `width: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};` : ''}
 					${teamMemberIconsSize.Tablet ? `height: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};` : ''}
 				}
+
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+					${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
+					${teamMemberImageOverlayOpacity.Tablet !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Tablet};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
 			}
 
 				@media only screen and (max-width: 767px) {
@@ -2830,6 +2836,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile .fb-team-member-social-icon svg {
 						${teamMemberIconsSize.Mobile ? `width: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};` : ''}
 						${teamMemberIconsSize.Mobile ? `height: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};` : ''}
+					}
+
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+						${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
+						${teamMemberImageOverlayOpacity.Tablet !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Tablet};` : ''}
+						transition: all 0.3s ease-in-out;
 					}
 				}
 		`,
@@ -3413,7 +3425,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												)}
 
-												<RangeControl
+												{/* <RangeControl
 													label="Opacity"
 													value={teamMemberImageOverlayOpacity}
 													onChange={(value) => setAttributes({ teamMemberImageOverlayOpacity: value, }) }
@@ -3422,8 +3434,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													step={0.1}
 													allowReset
 													resetFallbackValue={undefined}
-												/>
-												{/* <FB_Range
+												/> */}
+
+												<FB_Range
 													label={__("Opacity", "frontis-blocks")}
 													min={0}
 													max={1}
@@ -3434,7 +3447,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													rangeStep={0.1}
 													resetFallbackValue={0.5}
 													isRangeUnit={false}
-												/> */}
+												/>
 											</>
 											}
 
