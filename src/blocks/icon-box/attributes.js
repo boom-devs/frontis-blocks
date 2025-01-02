@@ -1480,11 +1480,23 @@ const attributes = {
     iconBoxMediaBackgroundImageID: {
         type: "number",
     },
+    boxGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     boxGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     boxGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    boxGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    boxGlobalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
