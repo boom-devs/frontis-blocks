@@ -11,7 +11,8 @@ import {
 	TextControl,
 	ToggleControl,
 	TabPanel,
-	SelectControl
+	SelectControl,
+	BaseControl
 } from '@wordpress/components';
 import { useEffect, useState, useMemo } from '@wordpress/element';
 
@@ -1062,7 +1063,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											)}
 
 											<FB_Spacing
-												label={ 'Border' }
+												label={ 'Border Width' }
 												deviceType={deviceType}
 												spacingUnitsHandler={countDownItemBorderUnitsHandler}
 												spacingUnits={countDownItemBorderTypeUnits}
@@ -1316,11 +1317,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "advanced" && (
 									<>
 										<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperBgColorControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
 
 										<FB_BackgroundColorControl
 											bgColorSwitcher={globalBgColorSwitcher}

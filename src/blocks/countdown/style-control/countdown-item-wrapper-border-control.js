@@ -183,8 +183,30 @@ export default function CountDownItemWrapperBorderControl ({ attributes, setAttr
 				options={BORDER_STYLES}
 				onChange={(value) => setAttributes({ countDownItemWrapperBorder: value })}
 			/>
+			{/** Item Background Control */}
+			<FB_SwitcherControl
+				label={__("Text Color", "frontis-blocks")}
+				globalSwitcher={countDownItemWrapperBorderColorSwitcher}
+				setGlobalSwitcher={(value) => setAttributes({ countDownItemWrapperBorderColorSwitcher: value })}
+			/>
+	
+			{countDownItemWrapperBorderColorSwitcher === 'normal' && (
+				<FB_ColorControl
+					label={__("Normal Color", "frontis-blocks")}
+					globalColor={countDownItemWrapperBorderColor}
+					setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value })}
+				/>
+			)}
+	
+			{countDownItemWrapperBorderColorSwitcher === 'hover' && (
+				<FB_ColorControl
+					label={__("Hover Color", "frontis-blocks")}
+					globalColor={countDownItemWrapperBorderHoverColor}
+					setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value })}
+				/>
+			)}
 			<FB_Spacing
-				label={ 'Border' }
+				label={ 'Border Width' }
 				deviceType={deviceType}
 				spacingUnitsHandler={countDownItemWrapperBorderTypeUnitsHandler}
 				spacingUnits={countDownItemWrapperBorderTypeUnits}
@@ -206,15 +228,6 @@ export default function CountDownItemWrapperBorderControl ({ attributes, setAttr
 				handleSpacingUnitHandler={countDownItemWrapperHandleSpacingUnitHandlerFn}
 				spacingCombineBtn={countDownItemWrapperBorderRadiusLink}
 				spacingCombineBtnHandler={countDownItemWrapperCombineBtnHandlerFn} setAttributes={setAttributes}
-			/>
-			<FB_Color
-				label={__("Border Color", "frontis-blocks")}
-				globalColorSwitcher={countDownItemWrapperBorderColorSwitcher}
-				globalColor={countDownItemWrapperBorderColor}
-				globalHoverColor={countDownItemWrapperBorderHoverColor}
-				handleColorSwitcherChange={(value) => setAttributes({ countDownItemWrapperBorderColorSwitcher: value })}
-				handleGlobalColorChange={(value) => setAttributes({ countDownItemWrapperBorderColor: value })}
-				handleGlobalHoverColorChange={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value })}
 			/>
 		</>
 	);

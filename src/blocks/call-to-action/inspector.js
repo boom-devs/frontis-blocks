@@ -122,17 +122,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		SubHeadingHoverColor,
 		infoBoxTabPadding,
 		infoBoxMobilePadding,
-		infoBoxBorder,
-		infoBoxBorderColor,
-		infoBoxBorderHoverColor,
-		infoBoxBorderColorSwitcher,
-		infoBoxBorderUnits,
-		infoBoxDesktopBorderWidth,
 		infoBoxTabBorderWidth,
 		infoBoxMobileBorderWidth,
-
-		infoBoxBorderRadiusUnits,
-		infoBoxDesktopBorderRadiusWidth,
 		infoBoxTabBorderRadiusWidth,
 		infoBoxMobileBorderRadiusWidth,
 
@@ -163,10 +154,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnOneDesktopMargin,
 		btnOneTabMargin,
 		btnOneMobileMargin,
-		btnOneActiveMarginDevice,
 		btnOneMarginLink,
 		icon,
 		btnIcon,
+		btnIconRotate,
 		width,
 		mediaSwitcher,
 		contentAlignment,
@@ -296,6 +287,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonTwoBgColor,
 		buttonTwoBgHoverColor,
 		btnTwoBorderLink,
+		btnTwoIconRotate,
 		btnTwoBorderradiusUnits,
 		btnTwoDesktopBorderradiusWidth,
 		btnTwoTabBorderradiusWidth,
@@ -330,6 +322,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		hoverBackgroundImageRepeat,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
+		globalBoxShadowSwitcher,
+		globalBoxShadowValues,
+		globalBoxShadowHoverValues,
+		globalBoxShadowCssValue,
+		globalHoverBoxShadowCssValue,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -1842,7 +1839,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${BorderDesktopWidth ? `border-width: ${BorderDesktopWidth};` : ""}
 				${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
 				${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
-				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
+				${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : "" }
 				${testBackgroundType === "gradient" 
 					? (testCustomGradientSwitcher && testCustomGradientInputValue 
 						? `background: ${testCustomGradientInputValue};` 
@@ -1869,6 +1866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
 				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
 				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
+				${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : "" }
 				${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-heading {
@@ -1971,6 +1969,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 				width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};
 				${btnIconColor !== undefined ? `fill: ${btnIconColor};` : "#ffffff" };
+				transform: rotate(${btnIconRotate.Desktop}deg);
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper:hover .fb-btn-icon-wrapper svg {
 				${btnIconHoverColor !== undefined ? `fill: ${btnIconHoverColor};` : "#ffffff" };
@@ -1978,6 +1977,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 				width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};
 				${btnTwoIconColor !== undefined ? `fill: ${btnTwoIconColor};` : "#ffffff" };
+				transform: rotate(${btnTwoIconRotate.Desktop}deg);
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper:hover .fb-btn-icon-wrapper svg {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
@@ -2028,9 +2028,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 					width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
+					transform: rotate(${btnIconRotate.Tablet}deg);
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 					width: ${btnTwoIconSize.Tablet}${btnTwoIconSizeUnits.Tablet};
+					transform: rotate(${btnTwoIconRotate.Tablet}deg);
 				}
 			}
 			@media only screen and (max-width: 767px) {
@@ -2077,9 +2079,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 					width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};
+					transform: rotate(${btnIconRotate.Mobile}deg);
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 					width: ${btnTwoIconSize.Mobile}${btnTwoIconSizeUnits.Mobile};
+					transform: rotate(${btnTwoIconRotate.Mobile}deg);
 				}
 			}
 		`,
@@ -2253,7 +2257,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnOneDesktopBorderRadiusWidth,
 			btnOneTabletBorderRadiusWidth,
 			btnOneMobileBorderRadiusWidth,
-			globalZIndex
+			globalZIndex,
+			btnIconRotate,
+			btnTwoIconRotate,
+			globalBoxShadowSwitcher,
+			globalBoxShadowValues,
+			globalBoxShadowHoverValues,
+			globalBoxShadowCssValue,
+			globalHoverBoxShadowCssValue,
 
 		],
 	);
@@ -2849,7 +2860,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												{buttonIconSwitcher && (
 													<>
 														{/* Start Icon Color*/}
-														
 														<FB_SwitcherControl
 														label={__("Icon Color", "frontis-blocks")}
 														globalSwitcher={btnIconColorSwitcher}
@@ -2871,6 +2881,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
 															/>
 														)}
+														<FB_Range
+														min={0}
+														max={360}
+														label={__("Rotate Icon", "frontis-blocks")}
+														rangeValue={btnIconRotate}
+														onChangeHandler={(value) => setAttributes({ btnIconRotate: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+														/>
 													</>
 												)}
 												
@@ -3041,27 +3063,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												)}
 
-												<FB_SwitcherControl
-                                                label={__("Icon Color", "frontis-blocks")}
-                                                globalSwitcher={btnTwoIconColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
-												/>
+												{buttonTwoIconSwitcher &&(
+													<>
+														<FB_SwitcherControl
+														label={__("Icon Color", "frontis-blocks")}
+														globalSwitcher={btnTwoIconColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
+														/>
 
-												{btnTwoIconColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={btnTwoIconColor}
-														setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
-													/>
-												)}
+														{btnTwoIconColorSwitcher === 'normal' && (
+															<FB_ColorControl
+																label={__("Normal Color", "frontis-blocks")}
+																globalColor={btnTwoIconColor}
+																setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
+															/>
+														)}
 
-												{btnTwoIconColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={btnTwoIconHoverColor}
-														setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
-													/>
+														{btnTwoIconColorSwitcher === 'hover' && (
+															<FB_ColorControl
+																label={__("Hover Color", "frontis-blocks")}
+																globalColor={btnTwoIconHoverColor}
+																setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
+															/>
+														)}
+
+														<FB_Range
+															min={0}
+															max={360}
+															label={__("Rotate Icon", "frontis-blocks")}
+															rangeValue={btnTwoIconRotate}
+															onChangeHandler={(value) => setAttributes({ btnTwoIconRotate: value === 0 ? undefined : value })}
+															deviceType={deviceType}
+															setAttributes={setAttributes}
+															rangeStep={1}
+															resetFallbackValue={""}
+															isRangeUnit={false}
+														/>
+													</>
 												)}
+												
 												<FB_Spacing
 													label={__("Padding", "frontis-blocks")}
 													deviceType={deviceType}
@@ -3160,7 +3200,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
-													
 													<FB_Range
 														min={0}
 														max={10000000}
@@ -3443,6 +3482,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															})
 														}
 													/>
+													<FB_SwitcherControl
+                                                    label={__("Box Shadow", "frontis-blocks")}
+                                                    globalSwitcher={globalBoxShadowSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
+													/>
+
+													{globalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
+															initialShadowValue={globalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{globalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
+															initialShadowValue={globalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
+														/>
+													)}
 												</PanelBody>
 											</div>
 										</div>

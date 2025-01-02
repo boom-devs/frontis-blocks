@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	useBlockProps,
-	InspectorControls,
 } from '@wordpress/block-editor';
 
 import { useEffect, useState } from '@wordpress/element';

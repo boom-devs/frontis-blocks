@@ -117,7 +117,7 @@ const attributes = {
 	},
 	btnIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnIconSize: {
 		type: 'object',
@@ -147,10 +147,18 @@ const attributes = {
 		type: 'string',
         default: ''
 	},
+	btnIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
+	},
 	//Button two icon
 	btnTwoIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnTwoIconSize: {
 		type: 'object',
@@ -179,6 +187,14 @@ const attributes = {
 	btnTwoIconHoverColor: {
 		type: 'string',
 		default: ''
+	},
+	btnTwoIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
 	},
     mediaIconColor: {
 		type: 'string',
@@ -1804,11 +1820,23 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    boxGlobalBoxShadowValues: {
+	globalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    globalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    boxGlobalBoxShadowCssValue: {
+	globalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    globalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    globalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
