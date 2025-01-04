@@ -776,7 +776,7 @@ const attributes = {
     },
     buttonIconImagedisplay : {
         type: 'string',
-        default: 'cover',
+        default: 'none',
     },
 }
 export default attributes;

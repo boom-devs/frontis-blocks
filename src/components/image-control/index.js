@@ -93,15 +93,16 @@ const FB_ImageControl = ({
                 <div className="fb-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
-                            label={__("Image Size", "frontis-blocks")}
+                            label={__("Object Fit", "frontis-blocks")}
                             className="fb-image-label"
                             value={globalImageSize}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
                                     {label: __("None", "frontis-blocks"), value: "none"},
-                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
+                                    {label: __("Fill", "frontis-blocks"), value: "fill"},
                                     {label: __("Contain", "frontis-blocks"), value: "contain"},
+                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
+                                    {label: __("Scale Down", "frontis-blocks"), value: "scale-down"},
                                 ]
                             )}
                             onChange={setglobalImageSize}
