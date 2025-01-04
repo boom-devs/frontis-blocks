@@ -7,6 +7,7 @@ import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader"
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import {useDeviceType} from "@Config/displayType";
+import frontendStyling from './frontstyling';
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -144,14 +145,13 @@ const Edit = (props) => {
 		if (block) {
 			const coreBlockEditord = select( 'core/block-editor' );
 			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
+
+			console.log(parentBlockId)
 			setAttributes({p_block_id: parentBlockId});
 		}
 
 		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
 	}
-
-	console.log("p_block_id");
-	console.log(p_block_id)
 
 	return (
 		<>

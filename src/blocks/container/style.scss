@@ -107,11 +107,9 @@
 	}
 }
 
-body
-.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > *:not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-column ):not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-section ):not( .frontis-blocks-container__shape ):not( .frontis-blocks-container__video-wrap ):not( .wp-block-spectra-pro-register ):not( .wp-block-spectra-pro-login ):not( .frontis-blocks-slider-container ):not(.spectra-image-gallery__control-lightbox):not(.wp-block-frontis-blocks-info-box),
+body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > *:not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-column ):not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-section ):not( .frontis-blocks-container__shape ):not( .frontis-blocks-container__video-wrap ):not( .wp-block-spectra-pro-register ):not( .wp-block-spectra-pro-login ):not( .frontis-blocks-slider-container ):not(.spectra-image-gallery__control-lightbox):not(.wp-block-frontis-blocks-info-box),
 body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap,
-body
-.wp-block-frontis-blocks-container > *:not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-column ):not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-section ):not( .frontis-blocks-container__shape ):not( .frontis-blocks-container__video-wrap ):not( .wp-block-spectra-pro-register ):not( .wp-block-spectra-pro-login ):not( .frontis-blocks-slider-container ):not( .spectra-container-link-overlay ):not(.spectra-image-gallery__control-lightbox):not(.wp-block-frontis-blocks-lottie):not(.frontis-blocks-faq__outer-wrap) {
+body .wp-block-frontis-blocks-container > *:not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-column ):not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-section ):not( .frontis-blocks-container__shape ):not( .frontis-blocks-container__video-wrap ):not( .wp-block-spectra-pro-register ):not( .wp-block-spectra-pro-login ):not( .frontis-blocks-slider-container ):not( .spectra-container-link-overlay ):not(.spectra-image-gallery__control-lightbox):not(.wp-block-frontis-blocks-lottie):not(.frontis-blocks-faq__outer-wrap) {
 	min-width: unset !important;
 	width: 100%;
 	position: relative;

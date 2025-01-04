@@ -20,10 +20,6 @@ import {useDeviceType, setDeviceType} from "@Config/displayType";
 
 const Inspector = (props) => {
 	let deviceType= useDeviceType();
-
-	console.log("Chekcing device type", deviceType);
-	console.log(deviceType)
-
 	const {
 		isSelected,
 		attributes,
@@ -36,6 +32,8 @@ const Inspector = (props) => {
 			customWidth,
 			resetFallBackCustomWidth,
 			customWidthUnits,
+			minHeight,
+			minHeightUnits
 		},
 		clientId,
 		setAttributes
@@ -86,6 +84,15 @@ const Inspector = (props) => {
 		setAttributes({fullWidthContentBoxedWidthUnits: units});
 	}
 
+	// Handle min height
+	const minHeightFn = (height) => {
+		setAttributes({minHeight: height});
+	}
+
+	const minHeightUnitsFn = (units) => {
+		setAttributes({minHeightUnits: units});
+	}
+
 	// Handle custom width each row
 	const customContentWidthFn = (width) => {
 		setAttributes({customWidth: width});
@@ -99,6 +106,9 @@ const Inspector = (props) => {
 	const handleResponsive = (attr) => {
 		// setDeviceType(attr.deviceType, false);
 	}
+
+	console.log("containerTypeFull containerTypeFull")
+	console.log(containerTypeFull)
 
 	return (
 		<InspectorControls key="controls">
@@ -176,24 +186,26 @@ const Inspector = (props) => {
 															))}
 														</ButtonGroup>
 														<div style={{marginTop: '10px'}}></div>
-														<FB_Range
-															min={1}
-															max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-															label={__("Content Box Width", "frontis-blocks")}
-															rangeValue={fullWidthContentBoxedWidth}
-															onChangeHandler={fullWidthContentBoxedWidthFn}
-															rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-															deviceType={deviceType}
-															units={fullWidthContentBoxedWidthUnits}
-															setAttributes={handleResponsive}
-															rangeStep={1}
-															resetFallbackValue={resetFallBackCustomWidth[deviceType]}
-															units_types_arr={[
-																{ label: 'px', value: 'px' },
-																{ label: '%', value: '%' },
-																{ label: 'vw', value: 'vw' },
-															]}
-														/>
+														{containerTypeFull !== 'full-width' &&
+															<FB_Range
+																min={1}
+																max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+																label={__("Content Box Width", "frontis-blocks")}
+																rangeValue={fullWidthContentBoxedWidth}
+																onChangeHandler={fullWidthContentBoxedWidthFn}
+																rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+																deviceType={deviceType}
+																units={fullWidthContentBoxedWidthUnits}
+																setAttributes={handleResponsive}
+																rangeStep={1}
+																resetFallbackValue={resetFallBackCustomWidth[deviceType]}
+																units_types_arr={[
+																	{ label: 'px', value: 'px' },
+																	{ label: '%', value: '%' },
+																	{ label: 'vw', value: 'vw' },
+																]}
+															/>
+														}
 													</BaseControl>
 												</>
 											)}
@@ -223,20 +235,19 @@ const Inspector = (props) => {
 
 											<FB_Range
 												min={1}
-												max={2000}
+												max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
 												label={__("Minimum Height", "frontis-blocks")}
 												rangeValue={fullWidthContentBoxedWidth}
-												onChangeHandler={fullWidthContentBoxedWidthFn}
-												rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+												onChangeHandler={minHeightFn}
+												rangeUnitHandler={minHeightUnitsFn}
 												deviceType={deviceType}
-												units={fullWidthContentBoxedWidthUnits}
+												units={minHeightUnits}
 												setAttributes={handleResponsive}
 												rangeStep={1}
-												resetFallbackValue={1200}
+												resetFallbackValue={minHeight[deviceType]}
 												units_types_arr={[
 													{ label: 'px', value: 'px' },
-													{ label: '%', value: '%' },
-													{ label: 'vw', value: 'vw' },
+													{ label: 'vh', value: 'vh' },
 												]}
 											/>
 										</PanelBody>
