@@ -39,9 +39,24 @@
                 z-index: 1;
                 svg {
                     display: block;
-                    height: 16px;
                     width: 16px;
+                    height: 16px;
                     fill: #fff;
+                    box-sizing: content-box;
+                }
+            }
+            .fb-advanced-button-icon-image{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+                width: 20px;
+                height: 20px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
                     box-sizing: content-box;
                 }
             }        
