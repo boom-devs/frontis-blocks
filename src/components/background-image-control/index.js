@@ -6,7 +6,7 @@ import {
 } from '@wordpress/components';
 import './editor.lazy.scss';
 
-const FB_ImageControl = ({
+const FB_BackgroundImageControl = ({
     label = '',
     globalBackgroundImageUrl,
     setGlobalBackgroundImageUrl,
@@ -176,4 +176,4 @@ const FB_ImageControl = ({
     );
 };
 
-export default FB_ImageControl;
+export default FB_BackgroundImageControl;

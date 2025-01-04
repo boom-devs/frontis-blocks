@@ -21,7 +21,7 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
 import { useEffect, useMemo } from "@wordpress/element";
 import FB_Range from "../../components/range";
-import FB_ImageControl from "../../components/image-control";
+import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_ColorControl from "../../components/color-control";
 import {useDeviceType} from "@Config/displayType";
@@ -545,7 +545,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 )}
 
                                             {titlePrefixType === "image" && (
-                                                <FB_ImageControl
+                                                <FB_BackgroundImageControl
                                                     globalBackgroundImageUrl={titlePrefixImgUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setAttributes({ titlePrefixImgUrl: value })}
                                                     globalBackgroundImageAlt={titlePrefixImgAlt}
@@ -626,7 +626,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 )}
 
                                             {titleSuffixType === "image" && (
-                                                <FB_ImageControl 
+                                                <FB_BackgroundImageControl 
                                                     globalBackgroundImageUrl={titleSuffixImgUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setAttributes({ titleSuffixImgUrl: value })}
                                                     globalBackgroundImageAlt={titleSuffixImgAlt}
