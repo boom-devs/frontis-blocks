@@ -28,6 +28,7 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
   const handleRangeChange = (e) => {
     setShadeStep(Number(e.target.value));
   };
+  
 
   return (
     <div className="color-picker-container">
