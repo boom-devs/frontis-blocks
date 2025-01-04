@@ -10,6 +10,7 @@ import {useDeviceType} from "@Config/displayType";
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
 	const { attributes, setAttributes, clientId, hasSliderParent, hasPopupParent } = props;
+
 	const {
 		p_block_id,
 		htmlTag,
@@ -75,7 +76,7 @@ const Render = ( props ) => {
 
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType } ${ isRootContainerClass }`,
+		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
@@ -95,14 +96,9 @@ const Render = ( props ) => {
 		innerBlocksParams.allowedBlocks = ALLOWED_BLOCKS;
 	}
 
-	const { getBlockParentsAll, getBlockSingle } = useSelect( ( selectStore ) => {
-		const { getBlockParents, getBlock } = selectStore( 'core/block-editor' );
-		return { getBlockParentsAll: getBlockParents, getBlockSingle: getBlock };
-	}, [] );
-
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
-			
+
 			setAttributes({
 				p_block_id: blockProps.id,
 			});

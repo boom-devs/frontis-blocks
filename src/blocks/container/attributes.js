@@ -126,6 +126,8 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
+
+	// Need remove
 	minHeightDesktop: {
 		type: 'number',
 		isGBSStyle: true,
@@ -140,6 +142,26 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
+	// End Remove
+
+	minHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+
+	minHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 	directionDesktop: {
 		type: 'string',
 		default: 'column',
@@ -686,6 +708,8 @@ const attributes = {
 		type: 'string',
 		default: '%',
 	},
+
+	// Need remove
 	minHeightTypeTablet: {
 		type: 'string',
 		default: 'px',
@@ -694,6 +718,8 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
+	// End Need remove
+
 	// correct formating
 	topHeightType: {
 		type: 'string',

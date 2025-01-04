@@ -27,9 +27,6 @@ export default function save( props ) {
 		linkTarget,
 	} = props.attributes;
 
-	console.log("props props props ")
-	console.log(p_block_id);
-
 	const topDividerHtml = 'none' !== topType && (
 		<div
 			className={ classnames(
@@ -78,17 +75,10 @@ export default function save( props ) {
 		}
 	}
 
-	// let blockAtts = useBlockProps();
-
-	// console.log("blockAtts blockAtts")
-	// console.log(blockAtts)
 	const blockProps = {
 		...useBlockProps.save(),
 		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined
 	};
-
-	console.log("blockAtts blockAtts")
-	console.log(props)
 
 	return (
 		<>
@@ -115,12 +105,12 @@ export default function save( props ) {
 				{ bottomDividerHtml }
 				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
 				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
-					<div className="frontis-blocks-container-inner-blocks-wrap">
+					<div className={`frontis-blocks-container-inner-blocks-wrap`}>
 						<InnerBlocks.Content />
 					</div>
 				) : (
 					<InnerBlocks.Content />
-				) }
+				)}
 				{
 					htmlTag === 'a' && 'undefined' !== typeof customTagLinkAttributes.href && (
 						<a className='frontis-blocks-container-link-overlay' { ...customTagLinkAttributes } > </a>
