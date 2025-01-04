@@ -14,6 +14,16 @@ export default function save({ attributes }) {
         buttonIconSize,
         buttonIconColor,
 
+
+        buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		bbuttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
+
     } = attributes;
 
     const blockProps = useBlockProps.save();
@@ -35,6 +45,18 @@ export default function save({ attributes }) {
                             </div>
                         )}
 
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    <img 
+                                        src={buttonIconImageUrl} 
+                                        alt={buttonIconImageAlt || 'Button image'} 
+                                        className="button-icon-image"
+                                    />
+                                </div>
+                            </div>
+                        )}
+
                         {buttonIconAlign !== 'icon-only' && (
                             <RichText.Content
                                 tagName="span"
@@ -46,6 +68,18 @@ export default function save({ attributes }) {
                         {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    <img 
+                                        src={buttonIconImageUrl} 
+                                        alt={buttonIconImageAlt || 'Button image'} 
+                                        className="button-icon-image"
+                                    />
+                                </div>
                             </div>
                         )}
 
