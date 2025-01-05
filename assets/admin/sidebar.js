@@ -543,12 +543,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var chroma_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chroma-js */ "./node_modules/chroma-js/index.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _ColorPicker_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ColorPicker.css */ "./admin/sidebar/components/ColorPicker.css");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var chroma_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chroma-js */ "./node_modules/chroma-js/index.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ColorPicker_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ColorPicker.css */ "./admin/sidebar/components/ColorPicker.css");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -559,28 +561,80 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+var defaultsColors = [{
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
+  "color": '#399CFF',
+  "slug": 'primary-color',
+  "var": '--fb-primary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
+  "color": '#f00000',
+  "slug": 'secondary-color',
+  "var": '--fb-secondary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
+  "color": '#F72585',
+  "slug": 'tertiary-color',
+  "var": '--fb-tertiary-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
+  "color": "#7209B7",
+  "slug": 'accent-color',
+  "var": '--fb-accent-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
+  "color": '#3A0CA3',
+  "slug": 'text-color',
+  "var": '--fb-text-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
+  "color": '#4361EE',
+  "slug": 'link-color',
+  "var": '--fb-link-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
+  "color": '#4CC9F0',
+  "slug": 'link-hover-color',
+  "var": '--fb-link-hover-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
+  "color": '#FFFFFF',
+  "slug": 'white-color',
+  "var": '--fb-white-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
+  "color": '#000000',
+  "slug": 'black-color',
+  "var": '--fb-black-color'
+}, {
+  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
+  "color": '#808080',
+  "slug": 'gray-color',
+  "var": '--fb-gray-color'
+}];
 var ColorPicker = function ColorPicker(_ref) {
   var _ref$defaultColor = _ref.defaultColor,
     defaultColor = _ref$defaultColor === void 0 ? "#f9f9f9" : _ref$defaultColor;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultColor),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultColor),
     _useState2 = _slicedToArray(_useState, 2),
     baseColor = _useState2[0],
     setBaseColor = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(500),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(500),
     _useState4 = _slicedToArray(_useState3, 2),
     shadeStep = _useState4[0],
     setShadeStep = _useState4[1]; // Default shade step
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(defaultColor),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(defaultColor),
     _useState6 = _slicedToArray(_useState5, 2),
     shadeColor = _useState6[0],
     setShadeColor = _useState6[1];
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // Generate the shade color when baseColor or shadeStep changes
     generateShade(baseColor, shadeStep);
   }, [baseColor, shadeStep]);
   var generateShade = function generateShade(color, step) {
     // Create chroma scale: lightest at 100, darkest at 900
-    var scale = chroma_js__WEBPACK_IMPORTED_MODULE_1__["default"].scale([(0,chroma_js__WEBPACK_IMPORTED_MODULE_1__["default"])(color).brighten(1), color, (0,chroma_js__WEBPACK_IMPORTED_MODULE_1__["default"])(color).darken(3)]).domain([100, 900]);
+    var scale = chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"].scale([(0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).brighten(2), color, (0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).darken(3)]).domain([100, 900]);
     var generatedShade = scale(step).hex();
     setShadeColor(generatedShade);
   };
@@ -588,29 +642,27 @@ var ColorPicker = function ColorPicker(_ref) {
     console.log(color);
     setBaseColor(color);
   };
-  var handleRangeChange = function handleRangeChange(e) {
-    setShadeStep(Number(e.target.value));
+  var handleRangeChange = function handleRangeChange(value) {
+    setShadeStep(value);
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "color-picker-container"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
-    defaultValue: baseColor,
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+    colors: defaultsColors,
+    value: baseColor,
     enableAlpha: true,
     onChange: handleBaseColorChange
   }), /*#__PURE__*/React.createElement("div", null, "Base Color: ", baseColor), /*#__PURE__*/React.createElement("div", {
     className: "range-slider"
-  }, /*#__PURE__*/React.createElement("label", {
-    htmlFor: "shade-range",
-    style: {
-      display: "block",
-      margin: "10px 0"
-    }
-  }, "Shade Step (", shadeStep, ")"), /*#__PURE__*/React.createElement("input", {
-    id: "shade-range",
-    type: "range",
-    min: "100",
-    max: "900",
-    step: "100",
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+    __next40pxDefaultSize: true,
+    __nextHasNoMarginBottom: true,
+    help: "Please select how transparent you would like this.",
+    initialPosition: 500,
+    label: "Shade range",
+    max: 900,
+    min: 100,
+    step: 100,
     value: shadeStep,
     onChange: handleRangeChange
   })), /*#__PURE__*/React.createElement("div", {
