@@ -10,32 +10,59 @@ const attributes = {
     sliderItems: {
         type: "array",
         default: [
-            { id: 'item-1',
+            { 
+                id: 'item-1',
                 title: 'Slider Item 1',
-                nestedItems: [
-                    { id: 'item-1-1',
-                        title: 'Slider Item 1',
-                        image: ''
-                    },
-                ],
+
+                sliderItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '#399CFF',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: ''
             },
-            { id: 'item-2',
+            { 
+                id: 'item-2',
                 title: 'Slider Item 2',
-                nestedItems: [
-                    { id: 'item-2-1',
-                        title: 'Slider Item 2',
-                        image: ''
-                    },
-                ],
+
+                sliderItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '#399CFF',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: ''
             },
-            { id: 'item-3',
+            { 
+                id: 'item-3',
                 title: 'Slider Item 3',
-                nestedItems: [
-                    { id: 'item-3-1',
-                        title: 'Slider Item 3',
-                        image: ''
-                    },
-                ],
+
+                sliderItemBgColorSwitcher: 'normal',
+
+                normalItemBackgroundType: 'classic',
+                normalItemClassicColor: '#399CFF',
+                normalItemGradientColor: null,
+                normalItemCustomGradientSwitcher: false,
+                normalItemCustomGradientInputValue: '',
+
+                hoverItemBackgroundType: 'classic',
+                hoverItemClassicColor: '',
+                hoverItemGradientColor: null,
+                hoverItemCustomGradientSwitcher: false,
+                hoverItemCustomGradientInputValue: ''
             },
         ],
         items: {
@@ -47,33 +74,57 @@ const attributes = {
                 },
                 title: {
                     type: "string",
-                    default: ""
+                    default: "Slider Item"
                 },
-                nestedItems: {
-                    type: "array",
-                    default: [],
-                    items: {
-                        type: "object",
-                        properties: {
-                            id: {
-                                type: "string",
-                                default: ""
-                            },
-                            title: {
-                                type: "string",
-                                default: ""
-                            },
-                            image: {
-                                type: "string",
-                                default: ""
-                            },
-                        }
-                    }
+                sliderItemBgColorSwitcher: {
+                    type: "string",
+                    default: "normal",
+                },
+
+                normalItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                normalItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                normalItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                normalItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                normalItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
+                },
+
+                hoverItemBackgroundType: {
+                    type: "string",
+                    default: "classic",
+                },
+                hoverItemClassicColor: {
+                    type: "string",
+                    default: "",
+                },
+                hoverItemGradientColor: {
+                    type: "string",
+                    default: null,
+                },
+                hoverItemCustomGradientSwitcher: {
+                    type: "boolean",
+                    default: false,
+                },
+                hoverItemCustomGradientInputValue: {
+                    type: "string",
+                    default: "",
                 },
             }
         }
     },
-
 };
 
 export default attributes;

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import {RichText, useBlockProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -23,41 +23,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             <div {...blockProps}>
                 <Swiper
+                    className='swiper-container-outer'
                     modules={[Navigation, Pagination]}
-                    spaceBetween={50}
+                    // spaceBetween={50}
                     slidesPerView={1}
+                    speed={1000}
                     navigation
+                    pagination={{ clickable: true }}
                     loop
                 >
                     {sliderItems.map((item) => (
                         <SwiperSlide key={item.id}>
-                            <div className={`fb-slider-list-item single-item-${item.id}`} ref={panelRef}>
-                                <ul className="fb-nested-items-list">
-                                    {(item.nestedItems || []).map((nestedItem) => (
-                                        <li key={nestedItem.id} className="fb-nested-item">
+                            <div className={`fb-slider-content-wrapper item-${item.id}`}>
+                                <div className='fb-slider-content-inner-wrapper'>
+                                    <div className={`fb-slider-list-item`}>
+                                        <div className="fb-slider-list-content">
                                             <RichText
-                                                tagName="span"
-                                                className="fb-nested-item-title"
-                                                value={nestedItem.title}
-                                                onChange={(value) => {
-                                                    const updatedNestedItems = item.nestedItems.map((nested) =>
-                                                        nested.id === nestedItem.id
-                                                            ? { ...nested, title: value }
-                                                            : nested
-                                                    );
+                                                tagName="h3"
+                                                className="fb-slider-title"
+                                                value={item.title}
+                                                onChange={(value) =>
                                                     setAttributes({
-                                                        sliderItems: sliderItems.map((i) =>
-                                                            i.id === item.id
-                                                                ? { ...i, nestedItems: updatedNestedItems }
-                                                                : i
+                                                        sliderItems: sliderItems.map((sliderItem) =>
+                                                            sliderItem.id === item.id
+                                                                ? { ...sliderItem, title: value }
+                                                                : sliderItem
                                                         ),
-                                                    });
-                                                }}
-                                                placeholder={__('Add Title', 'frontis-blocks')}
+                                                    })
+                                                }
+                                                placeholder={__('Slider Title', 'frontis-blocks')}
                                             />
-                                        </li>
-                                    ))}
-                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </SwiperSlide>
                     ))}
