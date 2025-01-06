@@ -25,9 +25,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		Show_Separator_Switcher,
 		Sub_Heading_Text,
 		Sub_Heading_Tag,
-		Seperator_Position,
-		Sub_Heading_Position,
 		info_Button_Switcher,
+		subHeadingSwitcher,
+		subTitleAlignment,
+		subTitleTag,
+		subTitleText,
+		descriptionSwitcher,
 		info_Button_Text,
 		info_Button_Link,
 		wrapperAlignment,
@@ -49,7 +52,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoText,
 		btnTwoLink,
 		btnOneTargetUrl,
-		btnTwoTargetUrl
+		btnTwoTargetUrl,
+		FeatureItems,
+		imageSwitcher
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -86,6 +91,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
+							{imageSwitcher && (
+								
+								<div className="fb-cta-image-wrapper">
+								{FeatureItems.map(item => (
+									
+									<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
+										{item.teamMemberImageUrl && (
+											<img 
+											src={item.teamMemberImageUrl} 
+											alt={item.teamMemberImageAlt || "Preview Image"} 
+											width="200"  
+											height="200"
+										/>
+										)}
+									</div>
+								))}
+								</div>
+								
+								
+							)}
+							{subHeadingSwitcher && (
+								<RichText
+									tagName={subTitleTag}
+									value={subTitleText}
+									onChange={(value) =>
+										setAttributes({ subTitleText: value })
+									}
+									placeholder={__("CTA Sub Heading", "frontis-block")}
+									className="fb-cta-sub-heading"
+									style={{ textAlign: subTitleAlignment }}
+								/>
+							)}
 							<RichText
 								tagName={headingTag}
 								value={Heading_Text}
@@ -95,7 +132,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								style={{ textAlign: Alignment }}
 							/>
 
-							{Sub_Heading_Switcher && (
+							{descriptionSwitcher && (
 								<RichText
 									tagName={Sub_Heading_Tag}
 									value={Sub_Heading_Text}

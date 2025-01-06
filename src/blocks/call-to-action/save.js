@@ -5,7 +5,6 @@ import { __ } from "@wordpress/i18n";
 export default function save({ attributes }) {
 	const {
 		blockID,
-		wrapperAlignment,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -17,9 +16,12 @@ export default function save({ attributes }) {
 		descAlignment,
 		buttonAlignment,
 		icon,
-		mediaSwitcher,
 
 		Sub_Heading_Tag,
+		subHeadingSwitcher,
+		subTitleAlignment,
+		subTitleTag,
+		subTitleText,
 		btnIconPosition,
 		buttonIconSwitcher,
 		btnIcon,
@@ -44,6 +46,15 @@ export default function save({ attributes }) {
 				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
+							{subHeadingSwitcher && (
+								<RichText.Content
+									tagName={subTitleTag}
+									value={subTitleText}
+									placeholder={__("CTA Sub Heading", "frontis-block")}
+									className="fb-cta-sub-heading"
+									style={{ textAlign: subTitleAlignment }}
+								/>
+							)}
 							<RichText.Content
 								tagName={headingTag}
 								value={Heading_Text}
