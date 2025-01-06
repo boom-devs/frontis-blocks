@@ -1,129 +1,50 @@
+const slideCount = 3;
+const slideContent = [];
+
+for ( let i = 1; i <= slideCount; i++ ) {
+	slideContent.push( {
+		isPreview: false,
+	} );
+}
+
 const attributes = {
     blockId: {
         type: "string",
         default: ""
     },
-    blockStyle: {
-        type: "string",
-        default: ""
-    },
-    sliderItems: {
+    slideContent: {
         type: "array",
-        default: [
-            { 
-                id: 'item-1',
-                title: 'Slider Item 1',
+		default: slideContent
+    },
+    slideItem: {
+        type: "number",
+        default: slideCount
+    },
 
-                sliderItemBgColorSwitcher: 'normal',
-
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
-                normalItemGradientColor: null,
-                normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
-
-                hoverItemBackgroundType: 'classic',
-                hoverItemClassicColor: '',
-                hoverItemGradientColor: null,
-                hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
-            },
-            { 
-                id: 'item-2',
-                title: 'Slider Item 2',
-
-                sliderItemBgColorSwitcher: 'normal',
-
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
-                normalItemGradientColor: null,
-                normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
-
-                hoverItemBackgroundType: 'classic',
-                hoverItemClassicColor: '',
-                hoverItemGradientColor: null,
-                hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
-            },
-            { 
-                id: 'item-3',
-                title: 'Slider Item 3',
-
-                sliderItemBgColorSwitcher: 'normal',
-
-                normalItemBackgroundType: 'classic',
-                normalItemClassicColor: '#399CFF',
-                normalItemGradientColor: null,
-                normalItemCustomGradientSwitcher: false,
-                normalItemCustomGradientInputValue: '',
-
-                hoverItemBackgroundType: 'classic',
-                hoverItemClassicColor: '',
-                hoverItemGradientColor: null,
-                hoverItemCustomGradientSwitcher: false,
-                hoverItemCustomGradientInputValue: ''
-            },
-        ],
-        items: {
-            type: "object",
-            properties: {
-                id: {
-                    type: "string",
-                    default: ""
-                },
-                title: {
-                    type: "string",
-                    default: "Slider Item"
-                },
-                sliderItemBgColorSwitcher: {
-                    type: "string",
-                    default: "normal",
-                },
-
-                normalItemBackgroundType: {
-                    type: "string",
-                    default: "classic",
-                },
-                normalItemClassicColor: {
-                    type: "string",
-                    default: "",
-                },
-                normalItemGradientColor: {
-                    type: "string",
-                    default: null,
-                },
-                normalItemCustomGradientSwitcher: {
-                    type: "boolean",
-                    default: false,
-                },
-                normalItemCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
-                },
-
-                hoverItemBackgroundType: {
-                    type: "string",
-                    default: "classic",
-                },
-                hoverItemClassicColor: {
-                    type: "string",
-                    default: "",
-                },
-                hoverItemGradientColor: {
-                    type: "string",
-                    default: null,
-                },
-                hoverItemCustomGradientSwitcher: {
-                    type: "boolean",
-                    default: false,
-                },
-                hoverItemCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
-                },
-            }
-        }
+    // Slider Settings
+    transitionType: {
+        type: "string",
+        default: "slide",
+    },
+    displayIndicators: {
+        type: "boolean",
+        default: true,
+    },
+    indicatorColor: {
+        type: "string",
+        default: "#000000", // Default color for the indicator
+    },
+    autoplay: {
+        type: "boolean",
+        default: false,
+    },
+    autoplaySpeed: {
+        type: "number",
+        default: 1000,
+    },
+    navigationArrows: {
+        type: "boolean",
+        default: true,
     },
 };
 

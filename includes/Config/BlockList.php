@@ -341,18 +341,19 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
             ],
-            // pro inactive block
-            // 'pro-test' => [
-            //     'slug'      => 'pro-test',
-            //     'title'     => 'Pro Test',
-            //     'package'   => 'pro',
-            //     'category'  => 'content',
-            //     'badge'     => 'pro',
-            //     'status'    => 'false',
-            //     'icon'      => FB_PLUGIN_URL . 'assets/icons/icon.svg',
-            //     'doc'       => 'https://wpmessiah.com/docs/pro-test',
-            //     'demo'      => 'https://wpmessiah.com/demo/pro-test',
-            // ],
+            'slider-item' => [
+                'slug'      => 'slider-item',
+                'title'     => 'Slider Item',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/slider.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+            ],
+
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
 	}
