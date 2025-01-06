@@ -9,7 +9,8 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"align": ["wide", "full"]
+		"align": ["wide", "full"],
+		"customClassName": false
 		
 	},
 	"textdomain": "frontis-blocks",

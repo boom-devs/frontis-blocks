@@ -29,7 +29,7 @@ import FB_AlignmentControl from '../../components/alignment-control/index.js';
 import FB_Range from '../../components/range/index.js';
 import FB_TypographyControl from '../../components/typography-control/index.js';
 import FB_ColorControl from '../../components/color-control/index.js';
-import FB_ImageControl from '../../components/image-control/index.js';
+import FB_BackgroundImageControl from '../../components/background-image-control/index.js';
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 import loadGoogleFont from '@Utils/loadGoogleFont';
@@ -2445,7 +2445,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
 				${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
-				${teamMemberImageOverlayOpacity !== undefined ? `opacity: ${teamMemberImageOverlayOpacity};` : ''}
+				${teamMemberImageOverlayOpacity.Desktop !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Desktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
@@ -2765,6 +2765,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberIconsSize.Tablet ? `width: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};` : ''}
 					${teamMemberIconsSize.Tablet ? `height: ${teamMemberIconsSize.Tablet}${teamMemberIconsSizeUnits.Tablet};` : ''}
 				}
+
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+					${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
+					${teamMemberImageOverlayOpacity.Tablet !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Tablet};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
 			}
 
 				@media only screen and (max-width: 767px) {
@@ -2830,6 +2836,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile .fb-team-member-social-icon svg {
 						${teamMemberIconsSize.Mobile ? `width: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};` : ''}
 						${teamMemberIconsSize.Mobile ? `height: ${teamMemberIconsSize.Mobile}${teamMemberIconsSizeUnits.Mobile};` : ''}
+					}
+
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+						${teamMemberImageBGColor !== undefined ? `background: ${teamMemberImageBGColor};` : ''}
+						${teamMemberImageOverlayOpacity.Tablet !== undefined ? `opacity: ${teamMemberImageOverlayOpacity.Tablet};` : ''}
+						transition: all 0.3s ease-in-out;
 					}
 				}
 		`,
@@ -3188,7 +3200,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === 'general' && (
 									<>
 										<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={true}>
-											<FB_ImageControl
+											<FB_BackgroundImageControl
                                                 globalBackgroundImageUrl={teamMemberImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}
                                                 globalBackgroundImageAlt={teamMemberImageAlt}
@@ -3413,7 +3425,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												)}
 
-												<RangeControl
+												{/* <RangeControl
 													label="Opacity"
 													value={teamMemberImageOverlayOpacity}
 													onChange={(value) => setAttributes({ teamMemberImageOverlayOpacity: value, }) }
@@ -3422,8 +3434,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													step={0.1}
 													allowReset
 													resetFallbackValue={undefined}
-												/>
-												{/* <FB_Range
+												/> */}
+
+												<FB_Range
 													label={__("Opacity", "frontis-blocks")}
 													min={0}
 													max={1}
@@ -3434,7 +3447,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													rangeStep={0.1}
 													resetFallbackValue={0.5}
 													isRangeUnit={false}
-												/> */}
+												/>
 											</>
 											}
 

@@ -22,10 +22,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
     const toggleOpen = () => setIsOpen(!isOpen);
     
-    const handleMedia = (imgUrl) => {
-        handleChangeItem(id, imgUrl);
-    }
-    
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
@@ -51,40 +47,15 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
             {isOpen && (
                 <div className="sortable-item-content">
-                    {/* <FB_ImageControl
-                        label={__("Image", "frontis-blocks")}
-                        globalBackgroundImageUrl={item.teamMemberImageUrl}
-                        setGlobalBackgroundImageUrl={(value) => handleChangeItem(item.id, 'teamMemberImageUrl', value)}
-                        globalBackgroundImageAlt={item.teamMemberImageAlt}
-                        setGlobalBackgroundImageAlt={(value) => handleChangeItem(item.id, 'teamMemberImageAlt', value)}
-                        globalBackgroundImageID={item.teamMemberImageID}
-                        setGlobalBackgroundImageID={(value) => handleChangeItem(item.id, 'teamMemberImageID', value)}
-                        globalBackgroundImagePosition={item.teamMemberImagePosition}
-                        setGlobalBackgroundImagePosition={(value) => handleChangeItem(item.id, 'teamMemberImagePosition', value)}
-                        globalBackgroundImageAttachment={item.teamMemberImageAttachment}
-                        setGlobalBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'teamMemberImageAttachment', value)}
-                        globalBackgroundImageRepeat={item.teamMemberImageRepeat}
-                        setGlobalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'teamMemberImageRepeat', value)}
-                        globalBackgroundImageSize={item.teamMemberImageSize}
-                        setGlobalBackgroundImageSize={(value) => handleChangeItem(item.id, 'teamMemberImageSize', value)}
-                    /> */}
-
+                    
                     <FB_ImageControl
                         label={__("Image", "frontis-blocks")}
-                        globalBackgroundImageUrl={item.teamMemberImageUrl}
-                        setGlobalBackgroundImageUrl={(value) => handleMedia(item.id, 'teamMemberImageUrl', value)}
-                        // globalBackgroundImageAlt={item.teamMemberImageAlt}
-                        // setGlobalBackgroundImageAlt={(value) => handleChangeItem(item.id, 'teamMemberImageAlt', value)}
-                        globalBackgroundImageID={item.teamMemberImageID}
-                        setGlobalBackgroundImageID={(value) => handleChangeItem(item.id, 'teamMemberImageID', value)}
-                        // globalBackgroundImagePosition={item.teamMemberImagePosition}
-                        // setGlobalBackgroundImagePosition={(value) => handleChangeItem(item.id, 'teamMemberImagePosition', value)}
-                        // globalBackgroundImageAttachment={item.teamMemberImageAttachment}
-                        // setGlobalBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'teamMemberImageAttachment', value)}
-                        // globalBackgroundImageRepeat={item.teamMemberImageRepeat}
-                        // setGlobalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'teamMemberImageRepeat', value)}
-                        // globalBackgroundImageSize={item.teamMemberImageSize}
-                        // setGlobalBackgroundImageSize={(value) => handleChangeItem(item.id, 'teamMemberImageSize', value)}
+                        globalImageUrl={item.teamMemberImageUrl}
+                        setglobalImageUrl={(value) => handleChangeItem(item.id, 'url', value)}
+                        globalImageAlt={item.teamMemberImageAlt}
+                        setglobalImageAlt={(value) => handleChangeItem('alt', value)}
+                        globalImageID={item.teamMemberImageID}
+                        setglobalImageID={(value) => handleChangeItem('id', value)}
                     />
                 </div>
             )}

@@ -26,7 +26,7 @@ import {
 	ICON_POSITION,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, useState } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -337,6 +337,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		imageSwitcher
 	} = attributes;
 
+	const [ctaImgList, setCtaImgList] = useState(FeatureItems);
 	const deviceType = useDeviceType();
 	
 	useEffect(() => {
@@ -352,18 +353,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = FeatureItems.findIndex(item => item.id === active.id);
-            const newIndex = FeatureItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(FeatureItems, oldIndex, newIndex);
+            const oldIndex = ctaImgList.findIndex(item => item.id === active.id);
+            const newIndex = ctaImgList.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(ctaImgList, oldIndex, newIndex);
             setAttributes({ FeatureItems: updatedItems });
+			setCtaImgList(updatedItems);
         }
     };
 
     
 	const handleAddItem = () => {
 		const newItem = {
-			id: `item-${FeatureItems.length + 1}`,
-			Title: `Feature Item ${FeatureItems.length + 1}`,
+			id: `item-${ctaImgList.length + 1}`,
+			Title: `Feature Item ${ctaImgList.length + 1}`,
 			teamMemberImageUrl: "", // Empty URL for now
 			teamMemberImageAlt: "", // Empty alt text for now
 			teamMemberImageID: "", // Empty image ID for now
@@ -374,33 +376,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		};
 	
 		setAttributes({
-			FeatureItems: [...FeatureItems, newItem],
+			FeatureItems: [...ctaImgList, newItem],
 		});
-	};
 
-    // const handleChangeItem = (id, key, value) => {
-    //     const updatedItems = FeatureItems.map(item => 
-    //         item.id === id ? { ...item, [key]: value } : item
-    //     );
-    //     setAttributes({ FeatureItems: updatedItems });
-    // };
+		setCtaImgList([...ctaImgList, newItem]);
+	};
 
 	const handleChangeItem = (id, key, value) => {
-		let updatedItems = FeatureItems;
-		updatedItems.length > 0 && updatedItems.forEach(item => {
-			if (item.id === key) {
-			  item.teamMemberImageUrl = value;
-			}
-		});
+		let updatedItems = ctaImgList;
+		if(key === 'url'){
+			updatedItems.length > 0 && updatedItems.forEach(item => {
+				if (item.id === id) {
+				  item.teamMemberImageUrl = value;
+				}
+			});
+		}
+		
 		setAttributes({ FeatureItems: updatedItems });
+		setCtaImgList(updatedItems);
 	};
 
-	console.log("FeatureItems\	")
-	console.log(FeatureItems)
-
     const handleDeleteItem = (id) => {
-        const updatedItems = FeatureItems.filter(item => item.id !== id);
+        const updatedItems = ctaImgList.filter(item => item.id !== id);
         setAttributes({ FeatureItems: updatedItems });
+		setCtaImgList(updatedItems);
     };
 
 	const buttonIconHandler = (iconName) => {
@@ -2471,9 +2470,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													collisionDetection={closestCenter}
 													onDragEnd={handleDragEnd}
 												>
-													<SortableContext items={FeatureItems.map(item => item.id)}>
+													<SortableContext items={ctaImgList.map(item => item.id)}>
 														<ul className='dnd-items-wrapper'>
-															{FeatureItems.map((item) => (
+															{ctaImgList.map((item) => (
 																<SortableItem
 																	key={item.id}
 																	id={item.id}

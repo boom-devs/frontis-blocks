@@ -17,7 +17,7 @@ import {
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_ImageControl from '@Components/image-control';
+import FB_BackgroundImageControl from '@Components/background-image-control';
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
@@ -1253,7 +1253,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             {imageOverlaySwitcher && (
                                                 <>
-                                                <FB_ImageControl 
+                                                <FB_BackgroundImageControl 
                                                     globalBackgroundImageUrl={previewImageUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setAttributes({ previewImageUrl: value })}
                                                     globalBackgroundImageAlt={previewImageAlt}

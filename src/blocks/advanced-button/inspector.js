@@ -41,6 +41,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ImageControl from '@Components/image-control';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
@@ -137,6 +138,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonIconBorderRadiusLink,
         buttonIconGapSize,
         buttonIconGapUnits,
+		buttonIconRotate,
 
         /** Start Global Setting */
         buttonGlobalZIndex,
@@ -178,6 +180,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalBoxShadowHoverValues,
 		buttonGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
+
+		/** Start button Icon Image */
+		buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
+		/** end Icon Button Image*/
 		blockStyle,
 
     } = attributes;    
@@ -1060,9 +1073,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 			${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+		}
+
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+			${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};` : ''}
+			${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Desktop}${buttonIconImageHeightUnits.Desktop};` : ''}
+			${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 		}
 
 		@media only screen and (max-width: 1024px) {
@@ -1113,6 +1133,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
+			}
+
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};` : ''}
+				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};` : ''}
+				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 			}
 		}
 
@@ -1163,6 +1190,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
+				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};` : ''}
+				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 			}
 		}
 	`, [
@@ -1267,6 +1300,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconBorderLink,
 		buttonIconBorderRadiusUnits,
 		buttonIconBorderRadiusLink,
+		buttonIconRotate,
+
+		buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
 	]);
 
 	useEffect(() => {
@@ -1362,6 +1405,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         {(buttonIconAlign === 'icon-text' || buttonIconAlign === 'icon-only') && (
                                                             <FBIconPicker value={buttonIcon} setIconHandler={iconHandler} /> 
                                                         )}
+
+														{(buttonIconAlign === 'image') && (
+															<FB_ImageControl 
+																globalImageUrl={buttonIconImageUrl}
+																setglobalImageUrl={(value) => setAttributes({ buttonIconImageUrl: value })}
+																globalImageAlt={buttonIconImageAlt}
+																setglobalImageAlt={(value) => setAttributes({ buttonIconImageAlt: value })}
+																globalImageID={buttonIconImageID}
+																setglobalImageID={(value) => setAttributes({ buttonIconImageID: value })}
+																globalImageSize={buttonIconImagedisplay}
+																setglobalImageSize={(value) => setAttributes({ buttonIconImagedisplay: value })}
+															/>
+														)}
+
                                                     </BaseControl>
                                                 </div>
                                                 <FB_UrlControl
@@ -1593,7 +1650,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 												)}
                                         </PanelBody>
 
-										{buttonIconAlign !== 'none' && (
+										{buttonIconAlign === 'icon-text' && buttonIconAlign ==='icon-only' (
 											<PanelBody
 												title={__("Icon Styles", "frontis-blocks")}
 												initialOpen={false}
@@ -1721,6 +1778,73 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													min={0}
 													max={100}
 													label={__("Icon Gap", "frontis-blocks")}
+													rangeValue={buttonIconGapSize}
+													onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconGapUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={''}
+												/>
+												<FB_Range
+													min={0}
+													max={360}
+													label={__("Icon Rotation", "frontis-blocks")}
+													rangeValue={buttonIconRotate}
+													onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+													deviceType={deviceType}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
+													isRangeUnit={false}
+
+												/>
+											</PanelBody>
+										)}
+										{(buttonIconAlign === 'image') &&(
+											<PanelBody
+												title={__("Image Styles", "frontis-blocks")}
+												initialOpen={false}
+											>
+												<SelectControl
+													label={__("Image Position", "frontis-blocks")}
+													value={buttonIconPosition}
+													options={ICON_POSITION}
+													onChange={(value) => setAttributes({ buttonIconPosition: value })}
+												/>
+												<FB_Range
+													min={1}
+													max={100}
+													label={__("Image Width", "frontis-blocks")}
+													rangeValue={buttonIconImageWidth}
+													onChangeHandler={(value) => setAttributes({ buttonIconImageWidth: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconImageWidthUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconImageWidthUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={20}
+												/>
+
+												<FB_Range
+													min={1}
+													max={100}
+													label={__("Image Height", "frontis-blocks")}
+													rangeValue={buttonIconImageHeight}
+													onChangeHandler={(value) => setAttributes({ buttonIconImageHeight: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconImageHeightUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconImageHeightUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={20}
+												/>
+												
+												<FB_Range
+													min={0}
+													max={100}
+													label={__("Image Gap", "frontis-blocks")}
 													rangeValue={buttonIconGapSize}
 													onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
 													rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
