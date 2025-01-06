@@ -47,7 +47,6 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
             {isOpen && (
                 <div className="sortable-item-content">
-                    
                     <FB_ImageControl
                         label={__("Image", "frontis-blocks")}
                         globalImageUrl={item.teamMemberImageUrl}
