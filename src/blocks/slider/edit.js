@@ -1,5 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import {RichText, useBlockProps } from '@wordpress/block-editor';
+import {RichText, useBlockProps, BlockControls, } from '@wordpress/block-editor';
+import { 
+    Toolbar,
+    ToolbarGroup,
+    ToolbarButton
+} from '@wordpress/components';
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -14,6 +19,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-slider-main-wrapper ${blockId}`,
     });
 
+
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${sliderItems.length + 1}`,
+            title: `Slider Item ${sliderItems.length + 1}`,
+
+            sliderItemBgColorSwitcher: 'normal',
+
+            normalItemBackgroundType: 'classic',
+            normalItemClassicColor: '#399CFF',
+            normalItemGradientColor: null,
+            normalItemCustomGradientSwitcher: false,
+            normalItemCustomGradientInputValue: '',
+
+            hoverItemBackgroundType: 'classic',
+            hoverItemClassicColor: '',
+            hoverItemGradientColor: null,
+            hoverItemCustomGradientSwitcher: false,
+            hoverItemCustomGradientInputValue: ''
+        };
+        setAttributes({ sliderItems: [...sliderItems, newItem] });
+    };
+
     return (
         <>
             <Inspector 
@@ -21,6 +49,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
+
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon="plus"
+                        label={__('Add Slider', 'frontis-blocks')}
+                        onClick={handleAddItem}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+
             <div {...blockProps}>
                 <Swiper
                     className='swiper-container-outer'
