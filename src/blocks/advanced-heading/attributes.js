@@ -95,7 +95,12 @@ const attributes = {
         default: '',
     },
     headingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     headingTextStrokeColorSwitcher: {
         type: 'string',
@@ -408,7 +413,24 @@ const attributes = {
         default: '',
     },
     subHeadingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingTextStrokeColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    subHeadingTextStrokeColor: {
+        type: 'string',
+        default: '',
+    },
+    subHeadingTextStrokeHoverColor: {
+        type: 'string',
+        default: '',
     },
     subHeadingColorSwitcher: {
         type: "string",

@@ -2830,7 +2830,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
                 ${fluentFormErrorTabletPadding ? `padding: ${fluentFormErrorTabletPadding};` : ""}
                 ${fluentFormErrorTabletMargin ? `margin: ${fluentFormErrorTabletMargin};` : ""} 
-            }  
+            }
+
+            .fluentform * {
+                box-sizing: border-box;
+            }
+
+            .frm-fluent-form .ff-t-container {
+                display: flex;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .frm-fluent-form .ff-t-cell {
+                display: flex;
+                flex-direction: column;
+                vertical-align: inherit;
+                width: 100%;
+            }
+
+            .fluentform .ff-el-input--label {
+                display: inline-block;
+                margin-bottom: 5px;
+                position: relative;
+            }
+
+            .ff-default .ff-el-input--label label {
+                display: inline-block;
+                font-weight: 500;
+                line-height: inherit;
+                margin-bottom: 0;
+            }
+            .ff-el-form-control {
+                display: block;
+                width: 100%;
+            }
+
+            .ff-default .ff-el-form-control {
+                background-clip: padding-box;
+                background-image: none;
+                border-radius: 7px;
+                border-radius: ;
+                line-height: 1;
+                margin-bottom: 0;
+                max-width: 100%;
+                padding: 11px 15px;
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+
+            .fluentform .ff-el-group {
+                margin-bottom: 20px;
+            }
+
+            .ff-default .ff_btn_style {
+                border-radius: 7px;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 1.5;
+                padding: 8px 20px;
+                position: relative;
+                text-align: center;
+                transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+                vertical-align: middle;
+                white-space: nowrap;
+            }
         }
             
         @media only screen and (max-width: 767px) {
@@ -3080,6 +3148,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormErrorMobilePadding ? `padding: ${fluentFormErrorMobilePadding};` : ""}
                 ${fluentFormErrorMobileMargin ? `margin: ${fluentFormErrorMobileMargin};` : ""} 
             } 
+            .frm-fluent-form .ff-t-container {
+                display: block;
+                width: 100%;
+            }
         }
 
 

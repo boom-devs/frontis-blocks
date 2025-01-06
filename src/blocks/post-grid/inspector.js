@@ -476,7 +476,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreTextColorSwitcher,
         loadMoreTextColor,
         loadMoreTextHoverColor,
+        loadMoreloaderColorSwitcher,
         loadMoreloaderColor,
+        loadMoreloaderHoverColor,
 
         loadMoreIconSize,
         loadMoreIconSizeUnits,
@@ -2799,8 +2801,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-radius: 50%;
 			display: inline-block;
 			box-sizing: border-box;
+            transition: all .3s ease-in-out;
 			animation: loader 1s linear infinite;
-        } 
+        }
+        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper:hover .fb_load_more_loader {
+            border-top: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
+			border-right: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
+			border-bottom: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
+            transition: all .3s ease-in-out;
+        }
 
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
@@ -5741,11 +5750,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 )}
 
-                                                <FB_ColorControl
+                                                <FB_SwitcherControl
                                                     label={__("Loader Color", "frontis-blocks")}
-                                                    globalColor={loadMoreloaderColor} 
-                                                    setGlobalColor={(value) => setAttributes({ loadMoreloaderColor: value })}
+                                                    globalSwitcher={loadMoreloaderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ loadMoreloaderColorSwitcher: value })}
                                                 />
+
+                                                {loadMoreloaderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={loadMoreloaderColor} 
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreloaderColor: value })}
+                                                    />
+                                                )}
+
+                                                {loadMoreloaderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={loadMoreloaderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ loadMoreloaderHoverColor: value })}
+                                                    />
+                                                )}
 
                                                 <FB_Range
                                                     min={1}

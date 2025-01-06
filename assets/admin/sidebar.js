@@ -5428,8 +5428,14 @@ var FB_Range = function FB_Range(_ref) {
       onChangeHandler(newRangeValue);
     }
   }, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
+
+  // const setRangeValue = (value) => {
+  // 	const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
+  // 	onChangeHandler(newRangeValue);
+  // };
+
   var setRangeValue = function setRangeValue(value) {
-    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, value || resetFallbackValue));
+    var newRangeValue = _objectSpread(_objectSpread({}, rangeValue), {}, _defineProperty({}, deviceType, value !== null ? String(value) : String(resetFallbackValue)));
     onChangeHandler(newRangeValue);
   };
   var setRangeUnit = function setRangeUnit(unit) {
@@ -5468,8 +5474,10 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    value: rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined,
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
+  // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+  , {
+    value: rangeValue[deviceType] !== "" ? Number(rangeValue[deviceType]) : undefined,
     onChange: setRangeValue,
     min: min,
     max: max,

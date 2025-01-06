@@ -298,8 +298,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaIconColor,
 		mediaIconHoverColor,
 		mediaIconColorSwitcher,
+		boxGlobalBoxShadowSwitcher,
 		boxGlobalBoxShadowValues,
 		boxGlobalBoxShadowCssValue,
+		boxGlobalHoverBoxShadowValues,
+		boxGlobalHoverBoxShadowCssValue,
 		mediaBgTypeImage,
 		bgType,
 		iconBoxMediaID,
@@ -335,7 +338,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		iconBoxButtonBorderLink,
 		iconBoxIconVerticalPosition,
-		iconBoxCardAlignment
+		iconBoxCardAlignment,
+
+		wrapperLink,
+		wrapperTargetUrl,
+		wrapperUrlSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1920,6 +1927,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-icon-box-wrapper.${blockID}:hover {
 			  ${globalBgHoverColor !== undefined ? `background-color: ${globalBgHoverColor};` : "" }
 			  ${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : "" }
+			  ${boxGlobalHoverBoxShadowCssValue ? `box-shadow: ${boxGlobalHoverBoxShadowCssValue};` : "" }
 			  transition: all .3s ease-in-out;
 		  }
 	  
@@ -2416,8 +2424,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			mediaIconColor,
 			mediaIconHoverColor,
+			boxGlobalBoxShadowSwitcher,
 			boxGlobalBoxShadowValues,
 			boxGlobalBoxShadowCssValue,
+			boxGlobalHoverBoxShadowValues,
+			boxGlobalHoverBoxShadowCssValue,
 			mediaBgTypeImage,
 			bgType,
 			iconBoxMediaID,
@@ -2843,7 +2854,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										{/*Image/Icon Style*/}
 										<PanelBody
-											title={__("Image/Icon", "frontis-block")}
+											title={__("Icon/Image", "frontis-block")}
 											initialOpen={false}
 										>
 											<FB_Range
@@ -3702,17 +3713,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ boxGlobalBoxShadowValues: value })
-														}
-														initialShadowValue={boxGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																boxGlobalBoxShadowCssValue: value,
-															})
-														}
+
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={boxGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ boxGlobalBoxShadowSwitcher: value })}
 													/>
+													
+													{boxGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) =>
+																setAttributes({ boxGlobalBoxShadowValues: value })
+															}
+															initialShadowValue={boxGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) =>
+																setAttributes({
+																	boxGlobalBoxShadowCssValue: value,
+																})
+															}
+														/>
+													)}
+													
+													{boxGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) =>
+																setAttributes({ boxGlobalHoverBoxShadowValues: value })
+															}
+															initialShadowValue={boxGlobalHoverBoxShadowValues}
+															onBoxShadowStyleChange={(value) =>
+																setAttributes({
+																	boxGlobalHoverBoxShadowCssValue: value,
+																})
+															}
+														/>
+													)}
+												</PanelBody>
+
+												<PanelBody
+													title={__("Wrapper Link", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<ToggleControl
+															label={__("Enable Link", "frontis-blocks")}
+															checked={wrapperUrlSwitcher}
+															onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
+													/>
+													
+													{wrapperUrlSwitcher && (
+														<FB_UrlControl
+															url={wrapperLink}
+															onChangeUrl={(value) =>
+																setAttributes({ wrapperLink: value })
+															}
+															openInNewTab={wrapperTargetUrl}
+															onChangeOpenInNewTab={(value) =>
+																setAttributes({ wrapperTargetUrl: value })
+														}
+														/>
+													)}
 												</PanelBody>
 											</div>
 										</div>
