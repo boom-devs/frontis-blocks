@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Button } from '@wordpress/components';
-
+import { MediaPlaceholder } from '@wordpress/block-editor';
 
 
 import {
@@ -22,6 +22,9 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
     const toggleOpen = () => setIsOpen(!isOpen);
     
+    const handleMedia = (imgUrl) => {
+        handleChangeItem(id, imgUrl);
+    }
     
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
@@ -68,26 +71,21 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                     <FB_ImageControl
                         label={__("Image", "frontis-blocks")}
-                        globalBackgroundImageUrl={item.teamMemberImageUrl}  // Check this value
-                        setGlobalBackgroundImageUrl={(value) => {
-                            console.log("Setting Image URL:", value);  // Log the new URL
-                            handleChangeItem(item.teamMemberImageUrl, 'teamMemberImageUrl', value);
-                        }}
-                        globalBackgroundImageAlt={item.teamMemberImageAlt}
-                        setGlobalBackgroundImageAlt={(value) => handleChangeItem(item.id, 'teamMemberImageAlt', value)}
+                        globalBackgroundImageUrl={item.teamMemberImageUrl}
+                        setGlobalBackgroundImageUrl={(value) => handleMedia(item.id, 'teamMemberImageUrl', value)}
+                        // globalBackgroundImageAlt={item.teamMemberImageAlt}
+                        // setGlobalBackgroundImageAlt={(value) => handleChangeItem(item.id, 'teamMemberImageAlt', value)}
                         globalBackgroundImageID={item.teamMemberImageID}
                         setGlobalBackgroundImageID={(value) => handleChangeItem(item.id, 'teamMemberImageID', value)}
-                        globalBackgroundImagePosition={item.teamMemberImagePosition}
-                        setGlobalBackgroundImagePosition={(value) => handleChangeItem(item.id, 'teamMemberImagePosition', value)}
-                        globalBackgroundImageAttachment={item.teamMemberImageAttachment}
-                        setGlobalBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'teamMemberImageAttachment', value)}
-                        globalBackgroundImageRepeat={item.teamMemberImageRepeat}
-                        setGlobalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'teamMemberImageRepeat', value)}
-                        globalBackgroundImageSize={item.teamMemberImageSize}
-                        setGlobalBackgroundImageSize={(value) => handleChangeItem(item.id, 'teamMemberImageSize', value)}
+                        // globalBackgroundImagePosition={item.teamMemberImagePosition}
+                        // setGlobalBackgroundImagePosition={(value) => handleChangeItem(item.id, 'teamMemberImagePosition', value)}
+                        // globalBackgroundImageAttachment={item.teamMemberImageAttachment}
+                        // setGlobalBackgroundImageAttachment={(value) => handleChangeItem(item.id, 'teamMemberImageAttachment', value)}
+                        // globalBackgroundImageRepeat={item.teamMemberImageRepeat}
+                        // setGlobalBackgroundImageRepeat={(value) => handleChangeItem(item.id, 'teamMemberImageRepeat', value)}
+                        // globalBackgroundImageSize={item.teamMemberImageSize}
+                        // setGlobalBackgroundImageSize={(value) => handleChangeItem(item.id, 'teamMemberImageSize', value)}
                     />
-
-
                 </div>
             )}
         </li>

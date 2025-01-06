@@ -94,19 +94,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{imageSwitcher && (
 								
 								<div className="fb-cta-image-wrapper">
-								{FeatureItems.map(item => (
-									
-									<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
-										{item.teamMemberImageUrl && (
-											<img 
-											src={item.teamMemberImageUrl} 
-											alt={item.teamMemberImageAlt || "Preview Image"} 
-											width="200"  
-											height="200"
-										/>
-										)}
-									</div>
-								))}
+								{FeatureItems.map(item => {
+									return (
+										<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
+											{item.teamMemberImageUrl && (
+												<img
+													src={item.teamMemberImageUrl}
+													alt={item.teamMemberImageAlt || "Preview Image"}
+													width="200"
+													height="200"
+												/>
+											)}
+										</div>
+									);
+								})}
 								</div>
 								
 								

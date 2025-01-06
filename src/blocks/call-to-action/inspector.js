@@ -386,13 +386,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     // };
 
 	const handleChangeItem = (id, key, value) => {
-		console.log("Before Update:", FeatureItems);
-		const updatedItems = FeatureItems.map(item => 
-			item.id === id ? { ...item, [key]: value } : item
-		);
+		let updatedItems = FeatureItems;
+		updatedItems.length > 0 && updatedItems.forEach(item => {
+			if (item.id === key) {
+			  item.teamMemberImageUrl = value;
+			}
+		});
 		setAttributes({ FeatureItems: updatedItems });
-		console.log("After Update:", updatedItems);
-	};	
+	};
+
+	console.log("FeatureItems\	")
+	console.log(FeatureItems)
 
     const handleDeleteItem = (id) => {
         const updatedItems = FeatureItems.filter(item => item.id !== id);
