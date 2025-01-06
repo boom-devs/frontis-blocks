@@ -4,6 +4,8 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from "@wordpress/block-editor";
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import {
 	SelectControl,
@@ -23,8 +25,8 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 } from "./constants/constants";
-
-import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
+import SortableItem from './sortableItem';
+import { useEffect, useMemo } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -44,11 +46,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
+		FeatureItems,
 		Heading_Text,
 		headingTag,
+		subTitleAlignment,
+		subTitleText,
+		subTitleTag,
 		Heading_Background_Color,
 		Alignment,
-		Sub_Heading_Switcher,
+		subHeadingSwitcher,
+		descriptionSwitcher,
 		Sub_Heading_Text,
 		headingFontFamily,
 		headingFontSize,
@@ -184,39 +191,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		boxBgHoverColor,
 		mediaSize,
 		mediaSizeUnits,
-		globalZIndex,
-		globalPaddingUnits,
-		globalPaddingDesktop,
-		globalPaddingTablet,
-		globalPaddingMobile,
-		globalPaddingLink,
-
-		globalMarginUnits,
-		globalMarginDesktop,
-		globalMarginTablet,
-		globalMarginMobile,
-		globalMarginLink,
-
-		globalBgColorSwitcher,
-		globalBgColor,
-		globalBgHoverColor,
-
-		globalBorder,
-		globalBorderColorSwitcher,
-		globalBorderColor,
-		globalBorderHoverColor,
-		globalBorderUnits,
-		globalBorderDesktop,
-		globalBorderTablet,
-		globalBorderMobile,
-		globalBorderLink,
-
-		globalBorderRadiusUnits,
-		globalBorderRadiusDesktop,
-		globalBorderRadiusTablet,
-		globalBorderRadiusMobile,
-		globalBorderRadiusLink,
-
+		
 		btnOneBorderUnits,
 		btnOneDesktopBorder,
 		btnOneTabBorder,
@@ -327,6 +302,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBoxShadowHoverValues,
 		globalBoxShadowCssValue,
 		globalHoverBoxShadowCssValue,
+		globalZIndex,
+		globalPaddingUnits,
+		globalPaddingDesktop,
+		globalPaddingTablet,
+		globalPaddingMobile,
+		globalPaddingLink,
+
+		globalMarginUnits,
+		globalMarginDesktop,
+		globalMarginTablet,
+		globalMarginMobile,
+		globalMarginLink,
+
+		globalBgColorSwitcher,
+		globalBgColor,
+		globalBgHoverColor,
+
+		globalBorder,
+		globalBorderColorSwitcher,
+		globalBorderColor,
+		globalBorderHoverColor,
+		globalBorderUnits,
+		globalBorderDesktop,
+		globalBorderTablet,
+		globalBorderMobile,
+		globalBorderLink,
+
+		globalBorderRadiusUnits,
+		globalBorderRadiusDesktop,
+		globalBorderRadiusTablet,
+		globalBorderRadiusMobile,
+		globalBorderRadiusLink,
+		imageSwitcher
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -340,6 +348,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId]);
 
 	const blockProps = useBlockProps();
+
+	const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = FeatureItems.findIndex(item => item.id === active.id);
+            const newIndex = FeatureItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(FeatureItems, oldIndex, newIndex);
+            setAttributes({ FeatureItems: updatedItems });
+        }
+    };
+
+    
+	const handleAddItem = () => {
+		const newItem = {
+			id: `item-${FeatureItems.length + 1}`,
+			Title: `Feature Item ${FeatureItems.length + 1}`,
+			teamMemberImageUrl: "", // Empty URL for now
+			teamMemberImageAlt: "", // Empty alt text for now
+			teamMemberImageID: "", // Empty image ID for now
+			teamMemberImagePosition: "", // Default empty position
+			teamMemberImageAttachment: "", // Default empty attachment
+			teamMemberImageRepeat: "", // Default empty repeat value
+			teamMemberImageSize: "", // Default empty size value
+		};
+	
+		setAttributes({
+			FeatureItems: [...FeatureItems, newItem],
+		});
+	};
+
+    // const handleChangeItem = (id, key, value) => {
+    //     const updatedItems = FeatureItems.map(item => 
+    //         item.id === id ? { ...item, [key]: value } : item
+    //     );
+    //     setAttributes({ FeatureItems: updatedItems });
+    // };
+
+	const handleChangeItem = (id, key, value) => {
+		console.log("Before Update:", FeatureItems);
+		const updatedItems = FeatureItems.map(item => 
+			item.id === id ? { ...item, [key]: value } : item
+		);
+		setAttributes({ FeatureItems: updatedItems });
+		console.log("After Update:", updatedItems);
+	};	
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = FeatureItems.filter(item => item.id !== id);
+        setAttributes({ FeatureItems: updatedItems });
+    };
 
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
@@ -2310,6 +2368,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
+										{/* Title Element */}
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Title", "frontis-block")}
@@ -2330,14 +2389,108 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											
 												<TextareaControl
 													label={__("Title Text", "frontis-block")}
+													className="fb-setting-text"
 													value={Heading_Text}
 													onChange={(value) =>
 														setAttributes({ Heading_Text: value })
 													}
-													className="fb-setting-text"
+													
 												/>
 											</PanelBody>
 										</div>
+										
+										{/* Sub title element */}
+										<div className="fb-advanced-wrapper">
+										<PanelBody
+											title={__("Sub Title", "frontis-block")}
+											initialOpen={false}
+										>
+											<ToggleControl
+												label={__("Show Sub Title", "frontis-block")}
+												checked={subHeadingSwitcher}
+												onChange={(value) =>
+													setAttributes({ subHeadingSwitcher: value })
+												}
+											/>
+
+											{subHeadingSwitcher && (
+												<>
+												<FB_AlignmentControl
+													label={__("Sub Title Alignment", "frontis-blocks")}
+													globalAlignment={subTitleAlignment}
+													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
+												/>
+	
+												<FB_HtmlTagControl
+													label={__("Sub Title Tag", "frontis-blocks")}
+													globalHtmlTag={subTitleTag}
+													setGlobalHtmlTag={(value) => setAttributes({ subTitleTag: value })}
+												/>
+	
+												<TextareaControl
+													label={__("Sub Title Text", "frontis-block")}
+													className="fb-setting-text"
+													value={subTitleText}
+													onChange={(value) =>
+														setAttributes({ subTitleText: value })
+													}
+													
+												/>
+												</>
+											)}
+											
+											
+										</PanelBody>
+										</div>
+										{/* Image control */}
+										<div className="fb-advanced-wrapper">
+										<PanelBody
+											title={__("Image", "frontis-block")}
+											initialOpen={false}
+										>
+											<ToggleControl
+												label={__("Show Image", "frontis-block")}
+												checked={imageSwitcher}
+												onChange={(value) =>
+													setAttributes({ imageSwitcher: value })
+												}
+											/>
+
+											{imageSwitcher && (
+												<>
+												<FB_AlignmentControl
+													label={__("Image Alignment", "frontis-blocks")}
+													globalAlignment={subTitleAlignment}
+													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
+												/>
+												<DndContext
+													collisionDetection={closestCenter}
+													onDragEnd={handleDragEnd}
+												>
+													<SortableContext items={FeatureItems.map(item => item.id)}>
+														<ul className='dnd-items-wrapper'>
+															{FeatureItems.map((item) => (
+																<SortableItem
+																	key={item.id}
+																	id={item.id}
+																	item={item}
+																	handleChangeItem={handleChangeItem}
+																	handleDeleteItem={handleDeleteItem}
+																/>
+															))}
+														</ul>
+													</SortableContext>
+													<Button isPrimary onClick={handleAddItem}>
+														{__("Add Image", "frontis-blocks")}
+													</Button>
+												</DndContext>
+												</>
+											)}
+											
+											
+										</PanelBody>
+										</div>
+									
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Description", "frontis-block")}
@@ -2345,13 +2498,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											>
 												<ToggleControl
 													label={__("Show Description", "frontis-block")}
-													checked={Sub_Heading_Switcher}
+													checked={descriptionSwitcher}
 													onChange={(value) =>
-														setAttributes({ Sub_Heading_Switcher: value })
+														setAttributes({ descriptionSwitcher: value })
 													}
 												/>
 
-												{Sub_Heading_Switcher && (
+												{descriptionSwitcher && (
 													<>
 														
 														<FB_AlignmentControl
@@ -2669,7 +2822,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										</PanelBody>
 										{/*Description Style*/}
-										{Sub_Heading_Switcher && (
+										{descriptionSwitcher && (
 											<PanelBody
 												title={__("Description", "frontis-block")}
 												initialOpen={false}

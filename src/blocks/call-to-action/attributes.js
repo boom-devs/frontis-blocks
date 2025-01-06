@@ -277,6 +277,7 @@ const attributes = {
         type: "string",
         default: "center",
     },
+	// Title 
     Alignment: {
         type: "string",
         default: "center",
@@ -288,6 +289,19 @@ const attributes = {
     headingTag: {
         type : "string",
         default: "h2"
+    },
+	//Sub Title
+	subTitleAlignment: {
+        type: "string",
+        default: "center",
+    },
+    subTitleText: {
+        type : "string",
+        default: "23k User  Our Customer Love us"
+    },
+    subTitleTag: {
+        type : "string",
+        default: "h4"
     },
     /** Start Heading Style */
     headingFontFamily: {
@@ -637,7 +651,15 @@ const attributes = {
         type : "string",
         default: "p"
     },
-    Sub_Heading_Switcher: {
+    descriptionSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+	subHeadingSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+	imageSwitcher: {
         type: "boolean",
         default: true,
     },
@@ -1998,5 +2020,85 @@ const attributes = {
         type: "string",
         default: "",
     },
+	FeatureItems: {
+		type: "array",
+		default: [
+			{
+				id: "item-1",
+				Title: "Feature Item 1",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+			{
+				id: "item-2",
+				Title: "Feature Item 2",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+			{
+				id: "item-3",
+				Title: "Feature Item 3",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+		],
+		items: {
+			type: "object",
+			properties: {
+				id: {
+					type: "string",
+					default: "",
+				},
+				Title: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageUrl: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageAlt: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageID: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImagePosition: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageAttachment: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageRepeat: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageSize: {
+					type: "string",
+					default: "",
+				},
+			},
+		},
+	},
+	
 }
 export default attributes;
