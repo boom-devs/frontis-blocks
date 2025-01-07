@@ -1,29 +1,32 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, BlockControls, useInnerBlocksProps } from '@wordpress/block-editor';
-
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { withSelect, useDispatch, useSelect } from '@wordpress/data';
+import { withSelect, withDispatch, useDispatch, useSelect } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
-import { useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
+import { compose } from '@wordpress/compose';
 import Inspector from './inspector';
-// Import Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
-const ALLOWED_BLOCKS = [ 'frontis-blocks/slider-item' ];
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export default function Edit(props) {
+const ALLOWED_BLOCKS = ['frontis-blocks/slider-item'];
+
+// function Edit(props) {
+
+const Edit = ( props ) => {
 
     const {
         attributes,
         setAttributes,
         clientId,
+        block,
+        insertBlock,
     } = props;
+    
     const {
         blockId,
         autoplay,
@@ -35,6 +38,11 @@ export default function Edit(props) {
         slideItem,
     } = attributes;
 
+    	// Centralize slider instance.
+	const [ swiperInstance, setSwiperInstance ] = useState( null );
+
+	props = { ...props, swiperInstance, setSwiperInstance };
+
     const { replaceInnerBlocks } = useDispatch('core/block-editor');
     const innerBlocks = useSelect(
         (select) => select('core/block-editor').getBlocks(clientId),
@@ -45,80 +53,43 @@ export default function Edit(props) {
         className: `fb-slider-main-wrapper ${blockId}`,
     });
 
-    const applyWithSelect = withSelect( ( select, props ) => {
-        // eslint-disable-line no-shadow
-        const { insertBlock } = useDispatch( 'core/block-editor' );
-
-        const { getSelectedBlock, getBlockParents } = select( 'core/block-editor' );
-        const selectedBlock = getSelectedBlock();
-        const parentBlockIds = getBlockParents( selectedBlock?.clientId );
-        const blockParents = select( 'core/block-editor' ).getBlocksByClientId( parentBlockIds );
-
-        return {
-            insertBlock,
-            block: ( select( 'core/block-editor' ) || select( 'core/editor' ) ).getBlock( props.clientId ),
-            blockParents,
-        };
-    } );
-
     const getBlockControls = () => {
         return (
             <BlockControls>
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="insert"
-                        label={ __( 'Add Slide', 'ultimate-addons-for-gutenberg' ) }
-                        onClick={ () => {
-                            // Ensure that the block and innerBlocks are properly defined
-                            const { block, insertBlock } = props;
-                            if ( block && block.innerBlocks ) {
-                                const newSlideBlock = createBlock( 'frontis-blocks/slider-item' );
-                                // Insert the new block into the correct position
-                                insertBlock( newSlideBlock, block.innerBlocks.length, block.clientId );
-
-                                // Update attributes after inserting the block
-                                setAttributes( { slideItem: attributes.slideItem + 1 } );
-                                swiperInstance.activeIndex = attributes.slideItem + 1;
+                        label={__('Add Slide', 'ultimate-addons-for-gutenberg')}
+                        onClick={() => {
+                            if (block && block.innerBlocks) {
+                                const newSlideBlock = createBlock('frontis-blocks/slider-item');
+                                insertBlock(newSlideBlock, block.innerBlocks.length, block.clientId);
+                                setAttributes({ slideItem: attributes.slideItem + 1 });
+                                
+                                if (swiperInstance) {
+                                    swiperInstance.slideNext();
+                                }
                             }
-                        } }
+                        }}
                     />
                 </ToolbarGroup>
             </BlockControls>
         );
     };
 
-
-
-
-
     const getSliderTemplate = useMemo(() => {
         const sliderTemplate = [
             [
                 'frontis-blocks/slider-item',
-                {},
-                [
-                    [
-                        'Hello world 1',
-                    ],
-                ],
             ],
             [
                 'frontis-blocks/slider-item',
-                {},
-                [
-                    [
-                        'Hello world 2',
-                    ],
-                ],
             ],
             [
                 'frontis-blocks/slider-item',
-                {},
-                [
-                    [
-                        'Hello world 3',
-                    ],
-                ],
+            ],
+            [
+                'frontis-blocks/slider-item',
             ],
         ];
     
@@ -142,7 +113,7 @@ export default function Edit(props) {
     return (
         <>
             <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
-            { getBlockControls() }
+            {getBlockControls()}
 
             <div {...blockProps}>
                 <Swiper
@@ -153,11 +124,31 @@ export default function Edit(props) {
                     navigation={navigationArrows}
                     pagination={{ clickable: displayIndicators }}
                     loop
+                    onSwiper={setSwiperInstance}
                 >
-
-                    <div { ...innerBlocksProps } />
+                    <div {...innerBlocksProps} />
                 </Swiper>
             </div>
         </>
     );
 }
+
+export default compose(
+    withSelect((select, props) => {
+        const { getSelectedBlock, getBlockParents } = select('core/block-editor');
+        const selectedBlock = getSelectedBlock();
+        const parentBlockIds = getBlockParents(selectedBlock?.clientId);
+        const blockParents = select('core/block-editor').getBlocksByClientId(parentBlockIds);
+
+        return {
+            block: select('core/block-editor').getBlock(props.clientId),
+            blockParents,
+        };
+    }),
+    withDispatch((dispatch) => {
+        const { insertBlock } = dispatch('core/block-editor');
+        return {
+            insertBlock,
+        };
+    })
+)(Edit);
