@@ -37,7 +37,7 @@ const attributes = {
     // Slide Content
     slideTitle: {
         type: "string",
-        default: "Slide Title",
+        default: "Slide title from child",
     },
 };
 
