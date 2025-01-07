@@ -728,5 +728,53 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+    buttonIconImageUrl : {
+        type: 'string',
+        default: '',
+    },
+    buttonIconImageAlt : { 
+        type: 'string',
+        default: '',
+    },
+    buttonIconImageID : {
+        type: 'number',
+    },
+    buttonIconImageWidth : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageWidthUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconImageHeight : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageHeightUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconImagedisplay : {
+        type: 'string',
+        default: 'none',
+    },
 }
 export default attributes;

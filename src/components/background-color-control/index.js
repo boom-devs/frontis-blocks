@@ -9,7 +9,7 @@ import {
     
 } from '@wordpress/components';
 
-import FB_ImageControl from '@Components/image-control';
+import FB_BackgroundImageControl from '@Components/background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
@@ -138,7 +138,7 @@ const FB_BackgroundColorControl = ({
                                         />
 
                                         {isBackgroundImage && (
-                                            <FB_ImageControl
+                                            <FB_BackgroundImageControl
                                                 label={__("Background Image", "frontis-blocks")}
                                                 globalBackgroundImageUrl={normalBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setNormalBackgroundImageUrl(value)}
@@ -225,7 +225,7 @@ const FB_BackgroundColorControl = ({
                                         />
 
                                         {isBackgroundImage && (
-                                            <FB_ImageControl
+                                            <FB_BackgroundImageControl
                                                 label={__("Background Image", "frontis-blocks")}
                                                 globalBackgroundImageUrl={hoverBackgroundImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setHoverBackgroundImageUrl(value)}

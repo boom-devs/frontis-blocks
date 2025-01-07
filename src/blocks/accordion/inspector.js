@@ -29,7 +29,7 @@ import FBIconPicker from '../../components/icon-picker';
 import FB_TypographyControl from '../../components/typography-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
-import FB_ImageControl from '../../components/image-control';
+import FB_BackgroundImageControl from '../../components/background-image-control';
 import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
@@ -1166,7 +1166,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             />
                                                         }
                                                         { tabIconSwitcher === 'image' &&
-                                                            <FB_ImageControl
+                                                            <FB_BackgroundImageControl
                                                                 globalBackgroundImageUrl={tabImageUrl}
                                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ tabImageUrl: value })}
                                                                 globalBackgroundImageAlt={tabImageAlt}
@@ -1212,7 +1212,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             />
                                                         }
                                                         { expandedIconSwitcher === 'image' &&
-                                                            <FB_ImageControl 
+                                                            <FB_BackgroundImageControl 
                                                                 globalBackgroundImageUrl={expandedImageUrl}
                                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ expandedImageUrl: value })}
                                                                 globalBackgroundImageAlt={expandedImageAlt}
