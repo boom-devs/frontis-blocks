@@ -76,11 +76,11 @@ const attributes = {
 	},
 	countDownItemBgColor: {
 		type: "string",
-		default: "#F97255"
+		default: "#399CFF"
 	},
 	countDownItemBgHoverColor: {
 		type: 'string',
-		default: "#F97255"
+		default: "#399CFF"
 	},
 
 	/** Start Background Image */
@@ -125,28 +125,28 @@ const attributes = {
 	countDownItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusLink : {
@@ -155,6 +155,10 @@ const attributes = {
 	},
 
 	// Border Type
+	countDownItemBorderColorSwitcher :{
+		type: 'string',
+		default: 'normal'
+	},
 	countDownItemBorder: {
 		type: 'string',
 		default: "none",
@@ -173,28 +177,28 @@ const attributes = {
 	countDownItemBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeLink : {
@@ -204,9 +208,9 @@ const attributes = {
 	countDownItemGap: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '25',
+			Tablet: '25',
+			Mobile: '25'
 		}
 	},
 	countDownItemGapUnits: {
@@ -223,19 +227,19 @@ const attributes = {
 	},
 	countDownItemBgColor: {
 		type: "string",
-		default: "#0D173B"
+		default: ""
 	},
 	countDownItemBgHoverColor: {
 		type: 'string',
-		default: "#0D173B"
+		default: ""
 	},
 
 	countDownItemSize: {
 		type: 'object',
 		default: {
-			Desktop: 144,
-			Tablet: 120,
-			Mobile: 100
+			Desktop: '144',
+			Tablet: '120',
+			Mobile: '100'
 		}
 	},
 	countDownItemSizeUnits: {
@@ -291,6 +295,8 @@ const attributes = {
 		type: 'string',
 		default: "auto",
 	},
+
+	
 	/** End Background Image */
 
 	/** Start Border Type */
@@ -320,28 +326,28 @@ const attributes = {
 	countDownItemWrapperBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeLink : {
@@ -649,7 +655,7 @@ const attributes = {
 	},
 	countDownSeparatorEnabled: {
 		type: "boolean",
-		default: false,
+		default: true,
 	},
 	countDownSeparatorType: {
 		type: 'string',
@@ -661,11 +667,11 @@ const attributes = {
 	},
 	countDownSeparatorFontColor: {
 		type: "string",
-		default: "#15171C"
+		default: "#ffffff"
 	},
 	countDownSeparatorFontHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: "#ffffff"
 	},
 	countDownSeparatorFontFamily: {
 		type: 'string',
@@ -740,9 +746,9 @@ const attributes = {
 	countDownSeparatorHorizontalGap: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '60',
+			Tablet: '60',
+			Mobile: '60'
 		}
 	},
 	countDownSeparatorHorizontalGapUnits: {
@@ -783,7 +789,7 @@ const attributes = {
 	},
 	globalClassicColor: {
 		type: "string",
-		default: "#15171C"
+		default: "#399CFF"
 	},
 	globalGradientColor: {
 		type: "string",

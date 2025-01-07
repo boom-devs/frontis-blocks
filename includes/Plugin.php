@@ -95,10 +95,6 @@ final class Plugin
 
 	public function enqueue_scripts()
 	{
-		// Check if the current post has the 'countdown' block
-		if (has_block('frontis-blocks/countdown')) {
-			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/js/countdown.js', array('jquery'), '1.0.0', true);
-		}
 
 		// Check if the current post has the 'counter' block
 		if (has_block('frontis-blocks/counter-number')) {

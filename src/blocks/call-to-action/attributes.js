@@ -117,7 +117,7 @@ const attributes = {
 	},
 	btnIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnIconSize: {
 		type: 'object',
@@ -147,10 +147,18 @@ const attributes = {
 		type: 'string',
         default: ''
 	},
+	btnIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
+	},
 	//Button two icon
 	btnTwoIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnTwoIconSize: {
 		type: 'object',
@@ -180,6 +188,14 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	btnTwoIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
+	},
     mediaIconColor: {
 		type: 'string',
         default: '#ffffff'
@@ -193,7 +209,7 @@ const attributes = {
 	},
     btnIconPosition: {
 		type: 'string',
-        default: 'left'
+        default: 'right'
 	},
     infoIconPosition: {
 		type: 'string',
@@ -828,28 +844,28 @@ const attributes = {
     btnOneDesktopBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneTabBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneMobileBorder: {
         type: "object",
         default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
 		},
     },
     btnOneBorderLink: {
@@ -857,8 +873,13 @@ const attributes = {
         default: true,
     },
     /** Button One Border Radius **/
+	infoButtonBorder: {
+        type: 'string',
+		default: 'solid'
+    },
 	infoButtonBorderColor: {
         type: 'string',
+		default: 'transparent'
     },
     infoButtonHoverBorderColor: {
         type: 'string',
@@ -1799,11 +1820,23 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    boxGlobalBoxShadowValues: {
+	globalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    globalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    boxGlobalBoxShadowCssValue: {
+	globalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    globalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    globalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
     },

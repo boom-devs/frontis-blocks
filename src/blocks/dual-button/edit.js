@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { useRef } from "@wordpress/element";
 import {
     useBlockProps,
     RichText,
@@ -10,6 +11,7 @@ import {
  * Internal dependencies
  */
 import Inspector from "./inspector";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
@@ -39,6 +41,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const blockProps = useBlockProps();
 
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
     // Prevent link navigation in the editor and focus on text
     const handleButtonClick = (event) => {
@@ -62,7 +69,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
 
             <div {...blockProps} id={blockID}>
-                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} >
+                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} ref={panelRef}>
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 
 						flexDirection:
