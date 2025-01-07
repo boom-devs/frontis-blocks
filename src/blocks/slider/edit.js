@@ -52,8 +52,8 @@ const Edit = (props) => {
 
     const [swiperInstance, setSwiperInstance] = useState(null);
 	const { selectBlock } = useDispatch( blockEditorStore );
-    const { replaceInnerBlocks } = wp.data.dispatch('core/block-editor');
-    const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
+    // const { replaceInnerBlocks } = wp.data.dispatch('core/block-editor');
+    // const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
 
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
@@ -76,18 +76,31 @@ const Edit = (props) => {
         ['frontis-blocks/slider-item'],
     ], [slideItem, slideContent]);
 
+    // const innerBlocksProps = useInnerBlocksProps(
+    //     {
+    //         className: `swiper-wrapper`,
+    //         slot: 'container-start',
+    //     },
+    //     {
+    //         allowedBlocks: ALLOWED_BLOCKS,
+    //         template: getSliderTemplate,
+    //         renderAppender: InnerBlocks.ButtonBlockAppender,
+    //         orientation: 'horizontal',
+    //     }
+    // );
+
     const innerBlocksProps = useInnerBlocksProps(
-        {
-            className: `swiper-wrapper`,
-            slot: 'container-start',
-        },
-        {
-            allowedBlocks: ALLOWED_BLOCKS,
-            template: getSliderTemplate,
-            renderAppender: InnerBlocks.ButtonBlockAppender,
-            orientation: 'horizontal',
-        }
-    );
+		{
+			className: `swiper-wrapper`,
+			slot: 'container-start',
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: getSliderTemplate,
+			renderAppender: false,
+			orientation: 'horizontal',
+		}
+	);
 
 
     const setSwiperNavigationPagination = ( swiperInst ) => {
@@ -172,31 +185,51 @@ const Edit = (props) => {
 		}
 	}, [ isListViewOpen ] );
 
-    const getBlockControls = () => (
-        <BlockControls>
-            <ToolbarGroup>
-                <ToolbarButton
-                    icon="insert"
-                    label={__('Add Slide', 'frontis-blocks')}
-                    onClick={() => {
-                        if (block && block.innerBlocks) {
-                            const currentIndex = swiperInstance ? swiperInstance.activeIndex : 0;
+    // const getBlockControls = () => (
+    //     <BlockControls>
+    //         <ToolbarGroup>
+    //             <ToolbarButton
+    //                 icon="insert"
+    //                 label={__('Add Slide', 'frontis-blocks')}
+    //                 onClick={() => {
+    //                     if (block && block.innerBlocks) {
+    //                         const currentIndex = swiperInstance ? swiperInstance.activeIndex : 0;
 
-                            const newSlideBlock = createBlock('frontis-blocks/slider-item');
-                            const newInnerBlocks = [...innerBlocks, newSlideBlock];
-                            replaceInnerBlocks(clientId, newInnerBlocks, true);
+    //                         const newSlideBlock = createBlock('frontis-blocks/slider-item');
+    //                         const newInnerBlocks = [...innerBlocks, newSlideBlock];
+    //                         replaceInnerBlocks(clientId, newInnerBlocks, true);
 
-                            setAttributes({ slideItem: attributes.slideItem + 1 });
+    //                         setAttributes({ slideItem: attributes.slideItem + 1 });
 
-                            if (swiperInstance) {
-                                swiperInstance.slideTo(currentIndex, 0);
-                            }
-                        }
-                    }}
-                />
-            </ToolbarGroup>
-        </BlockControls>
-    );
+    //                         if (swiperInstance) {
+    //                             swiperInstance.slideTo(currentIndex, 0);
+    //                         }
+    //                     }
+    //                 }}
+    //             />
+    //         </ToolbarGroup>
+    //     </BlockControls>
+    // );
+
+
+    const getBlockControls = () => {
+		return (
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="insert"
+						label={ __( 'Add Slide', 'ultimate-addons-for-gutenberg' ) }
+						onClick={ () => {
+							insertBlock( createBlock( 'frontis-blocks/slider-item' ), block.innerBlocks.length, block.clientId );
+
+							setAttributes( { slideItem: attributes.slideItem + 1 } );
+							swiperInstance.activeIndex = attributes.slideItem + 1;
+						} }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+		);
+	};
 
 
     return (

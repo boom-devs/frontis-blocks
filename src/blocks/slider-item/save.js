@@ -1,29 +1,20 @@
-import {InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
+import classnames from 'classnames';
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-export default function Save({ attributes }) {
-    const {
-        blockId,
-        slideTitle,
-    } = attributes;
+export default function save( props ) {
+	const { blockId } = props.attributes;
 
-    const blockProps = useBlockProps.save({
-        id: blockId,
-    });
+	const blockProps = useBlockProps.save( {
+		className: classnames( 'fb-slider-child-wrap', 'swiper-slide', `fb-block-${ blockId }` ),
+	} );
 
-    return (
-        <>
-            <div {...blockProps} key={blockId}>
-                <div className="swiper-content">
-                    <div className="fb-slide-content">
-                        <RichText.Content
-                            tagName="h2"
-                            className="fb-slide-title"
-                            value={slideTitle}
-                        />
-                    </div>
-                    <InnerBlocks.Content />
-                </div>
-            </div>
-        </>
-    );
+	return (
+		<>
+			<div { ...blockProps } key={ blockId }>
+				<div className="swiper-content">
+					<InnerBlocks.Content />
+				</div>
+			</div>
+		</>
+	);
 }
