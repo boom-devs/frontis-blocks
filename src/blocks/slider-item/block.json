@@ -1,0 +1,31 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/slider-item",
+    "version": "1.0.0",
+    "title": "Slide Item",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+    "description": "A single slide in the slider.",
+    "icon": "format-image",
+    "example": {},
+    "supports": {
+        "anchor": false,
+        "align": ["wide", "full"],
+        "customClassName": false
+    },
+    "parent": ["frontis-blocks/slider"],
+    "usesContext": [
+        "fb/sliderID",
+        "fb/sliderInheritedTransitionType",
+        "fb/sliderInheritedDisplayIndicators",
+        "fb/sliderInheritedIndicatorColor",
+        "fb/sliderInheritedAutoplay",
+        "fb/sliderInheritedAutoplaySpeed",
+        "fb/sliderInheritedNavigationArrows"
+    ],
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
+}
+
