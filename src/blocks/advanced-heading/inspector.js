@@ -611,9 +611,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingMobileBorderWidth = `${headingMobileBorder.top}${headingBorderUnits.Mobile} ${headingMobileBorder.right}${headingBorderUnits.Mobile} ${headingMobileBorder.bottom}${headingBorderUnits.Mobile} ${headingMobileBorder.left}${headingBorderUnits.Mobile}`;
     /** End Heading Border */
 
-
-
-
     /** Start Heading Border Radius */
     const headingBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -689,7 +686,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingTabletBorderRadiusWidth = `${headingTabBorderRadius.top}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.right}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.bottom}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.left}${headingBorderRadiusUnits.Tablet}`;
     const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius.top}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.right}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.bottom}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.left}${headingBorderRadiusUnits.Mobile}`;
     /** End Heading Border Radius */
-
 
     /** Start Sub Heading Padding */
     const subHeadingPaddingUnitsChange = (event, position) => {
@@ -995,8 +991,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const subHeadingMobileBorderRadiusWidth = `${subHeadingMobileBorderRadius.top}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.right}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.bottom}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.left}${subHeadingBorderRadiusUnits.Mobile}`;
     /** End Sub Heading Border Radius */
 
-
-
     	/** Start Icon Border */
 	const handleHeadingIconBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1140,9 +1134,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const headingIconTabletBorderRadiusWidthValue = `${headingIconBorderRadiusTablet.top}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.right}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.bottom}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.left}${headingIconBorderRadiusUnits.Tablet}`;
 	const headingIconMobileBorderRadiusWidthValue = `${headingIconBorderRadiusMobile.top}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.right}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.bottom}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.left}${headingIconBorderRadiusUnits.Mobile}`;
 	/** End Icon Border Radius */
-
-
-
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -1364,7 +1355,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalMobileBorderWidth = `${headingGlobalBorderMobile.top}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.right}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.bottom}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.left}${headingGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
-
 	/** Start Global border radius*/
 	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1489,7 +1479,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
             transition: all .3s ease-in-out;
         }
-
 
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
             ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
@@ -1813,7 +1802,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingLineHeight,
     headingLineHeightUnits,
     headingDesktopPaddingWidth,
+    headingTabletPaddingWidth,
+    headingMobilePaddingWidth,
     headingDesktopMarginWidth,
+    headingTabletMarginWidth,
+    headingMobileMarginWidth,
     headingBorder,
     headingDesktopBorderWidth,
     headingTabletBorderWidth,
@@ -1846,10 +1839,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     subHeadingLineHeight,
     subHeadingLineHeightUnits,
     subHeadingDesktopPaddingWidth,
+    subHeadingTabletPaddingWidth,
+    subHeadingMobilePaddingWidth,
     subHeadingDesktopMarginWidth,
+    subHeadingTabletMarginWidth,
+    subHeadingMobileMarginWidth,
     subHeadingBorder,
     subHeadingDesktopBorderWidth,
+    subHeadingTabletBorderWidth,
+    subHeadingMobileBorderWidth,
     subHeadingDesktopBorderRadiusWidth,
+    subHeadingTabletBorderRadiusWidth,
+    subHeadingMobileBorderRadiusWidth,
     subHeadingBorderColor,
     subHeadingTextShadowCssValue,
     subHeadingTextStroke,
