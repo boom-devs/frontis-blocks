@@ -8,37 +8,18 @@ import { compose } from '@wordpress/compose';
 const Edit = (props) => {
     const { attributes, setAttributes, clientId, context, slideIndex } = props;
 
-    const { blockId, slideTitle } = attributes;
-
-    const blockProps = useBlockProps({
-        className: `fb-slide-main-wrapper ${blockId || 'default-id'} swiper-slide`,
-    });
-
-    useEffect(() => {
-        setAttributes({
-            sliderID: context?.['fb/sliderID'] || '',
-            inheritedTransitionType: context?.['fb/sliderInheritedTransitionType'] || '',
-            inheritedDisplayIndicators: context?.['fb/sliderInheritedDisplayIndicators'] || false,
-            inheritedIndicatorColor: context?.['fb/sliderInheritedIndicatorColor'] || '',
-            inheritedAutoplay: context?.['fb/sliderInheritedAutoplay'] || false,
-            inheritedAutoplaySpeed: context?.['fb/sliderInheritedAutoplaySpeed'] || 5000,
-            inheritedNavigationArrows: context?.['fb/sliderInheritedNavigationArrows'] || false,
-        });
-    }, [context]);
+    const { blockId } = attributes;
 
 
     const parentBlocks = wp.blocks.getBlockTypes().filter( function ( item ) {
 		return ! item.parent;
 	} );
 
-
-
     const TEMPLATE = [
 		[
 			'frontis-blocks/testimonial',
 		],
 	];
-
 
     // Hide slider block.
 	const ALLOWED_BLOCKS = parentBlocks
@@ -60,20 +41,14 @@ const Edit = (props) => {
         innerBlockOptions
     );
 
+    const blockProps = useBlockProps({
+        className: `fb-slide-main-wrapper ${blockId || 'default-id'} swiper-slide`,
+    });
 
     return (
         <>
             <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
             <div {...blockProps}>
-                {/* <div className="fb-slide-content">
-                    <RichText
-                        tagName="h2"
-                        className="fb-slide-title"
-                        value={slideTitle}
-                        onChange={(value) => setAttributes({ slideTitle: value })}
-                        placeholder={__('Slide Title', 'frontis')}
-                    />
-                </div> */}
                 <div {...innerBlocksProps} />
             </div>
         </>
