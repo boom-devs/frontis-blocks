@@ -1,4 +1,3 @@
-// background-color.js
 import { __ } from '@wordpress/i18n';
 import { 
     BaseControl, 
@@ -8,20 +7,14 @@ import './editor.lazy.scss';
 
 const FB_ImageControl = ({
     label = '',
-    globalBackgroundImageUrl,
-    setGlobalBackgroundImageUrl,
-    globalBackgroundImageAlt,
-    setGlobalBackgroundImageAlt,
-    globalBackgroundImageID,
-    setGlobalBackgroundImageID,
-    globalBackgroundImagePosition = '',
-    setGlobalBackgroundImagePosition,
-    globalBackgroundImageAttachment = '',
-    setGlobalBackgroundImageAttachment,
-    globalBackgroundImageRepeat = '',
-    setGlobalBackgroundImageRepeat,
-    globalBackgroundImageSize = '',
-    setGlobalBackgroundImageSize,
+    globalImageUrl,
+    setglobalImageUrl,
+    globalImageAlt,
+    setglobalImageAlt,
+    globalImageID,
+    setglobalImageID,
+    globalImageSize = '',
+    setglobalImageSize,
 
 }) => {
 
@@ -33,14 +26,14 @@ const FB_ImageControl = ({
             label={label}
             className="fb-image-control-wrapper"
         >
-            {globalBackgroundImageUrl ? ( 
-                <div className="fb-image-control" style={{backgroundImage: `url(${globalBackgroundImageUrl})`}}> 
+            {globalImageUrl ? ( 
+                <div className="fb-image-control" style={{backgroundImage: `url(${globalImageUrl})`}}> 
                     <button
                         className='fb-image-delete'
                         onClick={() => {
-                            setGlobalBackgroundImageUrl(null);
-                            setGlobalBackgroundImageAlt(null);
-                            setGlobalBackgroundImageID(null);
+                            setglobalImageUrl(null);
+                            setglobalImageAlt(null);
+                            setglobalImageID(null);
                         }}
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M15 9L9 15" stroke="#4D4D4D" strokeWidth="1.5"></path><path d="M9 9L15 15" stroke="#4D4D4D" strokeWidth="1.5"></path></svg>
@@ -49,7 +42,7 @@ const FB_ImageControl = ({
                         className='fb-image-replace-btn'
                         onClick={() => {
                             const mediaUploader = wp.media({
-                                title: __('Select or Upload background Image', 'frontis-blocks'),
+                                title: __('Select or Upload Image', 'frontis-blocks'),
                                 button: {
                                     text: __('Use this image', 'frontis-blocks'),
                                 },
@@ -58,9 +51,9 @@ const FB_ImageControl = ({
 
                             mediaUploader.on('select', function() {
                                 const attachment = mediaUploader.state().get('selection').first().toJSON();
-                                setGlobalBackgroundImageUrl(attachment.url);
-                                setGlobalBackgroundImageAlt(attachment.alt);
-                                setGlobalBackgroundImageID(attachment.id);
+                                setglobalImageUrl(attachment.url);
+                                setglobalImageAlt(attachment.alt);
+                                setglobalImageID(attachment.id);
                             });
 
                             mediaUploader.open();
@@ -75,7 +68,7 @@ const FB_ImageControl = ({
                     className='fb-image-upload-btn'
                     onClick={() => {
                         const mediaUploader = wp.media({
-                            title: __('Select or Upload background Image', 'frontis-blocks'),
+                            title: __('Select or Upload Image', 'frontis-blocks'),
                             button: {
                                 text: __('Use this image', 'frontis-blocks'),
                             },
@@ -84,9 +77,9 @@ const FB_ImageControl = ({
 
                         mediaUploader.on('select', function() {
                             const attachment = mediaUploader.state().get('selection').first().toJSON();
-                            setGlobalBackgroundImageUrl(attachment.url);
-                            setGlobalBackgroundImageAlt(attachment.alt);
-                            setGlobalBackgroundImageID(attachment.id);
+                            setglobalImageUrl(attachment.url);
+                            setglobalImageAlt(attachment.alt);
+                            setglobalImageID(attachment.id);
                         });
 
                         mediaUploader.open();
@@ -96,77 +89,23 @@ const FB_ImageControl = ({
                     Upload
                 </button>
             )}
-            {globalBackgroundImageUrl && (
+            {globalImageUrl && (
                 <div className="fb-image-control-setting-wrapper">
-                    <BaseControl
-                    >
+                    <BaseControl>
                         <SelectControl
-                            label={__("Image Position", "frontis-blocks")}
+                            label={__("Object Fit", "frontis-blocks")}
                             className="fb-image-label"
-                            value={globalBackgroundImagePosition}
+                            value={globalImageSize}
                             options={(
                                 [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Center Center", "frontis-blocks"), value: "center center"},
-                                    {label: __("Center Left", "frontis-blocks"), value: "center left"},
-                                    {label: __("Center Right", "frontis-blocks"), value: "center right"},
-                                    {label: __("Top Center", "frontis-blocks"), value: "top center"},
-                                    {label: __("Top Left", "frontis-blocks"), value: "top left"},
-                                    {label: __("Top Right", "frontis-blocks"), value: "top right"},
-                                    {label: __("Bottom Center", "frontis-blocks"), value: "bottom center"},
-                                    {label: __("Bottom Left", "frontis-blocks"), value: "bottom left"},
-                                    {label: __("Bottom Right", "frontis-blocks"), value: "bottom right"},
-                                    {label: __("Left Center", "frontis-blocks"), value: "left center"},
-                                    {label: __("Left Top", "frontis-blocks"), value: "left top"},
-                                    {label: __("Left Bottom", "frontis-blocks"), value: "left bottom"},
-                                    {label: __("Right Center", "frontis-blocks"), value: "right center"},
-                                    {label: __("Right Top", "frontis-blocks"), value: "right top"},
-                                    {label: __("Right Bottom", "frontis-blocks"), value: "right bottom"},
-                                ]
-                            )}
-                            onChange={setGlobalBackgroundImagePosition} 
-                        />
-                        <SelectControl
-                            label={__("Image Attachment", "frontis-blocks")}
-                            className="fb-image-label"
-                            value={globalBackgroundImageAttachment}
-                            options={(
-                                [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Scroll", "frontis-blocks"), value: "scroll"},
-                                    {label: __("Fixed", "frontis-blocks"), value: "fixed"},
-                                ]
-                            )}
-                            onChange={setGlobalBackgroundImageAttachment}
-                        />
-                        <SelectControl
-                            label={__("Image Repeat", "frontis-blocks")}
-                            className="fb-image-label"
-                            value={globalBackgroundImageRepeat}
-                            options={(
-                                [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Repeat", "frontis-blocks"), value: "repeat"},
-                                    {label: __("Repeat X", "frontis-blocks"), value: "repeat-x"},
-                                    {label: __("Repeat Y", "frontis-blocks"), value: "repeat-y"},
-                                    {label: __("No Repeat", "frontis-blocks"), value: "no-repeat"},
-                                ]
-                            )}
-                            onChange={setGlobalBackgroundImageRepeat} 
-                        />
-                        <SelectControl
-                            label={__("Image Size", "frontis-blocks")}
-                            className="fb-image-label"
-                            value={globalBackgroundImageSize}
-                            options={(
-                                [
-                                    {label: __("Default", "frontis-blocks"), value: ""},
-                                    {label: __("Auto", "frontis-blocks"), value: "auto"},
-                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
+                                    {label: __("None", "frontis-blocks"), value: "none"},
+                                    {label: __("Fill", "frontis-blocks"), value: "fill"},
                                     {label: __("Contain", "frontis-blocks"), value: "contain"},
+                                    {label: __("Cover", "frontis-blocks"), value: "cover"},
+                                    {label: __("Scale Down", "frontis-blocks"), value: "scale-down"},
                                 ]
                             )}
-                            onChange={setGlobalBackgroundImageSize}
+                            onChange={setglobalImageSize}
                         />
                     </BaseControl>
                     

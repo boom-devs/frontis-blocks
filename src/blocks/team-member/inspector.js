@@ -29,7 +29,7 @@ import FB_AlignmentControl from '../../components/alignment-control/index.js';
 import FB_Range from '../../components/range/index.js';
 import FB_TypographyControl from '../../components/typography-control/index.js';
 import FB_ColorControl from '../../components/color-control/index.js';
-import FB_ImageControl from '../../components/image-control/index.js';
+import FB_BackgroundImageControl from '../../components/background-image-control/index.js';
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 import loadGoogleFont from '@Utils/loadGoogleFont';
@@ -3200,7 +3200,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === 'general' && (
 									<>
 										<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={true}>
-											<FB_ImageControl
+											<FB_BackgroundImageControl
                                                 globalBackgroundImageUrl={teamMemberImageUrl}
                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}
                                                 globalBackgroundImageAlt={teamMemberImageAlt}
