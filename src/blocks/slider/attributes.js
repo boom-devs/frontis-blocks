@@ -20,32 +20,18 @@ const attributes = {
         type: "number",
         default: slideCount
     },
-
-    // Slider Settings
-    transitionType: {
-        type: "string",
-        default: "slide",
-    },
-    displayIndicators: {
-        type: "boolean",
-        default: true,
-    },
-    indicatorColor: {
-        type: "string",
-        default: "#000000", // Default color for the indicator
-    },
-    autoplay: {
-        type: "boolean",
-        default: false,
-    },
-    autoplaySpeed: {
-        type: "number",
-        default: 1000,
-    },
-    navigationArrows: {
-        type: "boolean",
-        default: true,
-    },
+	transitionSpeed: {
+		type: 'number',
+		default: 800,
+	},
+    displayArrows: {
+		type: 'boolean',
+		default: true,
+	},
+	displayDots: {
+		type: 'boolean',
+		default: true,
+	},
 };
 
 export default attributes;
