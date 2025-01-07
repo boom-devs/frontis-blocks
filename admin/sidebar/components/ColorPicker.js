@@ -1,7 +1,7 @@
 import {__} from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import chroma from "chroma-js";
-import {ColorPicker as WpColorPicker, RangeControl, ColorIndicator, ColorPalette} from '@wordpress/components';
+import {ColorPicker as WpColorPicker, RangeControl, ColorIndicator, ColorPalette, Dropdown, __experimentalVStack as Vstack, Button} from '@wordpress/components';
 import "./ColorPicker.css";
 
 const defaultsColors = [
@@ -105,20 +105,29 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
         enableAlpha={true}
         onChange={handleBaseColorChange}
       /> */}
-      <ColorPalette
+      {/* <ColorPalette
         colors={defaultsColors}
         value={ baseColor }
         enableAlpha={true}
         onChange={handleBaseColorChange}
-      />
-      <div>Base Color: {baseColor}</div>
-
-      {/* Range slider for selecting shade */}
-      <div className="range-slider">
-        {/* <label htmlFor="shade-range" style={{ display: "block", margin: "10px 0" }}>
-          Shade Step ({shadeStep})
-        </label> */}
-        <RangeControl
+      /> */}
+      <Dropdown
+        className="my-container-class-name"
+        contentClassName="my-dropdown-content-classname"
+        popoverProps={{ placement: 'bottom-start' }}
+        renderToggle={({ isOpen, onToggle }) => (
+          <Button onClick={onToggle} aria-expanded={isOpen}>
+            <ColorIndicator colorValue={shadeColor} /> Primary Color
+          </Button>
+        )}
+        renderContent={ () => (
+          <Vstack>
+          <WpColorPicker
+            defaultValue={baseColor}
+            enableAlpha={true}
+            onChange={handleBaseColorChange}
+          />
+          <RangeControl
           __next40pxDefaultSize
           __nextHasNoMarginBottom
           help="Please select how transparent you would like this."
@@ -129,7 +138,41 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
           step={100}
           value={shadeStep}
           onChange={handleRangeChange}
-        />
+            />
+            <div
+          className="shade-preview"
+          style={{
+            background: shadeColor,
+            width: "50px",
+            height: "50px",
+            borderRadius: "8px",
+            marginBottom: "10px",
+            border: "1px solid #ccc",
+          }}
+        ></div>
+          <div>Selected Shade ({shadeStep}): {shadeColor}</div>
+          </Vstack>
+        )}
+      />
+      
+
+      {/* Range slider for selecting shade */}
+      <div className="range-slider">
+        {/* <label htmlFor="shade-range" style={{ display: "block", margin: "10px 0" }}>
+          Shade Step ({shadeStep})
+        </label> */}
+        {/* <RangeControl
+          __next40pxDefaultSize
+          __nextHasNoMarginBottom
+          help="Please select how transparent you would like this."
+          initialPosition={500}
+          label="Shade range"
+          max={900}
+          min={ 100 }
+          step={100}
+          value={shadeStep}
+          onChange={handleRangeChange}
+        /> */}
         {/* <input
           id="shade-range"
           type="range"
@@ -142,7 +185,7 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
       </div>
 
       {/* Display the selected shade */}
-      <div className="shade-display" style={{ marginTop: "20px" }}>
+      {/* <div className="shade-display" style={{ marginTop: "20px" }}>
         <div
           className="shade-preview"
           style={{
@@ -155,7 +198,7 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
           }}
         ></div>
         <div>Selected Shade ({shadeStep}): {shadeColor}</div>
-      </div>
+      </div> */}
     </div>
   );
 };

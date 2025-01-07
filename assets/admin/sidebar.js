@@ -647,40 +647,53 @@ var ColorPicker = function ColorPicker(_ref) {
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "color-picker-container"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
-    colors: defaultsColors,
-    value: baseColor,
-    enableAlpha: true,
-    onChange: handleBaseColorChange
-  }), /*#__PURE__*/React.createElement("div", null, "Base Color: ", baseColor), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dropdown, {
+    className: "my-container-class-name",
+    contentClassName: "my-dropdown-content-classname",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+        onToggle = _ref2.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+        onClick: onToggle,
+        "aria-expanded": isOpen
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorIndicator, {
+        colorValue: shadeColor
+      }), " Primary Color");
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalVStack, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+        defaultValue: baseColor,
+        enableAlpha: true,
+        onChange: handleBaseColorChange
+      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+        __next40pxDefaultSize: true,
+        __nextHasNoMarginBottom: true,
+        help: "Please select how transparent you would like this.",
+        initialPosition: 500,
+        label: "Shade range",
+        max: 900,
+        min: 100,
+        step: 100,
+        value: shadeStep,
+        onChange: handleRangeChange
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "shade-preview",
+        style: {
+          background: shadeColor,
+          width: "50px",
+          height: "50px",
+          borderRadius: "8px",
+          marginBottom: "10px",
+          border: "1px solid #ccc"
+        }
+      }), /*#__PURE__*/React.createElement("div", null, "Selected Shade (", shadeStep, "): ", shadeColor));
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     className: "range-slider"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    __next40pxDefaultSize: true,
-    __nextHasNoMarginBottom: true,
-    help: "Please select how transparent you would like this.",
-    initialPosition: 500,
-    label: "Shade range",
-    max: 900,
-    min: 100,
-    step: 100,
-    value: shadeStep,
-    onChange: handleRangeChange
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "shade-display",
-    style: {
-      marginTop: "20px"
-    }
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "shade-preview",
-    style: {
-      background: shadeColor,
-      width: "100px",
-      height: "100px",
-      borderRadius: "8px",
-      marginBottom: "10px",
-      border: "1px solid #ccc"
-    }
-  }), /*#__PURE__*/React.createElement("div", null, "Selected Shade (", shadeStep, "): ", shadeColor)));
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPicker);
 
