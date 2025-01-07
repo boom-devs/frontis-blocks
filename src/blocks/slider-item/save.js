@@ -1,4 +1,4 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import {InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
     const {
@@ -6,15 +6,24 @@ export default function Save({ attributes }) {
         slideTitle,
     } = attributes;
 
+    const blockProps = useBlockProps.save({
+        id: blockId,
+    });
+
     return (
-        <div className={`fb-slide-main-wrapper ${blockId} swiper-slide`}>
-            <div className="fb-slide-content">
-                <RichText.Content
-                    tagName="h2"
-                    className="fb-slide-title"
-                    value={slideTitle}
-                />
+        <>
+            <div {...blockProps} key={blockId}>
+                <div className="swiper-content">
+                    <div className="fb-slide-content">
+                        <RichText.Content
+                            tagName="h2"
+                            className="fb-slide-title"
+                            value={slideTitle}
+                        />
+                    </div>
+                    <InnerBlocks.Content />
+                </div>
             </div>
-        </div>
+        </>
     );
 }
