@@ -14,16 +14,6 @@
         "align": ["wide", "full"],
         "customClassName": false
     },
-    "parent": ["frontis-blocks/slider"],
-    "usesContext": [
-        "fb/sliderID",
-        "fb/sliderInheritedTransitionType",
-        "fb/sliderInheritedDisplayIndicators",
-        "fb/sliderInheritedIndicatorColor",
-        "fb/sliderInheritedAutoplay",
-        "fb/sliderInheritedAutoplaySpeed",
-        "fb/sliderInheritedNavigationArrows"
-    ],
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css"
