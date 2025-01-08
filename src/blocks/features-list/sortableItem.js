@@ -4,7 +4,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { TextControl, TextareaControl, Button, ButtonGroup, BaseControl } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
-
+import FB_ImageControl from '@Components/image-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
@@ -91,6 +91,17 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             </ButtonGroup>
                             { FeatureIconAlign === 'icon' && (
                                 <FBIconPicker value={item.FeatureIcon} setIconHandler={iconHandler} />
+                            )}
+                            {(FeatureIconAlign === 'image') && (
+                                <FB_ImageControl 
+                                    globalImageUrl={item.FeatureIconImageUrl}
+                                    setglobalImageUrl={(value) => handleChangeItem(item.id, 'FeatureIconImageUrl', value)}
+                                    globalImageAlt={item.FeatureIconImageAlt}
+                                    setglobalImageAlt={(value) => handleChangeItem(item.id, 'FeatureIconImageAlt', value)}
+                                    globalImageID={item.FeatureIconImageID}
+                                    setglobalImageID={(value) => handleChangeItem(item.id, 'FeatureIconImageID', value)}
+                                    isImageSize={false}
+                                />
                             )}
                         </BaseControl>
                     </div>

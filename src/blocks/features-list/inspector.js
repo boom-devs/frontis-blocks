@@ -292,6 +292,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             Title: `Feature Item ${FeatureItems.length + 1}`, 
             Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.', 
             FeatureIcon: 'check' ,
+            FeatureIconImageUrl,
+            FeatureIconImageAlt,
+            FeatureIconImageID,
 
             FeatureSingleItemIconColorSwitcher: "normal",
             FeatureSingleItemIconColor: "",
