@@ -1,13 +1,12 @@
 import {select, useSelect} from '@wordpress/data';
-import {useEffect, useMemo, useRef} from '@wordpress/element';
+import {useEffect, useMemo} from '@wordpress/element';
 import Inspector from './inspector';
-import {VariationPicker} from './variationPicker';
+import {ColumnsPicker} from './variationPicker';
 import './editor.scss';
 import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader";
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import {useDeviceType} from "@Config/displayType";
-import frontendStyling from './frontstyling';
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -145,12 +144,10 @@ const Edit = (props) => {
 		if (block) {
 			const coreBlockEditord = select( 'core/block-editor' );
 			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
-
-			console.log(parentBlockId)
 			setAttributes({p_block_id: parentBlockId});
 		}
 
-		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
+		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
 	return (
