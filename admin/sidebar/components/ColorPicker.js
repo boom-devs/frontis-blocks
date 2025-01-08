@@ -1,90 +1,71 @@
 import {__} from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
 import chroma from "chroma-js";
-import {ColorPicker as WpColorPicker, RangeControl, ColorIndicator, ColorPalette, Dropdown, __experimentalVStack as Vstack, Button} from '@wordpress/components';
+import {ColorPicker as WpColorPicker, RangeControl, ColorIndicator, ColorPalette, Dropdown, __experimentalVStack as Vstack, Button, CircularOptionPicker} from '@wordpress/components';
 import "./ColorPicker.css";
-
-const defaultsColors = [
-	{
-		"name": __("Primary Color", "frontis-blocks"),
-		"color": '#399CFF',
-		"slug": 'primary-color',
-		"var": '--fb-primary-color'
-	},
-	{
-		"name": __("Secondary Color", "frontis-blocks"),
-		"color": '#f00000',
-		"slug": 'secondary-color',
-		"var": '--fb-secondary-color'
-	},
-	{
-		"name": __("Tertiary Color", "frontis-blocks"),
-		"color": '#F72585',
-		"slug": 'tertiary-color',
-		"var": '--fb-tertiary-color'
-	},
-	{
-		"name": __("Accent Color", "frontis-blocks"),
-		"color": "#7209B7",
-		"slug": 'accent-color',
-		"var": '--fb-accent-color'
-	},
-	{
-		"name": __("Text Color", "frontis-blocks"),
-		"color": '#3A0CA3',
-		"slug": 'text-color',
-		"var": '--fb-text-color'
-	},
-	{
-		"name": __("Link Color", "frontis-blocks"),
-		"color": '#4361EE',
-		"slug": 'link-color',
-		"var": '--fb-link-color'
-	},
-	{
-		"name": __("Link Hover Color", "frontis-blocks"),
-		"color": '#4CC9F0',
-		"slug": 'link-hover-color',
-		"var": '--fb-link-hover-color'
-	},
-	{
-		"name": __("White Color", "frontis-blocks"),
-		"color": '#FFFFFF',
-		"slug": 'white-color',
-		"var": '--fb-white-color'
-	},
-	{
-		"name": __("Black Color", "frontis-blocks"),
-		"color": '#000000',
-		"slug": 'black-color',
-		"var": '--fb-black-color'
-	},
-	{
-		"name": __("Gray Color", "frontis-blocks"),
-		"color": '#808080',
-		"slug": 'gray-color',
-		"var": '--fb-gray-color'
-	}
-
-];
-
 
 const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
   const [baseColor, setBaseColor] = useState(defaultColor);
   const [shadeStep, setShadeStep] = useState(500); // Default shade step
-  const [shadeColor, setShadeColor] = useState(defaultColor);
+  const [ shadeColor, setShadeColor ] = useState(defaultColor);
+  const [ shades, setShades ] = useState([]);
+  const [ currentColor, setCurrentColor ] = useState();
+
 
   useEffect(() => {
     // Generate the shade color when baseColor or shadeStep changes
     generateShade(baseColor, shadeStep);
+    generateShades(baseColor);
   }, [baseColor, shadeStep]);
 
-  const generateShade = (color, step) => {
-    // Create chroma scale: lightest at 100, darkest at 900
-    const scale = chroma.scale([chroma(color).brighten(2), color, chroma(color).darken(3)]).domain([100, 900]);
-    const generatedShade = scale(step).hex();
-    setShadeColor(generatedShade);
+  const generateShades = (color) => {
+    const shades = [];
+    for (let step = 100; step <= 900; step += 100) {
+      const generatedShade = {
+        name: `${step}`,
+        color: generateShade(color, step)
+      };
+      shades.push(generatedShade);
+    }
+    console.log(shades);
+    setShades(shades); // Set the shades state
   };
+
+  const generateShade = (color, step) => {
+    const scale = chroma.scale([chroma(color).brighten(2), color, chroma(color).darken(3)]).domain([100, 900]);
+    return scale(step).hex();
+  };
+
+  const options = (
+    <>
+      {shades.map(({ color, name }, index) => (
+        <Button
+          key={`${color}-${index}`}
+          icon={
+            <span 
+              style={{ 
+                background: color,
+                display: 'block',
+                width: '24px',
+                height: '24px',
+                borderRadius: '50%'
+              }} 
+            />
+          }
+          isPressed={index === currentColor}
+          onClick={() => {
+            setCurrentColor(index);
+            setShadeColor(color);
+          }}
+          aria-label={`Shade ${name}`}
+          style={{
+            padding: 2,
+            margin: '0 4px'
+          }}
+        />
+      ))}
+    </>
+  );
 
   const handleBaseColorChange = (color) => {
     console.log(color);
@@ -121,6 +102,7 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
           </Button>
         )}
         renderContent={ () => (
+          <>
           <Vstack>
           <WpColorPicker
             defaultValue={baseColor}
@@ -128,18 +110,33 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
             onChange={handleBaseColorChange}
           />
           <RangeControl
-          __next40pxDefaultSize
-          __nextHasNoMarginBottom
-          help="Please select how transparent you would like this."
-          initialPosition={500}
-          label="Shade range"
-          max={900}
-          min={ 100 }
-          step={100}
-          value={shadeStep}
-          onChange={handleRangeChange}
+            __next40pxDefaultSize
+            __nextHasNoMarginBottom
+            help="Please select how transparent you would like this."
+            initialPosition={500}
+            label="Shade range"
+            max={900}
+            min={ 100 }
+            step={100}
+            value={shadeStep}
+            onChange={handleRangeChange}
+          />
+            <CircularOptionPicker
+              options={options}
+              actions={
+                <Button
+                  onClick={() => {
+                    setCurrentColor(undefined);
+                    setShadeColor(defaultColor);
+                  }}
+                  variant="secondary"
+                  className="is-small"
+                >
+                  Clear
+                </Button>
+              }
             />
-            <div
+          <div
           className="shade-preview"
           style={{
             background: shadeColor,
@@ -148,10 +145,10 @@ const ColorPicker = ({ defaultColor = "#f9f9f9" }) => {
             borderRadius: "8px",
             marginBottom: "10px",
             border: "1px solid #ccc",
-          }}
-        ></div>
+          }}></div>
           <div>Selected Shade ({shadeStep}): {shadeColor}</div>
-          </Vstack>
+            </Vstack>
+          </>
         )}
       />
       

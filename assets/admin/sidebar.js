@@ -562,57 +562,6 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var defaultsColors = [{
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
-  "color": '#399CFF',
-  "slug": 'primary-color',
-  "var": '--fb-primary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#f00000',
-  "slug": 'secondary-color',
-  "var": '--fb-secondary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#F72585',
-  "slug": 'tertiary-color',
-  "var": '--fb-tertiary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
-  "color": "#7209B7",
-  "slug": 'accent-color',
-  "var": '--fb-accent-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
-  "color": '#3A0CA3',
-  "slug": 'text-color',
-  "var": '--fb-text-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
-  "color": '#4361EE',
-  "slug": 'link-color',
-  "var": '--fb-link-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#4CC9F0',
-  "slug": 'link-hover-color',
-  "var": '--fb-link-hover-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
-  "color": '#FFFFFF',
-  "slug": 'white-color',
-  "var": '--fb-white-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
-  "color": '#000000',
-  "slug": 'black-color',
-  "var": '--fb-black-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color',
-  "var": '--fb-gray-color'
-}];
 var ColorPicker = function ColorPicker(_ref) {
   var _ref$defaultColor = _ref.defaultColor,
     defaultColor = _ref$defaultColor === void 0 ? "#f9f9f9" : _ref$defaultColor;
@@ -628,16 +577,61 @@ var ColorPicker = function ColorPicker(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     shadeColor = _useState6[0],
     setShadeColor = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    shades = _useState8[0],
+    setShades = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
+    _useState10 = _slicedToArray(_useState9, 2),
+    currentColor = _useState10[0],
+    setCurrentColor = _useState10[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     // Generate the shade color when baseColor or shadeStep changes
     generateShade(baseColor, shadeStep);
+    generateShades(baseColor);
   }, [baseColor, shadeStep]);
-  var generateShade = function generateShade(color, step) {
-    // Create chroma scale: lightest at 100, darkest at 900
-    var scale = chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"].scale([(0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).brighten(2), color, (0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).darken(3)]).domain([100, 900]);
-    var generatedShade = scale(step).hex();
-    setShadeColor(generatedShade);
+  var generateShades = function generateShades(color) {
+    var shades = [];
+    for (var step = 100; step <= 900; step += 100) {
+      var generatedShade = {
+        name: "".concat(step),
+        color: generateShade(color, step)
+      };
+      shades.push(generatedShade);
+    }
+    console.log(shades);
+    setShades(shades); // Set the shades state
   };
+  var generateShade = function generateShade(color, step) {
+    var scale = chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"].scale([(0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).brighten(2), color, (0,chroma_js__WEBPACK_IMPORTED_MODULE_2__["default"])(color).darken(3)]).domain([100, 900]);
+    return scale(step).hex();
+  };
+  var options = /*#__PURE__*/React.createElement(React.Fragment, null, shades.map(function (_ref2, index) {
+    var color = _ref2.color,
+      name = _ref2.name;
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+      key: "".concat(color, "-").concat(index),
+      icon: /*#__PURE__*/React.createElement("span", {
+        style: {
+          background: color,
+          display: 'block',
+          width: '24px',
+          height: '24px',
+          borderRadius: '50%'
+        }
+      }),
+      isPressed: index === currentColor,
+      onClick: function onClick() {
+        setCurrentColor(index);
+        setShadeColor(color);
+      },
+      "aria-label": "Shade ".concat(name),
+      style: {
+        padding: 2,
+        margin: '0 4px'
+      }
+    });
+  }));
   var handleBaseColorChange = function handleBaseColorChange(color) {
     console.log(color);
     setBaseColor(color);
@@ -653,9 +647,9 @@ var ColorPicker = function ColorPicker(_ref) {
     popoverProps: {
       placement: 'bottom-start'
     },
-    renderToggle: function renderToggle(_ref2) {
-      var isOpen = _ref2.isOpen,
-        onToggle = _ref2.onToggle;
+    renderToggle: function renderToggle(_ref3) {
+      var isOpen = _ref3.isOpen,
+        onToggle = _ref3.onToggle;
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
         onClick: onToggle,
         "aria-expanded": isOpen
@@ -664,7 +658,7 @@ var ColorPicker = function ColorPicker(_ref) {
       }), " Primary Color");
     },
     renderContent: function renderContent() {
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalVStack, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalVStack, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
         defaultValue: baseColor,
         enableAlpha: true,
         onChange: handleBaseColorChange
@@ -679,6 +673,16 @@ var ColorPicker = function ColorPicker(_ref) {
         step: 100,
         value: shadeStep,
         onChange: handleRangeChange
+      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CircularOptionPicker, {
+        options: options,
+        actions: /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+          onClick: function onClick() {
+            setCurrentColor(undefined);
+            setShadeColor(defaultColor);
+          },
+          variant: "secondary",
+          className: "is-small"
+        }, "Clear")
       }), /*#__PURE__*/React.createElement("div", {
         className: "shade-preview",
         style: {
@@ -689,7 +693,7 @@ var ColorPicker = function ColorPicker(_ref) {
           marginBottom: "10px",
           border: "1px solid #ccc"
         }
-      }), /*#__PURE__*/React.createElement("div", null, "Selected Shade (", shadeStep, "): ", shadeColor));
+      }), /*#__PURE__*/React.createElement("div", null, "Selected Shade (", shadeStep, "): ", shadeColor)));
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: "range-slider"
