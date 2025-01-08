@@ -351,11 +351,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				  item.FeatureIconImageUrl = value;
 				}
 			});
-            setAttributes({ FeatureItems: updatedItems });
             setFeatureItemList(updatedItems);
 		}
         setAttributes({ FeatureItems: updatedItems });
-
         
     };
 
@@ -365,6 +363,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setFeatureItemList(updatedItems);
     };
 
+
+    //Sync FeatureItemList with attributes.FeatureItems
+    useEffect(() => {
+        setAttributes({ FeatureItems: FeatureItemList });
+    }, [FeatureItemList, setAttributes]);
+
+
+
+    // Initialize FeatureItemList from attributes.FeatureItems
+    // useEffect(() => {
+    //     if (FeatureItems && JSON.stringify(FeatureItems) !== JSON.stringify(FeatureItemList)) {
+    //         setFeatureItemList(FeatureItems);
+    //     }
+    // }, [FeatureItems]);
+
+    // // Sync FeatureItemList with attributes.FeatureItems
+    // useEffect(() => {
+    //     if (JSON.stringify(FeatureItemList) !== JSON.stringify(FeatureItems)) {
+    //         setAttributes({ FeatureItems: FeatureItemList });
+    //     }
+    // }, [FeatureItemList, FeatureItems, setAttributes]);
 
     /** Start Global padding */
 	const handleFeatureIconPaddingUnitChange = ( event, position ) => {
