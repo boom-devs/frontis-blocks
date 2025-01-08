@@ -1,4 +1,3 @@
-import variations from "@Blocks/container/variations";
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 import { registerBlockType } from '@wordpress/blocks';
 import attributes from './attributes';
@@ -11,7 +10,6 @@ registerBlockType(metadata.name, {
 	...metadata,
 	icon: FB_Block_Icons.container,
 	attributes,
-	variations,
 	edit: ( props ) => <Edit { ...props }/>,
 	save: ( props ) => <Save { ...props }/>
 });

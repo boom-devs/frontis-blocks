@@ -27,11 +27,11 @@ $grid_css_array = array(
 $attributes = $block['attrs'];
 
 // Arrange block attributes
-$containerType = isset( $attributes['containerType'] ) ? $attributes['containerType'] : 'full-width';
-$containerTypeFull = isset( $attributes['containerTypeFull'] ) ? $attributes['containerTypeFull'] : 'boxed';
-$htmlTag = isset( $attributes['htmlTag'] ) ? $attributes['htmlTag'] : 'div';
-$htmlTagLink = isset( $attributes['htmlTagLink'] ) ? $attributes['htmlTagLink'] : null;
-$linkTarget = isset( $attributes['linkTarget'] ) ? $attributes['linkTarget'] : false;
+$containerType = $attributes['containerType'] ?? 'full-width';
+$containerTypeFull = $attributes['containerTypeFull'] ?? 'boxed';
+$htmlTag = $attributes['htmlTag'] ?? 'div';
+$htmlTagLink = $attributes['htmlTagLink'] ?? null;
+$linkTarget = $attributes['linkTarget'] ?? false;
 $contentWidth = isset( $attributes['contentWidth'] ) ? $attributes['contentWidth'] : 'alignfull';
 $innerContentWidth = isset( $attributes['innerContentWidth'] ) ? $attributes['innerContentWidth'] : 'alignwide';
 $customWidth = isset( $attributes['customWidth'] ) ? $attributes['customWidth'] : [ 'Desktop' => 100, 'Tablet' => 100, 'Mobile' => 100 ];
@@ -40,7 +40,7 @@ $resetFallBackCustomWidth = isset( $attributes['resetFallBackCustomWidth'] ) ? $
 $widthDesktop = isset( $attributes['widthDesktop'] ) ? $attributes['widthDesktop'] : 100;
 $widthTablet = isset( $attributes['widthTablet'] ) ? $attributes['widthTablet'] : null;
 $widthMobile = isset( $attributes['widthMobile'] ) ? $attributes['widthMobile'] : 100;
-$widthType = isset( $attributes['widthType'] ) ? $attributes['widthType'] : '%';
+$widthType = $attributes['widthType'] ?? '%';
 $fullWidthContentBoxedWidth = isset( $attributes['fullWidthContentBoxedWidth'] ) ? $attributes['fullWidthContentBoxedWidth'] : [ 'Desktop' => 1200, 'Tablet' => 1024, 'Mobile' => 767 ];
 $fullWidthContentBoxedWidthUnits = isset( $attributes['fullWidthContentBoxedWidthUnits'] ) ? $attributes['fullWidthContentBoxedWidthUnits'] : [ 'Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px' ];
 $innerContentCustomWidthDesktop = isset( $attributes['innerContentCustomWidthDesktop'] ) ? $attributes['innerContentCustomWidthDesktop'] : 1200;
@@ -351,6 +351,11 @@ $directionDesktop = isset( $attributes['directionDesktop'] ) ? $attributes['dire
 
 $innerContentWidth = isset( $attributes['innerContentWidth'] ) ? $attributes['innerContentWidth'] : 'alignfull';
 $contentWidth = isset( $attributes['contentWidth'] ) ? $attributes['contentWidth'] : 'alignwide';
+$containerWrap = $attributes['containerWrap'] ?? [ 'Desktop' => 'wrap', 'Tablet' => 'wrap', 'Mobile' => 'wrap' ];
+
+//echo "<pre>";
+//var_dump($attributes);
+//echo "</pre>";
 
 $has_inner_blocks_wrap = 'alignwide' === $contentWidth && 'alignfull' === $innerContentWidth;
 
@@ -371,8 +376,8 @@ if (isset($attributes['p_block_id']) && !isset($attributes['isBlockRootParent'])
 		$css_content .= "@media (max-width: 1024px) {\n";
 		$css_content .= "  .frontis-blocks-$block_id {\n";
 		if (isset($customWidth['Tablet'])) {
-			$css_content .= "    width: {$customWidth['Tablet']}%; /* Tablet */\n";
-			$css_content .= "  width: 100%; /* Desktop */\n";
+			$css_content .= "    max-width: {$customWidth['Tablet']}%; /* Tablet */\n";
+			$css_content .= "  width: 100%; /* Tablet */\n";
 		}
 		$css_content .= "  }\n";
 		$css_content .= "}\n";
@@ -380,7 +385,8 @@ if (isset($attributes['p_block_id']) && !isset($attributes['isBlockRootParent'])
 		$css_content .= "@media (max-width: 768px) {\n";
 		$css_content .= "  .frontis-blocks-$block_id {\n";
 		if (isset($customWidth['Mobile'])) {
-			$css_content .= "    width: {$customWidth['Mobile']}%; /* Mobile */\n";
+			$css_content .= "    max-width: {$customWidth['Mobile']}%; /* Mobile */\n";
+			$css_content .= "  width: 100%; /* Mobile */\n";
 		}
 		$css_content .= "  }\n";
 		$css_content .= "}\n";
@@ -389,6 +395,9 @@ if (isset($attributes['p_block_id']) && !isset($attributes['isBlockRootParent'])
 	// Enqueue style for frontend
 	EnqueueBlocksCss::enqueue_block_asset($css_content, $single_block['slug'], $block_id);
 }
+//echo "<pre>";
+//var_dump($block_attributes);
+//echo "</pre>";
 
 if(isset($block_attributes['isBlockRootParent']) && $block_attributes['isBlockRootParent'] ) {
 	// Generate CSS for directionDesktop if available
@@ -419,45 +428,44 @@ if(isset($block_attributes['isBlockRootParent']) && $block_attributes['isBlockRo
 
 
 	// Generate css for desktop
-
-		// Generate root container css
-// 		$root_container = array()
-	if(isset($fullWidthContentBoxedWidth['Desktop'])){
-		$desktopContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Desktop'];
-		$desktopContentBoxedWidth = $fullWidthContentBoxedWidth['Desktop'] . $desktopContentBoxedWidthUnit;
-		$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
-		$css .= "  	--inner-content-custom-width: min(100%, $desktopContentBoxedWidth);\n";
-		$css .= "  	max-width: var(--inner-content-custom-width);\n";
-		$css .= "   width: 100%;\n";
-		$css .= "   align-items: center;\n";
-		$css .= "   flex-wrap: wrap;\n";
-		$css .= "}\n";
-	}
+	$desktopContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Desktop'];
+	$desktopContainerWrap = $containerWrap['Desktop'];
+	$desktopContentBoxedWidth = $fullWidthContentBoxedWidth['Desktop'] . $desktopContentBoxedWidthUnit;
+	$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
+	$css .= "  	--inner-content-custom-width: min(100%, $desktopContentBoxedWidth);\n";
+	$css .= "  	max-width: var(--inner-content-custom-width);\n";
+	$css .= "   width: 100%;\n";
+	$css .= "   align-items: center;\n";
+	$css .= "   flex-wrap: $desktopContainerWrap;\n";
+	$css .= "}\n";
 
 	// Generate css for tablet
-	if(isset($fullWidthContentBoxedWidth['Tablet'])){
-		$css .= "@media (max-width: 1024px) {\n";
-			$tabletContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Tablet'];
-			$tabletContentBoxedWidth = $fullWidthContentBoxedWidth['Tablet'] . $tabletContentBoxedWidthUnit;
-			$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
-			$css .= "  --inner-content-custom-width: min(100%, $tabletContentBoxedWidth);\n";
-			$css .= "  max-width: var(--inner-content-custom-width);\n";
-			$css .= "   width: 100%;\n";
-			$css .= "}\n";
+	$tabletContainerWrap = $containerWrap['Tablet'];
+	$css .= "@media (max-width: 1024px) {\n";
+		$tabletContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Tablet'];
+		$tabletContentBoxedWidth = $fullWidthContentBoxedWidth['Tablet'] . $tabletContentBoxedWidthUnit;
+		$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
+		$css .= "  --inner-content-custom-width: min(100%, $tabletContentBoxedWidth);\n";
+		$css .= "  max-width: var(--inner-content-custom-width);\n";
+		$css .= "   width: 100%;\n";
+		$css .= "   align-items: center;\n";
+		$css .= "   flex-wrap: $tabletContainerWrap;\n";
 		$css .= "}\n";
-	}
+	$css .= "}\n";
 
-	if(isset($fullWidthContentBoxedWidth['Mobile'])){
-		$css .= "@media (max-width: 768px) {\n";
-			$mobileContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Mobile'];
-			$mobileContentBoxedWidth = $fullWidthContentBoxedWidth['Mobile'] . $mobileContentBoxedWidthUnit;
-			$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
-			$css .= "  --inner-content-custom-width: min(100%, $mobileContentBoxedWidth);\n";
-			$css .= "  max-width: var(--inner-content-custom-width);\n";
-			$css .= "   width: 100%;\n";
-			$css .= "}\n";
+	// Generate css for mobile
+	$mobileContainerWrap = $containerWrap['Mobile'];
+	$css .= "@media (max-width: 768px) {\n";
+		$mobileContentBoxedWidthUnit = $fullWidthContentBoxedWidthUnits['Mobile'];
+		$mobileContentBoxedWidth = $fullWidthContentBoxedWidth['Mobile'] . $mobileContentBoxedWidthUnit;
+		$css .= "#$block_id .frontis-blocks-container-inner-blocks-wrap {\n";
+		$css .= "  --inner-content-custom-width: min(100%, $mobileContentBoxedWidth);\n";
+		$css .= "  max-width: var(--inner-content-custom-width);\n";
+		$css .= "   width: 100%;\n";
+		$css .= "   align-items: center;\n";
+		$css .= "   flex-wrap: $mobileContainerWrap;\n";
 		$css .= "}\n";
-	}
+	$css .= "}\n";
 
 // 	    --inner-content-custom-width: min(100%, 1340px);
 //         max-width: var(--inner-content-custom-width);

@@ -59,6 +59,19 @@ const attributes = {
 			Mobile: 100
 		}
 	},
+	containerCustomWidth: {
+		type: 'string',
+		default: '100',
+	},
+
+	containerCustomWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
 	customWidthUnits: {
 		type: 'object',
 		default: {
@@ -127,23 +140,6 @@ const attributes = {
 		default: 'px',
 	},
 
-	// Need remove
-	minHeightDesktop: {
-		type: 'number',
-		isGBSStyle: true,
-	},
-	minHeightTablet: {
-		type: 'number',
-	},
-	minHeightMobile: {
-		type: 'number',
-	},
-	minHeightType: {
-		type: 'string',
-		default: 'px',
-	},
-	// End Remove
-
 	minHeight: {
 		type: 'object',
 		default: {
@@ -193,17 +189,27 @@ const attributes = {
 	justifyContentMobile: {
 		type: 'string',
 	},
-	wrapDesktop: {
-		type: 'string',
-		default: 'nowrap',
+
+	containerWrap: {
+		type: 'object',
+		default: {
+			Desktop: 'wrap',
+			Tablet: 'wrap',
+			Mobile: 'wrap',
+		}
 	},
-	wrapTablet: {
-		type: 'string',
-	},
-	wrapMobile: {
-		type: 'string',
-		default: 'wrap',
-	},
+
+	// wrapDesktop: {
+	// 	type: 'string',
+	// 	default: 'nowrap',
+	// },
+	// wrapTablet: {
+	// 	type: 'string',
+	// },
+	// wrapMobile: {
+	// 	type: 'string',
+	// 	default: 'wrap',
+	// },
 	alignContentDesktop: {
 		type: 'string',
 		default: '',
@@ -690,6 +696,7 @@ const attributes = {
 	linkHoverColor: {
 		type: 'string',
 	},
+
 	// responsive code
 	innerContentCustomWidthTypeTablet: {
 		type: 'string',
