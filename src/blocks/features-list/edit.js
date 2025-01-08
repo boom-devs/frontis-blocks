@@ -21,6 +21,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-feature-main-wrapper ${blockID}`,
     });
 
+    console.log(FeatureItems);
+
     /**
     * Manages tab button settings and switches to block settings on click
     */

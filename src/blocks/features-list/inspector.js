@@ -276,25 +276,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
+    const [FeatureItemList, setFeatureItemList] = useState(FeatureItems);
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = FeatureItems.findIndex(item => item.id === active.id);
-            const newIndex = FeatureItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(FeatureItems, oldIndex, newIndex);
+            const oldIndex = FeatureItemList.findIndex(item => item.id === active.id);
+            const newIndex = FeatureItemList.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(FeatureItemList, oldIndex, newIndex);
             setAttributes({ FeatureItems: updatedItems });
+            setFeatureItemList(updatedItems);
         }
     };
 
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${FeatureItems.length + 1}`, 
-            Title: `Feature Item ${FeatureItems.length + 1}`, 
+            id: `item-${FeatureItemList.length + 1}`, 
+            Title: `Feature Item ${FeatureItemList.length + 1}`, 
             Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.', 
             FeatureIcon: 'check' ,
-            FeatureIconImageUrl,
-            FeatureIconImageAlt,
-            FeatureIconImageID,
+            FeatureIconImageUrl: '',
+            FeatureIconImageAlt: '',
+            FeatureIconImageID: '',
+
 
             FeatureSingleItemIconColorSwitcher: "normal",
             FeatureSingleItemIconColor: "",
@@ -333,24 +337,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             /** End Single Item Background Color */
         };
         setAttributes({ FeatureItems: [...FeatureItems, newItem] });
+        setFeatureItemList([...FeatureItemList, newItem]);
     };
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = FeatureItems.map(item => 
+        const updatedItems = FeatureItemList.map(item => 
             item.id === id ? { ...item, [key]: value } : item
         );
+
+        if(key === 'FeatureIconImageUrl'){
+			updatedItems.length > 0 && updatedItems.forEach(item => {
+				if (item.id === id) {
+				  item.FeatureIconImageUrl = value;
+				}
+			});
+            setAttributes({ FeatureItems: updatedItems });
+            setFeatureItemList(updatedItems);
+		}
         setAttributes({ FeatureItems: updatedItems });
+
+        
     };
 
     const handleDeleteItem = (id) => {
-        const updatedItems = FeatureItems.filter(item => item.id !== id);
+        const updatedItems = FeatureItemList.filter(item => item.id !== id);
         setAttributes({ FeatureItems: updatedItems });
+        setFeatureItemList(updatedItems);
     };
 
 
-
-
-    	/** Start Global padding */
+    /** Start Global padding */
 	const handleFeatureIconPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( FeatureIconPaddingLink ) {
@@ -1792,15 +1808,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     collisionDetection={closestCenter}
                                                     onDragEnd={handleDragEnd}
                                                 >
-                                                    <SortableContext items={FeatureItems.map(item => item.id)}>
+                                                    <SortableContext items={FeatureItemList.map(item => item.id)}>
                                                         <ul className='dnd-items-wrapper'>
-                                                            {FeatureItems.map((item) => (
+                                                            {FeatureItemList.map((item) => (
                                                                 <SortableItem
                                                                     key={item.id}
                                                                     id={item.id}
                                                                     item={item}
                                                                     handleChangeItem={handleChangeItem}
                                                                     handleDeleteItem={handleDeleteItem}
+                                                                    setAttributes = {setAttributes}
                                                                 />
                                                             ))}
                                                         </ul>
