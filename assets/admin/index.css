@@ -2881,6 +2881,16 @@
 .fb-inspector-control .components-panel__body .components-datetime__date > div:nth-child(2) {
   gap: 2px;
 }
+.fb-inspector-control .components-datetime__time .components-datetime__time-separator {
+  border-top: 0;
+  border-bottom: 0;
+}
+.fb-inspector-control .components-datetime__time .components-base-control__field .components-toggle-group-control {
+  border-color: #93C4F5;
+}
+.fb-inspector-control .components-datetime__time .components-base-control__field .components-select-control__input {
+  padding: 8px 12px !important;
+}
 
 .fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper, .fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
   margin-bottom: 24px;

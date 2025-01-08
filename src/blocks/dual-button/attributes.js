@@ -528,9 +528,9 @@ const attributes = {
 	buttonsGap: {
 		type: "object",
 		default: {
-			Desktop: 0,
-			Tablet: 0,
-			Mobile: 0,
+			Desktop: '0',
+			Tablet: '0',
+			Mobile: '0',
 		},
 	},
 	buttonsGapUnits: {
@@ -1345,6 +1345,26 @@ const attributes = {
         default: [],
     },
     dualButtonGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	globalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    globalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+	globalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    globalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    globalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
