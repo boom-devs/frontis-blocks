@@ -20,10 +20,6 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
-
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
                 FeatureSingleItemIconHoverColor: "",
@@ -65,10 +61,6 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
-
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
                 FeatureSingleItemIconHoverColor: "",
@@ -109,10 +101,6 @@ const attributes = {
                 Title: 'Feature Item 3',
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
-
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
 
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
@@ -174,7 +162,6 @@ const attributes = {
                     type: "string",
                     default: "icon",
                 },
-                
                 FeatureIconImageUrl: {
                     type: "string",
                     default: ""
