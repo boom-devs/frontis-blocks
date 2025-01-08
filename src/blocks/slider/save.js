@@ -1,43 +1,38 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import './style.scss'; // Ensure you have styles for the front end if needed
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
-    const { 
-
+    const {
         blockId,
-        sliderItems,
-        
+        transitionType,
+        displayIndicators,
+        indicatorColor,
+        autoplay,
+        autoplaySpeed,
+        navigationArrows,
     } = attributes;
 
-    const blockProps = useBlockProps.save({
-        className: `fb-slider-main-wrapper ${blockId}`,
-    });
-
-
     return (
-        <>
-            <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-slider-wrapper">
-                    <div className={`fb-slider-list-wrapper `}>
-                        <ul className="fb-slider-list-items">
-                            {sliderItems.map(item => (
-                                  <li key={item.id} className={`fb-slider-list-item single-item-${item.id}`}>
-
-                                    <div className="fb-slider-list-content">
-                                        <RichText.Content
-                                            tagName="p"
-                                            className="fb-slider-list-title"
-                                            value={item.title}
-                                        />
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+        <div 
+            className={`fb-slider-main-wrapper ${blockId}`}
+            data-transition={transitionType}
+            data-indicators={displayIndicators}
+            data-indicator-color={indicatorColor}
+            data-autoplay={autoplay}
+            data-autoplay-speed={autoplaySpeed}
+            data-arrows={navigationArrows}
+        >
+            <div className="swiper">
+                <div className="swiper-wrapper">
+                    <InnerBlocks.Content />
                 </div>
+                {displayIndicators && <div className="swiper-pagination"></div>}
+                {navigationArrows && (
+                    <>
+                        <div className="swiper-button-prev"></div>
+                        <div className="swiper-button-next"></div>
+                    </>
+                )}
             </div>
-            
-        </>
+        </div>
     );
 }

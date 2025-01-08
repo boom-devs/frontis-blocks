@@ -97,16 +97,20 @@ final class Plugin
 	{
 		// Check if the current post has the 'countdown' block
 		if (has_block('frontis-blocks/countdown')) {
-			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js', array('jquery'), '1.0.0', true);
+			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/js/countdown.js', array('jquery'), '1.0.0', true);
 		}
 
 		// Check if the current post has the 'counter' block
 		if (has_block('frontis-blocks/counter-number')) {
-			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js', array('jquery'), '1.0.0', true);
+			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/js/counter.js', array('jquery'), '1.0.0', true);
 		}
 
 		if (has_block('frontis-blocks/advanced-video')) {
 			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+		}
+		if (has_block('frontis-blocks/slider')) {
+			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
+			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
 		}
 	}
 
