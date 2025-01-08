@@ -729,8 +729,6 @@ const attributes = {
         default: '',
     },
 
-    // Testimonial
-
     buttonIconImageUrl : {
         type: 'string',
         default: '',
