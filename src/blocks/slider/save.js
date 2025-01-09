@@ -1,38 +1,39 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-export default function Save({ attributes }) {
+import classnames from 'classnames';
+
+export default function save( props ) {
+	const { attributes } = props;
+
     const {
         blockId,
-        transitionType,
-        displayIndicators,
-        indicatorColor,
-        autoplay,
-        autoplaySpeed,
-        navigationArrows,
+        slideContent,
+        slideItem,
+        transitionSpeed,
+        displayArrows,
+		displayDots,
     } = attributes;
 
-    return (
-        <div 
-            className={`fb-slider-main-wrapper ${blockId}`}
-            data-transition={transitionType}
-            data-indicators={displayIndicators}
-            data-indicator-color={indicatorColor}
-            data-autoplay={autoplay}
-            data-autoplay-speed={autoplaySpeed}
-            data-arrows={navigationArrows}
-        >
-            <div className="swiper">
-                <div className="swiper-wrapper">
-                    <InnerBlocks.Content />
-                </div>
-                {displayIndicators && <div className="swiper-pagination"></div>}
-                {navigationArrows && (
-                    <>
-                        <div className="swiper-button-prev"></div>
-                        <div className="swiper-button-next"></div>
-                    </>
-                )}
-            </div>
-        </div>
-    );
+	const blockProps = useBlockProps.save();
+
+	return (
+		<div
+			key={ blockId }
+			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container' ) }
+		>
+			<div className="fb-slides fb-swiper">
+				<div className="swiper-wrapper">
+					<InnerBlocks.Content />
+				</div>
+			</div>
+			{ displayDots && <div className="swiper-pagination"></div> }
+
+			{ displayArrows && (
+				<>
+					<div className="swiper-button-prev"></div>
+					<div className="swiper-button-next"></div>
+				</>
+			) }
+		</div>
+	);
 }
