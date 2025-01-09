@@ -299,7 +299,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             FeatureIconImageAlt: '',
             FeatureIconImageID: '',
 
-
             FeatureSingleItemIconColorSwitcher: "normal",
             FeatureSingleItemIconColor: "",
             FeatureSingleItemIconHoverColor: "",
@@ -340,21 +339,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setFeatureItemList([...FeatureItemList, newItem]);
     };
 
-    const handleChangeItem = (id, key, value) => {
-        const updatedItems = FeatureItemList.map(item => 
-            item.id === id ? { ...item, [key]: value } : item
-        );
+    // const handleChangeItem = (id, key, value) => {
+    //     const updatedItems = FeatureItemList.map(item => 
+    //         item.id === id ? { ...item, [key]: value } : item
+    //     );
 
-        if(key === 'FeatureIconImageUrl'){
-			updatedItems.length > 0 && updatedItems.forEach(item => {
-				if (item.id === id) {
-				  item.FeatureIconImageUrl = value;
-				}
-			});
-            setFeatureItemList(updatedItems);
-		}
-        setAttributes({ FeatureItems: updatedItems });
+    //     if(key === 'FeatureIconImageUrl'){
+	// 		updatedItems.length > 0 && updatedItems.forEach(item => {
+	// 			if (item.id === id) {
+	// 			  item.FeatureIconImageUrl = value;
+	// 			}
+	// 		});
+    //         setFeatureItemList(updatedItems);
+	// 	}
+    //     setAttributes({ FeatureItems: updatedItems });
         
+    // };
+
+
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = FeatureItemList.map(item => {
+            if (item.id === id) {
+                if (key === 'FeatureIconImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'FeatureIconImageUrl': image.url,
+                        'FeatureIconImageAlt': image.alt || ''
+                    };
+                }
+                return { ...item, [key]: value };
+            }
+            return item;
+        });
+        
+        setFeatureItemList(updatedItems);
+        setAttributes({ FeatureItems: updatedItems });
     };
 
     const handleDeleteItem = (id) => {
@@ -368,7 +391,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         setAttributes({ FeatureItems: FeatureItemList });
     }, [FeatureItemList, setAttributes]);
-
 
 
     // Initialize FeatureItemList from attributes.FeatureItems
