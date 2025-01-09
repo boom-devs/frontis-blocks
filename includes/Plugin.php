@@ -92,7 +92,6 @@ final class Plugin
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 	}
 
-
 	public function enqueue_scripts()
 	{
 		// Check if the current post has the 'countdown' block
@@ -112,12 +111,15 @@ final class Plugin
 			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
 			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
 
-			// Add the Swiper initialization script
+			// Swiper initialization script
 			add_action('wp_footer', function () {
 				?>
 				<script>
 					document.addEventListener('DOMContentLoaded', function () {
-						const sliders = document.querySelectorAll('.fb-swiper');
+						const sliderElement = document.querySelector('.wp-block-frontis-blocks-slider');
+						const blockId = sliderElement.dataset.blockId;
+						
+						const sliders = document.querySelectorAll('.fb-slider-container .fb-swiper');
 						sliders.forEach(slider => {
 							new Swiper(slider, {
 								navigation: {
@@ -141,7 +143,6 @@ final class Plugin
 			});
 		}
 	}
-
 
 	/**
 	 * Get plugin instance
