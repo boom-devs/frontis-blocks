@@ -101,11 +101,74 @@ class Settings extends AjaxBase {
     }
 
     public function file_generation() {
-        $this->handle_option_update('file_generation', 'boolean');
+    	if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+
+//         $this->handle_option_update('file_generation', 'boolean');
     }
 
+    /**
+     * generate_assets
+     *
+     * @return void
+     */
     public function generate_assets() {
-        $this->handle_option_update('generate_assets', 'boolean');
+        if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+            wp_send_json_error(['message' => 'Invalid nonce'], 400);
+            return;
+        }
+    
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+            return;
+        }
+    
+        // Upload directory path
+        $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
+    
+        // Check if the folder exists
+        if (is_dir($upload_directory)) {
+            // Attempt to delete the folder
+            if ($this->delete_folder($upload_directory)) {
+                wp_send_json_success(['message' => 'Files regenerated successfully']);
+            } else {
+                wp_send_json_error(['message' => 'Failed to regenerate files'], 500);
+            }
+        } else {
+            wp_send_json_error(['message' => 'Folder does not exist'], 404);
+        }
+    }
+
+    /**
+     * delete_folder
+     *
+     * @param string $folder_path
+     * @return void
+     */
+    private function delete_folder($folder_path) {
+        if (!is_dir($folder_path)) {
+            return false;
+        }
+
+        $files = array_diff(scandir($folder_path), ['.', '..']);
+        foreach ($files as $file) {
+            $file_path = $folder_path . DIRECTORY_SEPARATOR . $file;
+            if (is_dir($file_path)) {
+                $this->delete_folder($file_path); // Recursive call for subfolders
+            } else {
+                unlink($file_path); // Delete file
+            }
+        }
+
+        return rmdir($folder_path); // Remove the directory itself
     }
 
     public function version_control() {

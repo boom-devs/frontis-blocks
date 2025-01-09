@@ -204,10 +204,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						background: $neutral-color-100;
 						margin-bottom: 30px;
 					}
+
 					.components-input-control__container{
 						.components-input-control__input{
-							border: 1px solid $primary-color-300;
-							margin-left: 10px;
 							&:focus{
 								outline: none;
 							}
@@ -215,8 +214,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						.components-select-control__input{
 							background: $neutral-color-50;
 							height: unset;
-							border-radius: 8px;
-							padding: 12px;
+							padding: 6px 12px;
 							&:focus{
 								outline: none;
 							}
@@ -242,6 +240,13 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 							}
 						}
 						
+					}
+					.components-range-control__number{
+						.components-input-control__container {
+							border: 1px solid $primary-color-base;
+							border-radius: 6px;
+							margin-left: 10px;
+						}
 					}
 					.fb-setting-spacing-label-container{
 						margin: 14px 0;

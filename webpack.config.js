@@ -1,8 +1,12 @@
-const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
-const path = require( 'path' );
+const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	...defaultConfig,
+	entry: {
+		blocks: path.resolve(__dirname, 'src/blocks.js'),
+	},
 	resolve: {
 		alias: {
 			...defaultConfig.resolve.alias,
@@ -15,7 +19,19 @@ module.exports = {
 		},
 	},
 	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: '[name].js'
-	}
+		...defaultConfig.output,
+		path: path.resolve(__dirname, 'dist'),
+	},
+	optimization: {
+		minimize: true, // Enables minification
+		minimizer: [
+			new TerserPlugin({
+				terserOptions: {
+					compress: {
+						drop_console: true, // Removes console logs in production
+					},
+				},
+			}),
+		],
+	},
 };

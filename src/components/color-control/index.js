@@ -29,19 +29,30 @@ const FB_ColorControl = ({
         // Retrieve colors from local storage
         const storedColors = localStorage.getItem('fb_global_colors');
         const storedCustomColors = localStorage.getItem('fb_custom_colors');
+
         let combinedColors = [];
+
         if (storedColors) {
             try {
                 const parsedColors = JSON.parse(storedColors);
-                combinedColors = [...parsedColors];
+                if (Array.isArray(parsedColors)) {
+                    combinedColors = [...parsedColors];
+                } else {
+                    console.warn('Global colors is not an array:', parsedColors);
+                }
             } catch (error) {
                 console.error('Error parsing global colors:', error);
             }
         }
+
         if (storedCustomColors) {
             try {
                 const parsedCustomColors = JSON.parse(storedCustomColors);
-                combinedColors = [...combinedColors, ...parsedCustomColors];
+                if (Array.isArray(parsedCustomColors)) {
+                    combinedColors = [...combinedColors, ...parsedCustomColors];
+                } else {
+                    console.warn('Custom colors is not an array:', parsedCustomColors);
+                }
             } catch (error) {
                 console.error('Error parsing custom colors:', error);
             }
@@ -68,13 +79,26 @@ const FB_ColorControl = ({
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {globalColor || '#000'} 
+                                    {globalColor || ''}
                                 </span>
                                 <div
-                                className="fb-setting-color-display"
-                                style={{
-                                    backgroundColor: globalColor || '#000',
-                                }}
+                                    className="fb-setting-color-display"
+                                    style={
+                                        globalColor
+                                            ? {
+                                                backgroundColor: globalColor,
+                                            }
+                                            : {
+                                                backgroundImage:
+                                                    'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
+                                                backgroundPosition: '0 0, 0 5px, 5px -5px, -5px 0',
+                                                backgroundSize: '10px 10px',
+                                                border: '1px solid #e9e9e9',
+                                                height: '22px',
+                                                padding: '0',
+                                                width: '22px',
+                                            }
+                                    }
                                 />
                             </div>
                         </Button>

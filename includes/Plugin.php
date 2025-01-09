@@ -12,6 +12,7 @@ use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
+use FrontisBlocks\Core\SupportSVG;
 
 final class Plugin
 {
@@ -96,16 +97,20 @@ final class Plugin
 	{
 		// Check if the current post has the 'countdown' block
 		if (has_block('frontis-blocks/countdown')) {
-			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/public/countdown.js', array('jquery'), '1.0.0', true);
+			wp_enqueue_script('frontis-countdown', FB_PLUGIN_URL . 'assets/js/countdown.js', array('jquery'), '1.0.0', true);
 		}
 
 		// Check if the current post has the 'counter' block
 		if (has_block('frontis-blocks/counter-number')) {
-			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/public/counter.js', array('jquery'), '1.0.0', true);
+			wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/js/counter.js', array('jquery'), '1.0.0', true);
 		}
 
 		if (has_block('frontis-blocks/advanced-video')) {
 			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+		}
+		if (has_block('frontis-blocks/slider')) {
+			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
+			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
 		}
 	}
 
@@ -134,10 +139,11 @@ final class Plugin
 		define('FB_TEXT_DOMAIN', self::TEXT_DOMAIN);
 		define('FB_PLUGIN_PATH', plugin_dir_path(FB_PLUGIN_FILE));
 		define('FB_BLOCKS_DIR', FB_PLUGIN_PATH . 'build/blocks/');
+		define('FB_BLOCKS_DIR_DIST', plugin_dir_path(FB_PLUGIN_FILE));
 		define('FB_PLUGIN_URL', plugin_dir_url(FB_PLUGIN_FILE));
 		// define('SCRIPT_DEBUG', true);
 		define('FB_PLUGIN_BASENAME', plugin_basename(FB_PLUGIN_FILE));
-		define('FB_UPGRADE_PRO_URL', 'https://frontis.co/frontis-blocks-pro');
+		define('FB_UPGRADE_PRO_URL', 'https://wpmessiah.com/');
 		define('FB_IS_PRO_ACTIVE', class_exists('FrontisBlocks\Pro\Plugin') ? true : false);
 	}
 
@@ -192,6 +198,8 @@ final class Plugin
 		InitialActivatedBlocks::blocks();
 
 		GlobalSettings::get_instance()->register_global_settings_events();
+
+		SupportSVG::get_instance();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 

@@ -10,6 +10,12 @@
 
 		&.fb-setting-label-text {
 			flex: 1;
+            color: $neutral-color-950;
+            font-family: $body-font-family;
+            font-size: $medium-font-size;
+            font-weight: 400;
+            line-height: $body-line-height;
+            text-transform: capitalize !important;
 		}
 	}
 }
@@ -45,7 +51,7 @@
         transition: .15s;
         height: 0;
         width: 100% !important;
-        z-index: 2;
+        // z-index: 2;
         &.active {
             height: 28px;
             width: 26px;

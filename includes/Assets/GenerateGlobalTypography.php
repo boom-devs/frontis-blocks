@@ -12,23 +12,6 @@ class GenerateGlobalTypography {
 		self::enqueue_fonts();
 	}
 
-// 	private static function generate_fonts($data) {
-// 		// Extract font families into an array
-// 		$fonts = [];
-// 		foreach ($data as $style) {
-// 			if (!empty($style['fontFamily']) && $style !== 'heading') {
-// 				$fonts[$style['fontFamily']] = $style['fontFamily'];
-// 			} else {
-// 				foreach($style as $single_heading) {
-// 					if(isset($single_heading['fontFamily']) && !empty(isset($single_heading['fontFamily'])) ) {
-// 						$fonts[$single_heading['fontFamily']] = $single_heading['fontFamily'];
-// 					}
-// 				}
-// 			}
-// 		}
-// 		return array_unique($fonts);
-// 	}
-
 	private static function generate_css_file($data, $devices) {
 		$css = '';
 		if($data) {
@@ -38,7 +21,7 @@ class GenerateGlobalTypography {
 				$editor_selector = '';
 
 				if(current_user_can('editor') || current_user_can('administrator')) {
-					$editor_selector = 'body .wp-block-post-content';
+					$editor_selector = 'body .wp-block-post-content, body .wp-site-blocks';
 				} else {
 					$editor_selector = 'body';
 				}
@@ -59,32 +42,35 @@ class GenerateGlobalTypography {
 					foreach ($single_code as $key => $styles) {
 						$heading_selector = $editor_selector.' ' . $key;
 
-						$css .= "$heading_selector {\n";
-						if (isset($styles['fontFamily']) && !empty($styles['fontFamily'])) {
-							$css .= "    font-family: {$styles['fontFamily']};\n";
+						if( (isset($styles['fontFamily']) && !empty($styles['fontFamily']) && $styles['fontFamily'] !== 'Default') || (isset($styles['fontWeight']) && !empty($styles['fontWeight'])) || (isset($styles['fontStyle']) && !empty($styles['fontStyle'])) || (isset($styles['textTransform']) && !empty($styles['textTransform'])) || (isset($styles['textDecoration']) && !empty($styles['textDecoration'])) || (isset($styles['lineHeight']) && !empty($styles['lineHeight'])) || (isset($styles['fontSize']) && !empty($styles['fontSize'])) || (isset($styles['letterSpacing']) && !empty($styles['letterSpacing'])) ) {
+							$css .= "$heading_selector {\n";
+							if (isset($styles['fontFamily']) && !empty($styles['fontFamily']) && $styles['fontFamily'] !== 'Default') {
+								$css .= "    font-family: {$styles['fontFamily']};\n";
+							}
+							if (isset($styles['fontWeight']) && !empty($styles['fontWeight'])) {
+								$css .= "    font-weight: {$styles['fontWeight']};\n";
+							}
+							if (isset($styles['fontStyle']) && !empty($styles['fontStyle'])) {
+								$css .= "    font-style: {$styles['fontStyle']};\n";
+							}
+							if (isset($styles['textTransform']) && !empty($styles['textTransform'])) {
+								$css .= "    text-transform: {$styles['textTransform']};\n";
+							}
+							if (isset($styles['textDecoration']) && !empty($styles['textDecoration'])) {
+								$css .= "    text-decoration: {$styles['textDecoration']};\n";
+							}
+							if (isset($styles['lineHeight']['Desktop']) && !empty($styles['lineHeight']['Desktop'])) {
+								$css .= "    line-height: {$styles['lineHeight']['Desktop']}{$styles['lineHeightUnits']['Desktop']};\n";
+							}
+							if (isset($styles['fontSize']['Desktop']) && !empty($styles['fontSize']['Desktop'])) {
+								$css .= "    font-size: {$styles['fontSize']['Desktop']}{$styles['fontSizeUnit']['Desktop']};\n";
+							}
+							if (isset($styles['letterSpacing']['Desktop']) && !empty($styles['letterSpacing']['Desktop'])) {
+								$css .= "    letter-spacing: {$styles['letterSpacing']['Desktop']}{$styles['letterSpacingUnit']['Desktop']};\n";
+							}
+							$css .= "}\n";
+
 						}
-						if (isset($styles['fontWeight']) && !empty($styles['fontWeight'])) {
-							$css .= "    font-weight: {$styles['fontWeight']};\n";
-						}
-						if (isset($styles['fontStyle']) && !empty($styles['fontStyle'])) {
-							$css .= "    font-style: {$styles['fontStyle']};\n";
-						}
-						if (isset($styles['textTransform']) && !empty($styles['textTransform'])) {
-							$css .= "    text-transform: {$styles['textTransform']};\n";
-						}
-						if (isset($styles['textDecoration']) && !empty($styles['textDecoration'])) {
-							$css .= "    text-decoration: {$styles['textDecoration']};\n";
-						}
-						if (isset($styles['lineHeight']['Desktop']) && !empty($styles['lineHeight']['Desktop'])) {
-							$css .= "    line-height: {$styles['lineHeight']['Desktop']}{$styles['lineHeightUnits']['Desktop']};\n";
-						}
-						if (isset($styles['fontSize']['Desktop']) && !empty($styles['fontSize']['Desktop'])) {
-							$css .= "    font-size: {$styles['fontSize']['Desktop']}{$styles['fontSizeUnit']['Desktop']};\n";
-						}
-						if (isset($styles['letterSpacing']['Desktop']) && !empty($styles['letterSpacing']['Desktop'])) {
-							$css .= "    letter-spacing: {$styles['letterSpacing']['Desktop']}{$styles['letterSpacingUnit']['Desktop']};\n";
-						}
-						$css .= "}\n";
 
 						foreach ($devices as $device => $breakpoint) {
 							if($device !== 'Desktop') {
@@ -113,7 +99,7 @@ class GenerateGlobalTypography {
 				if ($key !== 'heading') {
 					if( (isset($single_code['fontFamily']) && !empty($single_code['fontFamily'])) || (isset($single_code['fontWeight']) && !empty($single_code['fontWeight'])) || (isset($single_code['fontStyle']) && !empty($single_code['fontStyle'])) || (isset($single_code['textTransform']) && !empty($single_code['textTransform'])) || (isset($single_code['textDecoration']) && !empty($single_code['textDecoration'])) || (isset($single_code['lineHeight']) && !empty($single_code['lineHeight'])) || (isset($single_code['fontSize']) && !empty($single_code['fontSize'])) || (isset($single_code['letterSpacing']) && !empty($single_code['letterSpacing'])) ) {
 						$css .= "$selector {\n";
-						if (isset($single_code['fontFamily']) && !empty($single_code['fontFamily'])) {
+						if (isset($single_code['fontFamily']) && !empty($single_code['fontFamily']) && $single_code['fontFamily'] !== 'Default') {
 							$css .= "    font-family: {$single_code['fontFamily']};\n";
 						}
 						if (isset($single_code['fontWeight']) && !empty($single_code['fontWeight'])) {

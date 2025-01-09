@@ -5,10 +5,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    deviceType: {
-        type: "string",
-        default: "Desktop"
-    },
     headingAlignment: {
         type: "string",
         default: "left",
@@ -44,7 +40,7 @@ const attributes = {
 	},
     headingFontWeight : {
         type: "string",
-        default: "600"
+        default: ""
     },
     headingFontStyle : {
         type: "string",
@@ -77,9 +73,9 @@ const attributes = {
     headingLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '42',
-			Tablet: '42',
-			Mobile: '42'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	headingLineHeightUnits: {
@@ -99,7 +95,12 @@ const attributes = {
         default: '',
     },
     headingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     headingTextStrokeColorSwitcher: {
         type: 'string',
@@ -147,10 +148,6 @@ const attributes = {
     },
     headingBorderHoverColor: {
         type: 'string',
-    },
-    headingBorderUnits : {
-        type: "string",
-        default: "px"
     },
     headingBorderUnits: {
 		type: 'object',
@@ -416,7 +413,24 @@ const attributes = {
         default: '',
     },
     subHeadingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingTextStrokeColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    subHeadingTextStrokeColor: {
+        type: 'string',
+        default: '',
+    },
+    subHeadingTextStrokeHoverColor: {
+        type: 'string',
+        default: '',
     },
     subHeadingColorSwitcher: {
         type: "string",
@@ -1075,11 +1089,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    headingGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	headingGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     headingGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    headingGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    headingGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1184,39 +1210,6 @@ const attributes = {
         default: "#399CFF",
     },
     blockStyle: {
-        type: "string",
-        default: "",
-    },
-
-    globalParagraphFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalLinkFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading1FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading2FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading3FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading4FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading5FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading6FontFamily: {
         type: "string",
         default: "",
     },

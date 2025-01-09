@@ -1,0 +1,293 @@
+.fb-advanced-image {
+	position: relative;
+	.fb-advanced-image-inner{
+		overflow: hidden;
+		position: relative;
+		img{
+			display: block;
+			width: auto;
+			height: inherit;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+	.fb-advanced-image-title{
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 99;
+	}
+
+	&.center .fb-advanced-image-title{
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		.fb-advanced-image-title-inner{
+			text-align: center;
+		}
+	}
+	&.center-left .fb-advanced-image-title{
+		top: 50%;
+		left: 0;
+		.fb-advanced-image-title-inner{
+			text-align: left;
+		}
+	}
+	&.center-right .fb-advanced-image-title{
+		top: 50%;
+		right: 0;
+		.fb-advanced-image-title-inner{
+			text-align: right;
+		}
+	}
+	&.top-left .fb-advanced-image-title{
+		align-items: flex-start;
+		justify-content: flex-start;
+		.fb-advanced-image-title-inner{
+			text-align: left;
+		}
+	}
+	&.top-center .fb-advanced-image-title{
+		align-items: center;
+		justify-content: center;
+		.fb-advanced-image-title-inner{
+			text-align: center;
+		}
+	}
+	&.top-right .fb-advanced-image-title{
+		align-items: flex-end;
+		justify-content: flex-end;
+		.fb-advanced-image-title-inner{
+			text-align: right;
+		}
+	}
+	&.bottom-left .fb-advanced-image-title{
+		align-items: flex-start;
+		justify-content: flex-end;
+		bottom: 0;
+		.fb-advanced-image-title-inner{
+			text-align: left;
+		}
+	}
+	&.bottom-center .fb-advanced-image-title{
+		align-items: center;
+		justify-content: flex-end;
+		bottom: 0;
+		.fb-advanced-image-title-inner{
+			text-align: center;
+		}
+	}
+	&.bottom-right .fb-advanced-image-title{
+		align-items: flex-end;
+		justify-content: flex-end;
+		bottom: 0;
+		.fb-advanced-image-title-inner{
+			text-align: right;
+		}
+	}
+	&.circle .fb-advanced-image-inner {
+		border-radius: 50%;
+	}
+	&.square .fb-advanced-image-inner {
+		border-radius: 0;
+	}
+	&.rounded .fb-advanced-image-inner {
+		border-radius: 15px;
+	}
+	&.triangle .fb-advanced-image-inner {
+		clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+	}
+	&.octagon .fb-advanced-image-inner {
+		clip-path: polygon(
+				30% 0%, 70% 0%, 100% 30%, 100% 70%,
+				70% 100%, 30% 100%, 0% 70%, 0% 30%
+		);
+	}
+	&.rhombus .fb-advanced-image-inner {
+		clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%);
+	}
+	&.hexagon .fb-advanced-image-inner {
+		clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+	}
+	&.bevel .fb-advanced-image-inner {
+		clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+	}
+	&.aesthetic-blob .fb-advanced-image-inner {
+		border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+	}
+	&.aesthetic-blob-2 .fb-advanced-image-inner {
+		border-radius: 52% 47% 83% 13% / 79% 40% 60% 23%;
+	}
+	&.aesthetic-blob-3 .fb-advanced-image-inner {
+		border-radius: 100% 100% 100% 100% / 37% 100% 21% 100%;
+	}
+	&.aesthetic-blob-4 .fb-advanced-image-inner {
+		border-radius: 50% 50% 50% 100% / 56% 70% 21% 100%;
+	}
+	&.irregular-blob .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/irregular-blob.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.triangle-blob .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/triangle-blob.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.overlaped-blob .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/overlaped-blob.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.seperate-blob .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/seperate-blob.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.pattern .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/pattern.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.abstract .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/abstract.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.container .fb-advanced-image-inner {
+		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/container.svg);
+		mask-size: auto;
+		mask-position: center center;
+		mask-repeat: no-repeat;
+	}
+	&.cover img {
+		object-fit: cover;
+	}
+	&.contain img {
+		object-fit: contain;
+	}
+	&.fill img {
+		object-fit: fill;
+	}
+	&.thumbnail {
+		.fb-advanced-image-inner{
+			width: 150px !important;
+			height: 150px !important;
+		}
+	}
+	&.medium {
+		.fb-advanced-image-inner{
+			width: 300px !important;
+			height: 300px !important;
+		}
+	}
+	&.large {
+		.fb-advanced-image-inner{
+			width: 1024px !important;
+			height: 1024px !important;
+		}
+	}
+	&.default, &.full-size {
+		.fb-advanced-image-inner{
+			width: unset;
+			height: unset;
+		}
+	}
+	&.zoom-in {
+		img{
+			transform: scale(1);
+			transition: transform 0.3s ease;
+			&:hover{
+				transform: scale(1.3);
+			}
+		}
+	}
+	&.zoom-out {
+		img{
+			transform: scale(1.3);
+			transition: transform 0.3s ease;
+			&:hover{
+				transform: scale(1);
+			}
+		}
+	}
+	&.slide {
+		img{
+			transform: scale(1.3);
+			margin-left: 30px;
+			transition: all 0.3s ease-in-out;
+			&:hover{
+				margin-left: 0;
+			}
+		}
+	}
+	&.blur {
+		img{
+			filter: blur(15px);
+			transition: all 0.3s ease;
+			&:hover{
+				filter: blur(0);
+			}
+		}
+	}
+	&.overlay {
+		.fb-advanced-image-inner{
+			position: relative;
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 9999px;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				transition: all 0.3s ease;
+				z-index: 999;
+			}
+			&:hover::before {
+				right: 0;
+			}
+		}
+	}
+	&.tilt {
+		.fb-advanced-image-inner{
+			transition: all 0.3s ease;
+			&:hover{
+				transform: rotateY(30deg) rotateX(30deg);
+			}
+		}
+	}
+	&.skew {
+		.fb-advanced-image-inner{
+			transition: all 0.3s ease;
+			&:hover{
+				transform: skewY(10deg) skewX(10deg);
+			}
+		}
+	}
+	&.overlay-simple {
+		.fb-advanced-image-inner{
+			position: relative;
+			&:before{
+					content: "";
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+					z-index: 1;
+					pointer-events: none;
+			}
+		}
+	}
+}

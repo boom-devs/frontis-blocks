@@ -20,7 +20,7 @@
             font-family: $heading-font-family;
             font-weight: 600;
             font-size: $small-font-size;
-            line-height: $heading-line-height;
+            line-height: 14px;
             border: 1px solid transparent;
             border-radius: 0;
             box-shadow: none;
@@ -52,6 +52,11 @@
             &:hover{
                 background: none;
             }
+			.components-button{
+				font-family: $heading-font-family;
+				font-weight: 600;
+				line-height: 16px;
+			}
         }
         .components-button{
             color: $neutral-color-950;
@@ -68,9 +73,9 @@
         .components-base-control__field {
             .components-base-control__label, label{
                 color: $neutral-color-950;
-                font-family: $heading-font-family;
+                font-family: $body-font-family;
                 font-size: $medium-font-size;
-                font-weight: 600;
+                font-weight: 400;
                 line-height: $body-line-height;
                 margin: 14px 0 10px 0;
                 min-height: auto;
@@ -124,7 +129,7 @@
 					font-weight: 400;
 					flex-grow: 1;
 					justify-content: center;
-                    padding: 10px;
+                    padding: 10px 5px;
                     margin-bottom: 0;
                     box-shadow: none;
                     border-radius: 0;
@@ -164,7 +169,12 @@
 			display: flex;
 			flex-wrap: nowrap;
 			.components-button{
+				font-size: 14px !important;
+				color: $neutral-color-600 !important;
 				border: 1px solid transparent;
+				&.active{
+					color: $neutral-color-950 !important;
+				}
 			}
 		}
 		.components-button-group.fb-btn-group-text-only{
@@ -200,7 +210,7 @@
 			height: unset !important;
 			padding: 5px;
 		}
-		.fb-feature-wrapper{
+		
 			.dnd-items-wrapper{
 				li.sortable-item{
 					.sortable-header{
@@ -223,19 +233,25 @@
 					}
 				}
 			}
-			.components-button.is-primary{
-				font-weight: 500;
-				background: $primary-color-base;
-				color: $white-color;
-				padding: 10px 16px;
-				border-radius: 8px;
+			.fb-feature-wrapper{
+				.components-button.is-primary{
+					font-weight: 500;
+					background: $primary-color-base;
+					color: $white-color;
+					padding: 10px 16px;
+					border-radius: 8px;
+				}
 			}
-		}   
+			
+		  
 		.components-range-control{
 			.components-range-control__root {
 				position: relative;
 				.components-range-control__number{
 					margin-right: -8px;
+					.components-input-control__container{
+						width: 100%;
+					}
 				}
 				.components-range-control__wrapper{
 					span{
@@ -276,10 +292,48 @@
 				position: relative;
 				.components-range-control__number{
 					margin-right: 0;
+					.components-input-control__container{
+						width: 100%;
+					}
 				}
 			}
 		}
+		.fb-image-upload-btn{
+			margin-bottom: 10px;
+		}
+		.components-datetime__time{
+			.components-base-control{
+				margin-bottom: 0;
+			}
+		}
+		.components-datetime__date{
+			margin-bottom: 10px;
+			.components-button.components-datetime__date__day{
+				padding: 0;
+				font-weight: 500;
+			}
+			> div:nth-child(2){
+				gap: 2px;
+			}
+		}
+		
     }
+	.components-datetime__time{
+		.components-datetime__time-separator{
+			border-top: 0 ;
+			border-bottom: 0 ;
+		}
+		.components-base-control__field{
+			.components-toggle-group-control{
+				border-color: $primary-color-300;
+			}
+			.components-select-control__input{
+				padding: 8px 12px !important;
+			}
+		}
+		
+	}
+	
 	
     
 }
@@ -298,7 +352,6 @@
                     border: 1px solid $neutral-color-300 !important;
                     background: $neutral-color-200 !important;
                 }
-                
             }
     }
 }
@@ -371,6 +424,7 @@
 				}
 				.fb-setting-color-hex{
 					text-transform: uppercase;
+					font-weight: 400;
 				}
 				.fb-setting-color-display{
 					width: 24px;
@@ -382,4 +436,13 @@
 	}
 }
 
+.fb-select2-control {
+    input {
+        box-shadow: unset;
+
+        &:focus {
+            box-shadow: unset;
+        }
+    }
+}
 /** End Admin Panel scss **/

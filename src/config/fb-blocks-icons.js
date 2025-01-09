@@ -14,12 +14,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -51,12 +49,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -80,12 +76,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -105,13 +99,11 @@ const FB_Block_Icons = {
 		{ 
 			version: '1.1', 
 			id: 'Layer_1', 
-			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
+			xmlns: 'http://www.w3.org/2000/svg',
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -142,12 +134,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -176,12 +166,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -198,12 +186,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0 { fill: #399CFF; }
@@ -234,12 +220,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -279,17 +263,11 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 		},
-		// fb('style', { type: 'text/css' }, `
-		// 	// .st0{fill:#B0D7FF;}
-		// 	.st1{fill:#399CFF;}
-		// `),
 		fb('path', {
 			className: 'st0',
 			d: `M24,12c0,1.93-1.57,3.5-3.5,3.5h-5c-0.84,0-1.61-0.3-2.21-0.79c0.31-0.15,0.59-0.35,0.83-0.59
@@ -330,12 +308,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -364,12 +340,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -406,12 +380,10 @@ const FB_Block_Icons = {
 			version: '1.1', 
 			id: 'Layer_1', 
 			xmlns: 'http://www.w3.org/2000/svg', 
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink', 
 			x: '0px', 
 			y: '0px',
 			viewBox: '0 0 24 24', 
 			style: { enableBackground: 'new 0 0 24 24' }, 
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -442,12 +414,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -480,12 +450,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -517,40 +485,16 @@ const FB_Block_Icons = {
 			fb('path', { className: 'st0', d: 'M10.35,6.93l-0.23-0.07V5.99c0.06,0.02,0.12,0.05,0.18,0.09c0.14,0.1,0.24,0.23,0.31,0.4l0.62-0.28c-0.07-0.19-0.17-0.36-0.31-0.5s-0.3-0.24-0.48-0.32c-0.1-0.04-0.21-0.07-0.31-0.09V4.84H9.68v0.45C9.49,5.3,9.31,5.34,9.16,5.41C8.97,5.5,8.82,5.63,8.72,5.79C8.61,5.96,8.56,6.15,8.56,6.36c0,0.25,0.07,0.46,0.22,0.63C8.92,7.17,9.14,7.31,9.44,7.4l0.24,0.08v0.86C9.59,8.32,9.51,8.27,9.43,8.22C9.27,8.1,9.14,7.95,9.05,7.75L8.42,8.03C8.49,8.24,8.6,8.42,8.75,8.57C8.9,8.73,9.07,8.85,9.27,8.93c0.13,0.05,0.27,0.08,0.41,0.1v0.46h0.44V9.04c0.17-0.02,0.34-0.05,0.48-0.12c0.19-0.09,0.35-0.22,0.46-0.39c0.11-0.17,0.17-0.35,0.17-0.57c0-0.25-0.07-0.45-0.22-0.62C10.86,7.16,10.64,7.03,10.35,6.93z M9.64,6.71c-0.11-0.04-0.2-0.09-0.25-0.15C9.34,6.49,9.31,6.42,9.31,6.33c0-0.08,0.02-0.15,0.06-0.21c0.04-0.06,0.1-0.11,0.18-0.14c0.04-0.02,0.08-0.03,0.12-0.04v0.77L9.64,6.71z M10.42,8.21c-0.04,0.06-0.1,0.1-0.18,0.14c-0.04,0.02-0.08,0.03-0.12,0.04V7.63l0.03,0.01c0.11,0.04,0.19,0.08,0.25,0.15c0.05,0.06,0.08,0.13,0.08,0.22C10.48,8.08,10.46,8.15,10.42,8.21z' })
 		)
 	),
-	// raw: fb(
-	// 	'svg',
-	// 	{
-	// 		version: '1.1',
-	// 		id: 'Layer_1',
-	// 		xmlns: 'http://www.w3.org/2000/svg',
-	// 		'xmlns:xlink': 'http://www.w3.org/1999/xlink',
-	// 		x: '0px',
-	// 		y: '0px',
-	// 		viewBox: '0 0 24 24',
-	// 		style: { enableBackground: 'new 0 0 24 24' },
-	// 		'xml:space': 'preserve',
-	// 		className: 'fb-editor-icons'
-	// 	},
-	// 	fb('style', { type: 'text/css' }, `
-	// 		.st0{fill:#399CFF;}
-	// 		.st1{fill:#B0D7FF;}
-	// 	`),
-	// 	fb('path', { className: 'st0', d: 'M22.5,8c0,0.28-0.22,0.5-0.5,0.5H2C1.72,8.5,1.5,8.28,1.5,8V2c0-0.28,0.22-0.5,0.5-0.5h20 c0.28,0,0.5,0.22,0.5,0.5V8 M24,8V2c0-1.1-0.9-2-2-2H2C0.9,0,0,0.9,0,2v6c0,1.1,0.9,2,2,2h20C23.1,10,24,9.1,24,8L24,8z' }),
-	// 	fb('path', { className: 'st1', d: 'M22.5,15c0,0.28-0.22,0.5-0.5,0.5H2c-0.28,0-0.5-0.22-0.5-0.5v-1c0-0.28,0.22-0.5,0.5-0.5h20 c0.28,0,0.5,0.22,0.5,0.5V15 M24,15v-1c0-1.1-0.9-2-2-2H2c-1.1,0-2,0.9-2,2v1c0,1.1,0.9,2,2,2h20C23.1,17,24,16.1,24,15L24,15z' }),
-	// 	fb('path', { className: 'st1', d: 'M22.5,22c0,0.28-0.22,0.5-0.5,0.5H2c-0.28,0-0.5-0.22-0.5-0.5v-1c0-0.28,0.22-0.5,0.5-0.5h20 c0.28,0,0.5,0.22,0.5,0.5V22 M24,22v-1c0-1.1-0.9-2-2-2H2c-1.1,0-2,0.9-2,2v1c0,1.1,0.9,2,2,2h20C23.1,24,24,23.1,24,22L24,22z' })
-	// ),
 	team_members: fb(
 		'svg',
 		{
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -568,12 +512,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('g', null,
@@ -597,12 +539,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -645,12 +585,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -688,12 +626,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -761,12 +697,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -815,12 +749,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 			className: 'fb-editor-icons'
 		},
 		fb('style', { type: 'text/css' }, `
@@ -877,12 +809,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve',
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -937,12 +867,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
@@ -978,16 +906,14 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}
-			.st1{fill:none;stroke:#399CFF;stroke-linecap:round;stroke-miterlimit:10;}
+			.st1{fill:none;stroke:#399CFF;strokeLinecap:round;stroke-miterlimit:10;}
 		`),
 		fb('g', null,
 			fb('path', { className: 'st0', d: `M20.5,1.98c1.1,0,2,0.9,2,2s-0.9,2-2,2h-17c-1.1,0-2-0.9-2-2s0.9-2,2-2H20.5 M20.5,0.48h-17
@@ -1023,12 +949,10 @@ const FB_Block_Icons = {
 			version: '1.1',
 			id: 'Layer_1',
 			xmlns: 'http://www.w3.org/2000/svg',
-			'xmlns:xlink': 'http://www.w3.org/1999/xlink',
 			x: '0px',
 			y: '0px',
 			viewBox: '0 0 24 24',
 			style: { enableBackground: 'new 0 0 24 24' },
-			'xml:space': 'preserve'
 		},
 		fb('style', { type: 'text/css' }, `
 			.st0{fill:#399CFF;}

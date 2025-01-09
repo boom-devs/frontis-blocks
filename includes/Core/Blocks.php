@@ -28,66 +28,101 @@ class Blocks
 
 	public function register_blocks()
 	{
-		$blocks_list = BlockList::get_instance()->get_blocks();
-		$active_blocks = get_option('fb_active_blocks');
+		// Load single build file
+		$script_dep_path = FB_BLOCKS_DIR_DIST . 'blocks.asset.php';
+		$script_info     = file_exists( $script_dep_path )
+			? include $script_dep_path
+			: array(
+				'dependencies' => array(),
+				'version'      => FB_VERSION,
+			);
 
-		if (!empty($blocks_list)) {
-			foreach ($blocks_list as $block) {
-				$slug = $block['slug'];
-				if (is_array($active_blocks) && !empty($active_blocks)) {
-					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
-						continue;
-					}
-				}
+		global $pagenow;
+		$script_dep = array_merge( $script_info['dependencies'], array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-api-fetch' ) );
 
-				$package = $block['package'];
-				$plugin_dir = FB_PLUGIN_PATH;
-				$blocks_dir = FB_BLOCKS_DIR . $slug;
-				$plugin_slug = 'frontis-blocks';
-
-				if (!file_exists($blocks_dir)) {
-					error_log($blocks_dir);
-					continue;
-				}
-
-				$localize_array = [];
-
-				// Enqueue block style in the editor
-				register_block_type($blocks_dir);
-				wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
-
-				// Enqueue block editor script and pass localized data
-				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
-				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
-
-				if (is_admin()) {
-					$admin_localize_array = [
-						'admin_nonce' => wp_create_nonce('admin-nonce'),
-						'fluent_plugin_active' => FluentForms::check_enable(),
-						'fluent_form_lists' => json_encode(FluentForms::form_list()),
-						'contact_form_active' => ContactForms7::check_enable(),
-						'contact_form7_lists' => ContactForms7::form_list(),
-						'contact_form7_html' => ContactForms7::wf7_form_html(),
-						'post_types' => Helper::get_post_types(),
-						'all_cats' => Helper::get_related_taxonomy(),
-						'all_authors' => Helper::get_all_authors_with_posts(),
-						'image_sizes' => Helper::get_image_sizes(),
-						'desktop_breakpoint' => 1200,
-						'tablet_breakpoint' => 1024,
-						'mobile_breakpoint' => 768
-					];
-
-					$localize_array = array_merge($localize_array, $admin_localize_array);
-				}
-
-				$localize_array['site_url'] = site_url();
-				$localize_array['pluginUrl'] = FB_PLUGIN_URL;
-				$localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
-				$localize_array['contact_form7_install_url'] = admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term');
-				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
-				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
-			}
+		if ( 'widgets.php' !== $pagenow ) {
+			$script_dep = array_merge( $script_info['dependencies'], array( 'wp-editor' ) );
 		}
+
+		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+		wp_enqueue_script( 'wp-theme-plugin-editor' );
+		wp_enqueue_style( 'wp-codemirror' );
+
+		// Scripts.
+		$blocks_script = file_exists( FB_BLOCKS_DIR_DIST . 'dist/blocks.js' ) ? 'dist/blocks.js' : 'dist/blocks.js';
+		wp_enqueue_script(
+			'fb-block-editor', // Handle.
+			FB_PLUGIN_URL . $blocks_script,
+			$script_dep,
+			FB_VERSION,
+			true // Enqueue the script in the footer.
+		);
+
+		$localize_array = [];
+
+		if (is_admin()) {
+			$admin_localize_array = [
+				'admin_nonce' => wp_create_nonce('admin-nonce'),
+				'fluent_plugin_active' => FluentForms::check_enable(),
+				'fluent_form_lists' => json_encode(FluentForms::form_list()),
+				'contact_form_active' => ContactForms7::check_enable(),
+				'contact_form7_lists' => ContactForms7::form_list(),
+				'contact_form7_html' => ContactForms7::wf7_form_html(),
+				'post_types' => Helper::get_post_types(),
+				'all_cats' => Helper::get_related_taxonomy(),
+				'all_authors' => Helper::get_all_authors_with_posts(),
+				'image_sizes' => Helper::get_image_sizes(),
+				'desktop_breakpoint' => 1200,
+				'tablet_breakpoint' => 1024,
+				'mobile_breakpoint' => 768
+			];
+
+			$localize_array = array_merge($localize_array, $admin_localize_array);
+		}
+
+		$localize_array['site_url'] = site_url();
+		$localize_array['pluginUrl'] = FB_PLUGIN_URL;
+		$localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
+		$localize_array['contact_form7_install_url'] = admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term');
+		wp_localize_script('fb-block-editor', 'FrontisBlocksData', $localize_array);
+		wp_localize_script('fb-block-editor', 'FrontisBlocksData', $localize_array);
+
+		wp_set_script_translations( 'fb-block-editor-js', 'frontis-blocks' );
+
+		// Common Editor style.
+		wp_enqueue_style(
+			'fb-block-common-editor', // Handle.
+			FB_PLUGIN_URL . 'dist/blocks.css', // Block editor CSS.
+			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+			FB_VERSION
+		);
+
+//		$blocks_list = BlockList::get_instance()->get_blocks();
+//		$active_blocks = get_option('fb_active_blocks');
+//
+//		if (!empty($blocks_list)) {
+//			foreach ($blocks_list as $block) {
+//				$slug = $block['slug'];
+//				$complete = $block['complete'];
+//				if (is_array($active_blocks) && !empty($active_blocks)) {
+//					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
+//						continue;
+//					}
+//				}
+//				if ($complete !== 'true') {
+//					continue;
+//				}
+//				$package = $block['package'];
+//				$plugin_dir = FB_PLUGIN_PATH;
+//				$blocks_dir = FB_BLOCKS_DIR . $slug;
+//				$plugin_slug = 'frontis-blocks';
+//
+//				if (!file_exists($blocks_dir)) {
+//					error_log($blocks_dir);
+//					continue;
+//				}
+//			}
+//		}
 	}
 
 	public function render_contact_form_7_shortcode($attributes)

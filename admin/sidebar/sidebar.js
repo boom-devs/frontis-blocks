@@ -1,32 +1,27 @@
 import {__} from "@wordpress/i18n";
 import {PluginSidebar, PluginSidebarMoreMenuItem} from "@wordpress/editor";
-import {
-	PanelBody,
-	Button,
-	TabPanel,
-	TextareaControl
-} from "@wordpress/components";
-import {
-	PanelColorSettings,
-} from "@wordpress/block-editor";
+import {useDispatch, useSelect} from '@wordpress/data';
+
+import {Button, PanelBody, TabPanel} from "@wordpress/components";
+import {PanelColorSettings,} from "@wordpress/block-editor";
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
-import {useState, useEffect} from "@wordpress/element";
+import {useEffect, useState} from "@wordpress/element";
 import "./sidebar.scss";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
-import {getFbLocalStorage, useAfterSave, loadGoogleFont} from "./helper";
-import {updateGlobalStyle, getGlobalStyle} from "./fetch";
+import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
+import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 
 const defaultsColors = [
 	{
 		"name": __("Primary Color", "frontis-blocks"),
-		"color": '#f00000',
+		"color": '#399CFF',
 		"slug": 'primary-color',
 	},
 	{
 		"name": __("Secondary Color", "frontis-blocks"),
-		"color": '#399CFF',
+		"color": '#f00000',
 		"slug": 'secondary-color',
 	},
 	{
@@ -55,50 +50,103 @@ const defaultsColors = [
 		"slug": 'link-hover-color',
 	},
 	{
-		"name": __("Background Color", "frontis-blocks"),
-		"color": '#393E46',
-		"slug": 'background-color',
-	},
-	{
-		"name": __("Button Color", "frontis-blocks"),
+		"name": __("White Color", "frontis-blocks"),
 		"color": '#FFFFFF',
-		"slug": 'button-color',
+		"slug": 'white-color',
 	},
 	{
-		"name": __("Button Background Color", "frontis-blocks"),
-		"color": '#000',
-		"slug": 'button-background-color',
+		"name": __("Black Color", "frontis-blocks"),
+		"color": '#000000',
+		"slug": 'black-color',
+	},
+	{
+		"name": __("Gray Color", "frontis-blocks"),
+		"color": '#808080',
+		"slug": 'gray-color',
 	}
 
 ];
+
 const gradientDefaults = [
 	{
-		"color": "linear-gradient(90deg, hsla(259, 84%, 78%, 1) 0%, hsla(206, 67%, 75%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
 		"name": "Primary Color",
 		"slug": "gradientPrimary",
 		"var": "--fb-gradient-primary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, hsla(18, 76%, 85%, 1) 0%, hsla(203, 69%, 84%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
 		"name": "Secondary Color",
 		"slug": "gradientSecondary",
 		"var": "--fb-gradient-secondary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, hsla(248, 21%, 15%, 1) 0%, hsla(250, 14%, 61%, 1) 100%)",
+		"color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
 		"name": "Tertiary Color",
 		"slug": "gradientTertiary",
 		"var": "--fb-gradient-tertiary-color"
 	},
 	{
-		"color": "linear-gradient(90deg, rgb(250, 250, 250) 0%, rgb(233, 233, 233) 49%, rgb(244, 243, 243) 100%)",
-		"name": "Background Color",
+		"color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
+		"name": "Accent Color",
+		"slug": "gradientAccent",
+		"var": "--fb-gradient-accent-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
+		"name": "Neutral Background",
 		"slug": "gradientBackground",
 		"var": "--fb-gradient-background-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
+		"name": "Vibrant Glow",
+		"slug": "gradientGradient",
+		"var": "--fb-gradient-gradient-color"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
+		"name": "Sunset Bliss",
+		"slug": "gradientSunsetBliss",
+		"var": "--fb-gradient-sunset-bliss"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
+		"name": "Ocean Breeze",
+		"slug": "gradientOceanBreeze",
+		"var": "--fb-gradient-ocean-breeze"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
+		"name": "Tangerine Dream",
+		"slug": "gradientTangerineDream",
+		"var": "--fb-gradient-tangerine-dream"
+	},
+	{
+		"color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
+		"name": "Lavender Kiss",
+		"slug": "gradientLavenderKiss",
+		"var": "--fb-gradient-lavender-kiss"
+	},
+	{
+		"color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
+		"name": "Minty Fresh",
+		"slug": "gradientMintyFresh",
+		"var": "--fb-gradient-minty-fresh"
+	},
+	{
+		"color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
+		"name": "Halloween",
+		"slug": "gradientHalloween",	
+		"var": "--fb-gradient-halloween"
 	}
+
+
 ];
 
 function FrontisBlocksSidebar(props) {
+
+	// Set state
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
 	const [gradientColors, setGradientColors] = useState([]);
@@ -106,11 +154,7 @@ function FrontisBlocksSidebar(props) {
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
 	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
-	const [typography, setTypography] = useState({});
-	const [customTypography, setCustomTypography] = useState({});
-	const [fontfamilies, setFontfamilies] = useState({})
-
-	const defaultTypos = {
+	const [typography, setTypography] = useState({
 		body: {
 			fontFamily: 'Default',
 			lineHeight: {
@@ -446,7 +490,9 @@ function FrontisBlocksSidebar(props) {
 				}
 			}
 		}
-	};
+	});
+	const [customTypography, setCustomTypography] = useState({});
+	const [fontfamilies, setFontfamilies] = useState({});
 
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
@@ -486,6 +532,9 @@ function FrontisBlocksSidebar(props) {
 					if(key === 'fb_global_colors') {
 						if(localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_global_colors');
+							console.log("before console log")
+							console.log(res)
+							console.log("after console log")
 							if(!res.success) {
 								setGlobalColors(defaultsColors);
 								localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
@@ -549,8 +598,7 @@ function FrontisBlocksSidebar(props) {
 						if(localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_typography');
 							if(!res.success) {
-								setTypography(defaultTypos);
-								localStorage.setItem('fb_typography', JSON.stringify(defaultTypos));
+								localStorage.setItem('fb_typography', JSON.stringify(typography));
 							} else {
 								setTypography(res.data);
 								localStorage.setItem('fb_typography', JSON.stringify(res.data));
@@ -625,6 +673,23 @@ function FrontisBlocksSidebar(props) {
 		colors[index].color = color;
 		setGlobalColors([...colors]);
 		setFbGlobalSettingsLoading(true);
+
+
+		// // Select the Save button and update its aria-disabled attribute
+		// const saveButton = document.querySelector(
+		// 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
+		// );
+
+		// if (saveButton) {
+		// 	// Set aria-disabled to false when color is updated
+		// 	saveButton.setAttribute('aria-disabled', 'false');
+	
+		// 	// Add a click event listener to set aria-disabled back to true
+		// 	saveButton.addEventListener('click', () => {
+		// 		saveButton.setAttribute('aria-disabled', 'true');
+		// 	});
+		// }
+
 	};
 
 	//Update Gradient Colors
@@ -735,6 +800,7 @@ function FrontisBlocksSidebar(props) {
 		handleUpdateSettings();
 	}, [isAfterSave]);
 
+
 	return (
 		<>
 			<PluginSidebarMoreMenuItem target="fb_plugin_sidebar">
@@ -783,7 +849,7 @@ function FrontisBlocksSidebar(props) {
 														onClick={() => setNewCustomColorFn()}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 														</svg>
 													</span>
 													</Button>
@@ -830,7 +896,7 @@ function FrontisBlocksSidebar(props) {
 														])}
 													>Add Custom Color <span>
 														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 														</svg>
 													</span>
 													</Button>

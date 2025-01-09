@@ -30,18 +30,18 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
         label: __("Blocks", "frontis-blocks"),
         comp: <Blocks />
     },
-    // {
-    //     id: 'settings',
-    //     icon: <OptionsIcon />,
-    //     label: __("Settings", "frontis-blocks"),
-    //     comp: <Settings />
-    // },
-    // {
-    //     id: 'integrations',
-    //     icon: <IntegrationsIcon />,
-    //     label: __("Integrations", "frontis-blocks"),
-    //     comp: <Integration />
-    // },
+    {
+        id: 'settings',
+        icon: <OptionsIcon />,
+        label: __("Settings", "frontis-blocks"),
+        comp: <Settings />
+    },
+    {
+        id: 'integrations',
+        icon: <IntegrationsIcon />,
+        label: __("Integrations", "frontis-blocks"),
+        comp: <Integration />
+    },
 	// {
 	// 	id: 'custom_icons',
 	// 	icon: <IntegrationsIcon />,
@@ -58,4 +58,5 @@ const TabMenus = applyFilters('frontisblocks/admin/tabs', [
 //       comp: <Pricing />
 //     });
 // }
+
 export default TabMenus;
