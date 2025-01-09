@@ -111,6 +111,34 @@ final class Plugin
 		if (has_block('frontis-blocks/slider')) {
 			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
 			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
+
+			// Add the Swiper initialization script
+			add_action('wp_footer', function () {
+				?>
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+						const sliders = document.querySelectorAll('.fb-swiper');
+						sliders.forEach(slider => {
+							new Swiper(slider, {
+								navigation: {
+									nextEl: '.swiper-button-next',
+									prevEl: '.swiper-button-prev',
+								},
+								pagination: {
+									el: '.swiper-pagination',
+									clickable: true,
+								},
+								autoplay: {
+									delay: 3000,
+									disableOnInteraction: false,
+								},
+								loop: true,
+							});
+						});
+					});
+				</script>
+				<?php
+			});
 		}
 	}
 
