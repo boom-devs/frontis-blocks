@@ -1,5 +1,4 @@
 import {__} from "@wordpress/i18n";
-import FB_Range from "@Components/range";
 import {InspectorControls} from "@wordpress/block-editor";
 import {
 	BaseControl,
@@ -14,6 +13,7 @@ import {
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
+import FB_Range from "@Components/range";
 import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import {useDeviceType} from "@Config/displayType";
@@ -24,6 +24,7 @@ const Inspector = (props) => {
 		isSelected,
 		attributes,
 		attributes: {
+			p_block_id,
 			containerType,
 			containerTypeFull,
 			containerCustomWidth,
@@ -36,7 +37,36 @@ const Inspector = (props) => {
 			customWidthUnits,
 			minHeight,
 			minHeightUnits,
-			containerWrap
+			containerWrap,
+
+			/** Normal Bg */
+			containerBgColorSwitcher,
+			containerBgNormalBackgroundType,
+			containerBgNormalClassicColor,
+			containerBgNormalGradientColor,
+			containerBgNormalCustomGradientSwitcher,
+			containerBgNormalCustomGradientInputValue,
+			containerBgNormalBackgroundImageUrl,
+			containerBgNormalBackgroundImageAlt,
+			containerBgNormalBackgroundImageID,
+			containerBgNormalBackgroundImagePosition,
+			containerBgNormalBackgroundImageAttachment,
+			containerBgNormalBackgroundImageRepeat,
+			containerBgNormalBackgroundImageSize,
+
+			/** Hover Bg */
+			containerBgHoverBackgroundType,
+			containerBgHoverClassicColor,
+			containerBgHoverGradientColor,
+			containerBgHoverCustomGradientSwitcher,
+			containerBgHoverCustomGradientInputValue,
+			containerBgHoverBackgroundImageUrl,
+			containerBgHoverBackgroundImageAlt,
+			containerBgHoverBackgroundImageID,
+			containerBgHoverBackgroundImagePosition,
+			containerBgHoverBackgroundImageAttachment,
+			containerBgHoverBackgroundImageRepeat,
+			containerBgHoverBackgroundImageSize,
 		},
 
 		setAttributes
@@ -115,6 +145,18 @@ const Inspector = (props) => {
 	}
 
 	return (
+		<>
+		<style>
+		{`
+			#${p_block_id} {
+				${containerBgNormalBackgroundType === 'gradient' ? `  
+					background: ${containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue ? containerBgNormalCustomGradientInputValue : containerBgNormalGradientColor};
+				`: `
+					background: ${containerBgNormalClassicColor};
+				`}
+			}
+		`}
+		</style>
 		<InspectorControls key="controls">
 			<div className="fb-inspector-control">
 				<TabPanel
@@ -361,6 +403,68 @@ const Inspector = (props) => {
 
 							{tab.name === "styles" && (
 								<>
+									<PanelBody
+										title={__("Background", "frontis-blocks")}
+										initialOpen={true}
+									>
+									<FB_BackgroundColorControl
+										label={__("", "frontis-blocks")}
+										bgColorSwitcher={containerBgColorSwitcher}
+										setBgColorSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
+
+										normalBackgroundType={containerBgNormalBackgroundType}
+										setNormalBackgroundType={(value) => setAttributes({ containerBgNormalBackgroundType: value })}
+										normalClassicColor={containerBgNormalClassicColor}
+										setNormalClassicColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
+										normalGradientColor={containerBgNormalGradientColor}
+										setNormalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
+										normalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
+										setNormalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
+										normalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
+										setNormalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
+
+										normalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
+										setNormalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
+										normalBackgroundImageAlt={containerBgNormalBackgroundImageAlt}
+										setNormalBackgroundImageAlt={(value) => setAttributes({ containerBgNormalBackgroundImageAlt: value })}
+										normalBackgroundImageID={containerBgNormalBackgroundImageID}
+										setNormalBackgroundImageID={(value) => setAttributes({ containerBgNormalBackgroundImageID: value })}
+										normalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
+										setNormalBackgroundImagePosition={(value) => setAttributes({ containerBgNormalBackgroundImagePosition: value })}
+										normalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
+										setNormalBackgroundImageAttachment={(value) => setAttributes({ containerBgNormalBackgroundImageAttachment: value })}
+										normalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
+										setNormalBackgroundImageRepeat={(value) => setAttributes({ containerBgNormalBackgroundImageRepeat: value })}
+										normalBackgroundImageSize={containerBgNormalBackgroundImageSize}
+										setNormalBackgroundImageSize={(value) => setAttributes({ containerBgNormalBackgroundImageSize: value })}
+
+										hoverBackgroundType={containerBgHoverBackgroundType}
+										setHoverBackgroundType={(value) => setAttributes({ containerBgHoverBackgroundType: value })}
+										hoverClassicColor={containerBgHoverClassicColor}
+										setHoverClassicColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
+										hoverGradientColor={containerBgHoverGradientColor}
+										setHoverGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
+										hoverCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
+										setHoverCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
+										hoverCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
+										setHoverCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
+
+										hoverBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
+										setHoverBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
+										hoverBackgroundImageAlt={containerBgHoverBackgroundImageAlt}
+										setHoverBackgroundImageAlt={(value) => setAttributes({ containerBgHoverBackgroundImageAlt: value })}
+										hoverBackgroundImageID={containerBgHoverBackgroundImageID}
+										setHoverBackgroundImageID={(value) => setAttributes({ containerBgHoverBackgroundImageID: value })}
+										hoverBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
+										setHoverBackgroundImagePosition={(value) => setAttributes({ containerBgHoverBackgroundImagePosition: value })}
+										hoverBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment}
+										setHoverBackgroundImageAttachment={(value) => setAttributes({ containerBgHoverBackgroundImageAttachment: value })}
+										hoverBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
+										setHoverBackgroundImageRepeat={(value) => setAttributes({ containerBgHoverBackgroundImageRepeat: value })}
+										hoverBackgroundImageSize={containerBgHoverBackgroundImageSize}
+										setHoverBackgroundImageSize={(value) => setAttributes({ containerBgHoverBackgroundImageSize: value })}
+									/>
+									</PanelBody>
 									<PanelBody
 										title={__("Container Gap", "frontis-blocks")}
 										initialOpen={true}
@@ -679,6 +783,7 @@ const Inspector = (props) => {
 				</TabPanel>
 			</div>
 		</InspectorControls>
+		</>
 	);
 };
 

@@ -221,6 +221,122 @@ const attributes = {
 	alignContentMobile: {
 		type: 'string',
 	},
+
+
+	/** Start Background */
+	containerBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	containerBgNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	containerBgNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	containerBgNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	containerBgNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** Bg Normal Image */
+	containerBgNormalBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalBackgroundImageID: {
+		type: "number",
+		default: "",
+	},
+	containerBgNormalBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	containerBgNormalBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+
+	/**Bg Hover */
+	containerBgHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	containerBgHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	containerBgHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	containerBgHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** Hover Image */
+	containerBgHoverBackgroundImageUrl: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverBackgroundImageAlt: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverBackgroundImageID: {
+		type: "number",
+		default: 0,
+	},
+	containerBgHoverBackgroundImagePosition: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverBackgroundImageAttachment: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverBackgroundImageRepeat: {
+		type: "string",
+		default: "",
+	},
+	containerBgHoverBackgroundImageSize: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+
+
+
+
+
+
+
+
 	backgroundType: {
 		type: 'string',
 		default: 'none',
