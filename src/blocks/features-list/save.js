@@ -29,15 +29,27 @@ export default function Save({ attributes }) {
                                   
                                   <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
 
-                                    { item.FeatureIconAlign !== 'none' && (
+                                    {item.FeatureIconAlign !== 'none' && (
                                         <div className="fb-feature-list-icon-box">
-                                            <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
-                                                <span className="fb-feature-list-icon">
-                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                </span>
-                                            </div>
+                                            {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
+                                                <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                    <span className="fb-feature-list-icon">
+                                                        {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                    </span>
+                                                </div>
+                                            ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
+                                                <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
+
+                                                    <img
+                                                        src={item.FeatureIconImageUrl}
+                                                        alt={item.FeatureIconImageAlt || 'Feature Image'}
+                                                        className="fb-feature-icon-image"
+                                                    />
+
+                                                </div>
+                                            ) : null}
                                         </div>
-                                    ) }
+                                    )}
                                     
                                     <div className="fb-feature-list-content">
                                         <RichText.Content
