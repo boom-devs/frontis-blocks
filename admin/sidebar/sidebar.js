@@ -22,7 +22,9 @@ import {getFbLocalStorage, loadGoogleFont, useAfterSave} from "./helper";
 import {getGlobalStyle, updateGlobalStyle} from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 import { Coloricon, Typographyicon, Blockicon, ChevronRight, ChevronLeft } from "./../icons";
-import ColorPicker from "./components/ColorPicker";
+
+import FbColorPicker from "./components/ColorPicker";
+import FbColorPanel from "./components/FbColorPanel";
 
 const defaultsColors = [
 	{
@@ -1024,17 +1026,17 @@ function FrontisBlocksSidebar(props) {
 										<p>{ __("Available texts, links, Button, Headings global colors", "frontis-blocks") }</p>
 									</div>
 									</div>
-									<ColorPicker
-										defaultColor="#3498db"
-										onColorChange={handleColorChange}
-									/>
-									<PanelColorSettings
-										title={__("Colors", "frontis-blocks")}
-										className={"fb-color-panel fb-global-color-panel"}
-										initialOpen={true}
-										disableAlpha={true}
-										disableCustomGradients={false}
-										colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
+									<FbColorPanel 
+										colors={defaultsColors} 
+										onChange={(colorSlug, newColor) => {
+											const updatedColors = [...globalColors];
+											const index = updatedColors.findIndex(color => color.slug === colorSlug);
+											if (index !== -1) {
+												updatedColors[index].color = newColor;
+												setGlobalColors(updatedColors);
+											}
+										}}
+										setFbGlobalSettingsLoading={setFbGlobalSettingsLoading}
 									/>
 									
 								</>

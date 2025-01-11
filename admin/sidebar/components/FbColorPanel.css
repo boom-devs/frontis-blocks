@@ -1,0 +1,13 @@
+:root {
+  /* Base colors */
+  --fb-primary-color: #399CFF;
+  --fb-secondary-color: #f00000;
+  --fb-tertiary-color: #F72585;
+  --fb-accent-color: #7209B7;
+  --fb-text-color: #3A0CA3;
+  --fb-link-color: #4361EE;
+  --fb-link-hover-color: #4CC9F0;
+  --fb-white-color: #FFFFFF;
+  --fb-black-color: #000000;
+  --fb-gray-color: #808080;
+}

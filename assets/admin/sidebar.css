@@ -409,6 +409,94 @@ svg#fb-global-panel-icon {
 .fb-boder-full {
   border-top: 1px solid #E1E3E8;
 }
+
+.fb-color-panel.components-tools-panel {
+  background: #fff;
+  border: none;
+  margin: 0;
+  gap: 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-header {
+  padding: 16px;
+  border-bottom: 1px solid #E1E3E8;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-header h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin: 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item {
+  border: 1px solid #E1E3E8;
+  margin: 0;
+  border-bottom: none;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item:last-child {
+  border-bottom: 1px solid #E1E3E8;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker {
+  display: block;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .components-button {
+  width: 100%;
+  justify-content: flex-start;
+  height: 48px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 0;
+  gap: 8px;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .components-button:hover {
+  background: #F6F7F7;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .components-button .component-color-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .components-button span {
+  margin-left: 8px;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown {
+  padding: 16px;
+  min-width: 260px;
+  border: 1px solid #E1E3E8;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown .components-range-control {
+  margin-top: 16px;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown .fb-color-shades {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown .fb-color-shades .fb-color-shade-button {
+  min-width: 24px;
+  border: 1px solid #E1E3E8;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown .fb-color-shades .fb-color-shade-button:hover {
+  transform: scale(1.1);
+  border-color: #007cba;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel-item .fb-color-picker .fb-color-picker-dropdown .fb-color-shades .fb-color-shade-button:focus {
+  box-shadow: 0 0 0 1.5px #007cba;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel__header .components-button {
+  color: #007cba;
+  font-size: 13px;
+  height: auto;
+  padding: 0;
+}
+.fb-color-panel.components-tools-panel .components-tools-panel__header .components-button:hover {
+  color: #006ba1;
+}
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/responsive-control/editor.lazy.scss ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -425,45 +513,22 @@ svg#fb-global-panel-icon {
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/typography-control/editor.lazy.scss ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./admin/sidebar/components/ColorPicker.css ***!
-  \******************************************************************************************************************************************************************************************************************************/
-.color-picker-container {
-    position: relative;
-    max-width: 300px;
-    margin: 20px;
-  }
-  
-  .color-picker-popup {
-    position: absolute;
-    top: 50px;
-    left: 0;
-    background: #fff;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 10px;
-    width: 300px;
-    z-index: 10;
-  }
-  
-  .color-variations {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .color-variation-box {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .color-code-display {
-    margin-top: 20px;
-    font-weight: bold;
-  }
-  
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./admin/sidebar/components/FbColorPanel.css ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+:root {
+  /* Base colors */
+  --fb-primary-color: #399CFF;
+  --fb-secondary-color: #f00000;
+  --fb-tertiary-color: #F72585;
+  --fb-accent-color: #7209B7;
+  --fb-text-color: #3A0CA3;
+  --fb-link-color: #4361EE;
+  --fb-link-hover-color: #4CC9F0;
+  --fb-white-color: #FFFFFF;
+  --fb-black-color: #000000;
+  --fb-gray-color: #808080;
+}
+
 
 /*# sourceMappingURL=sidebar.css.map*/

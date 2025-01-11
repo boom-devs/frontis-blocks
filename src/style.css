@@ -1,0 +1,49 @@
+:root {
+  /* Base colors */
+  --fb-primary-color: #399CFF;
+  --fb-secondary-color: #f00000;
+  --fb-tertiary-color: #F72585;
+  --fb-accent-color: #7209B7;
+  --fb-text-color: #3A0CA3;
+  --fb-link-color: #4361EE;
+  --fb-link-hover-color: #4CC9F0;
+  --fb-white-color: #FFFFFF;
+  --fb-black-color: #000000;
+  --fb-gray-color: #808080;
+}
+
+/* Color utility classes */
+.fb-color-primary { color: var(--fb-primary-color); }
+.fb-color-secondary { color: var(--fb-secondary-color); }
+.fb-color-tertiary { color: var(--fb-tertiary-color); }
+.fb-color-accent { color: var(--fb-accent-color); }
+.fb-color-text { color: var(--fb-text-color); }
+.fb-color-link { color: var(--fb-link-color); }
+.fb-color-link-hover { color: var(--fb-link-hover-color); }
+.fb-color-white { color: var(--fb-white-color); }
+.fb-color-black { color: var(--fb-black-color); }
+.fb-color-gray { color: var(--fb-gray-color); }
+
+/* Background utility classes */
+.fb-bg-primary { background-color: var(--fb-primary-color); }
+.fb-bg-secondary { background-color: var(--fb-secondary-color); }
+.fb-bg-tertiary { background-color: var(--fb-tertiary-color); }
+.fb-bg-accent { background-color: var(--fb-accent-color); }
+.fb-bg-text { background-color: var(--fb-text-color); }
+.fb-bg-link { background-color: var(--fb-link-color); }
+.fb-bg-link-hover { background-color: var(--fb-link-hover-color); }
+.fb-bg-white { background-color: var(--fb-white-color); }
+.fb-bg-black { background-color: var(--fb-black-color); }
+.fb-bg-gray { background-color: var(--fb-gray-color); }
+
+/* Border utility classes */
+.fb-border-primary { border-color: var(--fb-primary-color); }
+.fb-border-secondary { border-color: var(--fb-secondary-color); }
+.fb-border-tertiary { border-color: var(--fb-tertiary-color); }
+.fb-border-accent { border-color: var(--fb-accent-color); }
+.fb-border-text { border-color: var(--fb-text-color); }
+.fb-border-link { border-color: var(--fb-link-color); }
+.fb-border-link-hover { border-color: var(--fb-link-hover-color); }
+.fb-border-white { border-color: var(--fb-white-color); }
+.fb-border-black { border-color: var(--fb-black-color); }
+.fb-border-gray { border-color: var(--fb-gray-color); } 
