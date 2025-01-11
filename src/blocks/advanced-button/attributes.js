@@ -220,11 +220,23 @@ const attributes = {
         type: "boolean",
         default: true
     },
+    buttonBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     buttonBoxShadowValues: { 
         type: 'array',
         default: [],
     },
     buttonBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    buttonBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    buttonBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -239,28 +251,28 @@ const attributes = {
     buttonDesktopPadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonTabPadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonMobilePadding: {
         type: "object", 
         default: {
-            top: 12,
-            bottom: 12,
-            left: 24,
-            right: 24,
+            top: '12',
+            bottom: '12',
+            left: '24',
+            right: '24',
         },
     },
     buttonPaddingLink: {
@@ -328,9 +340,9 @@ const attributes = {
     buttonIconSize: {
         type: 'object',
         default: {
-            Desktop: 16,
-            Tablet: 16,
-            Mobile: 16
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     buttonIconSizeUnits: {
@@ -461,9 +473,9 @@ const attributes = {
     buttonIconGapSize: {
         type: 'object',
         default: {
-            Desktop: 10,
-            Tablet: 10,
-            Mobile: 10
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
         }
     },
     buttonIconGapUnits: {
@@ -472,6 +484,14 @@ const attributes = {
             Desktop: 'px',
             Tablet: 'px',
             Mobile: 'px',
+        }
+    },
+    buttonIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
         }
     },
     /** End Icon Styles */
@@ -682,6 +702,10 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    buttonGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	buttonGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -690,11 +714,67 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    buttonGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    buttonGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
     /** End Global Style */
 
     blockStyle: {
         type: 'string',
         default: '',
+    },
+
+    buttonIconImageUrl : {
+        type: 'string',
+        default: '',
+    },
+    buttonIconImageAlt : { 
+        type: 'string',
+        default: '',
+    },
+    buttonIconImageID : {
+        type: 'number',
+    },
+    buttonIconImageWidth : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageWidthUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconImageHeight : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageHeightUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconImagedisplay : {
+        type: 'string',
+        default: 'none',
     },
 }
 export default attributes;

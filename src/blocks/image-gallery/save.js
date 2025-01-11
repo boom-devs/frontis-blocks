@@ -7,7 +7,6 @@ export default function Save({ attributes }) {
 
     const { 
         blockID,
-        deviceType,
 
         GalleryType,
         GalleryItems,
@@ -34,26 +33,27 @@ export default function Save({ attributes }) {
                         {GalleryItems.map(item => 
                             item?.image?.url && (
                                 <>
-                                    <style>
-                                        {`
-                                           .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-                                                grid-column: ${item.column?.desktop > 1 ? `span ${item.column?.desktop}` : 'unset'};
-                                                grid-row: ${item.row?.desktop > 1 ? `span ${item.row?.desktop}` : 'unset'};
-                                            }
-                                            @media only screen and (max-width: 1024px) {
-                                                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-                                                    grid-column: ${item.column?.tablet > 1 ? `span ${item.column?.tablet}` : 'unset'};
-                                                    grid-row: ${item.row?.tablet > 1 ? `span ${item.row?.tablet}` : 'unset'};
+                                    {GalleryType === 'mesonry' && <style>
+                                            {`
+                                            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+                                                    grid-column: ${item.column?.desktop > 1 ? `span ${item.column?.desktop}` : 'unset'};
+                                                    grid-row: ${item.row?.desktop > 1 ? `span ${item.row?.desktop}` : 'unset'};
                                                 }
-                                            }
-                                            @media only screen and (max-width: 767px) {
-                                                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
-                                                    grid-column: ${item.column?.mobile > 1 ? `span ${item.column?.mobile}` : 'unset'};
-                                                    grid-row: ${item.row?.mobile > 1 ? `span ${item.row?.mobile}` : 'unset'};
+                                                @media only screen and (max-width: 1024px) {
+                                                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+                                                        grid-column: ${item.column?.tablet > 1 ? `span ${item.column?.tablet}` : 'unset'};
+                                                        grid-row: ${item.row?.tablet > 1 ? `span ${item.row?.tablet}` : 'unset'};
+                                                    }
                                                 }
-                                            } 
-                                        `}
-                                    </style>
+                                                @media only screen and (max-width: 767px) {
+                                                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
+                                                        grid-column: ${item.column?.mobile > 1 ? `span ${item.column?.mobile}` : 'unset'};
+                                                        grid-row: ${item.row?.mobile > 1 ? `span ${item.row?.mobile}` : 'unset'};
+                                                    }
+                                                } 
+                                            `}
+                                    </style>}
+                                    
                                     <a href={item.image.url} key={item.id} 
                                         className={`fb-image-gallery-item ${blockID} ${item.id}`}
                                     >

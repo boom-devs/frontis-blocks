@@ -1,43 +1,39 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import './style.scss'; // Ensure you have styles for the front end if needed
+import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-export default function Save({ attributes }) {
-    const { 
+import classnames from 'classnames';
 
+export default function save( props ) {
+	const { attributes } = props;
+
+    const {
         blockId,
-        sliderItems,
-        
+        slideContent,
+        slideItem,
+        transitionSpeed,
+        displayArrows,
+		displayDots,
     } = attributes;
 
-    const blockProps = useBlockProps.save({
-        className: `fb-slider-main-wrapper ${blockId}`,
-    });
+	const blockProps = useBlockProps.save();
 
+	return (
+		<div
+			key={ blockId }
+			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container' ) }
+		>
+			<div className="fb-slides fb-swiper">
+				<div className="swiper-wrapper">
+					<InnerBlocks.Content />
+				</div>
+			</div>
+			{ displayDots && <div className="swiper-pagination"></div> }
 
-    return (
-        <>
-            <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-slider-wrapper">
-                    <div className={`fb-slider-list-wrapper `}>
-                        <ul className="fb-slider-list-items">
-                            {sliderItems.map(item => (
-                                  <li key={item.id} className={`fb-slider-list-item single-item-${item.id}`}>
-
-                                    <div className="fb-slider-list-content">
-                                        <RichText.Content
-                                            tagName="p"
-                                            className="fb-slider-list-title"
-                                            value={item.title}
-                                        />
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-        </>
-    );
+			{ displayArrows && (
+				<>
+					<div className="swiper-button-prev"></div>
+					<div className="swiper-button-next"></div>
+				</>
+			) }
+		</div>
+	);
 }

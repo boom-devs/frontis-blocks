@@ -22,7 +22,6 @@ import {
     MediaUploadCheck,
     Placeholder,
     PanelRow,
-    DropdownMenu
 } from '@wordpress/components';
 
 /**
@@ -52,19 +51,13 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import {
-    more,
-    arrowLeft,
-    database
-} from '@wordpress/icons';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
-    const [isFocused, setIsFocused] = useState(false);
-
     const {
         blockId,
-        deviceType,
+        // deviceType,
         headingText,
         headingTag,
         headingAlignment,
@@ -129,7 +122,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         /** End Heading */
 
         /**Start Sub Heading */
-
         subHeadingSwitcher,
         subHeadingText,
         subHeadingTag,
@@ -150,6 +142,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         subHeadingTextShadowValues,
         subHeadingTextShadowCssValue,
         subHeadingTextStroke,
+        subHeadingTextStrokeColorSwitcher,
+        subHeadingTextStrokeColor,
+        subHeadingTextStrokeHoverColor,
 
         subHeadingColorSwitcher,
         subHeadingColor,
@@ -264,8 +259,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingGlobalBorderRadiusMobile,
         headingGlobalBorderRadiusLink,
 
+        headingGlobalBoxShadowSwitcher,
         headingGlobalBoxShadowValues,
         headingGlobalBoxShadowCssValue,
+        headingGlobalBoxShadowHoverValues,
+        headingGlobalBoxShadowHoverCssValue,
+
         /** End Global Style */
 
         /** Start Background Image */
@@ -288,18 +287,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeHeightUnits,
         activeLineBeforeColor,
 
-        dataSource,
-
         blockStyle,
-        globalParagraphFontFamily,
-        globalLinkFontFamily,
-        globalHeading1FontFamily,
-        globalHeading2FontFamily,
-        globalHeading3FontFamily,
-        globalHeading4FontFamily,
-        globalHeading5FontFamily,
-        globalHeading6FontFamily,
     } = attributes;
+
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -313,7 +304,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		setAttributes({headingIcon: IconName})
 
 	}
-
     let defaultImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
@@ -326,6 +316,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, []);
 
+
+
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
         const presetConfigurations = {
@@ -336,7 +328,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
-                headingTextStroke: "",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
             },
@@ -347,7 +343,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "0px 18px 0px #399cff1a;",
                 headingColor: "transparent",
-                headingTextStroke: "2",
+                headingTextStroke: {
+                    Desktop: "2",
+                    Tablet: "2",
+                    Mobile: "2",
+                },
                 headingTextStrokeColor: "#399CFF",
                 headingTextStrokeHoverColor: "#399CFF",
             },
@@ -360,7 +360,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
-                headingTextStroke: "",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
             },
@@ -607,9 +611,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingMobileBorderWidth = `${headingMobileBorder.top}${headingBorderUnits.Mobile} ${headingMobileBorder.right}${headingBorderUnits.Mobile} ${headingMobileBorder.bottom}${headingBorderUnits.Mobile} ${headingMobileBorder.left}${headingBorderUnits.Mobile}`;
     /** End Heading Border */
 
-
-
-
     /** Start Heading Border Radius */
     const headingBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -685,7 +686,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingTabletBorderRadiusWidth = `${headingTabBorderRadius.top}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.right}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.bottom}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.left}${headingBorderRadiusUnits.Tablet}`;
     const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius.top}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.right}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.bottom}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.left}${headingBorderRadiusUnits.Mobile}`;
     /** End Heading Border Radius */
-
 
     /** Start Sub Heading Padding */
     const subHeadingPaddingUnitsChange = (event, position) => {
@@ -991,8 +991,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const subHeadingMobileBorderRadiusWidth = `${subHeadingMobileBorderRadius.top}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.right}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.bottom}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.left}${subHeadingBorderRadiusUnits.Mobile}`;
     /** End Sub Heading Border Radius */
 
-
-
     	/** Start Icon Border */
 	const handleHeadingIconBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1136,9 +1134,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const headingIconTabletBorderRadiusWidthValue = `${headingIconBorderRadiusTablet.top}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.right}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.bottom}${headingIconBorderRadiusUnits.Tablet} ${headingIconBorderRadiusTablet.left}${headingIconBorderRadiusUnits.Tablet}`;
 	const headingIconMobileBorderRadiusWidthValue = `${headingIconBorderRadiusMobile.top}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.right}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.bottom}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.left}${headingIconBorderRadiusUnits.Mobile}`;
 	/** End Icon Border Radius */
-
-
-
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -1360,7 +1355,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalMobileBorderWidth = `${headingGlobalBorderMobile.top}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.right}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.bottom}${headingGlobalBorderUnits.Mobile} ${headingGlobalBorderMobile.left}${headingGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
-
 	/** Start Global border radius*/
 	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1469,10 +1463,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
             ${headingTextStroke ? `
-                -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
-                text-stroke: ${headingTextStroke}px ${headingTextStrokeColor};
+                -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
+                text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
             ` : ''}
             ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
 
@@ -1486,16 +1480,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
             ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
             ${headingTextStrokeHoverColor ? `
-                -webkit-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                -moz-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                -ms-text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
-                text-stroke: ${headingTextStroke}px ${headingTextStrokeHoverColor};
+                -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
+                text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
             ` : ''}
         }
 
@@ -1518,10 +1511,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingBorderColor ? `border-color: ${subHeadingBorderColor};` : ''}
             ${subHeadingTextShadowCssValue ? `text-shadow: ${subHeadingTextShadowCssValue};` : ''}
             ${subHeadingTextStroke ? `
-                -webkit-text-stroke: ${subHeadingTextStroke}px;
-                -moz-text-stroke: ${subHeadingTextStroke}px;
-                -ms-text-stroke: ${subHeadingTextStroke}px;
-                text-stroke: ${subHeadingTextStroke}px;
+                -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
+                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
+                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
+                text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
             ` : ''}
             ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
@@ -1531,6 +1524,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
             ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
+            ${subHeadingTextStroke ? `
+                -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
+                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
+                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
+                text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
+            ` : ''}
         }
 
         .${blockId} .fb-advanced-icon {
@@ -1589,6 +1588,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         .${blockId}.fb-advanced-wrapper:hover {
             ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
+            ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
@@ -1612,7 +1612,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingTabletMarginWidth ? `margin: ${headingTabletMarginWidth};` : ''}
                 ${headingTabletBorderWidth ? `border-width: ${headingTabletBorderWidth};` : ''}
                 ${headingTabletBorderRadiusWidth ? `border-radius: ${headingTabletBorderRadiusWidth};` : ''}
+
+                ${headingTextStroke ? `
+                    -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
+                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
+                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
+                    text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
+                ` : ''}
             }
+
+            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+                ${headingTextStrokeHoverColor ? `
+                    -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
+                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
+                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
+                    text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
+                ` : ''}
+            }
+
             .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
                 ${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
@@ -1621,6 +1638,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingTabletMarginWidth ? `margin: ${subHeadingTabletMarginWidth};` : ''}
                 ${subHeadingTabletBorderWidth ? `border-width: ${subHeadingTabletBorderWidth};` : ''}
                 ${subHeadingTabletBorderRadiusWidth ? `border-radius: ${subHeadingTabletBorderRadiusWidth};` : ''}
+                ${subHeadingTextStroke ? `
+                    -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
+                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
+                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
+                    text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
+                ` : ''}
+            }
+
+            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+                ${subHeadingTextStroke ? `
+                    -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
+                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
+                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
+                    text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
+                ` : ''}
             }
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Tablet ? `width: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
@@ -1671,7 +1703,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingMobileMarginWidth ? `margin: ${headingMobileMarginWidth};` : ''}
                 ${headingMobileBorderWidth ? `border-width: ${headingMobileBorderWidth};` : ''}
                 ${headingMobileBorderRadiusWidth ? `border-radius: ${headingMobileBorderRadiusWidth};` : ''}
+                ${headingTextStroke ? `
+                    -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
+                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
+                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
+                    text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
+                ` : ''}
             }
+
+            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+                ${headingTextStrokeHoverColor ? `
+                    -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
+                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
+                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
+                    text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
+                ` : ''}
+            }
+
             .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
                 ${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
@@ -1680,6 +1728,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingMobileMarginWidth ? `margin: ${subHeadingMobileMarginWidth};` : ''}
                 ${subHeadingMobileBorderWidth ? `border-width: ${subHeadingMobileBorderWidth};` : ''}
                 ${subHeadingMobileBorderRadiusWidth ? `border-radius: ${subHeadingMobileBorderRadiusWidth};` : ''}
+                ${subHeadingTextStroke ? `
+                    -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
+                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
+                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
+                    text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
+                ` : ''}
+            }
+            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+                ${subHeadingTextStroke ? `
+                    -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
+                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
+                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
+                    text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
+                ` : ''}
             }
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Mobile ? `width: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
@@ -1740,7 +1802,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingLineHeight,
     headingLineHeightUnits,
     headingDesktopPaddingWidth,
+    headingTabletPaddingWidth,
+    headingMobilePaddingWidth,
     headingDesktopMarginWidth,
+    headingTabletMarginWidth,
+    headingMobileMarginWidth,
     headingBorder,
     headingDesktopBorderWidth,
     headingTabletBorderWidth,
@@ -1773,13 +1839,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     subHeadingLineHeight,
     subHeadingLineHeightUnits,
     subHeadingDesktopPaddingWidth,
+    subHeadingTabletPaddingWidth,
+    subHeadingMobilePaddingWidth,
     subHeadingDesktopMarginWidth,
+    subHeadingTabletMarginWidth,
+    subHeadingMobileMarginWidth,
     subHeadingBorder,
     subHeadingDesktopBorderWidth,
+    subHeadingTabletBorderWidth,
+    subHeadingMobileBorderWidth,
     subHeadingDesktopBorderRadiusWidth,
+    subHeadingTabletBorderRadiusWidth,
+    subHeadingMobileBorderRadiusWidth,
     subHeadingBorderColor,
     subHeadingTextShadowCssValue,
     subHeadingTextStroke,
+    subHeadingTextStrokeColorSwitcher,
+    subHeadingTextStrokeColor,
+    subHeadingTextStrokeHoverColor,
     subHeadingBoxShadowCssValue,
     subHeadingHoverColor,
     subHeadingBgColorHover,
@@ -1814,7 +1891,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     globalDesktopBorderWidth,
     globalDesktopBorderRadiusWidth,
     headingGlobalBorderColor,
+    headingGlobalBoxShadowSwitcher,
+    headingGlobalBoxShadowValues,
     headingGlobalBoxShadowCssValue,
+    headingGlobalBoxShadowHoverValues,
+    headingGlobalBoxShadowHoverCssValue,
     headingGlobalBgHoverColor,
     headingGlobalBorderHoverColor,
     activeLineAfterWidth,
@@ -1847,14 +1928,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
-
-    const handleFocus = () => {
-        setIsFocused(true);
-    };
-
-    const handleBlur = () => {
-        setIsFocused(false);
-    };
 
     return (
         <>
@@ -1938,38 +2011,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
                                                 />
 
-                                                <div class="fb-advance-heading-text">
-                                                    {dataSource == '' && (
-                                                        <TextareaControl
-                                                            label={__("Heading Text", "frontis-blocks")}
-                                                            value={headingText}
-                                                            onFocus={handleFocus}
-                                                            onBlur={handleBlur}
-                                                            onChange={(value) => setAttributes({ headingText: value })}
-                                                            className="fb-advanced-text"
-                                                        />
-                                                    )}
-                                                    {!isFocused &&
-                                                        <div class="fb-advance-heading-dynamic-data">
-                                                            <Dropdown
-                                                                className="fb-dynamic-tags-content"
-                                                                contentClassName="fb-dynamic-tags-content-popover"
-                                                                popoverProps={ { placement: 'bottom-start' } }
-                                                                renderToggle={ ( { isOpen, onToggle } ) => (
-                                                                    <Button
-                                                                        variant="primary"
-                                                                        onClick={ onToggle }
-                                                                        aria-expanded={ isOpen }
-                                                                        icon={'database'}
-                                                                    >
-                                                                        
-                                                                    </Button>
-                                                                ) }
-                                                                renderContent={ () => <div>This is the content of the popover.</div> }
-                                                            />
-                                                        </div>
-                                                    }
-                                                </div>
+                                                <TextareaControl
+                                                    label={__("Heading Text", "frontis-blocks")}
+                                                    value={headingText}
+                                                    onChange={(value) => setAttributes({ headingText: value })}
+                                                    className="fb-advanced-text"
+                                                />
                                             </PanelBody>
                                         </div>
                                         {subHeadingSwitcher && (
@@ -2122,15 +2169,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
                                                 isBoxShadow={false}
                                             />
-                                            
-                                            <RangeControl
-                                                label={__("Text Stroke", "frontis-blocks")}
-                                                value={headingTextStroke}
-                                                onChange={(value) => setAttributes({ headingTextStroke: value })}
+
+                                            <FB_Range
                                                 min={0}
                                                 max={10}
-                                                step={1}
-                                                resetFallbackValue={''}
+                                                label={__("Text Stroke", "frontis-blocks")}
+                                                rangeValue={headingTextStroke}
+                                                onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                                isRangeUnit={false}
+
                                             />
 
                                             <FB_SwitcherControl
@@ -2506,15 +2557,42 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     onBoxShadowStyleChange={(value) => setAttributes({ subHeadingTextShadowCssValue: value })}
                                                     isBoxShadow={false}
                                                 />
-                                                <RangeControl
-                                                    label={__("Text Stroke", "frontis-blocks")}
-                                                    value={subHeadingTextStroke}
-                                                    onChange={(value) => setAttributes({ subHeadingTextStroke: value })}
-                                                    min={1}
+
+                                                <FB_Range
+                                                    min={0}
                                                     max={10}
-                                                    step={1}
-                                                    resetFallbackValue={''}
+                                                    label={__("Text Stroke", "frontis-blocks")}
+                                                    rangeValue={subHeadingTextStroke}
+                                                    onChangeHandler={(value) => setAttributes({ subHeadingTextStroke: value === 0 ? undefined : value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                    isRangeUnit={false}
+
                                                 />
+
+                                            <FB_SwitcherControl
+                                                label={__("Text Stroke Color", "frontis-blocks")}
+                                                globalSwitcher={subHeadingTextStrokeColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ subHeadingTextStrokeColorSwitcher: value })}
+                                            />
+
+                                            {subHeadingTextStrokeColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={subHeadingTextStrokeColor}
+                                                    setGlobalColor={(value) => setAttributes({ subHeadingTextStrokeColor: value })}
+                                                />
+                                            )}
+
+                                            {subHeadingTextStrokeColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={subHeadingTextStrokeHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ subHeadingTextStrokeHoverColor: value })}
+                                                />
+                                            )}
 
                                                 <FB_SwitcherControl
                                                     label={__("Text Color", "frontis-blocks")}
@@ -3008,11 +3086,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
-														initialShadowValue={headingGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
-													/>
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={headingGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ headingGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {headingGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={headingGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {headingGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={headingGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
 												</PanelBody>
 											</div>
 										</div>

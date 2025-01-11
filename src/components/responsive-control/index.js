@@ -1,17 +1,24 @@
 import { __ } from '@wordpress/i18n';
+import { setDeviceType } from '@Config/displayType';
 import './editor.lazy.scss';
-import {useDeviceType, setDeviceType} from "@Config/displayType";
 
-const FB_ResponsiveControl = ({labelText, device, deviceHandler}) => {
+const FB_ResponsiveControl = ({labelText, device}) => {
 
 	/**
-	 * Handle the device type change
-	 * @param {string} deviceName - The device type to set
-	 */
-	const handleDevice = (deviceName) => {
-		// deviceHandler(deviceName);
-		setDeviceType(deviceName);
-	}
+ 	* Handle the device type change
+ 	* @param {string} deviceType - The device type to set
+ 	*/
+	const handleDevice = (deviceType) => {
+		if (!deviceType) {
+			console.error('Invalid device type:', deviceType);
+			return;
+		}
+		try {
+			setDeviceType(deviceType, false);
+		} catch (error) {
+			console.error('Error setting device type:', error);
+		}
+	};
 
 	/**
 	 * Toggle the device visibility

@@ -25,6 +25,7 @@ import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
@@ -35,7 +36,7 @@ import "./editor.scss";
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
+		// deviceType,
 		imageStyle,
 		displayCaption,
 		imageSize,
@@ -208,6 +209,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		overlayOpacity
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({

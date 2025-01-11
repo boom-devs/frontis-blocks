@@ -9,11 +9,9 @@
 	"example": {},
 	"supports": {
 		"html": false,
-		"spacing": {
-			"margin": false,
-			"padding": false
-		},
-		"align": ["wide", "full"]
+		"align": ["wide", "full"],
+		"customClassName": false
+		
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

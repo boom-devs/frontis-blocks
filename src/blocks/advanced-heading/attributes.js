@@ -5,14 +5,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-    deviceType: {
-        type: "string",
-        default: "Desktop"
-    },
-    dataSource: {
-        type: "string",
-        default: ""
-    },
     headingAlignment: {
         type: "string",
         default: "left",
@@ -23,7 +15,7 @@ const attributes = {
     },
     headingTag: {
         type : "string",
-        default: "h2"
+        default: "h2" 
     },
     /** Start Heading Style */
     headingFontFamily: {
@@ -103,7 +95,12 @@ const attributes = {
         default: '',
     },
     headingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     headingTextStrokeColorSwitcher: {
         type: 'string',
@@ -161,7 +158,7 @@ const attributes = {
 		}
     },
     headingDesktopBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -170,7 +167,7 @@ const attributes = {
         },
     },
     headingTabletBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -179,7 +176,7 @@ const attributes = {
         },
     },
     headingMobileBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -200,7 +197,7 @@ const attributes = {
 		}
     },
     headingDesktopBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -209,7 +206,7 @@ const attributes = {
         },
     },
     headingTabBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -218,7 +215,7 @@ const attributes = {
         },
     },
     headingMobileBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -249,7 +246,7 @@ const attributes = {
 		}
     },
     headingDesktopPadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -258,7 +255,7 @@ const attributes = {
         },
     },
     headingTabPadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -267,7 +264,7 @@ const attributes = {
         },
     },
     headingMobilePadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -288,7 +285,7 @@ const attributes = {
 		}
     },
     headingDesktopMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -297,7 +294,7 @@ const attributes = {
         },
     },
     headingTabMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -306,7 +303,7 @@ const attributes = {
         },
     },
     headingMobileMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -327,7 +324,7 @@ const attributes = {
     },
     subHeadingTag: {
         type : "string",
-        default: "p"
+        default: "p" 
     },
     subHeadingSwitcher: {
         type: "boolean",
@@ -338,7 +335,7 @@ const attributes = {
         default: "bottom",
     },
 
-    /** Start Sub Heading Style */
+    /** Start Sub Heading Style */  
     subHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -416,7 +413,24 @@ const attributes = {
         default: '',
     },
     subHeadingTextStroke: {
-        type: 'number',
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingTextStrokeColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    subHeadingTextStrokeColor: {
+        type: 'string',
+        default: '',
+    },
+    subHeadingTextStrokeHoverColor: {
+        type: 'string',
+        default: '',
     },
     subHeadingColorSwitcher: {
         type: "string",
@@ -464,7 +478,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -473,7 +487,7 @@ const attributes = {
         },
     },
     subHeadingTabBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -482,7 +496,7 @@ const attributes = {
         },
     },
     subHeadingMobileBorder: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -503,7 +517,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -512,7 +526,7 @@ const attributes = {
         },
     },
     subHeadingTabBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -521,7 +535,7 @@ const attributes = {
         },
     },
     subHeadingMobileBorderRadius: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -556,7 +570,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopPadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -565,7 +579,7 @@ const attributes = {
         },
     },
     subHeadingTabPadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -574,7 +588,7 @@ const attributes = {
         },
     },
     subHeadingMobilePadding: {
-        type: "object",
+        type: "object", 
         default: {
             top: "",
             bottom: "",
@@ -595,7 +609,7 @@ const attributes = {
 		}
     },
     subHeadingDesktopMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -604,7 +618,7 @@ const attributes = {
         },
     },
     subHeadingTabMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -613,7 +627,7 @@ const attributes = {
         },
     },
     subHeadingMobileMargin: {
-        type: "object",
+        type: "object", 
         default: {
             top: "0",
             bottom: "0",
@@ -626,7 +640,7 @@ const attributes = {
         default: true
     },
     /** End Sub Heading Spacing */
-    /** End Sub Heading Style */
+    /** End Sub Heading Style */  
 
     separator: {
         type: "string",
@@ -699,7 +713,7 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
-	},
+	}, 
 
 
     /** Start Icon */
@@ -795,7 +809,7 @@ const attributes = {
 		}
 	},
 	headingIconBorderDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -804,7 +818,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -813,7 +827,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -837,7 +851,7 @@ const attributes = {
 		}
 	},
 	headingIconBorderRadiusDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -846,7 +860,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderRadiusTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -855,7 +869,7 @@ const attributes = {
 		},
 	},
 	headingIconBorderRadiusMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -888,7 +902,7 @@ const attributes = {
 		}
 	},
 	headingGlobalPaddingDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -897,7 +911,7 @@ const attributes = {
 		},
 	},
 	headingGlobalPaddingTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -906,7 +920,7 @@ const attributes = {
 		},
 	},
 	headingGlobalPaddingMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -930,7 +944,7 @@ const attributes = {
 		}
 	},
 	headingGlobalMarginDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -939,7 +953,7 @@ const attributes = {
 		},
 	},
 	headingGlobalMarginTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -948,7 +962,7 @@ const attributes = {
 		},
 	},
 	headingGlobalMarginMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1000,7 +1014,7 @@ const attributes = {
 		}
 	},
 	headingGlobalBorderDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1009,7 +1023,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1018,7 +1032,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1042,7 +1056,7 @@ const attributes = {
 		}
 	},
 	headingGlobalBorderRadiusDesktop: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1051,7 +1065,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderRadiusTablet: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1060,7 +1074,7 @@ const attributes = {
 		},
 	},
 	headingGlobalBorderRadiusMobile: {
-		type: "object",
+		type: "object", 
 		default: {
 			top: '',
 			bottom: '',
@@ -1075,11 +1089,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    headingGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	headingGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     headingGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    headingGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    headingGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1184,39 +1210,6 @@ const attributes = {
         default: "#399CFF",
     },
     blockStyle: {
-        type: "string",
-        default: "",
-    },
-
-    globalParagraphFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalLinkFontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading1FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading2FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading3FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading4FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading5FontFamily: {
-        type: "string",
-        default: "",
-    },
-    globalHeading6FontFamily: {
         type: "string",
         default: "",
     },

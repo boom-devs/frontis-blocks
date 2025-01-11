@@ -318,6 +318,22 @@
 		}
 		
     }
+	.components-datetime__time{
+		.components-datetime__time-separator{
+			border-top: 0 ;
+			border-bottom: 0 ;
+		}
+		.components-base-control__field{
+			.components-toggle-group-control{
+				border-color: $primary-color-300;
+			}
+			.components-select-control__input{
+				padding: 8px 12px !important;
+			}
+		}
+		
+	}
+	
 	
     
 }
@@ -420,4 +436,13 @@
 	}
 }
 
+.fb-select2-control {
+    input {
+        box-shadow: unset;
+
+        &:focus {
+            box-shadow: unset;
+        }
+    }
+}
 /** End Admin Panel scss **/

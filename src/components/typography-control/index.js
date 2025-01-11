@@ -7,7 +7,8 @@ import {
 	Dashicon,
 } from '@wordpress/components';
 
-import { useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
+import Select2 from "react-select";
 
 import {
     FONT_FAMILYS,
@@ -49,19 +50,33 @@ const FB_TypographyControl = ({
     setAttributes,
 }) => {
 
+    const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(
+        FONT_FAMILYS.find(option => option.value === fontFamily)
+    );
+
     useEffect(() => {
 		if (fontFamily !== 'Default') {
 			loadGoogleFont(fontFamily);
 		}
 	}, [fontFamily]);
 
-	const handleFontFamilyChange = (newFontFamily) => {
-		onChangeFontFamily(newFontFamily);
+    const handleFontFamilyChange = (selectedOption) => {
+        setSelectedFontFamilyOption(selectedOption);
+        const newFontFamily = selectedOption?.value || 'Default';
+        onChangeFontFamily(newFontFamily);
 
         if (newFontFamily !== 'Default') {
             loadGoogleFont(newFontFamily);
         }
-	};
+    };
+
+	// const handleFontFamilyChange = (newFontFamily) => {
+	// 	onChangeFontFamily(newFontFamily);
+
+    //     if (newFontFamily !== 'Default') {
+    //         loadGoogleFont(newFontFamily);
+    //     }
+	// };
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
@@ -129,11 +144,17 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            <SelectControl
+                            {/* <SelectControl
                                 label={__("Font Family", "frontis-blocks")}
                                 options={FONT_FAMILYS}
                                 value={fontFamily}
                                 onChange={handleFontFamilyChange}
+                            /> */}
+                            <Select2 
+                                options={FONT_FAMILYS}
+                                value={selectedFontFamilyOption}
+                                onChange={handleFontFamilyChange}
+                                className="fb-select2-control"
                             />
 							<FB_Range
 								min={0}

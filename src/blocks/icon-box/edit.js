@@ -11,12 +11,15 @@ import {
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { Card } from "@wordpress/components";
+import { useRef } from "@wordpress/element";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		separator,
 		Sub_Heading_Switcher,
@@ -25,11 +28,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		Sub_Heading_Tag,
 		Seperator_Position,
 		Sub_Heading_Position,
-		info_Button_Switcher,
-		info_Button_Text,
-		info_Button_Link,
+		icon_Box_Button_Switcher,
+		icon_Box_Button_Text,
+		icon_Box_Button_Link,
 		wrapperAlignment,
-		infoBoxBg,
+		iconBoxBg,
 		descAlignment,
 		buttonAlignment,
 		icon,
@@ -39,18 +42,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition,
-		headingUrlSwitcher,
-		headingLink,
-		headingTargetUrl,
-		infoIconVerticalPosition
+        iconBoxIconPosition,
+		iconBoxButtonLink,
+		iconBoxbtnTargetUrl,
+		iconBoxIconVerticalPosition,
+		iconBoxCardAlignment
 	} = attributes;
 
 	const blockProps = useBlockProps();
 
-	const handleHeadingClick = (event) => {
+	// Prevent link navigation in the editor and focus on text
+    const handleButtonClick = (event) => {
         event.preventDefault();
     };
+
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+	
+
 	return (
 		<>
 			<Inspector
@@ -68,66 +80,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-icon-box-content-wrapper ${blockID}`}>
-					<div className={`fb-icon-box-content-wrapper-inner ${blockID}`} style={{
-                        display: "flex",
-                        flexDirection:
-                            infoIconPosition === "left"
-                                ? "row"
-                                : infoIconPosition === "right"
-                                ? "row-reverse"
-                                : infoIconPosition === "top"
-                                ? "column"
-                                : "column-reverse",
-                        
-                    }}>
-						<div className="fb-icon-media-container" style={{
-								justifyContent: wrapperAlignment,
-								alignItems: infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start",
-							}}>
+				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} ref={panelRef}>
+					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
+						<div className="fb-icon-media-container">
 						<div
 							className="fb-icon-media-wrapper"
-							
 						>
 							{mediaSwitcher === "image" && (
-								<img src={attributes.infoMediaUrl} />
+								<img src={attributes.iconBoxMediaUrl} />
 							)}
 							{mediaSwitcher === "icon" && (
 								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
 							)}
 						</div>
 						</div>
-						
 						<div className="fb-icon-box-content-wrapper">
-
-							
-						{headingUrlSwitcher ? (
-							<a 
-							href={headingLink} 
-								target={headingTargetUrl ? '_blank' : undefined}
-								rel={headingTargetUrl ? 'noopener noreferrer' : undefined}
-								onClick={handleHeadingClick}
-							>
 							<RichText
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
-								onChange={(value) => setAttributes({ Heading_Text: value })}
+								onChange={(value) => setAttributes({ text: value })}
 								placeholder={__("Icon Heading", "frontis-block")}
 								className="fb-heading"
-								style={{ textAlign: Alignment }}
 							/>
-							</a>
-							
-						) : (
-							<RichText
-								tagName={Heading_Tag}
-								value={Heading_Text}
-								onChange={(value) => setAttributes({ Heading_Text: value })}
-								placeholder={__("Icon Heading", "frontis-block")}
-								className="fb-heading"
-								style={{ textAlign: Alignment }}
-							/>
-						)}
 
 							{Sub_Heading_Switcher && (
 								<RichText
@@ -136,12 +110,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									onChange={(value) =>
 										setAttributes({ Sub_Heading_Text: value })
 									}
-									placeholder={__("Info description", "frontis-block")}
+									placeholder={__("Icon description", "frontis-block")}
 									className="fb-description"
-									style={{ textAlign: descAlignment }}
 								/>
 							)}
-							
+							{icon_Box_Button_Switcher && (
+								<div className="fb-icon-button">
+								<div className="fb-icon-btn-container">
+								<a
+									className="fb-icon-btn-wrapper"
+									href={iconBoxButtonLink} 
+									target={iconBoxbtnTargetUrl ? '_blank' : undefined}
+									rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
+									onClick={handleButtonClick}
+								>
+									<RichText
+										value={icon_Box_Button_Text}
+										tagName={"span"}
+										onChange={(value) =>
+											setAttributes({ icon_Box_Button_Text: value })
+										}
+										placeholder={__("Icon Button", "frontis-block")}
+										
+										
+									/>
+									{buttonIconSwitcher && (
+										<div className="fb-btn-icon-wrapper">
+											{renderSVG(btnIcon)}
+										</div>
+									)}
+								</a>
+								</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
