@@ -20,9 +20,8 @@ const attributes = {
 	block_id: {
 		type: 'string',
 	},
-	deviceType: {
+	p_block_id: {
 		type: 'string',
-		default: 'Desktop'
 	},
 	containerType: {
 		type: 'string',
@@ -58,6 +57,19 @@ const attributes = {
 			Desktop: 100,
 			Tablet: 100,
 			Mobile: 100
+		}
+	},
+	containerCustomWidth: {
+		type: 'string',
+		default: '100',
+	},
+
+	containerCustomWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		}
 	},
 	customWidthUnits: {
@@ -127,20 +139,25 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
-	minHeightDesktop: {
-		type: 'number',
-		isGBSStyle: true,
+
+	minHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
 	},
-	minHeightTablet: {
-		type: 'number',
+
+	minHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	minHeightMobile: {
-		type: 'number',
-	},
-	minHeightType: {
-		type: 'string',
-		default: 'px',
-	},
+
 	directionDesktop: {
 		type: 'string',
 		default: 'column',
@@ -172,17 +189,27 @@ const attributes = {
 	justifyContentMobile: {
 		type: 'string',
 	},
-	wrapDesktop: {
-		type: 'string',
-		default: 'nowrap',
+
+	containerWrap: {
+		type: 'object',
+		default: {
+			Desktop: 'wrap',
+			Tablet: 'wrap',
+			Mobile: 'wrap',
+		}
 	},
-	wrapTablet: {
-		type: 'string',
-	},
-	wrapMobile: {
-		type: 'string',
-		default: 'wrap',
-	},
+
+	// wrapDesktop: {
+	// 	type: 'string',
+	// 	default: 'nowrap',
+	// },
+	// wrapTablet: {
+	// 	type: 'string',
+	// },
+	// wrapMobile: {
+	// 	type: 'string',
+	// 	default: 'wrap',
+	// },
 	alignContentDesktop: {
 		type: 'string',
 		default: '',
@@ -669,6 +696,7 @@ const attributes = {
 	linkHoverColor: {
 		type: 'string',
 	},
+
 	// responsive code
 	innerContentCustomWidthTypeTablet: {
 		type: 'string',
@@ -687,6 +715,8 @@ const attributes = {
 		type: 'string',
 		default: '%',
 	},
+
+	// Need remove
 	minHeightTypeTablet: {
 		type: 'string',
 		default: 'px',
@@ -695,6 +725,8 @@ const attributes = {
 		type: 'string',
 		default: 'px',
 	},
+	// End Need remove
+
 	// correct formating
 	topHeightType: {
 		type: 'string',

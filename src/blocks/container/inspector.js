@@ -1,80 +1,46 @@
-import { __ } from "@wordpress/i18n";
+import {__} from "@wordpress/i18n";
 import FB_Range from "@Components/range";
-import { InspectorControls } from "@wordpress/block-editor";
+import {InspectorControls} from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
 	ButtonGroup,
 	PanelBody,
-	TabPanel,
-	Dashicon,
 	RangeControl,
-	SelectControl
+	SelectControl,
+	TabPanel
 } from "@wordpress/components";
-import { useState, useEffect, useMemo } from "@wordpress/element";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
+import {useDeviceType} from "@Config/displayType";
 
-const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
+const Inspector = (props) => {
+	let deviceType= useDeviceType();
 	const {
-		htmlTag,
-		containerWidth,
-		contentBoxWidth,
-		minimumHeight,
-		equalHeight,
-		overflow,
-		layoutType,
-		flexDirection,
-		flexWrap,
-		justifyContent,
-		alignItems,
-		alignContent,
-		gridTemplateColumns,
-		gridTemplateRows,
-		gridGap,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
-		marginTop,
-		marginRight,
-		marginBottom,
-		marginLeft,
-		containerType,
-		containerTypeFull,
-		fullWidthContentBoxedWidth,
-		fullWidthContentBoxedWidthUnits,
-		isBlockRootParent,
-		customWidth,
-		widthType,
-		variationSelected,
-		resetFallBackCustomWidth,
-		customWidthUnits,
-		deviceType
-	} = attributes;
+		isSelected,
+		attributes,
+		attributes: {
+			containerType,
+			containerTypeFull,
+			containerCustomWidth,
+			containerCustomWidthUnits,
+			fullWidthContentBoxedWidth,
+			fullWidthContentBoxedWidthUnits,
+			isBlockRootParent,
+			customWidth,
+			resetFallBackCustomWidth,
+			customWidthUnits,
+			minHeight,
+			minHeightUnits,
+			containerWrap
+		},
 
-	let defaultImageUrl = '';
-	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/flex-start';
-	}
-
-	// Reset breakpoint value
-	const DEVICE_BREAKPOINT = {
-		'Desktop': FrontisBlocksData.desktop_breakpoint,
-		'Mobile': FrontisBlocksData.mobile_breakpoint,
-		'Tablet': FrontisBlocksData.tablet_breakpoint
-	}
-
-	// Reset custom width value
-	let CUSTOM_DEVICE_BREAKPOINT = {
-		'Desktop': 100,
-		'Mobile': 100,
-		'Tablet': 100
-	}
+		setAttributes
+	} = props;
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -102,9 +68,9 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.73425 7.39404V16.5191" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M15.2767 7.39404V16.5191" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21V3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21V3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-evenly" }
 	];
 	const WRAP = [
-		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "left" },
-		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
-		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.35999 8.76794H15.26C16.34 8.76794 17.22 9.72562 17.22 10.901V16.5926C17.22 17.7679 16.34 18.7256 15.26 18.7256H7.51999" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.0699 12.2068L6.7699 8.76783L10.0699 5.30713" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "right" },
+		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
+		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
+		{ label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.35999 8.76794H15.26C16.34 8.76794 17.22 9.72562 17.22 10.901V16.5926C17.22 17.7679 16.34 18.7256 15.26 18.7256H7.51999" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.0699 12.2068L6.7699 8.76783L10.0699 5.30713" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap-reverse" },
 	];
 
 	// Handle full width content boxed width
@@ -116,6 +82,15 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 		setAttributes({fullWidthContentBoxedWidthUnits: units});
 	}
 
+	// Handle min height
+	const minHeightFn = (height) => {
+		setAttributes({minHeight: height});
+	}
+
+	const minHeightUnitsFn = (units) => {
+		setAttributes({minHeightUnits: units});
+	}
+
 	// Handle custom width each row
 	const customContentWidthFn = (width) => {
 		setAttributes({customWidth: width});
@@ -125,8 +100,19 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 		setAttributes({customWidthUnits: units});
 	}
 
-	console.log("Attributes")
-	console.log(attributes)
+	// Handling responsive
+	const handleResponsive = (attr) => {
+		// setDeviceType(attr.deviceType, false);
+	}
+
+	// Container type custom width
+	const containerCustomContentWidthFn = (width) => {
+		setAttributes({containerCustomWidth: width});
+	}
+
+	const containerCustomContentWidthFnUnitsFn = (units) => {
+		setAttributes({containerCustomWidthUnits: units});
+	}
 
 	return (
 		<InspectorControls key="controls">
@@ -183,6 +169,30 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 												</BaseControl>
 											}
 
+											{/* Container width is custom */}
+											{(isBlockRootParent && containerType === 'custom') &&
+												<>
+													<FB_Range
+														min={1}
+														max={containerCustomWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+														label={__("Custom Width", "frontis-blocks")}
+														rangeValue={containerCustomWidth}
+														onChangeHandler={containerCustomContentWidthFn}
+														rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
+														deviceType={deviceType}
+														units={containerCustomWidthUnits}
+														setAttributes={handleResponsive}
+														rangeStep={1}
+														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: '%', value: '%' },
+															{ label: 'vw', value: 'vw' },
+														]}
+													/>
+												</>
+											}
+
 											{ (containerType === 'full-width' && isBlockRootParent) && (
 												<>
 													<BaseControl
@@ -204,24 +214,26 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 															))}
 														</ButtonGroup>
 														<div style={{marginTop: '10px'}}></div>
-														<FB_Range
-															min={1}
-															max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-															label={__("Content Box Width", "frontis-blocks")}
-															rangeValue={fullWidthContentBoxedWidth}
-															onChangeHandler={fullWidthContentBoxedWidthFn}
-															rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-															deviceType={deviceType}
-															units={fullWidthContentBoxedWidthUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={resetFallBackCustomWidth[deviceType]}
-															units_types_arr={[
-																{ label: 'px', value: 'px' },
-																{ label: '%', value: '%' },
-																{ label: 'vw', value: 'vw' },
-															]}
-														/>
+														{containerTypeFull !== 'full-width' &&
+															<FB_Range
+																min={1}
+																max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+																label={__("Content Box Width", "frontis-blocks")}
+																rangeValue={fullWidthContentBoxedWidth}
+																onChangeHandler={fullWidthContentBoxedWidthFn}
+																rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+																deviceType={deviceType}
+																units={fullWidthContentBoxedWidthUnits}
+																setAttributes={handleResponsive}
+																rangeStep={1}
+																resetFallbackValue={resetFallBackCustomWidth[deviceType]}
+																units_types_arr={[
+																	{ label: 'px', value: 'px' },
+																	{ label: '%', value: '%' },
+																	{ label: 'vw', value: 'vw' },
+																]}
+															/>
+														}
 													</BaseControl>
 												</>
 											)}
@@ -237,7 +249,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 														rangeUnitHandler={customContentWidthFnUnitsFn}
 														deviceType={deviceType}
 														units={customWidthUnits}
-														setAttributes={setAttributes}
+														setAttributes={handleResponsive}
 														rangeStep={1}
 														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
 														units_types_arr={[
@@ -251,20 +263,19 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 
 											<FB_Range
 												min={1}
-												max={2000}
+												max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
 												label={__("Minimum Height", "frontis-blocks")}
-												rangeValue={fullWidthContentBoxedWidth}
-												onChangeHandler={fullWidthContentBoxedWidthFn}
-												rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+												rangeValue={minHeight}
+												onChangeHandler={minHeightFn}
+												rangeUnitHandler={minHeightUnitsFn}
 												deviceType={deviceType}
-												units={fullWidthContentBoxedWidthUnits}
-												setAttributes={setAttributes}
+												units={minHeightUnits}
+												setAttributes={handleResponsive}
 												rangeStep={1}
-												resetFallbackValue={1200}
+												resetFallbackValue={''}
 												units_types_arr={[
 													{ label: 'px', value: 'px' },
-													{ label: '%', value: '%' },
-													{ label: 'vw', value: 'vw' },
+													{ label: 'vh', value: 'vh' },
 												]}
 											/>
 										</PanelBody>
@@ -332,11 +343,14 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 															<Button
 																key={key}
 																onClick={() =>
-																	setAttributes({})
+																	setAttributes({
+																		containerWrap: {
+																			...containerWrap, // Spread the existing values
+																			[deviceType]: item.value, // Update the specific device type
+																		},
+																	})
 																}
-																className={`fb-advanced-alignment-single-btn ${
-																	""
-																}`}
+																className={`fb-advanced-alignment-single-btn ${containerWrap[deviceType] === item.value ? 'active' : ''}`}
 															>
 																{item.label}
 															</Button>
@@ -364,7 +378,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 											rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 											deviceType={deviceType}
 											units={fullWidthContentBoxedWidthUnits}
-											setAttributes={setAttributes}
+											setAttributes={handleResponsive}
 											rangeStep={1}
 											resetFallbackValue={1200}
 											units_types_arr={[
@@ -435,7 +449,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 											</PanelBody>
 
@@ -627,7 +641,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 
 												<FB_Spacing
@@ -647,7 +661,7 @@ const Inspector = ({ attributes, setAttributes, handleResponsive }) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={setAttributes}
+													setAttributes={handleResponsive}
 												/>
 												<FB_BoxShadowControl
 													onBoxShadowChange={(value) =>

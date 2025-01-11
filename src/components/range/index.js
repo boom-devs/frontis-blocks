@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
