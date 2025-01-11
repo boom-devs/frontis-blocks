@@ -10,7 +10,6 @@ const FB_ResponsiveControl = ({labelText, device}) => {
  	*/
 	const handleDevice = (deviceType) => {
 		if (!deviceType) {
-			console.error('Invalid device type:', deviceType);
 			return;
 		}
 		try {

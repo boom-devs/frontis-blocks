@@ -1,6 +1,7 @@
 <?php
 
 namespace FrontisBlocks\Utils;
+use FrontisBlocks\Config\BlockList;
 
 class Helper
 {
@@ -309,6 +310,29 @@ class Helper
 
         return false;
     }
+
+	public static function get_deactivated_blocks()
+	{
+		$blocks       = array();
+		$blocks_list = BlockList::get_instance()->get_blocks();
+		$active_blocks = get_option('fb_active_blocks');
+
+		if (!empty($blocks_list)) {
+			foreach ($blocks_list as $block) {
+				$slug = $block['slug'];
+				$_slug = 'frontis-blocks/'.$slug;
+				if (is_array($active_blocks) && !empty($active_blocks)) {
+					if (array_key_exists($slug, $active_blocks) && $active_blocks[$slug]) {
+						continue;
+					} else {
+						array_push( $blocks, $_slug );
+					}
+				}
+			}
+		}
+
+		return $blocks;
+	}
 
 	public static function load_google_font( $fonts )
 	{

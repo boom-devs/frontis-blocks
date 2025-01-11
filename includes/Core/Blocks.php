@@ -82,12 +82,24 @@ class Blocks
 
 		$localize_array['site_url'] = site_url();
 		$localize_array['pluginUrl'] = FB_PLUGIN_URL;
+		$localize_array['activated_blocks'] = get_option('fb_active_blocks');
 		$localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
 		$localize_array['contact_form7_install_url'] = admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term');
 		wp_localize_script('fb-block-editor', 'FrontisBlocksData', $localize_array);
 		wp_localize_script('fb-block-editor', 'FrontisBlocksData', $localize_array);
 
 		wp_set_script_translations( 'fb-block-editor-js', 'frontis-blocks' );
+
+		wp_enqueue_script( 'fb-deactivate-block', FB_PLUGIN_URL . 'assets/js/deactivated-blocks.js', array( 'wp-blocks' ), FB_VERSION, true );
+
+		$blocks = Helper::get_deactivated_blocks();
+		wp_localize_script(
+			'fb-deactivate-block',
+			'deactivated_blocks',
+			array(
+				'blocks' => $blocks,
+			)
+		);
 
 		// Common Editor style.
 		wp_enqueue_style(
@@ -96,33 +108,6 @@ class Blocks
 			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 			FB_VERSION
 		);
-
-//		$blocks_list = BlockList::get_instance()->get_blocks();
-//		$active_blocks = get_option('fb_active_blocks');
-//
-//		if (!empty($blocks_list)) {
-//			foreach ($blocks_list as $block) {
-//				$slug = $block['slug'];
-//				$complete = $block['complete'];
-//				if (is_array($active_blocks) && !empty($active_blocks)) {
-//					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
-//						continue;
-//					}
-//				}
-//				if ($complete !== 'true') {
-//					continue;
-//				}
-//				$package = $block['package'];
-//				$plugin_dir = FB_PLUGIN_PATH;
-//				$blocks_dir = FB_BLOCKS_DIR . $slug;
-//				$plugin_slug = 'frontis-blocks';
-//
-//				if (!file_exists($blocks_dir)) {
-//					error_log($blocks_dir);
-//					continue;
-//				}
-//			}
-//		}
 	}
 
 	public function render_contact_form_7_shortcode($attributes)
