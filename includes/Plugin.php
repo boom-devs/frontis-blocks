@@ -112,22 +112,99 @@ final class Plugin
 			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
 
 			// Swiper initialization script
+			// add_action('wp_footer', function () {
+			// 	// Define the slider options in PHP
+			// 	$slider_options = apply_filters(
+			// 		'fb_slider_options',
+			// 		array(
+			// 			'navigation' => array(
+			// 				'nextEl' => '.swiper-button-next',
+			// 				'prevEl' => '.swiper-button-prev',
+			// 			),
+			// 			'pagination' => array(
+			// 				'el' => '.swiper-pagination',
+			// 				'clickable' => true,
+			// 			),
+			// 			'autoplay' => array(
+			// 				'delay' => 3000,
+			// 				'disableOnInteraction' => false,
+			// 			),
+			// 			'loop' => true,
+			// 		)
+			// 	);
+			
+			// 	// Encode the options into JSON
+			// 	$settings = wp_json_encode($slider_options);
+			
+			// 	ob_start();
+			// 	?>
+			// 	<script>
+			// 		document.addEventListener('DOMContentLoaded', function () {
+			// 			const sliders = document.querySelectorAll('.fb-slider-container .fb-swiper');
+			// 			sliders.forEach(slider => {
+			// 				new Swiper(slider, <?php echo $settings; ?>);
+			// 			});
+			// 		});
+			// 	</script>
+			// 	<?php
+			// 	echo ob_get_clean();
+			// });
+
+			// add_action('wp_footer', function () {
+			// 	?>
+			// 	<script>
+			// 		document.addEventListener('DOMContentLoaded', function () {
+			// 			// Loop through all sliders in the DOM
+			// 			const sliders = document.querySelectorAll('.wp-block-frontis-blocks-slider');
+			
+			// 			sliders.forEach(sliderElement => {
+			// 				// Get the unique blockId for the current slider
+			// 				const blockId = sliderElement.dataset.blockId;
+			
+			// 				// Define slider options dynamically
+			// 				const sliderOptions = {
+			// 					navigation: {
+			// 						nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
+			// 						prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
+			// 					},
+			// 					pagination: {
+			// 						el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
+			// 						clickable: true,
+			// 					},
+			// 					autoplay: {
+			// 						delay: 3000,
+			// 						disableOnInteraction: false,
+			// 					},
+			// 					loop: true,
+			// 				};
+			
+			// 				// Initialize Swiper for the current slider
+			// 				new Swiper(`.fb-slider-container[data-block-id="${blockId}"] .fb-swiper`, sliderOptions);
+			// 			});
+			// 		});
+			// 	</script>
+			// 	<?php
+			// });
+
 			add_action('wp_footer', function () {
 				?>
 				<script>
 					document.addEventListener('DOMContentLoaded', function () {
-						const sliderElement = document.querySelector('.wp-block-frontis-blocks-slider');
-						const blockId = sliderElement.dataset.blockId;
-						
-						const sliders = document.querySelectorAll('.fb-slider-container .fb-swiper');
-						sliders.forEach(slider => {
-							new Swiper(slider, {
+						// Select all slider containers
+						const sliders = document.querySelectorAll('.fb-slider-container');
+			
+						sliders.forEach(sliderContainer => {
+							// Get the unique blockId from the data attribute
+							const blockId = sliderContainer.dataset.blockId;
+			
+							// Define slider options dynamically based on blockId
+							const sliderOptions = {
 								navigation: {
-									nextEl: '.swiper-button-next',
-									prevEl: '.swiper-button-prev',
+									nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
+									prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
 								},
 								pagination: {
-									el: '.swiper-pagination',
+									el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
 									clickable: true,
 								},
 								autoplay: {
@@ -135,12 +212,17 @@ final class Plugin
 									disableOnInteraction: false,
 								},
 								loop: true,
-							});
+							};
+			
+							// Initialize Swiper for the current slider
+							new Swiper(`.fb-slider-container[data-block-id="${blockId}"] .fb-swiper`, sliderOptions);
 						});
 					});
 				</script>
 				<?php
-			});
+			});			
+			
+			
 		}
 	}
 
