@@ -181,7 +181,6 @@ const Inspector = (props) => {
 														rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
 														deviceType={deviceType}
 														units={containerCustomWidthUnits}
-														setAttributes={handleResponsive}
 														rangeStep={1}
 														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
 														units_types_arr={[
@@ -224,7 +223,6 @@ const Inspector = (props) => {
 																rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 																deviceType={deviceType}
 																units={fullWidthContentBoxedWidthUnits}
-																setAttributes={handleResponsive}
 																rangeStep={1}
 																resetFallbackValue={resetFallBackCustomWidth[deviceType]}
 																units_types_arr={[
@@ -249,7 +247,6 @@ const Inspector = (props) => {
 														rangeUnitHandler={customContentWidthFnUnitsFn}
 														deviceType={deviceType}
 														units={customWidthUnits}
-														setAttributes={handleResponsive}
 														rangeStep={1}
 														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
 														units_types_arr={[
@@ -270,7 +267,6 @@ const Inspector = (props) => {
 												rangeUnitHandler={minHeightUnitsFn}
 												deviceType={deviceType}
 												units={minHeightUnits}
-												setAttributes={handleResponsive}
 												rangeStep={1}
 												resetFallbackValue={''}
 												units_types_arr={[
@@ -378,7 +374,6 @@ const Inspector = (props) => {
 											rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 											deviceType={deviceType}
 											units={fullWidthContentBoxedWidthUnits}
-											setAttributes={handleResponsive}
 											rangeStep={1}
 											resetFallbackValue={1200}
 											units_types_arr={[
@@ -449,7 +444,7 @@ const Inspector = (props) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={handleResponsive}
+													setAttributes={setAttributes}
 												/>
 											</PanelBody>
 
@@ -641,7 +636,7 @@ const Inspector = (props) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={handleResponsive}
+													setAttributes={setAttributes}
 												/>
 
 												<FB_Spacing
@@ -661,7 +656,7 @@ const Inspector = (props) => {
 													spacingCombineBtnHandler={
 														''
 													}
-													setAttributes={handleResponsive}
+													setAttributes={setAttributes}
 												/>
 												<FB_BoxShadowControl
 													onBoxShadowChange={(value) =>
