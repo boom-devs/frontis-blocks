@@ -15,32 +15,6 @@ $border_color: #dddddd;
     }
 }
 
-.fb-advance-heading-text {
-    position: relative;
-
-    .fb-advance-heading-dynamic-data {
-        position: absolute;
-        top: calc( 0% + 32px );
-        right: 2px;
-        cursor: pointer;
-
-        button {
-            height: auto !important;
-            margin: 0 !important;
-            padding: 5px !important;
-            cursor: pointer !important;
-        }
-    }
-}
-
-.fb-dynamic-tags-content-popover {
-    width: 225px;
-
-    .components-popover__content {
-        width: 100%;
-    }
-}
-
 .fb-advanced-heading-bg-image {
     margin-bottom: 16px;
     .components-base-control__field {
