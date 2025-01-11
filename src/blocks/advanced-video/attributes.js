@@ -556,11 +556,23 @@ const attributes = {
     },
 
     /** Start Box Shadow */
+    videoGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     videoGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     videoGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    videoGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    videoGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

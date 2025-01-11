@@ -1958,6 +1958,27 @@ const attributes = {
     blockStyle: {
         type: "string",
         default: ""
-    }
+    },
+
+    fluentFormGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    fluentFormGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    fluentFormGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    fluentFormGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    fluentFormGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 }
 export default attributes;

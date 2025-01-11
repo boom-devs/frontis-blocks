@@ -11,33 +11,29 @@ import {
 	TextControl,
 	ToggleControl,
 	TabPanel,
-	SelectControl
+	SelectControl,
+	BaseControl
 } from '@wordpress/components';
-
 import { useEffect, useState, useMemo } from '@wordpress/element';
 
-import './editor.scss';
+import {
+	BORDER_STYLES,
+} from "./constants/constants";
 
-import CountDownItemWrapperBgColorControl from "./style-control/countdown-item-wrapper-bg-color-control";
-import CountDownItemWrapperBorderControl from "./style-control/countdown-item-wrapper-border-control";
-import CountDownItemWrapperPaddingMarginControl from "./style-control/countdown-item-wrapper-padding-margin-control";
-import CountDownItemSizeControl from "./style-control/countdown-item-size-control";
-import CountDownItemGapControl from "./style-control/countdown-item-gap-control";
-import CountDownItemBorderTypeControl from "./style-control/countdown-item-border-type-control";
-import CountDownItemBorderRadiusControl from "./style-control/countdown-item-border-radius-control";
-import CountDownDigitTypographyControl from "./style-control/countdown-digit-typograpy-control";
-import CountDownLabelTypographyControl from "./style-control/countdown-label-typograpy-control";
-import CountDownItemBgColorControl from "./style-control/countdown-item-bg-color-control";
-import CountDownSeparatorControl from "./style-control/countdown-separator-control";
+import FB_Range from "@Components/range";
+import FB_Spacing from "@Components/spacing";
+import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundColorControl from "@Components/background-color-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
-
-
+import {useDeviceType} from "@Config/displayType";
+import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		deviceType,
-
+		// deviceType,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -48,7 +44,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showHours,
 		showMinutes,
 		showSeconds,
-
 
 		// Countdown Separator
 		countDownSeparatorEnabled,
@@ -82,8 +77,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemGap,
 		countDownItemGapUnits,
 
-		countDownItemBgColor,
-
 		/** Background Image */
 		countDownItemBgImageEnabled,
 		countDownItemBgImageUrl,
@@ -94,7 +87,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemBgImageAttachmentType,
 		countDownItemBgImageRepeatType,
 		countDownItemBgImageSizeType,
+		countDownItemBgColorSwitcher,
+		countDownItemBgColor,
+		countDownItemBgHoverColor,
 
+		/** Background Image */
 		// Border Type
 		countDownItemBorder,
 		countDownItemBorderColor,
@@ -105,7 +102,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemBorderTypeTablet,
 		countDownItemBorderTypeMobile,
 		countDownItemBorderTypeLink,
+		countDownItemBorderColorSwitcher,
+		countDownItemBorderHoverColor,
 
+		countDownItemBorderTypeTab,
 		// Border Radius
 		countDownItemBorderRadiusUnits,
 		countDownItemBorderRadiusDesktop,
@@ -114,6 +114,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemBorderRadiusLink,
 
 		digitFontColor,
+		digitFontHoverColor,
 		digitFontFamily,
 		digitFontSize,
 		digitFontSizeUnits,
@@ -125,8 +126,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		digitLetterSpacingUnits,
 		digitLineHeight,
 		digitLineHeightUnits,
+		digitFontColorSwitcher,
 
+		labelFontColorSwitcher,
 		labelFontColor,
+		labelFontHoverColor,
 		labelFontFamily,
 		labelFontSize,
 		labelFontSizeUnits,
@@ -140,8 +144,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		labelLineHeightUnits,
 
 		/** Start Item Wrapper */
-		countDownItemWrapperBgFontColorSwitcher,
-		countDownItemWrapperBgFontColor,
 		countDownItemWrapperBgFontHoverColor,
 
 		countDownItemWrapperBoxShadowValues,
@@ -172,6 +174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemWrapperBorderRadiusUnits,
 		countDownItemWrapperBorderRadiusDesktop,
 		countDownItemWrapperBorderRadiusTablet,
+		countDownItemBorderRadiusTab,
 		countDownItemWrapperBorderRadiusMobile,
 		countDownItemWrapperBorderRadiusLink,
 
@@ -187,9 +190,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemWrapperMarginMobile,
 		countDownItemWrapperMarginLink,
 		/** End Item Wrapper */
+		globalBgColorSwitcher,
+		globalBackgroundType,
+		globalClassicColor,
+		globalGradientColor,
+		globalCustomGradientSwitcher,
+		globalCustomGradientInputValue,
+		globalBackgroundColorStyle,
+		globalBackgroundImageUrl,
+		globalBackgroundImageAlt,
+		globalBackgroundImageID,
+		globalBackgroundImagePosition,
+		globalBackgroundImageAttachment,
+		globalBackgroundImageSize,
+		globalBackgroundImageRepeat,
+		hoverBackgroundType,
+		hoverClassicColor,
+		hoverGradientColor,
+		hoverCustomGradientSwitcher,
+		hoverCustomGradientInputValue,
+		hoverBackgroundImageUrl,
+		hoverBackgroundImageAlt,
+		hoverBackgroundImageID,
+		hoverBackgroundImagePosition,
+		hoverBackgroundImageAttachment,
+		hoverBackgroundImageSize,
+		hoverBackgroundImageRepeat,
 
 	} = attributes;
 
+	const deviceType= useDeviceType();
+	
 	const [timeRemaining, setTimeRemaining] = useState({});
 
 	// Set default date to one week from today
@@ -250,6 +281,416 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 	{/* Inspector Controls */}
+	const handleCountdownItemBorderUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemBorderTypeLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemBorderTypeDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemBorderTypeTab: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemBorderTypeMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemBorderTypeDesktop: {...countDownItemBorderTypeDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemBorderTypeTab: {...countDownItemBorderTypeTab, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemBorderTypeMobile: {...countDownItemBorderTypeMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countdownItemBorderCombineBtnHandler = () => {
+		setAttributes( {countDownItemBorderTypeLink: !countDownItemBorderTypeLink} );
+	}
+
+	const countDownItemBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemBorderTypeUnits: {
+				...countDownItemBorderTypeUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+
+	const handleCountDownItemBorderRadiusUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemBorderRadiusTab: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemBorderRadiusDesktop: {...countDownItemBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemBorderRadiusTab: {...countDownItemBorderRadiusTab, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemBorderRadiusMobile: {...countDownItemBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemBorderRadiusCombineBtnHandler = () => {
+		setAttributes( {countDownItemBorderRadiusLink: !countDownItemBorderRadiusLink} );
+	}
+
+	const countDownItemBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemBorderRadiusUnits: {
+				...countDownItemBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	/** Start Border Type*/
+	const handleCountDownItemWrapperBorderUnitHandlerFn = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperBorderTypeLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperBorderTypeDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperBorderTypeTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperBorderTypeMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperBorderTypeDesktop: {...countDownItemWrapperBorderTypeDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperBorderTypeTablet: {...countDownItemWrapperBorderTypeTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperBorderTypeMobile: {...countDownItemWrapperBorderTypeMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperBorderCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperBorderTypeLink: !countDownItemWrapperBorderTypeLink} );
+	}
+
+	const countDownItemWrapperBorderTypeUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperBorderTypeUnits: {
+				...countDownItemWrapperBorderTypeUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	/** Start Border Type*/
+
+	/** Start Border Radius*/
+	const countDownItemWrapperHandleSpacingUnitHandlerFn = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperBorderRadiusDesktop: {...countDownItemWrapperBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperBorderRadiusTablet: {...countDownItemWrapperBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperBorderRadiusMobile: {...countDownItemWrapperBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperBorderRadiusLink: !countDownItemWrapperBorderRadiusLink} );
+	}
+
+	const countDownItemWrapperBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperBorderRadiusUnits: {
+				...countDownItemWrapperBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	/** Start Padding */
+	const countDownItemWrapperPaddingHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperPaddingDesktop: {...countDownItemWrapperPaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperPaddingTablet: {...countDownItemWrapperPaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperPaddingMobile: {...countDownItemWrapperPaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperPaddingSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperPaddingLink: !countDownItemWrapperPaddingLink} );
+	}
+
+	const countDownItemWrapperPaddingSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperPaddingUnits: {
+				...countDownItemWrapperPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Padding */
+
+	/** Start Margin */
+	const countDownItemWrapperMarginHandleSpacingUnitHandler = ( event, position ) => {
+		const value = event.target.value;
+		if ( countDownItemWrapperMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						countDownItemWrapperMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						countDownItemWrapperMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						countDownItemWrapperMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {countDownItemWrapperMarginDesktop: {...countDownItemWrapperMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {countDownItemWrapperMarginTablet: {...countDownItemWrapperMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {countDownItemWrapperMarginMobile: {...countDownItemWrapperMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+	const countDownItemWrapperMarginSpacingCombineBtnHandlerFn = () => {
+		setAttributes( {countDownItemWrapperMarginLink: !countDownItemWrapperMarginLink} );
+	}
+
+	const countDownItemWrapperMarginSpacingUnitsHandler = (unit) => {
+		setAttributes( {
+			countDownItemWrapperMarginUnits: {
+				...countDownItemWrapperMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Margin */
 	{/* Countdown Item Wrapper Control */}
 	const countDownItemWrapperBorderTypeGetDesktop = `${countDownItemWrapperBorderTypeDesktop.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeDesktop.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
 	const countDownItemWrapperBorderTypeGetTablet = `${countDownItemWrapperBorderTypeTablet.top}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.right}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.bottom}${countDownItemWrapperBorderTypeUnits[deviceType]} ${countDownItemWrapperBorderTypeTablet.left}${countDownItemWrapperBorderTypeUnits[deviceType]}`;
@@ -284,27 +725,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 			.fb-count-down-wrapper.${blockID} {
 				${countDownItemGap.Desktop ? `gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};` : ''}
-				${countDownItemWrapperBgFontColor ? `background: ${countDownItemWrapperBgFontColor};` : ''}
 				${countDownItemWrapperBorder ? `border: ${countDownItemWrapperBorder};` : ''}
 				${countDownItemWrapperBorderTypeGetDesktop ? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};` : ''}
 				${countDownItemWrapperBorderRadiusGetDesktop ? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};` : ''}
 				${countDownItemWrapperBorderColor ? `border-color: ${countDownItemWrapperBorderColor};` : ''}
-				${
-					countDownItemWrapperBackgroundImageEnabled && 
-					countDownItemWrapperBackgroundImageUrl && 
-					countDownItemWrapperBackgroundImageUrl !== 'null' 
-					? `
-					background-image: url(${countDownItemWrapperBackgroundImageUrl});
-					background-position: ${countDownItemWrapperBgImagePositionType};
-					background-repeat: ${countDownItemWrapperBgImageRepeatType};
-					background-size: ${countDownItemWrapperBgImageSizeType};
-					` 
-					: ''
+				
+				${globalBackgroundType === "gradient" 
+					? (globalCustomGradientSwitcher && globalCustomGradientInputValue 
+						? `background: ${globalCustomGradientInputValue};` 
+						: (globalGradientColor 
+							? `background: ${globalGradientColor};` 
+							: `background: ${globalClassicColor};`))
+					: (globalBackgroundImageUrl && globalBackgroundImageUrl !== "null" 
+						? `
+							${globalBackgroundImageUrl ? `background-image: url(${globalBackgroundImageUrl});` : "" }
+							${globalBackgroundImagePosition ? `background-position: ${globalBackgroundImagePosition};` : "" }
+							${globalBackgroundImageAttachment ? `background-attachment: ${globalBackgroundImageAttachment};` : "" }
+							${globalBackgroundImageRepeat ? `background-repeat: ${globalBackgroundImageRepeat};` : "" }
+							${globalBackgroundImageSize ? `background-size: ${globalBackgroundImageSize};` : "" } 
+						`
+						: `background: ${globalClassicColor};`)
 				}
 				${countDownItemWrapperPaddingGetDesktop ? `padding: ${countDownItemWrapperPaddingGetDesktop};` : ''}
 				${countDownItemWrapperMarginGetDesktop ? `margin: ${countDownItemWrapperMarginGetDesktop};` : ''}
 			}
 	
+			.fb-count-down-wrapper.${blockID}:hover{
+				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
+				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
+				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
+				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
+				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
+			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 				${countDownItemBgColor ? `background: ${countDownItemBgColor};` : ''}
 				${countDownItemSize.Desktop ? `width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
@@ -313,18 +766,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
 				${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
 				${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
-				${
-					countDownItemBgImageEnabled && 
-					countDownItemBgImageUrl && 
-					countDownItemBgImageUrl !== 'null' 
-					? `
-					background-image: url(${countDownItemBgImageUrl});
-					background-position: ${countDownItemBgImagePositionType};
-					background-repeat: ${countDownItemBgImageRepeatType};
-					background-size: ${countDownItemBgImageSizeType};
-					` 
-					: ''
-				}
+				
+			}
+			.fb-count-down-wrapper.${blockID} .fb-count-down-item:hover {
+				${countDownItemBgHoverColor ? `background: ${countDownItemBgHoverColor};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 				${
@@ -348,7 +793,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					: ''
 				}
 			}
-	
+			.fb-count-down-wrapper.${blockID} .fb-count-down-item:hover:before {
+				${countDownSeparatorFontHoverColor ? `color: ${countDownSeparatorFontHoverColor};` : ''}
+			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
 				${digitFontColor ? `color: ${digitFontColor};` : ""}
 				${digitFontFamily ? `font-family: ${digitFontFamily};` : ""}
@@ -360,7 +807,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ""}
 				${digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ""}
 			}
-
+			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time:hover {
+				${digitFontHoverColor ? `color: ${digitFontHoverColor};` : ""}
+			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
 				${labelFontColor ? `color: ${labelFontColor};` : ""}
 				${labelFontFamily ? `font-family: ${labelFontFamily};` : ""}
@@ -371,6 +820,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${labelTextDecoration ? `text-decoration: ${labelTextDecoration};` : ""}
 				${labelLetterSpacing.Desktop ? `letter-spacing: ${labelLetterSpacing.Desktop}${labelLetterSpacingUnits.Desktop};` : ""}
 				${labelLineHeight.Desktop ? `line-height: ${labelLineHeight.Desktop}${labelLineHeightUnits.Desktop};` : ""}
+			}
+			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label:hover{
+				${labelFontHoverColor ? `color: ${labelFontHoverColor};` : ""}
 			}
 
 			@media only screen and (max-width: 1024px) {
@@ -455,7 +907,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[
 			blockID,
 			countDownItemGap,
-			countDownItemWrapperBgFontColor,
 			countDownItemWrapperBorder,
 			countDownItemWrapperBorderTypeGetDesktop,
 			countDownItemWrapperBorderRadiusGetDesktop,
@@ -492,6 +943,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownSeparatorLetterSpacing,
 			countDownSeparatorLineHeight,
 			digitFontColor,
+			digitFontHoverColor,
 			digitFontFamily,
 			digitFontSize,
 			digitFontSizeUnits,
@@ -504,6 +956,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			digitLineHeight,
 			digitLineHeightUnits,
 			labelFontColor,
+			labelFontHoverColor,
 			labelFontFamily,
 			labelFontSize,
 			labelFontSizeUnits,
@@ -534,7 +987,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownItemWrapperMarginGetMobile,
 			countDownItemSizeUnits,
 			countDownItemBorderTypeGetMobile,
-			countDownItemBorderRadiusGetMobile
+			countDownItemBorderRadiusGetMobile,
+			globalBackgroundType,
+			globalCustomGradientSwitcher,
+			globalCustomGradientInputValue,
+			globalGradientColor,
+			globalClassicColor,
+			globalBackgroundImageUrl,
+			globalBackgroundImagePosition,
+			globalBackgroundImageAttachment,
+			globalBackgroundImageRepeat,
+			globalBackgroundImageSize
 		]
 	);
 	
@@ -653,35 +1116,114 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 								{tab.name === "styles" && (
 									<>
-
 										<PanelBody
 											title={__("Item", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<CountDownItemSizeControl
-												attributes={attributes}
+											<FB_Range
+												min={1}
+												max={1400}
+												label={__("Item Size", "frontis-blocks")}
+												rangeValue={countDownItemSize}
+												onChangeHandler={(value) => setAttributes({ countDownItemSize: value })}
+												rangeUnitHandler={(value) => setAttributes({ countDownItemSizeUnits: value })}
+												deviceType={deviceType}
+												units={countDownItemSizeUnits}
 												setAttributes={setAttributes}
-												clientId ={clientId}
+												rangeStep={1}
+												resetFallbackValue={""}
 											/>
-											<CountDownItemGapControl
-												attributes={attributes}
+
+											<FB_Range
+												min={1}
+												max={1400}
+												label={__("Item Gap", "frontis-blocks")}
+												rangeValue={countDownItemGap}
+												onChangeHandler={(value) => setAttributes({ countDownItemGap: value })}
+												rangeUnitHandler={(value) => setAttributes({ countDownItemGapUnits: value })}
+												deviceType={deviceType}
+												units={countDownItemGapUnits}
 												setAttributes={setAttributes}
-												clientId ={clientId}
+												rangeStep={1}
+												resetFallbackValue={""}
 											/>
-											<CountDownItemBgColorControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
+											
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={countDownItemBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ countDownItemBgColorSwitcher: value })}
+                                            />
+
+                                            {countDownItemBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={countDownItemBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value })}
+                                                />
+                                            )}
+
+                                            {countDownItemBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={countDownItemBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value })}
+                                                />
+                                            )}
+											
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={countDownItemBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ countDownItemBorder: value })}
 											/>
-											<CountDownItemBorderTypeControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
+									
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={countDownItemBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ countDownItemBorderColorSwitcher: value })}
 											/>
-											<CountDownItemBorderRadiusControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
+									
+											{countDownItemBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={countDownItemBorderColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemBorderColor: value })}
+												/>
+											)}
+									
+											{countDownItemBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={countDownItemBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemBorderHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing
+												label={ 'Border Width' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemBorderUnitsHandler}
+												spacingUnits={countDownItemBorderTypeUnits}
+												spacingDesktop={countDownItemBorderTypeDesktop}
+												spacingTablet={countDownItemBorderTypeTab}
+												spacingMobile={countDownItemBorderTypeMobile}
+												handleSpacingUnitHandler={handleCountdownItemBorderUnitHandler}
+												spacingCombineBtn={countDownItemBorderTypeLink}
+												spacingCombineBtnHandler={countdownItemBorderCombineBtnHandler} setAttributes={setAttributes}
+											/>
+									
+											<FB_Spacing
+												label={ 'Border Radius' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemBorderRadiusUnitsHandler}
+												spacingUnits={countDownItemBorderRadiusUnits}
+												spacingDesktop={countDownItemBorderRadiusDesktop}
+												spacingTablet={countDownItemBorderRadiusTab}
+												spacingMobile={countDownItemBorderRadiusMobile}
+												handleSpacingUnitHandler={handleCountDownItemBorderRadiusUnitHandler}
+												spacingCombineBtn={countDownItemBorderRadiusLink}
+												spacingCombineBtnHandler={countDownItemBorderRadiusCombineBtnHandler} setAttributes={setAttributes}
 											/>
 										</PanelBody>
 
@@ -689,29 +1231,221 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Digit", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<CountDownDigitTypographyControl
-												attributes={attributes}
+											<FB_TypographyControl
+												fontFamily={digitFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value })}
+
+												fontSize={digitFontSize}
+												onChangeFontSize={(value) => setAttributes({ digitFontSize: value })}
+
+												fontSizeUnits={digitFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ digitFontSizeUnits: value })}
+
+												fontWeight={digitFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ digitFontWeight: value })}
+
+												fontStyle={digitFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ digitFontStyle: value })}
+
+												textTransform={digitTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ digitTextTransform: value })}
+
+												textDecoration={digitTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ digitTextDecoration: value })}
+
+												letterSpacing={digitLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ digitLetterSpacing: value })}
+
+												letterSpacingUnits={digitLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ digitLetterSpacingUnits: value })}
+
+												lineHeight={digitLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ digitLineHeight: value })}
+
+												lineHeightUnits={digitLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ digitLineHeightUnits: value })}
+
+												deviceType={deviceType}
 												setAttributes={setAttributes}
-												clientId ={clientId}
 											/>
+
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={digitFontColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ digitFontColorSwitcher: value })}
+											/>
+
+											{digitFontColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={digitFontColor}
+													setGlobalColor={(value) => setAttributes({ digitFontColor: value })}
+												/>
+											)}
+
+											{digitFontColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={digitFontHoverColor}
+													setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value })}
+												/>
+											)}
 										</PanelBody>
 
 										<PanelBody
 											title={__("Label", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<CountDownLabelTypographyControl
-												attributes={attributes}
+											<FB_TypographyControl
+												fontFamily={labelFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ labelFontFamily: value })}
+
+												fontSize={labelFontSize}
+												onChangeFontSize={(value) => setAttributes({ labelFontSize: value })}
+
+												fontSizeUnits={labelFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ labelFontSizeUnits: value })}
+
+												fontWeight={labelFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ labelFontWeight: value })}
+
+												fontStyle={labelFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ labelFontStyle: value })}
+
+												textTransform={labelTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ labelTextTransform: value })}
+
+												textDecoration={labelTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ labelTextDecoration: value })}
+
+												letterSpacing={labelLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ labelLetterSpacing: value })}
+
+												letterSpacingUnits={labelLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ labelLetterSpacingUnits: value })}
+
+												lineHeight={labelLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ labelLineHeight: value })}
+
+												lineHeightUnits={labelLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ labelLineHeightUnits: value })}
+
+												deviceType={deviceType}
 												setAttributes={setAttributes}
-												clientId ={clientId}
 											/>
+
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={labelFontColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ labelFontColorSwitcher: value })}
+											/>
+
+											{labelFontColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={labelFontColor}
+													setGlobalColor={(value) => setAttributes({ labelFontColor: value })}
+												/>
+											)}
+
+											{labelFontColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={labelFontHoverColor}
+													setGlobalColor={(value) => setAttributes({ labelFontHoverColor: value })}
+												/>
+											)}
+											
 										</PanelBody>
 										{countDownSeparatorEnabled && (
 										<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
-											<CountDownSeparatorControl
-												attributes={attributes}
+
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={countDownSeparatorFontColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ countDownSeparatorFontColorSwitcher: value })}
+											/>
+
+											{countDownSeparatorFontColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={countDownSeparatorFontColor}
+													setGlobalColor={(value) => setAttributes({ countDownSeparatorFontColor: value })}
+												/>
+											)}
+
+											{countDownSeparatorFontColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={countDownSeparatorFontHoverColor}
+													setGlobalColor={(value) => setAttributes({ countDownSeparatorFontHoverColor: value })}
+												/>
+											)}
+
+											<FB_TypographyControl
+												fontFamily={countDownSeparatorFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ countDownSeparatorFontFamily: value })}
+
+												fontSize={countDownSeparatorFontSize}
+												onChangeFontSize={(value) => setAttributes({ countDownSeparatorFontSize: value })}
+
+												fontSizeUnits={countDownSeparatorFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ countDownSeparatorFontSizeUnits: value })}
+
+												fontWeight={countDownSeparatorFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ countDownSeparatorFontWeight: value })}
+
+												fontStyle={countDownSeparatorFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ countDownSeparatorFontStyle: value })}
+
+												textTransform={countDownSeparatorTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ countDownSeparatorTextTransform: value })}
+
+												textDecoration={countDownSeparatorTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ countDownSeparatorTextDecoration: value })}
+
+												letterSpacing={countDownSeparatorLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ countDownSeparatorLetterSpacing: value })}
+
+												letterSpacingUnits={countDownSeparatorLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ countDownSeparatorLetterSpacingUnits: value })}
+
+												lineHeight={countDownSeparatorLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ countDownSeparatorLineHeight: value })}
+
+												lineHeightUnits={countDownSeparatorLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ countDownSeparatorLineHeightUnits: value })}
+
+												deviceType={deviceType}
 												setAttributes={setAttributes}
-												clientId ={clientId}
+											/>
+
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Horizontal Spacing", "frontis-blocks")}
+												rangeValue={countDownSeparatorHorizontalGap}
+												onChangeHandler={(value) => setAttributes({ countDownSeparatorHorizontalGap: value })}
+												rangeUnitHandler={(value) => setAttributes({ countDownSeparatorHorizontalGapUnits: value })}
+												deviceType={deviceType}
+												units={countDownSeparatorHorizontalGapUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={70}
+											/>
+
+											<FB_Range
+												min={1}
+												max={100}
+												label={__("Vertical Spacing", "frontis-blocks")}
+												rangeValue={countDownSeparatorVerticalGap}
+												onChangeHandler={(value) => setAttributes({ countDownSeparatorVerticalGap: value })}
+												rangeUnitHandler={(value) => setAttributes({ countDownSeparatorVerticalGapUnits: value })}
+												deviceType={deviceType}
+												units={countDownSeparatorVerticalGapUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={20}
 											/>
 										</PanelBody>
 										)}
@@ -721,25 +1455,141 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === "advanced" && (
 									<>
 										<PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperBgColorControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+
+										<FB_BackgroundColorControl
+											bgColorSwitcher={globalBgColorSwitcher}
+											setBgColorSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value }) }
+											normalBackgroundType={globalBackgroundType}
+											setNormalBackgroundType={(value) => setAttributes({ globalBackgroundType: value }) }
+											normalClassicColor={globalClassicColor}
+											setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value }) }
+											normalGradientColor={globalGradientColor}
+											setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value }) }
+											normalCustomGradientSwitcher={ globalCustomGradientSwitcher }
+											setNormalCustomGradientSwitcher={(value) => setAttributes({ globalCustomGradientSwitcher: value, }) }
+											normalCustomGradientInputValue={ globalCustomGradientInputValue }
+											setNormalCustomGradientInputValue={(value) => setAttributes({ globalCustomGradientInputValue: value, }) }
+											normalBackgroundImageUrl={globalBackgroundImageUrl}
+											setNormalBackgroundImageUrl={(value) => setAttributes({ globalBackgroundImageUrl: value }) }
+											normalBackgroundImageAlt={globalBackgroundImageAlt}
+											setNormalBackgroundImageAlt={(value) => setAttributes({ globalBackgroundImageAlt: value }) }
+											normalBackgroundImageID={globalBackgroundImageID}
+											setNormalBackgroundImageID={(value) => setAttributes({ globalBackgroundImageID: value }) }
+											normalBackgroundImagePosition={ globalBackgroundImagePosition }
+											setNormalBackgroundImagePosition={(value) => setAttributes({ globalBackgroundImagePosition: value, }) }
+											normalBackgroundImageAttachment={ globalBackgroundImageAttachment }
+											setNormalBackgroundImageAttachment={(value) => setAttributes({ globalBackgroundImageAttachment: value, }) }
+											normalBackgroundImageRepeat={ globalBackgroundImageRepeat }
+											setNormalBackgroundImageRepeat={(value) => setAttributes({ globalBackgroundImageRepeat: value, }) }
+											normalBackgroundImageSize={globalBackgroundImageSize}
+											setNormalBackgroundImageSize={(value) => setAttributes({ globalBackgroundImageSize: value }) }
+											hoverBackgroundType={hoverBackgroundType}
+											setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
+											hoverClassicColor={hoverClassicColor}
+											setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value }) }
+											hoverGradientColor={hoverGradientColor}
+											setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value }) }
+											hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
+											setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
+											hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
+											setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, }) }
+											hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+											setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value }) }
+											hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+											setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value }) }
+											hoverBackgroundImageID={hoverBackgroundImageID}
+											setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value }) }
+											hoverBackgroundImagePosition={ hoverBackgroundImagePosition }
+											setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, }) }
+											hoverBackgroundImageAttachment={ hoverBackgroundImageAttachment }
+											setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, }) }
+											hoverBackgroundImageRepeat={ hoverBackgroundImageRepeat }
+											setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, }) }
+											hoverBackgroundImageSize={hoverBackgroundImageSize}
+											setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value }) }
+										/>
+
 										</PanelBody>
 										<PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperBorderControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
+											
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={countDownItemWrapperBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ countDownItemWrapperBorder: value })}
+											/>
+											{/** Item Background Control */}
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={countDownItemWrapperBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ countDownItemWrapperBorderColorSwitcher: value })}
+											/>
+									
+											{countDownItemWrapperBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={countDownItemWrapperBorderColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value })}
+												/>
+											)}
+									
+											{countDownItemWrapperBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={countDownItemWrapperBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value })}
+												/>
+											)}
+											<FB_Spacing
+												label={ 'Border Width' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemWrapperBorderTypeUnitsHandler}
+												spacingUnits={countDownItemWrapperBorderTypeUnits}
+												spacingDesktop={countDownItemWrapperBorderTypeDesktop}
+												spacingTablet={countDownItemWrapperBorderTypeTablet}
+												spacingMobile={countDownItemWrapperBorderTypeMobile}
+												handleSpacingUnitHandler={handleCountDownItemWrapperBorderUnitHandlerFn}
+												spacingCombineBtn={countDownItemWrapperBorderTypeLink}
+												spacingCombineBtnHandler={countDownItemWrapperBorderCombineBtnHandlerFn} setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={ 'Border Radius' }
+												deviceType={deviceType}
+												spacingUnitsHandler={countDownItemWrapperBorderRadiusUnitsHandler}
+												spacingUnits={countDownItemWrapperBorderRadiusUnits}
+												spacingDesktop={countDownItemWrapperBorderRadiusDesktop}
+												spacingTablet={countDownItemWrapperBorderRadiusTablet}
+												spacingMobile={countDownItemWrapperBorderRadiusMobile}
+												handleSpacingUnitHandler={countDownItemWrapperHandleSpacingUnitHandlerFn}
+												spacingCombineBtn={countDownItemWrapperBorderRadiusLink}
+												spacingCombineBtnHandler={countDownItemWrapperCombineBtnHandlerFn} setAttributes={setAttributes}
 											/>
 										</PanelBody>
 										<PanelBody title={__("Padding/Margin", "frontis-blocks")} initialOpen={false}>
-											<CountDownItemWrapperPaddingMarginControl
-												attributes={attributes}
-												setAttributes={setAttributes}
-												clientId ={clientId}
-											/>
+										<FB_Spacing
+											label={ 'Padding' }
+											deviceType={deviceType}
+											spacingUnitsHandler={countDownItemWrapperPaddingSpacingUnitsHandler}
+											spacingUnits={countDownItemWrapperPaddingUnits}
+											spacingDesktop={countDownItemWrapperPaddingDesktop}
+											spacingTablet={countDownItemWrapperPaddingTablet}
+											spacingMobile={countDownItemWrapperPaddingMobile}
+											handleSpacingUnitHandler={countDownItemWrapperPaddingHandleSpacingUnitHandler}
+											spacingCombineBtn={countDownItemWrapperPaddingLink}
+											spacingCombineBtnHandler={countDownItemWrapperPaddingSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
+										/>
+										<FB_Spacing
+											label={ 'Margin' }
+											deviceType={deviceType}
+											spacingUnitsHandler={countDownItemWrapperMarginSpacingUnitsHandler}
+											spacingUnits={countDownItemWrapperMarginUnits}
+											spacingDesktop={countDownItemWrapperMarginDesktop}
+											spacingTablet={countDownItemWrapperMarginTablet}
+											spacingMobile={countDownItemWrapperMarginMobile}
+											handleSpacingUnitHandler={countDownItemWrapperMarginHandleSpacingUnitHandler}
+											spacingCombineBtn={countDownItemWrapperMarginLink}
+											spacingCombineBtnHandler={countDownItemWrapperMarginSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
+										/>
 										</PanelBody>
 									</>
 								)}

@@ -2,26 +2,12 @@ import { __ } from '@wordpress/i18n';
 
 import {
 	useBlockProps,
-	InspectorControls,
 } from '@wordpress/block-editor';
 
-import {
-	PanelBody,
-	DateTimePicker,
-	TextControl,
-	ColorPicker,
-	BaseControl,
-	RangeControl,
-	ToggleControl,
-	TabPanel,
-	Dropdown, Button, Dashicon, SelectControl, ButtonGroup
-} from '@wordpress/components';
-
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import Inspector from "./inspector";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
-
-
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -31,14 +17,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownLabelHour,
 		countDownLabelMinute,
 		countDownLabelSecond,
-
 		targetDate,
 		showDays,
 		showHours,
 		showMinutes,
 		showSeconds,
-
 	} = attributes;
+
+
+/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	const [timeRemaining, setTimeRemaining] = useState({});
 
@@ -108,7 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			/>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} ref={panelRef}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.days || 0}</span>

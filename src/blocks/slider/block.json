@@ -1,19 +1,20 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "frontis-blocks/slider",
-	"version": "1.0.0",
-	"title": "Slider",
-	"category": "frontis-blocks",
-	"description": "Slider block",
-	"example": {},
-	"supports": {
-		"html": false,
-		"align": ["wide", "full"],
-		"customClassName": false
-	},
-	"textdomain": "frontis-blocks",
-	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/slider",
+    "version": "1.0.0",
+    "title": "Slider",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+    "description": "A slider block for displaying slides.",
+    "icon": "images-alt2",
+    "example": {},
+    "supports": {
+        "anchor": false,
+        "align": ["wide", "full"],
+        "customClassName": false
+    },
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css"
 }

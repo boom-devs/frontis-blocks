@@ -1124,11 +1124,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    TestimonialGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	TestimonialGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     TestimonialGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    TestimonialGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

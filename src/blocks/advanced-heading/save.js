@@ -28,14 +28,6 @@ export default function save({ attributes }) {
 
     return (
         <>
-            <style>
-                {`
-                    .${blockId} .fb-advanced-icon {
-                        width: 30px;
-                        height: 30px;
-                    }
-                `}
-            </style>
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
 

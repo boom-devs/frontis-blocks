@@ -41,13 +41,15 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ImageControl from '@Components/image-control';
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const {
 		blockId,
-		deviceType,
+		// deviceType,
 		buttonAlignment,
 		buttonText,
 		buttonUrl,
@@ -90,8 +92,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonMobileBorderRadiusWidth,
 		buttonBorderRadiusLink,
 
+		buttonBoxShadowSwitcher,
 		buttonBoxShadowValues,
 		buttonBoxShadowCssValue,
+		buttonBoxShadowHoverValues,
+		buttonBoxShadowHoverCssValue,
 
 		buttonPaddingUnits,
 		buttonDesktopPadding,
@@ -133,6 +138,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonIconBorderRadiusLink,
         buttonIconGapSize,
         buttonIconGapUnits,
+		buttonIconRotate,
 
         /** Start Global Setting */
         buttonGlobalZIndex,
@@ -168,13 +174,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonGlobalBorderRadiusMobile,
         buttonGlobalBorderRadiusLink,
 
+		buttonGlobalBoxShadowSwitcher,
         buttonGlobalBoxShadowValues,
         buttonGlobalBoxShadowCssValue,
+		buttonGlobalBoxShadowHoverValues,
+		buttonGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
+
+		/** Start button Icon Image */
+		buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
+		/** end Icon Button Image*/
 		blockStyle,
 
     } = attributes;    
     
+	const deviceType= useDeviceType();
+	
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -182,7 +204,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             });
         }
     }, [clientId]);
-
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {
@@ -998,6 +1019,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		.${blockId}.fb-advanced-button-wrapper:hover {
 			${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 			${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+			${buttonGlobalBoxShadowHoverCssValue ? `box-shadow: ${buttonGlobalBoxShadowHoverCssValue};` : ''}
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button {
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
@@ -1024,6 +1046,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover {
 			${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
 			${buttonBgHoverColor !== undefined ? `background-color: ${buttonBgHoverColor};` : ''}
+			${buttonBoxShadowHoverCssValue ? `box-shadow: ${buttonBoxShadowHoverCssValue};` : ''} 
 		}
 
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
@@ -1050,9 +1073,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 		}
 		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 			${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+		}
+
+		.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+			${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};` : ''}
+			${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Desktop}${buttonIconImageHeightUnits.Desktop};` : ''}
+			${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 		}
 
 		@media only screen and (max-width: 1024px) {
@@ -1103,6 +1133,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
+			}
+
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};` : ''}
+				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};` : ''}
+				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 			}
 		}
 
@@ -1153,6 +1190,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper svg {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
+			}
+			.${blockId}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
+				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};` : ''}
+				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 			}
 		}
 	`, [
@@ -1165,7 +1208,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		globalDesktopBorderWidth,
 		globalDesktopBorderRadiusWidth,
 		buttonGlobalBorderColor,
-		buttonGlobalBoxShadowCssValue,
+		buttonGlobalBoxShadowSwitcher,
+        buttonGlobalBoxShadowValues,
+        buttonGlobalBoxShadowCssValue,
+		buttonGlobalBoxShadowHoverValues,
+		buttonGlobalBoxShadowHoverCssValue,
 		buttonGlobalBgHoverColor,
 		buttonGlobalBorderHoverColor,
 		buttonBgColor,
@@ -1186,7 +1233,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonDesktopBorderWidthStr,
 		buttonDesktopBorderRadiusStr,
 		buttonBorderColor,
+		buttonBoxShadowSwitcher,
+		buttonBoxShadowValues,
 		buttonBoxShadowCssValue,
+		buttonBoxShadowHoverValues,
+		buttonBoxShadowHoverCssValue,
 		buttonWidth,
 		buttonWidthUnits,
 		buttonAlignment,
@@ -1249,6 +1300,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconBorderLink,
 		buttonIconBorderRadiusUnits,
 		buttonIconBorderRadiusLink,
+		buttonIconRotate,
+
+		buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
 	]);
 
 	useEffect(() => {
@@ -1344,6 +1405,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         {(buttonIconAlign === 'icon-text' || buttonIconAlign === 'icon-only') && (
                                                             <FBIconPicker value={buttonIcon} setIconHandler={iconHandler} /> 
                                                         )}
+
+														{(buttonIconAlign === 'image') && (
+															<FB_ImageControl 
+																globalImageUrl={buttonIconImageUrl}
+																setglobalImageUrl={(value) => setAttributes({ buttonIconImageUrl: value })}
+																globalImageAlt={buttonIconImageAlt}
+																setglobalImageAlt={(value) => setAttributes({ buttonIconImageAlt: value })}
+																globalImageID={buttonIconImageID}
+																setglobalImageID={(value) => setAttributes({ buttonIconImageID: value })}
+																globalImageSize={buttonIconImagedisplay}
+																setglobalImageSize={(value) => setAttributes({ buttonIconImagedisplay: value })}
+															/>
+														)}
+
                                                     </BaseControl>
                                                 </div>
                                                 <FB_UrlControl
@@ -1549,14 +1624,33 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
                                                     setAttributes={setAttributes}
                                                 />
-                                                <FB_BoxShadowControl
-                                                    onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
-                                                    initialShadowValue={buttonBoxShadowValues}
-                                                    onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-                                                />
+
+												<FB_SwitcherControl
+													label={__("Box Shadow", "frontis-blocks")}
+													globalSwitcher={buttonBoxShadowSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
+												/>
+
+												{buttonBoxShadowSwitcher === 'normal' && (
+													<FB_BoxShadowControl
+														label={__("Normal Shadow", "frontis-blocks")}
+														onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
+														initialShadowValue={buttonBoxShadowValues}
+														onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
+													/>
+												)}
+
+												{buttonBoxShadowSwitcher === 'hover' && (
+													<FB_BoxShadowControl
+														label={__("Hover Shadow", "frontis-blocks")}
+														onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
+														initialShadowValue={buttonBoxShadowHoverValues}
+														onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
+													/>
+												)}
                                         </PanelBody>
 
-										{buttonIconAlign !== 'none' && (
+										{buttonIconAlign === 'icon-text' && buttonIconAlign ==='icon-only' (
 											<PanelBody
 												title={__("Icon Styles", "frontis-blocks")}
 												initialOpen={false}
@@ -1684,6 +1778,73 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													min={0}
 													max={100}
 													label={__("Icon Gap", "frontis-blocks")}
+													rangeValue={buttonIconGapSize}
+													onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconGapUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={''}
+												/>
+												<FB_Range
+													min={0}
+													max={360}
+													label={__("Icon Rotation", "frontis-blocks")}
+													rangeValue={buttonIconRotate}
+													onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+													deviceType={deviceType}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={""}
+													isRangeUnit={false}
+
+												/>
+											</PanelBody>
+										)}
+										{(buttonIconAlign === 'image') &&(
+											<PanelBody
+												title={__("Image Styles", "frontis-blocks")}
+												initialOpen={false}
+											>
+												<SelectControl
+													label={__("Image Position", "frontis-blocks")}
+													value={buttonIconPosition}
+													options={ICON_POSITION}
+													onChange={(value) => setAttributes({ buttonIconPosition: value })}
+												/>
+												<FB_Range
+													min={1}
+													max={100}
+													label={__("Image Width", "frontis-blocks")}
+													rangeValue={buttonIconImageWidth}
+													onChangeHandler={(value) => setAttributes({ buttonIconImageWidth: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconImageWidthUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconImageWidthUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={20}
+												/>
+
+												<FB_Range
+													min={1}
+													max={100}
+													label={__("Image Height", "frontis-blocks")}
+													rangeValue={buttonIconImageHeight}
+													onChangeHandler={(value) => setAttributes({ buttonIconImageHeight: value })}
+													rangeUnitHandler={(value) => setAttributes({ buttonIconImageHeightUnits: value })}
+													deviceType={deviceType}
+													units={buttonIconImageHeightUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={20}
+												/>
+												
+												<FB_Range
+													min={0}
+													max={100}
+													label={__("Image Gap", "frontis-blocks")}
 													rangeValue={buttonIconGapSize}
 													onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
 													rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
@@ -1838,11 +1999,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ buttonGlobalBoxShadowValues: value })}
-														initialShadowValue={buttonGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ buttonGlobalBoxShadowCssValue: value })}
-													/>
+
+													<FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={buttonGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {buttonGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ buttonGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={buttonGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ buttonGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {buttonGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ buttonGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={buttonGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ buttonGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
 												</PanelBody>
 											</div>
 										</div>

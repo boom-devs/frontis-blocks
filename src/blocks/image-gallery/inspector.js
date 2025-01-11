@@ -39,12 +39,13 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         blockStyle,
-        deviceType,
+        // deviceType,
 
         GalleryPresetStyle,
         GalleryType,
@@ -231,7 +232,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
     
-
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -291,6 +293,95 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      /** Start Preset Style */
      const changeGalleryPreset = (selectedPreset) => {
         const presetConfigurations = {
+            "default": {
+                deviceType: "Desktop",
+                GalleryType: "grid",
+                GalleryItems: [
+                    {
+                        id: "image-1",
+                        title: "Image 1",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-2",
+                        title: "Image 2",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                    {
+                        id: "image-3",
+                        title: "Image 3",
+                        image: {
+                            id: 0,
+                            url: defaultImageUrl,
+                            width: 0,
+                            height: 0
+                        }
+                    },
+                ],
+                GalleryPresetStyle: "default",
+                GalleryItemHeight: {
+                    Desktop: 300,
+                    Tablet: 300,
+                    Mobile: 250
+                },
+                ImageOverlayStyle: "none",
+                lightboxIconSwitcher: true,
+                lightboxIcon: "plus",
+                lightboxIconSize: {
+                    Desktop: 24,
+                    Tablet: 24,
+                    Mobile: 24
+                },
+                lightboxColor: "#000",
+                lightboxHoverColor: "#000",
+                lightboxBGColor: "#fff",
+                lightboxBorder: "none",
+                lightboxBorderColor: "#000",
+                lightboxDesktopPadding: {
+                    top: 20,
+                    right: 20,
+                    bottom: 20,
+                    left: 20
+                },
+                lightboxDesktopBorderWidth: {
+                    top: '0',
+                    right: '0',
+                    bottom: '0',
+                    left: '0'
+                },
+                lightboxDesktopBorderRadiusWidth: {
+                    top: 50,
+                    right: 50,
+                    bottom: 50,
+                    left: 50
+                },
+                GalleryColumnNumber: {
+                    Desktop: 3,
+                    Tablet: 2,
+                    Mobile: 1
+                },
+                GalleryImageGap: {
+                    Desktop: 30,
+                    Tablet: 15,
+                    Mobile: 10
+                },
+                imageDesktopBorderRadiusWidth: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                }
+            },
             "preset-1": {
                 deviceType: "Desktop",
                 GalleryType: "grid",
@@ -625,6 +716,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         }
                     ],
                     GalleryPresetStyle: "preset-3",
+                    ImageOverlayStyle: "overlay",
+                    ImageOverlayStyleType: "bottom",
                     lightboxIconSwitcher: false,
                     GalleryItemHeight: {
                         Desktop: 410,
@@ -1964,7 +2057,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const fbGalleryStyle = useMemo(() => `
-        .fb-gallery-main-wrapper.${blockID} {
+        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
             position: relative;
             overflow: hidden;
             ${
@@ -2026,6 +2119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             width: 100%;
             height: 100%;
             overflow: hidden;
+            outline: none;
             ${imageBorder !== undefined ? `border-style: ${imageBorder};` : ''}
             ${imageDesktopBorder !== undefined ? `border-width: ${imageDesktopBorder};` : ''}
             ${imageBorderColor !== undefined ? `border-color: ${imageBorderColor};` : ''}
@@ -2034,6 +2128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
             position: absolute;
             top: 0;
+            outline: none;
             ${ImageAlignment === 'left' ? 'left: 0;' : ''}
             ${ImageAlignment === 'right' ? 'right: 0; left: unset;' : ''}
             ${ImageAlignment === 'center' && ImageOverlayStyleType !== 'zoominout' ? 'left: 50%; transform: translateX(-50%);' : ''}
@@ -2089,7 +2184,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         @media only screen and (max-width: 1024px) {
-            .fb-gallery-main-wrapper.${blockID} {
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingTabletWidth !== undefined ? `${GalleryPaddingTabletWidth}` : ''};
                 margin: ${GalleryMarginTabletWidth !== undefined ? `${GalleryMarginTabletWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusTabletWidth !== undefined ? `${GalleryBorderRadiusTabletWidth}` : ''};
@@ -2127,7 +2222,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
-            .fb-gallery-main-wrapper.${blockID} {
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingMobileWidth !== undefined ? `${GalleryPaddingMobileWidth}` : ''};
                 margin: ${GalleryMarginMobileWidth !== undefined ? `${GalleryMarginMobileWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusMobileWidth !== undefined ? `${GalleryBorderRadiusMobileWidth}` : ''};
@@ -2752,7 +2847,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderUnitsHandler}
                                                     spacingUnits={imageBorderUnits}
@@ -2766,7 +2861,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
                                                     spacingUnits={imageBorderRadiusUnits}
@@ -3018,7 +3113,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             )}
 
                                             <FB_Spacing 
-                                                label={__("Border Width", "frontis-blocks")}
+                                                label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderUnitsHandler}
                                                 spacingUnits={ButtonBorderUnits}
@@ -3032,7 +3127,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
                                                 spacingUnits={ButtonBorderRadiusUnits}
@@ -3163,7 +3258,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing 
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderUnitsHandler}
                                                     spacingUnits={lightboxBorderUnits}
@@ -3177,7 +3272,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleLightboxBorderRadiusUnitsHandler}
                                                     spacingUnits={lightboxBorderRadiusUnits}
@@ -3377,7 +3472,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                             </PanelBody>
 
                                             <PanelBody
-                                                title={__("Border & Border radius", "frontis-blocks")}
+                                                title={__("Border & Border Radius", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-border-setting-wrapper"
                                                 >
@@ -3411,7 +3506,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 )}
 
                                                 <FB_Spacing 
-                                                    label={__("Border Width", "frontis-blocks")}
+                                                    label={__("Border", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderUnitsHandler}
                                                     spacingUnits={GalleryBorderUnits}
@@ -3425,7 +3520,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
 
                                                 <FB_Spacing 
-                                                    label={__("Border Radius Width", "frontis-blocks")}
+                                                    label={__("Border Radius", "frontis-blocks")}
                                                     deviceType={deviceType}
                                                     spacingUnitsHandler={handleGalleryBorderRadiusUnitsHandler}
                                                     spacingUnits={GalleryBorderRadiusUnits}
@@ -3439,7 +3534,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
-                                            <PanelBody
+                                            {/* <PanelBody
                                                 title={__("Responsive Control", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-responsive-control-wrapper"
@@ -3462,7 +3557,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     checked={GalleryMobileSwitcher}
                                                     onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
                                                 />
-                                            </PanelBody>
+                                            </PanelBody> */}
 
                                         </div>
                                     </div>

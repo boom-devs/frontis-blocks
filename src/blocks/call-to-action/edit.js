@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import { useRef } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -11,21 +12,25 @@ import {
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { Card } from "@wordpress/components";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		separator,
 		Sub_Heading_Switcher,
 		Show_Separator_Switcher,
 		Sub_Heading_Text,
 		Sub_Heading_Tag,
-		Seperator_Position,
-		Sub_Heading_Position,
 		info_Button_Switcher,
+		subHeadingSwitcher,
+		subTitleAlignment,
+		subTitleTag,
+		subTitleText,
+		descriptionSwitcher,
 		info_Button_Text,
 		info_Button_Link,
 		wrapperAlignment,
@@ -47,10 +52,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoText,
 		btnTwoLink,
 		btnOneTargetUrl,
-		btnTwoTargetUrl
+		btnTwoTargetUrl,
+		FeatureItems,
+		imageSwitcher
 	} = attributes;
 
 	const blockProps = useBlockProps();
+
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	const handleBtnClick = (e) =>{
 		e.preventDefault();
@@ -74,20 +87,53 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} ref={panelRef}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
+							{imageSwitcher && (
+								
+								<div className="fb-cta-image-wrapper">
+								{FeatureItems.map(item => {
+									return (
+										<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
+											{item.teamMemberImageUrl && (
+												<img
+													src={item.teamMemberImageUrl}
+													alt={item.teamMemberImageAlt || "Preview Image"}
+													width="200"
+													height="200"
+												/>
+											)}
+										</div>
+									);
+								})}
+								</div>
+								
+								
+							)}
+							{subHeadingSwitcher && (
+								<RichText
+									tagName={subTitleTag}
+									value={subTitleText}
+									onChange={(value) =>
+										setAttributes({ subTitleText: value })
+									}
+									placeholder={__("CTA Sub Heading", "frontis-block")}
+									className="fb-cta-sub-heading"
+									style={{ textAlign: subTitleAlignment }}
+								/>
+							)}
 							<RichText
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
-								onChange={(value) => setAttributes({ text: value })}
+								onChange={(value) => setAttributes({ Heading_Text: value })}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
 							/>
 
-							{Sub_Heading_Switcher && (
+							{descriptionSwitcher && (
 								<RichText
 									tagName={Sub_Heading_Tag}
 									value={Sub_Heading_Text}

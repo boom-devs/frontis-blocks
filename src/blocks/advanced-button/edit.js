@@ -4,6 +4,9 @@ import {
     RichText, 
     BlockControls,
     AlignmentToolbar,
+    MediaUpload,
+    MediaUploadCheck,
+    MediaPlaceholder,
 } from '@wordpress/block-editor';
 import { useRef } from '@wordpress/element';
 
@@ -18,7 +21,6 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
-        deviceType,
         buttonAlignment,
         buttonText,
         buttonUrl,
@@ -28,6 +30,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonZIndex,
         buttonIconAlign,
         buttonIconPosition,
+
+        buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -44,6 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
+
 
     return (
         <>
@@ -76,6 +88,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         )}
 
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    {buttonIconImageUrl ? (
+                                        <img src={buttonIconImageUrl} alt={buttonIconImageAlt} />
+                                    ) : (
+                                        <MediaPlaceholder
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    buttonIconImageID: media.id,
+                                                    buttonIconImageUrl: media.url,
+                                                    buttonIconImageAlt: media.alt,
+                                                })
+                                            }
+                                            allowedTypes={['image']}
+                                            multiple={false}
+                                            labels={{ title: 'Add Image' }}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         {buttonIconAlign !== 'icon-only' && (
                             <RichText
                                 tagName="span"
@@ -89,6 +124,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    {buttonIconImageUrl ? (
+                                        <img src={buttonIconImageUrl} alt={buttonIconImageAlt} />
+                                    ) : (
+                                        <MediaPlaceholder
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    buttonIconImageID: media.id,
+                                                    buttonIconImageUrl: media.url,
+                                                    buttonIconImageAlt: media.alt,
+                                                })
+                                            }
+                                            allowedTypes={['image']}
+                                            multiple={false}
+                                            labels={{ title: 'Add Image' }}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         )}
 

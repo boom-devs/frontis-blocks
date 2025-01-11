@@ -4,15 +4,15 @@ import './style.scss';
 /**
  * Internal dependencies
  */
-import Edit from './edit';
-import save from './save';
+import Edit from './edit.js';
+import save from './save.js';
 import metadata from './block.json';
 import attributes from './attributes.js';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.icon_box,
 	edit: Edit,
 	save,
+	icon: FB_Block_Icons.icon_box,
 } );

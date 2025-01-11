@@ -28,8 +28,13 @@ const FB_Range = ({
 		}
 	}, [deviceType, rangeValue, onChangeHandler, resetFallbackValue]);
 
+	// const setRangeValue = (value) => {
+	// 	const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
+	// 	onChangeHandler(newRangeValue);
+	// };
+
 	const setRangeValue = (value) => {
-		const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
+		const newRangeValue = {...rangeValue, [deviceType]: value !== null ? String(value) : String(resetFallbackValue)};
 		onChangeHandler(newRangeValue);
 	};
 
@@ -49,7 +54,6 @@ const FB_Range = ({
 					<FB_ResponsiveControl
 						labelText={__(label, 'frontis-blocks')}
 						device={deviceType}
-						deviceHandler={(newDevice) => setAttributes({ deviceType: newDevice })}
 					/>
 					<div className="fb-unit-wrapper">
 						{rangeValue[deviceType] && (
@@ -69,7 +73,8 @@ const FB_Range = ({
 					</div>
 				</div>
 				<RangeControl
-					value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+					// value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
+					value={rangeValue[deviceType] !== "" ? Number(rangeValue[deviceType]) : undefined}
 					onChange={setRangeValue}
 					min={min}
 					max={max}
