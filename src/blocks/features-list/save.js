@@ -38,7 +38,7 @@ export default function Save({ attributes }) {
                                                     </span>
                                                 </div>
                                             ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
-                                                <div className='fb-feature-icon-image-wrapper'>
+                                                <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
 
                                                     <img
                                                         src={item.FeatureIconImageUrl}
