@@ -14,7 +14,21 @@
         "align": ["wide", "full"],
         "customClassName": false
     },
-    "editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css",
-    "style": "file:./style-index.css"
+    "editorScript": [
+        "file:./index.js",
+        "frontis-swiper-script"
+    ],
+    "editorStyle": [
+        "file:./index.css",
+        "frontis-swiper-style"
+    ],
+    "style": [
+        "file:./style-index.css",
+        "frontis-swiper-style"
+    ],
+    "viewScript": [
+        "file:./view.js",
+        "frontis-swiper-script"
+    ]
+
 }
