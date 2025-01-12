@@ -19,6 +19,11 @@ const BlockCard = ({ block, onChange }) => {
 
     console.log(block);
 
+
+    if (block.child === 'true') {
+        return null; // You can return null if you don't want to render anything for child blocks
+    }
+
     return (
         <div className="fb-block-card">
             <div className="fb-block-card-icon">
