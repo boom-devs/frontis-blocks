@@ -20,6 +20,7 @@ export default function save( props ) {
 		<div
 			key={ blockId }
 			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container' ) }
+			data-block-id={ blockId }
 		>
 			<div className="fb-slides fb-swiper">
 				<div className="swiper-wrapper">
@@ -36,4 +37,5 @@ export default function save( props ) {
 			) }
 		</div>
 	);
+	
 }

@@ -92,7 +92,6 @@ final class Plugin
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 	}
 
-
 	public function enqueue_scripts()
 	{
 		// Check if the current post has the 'countdown' block
@@ -106,14 +105,14 @@ final class Plugin
 		}
 
 		if (has_block('frontis-blocks/advanced-video')) {
-			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+			// wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', '1.0.0', true);;
 		}
 		if (has_block('frontis-blocks/slider')) {
-			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
-			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
+			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
+			wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 		}
 	}
-
 
 	/**
 	 * Get plugin instance
