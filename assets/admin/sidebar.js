@@ -104,8 +104,8 @@ var compat = function compat(element) {
     return;
   }
 
-  var value = element.value,
-      parent = element.parent;
+  var value = element.value;
+  var parent = element.parent;
   var isImplicitRule = element.column === parent.column && element.line === parent.line;
 
   while (parent.type !== 'rule') {
@@ -472,12 +472,19 @@ var prefixer = function prefixer(element, index, children, callback) {
 };
 
 var defaultStylisPlugins = [prefixer];
+var getSourceMap;
 
-var createCache = function
-  /*: EmotionCache */
-createCache(options
-/*: Options */
-) {
+{
+  var sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
+
+  getSourceMap = function getSourceMap(styles) {
+    var matches = styles.match(sourceMapPattern);
+    if (!matches) return;
+    return matches[matches.length - 1];
+  };
+}
+
+var createCache = function createCache(options) {
   var key = options.key;
 
   if (!key) {
@@ -490,9 +497,7 @@ createCache(options
     // note this very very intentionally targets all style elements regardless of the key to ensure
     // that creating a cache works inside of render of a React component
 
-    Array.prototype.forEach.call(ssrStyles, function (node
-    /*: HTMLStyleElement */
-    ) {
+    Array.prototype.forEach.call(ssrStyles, function (node) {
       // we want to only move elements which have a space in the data-emotion attribute value
       // because that indicates that it is an Emotion 11 server-side rendered style elements
       // while we will already ignore Emotion 11 client-side inserted styles because of the :not([data-s]) part in the selector
@@ -520,17 +525,13 @@ createCache(options
 
   var inserted = {};
   var container;
-  /* : Node */
-
   var nodesToHydrate = [];
 
   {
     container = options.container || document.head;
     Array.prototype.forEach.call( // this means we will ignore elements which don't have a space in them which
     // means that the style elements we're looking at are only Emotion 11 server-rendered style elements
-    document.querySelectorAll("style[data-emotion^=\"" + key + " \"]"), function (node
-    /*: HTMLStyleElement */
-    ) {
+    document.querySelectorAll("style[data-emotion^=\"" + key + " \"]"), function (node) {
       var attrib = node.getAttribute("data-emotion").split(' ');
 
       for (var i = 1; i < attrib.length; i++) {
@@ -542,13 +543,6 @@ createCache(options
   }
 
   var _insert;
-  /*: (
-  selector: string,
-  serialized: SerializedStyles,
-  sheet: StyleSheet,
-  shouldCache: boolean
-  ) => string | void */
-
 
   var omnipresentPlugins = [compat, removeLabel];
 
@@ -580,27 +574,19 @@ createCache(options
       return (0,stylis__WEBPACK_IMPORTED_MODULE_6__.serialize)((0,stylis__WEBPACK_IMPORTED_MODULE_8__.compile)(styles), serializer);
     };
 
-    _insert = function
-      /*: void */
-    insert(selector
-    /*: string */
-    , serialized
-    /*: SerializedStyles */
-    , sheet
-    /*: StyleSheet */
-    , shouldCache
-    /*: boolean */
-    ) {
+    _insert = function insert(selector, serialized, sheet, shouldCache) {
       currentSheet = sheet;
 
-      if (serialized.map !== undefined) {
-        currentSheet = {
-          insert: function insert(rule
-          /*: string */
-          ) {
-            sheet.insert(rule + serialized.map);
-          }
-        };
+      if (getSourceMap) {
+        var sourceMap = getSourceMap(serialized.styles);
+
+        if (sourceMap) {
+          currentSheet = {
+            insert: function insert(rule) {
+              sheet.insert(rule + sourceMap);
+            }
+          };
+        }
       }
 
       stylis(selector ? selector + "{" + serialized.styles + "}" : serialized.styles);
@@ -611,9 +597,7 @@ createCache(options
     };
   }
 
-  var cache
-  /*: EmotionCache */
-  = {
+  var cache = {
     key: key,
     sheet: new _emotion_sheet__WEBPACK_IMPORTED_MODULE_0__.StyleSheet({
       key: key,
@@ -756,9 +740,9 @@ var hoistNonReactStatics = (function (targetComponent, sourceComponent) {
 
 /***/ }),
 
-/***/ "./node_modules/@emotion/react/dist/emotion-element-7a1343fa.browser.development.esm.js":
+/***/ "./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js":
 /*!**********************************************************************************************!*\
-  !*** ./node_modules/@emotion/react/dist/emotion-element-7a1343fa.browser.development.esm.js ***!
+  !*** ./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js ***!
   \**********************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -794,10 +778,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* import { type EmotionCache } from '@emotion/utils' */
-var EmotionCacheContext
-/*: React.Context<EmotionCache | null> */
-= /* #__PURE__ */react__WEBPACK_IMPORTED_MODULE_0__.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
+var EmotionCacheContext = /* #__PURE__ */react__WEBPACK_IMPORTED_MODULE_0__.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
 // because this module is primarily intended for the browser and node
 // but it's also required in react native and similar environments sometimes
 // and we could have a special build just for that
@@ -812,24 +793,12 @@ typeof HTMLElement !== 'undefined' ? /* #__PURE__ */(0,_emotion_cache__WEBPACK_I
 }
 
 var CacheProvider = EmotionCacheContext.Provider;
-var __unsafe_useEmotionCache = function useEmotionCache()
-/*: EmotionCache | null*/
-{
+var __unsafe_useEmotionCache = function useEmotionCache() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(EmotionCacheContext);
 };
 
-var withEmotionCache = function withEmotionCache
-/* <Props, Ref: React.Ref<*>> */
-(func
-/*: (props: Props, cache: EmotionCache, ref: Ref) => React.Node */
-)
-/*: React.AbstractComponent<Props> */
-{
-  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function (props
-  /*: Props */
-  , ref
-  /*: Ref */
-  ) {
+var withEmotionCache = function withEmotionCache(func) {
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function (props, ref) {
     // the cache will never be null in the browser
     var cache = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(EmotionCacheContext);
     return func(props, cache, ref);
@@ -846,11 +815,7 @@ var useTheme = function useTheme() {
   return react__WEBPACK_IMPORTED_MODULE_0__.useContext(ThemeContext);
 };
 
-var getTheme = function getTheme(outerTheme
-/*: Object */
-, theme
-/*: Object | (Object => Object) */
-) {
+var getTheme = function getTheme(outerTheme, theme) {
   if (typeof theme === 'function') {
     var mergedTheme = theme(outerTheme);
 
@@ -873,16 +838,7 @@ var createCacheWithTheme = /* #__PURE__ */(0,_emotion_weak_memoize__WEBPACK_IMPO
     return getTheme(outerTheme, theme);
   });
 });
-/*
-type ThemeProviderProps = {
-  theme: Object | (Object => Object),
-  children: React.Node
-}
-*/
-
-var ThemeProvider = function ThemeProvider(props
-/*: ThemeProviderProps */
-) {
+var ThemeProvider = function ThemeProvider(props) {
   var theme = react__WEBPACK_IMPORTED_MODULE_0__.useContext(ThemeContext);
 
   if (props.theme !== theme) {
@@ -893,46 +849,29 @@ var ThemeProvider = function ThemeProvider(props
     value: theme
   }, props.children);
 };
-function withTheme
-/* <Config: {}> */
-(Component
-/*: React.AbstractComponent<Config> */
-)
-/*: React.AbstractComponent<$Diff<Config, { theme: Object }>> */
-{
+function withTheme(Component) {
   var componentName = Component.displayName || Component.name || 'Component';
-
-  var render = function render(props, ref) {
+  var WithTheme = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(function render(props, ref) {
     var theme = react__WEBPACK_IMPORTED_MODULE_0__.useContext(ThemeContext);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({
       theme: theme,
       ref: ref
     }, props));
-  };
-
-  var WithTheme = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(render);
+  });
   WithTheme.displayName = "WithTheme(" + componentName + ")";
   return (0,_isolated_hnrs_dist_emotion_react_isolated_hnrs_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_7__["default"])(WithTheme, Component);
 }
 
 var hasOwn = {}.hasOwnProperty;
 
-var getLastPart = function
-  /* : string */
-getLastPart(functionName
-/* : string */
-) {
+var getLastPart = function getLastPart(functionName) {
   // The match may be something like 'Object.createEmotionProps' or
   // 'Loader.prototype.render'
   var parts = functionName.split('.');
   return parts[parts.length - 1];
 };
 
-var getFunctionNameFromStackTraceLine = function
-  /*: ?string*/
-getFunctionNameFromStackTraceLine(line
-/*: string*/
-) {
+var getFunctionNameFromStackTraceLine = function getFunctionNameFromStackTraceLine(line) {
   // V8
   var match = /^\s+at\s+([A-Za-z0-9$.]+)\s/.exec(line);
   if (match) return getLastPart(match[1]); // Safari / Firefox
@@ -970,23 +909,17 @@ var getLabelFromStackTrace = function getLabelFromStackTrace(stackTrace) {
 
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
 var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
-var createEmotionProps = function createEmotionProps(type
-/*: React.ElementType */
-, props
-/*: Object */
-) {
+var createEmotionProps = function createEmotionProps(type, props) {
   if (typeof props.css === 'string' && // check if there is a css declaration
   props.css.indexOf(':') !== -1) {
     throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
   }
 
-  var newProps
-  /*: any */
-  = {};
+  var newProps = {};
 
-  for (var key in props) {
-    if (hasOwn.call(props, key)) {
-      newProps[key] = props[key];
+  for (var _key in props) {
+    if (hasOwn.call(props, _key)) {
+      newProps[_key] = props[_key];
     }
   }
 
@@ -997,7 +930,7 @@ var createEmotionProps = function createEmotionProps(type
   // Even if the flag is set, we still don't compute the label if it has already
   // been determined by the Babel plugin.
 
-  if (typeof globalThis !== 'undefined' && !!globalThis.EMOTION_RUNTIME_AUTO_LABEL && !!props.css && (typeof props.css !== 'object' || typeof props.css.name !== 'string' || props.css.name.indexOf('-') === -1)) {
+  if (typeof globalThis !== 'undefined' && !!globalThis.EMOTION_RUNTIME_AUTO_LABEL && !!props.css && (typeof props.css !== 'object' || !('name' in props.css) || typeof props.css.name !== 'string' || props.css.name.indexOf('-') === -1)) {
     var label = getLabelFromStackTrace(new Error().stack);
     if (label) newProps[labelPropName] = label;
   }
@@ -1017,9 +950,7 @@ var Insertion = function Insertion(_ref) {
   return null;
 };
 
-var Emotion = /* #__PURE__ */withEmotionCache(
-/* <any, any> */
-function (props, cache, ref) {
+var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
   var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
   // not passing the registered cache to serializeStyles because it would
   // make certain babel optimisations not possible
@@ -1051,9 +982,9 @@ function (props, cache, ref) {
   className += cache.key + "-" + serialized.name;
   var newProps = {};
 
-  for (var key in props) {
-    if (hasOwn.call(props, key) && key !== 'css' && key !== typePropName && (key !== labelPropName)) {
-      newProps[key] = props[key];
+  for (var _key2 in props) {
+    if (hasOwn.call(props, _key2) && _key2 !== 'css' && _key2 !== typePropName && (_key2 !== labelPropName)) {
+      newProps[_key2] = props[_key2];
     }
   }
 
@@ -1089,21 +1020,21 @@ var Emotion$1 = Emotion;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   CacheProvider: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.C),
+/* harmony export */   CacheProvider: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.C),
 /* harmony export */   ClassNames: () => (/* binding */ ClassNames),
 /* harmony export */   Global: () => (/* binding */ Global),
-/* harmony export */   ThemeContext: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T),
-/* harmony export */   ThemeProvider: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.a),
-/* harmony export */   __unsafe_useEmotionCache: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__._),
+/* harmony export */   ThemeContext: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T),
+/* harmony export */   ThemeProvider: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.a),
+/* harmony export */   __unsafe_useEmotionCache: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__._),
 /* harmony export */   createElement: () => (/* binding */ jsx),
 /* harmony export */   css: () => (/* binding */ css),
 /* harmony export */   jsx: () => (/* binding */ jsx),
 /* harmony export */   keyframes: () => (/* binding */ keyframes),
-/* harmony export */   useTheme: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.u),
-/* harmony export */   withEmotionCache: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w),
-/* harmony export */   withTheme: () => (/* reexport safe */ _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.b)
+/* harmony export */   useTheme: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.u),
+/* harmony export */   withEmotionCache: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w),
+/* harmony export */   withTheme: () => (/* reexport safe */ _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.b)
 /* harmony export */ });
-/* harmony import */ var _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./emotion-element-7a1343fa.browser.development.esm.js */ "./node_modules/@emotion/react/dist/emotion-element-7a1343fa.browser.development.esm.js");
+/* harmony import */ var _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./emotion-element-489459f2.browser.development.esm.js */ "./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _emotion_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/utils */ "./node_modules/@emotion/utils/dist/emotion-utils.browser.esm.js");
@@ -1130,9 +1061,10 @@ var isDevelopment = true;
 
 var pkg = {
 	name: "@emotion/react",
-	version: "11.13.3",
+	version: "11.14.0",
 	main: "dist/emotion-react.cjs.js",
 	module: "dist/emotion-react.esm.js",
+	types: "dist/emotion-react.cjs.d.ts",
 	exports: {
 		".": {
 			types: {
@@ -1362,25 +1294,24 @@ var pkg = {
 	},
 	imports: {
 		"#is-development": {
-			development: "./src/conditions/true.js",
-			"default": "./src/conditions/false.js"
+			development: "./src/conditions/true.ts",
+			"default": "./src/conditions/false.ts"
 		},
 		"#is-browser": {
-			"edge-light": "./src/conditions/false.js",
-			workerd: "./src/conditions/false.js",
-			worker: "./src/conditions/false.js",
-			browser: "./src/conditions/true.js",
-			"default": "./src/conditions/is-browser.js"
+			"edge-light": "./src/conditions/false.ts",
+			workerd: "./src/conditions/false.ts",
+			worker: "./src/conditions/false.ts",
+			browser: "./src/conditions/true.ts",
+			"default": "./src/conditions/is-browser.ts"
 		}
 	},
-	types: "types/index.d.ts",
 	files: [
 		"src",
 		"dist",
 		"jsx-runtime",
 		"jsx-dev-runtime",
 		"_isolated-hnrs",
-		"types/*.d.ts",
+		"types/css-prop.d.ts",
 		"macro.*"
 	],
 	sideEffects: false,
@@ -1391,11 +1322,11 @@ var pkg = {
 	},
 	dependencies: {
 		"@babel/runtime": "^7.18.3",
-		"@emotion/babel-plugin": "^11.12.0",
-		"@emotion/cache": "^11.13.0",
-		"@emotion/serialize": "^1.3.1",
-		"@emotion/use-insertion-effect-with-fallbacks": "^1.1.0",
-		"@emotion/utils": "^1.4.0",
+		"@emotion/babel-plugin": "^11.13.5",
+		"@emotion/cache": "^11.14.0",
+		"@emotion/serialize": "^1.3.3",
+		"@emotion/use-insertion-effect-with-fallbacks": "^1.2.0",
+		"@emotion/utils": "^1.4.2",
 		"@emotion/weak-memoize": "^0.4.0",
 		"hoist-non-react-statics": "^3.3.1"
 	},
@@ -1409,10 +1340,11 @@ var pkg = {
 	},
 	devDependencies: {
 		"@definitelytyped/dtslint": "0.0.112",
-		"@emotion/css": "11.13.0",
-		"@emotion/css-prettifier": "1.1.4",
+		"@emotion/css": "11.13.5",
+		"@emotion/css-prettifier": "1.2.0",
 		"@emotion/server": "11.11.0",
-		"@emotion/styled": "11.13.0",
+		"@emotion/styled": "11.14.0",
+		"@types/hoist-non-react-statics": "^3.3.5",
 		"html-tag-names": "^1.1.2",
 		react: "16.14.0",
 		"svg-tag-names": "^1.1.1",
@@ -1425,10 +1357,10 @@ var pkg = {
 	"umd:main": "dist/emotion-react.umd.min.js",
 	preconstruct: {
 		entrypoints: [
-			"./index.js",
-			"./jsx-runtime.js",
-			"./jsx-dev-runtime.js",
-			"./_isolated-hnrs.js"
+			"./index.ts",
+			"./jsx-runtime.ts",
+			"./jsx-dev-runtime.ts",
+			"./_isolated-hnrs.ts"
 		],
 		umdName: "emotionReact",
 		exports: {
@@ -1446,25 +1378,18 @@ var pkg = {
 	}
 };
 
-var jsx
-/*: typeof React.createElement */
-= function jsx
-/*: typeof React.createElement */
-(type
-/*: React.ElementType */
-, props
-/*: Object */
-) {
+var jsx = function jsx(type, props) {
+  // eslint-disable-next-line prefer-rest-params
   var args = arguments;
 
-  if (props == null || !_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.h.call(props, 'css')) {
+  if (props == null || !_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.h.call(props, 'css')) {
     return react__WEBPACK_IMPORTED_MODULE_1__.createElement.apply(undefined, args);
   }
 
   var argsLength = args.length;
   var createElementArgArray = new Array(argsLength);
-  createElementArgArray[0] = _emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.E;
-  createElementArgArray[1] = (0,_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.c)(type, props);
+  createElementArgArray[0] = _emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.E;
+  createElementArgArray[1] = (0,_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.c)(type, props);
 
   for (var i = 2; i < argsLength; i++) {
     createElementArgArray[i] = args[i];
@@ -1473,36 +1398,28 @@ var jsx
   return react__WEBPACK_IMPORTED_MODULE_1__.createElement.apply(null, createElementArgArray);
 };
 
-/*
-type Styles = Object | Array<Object>
+(function (_jsx) {
+  var JSX;
 
-type GlobalProps = {
-  +styles: Styles | (Object => Styles)
-}
-*/
+  (function (_JSX) {})(JSX || (JSX = _jsx.JSX || (_jsx.JSX = {})));
+})(jsx || (jsx = {}));
 
 var warnedAboutCssPropForGlobal = false; // maintain place over rerenders.
 // initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
 // initial client-side render from SSR, use place of hydrating tag
 
-var Global
-/*: React.AbstractComponent<
-GlobalProps
-> */
-= /* #__PURE__ */(0,_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w)(function (props
-/*: GlobalProps */
-, cache) {
+var Global = /* #__PURE__ */(0,_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w)(function (props, cache) {
   if (!warnedAboutCssPropForGlobal && ( // check for className as well since the user is
   // probably using the custom createElement which
   // means it will be turned into a className prop
   // I don't really want to add it to the type since it shouldn't be used
-  props.className || props.css)) {
+  'className' in props && props.className || 'css' in props && props.css)) {
     console.error("It looks like you're using the css prop on Global, did you mean to use the styles prop instead?");
     warnedAboutCssPropForGlobal = true;
   }
 
   var styles = props.styles;
-  var serialized = (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_4__.serializeStyles)([styles], undefined, react__WEBPACK_IMPORTED_MODULE_1__.useContext(_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T));
+  var serialized = (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_4__.serializeStyles)([styles], undefined, react__WEBPACK_IMPORTED_MODULE_1__.useContext(_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T));
   // but it is based on a constant that will never change at runtime
   // it's effectively like having two implementations and switching them out
   // so it's not actually breaking anything
@@ -1519,9 +1436,7 @@ GlobalProps
       speedy: cache.sheet.isSpeedy
     });
     var rehydrating = false;
-    var node
-    /*: HTMLStyleElement | null*/
-    = document.querySelector("style[data-emotion=\"" + key + " " + serialized.name + "\"]");
+    var node = document.querySelector("style[data-emotion=\"" + key + " " + serialized.name + "\"]");
 
     if (cache.sheet.tags.length) {
       sheet.before = cache.sheet.tags[0];
@@ -1570,11 +1485,7 @@ GlobalProps
   Global.displayName = 'EmotionGlobal';
 }
 
-/* import type { Interpolation, SerializedStyles } from '@emotion/utils' */
-
-function css()
-/*: SerializedStyles */
-{
+function css() {
   for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
     args[_key] = arguments[_key];
   }
@@ -1582,18 +1493,7 @@ function css()
   return (0,_emotion_serialize__WEBPACK_IMPORTED_MODULE_4__.serializeStyles)(args);
 }
 
-/*
-type Keyframes = {|
-  name: string,
-  styles: string,
-  anim: 1,
-  toString: () => string
-|} & string
-*/
-
-var keyframes = function
-  /*: Keyframes */
-keyframes() {
+function keyframes() {
   var insertable = css.apply(void 0, arguments);
   var name = "animation-" + insertable.name;
   return {
@@ -1604,23 +1504,9 @@ keyframes() {
       return "_EMO_" + this.name + "_" + this.styles + "_EMO_";
     }
   };
-};
+}
 
-/*
-type ClassNameArg =
-  | string
-  | boolean
-  | { [key: string]: boolean }
-  | Array<ClassNameArg>
-  | null
-  | void
-*/
-
-var classnames = function
-  /*: string */
-classnames(args
-/*: Array<ClassNameArg> */
-) {
+var classnames = function classnames(args) {
   var len = args.length;
   var i = 0;
   var cls = '';
@@ -1671,13 +1557,7 @@ classnames(args
   return cls;
 };
 
-function merge(registered
-/*: Object */
-, css
-/*: (...args: Array<any>) => string */
-, className
-/*: string */
-) {
+function merge(registered, css, className) {
   var registeredStyles = [];
   var rawClassName = (0,_emotion_utils__WEBPACK_IMPORTED_MODULE_2__.getRegisteredStyles)(registered, registeredStyles, className);
 
@@ -1700,19 +1580,8 @@ var Insertion = function Insertion(_ref) {
 
   return null;
 };
-/*
-type Props = {
-  children: ({
-    css: (...args: any) => string,
-    cx: (...args: Array<ClassNameArg>) => string,
-    theme: Object
-  }) => React.Node
-} */
 
-
-var ClassNames
-/*: React.AbstractComponent<Props>*/
-= /* #__PURE__ */(0,_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w)(function (props, cache) {
+var ClassNames = /* #__PURE__ */(0,_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.w)(function (props, cache) {
   var hasRendered = false;
   var serializedArr = [];
 
@@ -1747,7 +1616,7 @@ var ClassNames
   var content = {
     css: css,
     cx: cx,
-    theme: react__WEBPACK_IMPORTED_MODULE_1__.useContext(_emotion_element_7a1343fa_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T)
+    theme: react__WEBPACK_IMPORTED_MODULE_1__.useContext(_emotion_element_489459f2_browser_development_esm_js__WEBPACK_IMPORTED_MODULE_0__.T)
   };
   var ele = props.children(content);
   hasRendered = true;
@@ -1768,8 +1637,7 @@ var ClassNames
 
   if (isBrowser && !isTestEnv) {
     // globalThis has wide browser support - https://caniuse.com/?search=globalThis, Node.js 12 and later
-    var globalContext = // $FlowIgnore
-    typeof globalThis !== 'undefined' ? globalThis // eslint-disable-line no-undef
+    var globalContext = typeof globalThis !== 'undefined' ? globalThis // eslint-disable-line no-undef
     : isBrowser ? window : __webpack_require__.g;
     var globalKey = "__EMOTION_REACT_" + pkg.version.split('.')[0] + "__";
 
@@ -1930,11 +1798,6 @@ function handleInterpolation(mergedProps, registered, interpolation) {
           }
 
           var styles = serializedStyles.styles + ";";
-
-          if (serializedStyles.map !== undefined) {
-            styles += serializedStyles.map;
-          }
-
           return styles;
         }
 
@@ -2041,14 +1904,8 @@ function createStringFromObject(mergedProps, registered, obj) {
   return string;
 }
 
-var labelPattern = /label:\s*([^\s;{]+)\s*(;|$)/g;
-var sourceMapPattern;
-
-{
-  sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
-} // this is the cursor for keyframes
+var labelPattern = /label:\s*([^\s;{]+)\s*(;|$)/g; // this is the cursor for keyframes
 // keyframes are stored on the SerializedStyles object as a linked list
-
 
 var cursor;
 function serializeStyles(args, registered, mergedProps) {
@@ -2087,15 +1944,6 @@ function serializeStyles(args, registered, mergedProps) {
 
       styles += templateStringsArr[i];
     }
-  }
-
-  var sourceMap;
-
-  {
-    styles = styles.replace(sourceMapPattern, function (match) {
-      sourceMap = match;
-      return '';
-    });
   } // using a global regex with .exec is stateful so lastIndex has to be reset each time
 
 
@@ -2113,7 +1961,6 @@ function serializeStyles(args, registered, mergedProps) {
     var devStyles = {
       name: name,
       styles: styles,
-      map: sourceMap,
       next: cursor,
       toString: function toString() {
         return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop).";
@@ -9335,7 +9182,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Store */ "./src/store/index.js");
+/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
 /* harmony import */ var _Utils_customizer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Utils/customizer */ "./src/utils/customizer.js");
 
 
@@ -9343,7 +9190,7 @@ __webpack_require__.r(__webpack_exports__);
 var useDeviceType = function useDeviceType() {
   var deviceType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(function (select) {
     var _select, _select2, _select3;
-    var getDeviceFromStore = ((_select = select('core/edit-site')) === null || _select === void 0 ? void 0 : _select.__experimentalGetPreviewDeviceType()) || ((_select2 = select('core/edit-post')) === null || _select2 === void 0 ? void 0 : _select2.__experimentalGetPreviewDeviceType()) || ((_select3 = select(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _select3 === void 0 ? void 0 : _select3.getDeviceType());
+    var getDeviceFromStore = ((_select = select('core/edit-site')) === null || _select === void 0 ? void 0 : _select.__experimentalGetPreviewDeviceType()) || ((_select2 = select('core/edit-post')) === null || _select2 === void 0 ? void 0 : _select2.__experimentalGetPreviewDeviceType()) || ((_select3 = select(_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_1__.STORE_NAME)) === null || _select3 === void 0 ? void 0 : _select3.getDeviceType());
     return getDeviceFromStore || 'Desktop';
   }, []);
   return deviceType || '';
@@ -9358,7 +9205,7 @@ var useDeviceType = function useDeviceType() {
 var setDeviceType = function setDeviceType(device) {
   var _dispatch, _dispatch2, _dispatch3;
   var updateInCustomizer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var setPreviewDeviceType = ((_dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-site')) === null || _dispatch === void 0 ? void 0 : _dispatch.__experimentalSetPreviewDeviceType) || ((_dispatch2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-post')) === null || _dispatch2 === void 0 ? void 0 : _dispatch2.__experimentalSetPreviewDeviceType) || ((_dispatch3 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _dispatch3 === void 0 ? void 0 : _dispatch3.setDeviceType);
+  var setPreviewDeviceType = ((_dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-site')) === null || _dispatch === void 0 ? void 0 : _dispatch.__experimentalSetPreviewDeviceType) || ((_dispatch2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-post')) === null || _dispatch2 === void 0 ? void 0 : _dispatch2.__experimentalSetPreviewDeviceType) || ((_dispatch3 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(frontisStore)) === null || _dispatch3 === void 0 ? void 0 : _dispatch3.setDeviceType);
 
   // Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
   if (!setPreviewDeviceType || typeof setPreviewDeviceType !== 'function') {
@@ -12695,119 +12542,6 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
-
-/***/ }),
-
-/***/ "./src/store/actions.js":
-/*!******************************!*\
-  !*** ./src/store/actions.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setDeviceType: () => (/* binding */ setDeviceType)
-/* harmony export */ });
-// This action is used to set the device type. If the Gutenberg stores do not provide device type support, this action serves as a fallback.
-function setDeviceType(value) {
-  return {
-    type: 'UPDATE_DEVICE_TYPE',
-    value: value
-  };
-}
-
-/***/ }),
-
-/***/ "./src/store/index.js":
-/*!****************************!*\
-  !*** ./src/store/index.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   store: () => (/* binding */ store)
-/* harmony export */ });
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./src/store/reducer.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./src/store/actions.js");
-/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectors */ "./src/store/selectors.js");
-/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
-/**
- * WordPress dependencies
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-
-var store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)(_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__.STORE_NAME, {
-  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  actions: _actions__WEBPACK_IMPORTED_MODULE_2__,
-  selectors: _selectors__WEBPACK_IMPORTED_MODULE_3__
-});
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(store);
-
-/***/ }),
-
-/***/ "./src/store/reducer.js":
-/*!******************************!*\
-  !*** ./src/store/reducer.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var DEFAULT_STATE = {
-  deviceType: 'Desktop'
-};
-function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return _objectSpread(_objectSpread({}, state), action.value);
-    case 'UPDATE_DEVICE_TYPE':
-      return _objectSpread(_objectSpread({}, state), {}, {
-        deviceType: action.value
-      });
-  }
-  return state;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reducer);
-
-/***/ }),
-
-/***/ "./src/store/selectors.js":
-/*!********************************!*\
-  !*** ./src/store/selectors.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getDeviceType: () => (/* binding */ getDeviceType),
-/* harmony export */   getState: () => (/* binding */ getState)
-/* harmony export */ });
-function getState(state) {
-  return state;
-}
-function getDeviceType(state) {
-  return state.deviceType;
-}
 
 /***/ }),
 
@@ -17423,7 +17157,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Select_aab027f3_esm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Select-aab027f3.esm.js */ "./node_modules/react-select/dist/Select-aab027f3.esm.js");
-/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-element-7a1343fa.browser.development.esm.js");
+/* harmony import */ var _emotion_react__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @emotion/react */ "./node_modules/@emotion/react/dist/emotion-element-489459f2.browser.development.esm.js");
 /* harmony import */ var _emotion_cache__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/cache */ "./node_modules/@emotion/cache/dist/emotion-cache.browser.development.esm.js");
 /* harmony import */ var _index_641ee5b8_esm_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index-641ee5b8.esm.js */ "./node_modules/react-select/dist/index-641ee5b8.esm.js");
 /* harmony import */ var _babel_runtime_helpers_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime/helpers/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
@@ -17659,15 +17393,15 @@ function memoizeOne(resultFn, isEqual) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ index)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
-var index =  react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect ;
+var index = react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect ;
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
+
 
 
 /***/ }),
@@ -19987,6 +19721,10 @@ const platform = {
   isRTL
 };
 
+function rectsAreEqual(a, b) {
+  return a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height;
+}
+
 // https://samthor.au/2021/observing-dom/
 function observeMove(element, onMove) {
   let io = null;
@@ -20006,12 +19744,13 @@ function observeMove(element, onMove) {
       threshold = 1;
     }
     cleanup();
+    const elementRectForRootMargin = element.getBoundingClientRect();
     const {
       left,
       top,
       width,
       height
-    } = element.getBoundingClientRect();
+    } = elementRectForRootMargin;
     if (!skip) {
       onMove();
     }
@@ -20043,6 +19782,16 @@ function observeMove(element, onMove) {
         } else {
           refresh(false, ratio);
         }
+      }
+      if (ratio === 1 && !rectsAreEqual(elementRectForRootMargin, element.getBoundingClientRect())) {
+        // It's possible that even though the ratio is reported as 1, the
+        // element is not actually fully within the IntersectionObserver's root
+        // area anymore. This can happen under performance constraints. This may
+        // be a bug in the browser's IntersectionObserver implementation. To
+        // work around this, we compare the element's bounding rect now with
+        // what it was at the time we created the IntersectionObserver. If they
+        // are not equal then the element moved, so we refresh.
+        refresh();
       }
       isFirstUpdate = false;
     }
@@ -20121,7 +19870,7 @@ function autoUpdate(reference, floating, update, options) {
   }
   function frameLoop() {
     const nextRefRect = getBoundingClientRect(reference);
-    if (prevRefRect && (nextRefRect.x !== prevRefRect.x || nextRefRect.y !== prevRefRect.y || nextRefRect.width !== prevRefRect.width || nextRefRect.height !== prevRefRect.height)) {
+    if (prevRefRect && !rectsAreEqual(prevRefRect, nextRefRect)) {
       update();
     }
     prevRefRect = nextRefRect;
@@ -20346,7 +20095,8 @@ function isContainingBlock(elementOrCss) {
   const css = isElement(elementOrCss) ? getComputedStyle(elementOrCss) : elementOrCss;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-  return css.transform !== 'none' || css.perspective !== 'none' || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
+  // https://drafts.csswg.org/css-transforms-2/#individual-transforms
+  return ['transform', 'translate', 'scale', 'rotate', 'perspective'].some(value => css[value] ? css[value] !== 'none' : false) || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'translate', 'scale', 'rotate', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
 }
 function getContainingBlock(element) {
   let currentNode = getParentNode(element);
