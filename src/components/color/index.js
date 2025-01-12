@@ -174,6 +174,7 @@ const FB_Color = ({
     ];
 
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
+    const savedglobalColors = useSelect((select) => select('frontis-blocks/global-styles').getColors() || [], []);
 
     const defaultColors = [
         { color: '#F72585' },
