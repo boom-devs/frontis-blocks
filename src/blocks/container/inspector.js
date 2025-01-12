@@ -39,6 +39,9 @@ const Inspector = (props) => {
 			minHeightUnits,
 			containerWrap,
 
+			contentWidth,
+			innerContentWidth,
+
 			/** Normal Bg */
 			containerBgColorSwitcher,
 			containerBgNormalBackgroundType,
@@ -146,7 +149,7 @@ const Inspector = (props) => {
 
 	return (
 		<>
-		<style>
+		{/* <style>
 		{`
 			#${p_block_id} {
 				${containerBgNormalBackgroundType === 'gradient' ? `  
@@ -156,7 +159,7 @@ const Inspector = (props) => {
 				`}
 			}
 		`}
-		</style>
+		</style> */}
 		<InspectorControls key="controls">
 			<div className="fb-inspector-control">
 				<TabPanel

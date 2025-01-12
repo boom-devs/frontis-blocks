@@ -47,6 +47,8 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 		globalBlockStyleId,
 	} = backgroundAttributes;
 
+	console.log(backgroundType)
+
 	const bgCSS = {};
 	const bgOverlayCSS = {};
 
