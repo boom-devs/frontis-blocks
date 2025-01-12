@@ -74,19 +74,19 @@ class Helper
     public static function get_image_sizes() {
 
         global $_wp_additional_image_sizes;
-    
+
         // Define essential sizes
         $essential_sizes = array( 'full', 'thumbnail', 'medium', 'medium_large', 'large' );
-    
+
         $sizes       = get_intermediate_image_sizes();
         $image_sizes = array();
-    
+
         // Add the 'Full' size option
         $image_sizes[] = array(
             'value' => 'full',
             'label' => esc_html__( 'Full', 'frontis-blocks' ),
         );
-    
+
         foreach ( $sizes as $size ) {
             // Include only essential sizes
             if ( in_array( $size, $essential_sizes, true ) ) {
@@ -109,12 +109,12 @@ class Helper
                 }
             }
         }
-    
+
         // Apply the filter for additional customization
         $image_sizes = apply_filters( 'fb_post_featured_image_sizes', $image_sizes );
-    
+
         return $image_sizes;
-    }    
+    }
 
 	/**
 	 * Get all taxonomies.
@@ -289,6 +289,27 @@ class Helper
     {
         return in_array($plugin_path, (array) get_option('active_plugins', []), true) || self::is_plugin_active_for_network($plugin_path);
     }
+
+	public static function generate_css($styles, $container_css) {
+		// Generate CSS for the block ID
+		$css = array_map(
+			function ($selector, $styles) {
+				$filtered_styles = implode("; ", array_map(
+					fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
+					array_keys($styles),
+					$styles
+				));
+
+				// Return CSS if styles are valid
+				return $filtered_styles ? "#$selector { $filtered_styles; }" : "";
+			},
+			array_keys($container_css),
+			$container_css
+		);
+
+		// Filter out empty styles and combine
+		return implode("\n", array_filter($css));
+	}
 
     /**
      * Check if a plugin is active for the entire network

@@ -36,14 +36,15 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
-
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         fluentFormGlobalZIndex,
         formId,
         showLabels,
@@ -123,7 +124,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormFocusBorderRadiusTablet,
         fluentFormFocusBorderRadiusMobile,
         fluentFormFocusBorderRadiusLink,
-
 
         fluentFormPlaceholderColor,
 
@@ -351,11 +351,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBorderRadiusMobile,
         fluentFormGlobalBorderRadiusLink,
 
+        fluentFormGlobalBoxShadowSwitcher,
+        fluentFormGlobalBoxShadowValues,
+        fluentFormGlobalBoxShadowCssValue,
+        fluentFormGlobalBoxShadowHoverValues,
+        fluentFormGlobalBoxShadowHoverCssValue,
+
         blockStyle,
 
     } = attributes;
 
-
+	const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -2273,61 +2280,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Border Radius */
 
 
-    // Helper function to load fonts
-    const loadFont = (fontFamily) => {
-        if (fontFamily) {
-            const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}`;
-            const linkElement = document.createElement('link');
-            linkElement.rel = 'stylesheet';
-            linkElement.href = fontUrl;
-            document.head.appendChild(linkElement);
-        }
-    };
-
-    // Apply font family styles using useEffect
+    /* Start Load Google Fonts */
     useEffect(() => {
-        loadFont(fluentFormLabelFontFamily);
-    }, [fluentFormLabelFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormInputFontFamily);
-    }, [fluentFormInputFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSectionBreakTitleFontFamily);
-    }, [fluentFormSectionBreakTitleFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSectionBreakDescFontFamily);
-    }, [fluentFormSectionBreakDescFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormHtmlFontFamily);
-    }, [fluentFormHtmlFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSubmitFontFamily);
-    }, [fluentFormSubmitFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormSuccessFontFamily);
-    }, [fluentFormSuccessFontFamily]);
-
-    useEffect(() => {
-        loadFont(fluentFormErrorFontFamily);
-    }, [fluentFormErrorFontFamily]);
-
-
-
-
-
+        loadGoogleFont(fluentFormLabelFontFamily);
+        loadGoogleFont(fluentFormInputFontFamily);
+        loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
+        loadGoogleFont(fluentFormSectionBreakDescFontFamily);
+        loadGoogleFont(fluentFormHtmlFontFamily);
+        loadGoogleFont(fluentFormSubmitFontFamily);
+        loadGoogleFont(fluentFormSuccessFontFamily);
+        loadGoogleFont(fluentFormErrorFontFamily);
+    }, [fluentFormLabelFontFamily,
+         fluentFormInputFontFamily, 
+         fluentFormSectionBreakTitleFontFamily, 
+         fluentFormSectionBreakDescFontFamily,
+         fluentFormHtmlFontFamily, 
+         fluentFormSubmitFontFamily, 
+         fluentFormSuccessFontFamily, 
+         fluentFormErrorFontFamily] 
+    );
+    /* End Load Google Fonts */
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockID}.fb-fluent-form-wrapper {
-            ${fluentFormGlobalZIndex ? `z-index: ${fluentFormGlobalZIndex};` : ''}
-            position: relative;
-        }
         .${blockID}.fb-fluent-form-wrapper {
             ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
             padding: ${DesktopPadding};
@@ -2336,11 +2311,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-width: ${BorderDesktopWidth};
             border-radius: ${BorderRadiusDesktopWidth} !important;
             ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+            ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
+            ${fluentFormGlobalBoxShadowCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowCssValue};` : ''} 
+            position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper:hover {
             ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
             ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+            ${fluentFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
         .${blockID}.fb-fluent-form-wrapper.fb-fluent-form-hide-label .fb-fluent-form-rendered .ff-el-group label:not(.ff-el-form-check-label),
@@ -2615,6 +2594,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderTabletWidth};
                 border-radius: ${BorderRadiusTabletWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormGlobalZIndex.Tablet ? `z-index: ${fluentFormGlobalZIndex.Tablet};` : ''}
+                position: relative;
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
@@ -2849,7 +2830,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
                 ${fluentFormErrorTabletPadding ? `padding: ${fluentFormErrorTabletPadding};` : ""}
                 ${fluentFormErrorTabletMargin ? `margin: ${fluentFormErrorTabletMargin};` : ""} 
-            }  
+            }
+
+            .fluentform * {
+                box-sizing: border-box;
+            }
+
+            .frm-fluent-form .ff-t-container {
+                display: flex;
+                gap: 15px;
+                width: 100%;
+            }
+
+            .frm-fluent-form .ff-t-cell {
+                display: flex;
+                flex-direction: column;
+                vertical-align: inherit;
+                width: 100%;
+            }
+
+            .fluentform .ff-el-input--label {
+                display: inline-block;
+                margin-bottom: 5px;
+                position: relative;
+            }
+
+            .ff-default .ff-el-input--label label {
+                display: inline-block;
+                font-weight: 500;
+                line-height: inherit;
+                margin-bottom: 0;
+            }
+            .ff-el-form-control {
+                display: block;
+                width: 100%;
+            }
+
+            .ff-default .ff-el-form-control {
+                background-clip: padding-box;
+                background-image: none;
+                border-radius: 7px;
+                border-radius: ;
+                line-height: 1;
+                margin-bottom: 0;
+                max-width: 100%;
+                padding: 11px 15px;
+                transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            }
+
+            .fluentform .ff-el-group {
+                margin-bottom: 20px;
+            }
+
+            .ff-default .ff_btn_style {
+                border-radius: 7px;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 1.5;
+                padding: 8px 20px;
+                position: relative;
+                text-align: center;
+                transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+                vertical-align: middle;
+                white-space: nowrap;
+            }
         }
             
         @media only screen and (max-width: 767px) {
@@ -2862,6 +2911,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderMobileWidth};
                 border-radius: ${BorderRadiusMobileWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormGlobalZIndex.Mobile ? `z-index: ${fluentFormGlobalZIndex.Mobile};` : ''}
+                position: relative; 
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
@@ -3097,6 +3148,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormErrorMobilePadding ? `padding: ${fluentFormErrorMobilePadding};` : ""}
                 ${fluentFormErrorMobileMargin ? `margin: ${fluentFormErrorMobileMargin};` : ""} 
             } 
+            .frm-fluent-form .ff-t-container {
+                display: block;
+                width: 100%;
+            }
         }
 
 
@@ -3510,7 +3565,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         BorderRadiusTabletWidth,
         BorderRadiusMobileWidth,
 
-
+        fluentFormGlobalBoxShadowSwitcher,
+        fluentFormGlobalBoxShadowValues,
+        fluentFormGlobalBoxShadowCssValue,
+        fluentFormGlobalBoxShadowHoverValues,
+        fluentFormGlobalBoxShadowHoverCssValue,
 
 
     ]);
@@ -4672,18 +4731,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={fluentFormGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
+                                                    <FB_Range
+                                                        min={0}
                                                         max={10000000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={''}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={fluentFormGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ fluentFormGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
 
@@ -4739,7 +4802,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
                                                 </PanelBody>
-                                                <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
+                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
                                                     <SelectControl
                                                             label={__("Border Style", "frontis-blocks")}
@@ -4798,6 +4861,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
+
+                                                    <FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={fluentFormGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ fluentFormGlobalBoxShadowSwitcher: value })}
+													/>
+
+													{fluentFormGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ fluentFormGlobalBoxShadowValues: value })}
+															initialShadowValue={fluentFormGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ fluentFormGlobalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{fluentFormGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ fluentFormGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={fluentFormGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ fluentFormGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
                                                 </PanelBody>
 
 

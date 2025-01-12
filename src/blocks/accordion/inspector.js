@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { select, dispatch } from "@wordpress/data";
@@ -11,43 +11,35 @@ import {
     TabPanel,
     Button,
     ButtonGroup,
-    Dropdown,
-    RangeControl,
     SelectControl,
-    Dashicon,
-    TextControl,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
     BORDER_STYLES,
-    ACCORDION_TYPES,
-    HEADING,
     TITLE_ALIGNMENT,
-    CONTENT_ALIGN,
     ICON_POSITIONS,
     ICON_SWITCHER,
 } from "./constants/constants";
-import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
 
 import './editor.scss';
 import FBIconPicker from '../../components/icon-picker';
 import FB_TypographyControl from '../../components/typography-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
-import FB_ImageControl from '../../components/image-control';
+import FB_BackgroundImageControl from '../../components/background-image-control';
+import FB_HtmlTagControl from '../../components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_ColorControl from '../../components/color-control';
+import FB_SwitcherControl from '../../components/switcher-control';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        blockStyle,
         accordionAlignment,
         accordionIconZIndex,
         accordionItems,
@@ -209,8 +201,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionMobileSwitcher,
 
         // Boxshadow
+        accordionGlobalBoxShadowSwitcher,
         accordionGlobalBoxShadowValues,
         accordionGlobalBoxShadowCssValue,
+        accordionGlobalHoverBoxShadowValues,
+        accordionGlobalHoverBoxShadowCssValue,
 
         // Backgorund
         accordionBgColorSwitcher,
@@ -240,8 +235,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionBgHoverImageSize,
 
         // Item Box Shadow
+        accordionItemBoxShadowSwitcher,
         accordionItemBoxShadowValues,
         accordionItemBoxShadowCssValue,
+        accordionItemHoverBoxShadowValues,
+        accordionItemHoverBoxShadowCssValue,
 
         // Item Backgorund
         titleBgColorSwitcher,
@@ -290,8 +288,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentMobileSwitcher,
 
         // Item Box Shadow
+        contentBoxShadowSwitcher,
         contentBoxShadowValues,
         contentBoxShadowCssValue,
+        contentHoverBoxShadowValues,
+        contentHoverBoxShadowCssValue,
 
         // Item Backgorund
         contentBgColorSwitcher,
@@ -321,6 +322,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageSize,
     } = attributes;
 
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -354,39 +356,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
 
 
-    /** Title Color */
-    const handleTitleColorSwitcherChange = (value) => {
-        setAttributes({ titleColorSwitcher: value });
-    };
-    const handleTitleColorChange = (value) => {
-        setAttributes({ titleColor: value });
-    };
-    const handleTitleHoverColorChange = (value) => {
-        setAttributes({ titleHoverColor: value });
-    };
-
-    /** Title Backgorund Color */
-    const handleTitleBGColorSwitcherChange = (value) => {
-        setAttributes({ titleBGColorSwitcher: value });
-    };
-    const handleTitleBGColorChange = (value) => {
-        setAttributes({ titleBGColor: value });
-    };
-    const handleTitleBGHoverColorChange = (value) => {
-        setAttributes({ titleBGHoverColor: value });
-    };
-
-    /** Item Icon Color */
-    const handleTitleIconColorSwitcherChange = (value) => {
-        setAttributes({ titleIconColorSwitcher: value });
-    };
-    const handleTitleIconColorChange = (value) => {
-        setAttributes({ titleIconColor: value });
-    };
-    const handleTitleIconHoverColorChange = (value) => {
-        setAttributes({ titleIconHoverColor: value });
-    };
-
+     /** Start load font */
+     useEffect(() => {
+        loadGoogleFont(titleFontFamily);
+    }, [titleFontFamily]);
+    /** End load font */
 
 
     /** Start Accordions Gap */
@@ -455,39 +429,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 
-    // FB_Color for accordion content BG
-    const accordionBGColorSwitcherChange = (value) => {
-        setAttributes({ accordionBgColorSwitcher: value });
-    };
-    const accordionBGColorChange = (value) => {
-        setAttributes({ accordionBgColor: value });
-    };
-    const accordionBGHoverColorChange = (value) => {
-        setAttributes({ accordionBgHoverColor: value });
-    };
-
-    // FB_Color for accordion Border
-    const accordionBorderColorSwitcherChange = (value) => {
-        setAttributes({ accordionBorderColorSwitcher: value });
-    };
-    const accordionBorderColorChange = (value) => {
-        setAttributes({ accordionBorderColor: value });
-    };
-    const accordionBorderHoverColorChange = (value) => {
-        setAttributes({ accordionBorderHoverColor: value });
-    };
-
-
-    // FB_Color for accordionItems Border
-    const accordionItemsBorderColorSwitcherChange = (value) => {
-        setAttributes({ accordionItemsBorderColorSwitcher: value });
-    };
-    const accordionItemsBorderColorChange = (value) => {
-        setAttributes({ accordionItemsBorderColor: value });
-    };
-    const accordionItemsBorderHoverColorChange = (value) => {
-        setAttributes({ accordionItemsBorderHoverColor: value });
-    };	
 
     // accordionItems Padding Functionb
     const handleAccordionItemsPaddingUnitChange = ( event, position ) => {
@@ -1123,107 +1064,710 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
 
+
+
+    const accordionItemsPaddingDesktopWidth = `${accordionItemsDesktopPadding.top}${accordionItemsPaddingUnits.Desktop} ${accordionItemsDesktopPadding.right}${accordionItemsPaddingUnits.Desktop} ${accordionItemsDesktopPadding.bottom}${accordionItemsPaddingUnits.Desktop} ${accordionItemsDesktopPadding.left}${accordionItemsPaddingUnits.Desktop}`;
+    const accordionItemsPaddingTabletWidth = `${accordionItemsTabPadding.top}${accordionItemsPaddingUnits.Tablet} ${accordionItemsTabPadding.right}${accordionItemsPaddingUnits.Tablet} ${accordionItemsTabPadding.bottom}${accordionItemsPaddingUnits.Tablet} ${accordionItemsTabPadding.left}${accordionItemsPaddingUnits.Tablet}`;
+    const accordionItemsPaddingMobileWidth = `${accordionItemsMobilePadding.top}${accordionItemsPaddingUnits.Mobile} ${accordionItemsMobilePadding.right}${accordionItemsPaddingUnits.Mobile} ${accordionItemsMobilePadding.bottom}${accordionItemsPaddingUnits.Mobile} ${accordionItemsMobilePadding.left}${accordionItemsPaddingUnits.Mobile}`;
+
+    const accordionItemsBorderDesktopWidth = `${accordionItemsDesktopBorderWidth.top}${accordionItemsBorderUnits.Desktop} ${accordionItemsDesktopBorderWidth.right}${accordionItemsBorderUnits.Desktop} ${accordionItemsDesktopBorderWidth.bottom}${accordionItemsBorderUnits.Desktop} ${accordionItemsDesktopBorderWidth.left}${accordionItemsBorderUnits.Desktop}`;
+    const accordionItemsBorderTabletWidth = `${accordionItemsTabBorderWidth.top}${accordionItemsBorderUnits.Tablet} ${accordionItemsTabBorderWidth.right}${accordionItemsBorderUnits.Tablet} ${accordionItemsTabBorderWidth.bottom}${accordionItemsBorderUnits.Tablet} ${accordionItemsTabBorderWidth.left}${accordionItemsBorderUnits.Tablet}`;
+    const accordionItemsBorderMobileWidth = `${accordionItemsMobileBorderWidth.top}${accordionItemsBorderUnits.Mobile} ${accordionItemsMobileBorderWidth.right}${accordionItemsBorderUnits.Mobile} ${accordionItemsMobileBorderWidth.bottom}${accordionItemsBorderUnits.Mobile} ${accordionItemsMobileBorderWidth.left}${accordionItemsBorderUnits.Mobile}`;
+
+    const accordionItemsBorderRadiusDesktopWidth = `${accordionItemsDesktopBorderRadiusWidth.top}${accordionItemsBorderRadiusUnits.Desktop} ${accordionItemsDesktopBorderRadiusWidth.right}${accordionItemsBorderRadiusUnits.Desktop} ${accordionItemsDesktopBorderRadiusWidth.bottom}${accordionItemsBorderRadiusUnits.Desktop} ${accordionItemsDesktopBorderRadiusWidth.left}${accordionItemsBorderRadiusUnits.Desktop}`;
+    const accordionItemsBorderRadiusTabletWidth = `${accordionItemsTabBorderRadiusWidth.top}${accordionItemsBorderRadiusUnits.Tablet} ${accordionItemsTabBorderRadiusWidth.right}${accordionItemsBorderRadiusUnits.Tablet} ${accordionItemsTabBorderRadiusWidth.bottom}${accordionItemsBorderRadiusUnits.Tablet} ${accordionItemsTabBorderRadiusWidth.left}${accordionItemsBorderRadiusUnits.Tablet}`;
+    const accordionItemsBorderRadiusMobileWidth = `${accordionItemsMobileBorderRadiusWidth.top}${accordionItemsBorderRadiusUnits.Mobile} ${accordionItemsMobileBorderRadiusWidth.right}${accordionItemsBorderRadiusUnits.Mobile} ${accordionItemsMobileBorderRadiusWidth.bottom}${accordionItemsBorderRadiusUnits.Mobile} ${accordionItemsMobileBorderRadiusWidth.left}${accordionItemsBorderRadiusUnits.Mobile}`;
+      
+    const accordionMarginDesktopWidth = `${accordionDesktopMargin.top}${accordionMarginUnits.Desktop} ${accordionDesktopMargin.right}${accordionMarginUnits.Desktop} ${accordionDesktopMargin.bottom}${accordionMarginUnits.Desktop} ${accordionDesktopMargin.left}${accordionMarginUnits.Desktop}`;
+    const accordionMarginTabletWidth = `${accordionTabMargin.top}${accordionMarginUnits.Tablet} ${accordionTabMargin.right}${accordionMarginUnits.Tablet} ${accordionTabMargin.bottom}${accordionMarginUnits.Tablet} ${accordionTabMargin.left}${accordionMarginUnits.Tablet}`;
+    const accordionMarginMobileWidth = `${accordionMobileMargin.top}${accordionMarginUnits.Mobile} ${accordionMobileMargin.right}${accordionMarginUnits.Mobile} ${accordionMobileMargin.bottom}${accordionMarginUnits.Mobile} ${accordionMobileMargin.left}${accordionMarginUnits.Mobile}`;
+
+    const accordionPaddingDesktopWidth = `${accordionDesktopPadding.top}${accordionPaddingUnits.Desktop} ${accordionDesktopPadding.right}${accordionPaddingUnits.Desktop} ${accordionDesktopPadding.bottom}${accordionPaddingUnits.Desktop} ${accordionDesktopPadding.left}${accordionPaddingUnits.Desktop}`;
+    const accordionPaddingTabletWidth = `${accordionTabPadding.top}${accordionPaddingUnits.Tablet} ${accordionTabPadding.right}${accordionPaddingUnits.Tablet} ${accordionTabPadding.bottom}${accordionPaddingUnits.Tablet} ${accordionTabPadding.left}${accordionPaddingUnits.Tablet}`;
+    const accordionPaddingMobileWidth = `${accordionMobilePadding.top}${accordionPaddingUnits.Mobile} ${accordionMobilePadding.right}${accordionPaddingUnits.Mobile} ${accordionMobilePadding.bottom}${accordionPaddingUnits.Mobile} ${accordionMobilePadding.left}${accordionPaddingUnits.Mobile}`;
+
+    const accordionBorderDesktopWidth = `${accordionDesktopBorderWidth.top}${accordionBorderUnits.Desktop} ${accordionDesktopBorderWidth.right}${accordionBorderUnits.Desktop} ${accordionDesktopBorderWidth.bottom}${accordionBorderUnits.Desktop} ${accordionDesktopBorderWidth.left}${accordionBorderUnits.Desktop}`;
+    const accordionBorderTabletWidth = `${accordionTabBorderWidth.top}${accordionBorderUnits.Tablet} ${accordionTabBorderWidth.right}${accordionBorderUnits.Tablet} ${accordionTabBorderWidth.bottom}${accordionBorderUnits.Tablet} ${accordionTabBorderWidth.left}${accordionBorderUnits.Tablet}`;
+    const accordionBorderMobileWidth = `${accordionMobileBorderWidth.top}${accordionBorderUnits.Mobile} ${accordionMobileBorderWidth.right}${accordionBorderUnits.Mobile} ${accordionMobileBorderWidth.bottom}${accordionBorderUnits.Mobile} ${accordionMobileBorderWidth.left}${accordionBorderUnits.Mobile}`;
+
+    const accordionBorderRadiusDesktopWidth = `${accordionDesktopBorderRadiusWidth.top}${accordionBorderRadiusUnits.Desktop} ${accordionDesktopBorderRadiusWidth.right}${accordionBorderRadiusUnits.Desktop} ${accordionDesktopBorderRadiusWidth.bottom}${accordionBorderRadiusUnits.Desktop} ${accordionDesktopBorderRadiusWidth.left}${accordionBorderRadiusUnits.Desktop}`;
+    const accordionBorderRadiusTabletWidth = `${accordionTabBorderRadiusWidth.top}${accordionBorderRadiusUnits.Tablet} ${accordionTabBorderRadiusWidth.right}${accordionBorderRadiusUnits.Tablet} ${accordionTabBorderRadiusWidth.bottom}${accordionBorderRadiusUnits.Tablet} ${accordionTabBorderRadiusWidth.left}${accordionBorderRadiusUnits.Tablet}`;
+    const accordionBorderRadiusMobileWidth = `${accordionMobileBorderRadiusWidth.top}${accordionBorderRadiusUnits.Mobile} ${accordionMobileBorderRadiusWidth.right}${accordionBorderRadiusUnits.Mobile} ${accordionMobileBorderRadiusWidth.bottom}${accordionBorderRadiusUnits.Mobile} ${accordionMobileBorderRadiusWidth.left}${accordionBorderRadiusUnits.Mobile}`;
+
+    const contentBorderDesktopWidth = `${contentDesktopBorderWidth.top}${contentBorderUnits.Desktop} ${contentDesktopBorderWidth.right}${contentBorderUnits.Desktop} ${contentDesktopBorderWidth.bottom}${contentBorderUnits.Desktop} ${contentDesktopBorderWidth.left}${contentBorderUnits.Desktop}`;
+    const contentBorderTabletWidth = `${contentTabBorderWidth.top}${contentBorderUnits.Tablet} ${contentTabBorderWidth.right}${contentBorderUnits.Tablet} ${contentTabBorderWidth.bottom}${contentBorderUnits.Tablet} ${contentTabBorderWidth.left}${contentBorderUnits.Tablet}`;
+    const contentBorderMobileWidth = `${contentMobileBorderWidth.top}${contentBorderUnits.Mobile} ${contentMobileBorderWidth.right}${contentBorderUnits.Mobile} ${contentMobileBorderWidth.bottom}${contentBorderUnits.Mobile} ${contentMobileBorderWidth.left}${contentBorderUnits.Mobile}`;
+
+    const contentBorderRadiusDesktopWidth = `${contentDesktopBorderRadiusWidth.top}${contentBorderRadiusUnits.Desktop} ${contentDesktopBorderRadiusWidth.right}${contentBorderRadiusUnits.Desktop} ${contentDesktopBorderRadiusWidth.bottom}${contentBorderRadiusUnits.Desktop} ${contentDesktopBorderRadiusWidth.left}${contentBorderRadiusUnits.Desktop}`;
+    const contentBorderRadiusTabletWidth = `${contentTabBorderRadiusWidth.top}${contentBorderRadiusUnits.Tablet} ${contentTabBorderRadiusWidth.right}${contentBorderRadiusUnits.Tablet} ${contentTabBorderRadiusWidth.bottom}${contentBorderRadiusUnits.Tablet} ${contentTabBorderRadiusWidth.left}${contentBorderRadiusUnits.Tablet}`;
+    const contentBorderRadiusMobileWidth = `${contentMobileBorderRadiusWidth.top}${contentBorderRadiusUnits.Mobile} ${contentMobileBorderRadiusWidth.right}${contentBorderRadiusUnits.Mobile} ${contentMobileBorderRadiusWidth.bottom}${contentBorderRadiusUnits.Mobile} ${contentMobileBorderRadiusWidth.left}${contentBorderRadiusUnits.Mobile}`;
+
     
-    // FB_Color for content Border
-    const contentBorderColorSwitcherChange = (value) => {
-        setAttributes({ contentBorderColorSwitcher: value });
-    };
-    const contentBorderColorChange = (value) => {
-        setAttributes({ contentBorderColor: value });
-    };
-    const contentBorderHoverColorChange = (value) => {
-        setAttributes({ contentBorderHoverColor: value });
-    };
+
+    const fbaccordionItemstyle = useMemo(() => {
+        let styles = `
+          .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+                position: relative;
+                ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
+                ${accordionDesktopPadding !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
+                ${accordionDesktopMargin !== undefined ? `margin: ${accordionMarginDesktopWidth};` : ''}
+                ${accordionBorder !== undefined ? `border-style: ${accordionBorder};` : ''}
+                ${accordionDesktopBorderWidth !== undefined ? `border-width: ${accordionBorderDesktopWidth};` : ''}
+                ${accordionBorderColor !== undefined ? `border-color: ${accordionBorderColor};` : ''}
+                ${accordionDesktopBorderRadiusWidth !== undefined ? `border-radius: ${accordionBorderRadiusDesktopWidth};` : ''}
+                ${
+                    accordionBgType === "gradient"
+                      ? `background: ${
+                          accordionBgCustomGradientSwitcher && accordionBgCustomGradientInputValue
+                            ? accordionBgCustomGradientInputValue
+                            : accordionBgGradientColor
+                        };`
+                      : accordionBgImageUrl !== undefined && accordionBgImageUrl !== null && accordionBgImageUrl !== ""
+                      ? `
+                        ${accordionBgImageUrl !== undefined ? `background-image: url(${accordionBgImageUrl});` : ''}
+                        ${accordionBgImagePosition !== undefined ? `background-position: ${accordionBgImagePosition};` : ''}
+                        ${accordionBgImageAttachment !== undefined ? `background-attachment: ${accordionBgImageAttachment};` : ''}
+                        ${accordionBgImageRepeat !== undefined ? `background-repeat: ${accordionBgImageRepeat};` : ''}
+                        ${accordionBgImageSize !== undefined ? `background-size: ${accordionBgImageSize};` : ''}
+                      `
+                      : `background: ${accordionBgClassicColor};`
+                }
+                ${accordionGlobalBoxShadowCssValue ? `box-shadow: ${accordionGlobalBoxShadowCssValue};` : ''}
+                overflow: hidden;
+                transition: all .3s ease-in-out;
+            }
+        
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper:hover {
+                ${
+                    accordionBgHoverType === "gradient"
+                      ? `background: ${
+                          accordionBgHoverCustomGradientSwitcher && accordionBgHoverCustomGradientInputValue
+                            ? accordionBgHoverCustomGradientInputValue
+                            : accordionBgHoverGradientColor
+                        };`
+                      : accordionBgHoverImageUrl !== undefined && accordionBgHoverImageUrl !== null && accordionBgHoverImageUrl !== ""
+                      ? `
+                        ${accordionBgHoverImageUrl !== undefined ? `background-image: url(${accordionBgHoverImageUrl});` : ''}
+                        ${accordionBgHoverImagePosition !== undefined ? `background-position: ${accordionBgHoverImagePosition};` : ''}
+                        ${accordionBgHoverImageAttachment !== undefined ? `background-attachment: ${accordionBgHoverImageAttachment};` : ''}
+                        ${accordionBgHoverImageRepeat !== undefined ? `background-repeat: ${accordionBgHoverImageRepeat};` : ''}
+                        ${accordionBgHoverImageSize !== undefined ? `background-size: ${accordionBgHoverImageSize};` : ''}
+                      `
+                      : `background: ${accordionBgHoverClassicColor};`
+                }
+                ${accordionBorderHoverColor !== undefined ? `border-color: ${accordionBorderHoverColor};` : ''}
+                ${accordionGlobalHoverBoxShadowCssValue ? `box-shadow: ${accordionGlobalHoverBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper {
+                ${
+                    titleBgType === "gradient"
+                      ? `background: ${
+                          titleBgCustomGradientSwitcher && titleBgCustomGradientInputValue
+                            ? titleBgCustomGradientInputValue
+                            : titleBgGradientColor
+                        };`
+                      : titleBgImageUrl !== undefined && titleBgImageUrl !== null && titleBgImageUrl !== ""
+                      ? `
+                        ${titleBgImageUrl !== undefined ? `background-image: url(${titleBgImageUrl});` : ''}
+                        ${titleBgImagePosition !== undefined ? `background-position: ${titleBgImagePosition};` : ''}
+                        ${titleBgImageAttachment !== undefined ? `background-attachment: ${titleBgImageAttachment};` : ''}
+                        ${titleBgImageRepeat !== undefined ? `background-repeat: ${titleBgImageRepeat};` : ''}
+                        ${titleBgImageSize !== undefined ? `background-size: ${titleBgImageSize};` : ''}
+                      `
+                      : `background: ${titleBgClassicColor};`
+                }
+                display: flex;
+                align-items: center;
+                ${titleSpacing?.Desktop !== undefined ? `gap: ${titleSpacing.Desktop}${titleSpacingUnits.Desktop};` : ''}
+                ${accordionItemsPaddingDesktopWidth !== undefined ? `padding: ${accordionItemsPaddingDesktopWidth};` : ''}
+                ${accordionItemsBorder !== undefined ? `border-style: ${accordionItemsBorder};` : ''}
+                ${accordionItemsBorderColor !== undefined ? `border-color: ${accordionItemsBorderColor};` : ''}
+                ${accordionItemsDesktopBorderWidth !== undefined ? `border-width: ${accordionItemsBorderDesktopWidth};` : ''}
+                ${accordionItemsDesktopBorderRadiusWidth !== undefined ? `border-radius: ${accordionItemsBorderRadiusDesktopWidth};` : ''}
+                ${accordionItemBoxShadowCssValue ? `box-shadow: ${accordionItemBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover {
+                ${
+                    titleBgHoverType === "gradient"
+                      ? `background: ${
+                          titleBgHoverCustomGradientSwitcher && titleBgHoverCustomGradientInputValue
+                            ? titleBgHoverCustomGradientInputValue
+                            : titleBgHoverGradientColor
+                        };`
+                      : titleBgHoverImageUrl !== undefined && titleBgHoverImageUrl !== null && titleBgHoverImageUrl !== ""
+                      ? `
+                        ${titleBgHoverImageUrl !== undefined ? `background-image: url(${titleBgHoverImageUrl});` : ''}
+                        ${titleBgHoverImagePosition !== undefined ? `background-position: ${titleBgHoverImagePosition};` : ''}
+                        ${titleBgHoverImageAttachment !== undefined ? `background-attachment: ${titleBgHoverImageAttachment};` : ''}
+                        ${titleBgHoverImageRepeat !== undefined ? `background-repeat: ${titleBgHoverImageRepeat};` : ''}
+                        ${titleBgHoverImageSize !== undefined ? `background-size: ${titleBgHoverImageSize};` : ''}
+                      `
+                      : `background: ${titleBgHoverClassicColor};`
+                }
+                ${accordionItemsBorderHoverColor !== undefined ? `border-color: ${accordionItemsBorderHoverColor};` : ''}
+                ${accordionItemHoverBoxShadowCssValue ? `box-shadow: ${accordionItemHoverBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
+                ${titleColor !== undefined ? `color: ${titleColor};` : ''}
+                ${titleFontFamily !== 'default' ? `font-family: ${titleFontFamily};` : ''}
+                ${titleFontSize?.Desktop !== undefined ? `font-size: ${titleFontSize.Desktop}${titleFontSizeUnits.Desktop};` : ''}
+                ${titleFontWeight !== undefined ? `font-weight: ${titleFontWeight};` : ''}
+                ${titleFontStyle !== undefined ? `font-style: ${titleFontStyle};` : ''}
+                ${titleLetterSpacing?.Desktop !== undefined ? `letter-spacing: ${titleLetterSpacing.Desktop}${titleLetterSpacingUnits.Desktop};` : ''}
+                ${titleLineHeight?.Desktop !== undefined ? `line-height: ${titleLineHeight.Desktop}${titleLineHeightUnits.Desktop};` : ''}
+            }
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title {
+                ${titleHoverColor !== undefined ? `color: ${titleHoverColor};` : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon svg,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon img,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon svg,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon img,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon svg,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon img {
+                width: 100%;
+                height: 100%;
+            }
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
+                ${titleIconColor !== undefined ? `fill: ${titleIconColor};` : ''}
+                ${titleIconSize?.Desktop !== undefined ? `
+                    width: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop}; 
+                    height: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-tab-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-expanded-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-icon {
+                ${titleIconHoverColor !== undefined ? `fill: ${titleIconHoverColor};` : ''}
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
+                display: flex;
+                flex-direction: column;
+                ${accordionItemGap?.Desktop !== undefined ? `gap: ${accordionItemGap.Desktop}${accordionItemGapUnits.Desktop};` : ''}
+                padding: 0;
+                margin: 0;
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper {
+                ${titleAlignment === 'left' ? 'justify-content: left;' : ''}
+                ${titleAlignment === 'center' ? 'justify-content: center;' : ''}
+                ${titleAlignment === 'right' ? 'justify-content: right;' : ''}
+                ${titleAlignment === 'between' ? 'justify-content: space-between;' : ''}
+                ${iconPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
+                ${iconPosition === 'right' ? 'flex-direction: row;' : ''}
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
+                display: inline-flex;
+                align-items: center;
+                ${prefixSuffixSpacing?.Desktop !== undefined ? `gap: ${prefixSuffixSpacing.Desktop}${prefixSuffixSpacingUnits.Desktop};` : ''}
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
+                ${titlePrefixIconSize?.Desktop !== undefined ? `width: ${titlePrefixIconSize.Desktop}${titlePrefixIconSizeUnits.Desktop}; height: ${titlePrefixIconSize.Desktop}${titlePrefixIconSizeUnits.Desktop};` : ''}
+                display: flex;
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
+                ${titleSuffixIconSize?.Desktop !== undefined ? `width: ${titleSuffixIconSize.Desktop}${titleSuffixIconSizeUnits.Desktop}; height: ${titleSuffixIconSize.Desktop}${titleSuffixIconSizeUnits.Desktop};` : ''}
+                display: flex;
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix img,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix svg,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix img,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix svg {
+                margin: 0;
+                padding: 0;
+                min-width: 100%;
+                width: 100%;
+                height: 100%;
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix img,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix .components-button,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix img,
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix .components-button {
+                margin: 0 !important;
+                padding: 0 !important;
+                min-width: 100% !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+            }
+
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+            ${
+            contentBgType === "gradient"
+                ? `background: ${
+                    contentBgCustomGradientSwitcher && contentBgCustomGradientInputValue
+                    ? contentBgCustomGradientInputValue
+                    : contentBgGradientColor
+                };`
+                : contentBgImageUrl !== undefined && contentBgImageUrl !== null && contentBgImageUrl !== ""
+                ? `
+                ${contentBgImageUrl !== undefined ? `background-image: url(${contentBgImageUrl});` : ''}
+                ${contentBgImagePosition !== undefined ? `background-position: ${contentBgImagePosition};` : ''}
+                ${contentBgImageAttachment !== undefined ? `background-attachment: ${contentBgImageAttachment};` : ''}
+                ${contentBgImageRepeat !== undefined ? `background-repeat: ${contentBgImageRepeat};` : ''}
+                ${contentBgImageSize !== undefined ? `background-size: ${contentBgImageSize};` : ''}
+                `
+                : `background: ${contentBgClassicColor};`
+            }
+            ${contentBoxShadowCssValue ? `box-shadow: ${contentBoxShadowCssValue};` : ''}
+            ${contentBorder !== undefined ? `border-style: ${contentBorder};` : ''}
+            ${contentDesktopBorderWidth !== undefined ? `border-width: ${contentBorderDesktopWidth};` : ''}
+            ${contentBorderColor !== undefined ? `border-color: ${contentBorderColor};` : ''}
+            ${contentDesktopBorderRadiusWidth !== undefined ? `border-radius: ${contentBorderRadiusDesktopWidth};` : ''}
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper:hover {
+            ${
+                contentBgHoverType === "gradient"
+                ? `background: ${
+                    contentBgHoverCustomGradientSwitcher && contentBgHoverCustomGradientInputValue
+                        ? contentBgHoverCustomGradientInputValue
+                        : contentBgHoverGradientColor
+                    };`
+                : contentBgHoverImageUrl !== undefined && contentBgHoverImageUrl !== null && contentBgHoverImageUrl !== ""
+                ? `
+                    ${contentBgHoverImageUrl !== undefined ? `background-image: url(${contentBgHoverImageUrl});` : ''}
+                    ${contentBgHoverImagePosition !== undefined ? `background-position: ${contentBgHoverImagePosition};` : ''}
+                    ${contentBgHoverImageAttachment !== undefined ? `background-attachment: ${contentBgHoverImageAttachment};` : ''}
+                    ${contentBgHoverImageRepeat !== undefined ? `background-repeat: ${contentBgHoverImageRepeat};` : ''}
+                    ${contentBgHoverImageSize !== undefined ? `background-size: ${contentBgHoverImageSize};` : ''}
+                `
+                : `background: ${contentBgHoverClassicColor};`
+            }
+            ${contentHoverBoxShadowCssValue ? `box-shadow: ${contentHoverBoxShadowCssValue};` : ''}
+            ${contentBorderHoverColor !== undefined ? `border-color: ${contentBorderHoverColor};` : ''}
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+            position: absolute;
+			visibility: hidden;
+            opacity: 0;
+			transition: opacity 0.3s ease-in-out;
+		}
+
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+			position: static;
+			visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+		}
+      
+        @media only screen and (max-width: 1024px) {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+                ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
+                ${accordionTabPadding !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
+                ${accordionTabMargin !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
+                ${accordionTabBorderRadiusWidth !== undefined ? `border-radius: ${accordionBorderRadiusTabletWidth};` : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
+                ${titleIconSize?.Tablet !== undefined ? `
+                    width: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet}; 
+                    height: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
+                ${titleFontSize?.Tablet !== undefined 
+                    ? `font-size: ${titleFontSize.Tablet}${titleFontSizeUnits.Tablet};` 
+                    : ''}
+                ${titleLetterSpacing?.Tablet !== undefined 
+                    ? `letter-spacing: ${titleLetterSpacing.Tablet}${titleLetterSpacingUnits.Tablet};` 
+                    : ''}
+                ${titleLineHeight?.Tablet !== undefined 
+                    ? `line-height: ${titleLineHeight.Tablet}${titleLineHeightUnits.Tablet};` 
+                    : ''}
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
+                ${accordionItemGap?.Tablet !== undefined 
+                    ? `gap: ${accordionItemGap.Tablet}${accordionItemGapUnits.Tablet};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper {
+                ${titleSpacing?.Tablet !== undefined 
+                    ? `gap: ${titleSpacing.Tablet}${titleSpacingUnits.Tablet};` 
+                    : ''}
+                ${accordionItemsTabPadding !== undefined 
+                    ? `padding: ${accordionItemsPaddingTabletWidth};` 
+                    : ''}
+                ${accordionItemsTabBorderWidth !== undefined 
+                    ? `border-width: ${accordionItemsBorderTabletWidth};` 
+                    : ''}
+                ${accordionItemsTabBorderRadiusWidth !== undefined 
+                    ? `border-radius: ${accordionItemsBorderRadiusTabletWidth};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
+                ${prefixSuffixSpacing?.Tablet !== undefined 
+                    ? `gap: ${prefixSuffixSpacing.Tablet}${prefixSuffixSpacingUnits.Tablet};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+                ${titlePrefixIconSize?.Tablet !== undefined 
+                    ? `width: ${titlePrefixIconSize.Tablet}${titlePrefixIconSizeUnits.Tablet}; height: ${titlePrefixIconSize.Tablet}${titlePrefixIconSizeUnits.Tablet};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+                ${titleSuffixIconSize?.Tablet !== undefined 
+                    ? `width: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet}; height: ${titleSuffixIconSize.Tablet}${titleSuffixIconSizeUnits.Tablet};` 
+                    : ''}
+            }
+            
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+                ${contentTabBorderWidth !== undefined ? `border-width: ${contentBorderTabletWidth};` : ''}
+                ${contentTabBorderRadiusWidth !== undefined ? `border-radius: ${contentBorderRadiusTabletWidth};` : ''}
+            }
+        }
+      
+        @media only screen and (max-width: 767px) {
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+                ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
+                ${accordionMobilePadding !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
+                ${accordionMobileMargin !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}
+                ${accordionMobileBorderRadiusWidth !== undefined ? `border-radius: ${accordionBorderRadiusMobileWidth};` : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
+                ${titleIconSize?.Mobile !== undefined 
+                    ? `width: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile}; height: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
+                ${titleFontSize?.Mobile !== undefined 
+                    ? `font-size: ${titleFontSize.Mobile}${titleFontSizeUnits.Mobile};` 
+                    : ''}
+                ${titleLetterSpacing?.Mobile !== undefined 
+                    ? `letter-spacing: ${titleLetterSpacing.Mobile}${titleLetterSpacingUnits.Mobile};` 
+                    : ''}
+                ${titleLineHeight?.Mobile !== undefined 
+                    ? `line-height: ${titleLineHeight.Mobile}${titleLineHeightUnits.Mobile};` 
+                    : ''}
+            }
+
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-inner .block-editor-block-list__layout {
+                ${accordionItemGap?.Mobile !== undefined 
+                    ? `gap: ${accordionItemGap.Mobile}${accordionItemGapUnits.Mobile};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper {
+                ${titleSpacing?.Mobile !== undefined 
+                    ? `gap: ${titleSpacing.Mobile}${titleSpacingUnits.Mobile};` 
+                    : ''}
+                ${accordionItemsPaddingMobileWidth !== undefined 
+                    ? `padding: ${accordionItemsPaddingMobileWidth};` 
+                    : ''}
+                ${accordionItemsMobileBorderWidth !== undefined 
+                    ? `border-width: ${accordionItemsBorderMobileWidth};` 
+                    : ''}
+                ${accordionItemsMobileBorderRadiusWidth !== undefined 
+                    ? `border-radius: ${accordionItemsBorderRadiusMobileWidth};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner {
+                ${prefixSuffixSpacing?.Mobile !== undefined 
+                    ? `gap: ${prefixSuffixSpacing.Mobile}${prefixSuffixSpacingUnits.Mobile};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-prefix {
+                ${titlePrefixIconSize?.Mobile !== undefined 
+                    ? `width: ${titlePrefixIconSize.Mobile}${titlePrefixIconSizeUnits.Mobile}; height: ${titlePrefixIconSize.Mobile}${titlePrefixIconSizeUnits.Mobile};` 
+                    : ''}
+            }
+
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-title-inner .fb-accordion-title-suffix {
+                ${titleSuffixIconSize?.Mobile !== undefined 
+                    ? `width: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile}; height: ${titleSuffixIconSize.Mobile}${titleSuffixIconSizeUnits.Mobile};` 
+                    : ''}
+            }
+            
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-wrapper {
+                ${contentMobileBorderWidth !== undefined ? `border-width: ${contentBorderMobileWidth};` : ''}
+                ${contentMobileBorderRadiusWidth !== undefined ? `border-radius: ${contentBorderRadiusMobileWidth};` : ''}
+            }
+        }
+
+        `;
+        return styles.replace(/\s+/g, ' ').trim();
+      }, [
+        blockID,
+        blockStyle,
+        deviceType,
+        
+        accordionType,
+        displayIcon,
+        tabIcon,
+        expandedIcon,
+        tagName,
+        faqSchema,
+
+        titleFontFamily,
+        titleFontSize,
+        titleFontSizeUnits,
+        titleFontWeight,
+        titleFontStyle,
+        titleTextTransform,
+        titleTextDecoration,
+        titleLetterSpacing,
+        titleLetterSpacingUnits,
+        titleLineHeight,
+        titleLineHeightUnits,
+
+        iconPosition,
+        titleAlignment,
+
+        titleColor,
+        titleHoverColor,
+
+        accordionItemGap,
+        accordionItemGapUnits,
+
+        titleSpacing,
+        titleSpacingUnits,
+
+        prefixSuffixSpacing,
+        prefixSuffixSpacingUnits,
+
+        titleIconSize,
+        titleIconSizeUnits,
+
+        titlePrefixIconSize,
+        titlePrefixIconSizeUnits,
+        
+        titleSuffixIconSize,
+        titleSuffixIconSizeUnits,
+
+        titleBGColor,
+        titleBGHoverColor,
+
+        titleIconColor,
+        titleIconHoverColor,
+
+        // Accordion Items
+        accordionItemsPaddingUnits,
+        accordionItemsDesktopPadding,
+        accordionItemsTabPadding,
+        accordionItemsMobilePadding,
+
+        accordionItemsBorder,
+        accordionItemsBorderColor,
+        accordionItemsBorderHoverColor,
+        
+        accordionItemsBorderUnits,
+        accordionItemsDesktopBorderWidth,
+        accordionItemsTabBorderWidth,
+        accordionItemsMobileBorderWidth,
+
+        accordionItemsBorderRadiusUnits,
+        accordionItemsDesktopBorderRadiusWidth,
+        accordionItemsTabBorderRadiusWidth,
+        accordionItemsMobileBorderRadiusWidth,
+
+        // Accordion Advance
+        accordionZIndex,
+        accordionPaddingUnits,
+        accordionDesktopPadding,
+        accordionTabPadding,
+        accordionMobilePadding,
+
+        accordionMarginUnits,
+        accordionDesktopMargin,
+        accordionTabMargin,
+        accordionMobileMargin,
+
+        accordionBorder,
+        accordionBorderColor,
+        accordionBorderHoverColor,
+
+        accordionBorderUnits,
+        accordionDesktopBorderWidth,
+        accordionTabBorderWidth,
+        accordionMobileBorderWidth,
+
+        accordionBorderRadiusUnits,
+        accordionDesktopBorderRadiusWidth,
+        accordionTabBorderRadiusWidth,
+        accordionMobileBorderRadiusWidth,
+
+        accordionDesktopSwitcher,
+        accordionTabletSwitcher,
+        accordionMobileSwitcher,
+
+        // Boxshadow
+        accordionGlobalBoxShadowSwitcher,
+        accordionGlobalBoxShadowValues,
+        accordionGlobalBoxShadowCssValue,
+        accordionGlobalHoverBoxShadowValues,
+        accordionGlobalHoverBoxShadowCssValue,
+
+        // Backgorund
+        accordionBgColorSwitcher,
+        accordionBgType,
+        accordionBgClassicColor,
+        accordionBgGradientColor,
+        accordionBgCustomGradientSwitcher,
+        accordionBgCustomGradientInputValue,
+        accordionBgImageUrl,
+        accordionBgImageAlt,
+        accordionBgImageID,
+        accordionBgImagePosition,
+        accordionBgImageAttachment,
+        accordionBgImageRepeat,
+        accordionBgImageSize,
+        accordionBgHoverType,
+        accordionBgHoverClassicColor,
+        accordionBgHoverGradientColor,
+        accordionBgHoverCustomGradientSwitcher,
+        accordionBgHoverCustomGradientInputValue,
+        accordionBgHoverImageUrl,
+        accordionBgHoverImageAlt,
+        accordionBgHoverImageID,
+        accordionBgHoverImagePosition,
+        accordionBgHoverImageAttachment,
+        accordionBgHoverImageRepeat,
+        accordionBgHoverImageSize,
+
+        // Item Box Shadow
+        accordionItemBoxShadowSwitcher,
+        accordionItemBoxShadowValues,
+        accordionItemBoxShadowCssValue,
+        accordionItemHoverBoxShadowValues,
+        accordionItemHoverBoxShadowCssValue,
+
+        // Item Backgorund
+        titleBgColorSwitcher,
+        titleBgType,
+        titleBgClassicColor,
+        titleBgGradientColor,
+        titleBgCustomGradientSwitcher,
+        titleBgCustomGradientInputValue,
+        titleBgImageUrl,
+        titleBgImageAlt,
+        titleBgImageID,
+        titleBgImagePosition,
+        titleBgImageAttachment,
+        titleBgImageRepeat,
+        titleBgImageSize,
+        titleBgHoverType,
+        titleBgHoverClassicColor,
+        titleBgHoverGradientColor,
+        titleBgHoverCustomGradientSwitcher,
+        titleBgHoverCustomGradientInputValue,
+        titleBgHoverImageUrl,
+        titleBgHoverImageAlt,
+        titleBgHoverImageID,
+        titleBgHoverImagePosition,
+        titleBgHoverImageAttachment,
+        titleBgHoverImageRepeat,
+        titleBgHoverImageSize,
+
+        // Accordion Item Content
+        contentBorder,
+        contentBorderColor,
+        contentBorderHoverColor,
+        contentBorderColorSwitcher,
+        contentBorderUnits,
+        contentDesktopBorderWidth,
+        contentTabBorderWidth,
+        contentMobileBorderWidth,
+        contentBorderLink,
+        contentBorderRadiusUnits,
+        contentDesktopBorderRadiusWidth,
+        contentTabBorderRadiusWidth,
+        contentMobileBorderRadiusWidth,
+        contentBorderRadiusLink,
+        contentDesktopSwitcher,
+        contentTabletSwitcher,
+        contentMobileSwitcher,
+
+        // Item Box Shadow
+        contentBoxShadowSwitcher,
+        contentBoxShadowValues,
+        contentBoxShadowCssValue,
+        contentHoverBoxShadowValues,
+        contentHoverBoxShadowCssValue,
+
+        // Item Backgorund
+        contentBgColorSwitcher,
+        contentBgType,
+        contentBgClassicColor,
+        contentBgGradientColor,
+        contentBgCustomGradientSwitcher,
+        contentBgCustomGradientInputValue,
+        contentBgImageUrl,
+        contentBgImageAlt,
+        contentBgImageID,
+        contentBgImagePosition,
+        contentBgImageAttachment,
+        contentBgImageRepeat,
+        contentBgImageSize,
+        contentBgHoverType,
+        contentBgHoverClassicColor,
+        contentBgHoverGradientColor,
+        contentBgHoverCustomGradientSwitcher,
+        contentBgHoverCustomGradientInputValue,
+        contentBgHoverImageUrl,
+        contentBgHoverImageAlt,
+        contentBgHoverImageID,
+        contentBgHoverImagePosition,
+        contentBgHoverImageAttachment,
+        contentBgHoverImageRepeat,
+        contentBgHoverImageSize,
+      ]);
+      
+      useEffect(() => {
+        setAttributes({
+          blockStyle: fbaccordionItemstyle.replace(/\s+/g, ' ').trim(),
+        });
+      }, [fbaccordionItemstyle]);
+
+      const editorStyle = fbaccordionItemstyle.replace(/\s+/g, ' ').trim();
+      
+
     
 
     return (
         <>
-
-            {/* <style>
-            {`
-                .fb-accordion-main-wrapper.${blockID} {
-                    z-index: ${accordionIconZIndex !== undefined ? accordionIconZIndex : ''};
-                }
-                .fb-accordion-wrapper {
-                    ${accordionGlobalBgColor !== undefined ? `background-color: ${accordionGlobalBgColor};` : ''};
-                    padding: ${DesktopPadding};
-                    margin: ${DesktopMargin};
-                    border: ${accordionBorder};
-                    border-width: ${BorderDesktopWidth};
-                    border-radius: ${BorderRadiusDesktopWidth} !important;
-                    ${accordionBorderColor !== undefined ? `border-color: ${accordionBorderColor};` : ''};
-                    transition: all .3s ease-in-out;
-                }
-                .fb-accordion-wrapper:hover {
-                    ${accordionGlobalBgHoverColor !== undefined ? `background-color: ${accordionGlobalBgHoverColor};` : ''};
-                    ${accordionBorderHoverColor !== undefined ? `border-color: ${accordionBorderHoverColor};` : ''};
-                }
-                .fb-accordions {
-                    column-gap: ${accordionIconGapSize.Desktop}${accordionIconGapUnits.Desktop};
-                    justify-content: ${accordionAlignment};
-                }
-                .fb-accordion-list-item a {
-                    width: ${accordionIconSize.Desktop}${accordionIconSizeUnits.Desktop};
-                    height: ${accordionIconSize.Desktop}${accordionIconSizeUnits.Desktop};
-                    padding: ${IconPaddingDesktop};
-                    background-color: ${accordionBgColor};
-                    border: ${accordionIconBorder};
-                    border-width: ${IconBorderDesktopWidth};
-                    border-radius: ${IconBorderRadiusDesktopWidth} !important;
-                    ${accordionIconBorderColor !== undefined ? `border-color: ${accordionIconBorderColor};` : ''};
-                }
-                .fb-accordion-list-item a:hover {
-                    background-color: ${accordionBgHoverColor};
-                    ${accordionIconBorderHoverColor !== undefined ? `border-color: ${accordionIconBorderHoverColor};` : ''};
-                }
-                .fb-accordion-list-item a svg{
-                    fill: ${accordionIconColor};
-                }
-                .fb-accordion-list-item a:hover svg{
-                    fill: ${accordionIconHoverColor};
-                }
-
-                @media only screen and (max-width: 1024px) {
-
-                    .fb-accordion-wrapper {
-                        padding: ${TabletPadding};
-                        margin: ${TabletMargin};
-                        border-width: ${BorderTabletWidth};
-                        border-radius: ${BorderRadiusTabletWidth} !important;
-                    }
-                    .fb-accordions {
-                        column-gap: ${accordionIconGapSize.Tablet}${accordionIconGapUnits.Tablet};
-                    }
-                    .fb-accordion-list-item a {
-                        width: ${accordionIconSize.Tablet}${accordionIconSizeUnits.Tablet};
-                        height: ${accordionIconSize.Tablet}${accordionIconSizeUnits.Tablet};
-                        padding: ${IconPaddingTablet};
-                        border-width: ${IconBorderTabletWidth};
-                        border-radius: ${IconBorderRadiusTabletWidth} !important;
-                    }
-                }
-
-                @media only screen and (max-width: 767px) {
-                    .fb-accordion-wrapper {
-                        padding: ${MobilePadding};
-                        margin: ${MobileMargin};
-                        border-width: ${BorderMobileWidth};
-                        border-radius: ${BorderRadiusMobileWidth} !important;
-                    }
-                    .fb-accordions {
-                        column-gap: ${accordionIconGapSize.Mobile}${accordionIconGapUnits.Mobile};
-                    }
-                    .fb-accordion-list-item a {
-                        width: ${accordionIconSize.Mobile}${accordionIconSizeUnits.Mobile};
-                        height: ${accordionIconSize.Mobile}${accordionIconSizeUnits.Mobile};
-                        padding: ${IconPaddingMobile};
-                        border-width: ${IconBorderMobileWidth};
-                        border-radius: ${IconBorderRadiusMobileWidth} !important;
-                    }
-                }
-
+            <style>
+			{`
+				${editorStyle}
             `}
-            </style> */}
+			</style>
+
+
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -1252,31 +1796,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                 <>
                                    <PanelBody initialOpen={true}>
-                                       <BaseControl
-                                           label={__(
-                                               "Accordion Items Title Tag",
-                                               "frontis-blocks"
-                                           )}
-                                           className="fb-setting-text-alignment"
-                                        >
-                                           <div className="fb-setting-switcher-container">
-                                                <BaseControl
-                                                    className="fb-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                                        {HEADING.map((item, key) => (
-                                                            <Button
-                                                                key={key}
-                                                                onClick={() => setAttributes({ tagName: item.value })} 
-                                                                className={`fb-setting-switcher-panel-btn-switcher ${tagName === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
-                                       </BaseControl>
+                                       <FB_HtmlTagControl
+                                            label={__("Accordion Items Title Tag", "frontis-blocks")}
+                                            globalHtmlTag={tagName}
+                                            setGlobalHtmlTag={(value) => setAttributes({ tagName: value })}
+                                        />
+
                                        <FB_Range
                                             min={1}
                                             max={100}
@@ -1341,7 +1866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             />
                                                         }
                                                         { tabIconSwitcher === 'image' &&
-                                                            <FB_ImageControl
+                                                            <FB_BackgroundImageControl
                                                                 globalBackgroundImageUrl={tabImageUrl}
                                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ tabImageUrl: value })}
                                                                 globalBackgroundImageAlt={tabImageAlt}
@@ -1387,7 +1912,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             />
                                                         }
                                                         { expandedIconSwitcher === 'image' &&
-                                                            <FB_ImageControl 
+                                                            <FB_BackgroundImageControl 
                                                                 globalBackgroundImageUrl={expandedImageUrl}
                                                                 setGlobalBackgroundImageUrl={(value) => setAttributes({ expandedImageUrl: value })}
                                                                 globalBackgroundImageAlt={expandedImageAlt}
@@ -1425,62 +1950,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             "Icon Position",
                                                             "frontis-blocks"
                                                         )}
+                                                        id="fb-setting-text-alignment"
                                                         className="fb-setting-text-alignment"
                                                     >
-                                                        <ButtonGroup id="fb-icon-pos-btgrp" className="fb-setting-text-alignment-group-btn">
-                                                            {ICON_POSITIONS.map(
-                                                                (item, key) => (
-                                                                    <Button
-                                                                        className="fb-setting-text-alignment-single-btn"
-                                                                        key={key}
-                                                                        // isLarge
-                                                                        isSecondary={
-                                                                            iconPosition !==
-                                                                            item.value
-                                                                        }
-                                                                        isPrimary={
-                                                                            iconPosition ===
-                                                                            item.value
-                                                                        }
-                                                                        onClick={() =>
-                                                                            setAttributes(
-                                                                                {
-                                                                                    iconPosition:
-                                                                                        item.value,
-                                                                                }
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                )
-                                                            )}
+                                                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
+                                                            {ICON_POSITIONS.map((item) => (
+                                                                <Button
+                                                                    key={item.value}
+                                                                    onClick={() => setAttributes({ iconPosition: item.value })}
+                                                                    className={`fb-setting-text-alignment-single-btn ${iconPosition === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
                                                         </ButtonGroup>
                                                     </BaseControl>
 
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Spacing", "frontis-blocks")}
-                                                        rangeValue={titleSpacing}
-                                                        onChangeHandler={titleSpacingHandler}
-                                                        rangeUnitHandler={titleSpacingUnitsHandler}
-                                                        deviceType={deviceType}
-                                                        units={titleSpacingUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={20}
-                                                    />
-                    
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Icon Color", "frontis-blocks")}
-                                                        globalColorSwitcher={titleIconColorSwitcher}
-                                                        globalColor={titleIconColor}
-                                                        globalHoverColor={titleIconHoverColor}
-                                                        handleColorSwitcherChange={handleTitleIconColorSwitcherChange}
-                                                        handleGlobalColorChange={handleTitleIconColorChange}
-                                                        handleGlobalHoverColorChange={handleTitleIconHoverColorChange}
+                                                        globalSwitcher={titleIconColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ titleIconColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {titleIconColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={titleIconColor}
+                                                            setGlobalColor={(value) => setAttributes({ titleIconColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {titleIconColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={titleIconHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ titleIconHoverColor: value })}
+                                                        />
+                                                    )}
                                                 </>
                                             )}
                                         </PanelBody>
@@ -1494,38 +2000,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     "Title Align ",
                                                     "frontis-blocks"
                                                 )}
+                                                id="fb-setting-text-alignment"
                                                 className="fb-setting-text-alignment"
                                             >
                                                 <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                                                    {TITLE_ALIGNMENT.map(
-                                                        (item, key) => (
-                                                            <Button
-                                                                className="fb-setting-text-alignment-single-btn"
-                                                                key={key}
-                                                                isSecondary={
-                                                                    titleAlignment !==
-                                                                    item.value
-                                                                }
-                                                                isPrimary={
-                                                                    titleAlignment ===
-                                                                    item.value
-                                                                }
-                                                                onClick={() =>
-                                                                    setAttributes({
-                                                                        titleAlignment:
-                                                                            item.value,
-                                                                    })
-                                                                }
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        )
-                                                    )}
+                                                    {TITLE_ALIGNMENT.map((item) => (
+                                                        <Button
+                                                            key={item.value}
+                                                            onClick={() => setAttributes({ titleAlignment: item.value })}
+                                                            className={`fb-setting-text-alignment-single-btn ${titleAlignment === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
                                                 </ButtonGroup>
                                             </BaseControl>
+
+                                            {titleAlignment !== 'between' && <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Spacing", "frontis-blocks")}
+                                                rangeValue={titleSpacing}
+                                                onChangeHandler={titleSpacingHandler}
+                                                rangeUnitHandler={titleSpacingUnitsHandler}
+                                                deviceType={deviceType}
+                                                units={titleSpacingUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={20}
+                                            />}
                     
-                                                <FB_TypographyControl
-                                                    fontFamily={titleFontFamily}
+                                            <FB_TypographyControl
+                                                fontFamily={titleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value })}
                                                     
                                                     fontSize={titleFontSize}
@@ -1559,17 +2065,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
                                                     
                                                     deviceType={deviceType}
-                                                    setAttributes={setAttributes}
-                                                />
-                                            <FB_Color
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalColorSwitcher={titleColorSwitcher}
-                                                globalColor={titleColor}
-                                                globalHoverColor={titleHoverColor}
-                                                handleColorSwitcherChange={handleTitleColorSwitcherChange}
-                                                handleGlobalColorChange={handleTitleColorChange}
-                                                handleGlobalHoverColorChange={handleTitleHoverColorChange}
+                                                setAttributes={setAttributes}
                                             />
+
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={titleColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
+                                            />
+                                            
+                                            {titleColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={titleColor}
+                                                    setGlobalColor={(value) => setAttributes({ titleColor: value })}
+                                                />
+                                            )}
+                                            
+                                            {titleColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={titleHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ titleHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_BackgroundColorControl
                                                 label={__("Background Color", "frontis-blocks")}
@@ -1646,7 +2165,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ titleBgImageSize: value })
 														}
 														hoverBackgroundType={titleBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType ={(value) =>
 															setAttributes({ titleBgHoverType: value })
 														}
 														hoverClassicColor={titleBgHoverClassicColor}
@@ -1792,7 +2311,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody
                                             title={__(
-                                                "Items Title Border & Radius",
+                                                "Titles Border & Radius",
                                                 "frontis-blocks"
                                             )}
                                             initialOpen={false}
@@ -1804,18 +2323,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ accordionItemsBorder: value })}
                                                     />
         
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={accordionItemsBorderColorSwitcher}
-                                                        globalColor={accordionItemsBorderColor}
-                                                        globalHoverColor={accordionItemsBorderHoverColor}
-                                                        handleColorSwitcherChange={accordionItemsBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={accordionItemsBorderColorChange}
-                                                        handleGlobalHoverColorChange={accordionItemsBorderHoverColorChange}
+                                                        globalSwitcher={accordionItemsBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionItemsBorderColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {accordionItemsBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={accordionItemsBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionItemsBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={accordionItemsBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderHoverColor: value })}
+                                                        />
+                                                    )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderUnitsHandler}
                                                         spacingUnits={accordionItemsBorderUnits}
@@ -1829,7 +2360,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionItemsBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionItemsBorderRadiusUnits}
@@ -1842,17 +2373,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes={setAttributes}
                                                     />
 
-                                                    <FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ accordionItemBoxShadowValues: value })
-														}
-														initialShadowValue={accordionItemBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																accordionItemBoxShadowCssValue: value,
-															})
-														}
-													/>
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={accordionItemBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionItemBoxShadowSwitcher: value })}
+                                                    />
+                                                    
+                                                    {accordionItemBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionItemBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionItemBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionItemBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionItemBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionItemHoverBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionItemHoverBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionItemHoverBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
                                         </PanelBody>
 
                                         <PanelBody title="Item Content" initialOpen={false} >
@@ -1930,7 +2485,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ contentBgImageSize: value })
 														}
 														hoverBackgroundType={contentBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ contentBgHoverType: value })
 														}
 														hoverClassicColor={contentBgHoverClassicColor}
@@ -2006,18 +2561,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ contentBorder: value })}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={contentBorderColorSwitcher}
-                                                globalColor={contentBorderColor}
-                                                globalHoverColor={contentBorderHoverColor}
-                                                handleColorSwitcherChange={contentBorderColorSwitcherChange}
-                                                handleGlobalColorChange={contentBorderColorChange}
-                                                handleGlobalHoverColorChange={contentBorderHoverColorChange}
+                                                globalSwitcher={contentBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ contentBorderColorSwitcher: value })}
                                             />
+                                            
+                                            {contentBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={contentBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ contentBorderColor: value })}
+                                                />
+                                            )}
+                                            
+                                            {contentBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={contentBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ contentBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing
-                                                label={__("Border Width", "frontis-blocks")}
+                                                label={__("Border", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderUnitsHandler}
                                                 spacingUnits={contentBorderUnits}
@@ -2031,7 +2598,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
                                             <FB_Spacing 
-                                                label={__("Border Radius Width", "frontis-blocks")}
+                                                label={__("Border Radius", "frontis-blocks")}
                                                 deviceType={deviceType}
                                                 spacingUnitsHandler={handleContentBorderRadiusUnitsHandler}
                                                 spacingUnits={contentBorderRadiusUnits}
@@ -2044,17 +2611,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 
-                                            <FB_BoxShadowControl
-												onBoxShadowChange={(value) =>
-													setAttributes({ contentBoxShadowValues: value })
-												}
-												initialShadowValue={contentBoxShadowValues}
-												onBoxShadowStyleChange={(value) =>
-													setAttributes({
-														contentBoxShadowCssValue: value,
-													})
-												}
-											/>
+                                            <FB_SwitcherControl
+                                                label={__("Box Shadow", "frontis-blocks")}
+                                                globalSwitcher={contentBoxShadowSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ contentBoxShadowSwitcher: value })}
+                                            />
+                                            
+                                            {contentBoxShadowSwitcher === 'normal' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Normal Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) =>
+                                                        setAttributes({ contentBoxShadowValues: value })
+                                                    }
+                                                    initialShadowValue={contentBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) =>
+                                                        setAttributes({
+                                                            contentBoxShadowCssValue: value,
+                                                        })
+                                                    }
+                                                />
+                                            )}
+                                            
+                                            {contentBoxShadowSwitcher === 'hover' && (
+                                                <FB_BoxShadowControl
+                                                    label={__("Hover Shadow", "frontis-blocks")}
+                                                    onBoxShadowChange={(value) =>
+                                                        setAttributes({ contentHoverBoxShadowValues: value })
+                                                    }
+                                                    initialShadowValue={contentHoverBoxShadowValues}
+                                                    onBoxShadowStyleChange={(value) =>
+                                                        setAttributes({
+                                                            contentHoverBoxShadowCssValue: value,
+                                                        })
+                                                    }
+                                                />
+                                            )}
                                         </PanelBody>
                                     </>
                                 )}
@@ -2068,14 +2659,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={accordionZIndex}
-                                                        onChange={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
-                                                        max={100}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={undefined}
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={accordionZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ accordionZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
         
@@ -2177,7 +2772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ accordionBgImageSize: value })
 														}
 														hoverBackgroundType={accordionBgHoverType}
-														setBgHoverType={(value) =>
+														setHoverBackgroundType={(value) =>
 															setAttributes({ accordionBgHoverType: value })
 														}
 														hoverClassicColor={accordionBgHoverClassicColor}
@@ -2238,7 +2833,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
         
                                                 <PanelBody
-                                                    title={__("Border & Border radius", "frontis-blocks")}
+                                                    title={__("Border & Border Radius", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-border-setting-wrapper"
                                                     >
@@ -2249,18 +2844,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ accordionBorder: value })}
                                                         />
         
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={accordionBorderColorSwitcher}
-                                                        globalColor={accordionBorderColor}
-                                                        globalHoverColor={accordionBorderHoverColor}
-                                                        handleColorSwitcherChange={accordionBorderColorSwitcherChange}
-                                                        handleGlobalColorChange={accordionBorderColorChange}
-                                                        handleGlobalHoverColorChange={accordionBorderHoverColorChange}
+                                                        globalSwitcher={accordionBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionBorderColorSwitcher: value })}
                                                     />
+                                                    
+                                                    {accordionBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={accordionBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionBorderColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={accordionBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ accordionBorderHoverColor: value })}
+                                                        />
+                                                    )}
         
                                                     <FB_Spacing 
-                                                        label={__("Border Width", "frontis-blocks")}
+                                                        label={__("Border", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderUnitsHandler}
                                                         spacingUnits={accordionBorderUnits}
@@ -2274,7 +2881,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
         
                                                     <FB_Spacing 
-                                                        label={__("Border Radius Width", "frontis-blocks")}
+                                                        label={__("Border Radius", "frontis-blocks")}
                                                         deviceType={deviceType}
                                                         spacingUnitsHandler={handleAccordionBorderRadiusUnitsHandler}
                                                         spacingUnits={accordionBorderRadiusUnits}
@@ -2287,20 +2894,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setAttributes={setAttributes}
                                                     />
 
-                                                    <FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ accordionGlobalBoxShadowValues: value })
-														}
-														initialShadowValue={accordionGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																accordionGlobalBoxShadowCssValue: value,
-															})
-														}
-													/>
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={accordionGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ accordionGlobalBoxShadowSwitcher: value })}
+                                                    />
+                                                    
+                                                    {accordionGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionGlobalBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionGlobalBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                    
+                                                    {accordionGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ accordionGlobalHoverBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={accordionGlobalHoverBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    accordionGlobalHoverBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
                                                 </PanelBody>
         
-                                                <PanelBody
+                                                {/* <PanelBody
                                                     title={__("Responsive Control", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-responsive-control-wrapper"
@@ -2323,7 +2954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         checked={accordionMobileSwitcher}
                                                         onChange={(value) => setAttributes({ accordionMobileSwitcher: value })}
                                                     />
-                                                </PanelBody>
+                                                </PanelBody> */}
         
                                             </div>
                                         </div>

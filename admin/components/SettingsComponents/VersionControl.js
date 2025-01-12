@@ -116,7 +116,6 @@ const VersionControl = () => {
 
   const handleRollback = () => {
     // I will Add rollback logic here
-    console.log('Rollback triggered for version:', options.selected_version);
     saveOption('selected_version', options.selected_version);
   };
 
@@ -134,7 +133,7 @@ const VersionControl = () => {
           <h3>{__('Rollback To Previous Version', 'frontis-blocks')}</h3>
           <p>{__('Select a version to rollback to', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input fb-option-input-rollback">
+        {/* <div className="fb-option-input fb-option-input-rollback">
           <SelectControl
             value={options.selected_version}
             options={versions}
@@ -142,12 +141,16 @@ const VersionControl = () => {
           />
           <Button
             isPrimary
+            className="fb-button-primary"
             onClick={handleRollback}
             disabled={!options.selected_version}
           >
             {__('Rollback', 'frontis-blocks')}
           </Button>
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
 
       <div className="fb-option">
@@ -155,12 +158,15 @@ const VersionControl = () => {
           <h3>{__('Enable Beta', 'frontis-blocks')}</h3>
           <p>{__('Enable beta features', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.enable_beta}
             onChange={() => handleSwitchChange('enable_beta')}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
 
       <div className="fb-option">
@@ -168,12 +174,15 @@ const VersionControl = () => {
           <h3>{__('Enable Legacy Block', 'frontis-blocks')}</h3>
           <p>{__('Enable support for legacy blocks', 'frontis-blocks')}</p>
         </div>
-        <div className="fb-option-input">
+        {/* <div className="fb-option-input">
           <Switch
             checked={options.enable_legacy_block}
             onChange={() => handleSwitchChange('enable_legacy_block')}
           />
-        </div>
+        </div> */}
+        <p className="fb-button-upcoming">
+          {__('Coming Soon', 'frontis-blocks')}
+        </p>
       </div>
     </div>
   );

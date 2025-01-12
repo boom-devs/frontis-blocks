@@ -1,4 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
 	const { 
@@ -15,7 +16,6 @@ export default function save({ attributes }) {
 		orderBy,
 		sortOrder,
 		blockStyle,
-		deviceType,
 		selectedCatSwitcher,
 		selectedTagSwitcher,
 		selectedAuthorSwitcher,
@@ -35,6 +35,10 @@ export default function save({ attributes }) {
 		postAuthorAvatarSwitcher,
 		postSwitcher,
 		postImageSize,
+		loadMoreSwitcher,
+		loadMoreText,
+		loadMoreIcon,
+		loadMoreIconAlign,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -65,9 +69,18 @@ export default function save({ attributes }) {
 				data-post-author-prefix-switcher={postAuthorPrefixSwitcher}
 				data-post-author-prefix={postAuthorPrefix}
 				data-show-date-switcher={showDateSwitcher}
+				data-post-author-avatar-switcher={postAuthorAvatarSwitcher}
 				data-post-image-size={postImageSize}
+				data-show-load-more-switcher={loadMoreSwitcher}
+				data-load-more-text={loadMoreText}
+				data-load-more-icon={loadMoreIcon}
+				data-load-more-icon-align={loadMoreIconAlign}
 			>
-				<div className={`fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}></div>
+				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}>
+					<div className="load_more_button_icon">
+						{renderSVG(loadMoreIcon)}
+					</div>
+				</div>
 				<div className="loading post">
 					{placeholders.map((item) => (
 						<div key={item} className={`post-card skeleton skeleton-item ${blockId}`}>
@@ -77,7 +90,6 @@ export default function save({ attributes }) {
 						</div>
 					))}
 				</div>
-				<section id="pagination" className="pagination"></section>
 			</div>
 		</>
 	);

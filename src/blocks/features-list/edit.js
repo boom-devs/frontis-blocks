@@ -2,7 +2,8 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
-import { useEffect } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -20,6 +21,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-feature-main-wrapper ${blockID}`,
     });
 
+    console.log(FeatureItems);
+
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
     return (
         <>
             <Inspector
@@ -29,22 +38,34 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-feature-wrapper">
+                <div className="fb-parent-wrapper fb-feature-wrapper" ref={panelRef}>
                     <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
                                   
                                 <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
 
-                                    { item.FeatureIconAlign !== 'none' && (
+                                {item.FeatureIconAlign !== 'none' && (
                                         <div className="fb-feature-list-icon-box">
-                                            <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
-                                                <span className="fb-feature-list-icon">
-                                                    {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                </span>
-                                            </div>
+                                            {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
+                                                <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                    <span className="fb-feature-list-icon">
+                                                        {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                    </span>
+                                                </div>
+                                            ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
+                                                <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
+
+                                                    <img
+                                                        src={item.FeatureIconImageUrl}
+                                                        alt={item.FeatureIconImageAlt || 'Feature Image'}
+                                                        className="fb-feature-icon-image"
+                                                    />
+
+                                                </div>
+                                            ) : null}
                                         </div>
-                                    ) }
+                                    )}
                                     
                                     <div className="fb-feature-list-content">
                                         <RichText

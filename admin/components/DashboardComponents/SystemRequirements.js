@@ -36,7 +36,7 @@ const SystemRequirements = () => {
                 ))}
             </div>
             <div className="fb-system-requirements-note">
-                <p>{__('Note: The Frontis Block is a modern content creation tool designed for WordPress, offering a flexible and intuitive way to build web pages.', 'frontis-blocks')}</p>
+                <p><span>{__('Note: ', 'frontis-blocks')}</span>{__('The Frontis Block is a modern content creation tool designed for WordPress, offering a flexible and intuitive way to build web pages.', 'frontis-blocks')}</p>
             </div>
         </div>
     );

@@ -12,7 +12,12 @@ const attributes = {
         default: '',
     },
     videoGlobalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
     },
     videoURL: {
         type: "string",
@@ -365,12 +370,6 @@ const attributes = {
     },
     /** End Border */
 
-
-
-
-
-
-
     /** Start Global Style */
 
     videoGlobalPaddingUnits: {
@@ -557,11 +556,23 @@ const attributes = {
     },
 
     /** Start Box Shadow */
+    videoGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     videoGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     videoGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    videoGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    videoGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

@@ -26,18 +26,20 @@ import {
 	PRESETS,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
-import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         socialAlignment,
         socialItems,
 
@@ -175,8 +177,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBorderRadiusMobile,
         socialGlobalBorderRadiusLink,
 
+		socialGlobalBoxShadowSwitcher,
         socialGlobalBoxShadowValues,
         socialGlobalBoxShadowCssValue,
+		socialGlobalBoxShadowHoverValues,
+		socialGlobalBoxShadowHoverCssValue,
 
 
 		socialIconsPresetStyle,
@@ -186,7 +191,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 	
-
+    const deviceType= useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -2397,22 +2402,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Preset Style */
 
 
-	    /* set default values for the style attributes */
-		useEffect(() => {
-			if (socialTitleFontFamily) { 
-				const fontUrl = `https://fonts.googleapis.com/css?family=${socialTitleFontFamily.replace(' ', '+')}`;
-				const linkElement = document.createElement('link');
-				linkElement.rel = 'stylesheet';
-				linkElement.href = fontUrl;
-				document.head.appendChild(linkElement);
-			}
-		}, [socialTitleFontFamily]);
-
+	/** Start load font */
+	useEffect(() => {
+		loadGoogleFont(socialTitleFontFamily);
+	}, [socialTitleFontFamily]);
+	/** End load font */
 
 
 		const allBlockStyle = useMemo(() => `
 			.${blockID}.fb-social-wrapper {
-				${socialGlobalZIndex ? `z-index: ${socialGlobalZIndex};` : ''}
+				${socialGlobalZIndex.Desktop ? `z-index: ${socialGlobalZIndex.Desktop};` : ''}
 				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
 				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -2427,6 +2426,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-social-wrapper:hover {
 				${socialGlobalBgHoverColor ? `background-color: ${socialGlobalBgHoverColor};` : ''}
 				${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
+				${socialGlobalBoxShadowHoverCssValue  ? `box-shadow: ${socialGlobalBoxShadowHoverCssValue};` : ''}
 			}
 			.${blockID} .fb-socials {
 				grid-gap: ${socialGapSize.Desktop}${socialGapUnits.Desktop};
@@ -2485,6 +2485,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 1024px) {
 				.${blockID}.fb-social-wrapper {
+					${socialGlobalZIndex.Tablet ? `z-index: ${socialGlobalZIndex.Tablet};` : ''}
 					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
 					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -2521,6 +2522,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			@media only screen and (max-width: 767px) {
 				.${blockID}.fb-social-wrapper {
+					${socialGlobalZIndex.Mobile ? `z-index: ${socialGlobalZIndex.Mobile};` : ''}
 					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
 					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -2561,7 +2563,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalDesktopBorderWidth,
 			globalDesktopBorderRadiusWidth,
 			socialGlobalBorderColor,
+			socialGlobalBoxShadowSwitcher,
+			socialGlobalBoxShadowValues,
 			socialGlobalBoxShadowCssValue,
+			socialGlobalBoxShadowHoverValues,
+			socialGlobalBoxShadowHoverCssValue,
 			socialGlobalBgHoverColor,
 			socialGlobalBorderHoverColor,
 			socialGapSize,
@@ -2740,25 +2746,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={25}
                                             />
 
-                                            <FB_Color
-                                                label={__("Icon Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialIconGlobalColorSwitcher}
-                                                globalColor={socialIconGlobalColor}
-                                                globalHoverColor={socialIconGlobalHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconGlobalColorSwitcher: value })} 
-                                                handleGlobalColorChange={(value) => setAttributes({ socialIconGlobalColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconGlobalHoverColor: value })}
-                                            />
+											<FB_SwitcherControl
+													label={__("Icon Color", "frontis-blocks")}
+													globalSwitcher={socialIconGlobalColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconGlobalColorSwitcher: value })}
+											/>
 
-                                            <FB_Color
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialIconBgGlobalColorSwitcher}	
-                                                globalColor={socialIconBgGlobalColor}
-                                                globalHoverColor={socialIconBgGlobalHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconBgGlobalColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ socialIconBgGlobalColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBgGlobalHoverColor: value })}
-                                            />
+											{socialIconGlobalColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={socialIconGlobalColor}
+													setGlobalColor={(value) => setAttributes({ socialIconGlobalColor: value })}
+												/>
+											)}
+
+											{socialIconGlobalColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={socialIconGlobalHoverColor}
+													setGlobalColor={(value) => setAttributes({ socialIconGlobalHoverColor: value })}
+												/>
+											)}
+
+											<FB_SwitcherControl
+													label={__("Background Color", "frontis-blocks")}
+													globalSwitcher={socialIconBgGlobalColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconBgGlobalColorSwitcher: value })}
+											/>
+
+											{socialIconBgGlobalColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={socialIconBgGlobalColor}
+													setGlobalColor={(value) => setAttributes({ socialIconBgGlobalColor: value })}
+												/>
+											)}
+
+											{socialIconBgGlobalColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={socialIconBgGlobalHoverColor}
+													setGlobalColor={(value) => setAttributes({ socialIconBgGlobalHoverColor: value })}
+												/>
+											)}
+
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
                                                 value={socialIconBorder}
@@ -2766,15 +2797,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ socialIconBorder: value })}
                                             />
 
-                                            <FB_Color
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialIconBorderColorSwitcher}
-                                                globalColor={socialIconBorderColor}
-                                                globalHoverColor={socialIconBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialIconBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ socialIconBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialIconBorderHoverColor: value })}
-                                            />
+											<FB_SwitcherControl
+													label={__("Border Color", "frontis-blocks")}
+													globalSwitcher={socialIconBorderColorSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ socialIconBorderColorSwitcher: value })}
+											/>
+
+											{socialIconBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={socialIconBorderColor}
+													setGlobalColor={(value) => setAttributes({ socialIconBorderColor: value })}
+												/>
+											)}
+
+											{socialIconBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={socialIconBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ socialIconBorderHoverColor: value })}
+												/>
+											)}
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -2862,15 +2905,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														deviceType={deviceType}
 														setAttributes={setAttributes}
 													/>
-													<FB_Color
-														label={__("Title Color", "frontis-blocks")}
-														globalColorSwitcher={socialTitleColorSwitcher}
-														globalColor={socialTitleColor}
-														globalHoverColor={socialTitleHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ socialTitleColorSwitcher: value })} 
-														handleGlobalColorChange={(value) => setAttributes({ socialTitleColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ socialTitleHoverColor: value })}
+
+													<FB_SwitcherControl
+															label={__("Title Color", "frontis-blocks")}
+															globalSwitcher={socialTitleColorSwitcher}
+															setGlobalSwitcher={(value) => setAttributes({ socialTitleColorSwitcher: value })}
 													/>
+
+													{socialTitleColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={socialTitleColor}
+															setGlobalColor={(value) => setAttributes({ socialTitleColor: value })}
+														/>
+													)}
+
+													{socialTitleColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={socialTitleHoverColor}
+															setGlobalColor={(value) => setAttributes({ socialTitleHoverColor: value })}
+														/>
+													)}
+
 													<FB_Spacing 
 														label={__("Padding", "frontis-blocks")}
 														deviceType={deviceType}
@@ -2889,16 +2946,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
 
-                                        <PanelBody title={__("Background", "frontis-blocks")} initialOpen={false}>
-                                            <FB_Color
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialBgColorSwitcher}
-                                                globalColor={socialBgColor}
-                                                globalHoverColor={socialBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ socialBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialBgHoverColor: value })}
-                                            />
+                                        <PanelBody 
+											title={__("Background", "frontis-blocks")}
+											initialOpen={false}
+										>
+
+											<FB_SwitcherControl
+												label={__("Background Color", "frontis-blocks")}
+												globalSwitcher={socialBgColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ socialBgColorSwitcher: value })}
+											/>
+
+											{socialBgColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={socialBgColor}
+													setGlobalColor={(value) => setAttributes({ socialBgColor: value })}
+												/>
+											)}
+
+											{socialBgColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={socialBgHoverColor}
+													setGlobalColor={(value) => setAttributes({ socialBgHoverColor: value })}
+												/>
+											)}
+
                                         </PanelBody>
                                         <PanelBody title={__("Border and Radius", "frontis-blocks")} initialOpen={false}>
                                             <SelectControl
@@ -2908,15 +2982,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ socialBorder: value })}
                                             />
 
-                                            <FB_Color
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={socialBorderColorSwitcher}
-                                                globalColor={socialBorderColor}
-                                                globalHoverColor={socialBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ socialBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ socialBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ socialBorderHoverColor: value })}
-                                            />
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={socialBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ socialBorderColorSwitcher: value })}
+											/>
+
+											{socialBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={socialBorderColor}
+													setGlobalColor={(value) => setAttributes({ socialBorderColor: value })}
+												/>
+											)}
+
+											{socialBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={socialBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ socialBorderHoverColor: value })}
+												/>
+											)}
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -2994,19 +3080,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
-													<RangeControl
-														value={socialGlobalZIndex}
-														onChange={(value) => setAttributes({ socialGlobalZIndex: value === 0 ? undefined : value })}
-														min={0}
-														max={10000000}
-														step={1}
-														allowReset
-														resetFallbackValue={''}
-													/>
+													<FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={socialGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ socialGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -3038,16 +3128,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 
-												<PanelBody title="Background Color" initialOpen={false} >
-													<FB_Color
+												<PanelBody 
+													title={__("Background Color", "frontis-blocks")} 
+													initialOpen={false} 
+												>
+													<FB_SwitcherControl
 														label={__("Background Color", "frontis-blocks")}
-														globalColorSwitcher={socialGlobalBgColorSwitcher}
-														globalColor={socialGlobalBgColor}
-														globalHoverColor={socialGlobalBgHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ socialGlobalBgColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ socialGlobalBgColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ socialGlobalBgHoverColor: value })}
+														globalSwitcher={socialGlobalBgColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ socialGlobalBgColorSwitcher: value })}
 													/>
+
+													{socialGlobalBgColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={socialGlobalBgColor}
+															setGlobalColor={(value) => setAttributes({ socialGlobalBgColor: value })}
+														/>
+													)}
+
+													{socialGlobalBgColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={socialGlobalBgHoverColor}
+															setGlobalColor={(value) => setAttributes({ socialGlobalBgHoverColor: value })}
+														/>
+													)}
 												</PanelBody>
 												<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
@@ -3058,15 +3163,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															onChange={(value) => setAttributes({ socialGlobalBorder: value })}
 													/>
 
-													<FB_Color
+													<FB_SwitcherControl
 														label={__("Border Color", "frontis-blocks")}
-														globalColorSwitcher={socialGlobalBorderColorSwitcher}
-														globalColor={socialGlobalBorderColor}
-														globalHoverColor={socialGlobalBorderHoverColor}
-														handleColorSwitcherChange={(value) => setAttributes({ socialGlobalBorderColorSwitcher: value })}
-														handleGlobalColorChange={(value) => setAttributes({ socialGlobalBorderColor: value })}
-														handleGlobalHoverColorChange={(value) => setAttributes({ socialGlobalBorderHoverColor: value })}
+														globalSwitcher={socialGlobalBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ socialGlobalBorderColorSwitcher: value })}
 													/>
+
+													{socialGlobalBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={socialGlobalBorderColor}
+															setGlobalColor={(value) => setAttributes({ socialGlobalBorderColor: value })}
+														/>
+													)}
+
+													{socialGlobalBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={socialGlobalBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ socialGlobalBorderHoverColor: value })}
+														/>
+													)}
 
 													<FB_Spacing 
 														label={__("Border", "frontis-blocks")}
@@ -3095,11 +3212,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 														setAttributes={setAttributes}
 													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowValues: value })}
-														initialShadowValue={socialGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowCssValue: value })}
+													<FB_SwitcherControl
+														label={__("Box Shadow", "frontis-blocks")}
+														globalSwitcher={socialGlobalBoxShadowSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ socialGlobalBoxShadowSwitcher: value })}
 													/>
+
+													{socialGlobalBoxShadowSwitcher === 'normal' && (
+														<FB_BoxShadowControl
+															label={__("Normal Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowValues: value })}
+															initialShadowValue={socialGlobalBoxShadowValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowCssValue: value })}
+														/>
+													)}
+
+													{socialGlobalBoxShadowSwitcher === 'hover' && (
+														<FB_BoxShadowControl
+															label={__("Hover Shadow", "frontis-blocks")}
+															onBoxShadowChange={(value) => setAttributes({ socialGlobalBoxShadowHoverValues: value })}
+															initialShadowValue={socialGlobalBoxShadowHoverValues}
+															onBoxShadowStyleChange={(value) => setAttributes({ socialGlobalBoxShadowHoverCssValue: value })}
+														/>
+													)}
+
 												</PanelBody>
 											</div>
 										</div>

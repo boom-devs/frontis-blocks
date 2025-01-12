@@ -124,12 +124,15 @@ const Performance = () => {
 					</p>
 				</div>
 
-				<div className="fb-option-input">
+				{/* <div className="fb-option-input">
 					<Switch
 						checked={options.google_fonts}
 						onChange={() => handleSwitchChange("google_fonts")}
 					/>
-				</div>
+				</div> */}
+				<p className="fb-button-upcoming">
+					{__('Coming Soon', 'frontis-blocks')}
+				</p>
 			</div>
 
 			<div className="fb-option">
@@ -142,12 +145,15 @@ const Performance = () => {
 						)}
 					</p>
 				</div>
-				<div className="fb-option-input">
+				{/* <div className="fb-option-input">
 					<Switch
 						checked={options.preload_local_fonts}
 						onChange={() => handleSwitchChange("preload_local_fonts")}
 					/>
-				</div>
+				</div> */}
+				<p className="fb-button-upcoming">
+					{__('Coming Soon', 'frontis-blocks')}
+				</p>
 			</div>
 
             {/* Allow Only Selected Fonts for later, its need to use select2 library */}

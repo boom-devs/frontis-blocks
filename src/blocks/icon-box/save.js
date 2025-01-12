@@ -5,20 +5,23 @@ import { __ } from "@wordpress/i18n";
 export default function save({ attributes }) {
 	const {
 		blockID,
-		wrapperAlignment,
 		Heading_Text,
-		Heading_Tag,
-		Alignment,
+		headingTag,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
-		descAlignment,
+
+		icon_Box_Button_Switcher,
+		icon_Box_Button_Text,
+		
 		icon,
 		mediaSwitcher,
+		
 		Sub_Heading_Tag,
-		infoIconPosition,
-		headingUrlSwitcher,
-		headingLink,
-		headingTargetUrl,
+		buttonIconSwitcher,
+		btnIcon,
+		iconBoxbtnTargetUrl,
+		iconBoxButtonLink,
+
 		wrapperLink,
 		wrapperTargetUrl,
 		wrapperUrlSwitcher,
@@ -37,37 +40,14 @@ export default function save({ attributes }) {
 						target={wrapperTargetUrl ? "_blank" : undefined}
 						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
 					>
-						<div className={`fb-icon-box-content-wrapper ${blockID}`}>
-							<div
-								className={`fb-icon-box-content-wrapper-inner ${blockID}`}
-								style={{
-									display: "flex",
-									flexDirection:
-										infoIconPosition === "left"
-											? "row"
-											: infoIconPosition === "right"
-											? "row-reverse"
-											: infoIconPosition === "top"
-											? "column"
-											: "column-reverse",
-								}}
-							>
-								<div
-									className="fb-icon-media-container"
-									style={{
-										justifyContent: wrapperAlignment,
-									}}
-								>
-									<div
-										className="fb-icon-media-wrapper"
-										style={{
-											textAlign: wrapperAlignment,
-										}}
-									>
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
+								<div className="fb-icon-media-container">
+									<div className="fb-icon-media-wrapper">
 										{mediaSwitcher === "image" && (
 											<img
-												src={attributes.infoMediaUrl}
-												alt={attributes.infoMediaAlt || ""}
+												src={attributes.iconBoxMediaUrl}
+												alt={attributes.iconBoxMediaAlt || ""}
 											/>
 										)}
 										{mediaSwitcher === "icon" && (
@@ -76,79 +56,60 @@ export default function save({ attributes }) {
 									</div>
 								</div>
 								<div className="fb-icon-box-content-wrapper">
-									{headingUrlSwitcher ? (
-										<a
-											href={headingLink}
-											target={headingTargetUrl ? "_blank" : undefined}
-											rel={headingTargetUrl ? "noopener noreferrer" : undefined}
-										>
-											<RichText.Content
-												tagName={Heading_Tag}
-												value={Heading_Text}
-												onChange={(value) =>
-													setAttributes({ Heading_Text: value })
-												}
-												placeholder={__("Icon Heading", "frontis-block")}
-												className="fb-heading"
-												style={{ textAlign: Alignment }}
-											/>
-										</a>
-									) : (
-										<RichText.Content
-											tagName={Heading_Tag}
-											value={Heading_Text}
-											onChange={(value) =>
-												setAttributes({ Heading_Text: value })
-											}
-											placeholder={__("Icon Heading", "frontis-block")}
-											className="fb-heading"
-											style={{ textAlign: Alignment }}
-										/>
-									)}
+									<RichText.Content
+										tagName={headingTag}
+										value={Heading_Text}
+										className="fb-heading"
+									/>
+
 									{Sub_Heading_Switcher && (
 										<RichText.Content
 											tagName={Sub_Heading_Tag}
 											value={Sub_Heading_Text}
 											className="fb-description"
-											style={{ textAlign: descAlignment }}
 										/>
+									)}
+
+									{icon_Box_Button_Switcher && (
+										<div className="fb-icon-button">
+										<div className="fb-icon-btn-container">
+											<a
+												href={iconBoxButtonLink} 
+												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
+												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
+												className="fb-icon-btn-wrapper"
+											>
+												
+
+
+													<RichText.Content
+														value={icon_Box_Button_Text}
+														tagName={"span"}
+														className="fb-icon-button"
+													/>
+												
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
+											</a>
+										</div>
+										</div>
 									)}
 								</div>
 							</div>
 						</div>
 					</a>
-				) : (
-						<div className={`fb-icon-box-content-wrapper ${blockID}`}>
-							<div
-								className={`fb-icon-box-content-wrapper-inner ${blockID}`}
-								style={{
-									display: "flex",
-									flexDirection:
-										infoIconPosition === "left"
-											? "row"
-											: infoIconPosition === "right"
-											? "row-reverse"
-											: infoIconPosition === "top"
-											? "column"
-											: "column-reverse",
-								}}
-							>
-								<div
-									className="fb-icon-media-container"
-									style={{
-										justifyContent: wrapperAlignment,
-									}}
-								>
-									<div
-										className="fb-icon-media-wrapper"
-										style={{
-											textAlign: wrapperAlignment,
-										}}
-									>
+					) : (
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
+								<div className="fb-icon-media-container">
+									<div className="fb-icon-media-wrapper">
 										{mediaSwitcher === "image" && (
 											<img
-												src={attributes.infoMediaUrl}
-												alt={attributes.infoMediaAlt || ""}
+												src={attributes.iconBoxMediaUrl}
+												alt={attributes.iconBoxMediaAlt || ""}
 											/>
 										)}
 										{mediaSwitcher === "icon" && (
@@ -157,42 +118,46 @@ export default function save({ attributes }) {
 									</div>
 								</div>
 								<div className="fb-icon-box-content-wrapper">
-									{headingUrlSwitcher ? (
-										<a
-											href={headingLink}
-											target={headingTargetUrl ? "_blank" : undefined}
-											rel={headingTargetUrl ? "noopener noreferrer" : undefined}
-										>
-											<RichText.Content
-												tagName={Heading_Tag}
-												value={Heading_Text}
-												onChange={(value) =>
-													setAttributes({ Heading_Text: value })
-												}
-												placeholder={__("Icon Heading", "frontis-block")}
-												className="fb-heading"
-												style={{ textAlign: Alignment }}
-											/>
-										</a>
-									) : (
-										<RichText.Content
-											tagName={Heading_Tag}
-											value={Heading_Text}
-											onChange={(value) =>
-												setAttributes({ Heading_Text: value })
-											}
-											placeholder={__("Icon Heading", "frontis-block")}
-											className="fb-heading"
-											style={{ textAlign: Alignment }}
-										/>
-									)}
+									<RichText.Content
+										tagName={headingTag}
+										value={Heading_Text}
+										className="fb-heading"
+									/>
+
 									{Sub_Heading_Switcher && (
 										<RichText.Content
 											tagName={Sub_Heading_Tag}
 											value={Sub_Heading_Text}
 											className="fb-description"
-											style={{ textAlign: descAlignment }}
 										/>
+									)}
+
+									{icon_Box_Button_Switcher && (
+										<div className="fb-icon-button">
+										<div className="fb-icon-btn-container">
+											<a
+												href={iconBoxButtonLink} 
+												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
+												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
+												className="fb-icon-btn-wrapper"
+											>
+												
+
+
+													<RichText.Content
+														value={icon_Box_Button_Text}
+														tagName={"span"}
+														className="fb-icon-button"
+													/>
+												
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
+											</a>
+										</div>
+										</div>
 									)}
 								</div>
 							</div>

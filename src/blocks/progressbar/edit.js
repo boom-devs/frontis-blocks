@@ -3,6 +3,8 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
 import Inspector from "./inspector";
 import './editor.scss';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -21,10 +23,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			outSideprogressBarRef.current.style.width = '0%';
 	
 			setTimeout(() => {
-				outSideprogressBarRef.current.style.width = `${progressNumber}%`;
+				if (outSideprogressBarRef.current) {
+					outSideprogressBarRef.current.style.width = `${progressNumber}%`;
 	
-				const percentageLabel = outSideprogressBarRef.current.querySelector('.progress-bar-number');
-				percentageLabel.style.left = `${progressNumber}%`;
+					const percentageLabel = outSideprogressBarRef.current.querySelector('.progress-bar-number');
+					if (percentageLabel) {
+						percentageLabel.style.left = `${progressNumber}%`;
+					}
+				}
 			}, 100);
 		}
 	}, [progressNumber, progressTextPosition]);
@@ -46,6 +52,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-progress-bar-main-wrapper ${blockID}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
     return (
         <>
             <Inspector
@@ -55,7 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-				<div className='progress-bar-wrapper'>
+				<div className='fb-parent-wrapper progress-bar-wrapper' ref={panelRef}>
 					{progressTextPosition === 'text-outSide' && (
 						<div className="progress-bar-text-outSide-wrapper">
 							<div className="progress-bar-label">

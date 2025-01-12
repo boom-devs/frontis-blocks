@@ -14,10 +14,6 @@ class EnqueueBlocksCss {
 		$css_file_name = $block_id . '.css';
 		$css_file = $css_dir . $css_file_name;
 		file_put_contents( $css_file, $css_content );
-
-		// // Enqueue the generated CSS file
-		// $css_url = trailingslashit( $upload_dir['baseurl'] ) . 'frontis-blocks/' . $css_file_name;
-		// wp_enqueue_style( $block_id, $css_url );
 	}
 
 	// Function to minify CSS
@@ -39,23 +35,9 @@ class EnqueueBlocksCss {
 		$combined_css_file_name = 'frontis-blocks.css';
 		$combined_css_file_path = $css_new_dir . $combined_css_file_name;
 
-		// Use a cache identifier based on the modification times of all CSS files
-		$cache_key_file = $css_new_dir . 'cache-key.txt';
-
 		// Ensure the target directory exists
 		if (!file_exists($css_new_dir)) {
 			wp_mkdir_p($css_new_dir);
-		}
-
-		// Check if the cache key exists and matches
-		$cached_key = file_exists($cache_key_file) ? file_get_contents($cache_key_file) : '';
-		$current_key = self::generate_cache_key($css_dir);
-
-		// If the cache is valid, enqueue the existing CSS file
-		if ($cached_key === $current_key && file_exists($combined_css_file_path)) {
-			$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-			wp_enqueue_style('frontis-block-styles', $css_url);
-			return;
 		}
 
 		// Combine and minify CSS files
@@ -68,11 +50,7 @@ class EnqueueBlocksCss {
 				$css_contents[] = $css_content;
 			}
 
-			// $minified_css = self::minify_css(implode("\n", $css_contents));
 			file_put_contents($combined_css_file_path, $css_contents);
-
-			// Save the new cache key
-			file_put_contents($cache_key_file, $current_key);
 
 			// Cleanup old files
 			foreach ($css_files as $file) {
@@ -82,20 +60,10 @@ class EnqueueBlocksCss {
 			}
 
 			// Enqueue the CSS
-			$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-			wp_enqueue_style('frontis-block-styles', $css_url);
+			if(!Helper::is_gutenberg_editor()) {
+				$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
+				wp_enqueue_style('frontis-block-styles', $css_url);
+			}
 		}
-	}
-
-	// Generate a cache key based on CSS file modification times
-	private static function generate_cache_key($css_dir) {
-		$css_files = glob($css_dir . '*.css');
-		$mod_times = [];
-
-		foreach ($css_files as $file) {
-			$mod_times[] = filemtime($file);
-		}
-
-		return md5(implode('|', $mod_times));
 	}
 }

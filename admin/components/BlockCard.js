@@ -17,6 +17,11 @@ const BlockCard = ({ block, onChange }) => {
         setIsChecked(checked);
     };
 
+
+    if (block.child === 'true') {
+        return null; // You can return null if you don't want to render anything for child blocks
+    }
+
     return (
         <div className="fb-block-card">
             <div className="fb-block-card-icon">
@@ -24,8 +29,10 @@ const BlockCard = ({ block, onChange }) => {
             </div>
             <div className="fb-block-card-content">
                 <div>
-                    <h3 className="fb-block-card-title">{ block.title }</h3>
-                    {block.badge && <span className="fb-block-card-badge">{block.badge}</span>}
+                    <h3 className="fb-block-card-title">
+                        {block.title}
+                        {block.badge !== 'free' && <span className={`fb-block-card-badge ${block.badge}`}>{block.badge}</span>}
+                    </h3>
                 </div>
                 <div className="fb-block-card-links">
                     <a href={block.doc ? block.doc : 'https://frontis.com'} target="_blank" rel="noopener noreferrer" className="fb-block-card-link fb-block-card-doc">
@@ -40,15 +47,18 @@ const BlockCard = ({ block, onChange }) => {
             </div>
             <div className="fb-block-card-switch">
                 <label htmlFor={`switch-${block.slug}`} className="fb-block-card-switch-label">
-                    <Switch
-                        checked={isChecked}
-                        onChange={handleChange}
-                        className="fb-block-card-switch-input"
-                        id={`switch-${block.slug}`}
-                        disabled={
-                            isProActive === 'false' && block.package === 'pro' ? true : false
-                        }
-                    />
+                    {block.complete === 'true' ? 
+                        <Switch
+                            checked={isChecked}
+                            onChange={handleChange}
+                            className="fb-block-card-switch-input"
+                            id={`switch-${block.slug}`}
+                            disabled={
+                                isProActive === 'false' && block.package === 'pro' ? true : false
+                            }
+                        />
+                    : 
+                    <span className={`fb-block-card-upcoming`}>Upcoming</span>}
                 </label>
             </div>
         </div>

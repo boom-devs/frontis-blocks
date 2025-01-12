@@ -224,8 +224,32 @@ const FB_Color = ({
                         onClick={onToggle}
                         aria-expanded={isOpen}
                         className="fb-setting-color-setting-icon-btn"
+                        
                     >
-                        <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <span className="fb-setting-color-hex">
+                                    {globalColor || ''}
+                                </span>
+                                <div
+                                    className="fb-setting-color-display"
+                                    style={
+                                        globalColor
+                                            ? {
+                                                backgroundColor: globalColor,
+                                            }
+                                            : {
+                                                backgroundImage:
+                                                    'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
+                                                backgroundPosition: '0 0, 0 5px, 5px -5px, -5px 0',
+                                                backgroundSize: '10px 10px',
+                                                border: '1px solid #e9e9e9',
+                                                height: '22px',
+                                                padding: '0',
+                                                width: '22px',
+                                            }
+                                    }
+                                />
+                            </div>
                     </Button>
                 )}
                 renderContent={() => (
@@ -263,7 +287,7 @@ const FB_Color = ({
                 label={__(label, 'frontis-blocks')}
                 className="fb-setting-color-panel-wrapper"
             >
-                <ButtonGroup className="fb-setting-color-panel-btn">
+                <ButtonGroup className="fb-setting-color-panel-btn fb-btn-group-text-only">
                     {NORMAL_HOVER.map((item) => (
                         <Button
                             key={item.value}

@@ -353,7 +353,7 @@ const attributes = {
     },
     TestimonialTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialTitleFontSize: {
         type: 'object',
@@ -476,7 +476,7 @@ const attributes = {
 
     TestimonialDescFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialDescFontSize: {
         type: 'object',
@@ -599,7 +599,7 @@ const attributes = {
 
     TestimonialAuthorFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialAuthorFontSize: {
         type: 'object',
@@ -723,7 +723,7 @@ const attributes = {
 
     TestimonialDesignationFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     TestimonialDesignationFontSize: {
         type: 'object',
@@ -919,7 +919,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	TestimonialGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	/** Start Padding */
 	TestimonialGlobalPaddingUnits: {
@@ -1119,11 +1124,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    TestimonialGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	TestimonialGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
     TestimonialGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    TestimonialGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

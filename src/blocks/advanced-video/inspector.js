@@ -17,16 +17,18 @@ import {
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_Color from '@Components/color';
-import FB_ImageControl from '@Components/image-control';
+import FB_BackgroundImageControl from '@Components/background-image-control';
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        deviceType,
+        // deviceType,
         blockStyle,
         videoGlobalZIndex,
         videoURL,
@@ -131,11 +133,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBorderRadiusMobile,
         videoGlobalBorderRadiusLink,
 
+        videoGlobalBoxShadowSwitcher,
         videoGlobalBoxShadowValues,
         videoGlobalBoxShadowCssValue,
+        videoGlobalBoxShadowHoverValues,
+        videoGlobalBoxShadowHoverCssValue,
 
     } = attributes;
 
+    const deviceType= useDeviceType();
+    
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -824,7 +831,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
         .${blockID}.fb-advanced-video-main-wrapper {
-            z-index: ${videoGlobalZIndex !== undefined ? videoGlobalZIndex : ''};
+            ${videoGlobalZIndex.Desktop ? `z-index: ${videoGlobalZIndex.Desktop};` : ''}
         }
         .${blockID}.fb-advanced-video-wrapper {
             ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
@@ -840,6 +847,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-advanced-video-wrapper:hover {
             ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
             ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
+            ${videoGlobalBoxShadowHoverCssValue ? `box-shadow: ${videoGlobalBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockID} .fb-player-wrapper {
@@ -902,6 +910,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
+            .${blockID}.fb-advanced-video-main-wrapper {
+                ${videoGlobalZIndex.Tablet ? `z-index: ${videoGlobalZIndex.Tablet};` : ''}
+            }
+
             .${blockID}.fb-advanced-video-wrapper {
                 padding: ${TabletPadding};
                 margin: ${TabletMargin};
@@ -958,6 +970,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
+
+            .${blockID}.fb-advanced-video-main-wrapper {
+                ${videoGlobalZIndex.Mobile ? `z-index: ${videoGlobalZIndex.Mobile};` : ''}
+            }
+
             .${blockID}.fb-advanced-video-wrapper {
                 padding: ${MobilePadding};
                 margin: ${MobileMargin};
@@ -1103,13 +1120,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBorderRadiusMobile,
         videoGlobalBorderRadiusLink,
         videoGlobalBoxShadowValues,
+        videoGlobalBoxShadowSwitcher,
+        videoGlobalBoxShadowValues,
         videoGlobalBoxShadowCssValue,
+        videoGlobalBoxShadowHoverValues,
+        videoGlobalBoxShadowHoverCssValue,
         DesktopPadding,
         DesktopMargin,
         BorderDesktopWidth,
         BorderRadiusDesktopWidth,
         videoGlobalBorderColor,
-        videoGlobalBoxShadowCssValue,
         videoGlobalBgHoverColor,
         videoGlobalBorderHoverColor,
         videoWidth,
@@ -1233,7 +1253,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             {imageOverlaySwitcher && (
                                                 <>
-                                                <FB_ImageControl 
+                                                <FB_BackgroundImageControl 
                                                     globalBackgroundImageUrl={previewImageUrl}
                                                     setGlobalBackgroundImageUrl={(value) => setAttributes({ previewImageUrl: value })}
                                                     globalBackgroundImageAlt={previewImageAlt}
@@ -1285,15 +1305,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     onChange={(value) => setAttributes({ videoBorder: value })}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={videoBorderColorSwitcher}
-                                                globalColor={videoBorderColor}
-                                                globalHoverColor={videoBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ videoBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ videoBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoBorderHoverColor: value })}
+                                                globalSwitcher={videoBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ videoBorderColorSwitcher: value })}
                                             />
+
+                                            {videoBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={videoBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {videoBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={videoBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -1338,25 +1370,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={64}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Icon Color", "frontis-blocks")}
-                                                globalColorSwitcher={videoPlayIconColorSwitcher}
-                                                globalColor={videoPlayIconColor}
-                                                globalHoverColor={videoPlayIconHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconHoverColor: value })}
+                                                globalSwitcher={videoPlayIconColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconColorSwitcher: value })}
                                             />
 
-                                            <FB_Color
+                                            {videoPlayIconColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconColor: value })}
+                                                />
+                                            )}
+
+                                            {videoPlayIconColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconHoverColor: value })}
+                                                />
+                                            )}
+
+                                            <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalColorSwitcher={videoPlayIconBgColorSwitcher}
-                                                globalColor={videoPlayIconBgColor}
-                                                globalHoverColor={videoPlayIconBgHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconBgColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconBgColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
+                                                globalSwitcher={videoPlayIconBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBgColorSwitcher: value })}
                                             />
+
+                                            {videoPlayIconBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBgColor: value })}
+                                                />
+                                            )}
+
+                                            {videoPlayIconBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
+                                                />
+                                            )}
+
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
                                                 value={videoPlayIconBorder}
@@ -1364,15 +1421,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ videoPlayIconBorder: value })}
                                             />
 
-                                            <FB_Color
+                                            <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
-                                                globalColorSwitcher={videoPlayIconBorderColorSwitcher}
-                                                globalColor={videoPlayIconBorderColor}
-                                                globalHoverColor={videoPlayIconBorderHoverColor}
-                                                handleColorSwitcherChange={(value) => setAttributes({ videoPlayIconBorderColorSwitcher: value })}
-                                                handleGlobalColorChange={(value) => setAttributes({ videoPlayIconBorderColor: value })}
-                                                handleGlobalHoverColorChange={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
+                                                globalSwitcher={videoPlayIconBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBorderColorSwitcher: value })}
                                             />
+
+                                            {videoPlayIconBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBorderColor: value })}
+                                                />
+                                            )}
+
+                                            {videoPlayIconBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={videoPlayIconBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
+                                                />
+                                            )}
 
                                             <FB_Spacing 
                                                 label={__("Border", "frontis-blocks")}
@@ -1423,18 +1492,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Z Index", "frontis-blocks")}
+                                                    title={__("Advanced", "frontis-blocks")}
                                                     initialOpen={true}
                                                     className='fb-setting-z-index-header'
                                                 >
-                                                    <RangeControl
-                                                        value={videoGlobalZIndex}
-                                                        onChange={(value) => setAttributes({ videoGlobalZIndex: value === 0 ? undefined : value })}
-                                                        min={1}
-                                                        max={10000}
-                                                        step={1}
-                                                        allowReset
-                                                        resetFallbackValue={100}
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={videoGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ videoGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
                                                     />
                                                 </PanelBody>
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -1466,16 +1539,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 </PanelBody>
 
-                                                <PanelBody title="Background Color" initialOpen={false} >
-                                                    <FB_Color
+                                                <PanelBody 
+                                                    title={__("Background Color", "frontis-blocks")}  
+                                                    initialOpen={false} 
+                                                > 
+                                                    <FB_SwitcherControl
                                                         label={__("Background Color", "frontis-blocks")}
-                                                        globalColorSwitcher={videoGlobalBgColorSwitcher}
-                                                        globalColor={videoGlobalBgColor}
-                                                        globalHoverColor={videoGlobalBgHoverColor}
-                                                        handleColorSwitcherChange={(value) => setAttributes({ videoGlobalBgColorSwitcher: value })}
-                                                        handleGlobalColorChange={(value) => setAttributes({ videoGlobalBgColor: value })}
-                                                        handleGlobalHoverColorChange={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
+                                                        globalSwitcher={videoGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBgColorSwitcher: value })}
                                                     />
+
+                                                    {videoGlobalBgColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={videoGlobalBgColor}
+                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBgColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {videoGlobalBgColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={videoGlobalBgHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
+                                                        />
+                                                    )}
                                                 </PanelBody>
                                                 <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
@@ -1486,15 +1574,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ videoGlobalBorder: value })}
                                                     />
 
-                                                    <FB_Color
+                                                    <FB_SwitcherControl
                                                         label={__("Border Color", "frontis-blocks")}
-                                                        globalColorSwitcher={videoGlobalBorderColorSwitcher}
-                                                        globalColor={videoGlobalBorderColor}
-                                                        globalHoverColor={videoGlobalBorderHoverColor}
-                                                        handleColorSwitcherChange={(value) => setAttributes({ videoGlobalBorderColorSwitcher: value })}
-                                                        handleGlobalColorChange={(value) => setAttributes({ videoGlobalBorderColor: value })}
-                                                        handleGlobalHoverColorChange={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
+                                                        globalSwitcher={videoGlobalBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBorderColorSwitcher: value })}
                                                     />
+
+                                                    {videoGlobalBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={videoGlobalBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBorderColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {videoGlobalBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={videoGlobalBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
+                                                        />
+                                                    )}
 
                                                     <FB_Spacing 
                                                         label={__("Border", "frontis-blocks")}
@@ -1523,11 +1623,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                                                         setAttributes={setAttributes}
                                                     />
-                                                    <FB_BoxShadowControl
-                                                        onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
-                                                        initialShadowValue={videoGlobalBoxShadowValues}
-                                                        onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={videoGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBoxShadowSwitcher: value })}
                                                     />
+
+                                                    {videoGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={videoGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {videoGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={videoGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
                                                 </PanelBody>
                                             </div>
                                         </div>

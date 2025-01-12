@@ -24,3 +24,8 @@ $primary-color: #399CFF;
     }
 
 }
+.fb-contact-form-wrapper {
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+}

@@ -125,21 +125,31 @@ const attributes = {
 
     titlePrefixImgUrl: {
         type: "string",
-        default: ''
-    },
-    titlePrefixImgId: {
-        type: "number",
-        default: 0
+        default: ""
     },
     titlePrefixImgAlt: {
         type: "string",
-        default: ''
+        default: ""
     },
-    titlePrefixImgWidth: {
-        type: "number",
+    titlePrefixImgID: {
+        type: "string",
+        default: ""
     },
-    titlePrefixImgHeight: {
-        type: "number",
+    titlePrefixImgPosition: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgAttachment: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgRepeat: {
+        type: "string",
+        default: ""
+    },
+    titlePrefixImgSize: {
+        type: "string",
+        default: ""
     },
 
     titleSuffixType: {
@@ -162,21 +172,31 @@ const attributes = {
 
     titleSuffixImgUrl: {
         type: "string",
-        default: ''
-    },
-    titleSuffixImgId: {
-        type: "number",
-        default: 0
+        default: ""
     },
     titleSuffixImgAlt: {
         type: "string",
-        default: ''
+        default: ""
     },
-    titleSuffixImgWidth: {
-        type: "number",
+    titleSuffixImgID: {
+        type: "string",
+        default: ""
     },
-    titleSuffixImgHeight: {
-        type: "number",
+    titleSuffixImgPosition: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgAttachment: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgRepeat: {
+        type: "string",
+        default: ""
+    },
+    titleSuffixImgSize: {
+        type: "string",
+        default: ""
     },
     
     
@@ -190,7 +210,12 @@ const attributes = {
     },
 
     accordionItemZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
 
     accordionItemPaddingUnits : {
@@ -204,28 +229,28 @@ const attributes = {
     accordionItemDesktopPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemTabPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemMobilePadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemPaddingLink : {
@@ -244,28 +269,28 @@ const attributes = {
     accordionItemDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMarginLink : {
@@ -300,28 +325,28 @@ const attributes = {
     accordionItemDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemBorderLink : {
@@ -340,28 +365,28 @@ const attributes = {
     accordionItemDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemBorderRadiusLink : {

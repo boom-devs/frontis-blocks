@@ -7,7 +7,7 @@ export default function save({ attributes }) {
 		blockID,
 		wrapperAlignment,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
@@ -28,7 +28,9 @@ export default function save({ attributes }) {
 		btnIcon,
 		infoIconPosition,
 		infobtnTargetUrl,
-		infoButtonLink
+		infoButtonLink,
+		infoIconVerticalPosition,
+		infoCardAlignment
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -38,29 +40,10 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-info-box-content-wrapper ${blockID}`}>
-					<div
-						className={`fb-info-box-content-wrapper-inner ${blockID}`}
-						style={{
-							display: "flex",
-							flexDirection:
-								infoIconPosition === "left"
-									? "row"
-									: infoIconPosition === "right"
-									? "row-reverse"
-									: infoIconPosition === "top"
-									? "column"
-									: "column-reverse",
-						}}
-					>
-						<div
-							className="fb-info-media-container"
-							style={{ justifyContent: wrapperAlignment }}
-						>
-							<div
-								className="fb-info-media-wrapper"
-								style={{ textAlign: wrapperAlignment }}
-							>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`}>
+					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
+						<div className="fb-info-media-container">
+							<div className="fb-info-media-wrapper">
 								{mediaSwitcher === "image" && (
 									<img
 										src={attributes.infoMediaUrl}
@@ -74,10 +57,9 @@ export default function save({ attributes }) {
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText.Content
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
 								className="fb-heading"
-								style={{ textAlign: Alignment }}
 							/>
 
 							{Sub_Heading_Switcher && (
@@ -85,26 +67,17 @@ export default function save({ attributes }) {
 									tagName={Sub_Heading_Tag}
 									value={Sub_Heading_Text}
 									className="fb-description"
-									style={{ textAlign: descAlignment }}
 								/>
 							)}
 
 							{info_Button_Switcher && (
-								<a className="fb-info-button"
-								href={infoButtonLink} 
-								target={infobtnTargetUrl ? '_blank' : undefined}
-								rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
-								>
-								<div
-									className="fb-info-btn-container"
-									style={{ textAlign: buttonAlignment }}
-								>
-									<div
+								<div className="fb-info-button">
+								<div className="fb-info-btn-container">
+									<a
+										href={infoButtonLink} 
+										target={infobtnTargetUrl ? '_blank' : undefined}
+										rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
 										className="fb-info-btn-wrapper"
-										style={{
-											flexDirection:
-												btnIconPosition === "left" ? "row-reverse" : "row",
-										}}
 									>
 										
 
@@ -120,9 +93,9 @@ export default function save({ attributes }) {
 												{renderSVG(btnIcon)}
 											</div>
 										)}
-									</div>
+									</a>
 								</div>
-								</a>
+								</div>
 							)}
 						</div>
 					</div>

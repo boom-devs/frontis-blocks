@@ -398,6 +398,10 @@ const attributes = {
             right: '10',
         },
     },
+    socialIconPaddingLink : {
+        type : "boolean",
+        default: true
+    },
     /*End Icon Styles */
 
     /** Title Styles */
@@ -408,7 +412,7 @@ const attributes = {
 
     socialTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     socialTitleFontSize: {
 		type: 'object',
@@ -742,7 +746,12 @@ const attributes = {
 
     /*Global Styles */
     socialGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
     socialGlobalPaddingUnits: {
 		type: 'object',
@@ -925,12 +934,24 @@ const attributes = {
         default: true
     },
 
-    	/** Start Box Shadow */
+    /** Start Box Shadow */
+    socialGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	socialGlobalBoxShadowValues: { 
         type: 'array',
         default: [],
     },
     socialGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    socialGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    socialGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },

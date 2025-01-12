@@ -8,7 +8,12 @@ const attributes = {
         default: "Desktop"
     },
 	fluentFormGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	formId: {
 		type: 'string'
@@ -38,7 +43,7 @@ const attributes = {
     },
     fluentFormLabelFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormLabelFontSize: {
         type: 'object',
@@ -119,7 +124,7 @@ const attributes = {
     },
     fluentFormInputFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormInputFontSize: {
         type: "object",
@@ -677,7 +682,7 @@ const attributes = {
     },
     fluentFormSectionBreakTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormSectionBreakTitleFontSize: {
         type: "object",
@@ -836,7 +841,7 @@ const attributes = {
     },
     fluentFormSectionBreakDescFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormSectionBreakDescFontSize: {
         type: "object",
@@ -998,7 +1003,7 @@ const attributes = {
     },
     fluentFormHtmlFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormHtmlFontSize: {
         type: "object",
@@ -1208,7 +1213,7 @@ const attributes = {
     },
     fluentFormSubmitFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormSubmitFontSize: {
         type: "object",
@@ -1454,7 +1459,7 @@ const attributes = {
     },
     fluentFormSuccessFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormSuccessFontSize: { 
         type: "object",
@@ -1619,7 +1624,7 @@ const attributes = {
     },
     fluentFormErrorFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     fluentFormErrorFontSize: {
         type: "object",
@@ -1953,6 +1958,27 @@ const attributes = {
     blockStyle: {
         type: "string",
         default: ""
-    }
+    },
+
+    fluentFormGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    fluentFormGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    fluentFormGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    fluentFormGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    fluentFormGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 }
 export default attributes;

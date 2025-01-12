@@ -37,28 +37,28 @@ const attributes = {
     accordionIconBorderDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderLink : {
@@ -76,28 +76,28 @@ const attributes = {
     accordionIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionIconBorderRadiusLink : {
@@ -108,9 +108,9 @@ const attributes = {
     accordionItemGap: {
 		type: 'object',
 		default: {
-			Desktop: 20,
-			Tablet: 15,
-			Mobile: 15
+			Desktop: '20',
+			Tablet: '15',
+			Mobile: '15'
 		}
 	},
 	accordionItemGapUnits: {
@@ -133,28 +133,28 @@ const attributes = {
     accordionIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionIconPaddingTablet: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionIconPaddingMobile: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionIconPaddingLink : {
@@ -165,9 +165,9 @@ const attributes = {
     titleSpacing: {
 		type: 'object',
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	titleSpacingUnits: {
@@ -182,9 +182,9 @@ const attributes = {
     prefixSuffixSpacing: {
 		type: 'object',
 		default: {
-			Desktop: 20,
-			Tablet: 15,
-			Mobile: 15
+			Desktop: '20',
+			Tablet: '15',
+			Mobile: '15'
 		}
 	},
 	prefixSuffixSpacingUnits: {
@@ -199,9 +199,9 @@ const attributes = {
     titleSuffixIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 22,
-			Tablet: 20,
-			Mobile: 18
+			Desktop: '22',
+			Tablet: '20',
+			Mobile: '18'
 		}
 	},
 	titleSuffixIconSizeUnits: {
@@ -216,9 +216,9 @@ const attributes = {
     titleIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 22,
-			Tablet: 20,
-			Mobile: 18
+			Desktop: '22',
+			Tablet: '20',
+			Mobile: '18'
 		}
 	},
 	titleIconSizeUnits: {
@@ -233,9 +233,9 @@ const attributes = {
     titlePrefixIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 22,
-			Tablet: 20,
-			Mobile: 18
+			Desktop: '22',
+			Tablet: '20',
+			Mobile: '18'
 		}
 	},
 	titlePrefixIconSizeUnits: {
@@ -333,7 +333,7 @@ const attributes = {
     },
     tabIcon: {
         type: "string",
-        default: "angles-right",
+        default: "angle-right",
     },
 
     /** Start Tab Image */
@@ -373,7 +373,7 @@ const attributes = {
     },
     expandedIcon: {
         type: "string",
-        default: "angles-down",
+        default: "angle-down",
     },
 
     /** Start expanded Image */
@@ -381,7 +381,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    taImageAlt: {
+    expandedImageAlt: {
         type: "string",
         default: ""
     },
@@ -451,7 +451,7 @@ const attributes = {
     },
     titleHoverColor: {
         type: "string",
-        default: "#000000",
+        default: "#FFFFFF",
     },
 
     titleIconColorSwitcher: {
@@ -464,12 +464,12 @@ const attributes = {
     },
     titleIconHoverColor: {
         type: "string",
-        default: "#000000",
+        default: "#FFFFFF",
     },
 
     tagName: {
         type: "string",
-        default: "h3",
+        default: "h4",
     },
     accordionChildCount: {
         type: "number",
@@ -491,28 +491,28 @@ const attributes = {
     accordionItemsDesktopPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemsTabPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemsMobilePadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     accordionItemsPaddingLink : {
@@ -546,28 +546,28 @@ const attributes = {
     accordionItemsDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemsTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemsMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionItemsBorderLink : {
@@ -586,28 +586,28 @@ const attributes = {
     accordionItemsDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 8,
-            bottom: 8,
-            left: 8,
-            right: 8,
+            top: '8',
+            bottom: '8',
+            left: '8',
+            right: '8',
         },
     },
     accordionItemsTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 8,
-            bottom: 8,
-            left: 8,
-            right: 8,
+            top: '8',
+            bottom: '8',
+            left: '8',
+            right: '8',
         },
     },
     accordionItemsMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 8,
-            bottom: 8,
-            left: 8,
-            right: 8,
+            top: '8',
+            bottom: '8',
+            left: '8',
+            right: '8',
         },
     },
     accordionItemsBorderRadiusLink : {
@@ -615,9 +615,13 @@ const attributes = {
         default: true
     },
 
-
     accordionZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     
     accordionPaddingUnits : {
@@ -631,28 +635,28 @@ const attributes = {
     accordionDesktopPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionTabPadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionMobilePadding: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionPaddingLink : {
@@ -671,28 +675,28 @@ const attributes = {
     accordionDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionMarginLink : {
@@ -727,28 +731,28 @@ const attributes = {
     accordionDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionBorderLink : {
@@ -767,28 +771,28 @@ const attributes = {
     accordionDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     accordionBorderRadiusLink : {
@@ -809,6 +813,10 @@ const attributes = {
     },
 
 
+    accordionGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     accordionGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -817,6 +825,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    accordionGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    accordionGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     accordionBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -923,6 +940,10 @@ const attributes = {
     },
 
 
+    accordionItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     accordionItemBoxShadowValues: {
         type: 'array',
         default: [],
@@ -931,6 +952,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    accordionItemHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    accordionItemHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     titleBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -941,7 +971,7 @@ const attributes = {
     },
     titleBgClassicColor: {
         type: "string",
-        default: "antiquewhite"
+        default: "#EBF5FF"
     },
     titleBgGradientColor: {
         type: "string",
@@ -992,7 +1022,7 @@ const attributes = {
     },
     titleBgHoverClassicColor: {
         type: "string",
-        default: "antiquewhite"
+        default: "#399CFF"
     },
     titleBgHoverGradientColor: {
         type: "string",
@@ -1049,28 +1079,28 @@ const attributes = {
     contentDesktopPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     contentTabPadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     contentMobilePadding: {
         type: "object", 
         default: {
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
+            top: '20',
+            bottom: '20',
+            left: '20',
+            right: '20',
         },
     },
     contentPaddingLink : {
@@ -1089,28 +1119,28 @@ const attributes = {
     contentDesktopMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentTabMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentMobileMargin: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentMarginLink : {
@@ -1145,28 +1175,28 @@ const attributes = {
     contentDesktopBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentTabBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentMobileBorderWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentBorderLink : {
@@ -1185,28 +1215,28 @@ const attributes = {
     contentDesktopBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentTabBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentMobileBorderRadiusWidth: {
         type: "object", 
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     contentBorderRadiusLink : {
@@ -1226,6 +1256,10 @@ const attributes = {
         default: false,
     },
     
+    contentBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     contentBoxShadowValues: {
         type: 'array',
         default: [],
@@ -1234,6 +1268,15 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    contentHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    contentHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
     contentBgColorSwitcher: {
         type: "string",
         default: "normal"

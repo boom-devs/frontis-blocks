@@ -27,7 +27,12 @@ export const attributes = {
 		default: "Desktop"
 	},
 	contactFormGlobalZIndex : {
-		type: "number",
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
 	},
 	showPlaceholder: {
 		type: "boolean",
@@ -50,14 +55,14 @@ export const attributes = {
 	},
 	contactFormLabelFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormLabelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '18',
-			Tablet: '18',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormLabelFontSizeUnits: {
@@ -70,7 +75,7 @@ export const attributes = {
 	},
 	contactFormLabelFontWeight : {
 		type: "string",
-		default: "500"
+		default: ""
 	},
 	contactFormLabelFontStyle : {
 		type: "string",
@@ -132,7 +137,7 @@ export const attributes = {
 	},
 	contactFormInputFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormInputFontSize: {
 		type: "object",
@@ -606,14 +611,14 @@ export const attributes = {
 	},
 	contactFormSubmitFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormSubmitFontSize: {
 		type: "object",
 		default: {
-			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormSubmitFontSizeUnits: {
@@ -853,7 +858,7 @@ export const attributes = {
 	},
 	contactFormSuccessFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormSuccessFontSize: {
 		type: "object",
@@ -1019,14 +1024,14 @@ export const attributes = {
 	},
 	contactFormErrorFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	contactFormErrorFontSize: {
 		type: "object",
 		default: {
-			Desktop: '13',
-			Tablet: '13',
-			Mobile: '13'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	contactFormErrorFontSizeUnits: {
@@ -1217,28 +1222,28 @@ export const attributes = {
 	contactFormGlobalMarginDesktop: {
 		type: "object",
 		default: {
-			top: 30,
-			bottom: 30,
-			left: 0,
-			right: 0,
+			top: "30",
+			bottom: "30", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginTablet: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20", 
+			left: "0",
+			right: "0",
 		},
 	},
 	contactFormGlobalMarginMobile: {
 		type: "object",
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 0,
-			right: 0,
+			top: "20",
+			bottom: "20",
+			left: '0',
+			right: '0',
 		},
 	},
 	contactFormGlobalMarginLink : {
@@ -1348,4 +1353,25 @@ export const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	contactFormGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    contactFormGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    contactFormGlobalBoxShadowHoverValues: { 
+        type: 'array',
+        default: [],
+    },
+    contactFormGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 }

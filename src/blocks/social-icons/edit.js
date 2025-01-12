@@ -1,8 +1,10 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useRef } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
 import './editor.scss';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
@@ -21,7 +23,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleSocialClick = (event) => {
         event.preventDefault();
     };
-    
+
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
 
     return (
         <>
@@ -32,7 +39,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className={`fb-social-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`} ref={panelRef}>
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (

@@ -22,7 +22,7 @@ import {
 	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 import {	NORMAL_HOVER,
 	UNIT_TYPES,
@@ -33,7 +33,7 @@ import {	NORMAL_HOVER,
 } from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
-
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -92,6 +92,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `${blockId}`,
     });
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
 	return (
 		<>
 		    <Inspector
@@ -100,11 +106,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 			<div {...blockProps} id={blockId}>
-				<div className={`fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`}>
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} ref={panelRef}> 
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">
-								<span className="fb-pricing-top-text">{pricingSectionTopText}</span>
+								<RichText
+									tagName="span"
+									className="fb-pricing-top-text"
+									value={pricingSectionTopText}
+									onChange={(value) => setAttributes({ pricingSectionTopText: value })}
+									placeholder={__('Enter text', 'frontis-blocks')}
+								/>
 							</div>
 						)}
 						<div className="fb-pricing-main-wrapper">
@@ -133,31 +145,98 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									)}
 								</div>
 								<div className="fb-pricing-price-wrapper">
-									<div className='fb-pricing-price-inner-wrapper'>
+									<div className="fb-pricing-price-inner-wrapper">
 										<span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
-											<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-											{normalPrice}
-											<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-											
+											<span className="price-currency">
+												{priceCurrencyPosition === 'left' ? (
+													<RichText 
+														tagName="span" 
+														value={priceCurrency} 
+														placeholder={__('Enter currency', 'frontis-blocks')}
+													/>
+												) : ''}
+											</span>
+											<RichText 
+												tagName="span" 
+												value={normalPrice} 
+												placeholder={__('Enter price', 'frontis-blocks')}
+											/>
+											<span className="price-currency">
+												{priceCurrencyPosition === 'right' ? (
+													<RichText 
+														tagName="span" 
+														value={priceCurrency} 
+														placeholder={__('Enter currency', 'frontis-blocks')}
+													/>
+												) : ''}
+											</span>
 											{!salePriceSwitcher && (
-												<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+												<span className="price-period">
+													<RichText 
+														tagName="span" 
+														value={pricePeriodSeparator} 
+														placeholder={__('Enter separator', 'frontis-blocks')}
+													/>
+													<RichText 
+														tagName="span" 
+														value={pricePeriod} 
+														placeholder={__('Enter period', 'frontis-blocks')}
+													/>
+												</span>
 											)}
 										</span>
 										{salePriceSwitcher && (
 											<span className="fb-pricing-sale-price">
-												<span className="price-currency">{priceCurrencyPosition === 'left' ? priceCurrency : ''}</span>
-												{salePrice}
-												<span className="price-currency">{priceCurrencyPosition === 'right' ? priceCurrency : ''}</span>
-												<span className="price-period">{pricePeriodSeparator}{pricePeriod}</span>
+												<span className="price-currency">
+													{priceCurrencyPosition === 'left' ? (
+														<RichText 
+															tagName="span" 
+															value={priceCurrency} 
+															placeholder={__('Enter currency', 'frontis-blocks')}
+														/>
+													) : ''}
+												</span>
+												<RichText 
+													tagName="span" 
+													value={salePrice} 
+													placeholder={__('Enter price', 'frontis-blocks')}
+												/>
+												<span className="price-currency">
+													{priceCurrencyPosition === 'right' ? (
+														<RichText 
+															tagName="span" 
+															value={priceCurrency} 
+															placeholder={__('Enter currency', 'frontis-blocks')}
+														/>
+													) : ''}
+												</span>
+												<span className="price-period">
+													<RichText 
+														tagName="span" 
+														value={pricePeriodSeparator} 
+														placeholder={__('Enter separator', 'frontis-blocks')}
+													/>
+													<RichText 
+														tagName="span" 
+														value={pricePeriod} 
+														placeholder={__('Enter period', 'frontis-blocks')}
+													/>
+												</span>
 											</span>
 										)}
 									</div>
 									{priceAfterTextSwitcher && (
 										<div className="fb-pricing-after-text-wrapper">
-											<span className="fb-pricing-after-text">{priceAfterText}</span>
+											<RichText
+												tagName="span"
+												className="fb-pricing-after-text"
+												value={priceAfterText}
+												placeholder={__('Enter text', 'frontis-blocks')}
+											/>
 										</div>
 									)}
 								</div>
+
 							</div>
 							<div className ='fb-pricing-content'>
 								<div className="fb-pricing-features-wrapper">
@@ -191,7 +270,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</div>
 								{priceFeatureAfterTextSwitcher && (
 									<div className="fb-pricing-feature-after-text-wrapper">
-										<span className="fb-pricing-feature-after-text">{priceFeatureAfterText}</span>
+										<RichText
+											tagName="span"
+											className="fb-pricing-feature-after-text"
+											value={priceFeatureAfterText}
+											placeholder={__('Enter text', 'frontis-blocks')}
+										/>
 									</div>
 								)}
 							</div>

@@ -1,5 +1,6 @@
 // Colors primary
 $primary-color: #4B9DEF;
+$primary-color-base: #399CFF;
 $primary-color-50: #EDF5FD;
 $primary-color-100: #DBEBFC;
 $primary-color-200: #B7D8F9;
@@ -10,6 +11,7 @@ $primary-color-700: #2D6296;
 $primary-color-800: #1F446A;
 $primary-color-850: #10273D;
 $primary-color-900: #081827;
+$background_color: #D7EBFF;
 
 // Neutral Color
 $white-color: #FFFFFF;
@@ -28,7 +30,7 @@ $neutral-color-950: #0B0C0E;
 
 // Success Color
 $success-color: #4CAF50;
-$success-color-50: #EDF7EE;
+$success-color-50: #F4FCF5;
 $success-color-100: #DBEFDC;
 $success-color-200: #B7DFB9;
 $success-color-300: #94CF96;
@@ -92,6 +94,7 @@ $border-color: $medium-gray;
 
 // Transitions
 $transition-duration: 0.3s;
+$transition: all 0.3s ease-in-out;
 
 // Z-index
 $z-index-modal: 1000;

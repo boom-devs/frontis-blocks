@@ -8,7 +8,12 @@ const attributes = {
         default: "Desktop"
     },
     progressGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
     progressTextPosition: {
         type: "string",
@@ -107,7 +112,7 @@ const attributes = {
 
     progressFontFamily: {
         type: "string",
-        default: "",
+        default: "Default",
     },
     progressFontSize: {
 		type: 'object',
