@@ -137,7 +137,7 @@ const gradientDefaults = [
 	{
 		"color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
 		"name": "Halloween",
-		"slug": "gradientHalloween",	
+		"slug": "gradientHalloween",
 		"var": "--fb-gradient-halloween"
 	}
 
@@ -494,6 +494,13 @@ function FrontisBlocksSidebar(props) {
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontfamilies, setFontfamilies] = useState({});
 
+	const { items, loading } = useSelect((select) => ({
+		items: select('my-custom-store').getItems(),
+		loading: select('my-custom-store').isLoading(),
+	}));
+
+	const { setItems, setLoading } = useDispatch('my-custom-store');
+
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
 		const fontFamilies = [];
@@ -683,7 +690,7 @@ function FrontisBlocksSidebar(props) {
 		// if (saveButton) {
 		// 	// Set aria-disabled to false when color is updated
 		// 	saveButton.setAttribute('aria-disabled', 'false');
-	
+
 		// 	// Add a click event listener to set aria-disabled back to true
 		// 	saveButton.addEventListener('click', () => {
 		// 		saveButton.setAttribute('aria-disabled', 'true');
@@ -695,6 +702,7 @@ function FrontisBlocksSidebar(props) {
 	//Update Gradient Colors
 	const setGradientColor = (index, color) => {
 		const colors = [...gradientColors];
+
 		colors[index].color = color;
 		setGradientColors([...colors]);
 		setFbGlobalSettingsLoading(true);
@@ -710,6 +718,8 @@ function FrontisBlocksSidebar(props) {
 
 	const setCustomColor = (index, color) => {
 		const colors = [...customColors];
+		console.log(colors);
+		setItems(colors);
 		colors[index].color = color;
 		setCustomColors([...colors]);
 		setFbGlobalSettingsLoading(true);
@@ -800,7 +810,7 @@ function FrontisBlocksSidebar(props) {
 		handleUpdateSettings();
 	}, [isAfterSave]);
 
-
+	console.log(items)
 	return (
 		<>
 			<PluginSidebarMoreMenuItem target="fb_plugin_sidebar">

@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import App from './App';
 import './scss/admin.scss';
 
-
 const FrontisBlocksAdmin = () => {
   return (
     <div className="">
