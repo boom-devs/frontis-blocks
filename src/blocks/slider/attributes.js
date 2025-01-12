@@ -12,6 +12,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     slideContent: {
         type: "array",
 		default: slideContent
@@ -20,6 +24,14 @@ const attributes = {
         type: "number",
         default: slideCount
     },
+    slidePerView: {
+		type: 'number',
+		default: 1,
+	},
+    transitionSwitcher : {
+		type: "string",
+		default: "slide"
+	},
 	transitionSpeed: {
 		type: 'number',
 		default: 800,
@@ -40,7 +52,14 @@ const attributes = {
 		type: 'number',
 		default: 3000,
 	},
-
+	infiniteLoop: {
+		type: 'boolean',
+		default: true,
+	},
+    allowTouchMove: {
+		type: 'boolean',
+		default: true,
+	},
 	/*{Arrows Style}*/
 	sliderArrowColorSwitcher: {
         type: 'string',
