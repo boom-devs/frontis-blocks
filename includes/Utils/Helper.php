@@ -290,6 +290,27 @@ class Helper
         return in_array($plugin_path, (array) get_option('active_plugins', []), true) || self::is_plugin_active_for_network($plugin_path);
     }
 
+	public static function generate_css($styles, $container_css) {
+		// Generate CSS for the block ID
+		$css = array_map(
+			function ($selector, $styles) {
+				$filtered_styles = implode("; ", array_map(
+					fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
+					array_keys($styles),
+					$styles
+				));
+
+				// Return CSS if styles are valid
+				return $filtered_styles ? "#$selector { $filtered_styles; }" : "";
+			},
+			array_keys($container_css),
+			$container_css
+		);
+
+		// Filter out empty styles and combine
+		return implode("\n", array_filter($css));
+	}
+
     /**
      * Check if a plugin is active for the entire network
      *
