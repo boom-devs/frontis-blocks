@@ -17,8 +17,6 @@ const BlockCard = ({ block, onChange }) => {
         setIsChecked(checked);
     };
 
-    console.log(block);
-
 
     if (block.child === 'true') {
         return null; // You can return null if you don't want to render anything for child blocks
