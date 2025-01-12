@@ -25,11 +25,46 @@ const Render = ( props ) => {
 		isBlockRootParent,
 		contentWidth,
 		innerContentWidth,
+
+
+
+
+		
+			/** Normal Bg */
+			containerBgColorSwitcher,
+			containerBgNormalBackgroundType,
+			containerBgNormalClassicColor,
+			containerBgNormalGradientColor,
+			containerBgNormalCustomGradientSwitcher,
+			containerBgNormalCustomGradientInputValue,
+			containerBgNormalBackgroundImageUrl,
+			containerBgNormalBackgroundImageAlt,
+			containerBgNormalBackgroundImageID,
+			containerBgNormalBackgroundImagePosition,
+			containerBgNormalBackgroundImageAttachment,
+			containerBgNormalBackgroundImageRepeat,
+			containerBgNormalBackgroundImageSize,
+
+			/** Hover Bg */
+			containerBgHoverBackgroundType,
+			containerBgHoverClassicColor,
+			containerBgHoverGradientColor,
+			containerBgHoverCustomGradientSwitcher,
+			containerBgHoverCustomGradientInputValue,
+			containerBgHoverBackgroundImageUrl,
+			containerBgHoverBackgroundImageAlt,
+			containerBgHoverBackgroundImageID,
+			containerBgHoverBackgroundImagePosition,
+			containerBgHoverBackgroundImageAttachment,
+			containerBgHoverBackgroundImageRepeat,
+			containerBgHoverBackgroundImageSize,
+			
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
-	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
+	// const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
+	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId );
 
 	const { getBlockOrder } = select( 'core/block-editor' );
 
