@@ -1144,7 +1144,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {tab.name === "advanced" && (
-                                    <PanelBody title={__("Advanced", "frontis-blocks")} initialOpen>
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
@@ -1309,8 +1308,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
                                             </div>
                                         </div>
-
-                                    </PanelBody>
                                 )}
                             </div>
                         )}
