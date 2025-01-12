@@ -198,6 +198,9 @@ var BlockCard = function BlockCard(_ref) {
     setIsChecked(checked);
   };
   console.log(block);
+  if (block.child === 'true') {
+    return null; // You can return null if you don't want to render anything for child blocks
+  }
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-block-card"
   }, /*#__PURE__*/React.createElement("div", {
