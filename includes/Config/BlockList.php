@@ -28,6 +28,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'accordion-item' => [
                 'slug'      => 'accordion-item',
@@ -40,6 +41,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'true',
             ],
             'advanced-heading' => [
                 'slug'      => 'advanced-heading',
@@ -52,6 +54,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'container' => [
                 'slug'      => 'container',
@@ -64,6 +67,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'advanced-image' => [
                 'slug'      => 'advanced-image',
@@ -76,6 +80,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'image-gallery' => [
                 'slug'      => 'image-gallery',
@@ -88,6 +93,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'info-box' => [
                 'slug'      => 'info-box',
@@ -100,6 +106,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'icon-box' => [
                 'slug'      => 'icon-box',
@@ -112,6 +119,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'advanced-button' => [
                 'slug'      => 'advanced-button',
@@ -124,6 +132,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'dual-button' => [
                 'slug'      => 'dual-button',
@@ -136,6 +145,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'advanced-navigation' => [
                 'slug'      => 'advanced-navigation',
@@ -148,6 +158,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'false',
+                'child'     => 'false',
             ],
             'advanced-video' => [
                 'slug'      => 'advanced-video',
@@ -160,6 +171,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'countdown' => [
                 'slug'      => 'countdown',
@@ -172,6 +184,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             
             'flip-box' => [
@@ -185,6 +198,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'false',
+                'child'     => 'false',
             ],
             'features-list' => [
                 'slug'      => 'features-list',
@@ -197,6 +211,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'testimonial' => [
                 'slug'      => 'testimonial',
@@ -209,6 +224,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'counter-number' => [
                 'slug'      => 'counter-number',
@@ -221,6 +237,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'fluent-form' => [
                 'slug'      => 'fluent-form',
@@ -233,6 +250,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'contact-form-7' => [
                 'slug'      => 'contact-form-7',
@@ -245,6 +263,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'call-to-action' => [
                 'slug'      => 'call-to-action',
@@ -257,6 +276,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'pricing-table' => [
                 'slug'      => 'pricing-table',
@@ -269,6 +289,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
 
             // 'woo-product-grid' => [
@@ -293,6 +314,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'post-grid' => [
                 'slug'      => 'post-grid',
@@ -305,6 +327,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'team-member' => [
                 'slug'      => 'team-member',
@@ -317,6 +340,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'progressbar' => [
                 'slug'      => 'progressbar',
@@ -329,6 +353,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'slider' => [
                 'slug'      => 'slider',
@@ -341,6 +366,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'slider-item' => [
                 'slug'      => 'slider-item',
@@ -353,6 +379,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'true',
             ],
 
         ];
