@@ -8,7 +8,7 @@ import shapes from './shapes';
 
 export default function save( props ) {
 	const {
-		block_id,
+		p_block_id,
 		htmlTag,
 		htmlTagLink,
 		contentWidth,
@@ -75,15 +75,18 @@ export default function save( props ) {
 		}
 	}
 
-	const blockProps = useBlockProps.save();
+	const blockProps = {
+		...useBlockProps.save(),
+		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined
+	};
 
 	return (
 		<>
 			<CustomTag
-				id={ blockProps.id }
-				className={ classnames(
+				 { ...blockProps }
+				 className={ classnames(
 					blockProps.className,
-					`frontis-blocks-block-${ block_id }`,
+					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
 					isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : ''
 				) }
 			>
@@ -102,12 +105,12 @@ export default function save( props ) {
 				{ bottomDividerHtml }
 				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
 				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
-					<div className="frontis-blocks-container-inner-blocks-wrap">
+					<div className={`frontis-blocks-container-inner-blocks-wrap`}>
 						<InnerBlocks.Content />
 					</div>
 				) : (
 					<InnerBlocks.Content />
-				) }
+				)}
 				{
 					htmlTag === 'a' && 'undefined' !== typeof customTagLinkAttributes.href && (
 						<a className='frontis-blocks-container-link-overlay' { ...customTagLinkAttributes } > </a>

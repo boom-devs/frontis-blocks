@@ -66,8 +66,7 @@ class BlockList
                 'icon'      => FB_PLUGIN_URL . 'assets/icons/container.svg',
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
-                'complete'  => 'true',
-                'child'     => 'false',
+                'complete'  => 'false',
             ],
             'advanced-image' => [
                 'slug'      => 'advanced-image',
