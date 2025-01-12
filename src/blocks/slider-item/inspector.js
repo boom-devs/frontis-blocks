@@ -43,7 +43,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {tab.name === "styles" && (
-                                    <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
+                                    <PanelBody title={__("Style", "frontis-blocks")} initialOpen>
                                         {/* Add style settings here */}
                                     </PanelBody>
                                 )}
