@@ -105,49 +105,12 @@ final class Plugin
 		}
 
 		if (has_block('frontis-blocks/advanced-video')) {
-			wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+			// wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
+			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', '1.0.0', true);;
 		}
 		if (has_block('frontis-blocks/slider')) {
-			wp_enqueue_script('frontis-slider-css', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css');
-			wp_enqueue_script('frontis-slider-js', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', array('jquery'), '1.0.0', true);
-
-			add_action('wp_footer', function () {
-				?>
-				<script>
-					document.addEventListener('DOMContentLoaded', function () {
-						// Select all slider containers
-						const sliders = document.querySelectorAll('.fb-slider-container');
-			
-						sliders.forEach(sliderContainer => {
-							// Get the unique blockId from the data attribute
-							const blockId = sliderContainer.dataset.blockId;
-			
-							// Define slider options dynamically based on blockId
-							const sliderOptions = {
-								navigation: {
-									nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
-									prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
-								},
-								pagination: {
-									el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
-									clickable: true,
-								},
-								autoplay: {
-									delay: 3000,
-									disableOnInteraction: false,
-								},
-								loop: true,
-							};
-			
-							// Initialize Swiper for the current slider
-							new Swiper(`.fb-slider-container[data-block-id="${blockId}"] .fb-swiper`, sliderOptions);
-						});
-					});
-				</script>
-				<?php
-			});			
-			
-			
+			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
+			wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 		}
 	}
 
