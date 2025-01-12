@@ -4,19 +4,23 @@ import {
     RichText, 
     BlockControls,
     AlignmentToolbar,
+    MediaUpload,
+    MediaUploadCheck,
+    MediaPlaceholder,
 } from '@wordpress/block-editor';
+import { useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings'; 
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
-        deviceType,
         buttonAlignment,
         buttonText,
         buttonUrl,
@@ -26,16 +30,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonZIndex,
         buttonIconAlign,
         buttonIconPosition,
+
+        buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
     } = attributes;
 
     const blockProps = useBlockProps();
-    
-    
 
-    // Prevent link navigation in the editor and focus on text
+    /**
+     * Manages tab button settings and switches to block settings on click
+     */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+    
+    /**
+     * Prevent link navigation in the editor and focus on text
+     */
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
+
 
     return (
         <>
@@ -54,7 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps} id={blockId}>
-                <div className={`fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
@@ -65,6 +85,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    {buttonIconImageUrl ? (
+                                        <img src={buttonIconImageUrl} alt={buttonIconImageAlt} />
+                                    ) : (
+                                        <MediaPlaceholder
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    buttonIconImageID: media.id,
+                                                    buttonIconImageUrl: media.url,
+                                                    buttonIconImageAlt: media.alt,
+                                                })
+                                            }
+                                            allowedTypes={['image']}
+                                            multiple={false}
+                                            labels={{ title: 'Add Image' }}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         )}
 
@@ -81,6 +124,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    {buttonIconImageUrl ? (
+                                        <img src={buttonIconImageUrl} alt={buttonIconImageAlt} />
+                                    ) : (
+                                        <MediaPlaceholder
+                                            onSelect={(media) =>
+                                                setAttributes({
+                                                    buttonIconImageID: media.id,
+                                                    buttonIconImageUrl: media.url,
+                                                    buttonIconImageAlt: media.alt,
+                                                })
+                                            }
+                                            allowedTypes={['image']}
+                                            multiple={false}
+                                            labels={{ title: 'Add Image' }}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         )}
 

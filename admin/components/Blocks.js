@@ -147,11 +147,24 @@ const Blocks = () => {
           <div className="fb-blocks-search">
             <input
               type="text"
-              placeholder={__('Search blocks...', 'frontis-blocks')}
+              placeholder={__('Search Blocks', 'frontis-blocks')}
               className="fb-blocks-search-input"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
+            <span className="fb-blocks-search-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <g clip-path="url(#clip0_4834_1174)">
+              <circle cx="8.625" cy="8.625" r="7.125" stroke="#6A758E" stroke-width="1.5"/>
+              <path d="M13.875 13.875L16.5 16.5" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_4834_1174">
+              <rect width="18" height="18" fill="white"/>
+              </clipPath>
+              </defs>
+              </svg>
+            </span>
             {searchTerm && (
               <button className="fb-blocks-search-clear" onClick={clearSearch}>
                 ×
@@ -160,11 +173,11 @@ const Blocks = () => {
           </div>
         </div>
         <div className="fb-blocks-header-right">
-          <button className="fb-blocks-button fb-blocks-enable-all" onClick={handleEnableAll}>
-            {__('Enable All', 'frontis-blocks')}
-          </button>
           <button className="fb-blocks-button fb-blocks-disable-all" onClick={handleDisableAll}>
             {__('Disable All', 'frontis-blocks')}
+          </button>
+          <button className="fb-blocks-button fb-blocks-enable-all" onClick={handleEnableAll}>
+            {__('Enable All', 'frontis-blocks')}
           </button>
         </div>
       </div>

@@ -14,6 +14,16 @@ export default function save({ attributes }) {
         buttonIconSize,
         buttonIconColor,
 
+
+        buttonIconImageUrl,
+		buttonIconImageAlt,
+		buttonIconImageID,
+		bbuttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
+
     } = attributes;
 
     const blockProps = useBlockProps.save();
@@ -22,7 +32,7 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps} id={blockId}>
-                <div className={`fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
@@ -32,6 +42,18 @@ export default function save({ attributes }) {
                         {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}> 
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'left' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    <img 
+                                        src={buttonIconImageUrl} 
+                                        alt={buttonIconImageAlt || 'Button image'} 
+                                        className="button-icon-image"
+                                    />
+                                </div>
                             </div>
                         )}
 
@@ -46,6 +68,18 @@ export default function save({ attributes }) {
                         {buttonIconPosition === 'right' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
+                            </div>
+                        )}
+
+                        {buttonIconPosition === 'right' && buttonIconAlign === 'image' && buttonIconImageUrl && (
+                            <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}>
+                                <div className="fb-advanced-button-icon-image">
+                                    <img 
+                                        src={buttonIconImageUrl} 
+                                        alt={buttonIconImageAlt || 'Button image'} 
+                                        className="button-icon-image"
+                                    />
+                                </div>
                             </div>
                         )}
 

@@ -39,6 +39,62 @@ export const separator_TYPE = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 ];
 
+export const CONTENT_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+    { label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const CARD_WRAP_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
+export const SOCIAL_ICON_TYPE = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const IMAGE_SOCIAL_ICON_POSITION = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+export const CONTENT_SOCIAL_ICON_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+export const SEPARATOR_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+];
+
+export const SOCIAL_ICON_BUTTON = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Button", "frontis-block"), value: "button" },
+];
+
+export const SOCIAL_ICON_ANIMATION = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Circle", "frontis-block"), value: "circle" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
 export const separator_POSITION = [
 	{ label: __("Top", "frontis-block"), value: "top" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },

@@ -18,7 +18,7 @@ const attributes = {
 	},
 	postPerPage: {
 		type: "string",
-		default: 6
+		default: "6"
 	},
 
 	postSwitcher: {
@@ -85,9 +85,9 @@ const attributes = {
 	gridColumnsPerSection: {
 		type: "object",
 		default: {
-			Desktop: 3,
-			Tablet: 2,
-			Mobile: 1
+			Desktop: "3",
+			Tablet: "2",
+			Mobile: "1"
 		}
 	},
 	gridGapUnits: {
@@ -109,34 +109,34 @@ const attributes = {
 	gridRowGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 	gridColumnGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 
 	listRowGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 30,
-			Mobile: 30
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
 		}
 	},
 	listImageSpacing: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 30,
-			Mobile: 0
+			Desktop: "40",
+			Tablet: "30",
+			Mobile: "0"
 		}
 	},
 
@@ -373,11 +373,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+	postGridBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	postGridBoxShadowValues: {
         type: 'array',
         default: [],
     },
     postGridBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+	postGridBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    postGridBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -1094,9 +1106,9 @@ const attributes = {
 	postCategoryGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postCategoryGapUnits: {
@@ -1385,9 +1397,9 @@ const attributes = {
 	postTagGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postTagGapUnits: {
@@ -1403,15 +1415,15 @@ const attributes = {
 	/** Start Author */
 	showAuthorSwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 
 	postAuthorGap: {
 		type: "object",
 		default: {
-			Desktop: 10,
-			Tablet: 10,
-			Mobile: 10
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
 		}
 	},
 	postAuthorGapUnits: {
@@ -1431,9 +1443,9 @@ const attributes = {
 	postAuthorAvatarWidth: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '40'
 		}
 	},
 	postAuthorAvatarWidthUnits: {
@@ -1687,7 +1699,7 @@ const attributes = {
 	/** Start Date */
 	showDateSwitcher: {
 		type: "boolean",
-		default: false
+		default: true
 	},
 
 	postDateFontFamily: {
@@ -1776,7 +1788,12 @@ const attributes = {
 
 	/** Start Global Setting */
 	postGlobalZIndex : {
-		type: "number",
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
 	},
 	/** Start Padding */
 	postGlobalPaddingUnits: {
@@ -2010,6 +2027,10 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+	postGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	postGlobalBoxShadowValues: {
 		type: 'array',
 		default: [],
@@ -2018,6 +2039,377 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+	postGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	postGlobalBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+
+
+
+	/** Start Load More */
+	loadMoreSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	loadMoreText: {
+		type: "string",
+		default: "Load More"
+	},
+	loadMoreIconAlign: {
+        type: "string",
+        default: "none",
+    },
+	loadMoreIcon: {
+		type: 'string',
+		default: 'angle-right',
+	},
+
+	loadMoreButtonBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
+	},
+	loadMoreButtonNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	loadMoreButtonNormalClassicColor: {
+		type: "string",
+		default: "#15171C",
+	},
+	loadMoreButtonNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	loadMoreButtonNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	loadMoreButtonNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	loadMoreButtonHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	loadMoreButtonHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	loadMoreButtonHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	loadMoreButtonHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	loadMoreButtonHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	loadMoreButtonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	loadMoreButtonDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '16',
+			bottom: '16',
+			left: '24',
+			right: '24',
+		},
+	},
+	loadMoreButtonTabletPadding: {
+		type: "object", 
+		default: {
+			top: '16',
+			bottom: '16',
+			left: '24',
+			right: '24',
+		},
+	},
+	loadMoreButtonMobilePadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '16',
+			right: '16',
+		},
+	},
+	loadMoreButtonPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	loadMoreButtonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	loadMoreButtonBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	loadMoreButtonBorderColor: {
+		type: 'string',
+	},
+	loadMoreButtonBorderHoverColor: {
+		type: 'string',
+	},
+	loadMoreButtonBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	loadMoreButtonDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	loadMoreButtonTabletBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	loadMoreButtonMobileBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	loadMoreButtonBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	loadMoreButtonBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	loadMoreButtonDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	loadMoreButtonTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	loadMoreButtonMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	loadMoreButtonBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	loadMoreTextFontFamily: { 
+		type: "string",
+		default: "Default",
+	},
+	loadMoreTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	loadMoreTextFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	loadMoreTextFontWeight: {
+		type: "string",
+		default: "600"
+	},
+	loadMoreTextFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	loadMoreTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	loadMoreTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	loadMoreTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	loadMoreTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	loadMoreTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30'
+		}
+	},
+	loadMoreTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	loadMoreTextColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	loadMoreTextColor : {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	loadMoreTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	loadMoreIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20'
+        }
+    },
+    loadMoreIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    loadMoreIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    loadMoreIconColor: {
+        type: "string",
+        default: "#FFFFFF"
+    },
+    loadMoreIconHoverColor: {
+        type: 'string',
+        default: ""
+    },
+	loadMoreIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	loadMoreIconDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '0',
+		},
+	},
+	loadMoreIconTabletMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '0',
+		},
+	},
+	loadMoreIconMobileMargin: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '0',
+		},
+	},
+	loadMoreIconMarginLink: {
+		type: "boolean",
+		default: true
+	},
+
+	loadMoreloaderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	loadMoreloaderColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	loadMoreloaderHoverColor: {
+		type: "string",
+		default: "#FFFFFF"
+	},
+
+
+	/** End Load More */
 
 };
 

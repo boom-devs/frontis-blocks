@@ -5,9 +5,8 @@ import { __ } from "@wordpress/i18n";
 export default function save({ attributes }) {
 	const {
 		blockID,
-		wrapperAlignment,
 		Heading_Text,
-		Heading_Tag,
+		headingTag,
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
@@ -17,9 +16,12 @@ export default function save({ attributes }) {
 		descAlignment,
 		buttonAlignment,
 		icon,
-		mediaSwitcher,
 
 		Sub_Heading_Tag,
+		subHeadingSwitcher,
+		subTitleAlignment,
+		subTitleTag,
+		subTitleText,
 		btnIconPosition,
 		buttonIconSwitcher,
 		btnIcon,
@@ -41,13 +43,22 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps}>
-				<div className={`fb-cta-content-wrapper ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
+							{subHeadingSwitcher && (
+								<RichText.Content
+									tagName={subTitleTag}
+									value={subTitleText}
+									placeholder={__("CTA Sub Heading", "frontis-block")}
+									className="fb-cta-sub-heading"
+									style={{ textAlign: subTitleAlignment }}
+								/>
+							)}
 							<RichText.Content
-								tagName={Heading_Tag}
+								tagName={headingTag}
 								value={Heading_Text}
-								placeholder={__("Info Heading", "frontis-block")}
+								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
 							/>
@@ -55,7 +66,7 @@ export default function save({ attributes }) {
 								<RichText.Content
 									tagName={Sub_Heading_Tag}
 									value={Sub_Heading_Text}
-									placeholder={__("Info description", "frontis-block")}
+									placeholder={__("CTA Description", "frontis-block")}
 									className="fb-description"
 									style={{ textAlign: descAlignment }}
 								/>
@@ -73,15 +84,16 @@ export default function save({ attributes }) {
 													btnIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a className="fb-cta-button"
-											href={info_Button_Link}
-											target={btnOneTargetUrl ? "_blank" : undefined}
-											rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+											<a
+												className="fb-cta-button"
+												href={info_Button_Link}
+												target={btnOneTargetUrl ? "_blank" : undefined}
+												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
 											>
 												<RichText.Content
+													tagName="span"
 													value={info_Button_Text}
-													placeholder={__("Info Button", "frontis-block")}
-													style={{ textAlign: buttonAlignment }}
+													placeholder={__("CTA Button", "frontis-block")}
 												/>
 											</a>
 											{buttonIconSwitcher && (
@@ -101,16 +113,16 @@ export default function save({ attributes }) {
 													btnTwoIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a className="fb-cta-button"
-											href={btnTwoLink}
-											target={btnTwoTargetUrl ? "_blank" : undefined}
-											rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+											<a
+												className="fb-cta-button"
+												href={btnTwoLink}
+												target={btnTwoTargetUrl ? "_blank" : undefined}
+												rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
 											>
 												<RichText.Content
+													tagName="span"
 													value={btnTwoText}
-													placeholder={__("Info Button", "frontis-block")}
-													className="fb-cta-button"
-													style={{ textAlign: buttonAlignment }}
+													placeholder={__("CTA Button", "frontis-block")}
 												/>
 											</a>
 											{buttonTwoIconSwitcher && (
@@ -126,6 +138,7 @@ export default function save({ attributes }) {
 					</div>
 				</div>
 			</div>
+
 		</>
 	);
 }

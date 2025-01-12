@@ -20,6 +20,10 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
+                FeatureIconImageUrl: "",
+                FeatureIconImageAlt: "",
+                FeatureIconImageID: "",
+
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
                 FeatureSingleItemIconHoverColor: "",
@@ -61,6 +65,10 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
+                FeatureIconImageUrl: "",
+                FeatureIconImageAlt: "",
+                FeatureIconImageID: "",
+
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
                 FeatureSingleItemIconHoverColor: "",
@@ -101,6 +109,10 @@ const attributes = {
                 Title: 'Feature Item 3',
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
+
+                FeatureIconImageUrl: "",
+                FeatureIconImageAlt: "",
+                FeatureIconImageID: "",
 
                 FeatureSingleItemIconColorSwitcher: "normal",
                 FeatureSingleItemIconColor: "",
@@ -161,6 +173,18 @@ const attributes = {
                 FeatureIconAlign: {
                     type: "string",
                     default: "icon",
+                },
+                FeatureIconImageUrl: {
+                    type: "string",
+                    default: ""
+                },
+                FeatureIconImageAlt: {
+                    type: "string",
+                    default: ""
+                },
+                FeatureIconImageID: {
+                    type: "number",
+                    default: ""
                 },
 
 
@@ -597,6 +621,10 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Icon Box Shadow */
+    FeatureIconBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureIconBoxShadowValues: {
         type: 'array',
         default: [],
@@ -605,12 +633,20 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    FeatureIconBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureIconBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
     /** End Icon Box Shadow */
 
     /** Start Title */
     FeatureTitleFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     FeatureTitleFontSize: {
 		type: 'object',
@@ -694,7 +730,7 @@ const attributes = {
     /** Start Description */
     FeatureDescFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     FeatureDescFontSize: {
         type: 'object',
@@ -747,9 +783,9 @@ const attributes = {
     FeatureDescLineHeight: {
         type: 'object',
         default: {
-            Desktop: 'inherit',
-            Tablet: 'inherit',
-            Mobile: 'inherit'
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     FeatureDescLineHeightUnits: {
@@ -968,11 +1004,23 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Single Item Box Shadow */
+    FeatureSingleItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureSingleItemBoxShadowValues: {
         type: 'array',
         default: [],
     },
     FeatureSingleItemBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    FeatureSingleItemBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureSingleItemBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -983,7 +1031,12 @@ const attributes = {
 
     /** Start Global Setting */
 	FeatureGlobalZIndex : {
-        type: "number",
+        type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 	/** Start Padding */
 	FeatureGlobalPaddingUnits: {
@@ -1191,8 +1244,6 @@ const attributes = {
     },
     /** End Background Color */
 
-
-
 	/** Start Border */
 	FeatureGlobalBorder: {
 		type: 'string',
@@ -1293,6 +1344,10 @@ const attributes = {
 	/** End Border Radius */
 
 	/** Start Box Shadow */
+    FeatureGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
 	FeatureGlobalBoxShadowValues: {
         type: 'array',
         default: [],
@@ -1301,7 +1356,141 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    FeatureGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    FeatureGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
     /** End Global Style */
+
+    /** FeatureIconImage */
+    FeatureIconImageUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+    FeatureIconImageWidth: {
+        type: "object",
+        default: {
+            Desktop: "60",
+            Tablet: "60",
+            Mobile : "60"
+        }
+    },
+    FeatureIconImageHeight: {
+        type: "object",
+        default: {
+            Desktop: "60",
+            Tablet: "60",
+            Mobile : "60"
+        }
+    },
+
+    /** Start Border */
+	FeatureIconImageBorder: {
+		type: 'string',
+		default: "none",
+	},
+	FeatureIconImageBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	FeatureIconImageBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	FeatureIconImageBorderHoverColor: {
+		type: 'string',
+	},
+	FeatureIconImageBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureIconImageBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	FeatureIconImageBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureIconImageBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	FeatureIconImageBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border Radius */
+
     
 };
 

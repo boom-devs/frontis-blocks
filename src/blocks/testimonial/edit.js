@@ -15,8 +15,9 @@ import {
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
-import { useEffect } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
@@ -63,6 +64,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return icons;
     };
 
+    /**
+    * Manages tab button settings and switches to block settings on click
+    */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
     return (
         <>
             <Inspector
@@ -104,7 +111,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`}>
+                <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`} ref={panelRef}>
                     <div className={`fb-testimonial-wrapper ${blockID}`}>
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>

@@ -22,22 +22,22 @@ const attributes = {
 	mediaSize: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '25',
+			Tablet: '25',
+			Mobile: '25'
 		}
 	},
 	mediaSizeDesktop: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaSizeSizeTablet: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaSizeSizeMobile: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaSizeUnitsSave: {
 		type: "string",
@@ -58,22 +58,22 @@ const attributes = {
     mediaBgWidth: {
 		type: 'object',
 		default: {
-			Desktop: 50,
-			Tablet: 50,
-			Mobile: 50
+			Desktop: '50',
+			Tablet: '50',
+			Mobile: '50'
 		}
 	},
 	mediaBgWidthDesktop: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgWidthTablet: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgWidthMobile: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgWidthUnitsSave: {
 		type: "string",
@@ -90,22 +90,22 @@ const attributes = {
     mediaBgHeight: {
 		type: 'object',
 		default: {
-			Desktop: 50,
-			Tablet: 50,
-			Mobile: 50
+			Desktop: '50',
+			Tablet: '50',
+			Mobile: '50'
 		}
 	},
 	mediaBgHeightDesktop: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgHeightTablet: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgHeightMobile: {
 		type: "number",
-		default: 20
+		default: '20'
 	},
 	mediaBgHeightUnits: {
 		type: 'object',
@@ -117,14 +117,14 @@ const attributes = {
 	},
 	btnIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	btnIconSizeUnits: {
@@ -147,17 +147,25 @@ const attributes = {
 		type: 'string',
         default: ''
 	},
+	btnIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
+	},
 	//Button two icon
 	btnTwoIcon: {
 		type: 'string',
-		default: 'arrow-up-right-from-square',
+		default: 'arrow-left',
 	},
 	btnTwoIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 16,
-			Tablet: 16,
-			Mobile: 16
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	btnTwoIconSizeUnits: {
@@ -180,6 +188,14 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	btnTwoIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: '145',
+			Tablet: '145',
+			Mobile: '145'
+		}
+	},
     mediaIconColor: {
 		type: 'string',
         default: '#ffffff'
@@ -193,7 +209,7 @@ const attributes = {
 	},
     btnIconPosition: {
 		type: 'string',
-        default: 'left'
+        default: 'right'
 	},
     infoIconPosition: {
 		type: 'string',
@@ -201,11 +217,11 @@ const attributes = {
 	},
     height: {
         type: 'number',
-        default: 50
+        default: '50'
     },
     width: {
         type: 'number',
-        default: 50
+        default: '50'
     },
 	icon: {
 		type: 'string',
@@ -239,7 +255,7 @@ const attributes = {
     },
     borderRadius: {
         type: 'number',
-        default: 0,
+        default: '0',
     },
     titleText: {
         type: 'string',
@@ -261,6 +277,7 @@ const attributes = {
         type: "string",
         default: "center",
     },
+	// Title 
     Alignment: {
         type: "string",
         default: "center",
@@ -269,14 +286,27 @@ const attributes = {
         type : "string",
         default: "We are help you to grow up"
     },
-    Heading_Tag: {
+    headingTag: {
         type : "string",
         default: "h2"
+    },
+	//Sub Title
+	subTitleAlignment: {
+        type: "string",
+        default: "center",
+    },
+    subTitleText: {
+        type : "string",
+        default: "23k User  Our Customer Love us"
+    },
+    subTitleTag: {
+        type : "string",
+        default: "h4"
     },
     /** Start Heading Style */
     headingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     headingFontSize: {
 		type: 'object',
@@ -342,15 +372,15 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    Heading_Color_Switcher : {
+    headingColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    Heading_Color : {
+    headingColor : {
         type: "string",
 		default: "#ffffff"
     },
-    Heading_Hover_Color: {
+    headingHoverColor: {
         type: 'string',
     },
     Heading_Background_Color: {
@@ -360,13 +390,13 @@ const attributes = {
         type: 'string',
         default: "none",
     },
-    Heading_Border_Color: {
+    headingBorderColor: {
         type: 'string',
     },
-    Heading_Border_Hover_Color: {
+    headingBorderHoverColor: {
         type: 'string',
     },
-    Heading_Border_Color_Switcher : {
+    headingBorderColorSwitcher : {
         type: "string",
         default: "normal"
     },
@@ -383,28 +413,28 @@ const attributes = {
     headingDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 24,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
         },
     },
     headingTabPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 18,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '18',
+            left: '0',
+            right: '0',
         },
     },
     headingMobilePadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 16,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '16',
+            left: '0',
+            right: '0',
         },
     },
     headingPaddingLink : {
@@ -424,29 +454,29 @@ const attributes = {
     headingDesktopMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingTabMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingMobileMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingMarginLink: {
         type: "boolean",
@@ -464,29 +494,29 @@ const attributes = {
     headingDesktopBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingTabBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingMobileBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     headingBorderLink: {
         type: "boolean",
@@ -502,30 +532,30 @@ const attributes = {
         },
     },
     headingDesktopBorderRadius: {
-        type: "object",
+        type: "object",	
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            topLeft: '0',
+            topRight: '0',
+            bottomLeft: '0',
+            bottomRight: '0',
         },
     },
     headingTabBorderRadius: {
         type: "object",
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            topLeft: '0',
+            topRight: '0',
+            bottomLeft: '0',
+            bottomRight: '0',
         },
     },
     headingMobileBorderRadius: {
         type: "object",
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            topLeft: '0',
+            topRight: '0',
+            bottomLeft: '0',
+            bottomRight: '0',
         },
     },
     headingBorderRadiusLink: {
@@ -536,7 +566,7 @@ const attributes = {
     //Sub Heading
     SubHeadingFontFamily: {
         type: "string",
-        default: "inherit",
+        default: "Default",
     },
     SubHeadingFontSize: {
         type: 'object',
@@ -621,7 +651,15 @@ const attributes = {
         type : "string",
         default: "p"
     },
-    Sub_Heading_Switcher: {
+    descriptionSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+	subHeadingSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+	imageSwitcher: {
         type: "boolean",
         default: true,
     },
@@ -641,28 +679,28 @@ const attributes = {
     descDesktopPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 42,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '42',
+            left: '0',
+            right: '0',
         },
     },
     descTabPadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 32,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '32',
+            left: '0',
+            right: '0',
         },
     },
     descMobilePadding: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 24,
-            left: 0,
-            right: 0,
+            top: '0',
+            bottom: '24',
+            left: '0',
+            right: '0',
         },
     },
     descPaddingLink: {
@@ -682,29 +720,29 @@ const attributes = {
     descDesktopMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
     },
     descTabMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
     },
     descMobileMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
     },
     descMarginLink: {
         type: "boolean",
@@ -743,28 +781,28 @@ const attributes = {
     btnOneDesktopPadding: {
         type: "object",
         default: {
-            top: 12,
-            bottom: 12,
-            left: 20,
-            right: 20,
+            top: '12',
+            bottom: '12',
+            left: '20',
+            right: '20',
         },
     },
     btnOneTabPadding: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '10',
+            bottom: '10',
+            left: '20',
+            right: '20',
         },
     },
     btnOneMobilePadding: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '8',
+            bottom: '8',
+            left: '15',
+            right: '15',
         },
     },
     btnOnePaddingLink: {
@@ -783,29 +821,29 @@ const attributes = {
     btnOneDesktopMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 10,
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '10',
         },
     },
     btnOneTabMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '10',
+		},
     },
     btnOneMobileMargin: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '10',
+		},
     },
     btnOneActiveMarginDevice: {
         type: "string",
@@ -828,35 +866,50 @@ const attributes = {
     btnOneDesktopBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
+		},
     },
     btnOneTabBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
+		},
     },
     btnOneMobileBorder: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '2',
+			bottom: '2',
+			left: '2',
+			right: '2',
+		},
     },
     btnOneBorderLink: {
         type: "boolean",
         default: true,
     },
     /** Button One Border Radius **/
+	infoButtonBorder: {
+        type: 'string',
+		default: 'solid'
+    },
+	infoButtonBorderColor: {
+        type: 'string',
+		default: 'transparent'
+    },
+    infoButtonHoverBorderColor: {
+        type: 'string',
+    },
+    infoButtonBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
     btnOneBorderRadiusUnits: {
         type: 'object',
         default: {
@@ -868,28 +921,28 @@ const attributes = {
     btnOneDesktopBorderRadius: {
         type: "object",
         default: {
-            top: 50,
-            left: 50,
-            bottom: 50,
-            right: 50,
+            top: '50',
+            left: '50',
+            bottom: '50',
+            right: '50',
         },
     },
     btnOneTabBorderRadius: {
         type: "object",
         default: {
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
+            top: '50',
+            left: '50',
+            bottom: '50',
+            right: '50',
         },
     },
     btnOneMobileBorderRadius: {
         type: "object",
         default: {
-            topLeft: 0,
-            topRight: 0,
-            bottomLeft: 0,
-            bottomRight: 0,
+            top: '50',
+            left: '50',
+            bottom: '50',
+            right: '50',
         },
     },
     btnOneBorderRadiusLink: {
@@ -900,7 +953,7 @@ const attributes = {
 	//Button Two
 	buttonTwoFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	buttonTwoFontSize: {
 		type: 'object',
@@ -1020,28 +1073,28 @@ const attributes = {
 	btnTwoDesktopPadding: {
 		type: "object",
 		default: {
-			top: 12,
-			bottom: 12,
-			left: 20,
-			right: 20,
+			top: '12',
+			bottom: '12',
+			left: '20',
+			right: '20',
 		},
 	},
 	btnTwoTabPadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '10',
+			bottom: '10',
+			left: '20',
+			right: '20',
 		},
 	},
 	btnTwoMobilePadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '8',
+			bottom: '8',
+			left: '15',
+			right: '15',
 		},
 	},
 	btnTwoPaddingLink : {
@@ -1060,28 +1113,28 @@ const attributes = {
 	btnTwoDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	btnTwoTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	btnTwoMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	btnTwoActiveMarginDevice: {
@@ -1128,19 +1181,19 @@ const attributes = {
 	btnTwoTabBorder: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2"
 		},
 	},
 	btnTwoMobileBorder: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2"
 		},
 	},
 	btnTwoBorderLink : {
@@ -1159,28 +1212,28 @@ const attributes = {
 	btnTwoDesktopBorderRadius: {
 		type: "object",
 		default: {
-			top: 50,
-			bottom: 50,
-			left: 50,
-			right: 50,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	btnTwoTabBorderRadius: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	btnTwoMobileBorderRadius: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	btnTwoBorderRadiusLink : {
@@ -1195,28 +1248,28 @@ const attributes = {
 	infoBoxDesktopPadding: {
 		type: "object",
 		default: {
-			top: 40,
-			bottom: 40,
-			left: 40,
-			right: 40,
+			top: '40',
+			bottom: '40',
+			left: '40',
+			right: '40',
 		},
 	},
 	infoBoxTabPadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobilePadding: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// Info box margin
@@ -1227,28 +1280,28 @@ const attributes = {
 	infoBoxDesktopMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileMargin: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxActiveMarginDevice: {
@@ -1281,28 +1334,28 @@ const attributes = {
 	infoBoxDesktopBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileBorderWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// 	Info Box Border Radius
@@ -1313,34 +1366,34 @@ const attributes = {
 	infoBoxDesktopBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxTabBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	infoBoxMobileBorderRadiusWidth: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	// Button One Typography
 	buttonFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Default",
 	},
 	buttonFontSize: {
 		type: 'object',
@@ -1427,7 +1480,12 @@ const attributes = {
 		type: "string"
 	},
 	globalZIndex : {
-        type: "number",
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
 	globalPaddingUnits: {
 		type: 'object',
@@ -1440,28 +1498,28 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: 120,
-            bottom: 120,
-            left: 20,
-            right: 20,
+            top: '120',
+            bottom: '120',
+            left: '20',
+            right: '20',
         },
     },
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: 80,
-            bottom: 80,
-            left: 20,
-            right: 20,
+            top: '80',
+            bottom: '80',
+            left: '20',
+            right: '20',
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: 60,
-            bottom: 60,
-            left: 15,
-            right: 15,
+            top: '60',
+            bottom: '60',
+            left: '15',
+            right: '15',
         },
     },
     globalPaddingLink : {
@@ -1479,29 +1537,29 @@ const attributes = {
     globalMarginDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
     },
     globalMarginTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalMarginMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalMarginLink : {
         type : "boolean",
@@ -1543,29 +1601,29 @@ const attributes = {
     globalBorderDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderLink : {
         type : "boolean",
@@ -1582,29 +1640,29 @@ const attributes = {
     globalBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderRadiusTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderRadiusMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     globalBorderRadiusLink : {
         type : "boolean",
@@ -1621,29 +1679,29 @@ const attributes = {
     mediaPaddingDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaPaddingTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaPaddingMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaPaddingLink: {
         type: "boolean",
@@ -1660,29 +1718,29 @@ const attributes = {
     mediaMarginDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaMarginTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaMarginMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaMarginLink: {
         type: "boolean",
@@ -1717,29 +1775,29 @@ const attributes = {
     mediaBorderDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderLink: {
         type: "boolean",
@@ -1756,39 +1814,51 @@ const attributes = {
     mediaBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderRadiusTablet: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderRadiusMobile: {
         type: "object",
         default: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-        },
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
     },
     mediaBorderRadiusLink: {
         type: "boolean",
         default: true
     },
-    boxGlobalBoxShadowValues: {
+	globalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    globalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    boxGlobalBoxShadowCssValue: {
+	globalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    globalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    globalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
@@ -1894,8 +1964,6 @@ const attributes = {
         default: ""
     },
 
-
-
     globalBackgroundImageUrl: {
         type: "string",
         default: ""
@@ -1952,5 +2020,85 @@ const attributes = {
         type: "string",
         default: "",
     },
+	FeatureItems: {
+		type: "array",
+		default: [
+			{
+				id: "item-1",
+				Title: "Feature Item 1",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+			{
+				id: "item-2",
+				Title: "Feature Item 2",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+			{
+				id: "item-3",
+				Title: "Feature Item 3",
+				teamMemberImageUrl: "",
+				teamMemberImageAlt: "",
+				teamMemberImageID: "",
+				teamMemberImagePosition: "",
+				teamMemberImageAttachment: "",
+				teamMemberImageRepeat: "",
+				teamMemberImageSize: "",
+			},
+		],
+		items: {
+			type: "object",
+			properties: {
+				id: {
+					type: "string",
+					default: "",
+				},
+				Title: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageUrl: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageAlt: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageID: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImagePosition: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageAttachment: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageRepeat: {
+					type: "string",
+					default: "",
+				},
+				teamMemberImageSize: {
+					type: "string",
+					default: "",
+				},
+			},
+		},
+	},
+	
 }
 export default attributes;

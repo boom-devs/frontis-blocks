@@ -101,28 +101,3 @@ $border_color: #dddddd;
 // }
 
 
-.fb-unit-wrapper {
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	.fb-reset-control-container {
-		.fb-reset-button {
-			align-items: center;
-			background-color: #dcdcde;
-			border: 0;
-			border-radius: 50%;
-			cursor: pointer !important;
-			display: flex;
-			height: 26px !important;
-			justify-content: center;
-			min-width: auto !important;
-			opacity: 1 !important;
-			padding: 6px !important;
-			width: 26px !important;
-			svg {
-				display: block;
-				fill: none;
-			}
-		}
-	}
-}

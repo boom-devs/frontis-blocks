@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 const VideoBanner = () => {
     return (
         <div className="fb-video-banner">
-            <div className="fb-video-wrapper">
+            {/* <div className="fb-video-wrapper">
                 <iframe
                     width="100%"
                     height="100%"
@@ -13,7 +13,7 @@ const VideoBanner = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                 ></iframe>
-            </div>
+            </div> */}
             <div className="fb-video-banner-content">
                 <div>
                     <h2>{__('Welcome to Frontis Blocks', 'frontis-blocks')}</h2>
