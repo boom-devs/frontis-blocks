@@ -12,7 +12,6 @@ import './editor.scss';
 
 import {
     BORDER_STYLES,
-    TRANSITION_EFFECTS
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -22,12 +21,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
         autoplay,
         autoplaySpeed,
-        infiniteLoop,
-        transitionSpeed,
-        transitionSwitcher,
-        allowTouchMove,
-        displayArrows,
-        displayDots,
+
         /** Arrow Color **/
         sliderArrowColorSwitcher,
         sliderArrowColor,
@@ -119,19 +113,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( { autoplay: ! autoplay } );
     };
 
-    const toggleInfiniteLoop = () => {
-        setAttributes( { infiniteLoop: ! infiniteLoop } );
-    };
-
-    const toggleTouchMove = () => {
-        setAttributes( { allowTouchMove: ! allowTouchMove } );
-    };
-    const toggleArrow = () => {
-        setAttributes( { displayArrows: ! displayArrows } );
-    };
-    const toggleDots = () => {
-        setAttributes( { displayDots: ! displayDots } );
-    };
     /** Start Arrow Padding */
     const arrowPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -746,7 +727,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${arrowGlobalBorderHoverColor ? `border-color: ${arrowGlobalBorderHoverColor};` : ''}
                 ${arrowGlobalBoxShadowHoverCssValue ? `box-shadow: ${arrowGlobalBoxShadowHoverCssValue};` : ''}
             }
-            
+            {/* Arrow Color* /}
+            .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:after,
+            .fb-block-${ blockId }.fb-slider-container .swiper-button-next:after{
+                ${sliderArrowColor ? `color: ${sliderArrowColor};` : ''}
+            }
+            .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:hover:after,
+            .fb-block-${ blockId }.fb-slider-container .swiper-button-next:hover:after {
+                ${sliderArrowHoverColor ? `color: ${sliderArrowHoverColor};` : ''}
+            }
             {/*Arrow Background Color*/}
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev,
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next{
@@ -762,15 +751,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next:hover {
                 ${sliderArrowBgHoverColor ? `background-color: ${sliderArrowBgHoverColor};` : ''}
             }
-            {/ *Arrow Size, Color */}
+            {/*Arrow Size*/}
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:after,
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next:after{
-                ${sliderArrowColor ? `color: ${sliderArrowColor};` : ''}
                 ${arrowSize.Desktop ? `font-size: ${arrowSize.Desktop}${arrowSizeUnits.Desktop};` : ''}
-            }
-            .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:hover:after,
-            .fb-block-${ blockId }.fb-slider-container .swiper-button-next:hover:after {
-                ${sliderArrowHoverColor ? `color: ${sliderArrowHoverColor};` : ''}
             }
             {/* Arrow Space From Edges Prev */}
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev{
@@ -852,6 +836,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${dotsSpacingFromTop.Mobile ? `bottom: ${dotsSpacingFromTop.Mobile}${dotsSpacingFromTopUnits.Mobile};` : ''}
                 }
             }
+            
+           
     `, [
         blockId,
         sliderArrowColor,
@@ -878,9 +864,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         arrowMobileMarginWidth,
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
-        arrowGlobalBgHoverColor,
-        arrowGlobalBorderHoverColor,
-        arrowGlobalBoxShadowHoverCssValue,
         arrowGlobalZIndex,
         arrowGlobalBgColor,
         globalDesktopPadding,
@@ -900,6 +883,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     return (
+
         <>
             <style>
                 {editorStyle}
@@ -921,71 +905,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "general" && (
                                     <>
                                         <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
-                                            <ToggleControl
-                                                label={ __( 'Autoplay', 'frontis-blocks' ) }
-                                                checked={ autoplay }
-                                                onChange={ toggleAutoplay }
-                                                help={ __(
-                                                    "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                    'frontis-blocks'
-                                                ) }
-                                            />
-                                            { autoplay === true && (
-                                            <>
-                                                <RangeControl
-                                                    __nextHasNoMarginBottom
-                                                    __next40pxDefaultSize
-                                                    label={ __( 'Autoplay Speed (ms)', 'frontis-blocks' ) }
-                                                    setAttributes={ setAttributes }
-                                                    value={ autoplaySpeed }
-                                                    onChange={ ( value ) => setAttributes( value ) }
-                                                    min={ 0 }
-                                                    max={ 15000 }
-                                                />
-                                            </>
-                                            ) }
-                                            <ToggleControl
-                                            label={ __( 'Infinite Loop', 'frontis-blocks' ) }
-                                            checked={ infiniteLoop }
-                                            onChange={ toggleInfiniteLoop }
+                                        <ToggleControl
+                                            label={ __( 'Autoplay', 'frontis-blocks' ) }
+                                            checked={ autoplay }
+                                            onChange={ toggleAutoplay }
                                             help={ __(
                                                 "Above setting will only take effect once you are on the live page, and not while you're editing.",
                                                 'frontis-blocks'
                                             ) }
-                                            />
-                                            <SelectControl
-                                                label={__("Transition Effect", "frontis-block")}
-                                                value={transitionSwitcher}
-                                                options={TRANSITION_EFFECTS}
-                                                onChange={(value) =>
-                                                    setAttributes({ transitionSwitcher: value })
-                                                }
-                                            />
+                                        />
+                                        { autoplay === true && (
+                                        <>
                                             <RangeControl
                                                 __nextHasNoMarginBottom
                                                 __next40pxDefaultSize
-                                                label={ __( 'Transition Speed (ms)', 'frontis-blocks' ) }
+                                                label={ __( 'Autoplay Speed (ms)', 'frontis-blocks' ) }
                                                 setAttributes={ setAttributes }
-                                                value={ '' }
+                                                value={ autoplaySpeed }
                                                 onChange={ ( value ) => setAttributes( value ) }
                                                 min={ 0 }
                                                 max={ 15000 }
                                             />
-                                            <ToggleControl
-                                            label={ __( 'Allow Touch Move?', 'frontis-blocks' ) }
-                                            checked={ allowTouchMove }
-                                            onChange={ toggleTouchMove }
-                                            help={ __(
-                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                'frontis-blocks'
-                                            ) }
+                                            
+                                            <RangeControl
+                                                __nextHasNoMarginBottom
+                                                __next40pxDefaultSize
+                                                label={ __( 'Autoplay Speed (ms)', 'frontis-blocks' ) }
+                                                setAttributes={ setAttributes }
+                                                value={ autoplaySpeed }
+                                                onChange={ ( value ) => setAttributes( value ) }
+                                                min={ 0 }
+                                                max={ 15000 }
                                             />
+                                        </>
+                                    ) }
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
                                             label={ __( 'Arrows', 'frontis-blocks' ) }
-                                            checked={ displayArrows }
-                                            onChange={ toggleArrow }
+                                            checked={ autoplay }
+                                            onChange={ toggleAutoplay }
                                             help={ __(
                                                 "Above setting will only take effect once you are on the live page, and not while you're editing.",
                                                 'frontis-blocks'
@@ -993,8 +952,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         />
                                         <ToggleControl
                                             label={ __( 'Dots', 'frontis-blocks' ) }
-                                            checked={ displayDots }
-                                            onChange={ toggleDots }
+                                            checked={ autoplay }
+                                            onChange={ toggleAutoplay }
                                             help={ __(
                                                 "Above setting will only take effect once you are on the live page, and not while you're editing.",
                                                 'frontis-blocks'
@@ -1185,6 +1144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {tab.name === "advanced" && (
+                                    <PanelBody title={__("Advanced", "frontis-blocks")} initialOpen>
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
@@ -1349,6 +1309,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </PanelBody>
                                             </div>
                                         </div>
+
+                                    </PanelBody>
                                 )}
                             </div>
                         )}

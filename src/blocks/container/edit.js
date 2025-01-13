@@ -1,36 +1,26 @@
-import {
-	useBlockProps,
-	InnerBlocks,
-	useInnerBlocksProps,
-	__experimentalUseInnerBlocksProps as useInnerBlocksPropsV2
-} from '@wordpress/block-editor';
-import {useSelect} from '@wordpress/data';
-import {useEffect, useMemo, useRef} from '@wordpress/element';
-import {Icon} from '@wordpress/components';
-import {plus} from '@wordpress/icons';
-import {__} from '@wordpress/i18n';
+import {select, useSelect} from '@wordpress/data';
+import {useEffect, useMemo} from '@wordpress/element';
 import Inspector from './inspector';
-import {VariationPicker} from './variationPicker';
+import {ColumnsPicker} from './variationPicker';
 import './editor.scss';
 import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader";
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
+import {useDeviceType} from "@Config/displayType";
 
 const Edit = (props) => {
+	let deviceType= useDeviceType();
 	const {
 		isSelected,
 		attributes,
 		attributes: {
+			p_block_id,
 			borderStyle,
 			borderWidth,
 			borderColor,
-			deviceType,
 			borderHoverColor,
 			borderRadius,
 			variationSelected,
-			UAGHideDesktop,
-			UAGHideTab,
-			UAGHideMob,
 			globalBlockStyleId,
 			backgroundType,
 			backgroundVideoOpacity,
@@ -40,7 +30,7 @@ const Edit = (props) => {
 		setAttributes,
 		name,
 		context,
-		hasDynamicContent
+		hasDynamicContent,
 	} = props;
 
 	const {
@@ -54,7 +44,6 @@ const Edit = (props) => {
 		const coreBlocks = select( 'core/blocks' );
 		const coreBlockEditor = select( 'core/block-editor' );
 		const getBlockParentStore = coreBlockEditor?.getBlockParents( clientId );
-
 		const parentClientId = coreBlockEditor.getBlockRootClientId( props.clientId );
 		return {
 			defaultVariation: coreBlocks?.getDefaultBlockVariation( name ),
@@ -65,7 +54,6 @@ const Edit = (props) => {
 			parentAttributes : coreBlockEditor.getBlockAttributes( parentClientId ),
 		};
 	} );
-
 
 	if ( isParentOfSelectedBlock ) {
 		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
@@ -149,14 +137,17 @@ const Edit = (props) => {
 		}
 	}, [ hasDynamicContent, context?.postId ] );
 
-	const blockStyling = useMemo( () => styling( attributes, clientId, name, attributes.deviceType ), [ attributes, attributes.deviceType ] );
+	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
-		return <VariationPicker { ...{ ...props, variations, defaultVariation } } />
-	}
+		const block = select('core/block-editor').getBlock(clientId);
+		if (block) {
+			const coreBlockEditord = select( 'core/block-editor' );
+			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
+			setAttributes({p_block_id: parentBlockId});
+		}
 
-	const handleResponsive = (device) => {
-		console.log(device)
+		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
 	return (
