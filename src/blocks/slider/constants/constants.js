@@ -13,6 +13,12 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
+export const TRANSITION_EFFECTS = [
+	{ label: __("Slide", "frontis-block"), value: "slide" },
+	{ label: __("Fade", "frontis-block"), value: "fade" },
+	{ label: __("Flip", "frontis-block"), value: "flip" },
+];
+
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },

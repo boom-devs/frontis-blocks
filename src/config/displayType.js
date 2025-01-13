@@ -1,11 +1,11 @@
 import { useSelect, dispatch } from '@wordpress/data';
-import { store as frontisStore } from '@Store';
+import {STORE_NAME as storeName} from "@Constants/fbConstants";
 import {isCustomizerPage} from "@Utils/customizer";
 
 export const useDeviceType = () => {
 	const deviceType = useSelect( ( select ) => {
 		const getDeviceFromStore = select( 'core/edit-site' )?.__experimentalGetPreviewDeviceType() ||
-			select( 'core/edit-post' )?.__experimentalGetPreviewDeviceType() || select( frontisStore )?.getDeviceType();
+			select( 'core/edit-post' )?.__experimentalGetPreviewDeviceType() || select( storeName )?.getDeviceType();
 
 		return getDeviceFromStore || 'Desktop'
 	}, [] );
