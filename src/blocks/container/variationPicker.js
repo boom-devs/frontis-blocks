@@ -592,58 +592,29 @@ export const variations = [
 		],
 		scope: [ 'block' ],
 	},
-	{
-		name: '50-50_100',
-		icon: rowIcons[ '50-50_100' ],
-		attributes: {
-			variationSelected: true,
-			directionDesktop: 'row',
-			wrapDesktop: 'wrap',
-			wrapMobile: 'wrap',
-			deviceType: 'Desktop'
-		},
-		innerBlocks: [
-			[
-				'frontis-blocks/container',
-				{
-					customWidth: {
-						Desktop: 100,
-						Tablet: 100,
-						Mobile: 100,
-					},
-					widthSetByUser: true,
-					directionDesktop: 'row' },
-
-				[
-					[ 'frontis-blocks/container', {
-						customWidth: {
-							Desktop: 50,
-							Tablet: 50,
-							Mobile: 100,
-						},
-						widthSetByUser: true
-					} ],
-					[ 'frontis-blocks/container', {
-						customWidth: {
-							Desktop: 50,
-							Tablet: 50,
-							Mobile: 100,
-						},
-						widthSetByUser: true }
-					],
-				],
-			],
-			[ 'frontis-blocks/container', {
-				customWidth: {
-					Desktop: 100,
-					Tablet: 100,
-					Mobile: 100,
-				},
-				widthSetByUser: true }
-			],
-		],
-		scope: [ 'block' ],
-	},
+	// {
+	// 	name: '50-50_100',
+	// 	icon: rowIcons[ '50-50_100' ],
+	// 	attributes: {
+	// 		variationSelected: true,
+	// 		directionDesktop: 'row',
+	// 		wrapDesktop: 'wrap',
+	// 		wrapMobile: 'wrap',
+	// 		deviceType: 'Desktop'
+	// 	},
+	// 	innerBlocks: [
+	// 		[
+	// 			'frontis-blocks/container',
+	// 			// {customWidth: {Desktop: 100, Tablet: 100, Mobile: 100,}, widthSetByUser: true, directionDesktop: 'row'},
+	// 			[
+	// 				[ 'frontis-blocks/container', {customWidth: {Desktop: 50, Tablet: 50, Mobile: 100}, widthSetByUser: true} ],
+	// 				[ 'frontis-blocks/container', {customWidth: {Desktop: 50, Tablet: 50, Mobile: 100}, widthSetByUser: true}],
+	// 			],
+	// 		],
+	// 		[ 'frontis-blocks/container', {customWidth: {Desktop: 100,Tablet: 100,Mobile: 100}, widthSetByUser: true }],
+	// 	],
+	// 	scope: [ 'block' ],
+	// },
 	{
 		name: '25-75_75-25',
 		icon: rowIcons[ '25-75_75-25' ],
@@ -692,14 +663,13 @@ export const variations = [
 	},
 ];
 
-export const VariationPicker = ( props ) => {
+export const ColumnsPicker = ( props ) => {
 	const { clientId, setAttributes, defaultVariation } = props;
 	const { replaceInnerBlocks } = useDispatch( 'core/block-editor' );
 
 	const blockVariationPickerOnSelect = ( nextVariation = defaultVariation ) => {
 		if ( nextVariation.attributes ) {
 			setAttributes( nextVariation.attributes );
-			console.log(props)
 			setAttributes({resetFallBackCustomWidth: props.attributes.customWidth });
 		}
 
@@ -712,11 +682,11 @@ export const VariationPicker = ( props ) => {
 		<div {...useBlockProps()} className="frontis-blocks-container-variation-picker">
 			<BlockVariationPicker
 				icon={ FB_Block_Icons.container }
-				label={ __( 'Container', 'ultimate-addons-for-gutenberg' ) }
+				label={ __( 'Container', 'frontis-blocks' ) }
 				instructions={
 					__(
-						'Select a container layout to start with.',
-						'ultimate-addons-for-gutenberg'
+						'Select a container layout.',
+						'frontis-blocks'
 					)
 				}
 				variations={ variations }
