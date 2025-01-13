@@ -655,6 +655,54 @@ const attributes = {
 	},
 	/** End Margin */
 
+    /** Start Background */
+	sliderGlobalBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	sliderGlobalBgNormalBackgroundType: {  
+		type: "string",
+		default: "classic",
+	},
+	sliderGlobalBgNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	sliderGlobalBgNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	sliderGlobalBgNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	sliderGlobalBgNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	sliderGlobalBgHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	sliderGlobalBgHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	sliderGlobalBgHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	sliderGlobalBgHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	sliderGlobalBgHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+
 	/** Start Background */
 	sliderGlobalBgColorSwitcher : {
 		type: "string",

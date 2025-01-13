@@ -4,6 +4,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl } from '@wordpress/components';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
@@ -86,8 +87,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalMarginLink,
 
         sliderGlobalBgColorSwitcher,
-        sliderGlobalBgColor,
-        sliderGlobalBgHoverColor,
+        sliderGlobalBgNormalBackgroundType,
+        sliderGlobalBgNormalClassicColor,
+        sliderGlobalBgNormalGradientColor,
+        sliderGlobalBgNormalCustomGradientSwitcher,
+        sliderGlobalBgNormalCustomGradientInputValue,
+        sliderGlobalBgHoverBackgroundType,
+        sliderGlobalBgHoverClassicColor,
+        sliderGlobalBgHoverGradientColor,
+        sliderGlobalBgHoverCustomGradientSwitcher,
+        sliderGlobalBgHoverCustomGradientInputValue,
 
         sliderGlobalBorder,
         sliderGlobalBorderColorSwitcher,
@@ -730,24 +739,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const globalMobileBorderRadiusWidth = `${sliderGlobalBorderRadiusMobile.top}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.right}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.bottom}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.left}${sliderGlobalBorderRadiusUnits.Mobile}`;
 
     const sliderBlockStyle = useMemo(() => `
-            .fb-block-${ blockId }.fb-slider-container{
-                ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
-                ${sliderGlobalBgColor ? `background-color: ${sliderGlobalBgColor};` : ''}
-                ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
-                ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
-                ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
-                ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-                ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-                ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
-                ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
-                transition: all .3s ease-in-out;
-                position: relative;
-            }
-            .fb-block-${ blockId }.fb-slider-container:hover{
-                ${sliderGlobalBgHoverColor ? `background-color: ${sliderGlobalBgHoverColor};` : ''}
-                ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
-                ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
-            }
+        .fb-block-${ blockId }.fb-slider-container{
+            ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
+            ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
+            ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
+            ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
+            ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
+            ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
+            ${sliderGlobalBgNormalBackgroundType === 'gradient' ? `  
+                background: ${
+                    sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue 
+                        ? sliderGlobalBgNormalCustomGradientInputValue 
+                        : sliderGlobalBgNormalGradientColor || sliderGlobalBgNormalClassicColor
+                };
+            ` : `
+                background: ${sliderGlobalBgNormalClassicColor};
+            `}
+            transition: all .3s ease-in-out;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .fb-block-${ blockId }.fb-slider-container:hover{
+            ${sliderGlobalBgHoverBackgroundType === 'gradient' ? `  
+                background: ${
+                    sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue 
+                        ? sliderGlobalBgHoverCustomGradientInputValue 
+                        : sliderGlobalBgHoverGradientColor || sliderGlobalBgHoverClassicColor
+                };
+            ` : `
+                background: ${sliderGlobalBgHoverClassicColor};
+            `}
+            ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
+            ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
+        }
             {/* Arrow Color* /}
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:after,
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next:after{
@@ -905,10 +931,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalMarginTabletWidth,
         sliderGlobalMarginMobileWidth,
 
-
         sliderGlobalBgColorSwitcher,
-        sliderGlobalBgColor,
-        sliderGlobalBgHoverColor,
+        sliderGlobalBgNormalBackgroundType,
+        sliderGlobalBgNormalClassicColor,
+        sliderGlobalBgNormalGradientColor,
+        sliderGlobalBgNormalCustomGradientSwitcher,
+        sliderGlobalBgNormalCustomGradientInputValue,
+        sliderGlobalBgHoverBackgroundType,
+        sliderGlobalBgHoverClassicColor,
+        sliderGlobalBgHoverGradientColor,
+        sliderGlobalBgHoverCustomGradientSwitcher,
+        sliderGlobalBgHoverCustomGradientInputValue,
 
         sliderGlobalBorder,
         sliderGlobalBorderColorSwitcher,
@@ -1223,6 +1256,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     isRangeUnit={false}
                                                 />
                                             </PanelBody>
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_BackgroundColorControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    bgColorSwitcher={sliderGlobalBgColorSwitcher}
+                                                    setBgColorSwitcher={(value) => setAttributes({ sliderGlobalBgColorSwitcher: value })}
+                                                    
+                                                    normalBackgroundType={sliderGlobalBgNormalBackgroundType}
+                                                    setNormalBackgroundType={(value) => setAttributes({ sliderGlobalBgNormalBackgroundType: value })}
+                                                    normalClassicColor={sliderGlobalBgNormalClassicColor}
+                                                    setNormalClassicColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value })}
+                                                    normalGradientColor={sliderGlobalBgNormalGradientColor}
+                                                    setNormalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value })}
+                                                    normalCustomGradientSwitcher={sliderGlobalBgNormalCustomGradientSwitcher}
+                                                    setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientSwitcher: value })}
+                                                    normalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
+                                                    setNormalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientInputValue: value })}
+                                                    
+                                                    hoverBackgroundType={sliderGlobalBgHoverBackgroundType}
+                                                    setHoverBackgroundType={(value) => setAttributes({ sliderGlobalBgHoverBackgroundType: value })}
+                                                    hoverClassicColor={sliderGlobalBgHoverClassicColor}
+                                                    setHoverClassicColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value })}
+                                                    hoverGradientColor={sliderGlobalBgHoverGradientColor}
+                                                    setHoverGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value })}
+                                                    hoverCustomGradientSwitcher={sliderGlobalBgHoverCustomGradientSwitcher}
+                                                    setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientSwitcher: value })}
+                                                    hoverCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
+                                                    setHoverCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientInputValue: value })}
+
+                                                    isBackgroundImage={false}
+                                                />
+
+                                            </PanelBody>
 
                                             <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                 <FB_Spacing
@@ -1251,33 +1319,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
                                                     setAttributes={setAttributes}
                                                 />
-                                            </PanelBody>
-
-                                            <PanelBody
-                                                title={__("Background Color", "frontis-blocks")}
-                                                initialOpen={false}
-                                            >
-                                                <FB_SwitcherControl
-                                                    label={__("Background Color", "frontis-blocks")}
-                                                    globalSwitcher={sliderGlobalBgColorSwitcher}
-                                                    setGlobalSwitcher={(value) => setAttributes({ sliderGlobalBgColorSwitcher: value })}
-                                                />
-
-                                                {sliderGlobalBgColorSwitcher === 'normal' && (
-                                                    <FB_ColorControl
-                                                        label={__("Normal Color", "frontis-blocks")}
-                                                        globalColor={sliderGlobalBgColor}
-                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgColor: value })}
-                                                    />
-                                                )}
-
-                                                {sliderGlobalBgColorSwitcher === 'hover' && (
-                                                    <FB_ColorControl
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        globalColor={sliderGlobalBgHoverColor}
-                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgHoverColor: value })}
-                                                    />
-                                                )}
                                             </PanelBody>
                                             <PanelBody
                                                 title={__("Border and Shadow", "frontis-blocks")}
