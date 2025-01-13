@@ -113,6 +113,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const toggleAutoplay = () => {
         setAttributes( { autoplay: ! autoplay } );
     };
+    const toggleArrows = () => {
+        setAttributes( { displayArrows: ! displayArrows } );
+    };
+    const toggleDots = () => {
+        setAttributes( { displayDots: ! displayDots } );
+    };
+    const toggleInfinteLoop = () => {
+        setAttributes( { infiniteLoop: ! infiniteLoop } );
+    };
 
     /** Start Arrow Padding */
     const arrowPaddingUnitsChange = (event, position) => {
@@ -928,24 +937,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 max={ 15000 }
                                             />
                                             
-                                            <RangeControl
-                                                __nextHasNoMarginBottom
-                                                __next40pxDefaultSize
-                                                label={ __( 'Autoplay Speed (ms)', 'frontis-blocks' ) }
-                                                setAttributes={ setAttributes }
-                                                value={ autoplaySpeed }
-                                                onChange={ ( value ) => setAttributes( value ) }
-                                                min={ 0 }
-                                                max={ 15000 }
-                                            />
                                         </>
-                                    ) }
+                                        ) }
+                                        <ToggleControl
+                                            label={ __( 'Infinte Loop', 'frontis-blocks' ) }
+                                            checked={ infiniteLoop }
+                                            onChange={ toggleInfinteLoop }
+                                            help={ __(
+                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
+                                                'frontis-blocks'
+                                            ) }
+                                        />
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
                                             label={ __( 'Arrows', 'frontis-blocks' ) }
-                                            checked={ autoplay }
-                                            onChange={ toggleAutoplay }
+                                            checked={ displayArrows }
+                                            onChange={ toggleArrows }
                                             help={ __(
                                                 "Above setting will only take effect once you are on the live page, and not while you're editing.",
                                                 'frontis-blocks'
@@ -953,8 +961,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         />
                                         <ToggleControl
                                             label={ __( 'Dots', 'frontis-blocks' ) }
-                                            checked={ autoplay }
-                                            onChange={ toggleAutoplay }
+                                            checked={ displayDots }
+                                            onChange={ toggleDots }
                                             help={ __(
                                                 "Above setting will only take effect once you are on the live page, and not while you're editing.",
                                                 'frontis-blocks'
