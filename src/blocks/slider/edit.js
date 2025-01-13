@@ -41,8 +41,9 @@ const Edit = (props) => {
         displayArrows,
 		displayDots,
         autoplay,
+        autoplaySpeed,
         slidePerView,
-        infiniteLoop,
+        loop,
         transitionSwitcher,
         allowTouchMove,
     } = attributes;
@@ -81,19 +82,6 @@ const Edit = (props) => {
         ['frontis-blocks/slider-item'],
     ], [slideItem, slideContent]);
 
-    // const innerBlocksProps = useInnerBlocksProps(
-    //     {
-    //         className: `swiper-wrapper`,
-    //         slot: 'container-start',
-    //     },
-    //     {
-    //         allowedBlocks: ALLOWED_BLOCKS,
-    //         template: getSliderTemplate,
-    //         renderAppender: InnerBlocks.ButtonBlockAppender,
-    //         orientation: 'horizontal',
-    //     }
-    // );
-
     const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: `swiper-wrapper`,
@@ -131,23 +119,80 @@ const Edit = (props) => {
 	};
 
 
-    const settings = {
-		slidesPerView: slidePerView,
-		autoplay: autoplay,
-		speed: transitionSpeed,
-		loop: infiniteLoop,
-		effect: 'slide',
-		allowTouchMove: allowTouchMove,
-		onBeforeInit( swiperInst ) {
-			swiperRef.current = swiperInst;
-			setSwiperInstance( swiperInst );
-		},
-		onAfterInit( swiperInst ) {
-			setTimeout( () => {
-				setSwiperNavigationPagination( swiperInst );
-			} );
-		},
-	};
+    // const settings = {
+	// 	slidesPerView: slidePerView,
+    //     autoplay: autoplay ? {
+    //         delay: autoplaySpeed,
+    //     } : false,
+	// 	speed: transitionSpeed,
+	// 	loop: loop,
+	// 	effect: 'slide',
+	// 	allowTouchMove: allowTouchMove,
+	// 	onBeforeInit( swiperInst ) {
+	// 		swiperRef.current = swiperInst;
+	// 		setSwiperInstance( swiperInst );
+	// 	},
+	// 	onAfterInit( swiperInst ) {
+	// 		setTimeout( () => {
+	// 			setSwiperNavigationPagination( swiperInst );
+	// 		} );
+	// 	},
+	// };
+
+
+
+    // First, move settings into a useMemo to avoid unnecessary recalculations
+    const settings = useMemo(() => ({
+        slidesPerView: slidePerView,
+        autoplay: autoplay ? {
+            delay: autoplaySpeed,
+        } : false,
+        speed: transitionSpeed,
+        loop: loop,
+        effect: 'slide',
+        allowTouchMove: allowTouchMove,
+        onBeforeInit(swiperInst) {
+            swiperRef.current = swiperInst;
+            setSwiperInstance(swiperInst);
+        },
+        onAfterInit(swiperInst) {
+            setTimeout(() => {
+                setSwiperNavigationPagination(swiperInst);
+            });
+        },
+    }), [slidePerView, autoplay, autoplaySpeed, transitionSpeed, loop, allowTouchMove]);
+
+    // Add useEffect to update Swiper when settings change
+    useEffect(() => {
+        if (swiperInstance) {
+            // Update general settings
+            swiperInstance.params.slidesPerView = slidePerView;
+            swiperInstance.params.speed = transitionSpeed;
+            swiperInstance.params.loop = loop;
+            swiperInstance.params.allowTouchMove = allowTouchMove;
+
+            // Handle autoplay settings
+            if (autoplay) {
+                swiperInstance.params.autoplay = {
+                    delay: autoplaySpeed,
+                };
+                swiperInstance.autoplay.start();
+            } else {
+                swiperInstance.autoplay.stop();
+            }
+
+            // Update the Swiper instance with new parameters
+            swiperInstance.update();
+
+            // If loop setting changed, need to re-initialize
+            if (swiperInstance.params.loop !== loop) {
+                swiperInstance.loopDestroy();
+                if (loop) {
+                    swiperInstance.loopCreate();
+                }
+            }
+        }
+    }, [swiperInstance, slidePerView, autoplay, autoplaySpeed, transitionSpeed, loop, allowTouchMove]);
 
 
     useEffect( () => {
@@ -189,33 +234,6 @@ const Edit = (props) => {
 			}
 		}
 	}, [ isListViewOpen ] );
-
-    // const getBlockControls = () => (
-    //     <BlockControls>
-    //         <ToolbarGroup>
-    //             <ToolbarButton
-    //                 icon="insert"
-    //                 label={__('Add Slide', 'frontis-blocks')}
-    //                 onClick={() => {
-    //                     if (block && block.innerBlocks) {
-    //                         const currentIndex = swiperInstance ? swiperInstance.activeIndex : 0;
-
-    //                         const newSlideBlock = createBlock('frontis-blocks/slider-item');
-    //                         const newInnerBlocks = [...innerBlocks, newSlideBlock];
-    //                         replaceInnerBlocks(clientId, newInnerBlocks, true);
-
-    //                         setAttributes({ slideItem: attributes.slideItem + 1 });
-
-    //                         if (swiperInstance) {
-    //                             swiperInstance.slideTo(currentIndex, 0);
-    //                         }
-    //                     }
-    //                 }}
-    //             />
-    //         </ToolbarGroup>
-    //     </BlockControls>
-    // );
-
 
     const getBlockControls = () => {
 		return (

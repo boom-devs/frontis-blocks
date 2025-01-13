@@ -48,11 +48,11 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
-	autoplaySpeed: {
-		type: 'number',
-		default: 3000,
-	},
-	infiniteLoop: {
+    autoplaySpeed: {
+        type: 'number',
+        default: 2000,
+    },
+	loop: {
 		type: 'boolean',
 		default: true,
 	},
