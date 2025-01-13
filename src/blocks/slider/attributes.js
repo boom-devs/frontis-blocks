@@ -308,234 +308,7 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
-	},    
-
-    /** Start Global Setting */
-	sliderGlobalZIndex : {
-        type: "object",
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-	/** Start Padding */
-	sliderGlobalPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
 	},
-	sliderGlobalPaddingDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalPaddingTablet: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalPaddingMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Padding */
-
-	/** Start Margin */
-	sliderGlobalMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	sliderGlobalMarginDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalMarginTablet: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalMarginMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Margin */
-
-	/** Start Background */
-	sliderGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	sliderGlobalBgColor : {
-		type: "string",
-	},
-	sliderGlobalBgHoverColor: {
-		type: 'string',
-	},
-	/** End Background */
-
-	/** Start Border */
-	sliderGlobalBorder: {
-		type: 'string',
-		default: "none",
-	},
-	sliderGlobalBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	sliderGlobalBorderColor: {
-		type: 'string',
-		default: ""
-	},
-	sliderGlobalBorderHoverColor: {
-		type: 'string',
-	},
-	sliderGlobalBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	sliderGlobalBorderDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderTablet: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Border */
-
-	/** Start Border Radius */
-	sliderGlobalBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	sliderGlobalBorderRadiusDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderRadiusTablet: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderRadiusMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	sliderGlobalBorderRadiusLink : {
-		type : "boolean",
-		default: true
-	},
-	/** End Border Radius */
-
-	/** Start Box Shadow */
-    sliderGlobalBoxShadowSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
-	sliderGlobalBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    sliderGlobalBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-    sliderGlobalBoxShadowHoverValues: {
-        type: 'array',
-        default: [],
-    },
-    sliderGlobalBoxShadowHoverCssValue: {
-        type: 'string',
-        default: '',
-    },
 
 	/*{Arrows Style}*/
 	sliderArrowColorSwitcher: {
@@ -785,7 +558,9 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
-	},    
+	},
+    
+    
 
     /** Start Global Setting */
 	sliderGlobalZIndex : {
@@ -1013,7 +788,234 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    /** End Global Style */
+
+    // /** Start Global Setting */
+	// sliderGlobalZIndex : {
+    //     type: "object",
+    //     default: {
+    //         Desktop: '',
+    //         Tablet: '',
+    //         Mobile: ''
+    //     }
+    // },
+	// /** Start Padding */
+	// sliderGlobalPaddingUnits: {
+	// 	type: 'object',
+	// 	default: {
+	// 		Desktop: 'px',
+	// 		Tablet: 'px',
+	// 		Mobile: 'px'
+	// 	}
+	// },
+	// sliderGlobalPaddingDesktop: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalPaddingTablet: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalPaddingMobile: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalPaddingLink : {
+	// 	type : "boolean",
+	// 	default: true
+	// },
+	// /** End Padding */
+
+	// /** Start Margin */
+	// sliderGlobalMarginUnits: {
+	// 	type: 'object',
+	// 	default: {
+	// 		Desktop: 'px',
+	// 		Tablet: 'px',
+	// 		Mobile: 'px'
+	// 	}
+	// },
+	// sliderGlobalMarginDesktop: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalMarginTablet: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalMarginMobile: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalMarginLink : {
+	// 	type : "boolean",
+	// 	default: true
+	// },
+	// /** End Margin */
+
+	// /** Start Background */
+	// sliderGlobalBgColorSwitcher : {
+	// 	type: "string",
+	// 	default: "normal"
+	// },
+	// sliderGlobalBgColor : {
+	// 	type: "string",
+	// },
+	// sliderGlobalBgHoverColor: {
+	// 	type: 'string',
+	// },
+	// /** End Background */
+
+	// /** Start Border */
+	// sliderGlobalBorder: {
+	// 	type: 'string',
+	// 	default: "none",
+	// },
+	// sliderGlobalBorderColorSwitcher : {
+	// 	type: "string",
+	// 	default: "normal"
+	// },
+	// sliderGlobalBorderColor: {
+	// 	type: 'string',
+	// 	default: ""
+	// },
+	// sliderGlobalBorderHoverColor: {
+	// 	type: 'string',
+	// },
+	// sliderGlobalBorderUnits: {
+	// 	type: 'object',
+	// 	default: {
+	// 		Desktop: 'px',
+	// 		Tablet: 'px',
+	// 		Mobile: 'px'
+	// 	}
+	// },
+	// sliderGlobalBorderDesktop: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderTablet: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderMobile: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderLink : {
+	// 	type : "boolean",
+	// 	default: true
+	// },
+	// /** End Border */
+
+	// /** Start Border Radius */
+	// sliderGlobalBorderRadiusUnits: {
+	// 	type: 'object',
+	// 	default: {
+	// 		Desktop: 'px',
+	// 		Tablet: 'px',
+	// 		Mobile: 'px'
+	// 	}
+	// },
+	// sliderGlobalBorderRadiusDesktop: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderRadiusTablet: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderRadiusMobile: {
+	// 	type: "object", 
+	// 	default: {
+	// 		top: '',
+	// 		bottom: '',
+	// 		left: '',
+	// 		right: '',
+	// 	},
+	// },
+	// sliderGlobalBorderRadiusLink : {
+	// 	type : "boolean",
+	// 	default: true
+	// },
+	// /** End Border Radius */
+
+	// /** Start Box Shadow */
+    // sliderGlobalBoxShadowSwitcher: {
+    //     type: 'string',
+    //     default: 'normal',
+    // },
+	// sliderGlobalBoxShadowValues: {
+    //     type: 'array',
+    //     default: [],
+    // },
+    // sliderGlobalBoxShadowCssValue: {
+    //     type: 'string',
+    //     default: '',
+    // },
+    // sliderGlobalBoxShadowHoverValues: {
+    //     type: 'array',
+    //     default: [],
+    // },
+    // sliderGlobalBoxShadowHoverCssValue: {
+    //     type: 'string',
+    //     default: '',
+    // },
+    // /** End Global Style */
 
 };
 

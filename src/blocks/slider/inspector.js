@@ -69,39 +69,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Dots Spacing */
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
+
         /** Global Settings */
+        sliderGlobalZIndex,
+        
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
         sliderGlobalPaddingTablet,
         sliderGlobalPaddingMobile,
         sliderGlobalPaddingLink,
+
         sliderGlobalMarginUnits,
         sliderGlobalMarginDesktop,
         sliderGlobalMarginTablet,
         sliderGlobalMarginMobile,
         sliderGlobalMarginLink,
+
         sliderGlobalBgColorSwitcher,
         sliderGlobalBgColor,
         sliderGlobalBgHoverColor,
+
         sliderGlobalBorder,
         sliderGlobalBorderColorSwitcher,
         sliderGlobalBorderColor,
         sliderGlobalBorderHoverColor,
+
         sliderGlobalBorderUnits,
         sliderGlobalBorderDesktop,
         sliderGlobalBorderTablet,
         sliderGlobalBorderMobile,
         sliderGlobalBorderLink,
+
         sliderGlobalBorderRadiusUnits,
         sliderGlobalBorderRadiusDesktop,
         sliderGlobalBorderRadiusTablet,
         sliderGlobalBorderRadiusMobile,
         sliderGlobalBorderRadiusLink,
+
         sliderGlobalBoxShadowSwitcher,
         sliderGlobalBoxShadowValues,
         sliderGlobalBoxShadowCssValue,
         sliderGlobalBoxShadowHoverValues,
         sliderGlobalBoxShadowHoverCssValue
+        /** End Global Setting */
 
     } = attributes;
     const deviceType = useDeviceType();
@@ -496,9 +506,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const globalDesktopPadding = `${sliderGlobalPaddingDesktop.top}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.right}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.bottom}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.left}${sliderGlobalPaddingUnits.Desktop}`;
-    const globalTabletPadding = `${sliderGlobalPaddingTablet.top}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.right}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.bottom}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.left}${sliderGlobalPaddingUnits.Tablet}`;
-    const globalMobilePadding = `${sliderGlobalPaddingMobile.top}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.right}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.bottom}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.left}${sliderGlobalPaddingUnits.Mobile}`;
+    const sliderGlobalPaddingDesktopWidth = `${sliderGlobalPaddingDesktop.top}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.right}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.bottom}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.left}${sliderGlobalPaddingUnits.Desktop}`;
+    const sliderGlobalPaddingTabletWidth = `${sliderGlobalPaddingTablet.top}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.right}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.bottom}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.left}${sliderGlobalPaddingUnits.Tablet}`;
+    const sliderGlobalPaddingMobileWidth = `${sliderGlobalPaddingMobile.top}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.right}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.bottom}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.left}${sliderGlobalPaddingUnits.Mobile}`;
     /** End Global Padding */
 
     /** Start Global Margin */
@@ -569,9 +579,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
 
-    const globalDesktopMargin = `${sliderGlobalMarginDesktop.top}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.right}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.bottom}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.left}${sliderGlobalMarginUnits.Desktop}`;
-    const globalTabletMargin = `${sliderGlobalMarginTablet.top}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.right}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.bottom}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.left}${sliderGlobalMarginUnits.Tablet}`;
-    const globalMobileMargin = `${sliderGlobalMarginMobile.top}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.right}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.bottom}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.left}${sliderGlobalMarginUnits.Mobile}`;
+    const sliderGlobalMarginDesktopWidth = `${sliderGlobalMarginDesktop.top}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.right}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.bottom}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.left}${sliderGlobalMarginUnits.Desktop}`;
+    const sliderGlobalMarginTabletWidth = `${sliderGlobalMarginTablet.top}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.right}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.bottom}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.left}${sliderGlobalMarginUnits.Tablet}`;
+    const sliderGlobalMarginMobileWidth = `${sliderGlobalMarginMobile.top}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.right}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.bottom}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.left}${sliderGlobalMarginUnits.Mobile}`;
     /** End Margin */
 
     /** Start Global border */
@@ -723,8 +733,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-block-${ blockId }.fb-slider-container{
                 ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
                 ${sliderGlobalBgColor ? `background-color: ${sliderGlobalBgColor};` : ''}
-                ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-                ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+                ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
+                ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
                 ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
                 ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
                 ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
@@ -783,8 +793,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             @media only screen and (max-width: 1024px) {
                 .fb-block-${ blockId }.fb-slider-container{
                     ${sliderGlobalZIndex.Tablet ? `z-index: ${sliderGlobalZIndex.Tablet};` : ''}
-                    ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                    ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
+                    ${sliderGlobalPaddingTabletWidth ? `padding: ${sliderGlobalPaddingTabletWidth};` : ''}
+                    ${sliderGlobalMarginTabletWidth ? `margin: ${sliderGlobalMarginTabletWidth};` : ''}
                     ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                     ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                 }
@@ -816,8 +826,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             @media only screen and (max-width: 767px) {
                 .fb-block-${ blockId }.fb-slider-container{
                     ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
-                    ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                    ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
+                    ${sliderGlobalPaddingMobileWidth ? `padding: ${sliderGlobalPaddingMobileWidth};` : ''}
+                    ${sliderGlobalMarginMobileWidth ? `margin: ${sliderGlobalMarginMobileWidth};` : ''}
                     ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                     ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                 }
@@ -874,16 +884,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
 
+        /** Global Settings */
         sliderGlobalZIndex,
+        
+        sliderGlobalPaddingUnits,
+        sliderGlobalPaddingDesktop,
+        sliderGlobalPaddingTablet,
+        sliderGlobalPaddingMobile,
+        sliderGlobalPaddingLink,
+        sliderGlobalPaddingDesktopWidth,
+        sliderGlobalPaddingTabletWidth,
+        sliderGlobalPaddingMobileWidth,
 
+        sliderGlobalMarginUnits,
+        sliderGlobalMarginDesktop,
+        sliderGlobalMarginTablet,
+        sliderGlobalMarginMobile,
+        sliderGlobalMarginLink,
+        sliderGlobalMarginDesktopWidth,
+        sliderGlobalMarginTabletWidth,
+        sliderGlobalMarginMobileWidth,
+
+
+        sliderGlobalBgColorSwitcher,
         sliderGlobalBgColor,
-        globalDesktopPadding,
-        globalDesktopMargin,
+        sliderGlobalBgHoverColor,
+
         sliderGlobalBorder,
-        globalDesktopBorderWidth,
-        globalDesktopBorderRadiusWidth,
+        sliderGlobalBorderColorSwitcher,
         sliderGlobalBorderColor,
-        sliderGlobalBoxShadowCssValue
+        sliderGlobalBorderHoverColor,
+
+        sliderGlobalBorderUnits,
+        sliderGlobalBorderDesktop,
+        sliderGlobalBorderTablet,
+        sliderGlobalBorderMobile,
+        sliderGlobalBorderLink,
+
+        sliderGlobalBorderRadiusUnits,
+        sliderGlobalBorderRadiusDesktop,
+        sliderGlobalBorderRadiusTablet,
+        sliderGlobalBorderRadiusMobile,
+        sliderGlobalBorderRadiusLink,
+
+        sliderGlobalBoxShadowSwitcher,
+        sliderGlobalBoxShadowValues,
+        sliderGlobalBoxShadowCssValue,
+        sliderGlobalBoxShadowHoverValues,
+        sliderGlobalBoxShadowHoverCssValue
+        /** End Global Setting */
     ]);
 
     useEffect(() => {
