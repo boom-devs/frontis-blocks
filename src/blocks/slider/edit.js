@@ -13,13 +13,31 @@ import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Manipulation, Mousewheel } from 'swiper/modules';
 import { useDeviceType } from "@Config/displayType";
+import { 
+    Navigation, 
+    Pagination, 
+    Autoplay, 
+    Manipulation,
+    Mousewheel,
+    EffectFade,
+    EffectCube,
+    EffectCoverflow,
+    EffectFlip,
+    EffectCreative,
+    EffectCards
+} from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/mousewheel';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-cube';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-creative';
+import 'swiper/css/effect-cards';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/slider-item'];
 
@@ -51,6 +69,7 @@ const Edit = (props) => {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+        effect,
     } = attributes;
 
 
@@ -123,7 +142,65 @@ const Edit = (props) => {
 		}
 	};
 
-
+    // Get effect-specific settings
+    const getEffectSettings = () => {
+        switch (effect) {
+            case 'fade':
+                return {
+                    fadeEffect: {
+                        crossFade: true
+                    }
+                };
+            case 'cube':
+                return {
+                    cubeEffect: {
+                        shadow: true,
+                        slideShadows: true,
+                        shadowOffset: 20,
+                        shadowScale: 0.94
+                    }
+                };
+            case 'coverflow':
+                return {
+                    coverflowEffect: {
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows: true
+                    }
+                };
+            case 'flip':
+                return {
+                    flipEffect: {
+                        slideShadows: true,
+                        limitRotation: true
+                    }
+                };
+            case 'creative':
+                return {
+                    creativeEffect: {
+                        prev: {
+                            translate: [0, 0, -400],
+                        },
+                        next: {
+                            translate: ['100%', 0, 0],
+                        },
+                    }
+                };
+            case 'cards':
+                return {
+                    cardsEffect: {
+                        perSlideOffset: 8,
+                        perSlideRotate: 2
+                    }
+                };
+            default:
+                return {
+                    effect: 'slide'
+                };
+        }
+    };
 
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
@@ -137,7 +214,8 @@ const Edit = (props) => {
         } : false,
         speed: transitionSpeed,
         loop: loop,
-        effect: 'slide',
+        effect: effect,
+        ...getEffectSettings(),
         allowTouchMove: allowTouchMove,
         // Add mousewheel configuration
         mousewheel: enableMouseWheel ? {
@@ -163,7 +241,8 @@ const Edit = (props) => {
         reverseDirection,
         transitionSpeed,
         loop,
-        allowTouchMove
+        allowTouchMove,
+        effect,
     ]);
 
     // Add useEffect to update Swiper when settings change
@@ -335,7 +414,19 @@ const Edit = (props) => {
                 <Swiper
                     ref={swiperRef}
                     {...settings}
-                    modules={[Navigation, Pagination, Autoplay, Manipulation, Mousewheel]}
+                    modules={[
+                        Navigation,
+                        Pagination,
+                        Autoplay,
+                        Manipulation,
+                        Mousewheel,
+                        EffectFade,
+                        EffectCube,
+                        EffectCoverflow,
+                        EffectFlip,
+                        EffectCreative,
+                        EffectCards
+                    ]}
                     navigation={
                         displayArrows
                             ? {
