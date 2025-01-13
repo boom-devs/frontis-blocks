@@ -22,7 +22,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
         autoplay,
         autoplaySpeed,
-
+        infiniteLoop,
+        allowTouchMove,
+        displayArrows,
+        displayDots,
         /** Arrow Color **/
         sliderArrowColorSwitcher,
         sliderArrowColor,
