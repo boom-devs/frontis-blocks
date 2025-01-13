@@ -15,6 +15,8 @@ const FB_ImageControl = ({
     setglobalImageID,
     globalImageSize = '',
     setglobalImageSize,
+    
+    isImageSize = true,
 
 }) => {
 
@@ -89,7 +91,7 @@ const FB_ImageControl = ({
                     Upload
                 </button>
             )}
-            {globalImageUrl && (
+            {globalImageUrl && isImageSize && (
                 <div className="fb-image-control-setting-wrapper">
                     <BaseControl>
                         <SelectControl
