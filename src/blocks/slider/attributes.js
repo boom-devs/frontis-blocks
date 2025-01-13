@@ -703,19 +703,6 @@ const attributes = {
 	},
 	/** End Background */
 
-	/** Start Background */
-	sliderGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	sliderGlobalBgColor : {
-		type: "string",
-	},
-	sliderGlobalBgHoverColor: {
-		type: 'string',
-	},
-	/** End Background */
-
 	/** Start Border */
 	sliderGlobalBorder: {
 		type: 'string',
@@ -785,28 +772,28 @@ const attributes = {
 	sliderGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	sliderGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	sliderGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	sliderGlobalBorderRadiusLink : {
