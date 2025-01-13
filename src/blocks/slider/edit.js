@@ -132,12 +132,12 @@ const Edit = (props) => {
 
 
     const settings = {
-		slidesPerView: slidePerView,
-		autoplay: autoplay,
+		slidesPerView: 1,
+		autoplay: true,
 		speed: transitionSpeed,
-		loop: infiniteLoop,
-		effect: transitionSwitcher,
-		allowTouchMove: allowTouchMove,
+		loop: true,
+		effect: 'slide',
+		allowTouchMove: true,
 		onBeforeInit( swiperInst ) {
 			swiperRef.current = swiperInst;
 			setSwiperInstance( swiperInst );

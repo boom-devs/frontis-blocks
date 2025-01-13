@@ -12,6 +12,7 @@ import './editor.scss';
 
 import {
     BORDER_STYLES,
+    TRANSITION_EFFECTS
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
