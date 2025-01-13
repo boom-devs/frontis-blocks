@@ -9182,7 +9182,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Store */ "./src/store/index.js");
+/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
 /* harmony import */ var _Utils_customizer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Utils/customizer */ "./src/utils/customizer.js");
 
 
@@ -9190,7 +9190,7 @@ __webpack_require__.r(__webpack_exports__);
 var useDeviceType = function useDeviceType() {
   var deviceType = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.useSelect)(function (select) {
     var _select, _select2, _select3;
-    var getDeviceFromStore = ((_select = select('core/edit-site')) === null || _select === void 0 ? void 0 : _select.__experimentalGetPreviewDeviceType()) || ((_select2 = select('core/edit-post')) === null || _select2 === void 0 ? void 0 : _select2.__experimentalGetPreviewDeviceType()) || ((_select3 = select(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _select3 === void 0 ? void 0 : _select3.getDeviceType());
+    var getDeviceFromStore = ((_select = select('core/edit-site')) === null || _select === void 0 ? void 0 : _select.__experimentalGetPreviewDeviceType()) || ((_select2 = select('core/edit-post')) === null || _select2 === void 0 ? void 0 : _select2.__experimentalGetPreviewDeviceType()) || ((_select3 = select(_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_1__.STORE_NAME)) === null || _select3 === void 0 ? void 0 : _select3.getDeviceType());
     return getDeviceFromStore || 'Desktop';
   }, []);
   return deviceType || '';
@@ -9205,7 +9205,7 @@ var useDeviceType = function useDeviceType() {
 var setDeviceType = function setDeviceType(device) {
   var _dispatch, _dispatch2, _dispatch3;
   var updateInCustomizer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var setPreviewDeviceType = ((_dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-site')) === null || _dispatch === void 0 ? void 0 : _dispatch.__experimentalSetPreviewDeviceType) || ((_dispatch2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-post')) === null || _dispatch2 === void 0 ? void 0 : _dispatch2.__experimentalSetPreviewDeviceType) || ((_dispatch3 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(_Store__WEBPACK_IMPORTED_MODULE_1__.store)) === null || _dispatch3 === void 0 ? void 0 : _dispatch3.setDeviceType);
+  var setPreviewDeviceType = ((_dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-site')) === null || _dispatch === void 0 ? void 0 : _dispatch.__experimentalSetPreviewDeviceType) || ((_dispatch2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)('core/edit-post')) === null || _dispatch2 === void 0 ? void 0 : _dispatch2.__experimentalSetPreviewDeviceType) || ((_dispatch3 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.dispatch)(frontisStore)) === null || _dispatch3 === void 0 ? void 0 : _dispatch3.setDeviceType);
 
   // Verify setPreviewDeviceType is available and setPreviewDeviceType should be function.
   if (!setPreviewDeviceType || typeof setPreviewDeviceType !== 'function') {
@@ -12542,119 +12542,6 @@ var FONT_FAMILYS = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
 }];
-
-/***/ }),
-
-/***/ "./src/store/actions.js":
-/*!******************************!*\
-  !*** ./src/store/actions.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setDeviceType: () => (/* binding */ setDeviceType)
-/* harmony export */ });
-// This action is used to set the device type. If the Gutenberg stores do not provide device type support, this action serves as a fallback.
-function setDeviceType(value) {
-  return {
-    type: 'UPDATE_DEVICE_TYPE',
-    value: value
-  };
-}
-
-/***/ }),
-
-/***/ "./src/store/index.js":
-/*!****************************!*\
-  !*** ./src/store/index.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   store: () => (/* binding */ store)
-/* harmony export */ });
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducer */ "./src/store/reducer.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./src/store/actions.js");
-/* harmony import */ var _selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectors */ "./src/store/selectors.js");
-/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
-/**
- * WordPress dependencies
- */
-
-
-/**
- * Internal dependencies
- */
-
-
-
-
-var store = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.createReduxStore)(_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_4__.STORE_NAME, {
-  reducer: _reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  actions: _actions__WEBPACK_IMPORTED_MODULE_2__,
-  selectors: _selectors__WEBPACK_IMPORTED_MODULE_3__
-});
-(0,_wordpress_data__WEBPACK_IMPORTED_MODULE_0__.register)(store);
-
-/***/ }),
-
-/***/ "./src/store/reducer.js":
-/*!******************************!*\
-  !*** ./src/store/reducer.js ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var DEFAULT_STATE = {
-  deviceType: 'Desktop'
-};
-function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_STATE;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  switch (action.type) {
-    case 'UPDATE_INITIAL_STATE':
-      return _objectSpread(_objectSpread({}, state), action.value);
-    case 'UPDATE_DEVICE_TYPE':
-      return _objectSpread(_objectSpread({}, state), {}, {
-        deviceType: action.value
-      });
-  }
-  return state;
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reducer);
-
-/***/ }),
-
-/***/ "./src/store/selectors.js":
-/*!********************************!*\
-  !*** ./src/store/selectors.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getDeviceType: () => (/* binding */ getDeviceType),
-/* harmony export */   getState: () => (/* binding */ getState)
-/* harmony export */ });
-function getState(state) {
-  return state;
-}
-function getDeviceType(state) {
-  return state.deviceType;
-}
 
 /***/ }),
 
@@ -19834,6 +19721,10 @@ const platform = {
   isRTL
 };
 
+function rectsAreEqual(a, b) {
+  return a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height;
+}
+
 // https://samthor.au/2021/observing-dom/
 function observeMove(element, onMove) {
   let io = null;
@@ -19853,12 +19744,13 @@ function observeMove(element, onMove) {
       threshold = 1;
     }
     cleanup();
+    const elementRectForRootMargin = element.getBoundingClientRect();
     const {
       left,
       top,
       width,
       height
-    } = element.getBoundingClientRect();
+    } = elementRectForRootMargin;
     if (!skip) {
       onMove();
     }
@@ -19890,6 +19782,16 @@ function observeMove(element, onMove) {
         } else {
           refresh(false, ratio);
         }
+      }
+      if (ratio === 1 && !rectsAreEqual(elementRectForRootMargin, element.getBoundingClientRect())) {
+        // It's possible that even though the ratio is reported as 1, the
+        // element is not actually fully within the IntersectionObserver's root
+        // area anymore. This can happen under performance constraints. This may
+        // be a bug in the browser's IntersectionObserver implementation. To
+        // work around this, we compare the element's bounding rect now with
+        // what it was at the time we created the IntersectionObserver. If they
+        // are not equal then the element moved, so we refresh.
+        refresh();
       }
       isFirstUpdate = false;
     }
@@ -19968,7 +19870,7 @@ function autoUpdate(reference, floating, update, options) {
   }
   function frameLoop() {
     const nextRefRect = getBoundingClientRect(reference);
-    if (prevRefRect && (nextRefRect.x !== prevRefRect.x || nextRefRect.y !== prevRefRect.y || nextRefRect.width !== prevRefRect.width || nextRefRect.height !== prevRefRect.height)) {
+    if (prevRefRect && !rectsAreEqual(prevRefRect, nextRefRect)) {
       update();
     }
     prevRefRect = nextRefRect;
@@ -20193,7 +20095,8 @@ function isContainingBlock(elementOrCss) {
   const css = isElement(elementOrCss) ? getComputedStyle(elementOrCss) : elementOrCss;
 
   // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
-  return css.transform !== 'none' || css.perspective !== 'none' || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
+  // https://drafts.csswg.org/css-transforms-2/#individual-transforms
+  return ['transform', 'translate', 'scale', 'rotate', 'perspective'].some(value => css[value] ? css[value] !== 'none' : false) || (css.containerType ? css.containerType !== 'normal' : false) || !webkit && (css.backdropFilter ? css.backdropFilter !== 'none' : false) || !webkit && (css.filter ? css.filter !== 'none' : false) || ['transform', 'translate', 'scale', 'rotate', 'perspective', 'filter'].some(value => (css.willChange || '').includes(value)) || ['paint', 'layout', 'strict', 'content'].some(value => (css.contain || '').includes(value));
 }
 function getContainingBlock(element) {
   let currentNode = getParentNode(element);

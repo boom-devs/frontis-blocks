@@ -42,6 +42,9 @@
             .fb-feature-list-icon-inner {
                 margin-left: 20px;
             }
+            .fb-feature-icon-image-wrapper {
+                margin-left: 20px;
+            }
         }
     }
 
@@ -94,6 +97,34 @@
                 display: none !important;
             }
 
+        }
+        .fb-feature-icon-image-wrapper {
+            display: inline-flex;
+            transition: ease-in-out .5s;
+            img {
+                width: 100%;
+                height: 100%;
+                transition: ease-in-out .5s;
+            }
+            &.circle {
+                img {
+                    border-radius: 50%;
+                }
+            }
+            &.square {
+                img{
+                    border-radius: 0%;
+                }
+            }
+            &.rhombus {
+                img {
+                    margin: 15px 0;
+                    transform: rotate(45deg);
+                }
+            }
+            &.none {
+                display: none !important;
+            }
         }
     }
 

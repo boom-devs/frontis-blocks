@@ -13,5 +13,6 @@ import attributes from './attributes.js';
 registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
+	parent: ['frontis-blocks/slider'],
 	save,
 } );

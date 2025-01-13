@@ -14,17 +14,21 @@
         "align": ["wide", "full"],
         "customClassName": false
     },
-    "providesContext": {
-        "fb/sliderID": "blockId",
-        "fb/sliderInheritedTransitionType": "transitionType",
-        "fb/sliderInheritedDisplayIndicators": "displayIndicators",
-        "fb/sliderInheritedIndicatorColor": "indicatorColor",
-        "fb/sliderInheritedAutoplay": "autoplay",
-        "fb/sliderInheritedAutoplaySpeed": "autoplaySpeed",
-        "fb/sliderInheritedNavigationArrows": "navigationArrows"
-    },
-    "editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css",
-    "style": "file:./style-index.css",
-    "viewScript": "file:./view.js"
+    "editorScript": [
+        "file:./index.js",
+        "frontis-swiper-script"
+    ],
+    "editorStyle": [
+        "file:./index.css",
+        "frontis-swiper-style"
+    ],
+    "style": [
+        "file:./style-index.css",
+        "frontis-swiper-style"
+    ],
+    "viewScript": [
+        "file:./view.js",
+        "frontis-swiper-script"
+    ]
+
 }
