@@ -24,7 +24,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         autoplay,
         autoplaySpeed,
         loop,
+        slidePerView,
+        spaceBetween,
+        transitionSpeed,
         allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
         displayArrows,
         displayDots,
         /** Arrow Color **/
@@ -143,9 +150,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     // const toggleInfinteLoop = () => {
     //     setAttributes( { loop: ! loop } );
     // };
-
-    console.log(autoplaySpeed);
-    console.log(autoplay);
 
     /** Start Arrow Padding */
     const arrowPaddingUnitsChange = (event, position) => {
@@ -1071,9 +1075,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <>
                                     <PanelBody title={__("Slider Options", "frontis-blocks")} initialOpen>
                                         <ToggleControl
-                                            label={ __( 'Enable Infinite Loop', 'frontis-blocks' ) }
+                                            label={ __( 'Enable Loop', 'frontis-blocks' ) }
                                             checked={ loop }
                                             onChange={(value) => setAttributes({ loop: value })}
+                                        />
+                                        <ToggleControl
+                                            label={ __( 'Enable Allow TouchMove', 'frontis-blocks' ) }
+                                            checked={ allowTouchMove }
+                                            onChange={(value) => setAttributes({ allowTouchMove: value })}
+                                        />
+                                        <ToggleControl
+                                            label={__("Pause on Hover", "frontis-blocks")}
+                                            checked={pauseOnHover}
+                                            onChange={(value) => setAttributes({ pauseOnHover: value })}
+                                        />
+                                        <ToggleControl
+                                            label={__("Stop on Last Slide", "frontis-blocks")}
+                                            checked={stopOnLastSlide}
+                                            onChange={(value) => {
+                                                setAttributes({ stopOnLastSlide: value });
+                                                if (value) {
+                                                    setAttributes({ loop: false });
+                                                }
+                                            }}
+                                        />
+                                        <ToggleControl
+                                            label={__("Reverse Direction", "frontis-blocks")}
+                                            checked={reverseDirection}
+                                            onChange={(value) => setAttributes({ reverseDirection: value })}
+                                        />
+                                        <ToggleControl
+                                            label={__("Enable Mouse Wheel", "frontis-blocks")}
+                                            checked={enableMouseWheel}
+                                            onChange={(value) => setAttributes({ enableMouseWheel: value })}
                                         />
                                         <ToggleControl
                                             label={ __( 'Enable Autoplay', 'frontis-blocks' ) }
@@ -1085,13 +1119,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             label={__('Autoplay Speed (ms)', 'frontis-blocks')}
                                             value={autoplaySpeed}
                                             onChange={(value) => setAttributes({ autoplaySpeed: value })}
-                                            min={1}
-                                            max={20000}
-                                            step={1}
+                                            min={1000}
+                                            max={10000}
+                                            step={500}
                                             initialPosition={2000}
-                                            help={__('Set the speed of autoplay in milliseconds', 'frontis-blocks')}
                                         />
                                         )}
+                                        <RangeControl
+                                             label={__("Transition Speed (ms)", "frontis-blocks")}
+                                            value={transitionSpeed}
+                                            onChange={(value) => setAttributes({ transitionSpeed: value })}
+                                            min={100}
+                                            max={3000}
+                                            step={100}
+                                            initialPosition={500}
+                                        />
+                                        <RangeControl
+                                            label={__('Slide Per View', 'frontis-blocks')}
+                                            value={slidePerView}
+                                            onChange={(value) => setAttributes({ slidePerView: value })}
+                                            min={1}
+                                            max={10}
+                                            step={1}
+                                            initialPosition={1}
+                                        />
+                                        <RangeControl
+                                            label={__('Space Between Slide', 'frontis-blocks')}
+                                            value={spaceBetween}
+                                            onChange={(value) => setAttributes({ spaceBetween: value })}
+                                            min={0}
+                                            max={200}
+                                            step={1}
+                                            initialPosition={1}
+                                        />
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl

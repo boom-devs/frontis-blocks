@@ -13,12 +13,13 @@ import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, Manipulation } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Manipulation, Mousewheel } from 'swiper/modules';
 import { useDeviceType } from "@Config/displayType";
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/mousewheel';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/slider-item'];
 
@@ -43,9 +44,13 @@ const Edit = (props) => {
         autoplay,
         autoplaySpeed,
         slidePerView,
+        spaceBetween,
         loop,
-        transitionSwitcher,
         allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
     } = attributes;
 
 
@@ -119,38 +124,27 @@ const Edit = (props) => {
 	};
 
 
-    // const settings = {
-	// 	slidesPerView: slidePerView,
-    //     autoplay: autoplay ? {
-    //         delay: autoplaySpeed,
-    //     } : false,
-	// 	speed: transitionSpeed,
-	// 	loop: loop,
-	// 	effect: 'slide',
-	// 	allowTouchMove: allowTouchMove,
-	// 	onBeforeInit( swiperInst ) {
-	// 		swiperRef.current = swiperInst;
-	// 		setSwiperInstance( swiperInst );
-	// 	},
-	// 	onAfterInit( swiperInst ) {
-	// 		setTimeout( () => {
-	// 			setSwiperNavigationPagination( swiperInst );
-	// 		} );
-	// 	},
-	// };
-
-
 
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
         slidesPerView: slidePerView,
+        spaceBetween: spaceBetween,
         autoplay: autoplay ? {
             delay: autoplaySpeed,
+            disableOnInteraction: false,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
         } : false,
         speed: transitionSpeed,
         loop: loop,
         effect: 'slide',
         allowTouchMove: allowTouchMove,
+        // Add mousewheel configuration
+        mousewheel: enableMouseWheel ? {
+            forceToAxis: true,
+            sensitivity: 1,
+            releaseOnEdges: true,
+        } : false,
         onBeforeInit(swiperInst) {
             swiperRef.current = swiperInst;
             setSwiperInstance(swiperInst);
@@ -160,30 +154,48 @@ const Edit = (props) => {
                 setSwiperNavigationPagination(swiperInst);
             });
         },
-    }), [slidePerView, autoplay, autoplaySpeed, transitionSpeed, loop, allowTouchMove]);
+    }), [
+        slidePerView,
+        spaceBetween,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        allowTouchMove
+    ]);
 
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
             // Update general settings
             swiperInstance.params.slidesPerView = slidePerView;
+            swiperInstance.params.spaceBetween = spaceBetween;
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
             swiperInstance.params.allowTouchMove = allowTouchMove;
-
+    
             // Handle autoplay settings
             if (autoplay) {
                 swiperInstance.params.autoplay = {
                     delay: autoplaySpeed,
+                    disableOnInteraction: false,
+                    stopOnLastSlide: stopOnLastSlide,
+                    reverseDirection: reverseDirection,
                 };
-                swiperInstance.autoplay.start();
+    
+                // Only start autoplay if we're not on the last slide when stopOnLastSlide is true
+                if (!stopOnLastSlide || (stopOnLastSlide && swiperInstance.activeIndex !== swiperInstance.slides.length - 1)) {
+                    swiperInstance.autoplay.start();
+                }
             } else {
                 swiperInstance.autoplay.stop();
             }
-
+    
             // Update the Swiper instance with new parameters
             swiperInstance.update();
-
+    
             // If loop setting changed, need to re-initialize
             if (swiperInstance.params.loop !== loop) {
                 swiperInstance.loopDestroy();
@@ -191,8 +203,67 @@ const Edit = (props) => {
                     swiperInstance.loopCreate();
                 }
             }
+    
+            // Reset event listeners
+            swiperInstance.off('reachEnd');
+            if (stopOnLastSlide && !loop && autoplay) {
+                swiperInstance.on('reachEnd', () => {
+                    swiperInstance.autoplay.stop();
+                });
+            }
         }
-    }, [swiperInstance, slidePerView, autoplay, autoplaySpeed, transitionSpeed, loop, allowTouchMove]);
+    }, [
+        swiperInstance,
+        slidePerView,
+        spaceBetween,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        allowTouchMove
+    ]);
+
+    // Add this new useEffect for pause on hover
+    useEffect(() => {
+        if (swiperInstance && autoplay && pauseOnHover) {
+            const swiperEl = swiperInstance.el;
+            
+            const handleMouseEnter = () => {
+                if (swiperInstance.autoplay.running) {
+                    swiperInstance.autoplay.stop();
+                }
+            };
+
+            const handleMouseLeave = () => {
+                if (autoplay && !stopOnLastSlide) {
+                    swiperInstance.autoplay.start();
+                }
+            };
+
+            swiperEl.addEventListener('mouseenter', handleMouseEnter);
+            swiperEl.addEventListener('mouseleave', handleMouseLeave);
+
+            return () => {
+                swiperEl.removeEventListener('mouseenter', handleMouseEnter);
+                swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+            };
+        }
+    }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
+
+    // Add useEffect to handle mousewheel updates
+    useEffect(() => {
+        if (swiperInstance) {
+            // Update mousewheel settings
+            if (enableMouseWheel) {
+                swiperInstance.mousewheel.enable();
+            } else {
+                swiperInstance.mousewheel.disable();
+            }
+            swiperInstance.update();
+        }
+    }, [swiperInstance, enableMouseWheel]);
 
 
     useEffect( () => {
@@ -262,16 +333,15 @@ const Edit = (props) => {
 
             <div {...blockProps}>
                 <Swiper
-                    ref={ swiperRef }
-                    { ...settings }
-                    modules={ [ Navigation, Pagination, Autoplay, Manipulation ] }
-
+                    ref={swiperRef}
+                    {...settings}
+                    modules={[Navigation, Pagination, Autoplay, Manipulation, Mousewheel]}
                     navigation={
                         displayArrows
                             ? {
                                     nextEl: '#block-' + clientId + ' .swiper-button-next',
                                     prevEl: '#block-' + clientId + ' .swiper-button-prev',
-                              }
+                            }
                             : false
                     }
                     pagination={
@@ -279,15 +349,26 @@ const Edit = (props) => {
                             ? {
                                     el: '#block-' + clientId + ' .swiper-pagination',
                                     clickable: true,
-                              }
+                            }
                             : false
                     }
-
                     onSwiper={(swiper) => {
                         setSwiperInstance(swiper);
                         swiper.on('slideChange', () => {
                             setAttributes({ currentSlideIndex: swiper.activeIndex });
                         });
+                        
+                        // Add reach end handler for stopOnLastSlide
+                        swiper.on('reachEnd', () => {
+                            if (stopOnLastSlide && !loop && autoplay) {
+                                swiper.autoplay.stop();
+                            }
+                        });
+                    }}
+                    onReachEnd={() => {
+                        if (stopOnLastSlide && !loop && autoplay) {
+                            swiperInstance?.autoplay.stop();
+                        }
                     }}
                 >
                     <div {...innerBlocksProps} />

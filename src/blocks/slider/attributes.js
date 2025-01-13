@@ -24,25 +24,18 @@ const attributes = {
         type: "number",
         default: slideCount
     },
+
     slidePerView: {
 		type: 'number',
 		default: 1,
 	},
-    transitionSwitcher : {
-		type: "string",
-		default: "slide"
+    spaceBetween: {
+		type: 'number',
+		default: 0,
 	},
 	transitionSpeed: {
 		type: 'number',
-		default: 800,
-	},
-    displayArrows: {
-		type: 'boolean',
-		default: true,
-	},
-	displayDots: {
-		type: 'boolean',
-		default: true,
+		default: 500,
 	},
 	autoplay: {
 		type: 'boolean',
@@ -60,6 +53,38 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+    pauseOnHover: {
+        "type": "boolean",
+        "default": false
+    },
+    stopOnLastSlide: {
+        "type": "boolean",
+        "default": false
+    },
+    reverseDirection: {
+        "type": "boolean",
+        "default": false
+    },
+    enableKeyboardControl: {
+        "type": "boolean",
+        "default": true
+    },
+    enableMouseWheel: {
+        "type": "boolean",
+        "default": false
+    },
+
+    displayArrows: {
+		type: 'boolean',
+		default: true,
+	},
+	displayDots: {
+		type: 'boolean',
+		default: true,
+	},
+
+
+
 	/*{Arrows Style}*/
 	sliderArrowColorSwitcher: {
         type: 'string',
