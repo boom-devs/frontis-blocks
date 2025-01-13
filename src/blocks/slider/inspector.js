@@ -13,7 +13,7 @@ import './editor.scss';
 
 import {
     BORDER_STYLES,
-    TRANSITION_EFFECTS
+    EFFECT_OPTIONS,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -32,6 +32,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+        effect,
         displayArrows,
         displayDots,
         /** Arrow Color **/
@@ -1151,6 +1152,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             max={200}
                                             step={1}
                                             initialPosition={1}
+                                        />
+                                    </PanelBody>
+                                    <PanelBody title={__("Effect", "frontis-blocks")} initialOpen={false}>
+                                        <SelectControl
+                                            label={__('Slide Effect', 'your-text-domain')}
+                                            value={effect}
+                                            options={EFFECT_OPTIONS}
+                                            onChange={(value) => setAttributes({ effect: value })}
                                         />
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>

@@ -73,7 +73,10 @@ const attributes = {
         "type": "boolean",
         "default": false
     },
-
+    effect: {
+        type: 'string',
+        default: 'creative'
+    },
     displayArrows: {
 		type: 'boolean',
 		default: true,
