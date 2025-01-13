@@ -23,7 +23,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
         autoplay,
         autoplaySpeed,
-        infiniteLoop,
+        loop,
         allowTouchMove,
         displayArrows,
         displayDots,
@@ -131,18 +131,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
-    const toggleAutoplay = () => {
-        setAttributes( { autoplay: ! autoplay } );
-    };
-    const toggleArrows = () => {
-        setAttributes( { displayArrows: ! displayArrows } );
-    };
-    const toggleDots = () => {
-        setAttributes( { displayDots: ! displayDots } );
-    };
-    const toggleInfinteLoop = () => {
-        setAttributes( { infiniteLoop: ! infiniteLoop } );
-    };
+    // const toggleAutoplay = () => {
+    //     setAttributes( { autoplay: ! autoplay } );
+    // };
+    // const toggleArrows = () => {
+    //     setAttributes( { displayArrows: ! displayArrows } );
+    // };
+    // const toggleDots = () => {
+    //     setAttributes( { displayDots: ! displayDots } );
+    // };
+    // const toggleInfinteLoop = () => {
+    //     setAttributes( { loop: ! loop } );
+    // };
+
+    console.log(autoplaySpeed);
+    console.log(autoplay);
 
     /** Start Arrow Padding */
     const arrowPaddingUnitsChange = (event, position) => {
@@ -941,6 +944,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
            
     `, [
         blockId,
+        autoplay,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
+        displayArrows,
+        displayDots,
         sliderArrowColor,
         sliderArrowHoverColor,
         sliderArrowBgColor,
@@ -1060,59 +1069,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <div className={`fb-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
-                                        <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
+                                    <PanelBody title={__("Slider Options", "frontis-blocks")} initialOpen>
                                         <ToggleControl
-                                            label={ __( 'Autoplay', 'frontis-blocks' ) }
+                                            label={ __( 'Enable Infinite Loop', 'frontis-blocks' ) }
+                                            checked={ loop }
+                                            onChange={(value) => setAttributes({ loop: value })}
+                                        />
+                                        <ToggleControl
+                                            label={ __( 'Enable Autoplay', 'frontis-blocks' ) }
                                             checked={ autoplay }
-                                            onChange={ toggleAutoplay }
-                                            help={ __(
-                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                'frontis-blocks'
-                                            ) }
+                                            onChange={(value) => setAttributes({ autoplay: value })}
                                         />
-                                        { autoplay === true && (
-                                        <>
-                                            <RangeControl
-                                                __nextHasNoMarginBottom
-                                                __next40pxDefaultSize
-                                                label={ __( 'Autoplay Speed (ms)', 'frontis-blocks' ) }
-                                                setAttributes={ setAttributes }
-                                                value={ autoplaySpeed }
-                                                onChange={ ( value ) => setAttributes( value ) }
-                                                min={ 0 }
-                                                max={ 15000 }
-                                            />
-                                            
-                                        </>
-                                        ) }
-                                        <ToggleControl
-                                            label={ __( 'Infinte Loop', 'frontis-blocks' ) }
-                                            checked={ infiniteLoop }
-                                            onChange={ toggleInfinteLoop }
-                                            help={ __(
-                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                'frontis-blocks'
-                                            ) }
+                                        { autoplay && (
+                                        <RangeControl
+                                            label={__('Autoplay Speed (ms)', 'frontis-blocks')}
+                                            value={autoplaySpeed}
+                                            onChange={(value) => setAttributes({ autoplaySpeed: value })}
+                                            min={1}
+                                            max={20000}
+                                            step={1}
+                                            initialPosition={2000}
+                                            help={__('Set the speed of autoplay in milliseconds', 'frontis-blocks')}
                                         />
+                                        )}
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
                                             label={ __( 'Arrows', 'frontis-blocks' ) }
                                             checked={ displayArrows }
-                                            onChange={ toggleArrows }
-                                            help={ __(
-                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                'frontis-blocks'
-                                            ) }
+                                            onChange={(value) => setAttributes({ displayArrows: value })}
                                         />
                                         <ToggleControl
                                             label={ __( 'Dots', 'frontis-blocks' ) }
                                             checked={ displayDots }
-                                            onChange={ toggleDots }
-                                            help={ __(
-                                                "Above setting will only take effect once you are on the live page, and not while you're editing.",
-                                                'frontis-blocks'
-                                            ) }
+                                            onChange={(value) => setAttributes({ displayDots: value })}
                                         />
                                     </PanelBody>
                                     </>
