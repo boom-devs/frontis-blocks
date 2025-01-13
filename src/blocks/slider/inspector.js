@@ -70,39 +70,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
         /** Global Settings */
-        arrowGlobalZIndex,
-        arrowGlobalPaddingUnits,
-        arrowGlobalPaddingDesktop,
-        arrowGlobalPaddingTablet,
-        arrowGlobalPaddingMobile,
-        arrowGlobalPaddingLink,
-        arrowGlobalMarginUnits,
-        arrowGlobalMarginDesktop,
-        arrowGlobalMarginTablet,
-        arrowGlobalMarginMobile,
-        arrowGlobalMarginLink,
-        arrowGlobalBgColorSwitcher,
-        arrowGlobalBgColor,
-        arrowGlobalBgHoverColor,
-        arrowGlobalBorder,
-        arrowGlobalBorderColorSwitcher,
-        arrowGlobalBorderColor,
-        arrowGlobalBorderHoverColor,
-        arrowGlobalBorderUnits,
-        arrowGlobalBorderDesktop,
-        arrowGlobalBorderTablet,
-        arrowGlobalBorderMobile,
-        arrowGlobalBorderLink,
-        arrowGlobalBorderRadiusUnits,
-        arrowGlobalBorderRadiusDesktop,
-        arrowGlobalBorderRadiusTablet,
-        arrowGlobalBorderRadiusMobile,
-        arrowGlobalBorderRadiusLink,
-        arrowGlobalBoxShadowSwitcher,
-        arrowGlobalBoxShadowValues,
-        arrowGlobalBoxShadowCssValue,
-        arrowGlobalBoxShadowHoverValues,
-        arrowGlobalBoxShadowHoverCssValue
+        sliderGlobalPaddingUnits,
+        sliderGlobalPaddingDesktop,
+        sliderGlobalPaddingTablet,
+        sliderGlobalPaddingMobile,
+        sliderGlobalPaddingLink,
+        sliderGlobalMarginUnits,
+        sliderGlobalMarginDesktop,
+        sliderGlobalMarginTablet,
+        sliderGlobalMarginMobile,
+        sliderGlobalMarginLink,
+        sliderGlobalBgColorSwitcher,
+        sliderGlobalBgColor,
+        sliderGlobalBgHoverColor,
+        sliderGlobalBorder,
+        sliderGlobalBorderColorSwitcher,
+        sliderGlobalBorderColor,
+        sliderGlobalBorderHoverColor,
+        sliderGlobalBorderUnits,
+        sliderGlobalBorderDesktop,
+        sliderGlobalBorderTablet,
+        sliderGlobalBorderMobile,
+        sliderGlobalBorderLink,
+        sliderGlobalBorderRadiusUnits,
+        sliderGlobalBorderRadiusDesktop,
+        sliderGlobalBorderRadiusTablet,
+        sliderGlobalBorderRadiusMobile,
+        sliderGlobalBorderRadiusLink,
+        sliderGlobalBoxShadowSwitcher,
+        sliderGlobalBoxShadowValues,
+        sliderGlobalBoxShadowCssValue,
+        sliderGlobalBoxShadowHoverValues,
+        sliderGlobalBoxShadowHoverCssValue
 
     } = attributes;
     const deviceType = useDeviceType();
@@ -433,11 +432,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( arrowGlobalPaddingLink ) {
+        if ( sliderGlobalPaddingLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        arrowGlobalPaddingDesktop: {
+                        sliderGlobalPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -447,7 +446,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        arrowGlobalPaddingTablet: {
+                        sliderGlobalPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -457,7 +456,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        arrowGlobalPaddingMobile: {
+                        sliderGlobalPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -471,13 +470,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {arrowGlobalPaddingDesktop: {...arrowGlobalPaddingDesktop, [position]: value}} );
+                    setAttributes( {sliderGlobalPaddingDesktop: {...sliderGlobalPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {arrowGlobalPaddingTablet: {...arrowGlobalPaddingTablet, [position]: value}} );
+                    setAttributes( {sliderGlobalPaddingTablet: {...sliderGlobalPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {arrowGlobalPaddingMobile: {...arrowGlobalPaddingMobile, [position]: value}} );
+                    setAttributes( {sliderGlobalPaddingMobile: {...sliderGlobalPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -486,30 +485,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
     const handleGlobalPaddingCombineBtn = () => {
-        setAttributes( {arrowGlobalPaddingLink: !arrowGlobalPaddingLink} );
+        setAttributes( {sliderGlobalPaddingLink: !sliderGlobalPaddingLink} );
     }
 
     const handleGlobalPaddingUnitsHandler = (unit) => {
         setAttributes( {
-            arrowGlobalPaddingUnits: {
-                ...arrowGlobalPaddingUnits,
+            sliderGlobalPaddingUnits: {
+                ...sliderGlobalPaddingUnits,
                 [deviceType]: unit
             }
         })
     }
-    const globalDesktopPadding = `${arrowGlobalPaddingDesktop.top}${arrowGlobalPaddingUnits.Desktop} ${arrowGlobalPaddingDesktop.right}${arrowGlobalPaddingUnits.Desktop} ${arrowGlobalPaddingDesktop.bottom}${arrowGlobalPaddingUnits.Desktop} ${arrowGlobalPaddingDesktop.left}${arrowGlobalPaddingUnits.Desktop}`;
-    const globalTabletPadding = `${arrowGlobalPaddingTablet.top}${arrowGlobalPaddingUnits.Tablet} ${arrowGlobalPaddingTablet.right}${arrowGlobalPaddingUnits.Tablet} ${arrowGlobalPaddingTablet.bottom}${arrowGlobalPaddingUnits.Tablet} ${arrowGlobalPaddingTablet.left}${arrowGlobalPaddingUnits.Tablet}`;
-    const globalMobilePadding = `${arrowGlobalPaddingMobile.top}${arrowGlobalPaddingUnits.Mobile} ${arrowGlobalPaddingMobile.right}${arrowGlobalPaddingUnits.Mobile} ${arrowGlobalPaddingMobile.bottom}${arrowGlobalPaddingUnits.Mobile} ${arrowGlobalPaddingMobile.left}${arrowGlobalPaddingUnits.Mobile}`;
+    const globalDesktopPadding = `${sliderGlobalPaddingDesktop.top}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.right}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.bottom}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.left}${sliderGlobalPaddingUnits.Desktop}`;
+    const globalTabletPadding = `${sliderGlobalPaddingTablet.top}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.right}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.bottom}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.left}${sliderGlobalPaddingUnits.Tablet}`;
+    const globalMobilePadding = `${sliderGlobalPaddingMobile.top}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.right}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.bottom}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.left}${sliderGlobalPaddingUnits.Mobile}`;
     /** End Global Padding */
 
     /** Start Global Margin */
     const handleGlobalMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( arrowGlobalMarginLink ) {
+        if ( sliderGlobalMarginLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        arrowGlobalMarginDesktop: {
+                        sliderGlobalMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -519,7 +518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        arrowGlobalMarginTablet: {
+                        sliderGlobalMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -529,7 +528,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        arrowGlobalMarginMobile: {
+                        sliderGlobalMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -543,13 +542,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {arrowGlobalMarginDesktop: {...arrowGlobalMarginDesktop, [position]: value}} );
+                    setAttributes( {sliderGlobalMarginDesktop: {...sliderGlobalMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {arrowGlobalMarginTablet: {...arrowGlobalMarginTablet, [position]: value}} );
+                    setAttributes( {sliderGlobalMarginTablet: {...sliderGlobalMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {arrowGlobalMarginMobile: {...arrowGlobalMarginMobile, [position]: value}} );
+                    setAttributes( {sliderGlobalMarginMobile: {...sliderGlobalMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -558,31 +557,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
     const handleGlobalMarginCombineBtn = () => {
-        setAttributes( {arrowGlobalMarginLink: !arrowGlobalMarginLink} );
+        setAttributes( {sliderGlobalMarginLink: !sliderGlobalMarginLink} );
     }
 
     const handleGlobalMarginUnitsHandler = (unit) => {
         setAttributes( {
-            arrowGlobalMarginUnits: {
-                ...arrowGlobalMarginUnits,
+            sliderGlobalMarginUnits: {
+                ...sliderGlobalMarginUnits,
                 [deviceType]: unit
             }
         })
     }
 
-    const globalDesktopMargin = `${arrowGlobalMarginDesktop.top}${arrowGlobalMarginUnits.Desktop} ${arrowGlobalMarginDesktop.right}${arrowGlobalMarginUnits.Desktop} ${arrowGlobalMarginDesktop.bottom}${arrowGlobalMarginUnits.Desktop} ${arrowGlobalMarginDesktop.left}${arrowGlobalMarginUnits.Desktop}`;
-    const globalTabletMargin = `${arrowGlobalMarginTablet.top}${arrowGlobalMarginUnits.Tablet} ${arrowGlobalMarginTablet.right}${arrowGlobalMarginUnits.Tablet} ${arrowGlobalMarginTablet.bottom}${arrowGlobalMarginUnits.Tablet} ${arrowGlobalMarginTablet.left}${arrowGlobalMarginUnits.Tablet}`;
-    const globalMobileMargin = `${arrowGlobalMarginMobile.top}${arrowGlobalMarginUnits.Mobile} ${arrowGlobalMarginMobile.right}${arrowGlobalMarginUnits.Mobile} ${arrowGlobalMarginMobile.bottom}${arrowGlobalMarginUnits.Mobile} ${arrowGlobalMarginMobile.left}${arrowGlobalMarginUnits.Mobile}`;
+    const globalDesktopMargin = `${sliderGlobalMarginDesktop.top}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.right}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.bottom}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.left}${sliderGlobalMarginUnits.Desktop}`;
+    const globalTabletMargin = `${sliderGlobalMarginTablet.top}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.right}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.bottom}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.left}${sliderGlobalMarginUnits.Tablet}`;
+    const globalMobileMargin = `${sliderGlobalMarginMobile.top}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.right}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.bottom}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.left}${sliderGlobalMarginUnits.Mobile}`;
     /** End Margin */
 
     /** Start Global border */
     const handleGlobalBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( arrowGlobalBorderLink ) {
+        if ( sliderGlobalBorderLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        arrowGlobalBorderDesktop: {
+                        sliderGlobalBorderDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -592,7 +591,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        arrowGlobalBorderTablet: {
+                        sliderGlobalBorderTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -602,7 +601,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        arrowGlobalBorderMobile: {
+                        sliderGlobalBorderMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -616,13 +615,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {arrowGlobalBorderDesktop: {...arrowGlobalBorderDesktop, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderDesktop: {...sliderGlobalBorderDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {arrowGlobalBorderTablet: {...arrowGlobalBorderTablet, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderTablet: {...sliderGlobalBorderTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {arrowGlobalBorderMobile: {...arrowGlobalBorderMobile, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderMobile: {...sliderGlobalBorderMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -631,30 +630,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
     const handleGlobalBorderCombineBtn = () => {
-        setAttributes( {arrowGlobalBorderLink: !arrowGlobalBorderLink} );
+        setAttributes( {sliderGlobalBorderLink: !sliderGlobalBorderLink} );
     }
 
     const handleGlobalBorderUnitsHandler = (unit) => {
         setAttributes( {
-            arrowGlobalBorderUnits: {
-                ...arrowGlobalBorderUnits,
+            sliderGlobalBorderUnits: {
+                ...sliderGlobalBorderUnits,
                 [deviceType]: unit
             }
         })
     }
-    const globalDesktopBorderWidth = `${arrowGlobalBorderDesktop.top}${arrowGlobalBorderUnits.Desktop} ${arrowGlobalBorderDesktop.right}${arrowGlobalBorderUnits.Desktop} ${arrowGlobalBorderDesktop.bottom}${arrowGlobalBorderUnits.Desktop} ${arrowGlobalBorderDesktop.left}${arrowGlobalBorderUnits.Desktop}`;
-    const globalTabletBorderWidth = `${arrowGlobalBorderTablet.top}${arrowGlobalBorderUnits.Tablet} ${arrowGlobalBorderTablet.right}${arrowGlobalBorderUnits.Tablet} ${arrowGlobalBorderTablet.bottom}${arrowGlobalBorderUnits.Tablet} ${arrowGlobalBorderTablet.left}${arrowGlobalBorderUnits.Tablet}`;
-    const globalMobileBorderWidth = `${arrowGlobalBorderMobile.top}${arrowGlobalBorderUnits.Mobile} ${arrowGlobalBorderMobile.right}${arrowGlobalBorderUnits.Mobile} ${arrowGlobalBorderMobile.bottom}${arrowGlobalBorderUnits.Mobile} ${arrowGlobalBorderMobile.left}${arrowGlobalBorderUnits.Mobile}`;
+    const globalDesktopBorderWidth = `${sliderGlobalBorderDesktop.top}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.right}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.bottom}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.left}${sliderGlobalBorderUnits.Desktop}`;
+    const globalTabletBorderWidth = `${sliderGlobalBorderTablet.top}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.right}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.bottom}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.left}${sliderGlobalBorderUnits.Tablet}`;
+    const globalMobileBorderWidth = `${sliderGlobalBorderMobile.top}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.right}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.bottom}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.left}${sliderGlobalBorderUnits.Mobile}`;
     /** End Border */
 
     /** Start Global border radius*/
     const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( arrowGlobalBorderRadiusLink ) {
+        if ( sliderGlobalBorderRadiusLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        arrowGlobalBorderRadiusDesktop: {
+                        sliderGlobalBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -664,7 +663,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        arrowGlobalBorderRadiusTablet: {
+                        sliderGlobalBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -674,7 +673,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        arrowGlobalBorderRadiusMobile: {
+                        sliderGlobalBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -688,13 +687,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {arrowGlobalBorderRadiusDesktop: {...arrowGlobalBorderRadiusDesktop, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderRadiusDesktop: {...sliderGlobalBorderRadiusDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {arrowGlobalBorderRadiusTablet: {...arrowGlobalBorderRadiusTablet, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderRadiusTablet: {...sliderGlobalBorderRadiusTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {arrowGlobalBorderRadiusMobile: {...arrowGlobalBorderRadiusMobile, [position]: value}} );
+                    setAttributes( {sliderGlobalBorderRadiusMobile: {...sliderGlobalBorderRadiusMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -703,42 +702,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
     const handleGlobalBorderRadiusCombineBtn = () => {
-        setAttributes( {arrowGlobalBorderRadiusLink: !arrowGlobalBorderRadiusLink} );
+        setAttributes( {sliderGlobalBorderRadiusLink: !sliderGlobalBorderRadiusLink} );
     }
 
     const handleGlobalBorderRadiusUnitsHandler = (unit) => {
         setAttributes( {
-            arrowGlobalBorderRadiusUnits: {
-                ...arrowGlobalBorderRadiusUnits,
+            sliderGlobalBorderRadiusUnits: {
+                ...sliderGlobalBorderRadiusUnits,
                 [deviceType]: unit
             }
         })
     }
     /** End Global border */
 
-    const globalDesktopBorderRadiusWidth = `${arrowGlobalBorderRadiusDesktop.top}${arrowGlobalBorderRadiusUnits.Desktop} ${arrowGlobalBorderRadiusDesktop.right}${arrowGlobalBorderRadiusUnits.Desktop} ${arrowGlobalBorderRadiusDesktop.bottom}${arrowGlobalBorderRadiusUnits.Desktop} ${arrowGlobalBorderRadiusDesktop.left}${arrowGlobalBorderRadiusUnits.Desktop}`;
-    const globalTabletBorderRadiusWidth = `${arrowGlobalBorderRadiusTablet.top}${arrowGlobalBorderRadiusUnits.Tablet} ${arrowGlobalBorderRadiusTablet.right}${arrowGlobalBorderRadiusUnits.Tablet} ${arrowGlobalBorderRadiusTablet.bottom}${arrowGlobalBorderRadiusUnits.Tablet} ${arrowGlobalBorderRadiusTablet.left}${arrowGlobalBorderRadiusUnits.Tablet}`;
-    const globalMobileBorderRadiusWidth = `${arrowGlobalBorderRadiusMobile.top}${arrowGlobalBorderRadiusUnits.Mobile} ${arrowGlobalBorderRadiusMobile.right}${arrowGlobalBorderRadiusUnits.Mobile} ${arrowGlobalBorderRadiusMobile.bottom}${arrowGlobalBorderRadiusUnits.Mobile} ${arrowGlobalBorderRadiusMobile.left}${arrowGlobalBorderRadiusUnits.Mobile}`;
+    const globalDesktopBorderRadiusWidth = `${sliderGlobalBorderRadiusDesktop.top}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.right}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.bottom}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.left}${sliderGlobalBorderRadiusUnits.Desktop}`;
+    const globalTabletBorderRadiusWidth = `${sliderGlobalBorderRadiusTablet.top}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.right}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.bottom}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.left}${sliderGlobalBorderRadiusUnits.Tablet}`;
+    const globalMobileBorderRadiusWidth = `${sliderGlobalBorderRadiusMobile.top}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.right}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.bottom}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.left}${sliderGlobalBorderRadiusUnits.Mobile}`;
 
     const sliderBlockStyle = useMemo(() => `
-            {/** Parent Style */}
             .fb-block-${ blockId }.fb-slider-container{
-                ${arrowGlobalZIndex.Desktop ? `z-index: ${arrowGlobalZIndex.Desktop};` : ''}
-                ${arrowGlobalBgColor ? `background-color: ${arrowGlobalBgColor};` : ''}
+                ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
+                ${sliderGlobalBgColor ? `background-color: ${sliderGlobalBgColor};` : ''}
                 ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
                 ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
-                ${arrowGlobalBorder ? `border: ${arrowGlobalBorder};` : ''}
+                ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
                 ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
                 ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-                ${arrowGlobalBorderColor ? `border-color: ${arrowGlobalBorderColor};` : ''}
-                ${arrowGlobalBoxShadowCssValue ? `box-shadow: ${arrowGlobalBoxShadowCssValue};` : ''}
+                ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
+                ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
                 transition: all .3s ease-in-out;
                 position: relative;
             }
             .fb-block-${ blockId }.fb-slider-container:hover{
-                ${arrowGlobalBgHoverColor ? `background-color: ${arrowGlobalBgHoverColor};` : ''}
-                ${arrowGlobalBorderHoverColor ? `border-color: ${arrowGlobalBorderHoverColor};` : ''}
-                ${arrowGlobalBoxShadowHoverCssValue ? `box-shadow: ${arrowGlobalBoxShadowHoverCssValue};` : ''}
+                ${sliderGlobalBgHoverColor ? `background-color: ${sliderGlobalBgHoverColor};` : ''}
+                ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
+                ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
             }
             {/* Arrow Color* /}
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:after,
@@ -783,9 +781,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             @media only screen and (max-width: 1024px) {
-                {/** Parent Style */}
                 .fb-block-${ blockId }.fb-slider-container{
-                    ${arrowGlobalZIndex.Tablet ? `z-index: ${arrowGlobalZIndex.Tablet};` : ''}
+                    ${sliderGlobalZIndex.Tablet ? `z-index: ${sliderGlobalZIndex.Tablet};` : ''}
                     ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                     ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
                     ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -817,9 +814,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             
             @media only screen and (max-width: 767px) {
-                {/** Parent Style */}
                 .fb-block-${ blockId }.fb-slider-container{
-                    ${arrowGlobalZIndex.Mobile ? `z-index: ${arrowGlobalZIndex.Mobile};` : ''}
+                    ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
                     ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                     ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
                     ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -877,15 +873,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         arrowMobileMarginWidth,
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
-        arrowGlobalZIndex,
-        arrowGlobalBgColor,
+
+        sliderGlobalZIndex,
+
+        sliderGlobalBgColor,
         globalDesktopPadding,
         globalDesktopMargin,
-        arrowGlobalBorder,
+        sliderGlobalBorder,
         globalDesktopBorderWidth,
         globalDesktopBorderRadiusWidth,
-        arrowGlobalBorderColor,
-        arrowGlobalBoxShadowCssValue
+        sliderGlobalBorderColor,
+        sliderGlobalBoxShadowCssValue
     ]);
 
     useEffect(() => {
@@ -1156,173 +1154,170 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {tab.name === "advanced" && (
-                                    <PanelBody title={__("Advanced", "frontis-blocks")} initialOpen>
-                                        <div className="fb-setting-advanced-tab-wrapper">
-                                            <div className="fb-setting-inner-wrapper">
-                                                <PanelBody
-                                                    title={__("Advanced", "frontis-blocks")}
-                                                    initialOpen={true}
-                                                    className='fb-setting-z-index-header'
-                                                >
-                                                    <FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={arrowGlobalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ arrowGlobalZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                        isRangeUnit={false}
+                                    <div className="fb-setting-advanced-tab-wrapper">
+                                        <div className="fb-setting-inner-wrapper">
+                                            <PanelBody
+                                                title={__("Advanced", "frontis-blocks")}
+                                                initialOpen={true}
+                                                className='fb-setting-z-index-header'
+                                            >
+                                                <FB_Range
+                                                    min={0}
+                                                    max={10000000}
+                                                    label={__("Z Index", "frontis-blocks")}
+                                                    rangeValue={sliderGlobalZIndex}
+                                                    onChangeHandler={(value) => setAttributes({ sliderGlobalZIndex: value === 0 ? undefined : value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                    isRangeUnit={false}
+                                                />
+                                            </PanelBody>
+
+                                            <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                                                <FB_Spacing
+                                                    label={__("Padding", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                                                    spacingUnits={sliderGlobalPaddingUnits}
+                                                    spacingDesktop={sliderGlobalPaddingDesktop}
+                                                    spacingTablet={sliderGlobalPaddingTablet}
+                                                    spacingMobile={sliderGlobalPaddingMobile}
+                                                    handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                                                    spacingCombineBtn={sliderGlobalPaddingLink}
+                                                    spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                                <FB_Spacing
+                                                    label={__("Margin", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                                                    spacingUnits={sliderGlobalMarginUnits}
+                                                    spacingDesktop={sliderGlobalMarginDesktop}
+                                                    spacingTablet={sliderGlobalMarginTablet}
+                                                    spacingMobile={sliderGlobalMarginMobile}
+                                                    handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                                                    spacingCombineBtn={sliderGlobalMarginLink}
+                                                    spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
+                                            </PanelBody>
+
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_SwitcherControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalSwitcher={sliderGlobalBgColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ sliderGlobalBgColorSwitcher: value })}
+                                                />
+
+                                                {sliderGlobalBgColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={sliderGlobalBgColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgColor: value })}
                                                     />
-                                                </PanelBody>
+                                                )}
 
-                                                <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-                                                    <FB_Spacing
-                                                        label={__("Padding", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-                                                        spacingUnits={arrowGlobalPaddingUnits}
-                                                        spacingDesktop={arrowGlobalPaddingDesktop}
-                                                        spacingTablet={arrowGlobalPaddingTablet}
-                                                        spacingMobile={arrowGlobalPaddingMobile}
-                                                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-                                                        spacingCombineBtn={arrowGlobalPaddingLink}
-                                                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
-                                                        setAttributes={setAttributes}
+                                                {sliderGlobalBgColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={sliderGlobalBgHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgHoverColor: value })}
                                                     />
-                                                    <FB_Spacing
-                                                        label={__("Margin", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-                                                        spacingUnits={arrowGlobalMarginUnits}
-                                                        spacingDesktop={arrowGlobalMarginDesktop}
-                                                        spacingTablet={arrowGlobalMarginTablet}
-                                                        spacingMobile={arrowGlobalMarginMobile}
-                                                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-                                                        spacingCombineBtn={arrowGlobalMarginLink}
-                                                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
-                                                        setAttributes={setAttributes}
+                                                )}
+                                            </PanelBody>
+                                            <PanelBody
+                                                title={__("Border and Shadow", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+
+                                                <SelectControl
+                                                    label={__("Border Style", "frontis-blocks")}
+                                                    value={sliderGlobalBorder}
+                                                    options={BORDER_STYLES}
+                                                    onChange={(value) => setAttributes({ sliderGlobalBorder: value })}
+                                                />
+
+                                                <FB_SwitcherControl
+                                                    label={__("Border Color", "frontis-blocks")}
+                                                    globalSwitcher={sliderGlobalBorderColorSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ sliderGlobalBorderColorSwitcher: value })}
+                                                />
+
+                                                {sliderGlobalBorderColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={sliderGlobalBorderColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBorderColor: value })}
                                                     />
-                                                </PanelBody>
+                                                )}
 
-                                                <PanelBody
-                                                    title={__("Background Color", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                >
-                                                    <FB_SwitcherControl
-                                                        label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={arrowGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ arrowGlobalBgColorSwitcher: value })}
+                                                {sliderGlobalBorderColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={sliderGlobalBorderHoverColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBorderHoverColor: value })}
                                                     />
+                                                )}
 
-                                                    {arrowGlobalBgColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={arrowGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ arrowGlobalBgColor: value })}
-                                                        />
-                                                    )}
+                                                <FB_Spacing
+                                                    label={__("Border", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                                                    spacingUnits={sliderGlobalBorderUnits}
+                                                    spacingDesktop={sliderGlobalBorderDesktop}
+                                                    spacingTablet={sliderGlobalBorderTablet}
+                                                    spacingMobile={sliderGlobalBorderMobile}
+                                                    handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                                                    spacingCombineBtn={sliderGlobalBorderLink}
+                                                    spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
 
-                                                    {arrowGlobalBgColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={arrowGlobalBgHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ arrowGlobalBgHoverColor: value })}
-                                                        />
-                                                    )}
-                                                </PanelBody>
-                                                <PanelBody
-                                                    title={__("Border and Shadow", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                >
+                                                <FB_Spacing
+                                                    label={__("Border Radius", "frontis-blocks")}
+                                                    deviceType={deviceType}
+                                                    spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                                                    spacingUnits={sliderGlobalBorderRadiusUnits}
+                                                    spacingDesktop={sliderGlobalBorderRadiusDesktop}
+                                                    spacingTablet={sliderGlobalBorderRadiusTablet}
+                                                    spacingMobile={sliderGlobalBorderRadiusMobile}
+                                                    handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                                                    spacingCombineBtn={sliderGlobalBorderRadiusLink}
+                                                    spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                                                    setAttributes={setAttributes}
+                                                />
 
-                                                    <SelectControl
-                                                        label={__("Border Style", "frontis-blocks")}
-                                                        value={arrowGlobalBorder}
-                                                        options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ arrowGlobalBorder: value })}
+                                                <FB_SwitcherControl
+                                                    label={__("Box Shadow", "frontis-blocks")}
+                                                    globalSwitcher={sliderGlobalBoxShadowSwitcher}
+                                                    setGlobalSwitcher={(value) => setAttributes({ sliderGlobalBoxShadowSwitcher: value })}
+                                                />
+
+                                                {sliderGlobalBoxShadowSwitcher === 'normal' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Normal Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ sliderGlobalBoxShadowValues: value })}
+                                                        initialShadowValue={sliderGlobalBoxShadowValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ sliderGlobalBoxShadowCssValue: value })}
                                                     />
+                                                )}
 
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={arrowGlobalBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ arrowGlobalBorderColorSwitcher: value })}
+                                                {sliderGlobalBoxShadowSwitcher === 'hover' && (
+                                                    <FB_BoxShadowControl
+                                                        label={__("Hover Shadow", "frontis-blocks")}
+                                                        onBoxShadowChange={(value) => setAttributes({ sliderGlobalBoxShadowHoverValues: value })}
+                                                        initialShadowValue={sliderGlobalBoxShadowHoverValues}
+                                                        onBoxShadowStyleChange={(value) => setAttributes({ sliderGlobalBoxShadowHoverCssValue: value })}
                                                     />
-
-                                                    {arrowGlobalBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={arrowGlobalBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ arrowGlobalBorderColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {arrowGlobalBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={arrowGlobalBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ arrowGlobalBorderHoverColor: value })}
-                                                        />
-                                                    )}
-
-                                                    <FB_Spacing
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-                                                        spacingUnits={arrowGlobalBorderUnits}
-                                                        spacingDesktop={arrowGlobalBorderDesktop}
-                                                        spacingTablet={arrowGlobalBorderTablet}
-                                                        spacingMobile={arrowGlobalBorderMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-                                                        spacingCombineBtn={arrowGlobalBorderLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_Spacing
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-                                                        spacingUnits={arrowGlobalBorderRadiusUnits}
-                                                        spacingDesktop={arrowGlobalBorderRadiusDesktop}
-                                                        spacingTablet={arrowGlobalBorderRadiusTablet}
-                                                        spacingMobile={arrowGlobalBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-                                                        spacingCombineBtn={arrowGlobalBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_SwitcherControl
-                                                        label={__("Box Shadow", "frontis-blocks")}
-                                                        globalSwitcher={arrowGlobalBoxShadowSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ arrowGlobalBoxShadowSwitcher: value })}
-                                                    />
-
-                                                    {arrowGlobalBoxShadowSwitcher === 'normal' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Normal Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) => setAttributes({ arrowGlobalBoxShadowValues: value })}
-                                                            initialShadowValue={arrowGlobalBoxShadowValues}
-                                                            onBoxShadowStyleChange={(value) => setAttributes({ arrowGlobalBoxShadowCssValue: value })}
-                                                        />
-                                                    )}
-
-                                                    {arrowGlobalBoxShadowSwitcher === 'hover' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Hover Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) => setAttributes({ arrowGlobalBoxShadowHoverValues: value })}
-                                                            initialShadowValue={arrowGlobalBoxShadowHoverValues}
-                                                            onBoxShadowStyleChange={(value) => setAttributes({ arrowGlobalBoxShadowHoverCssValue: value })}
-                                                        />
-                                                    )}
-                                                </PanelBody>
-                                            </div>
+                                                )}
+                                            </PanelBody>
                                         </div>
-
-                                    </PanelBody>
+                                    </div>
                                 )}
                             </div>
                         )}

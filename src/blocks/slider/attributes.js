@@ -311,7 +311,7 @@ const attributes = {
 	},    
 
     /** Start Global Setting */
-	arrowGlobalZIndex : {
+	sliderGlobalZIndex : {
         type: "object",
         default: {
             Desktop: '',
@@ -320,7 +320,7 @@ const attributes = {
         }
     },
 	/** Start Padding */
-	arrowGlobalPaddingUnits: {
+	sliderGlobalPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -328,7 +328,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalPaddingDesktop: {
+	sliderGlobalPaddingDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -337,7 +337,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingTablet: {
+	sliderGlobalPaddingTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -346,7 +346,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingMobile: {
+	sliderGlobalPaddingMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -355,14 +355,14 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingLink : {
+	sliderGlobalPaddingLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Padding */
 
 	/** Start Margin */
-	arrowGlobalMarginUnits: {
+	sliderGlobalMarginUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -370,7 +370,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalMarginDesktop: {
+	sliderGlobalMarginDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -379,7 +379,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginTablet: {
+	sliderGlobalMarginTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -388,7 +388,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginMobile: {
+	sliderGlobalMarginMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -397,42 +397,42 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginLink : {
+	sliderGlobalMarginLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
-	arrowGlobalBgColorSwitcher : {
+	sliderGlobalBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	arrowGlobalBgColor : {
+	sliderGlobalBgColor : {
 		type: "string",
 	},
-	arrowGlobalBgHoverColor: {
+	sliderGlobalBgHoverColor: {
 		type: 'string',
 	},
 	/** End Background */
 
 	/** Start Border */
-	arrowGlobalBorder: {
+	sliderGlobalBorder: {
 		type: 'string',
 		default: "none",
 	},
-	arrowGlobalBorderColorSwitcher : {
+	sliderGlobalBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	arrowGlobalBorderColor: {
+	sliderGlobalBorderColor: {
 		type: 'string',
 		default: ""
 	},
-	arrowGlobalBorderHoverColor: {
+	sliderGlobalBorderHoverColor: {
 		type: 'string',
 	},
-	arrowGlobalBorderUnits: {
+	sliderGlobalBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -440,7 +440,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalBorderDesktop: {
+	sliderGlobalBorderDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -449,7 +449,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderTablet: {
+	sliderGlobalBorderTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -458,7 +458,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderMobile: {
+	sliderGlobalBorderMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -467,14 +467,14 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderLink : {
+	sliderGlobalBorderLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border */
 
 	/** Start Border Radius */
-	arrowGlobalBorderRadiusUnits: {
+	sliderGlobalBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -482,7 +482,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalBorderRadiusDesktop: {
+	sliderGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -491,7 +491,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusTablet: {
+	sliderGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -500,7 +500,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusMobile: {
+	sliderGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -509,30 +509,30 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusLink : {
+	sliderGlobalBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border Radius */
 
 	/** Start Box Shadow */
-    arrowGlobalBoxShadowSwitcher: {
+    sliderGlobalBoxShadowSwitcher: {
         type: 'string',
         default: 'normal',
     },
-	arrowGlobalBoxShadowValues: {
+	sliderGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    arrowGlobalBoxShadowCssValue: {
+    sliderGlobalBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
-    arrowGlobalBoxShadowHoverValues: {
+    sliderGlobalBoxShadowHoverValues: {
         type: 'array',
         default: [],
     },
-    arrowGlobalBoxShadowHoverCssValue: {
+    sliderGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -788,7 +788,7 @@ const attributes = {
 	},    
 
     /** Start Global Setting */
-	arrowGlobalZIndex : {
+	sliderGlobalZIndex : {
         type: "object",
         default: {
             Desktop: '',
@@ -797,7 +797,7 @@ const attributes = {
         }
     },
 	/** Start Padding */
-	arrowGlobalPaddingUnits: {
+	sliderGlobalPaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -805,7 +805,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalPaddingDesktop: {
+	sliderGlobalPaddingDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -814,7 +814,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingTablet: {
+	sliderGlobalPaddingTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -823,7 +823,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingMobile: {
+	sliderGlobalPaddingMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -832,14 +832,14 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalPaddingLink : {
+	sliderGlobalPaddingLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Padding */
 
 	/** Start Margin */
-	arrowGlobalMarginUnits: {
+	sliderGlobalMarginUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -847,7 +847,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalMarginDesktop: {
+	sliderGlobalMarginDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -856,7 +856,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginTablet: {
+	sliderGlobalMarginTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -865,7 +865,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginMobile: {
+	sliderGlobalMarginMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -874,42 +874,42 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalMarginLink : {
+	sliderGlobalMarginLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
-	arrowGlobalBgColorSwitcher : {
+	sliderGlobalBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	arrowGlobalBgColor : {
+	sliderGlobalBgColor : {
 		type: "string",
 	},
-	arrowGlobalBgHoverColor: {
+	sliderGlobalBgHoverColor: {
 		type: 'string',
 	},
 	/** End Background */
 
 	/** Start Border */
-	arrowGlobalBorder: {
+	sliderGlobalBorder: {
 		type: 'string',
 		default: "none",
 	},
-	arrowGlobalBorderColorSwitcher : {
+	sliderGlobalBorderColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	arrowGlobalBorderColor: {
+	sliderGlobalBorderColor: {
 		type: 'string',
 		default: ""
 	},
-	arrowGlobalBorderHoverColor: {
+	sliderGlobalBorderHoverColor: {
 		type: 'string',
 	},
-	arrowGlobalBorderUnits: {
+	sliderGlobalBorderUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -917,7 +917,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalBorderDesktop: {
+	sliderGlobalBorderDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -926,7 +926,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderTablet: {
+	sliderGlobalBorderTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -935,7 +935,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderMobile: {
+	sliderGlobalBorderMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -944,14 +944,14 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderLink : {
+	sliderGlobalBorderLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border */
 
 	/** Start Border Radius */
-	arrowGlobalBorderRadiusUnits: {
+	sliderGlobalBorderRadiusUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -959,7 +959,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	arrowGlobalBorderRadiusDesktop: {
+	sliderGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
 			top: '',
@@ -968,7 +968,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusTablet: {
+	sliderGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
 			top: '',
@@ -977,7 +977,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusMobile: {
+	sliderGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
 			top: '',
@@ -986,30 +986,30 @@ const attributes = {
 			right: '',
 		},
 	},
-	arrowGlobalBorderRadiusLink : {
+	sliderGlobalBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
 	/** End Border Radius */
 
 	/** Start Box Shadow */
-    arrowGlobalBoxShadowSwitcher: {
+    sliderGlobalBoxShadowSwitcher: {
         type: 'string',
         default: 'normal',
     },
-	arrowGlobalBoxShadowValues: {
+	sliderGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
-    arrowGlobalBoxShadowCssValue: {
+    sliderGlobalBoxShadowCssValue: {
         type: 'string',
         default: '',
     },
-    arrowGlobalBoxShadowHoverValues: {
+    sliderGlobalBoxShadowHoverValues: {
         type: 'array',
         default: [],
     },
-    arrowGlobalBoxShadowHoverCssValue: {
+    sliderGlobalBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
