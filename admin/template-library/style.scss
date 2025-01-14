@@ -1,0 +1,44 @@
+.fb-template-library-button-wrapper{
+	button {
+		background: #399CFF;
+		color: #fff;
+
+		svg {
+			width: 30px;
+			height: 20px;
+
+			path: {
+				fill: #fff;
+			}
+		}
+
+		&:hover {
+			color: #fff !important;
+
+			svg {
+				path: {
+					fill: #fff;
+				}
+			}
+		}
+	}
+}
+body {
+	.components-modal__frame{
+		&.fb-template-library-popover {
+			min-width: calc(100% - 32px);
+			height: 100% !important;
+		}
+	}
+
+	.fb-template-library-logo {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+
+		span {
+			font-weight: 700;
+			font-size: 30px;
+		}
+	}
+}

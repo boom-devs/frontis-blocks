@@ -2,6 +2,7 @@
 import { createRoot } from "@wordpress/element"
 import { subscribe } from '@wordpress/data'
 import TemplatesLibrary from "./templates"
+import './style.scss';
 
 document.addEventListener('DOMContentLoaded', function () {
 	console.log("Hey there i am here")
