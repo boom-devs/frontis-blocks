@@ -59,7 +59,7 @@ const FbColorPicker = ({ name = "Color", defaultColor = "#f9f9f9", onChange, slu
     setLocalShadeStep(step);
     setShadeStep(slug, step); // Save to store
     setShadeColor(shade.color);
-    setBaseColor(shade.color);
+    // setBaseColor(shade.color);
   };
 
   return (
@@ -95,7 +95,7 @@ const FbColorPicker = ({ name = "Color", defaultColor = "#f9f9f9", onChange, slu
                 {shades.map((shade, index) => (
                   <Button
                     key={index}
-                    className="fb-color-shade-button"
+                    className={`fb-color-shade-button ${shadeColor === shade.color ? 'is-selected' : ''}`}
                     onClick={() => handleShadeSelect(shade)}
                     style={{
                       backgroundColor: shade.color,
@@ -104,7 +104,7 @@ const FbColorPicker = ({ name = "Color", defaultColor = "#f9f9f9", onChange, slu
                       borderRadius: '50%',
                       padding: 0,
                       margin: '0 4px',
-                      border: shadeColor === shade.color ? '2px solid #007cba' : '1px solid #ddd'
+                      border: shadeColor === shade.color ? '3px solid #007cba' : '1px solid #ddd'
                     }}
                     aria-label={`Shade ${shade.name}`}
                   />

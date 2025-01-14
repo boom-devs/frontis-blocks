@@ -41,6 +41,7 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_global_colors() {
+        //log the data
         $this->handle_option_update('global_colors', 'array');
     }
 
@@ -57,6 +58,7 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_typography() {
+        error_log(print_r($_POST['data'], true));
         $this->handle_option_update('typography', 'array');
     }
 
@@ -80,7 +82,7 @@ class GlobalSettings extends AjaxBase {
 
     public function get_gradient_colors() {
         $global_gradient_colors = get_option('fb_gradient_colors');
-		if($global_gradient_color) {
+		if($global_gradient_colors) {
 			wp_send_json_success($global_gradient_colors);
 		}
 		wp_send_json_error('Gradient color not found.');

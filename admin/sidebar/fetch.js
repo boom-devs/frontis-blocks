@@ -1,89 +1,111 @@
-/**
- * Define AJAX Action names
- */
-const UPDATE_GLOBAL_STYLE = 'fb_update_global_colors';
-const GET_GLOBAL_STYLE = 'fb_get_global_colors';
-
 const {nonce, ajaxUrl} = window.frontisBlocksAdminSidebar;
 
 /**
- * Function for Update Global Settings
- * @param {*} data - The data to update
- * @param {string} path - The API path (not used, kept for compatibility)
+ * Function for Update Global Colors
+ * @param {*} data - The color data to update
  * @returns {object}
  */
-export const updateGlobalStyle = async (data, path) => {
+export const updateGlobalColors = async (data) => {
 	try {
-		console.log('Updating global style with data:', data); // Debug log
-
 		const response = await jQuery.ajax({
 			url: ajaxUrl,
 			type: 'POST',
 			data: {
-				action: UPDATE_GLOBAL_STYLE,
+				action: 'fb_update_global_colors',
 				nonce: nonce,
-				data: JSON.stringify(data) // Ensure data is properly stringified
+				data: data
 			}
 		});
 
-		console.log('Server response:', response); // Debug log
-
-		if (!response.success) {
-			console.error('Server returned error:', response.data); // Debug log
-			throw new Error(response.data || 'Update failed');
+		if (!response || !response.success) {
+			console.error('Update failed response:', response);
+			throw new Error(response?.data || 'Update failed');
 		}
 
-		return response;
+		return response.data;
 	} catch (error) {
 		console.error('Update failed:', error);
-		console.error('Full error details:', {
-			message: error.message,
-			stack: error.stack,
-			response: error.responseText
-		});
-		return {
-			success: false,
-			data: error.message || "Update failed."
-		};
+		throw error;
 	}
 };
 
 /**
- * Function to Get Global Settings
- * @param {string} path - The API path (not used, kept for compatibility)
+ * Function to Get Global Colors
  * @returns {object}
  */
-export const getGlobalStyle = async (path) => {
+export const getGlobalColors = async () => {
 	try {
-		console.log('Fetching global styles'); // Debug log
-
 		const response = await jQuery.ajax({
 			url: ajaxUrl,
 			type: 'POST',
 			data: {
-				action: GET_GLOBAL_STYLE,
+				action: 'fb_get_global_colors',
 				nonce: nonce
 			}
 		});
 
-		console.log('Server response:', response); // Debug log
-
 		if (!response.success) {
-			console.error('Server returned error:', response.data); // Debug log
 			throw new Error(response.data || 'Fetch failed');
 		}
 
-		return response;
+		return response.data;
 	} catch (error) {
 		console.error('Fetch failed:', error);
-		console.error('Full error details:', {
-			message: error.message,
-			stack: error.stack,
-			response: error.responseText
+		throw error;
+	}
+};
+
+/**
+ * Function to Get Typography
+ * @returns {object}
+ */
+export const getTypography = async () => {
+	try {
+		const response = await jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_get_typography',
+				nonce: nonce
+			}
 		});
-		return {
-			success: false,
-			data: error.message || "Data not found."
-		};
+
+		if (!response.success) {
+			throw new Error(response.data || 'Fetch failed');
+		}
+
+		return response.data;
+	} catch (error) {
+		console.error('Fetch failed:', error);
+		throw error;
+	}
+};
+
+/**
+ * Function for Update Typography
+ * @param {*} data - The typography data to update
+ * @returns {object}
+ */
+export const updateTypography = async (data) => {
+	try {
+		const response = await jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_update_typography',
+				nonce: nonce,
+				data: data
+			}
+		});
+
+		if (!response || !response.success) {
+			console.error('Update failed response:', response);
+			throw new Error(response?.data || 'Update failed');
+		}
+
+		return response.data;
+	} catch (error) {
+		console.error('Update failed:', error);
+		throw error;
 	}
 };

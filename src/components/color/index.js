@@ -1,150 +1,3 @@
-// import { __ } from '@wordpress/i18n';
-// import { Button, ButtonGroup, BaseControl, Dropdown, ColorPicker, ColorPalette, Dashicon, } from '@wordpress/components';
-// import './editor.lazy.scss';
-
-
-// const FB_Color = ({label, globalColorSwitcher, globalColor, globalHoverColor, handleColorSwitcherChange, handleGlobalColorChange, handleGlobalHoverColorChange }) => {
-
-//     const NORMAL_HOVER = [
-//         { label: __('Normal', 'frontis-blocks'), value: 'normal' },
-//         { label: __('Hover', 'frontis-blocks'), value: 'hover' },
-//     ];
-
-//     const setHandleColorSwitcherChange = (value) => {
-//         handleColorSwitcherChange(value);
-//     };
-
-//     const setHandleGlobalColorChange = (value) => {
-//         handleGlobalColorChange(value);
-//     };
-
-//     const setHandleGlobalHoverColorChange = (value) => {
-//         handleGlobalHoverColorChange(value);
-//     };
-
-//     return (
-//         <div className="fb-setting-color-container">
-//             <BaseControl
-//                 label={__(label, "frontis-blocks")}
-//                 className="fb-setting-color-panel-wrapper"
-//             >
-//                 <ButtonGroup className="fb-setting-color-panel-btn">
-//                     {NORMAL_HOVER.map((item, key) => (
-//                         <Button
-//                             key={key}
-//                             onClick={() => setHandleColorSwitcherChange(item.value)}
-//                             className={`fb-setting-color-panel-btn-switcher ${globalColorSwitcher === item.value ? 'active' : ''}`}
-//                         >
-//                             {item.label}
-//                         </Button>
-//                     ))}
-//                 </ButtonGroup>
-//             </BaseControl>
-
-//             {globalColorSwitcher === 'normal' && (
-//                 <BaseControl 
-//                     label={__("Normal Color", "frontis-blocks")}
-//                     className="fb-setting-color-setting-wrapper"
-//                 >
-//                     <Dropdown
-//                         className="fb-setting-color-setting-icon-dropdown"
-//                         contentClassName="fb-setting-color-setting-icon-dropdown-content"
-//                         popoverProps={{ placement: 'bottom-start' }}
-//                         renderToggle={({ isOpen, onToggle }) => (
-//                             <Button
-//                                 variant="primary"
-//                                 onClick={onToggle}
-//                                 aria-expanded={isOpen}
-//                                 className="fb-setting-color-setting-icon-btn"
-//                             >
-//                                 <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-//                             </Button>
-//                         )}
-//                         renderContent={() => (
-//                             <div className="fb-setting-color-setting-icon-popup">
-//                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-//                                     <div className="fb-setting-normal-color">
-//                                         <ColorPicker
-//                                             color={globalColor}
-//                                             onChange={setHandleGlobalColorChange}
-//                                             enableAlpha={true}
-//                                         />
-//                                         <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
-//                                         <ColorPalette
-//                                             colors={[
-//                                                 { color: '#F72585' },
-//                                                 { color: '#7209B7' },
-//                                                 { color: '#3A0CA3' },
-//                                                 { color: '#4361EE' },
-//                                                 { color: '#4CC9F0' },
-//                                             ]}
-//                                             disableCustomColors={true}
-//                                             value={globalColor}
-//                                             onChange={setHandleGlobalColorChange}
-//                                         />
-//                                     </div>
-//                                 </BaseControl>
-//                             </div>
-//                         )}
-//                     />
-//                 </BaseControl>
-//             )}
-
-//             {globalColorSwitcher === 'hover' && (
-//                 <BaseControl 
-//                     label={__("Hover Color", "frontis-blocks")}
-//                     className="fb-setting-color-setting-wrapper"
-//                 >
-//                     <Dropdown
-//                         className="fb-setting-color-setting-icon-dropdown"
-//                         contentClassName="fb-setting-color-setting-icon-dropdown-content"
-//                         popoverProps={{ placement: 'bottom-start' }}
-//                         renderToggle={({ isOpen, onToggle }) => (
-//                             <Button
-//                                 variant="primary"
-//                                 onClick={onToggle}
-//                                 aria-expanded={isOpen}
-//                                 className="fb-setting-color-setting-icon-btn"
-//                             >
-//                                 <Dashicon icon="color-picker" className="fb-setting-color-setting-icon" />
-//                             </Button>
-//                         )}
-//                         renderContent={() => (
-//                             <div className="fb-setting-color-setting-icon-popup">
-//                                 <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-//                                     <div className="fb-setting-hover-color">
-//                                         <ColorPicker
-//                                             color={globalHoverColor}
-//                                             onChange={setHandleGlobalHoverColorChange}
-//                                             enableAlpha={true}
-//                                         />
-//                                         <div className="fb-setting-hover-color-label">{__("Default Colors", "frontis-blocks")}</div>
-//                                         <ColorPalette
-//                                             colors={[
-//                                                 { color: '#F72585' },
-//                                                 { color: '#7209B7' },
-//                                                 { color: '#3A0CA3' },
-//                                                 { color: '#4361EE' },
-//                                                 { color: '#4CC9F0' },
-//                                             ]}
-//                                             disableCustomColors={true}
-//                                             value={globalHoverColor}
-//                                             onChange={setHandleGlobalHoverColorChange}
-//                                         />
-//                                     </div>
-//                                 </BaseControl>
-//                             </div>
-//                         )}
-//                     />
-//                 </BaseControl>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default FB_Color;
-
-
 import { __ } from '@wordpress/i18n';
 import {
     Button,
@@ -157,7 +10,9 @@ import {
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import { Globe } from '@Icons';
 import './editor.lazy.scss';
+
 
 const FB_Color = ({
     label,
@@ -215,70 +70,95 @@ const FB_Color = ({
         const handleColorChange = isHover ? handleGlobalHoverColorChange : handleGlobalColorChange;
 
         return (
-            <Dropdown
-                className="fb-setting-color-setting-icon-dropdown"
-                contentClassName="fb-setting-color-setting-icon-dropdown-content"
-                popoverProps={{ placement: 'bottom-start' }}
-                renderToggle={({ isOpen, onToggle }) => (
-                    <Button
-                        variant="primary"
-                        onClick={onToggle}
-                        aria-expanded={isOpen}
-                        className="fb-setting-color-setting-icon-btn"
-                        
-                    >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="fb-setting-color-controls">
+                <Dropdown
+                    className="fb-setting-color-setting-icon-dropdown"
+                    contentClassName="fb-setting-color-setting-icon-dropdown-content"
+                    popoverProps={{ placement: 'bottom-start' }}
+                    renderToggle={({ isOpen, onToggle }) => (
+                        <Button
+                            variant="primary"
+                            onClick={onToggle}
+                            aria-expanded={isOpen}
+                            className="fb-setting-color-setting-icon-btn"
+                        >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {globalColor || ''}
+                                    {color || ''}
                                 </span>
                                 <div
                                     className="fb-setting-color-display"
                                     style={
-                                        globalColor
-                                            ? {
-                                                backgroundColor: globalColor,
-                                            }
+                                        color
+                                            ? { backgroundColor: color }
                                             : {
-                                                backgroundImage:
-                                                    'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
+                                                backgroundImage: 'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
                                                 backgroundPosition: '0 0, 0 5px, 5px -5px, -5px 0',
                                                 backgroundSize: '10px 10px',
                                                 border: '1px solid #e9e9e9',
                                                 height: '22px',
-                                                padding: '0',
                                                 width: '22px',
                                             }
                                     }
                                 />
                             </div>
-                    </Button>
-                )}
-                renderContent={() => (
-                    <div className="fb-setting-color-setting-icon-popup">
-                        <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                            <ColorPicker color={color} onChange={handleColorChange} enableAlpha={true} />
-                            <div className="fb-setting-color-label">{__("Global Colors", "frontis-blocks")}</div>
-                            <ColorPalette
-                                colors={globalColors}
-                                disableCustomColors={true}
-                                value={color}
-                                onChange={handleColorChange}
-                            />
-                            {themeColors.length > 0 && (
-                                <>
-                                    <div className="fb-setting-color-label">{__("Theme Colors", "frontis-blocks")}</div>
-                                    <ColorPalette
-                                        colors={themeColors}
-                                        disableCustomColors={true}
-                                        value={color}
-                                        onChange={handleColorChange}
-                                    />
-                                </>
-                            )}
-                        </BaseControl>
-                    </div>
-                )}
-            />
+                        </Button>
+                    )}
+                    renderContent={() => (
+                        <div className="fb-setting-color-setting-icon-popup">
+                            <BaseControl className="fb-setting-color-setting-icon-popup-inner">
+                                <ColorPicker color={color} onChange={handleColorChange} enableAlpha={true} />
+                                <div className="fb-setting-color-label">{__("Global Colors", "frontis-blocks")}</div>
+                                <ColorPalette
+                                    colors={globalColors}
+                                    disableCustomColors={true}
+                                    value={color}
+                                    onChange={handleColorChange}
+                                />
+                                {themeColors.length > 0 && (
+                                    <>
+                                        <div className="fb-setting-color-label">{__("Theme Colors", "frontis-blocks")}</div>
+                                        <ColorPalette
+                                            colors={themeColors}
+                                            disableCustomColors={true}
+                                            value={color}
+                                            onChange={handleColorChange}
+                                        />
+                                    </>
+                                )}
+                            </BaseControl>
+                        </div>
+                    )}
+                />
+
+                <Dropdown
+                    className="fb-setting-global-colors-dropdown"
+                    contentClassName="fb-setting-global-colors-content"
+                    popoverProps={{ placement: 'bottom-start' }}
+                    renderToggle={({ isOpen, onToggle }) => (
+                        <Button
+                            icon={<Globe />}
+                            variant="secondary"
+                            onClick={onToggle}
+                            aria-expanded={isOpen}
+                            className="fb-setting-global-colors-btn"
+                        />
+                    )}
+                    renderContent={() => (
+                        <div className="fb-setting-global-colors-popup">
+                            <BaseControl className="fb-setting-global-colors-inner">
+                                <div className="fb-setting-color-label">{__("Saved Global Colors", "frontis-blocks")}</div>
+                                <ColorPalette
+                                    colors={savedglobalColors}
+                                    disableCustomColors={true}
+                                    value={color}
+                                    onChange={handleColorChange}
+                                />
+                            </BaseControl>
+                        </div>
+                    )}
+                />
+            </div>
         );
     };
 

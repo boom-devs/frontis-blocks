@@ -127,14 +127,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					font-size: $base-font-size;
 					font-weight: 500;
 					line-height: 16px;
-					padding: 0;
-					display: inline-block;
-					width: 100%;
+					padding: 0 10px;
+					// display: inline-block;
+					// width: 100%;
 				}
 				.fb-tab-wrapper {
-					display: flex;
-					align-items: center;
-					gap: 8px;
+					
 					.fb-tab-icon {
 						svg{
 							width: 24px;
@@ -147,7 +145,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						font-size: $medium-font-size;
 						font-weight: 500;
 						line-height: 16px;
-						color: $neutral-color-700;
+						// color: $neutral-color-700;
 					}
 				}
 				.flex-between{
@@ -155,8 +153,6 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					align-items: center;
 				}
 				.fb-global-header-inner-wrapper{
-					display: flex;
-					gap: 8px;
 					.back-button{
 						svg{
 							width: 16px;
@@ -628,6 +624,19 @@ svg#fb-global-panel-icon {
 							border: 1px solid #E1E3E8;
 							transition: all 0.2s ease;
 							padding: 0;
+							position: relative;
+
+							&.is-selected {
+								&::after {
+									content: "✓";
+									position: absolute;
+									top: 50%;
+									left: 50%;
+									transform: translate(-50%, -50%);
+									color: #fff;
+									text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+								}
+							}
 
 							&:hover {
 								transform: scale(1.1);

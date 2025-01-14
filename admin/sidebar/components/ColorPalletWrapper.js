@@ -1,9 +1,9 @@
-
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useRef } from "@wordpress/element";
 import {
     PanelColorSettings
 } from "@wordpress/block-editor";
+import FbColorPanel from "./FbColorPanel";
 
 const ColorPalletWrapper = (props) => {
     const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState } = props;
@@ -45,7 +45,7 @@ const ColorPalletWrapper = (props) => {
     return (
         <>
 			{customColors.length > 0 &&
-				<PanelColorSettings
+				<FbColorPanel
 					title={__(
 						"Custom Colors",
 						"frontis-blocks"
@@ -53,7 +53,7 @@ const ColorPalletWrapper = (props) => {
 					className={"fb-color-panel fb-custom-color-panel"}
 					initialOpen={true}
 					disableAlpha={true}
-					colorSettings={colorPanelArray(customColors, setCustomColor)}
+					colors={colorPanelArray(customColors, setCustomColor)}
 				/>
 			}
         </>
