@@ -1010,17 +1010,52 @@ const attributes = {
 	},
 	/** End Margin */
 
-	/** Start Background */
+
+        /** Start Background */
 	TestimonialGlobalBgColorSwitcher : {
 		type: "string",
 		default: "normal"
 	},
-	TestimonialGlobalBgColor : {
+	TestimonialGlobalBgNormalBackgroundType: {  
 		type: "string",
-		default: "#fefaf3"
+		default: "classic",
 	},
-	TestimonialGlobalBgHoverColor: {
-		type: 'string',
+	TestimonialGlobalBgNormalClassicColor: {
+		type: "string",
+		default: "#fefaf3",
+	},
+	TestimonialGlobalBgNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	TestimonialGlobalBgNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	TestimonialGlobalBgNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	TestimonialGlobalBgHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	TestimonialGlobalBgHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	TestimonialGlobalBgHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	TestimonialGlobalBgHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	TestimonialGlobalBgHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 	/** End Background */
 
