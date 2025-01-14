@@ -9,7 +9,7 @@ import {
 
 import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-
+import { Globe } from '@Icons';
 
 import {
     FONT_FAMILYS,
