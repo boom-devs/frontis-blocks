@@ -24,7 +24,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         autoplay,
         autoplaySpeed,
         loop,
-        slidePerView,
+        slidesPerView,
         spaceBetween,
         transitionSpeed,
         allowTouchMove,
@@ -1097,13 +1097,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes({ stopOnLastSlide: value });
                                                 if (value) {
                                                     setAttributes({ loop: false });
+                                                    setAttributes({ autoplay: true });
                                                 }
                                             }}
                                         />
                                         <ToggleControl
                                             label={__("Reverse Direction", "frontis-blocks")}
                                             checked={reverseDirection}
-                                            onChange={(value) => setAttributes({ reverseDirection: value })}
+                                            onChange={(value) => {
+                                                setAttributes({ reverseDirection: value });
+                                                if (value) {
+                                                    setAttributes({ autoplay: true });
+                                                }
+                                            }}
                                         />
                                         <ToggleControl
                                             label={__("Enable Mouse Wheel", "frontis-blocks")}
@@ -1137,8 +1143,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         />
                                         <RangeControl
                                             label={__('Slide Per View', 'frontis-blocks')}
-                                            value={slidePerView}
-                                            onChange={(value) => setAttributes({ slidePerView: value })}
+                                            value={slidesPerView}
+                                            onChange={(value) => setAttributes({ slidesPerView: value })}
                                             min={1}
                                             max={10}
                                             step={1}
