@@ -38,6 +38,7 @@ import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import {useDeviceType} from "@Config/displayType";
@@ -215,8 +216,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalMarginLink,
 
         TestimonialGlobalBgColorSwitcher,
-        TestimonialGlobalBgColor,
-        TestimonialGlobalBgHoverColor,
+        TestimonialGlobalBgNormalBackgroundType,
+        TestimonialGlobalBgNormalClassicColor,
+        TestimonialGlobalBgNormalGradientColor,
+        TestimonialGlobalBgNormalCustomGradientSwitcher,
+        TestimonialGlobalBgNormalCustomGradientInputValue,
+        TestimonialGlobalBgHoverBackgroundType,
+        TestimonialGlobalBgHoverClassicColor,
+        TestimonialGlobalBgHoverGradientColor,
+        TestimonialGlobalBgHoverCustomGradientSwitcher,
+        TestimonialGlobalBgHoverCustomGradientInputValue,
 
         TestimonialGlobalBorder,
         TestimonialGlobalBorderColor,
@@ -353,7 +362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgColor : '#fefaf3',
+                TestimonialGlobalBgNormalClassicColor : '#fefaf3',
                 TestimonialDescColor : '',
                 TestimonialAuthorColor : '',
 
@@ -415,7 +424,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
                 TestimonialDescColor : '',
                 TestimonialAuthorColor : '',
 
@@ -487,7 +496,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
                 TestimonialDescColor : '',
                 TestimonialAuthorColor : '',
             },
@@ -570,7 +579,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '100',
                     right: '0',
                 },
-                TestimonialGlobalBgColor : '#f7f7f7',
+                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
                 TestimonialDescColor : '',
                 TestimonialAuthorColor : '',
             },
@@ -641,7 +650,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgColor : '#404655',
+                TestimonialGlobalBgNormalClassicColor : '#404655',
                 TestimonialDescColor : '#ffffff',
                 TestimonialAuthorColor : '#ffffff',
             },
@@ -1579,7 +1588,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             position: relative;
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
-            ${TestimonialGlobalBgColor ? `background-color: ${TestimonialGlobalBgColor};` : ''} 
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
             ${TestimonialGlobalBorder ? `border: ${TestimonialGlobalBorder};` : ''} 
@@ -1587,11 +1595,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
             ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
+            ${TestimonialGlobalBgNormalBackgroundType === 'gradient' ? `  
+                background: ${
+                    TestimonialGlobalBgNormalCustomGradientSwitcher && TestimonialGlobalBgNormalCustomGradientInputValue 
+                        ? TestimonialGlobalBgNormalCustomGradientInputValue 
+                        : TestimonialGlobalBgNormalGradientColor || TestimonialGlobalBgNormalClassicColor
+                };
+            ` : `
+                background: ${TestimonialGlobalBgNormalClassicColor};
+            `}
             transition: all .3s ease-in-out;
             position: relative;
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section:hover {
-            ${TestimonialGlobalBgHoverColor ? `background-color: ${TestimonialGlobalBgHoverColor};` : ''} 
+            ${TestimonialGlobalBgHoverBackgroundType === 'gradient' ? `  
+                background: ${
+                    TestimonialGlobalBgHoverCustomGradientSwitcher && TestimonialGlobalBgHoverCustomGradientInputValue 
+                        ? TestimonialGlobalBgHoverCustomGradientInputValue 
+                        : TestimonialGlobalBgHoverGradientColor || TestimonialGlobalBgHoverClassicColor
+                };
+            ` : `
+                background: ${TestimonialGlobalBgHoverClassicColor};
+            `} 
             ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
             ${TestimonialGlobalBoxShadowHoverCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowHoverCssValue};` : ''}
         }
@@ -1995,8 +2020,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalMarginLink,
 
         TestimonialGlobalBgColorSwitcher,
-        TestimonialGlobalBgColor,
-        TestimonialGlobalBgHoverColor,
+        TestimonialGlobalBgNormalBackgroundType,
+        TestimonialGlobalBgNormalClassicColor,
+        TestimonialGlobalBgNormalGradientColor,
+        TestimonialGlobalBgNormalCustomGradientSwitcher,
+        TestimonialGlobalBgNormalCustomGradientInputValue,
+        TestimonialGlobalBgHoverBackgroundType,
+        TestimonialGlobalBgHoverClassicColor,
+        TestimonialGlobalBgHoverGradientColor,
+        TestimonialGlobalBgHoverCustomGradientSwitcher,
+        TestimonialGlobalBgHoverCustomGradientInputValue,
 
         TestimonialGlobalBorder,
         TestimonialGlobalBorderColor,
@@ -2973,6 +3006,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 />
                                             </PanelBody>
+                                            
+                                            <PanelBody
+                                                title={__("Background Color", "frontis-blocks")}
+                                                initialOpen={false} 
+                                            >
+                                                <FB_BackgroundColorControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    bgColorSwitcher={TestimonialGlobalBgColorSwitcher}
+                                                    setBgColorSwitcher={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
+                                                    
+                                                    normalBackgroundType={TestimonialGlobalBgNormalBackgroundType}
+                                                    setNormalBackgroundType={(value) => setAttributes({ TestimonialGlobalBgNormalBackgroundType: value })}
+                                                    normalClassicColor={TestimonialGlobalBgNormalClassicColor}
+                                                    setNormalClassicColor={(value) => setAttributes({ TestimonialGlobalBgNormalClassicColor: value })}
+                                                    normalGradientColor={TestimonialGlobalBgNormalGradientColor}
+                                                    setNormalGradientColor={(value) => setAttributes({ TestimonialGlobalBgNormalGradientColor: value })}
+                                                    normalCustomGradientSwitcher={TestimonialGlobalBgNormalCustomGradientSwitcher}
+                                                    setNormalCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientSwitcher: value })}
+                                                    normalCustomGradientInputValue={TestimonialGlobalBgNormalCustomGradientInputValue}
+                                                    setNormalCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientInputValue: value })}
+                                                    
+                                                    hoverBackgroundType={TestimonialGlobalBgHoverBackgroundType}
+                                                    setHoverBackgroundType={(value) => setAttributes({ TestimonialGlobalBgHoverBackgroundType: value })}
+                                                    hoverClassicColor={TestimonialGlobalBgHoverClassicColor}
+                                                    setHoverClassicColor={(value) => setAttributes({ TestimonialGlobalBgHoverClassicColor: value })}
+                                                    hoverGradientColor={TestimonialGlobalBgHoverGradientColor}
+                                                    setHoverGradientColor={(value) => setAttributes({ TestimonialGlobalBgHoverGradientColor: value })}
+                                                    hoverCustomGradientSwitcher={TestimonialGlobalBgHoverCustomGradientSwitcher}
+                                                    setHoverCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientSwitcher: value })}
+                                                    hoverCustomGradientInputValue={TestimonialGlobalBgHoverCustomGradientInputValue}
+                                                    setHoverCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientInputValue: value })}
+
+                                                    isBackgroundImage={false}
+                                                />
+                                            </PanelBody>
 
                                             <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                 <FB_Spacing 
@@ -3003,32 +3071,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             </PanelBody>
 
-                                            <PanelBody
-                                                title={__("Background Color", "frontis-blocks")}
-                                                initialOpen={false} 
-                                            >
-                                                <FB_SwitcherControl
-                                                        label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={TestimonialGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
-                                                />
-
-                                                {TestimonialGlobalBgColorSwitcher === 'normal' && (
-                                                    <FB_ColorControl
-                                                        label={__("Normal Color", "frontis-blocks")}
-                                                        globalColor={TestimonialGlobalBgColor}
-                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBgColor: value })}
-                                                    />
-                                                )}
-
-                                                {TestimonialGlobalBgColorSwitcher === 'hover' && (
-                                                    <FB_ColorControl
-                                                        label={__("Hover Color", "frontis-blocks")}
-                                                        globalColor={TestimonialGlobalBgHoverColor}
-                                                        setGlobalColor={(value) => setAttributes({ TestimonialGlobalBgHoverColor: value })}
-                                                    />
-                                                )}
-                                            </PanelBody>
                                             <PanelBody
                                                 title={__("Border and Shadow", "frontis-blocks")}
                                                 initialOpen={false}
