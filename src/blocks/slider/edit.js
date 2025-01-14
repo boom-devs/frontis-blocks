@@ -104,6 +104,7 @@ const Edit = (props) => {
     const getSliderTemplate = useMemo(() => [
         ['frontis-blocks/slider-item'],
         ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
     ], [slideItem, slideContent]);
 
     const innerBlocksProps = useInnerBlocksProps(
