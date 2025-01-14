@@ -107,11 +107,42 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 		overlayBlendModeTablet,
 		overlayBlendModeMobile,
 		globalBlockStyleId,
+
+
+
+					/** Normal Bg */
+					containerBgColorSwitcher,
+					containerBgNormalBackgroundType,
+					containerBgNormalClassicColor,
+					containerBgNormalGradientColor,
+					containerBgNormalCustomGradientSwitcher,
+					containerBgNormalCustomGradientInputValue,
+					containerBgNormalBackgroundImageUrl,
+					containerBgNormalBackgroundImageAlt,
+					containerBgNormalBackgroundImageID,
+					containerBgNormalBackgroundImagePosition,
+					containerBgNormalBackgroundImageAttachment,
+					containerBgNormalBackgroundImageRepeat,
+					containerBgNormalBackgroundImageSize,
+		
+					/** Hover Bg */
+					containerBgHoverBackgroundType,
+					containerBgHoverClassicColor,
+					containerBgHoverGradientColor,
+					containerBgHoverCustomGradientSwitcher,
+					containerBgHoverCustomGradientInputValue,
+					containerBgHoverBackgroundImageUrl,
+					containerBgHoverBackgroundImageAlt,
+					containerBgHoverBackgroundImageID,
+					containerBgHoverBackgroundImagePosition,
+					containerBgHoverBackgroundImageAttachment,
+					containerBgHoverBackgroundImageRepeat,
+					containerBgHoverBackgroundImageSize,
 	} = attributes;
 
 	const backgroundAttributesDesktop = {
-		backgroundType,
-		backgroundColor,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
 		backgroundImage: backgroundImageDesktop?.url ? backgroundImageDesktop : placeHolderImage,
 		gradientValue,
 		gradientColor1,
@@ -157,8 +188,8 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 
 	// Any properties that should be inherited from Desktop will be imported from backgroundAttributesDesktop, since only 1 CSS file is generated at a time in bgCss.
 	const backgroundAttributesTablet = {
-		backgroundType,
-		backgroundColor,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
 		// The placeholder image or Desktop background image would already be set or undefined in backgroundAttributesDesktop by this point.
 		backgroundImage: backgroundImageTablet?.url ? backgroundImageTablet : backgroundAttributesDesktop.backgroundImage,
 		gradientValue,
@@ -209,8 +240,8 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 
 	// Any properties that should be inherited from Tablet will be imported from backgroundAttributesTablet ( which inherits from backgroundAttributesDesktop ), since only 1 CSS file is generated at a time in bgCss.
 	const backgroundAttributesMobile = {
-		backgroundType,
-		backgroundColor,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
 		// The placeholder image or Tablet background image would already be set or undefined in backgroundAttributesTablet by this point.
 		backgroundImage: backgroundImageMobile?.url ? backgroundImageMobile : backgroundAttributesTablet.backgroundImage,
 		gradientValue,
@@ -268,6 +299,7 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 		blendMode: overlayBlendModeMobile || overlayBlendModeTablet || overlayBlendMode,
 		globalBlockStyleId,
 	};
+	// console.log(backgroundAttributesDesktop)
 
 	let bgCss;
 
@@ -282,6 +314,7 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 			bgCss = generateBackgroundCSS( backgroundAttributesDesktop, pseudoElementOverlay );
 	}
 
+
 	if ( ! bgCss ) {
 		return null;
 	}
@@ -290,6 +323,8 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 	if ( pseudoElementOverlay?.forStyleSheet ) {
 		return bgCss;
 	}
+
+
 
 	const createCamelCase = {};
 
