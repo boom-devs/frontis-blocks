@@ -9,3 +9,8 @@ export const setShadeStep = (slug, step) => ({
 	slug,
 	step,
 });
+
+export const setTypographies = (typographies) => ({
+	type: 'SET_TYPOGRAPHIES',
+	typographies: Array.isArray(typographies) ? typographies : [],
+});

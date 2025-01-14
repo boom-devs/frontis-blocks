@@ -1,0 +1,63 @@
+.fb-setting-typography {
+    .fb-typography-controls {
+        display: flex;
+        gap: 4px;
+        
+        .fb-setting-dropdown-icon-wrapper {
+            .fb-setting-dropdown-icon-btn {
+                padding: 8px;
+                height: auto;
+                min-width: auto;
+                background: transparent;
+                border: none;
+                
+                &:hover {
+                    background: var(--wp-components-color-gray-100, #f0f0f0);
+                }
+
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+}
+
+.fb-setting-typography-popup {
+    min-width: 280px;
+    padding: 16px;
+
+    .fb-typography-list {
+        .fb-typography-item {
+            margin-bottom: 16px;
+            cursor: pointer;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .fb-typography-header {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px;
+                border-radius: 4px;
+
+                &:hover {
+                    background: var(--wp-components-color-gray-100, #f0f0f0);
+                }
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+
+                span {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

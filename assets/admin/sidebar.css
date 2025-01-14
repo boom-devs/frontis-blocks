@@ -510,6 +510,53 @@ svg#fb-global-panel-icon {
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/@wordpress/scripts/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/typography-control/editor.lazy.scss ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.fb-setting-typography .fb-typography-controls {
+  display: flex;
+  gap: 4px;
+}
+.fb-setting-typography .fb-typography-controls .fb-setting-dropdown-icon-wrapper .fb-setting-dropdown-icon-btn {
+  padding: 8px;
+  height: auto;
+  min-width: auto;
+  background: transparent;
+  border: none;
+}
+.fb-setting-typography .fb-typography-controls .fb-setting-dropdown-icon-wrapper .fb-setting-dropdown-icon-btn:hover {
+  background: var(--wp-components-color-gray-100, #f0f0f0);
+}
+.fb-setting-typography .fb-typography-controls .fb-setting-dropdown-icon-wrapper .fb-setting-dropdown-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
 
+.fb-setting-typography-popup {
+  min-width: 280px;
+  padding: 16px;
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item {
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item:last-child {
+  margin-bottom: 0;
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item .fb-typography-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 4px;
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item .fb-typography-header:hover {
+  background: var(--wp-components-color-gray-100, #f0f0f0);
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item .fb-typography-header svg {
+  width: 20px;
+  height: 20px;
+}
+.fb-setting-typography-popup .fb-typography-list .fb-typography-item .fb-typography-header span {
+  font-size: 14px;
+  font-weight: 500;
+}
 
 /*# sourceMappingURL=sidebar.css.map*/

@@ -2,6 +2,8 @@
 const DEFAULT_STATE = {
 	colors: [],
 	shadeSteps: {},
+	typographies: [],
+	loading: false
 };
 
 export default function reducer(state = DEFAULT_STATE, action) {
@@ -19,6 +21,12 @@ export default function reducer(state = DEFAULT_STATE, action) {
 					...state.shadeSteps,
 					[action.slug]: action.step,
 				},
+			};
+
+		case 'SET_TYPOGRAPHIES':
+			return {
+				...state,
+				typographies: Array.isArray(action.typographies) ? action.typographies : [],
 			};
 
 		default:
