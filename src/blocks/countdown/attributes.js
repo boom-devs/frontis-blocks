@@ -585,6 +585,18 @@ const attributes = {
 		type: 'string',
 		default: "#FFFFFF"
 	},
+	labelBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	labelBgColor: {
+		type: "string",
+		default: ""
+	},
+	labelBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
 	labelFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -879,7 +891,201 @@ const attributes = {
 	hoverBackgroundImageRepeat: {
 		type: "string",
 		default: ""
-	},	
+	},
+
+	/** Label Start Border Type */
+	countDownLabelBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownLabelBorderColor: {
+		type: "string",
+		default: ""
+	},
+	countDownLabelBorderHoverColor: {
+		type: 'string',
+	},
+	countDownLabelBorder: {
+		type: 'string',
+		default: "none",
+	},
+	countDownLabelBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelBorderTypeDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Border Type */
+
+	/** Label Start Border Radius */
+	countDownLabelBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Border Radius */
+
+	/** Label Start Box Shadow */
+	countDownLabelBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	countDownLabelBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** Label End Box Shadow */
+
+	/** Label Start Padding */
+	countDownLabelPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelPaddingTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelPaddingMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Padding */
+
+	/** Label Start Margin */
+	countDownLabelMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelMarginDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Margin */
 	
 };
 
