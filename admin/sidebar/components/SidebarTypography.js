@@ -88,8 +88,8 @@ const FB_SidebarTypography = ({
 		onChangeLineHeightUnit(newLineHeightUnit);
 	};
 
-	console.log("Checking device type")
-	console.log(deviceType)
+	console.log("Checking device type:", deviceType)
+
 
 	return (
 		<>

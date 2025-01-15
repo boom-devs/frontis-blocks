@@ -553,10 +553,10 @@ function FrontisBlocksSidebar() {
 												justify="flex-start"
 												className="fb-tab-wrapper"
 											>
-												<span className="fb-tab-icon">
-													<Typographyicon />
-												</span>
-												<span className="fb-tab-title">{__("Typography", "frontis-blocks")}</span>
+											<span className="fb-tab-icon">
+												<Typographyicon />
+											</span>
+											<span className="fb-tab-title">{__("Typography", "frontis-blocks")}</span>
 											</HStack>
 										</NavigatorButton>
 									</div>
@@ -567,10 +567,10 @@ function FrontisBlocksSidebar() {
 												justify="flex-start"
 												className="fb-tab-wrapper"
 											>
-												<span className="fb-tab-icon">
-													<Coloricon />
-												</span>
-												<span className="fb-tab-title">{__("Colors", "frontis-blocks")}</span>
+											<span className="fb-tab-icon">
+												<Coloricon />
+											</span>
+											<span className="fb-tab-title">{__("Colors", "frontis-blocks")}</span>
 											</HStack>
 										</NavigatorButton>
 									</div>
@@ -602,12 +602,12 @@ function FrontisBlocksSidebar() {
 									<VStack direction="column" justify="flex-start">
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
-											<NavigatorButton path="/" className="back-button">
-												<ChevronLeft />
-											</NavigatorButton>
-											<div className="fb-global-header-inner">
-												<h3>{__("Typography", "frontis-blocks")}</h3>
-											</div>
+									<NavigatorButton path="/" className="back-button">
+										<ChevronLeft />
+									</NavigatorButton>
+									<div className="fb-global-header-inner">
+										<h3>{__("Typography", "frontis-blocks")}</h3>
+									</div>
 										</HStack>
 										<p>{__("Available fonts, typographic styles, application of those styles.", "frontis-blocks")}</p>
 									</VStack>
@@ -622,12 +622,12 @@ function FrontisBlocksSidebar() {
 									<VStack direction="column" justify="flex-start">
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
-											<NavigatorButton path="/" className="back-button">
-												<ChevronLeft />
-											</NavigatorButton>
-											<div className="fb-global-header-inner">
-												<h3>{__("Color", "frontis-blocks")}</h3>
-											</div>
+									<NavigatorButton path="/" className="back-button">
+										<ChevronLeft />
+									</NavigatorButton>
+									<div className="fb-global-header-inner">
+										<h3>{__("Color", "frontis-blocks")}</h3>
+									</div>
 										</HStack>
 										<p>{__("Available texts, links, Button, Headings global colors", "frontis-blocks")}</p>
 									</VStack>
@@ -665,12 +665,12 @@ function FrontisBlocksSidebar() {
 									<VStack direction="column" justify="flex-start">
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
-											<NavigatorButton path="/" className="back-button">
-												<ChevronLeft />
-											</NavigatorButton>
-											<div className="fb-global-header-inner">
-												<h3>{__("Blocks", "frontis-blocks")}</h3>
-											</div>
+									<NavigatorButton path="/" className="back-button">
+										<ChevronLeft />
+									</NavigatorButton>
+									<div className="fb-global-header-inner">
+										<h3>{__("Blocks", "frontis-blocks")}</h3>
+									</div>
 										</HStack>
 										<p>{__("Customize the appearance of specific blocks for the whole site.", "frontis-blocks")}</p>
 									</VStack>
