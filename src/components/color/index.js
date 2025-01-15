@@ -29,7 +29,7 @@ const FB_Color = ({
     ];
 
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
-    const savedglobalColors = useSelect((select) => select('frontis-blocks/global-styles').getColors() || [], []);
+    const globalColors = useSelect((select) => select('frontis-blocks/global-styles').getColors() || [], []);
 
     const defaultColors = [
         { color: '#F72585' },
@@ -39,31 +39,31 @@ const FB_Color = ({
         { color: '#4CC9F0' },
     ];
 
-    const [globalColors, setGlobalColors] = useState(defaultColors);
+    // const [globalColors, setGlobalColors] = useState(defaultColors);
 
-    useEffect(() => {
-        const storedColors = localStorage.getItem('fb_global_colors');
-        const storedCustomColors = localStorage.getItem('fb_custom_colors');
-        let combinedColors = [];
+    // useEffect(() => {
 
-        if (storedColors) {
-            try {
-                combinedColors = [...combinedColors, ...JSON.parse(storedColors)];
-            } catch (error) {
-                console.error('Error parsing global colors:', error);
-            }
-        }
 
-        if (storedCustomColors) {
-            try {
-                combinedColors = [...combinedColors, ...JSON.parse(storedCustomColors)];
-            } catch (error) {
-                console.error('Error parsing custom colors:', error);
-            }
-        }
+    //     let combinedColors = [];
 
-        setGlobalColors(combinedColors);
-    }, []);
+    //     if (storedColors) {
+    //         try {
+    //             combinedColors = [...combinedColors, ...JSON.parse(storedColors)];
+    //         } catch (error) {
+    //             console.error('Error parsing global colors:', error);
+    //         }
+    //     }
+
+    //     if (storedCustomColors) {
+    //         try {
+    //             combinedColors = [...combinedColors, ...JSON.parse(storedCustomColors)];
+    //         } catch (error) {
+    //             console.error('Error parsing custom colors:', error);
+    //         }
+    //     }
+
+    //     setGlobalColors(combinedColors);
+    // }, []);
 
     const renderColorPanel = (isHover = false) => {
         const color = isHover ? globalHoverColor : globalColor;
@@ -126,34 +126,6 @@ const FB_Color = ({
                                         />
                                     </>
                                 )}
-                            </BaseControl>
-                        </div>
-                    )}
-                />
-
-                <Dropdown
-                    className="fb-setting-global-colors-dropdown"
-                    contentClassName="fb-setting-global-colors-content"
-                    popoverProps={{ placement: 'bottom-start' }}
-                    renderToggle={({ isOpen, onToggle }) => (
-                        <Button
-                            icon={<Globe />}
-                            variant="secondary"
-                            onClick={onToggle}
-                            aria-expanded={isOpen}
-                            className="fb-setting-global-colors-btn"
-                        />
-                    )}
-                    renderContent={() => (
-                        <div className="fb-setting-global-colors-popup">
-                            <BaseControl className="fb-setting-global-colors-inner">
-                                <div className="fb-setting-color-label">{__("Saved Global Colors", "frontis-blocks")}</div>
-                                <ColorPalette
-                                    colors={savedglobalColors}
-                                    disableCustomColors={true}
-                                    value={color}
-                                    onChange={handleColorChange}
-                                />
                             </BaseControl>
                         </div>
                     )}
