@@ -19,11 +19,3 @@ registerBlockType( metadata.name, {
 
 
 
-
-
-
-
-
-
-
-

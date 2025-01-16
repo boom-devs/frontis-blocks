@@ -493,6 +493,63 @@ const attributes = {
 	},
 	/** End Margin */
 
+	singleDigitFontColorSwitcher: {
+		type : "boolean",
+		default: false
+	},
+
+	daysDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	daysDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	daysDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	hoursDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	hoursDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	hoursDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	minutesDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	minutesDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	minutesDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	secondsDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	secondsDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	secondsDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
 	digitFontColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -505,6 +562,7 @@ const attributes = {
 		type: 'string',
 		default: "#FFFFFF"
 	},
+
 	digitFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -992,19 +1050,70 @@ const attributes = {
 	},
 	/** Label End Border Radius */
 
-	/** Label Start Box Shadow */
-	countDownLabelBoxShadowValues: {
-		type: 'array',
-		default: [],
+	countDownLabelWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
-	countDownLabelBoxShadowCssValue: {
+	countDownLabelWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownLabelHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownLabelHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** Label End */
+
+
+	/** Digit Start Border Type */
+	countDownDigitBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownDigitBgColor: {
+		type: "string",
+		default: ""
+	},
+	countDownDigitBgHoverColor: {
 		type: 'string',
-		default: '',
+		default: ""
 	},
-	/** Label End Box Shadow */
-
-	/** Label Start Padding */
-	countDownLabelPaddingUnits: {
+	countDownDigitBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownDigitBorderColor: {
+		type: "string",
+		default: ""
+	},
+	countDownDigitBorderHoverColor: {
+		type: 'string',
+	},
+	countDownDigitBorder: {
+		type: 'string',
+		default: "none",
+	},
+	countDownDigitBorderTypeUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1012,41 +1121,41 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	countDownLabelPaddingDesktop: {
+	countDownDigitBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
 		},
 	},
-	countDownLabelPaddingTablet: {
+	countDownDigitBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
 		},
 	},
-	countDownLabelPaddingMobile: {
+	countDownDigitBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
 		},
 	},
-	countDownLabelPaddingLink : {
+	countDownDigitBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
-	/** Label End Padding */
+	/** Digit End Border Type */
 
-	/** Label Start Margin */
-	countDownLabelMarginUnits: {
+	/** Digit Start Border Radius */
+	countDownDigitBorderRadiusUnits : {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -1054,7 +1163,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	countDownLabelMarginDesktop: {
+	countDownDigitBorderRadiusDesktop: {
 		type: "object",
 		default: {
 			top: '',
@@ -1063,7 +1172,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	countDownLabelMarginTablet: {
+	countDownDigitBorderRadiusTablet: {
 		type: "object",
 		default: {
 			top: '',
@@ -1072,7 +1181,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	countDownLabelMarginMobile: {
+	countDownDigitBorderRadiusMobile: {
 		type: "object",
 		default: {
 			top: '',
@@ -1081,11 +1190,45 @@ const attributes = {
 			right: '',
 		},
 	},
-	countDownLabelMarginLink : {
+	countDownDigitBorderRadiusLink : {
 		type : "boolean",
 		default: true
 	},
-	/** Label End Margin */
+	/** Digit End Border Radius */
+	
+	countDownDigitWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownDigitWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownDigitHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownDigitHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** Digit End */
 	
 };
 
