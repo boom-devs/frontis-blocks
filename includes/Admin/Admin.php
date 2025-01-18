@@ -57,9 +57,37 @@ class Admin {
     }
 
     public function enqueue_scripts($hook){
+
+		// Get the blocks list
+		$blocks = BlockList::get_instance()->get_blocks();
+		$localizeArray = array(
+			'blocks' => $blocks,
+			'defaultBlocks' => BlockList::get_instance()->get_default_blocks(),
+			'nonce' => wp_create_nonce('fb_settings_nonce'),
+			'adminUrl' => admin_url(),
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'restUrl' => get_rest_url(),
+			'pluginUrl' => FB_PLUGIN_URL,
+			'version' => FB_VERSION,
+			'pro_url' => FB_UPGRADE_PRO_URL,
+			'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
+			'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
+		);
+
+		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
+			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
+			$tl_script_asset      = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
+			$tl_script_asset['dependencies'][] = 'jquery';
+			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
+			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
+			$localizeArray['nonce'] = wp_create_nonce('fb_sidebar_nonce');
+			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
+		}
+
         if('toplevel_page_frontis-blocks' != $hook){
             return;
         }
+
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
         wp_enqueue_script('jquery');
@@ -71,23 +99,9 @@ class Admin {
         $script_asset['dependencies'][] = 'jquery';
 
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
-        // Get the blocks list
-        $blocks = BlockList::get_instance()->get_blocks();
 
         // Localize the script with new data
-        wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', array(
-            'blocks' => $blocks,
-            'defaultBlocks' => BlockList::get_instance()->get_default_blocks(),
-            'nonce' => wp_create_nonce('fb_settings_nonce'),
-            'adminUrl' => admin_url(),
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-            'restUrl' => get_rest_url(),
-            'pluginUrl' => FB_PLUGIN_URL,
-            'version' => FB_VERSION,
-            'pro_url' => FB_UPGRADE_PRO_URL,
-            'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
-            'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
-        ));
+		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }
 
         /**

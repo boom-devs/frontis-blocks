@@ -125,15 +125,15 @@ class Settings extends AjaxBase {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
             return;
         }
-    
+
         if (!current_user_can('manage_options')) {
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
             return;
         }
-    
+
         // Upload directory path
         $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
-    
+
         // Check if the folder exists
         if (is_dir($upload_directory)) {
             // Attempt to delete the folder
