@@ -493,6 +493,63 @@ const attributes = {
 	},
 	/** End Margin */
 
+	singleDigitFontColorSwitcher: {
+		type : "boolean",
+		default: false
+	},
+
+	daysDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	daysDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	daysDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	hoursDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	hoursDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	hoursDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	minutesDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	minutesDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	minutesDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	secondsDigitFontColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	secondsDigitFontColor: {
+		type: "string",
+		default: ""
+	},
+	secondsDigitFontHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
 	digitFontColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -505,6 +562,7 @@ const attributes = {
 		type: 'string',
 		default: "#FFFFFF"
 	},
+
 	digitFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -584,6 +642,18 @@ const attributes = {
 	labelFontHoverColor: {
 		type: 'string',
 		default: "#FFFFFF"
+	},
+	labelBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	labelBgColor: {
+		type: "string",
+		default: ""
+	},
+	labelBgHoverColor: {
+		type: 'string',
+		default: ""
 	},
 	labelFontFamily: {
 		type: 'string',
@@ -879,7 +949,286 @@ const attributes = {
 	hoverBackgroundImageRepeat: {
 		type: "string",
 		default: ""
-	},	
+	},
+
+	/** Label Start Border Type */
+	countDownLabelBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownLabelBorderColor: {
+		type: "string",
+		default: ""
+	},
+	countDownLabelBorderHoverColor: {
+		type: 'string',
+	},
+	countDownLabelBorder: {
+		type: 'string',
+		default: "none",
+	},
+	countDownLabelBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelBorderTypeDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownLabelBorderTypeLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Border Type */
+
+	/** Label Start Border Radius */
+	countDownLabelBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Label End Border Radius */
+
+	countDownLabelWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownLabelWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownLabelHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownLabelHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** Label End */
+
+
+	/** Digit Start Border Type */
+	countDownDigitBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownDigitBgColor: {
+		type: "string",
+		default: ""
+	},
+	countDownDigitBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	countDownDigitBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	countDownDigitBorderColor: {
+		type: "string",
+		default: ""
+	},
+	countDownDigitBorderHoverColor: {
+		type: 'string',
+	},
+	countDownDigitBorder: {
+		type: 'string',
+		default: "none",
+	},
+	countDownDigitBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownDigitBorderTypeDesktop: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownDigitBorderTypeTablet: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownDigitBorderTypeMobile: {
+		type: "object",
+		default: {
+			top: 0,
+			bottom: 0,
+			left: 0,
+			right: 0,
+		},
+	},
+	countDownDigitBorderTypeLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Digit End Border Type */
+
+	/** Digit Start Border Radius */
+	countDownDigitBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownDigitBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** Digit End Border Radius */
+	
+	countDownDigitWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownDigitWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownDigitHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownDigitHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** Digit End */
 	
 };
 
