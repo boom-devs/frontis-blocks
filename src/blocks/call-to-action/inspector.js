@@ -337,7 +337,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		imageSwitcher
 	} = attributes;
 
-	const [ctaImgList, setCtaImgList] = useState(FeatureItems);
 	const deviceType = useDeviceType();
 	
 	useEffect(() => {
@@ -349,58 +348,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId]);
 
 	const blockProps = useBlockProps();
-
-	const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = ctaImgList.findIndex(item => item.id === active.id);
-            const newIndex = ctaImgList.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(ctaImgList, oldIndex, newIndex);
-            setAttributes({ FeatureItems: updatedItems });
-			setCtaImgList(updatedItems);
-        }
-    };
-
-    
-	const handleAddItem = () => {
-		const newItem = {
-			id: `item-${ctaImgList.length + 1}`,
-			Title: `Feature Item ${ctaImgList.length + 1}`,
-			teamMemberImageUrl: "", // Empty URL for now
-			teamMemberImageAlt: "", // Empty alt text for now
-			teamMemberImageID: "", // Empty image ID for now
-			teamMemberImagePosition: "", // Default empty position
-			teamMemberImageAttachment: "", // Default empty attachment
-			teamMemberImageRepeat: "", // Default empty repeat value
-			teamMemberImageSize: "", // Default empty size value
-		};
-	
-		setAttributes({
-			FeatureItems: [...ctaImgList, newItem],
-		});
-
-		setCtaImgList([...ctaImgList, newItem]);
-	};
-
-	const handleChangeItem = (id, key, value) => {
-		let updatedItems = ctaImgList;
-		if(key === 'url'){
-			updatedItems.length > 0 && updatedItems.forEach(item => {
-				if (item.id === id) {
-				  item.teamMemberImageUrl = value;
-				}
-			});
-		}
-		
-		setAttributes({ FeatureItems: updatedItems });
-		setCtaImgList(updatedItems);
-	};
-
-    const handleDeleteItem = (id) => {
-        const updatedItems = ctaImgList.filter(item => item.id !== id);
-        setAttributes({ FeatureItems: updatedItems });
-		setCtaImgList(updatedItems);
-    };
 
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
@@ -2402,98 +2349,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											</PanelBody>
 										</div>
 										
-										{/* Sub title element */}
-										<div className="fb-advanced-wrapper">
-										<PanelBody
-											title={__("Sub Title", "frontis-block")}
-											initialOpen={false}
-										>
-											<ToggleControl
-												label={__("Show Sub Title", "frontis-block")}
-												checked={subHeadingSwitcher}
-												onChange={(value) =>
-													setAttributes({ subHeadingSwitcher: value })
-												}
-											/>
-
-											{subHeadingSwitcher && (
-												<>
-												<FB_AlignmentControl
-													label={__("Sub Title Alignment", "frontis-blocks")}
-													globalAlignment={subTitleAlignment}
-													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
-												/>
-	
-												<FB_HtmlTagControl
-													label={__("Sub Title Tag", "frontis-blocks")}
-													globalHtmlTag={subTitleTag}
-													setGlobalHtmlTag={(value) => setAttributes({ subTitleTag: value })}
-												/>
-	
-												<TextareaControl
-													label={__("Sub Title Text", "frontis-block")}
-													className="fb-setting-text"
-													value={subTitleText}
-													onChange={(value) =>
-														setAttributes({ subTitleText: value })
-													}
-													
-												/>
-												</>
-											)}
-											
-											
-										</PanelBody>
-										</div>
 										{/* Image control */}
-										<div className="fb-advanced-wrapper">
-										<PanelBody
-											title={__("Image", "frontis-block")}
-											initialOpen={false}
-										>
-											<ToggleControl
-												label={__("Show Image", "frontis-block")}
-												checked={imageSwitcher}
-												onChange={(value) =>
-													setAttributes({ imageSwitcher: value })
-												}
-											/>
-
-											{imageSwitcher && (
-												<>
-												<FB_AlignmentControl
-													label={__("Image Alignment", "frontis-blocks")}
-													globalAlignment={subTitleAlignment}
-													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
-												/>
-												<DndContext
-													collisionDetection={closestCenter}
-													onDragEnd={handleDragEnd}
-												>
-													<SortableContext items={ctaImgList.map(item => item.id)}>
-														<ul className='dnd-items-wrapper'>
-															{ctaImgList.map((item) => (
-																<SortableItem
-																	key={item.id}
-																	id={item.id}
-																	item={item}
-																	handleChangeItem={handleChangeItem}
-																	handleDeleteItem={handleDeleteItem}
-																/>
-															))}
-														</ul>
-													</SortableContext>
-													<Button isPrimary onClick={handleAddItem}>
-														{__("Add Image", "frontis-blocks")}
-													</Button>
-												</DndContext>
-												</>
-											)}
-											
-											
-										</PanelBody>
-										</div>
-									
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Description", "frontis-block")}
