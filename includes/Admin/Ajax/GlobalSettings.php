@@ -34,7 +34,8 @@ class GlobalSettings extends AjaxBase {
             'get_typography',
             'get_custom_typography',
             'get_custom_css',
-            'get_fontfamilies'
+            'get_fontfamilies',
+			'import_demo_data'
         ];
 
         $this->init_ajax_events($events);
@@ -70,7 +71,7 @@ class GlobalSettings extends AjaxBase {
 
     public function get_global_colors() {
         $global_colors = get_option('fb_global_colors');
-        
+
         if($global_colors) {
 			wp_send_json_success($global_colors);
 		}
@@ -215,4 +216,31 @@ class GlobalSettings extends AjaxBase {
         }
     }
 
+	public function import_demo_data() {
+		$this->validate_nonce();
+
+		$json_file_path = FB_PLUGIN_URL . 'testing-page.json';
+
+		 // echo FB_PLUGIN_URL;
+
+	 	// Read and decode the JSON file
+		 $json_data = file_get_contents($json_file_path);
+		 $blocks = json_decode($json_data, true);
+
+		  // Check if the decoding was successful
+		  if (!$blocks || !is_array($blocks)) {
+			  wp_send_json_error('Invalid JSON structure.');
+		 }
+
+		 // Prepare post content for Gutenberg blocks
+		 $post_content = '';
+
+		 // Process each block
+		 foreach ($blocks as $block) {
+			 // Convert block to serialized Gutenberg content
+			 $post_content .= parse_block($block);
+		 }
+
+		wp_send_json_success($post_content);
+	}
 }

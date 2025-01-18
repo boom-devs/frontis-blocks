@@ -45,7 +45,7 @@ function parse_block($block) {
 
 add_action('init', function () {
 //     $json_file_path = FB_PLUGIN_URL . 'testing-page.json';
-    
+
 //     // echo FB_PLUGIN_URL;
 
 // // Read and decode the JSON file
@@ -80,3 +80,57 @@ add_action('init', function () {
 
 //     echo 'Post created successfully with ID: ' . $post_id;
 });
+
+
+$array = array(
+	'patterns' => array(
+		'categories' => array(
+
+		),
+		'items' => array(
+			'p_name' => array(
+				'content' => 'p_content',
+				'categories' => array()
+			),
+			'p_name' => array(
+				'content' => 'p_content',
+				'categories' => array()
+			)
+		)
+	),
+	'pages' => array(
+		'categories' => array(
+
+		),
+		'items' => array(
+			'p_name' => array(
+				'content' => 'p_content',
+				'categories' => array()
+			),
+			'p_name' => array(
+				'content' => 'p_content',
+				'categories' => array()
+			)
+		)
+	),
+	'kits' => array(
+		'items' => array(
+			'p_name' => array(
+				'content' => 'p_content',
+			),
+			'p_name' => array(
+				'content' => 'p_content',
+			)
+		)
+	),
+	'fav' => array(
+		'items' => array(
+			'p_name' => array(
+				'content' => 'p_content',
+			),
+			'p_name' => array(
+				'content' => 'p_content',
+			)
+		)
+	),
+);
