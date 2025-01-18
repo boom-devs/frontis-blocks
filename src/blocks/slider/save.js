@@ -9,9 +9,20 @@ export default function save( props ) {
         blockId,
         slideContent,
         slideItem,
-        transitionSpeed,
-        displayArrows,
+		displayArrows,
 		displayDots,
+		transitionSpeed,
+        autoplay,
+        autoplaySpeed,
+        slidePerView,
+        spaceBetween,
+        loop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
+        effect,
     } = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -21,6 +32,18 @@ export default function save( props ) {
 			key={ blockId }
 			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container' ) }
 			data-block-id={ blockId }
+			data-transition-speed={transitionSpeed}
+            data-autoplay={autoplay}
+            data-autoplay-speed={autoplaySpeed}
+            data-slides-per-view={slidePerView}
+            data-space-between={spaceBetween}
+            data-loop={loop}
+            data-allow-touch-move={allowTouchMove}
+            data-pause-on-hover={pauseOnHover}
+            data-stop-on-last-slide={stopOnLastSlide}
+            data-reverse-direction={reverseDirection}
+            data-enable-mouse-wheel={enableMouseWheel}
+            data-effect={effect}
 		>
 			<div className="fb-slides fb-swiper">
 				<div className="swiper-wrapper">
