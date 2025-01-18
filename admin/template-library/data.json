@@ -1,0 +1,166 @@
+{
+    "$schema": {
+        "patterns": {
+            "name": "Patterns",
+            "categories": {
+                "all": {
+                    "id": "all",
+                    "name": "All",
+                    "count": 30
+                },
+                "content-blocks": {
+                    "id": "content-blocks",
+                    "name": "Content Blocks",
+                    "count": 14
+                },
+                "creative": {
+                    "id": "creative",
+                    "name": "Creative",
+                    "count": 5
+                },
+                "dynamic": {
+                    "id": "dynamic",
+                    "name": "Dynamic",
+                    "count": 30
+                },
+                "layout": {
+                    "id": "layout",
+                    "name": "Layout",
+                    "count": 30
+                },
+                "form": {
+                    "id": "form",
+                    "name": "Form",
+                    "count": 30
+                },
+                "social": {
+                    "id": "social",
+                    "name": "Social",
+                    "count": 30
+                }
+            },
+            "items": {
+                "p_name": {
+                    "content": "p_content",
+                    "categories": []
+                }
+            }
+        },
+        "pages": {
+            "name": "Pages",
+            "categories": {
+                "all": {
+                    "id": "all",
+                    "name": "All",
+                    "count": 30
+                },
+                "content-blocks": {
+                    "id": "content-blocks",
+                    "name": "Content Blocks",
+                    "count": 14
+                },
+                "creative": {
+                    "id": "creative",
+                    "name": "Creative",
+                    "count": 5
+                },
+                "dynamic": {
+                    "id": "dynamic",
+                    "name": "Dynamic",
+                    "count": 30
+                },
+                "layout": {
+                    "id": "layout",
+                    "name": "Layout",
+                    "count": 30
+                },
+                "form": {
+                    "id": "form",
+                    "name": "Form",
+                    "count": 30
+                },
+                "social": {
+                    "id": "social",
+                    "name": "Social",
+                    "count": 30
+                }
+            },
+            "items": {
+                "p_name": {
+                    "content": "p_content",
+                    "categories": []
+                }
+            }
+        },
+        "kits": {
+            "name": "Kits",
+            "categories": {
+                "all": {
+                    "id": "all",
+                    "name": "All",
+                    "count": 30
+                },
+                "content-blocks": {
+                    "id": "content-blocks",
+                    "name": "Content Blocks",
+                    "count": 14
+                },
+                "creative": {
+                    "id": "creative",
+                    "name": "Creative",
+                    "count": 5
+                },
+                "dynamic": {
+                    "id": "dynamic",
+                    "name": "Dynamic",
+                    "count": 30
+                },
+                "layout": {
+                    "id": "layout",
+                    "name": "Layout",
+                    "count": 30
+                },
+                "form": {
+                    "id": "form",
+                    "name": "Form",
+                    "count": 30
+                },
+                "social": {
+                    "id": "social",
+                    "name": "Social",
+                    "count": 30
+                }
+            },
+            "items": {
+                "p_name": {
+                    "content": "p_content"
+                }
+            }
+        },
+        "template-library": {
+            "name": "Template Library",
+            "categories": {
+                "all": {
+                    "id": "all",
+                    "name": "All",
+                    "count": 30
+                },
+                "content-blocks": {
+                    "id": "content-blocks",
+                    "name": "Content Blocks",
+                    "count": 14
+                },
+                "creative": {
+                    "id": "creative",
+                    "name": "Creative",
+                    "count": 5
+                }
+            },
+            "items": {
+                "p_name": {
+                    "content": "p_content"
+                }
+            }
+        }
+    }
+}
