@@ -14,13 +14,19 @@ export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
 export const SELECT_SEPARATOR_TYPE = [
-	{ label: "Colon", value: ":" },
-	{ label: "Line", value: "|" },
-	{ label: "Slash", value: "/" },
+	{ label: "Colon", value: "colon" },
+	{ label: "Line", value: "line" },
+	{ label: "Slash", value: "slash" },
+	{ label: "Custom", value: "custom" },
 ];
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "em", value: "em" },
+];
+
+export const LAYOUT_TYPE = [
+	{ label: "Flex", value: "flex" },
+	{ label: "Grid", value: "grid" },
 ];
 
 export const separator_UNIT_TYPES = [

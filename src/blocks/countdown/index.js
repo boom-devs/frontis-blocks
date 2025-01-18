@@ -18,4 +18,3 @@ registerBlockType( metadata.name, {
 } );
 
 
-
