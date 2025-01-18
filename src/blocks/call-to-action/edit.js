@@ -91,39 +91,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
-							{imageSwitcher && (
-								
-								<div className="fb-cta-image-wrapper">
-								{FeatureItems.map(item => {
-									return (
-										<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
-											{item.teamMemberImageUrl && (
-												<img
-													src={item.teamMemberImageUrl}
-													alt={item.teamMemberImageAlt || "Preview Image"}
-													width="200"
-													height="200"
-												/>
-											)}
-										</div>
-									);
-								})}
-								</div>
-								
-								
-							)}
-							{subHeadingSwitcher && (
-								<RichText
-									tagName={subTitleTag}
-									value={subTitleText}
-									onChange={(value) =>
-										setAttributes({ subTitleText: value })
-									}
-									placeholder={__("CTA Sub Heading", "frontis-block")}
-									className="fb-cta-sub-heading"
-									style={{ textAlign: subTitleAlignment }}
-								/>
-							)}
 							<RichText
 								tagName={headingTag}
 								value={Heading_Text}
