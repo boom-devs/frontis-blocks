@@ -125,28 +125,28 @@ const attributes = {
 	countDownItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	countDownItemBorderRadiusLink : {
@@ -177,40 +177,62 @@ const attributes = {
 	countDownItemBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
+
+	countDownLayoutType: {
+		type: "string",
+		default: "flex"
+	},
+	countDownGrid: {
+		type: 'object',
+		default: {
+			Desktop: '4',
+			Tablet: '4',
+			Mobile: '2'
+		}
+	},
+	countDownGridUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 	countDownItemGap: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '104',
+			Tablet: '104',
+			Mobile: '104'
 		}
 	},
 	countDownItemGapUnits: {
@@ -237,9 +259,9 @@ const attributes = {
 	countDownItemSize: {
 		type: 'object',
 		default: {
-			Desktop: 144,
-			Tablet: 120,
-			Mobile: 100
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownItemSizeUnits: {
@@ -326,28 +348,28 @@ const attributes = {
 	countDownItemWrapperBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeLink : {
@@ -368,28 +390,28 @@ const attributes = {
 	countDownItemWrapperBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusLink : {
@@ -421,28 +443,28 @@ const attributes = {
 	countDownItemWrapperPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingLink : {
@@ -570,9 +592,9 @@ const attributes = {
 	digitFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '48',
-			Tablet: '42',
-			Mobile: '38'
+			Desktop: '62',
+			Tablet: '48',
+			Mobile: '32'
 		}
 	},
 	digitFontSizeUnits: {
@@ -618,9 +640,9 @@ const attributes = {
 	digitLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '80',
+			Tablet: '60',
+			Mobile: '42'
 		}
 	},
 	digitLineHeightUnits: {
@@ -729,7 +751,11 @@ const attributes = {
 	},
 	countDownSeparatorType: {
 		type: 'string',
-		default: ":",
+		default: "colon",
+	},
+	countDownSeparatorCustom: {
+		type: 'string',
+		default: "",
 	},
 	countDownSeparatorFontColorSwitcher: {
 		type: "string",
@@ -978,28 +1004,28 @@ const attributes = {
 	countDownLabelBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeLink : {
@@ -1049,6 +1075,46 @@ const attributes = {
 		default: true
 	},
 	/** Label End Border Radius */
+
+	countDownLabelMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelMarginDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownLabelMarginLink : {
+		type : "boolean",
+		default: true
+	},
 
 	countDownLabelWidth: {
 		type: 'object',
@@ -1124,28 +1190,28 @@ const attributes = {
 	countDownDigitBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeLink : {
@@ -1195,6 +1261,46 @@ const attributes = {
 		default: true
 	},
 	/** Digit End Border Radius */
+
+	countDownDigitMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownDigitMarginDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	
 	countDownDigitWidth: {
 		type: 'object',
