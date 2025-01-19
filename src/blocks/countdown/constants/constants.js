@@ -35,6 +35,13 @@ export const separator_UNIT_TYPES = [
 	{ label: "em", value: "em" },
 ];
 
+export const LAYOUT_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },
