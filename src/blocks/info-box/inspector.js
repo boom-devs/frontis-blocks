@@ -373,7 +373,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIcon: iconName });
 	};
 
-	/** End Preset Style **/
+	/** Start Preset Style **/
 	const changeInfoBoxPreset = (selectedPreset) => {
         const presetConfigurations = {
             "preset-1": {
@@ -486,18 +486,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 info_Button_Switcher: true,
                 mediaClassicColor: '#399CFF',
                 mediaHoverClassicColor: '399CFF',
-                globalBgColor: '#F89B2E',
-                globalBgHoverColor: '#F89B2E',
+                globalBgColor: '',
+                globalBgHoverColor: '',
 				mediaIconColor: '#ffffff',
                 mediaIconHoverColor: '#ffffff',
                 Heading_Color: '#15171C',
                 Heading_Hover_Color: '#15171C',
                 SubHeadingColor: '#555E72',
                 SubHeadingHoverColor: '#555E72',
-				buttonTextColor: '#F89B2E',
-				buttonTextHoverColor: '#F89B2E',
-                btnIconColor: '#F89B2E',
-                btnIconHoverColor: '#F89B2E',
+				buttonTextColor: '#399CFF',
+				buttonTextHoverColor: '#399CFF',
+                btnIconColor: '#399CFF',
+                btnIconHoverColor: '#399CFF',
                 globalBorderRadiusDesktop: {
                     top: "",
 					bottom: "",
