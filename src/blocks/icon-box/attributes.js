@@ -7,7 +7,10 @@ const attributes = {
         type: "string",
         default: "",
     },
-    
+    iconBoxPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	iconBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'

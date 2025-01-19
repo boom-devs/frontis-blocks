@@ -24,8 +24,8 @@ import {
 import {
 	BORDER_STYLES,
 	ICON_POSITION,
+	PRESETS
 } from "./constants/constants";
-import SortableItem from './sortableItem';
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -46,6 +46,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
+		ctaPresetStyle,
 		FeatureItems,
 		Heading_Text,
 		headingTag,
@@ -356,6 +357,154 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnTwoIcon: iconName });
 	};
 	
+	/** Start Preset Style **/
+	const changeCtaPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+				info_Button_Switcher: true,
+                mediaClassicColor: '#399CFF',
+                mediaHoverClassicColor: '#ffffff',
+				globalBgColor: '#EBF5FF',
+                globalBgHoverColor: '#399CFF',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#ffffff',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#ffffff',
+                buttonTextColor: '#399CFF',
+                btnIconColor: '#399CFF',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+            },
+            "preset-2": {
+				info_Button_Switcher: false,
+                mediaClassicColor: '',
+                mediaHoverClassicColor: '',
+                globalBgColor: '#399CFF',
+                globalBgHoverColor: '',
+				mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#ffffff',
+                Heading_Hover_Color: '#ffffff',
+                SubHeadingColor: '#ffffff',
+                SubHeadingHoverColor: '#ffffff',
+                globalBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+                mediaBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+            },
+            "preset-3": {
+                info_Button_Switcher: false,
+                mediaClassicColor: '#399CFF',
+                mediaHoverClassicColor: '399CFF',
+                globalBgColor: '',
+                globalBgHoverColor: '',
+				mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                globalBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+                mediaBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+            },
+            "preset-4": {
+                info_Button_Switcher: true,
+                mediaClassicColor: '#399CFF',
+                mediaHoverClassicColor: '#ffffff',
+				globalBgColor: '#FFFBF5',
+                globalBgHoverColor: '#399CFF',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#ffffff',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#ffffff',
+                buttonTextColor: '#F89B2E',
+				buttonTextHoverColor: '#F89B2E',
+                btnIconColor: '#F89B2E',
+                btnIconHoverColor: '#F89B2E',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+            },
+			"preset-5": {
+                info_Button_Switcher: true,
+                mediaClassicColor: '#399CFF',
+                mediaHoverClassicColor: '399CFF',
+                globalBgColor: '',
+                globalBgHoverColor: '',
+				mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+				buttonTextColor: '#399CFF',
+				buttonTextHoverColor: '#399CFF',
+                btnIconColor: '#399CFF',
+                btnIconHoverColor: '#399CFF',
+                globalBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                ctaPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style **/
+
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2318,11 +2467,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
+										<PanelBody
+										title={__("Presets", "frontis-block")}
+										initialOpen={true}
+										>
+											<SelectControl
+												label={__("Preset Style", "frontis-blocks")}
+												value={ctaPresetStyle}
+												options={PRESETS}
+												onChange={(selected) => changeCtaPreset(selected)}
+											/>
+										</PanelBody>
 										{/* Title Element */}
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Title", "frontis-block")}
-												initialOpen={true}
+												initialOpen={false}
 											>
 												
 												<FB_AlignmentControl
@@ -2348,7 +2508,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											</PanelBody>
 										</div>
-										
+
 										{/* Image control */}
 										<div className="fb-advanced-wrapper">
 											<PanelBody
