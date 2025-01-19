@@ -30,7 +30,8 @@ import {useDeviceType} from "@Config/displayType";
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-} from "../advanced-image/constants/constants";
+	PRESETS
+} from "./constants/constants";
 import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -39,6 +40,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// deviceType,
 		imageStyle,
 		displayCaption,
+		advancedImagePresetStyle,
 		imageSize,
 		imageWidth,
 		horizontalAlign,
@@ -249,6 +251,214 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}
 	
+	/** Start Preset Style **/
+	const changeAdvancedImagePreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+				buttonIconSwitcher: false,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'center',
+				Alignment: 'center',
+				descAlignment: 'center',
+				buttonAlignment: 'center',
+                mediaClassicColor: '#D7EBFF',
+                mediaHoverClassicColor: '#D7EBFF',
+				globalBgColor: '',
+                globalBgHoverColor: '',
+                mediaIconColor: '#399CFF',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#399CFF',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+				mediaMarginDesktop: {
+                    top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-2": {
+				buttonIconSwitcher: true,
+				iconBoxIconPosition: 'left',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '',
+                mediaHoverClassicColor: '',
+				globalBgColor: '#ffffff',
+                globalBgHoverColor: '#ffffff',
+                mediaIconColor: '#399CFF',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaMarginDesktop: {
+                    top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-3": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'center',
+				Alignment: 'center',
+				descAlignment: 'center',
+				buttonAlignment: 'center',
+                mediaClassicColor: '#F89B2E',
+                mediaHoverClassicColor: '#F89B2E',
+				globalBgColor: '#FFFBF5',
+                globalBgHoverColor: '#FFFBF5',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#F89B2E',
+                btnIconColor: '#F89B2E',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaMarginDesktop: {
+					top: '-64',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-4": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '#F89B2E',
+                mediaHoverClassicColor: '#F89B2E',
+				globalBgColor: '',
+                globalBgHoverColor: '',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#F89B2E',
+                btnIconColor: '#F89B2E',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaMarginDesktop: {
+					top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+			"preset-5": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '#15171C',
+                mediaHoverClassicColor: '#15171C',
+				globalBgColor: '#F7F7F7',
+                globalBgHoverColor: '#F7F7F7',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaMarginDesktop: {
+					top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                advancedImagePresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style **/
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1184,6 +1394,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("General", "frontis-blocks")}
 												initialOpen={false}
 											>
+											<SelectControl
+												label={__("Preset Style", "frontis-blocks")}
+												value={advancedImagePresetStyle}
+												options={PRESETS}
+												onChange={(selected) => changeAdvancedImagePreset(selected)}
+											/>
 											{/** Image Uploader **/}
 											<BaseControl
 											label={__("Image", "frontis-blocks")}
