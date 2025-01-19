@@ -210,20 +210,16 @@ const attributes = {
 		type: "string",
 		default: "flex"
 	},
+	countDownLayoutAlignment: {
+		type: "string",
+		default: "center"
+	},
 	countDownGrid: {
 		type: 'object',
 		default: {
 			Desktop: '4',
 			Tablet: '4',
 			Mobile: '2'
-		}
-	},
-	countDownGridUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
 		}
 	},
 
@@ -861,9 +857,9 @@ const attributes = {
 	countDownSeparatorVerticalGap: {
 		type: 'object',
 		default: {
-			Desktop: '20',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '40'
 		}
 	},
 	countDownSeparatorVerticalGapUnits: {

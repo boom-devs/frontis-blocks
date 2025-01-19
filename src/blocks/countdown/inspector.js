@@ -18,6 +18,7 @@ import { useEffect, useState, useMemo } from '@wordpress/element';
 
 import {
 	BORDER_STYLES,
+	LAYOUT_ALIGNMENT,
 	LAYOUT_TYPE,
 } from "./constants/constants";
 
@@ -30,6 +31,8 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import {SELECT_SEPARATOR_TYPE} from "@Blocks/countdown/constants/constants";
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
+import { ButtonGroup } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -77,8 +80,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownItemSizeUnits,
 
 		countDownLayoutType,
+		countDownLayoutAlignment,
 		countDownGrid,
-		countDownGridUnits,
 		countDownItemGap,
 		countDownItemGapUnits,
 
@@ -1244,7 +1247,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const countDownStyle = useMemo(
 		() => `
 			.fb-count-down-wrapper.${blockID} {
+				${countDownLayoutType === 'flex' ? `display: flex;` : ''}
+				${countDownLayoutType === 'grid' ? `display: grid;` : ''}
+				${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Desktop}, 1fr);` : ''}
 				${countDownItemGap.Desktop ? `gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};` : ''}
+				${countDownLayoutAlignment ? `justify-content: ${countDownLayoutAlignment};` : ''}
 				${countDownItemWrapperBorder ? `border: ${countDownItemWrapperBorder};` : ''}
 				${countDownItemWrapperBorderTypeGetDesktop ? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};` : ''}
 				${countDownItemWrapperBorderRadiusGetDesktop ? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};` : ''}
@@ -1668,6 +1675,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			secondsDigitFontColorSwitcher,
 			secondsDigitFontColor,
 			secondsDigitFontHoverColor,
+
+			countDownLayoutType,
+			countDownLayoutAlignment,
+			countDownGrid,
+			countDownItemGap,
+			countDownItemGapUnits,
 		]
 	);
 	
@@ -1758,18 +1771,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													label={__("Item Gap", "frontis-blocks")}
 													rangeValue={countDownGrid}
 													onChangeHandler={(value) => setAttributes({ countDownGrid: value })}
-													rangeUnitHandler={(value) => setAttributes({ countDownGridUnits: value })}
 													deviceType={deviceType}
-													units={countDownGridUnits}
 													setAttributes={setAttributes}
 													rangeStep={1}
 													resetFallbackValue={1}
+													isRangeUnit={false}
 												/>
 											}
 											
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Item Gap", "frontis-blocks")}
 												rangeValue={countDownItemGap}
 												onChangeHandler={(value) => setAttributes({ countDownItemGap: value })}
@@ -1780,6 +1792,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 											/>
+
+											{countDownLayoutType === 'flex' &&
+												<BaseControl
+													label={__(
+														"Alignment",
+														"frontis-blocks"
+													)}
+													id="fb-setting-text-alignment"
+													className="fb-setting-text-alignment"
+												>
+													<ButtonGroup className="fb-setting-text-alignment-group-btn">
+														{LAYOUT_ALIGNMENT.map((item) => (
+															<Button
+																key={item.value}
+																onClick={() => setAttributes({ countDownLayoutAlignment: item.value })}
+																className={`fb-setting-text-alignment-single-btn ${countDownLayoutAlignment === item.value ? 'active' : ''}`}
+															>
+																{item.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
+											}
 										</PanelBody>
 
 										<PanelBody title={__("Labels", "frontis-blocks")} initialOpen={false}>
@@ -1840,7 +1875,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										>
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Item Size", "frontis-blocks")}
 												rangeValue={countDownItemSize}
 												onChangeHandler={(value) => setAttributes({ countDownItemSize: value })}
@@ -1937,7 +1972,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										>
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Width", "frontis-blocks")}
 												rangeValue={countDownDigitWidth}
 												onChangeHandler={(value) => setAttributes({ countDownDigitWidth: value })}
@@ -1951,7 +1986,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Height", "frontis-blocks")}
 												rangeValue={countDownDigitHeight}
 												onChangeHandler={(value) => setAttributes({ countDownDigitHeight: value })}
@@ -2219,7 +2254,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										>
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Width", "frontis-blocks")}
 												rangeValue={countDownLabelWidth}
 												onChangeHandler={(value) => setAttributes({ countDownLabelWidth: value })}
@@ -2233,7 +2268,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											<FB_Range
 												min={1}
-												max={1400}
+												max={400}
 												label={__("Height", "frontis-blocks")}
 												rangeValue={countDownLabelHeight}
 												onChangeHandler={(value) => setAttributes({ countDownLabelHeight: value })}
@@ -2459,7 +2494,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											<FB_Range
 												min={1}
-												max={100}
+												max={400}
 												label={__("Hz Spacing", "frontis-blocks")}
 												rangeValue={countDownSeparatorHorizontalGap}
 												onChangeHandler={(value) => setAttributes({ countDownSeparatorHorizontalGap: value })}
@@ -2473,7 +2508,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 											<FB_Range
 												min={1}
-												max={100}
+												max={400}
 												label={__("Vr Spacing", "frontis-blocks")}
 												rangeValue={countDownSeparatorVerticalGap}
 												onChangeHandler={(value) => setAttributes({ countDownSeparatorVerticalGap: value })}
