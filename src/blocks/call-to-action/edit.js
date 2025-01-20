@@ -20,31 +20,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		Heading_Text,
 		headingTag,
 		Alignment,
-		separator,
-		Sub_Heading_Switcher,
-		Show_Separator_Switcher,
 		Sub_Heading_Text,
 		Sub_Heading_Tag,
-		info_Button_Switcher,
-		subHeadingSwitcher,
-		subTitleAlignment,
-		subTitleTag,
-		subTitleText,
+		ctaBtnOneSwitcher,
 		descriptionSwitcher,
 		info_Button_Text,
 		info_Button_Link,
-		wrapperAlignment,
-		infoBoxBg,
 		descAlignment,
 		buttonAlignment,
-		icon,
-		mediaSwitcher,
 		contentAlignment,
-		mediaSize,
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition,
 		btnTwoSwitcher,
 		btnTwoIconPosition,
 		btnTwoIcon,
@@ -53,8 +40,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoLink,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
-		FeatureItems,
-		imageSwitcher
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -68,9 +53,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const handleBtnClick = (e) =>{
 		e.preventDefault();
 	}
+
 	const handleBtnTwoClick = (e) =>{
 		e.preventDefault();
 	}
+
 	return (
 		<>
 			<Inspector
@@ -114,7 +101,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							)}
 
 							<div className="fb-cta-buttons-wrapper" style={{ justifyContent: buttonAlignment }}>
-								{info_Button_Switcher && (
+								{ctaBtnOneSwitcher && (
 									<div className="fb-cta-btn-one-wrapper" style={{
 
 									}}>

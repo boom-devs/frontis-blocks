@@ -98,7 +98,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingMobileBorderRadius,
 		headingBorderRadiusLink,
 
-		info_Button_Switcher,
+		ctaBtnOneSwitcher,
 		info_Button_Text,
 		info_Button_Link,
 		descAlignment,
@@ -361,135 +361,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeCtaPreset = (selectedPreset) => {
         const presetConfigurations = {
             "preset-1": {
-				info_Button_Switcher: true,
-                mediaClassicColor: '#399CFF',
-                mediaHoverClassicColor: '#ffffff',
-				globalBgColor: '#EBF5FF',
-                globalBgHoverColor: '#399CFF',
-                mediaIconColor: '#ffffff',
-                mediaIconHoverColor: '#399CFF',
-                Heading_Color: '#15171C',
-                Heading_Hover_Color: '#ffffff',
-                SubHeadingColor: '#555E72',
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+				buttonIconSwitcher: true,
+				testClassicColor: '#15171C',
+				buttonBgColor: '#ffffff',
+                headingColor: '#ffffff',
+                SubHeadingColor: '#ffffff',
                 SubHeadingHoverColor: '#ffffff',
-                buttonTextColor: '#399CFF',
-                btnIconColor: '#399CFF',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
                 globalBorderRadiusDesktop: {
-                    top: "6",
-					bottom: "6",
-					left: "6",
-					right: "6",
-                },
-				mediaBorderRadiusDesktop: {
-                    top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
                 },
             },
             "preset-2": {
-				info_Button_Switcher: false,
-                mediaClassicColor: '',
-                mediaHoverClassicColor: '',
-                globalBgColor: '#399CFF',
-                globalBgHoverColor: '',
-				mediaIconColor: '#ffffff',
-                mediaIconHoverColor: '#ffffff',
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: false,
+				buttonIconSwitcher: false,
+				buttonBgColor: '#399CFF',
+				testClassicColor: '#ffffff',
+                headingColor: '#15171C',
+                SubHeadingColor: '#15171C',
+                SubHeadingHoverColor: '#15171C',
+				buttonTextColor: '#ffffff',
+                globalBorderRadiusDesktop: {
+                    top: "16",
+					bottom: "16",
+					left: "16",
+					right: "16",
+                },
+            },
+            "preset-3": {
+                ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: false,
+				globalBgColor: '#ffffff',
                 Heading_Color: '#ffffff',
                 Heading_Hover_Color: '#ffffff',
                 SubHeadingColor: '#ffffff',
                 SubHeadingHoverColor: '#ffffff',
                 globalBorderRadiusDesktop: {
-                    top: "24",
-					bottom: "24",
-					left: "24",
-					right: "24",
-                },
-                mediaBorderRadiusDesktop: {
-                    top: "",
-					bottom: "",
-					left: "",
-					right: "",
+                    top: "16",
+					bottom: "16",
+					left: "16",
+					right: "16",
                 },
             },
-            "preset-3": {
-                info_Button_Switcher: false,
-                mediaClassicColor: '#399CFF',
-                mediaHoverClassicColor: '399CFF',
-                globalBgColor: '',
-                globalBgHoverColor: '',
-				mediaIconColor: '#ffffff',
-                mediaIconHoverColor: '#ffffff',
-                Heading_Color: '#15171C',
-                Heading_Hover_Color: '#15171C',
-                SubHeadingColor: '#555E72',
-                SubHeadingHoverColor: '#555E72',
-                globalBorderRadiusDesktop: {
-                    top: "24",
-					bottom: "24",
-					left: "24",
-					right: "24",
-                },
-                mediaBorderRadiusDesktop: {
-                    top: "24",
-					bottom: "24",
-					left: "24",
-					right: "24",
-                },
-            },
-            "preset-4": {
-                info_Button_Switcher: true,
-                mediaClassicColor: '#399CFF',
-                mediaHoverClassicColor: '#ffffff',
-				globalBgColor: '#FFFBF5',
-                globalBgHoverColor: '#399CFF',
-                mediaIconColor: '#ffffff',
-                mediaIconHoverColor: '#399CFF',
-                Heading_Color: '#15171C',
-                Heading_Hover_Color: '#ffffff',
-                SubHeadingColor: '#555E72',
-                SubHeadingHoverColor: '#ffffff',
-                buttonTextColor: '#F89B2E',
-				buttonTextHoverColor: '#F89B2E',
-                btnIconColor: '#F89B2E',
-                btnIconHoverColor: '#F89B2E',
-                globalBorderRadiusDesktop: {
-                    top: "6",
-					bottom: "6",
-					left: "6",
-					right: "6",
-                },
-				mediaBorderRadiusDesktop: {
-                    top: "24",
-					bottom: "24",
-					left: "24",
-					right: "24",
-                },
-            },
-			"preset-5": {
-                info_Button_Switcher: true,
-                mediaClassicColor: '#399CFF',
-                mediaHoverClassicColor: '399CFF',
-                globalBgColor: '',
-                globalBgHoverColor: '',
-				mediaIconColor: '#ffffff',
-                mediaIconHoverColor: '#ffffff',
-                Heading_Color: '#15171C',
-                Heading_Hover_Color: '#15171C',
-                SubHeadingColor: '#555E72',
-                SubHeadingHoverColor: '#555E72',
-				buttonTextColor: '#399CFF',
-				buttonTextHoverColor: '#399CFF',
-                btnIconColor: '#399CFF',
-                btnIconHoverColor: '#399CFF',
-                globalBorderRadiusDesktop: {
-                    top: "",
-					bottom: "",
-					left: "",
-					right: "",
-                },
-            },
-            
         };
 
         const selectedPresetConfig = presetConfigurations[selectedPreset];
@@ -2281,6 +2201,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			hoverBackgroundImageRepeat,
 			hoverBackgroundImageSize,
 			hoverClassicColor,
+			globalBgColor,
 			globalBgHoverColor,
 			globalBorderHoverColor,
 			infoBoxTabPadding,
@@ -2553,13 +2474,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											>
 												<ToggleControl
 													label={__("Show Button", "frontis-block")}
-													checked={info_Button_Switcher}
+													checked={ctaBtnOneSwitcher}
 													onChange={(value) =>
-														setAttributes({ info_Button_Switcher: value })
+														setAttributes({ ctaBtnOneSwitcher: value })
 													}
 												/>
 
-												{info_Button_Switcher && (
+												{ctaBtnOneSwitcher && (
 													<>
 														
 														<FB_AlignmentControl
@@ -2938,7 +2859,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										)}
 
 										{/*Button One Style*/}
-										{info_Button_Switcher && (
+										{ctaBtnOneSwitcher && (
 											<PanelBody
 												title={__("Button One", "frontis-block")}
 												className="fb-cta-button-setting-wrapper"

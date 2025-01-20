@@ -758,7 +758,7 @@ const attributes = {
         type: "string",
         default: "Learn More"
     },
-    info_Button_Switcher: {
+    ctaBtnOneSwitcher: {
         type: "boolean",
         default: true,
     },
