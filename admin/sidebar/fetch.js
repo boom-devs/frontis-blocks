@@ -70,9 +70,11 @@ export const getTypography = async () => {
 			}
 		});
 
+		
 		if (!response.success) {
 			throw new Error(response.data || 'Fetch failed');
 		}
+		console.log("Typography response:", response.data);
 
 		return response.data;
 	} catch (error) {

@@ -58,8 +58,9 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_typography() {
-        error_log(print_r($_POST['data'], true));
+        // error_log(print_r($_POST['data'], true));
         $this->handle_option_update('typography', 'array');
+        
     }
 
  	public function update_custom_typography() {
@@ -109,6 +110,7 @@ class GlobalSettings extends AjaxBase {
 
     public function get_typography() {
         $typography = get_option('fb_typography');
+        // error_log(print_r($typography, true));
         if($typography) {
 			wp_send_json_success($typography);
 		}
@@ -190,10 +192,10 @@ class GlobalSettings extends AjaxBase {
         $updated = update_option($option_name, $_POST['data'], true);
 
 		if($updated) {
-			$global_colors = get_option($option_name);
+			$get_values = get_option($option_name);
 			$data = array(
 				'option_name' => $option_name,
-				'data' => $global_colors
+				'data' => $get_values
 			);
 
 			wp_send_json_success($data);

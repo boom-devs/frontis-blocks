@@ -12,7 +12,7 @@ use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
-
+use FrontisBlocks\Core\DynamicStyles;
 final class Plugin
 {
 	/**
@@ -194,6 +194,8 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
+
+		DynamicStyles::get_instance();
 
 	}
 }

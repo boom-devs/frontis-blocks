@@ -22,7 +22,10 @@ import {useEffect, useState} from "@wordpress/element";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_SidebarTypography from "./SidebarTypography";
 import {getFbLocalStorage, setFbLocalStorage, useAfterSave, loadGoogleFont} from "../helper";
-import {getTypography, updateTypography} from "../fetch";
+import { getTypography, updateTypography } from "../fetch";
+import { STORE_NAME } from "../store";
+import { useDispatch, useSelect } from '@wordpress/data';
+
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
@@ -30,7 +33,36 @@ const TypographySettings = (props) => {
 	const [selectedHeading, setSelectedHeading] = useState('h1');
 	const [deviceType, setDeviceType] = useState('Desktop');
 	const [isMount, setIsMount] = useState(false);
-	const [fontFamilies, setFontFamilies] = useState([]);
+	const [ fontFamilies, setFontFamilies ] = useState([]);
+	const { setTypographies } = useDispatch(STORE_NAME);
+	const typographies = useSelect(select => select(STORE_NAME).getTypographies(), []);
+
+	// Fetch initial typography values
+	useEffect(() => {
+		const fetchTypographySettings = async () => {
+			// Get typography settings
+			const typographyResponse = await getTypography();
+			console.log("Typography response:", typographyResponse);
+			if (typographyResponse) {
+				setTypography(typographyResponse);
+				setTypographies(typographyResponse);
+			}
+
+			// Get custom typography settings
+			const customTypographyResponse = await getTypography('fb_get_custom_typography');
+			if (customTypographyResponse.success) {
+				setCustomTypography(customTypographyResponse.data.data);
+			}
+
+			// Get font families
+			const fontFamiliesResponse = await getTypography('fb_get_fontfamilies');
+			if (fontFamiliesResponse.success) {
+				setFontFamilies(fontFamiliesResponse.data.data);
+			}
+		};
+
+		fetchTypographySettings();
+	}, []);
 
 	// Typography elements
 	const typographyElements = {
@@ -65,7 +97,9 @@ const TypographySettings = (props) => {
 			}
 		}
 
-		return result
+		// console.log(result);
+
+		return result;
 	}
 
 	// Is heading saved
@@ -104,483 +138,138 @@ const TypographySettings = (props) => {
 		}
 	}
 
-	// Body link font typography
-	const onChangeFontFamily = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				fontFamily: value,
-			},
-		}));
-
-		loadGoogleFont(value);
-
-		setFontFamilies({
-			...fontFamilies,
-			[item]: value
-		});
-		setIsMount(true);
-	}
-
-	const onChangeFontSize = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				fontSize: {
-					...typography[item]?.fontSize,
-					[deviceType]: parseInt(value[deviceType]),
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeFontSizeUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				fontSizeUnit: {
-					...typography[item]?.fontSizeUnit,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeFontWeight = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				fontWeight: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeFontStyle = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				fontStyle: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeTextDecoration = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				textDecoration: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeTextTransform = (value,item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				textTransform: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeLetterSpacing = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				letterSpacing: {
-					...typography[item]?.letterSpacing,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeLetterSpacingUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				letterSpacingUnit: {
-					...typography[item]?.letterSpacingUnit,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeLineHeight = (value,item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-					lineHeight: {
-						...typography[item]?.lineHeight,
+	// Single handler for all typography changes
+	const handleTypographyChange = (value, item, property, type = 'regular') => {
+		const isHeading = type === 'heading';
+		const isCustom = type === 'custom';
+		
+		if (isCustom) {
+			const updatedCustomTypography = {
+				...customTypography,
+				[item]: {
+					...customTypography[item],
+					[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
+						...customTypography[item]?.[property],
 						[deviceType]: value[deviceType],
-					},
+					} : value,
 				},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeLineHeightUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-			  	...prevTypography[item],
-				lineHeightUnits: {
-					...typography[item]?.lineHeightUnits,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	// Heading typography handler
-	const onChangeHeadingFontFamily = (value, item) => {
-		// Assuming typography is an object that looks like { item1: { h1: { fontFamily: ... }, h2: ... }, item2: ... }
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					fontFamily: value,
-				},
-			},
-		}));
-
-		loadGoogleFont(value);
-		setIsMount(true);
-
-		setFontFamilies({
-			...fontFamilies,
-			[item]: {
-				...fontFamilies.heading,
-				[selectedHeading]: value
+			};
+			setCustomTypography(updatedCustomTypography);
+			
+			if (property === 'fontFamily') {
+				loadGoogleFont(value);
+				setFontFamilies({
+					...fontFamilies,
+					[item]: value
+				});
 			}
-		});
-	}
-
-	const onChangeHeadingFontSize = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
+		} else {
+		const updatedTypography = {
+			...typography,
 			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					fontSize: {
-						...typography[item][selectedHeading]?.fontSize,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
+				...typography[item],
+				...(isHeading ? {
+					[selectedHeading]: {
+						...typography[item]?.[selectedHeading],
+						[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
+							...typography[item]?.[selectedHeading]?.[property],
+							[deviceType]: property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType],
+						} : value,
+						// Always include all other properties
+						fontFamily: typography[item]?.[selectedHeading]?.fontFamily || '',
+						fontSize: typography[item]?.[selectedHeading]?.fontSize || {},
+						fontSizeUnit: typography[item]?.[selectedHeading]?.fontSizeUnit || {},
+						fontWeight: typography[item]?.[selectedHeading]?.fontWeight || '',
+						fontStyle: typography[item]?.[selectedHeading]?.fontStyle || '',
+						textTransform: typography[item]?.[selectedHeading]?.textTransform || '',
+						textDecoration: typography[item]?.[selectedHeading]?.textDecoration || '',
+						letterSpacing: typography[item]?.[selectedHeading]?.letterSpacing || {},
+						letterSpacingUnit: typography[item]?.[selectedHeading]?.letterSpacingUnit || {},
+						lineHeight: typography[item]?.[selectedHeading]?.lineHeight || {},
+						lineHeightUnits: typography[item]?.[selectedHeading]?.lineHeightUnits || {}
+					}
+				} : {
+					[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
+						...typography[item]?.[property],
+						[deviceType]: property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType],
+					} : value,
+					// Always include all other properties
+					fontFamily: typography[item]?.fontFamily || '',
+					fontSize: typography[item]?.fontSize || {},
+					fontSizeUnit: typography[item]?.fontSizeUnit || {},
+					fontWeight: typography[item]?.fontWeight || '',
+					fontStyle: typography[item]?.fontStyle || '',
+					textTransform: typography[item]?.textTransform || '',
+					textDecoration: typography[item]?.textDecoration || '',
+					letterSpacing: typography[item]?.letterSpacing || {},
+					letterSpacingUnit: typography[item]?.letterSpacingUnit || {},
+					lineHeight: typography[item]?.lineHeight || {},
+					lineHeightUnits: typography[item]?.lineHeightUnits || {}
+				})
+			}
+		};
+		setTypography(updatedTypography);
+
+		if (property === 'fontFamily') {
+			loadGoogleFont(value);
+			if (isHeading) {
+				setFontFamilies({
+					...fontFamilies,
+					[item]: {
+						...fontFamilies.heading,
+						[selectedHeading]: value
+					}
+				});
+			} else {
+				setFontFamilies({
+					...fontFamilies,
+					[item]: value
+				});
+				}
+			}
+		}
+
 		setIsMount(true);
-	}
+	};
 
-	const onChangeHeadingFontSizeUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					fontSizeUnit: {
-						...typography[item][selectedHeading]?.fontSizeUnit,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
-		setIsMount(true);
-	}
+	// Regular typography handlers
+	const onChangeFontFamily = (value, item) => handleTypographyChange(value, item, 'fontFamily');
+	const onChangeFontSize = (value, item) => handleTypographyChange(value, item, 'fontSize');
+	const onChangeFontSizeUnit = (value, item) => handleTypographyChange(value, item, 'fontSizeUnit');
+	const onChangeFontWeight = (value, item) => handleTypographyChange(value, item, 'fontWeight');
+	const onChangeFontStyle = (value, item) => handleTypographyChange(value, item, 'fontStyle');
+	const onChangeTextDecoration = (value, item) => handleTypographyChange(value, item, 'textDecoration');
+	const onChangeTextTransform = (value, item) => handleTypographyChange(value, item, 'textTransform');
+	const onChangeLetterSpacing = (value, item) => handleTypographyChange(value, item, 'letterSpacing');
+	const onChangeLetterSpacingUnit = (value, item) => handleTypographyChange(value, item, 'letterSpacingUnit');
+	const onChangeLineHeight = (value, item) => handleTypographyChange(value, item, 'lineHeight');
+	const onChangeLineHeightUnit = (value, item) => handleTypographyChange(value, item, 'lineHeightUnits');
 
-	const onChangeHeadingFontWeight = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					fontWeight: value,
-				},
-			},
-		}));
-		setIsMount(true);
-	}
+	// Heading typography handlers
+	const onChangeHeadingFontFamily = (value, item) => handleTypographyChange(value, item, 'fontFamily', 'heading');
+	const onChangeHeadingFontSize = (value, item) => handleTypographyChange(value, item, 'fontSize', 'heading');
+	const onChangeHeadingFontSizeUnit = (value, item) => handleTypographyChange(value, item, 'fontSizeUnit', 'heading');
+	const onChangeHeadingFontWeight = (value, item) => handleTypographyChange(value, item, 'fontWeight', 'heading');
+	const onChangeHeadingFontStyle = (value, item) => handleTypographyChange(value, item, 'fontStyle', 'heading');
+	const onChangeHeadingTextDecoration = (value, item) => handleTypographyChange(value, item, 'textDecoration', 'heading');
+	const onChangeHeadingTextTransform = (value, item) => handleTypographyChange(value, item, 'textTransform', 'heading');
+	const onChangeHeadingLetterSpacing = (value, item) => handleTypographyChange(value, item, 'letterSpacing', 'heading');
+	const onChangeHeadingLetterSpacingUnit = (value, item) => handleTypographyChange(value, item, 'letterSpacingUnit', 'heading');
+	const onChangeHeadingLineHeight = (value, item) => handleTypographyChange(value, item, 'lineHeight', 'heading');
+	const onChangeHeadingLineHeightUnit = (value, item) => handleTypographyChange(value, item, 'lineHeightUnits', 'heading');
 
-	const onChangeHeadingFontStyle = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					fontStyle: value,
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingTextDecoration = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					textDecoration: value,
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingTextTransform = (value,item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					textTransform: value,
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingLetterSpacing = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					letterSpacing: {
-						...typography[item][selectedHeading]?.letterSpacing,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingLetterSpacingUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					letterSpacingUnit: {
-						...typography[item][selectedHeading]?.letterSpacingUnit,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingLineHeight = (value,item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					lineHeight: {
-						...typography[item][selectedHeading]?.lineHeight,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeHeadingLineHeightUnit = (value, item) => {
-		setTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				[selectedHeading]: {
-					...prevTypography[item][selectedHeading],
-					lineHeightUnits: {
-						...typography[item][selectedHeading]?.lineHeightUnits,
-						[deviceType]: value[deviceType],
-					},
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	// Custom typography handler
-	const onChangeCustomFontFamily = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				fontFamily: value,
-			},
-		}));
-
-		setFontFamilies({
-			...fontFamilies,
-			[item]: value
-		});
-
-		loadGoogleFont(value);
-		setIsMount(true);
-	}
-
-	const onChangeCustomFontSize = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				fontSize: {
-					...customTypography[item]?.fontSize,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomFontSizeUnit = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				fontSizeUnit: {
-					...customTypography[item]?.fontSizeUnit,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomFontWeight = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				fontWeight: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomFontStyle = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				fontStyle: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomTextDecoration = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				textDecoration: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomTextTransform = (value,item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				textTransform: value,
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomLetterSpacing = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				letterSpacing: {
-					...customTypography[item]?.letterSpacing,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomLetterSpacingUnit = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				letterSpacingUnit: {
-					...customTypography[item]?.letterSpacingUnit,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomLineHeight = (value,item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				lineHeight: {
-					...customTypography[item]?.lineHeight,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
-
-	const onChangeCustomLineHeightUnit = (value, item) => {
-		setCustomTypography(prevTypography => ({
-			...prevTypography,
-			[item]: {
-				...prevTypography[item],
-				lineHeightUnits: {
-					...customTypography[item]?.lineHeightUnits,
-					[deviceType]: value[deviceType],
-				},
-			},
-		}));
-		setIsMount(true);
-	}
+	// Custom typography handlers
+	const onChangeCustomFontFamily = (value, item) => handleTypographyChange(value, item, 'fontFamily', 'custom');
+	const onChangeCustomFontSize = (value, item) => handleTypographyChange(value, item, 'fontSize', 'custom');
+	const onChangeCustomFontSizeUnit = (value, item) => handleTypographyChange(value, item, 'fontSizeUnit', 'custom');
+	const onChangeCustomFontWeight = (value, item) => handleTypographyChange(value, item, 'fontWeight', 'custom');
+	const onChangeCustomFontStyle = (value, item) => handleTypographyChange(value, item, 'fontStyle', 'custom');
+	const onChangeCustomTextDecoration = (value, item) => handleTypographyChange(value, item, 'textDecoration', 'custom');
+	const onChangeCustomTextTransform = (value, item) => handleTypographyChange(value, item, 'textTransform', 'custom');
+	const onChangeCustomLetterSpacing = (value, item) => handleTypographyChange(value, item, 'letterSpacing', 'custom');
+	const onChangeCustomLetterSpacingUnit = (value, item) => handleTypographyChange(value, item, 'letterSpacingUnit', 'custom');
+	const onChangeCustomLineHeight = (value, item) => handleTypographyChange(value, item, 'lineHeight', 'custom');
+	const onChangeCustomLineHeightUnit = (value, item) => handleTypographyChange(value, item, 'lineHeightUnits', 'custom');
 
 	// Save to database
 
@@ -593,8 +282,8 @@ const TypographySettings = (props) => {
 				if (typography) {
 					const response = await updateTypography(typography);
 					if (response.success) {
-						setTypography(response.data.data);
-						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+						setTypography(response);
+						setTypographies(response);
 					}
 				}
 
@@ -602,7 +291,6 @@ const TypographySettings = (props) => {
 					const response = await updateTypography(customTypography, 'fb_update_custom_typography');
 					if (response.success) {
 						setCustomTypography(response.data.data);
-						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
 					}
 				}
 
@@ -610,7 +298,6 @@ const TypographySettings = (props) => {
 					const response = await updateTypography(fontFamilies, 'fb_update_fontfamilies');
 					if (response.success) {
 						setFontFamilies(response.data.data);
-						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
 					}
 				}
 			}
@@ -620,8 +307,8 @@ const TypographySettings = (props) => {
 	}, [isAfterSave]);
 
 
-	console.log("Checking device type inside typography settings")
-	console.log(deviceType)
+	// console.log("Checking device type inside typography settings")
+	// console.log(deviceType)
 	return (
 		<TabPanel
 			className="fb-blocks-color-tabs"

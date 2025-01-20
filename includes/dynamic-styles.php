@@ -35,3 +35,18 @@ function fb_enqueue_dynamic_styles() {
 }
 add_action('wp_enqueue_scripts', 'fb_enqueue_dynamic_styles', 20);
 add_action('admin_enqueue_scripts', 'fb_enqueue_dynamic_styles', 20); 
+add_action('enqueue_block_editor_assets', 'fb_enqueue_dynamic_styles', 20);
+
+// add typography styles variables
+add_action('enqueue_block_editor_assets', 'fb_enqueue_typography_styles', 20);
+
+function fb_enqueue_typography_styles() {
+    $typography_settings = get_option('fb_typography', []);
+    $css = ':root {';
+    // typography variables
+    foreach ($typography_settings as $key => $value) {
+        $css .= sprintf('%s: %s;', $key, $value);
+    }
+    $css .= '}';
+    wp_add_inline_style('frontis-blocks-style', $css);
+}

@@ -10,9 +10,11 @@ import {
 	__experimentalNavigatorButton as NavigatorButton,
 	__experimentalNavigatorBackButton as NavigatorBackButton,
 	__experimentalHStack as HStack,
-	__experimentalVStack as VStack
+	__experimentalVStack as VStack,
+	Dashicon
 } from "@wordpress/components";
-import {useEffect, useState} from "@wordpress/element";
+import { useEffect, useState } from "@wordpress/element";
+
 import "./sidebar.scss";
 import {loadGoogleFont} from "./helper";
 import { getGlobalColors, updateGlobalColors } from "./fetch";
@@ -589,7 +591,7 @@ function FrontisBlocksSidebar() {
 													</span>
 													<span className="fb-tab-title">{__("Blocks", "frontis-blocks")}</span>
 												</HStack>
-												<span><ChevronRight /></span>
+												<span><Dashicon icon="arrow-right-alt2" /></span>
 											</HStack>
 										</NavigatorButton>
 									</div>
@@ -603,7 +605,7 @@ function FrontisBlocksSidebar() {
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
 									<NavigatorButton path="/" className="back-button">
-										<ChevronLeft />
+										<Dashicon icon="arrow-left-alt2" />
 									</NavigatorButton>
 									<div className="fb-global-header-inner">
 										<h3>{__("Typography", "frontis-blocks")}</h3>
@@ -623,7 +625,7 @@ function FrontisBlocksSidebar() {
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
 									<NavigatorButton path="/" className="back-button">
-										<ChevronLeft />
+										<Dashicon icon="arrow-left-alt2" />
 									</NavigatorButton>
 									<div className="fb-global-header-inner">
 										<h3>{__("Color", "frontis-blocks")}</h3>
@@ -666,7 +668,7 @@ function FrontisBlocksSidebar() {
 										<HStack direction="row" justify="flex-start"
 											alignment="stretch" className="fb-global-header-inner-wrapper">
 									<NavigatorButton path="/" className="back-button">
-										<ChevronLeft />
+										<Dashicon icon="arrow-left-alt2" />
 									</NavigatorButton>
 									<div className="fb-global-header-inner">
 										<h3>{__("Blocks", "frontis-blocks")}</h3>

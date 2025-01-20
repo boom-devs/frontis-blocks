@@ -832,6 +832,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     onChangeFontFamily(newFontFamily);
   };
   var handleFontSizeChange = function handleFontSizeChange(newFontSize) {
+    console.log(newFontSize);
     onChangeFontSize(newFontSize);
   };
   var handleFontSizeUnitChange = function handleFontSizeUnitChange(newFontSizeUnit) {
@@ -949,21 +950,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
 /* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
 /* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store */ "./admin/sidebar/store/index.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_8__);
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
 
 
 
@@ -996,6 +1002,59 @@ var TypographySettings = function TypographySettings(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
+  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useDispatch)(_store__WEBPACK_IMPORTED_MODULE_7__.STORE_NAME),
+    setTypographies = _useDispatch.setTypographies;
+  var typographies = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_8__.useSelect)(function (select) {
+    return select(_store__WEBPACK_IMPORTED_MODULE_7__.STORE_NAME).getTypographies();
+  }, []);
+
+  // Fetch initial typography values
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var fetchTypographySettings = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var typographyResponse, customTypographyResponse, fontFamiliesResponse;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.getTypography)();
+            case 2:
+              typographyResponse = _context.sent;
+              console.log("Typography response:", typographyResponse);
+              if (typographyResponse) {
+                setTypography(typographyResponse);
+                setTypographies(typographyResponse);
+              }
+
+              // Get custom typography settings
+              _context.next = 7;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.getTypography)('fb_get_custom_typography');
+            case 7:
+              customTypographyResponse = _context.sent;
+              if (customTypographyResponse.success) {
+                setCustomTypography(customTypographyResponse.data.data);
+              }
+
+              // Get font families
+              _context.next = 11;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.getTypography)('fb_get_fontfamilies');
+            case 11:
+              fontFamiliesResponse = _context.sent;
+              if (fontFamiliesResponse.success) {
+                setFontFamilies(fontFamiliesResponse.data.data);
+              }
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function fetchTypographySettings() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    fetchTypographySettings();
+  }, []);
 
   // Typography elements
   var typographyElements = {
@@ -1037,6 +1096,9 @@ var TypographySettings = function TypographySettings(props) {
         lineHeight: "".concat((_font$lineHeight = font.lineHeight) === null || _font$lineHeight === void 0 ? void 0 : _font$lineHeight[deviceType]).concat(((_font$lineHeightUnits = font.lineHeightUnits) === null || _font$lineHeightUnits === void 0 ? void 0 : _font$lineHeightUnits[deviceType]) || 'px')
       });
     }
+
+    // console.log(result);
+
     return result;
   };
 
@@ -1075,299 +1137,138 @@ var TypographySettings = function TypographySettings(props) {
     }
   };
 
-  // Body link font typography
-  var _onChangeFontFamily = function onChangeFontFamily(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
+  // Single handler for all typography changes
+  var handleTypographyChange = function handleTypographyChange(value, item, property) {
+    var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'regular';
+    var isHeading = type === 'heading';
+    var isCustom = type === 'custom';
+    if (isCustom) {
+      var _customTypography$ite;
+      var updatedCustomTypography = _objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, customTypography[item]), {}, _defineProperty({}, property, property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite[property]), {}, _defineProperty({}, deviceType, value[deviceType])) : value))));
+      setCustomTypography(updatedCustomTypography);
+      if (property === 'fontFamily') {
+        (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
+        setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
+      }
+    } else {
+      var _typography$item, _typography$item2, _typography$item3, _typography$item4, _typography$item5, _typography$item6, _typography$item7, _typography$item8, _typography$item9, _typography$item10, _typography$item11, _typography$item12, _typography$item13, _objectSpread7, _typography$item14, _typography$item15, _typography$item16, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _ref3;
+      var updatedTypography = _objectSpread(_objectSpread({}, typography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, typography[item]), isHeading ? _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, (_typography$item = typography[item]) === null || _typography$item === void 0 ? void 0 : _typography$item[selectedHeading]), {}, (_objectSpread7 = {}, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_objectSpread7, property, property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? _objectSpread(_objectSpread({}, (_typography$item2 = typography[item]) === null || _typography$item2 === void 0 || (_typography$item2 = _typography$item2[selectedHeading]) === null || _typography$item2 === void 0 ? void 0 : _typography$item2[property]), {}, _defineProperty({}, deviceType, property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType])) : value), "fontFamily", ((_typography$item3 = typography[item]) === null || _typography$item3 === void 0 || (_typography$item3 = _typography$item3[selectedHeading]) === null || _typography$item3 === void 0 ? void 0 : _typography$item3.fontFamily) || ''), "fontSize", ((_typography$item4 = typography[item]) === null || _typography$item4 === void 0 || (_typography$item4 = _typography$item4[selectedHeading]) === null || _typography$item4 === void 0 ? void 0 : _typography$item4.fontSize) || {}), "fontSizeUnit", ((_typography$item5 = typography[item]) === null || _typography$item5 === void 0 || (_typography$item5 = _typography$item5[selectedHeading]) === null || _typography$item5 === void 0 ? void 0 : _typography$item5.fontSizeUnit) || {}), "fontWeight", ((_typography$item6 = typography[item]) === null || _typography$item6 === void 0 || (_typography$item6 = _typography$item6[selectedHeading]) === null || _typography$item6 === void 0 ? void 0 : _typography$item6.fontWeight) || ''), "fontStyle", ((_typography$item7 = typography[item]) === null || _typography$item7 === void 0 || (_typography$item7 = _typography$item7[selectedHeading]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7.fontStyle) || ''), "textTransform", ((_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.textTransform) || ''), "textDecoration", ((_typography$item9 = typography[item]) === null || _typography$item9 === void 0 || (_typography$item9 = _typography$item9[selectedHeading]) === null || _typography$item9 === void 0 ? void 0 : _typography$item9.textDecoration) || ''), "letterSpacing", ((_typography$item10 = typography[item]) === null || _typography$item10 === void 0 || (_typography$item10 = _typography$item10[selectedHeading]) === null || _typography$item10 === void 0 ? void 0 : _typography$item10.letterSpacing) || {}), "letterSpacingUnit", ((_typography$item11 = typography[item]) === null || _typography$item11 === void 0 || (_typography$item11 = _typography$item11[selectedHeading]) === null || _typography$item11 === void 0 ? void 0 : _typography$item11.letterSpacingUnit) || {}), _defineProperty(_defineProperty(_objectSpread7, "lineHeight", ((_typography$item12 = typography[item]) === null || _typography$item12 === void 0 || (_typography$item12 = _typography$item12[selectedHeading]) === null || _typography$item12 === void 0 ? void 0 : _typography$item12.lineHeight) || {}), "lineHeightUnits", ((_typography$item13 = typography[item]) === null || _typography$item13 === void 0 || (_typography$item13 = _typography$item13[selectedHeading]) === null || _typography$item13 === void 0 ? void 0 : _typography$item13.lineHeightUnits) || {})))) : (_ref3 = {}, _defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_defineProperty(_ref3, property, property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? _objectSpread(_objectSpread({}, (_typography$item14 = typography[item]) === null || _typography$item14 === void 0 ? void 0 : _typography$item14[property]), {}, _defineProperty({}, deviceType, property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType])) : value), "fontFamily", ((_typography$item15 = typography[item]) === null || _typography$item15 === void 0 ? void 0 : _typography$item15.fontFamily) || ''), "fontSize", ((_typography$item16 = typography[item]) === null || _typography$item16 === void 0 ? void 0 : _typography$item16.fontSize) || {}), "fontSizeUnit", ((_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontSizeUnit) || {}), "fontWeight", ((_typography$item18 = typography[item]) === null || _typography$item18 === void 0 ? void 0 : _typography$item18.fontWeight) || ''), "fontStyle", ((_typography$item19 = typography[item]) === null || _typography$item19 === void 0 ? void 0 : _typography$item19.fontStyle) || ''), "textTransform", ((_typography$item20 = typography[item]) === null || _typography$item20 === void 0 ? void 0 : _typography$item20.textTransform) || ''), "textDecoration", ((_typography$item21 = typography[item]) === null || _typography$item21 === void 0 ? void 0 : _typography$item21.textDecoration) || ''), "letterSpacing", ((_typography$item22 = typography[item]) === null || _typography$item22 === void 0 ? void 0 : _typography$item22.letterSpacing) || {}), "letterSpacingUnit", ((_typography$item23 = typography[item]) === null || _typography$item23 === void 0 ? void 0 : _typography$item23.letterSpacingUnit) || {}), _defineProperty(_defineProperty(_ref3, "lineHeight", ((_typography$item24 = typography[item]) === null || _typography$item24 === void 0 ? void 0 : _typography$item24.lineHeight) || {}), "lineHeightUnits", ((_typography$item25 = typography[item]) === null || _typography$item25 === void 0 ? void 0 : _typography$item25.lineHeightUnits) || {})))));
+      setTypography(updatedTypography);
+      if (property === 'fontFamily') {
+        (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
+        if (isHeading) {
+          setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, fontFamilies.heading), {}, _defineProperty({}, selectedHeading, value)))));
+        } else {
+          setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
+        }
+      }
+    }
     setIsMount(true);
+  };
+
+  // Regular typography handlers
+  var _onChangeFontFamily = function onChangeFontFamily(value, item) {
+    return handleTypographyChange(value, item, 'fontFamily');
   };
   var _onChangeFontSize = function onChangeFontSize(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_typography$item = typography[item]) === null || _typography$item === void 0 ? void 0 : _typography$item.fontSize), {}, _defineProperty({}, deviceType, parseInt(value[deviceType])))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSize');
   };
   var _onChangeFontSizeUnit = function onChangeFontSizeUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item2 = typography[item]) === null || _typography$item2 === void 0 ? void 0 : _typography$item2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSizeUnit');
   };
   var _onChangeFontWeight = function onChangeFontWeight(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontWeight');
   };
   var _onChangeFontStyle = function onChangeFontStyle(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontStyle');
   };
   var _onChangeTextDecoration = function onChangeTextDecoration(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textDecoration');
   };
   var _onChangeTextTransform = function onChangeTextTransform(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textTransform');
   };
   var _onChangeLetterSpacing = function onChangeLetterSpacing(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_typography$item3 = typography[item]) === null || _typography$item3 === void 0 ? void 0 : _typography$item3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacing');
   };
   var _onChangeLetterSpacingUnit = function onChangeLetterSpacingUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item4 = typography[item]) === null || _typography$item4 === void 0 ? void 0 : _typography$item4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacingUnit');
   };
   var _onChangeLineHeight = function onChangeLineHeight(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_typography$item5 = typography[item]) === null || _typography$item5 === void 0 ? void 0 : _typography$item5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeight');
   };
   var _onChangeLineHeightUnit = function onChangeLineHeightUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item6 = typography[item]) === null || _typography$item6 === void 0 ? void 0 : _typography$item6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeightUnits');
   };
 
-  // Heading typography handler
+  // Heading typography handlers
   var onChangeHeadingFontFamily = function onChangeHeadingFontFamily(value, item) {
-    // Assuming typography is an object that looks like { item1: { h1: { fontFamily: ... }, h2: ... }, item2: ... }
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontFamily: value
-      })))));
-    });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
-    setIsMount(true);
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, fontFamilies.heading), {}, _defineProperty({}, selectedHeading, value)))));
+    return handleTypographyChange(value, item, 'fontFamily', 'heading');
   };
   var onChangeHeadingFontSize = function onChangeHeadingFontSize(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_typography$item$sele = typography[item][selectedHeading]) === null || _typography$item$sele === void 0 ? void 0 : _typography$item$sele.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSize', 'heading');
   };
   var onChangeHeadingFontSizeUnit = function onChangeHeadingFontSizeUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item$sele2 = typography[item][selectedHeading]) === null || _typography$item$sele2 === void 0 ? void 0 : _typography$item$sele2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSizeUnit', 'heading');
   };
   var onChangeHeadingFontWeight = function onChangeHeadingFontWeight(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontWeight: value
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontWeight', 'heading');
   };
   var onChangeHeadingFontStyle = function onChangeHeadingFontStyle(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontStyle: value
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontStyle', 'heading');
   };
   var onChangeHeadingTextDecoration = function onChangeHeadingTextDecoration(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        textDecoration: value
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textDecoration', 'heading');
   };
   var onChangeHeadingTextTransform = function onChangeHeadingTextTransform(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        textTransform: value
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textTransform', 'heading');
   };
   var onChangeHeadingLetterSpacing = function onChangeHeadingLetterSpacing(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_typography$item$sele3 = typography[item][selectedHeading]) === null || _typography$item$sele3 === void 0 ? void 0 : _typography$item$sele3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacing', 'heading');
   };
   var onChangeHeadingLetterSpacingUnit = function onChangeHeadingLetterSpacingUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item$sele4 = typography[item][selectedHeading]) === null || _typography$item$sele4 === void 0 ? void 0 : _typography$item$sele4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacingUnit', 'heading');
   };
   var onChangeHeadingLineHeight = function onChangeHeadingLineHeight(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_typography$item$sele5 = typography[item][selectedHeading]) === null || _typography$item$sele5 === void 0 ? void 0 : _typography$item$sele5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeight', 'heading');
   };
   var onChangeHeadingLineHeightUnit = function onChangeHeadingLineHeightUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item$sele6 = typography[item][selectedHeading]) === null || _typography$item$sele6 === void 0 ? void 0 : _typography$item$sele6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeightUnits', 'heading');
   };
 
-  // Custom typography handler
+  // Custom typography handlers
   var onChangeCustomFontFamily = function onChangeCustomFontFamily(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontFamily', 'custom');
   };
   var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSize', 'custom');
   };
   var onChangeCustomFontSizeUnit = function onChangeCustomFontSizeUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontSizeUnit', 'custom');
   };
   var onChangeCustomFontWeight = function onChangeCustomFontWeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontWeight', 'custom');
   };
   var onChangeCustomFontStyle = function onChangeCustomFontStyle(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'fontStyle', 'custom');
   };
   var onChangeCustomTextDecoration = function onChangeCustomTextDecoration(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textDecoration', 'custom');
   };
   var onChangeCustomTextTransform = function onChangeCustomTextTransform(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'textTransform', 'custom');
   };
   var onChangeCustomLetterSpacing = function onChangeCustomLetterSpacing(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacing', 'custom');
   };
   var onChangeCustomLetterSpacingUnit = function onChangeCustomLetterSpacingUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'letterSpacingUnit', 'custom');
   };
   var onChangeCustomLineHeight = function onChangeCustomLineHeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeight', 'custom');
   };
   var onChangeCustomLineHeightUnit = function onChangeCustomLineHeightUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setIsMount(true);
+    return handleTypographyChange(value, item, 'lineHeightUnits', 'custom');
   };
 
   // Save to database
@@ -1376,67 +1277,66 @@ var TypographySettings = function TypographySettings(props) {
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_5__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var response, _response, _response2;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
               if (!(isAfterSave && isMount)) {
-                _context.next = 16;
+                _context2.next = 16;
                 break;
               }
               if (!typography) {
-                _context.next = 6;
+                _context2.next = 6;
                 break;
               }
-              _context.next = 4;
+              _context2.next = 4;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateTypography)(typography);
             case 4:
-              response = _context.sent;
+              response = _context2.sent;
               if (response.success) {
-                setTypography(response.data.data);
-                localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+                setTypography(response);
+                setTypographies(response);
               }
             case 6:
               if (!customTypography) {
-                _context.next = 11;
+                _context2.next = 11;
                 break;
               }
-              _context.next = 9;
+              _context2.next = 9;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateTypography)(customTypography, 'fb_update_custom_typography');
             case 9:
-              _response = _context.sent;
+              _response = _context2.sent;
               if (_response.success) {
                 setCustomTypography(_response.data.data);
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
               }
             case 11:
               if (!fontFamilies) {
-                _context.next = 16;
+                _context2.next = 16;
                 break;
               }
-              _context.next = 14;
+              _context2.next = 14;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateTypography)(fontFamilies, 'fb_update_fontfamilies');
             case 14:
-              _response2 = _context.sent;
+              _response2 = _context2.sent;
               if (_response2.success) {
                 setFontFamilies(_response2.data.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response2.data.data));
               }
             case 16:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
-        }, _callee);
+        }, _callee2);
       }));
       return function handleUpdateSettings() {
-        return _ref.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }();
     handleUpdateSettings();
   }, [isAfterSave]);
-  console.log("Checking device type inside typography settings");
-  console.log(deviceType);
+
+  // console.log("Checking device type inside typography settings")
+  // console.log(deviceType)
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -1472,7 +1372,7 @@ var TypographySettings = function TypographySettings(props) {
         className: "edit_indecator"
       })))));
     })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
-      var _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27, _typography$item28, _typography$item29;
+      var _typography$item38, _typography$item39, _typography$item40, _typography$item41, _typography$item42, _typography$item43, _typography$item44, _typography$item45, _typography$item46, _typography$item47, _typography$item48;
       return /*#__PURE__*/React.createElement("div", {
         key: index,
         className: "fb-global-typography-element-content"
@@ -1498,7 +1398,7 @@ var TypographySettings = function TypographySettings(props) {
           value: heading
         });
       })), TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
-        var _typography$item7, _typography$item8, _typography$item9, _typography$item10, _typography$item11, _typography$item12, _typography$item13, _typography$item14, _typography$item15, _typography$item16, _typography$item17, _typography$item18;
+        var _typography$item26, _typography$item27, _typography$item28, _typography$item29, _typography$item30, _typography$item31, _typography$item32, _typography$item33, _typography$item34, _typography$item35, _typography$item36, _typography$item37;
         return /*#__PURE__*/React.createElement("div", {
           key: headingIndex,
           style: {
@@ -1507,50 +1407,50 @@ var TypographySettings = function TypographySettings(props) {
         }, /*#__PURE__*/React.createElement("div", {
           className: "fb-typography-settings"
         }, /*#__PURE__*/React.createElement("div", {
-          style: generateFontObj(typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading], true),
+          style: generateFontObj(typography === null || typography === void 0 || (_typography$item26 = typography[item]) === null || _typography$item26 === void 0 ? void 0 : _typography$item26[selectedHeading], true),
           className: "font_preview_box"
         }, "Aa"), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
+          fontFamily: typography === null || typography === void 0 || (_typography$item27 = typography[item]) === null || _typography$item27 === void 0 || (_typography$item27 = _typography$item27[selectedHeading]) === null || _typography$item27 === void 0 ? void 0 : _typography$item27.fontFamily,
           onChangeFontFamily: function onChangeFontFamily(value) {
             return onChangeHeadingFontFamily(value, item);
           },
-          fontSize: typography === null || typography === void 0 || (_typography$item9 = typography[item]) === null || _typography$item9 === void 0 || (_typography$item9 = _typography$item9[selectedHeading]) === null || _typography$item9 === void 0 ? void 0 : _typography$item9.fontSize,
+          fontSize: typography === null || typography === void 0 || (_typography$item28 = typography[item]) === null || _typography$item28 === void 0 || (_typography$item28 = _typography$item28[selectedHeading]) === null || _typography$item28 === void 0 ? void 0 : _typography$item28.fontSize,
           onChangeFontSize: function onChangeFontSize(value) {
             return onChangeHeadingFontSize(value, item);
           },
-          fontSizeUnits: typography === null || typography === void 0 || (_typography$item10 = typography[item]) === null || _typography$item10 === void 0 || (_typography$item10 = _typography$item10[selectedHeading]) === null || _typography$item10 === void 0 ? void 0 : _typography$item10.fontSizeUnit,
+          fontSizeUnits: typography === null || typography === void 0 || (_typography$item29 = typography[item]) === null || _typography$item29 === void 0 || (_typography$item29 = _typography$item29[selectedHeading]) === null || _typography$item29 === void 0 ? void 0 : _typography$item29.fontSizeUnit,
           onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
             return onChangeHeadingFontSizeUnit(value, item);
           },
-          fontWeight: typography === null || typography === void 0 || (_typography$item11 = typography[item]) === null || _typography$item11 === void 0 || (_typography$item11 = _typography$item11[selectedHeading]) === null || _typography$item11 === void 0 ? void 0 : _typography$item11.fontWeight,
+          fontWeight: typography === null || typography === void 0 || (_typography$item30 = typography[item]) === null || _typography$item30 === void 0 || (_typography$item30 = _typography$item30[selectedHeading]) === null || _typography$item30 === void 0 ? void 0 : _typography$item30.fontWeight,
           onChangeFontWeight: function onChangeFontWeight(value) {
             return onChangeHeadingFontWeight(value, item);
           },
-          fontStyle: typography === null || typography === void 0 || (_typography$item12 = typography[item]) === null || _typography$item12 === void 0 || (_typography$item12 = _typography$item12[selectedHeading]) === null || _typography$item12 === void 0 ? void 0 : _typography$item12.fontStyle,
+          fontStyle: typography === null || typography === void 0 || (_typography$item31 = typography[item]) === null || _typography$item31 === void 0 || (_typography$item31 = _typography$item31[selectedHeading]) === null || _typography$item31 === void 0 ? void 0 : _typography$item31.fontStyle,
           onChangeFontStyle: function onChangeFontStyle(value) {
             return onChangeHeadingFontStyle(value, item);
           },
-          textTransform: typography === null || typography === void 0 || (_typography$item13 = typography[item]) === null || _typography$item13 === void 0 || (_typography$item13 = _typography$item13[selectedHeading]) === null || _typography$item13 === void 0 ? void 0 : _typography$item13.textTransform,
+          textTransform: typography === null || typography === void 0 || (_typography$item32 = typography[item]) === null || _typography$item32 === void 0 || (_typography$item32 = _typography$item32[selectedHeading]) === null || _typography$item32 === void 0 ? void 0 : _typography$item32.textTransform,
           onChangeTextTransform: function onChangeTextTransform(value) {
             return onChangeHeadingTextTransform(value, item);
           },
-          textDecoration: typography === null || typography === void 0 || (_typography$item14 = typography[item]) === null || _typography$item14 === void 0 || (_typography$item14 = _typography$item14[selectedHeading]) === null || _typography$item14 === void 0 ? void 0 : _typography$item14.textDecoration,
+          textDecoration: typography === null || typography === void 0 || (_typography$item33 = typography[item]) === null || _typography$item33 === void 0 || (_typography$item33 = _typography$item33[selectedHeading]) === null || _typography$item33 === void 0 ? void 0 : _typography$item33.textDecoration,
           onChangeTextDecoration: function onChangeTextDecoration(value) {
             return onChangeHeadingTextDecoration(value, item);
           },
-          letterSpacing: typography === null || typography === void 0 || (_typography$item15 = typography[item]) === null || _typography$item15 === void 0 || (_typography$item15 = _typography$item15[selectedHeading]) === null || _typography$item15 === void 0 ? void 0 : _typography$item15.letterSpacing,
+          letterSpacing: typography === null || typography === void 0 || (_typography$item34 = typography[item]) === null || _typography$item34 === void 0 || (_typography$item34 = _typography$item34[selectedHeading]) === null || _typography$item34 === void 0 ? void 0 : _typography$item34.letterSpacing,
           onChangeLetterSpacing: function onChangeLetterSpacing(value) {
             return onChangeHeadingLetterSpacing(value, item);
           },
-          letterSpacingUnits: typography === null || typography === void 0 || (_typography$item16 = typography[item]) === null || _typography$item16 === void 0 || (_typography$item16 = _typography$item16[selectedHeading]) === null || _typography$item16 === void 0 ? void 0 : _typography$item16.letterSpacingUnit,
+          letterSpacingUnits: typography === null || typography === void 0 || (_typography$item35 = typography[item]) === null || _typography$item35 === void 0 || (_typography$item35 = _typography$item35[selectedHeading]) === null || _typography$item35 === void 0 ? void 0 : _typography$item35.letterSpacingUnit,
           onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
             return onChangeHeadingLetterSpacingUnit(value, item);
           },
-          lineHeight: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 || (_typography$item17 = _typography$item17[selectedHeading]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.lineHeight,
+          lineHeight: typography === null || typography === void 0 || (_typography$item36 = typography[item]) === null || _typography$item36 === void 0 || (_typography$item36 = _typography$item36[selectedHeading]) === null || _typography$item36 === void 0 ? void 0 : _typography$item36.lineHeight,
           onChangeLineHeight: function onChangeLineHeight(value) {
             return onChangeHeadingLineHeight(value, item);
           },
-          lineHeightUnits: typography === null || typography === void 0 || (_typography$item18 = typography[item]) === null || _typography$item18 === void 0 || (_typography$item18 = _typography$item18[selectedHeading]) === null || _typography$item18 === void 0 ? void 0 : _typography$item18.lineHeightUnits,
+          lineHeightUnits: typography === null || typography === void 0 || (_typography$item37 = typography[item]) === null || _typography$item37 === void 0 || (_typography$item37 = _typography$item37[selectedHeading]) === null || _typography$item37 === void 0 ? void 0 : _typography$item37.lineHeightUnits,
           onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
             return onChangeHeadingLineHeightUnit(value, item);
           },
@@ -1563,47 +1463,47 @@ var TypographySettings = function TypographySettings(props) {
         style: generateFontObj(typography[item], true),
         className: "font_preview_box"
       }, "Aa"), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        fontFamily: typography === null || typography === void 0 || (_typography$item19 = typography[item]) === null || _typography$item19 === void 0 ? void 0 : _typography$item19.fontFamily,
+        fontFamily: typography === null || typography === void 0 || (_typography$item38 = typography[item]) === null || _typography$item38 === void 0 ? void 0 : _typography$item38.fontFamily,
         onChangeFontFamily: function onChangeFontFamily(value) {
           return _onChangeFontFamily(value, item);
         },
-        fontSize: typography === null || typography === void 0 || (_typography$item20 = typography[item]) === null || _typography$item20 === void 0 ? void 0 : _typography$item20.fontSize,
+        fontSize: typography === null || typography === void 0 || (_typography$item39 = typography[item]) === null || _typography$item39 === void 0 ? void 0 : _typography$item39.fontSize,
         onChangeFontSize: function onChangeFontSize(value) {
           return _onChangeFontSize(value, item);
         },
-        fontSizeUnits: typography === null || typography === void 0 || (_typography$item21 = typography[item]) === null || _typography$item21 === void 0 ? void 0 : _typography$item21.fontSizeUnit,
+        fontSizeUnits: typography === null || typography === void 0 || (_typography$item40 = typography[item]) === null || _typography$item40 === void 0 ? void 0 : _typography$item40.fontSizeUnit,
         onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
           return _onChangeFontSizeUnit(value, item);
         },
-        fontWeight: typography === null || typography === void 0 || (_typography$item22 = typography[item]) === null || _typography$item22 === void 0 ? void 0 : _typography$item22.fontWeight,
+        fontWeight: typography === null || typography === void 0 || (_typography$item41 = typography[item]) === null || _typography$item41 === void 0 ? void 0 : _typography$item41.fontWeight,
         onChangeFontWeight: function onChangeFontWeight(value) {
           return _onChangeFontWeight(value, item);
         },
-        fontStyle: typography === null || typography === void 0 || (_typography$item23 = typography[item]) === null || _typography$item23 === void 0 ? void 0 : _typography$item23.fontStyle,
+        fontStyle: typography === null || typography === void 0 || (_typography$item42 = typography[item]) === null || _typography$item42 === void 0 ? void 0 : _typography$item42.fontStyle,
         onChangeFontStyle: function onChangeFontStyle(value) {
           return _onChangeFontStyle(value, item);
         },
-        textTransform: typography === null || typography === void 0 || (_typography$item24 = typography[item]) === null || _typography$item24 === void 0 ? void 0 : _typography$item24.textTransform,
+        textTransform: typography === null || typography === void 0 || (_typography$item43 = typography[item]) === null || _typography$item43 === void 0 ? void 0 : _typography$item43.textTransform,
         onChangeTextTransform: function onChangeTextTransform(value) {
           return _onChangeTextTransform(value, item);
         },
-        textDecoration: typography === null || typography === void 0 || (_typography$item25 = typography[item]) === null || _typography$item25 === void 0 ? void 0 : _typography$item25.textDecoration,
+        textDecoration: typography === null || typography === void 0 || (_typography$item44 = typography[item]) === null || _typography$item44 === void 0 ? void 0 : _typography$item44.textDecoration,
         onChangeTextDecoration: function onChangeTextDecoration(value) {
           return _onChangeTextDecoration(value, item);
         },
-        letterSpacing: typography === null || typography === void 0 || (_typography$item26 = typography[item]) === null || _typography$item26 === void 0 ? void 0 : _typography$item26.letterSpacing,
+        letterSpacing: typography === null || typography === void 0 || (_typography$item45 = typography[item]) === null || _typography$item45 === void 0 ? void 0 : _typography$item45.letterSpacing,
         onChangeLetterSpacing: function onChangeLetterSpacing(value) {
           return _onChangeLetterSpacing(value, item);
         },
-        letterSpacingUnits: typography === null || typography === void 0 || (_typography$item27 = typography[item]) === null || _typography$item27 === void 0 ? void 0 : _typography$item27.letterSpacingUnit,
+        letterSpacingUnits: typography === null || typography === void 0 || (_typography$item46 = typography[item]) === null || _typography$item46 === void 0 ? void 0 : _typography$item46.letterSpacingUnit,
         onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
           return _onChangeLetterSpacingUnit(value, item);
         },
-        lineHeight: typography === null || typography === void 0 || (_typography$item28 = typography[item]) === null || _typography$item28 === void 0 ? void 0 : _typography$item28.lineHeight,
+        lineHeight: typography === null || typography === void 0 || (_typography$item47 = typography[item]) === null || _typography$item47 === void 0 ? void 0 : _typography$item47.lineHeight,
         onChangeLineHeight: function onChangeLineHeight(value) {
           return _onChangeLineHeight(value, item);
         },
-        lineHeightUnits: typography === null || typography === void 0 || (_typography$item29 = typography[item]) === null || _typography$item29 === void 0 ? void 0 : _typography$item29.lineHeightUnits,
+        lineHeightUnits: typography === null || typography === void 0 || (_typography$item48 = typography[item]) === null || _typography$item48 === void 0 ? void 0 : _typography$item48.lineHeightUnits,
         onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
           return _onChangeLineHeightUnit(value, item);
         },
@@ -1619,7 +1519,7 @@ var TypographySettings = function TypographySettings(props) {
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
       path: "/"
     }, Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite7;
+      var _customTypography$ite2;
       return /*#__PURE__*/React.createElement("div", {
         key: index,
         className: "fb-custom-element fb-global-typography-element"
@@ -1628,7 +1528,7 @@ var TypographySettings = function TypographySettings(props) {
       }, /*#__PURE__*/React.createElement("span", {
         style: generateFontObj(customTypography[item]),
         className: "font_preview"
-      }, "Aa"), (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      }, "Aa"), (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
         className: "fb-delete-custom-typo"
       }, /*#__PURE__*/React.createElement("span", {
         className: 'fb-delete',
@@ -1696,7 +1596,7 @@ var TypographySettings = function TypographySettings(props) {
       strokeLinecap: "round",
       strokeLinejoin: "round"
     })))))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite8, _customTypography$ite9, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18, _customTypography$ite19, _customTypography$ite20;
+      var _customTypography$ite3, _customTypography$ite4, _customTypography$ite5, _customTypography$ite6, _customTypography$ite7, _customTypography$ite8, _customTypography$ite9, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15;
       return /*#__PURE__*/React.createElement("div", {
         key: index,
         className: "fb-global-typography-element-content"
@@ -1704,59 +1604,59 @@ var TypographySettings = function TypographySettings(props) {
         path: "/".concat(item)
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
         icon: "arrow-left-alt2"
-      }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
+      }), " ", (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.name), /*#__PURE__*/React.createElement("div", {
         className: "fb-typography-settings"
       }, /*#__PURE__*/React.createElement("div", {
         style: generateFontObj(customTypography[item], true),
         className: "font_preview_box"
       }, "Aa"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
-        value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
+        value: (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.name,
         onChange: function onChange(value) {
           return changeCustomTypoName(item, value);
         }
       }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontFamily,
+        fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.fontFamily,
         onChangeFontFamily: function onChangeFontFamily(value) {
           return onChangeCustomFontFamily(value, item);
         },
-        fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontSize,
+        fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.fontSize,
         onChangeFontSize: function onChangeFontSize(value) {
           return onChangeCustomFontSize(value, item);
         },
-        fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontSizeUnit,
+        fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.fontSizeUnit,
         onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
           return onChangeCustomFontSizeUnit(value, item);
         },
-        fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.fontWeight,
+        fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.fontWeight,
         onChangeFontWeight: function onChangeFontWeight(value) {
           return onChangeCustomFontWeight(value, item);
         },
-        fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.fontStyle,
+        fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.fontStyle,
         onChangeFontStyle: function onChangeFontStyle(value) {
           return onChangeCustomFontStyle(value, item);
         },
-        textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.textTransform,
+        textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.textTransform,
         onChangeTextTransform: function onChangeTextTransform(value) {
           return onChangeCustomTextTransform(value, item);
         },
-        textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.textDecoration,
+        textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.textDecoration,
         onChangeTextDecoration: function onChangeTextDecoration(value) {
           return onChangeCustomTextDecoration(value, item);
         },
-        letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.letterSpacing,
+        letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.letterSpacing,
         onChangeLetterSpacing: function onChangeLetterSpacing(value) {
           return onChangeCustomLetterSpacing(value, item);
         },
-        letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.letterSpacingUnit,
+        letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.letterSpacingUnit,
         onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
           return onChangeCustomLetterSpacingUnit(value, item);
         },
-        lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite19 = customTypography[item]) === null || _customTypography$ite19 === void 0 ? void 0 : _customTypography$ite19.lineHeight,
+        lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.lineHeight,
         onChangeLineHeight: function onChangeLineHeight(value) {
           return onChangeCustomLineHeight(value, item);
         },
-        lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite20 = customTypography[item]) === null || _customTypography$ite20 === void 0 ? void 0 : _customTypography$ite20.lineHeightUnits,
+        lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.lineHeightUnits,
         onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
           return onChangeCustomLineHeightUnit(value, item);
         },
@@ -1912,17 +1812,18 @@ var getTypography = /*#__PURE__*/function () {
           }
           throw new Error(response.data || 'Fetch failed');
         case 6:
+          console.log("Typography response:", response.data);
           return _context3.abrupt("return", response.data);
-        case 9:
-          _context3.prev = 9;
+        case 10:
+          _context3.prev = 10;
           _context3.t0 = _context3["catch"](0);
           console.error('Fetch failed:', _context3.t0);
           throw _context3.t0;
-        case 13:
+        case 14:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 9]]);
+    }, _callee3, null, [[0, 10]]);
   }));
   return function getTypography() {
     return _ref3.apply(this, arguments);
@@ -2767,7 +2668,9 @@ function FrontisBlocksSidebar() {
     }
   }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__.Blockicon, null)), /*#__PURE__*/React.createElement("span", {
     className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocks", "frontis-blocks"))), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__.ChevronRight, null))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocks", "frontis-blocks"))), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dashicon, {
+    icon: "arrow-right-alt2"
+  }))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
     path: "/typography"
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalVStack, {
     direction: "column",
@@ -2780,7 +2683,9 @@ function FrontisBlocksSidebar() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
     path: "/",
     className: "back-button"
-  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__.ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dashicon, {
+    icon: "arrow-left-alt2"
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks")))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Available fonts, typographic styles, application of those styles.", "frontis-blocks"))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_8__["default"], {
     typography: typography,
@@ -2798,7 +2703,9 @@ function FrontisBlocksSidebar() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
     path: "/",
     className: "back-button"
-  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__.ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dashicon, {
+    icon: "arrow-left-alt2"
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color", "frontis-blocks")))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Available texts, links, Button, Headings global colors", "frontis-blocks"))), /*#__PURE__*/React.createElement(_components_FbColorPanel__WEBPACK_IMPORTED_MODULE_10__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Colors", "frontis-blocks"),
@@ -2817,7 +2724,9 @@ function FrontisBlocksSidebar() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
     path: "/",
     className: "back-button"
-  }, /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_9__.ChevronLeft, null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Dashicon, {
+    icon: "arrow-left-alt2"
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocks", "frontis-blocks")))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Customize the appearance of specific blocks for the whole site.", "frontis-blocks"))))))))));
 }
