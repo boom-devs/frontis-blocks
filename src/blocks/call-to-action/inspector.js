@@ -395,21 +395,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "16",
                 },
             },
-            "preset-3": {
-                ctaBtnOneSwitcher: true,
-				btnTwoSwitcher: false,
-				globalBgColor: '#ffffff',
-                Heading_Color: '#ffffff',
-                Heading_Hover_Color: '#ffffff',
-                SubHeadingColor: '#ffffff',
-                SubHeadingHoverColor: '#ffffff',
-                globalBorderRadiusDesktop: {
-                    top: "16",
-					bottom: "16",
-					left: "16",
-					right: "16",
-                },
-            },
+            
         };
 
         const selectedPresetConfig = presetConfigurations[selectedPreset];

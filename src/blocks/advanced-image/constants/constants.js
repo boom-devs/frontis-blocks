@@ -14,67 +14,110 @@ export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
 export const PRESETS = [
-	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-block"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
-	{ label: __("Preset 4", "frontis-block"), value: "preset-4" },
-	{ label: __("Preset 5", "frontis-block"), value: "preset-5" },
+    { label: __("Preset 1", "frontis-block"), value: "preset-1" },
+    { label: __("Preset 2", "frontis-block"), value: "preset-2" },
+    { label: __("Preset 3", "frontis-block"), value: "preset-3" },
+    { label: __("Preset 4", "frontis-block"), value: "preset-4" },
+    { label: __("Preset 5", "frontis-block"), value: "preset-5" },
+];
+
+export const STYLES = [
+    { label: __("Square", "frontis-block"), value: "square" },
+    { label: __("Octagon", "frontis-block"), value: "octagon" },
+    { label: __("Triangle", "frontis-block"), value: "triangle" },
+    { label: __("Rhombus", "frontis-block"), value: "rhombus" },
+    { label: __("Hexagon", "frontis-block"), value: "hexagon" },
+    { label: __("Bevel", "frontis-block"), value: "bevel" },
+    { label: __("Abstract", "frontis-block"), value: "abstract" },
+    { label: __("Container", "frontis-block"), value: "container" },
+    { label: __("Aesthetic Blob", "frontis-block"), value: "aesthetic-blob" },
+    { label: __("Aesthetic Blob 2", "frontis-block"), value: "aesthetic-blob" },
+    { label: __("Aesthetic Blob 3", "frontis-block"), value: "aesthetic-blob-3" },
+    { label: __("Aesthetic Blob 4", "frontis-block"), value: "aesthetic-blob-4" },
+    { label: __("Irregular Blob", "frontis-block"), value: "irregular-blob" },
+    { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
+    { label: __("Overlaped Blob", "frontis-block"), value: "overlaped-blob" },
+    { label: __("Seperate Blob", "frontis-block"), value: "seperate-blob" },
+    { label: __("Pattern", "frontis-block"), value: "pattern" },
+];
+
+export const TITLE_POSITION = [
+    { label: __("Center", "frontis-block"), value: "center" },
+    { label: __("Center Left", "frontis-block"), value: "center-left" },
+    { label: __("Center Right", "frontis-block"), value: "center-right" },
+    { label: __("Top Left", "frontis-block"), value: "top-left" },
+    { label: __("Top Center", "frontis-block"), value: "top-center" },
+    { label: __("Top Right", "frontis-block"), value: "top-right" },
+    { label: __("Bottom Left", "frontis-block"), value: "bottom-left" },
+    { label: __("Bottom Center", "frontis-block"), value: "bottom-center" },
+    { label: __("Bottom Right", "frontis-block"), value: "bottom-right" },
+    { label: __("Vertically Center", "frontis-block"), value: "vertical-center" },
+];
+export const HOVER_EFFECTS = [
+    {label: __("No Effect", "frontis-blocks"), value: "no-effect",},
+    {label: __("Zoom In", "frontis-blocks"), value: "zoom-in",},
+    {label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
+    {label: __("Slide", "frontis-blocks"), value: "slide", },
+    {label: __("Blur", "frontis-blocks"), value: "blur", },
+    {label: __("Overlay", "frontis-blocks"), value: "overlay",},
+    {label: __("Tilt", "frontis-blocks"), value: "tilt", },
+    {label: __("Skew", "frontis-blocks"), value: "skew", },
 ];
 
 export const UNIT_TYPES = [
-	{ label: "px", value: "px" },
-	{ label: "%", value: "%" },
-	{ label: "em", value: "em" },
+    { label: "px", value: "px" },
+    { label: "%", value: "%" },
+    { label: "em", value: "em" },
 ];
 
 export const NORMAL_HOVER = [
-	{ label: "Normal", value: "normal" },
-	{ label: "Hover", value: "hover" },
+    { label: "Normal", value: "normal" },
+    { label: "Hover", value: "hover" },
 ];
 
 export const ICON_ALIGN = [
-	{ label: __(<Dashicon icon={"remove"} />), value: "no-icon" },
-	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
-	{ label: __(<Dashicon icon={"info"} />), value: "icon-only" },
+    { label: __(<Dashicon icon={"remove"} />), value: "no-icon" },
+    { label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+    { label: __(<Dashicon icon={"info"} />), value: "icon-only" },
 ];
 
 export const TEXT_ALIGN = [
-	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
-	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
-	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
+    { label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
+    { label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+    { label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+    { label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
-	{ label: __("H1", "frontis-blocks"), value: "h1" },
-	{ label: __("H2", "frontis-blocks"), value: "h2" },
-	{ label: __("H3", "frontis-blocks"), value: "h3" },
-	{ label: __("H4", "frontis-blocks"), value: "h4" },
-	{ label: __("H5", "frontis-blocks"), value: "h5" },
-	{ label: __("H6", "frontis-blocks"), value: "h6" },
-	{ label: __("P", "frontis-blocks"), value: "p" },
-	{ label: __("Div", "frontis-blocks"), value: "span" },
+    { label: __("H1", "frontis-blocks"), value: "h1" },
+    { label: __("H2", "frontis-blocks"), value: "h2" },
+    { label: __("H3", "frontis-blocks"), value: "h3" },
+    { label: __("H4", "frontis-blocks"), value: "h4" },
+    { label: __("H5", "frontis-blocks"), value: "h5" },
+    { label: __("H6", "frontis-blocks"), value: "h6" },
+    { label: __("P", "frontis-blocks"), value: "p" },
+    { label: __("Div", "frontis-blocks"), value: "span" },
 ];
 
 export const SEPERATOR_STYLES = [
-	{ label: __("Solid", "frontis-blocks"), value: "solid" },
-	{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
-	{ label: __("Dotted", "frontis-blocks"), value: "dotted" },
-	{ label: __("Double", "frontis-blocks"), value: "double" },
-	{ label: __("Groove", "frontis-blocks"), value: "groove" },
-	{ label: __("Outset", "frontis-blocks"), value: "outset" },
-	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
+    { label: __("Solid", "frontis-blocks"), value: "solid" },
+    { label: __("Dashed", "frontis-blocks"), value: "dashed" },
+    { label: __("Dotted", "frontis-blocks"), value: "dotted" },
+    { label: __("Double", "frontis-blocks"), value: "double" },
+    { label: __("Groove", "frontis-blocks"), value: "groove" },
+    { label: __("Outset", "frontis-blocks"), value: "outset" },
+    { label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
 
 export const BORDER_STYLES = [
-	{ label: __("None", "frontis-blocks"), value: "none" },
-	{ label: __("Solid", "frontis-blocks"), value: "solid" },
-	{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
-	{ label: __("Dotted", "frontis-blocks"), value: "dotted" },
-	{ label: __("Double", "frontis-blocks"), value: "double" },
-	{ label: __("Groove", "frontis-blocks"), value: "groove" },
-	{ label: __("Outset", "frontis-blocks"), value: "outset" },
-	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
+    { label: __("None", "frontis-blocks"), value: "none" },
+    { label: __("Solid", "frontis-blocks"), value: "solid" },
+    { label: __("Dashed", "frontis-blocks"), value: "dashed" },
+    { label: __("Dotted", "frontis-blocks"), value: "dotted" },
+    { label: __("Double", "frontis-blocks"), value: "double" },
+    { label: __("Groove", "frontis-blocks"), value: "groove" },
+    { label: __("Outset", "frontis-blocks"), value: "outset" },
+    { label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
 
 export const FONT_FAMILYS = [
