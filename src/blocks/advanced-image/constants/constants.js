@@ -28,13 +28,13 @@ export const STYLES = [
     { label: __("Rhombus", "frontis-block"), value: "rhombus" },
     { label: __("Hexagon", "frontis-block"), value: "hexagon" },
     { label: __("Bevel", "frontis-block"), value: "bevel" },
-    { label: __("Abstract", "frontis-block"), value: "abstract" },
-    { label: __("Container", "frontis-block"), value: "container" },
     { label: __("Aesthetic Blob", "frontis-block"), value: "aesthetic-blob" },
     { label: __("Aesthetic Blob 2", "frontis-block"), value: "aesthetic-blob" },
     { label: __("Aesthetic Blob 3", "frontis-block"), value: "aesthetic-blob-3" },
     { label: __("Aesthetic Blob 4", "frontis-block"), value: "aesthetic-blob-4" },
     { label: __("Irregular Blob", "frontis-block"), value: "irregular-blob" },
+    { label: __("Abstract", "frontis-block"), value: "abstract" },
+    { label: __("Container", "frontis-block"), value: "container" },
     { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
     { label: __("Overlaped Blob", "frontis-block"), value: "overlaped-blob" },
     { label: __("Seperate Blob", "frontis-block"), value: "seperate-blob" },
@@ -53,15 +53,22 @@ export const TITLE_POSITION = [
     { label: __("Bottom Right", "frontis-block"), value: "bottom-right" },
     { label: __("Vertically Center", "frontis-block"), value: "vertical-center" },
 ];
+
 export const HOVER_EFFECTS = [
-    {label: __("No Effect", "frontis-blocks"), value: "no-effect",},
-    {label: __("Zoom In", "frontis-blocks"), value: "zoom-in",},
-    {label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
-    {label: __("Slide", "frontis-blocks"), value: "slide", },
-    {label: __("Blur", "frontis-blocks"), value: "blur", },
-    {label: __("Overlay", "frontis-blocks"), value: "overlay",},
-    {label: __("Tilt", "frontis-blocks"), value: "tilt", },
-    {label: __("Skew", "frontis-blocks"), value: "skew", },
+    { label: __("No Effect", "frontis-blocks"), value: "no-effect", },
+    { label: __("Zoom In", "frontis-blocks"), value: "zoom-in", },
+    { label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
+    { label: __("Slide", "frontis-blocks"), value: "slide", },
+    { label: __("Blur", "frontis-blocks"), value: "blur", },
+    { label: __("Overlay", "frontis-blocks"), value: "overlay", },
+    { label: __("Tilt", "frontis-blocks"), value: "tilt", },
+    { label: __("Skew", "frontis-blocks"), value: "skew", },
+];
+
+export const AUTO_FIT = [
+    { label: __("Cover", "frontis-blocks"), value: "cover", },
+    { label: __("Fill", "frontis-blocks"), value: "fill", },
+    { label: __("Contain", "frontis-blocks"), value: "contain", },
 ];
 
 export const UNIT_TYPES = [
