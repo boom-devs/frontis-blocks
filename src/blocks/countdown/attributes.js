@@ -206,6 +206,10 @@ const attributes = {
 		default: true
 	},
 
+	countDownFlexWrap : {
+		type : "boolean",
+		default: true
+	},
 	countDownLayoutType: {
 		type: "string",
 		default: "flex"
@@ -252,6 +256,10 @@ const attributes = {
 		default: ""
 	},
 
+	countDownItemSizeHeight: {
+		type: "boolean",
+		default: true,
+	},
 	countDownItemSize: {
 		type: 'object',
 		default: {
@@ -1115,17 +1123,17 @@ const attributes = {
 	countDownLabelWidth: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	countDownLabelWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		}
 	},
 	countDownLabelHeight: {
@@ -1144,6 +1152,14 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	countDownLabelAlignmentHz: {
+        type: "string",
+        default: "center",
+    },
+	countDownLabelAlignmentVr: {
+        type: "string",
+        default: "center",
+    },
 	/** Label End */
 
 
@@ -1301,17 +1317,17 @@ const attributes = {
 	countDownDigitWidth: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	countDownDigitWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		}
 	},
 	countDownDigitHeight: {
@@ -1330,6 +1346,14 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	countDownDigitAlignmentHz: {
+        type: "string",
+        default: "center",
+    },
+	countDownDigitAlignmentVr: {
+        type: "string",
+        default: "center",
+    },
 	/** Digit End */
 	
 };
