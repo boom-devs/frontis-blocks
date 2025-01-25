@@ -7,6 +7,12 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	countDownPresetStyle: {
+        type: "string",
+        default: "default",
+    },
+
 	// Show Hide Label Attributes
 	showDays: {
 		type: 'boolean',
@@ -125,28 +131,28 @@ const attributes = {
 	countDownItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusLink : {
@@ -611,7 +617,7 @@ const attributes = {
 	},
 	digitFontWeight: {
 		type: 'string',
-		default: ''
+		default: '500'
 	},
 	digitFontStyle: {
 		type: 'string',
@@ -688,7 +694,7 @@ const attributes = {
 	labelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '14',
+			Desktop: '18',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -1091,28 +1097,28 @@ const attributes = {
 	countDownLabelMarginDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelMarginTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelMarginMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelMarginLink : {
