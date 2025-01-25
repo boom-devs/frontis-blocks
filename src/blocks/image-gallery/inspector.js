@@ -1033,7 +1033,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ...selectedPresetConfig,
             });
         } else {
-            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
+            console.warn(`Gallery: Preset "${selectedPreset}" not found.`);
         }
     };
     /** End Preset Style */
