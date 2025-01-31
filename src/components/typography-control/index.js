@@ -229,14 +229,15 @@ const FB_TypographyControl = ({
                     renderContent={() => (
                         <div className="fb-setting-typography-popup">
                             <div className="fb-typography-list">
-                                {typographies.map((typography) => (
-                                    <div key={typography.slug} className="fb-typography-item">
-                                        <div className="fb-typography-header">
-                                            <Globe />
-                                            <span>{typography.name}</span>
-                                        </div>
-                                    </div>
-                                ))}
+                                {typographies?.body && <div>Body</div>}
+                                {typographies?.link && <div>Link</div>}
+                                {typographies?.button && <div>Button</div>}
+                                {typographies?.heading && Object.keys(typographies.heading)
+                                    .filter(key => typographies.heading[key] && Object.keys(typographies.heading[key]).length > 0)
+                                    .map((heading) => (
+                                        <div key={heading}>{heading.toUpperCase()}</div>
+                                    ))
+                                }
                             </div>
                         </div>
                     )}

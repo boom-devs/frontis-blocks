@@ -58,16 +58,81 @@ class GlobalSettings extends AjaxBase {
     }
 
     public function update_typography() {
-        // error_log(print_r($_POST['data'], true));
-        $this->handle_option_update('typography', 'array');
+        $this->validate_nonce();
+        $this->validate_permissions();
         
+        $typography_data = $_POST['data'];
+        if (!is_array($typography_data)) {
+            wp_send_json_error('Invalid typography data format');
+            return;
+        }
+
+        // Sanitize the typography data
+        $sanitized_data = array();
+        foreach ($typography_data as $element => $settings) {
+            if (is_array($settings)) {
+                if ($element === 'heading') {
+                    // Handle heading hierarchy (h1-h6)
+                    $sanitized_data[$element] = array();
+                    foreach (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $heading) {
+                        if (isset($settings[$heading]) && is_array($settings[$heading])) {
+                            $sanitized_data[$element][$heading] = array(
+                                'fontFamily' => sanitize_text_field($settings[$heading]['fontFamily'] ?? ''),
+                                'fontSize' => $this->sanitize_responsive_value($settings[$heading]['fontSize'] ?? array()),
+                                'fontWeight' => sanitize_text_field($settings[$heading]['fontWeight'] ?? ''),
+                                'fontStyle' => sanitize_text_field($settings[$heading]['fontStyle'] ?? ''),
+                                'textTransform' => sanitize_text_field($settings[$heading]['textTransform'] ?? ''),
+                                'textDecoration' => sanitize_text_field($settings[$heading]['textDecoration'] ?? ''),
+                                'lineHeight' => $this->sanitize_responsive_value($settings[$heading]['lineHeight'] ?? array()),
+                                'letterSpacing' => $this->sanitize_responsive_value($settings[$heading]['letterSpacing'] ?? array())
+                            );
+                        }
+                    }
+                } else {
+                    // Handle other elements (body, link, button)
+                    $sanitized_data[$element] = array(
+                        'fontFamily' => sanitize_text_field($settings['fontFamily'] ?? ''),
+                        'fontSize' => $this->sanitize_responsive_value($settings['fontSize'] ?? array()),
+                        'fontWeight' => sanitize_text_field($settings['fontWeight'] ?? ''),
+                        'fontStyle' => sanitize_text_field($settings['fontStyle'] ?? ''),
+                        'textTransform' => sanitize_text_field($settings['textTransform'] ?? ''),
+                        'textDecoration' => sanitize_text_field($settings['textDecoration'] ?? ''),
+                        'lineHeight' => $this->sanitize_responsive_value($settings['lineHeight'] ?? array()),
+                        'letterSpacing' => $this->sanitize_responsive_value($settings['letterSpacing'] ?? array())
+                    );
+                }
+            }
+        }
+
+        $updated = update_option('fb_typography', $sanitized_data);
+        if ($updated) {
+            wp_send_json_success($sanitized_data);
+        } else {
+            wp_send_json_error('Failed to update typography settings');
+        }
     }
 
- 	public function update_custom_typography() {
+    private function sanitize_responsive_value($value) {
+        if (!is_array($value)) {
+            return array(
+                'Desktop' => floatval($value),
+                'Tablet' => floatval($value),
+                'Mobile' => floatval($value)
+            );
+        }
+
+        return array(
+            'Desktop' => floatval($value['Desktop'] ?? 0),
+            'Tablet' => floatval($value['Tablet'] ?? 0),
+            'Mobile' => floatval($value['Mobile'] ?? 0)
+        );
+    }
+
+    public function update_custom_typography() {
         $this->handle_option_update('custom_typography', 'array');
     }
 
-	public function update_fontfamilies() {
+    public function update_fontfamilies() {
         $this->handle_option_update('fontfamilies', 'array');
     }
 

@@ -2,7 +2,19 @@
 const DEFAULT_STATE = {
 	colors: [],
 	shadeSteps: {},
-	typographies: [],
+	typographies: {
+		body: {},
+		link: {},
+		button: {},
+		heading: {
+			h1: {},
+			h2: {},
+			h3: {},
+			h4: {},
+			h5: {},
+			h6: {}
+		}
+	},
 	loading: false
 };
 
@@ -26,7 +38,7 @@ export default function reducer(state = DEFAULT_STATE, action) {
 		case 'SET_TYPOGRAPHIES':
 			return {
 				...state,
-				typographies: Array.isArray(action.typographies) ? action.typographies : [],
+				typographies: action.typographies || DEFAULT_STATE.typographies
 			};
 
 		default:

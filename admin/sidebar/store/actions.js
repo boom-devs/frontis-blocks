@@ -10,7 +10,10 @@ export const setShadeStep = (slug, step) => ({
 	step,
 });
 
-export const setTypographies = (typographies) => ({
-	type: 'SET_TYPOGRAPHIES',
-	typographies: Array.isArray(typographies) ? typographies : [],
-});
+export const setTypographies = (typographies) => {
+	console.log("Setting typographies in store:", typographies);
+	return {
+		type: 'SET_TYPOGRAPHIES',
+		typographies: typeof typographies === 'object' ? typographies : null
+	};
+};

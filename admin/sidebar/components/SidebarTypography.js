@@ -16,6 +16,7 @@ import {
 } from "../../../src/fbConstants/fbConstants";
 
 import FB_Range from '@Components/range';
+import { useEffect } from 'react';
 
 const FB_SidebarTypography = ({
 								  label = __("Typography", "frontis-blocks"),
@@ -49,8 +50,12 @@ const FB_SidebarTypography = ({
 	};
 
 	const handleFontSizeChange = (newFontSize) => {
-		console.log(newFontSize);
-		onChangeFontSize(newFontSize);
+		// Ensure proper device type handling
+		const updatedFontSize = {
+			...fontSize,
+			[deviceType]: parseInt(newFontSize[deviceType] || newFontSize)
+		};
+		onChangeFontSize(updatedFontSize);
 	};
 
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
@@ -74,7 +79,12 @@ const FB_SidebarTypography = ({
 	};
 
 	const handleLetterSpacingChange = (newLetterSpacing) => {
-		onChangeLetterSpacing(newLetterSpacing);
+		// Ensure proper device type handling
+		const updatedLetterSpacing = {
+			...letterSpacing,
+			[deviceType]: parseFloat(newLetterSpacing[deviceType] || newLetterSpacing)
+		};
+		onChangeLetterSpacing(updatedLetterSpacing);
 	};
 
 	const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
@@ -82,12 +92,33 @@ const FB_SidebarTypography = ({
 	};
 
 	const handleLineHeightChange = (newLineHeight) => {
-		onChangeLineHeight(newLineHeight);
+		// Ensure proper device type handling
+		const updatedLineHeight = {
+			...lineHeight,
+			[deviceType]: parseFloat(newLineHeight[deviceType] || newLineHeight)
+		};
+		onChangeLineHeight(updatedLineHeight);
 	};
 
 	const handleLineHeightUnitChange = (newLineHeightUnit) => {
 		onChangeLineHeightUnit(newLineHeightUnit);
 	};
+
+	// Initialize default values for responsive controls if they don't exist
+	useEffect(() => {
+		if (fontSize && !fontSize[deviceType]) {
+			const defaultFontSize = { ...fontSize, [deviceType]: '' };
+			onChangeFontSize(defaultFontSize);
+		}
+		if (letterSpacing && !letterSpacing[deviceType]) {
+			const defaultLetterSpacing = { ...letterSpacing, [deviceType]: '' };
+			onChangeLetterSpacing(defaultLetterSpacing);
+		}
+		if (lineHeight && !lineHeight[deviceType]) {
+			const defaultLineHeight = { ...lineHeight, [deviceType]: '' };
+			onChangeLineHeight(defaultLineHeight);
+		}
+	}, [deviceType]);
 
 	console.log("Checking device type:", deviceType)
 
@@ -104,11 +135,11 @@ const FB_SidebarTypography = ({
 				min={1}
 				max={200}
 				label={__("Font Size", "frontis-blocks")}
-				rangeValue={fontSize}
+				rangeValue={fontSize || { [deviceType]: '' }}
 				onChangeHandler={handleFontSizeChange}
 				rangeUnitHandler={handleFontSizeUnitChange}
 				deviceType={deviceType}
-				units={fontSizeUnits}
+				units={fontSizeUnits || { [deviceType]: 'px' }}
 				setAttributes={setAttributes}
 				rangeStep={1}
 				resetFallbackValue={''}
@@ -142,11 +173,11 @@ const FB_SidebarTypography = ({
 					min={1}
 					max={100}
 					label={__("Letter Spacing", "frontis-blocks")}
-					rangeValue={letterSpacing}
+					rangeValue={letterSpacing || { [deviceType]: '' }}
 					onChangeHandler={handleLetterSpacingChange}
 					rangeUnitHandler={handleLetterSpacingUnitChange}
 					deviceType={deviceType}
-					units={letterSpacingUnits}
+					units={letterSpacingUnits || { [deviceType]: 'px' }}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={''}
@@ -157,11 +188,11 @@ const FB_SidebarTypography = ({
 					min={1}
 					max={200}
 					label={__("Line Height", "frontis-blocks")}
-					rangeValue={lineHeight}
+					rangeValue={lineHeight || { [deviceType]: '' }}
 					onChangeHandler={handleLineHeightChange}
 					rangeUnitHandler={handleLineHeightUnitChange}
 					deviceType={deviceType}
-					units={lineHeightUnits}
+					units={lineHeightUnits || { [deviceType]: 'px' }}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={''}

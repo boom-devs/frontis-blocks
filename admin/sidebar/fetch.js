@@ -70,15 +70,119 @@ export const getTypography = async () => {
 			}
 		});
 
-		
 		if (!response.success) {
-			throw new Error(response.data || 'Fetch failed');
+			throw new Error(response.data || 'Failed to fetch typography');
 		}
-		console.log("Typography response:", response.data);
 
-		return response.data;
+		// Create default structure if data is missing
+		const defaultTypography = {
+			body: {
+				fontFamily: '',
+				fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				fontWeight: '',
+				fontStyle: '',
+				textTransform: '',
+				textDecoration: '',
+				lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+			},
+			link: {
+				fontFamily: '',
+				fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				fontWeight: '',
+				fontStyle: '',
+				textTransform: '',
+				textDecoration: '',
+				lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+			},
+			button: {
+				fontFamily: '',
+				fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				fontWeight: '',
+				fontStyle: '',
+				textTransform: '',
+				textDecoration: '',
+				lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+				letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+			},
+			heading: {
+				h1: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				},
+				h2: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				},
+				h3: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				},
+				h4: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				},
+				h5: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				},
+				h6: {
+					fontFamily: '',
+					fontSize: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					fontWeight: '',
+					fontStyle: '',
+					textTransform: '',
+					textDecoration: '',
+					lineHeight: { Desktop: 0, Tablet: 0, Mobile: 0 },
+					letterSpacing: { Desktop: 0, Tablet: 0, Mobile: 0 }
+				}
+			}
+		};
+
+		// Merge received data with default structure
+		const mergedData = {
+			...defaultTypography,
+			...response.data,
+			heading: {
+				...defaultTypography.heading,
+				...(response.data?.heading || {})
+			}
+		};
+
+		return mergedData;
 	} catch (error) {
-		console.error('Fetch failed:', error);
+		console.error('Failed to fetch typography:', error);
 		throw error;
 	}
 };
@@ -100,14 +204,13 @@ export const updateTypography = async (data) => {
 			}
 		});
 
-		if (!response || !response.success) {
-			console.error('Update failed response:', response);
-			throw new Error(response?.data || 'Update failed');
+		if (!response.success) {
+			throw new Error(response.data || 'Failed to update typography');
 		}
 
-		return response.data;
+		return response;
 	} catch (error) {
-		console.error('Update failed:', error);
+		console.error('Failed to update typography:', error);
 		throw error;
 	}
 };

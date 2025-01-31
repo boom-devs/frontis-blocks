@@ -40,24 +40,28 @@ const TypographySettings = (props) => {
 	// Fetch initial typography values
 	useEffect(() => {
 		const fetchTypographySettings = async () => {
-			// Get typography settings
-			const typographyResponse = await getTypography();
-			console.log("Typography response:", typographyResponse);
-			if (typographyResponse) {
-				setTypography(typographyResponse);
-				setTypographies(typographyResponse);
-			}
+			try {
+				// Get typography settings
+				const typographyResponse = await getTypography();
+				console.log("Initial typography response:", typographyResponse);
+				if (typographyResponse) {
+					setTypography(typographyResponse);
+					setTypographies(typographyResponse);
+				}
 
-			// Get custom typography settings
-			const customTypographyResponse = await getTypography('fb_get_custom_typography');
-			if (customTypographyResponse.success) {
-				setCustomTypography(customTypographyResponse.data.data);
-			}
+				// Get custom typography settings
+				const customTypographyResponse = await getTypography('fb_get_custom_typography');
+				if (customTypographyResponse.success) {
+					setCustomTypography(customTypographyResponse.data);
+				}
 
-			// Get font families
-			const fontFamiliesResponse = await getTypography('fb_get_fontfamilies');
-			if (fontFamiliesResponse.success) {
-				setFontFamilies(fontFamiliesResponse.data.data);
+				// Get font families
+				const fontFamiliesResponse = await getTypography('fb_get_fontfamilies');
+				if (fontFamiliesResponse.success) {
+					setFontFamilies(fontFamiliesResponse.data);
+				}
+			} catch (error) {
+				console.error('Error fetching typography settings:', error);
 			}
 		};
 
@@ -129,7 +133,11 @@ const TypographySettings = (props) => {
 			if (attr.typography) {
 				setTypography(attr.typography);
 			} else if (attr.deviceType) {
-				setDeviceType(attr.deviceType)
+				// Ensure deviceType is valid
+				const validDeviceTypes = ['Desktop', 'Tablet', 'Mobile'];
+				if (validDeviceTypes.includes(attr.deviceType)) {
+					setDeviceType(attr.deviceType);
+				}
 			} else {
 				console.log("Unknown structure in attributes:", attr);
 			}
@@ -141,95 +149,40 @@ const TypographySettings = (props) => {
 	// Single handler for all typography changes
 	const handleTypographyChange = (value, item, property, type = 'regular') => {
 		const isHeading = type === 'heading';
-		const isCustom = type === 'custom';
 		
-		if (isCustom) {
-			const updatedCustomTypography = {
-				...customTypography,
-				[item]: {
-					...customTypography[item],
-					[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
-						...customTypography[item]?.[property],
-						[deviceType]: value[deviceType],
-					} : value,
-				},
-			};
-			setCustomTypography(updatedCustomTypography);
-			
-			if (property === 'fontFamily') {
-				loadGoogleFont(value);
-				setFontFamilies({
-					...fontFamilies,
-					[item]: value
-				});
-			}
-		} else {
-		const updatedTypography = {
-			...typography,
-			[item]: {
-				...typography[item],
-				...(isHeading ? {
+		let updatedTypography = { ...typography };
+		
+		if (isHeading) {
+			// For headings, update the specific heading (h1-h6) inside the heading object
+			updatedTypography = {
+				...typography,
+				heading: {
+					...typography.heading,
 					[selectedHeading]: {
-						...typography[item]?.[selectedHeading],
-						[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
-							...typography[item]?.[selectedHeading]?.[property],
-							[deviceType]: property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType],
-						} : value,
-						// Always include all other properties
-						fontFamily: typography[item]?.[selectedHeading]?.fontFamily || '',
-						fontSize: typography[item]?.[selectedHeading]?.fontSize || {},
-						fontSizeUnit: typography[item]?.[selectedHeading]?.fontSizeUnit || {},
-						fontWeight: typography[item]?.[selectedHeading]?.fontWeight || '',
-						fontStyle: typography[item]?.[selectedHeading]?.fontStyle || '',
-						textTransform: typography[item]?.[selectedHeading]?.textTransform || '',
-						textDecoration: typography[item]?.[selectedHeading]?.textDecoration || '',
-						letterSpacing: typography[item]?.[selectedHeading]?.letterSpacing || {},
-						letterSpacingUnit: typography[item]?.[selectedHeading]?.letterSpacingUnit || {},
-						lineHeight: typography[item]?.[selectedHeading]?.lineHeight || {},
-						lineHeightUnits: typography[item]?.[selectedHeading]?.lineHeightUnits || {}
+						...typography.heading?.[selectedHeading],
+						[property]: value
 					}
-				} : {
-					[property]: property.endsWith('Unit') || property === 'fontSize' || property === 'letterSpacing' || property === 'lineHeight' ? {
-						...typography[item]?.[property],
-						[deviceType]: property === 'fontSize' ? parseInt(value[deviceType]) : value[deviceType],
-					} : value,
-					// Always include all other properties
-					fontFamily: typography[item]?.fontFamily || '',
-					fontSize: typography[item]?.fontSize || {},
-					fontSizeUnit: typography[item]?.fontSizeUnit || {},
-					fontWeight: typography[item]?.fontWeight || '',
-					fontStyle: typography[item]?.fontStyle || '',
-					textTransform: typography[item]?.textTransform || '',
-					textDecoration: typography[item]?.textDecoration || '',
-					letterSpacing: typography[item]?.letterSpacing || {},
-					letterSpacingUnit: typography[item]?.letterSpacingUnit || {},
-					lineHeight: typography[item]?.lineHeight || {},
-					lineHeightUnits: typography[item]?.lineHeightUnits || {}
-				})
-			}
-		};
-		setTypography(updatedTypography);
-
-		if (property === 'fontFamily') {
-			loadGoogleFont(value);
-			if (isHeading) {
-				setFontFamilies({
-					...fontFamilies,
-					[item]: {
-						...fontFamilies.heading,
-						[selectedHeading]: value
-					}
-				});
-			} else {
-				setFontFamilies({
-					...fontFamilies,
-					[item]: value
-				});
 				}
-			}
+			};
+		} else {
+			// For other elements (body, link, button)
+			updatedTypography = {
+				...typography,
+				[item]: {
+					...typography[item],
+					[property]: value
+				}
+			};
 		}
 
+		console.log('Updating typography:', updatedTypography);
+		setTypography(updatedTypography);
 		setIsMount(true);
+
+		// Load Google Font if needed
+		if (property === 'fontFamily' && value) {
+			loadGoogleFont(value);
+		}
 	};
 
 	// Regular typography handlers
@@ -276,36 +229,46 @@ const TypographySettings = (props) => {
 	// Save colors after post save
 	const isAfterSave = useAfterSave();
 
+	// Save typography after changes
 	useEffect(() => {
-		const handleUpdateSettings = async () => {
-			if (isAfterSave && isMount) {
-				if (typography) {
+		const saveTypography = async () => {
+			if (isAfterSave && isMount && typography) {
+				try {
+					console.log('Saving typography:', typography);
 					const response = await updateTypography(typography);
 					if (response.success) {
-						setTypography(response);
-						setTypographies(response);
+						console.log('Typography saved successfully:', response.data);
+						setTypography(response.data);
+						setTypographies(response.data);
 					}
-				}
-
-				if (customTypography) {
-					const response = await updateTypography(customTypography, 'fb_update_custom_typography');
-					if (response.success) {
-						setCustomTypography(response.data.data);
-					}
-				}
-
-				if(fontFamilies) {
-					const response = await updateTypography(fontFamilies, 'fb_update_fontfamilies');
-					if (response.success) {
-						setFontFamilies(response.data.data);
-					}
+				} catch (error) {
+					console.error('Failed to save typography:', error);
 				}
 			}
+		};
+
+		saveTypography();
+	}, [isAfterSave, isMount, typography]);
+
+	// Initialize typography structure
+	useEffect(() => {
+		if (!typography) {
+			const initialTypography = {
+				body: {},
+				link: {},
+				heading: {
+					h1: {},
+					h2: {},
+					h3: {},
+					h4: {},
+					h5: {},
+					h6: {}
+				},
+				button: {}
+			};
+			setTypography(initialTypography);
 		}
-
-		handleUpdateSettings();
-	}, [isAfterSave]);
-
+	}, []);
 
 	// console.log("Checking device type inside typography settings")
 	// console.log(deviceType)

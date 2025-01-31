@@ -9,11 +9,14 @@ const FbColorPanel = ({ title, colors, setFbGlobalSettingsLoading }) => {
     const currentColors = useSelect(select => select(STORE_NAME).getColors(), []);
 
     const handleColorChange = (slug, newColor) => {
+        const cssVar = `--fb-${slug}-color`;
         const updatedColors = currentColors.map(color => {
             if (color.slug === slug) {
                 return {
                     ...color,
-                    color: newColor
+                    color: newColor,
+                    var: cssVar,
+                    value: `var(${cssVar})`
                 };
             }
             return color;
@@ -27,9 +30,13 @@ const FbColorPanel = ({ title, colors, setFbGlobalSettingsLoading }) => {
         <ToolsPanel 
             label={title}
             resetAll={() => {
-                setColors(colors);
+                setColors(colors.map(color => ({
+                    ...color,
+                    var: `--fb-${color.slug}-color`,
+                    value: `var(--fb-${color.slug}-color)`
+                })));
                 setFbGlobalSettingsLoading(true);
-            } }
+            }}
             className="fb-color-panel fb-global-color-panel"
         >
             {colors.map((color) => (
@@ -41,6 +48,7 @@ const FbColorPanel = ({ title, colors, setFbGlobalSettingsLoading }) => {
                     <FbColorPicker
                         name={color.name}
                         defaultColor={color.color}
+                        value={color.value}
                         onChange={(newColor) => handleColorChange(color.slug, newColor)}
                     />
                 </ToolsPanelItem>

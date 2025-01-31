@@ -20,6 +20,7 @@ const FB_Range = ({
 	units_types_arr = null,
 	isRangeUnit = true,
 }) => {
+	console.log("rangeValue:", rangeValue);
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
 		if (rangeValue[deviceType] === undefined) {
@@ -68,14 +69,14 @@ const FB_Range = ({
 						)}
 					</div>
 				</div>
-				<RangeControl
+					<RangeControl
 					value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
 					onChange={setRangeValue}
-					min={min}
-					max={max}
-					step={rangeStep}
+						min={min}
+						max={max}
+						step={rangeStep}
 					resetFallbackValue={resetFallbackValue}
-				/>
+					/>
 			</div>
 		</div>
 	);

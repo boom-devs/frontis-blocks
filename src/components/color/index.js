@@ -10,7 +10,6 @@ import {
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { Globe } from '@Icons';
 import './editor.lazy.scss';
 
 
@@ -69,6 +68,28 @@ const FB_Color = ({
         const color = isHover ? globalHoverColor : globalColor;
         const handleColorChange = isHover ? handleGlobalHoverColorChange : handleGlobalColorChange;
 
+        const handleGlobalColorSelect = (selectedColor) => {
+            // Check if the selected color is from global colors
+            const globalColor = globalColors.find(gc => gc.color === selectedColor);
+            if (globalColor) {
+                // Use CSS variable in output
+                handleColorChange(`var(--fb-${globalColor.slug}-color)`);
+            } else {
+                handleColorChange(selectedColor);
+            }
+        };
+
+        // Function to get display color for the color picker
+        const getDisplayColor = (colorValue) => {
+            if (colorValue && colorValue.startsWith('var(')) {
+                // Extract variable name and find matching color
+                const varName = colorValue.match(/--fb-(.*?)-color/)[1];
+                const globalColor = globalColors.find(gc => gc.slug === varName);
+                return globalColor ? globalColor.color : colorValue;
+            }
+            return colorValue;
+        };
+
         return (
             <div className="fb-setting-color-controls">
                 <Dropdown
@@ -84,13 +105,13 @@ const FB_Color = ({
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {color || ''}
+                                    {getDisplayColor(color)}
                                 </span>
                                 <div
                                     className="fb-setting-color-display"
                                     style={
                                         color
-                                            ? { backgroundColor: color }
+                                            ? { backgroundColor: getDisplayColor(color) }
                                             : {
                                                 backgroundImage: 'linear-gradient(45deg, #e9e9e9 25%, transparent 0), linear-gradient(-45deg, #e9e9e9 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e9e9e9 0), linear-gradient(-45deg, transparent 75%, #e9e9e9 0)',
                                                 backgroundPosition: '0 0, 0 5px, 5px -5px, -5px 0',
@@ -107,13 +128,20 @@ const FB_Color = ({
                     renderContent={() => (
                         <div className="fb-setting-color-setting-icon-popup">
                             <BaseControl className="fb-setting-color-setting-icon-popup-inner">
-                                <ColorPicker color={color} onChange={handleColorChange} enableAlpha={true} />
+                                <ColorPicker 
+                                    color={getDisplayColor(color)} 
+                                    onChange={(newColor) => {
+                                        // For direct color picker changes, use the raw color value
+                                        handleColorChange(newColor);
+                                    }}
+                                    enableAlpha={true} 
+                                />
                                 <div className="fb-setting-color-label">{__("Global Colors", "frontis-blocks")}</div>
                                 <ColorPalette
                                     colors={globalColors}
                                     disableCustomColors={true}
-                                    value={color}
-                                    onChange={handleColorChange}
+                                    value={getDisplayColor(color)}
+                                    onChange={handleGlobalColorSelect}
                                 />
                                 {themeColors.length > 0 && (
                                     <>
@@ -121,7 +149,7 @@ const FB_Color = ({
                                         <ColorPalette
                                             colors={themeColors}
                                             disableCustomColors={true}
-                                            value={color}
+                                            value={getDisplayColor(color)}
                                             onChange={handleColorChange}
                                         />
                                     </>

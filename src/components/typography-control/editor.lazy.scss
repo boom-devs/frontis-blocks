@@ -31,39 +31,61 @@
 }
 
 .fb-setting-typography-popup {
-    min-width: 280px;
     padding: 16px;
+    min-width: 280px;
 
     .fb-typography-list {
-        .fb-typography-item {
-            margin-bottom: 16px;
-            cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
 
-            &:last-child {
-                margin-bottom: 0;
-            }
+    .fb-typography-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
 
-            .fb-typography-header {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 8px;
-                border-radius: 4px;
+        &:hover {
+            border-color: #007cba;
+            background: #f8f9fa;
+        }
+    }
 
-                &:hover {
-                    background: var(--wp-components-color-gray-100, #f0f0f0);
-                }
+    .fb-typography-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-                svg {
-                    width: 20px;
-                    height: 20px;
-                }
+        span {
+            font-weight: 500;
+            color: #1e1e1e;
+        }
 
-                span {
-                    font-size: 14px;
-                    font-weight: 500;
-                }
-            }
+        .fb-typography-preview {
+            min-width: 30px;
+            text-align: center;
+            color: #1e1e1e;
+        }
+    }
+}
+
+.fb-setting-dropdown-icon-wrapper {
+    .fb-setting-dropdown-icon-btn {
+        padding: 0 8px;
+        height: 30px;
+        min-width: 30px;
+        border: 1px solid #757575;
+        border-radius: 2px;
+        
+        &:hover {
+            border-color: #007cba;
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
         }
     }
 }
