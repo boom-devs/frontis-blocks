@@ -5,7 +5,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.components-panel__header {
 		&.interface-complementary-area-header {
 			min-height: 58px;
-			background: $neutral-color-100;
+			background: $white-color;
 			padding: 14px 16px;
 
 			.interface-complementary-area-header__title {
@@ -22,13 +22,16 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.fb-blocks-color-tabs {
 		.components-tab-panel__tabs {
 			border-bottom: 1px solid $neutral-color-100;
-			padding: 0 12px;
+			padding: 0;
 
 			button {
+				font-family: Plus Jakarta Sans;
+				font-size: $base-font-size;
+				font-weight: 600;
+				line-height: 16px;
 				border-bottom: 2px solid transparent;
-
 				&.active-tab {
-					border-bottom: 2px solid $neutral-color-200;
+					// border-bottom: 2px solid $neutral-color-200;
 				}
 
 				&:first-child {
@@ -112,9 +115,65 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.fb-global-controls {
 		&.components-panel {
 			border-top: 0;
-
+			margin-top: 12px;
+			padding: 16px;
 			.fb-panel-control {
 				padding: 0px;
+				.fb-tab-element{
+					margin-bottom: 16px;
+				}
+				.components-navigator-button {
+					font-family: $heading-font-family;
+					font-size: $base-font-size;
+					font-weight: 500;
+					line-height: 16px;
+					padding: 0;
+				}
+				.fb-tab-wrapper {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+					.fb-tab-icon {
+						width: 24px;
+						height: 24px;
+					}
+					.fb-tab-title{
+						font-family: $heading-font-family;
+						font-size: $medium-font-size;
+						font-weight: 500;
+						line-height: 16px;
+						color: $neutral-color-700;
+					}
+				}
+				.fb-global-header-inner-wrapper{
+					display: flex;
+					gap: 8px;
+					.fb-global-header-inner{
+						h3{
+							font-family: $heading-font-family;
+							font-size: $medium-font-size;
+							font-weight: 600;
+							line-height: 16px;
+							color: $neutral-color-950;
+							text-transform: capitalize;
+							margin-top: 9px;
+						}
+						p{
+							font-family: $body-font-family;
+							font-size: $medium-font-size;
+							font-weight: 400;
+							line-height: 20px;
+							color: $neutral-color-950;
+						}
+					}
+				}
+				.fb-global-font-sizes-presets{
+					.font-size-presettes-wrapper{
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+					}
+				}
 			}
 			.components-panel__body {
 				border: none;
@@ -174,6 +233,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 					.fb-global-color-panel {
 						padding: 0;
+						
 					}
 				}
 
@@ -277,9 +337,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 .block-editor-tools-panel-color-gradient-settings__dropdown>button.is-open {
 	background: transparent;
 }
-.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
-	padding: 0;
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
+    padding: 24px 0;
+}
 
+.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
+	padding: 0 !important;
 	.block-editor-tools-panel-color-gradient-settings__item {
 		display: flex;
 		align-items: center;
@@ -394,7 +457,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 	.fb-custom-element {
 		border-bottom: 1px solid $neutral-color-100;
-		padding: 14px 12px;
+		padding: 12px;
 
 		button {
 			padding: 0;
@@ -407,15 +470,15 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 			&:focus {
 				outline: none !important;
-			box-shadow: none !important;
+				box-shadow: none !important;
 			}
 
 			.font_preview {
-				background: $neutral-color-100;
-				padding: 6px;
-				border-radius: 4px;
+				// background: $neutral-color-100;
+				// padding: 6px;
+				border-radius: 2px;
 				font-size: 12px;
-				min-height: 26px;
+				// min-height: 26px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -423,13 +486,22 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		}
 
 		&:last-child {
-			border-bottom: none;
+			.font_preview{
+				background: $primary-color-base;
+				svg{
+					path{
+						fill: #ffffff;
+					}
+				}
+			}
 		}
 
 		&.fb-global-typography-element {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			border-left: 1px solid #E1E3E8;
+			border-right: 1px solid #E1E3E8;
 		}
 	}
 
@@ -459,4 +531,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 svg#fb-global-panel-icon {
 	height: 25px;
+}
+.block-editor-panel-color-gradient-settings__color-name{
+	font-family: $heading-font-family;
+	font-size: $base-font-size;
+	font-weight: 500;
+	line-height: 16px;
 }
