@@ -19,9 +19,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
   padding: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
-  font-family: Plus Jakarta Sans;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 16px;
   border-bottom: 2px solid transparent;
 }
@@ -88,12 +87,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   padding: 0px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-element {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   line-height: 16px;
   padding: 0;
 }
@@ -106,32 +104,43 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   width: 24px;
   height: 24px;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon svg {
+  fill: none !important;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   line-height: 16px;
-  color: #404655;
+  color: #1e1e1e;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper:hover .fb-tab-title,
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper:hover .fb-tab-icon path {
+  color: #007cba;
+  stroke: #007cba !important;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper {
   display: flex;
   gap: 8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 16px;
   color: #0B0C0E;
   text-transform: capitalize;
   margin-top: 9px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
-  font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   color: #0B0C0E;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg {
+  fill: none !important;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg:hover path {
+  stroke: #007cba;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-font-sizes-presets .font-size-presettes-wrapper {
   display: flex;
@@ -279,7 +288,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   cursor: pointer;
 }
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item .fb-delete-custom-color:first-of-type {
-  display: block; /* Shudhu first button visible korbe */
+  display: block;
+  /* Shudhu first button visible korbe */
 }
 
 .fb-custom-color-item .actions {
