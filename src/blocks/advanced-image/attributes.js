@@ -7,6 +7,10 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
+	advancedImagePresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	imageId: {
 		"type": "number"
 	},
