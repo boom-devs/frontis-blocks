@@ -5331,9 +5331,9 @@ function FrontisBlocksSidebar(props) {
     "stroke-linecap": "round"
   }))), /*#__PURE__*/React.createElement("span", {
     className: "fb-tab-title"
-  }, "Colors")))), /*#__PURE__*/React.createElement("div", {
+  }, "Colors")))), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Customize the appearance of specific blocks for the whole site.", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
     path: "/blocks"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-wrapper"
@@ -5363,7 +5363,7 @@ function FrontisBlocksSidebar(props) {
     "stroke-width": "1.2"
   }), " ")), /*#__PURE__*/React.createElement("span", {
     className: "fb-tab-title"
-  }, "Blocks")))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Blocks", "frontis-blocks"))))), /*#__PURE__*/React.createElement("hr", null))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
     path: "/typography"
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner-wrapper"
@@ -5436,7 +5436,7 @@ function FrontisBlocksSidebar(props) {
     "stroke-linejoin": "round"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, "Blocks"), /*#__PURE__*/React.createElement("p", null, "Available Blocks"))))))))));
+  }, /*#__PURE__*/React.createElement("h3", null, "Blocks"), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Customize the appearance of specific blocks and for the whole site.", "")))))))))));
 }
 ;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FrontisBlocksSidebar);

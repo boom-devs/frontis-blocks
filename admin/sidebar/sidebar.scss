@@ -20,10 +20,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	}
 
 	.fb-blocks-color-tabs {
+		padding: 0 16px;
 		.components-tab-panel__tabs {
 			border-bottom: 1px solid $neutral-color-100;
-			padding: 0;
-
 			button {
 				font-size: $medium-font-size-global;
 				font-weight: 500;
@@ -116,13 +115,14 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		&.components-panel {
 			border-top: 0;
 			margin-top: 12px;
-			padding: 16px;
+			padding: 16px 0;
 
 			.fb-panel-control {
 				padding: 0px;
 
 				.fb-tab-element {
 					margin-bottom: 10px;
+					padding: 0 16px;
 				}
 
 				.components-navigator-button {
@@ -139,8 +139,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					gap: 8px;
 
 					.fb-tab-icon {
-						width: 24px;
-						height: 24px;
+						width: 20px;
+						height: 20px;
 
 						svg {
 							fill: none !important;
@@ -168,7 +168,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				.fb-global-header-inner-wrapper {
 					display: flex;
 					gap: 8px;
-
+					padding: 0 16px;
 					.fb-global-header-inner {
 						h3 {
 							font-size: $medium-font-size-global;
@@ -382,7 +382,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
-	padding: 24px 0;
+	padding: 24px 16px;
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
