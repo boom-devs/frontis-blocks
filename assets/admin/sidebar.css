@@ -14,9 +14,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
   letter-spacing: 0px;
   line-height: 19.2px;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs {
+  padding: 0 16px;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs {
   border-bottom: 1px solid #E1E3E8;
-  padding: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
   font-size: 13px;
@@ -81,13 +83,14 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel {
   border-top: 0;
   margin-top: 12px;
-  padding: 16px;
+  padding: 16px 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control {
   padding: 0px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-element {
   margin-bottom: 10px;
+  padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
   font-size: 13px;
@@ -101,8 +104,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   gap: 8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon svg {
   fill: none !important;
@@ -121,6 +124,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper {
   display: flex;
   gap: 8px;
+  padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
   font-size: 13px;
@@ -268,7 +272,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
-  padding: 24px 0;
+  padding: 24px 16px;
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
