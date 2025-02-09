@@ -12,7 +12,22 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0px;
-  line-height: 19.2px;
+  line-height: 19px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back {
+  padding-left: 0;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back span svg {
+  fill: none !important;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-inner-container {
+  padding: 0 10px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-label-container {
+  margin: 14px -7px !important;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs {
   padding: 0 16px;
@@ -101,11 +116,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper {
   display: flex;
   align-items: center;
+  flex-direction: row;
   gap: 8px;
-}
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon {
-  width: 20px;
-  height: 20px;
+  justify-content: flex-start;
+  width: 100%;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-icon svg {
   fill: none !important;
@@ -118,8 +132,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper:hover .fb-tab-title,
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper:hover .fb-tab-icon path {
-  color: #007cba;
-  stroke: #007cba !important;
+  color: #399CFF;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper {
   display: flex;
@@ -144,7 +157,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   fill: none !important;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg:hover path {
-  stroke: #007cba;
+  stroke: #399CFF;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-font-sizes-presets .font-size-presettes-wrapper {
   display: flex;
@@ -203,20 +216,20 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .components-panel__body .components-base-control .components-textarea-control__input {
   margin-top: 0;
-  border: 1px solid #e1e3e8;
+  border: 1px solid #E1E3E8;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content {
   padding-top: 10px;
 }
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings {
-  padding: 0 12px;
-  margin-top: 10px;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-setting-label-text {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase !important;
+  font-family: "Work Sans", sans-serif;
 }
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .font_preview_box {
-  padding: 20px;
-  text-align: center;
-  background: #E1E3E8;
-  margin-bottom: 30px;
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings {
+  padding: 0;
+  margin-top: 10px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
   outline: none;
@@ -253,18 +266,29 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
   margin: 10px 0;
+  font-weight: 500;
+  font-family: "Work Sans", sans-serif;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control {
   width: auto;
   margin-left: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap {
-  max-width: 200px;
   margin: 0 auto;
   margin-top: 12px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content:empty {
   display: none;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .font_preview_box {
+  align-items: center;
+  background: #E1E3E8;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  min-height: 100px;
+  overflow: hidden;
 }
 
 .block-editor-tools-panel-color-gradient-settings__dropdown > button.is-open {
@@ -380,7 +404,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: #399CFF;
 }
 .fb-global-typo-elements-wrap .fb-custom-element:last-child .font_preview svg path {
-  fill: #ffffff;
+  fill: #FFFFFF;
 }
 .fb-global-typo-elements-wrap .fb-custom-element.fb-global-typography-element {
   display: flex;
@@ -423,10 +447,6 @@ svg#fb-global-panel-icon {
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/range/editor.lazy.scss ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************/
-
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/typography-control/editor.lazy.scss ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
 
 
 /*# sourceMappingURL=sidebar.css.map*/

@@ -14,9 +14,30 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				font-size: 14px;
 				font-weight: 600;
 				letter-spacing: 0.00px;
-				line-height: 19.2px;
+				line-height: 19px;
 			}
 		}
+	}
+
+	.fb-global-back {
+		padding-left: 0;
+		gap: 10px;
+		display: flex;
+		align-items: center;
+
+		span {
+			svg {
+				fill: none !important;
+			}
+		}
+	}
+
+	.fb-setting-spacing-inner-container {
+		padding: 0 10px;
+	}
+
+	.fb-setting-spacing-label-container {
+		margin: 14px -7px !important;
 	}
 
 	.fb-blocks-color-tabs {
@@ -136,12 +157,13 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				.fb-tab-wrapper {
 					display: flex;
 					align-items: center;
-					gap: 8px;
+					flex-direction: row;
+					gap: calc(8px);
+					-webkit-box-pack: start;
+					justify-content: flex-start;
+					width: 100%;
 
 					.fb-tab-icon {
-						width: 20px;
-						height: 20px;
-
 						svg {
 							fill: none !important;
 						}
@@ -159,8 +181,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 						.fb-tab-title,
 						.fb-tab-icon path {
-							color: #007cba;
-							stroke: #007cba !important;
+							color: $primary-color-base;
 						}
 					}
 				}
@@ -192,7 +213,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						fill: none !important;
 						&:hover {
 							path {
-								stroke: #007cba;
+								stroke: $primary-color-base;
 							}
 						}
 					}
@@ -278,7 +299,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						margin-top: 0;
 						//width: calc(100% + 32px);
 						//margin-left: calc(0% - 16px);
-						border: 1px solid #e1e3e8;
+						border: 1px solid $neutral-color-100;
 					}
 				}
 			}
@@ -287,16 +308,16 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			.fb-global-typography-element-content {
 				padding-top: 10px;
 
-				.fb-typography-settings {
-					padding: 0 12px;
-					margin-top: 10px;
+				.fb-setting-label-text{
+					font-weight: 500;
+					font-size: 11px;
+					text-transform: uppercase !important;
+					font-family: $body-font-family;
+				}
 
-					.font_preview_box {
-						padding: 20px;
-						text-align: center;
-						background: $neutral-color-100;
-						margin-bottom: 30px;
-					}
+				.fb-typography-settings {
+					padding: 0;
+					margin-top: 10px;
 
 					.components-input-control__container {
 						.components-input-control__input {
@@ -355,6 +376,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 					.components-input-control__label {
 						margin: 10px 0;
+						font-weight: 500;
+						font-family: $body-font-family;
 					}
 				}
 
@@ -363,7 +386,6 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					margin-left: 0;
 
 					.fb-global-typography-headings-wrap {
-						max-width: 200px;
 						margin: 0 auto;
 						margin-top: 12px;
 					}
@@ -372,6 +394,17 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				&:empty {
 					display: none;
 				}
+			}
+
+			.font_preview_box {
+				align-items: center;
+				background: $neutral-color-100;
+				border-radius: 2px;
+				display: flex;
+				justify-content: center;
+				margin-bottom: 16px;
+				min-height: 100px;
+				overflow: hidden;
 			}
 		}
 	}
@@ -536,7 +569,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 				svg {
 					path {
-						fill: #ffffff;
+						fill: $white-color;
 					}
 				}
 			}
@@ -546,8 +579,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			border-left: 1px solid #E1E3E8;
-			border-right: 1px solid #E1E3E8;
+			border-left: 1px solid $neutral-color-100;
+			border-right: 1px solid $neutral-color-100;
 		}
 	}
 
