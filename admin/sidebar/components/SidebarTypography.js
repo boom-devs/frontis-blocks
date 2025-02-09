@@ -17,6 +17,7 @@ import {
 
 import FB_Range from '@Components/range';
 
+
 const FB_SidebarTypography = ({
 								  label = __("Typography", "frontis-blocks"),
 								  fontFamily,
@@ -25,7 +26,7 @@ const FB_SidebarTypography = ({
 								  onChangeFontSize,
 								  fontSizeUnits,
 								  onChangeFontSizeUnit,
-								  fontWeight,
+								  fontWeightState,
 								  onChangeFontWeight,
 								  fontStyle,
 								  onChangeFontStyle,
@@ -43,6 +44,7 @@ const FB_SidebarTypography = ({
 								  onChangeLineHeightUnit,
 								  deviceType,
 								  setAttributes,
+								  heading
 							  }) => {
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
@@ -88,9 +90,6 @@ const FB_SidebarTypography = ({
 		onChangeLineHeightUnit(newLineHeightUnit);
 	};
 
-	console.log("Checking device type")
-	console.log(deviceType)
-
 	return (
 		<>
 			<SelectControl
@@ -99,73 +98,82 @@ const FB_SidebarTypography = ({
 				value={fontFamily}
 				onChange={handleFontFamilyChange}
 			/>
-			<FB_Range
-				min={1}
-				max={200}
-				label={__("Font Size", "frontis-blocks")}
-				rangeValue={fontSize}
-				onChangeHandler={handleFontSizeChange}
-				rangeUnitHandler={handleFontSizeUnitChange}
-				deviceType={deviceType}
-				units={fontSizeUnits}
-				setAttributes={setAttributes}
-				rangeStep={1}
-				resetFallbackValue={''}
-			/>
-			<SelectControl
-				label={__("Font Weight", "frontis-blocks")}
-				options={FONT_WEIGHT}
-				value={fontWeight}
-				onChange={handleFontWeightChange}
-			/>
-			<SelectControl
-				label={__("Font Style", "frontis-blocks")}
-				options={FONT_STYLE}
-				value={fontStyle}
-				onChange={handleFontStyleChange}
-			/>
-			<SelectControl
-				label={__("Text Transform", "frontis-blocks")}
-				options={TEXT_TRANSFORM}
-				value={textTransform}
-				onChange={handleTextTransformChange}
-			/>
-			<SelectControl
-				label={__("Text Decoration", "frontis-blocks")}
-				options={TEXT_DECORATION}
-				value={textDecoration}
-				onChange={handleTextDecorationChange}
-			/>
-			{letterSpacingUnits &&
-				<FB_Range
-					min={1}
-					max={100}
-					label={__("Letter Spacing", "frontis-blocks")}
-					rangeValue={letterSpacing}
-					onChangeHandler={handleLetterSpacingChange}
-					rangeUnitHandler={handleLetterSpacingUnitChange}
-					deviceType={deviceType}
-					units={letterSpacingUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={''}
-				/>
-			}
-			{lineHeightUnits &&
+			{heading !== 'all' &&
 				<FB_Range
 					min={1}
 					max={200}
-					label={__("Line Height", "frontis-blocks")}
-					rangeValue={lineHeight}
-					onChangeHandler={handleLineHeightChange}
-					rangeUnitHandler={handleLineHeightUnitChange}
+					label={__("Font Size", "frontis-blocks")}
+					rangeValue={fontSize}
+					onChangeHandler={handleFontSizeChange}
+					rangeUnitHandler={handleFontSizeUnitChange}
 					deviceType={deviceType}
-					units={lineHeightUnits}
+					units={fontSizeUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={''}
 				/>
 			}
+			<div className='fb_global_typo_wrap'>
+				<SelectControl
+					label={__("Appearance", "frontis-blocks")}
+					options={FONT_WEIGHT}
+					value={fontWeightState}
+					onChange={handleFontWeightChange}
+				/>
+				<SelectControl
+					label={__("Font Style", "frontis-blocks")}
+					options={FONT_STYLE}
+					value={fontStyle}
+					onChange={handleFontStyleChange}
+				/>
+			</div>
+			<div className='fb_global_typo_wrap'>
+				<SelectControl
+					label={__("Text Transform", "frontis-blocks")}
+					options={TEXT_TRANSFORM}
+					value={textTransform}
+					onChange={handleTextTransformChange}
+				/>
+				<SelectControl
+					label={__("Text Decoration", "frontis-blocks")}
+					options={TEXT_DECORATION}
+					value={textDecoration}
+					onChange={handleTextDecorationChange}
+				/>
+			</div>
+			
+			<div className='fb_global_typo_wrap'>
+				{letterSpacingUnits &&
+					<FB_Range
+						min={1}
+						max={100}
+						label={__("Letter Spacing", "frontis-blocks")}
+						rangeValue={letterSpacing}
+						onChangeHandler={handleLetterSpacingChange}
+						rangeUnitHandler={handleLetterSpacingUnitChange}
+						deviceType={deviceType}
+						units={letterSpacingUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={''}
+					/>
+				}
+				{lineHeightUnits &&
+					<FB_Range
+						min={1}
+						max={200}
+						label={__("Line Height", "frontis-blocks")}
+						rangeValue={lineHeight}
+						onChangeHandler={handleLineHeightChange}
+						rangeUnitHandler={handleLineHeightUnitChange}
+						deviceType={deviceType}
+						units={lineHeightUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={''}
+					/>
+				}
+			</div>
 		</>
 	);
 };
