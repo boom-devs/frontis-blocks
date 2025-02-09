@@ -131,9 +131,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		labelFontColorSwitcher,
 		labelFontColor,
 		labelFontHoverColor,
-		labelBgColorSwitcher,
-		labelBgColor,
-		labelBgHoverColor,
 		labelFontFamily,
 		labelFontSize,
 		labelFontSizeUnits,
@@ -219,64 +216,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		hoverBackgroundImageAttachment,
 		hoverBackgroundImageSize,
 		hoverBackgroundImageRepeat,
-
-		// Label
-		countDownLabelBorderTypeUnits,
-		countDownLabelBorderTypeDesktop,
-		countDownLabelBorderTypeTablet,
-		countDownLabelBorderTypeMobile,
-		countDownLabelBorderTypeLink,
-		countDownLabelBorder,
-		countDownLabelBorderColorSwitcher,
-		countDownLabelBorderColor,
-		countDownLabelBorderHoverColor,
-		countDownLabelBorderRadiusUnits,
-		countDownLabelBorderRadiusDesktop,
-		countDownLabelBorderRadiusTablet,
-		countDownLabelBorderRadiusMobile,
-		countDownLabelBorderRadiusLink,
-		countDownLabelWidth,
-		countDownLabelWidthUnits,
-		countDownLabelHeight,
-		countDownLabelHeightUnits,
-
-		// Digit
-		countDownDigitBgColorSwitcher,
-		countDownDigitBgColor,
-		countDownDigitBgHoverColor,
-		countDownDigitBorderTypeUnits,
-		countDownDigitBorderTypeDesktop,
-		countDownDigitBorderTypeTablet,
-		countDownDigitBorderTypeMobile,
-		countDownDigitBorderTypeLink,
-		countDownDigitBorder,
-		countDownDigitBorderColorSwitcher,
-		countDownDigitBorderColor,
-		countDownDigitBorderHoverColor,
-		countDownDigitBorderRadiusUnits,
-		countDownDigitBorderRadiusDesktop,
-		countDownDigitBorderRadiusTablet,
-		countDownDigitBorderRadiusMobile,
-		countDownDigitBorderRadiusLink,
-		countDownDigitWidth,
-		countDownDigitWidthUnits,
-		countDownDigitHeight,
-		countDownDigitHeightUnits,
-
-		// single digit color
-		singleDigitFontColorSwitcher,
-		daysDigitFontColorSwitcher,
-		daysDigitFontColor,
-		daysDigitFontHoverColor,
-		hoursDigitFontColorSwitcher,
-		hoursDigitFontColor,
-		hoursDigitFontHoverColor,
-		minutesDigitFontColorSwitcher,
-		minutesDigitFontColor,
-		minutesDigitFontHoverColor,
-		secondsDigitFontColorSwitcher,
-		secondsDigitFontColor,
-		secondsDigitFontHoverColor,
 
 	} = attributes;
 
@@ -782,306 +721,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const countDownItemBorderRadiusGetMobile = `${countDownItemBorderRadiusMobile.top}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.right}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.bottom}${countDownItemBorderRadiusUnits[deviceType]} ${countDownItemBorderRadiusMobile.left}${countDownItemBorderRadiusUnits[deviceType]}`;
 
 
-
-	/** Label Start Border Type*/
-	const handleCountDownLabelBorderUnitHandlerFn = ( event, position ) => {
-		const value = event.target.value;
-		if ( countDownLabelBorderTypeLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						countDownLabelBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						countDownLabelBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						countDownLabelBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {countDownLabelBorderTypeDesktop: {...countDownLabelBorderTypeDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {countDownLabelBorderTypeTablet: {...countDownLabelBorderTypeTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {countDownLabelBorderTypeMobile: {...countDownLabelBorderTypeMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownLabelBorderCombineBtnHandlerFn = () => {
-		setAttributes( {countDownLabelBorderTypeLink: !countDownLabelBorderTypeLink} );
-	}
-
-	const countDownLabelBorderTypeUnitsHandler = (unit) => {
-		setAttributes( {
-			countDownLabelBorderTypeUnits: {
-				...countDownLabelBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Label Start Border Type*/
-
-	/** Label Start Border Radius*/
-	const countDownLabelHandleSpacingUnitHandlerFn = ( event, position ) => {
-		const value = event.target.value;
-		if ( countDownLabelBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						countDownLabelBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						countDownLabelBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						countDownLabelBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {countDownLabelBorderRadiusDesktop: {...countDownLabelBorderRadiusDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {countDownLabelBorderRadiusTablet: {...countDownLabelBorderRadiusTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {countDownLabelBorderRadiusMobile: {...countDownLabelBorderRadiusMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownLabelCombineBtnHandlerFn = () => {
-		setAttributes( {countDownLabelBorderRadiusLink: !countDownLabelBorderRadiusLink} );
-	}
-
-	const countDownLabelBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
-			countDownLabelBorderRadiusUnits: {
-				...countDownLabelBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	{/* Countdown Item Label Control */}
-	const countDownLabelBorderTypeGetDesktop = `${countDownLabelBorderTypeDesktop.top}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeDesktop.right}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeDesktop.bottom}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeDesktop.left}${countDownLabelBorderTypeUnits[deviceType]}`;
-	const countDownLabelBorderTypeGetTablet = `${countDownLabelBorderTypeTablet.top}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeTablet.right}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeTablet.bottom}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeTablet.left}${countDownLabelBorderTypeUnits[deviceType]}`;
-	const countDownLabelBorderTypeGetMobile = `${countDownLabelBorderTypeMobile.top}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeMobile.right}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeMobile.bottom}${countDownLabelBorderTypeUnits[deviceType]} ${countDownLabelBorderTypeMobile.left}${countDownLabelBorderTypeUnits[deviceType]}`;
-
-	const countDownLabelBorderRadiusGetDesktop = `${countDownLabelBorderRadiusDesktop.top}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusDesktop.right}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusDesktop.bottom}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusDesktop.left}${countDownLabelBorderRadiusUnits[deviceType]}`;
-	const countDownLabelBorderRadiusGetTablet = `${countDownLabelBorderRadiusTablet.top}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusTablet.right}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusTablet.bottom}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusTablet.left}${countDownLabelBorderRadiusUnits[deviceType]}`;
-	const countDownLabelBorderRadiusGetMobile = `${countDownLabelBorderRadiusMobile.top}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusMobile.right}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusMobile.bottom}${countDownLabelBorderRadiusUnits[deviceType]} ${countDownLabelBorderRadiusMobile.left}${countDownLabelBorderRadiusUnits[deviceType]}`;
-
-
-
-	/** Digit Start Border Type*/
-	const handleCountDownDigitBorderUnitHandlerFn = ( event, position ) => {
-		const value = event.target.value;
-		if ( countDownDigitBorderTypeLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						countDownDigitBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						countDownDigitBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						countDownDigitBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {countDownDigitBorderTypeDesktop: {...countDownDigitBorderTypeDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {countDownDigitBorderTypeTablet: {...countDownDigitBorderTypeTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {countDownDigitBorderTypeMobile: {...countDownDigitBorderTypeMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownDigitBorderCombineBtnHandlerFn = () => {
-		setAttributes( {countDownDigitBorderTypeLink: !countDownDigitBorderTypeLink} );
-	}
-
-	const countDownDigitBorderTypeUnitsHandler = (unit) => {
-		setAttributes( {
-			countDownDigitBorderTypeUnits: {
-				...countDownDigitBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-	/** Digit Start Border Type*/
-
-	/** Digit Start Border Radius*/
-	const countDownDigitHandleSpacingUnitHandlerFn = ( event, position ) => {
-		const value = event.target.value;
-		if ( countDownDigitBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						countDownDigitBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						countDownDigitBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						countDownDigitBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {countDownDigitBorderRadiusDesktop: {...countDownDigitBorderRadiusDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {countDownDigitBorderRadiusTablet: {...countDownDigitBorderRadiusTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {countDownDigitBorderRadiusMobile: {...countDownDigitBorderRadiusMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-	const countDownDigitCombineBtnHandlerFn = () => {
-		setAttributes( {countDownDigitBorderRadiusLink: !countDownDigitBorderRadiusLink} );
-	}
-
-	const countDownDigitBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
-			countDownDigitBorderRadiusUnits: {
-				...countDownDigitBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-
-
-	{/* Countdown Item Digit Control */}
-	const countDownDigitBorderTypeGetDesktop = `${countDownDigitBorderTypeDesktop.top}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeDesktop.right}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeDesktop.bottom}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeDesktop.left}${countDownDigitBorderTypeUnits[deviceType]}`;
-	const countDownDigitBorderTypeGetTablet = `${countDownDigitBorderTypeTablet.top}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeTablet.right}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeTablet.bottom}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeTablet.left}${countDownDigitBorderTypeUnits[deviceType]}`;
-	const countDownDigitBorderTypeGetMobile = `${countDownDigitBorderTypeMobile.top}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeMobile.right}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeMobile.bottom}${countDownDigitBorderTypeUnits[deviceType]} ${countDownDigitBorderTypeMobile.left}${countDownDigitBorderTypeUnits[deviceType]}`;
-
-	const countDownDigitBorderRadiusGetDesktop = `${countDownDigitBorderRadiusDesktop.top}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusDesktop.right}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusDesktop.bottom}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusDesktop.left}${countDownDigitBorderRadiusUnits[deviceType]}`;
-	const countDownDigitBorderRadiusGetTablet = `${countDownDigitBorderRadiusTablet.top}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusTablet.right}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusTablet.bottom}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusTablet.left}${countDownDigitBorderRadiusUnits[deviceType]}`;
-	const countDownDigitBorderRadiusGetMobile = `${countDownDigitBorderRadiusMobile.top}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusMobile.right}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusMobile.bottom}${countDownDigitBorderRadiusUnits[deviceType]} ${countDownDigitBorderRadiusMobile.left}${countDownDigitBorderRadiusUnits[deviceType]}`;
-
-
-
 	const countDownStyle = useMemo(
 		() => `
 			.fb-count-down-wrapper.${blockID} {
@@ -1123,10 +762,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownItemBgColor ? `background: ${countDownItemBgColor};` : ''}
 				${countDownItemSize.Desktop ? `width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
 				${countDownItemSize.Desktop ? `height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
-				${countDownItemBorder ? `border-style: ${countDownItemBorder};` : ''}
+				${countDownItemBorder ? `border: ${countDownItemBorder};` : ''}
 				${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
-				${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
 				${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
+				${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
 				
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item:hover {
@@ -1158,10 +797,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownSeparatorFontHoverColor ? `color: ${countDownSeparatorFontHoverColor};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				${countDownDigitBgColor ? `background-color: ${countDownDigitBgColor};` : ""}
 				${digitFontColor ? `color: ${digitFontColor};` : ""}
 				${digitFontFamily ? `font-family: ${digitFontFamily};` : ""}
 				${digitFontSize.Desktop ? `font-size: ${digitFontSize.Desktop}${digitFontSizeUnits.Desktop};` : ""}
@@ -1171,23 +806,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${digitTextDecoration ? `text-decoration: ${digitTextDecoration};` : ""}
 				${digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ""}
 				${digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ""}
-				${countDownDigitBorder ? `border-style: ${countDownDigitBorder};` : ''}
-				${countDownDigitBorderTypeGetDesktop ? `border-width: ${countDownDigitBorderTypeGetDesktop};` : ''}
-				${countDownDigitBorderColor ? `border-color: ${countDownDigitBorderColor};` : ''}
-				${countDownDigitBorderRadiusGetDesktop ? `border-radius: ${countDownDigitBorderRadiusGetDesktop};` : ''}
-				${countDownDigitWidth.Desktop ? `width: ${countDownDigitWidth.Desktop}${countDownDigitWidthUnits.Desktop};` : ''}
-				${countDownDigitHeight.Desktop ? `height: ${countDownDigitHeight.Desktop}${countDownDigitHeightUnits.Desktop};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time:hover {
-				${countDownDigitBgHoverColor ? `background-color: ${countDownDigitBgHoverColor};` : ""}
 				${digitFontHoverColor ? `color: ${digitFontHoverColor};` : ""}
-				${countDownDigitBorderHoverColor ? `border-color: ${countDownDigitBorderHoverColor};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
-			    display: flex;
-				justify-content: center;
-				align-items: center;
-				${labelBgColor ? `background-color: ${labelBgColor};` : ""}
 				${labelFontColor ? `color: ${labelFontColor};` : ""}
 				${labelFontFamily ? `font-family: ${labelFontFamily};` : ""}
 				${labelFontSize.Desktop ? `font-size: ${labelFontSize.Desktop}${labelFontSizeUnits.Desktop};` : ""}
@@ -1197,48 +820,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${labelTextDecoration ? `text-decoration: ${labelTextDecoration};` : ""}
 				${labelLetterSpacing.Desktop ? `letter-spacing: ${labelLetterSpacing.Desktop}${labelLetterSpacingUnits.Desktop};` : ""}
 				${labelLineHeight.Desktop ? `line-height: ${labelLineHeight.Desktop}${labelLineHeightUnits.Desktop};` : ""}
-				${countDownLabelBorder ? `border-style: ${countDownLabelBorder};` : ''}
-				${countDownLabelBorderTypeGetDesktop ? `border-width: ${countDownLabelBorderTypeGetDesktop};` : ''}
-				${countDownLabelBorderColor ? `border-color: ${countDownLabelBorderColor};` : ''}
-				${countDownLabelBorderRadiusGetDesktop ? `border-radius: ${countDownLabelBorderRadiusGetDesktop};` : ''}
-				${countDownLabelWidth.Desktop ? `width: ${countDownLabelWidth.Desktop}${countDownLabelWidthUnits.Desktop};` : ''}
-				${countDownLabelHeight.Desktop ? `height: ${countDownLabelHeight.Desktop}${countDownLabelHeightUnits.Desktop};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label:hover{
-				${labelBgHoverColor ? `background-color: ${labelBgHoverColor};` : ""}
 				${labelFontHoverColor ? `color: ${labelFontHoverColor};` : ""}
-				${countDownLabelBorderHoverColor ? `border-color: ${countDownLabelBorderHoverColor};` : ''}
 			}
-
-			${ singleDigitFontColorSwitcher === true ? `
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.days {
-					${daysDigitFontColor ? `color: ${daysDigitFontColor};` : ""}
-				}
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.days:hover {
-					${daysDigitFontHoverColor ? `color: ${daysDigitFontHoverColor};` : ""}
-				}
-
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.hours {
-					${hoursDigitFontColor ? `color: ${hoursDigitFontColor};` : ""}
-				}
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.hours:hover {
-					${hoursDigitFontHoverColor ? `color: ${hoursDigitFontHoverColor};` : ""}
-				}
-
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.minutes {
-					${minutesDigitFontColor ? `color: ${minutesDigitFontColor};` : ""}
-				}
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.minutes:hover {
-					${minutesDigitFontHoverColor ? `color: ${minutesDigitFontHoverColor};` : ""}
-				}
-
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.seconds {
-					${secondsDigitFontColor ? `color: ${secondsDigitFontColor};` : ""}
-				}
-				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-time.seconds:hover {
-					${secondsDigitFontHoverColor ? `color: ${secondsDigitFontHoverColor};` : ""}
-				}
-			` : ''}
 
 			@media only screen and (max-width: 1024px) {
 				.fb-count-down-wrapper.${blockID} {
@@ -1271,19 +856,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ""}
 					${digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ""}
 					${digitLineHeight.Tablet ? `line-height: ${digitLineHeight.Tablet}${digitLineHeightUnits.Tablet};` : ""}
-					${countDownDigitBorderTypeGetTablet ? `border-width: ${countDownDigitBorderTypeGetTablet};` : ''}
-					${countDownDigitBorderRadiusGetTablet ? `border-radius: ${countDownDigitBorderRadiusGetTablet};` : ''}
-					${countDownDigitWidth.Tablet ? `width: ${countDownDigitWidth.Tablet}${countDownDigitWidthUnits.Tablet};` : ''}
-					${countDownDigitHeight.Tablet ? `height: ${countDownDigitHeight.Tablet}${countDownDigitHeightUnits.Tablet};` : ''}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
 					${labelFontSize.Tablet ? `font-size: ${labelFontSize.Tablet}${labelFontSizeUnits.Tablet};` : ""}
 					${labelLetterSpacing.Tablet ? `letter-spacing: ${labelLetterSpacing.Tablet}${labelLetterSpacingUnits.Tablet};` : ""}
 					${labelLineHeight.Tablet ? `line-height: ${labelLineHeight.Tablet}${labelLineHeightUnits.Tablet};` : ""}
-					${countDownLabelBorderTypeGetTablet ? `border-width: ${countDownLabelBorderTypeGetTablet};` : ''}
-					${countDownLabelBorderRadiusGetTablet ? `border-radius: ${countDownLabelBorderRadiusGetTablet};` : ''}
-					${countDownLabelWidth.Tablet ? `width: ${countDownLabelWidth.Tablet}${countDownLabelWidthUnits.Tablet};` : ''}
-					${countDownLabelHeight.Tablet ? `height: ${countDownLabelHeight.Tablet}${countDownLabelHeightUnits.Tablet};` : ''}
 				}
 			}
 
@@ -1318,19 +895,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ""}
 					${digitLetterSpacing.Mobile ? `letter-spacing: ${digitLetterSpacing.Mobile}${digitLetterSpacingUnits.Mobile};` : ""}
 					${digitLineHeight.Mobile ? `line-height: ${digitLineHeight.Mobile}${digitLineHeightUnits.Mobile};` : ""}
-					${countDownDigitBorderTypeGetMobile ? `border-width: ${countDownDigitBorderTypeGetMobile};` : ''}
-					${countDownDigitBorderRadiusGetMobile ? `border-radius: ${countDownDigitBorderRadiusGetMobile};` : ''}
-					${countDownDigitWidth.Mobile ? `width: ${countDownDigitWidth.Mobile}${countDownDigitWidthUnits.Mobile};` : ''}
-					${countDownDigitHeight.Mobile ? `height: ${countDownDigitHeight.Mobile}${countDownDigitHeightUnits.Mobile};` : ''}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item .fb-count-down-label {
 					${labelFontSize.Mobile ? `font-size: ${labelFontSize.Mobile}${labelFontSizeUnits.Mobile};` : ""}
 					${labelLetterSpacing.Mobile ? `letter-spacing: ${labelLetterSpacing.Mobile}${labelLetterSpacingUnits.Mobile};` : ""}
 					${labelLineHeight.Mobile ? `line-height: ${labelLineHeight.Mobile}${labelLineHeightUnits.Mobile};` : ""}
-					${countDownLabelBorderTypeGetMobile ? `border-width: ${countDownLabelBorderTypeGetMobile};` : ''}
-					${countDownLabelBorderRadiusGetMobile ? `border-radius: ${countDownLabelBorderRadiusGetMobile};` : ''}
-					${countDownLabelWidth.Mobile ? `width: ${countDownLabelWidth.Mobile}${countDownLabelWidthUnits.Mobile};` : ''}
-					${countDownLabelHeight.Mobile ? `height: ${countDownLabelHeight.Mobile}${countDownLabelHeightUnits.Mobile};` : ''}
 				}
 			}
 	
@@ -1388,8 +957,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			digitLineHeightUnits,
 			labelFontColor,
 			labelFontHoverColor,
-			labelBgColor,
-			labelBgHoverColor,
 			labelFontFamily,
 			labelFontSize,
 			labelFontSizeUnits,
@@ -1430,65 +997,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBackgroundImagePosition,
 			globalBackgroundImageAttachment,
 			globalBackgroundImageRepeat,
-			globalBackgroundImageSize,
-
-			// Label
-			countDownLabelBorderTypeUnits,
-			countDownLabelBorderTypeDesktop,
-			countDownLabelBorderTypeTablet,
-			countDownLabelBorderTypeMobile,
-			countDownLabelBorderTypeLink,
-			countDownLabelBorder,
-			countDownLabelBorderColorSwitcher,
-			countDownLabelBorderColor,
-			countDownLabelBorderHoverColor,
-			countDownLabelBorderRadiusUnits,
-			countDownLabelBorderRadiusDesktop,
-			countDownLabelBorderRadiusTablet,
-			countDownLabelBorderRadiusMobile,
-			countDownLabelBorderRadiusLink,
-			countDownLabelWidth,
-			countDownLabelWidthUnits,
-			countDownLabelHeight,
-			countDownLabelHeightUnits,
-
-			// Digit
-			countDownDigitBgColorSwitcher,
-			countDownDigitBgColor,
-			countDownDigitBgHoverColor,
-			countDownDigitBorderTypeUnits,
-			countDownDigitBorderTypeDesktop,
-			countDownDigitBorderTypeTablet,
-			countDownDigitBorderTypeMobile,
-			countDownDigitBorderTypeLink,
-			countDownDigitBorder,
-			countDownDigitBorderColorSwitcher,
-			countDownDigitBorderColor,
-			countDownDigitBorderHoverColor,
-			countDownDigitBorderRadiusUnits,
-			countDownDigitBorderRadiusDesktop,
-			countDownDigitBorderRadiusTablet,
-			countDownDigitBorderRadiusMobile,
-			countDownDigitBorderRadiusLink,
-			countDownDigitWidth,
-			countDownDigitWidthUnits,
-			countDownDigitHeight,
-			countDownDigitHeightUnits,
-
-			// single digit color
-			singleDigitFontColorSwitcher,
-			daysDigitFontColorSwitcher,
-			daysDigitFontColor,
-			daysDigitFontHoverColor,
-			hoursDigitFontColorSwitcher,
-			hoursDigitFontColor,
-			hoursDigitFontHoverColor,
-			minutesDigitFontColorSwitcher,
-			minutesDigitFontColor,
-			minutesDigitFontHoverColor,
-			secondsDigitFontColorSwitcher,
-			secondsDigitFontColor,
-			secondsDigitFontHoverColor,
+			globalBackgroundImageSize
 		]
 	);
 	
@@ -1722,34 +1231,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Digit", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<FB_Range
-												min={1}
-												max={1400}
-												label={__("Width", "frontis-blocks")}
-												rangeValue={countDownDigitWidth}
-												onChangeHandler={(value) => setAttributes({ countDownDigitWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ countDownDigitWidthUnits: value })}
-												deviceType={deviceType}
-												units={countDownDigitWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Range
-												min={1}
-												max={1400}
-												label={__("Height", "frontis-blocks")}
-												rangeValue={countDownDigitHeight}
-												onChangeHandler={(value) => setAttributes({ countDownDigitHeight: value })}
-												rangeUnitHandler={(value) => setAttributes({ countDownDigitHeightUnits: value })}
-												deviceType={deviceType}
-												units={countDownDigitHeightUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
 											<FB_TypographyControl
 												fontFamily={digitFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value })}
@@ -1789,28 +1270,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											<FB_SwitcherControl
-												label={__("Background Color", "frontis-blocks")}
-												globalSwitcher={countDownDigitBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ countDownDigitBgColorSwitcher: value })}
-											/>
-																			
-											{countDownDigitBgColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={countDownDigitBgColor}
-													setGlobalColor={(value) => setAttributes({ countDownDigitBgColor: value })}
-												/>
-											)}
-																			
-											{countDownDigitBgColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={countDownDigitBgHoverColor}
-													setGlobalColor={(value) => setAttributes({ countDownDigitBgHoverColor: value })}
-												/>
-											)}
-
-											<FB_SwitcherControl
 												label={__("Color", "frontis-blocks")}
 												globalSwitcher={digitFontColorSwitcher}
 												setGlobalSwitcher={(value) => setAttributes({ digitFontColorSwitcher: value })}
@@ -1831,194 +1290,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value })}
 												/>
 											)}
-
-											<ToggleControl
-												label={__("Enable For Single Color", "frontis-blocks")}
-												checked={singleDigitFontColorSwitcher}
-												onChange={(value) => setAttributes({ singleDigitFontColorSwitcher: value })}
-												style={{ marginTop: '20px' }}
-											/>
-
-											{ singleDigitFontColorSwitcher === true && (
-												<>
-													<FB_SwitcherControl
-														label={__("Days Color", "frontis-blocks")}
-														globalSwitcher={daysDigitFontColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ daysDigitFontColorSwitcher: value })}
-													/>
-
-													{daysDigitFontColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={daysDigitFontColor}
-															setGlobalColor={(value) => setAttributes({ daysDigitFontColor: value })}
-														/>
-													)}
-
-													{daysDigitFontColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={daysDigitFontHoverColor}
-															setGlobalColor={(value) => setAttributes({ daysDigitFontHoverColor: value })}
-														/>
-													)}
-
-													<FB_SwitcherControl
-														label={__("Hours Color", "frontis-blocks")}
-														globalSwitcher={hoursDigitFontColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ hoursDigitFontColorSwitcher: value })}
-													/>
-
-													{hoursDigitFontColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={hoursDigitFontColor}
-															setGlobalColor={(value) => setAttributes({ hoursDigitFontColor: value })}
-														/>
-													)}
-
-													{hoursDigitFontColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={hoursDigitFontHoverColor}
-															setGlobalColor={(value) => setAttributes({ hoursDigitFontHoverColor: value })}
-														/>
-													)}
-
-													<FB_SwitcherControl
-														label={__("Minutes Color", "frontis-blocks")}
-														globalSwitcher={minutesDigitFontColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ minutesDigitFontColorSwitcher: value })}
-													/>
-
-													{minutesDigitFontColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={minutesDigitFontColor}
-															setGlobalColor={(value) => setAttributes({ minutesDigitFontColor: value })}
-														/>
-													)}
-
-													{minutesDigitFontColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={minutesDigitFontHoverColor}
-															setGlobalColor={(value) => setAttributes({ minutesDigitFontHoverColor: value })}
-														/>
-													)}
-
-													<FB_SwitcherControl
-														label={__("Seconds Color", "frontis-blocks")}
-														globalSwitcher={secondsDigitFontColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ secondsDigitFontColorSwitcher: value })}
-													/>
-
-													{secondsDigitFontColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={secondsDigitFontColor}
-															setGlobalColor={(value) => setAttributes({ secondsDigitFontColor: value })}
-														/>
-													)}
-
-													{secondsDigitFontColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={secondsDigitFontHoverColor}
-															setGlobalColor={(value) => setAttributes({ secondsDigitFontHoverColor: value })}
-														/>
-													)}
-												</>
-											)}
-
-										<SelectControl
-																						label={__("Border Style", "frontis-blocks")}
-																						value={countDownDigitBorder}
-																						options={BORDER_STYLES}
-																						onChange={(value) => setAttributes({ countDownDigitBorder: value })}
-																					/>
-																					{/** Item Background Control */}
-																					<FB_SwitcherControl
-																						label={__("Border Color", "frontis-blocks")}
-																						globalSwitcher={countDownDigitBorderColorSwitcher}
-																						setGlobalSwitcher={(value) => setAttributes({ countDownDigitBorderColorSwitcher: value })}
-																					/>
-																			
-																					{countDownDigitBorderColorSwitcher === 'normal' && (
-																						<FB_ColorControl
-																							label={__("Normal Color", "frontis-blocks")}
-																							globalColor={countDownDigitBorderColor}
-																							setGlobalColor={(value) => setAttributes({ countDownDigitBorderColor: value })}
-																						/>
-																					)}
-																			
-																					{countDownDigitBorderColorSwitcher === 'hover' && (
-																						<FB_ColorControl
-																							label={__("Hover Color", "frontis-blocks")}
-																							globalColor={countDownDigitBorderHoverColor}
-																							setGlobalColor={(value) => setAttributes({ countDownDigitBorderHoverColor: value })}
-																						/>
-																					)}
-
-																					<FB_Spacing
-																						label={ 'Border Width' }
-																						deviceType={deviceType}
-																						spacingUnitsHandler={countDownDigitBorderTypeUnitsHandler}
-																						spacingUnits={countDownDigitBorderTypeUnits}
-																						spacingDesktop={countDownDigitBorderTypeDesktop}
-																						spacingTablet={countDownDigitBorderTypeTablet}
-																						spacingMobile={countDownDigitBorderTypeMobile}
-																						handleSpacingUnitHandler={handleCountDownDigitBorderUnitHandlerFn}
-																						spacingCombineBtn={countDownDigitBorderTypeLink}
-																						spacingCombineBtnHandler={countDownDigitBorderCombineBtnHandlerFn} setAttributes={setAttributes}
-																					/>
-																					<FB_Spacing
-																						label={ 'Border Radius' }
-																						deviceType={deviceType}
-																						spacingUnitsHandler={countDownDigitBorderRadiusUnitsHandler}
-																						spacingUnits={countDownDigitBorderRadiusUnits}
-																						spacingDesktop={countDownDigitBorderRadiusDesktop}
-																						spacingTablet={countDownDigitBorderRadiusTablet}
-																						spacingMobile={countDownDigitBorderRadiusMobile}
-																						handleSpacingUnitHandler={countDownDigitHandleSpacingUnitHandlerFn}
-																						spacingCombineBtn={countDownDigitBorderRadiusLink}
-																						spacingCombineBtnHandler={countDownDigitCombineBtnHandlerFn} setAttributes={setAttributes}
-																					/>
-
 										</PanelBody>
 
 										<PanelBody
 											title={__("Label", "frontis-blocks")}
 											initialOpen={false}
 										>
-											<FB_Range
-												min={1}
-												max={1400}
-												label={__("Width", "frontis-blocks")}
-												rangeValue={countDownLabelWidth}
-												onChangeHandler={(value) => setAttributes({ countDownLabelWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ countDownLabelWidthUnits: value })}
-												deviceType={deviceType}
-												units={countDownLabelWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Range
-												min={1}
-												max={1400}
-												label={__("Height", "frontis-blocks")}
-												rangeValue={countDownLabelHeight}
-												onChangeHandler={(value) => setAttributes({ countDownLabelHeight: value })}
-												rangeUnitHandler={(value) => setAttributes({ countDownLabelHeightUnits: value })}
-												deviceType={deviceType}
-												units={countDownLabelHeightUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
 											<FB_TypographyControl
 												fontFamily={labelFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ labelFontFamily: value })}
@@ -2078,81 +1355,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													setGlobalColor={(value) => setAttributes({ labelFontHoverColor: value })}
 												/>
 											)}
-
-											<FB_SwitcherControl
-												label={__("Background Color", "frontis-blocks")}
-												globalSwitcher={labelBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ labelBgColorSwitcher: value })}
-											/>
-
-											{labelBgColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={labelBgColor}
-													setGlobalColor={(value) => setAttributes({ labelBgColor: value })}
-												/>
-											)}
-
-											{labelBgColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={labelBgHoverColor}
-													setGlobalColor={(value) => setAttributes({ labelBgHoverColor: value })}
-												/>
-											)}
-
-										<SelectControl
-																						label={__("Border Style", "frontis-blocks")}
-																						value={countDownLabelBorder}
-																						options={BORDER_STYLES}
-																						onChange={(value) => setAttributes({ countDownLabelBorder: value })}
-																					/>
-																					{/** Item Background Control */}
-																					<FB_SwitcherControl
-																						label={__("Border Color", "frontis-blocks")}
-																						globalSwitcher={countDownLabelBorderColorSwitcher}
-																						setGlobalSwitcher={(value) => setAttributes({ countDownLabelBorderColorSwitcher: value })}
-																					/>
-																			
-																					{countDownLabelBorderColorSwitcher === 'normal' && (
-																						<FB_ColorControl
-																							label={__("Normal Color", "frontis-blocks")}
-																							globalColor={countDownLabelBorderColor}
-																							setGlobalColor={(value) => setAttributes({ countDownLabelBorderColor: value })}
-																						/>
-																					)}
-																			
-																					{countDownLabelBorderColorSwitcher === 'hover' && (
-																						<FB_ColorControl
-																							label={__("Hover Color", "frontis-blocks")}
-																							globalColor={countDownLabelBorderHoverColor}
-																							setGlobalColor={(value) => setAttributes({ countDownLabelBorderHoverColor: value })}
-																						/>
-																					)}
-																					<FB_Spacing
-																						label={ 'Border Width' }
-																						deviceType={deviceType}
-																						spacingUnitsHandler={countDownLabelBorderTypeUnitsHandler}
-																						spacingUnits={countDownLabelBorderTypeUnits}
-																						spacingDesktop={countDownLabelBorderTypeDesktop}
-																						spacingTablet={countDownLabelBorderTypeTablet}
-																						spacingMobile={countDownLabelBorderTypeMobile}
-																						handleSpacingUnitHandler={handleCountDownLabelBorderUnitHandlerFn}
-																						spacingCombineBtn={countDownLabelBorderTypeLink}
-																						spacingCombineBtnHandler={countDownLabelBorderCombineBtnHandlerFn} setAttributes={setAttributes}
-																					/>
-																					<FB_Spacing
-																						label={ 'Border Radius' }
-																						deviceType={deviceType}
-																						spacingUnitsHandler={countDownLabelBorderRadiusUnitsHandler}
-																						spacingUnits={countDownLabelBorderRadiusUnits}
-																						spacingDesktop={countDownLabelBorderRadiusDesktop}
-																						spacingTablet={countDownLabelBorderRadiusTablet}
-																						spacingMobile={countDownLabelBorderRadiusMobile}
-																						handleSpacingUnitHandler={countDownLabelHandleSpacingUnitHandlerFn}
-																						spacingCombineBtn={countDownLabelBorderRadiusLink}
-																						spacingCombineBtnHandler={countDownLabelCombineBtnHandlerFn} setAttributes={setAttributes}
-																					/>
 											
 										</PanelBody>
 										{countDownSeparatorEnabled && (

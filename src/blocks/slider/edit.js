@@ -151,6 +151,15 @@ const Edit = (props) => {
                         crossFade: true
                     }
                 };
+            case 'cube':
+                return {
+                    cubeEffect: {
+                        shadow: true,
+                        slideShadows: true,
+                        shadowOffset: 20,
+                        shadowScale: 0.94
+                    }
+                };
             case 'coverflow':
                 return {
                     coverflowEffect: {
@@ -177,6 +186,13 @@ const Edit = (props) => {
                         next: {
                             translate: ['100%', 0, 0],
                         },
+                    }
+                };
+            case 'cards':
+                return {
+                    cardsEffect: {
+                        perSlideOffset: 8,
+                        perSlideRotate: 2
                     }
                 };
             default:
@@ -227,7 +243,6 @@ const Edit = (props) => {
         loop,
         allowTouchMove,
         effect,
-        enableMouseWheel,
     ]);
 
     // Add useEffect to update Swiper when settings change

@@ -7,6 +7,10 @@ const attributes = {
 		type: "string",
 		default: "Desktop",
 	},
+	dualButtonPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	blockStyle: {
 		type: "string",
 		default: "",
@@ -237,28 +241,28 @@ const attributes = {
 	ButtonDesktopPadding: {
 		type: "object",
 		default: {
-			top: 12,
-			bottom: 12,
-			left: 30,
-			right: 30,
+			top: "12",
+			bottom: "12",
+			left: "30",
+			right: "30",
 		},
 	},
 	ButtonTabPadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "12",
+			bottom: "12",
+			left: "30",
+			right: "30",
 		},
 	},
 	ButtonMobilePadding: {
 		type: "object",
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: "12",
+			bottom: "12",
+			left: "30",
+			right: "30",
 		},
 	},
 	ButtonPaddingLink: {
@@ -398,6 +402,7 @@ const attributes = {
 	},
 	connectorColor: {
 		type: "string",
+		default: "#ffffff"
 	},
 	connectorHoverColor: {
 		type: "string",
@@ -408,7 +413,7 @@ const attributes = {
 	},
 	connectorBgColor: {
 		type: "string",
-		default: "#ffffff",
+		default: "#399CFF",
 	},
 	connectorBgHoverColor: {
 		type: "string",
@@ -432,7 +437,7 @@ const attributes = {
 	/** Start Border */
 	connectorBorder: {
 		type: "string",
-		default: "none",
+		default: "solid",
 	},
 	connectorBorderColorSwitcher: {
 		type: "string",
@@ -440,7 +445,7 @@ const attributes = {
 	},
 	connectorBorderColor: {
 		type: "string",
-		default: "",
+		default: "#ffffff",
 	},
 	connectorBorderHoverColor: {
 		type: "string",
@@ -456,28 +461,28 @@ const attributes = {
 	connectorBorderDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2",
 		},
 	},
 	connectorBorderTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2",
 		},
 	},
 	connectorBorderMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "2",
+			bottom: "2",
+			left: "2",
+			right: "2",
 		},
 	},
 	connectorBorderLink: {
@@ -618,6 +623,7 @@ const attributes = {
 	},
 	ButtonTwoBgColor: {
 		type: "string",
+		default: "#15171C"
 	},
 	ButtonTwoBgHoverColor: {
 		type: "string",
