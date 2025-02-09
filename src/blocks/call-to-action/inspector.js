@@ -24,8 +24,8 @@ import {
 import {
 	BORDER_STYLES,
 	ICON_POSITION,
+	PRESETS
 } from "./constants/constants";
-import SortableItem from './sortableItem';
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -46,6 +46,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
+		ctaPresetStyle,
 		FeatureItems,
 		Heading_Text,
 		headingTag,
@@ -97,7 +98,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingMobileBorderRadius,
 		headingBorderRadiusLink,
 
-		info_Button_Switcher,
+		ctaBtnOneSwitcher,
 		info_Button_Text,
 		info_Button_Link,
 		descAlignment,
@@ -337,7 +338,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		imageSwitcher
 	} = attributes;
 
-	const [ctaImgList, setCtaImgList] = useState(FeatureItems);
 	const deviceType = useDeviceType();
 	
 	useEffect(() => {
@@ -350,58 +350,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const blockProps = useBlockProps();
 
-	const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = ctaImgList.findIndex(item => item.id === active.id);
-            const newIndex = ctaImgList.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(ctaImgList, oldIndex, newIndex);
-            setAttributes({ FeatureItems: updatedItems });
-			setCtaImgList(updatedItems);
-        }
-    };
-
-    
-	const handleAddItem = () => {
-		const newItem = {
-			id: `item-${ctaImgList.length + 1}`,
-			Title: `Feature Item ${ctaImgList.length + 1}`,
-			teamMemberImageUrl: "", // Empty URL for now
-			teamMemberImageAlt: "", // Empty alt text for now
-			teamMemberImageID: "", // Empty image ID for now
-			teamMemberImagePosition: "", // Default empty position
-			teamMemberImageAttachment: "", // Default empty attachment
-			teamMemberImageRepeat: "", // Default empty repeat value
-			teamMemberImageSize: "", // Default empty size value
-		};
-	
-		setAttributes({
-			FeatureItems: [...ctaImgList, newItem],
-		});
-
-		setCtaImgList([...ctaImgList, newItem]);
-	};
-
-	const handleChangeItem = (id, key, value) => {
-		let updatedItems = ctaImgList;
-		if(key === 'url'){
-			updatedItems.length > 0 && updatedItems.forEach(item => {
-				if (item.id === id) {
-				  item.teamMemberImageUrl = value;
-				}
-			});
-		}
-		
-		setAttributes({ FeatureItems: updatedItems });
-		setCtaImgList(updatedItems);
-	};
-
-    const handleDeleteItem = (id) => {
-        const updatedItems = ctaImgList.filter(item => item.id !== id);
-        setAttributes({ FeatureItems: updatedItems });
-		setCtaImgList(updatedItems);
-    };
-
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
 	};
@@ -409,6 +357,60 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnTwoIcon: iconName });
 	};
 	
+	/** Start Preset Style **/
+	const changeCtaPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+				buttonIconSwitcher: true,
+				testClassicColor: '#15171C',
+				buttonBgColor: '#ffffff',
+                headingColor: '#ffffff',
+                SubHeadingColor: '#ffffff',
+                SubHeadingHoverColor: '#ffffff',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+            },
+            "preset-2": {
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: false,
+				buttonIconSwitcher: false,
+				buttonBgColor: '#399CFF',
+				testClassicColor: '#ffffff',
+                headingColor: '#15171C',
+                SubHeadingColor: '#15171C',
+                SubHeadingHoverColor: '#15171C',
+				buttonTextColor: '#ffffff',
+                globalBorderRadiusDesktop: {
+                    top: "16",
+					bottom: "16",
+					left: "16",
+					right: "16",
+                },
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                ctaPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style **/
+
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2185,6 +2187,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			hoverBackgroundImageRepeat,
 			hoverBackgroundImageSize,
 			hoverClassicColor,
+			globalBgColor,
 			globalBgHoverColor,
 			globalBorderHoverColor,
 			infoBoxTabPadding,
@@ -2371,11 +2374,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
+										<PanelBody
+										title={__("Presets", "frontis-block")}
+										initialOpen={true}
+										>
+											<SelectControl
+												label={__("Preset Style", "frontis-blocks")}
+												value={ctaPresetStyle}
+												options={PRESETS}
+												onChange={(selected) => changeCtaPreset(selected)}
+											/>
+										</PanelBody>
 										{/* Title Element */}
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Title", "frontis-block")}
-												initialOpen={true}
+												initialOpen={false}
 											>
 												
 												<FB_AlignmentControl
@@ -2401,99 +2415,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											</PanelBody>
 										</div>
-										
-										{/* Sub title element */}
-										<div className="fb-advanced-wrapper">
-										<PanelBody
-											title={__("Sub Title", "frontis-block")}
-											initialOpen={false}
-										>
-											<ToggleControl
-												label={__("Show Sub Title", "frontis-block")}
-												checked={subHeadingSwitcher}
-												onChange={(value) =>
-													setAttributes({ subHeadingSwitcher: value })
-												}
-											/>
 
-											{subHeadingSwitcher && (
-												<>
-												<FB_AlignmentControl
-													label={__("Sub Title Alignment", "frontis-blocks")}
-													globalAlignment={subTitleAlignment}
-													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
-												/>
-	
-												<FB_HtmlTagControl
-													label={__("Sub Title Tag", "frontis-blocks")}
-													globalHtmlTag={subTitleTag}
-													setGlobalHtmlTag={(value) => setAttributes({ subTitleTag: value })}
-												/>
-	
-												<TextareaControl
-													label={__("Sub Title Text", "frontis-block")}
-													className="fb-setting-text"
-													value={subTitleText}
-													onChange={(value) =>
-														setAttributes({ subTitleText: value })
-													}
-													
-												/>
-												</>
-											)}
-											
-											
-										</PanelBody>
-										</div>
 										{/* Image control */}
-										<div className="fb-advanced-wrapper">
-										<PanelBody
-											title={__("Image", "frontis-block")}
-											initialOpen={false}
-										>
-											<ToggleControl
-												label={__("Show Image", "frontis-block")}
-												checked={imageSwitcher}
-												onChange={(value) =>
-													setAttributes({ imageSwitcher: value })
-												}
-											/>
-
-											{imageSwitcher && (
-												<>
-												<FB_AlignmentControl
-													label={__("Image Alignment", "frontis-blocks")}
-													globalAlignment={subTitleAlignment}
-													setGlobalAlignment={(value) => setAttributes({ subTitleAlignment: value })}
-												/>
-												<DndContext
-													collisionDetection={closestCenter}
-													onDragEnd={handleDragEnd}
-												>
-													<SortableContext items={ctaImgList.map(item => item.id)}>
-														<ul className='dnd-items-wrapper'>
-															{ctaImgList.map((item) => (
-																<SortableItem
-																	key={item.id}
-																	id={item.id}
-																	item={item}
-																	handleChangeItem={handleChangeItem}
-																	handleDeleteItem={handleDeleteItem}
-																/>
-															))}
-														</ul>
-													</SortableContext>
-													<Button isPrimary onClick={handleAddItem}>
-														{__("Add Image", "frontis-blocks")}
-													</Button>
-												</DndContext>
-												</>
-											)}
-											
-											
-										</PanelBody>
-										</div>
-									
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("Description", "frontis-block")}
@@ -2537,13 +2460,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											>
 												<ToggleControl
 													label={__("Show Button", "frontis-block")}
-													checked={info_Button_Switcher}
+													checked={ctaBtnOneSwitcher}
 													onChange={(value) =>
-														setAttributes({ info_Button_Switcher: value })
+														setAttributes({ ctaBtnOneSwitcher: value })
 													}
 												/>
 
-												{info_Button_Switcher && (
+												{ctaBtnOneSwitcher && (
 													<>
 														
 														<FB_AlignmentControl
@@ -2922,7 +2845,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										)}
 
 										{/*Button One Style*/}
-										{info_Button_Switcher && (
+										{ctaBtnOneSwitcher && (
 											<PanelBody
 												title={__("Button One", "frontis-block")}
 												className="fb-cta-button-setting-wrapper"
