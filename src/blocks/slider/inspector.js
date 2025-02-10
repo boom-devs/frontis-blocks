@@ -24,7 +24,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         autoplay,
         autoplaySpeed,
         loop,
-        slidesPerView,
+        slidePerView,
         spaceBetween,
         transitionSpeed,
         allowTouchMove,
@@ -35,15 +35,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         effect,
         displayArrows,
         displayDots,
-
         /** Arrow Color **/
         sliderArrowColorSwitcher,
         sliderArrowColor,
         sliderArrowHoverColor,
+        /** Arrow Bg Color **/
         sliderArrowBgColorSwitcher,
         sliderArrowBgColor,
         sliderArrowBgHoverColor,
-
         /** Arrow Size */
         arrowSize,
         arrowSizeUnits,
@@ -65,6 +64,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         arrowTabletBorderRadius,
         arrowMobileBorderRadius,
         arrowBorderRadiusLink,
+        /** Arrow Spacing */
+        arrowPaddingUnits,
+        arrowDesktopPadding,
+        arrowTabPadding,
+        arrowMobilePadding,
+        arrowPaddingLink,
+        arrowMarginUnits,
+        arrowDesktopMargin,
+        arrowTabMargin,
+        arrowMobileMargin,
+        arrowMarginLink,
         /** Dots Spacing */
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
@@ -128,6 +138,171 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             setAttributes({ blockId: `fb-slider-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
+
+    // const toggleAutoplay = () => {
+    //     setAttributes( { autoplay: ! autoplay } );
+    // };
+    // const toggleArrows = () => {
+    //     setAttributes( { displayArrows: ! displayArrows } );
+    // };
+    // const toggleDots = () => {
+    //     setAttributes( { displayDots: ! displayDots } );
+    // };
+    // const toggleInfinteLoop = () => {
+    //     setAttributes( { loop: ! loop } );
+    // };
+
+    /** Start Arrow Padding */
+    const arrowPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (arrowPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        arrowDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        arrowTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        arrowMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ arrowDesktopPadding: { ...arrowDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ arrowTabPadding: { ...arrowTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ arrowMobilePadding: { ...arrowMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const arrowPaddingLinkBtn = () => {
+        setAttributes({
+            arrowPaddingLink: !arrowPaddingLink
+        });
+    };
+
+    const arrowPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            arrowPaddingUnits: {
+                ...arrowPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default padding for Arrow */
+    const arrowDesktopPaddingWidth = `${arrowDesktopPadding.top}${arrowPaddingUnits.Desktop} ${arrowDesktopPadding.right}${arrowPaddingUnits.Desktop} ${arrowDesktopPadding.bottom}${arrowPaddingUnits.Desktop} ${arrowDesktopPadding.left}${arrowPaddingUnits.Desktop}`;
+    const arrowTabletPaddingWidth = `${arrowTabPadding.top}${arrowPaddingUnits.Tablet} ${arrowTabPadding.right}${arrowPaddingUnits.Tablet} ${arrowTabPadding.bottom}${arrowPaddingUnits.Tablet} ${arrowTabPadding.left}${arrowPaddingUnits.Tablet}`;
+    const arrowMobilePaddingWidth = `${arrowMobilePadding.top}${arrowPaddingUnits.Mobile} ${arrowMobilePadding.right}${arrowPaddingUnits.Mobile} ${arrowMobilePadding.bottom}${arrowPaddingUnits.Mobile} ${arrowMobilePadding.left}${arrowPaddingUnits.Mobile}`;
+    /** End Arrow Padding */
+
+    /** Start Arrow Margin */
+    const arrowMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (arrowMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        arrowDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        arrowTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        arrowMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ arrowDesktopMargin: { ...arrowDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ arrowTabMargin: { ...arrowTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ arrowMobileMargin: { ...arrowMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const arrowMarginLinkBtn = () => {
+        setAttributes({
+            arrowMarginLink: !arrowMarginLink
+        });
+    };
+
+    const arrowMarginUnitsHandler = (unit) => {
+        setAttributes({
+            arrowMarginUnits: {
+                ...arrowMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default margin for Arrow */
+    const arrowDesktopMarginWidth = `${arrowDesktopMargin.top}${arrowMarginUnits.Desktop} ${arrowDesktopMargin.right}${arrowMarginUnits.Desktop} ${arrowDesktopMargin.bottom}${arrowMarginUnits.Desktop} ${arrowDesktopMargin.left}${arrowMarginUnits.Desktop}`;
+    const arrowTabletMarginWidth = `${arrowTabMargin.top}${arrowMarginUnits.Tablet} ${arrowTabMargin.right}${arrowMarginUnits.Tablet} ${arrowTabMargin.bottom}${arrowMarginUnits.Tablet} ${arrowTabMargin.left}${arrowMarginUnits.Tablet}`;
+    const arrowMobileMarginWidth = `${arrowMobileMargin.top}${arrowMarginUnits.Mobile} ${arrowMobileMargin.right}${arrowMarginUnits.Mobile} ${arrowMobileMargin.bottom}${arrowMarginUnits.Mobile} ${arrowMobileMargin.left}${arrowMarginUnits.Mobile}`;
+    /** End Arrow Margin */
 
     /** Start Arrow Border */
     const arrowBorderUnitsChange = (event, position) => {
@@ -607,24 +782,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
             ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
         }
-
+        {/* Arrow Color* /}
+        .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:after,
+        .fb-block-${ blockId }.fb-slider-container .swiper-button-next:after{
+            ${sliderArrowColor ? `color: ${sliderArrowColor};` : ''}
+        }
+        .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:hover:after,
+        .fb-block-${ blockId }.fb-slider-container .swiper-button-next:hover:after {
+            ${sliderArrowHoverColor ? `color: ${sliderArrowHoverColor};` : ''}
+        }
+        {/*Arrow Background Color*/}
         .fb-block-${ blockId }.fb-slider-container .swiper-button-prev,
         .fb-block-${ blockId }.fb-slider-container .swiper-button-next{
-            ${sliderArrowColor ? `color: ${sliderArrowColor};` : ''}
             ${sliderArrowBgColor ? `background-color: ${sliderArrowBgColor};` : ''}
             ${arrowBorder ? `border: ${arrowBorder};` : ''}
+            ${arrowDesktopPaddingWidth ? `padding: ${arrowDesktopPaddingWidth};` : ''}
+            ${arrowDesktopMarginWidth ? `margin: ${arrowDesktopMarginWidth};` : ''}
             ${arrowDesktopBorderWidth ? `border-width: ${arrowDesktopBorderWidth};` : ''}
             ${arrowDesktopBorderRadiusWidth ? `border-radius: ${arrowDesktopBorderRadiusWidth};` : ''}
             ${arrowBorderColor ? `border-color: ${arrowBorderColor};` : ''}
-            width: 46px;
-            height: 46px;
-            line-height: 46px;
-            transition: all .3s ease-in-out;
         }
-
         .fb-block-${ blockId }.fb-slider-container .swiper-button-prev:hover,
         .fb-block-${ blockId }.fb-slider-container .swiper-button-next:hover {
-            ${sliderArrowHoverColor ? `color: ${sliderArrowHoverColor};` : ''}
             ${sliderArrowBgHoverColor ? `background-color: ${sliderArrowBgHoverColor};` : ''}
         }
         {/*Arrow Size*/}
@@ -687,6 +866,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev,
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next{
+                ${arrowTabletPaddingWidth ? `padding: ${arrowTabletPaddingWidth};` : ''}
+                ${arrowTabletMarginWidth ? `margin: ${arrowTabletMarginWidth};` : ''}
                 ${arrowTabletBorderWidth ? `border-width: ${arrowTabletBorderWidth};` : ''}
                 ${arrowTabletBorderRadiusWidth ? `border-radius: ${arrowTabletBorderRadiusWidth};` : ''}
             }
@@ -746,6 +927,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .fb-block-${ blockId }.fb-slider-container .swiper-button-prev,
             .fb-block-${ blockId }.fb-slider-container .swiper-button-next{
+                ${arrowMobilePaddingWidth ? `padding: ${arrowMobilePaddingWidth};` : ''}
+                ${arrowMobileMarginWidth ? `margin: ${arrowMobileMarginWidth};` : ''}
                 ${arrowMobileBorderWidth ? `border-width: ${arrowMobileBorderWidth};` : ''}
                 ${arrowMobileBorderRadiusWidth ? `border-radius: ${arrowMobileBorderRadiusWidth};` : ''}
             }
@@ -772,14 +955,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         allowTouchMove,
         displayArrows,
         displayDots,
-
-        sliderArrowColorSwitcher,
         sliderArrowColor,
         sliderArrowHoverColor,
-        sliderArrowBgColorSwitcher,
         sliderArrowBgColor,
         sliderArrowBgHoverColor,
-
         arrowSize,
         arrowSizeUnits,
         arrowSpaceFromEdges,
@@ -792,6 +971,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         arrowDesktopBorderRadiusWidth,
         arrowTabletBorderRadiusWidth,
         arrowMobileBorderRadiusWidth,
+        arrowDesktopPaddingWidth,
+        arrowTabletPaddingWidth,
+        arrowMobilePaddingWidth,
+        arrowDesktopMarginWidth,
+        arrowTabletMarginWidth,
+        arrowMobileMarginWidth,
         dotsSpacingFromTop,
         dotsSpacingFromTopUnits,
 
@@ -912,19 +1097,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes({ stopOnLastSlide: value });
                                                 if (value) {
                                                     setAttributes({ loop: false });
-                                                    setAttributes({ autoplay: true });
                                                 }
                                             }}
                                         />
                                         <ToggleControl
                                             label={__("Reverse Direction", "frontis-blocks")}
                                             checked={reverseDirection}
-                                            onChange={(value) => {
-                                                setAttributes({ reverseDirection: value });
-                                                if (value) {
-                                                    setAttributes({ autoplay: true });
-                                                }
-                                            }}
+                                            onChange={(value) => setAttributes({ reverseDirection: value })}
                                         />
                                         <ToggleControl
                                             label={__("Enable Mouse Wheel", "frontis-blocks")}
@@ -958,8 +1137,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         />
                                         <RangeControl
                                             label={__('Slide Per View', 'frontis-blocks')}
-                                            value={slidesPerView}
-                                            onChange={(value) => setAttributes({ slidesPerView: value })}
+                                            value={slidePerView}
+                                            onChange={(value) => setAttributes({ slidePerView: value })}
                                             min={1}
                                             max={10}
                                             step={1}
@@ -985,12 +1164,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     </PanelBody>
                                     <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
-                                            label={ __( 'Enable Arrows', 'frontis-blocks' ) }
+                                            label={ __( 'Arrows', 'frontis-blocks' ) }
                                             checked={ displayArrows }
                                             onChange={(value) => setAttributes({ displayArrows: value })}
                                         />
                                         <ToggleControl
-                                            label={ __( 'Enable Dots', 'frontis-blocks' ) }
+                                            label={ __( 'Dots', 'frontis-blocks' ) }
                                             checked={ displayDots }
                                             onChange={(value) => setAttributes({ displayDots: value })}
                                         />
@@ -1072,6 +1251,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             setAttributes={setAttributes}
                                             rangeStep={1}
                                             resetFallbackValue={""}
+                                        />
+                                        {/* Spacing */}
+                                        <FB_Spacing
+                                            label={__("Padding", "frontis-blocks")}
+                                            deviceType={deviceType}
+                                            spacingUnitsHandler={arrowPaddingUnitsHandler}
+                                            spacingUnits={arrowPaddingUnits}
+                                            spacingDesktop={arrowDesktopPadding}
+                                            spacingTablet={arrowTabPadding}
+                                            spacingMobile={arrowMobilePadding}
+                                            handleSpacingUnitHandler={arrowPaddingUnitsChange}
+                                            spacingCombineBtn={arrowPaddingLink}
+                                            spacingCombineBtnHandler={arrowPaddingLinkBtn}
+                                            setAttributes={setAttributes}
+                                        />
+                                        <FB_Spacing
+                                            label={__("Margin", "frontis-blocks")}
+                                            deviceType={deviceType}
+                                            spacingUnitsHandler={arrowMarginUnitsHandler}
+                                            spacingUnits={arrowMarginUnits}
+                                            spacingDesktop={arrowDesktopMargin}
+                                            spacingTablet={arrowTabMargin}
+                                            spacingMobile={arrowMobileMargin}
+                                            handleSpacingUnitHandler={arrowMarginUnitsChange}
+                                            spacingCombineBtn={arrowMarginLink}
+                                            spacingCombineBtnHandler={arrowMarginLinkBtn}
+                                            setAttributes={setAttributes}
                                         />
 
                                         {/* Border, Border Radius */}
