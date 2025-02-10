@@ -106,7 +106,8 @@ body {
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-						padding: 20px 0;
+						padding: 14px;
+						border: none;
 						border-bottom: 1px solid #E1E3E8;
 						cursor: pointer;
 						span{
@@ -132,13 +133,18 @@ body {
 							border-bottom: none;
 						}
 						&.active{
-							padding: 14px;
 							border-radius: 8px;
 							background: #EBF5FF;
-							border-bottom: none;
+							border-bottom: 1px solid transparent;
 							span.fb-template-library-store-sidebar-tab-count{
 								background: #ffffff;
 							}
+							span.fb-template-library-store-sidebar-tab-name{
+								color: #399CFF;
+							}
+						}
+						&:has(+ .active) {
+							border-bottom: 1px solid transparent;
 						}
 					}
 					button{
@@ -149,7 +155,7 @@ body {
 				}
 			}
 			.fb-template-library-store-content{
-				flex: 8;
+				flex: 6;
 				padding: 24px 0 0 24px;
 				.fb-template-library-cards {
 					display: flex;
