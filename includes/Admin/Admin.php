@@ -100,6 +100,8 @@ class Admin {
 
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
 
+
+        // responsiveCss.js
         // Localize the script with new data
 		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }

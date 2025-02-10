@@ -2407,10 +2407,20 @@ const attributes = {
 		type: "string",
 		default: "#FFFFFF"
 	},
-
-
 	/** End Load More */
 
+	postGridDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    postGridTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    postGridMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

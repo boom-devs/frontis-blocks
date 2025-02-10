@@ -60,7 +60,21 @@ const attributes = {
     classHook: {
         type: "string",
         default: ""
-    }
+    },
+
+    advancedNavigationDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedNavigationTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedNavigationMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    
 };
 
 export default attributes;

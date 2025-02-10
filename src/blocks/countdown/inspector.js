@@ -303,6 +303,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		secondsDigitFontColor,
 		secondsDigitFontHoverColor,
 
+		countDownDesktopSwitcher,
+		countDownTabletSwitcher,
+		countDownMobileSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3660,6 +3663,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											spacingCombineBtnHandler={countDownItemWrapperMarginSpacingCombineBtnHandlerFn} setAttributes={setAttributes}
 										/>
 										</PanelBody>
+										<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={countDownDesktopSwitcher}
+														onChange={(value) => setAttributes({ countDownDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={countDownTabletSwitcher}
+														onChange={(value) => setAttributes({ countDownTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={countDownMobileSwitcher}
+														onChange={(value) => setAttributes({ countDownMobileSwitcher: value })}
+													/>
+												</PanelBody>
 									</>
 								)}
 							</div>

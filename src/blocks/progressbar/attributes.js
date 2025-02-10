@@ -183,5 +183,18 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    progressbarDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 export default attributes;

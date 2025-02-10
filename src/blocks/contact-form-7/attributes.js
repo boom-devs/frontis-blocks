@@ -1374,4 +1374,17 @@ export const attributes = {
         type: 'string',
         default: '',
     },
+
+	contactFormDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contactFormTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contactFormMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }

@@ -188,7 +188,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// singleItemColorStyle,
 		blockStyle,
 
-
+		socialIconsDesktopSwitcher,
+		socialIconsTabletSwitcher,
+		socialIconsMobileSwitcher,
     } = attributes;
 	
     const deviceType= useDeviceType();
@@ -3236,6 +3238,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														/>
 													)}
 
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsDesktopSwitcher}
+														onChange={(value) => setAttributes({ socialIconsDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsTabletSwitcher}
+														onChange={(value) => setAttributes({ socialIconsTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsMobileSwitcher}
+														onChange={(value) => setAttributes({ socialIconsMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

@@ -253,6 +253,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBoxShadowHoverValues,
 		globalBoxShadowCssValue,
 		globalHoverBoxShadowCssValue,
+
+		dualBtnDesktopSwitcher,
+		dualBtnTabletSwitcher,
+		dualBtnMobileSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3587,6 +3591,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
 														/>
 													)}
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnDesktopSwitcher}
+														onChange={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnTabletSwitcher}
+														onChange={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnMobileSwitcher}
+														onChange={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

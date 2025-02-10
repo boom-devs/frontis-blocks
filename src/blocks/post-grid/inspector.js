@@ -492,7 +492,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreIconMarginLink,
         /** End Load More */
 
-
+        postGridDesktopSwitcher,
+		postGridTabletSwitcher,
+		postGridMobileSwitcher,
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -6095,6 +6097,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
 
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridDesktopSwitcher}
+														onChange={(value) => setAttributes({ postGridDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridTabletSwitcher}
+														onChange={(value) => setAttributes({ postGridTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridMobileSwitcher}
+														onChange={(value) => setAttributes({ postGridMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>
