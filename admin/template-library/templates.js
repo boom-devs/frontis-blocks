@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
+import data from "./data.json";
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
@@ -78,6 +79,9 @@ const PatternLibraryButton = () => {
 
     console.log(frontisBlocksAdmin)
     
+    // State for active tab
+    const schema = data.$schema;
+    const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
     
     return (
         <>
@@ -101,10 +105,10 @@ const PatternLibraryButton = () => {
                     <div className={`fb-template-library-store-wrap`}>
                         <div className={`fb-template-library-store-inner-wrap`}>
                             <div>
-                                <TemplateHeader/>
+                                <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data}/>
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
-                                <TemplateSidebar/>
+                                <TemplateSidebar activeTab={activeTab} data={data} />
                                 <TemplateContent/>
                             </div>
 

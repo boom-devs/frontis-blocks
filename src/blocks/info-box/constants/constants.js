@@ -1,16 +1,17 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
 
+export const PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+    { label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+    { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+];
+
 export const mediaType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
-];
-
-export const PRESETS = [
-	{ label: __("Default", "frontis-block"), value: "preset-0" },
-	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-block"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
 ];
 
 export const TEXT_ALIGN = [
