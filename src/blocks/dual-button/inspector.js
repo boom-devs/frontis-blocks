@@ -23,18 +23,14 @@ import {
  * Internal depencencies
  */
 import {
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	TEXT_ALIGN,
 	ICON_ALIGN,
-	FONT_FAMILYS,
 	BORDER_STYLES,
 	ICON_POSITION,
 	BUTTONS_DIRECTION,
+	PRESETS
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
-import FB_Color from "@Components/color";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
@@ -50,6 +46,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
+		dualButtonPresetStyle,
 		ButtonText,
 		ButtonUrl,
 		ButtonTargetUrl,
@@ -284,6 +281,315 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIconSizeUnits: value });
 	};
 
+	/** Start Preset Style */
+    const changeDualButtonPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+				connectorSwitcher: true,
+				buttonsDirection: 'vertical',
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-2": {
+                buttonIconAlign: 'icon-text',
+                buttonTwoIconAlign: 'icon-text',
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-3": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+				connectorSwitcher: false,
+				buttonsDirection: 'vertical',
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-4": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+                buttonsDirection: 'horizontal',
+				connectorSwitcher: false,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '15',
+					Tablet: '15',
+					Mobile: '15'
+				},
+            },
+			"preset-5": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+                buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+                ButtonDesktopBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                dualButtonPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+	
 	/** Button One **/
 	/** Border **/
 	const handleButtonOneBorderUnitChange = (event, position) => {
@@ -2063,6 +2369,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
+										<div className="fb-dual-button-pressets">
+										<PanelBody
+											title={__("Presets", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<SelectControl
+												label={__("Preset Style", "frontis-blocks")}
+												value={dualButtonPresetStyle}
+												options={PRESETS}
+												onChange={(selected) => changeDualButtonPreset(selected)}
+											/>	
+										</PanelBody>
+										</div>
 										<div className="fb-dual-button-container">
 											{/*Button One*/}
 											<div className="fb-dual-button-one-wrapper">

@@ -1,46 +1,32 @@
 import { useState, useEffect } from "@wordpress/element";
-const TemplateSidebar = () => {
-  // Define tabs data structure
-  const tabs = [
-    { id: 'all', name: 'All', count: 30 },
-    { id: 'content-blocks', name: 'Content Blocks', count: 14 },
-    { id: 'creative', name: 'Creative', count: 5 },
-    { id: 'dynamic', name: 'Dynamic', count: 30 },
-    { id: 'layout', name: 'Layout', count: 30 },
-    { id: 'form', name: 'Form', count: 30 },
-    { id: 'social', name: 'Social', count: 30 }
-  ];
 
-  // State for active tab
-  const [activeTab, setActiveTab] = useState('all');
-
-  // Handler for tab click
-  const handleTabClick = (tabId) => {
-    setActiveTab(tabId);
-  };
-
-  return (
-    <div className="fb-template-library-store-sidebar">
-      <div className="fb-template-library-store-sidebar-tabs">
-        {tabs.map((tab) => (
+const TemplateSidebar = ({activeTab, data}) => {
+    // Extract sections from the schema
+    const schema = data.$schema;
+    const categories = activeTab ? Object.values(schema[activeTab]?.categories || {}) : [];
+  
+    return (
+      <div className="fb-template-library-store-sidebar">
+        
+        {/* Categories Section */}
+        <div className="fb-template-library-store-sidebar-tabs">
+          
+          {categories.map((category) => (
           <button
-            key={tab.id}
-            className={`fb-template-library-store-sidebar-tab ${
-              activeTab === tab.id ? 'active' : ''
-            }`}
-            onClick={() => handleTabClick(tab.id)}
+            key={category.id}
+            className="fb-template-library-store-sidebar-tab"
           >
             <span className="fb-template-library-store-sidebar-tab-name">
-              {tab.name}
+              {category.name}
             </span>
             <span className="fb-template-library-store-sidebar-tab-count">
-              {String(tab.count).padStart(2, '0')}
+              {String(category.count).padStart(2, "0")}
             </span>
           </button>
         ))}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default TemplateSidebar;
