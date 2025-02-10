@@ -13,34 +13,26 @@ import {
 } from "@wordpress/components";
 import { useDispatch } from '@wordpress/data';
 import {useEffect, useState} from "@wordpress/element";
+import {useDeviceType} from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
 import {useAfterSave, loadGoogleFont} from "../helper";
 import {updateGlobalStyle} from "../fetch";
-
-import { useSelect } from '@wordpress/data';
 import FrontPreview from "./FontPreview";
-
-
-/**
- * WordPress dependencies
- */
-// import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-// import { unlock } from './unlock.js';
-
-// const { useGlobalStyle } = unlock( blockEditorPrivateApis );
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
-	const [deviceType, setDeviceType] = useState('Desktop');
+	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const { editPost } = useDispatch('core/editor');
+	const deviceType= useDeviceType();
+
+	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
+
+	console.log("isFSE isFSE isFSE")
+
 
 	// Typography elements
 	const typographyElements = {
@@ -81,21 +73,6 @@ const TypographySettings = (props) => {
 		delete tempTypography[item]
 		setCustomTypography({ ...tempTypography })
 	};
-
-	const setAttributes = (attr) => {
-		// Check if the input is an object
-		if (typeof attr === "object" && attr !== null) {
-			if (attr.typography) {
-				setTypography(attr.typography);
-			} else if (attr.deviceType) {
-				setDeviceType(attr.deviceType)
-			} else {
-				console.log("Unknown structure in attributes:", attr);
-			}
-		} else {
-			console.log("Input is not a valid object:", attr);
-		}
-	}
 
 	// Body link font typography
 	const onChangeFontFamily = (value, item) => {
@@ -616,10 +593,69 @@ const TypographySettings = (props) => {
 
 	useEffect(() => {
 		if(isMount) {
+
+			const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+			const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document;
+
+			if (iframeDocument) {
+				let styleTag = iframeDocument.getElementById("global-typo");
+
+				if (!styleTag) {
+					styleTag = iframeDocument.createElement("style");
+					styleTag.id = "global-typo";
+					iframeDocument.head.appendChild(styleTag);
+				}
+
+				// Generate styles dynamically from typography settings
+				let styles = "";
+
+				// Object.keys(typography).forEach((item) => {
+				// 	Object.keys(typography[item]).forEach((heading) => {
+				// 		const stylesForDevice = typography[item][heading];
+
+				// 		if (!stylesForDevice) return;
+
+				// 		const {
+				// 			fontFamily,
+				// 			fontSize,
+				// 			fontSizeUnit,
+				// 			fontWeight,
+				// 			fontStyle,
+				// 			textDecoration,
+				// 			textTransform,
+				// 			letterSpacing,
+				// 			letterSpacingUnit,
+				// 			lineHeight,
+				// 			lineHeightUnits,
+				// 		} = stylesForDevice;
+
+				// 		styles += `
+				// 			body .wp-site-blocks ${heading} {
+				// 				${fontFamily ? `font-family: ${fontFamily};` : ""}
+				// 				${fontSize?.[deviceType] ? `font-size: ${fontSize[deviceType]}${fontSizeUnit?.[deviceType] || "px"};` : ""}
+				// 				${fontWeight ? `font-weight: ${fontWeight};` : ""}
+				// 				${fontStyle ? `font-style: ${fontStyle};` : ""}
+				// 				${textDecoration ? `text-decoration: ${textDecoration};` : ""}
+				// 				${textTransform ? `text-transform: ${textTransform};` : ""}
+				// 				${letterSpacing?.[deviceType] ? `letter-spacing: ${letterSpacing[deviceType]}${letterSpacingUnit?.[deviceType] || "px"};` : ""}
+				// 				${lineHeight?.[deviceType] ? `line-height: ${lineHeight[deviceType]}${lineHeightUnits?.[deviceType] || "px"};` : ""}
+				// 			}
+				// 		`;
+				// 	});
+				// });
+
+				// Apply styles to the iframe document
+				styleTag.innerHTML = styles;
+			}
+
+		
 			editPost({ isDirty: true });
 		}
 		
 	}, [isMount]);
+
+
+	console.log(typography)
 
 	return (
 		<TabPanel
@@ -726,7 +762,6 @@ const TypographySettings = (props) => {
 																			lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}
 																			onChangeLineHeightUnit={(value) => onChangeHeadingLineHeightUnit(value, item)}
 																			deviceType={deviceType}
-																			setAttributes={setAttributes}
 																			heading={selectedHeading}
 																		/>
 
@@ -766,7 +801,6 @@ const TypographySettings = (props) => {
 																	lineHeightUnits={typography?.[item]?.lineHeightUnits}
 																	onChangeLineHeightUnit={(value) => onChangeLineHeightUnit(value, item)}
 																	deviceType={deviceType}
-																	setAttributes={setAttributes}
 																/>
 															</div>
 														</>
@@ -913,7 +947,6 @@ const TypographySettings = (props) => {
 																lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
 																onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
 																deviceType={deviceType}
-																setAttributes={setAttributes}
 															/>
 														</div>
 													</NavigatorScreen>

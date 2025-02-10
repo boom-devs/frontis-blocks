@@ -72,6 +72,7 @@ class Admin {
 			'pro_url' => FB_UPGRADE_PRO_URL,
 			'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
 			'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
+            'global_styles' => wp_get_global_styles()
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){

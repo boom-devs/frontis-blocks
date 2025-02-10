@@ -6,14 +6,14 @@ export default function FrontPreview({fontProps, deviceType, fontSize = false}) 
 		let result = {}
 		if (typeof font === 'object' && Object.keys(font).length > 0) {
 			result = {
-				...(font.fontFamily && { fontFamily: font.fontFamily }),
-				...(font.fontWeight && { fontWeight: font.fontWeight }),
-				...(font.textTransform && { textTransform: font.textTransform }),
-				...(font.fontStyle && { fontStyle: font.fontStyle }),
-				...(font.textDecoration && { textDecoration: font.textDecoration }),
-				...(font.letterSpacing && { letterSpacing: `${font.letterSpacing?.[deviceType]}${font.letterSpacingUnit?.[deviceType] || 'px'}` }),
+				...((font.fontFamily && font.fontFamily !== '') && { fontFamily: font.fontFamily }),
+				...((font.fontWeight && font.fontWeight !== '') && { fontWeight: font.fontWeight }),
+				...((font.textTransform && font.textTransform !== '') && { textTransform: font.textTransform }),
+				...((font.fontStyle && font.fontStyle !== '') && { fontStyle: font.fontStyle }),
+				...((font.textDecoration && font.textDecoration !== '') && { textDecoration: font.textDecoration }),
+				...((font.letterSpacing && font.letterSpacing?.[deviceType] !== '') && { letterSpacing: `${font.letterSpacing?.[deviceType]}${font.letterSpacingUnit?.[deviceType] || 'px'}` }),
 				...((size && font.fontSize?.[deviceType] !== '') && { fontSize: `${font.fontSize?.[deviceType]}${font.fontSizeUnit?.[deviceType] || 'px'}` }),
-				...((font.lineHeight) && { lineHeight: `${font.lineHeight?.[deviceType]}${font.lineHeightUnits?.[deviceType] || 'px'}` })
+				...((font.lineHeight && font.lineHeight?.[deviceType] !== '') && { lineHeight: `${font.lineHeight?.[deviceType]}${font.lineHeightUnits?.[deviceType] || 'px'}` })
 			}
 		}
 
