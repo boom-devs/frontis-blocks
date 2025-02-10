@@ -30,7 +30,7 @@
         top: -33px;
         right: 80px;
         box-shadow: unset;
-        font-size: 10px;
+        font-size: $unit-font-size;
         &:hover {
             box-shadow: unset !important;
         }
@@ -48,7 +48,8 @@
     padding: 6px 10px;
 	.fb-setting-units-current {
         font-family: $heading-font-family;
-        font-size: $base-font-size;
+        font-size: $unit-font-size;
+		font-weight: 400;
 		border: none;
 		cursor: pointer;
 		text-align: center;
@@ -76,6 +77,9 @@
 			align-items: center;
 			justify-content: center;
 			text-transform: uppercase;
+			font-family: $heading-font-family;
+			font-size: $unit-font-size;
+			font-weight: 400;
 			&.active {
 				font-weight: 400;
 				color: $primary-color-base;
