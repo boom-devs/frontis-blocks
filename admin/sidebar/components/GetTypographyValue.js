@@ -1,5 +1,6 @@
 // Export functions
 export const frontisExtractTypoValue = (cssVar) => {
+
     if (typeof cssVar !== "string") {
         return null;
     }
