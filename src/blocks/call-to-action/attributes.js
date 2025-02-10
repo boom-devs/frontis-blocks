@@ -2104,5 +2104,17 @@ const attributes = {
 		},
 	},
 	
+	ctaDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 export default attributes;

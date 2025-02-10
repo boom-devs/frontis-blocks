@@ -3534,7 +3534,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
-                                            {/* <PanelBody
+                                            <PanelBody
                                                 title={__("Responsive Control", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-responsive-control-wrapper"
@@ -3557,7 +3557,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     checked={GalleryMobileSwitcher}
                                                     onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
                                                 />
-                                            </PanelBody> */}
+                                            </PanelBody>
 
                                         </div>
                                     </div>

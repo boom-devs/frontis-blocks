@@ -776,5 +776,18 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
+
+    advancedBtnDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedBtnTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedBtnMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 export default attributes;

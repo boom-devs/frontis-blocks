@@ -1362,6 +1362,18 @@ const attributes = {
     },
 	/** Digit End */
 	
+	countDownDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    countDownTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    countDownMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

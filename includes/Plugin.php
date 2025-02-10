@@ -90,6 +90,7 @@ final class Plugin
 		$this->init_hooks();
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
 	}
 
 	public function enqueue_scripts()
@@ -112,6 +113,14 @@ final class Plugin
 			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
 			wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 		}
+	}
+
+	public function enqueue_editor_scripts()
+	{
+		wp_enqueue_script('frontis-counter', FB_PLUGIN_URL . 'assets/js/counter.js', array('jquery'), '1.0.0', true);
+
+		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), '1.0.0', true);
+		
 	}
 
 	/**

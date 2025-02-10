@@ -1980,5 +1980,18 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+    fluentFormDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    fluentFormTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    fluentFormMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 export default attributes;

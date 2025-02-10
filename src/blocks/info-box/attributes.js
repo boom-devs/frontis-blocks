@@ -1612,6 +1612,19 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    infoBoxDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    infoBoxTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    infoBoxMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 //
 export default attributes;

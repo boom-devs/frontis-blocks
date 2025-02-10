@@ -286,9 +286,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconImageBorderRadiusTablet,
         FeatureIconImageBorderRadiusMobile,
         FeatureIconImageBorderRadiusLink,
-
         /** FeatureIconImage */
 
+        featuresListDesktopSwitcher,
+		featuresListTabletSwitcher,
+		featuresListMobileSwitcher,
     } = attributes;
     
 	const deviceType= useDeviceType();
@@ -2919,6 +2921,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverCssValue: value })}
                                                         />
                                                     )}
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListDesktopSwitcher}
+														onChange={(value) => setAttributes({ featuresListDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListTabletSwitcher}
+														onChange={(value) => setAttributes({ featuresListTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListMobileSwitcher}
+														onChange={(value) => setAttributes({ featuresListMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

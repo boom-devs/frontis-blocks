@@ -1621,6 +1621,18 @@ const attributes = {
         default: false
     },
     
+    iconBoxDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    iconBoxTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    iconBoxMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 //
 export default attributes;
