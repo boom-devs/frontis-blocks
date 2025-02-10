@@ -171,8 +171,8 @@ function FrontisBlocksSidebar(props) {
 	console.log("globalTypography.heading")
 	console.log(frontisBlocksAdmin?.global_styles);
 
-	console.log("frontisExtractTypoValue(globalTypography?.h1?.typography?.fontSize)?.unit")
-	console.log(frontisExtractTypoValue(globalTypography?.h1?.typography?.fontSize)?.unit)
+	console.log("frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit")
+	console.log(frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value)
 	console.log(getFontFamily(globalTypographyElements?.typography?.fontFamily));
 	const [typography, setTypography] = useState({
 		body: {
@@ -325,44 +325,44 @@ function FrontisBlocksSidebar(props) {
 		},
 		heading: {
 			all: {
-				fontFamily: getFontFamily(globalTypography?.heading?.typography?.fontFamily),
+				fontFamily: getFontFamily(globalTypography?.heading?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: globalTypography?.heading?.typography?.lineHeight,
-					Tablet: globalTypography?.heading?.typography?.lineHeight,
-					Mobile: globalTypography?.heading?.typography?.lineHeight
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: 'px',
-					Tablet: 'px',
-					Mobile: 'px'
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: globalTypography?.heading?.typography?.fontSize,
-					Tablet: globalTypography?.heading?.typography?.fontSize,
-					Mobile: globalTypography?.heading?.typography?.fontSize
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: 'px',
-					Tablet: 'px',
-					Mobile: 'px'
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.heading?.typography?.fontWeight,
 				fontStyle: globalTypography?.heading?.typography?.fontStyle,
 				textTransform: globalTypography?.heading?.typography?.textTransform,
 				textDecoration: globalTypography?.heading?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: globalTypography?.heading?.typography?.letterSpacing,
-					Tablet: globalTypography?.heading?.typography?.letterSpacing,
-					Mobile: globalTypography?.heading?.typography?.letterSpacing
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: '',
-					Tablet: '',
-					Mobile: ''
+					Desktop: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.heading?.typography?.letterSpacing)?.unit || 'px',
 				}
 			},
 			h1: {
-				fontFamily: globalTypography?.h1?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h1?.typography?.fontFamily) || '',
 				lineHeight: {
 					Desktop: frontisExtractTypoValue(globalTypography?.h1?.typography?.lineHeight)?.value || '',
 					Tablet: frontisExtractTypoValue(globalTypography?.h1?.typography?.lineHeight)?.value || '',
@@ -399,188 +399,188 @@ function FrontisBlocksSidebar(props) {
 				}
 			},
 			h2: {
-				fontFamily: globalTypography?.h2?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h2?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.h2?.typography?.fontWeight,
 				fontStyle: globalTypography?.h2?.typography?.fontStyle,
 				textTransform: globalTypography?.h2?.typography?.textTransform,
 				textDecoration: globalTypography?.h2?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value,
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit,
+					Desktop: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h2?.typography?.letterSpacing)?.unit || 'px',
 				}
 			},
 			h3: {
-				fontFamily: globalTypography?.h3?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h3?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.h3?.typography?.fontWeight,
 				fontStyle: globalTypography?.h3?.typography?.fontStyle,
 				textTransform: globalTypography?.h3?.typography?.textTransform,
 				textDecoration: globalTypography?.h3?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value,
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit,
+					Desktop: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h3?.typography?.letterSpacing)?.unit || 'px',
 				}
 			},
 			h4: {
-				fontFamily: globalTypography?.h4?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h4?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.h4?.typography?.fontWeight,
 				fontStyle: globalTypography?.h4?.typography?.fontStyle,
 				textTransform: globalTypography?.h4?.typography?.textTransform,
 				textDecoration: globalTypography?.h4?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value,
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit,
+					Desktop: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h4?.typography?.letterSpacing)?.unit || 'px',
 				}
 			},
 			h5: {
-				fontFamily: globalTypography?.h5?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h5?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.h5?.typography?.fontWeight,
 				fontStyle: globalTypography?.h5?.typography?.fontStyle,
 				textTransform: globalTypography?.h5?.typography?.textTransform,
 				textDecoration: globalTypography?.h5?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value,
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit,
+					Desktop: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h5?.typography?.letterSpacing)?.unit || 'px',
 				}
 			},
 			h6: {
-				fontFamily: globalTypography?.h6?.typography?.fontFamily,
+				fontFamily: getFontFamily(globalTypography?.h6?.typography?.fontFamily) || '',
 				lineHeight: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.value || ''
 				},
 				lineHeightUnits: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.lineHeight)?.unit || 'px'
 				},
 				fontSize: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.value || ''
 				},
 				fontSizeUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.fontSize)?.unit || 'px'
 				},
 				fontWeight: globalTypography?.h6?.typography?.fontWeight,
 				fontStyle: globalTypography?.h6?.typography?.fontStyle,
 				textTransform: globalTypography?.h6?.typography?.textTransform,
 				textDecoration: globalTypography?.h6?.typography?.textDecoration,
 				letterSpacing: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value,
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value || '',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value || '',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.value || '',
 				},
 				letterSpacingUnit: {
-					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit,
-					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit,
-					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit,
+					Desktop: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit || 'px',
+					Tablet: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit || 'px',
+					Mobile: frontisExtractTypoValue(globalTypography?.h6?.typography?.letterSpacing)?.unit || 'px',
 				}
 			}
 		}
