@@ -160,6 +160,7 @@ body {
 				.fb-template-library-cards {
 					display: flex;
 					gap: 30px;
+					flex-wrap: wrap;
 					.fb-template-library-card {
 						background: #fff;
 						border-radius: 14px;

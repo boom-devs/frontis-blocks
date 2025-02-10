@@ -28,7 +28,7 @@ const PatternLibraryButton = () => {
 
     const importDemo = () => {
 
-        console.log(frontisBlocksAdmin.nonce)
+        // console.log(frontisBlocksAdmin.nonce)
         jQuery.ajax({
             url: frontisBlocksAdmin.ajaxUrl,
             type: 'POST',
@@ -78,11 +78,12 @@ const PatternLibraryButton = () => {
     }
 
     console.log(frontisBlocksAdmin)
-    
+
     // State for active tab
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
-    
+    const [activeCategory, setActiveCategory] = useState(null);
+
     return (
         <>
             <Button
@@ -105,11 +106,11 @@ const PatternLibraryButton = () => {
                     <div className={`fb-template-library-store-wrap`}>
                         <div className={`fb-template-library-store-inner-wrap`}>
                             <div>
-                                <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data}/>
+                                <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data} />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
-                                <TemplateSidebar activeTab={activeTab} data={data} />
-                                <TemplateContent/>
+                                <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+                                <TemplateContent activeTab={activeTab} activeCategory={activeCategory} data={data} />
                             </div>
 
                         </div>
