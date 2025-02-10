@@ -7,10 +7,11 @@ export const mediaType = [
 ];
 
 export const PRESETS = [
-	{ label: __("Default", "frontis-block"), value: "preset-0" },
 	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
 	{ label: __("Preset 2", "frontis-block"), value: "preset-2" },
 	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-block"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-block"), value: "preset-5" },
 ];
 
 export const TEXT_ALIGN = [

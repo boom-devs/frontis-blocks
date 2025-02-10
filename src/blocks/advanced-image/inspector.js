@@ -30,7 +30,11 @@ import {useDeviceType} from "@Config/displayType";
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-} from "../advanced-image/constants/constants";
+	STYLES,
+	TITLE_POSITION,
+	HOVER_EFFECTS,
+	AUTO_FIT
+} from "./constants/constants";
 import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -228,15 +232,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	/** Image **/
 	if (typeof FrontisBlocksData !== 'undefined') {
-		// Map each class to its corresponding image URL
 		const imageMapping = {
-			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
-			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
-			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
 			'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
+			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
+			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
+			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
 			'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
 			'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
-			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
+			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
 		};
 	
 		// Apply the URLs dynamically to each element
@@ -248,7 +251,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		});
 	}
-	
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1051,7 +1053,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
 		}
-		
 	`,
 		[
 			blockID,
@@ -1266,91 +1267,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
                                             	</BaseControl>
 
+												
 												<SelectControl
 													label={__("Styles", "frontis-blocks")}
 													value={imageStyle || "square"}
-													options={[
-														{
-															label: __("Square", "frontis-blocks"),
-															value: "square",
-														},
-														{
-															label: __("Octagon", "frontis-blocks"),
-															value: "octagon",
-														},
-														{
-															label: __("Triangle", "frontis-blocks"),
-															value: "triangle",
-														},
-														{
-															label: __("Rhombus", "frontis-blocks"),
-															value: "rhombus",
-														},
-														{
-															label: __("Hexagon", "frontis-blocks"),
-															value: "hexagon",
-														},
-														{
-															label: __("Bevel", "frontis-blocks"),
-															value: "bevel",
-														},
-														{
-															label: __("Abstract", "frontis-blocks"),
-															value: "abstract",
-														},
-														{
-															label: __("Container", "frontis-blocks"),
-															value: "container",
-														},
-														{
-															label: __("Aesthetic Blob", "frontis-blocks"),
-															value: "aesthetic-blob",
-														},
-														{
-															label: __("Aesthetic Blob 2", "frontis-blocks"),
-															value: "aesthetic-blob-2",
-														},
-														{
-															label: __("Aesthetic Blob 3", "frontis-blocks"),
-															value: "aesthetic-blob-3",
-														},
-														{
-															label: __("Aesthetic Blob 4", "frontis-blocks"),
-															value: "aesthetic-blob-4",
-														},
-														{
-															label: __("Irregular Blob", "frontis-blocks"),
-															value: "irregular-blob",
-														},
-														{
-															label: __("Triangle Blob", "frontis-blocks"),
-															value: "triangle-blob",
-														},
-														{
-															label: __("Overlaped Blob", "frontis-blocks"),
-															value: "overlaped-blob",
-														},
-														{
-															label: __("Seperate Blob", "frontis-blocks"),
-															value: "seperate-blob",
-														},
-														{
-															label: __("Pattern", "frontis-blocks"),
-															value: "pattern",
-														},
-														
-													]}
-													onChange={(newStyle) =>
-														setAttributes({ imageStyle: newStyle })
-													}
+													options={STYLES}
+													onChange={(value) => {
+														setAttributes({ imageStyle: value }); 
+													}}
 													__nextHasNoMarginBottom
 												/>
+
 												<ToggleControl
 													__nextHasNoMarginBottom
 													label={__("Show Overlay", "frontis-block")}
 													checked={showOverlay}
-													onChange={(newValue) => {
-														setAttributes({ showOverlay: newValue });
+													onChange={(value) => {
+														setAttributes({ showOverlay: value });
 													}}
 												/>
 												{/* Display Caption */}
@@ -1358,8 +1291,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Display Caption", "frontis-block")}
 													checked={displayCaption}
-													onChange={(newValue) => {
-														setAttributes({ displayCaption: newValue });
+													onChange={(value) => {
+														setAttributes({ displayCaption: value });
 													}}
 												/>
 
@@ -1377,8 +1310,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Display Title", "frontis-block")}
 													checked={displayTitle}
-													onChange={(newValue) => {
-														setAttributes({ displayTitle: newValue });
+													onChange={(value) => {
+														setAttributes({ displayTitle: value });
 													}}
 												/>
 												{displayTitle && (
@@ -1400,51 +1333,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<SelectControl
 															label={__("Title Position", "frontis-blocks")}
 															value={titlePosition || "center"}
-															options={[
-																{
-																	label: __("Center", "frontis-blocks"),
-																	value: "center",
-																},
-																{
-																	label: __("Center Left", "frontis-blocks"),
-																	value: "center-left",
-																},
-																{
-																	label: __("Center Right", "frontis-blocks"),
-																	value: "center-right",
-																},
-																{
-																	label: __("Top Left", "frontis-blocks"),
-																	value: "top-left",
-																},
-																{
-																	label: __("Top Center", "frontis-blocks"),
-																	value: "top-center",
-																},
-																{
-																	label: __("Top Right", "frontis-blocks"),
-																	value: "top-right",
-																},
-																{
-																	label: __("Bottom Left", "frontis-blocks"),
-																	value: "bottom-left",
-																},
-																{
-																	label: __("Bottom Center", "frontis-blocks"),
-																	value: "bottom-center",
-																},
-																{
-																	label: __("Bottom Right", "frontis-blocks"),
-																	value: "bottom-right",
-																},
-																{
-																	label: __(
-																		"Vertically Center",
-																		"frontis-blocks",
-																	),
-																	value: "vertical-center",
-																},
-															]}
+															options={TITLE_POSITION}
 															onChange={(value) =>
 																setAttributes({ titlePosition: value })
 															}
@@ -1458,8 +1347,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Enable Link?", "frontis-block")}
 													checked={linkSwitch}
-													onChange={(newValue) => {
-														setAttributes({ linkSwitch: newValue });
+													onChange={(value) => {
+														setAttributes({ linkSwitch: value });
 													}}
 												/>
 
@@ -1479,42 +1368,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<SelectControl
 													label={__("Hover Effect", "frontis-blocks")}
 													value={imageHover}
-													options={[
-														{
-															label: __("No Effect", "frontis-blocks"),
-															value: "no-effect",
-														},
-														{
-															label: __("Zoom In", "frontis-blocks"),
-															value: "zoom-in",
-														},
-														{
-															label: __("Zoom Out", "frontis-blocks"),
-															value: "zoom-out",
-														},
-														{
-															label: __("Slide", "frontis-blocks"),
-															value: "slide",
-														},
-														{
-															label: __("Blur", "frontis-blocks"),
-															value: "blur",
-														},
-														{
-															label: __("Overlay", "frontis-blocks"),
-															value: "overlay",
-														},
-														{
-															label: __("Tilt", "frontis-blocks"),
-															value: "tilt",
-														},
-														{
-															label: __("Skew", "frontis-blocks"),
-															value: "skew",
-														},
-													]}
-													onChange={(size) =>
-														setAttributes({ imageHover: size })
+													options={HOVER_EFFECTS}
+													onChange={(value) =>
+														setAttributes({ imageHover: value })
 													}
 													__nextHasNoMarginBottom
 												/>
@@ -1677,20 +1533,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<SelectControl
 												label={__("Image Fit Options", "frontis-blocks")}
 												value={imageFit || "cover"}
-												options={[
-													{
-														label: __("Cover", "frontis-blocks"),
-														value: "cover",
-													},
-													{
-														label: __("Fill", "frontis-blocks"),
-														value: "fill",
-													},
-													{
-														label: __("Contain", "frontis-blocks"),
-														value: "contain",
-													},
-												]}
+												options={AUTO_FIT}
 												onChange={(size) =>
 													setAttributes({ imageFit: size })
 												}

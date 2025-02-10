@@ -39,7 +39,7 @@ const attributes = {
 	},
 	autoplay: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
     autoplaySpeed: {
         type: 'number',
@@ -65,13 +65,17 @@ const attributes = {
         "type": "boolean",
         "default": false
     },
+    enableKeyboardControl: {
+        "type": "boolean",
+        "default": true
+    },
     enableMouseWheel: {
         "type": "boolean",
         "default": false
     },
     effect: {
         type: 'string',
-        default: 'slide'
+        default: 'creative'
     },
     displayArrows: {
 		type: 'boolean',
@@ -82,14 +86,16 @@ const attributes = {
 		default: true,
 	},
 
-    /** Arrow Color and bg color */
+
+
+	/*{Arrows Style}*/
 	sliderArrowColorSwitcher: {
         type: 'string',
         default: 'normal',
     },
     sliderArrowColor: {
         type: 'string',
-        default: '#399CFF',
+        default: '',
     },
     sliderArrowHoverColor: {
         type: 'string',
@@ -142,6 +148,334 @@ const attributes = {
 		}
 	},
     /** Arrow Spacing */
+    arrowPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowTabPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowMobilePadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    arrowMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowTabMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowMobileMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    
+    /** Arrow Border */
+    arrowBorder: {
+        type: 'string',
+        default: "none",
+    },
+    arrowBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    arrowBorderColor: {
+        type: 'string',
+    },
+    arrowBorderHoverColor: {
+        type: 'string',
+    },
+    arrowBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowTabletBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowMobileBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    arrowBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowTabletBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowMobileBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** Arrow Space From Edges */
+    dotsSpacingFromTop: {
+        type: 'object',
+        default: {
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
+        }
+    },
+    dotsSpacingFromTopUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	/*{Arrows Style}*/
+	sliderArrowColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    sliderArrowColor: {
+        type: 'string',
+        default: '',
+    },
+    sliderArrowHoverColor: {
+        type: 'string',
+        default: '',
+    },
+	sliderArrowBgColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    sliderArrowBgColor: {
+        type: 'string',
+        default: '',
+    },
+    sliderArrowBgHoverColor: {
+        type: 'string',
+        default: '',
+    },
+    /** Arrow Size */
+    arrowSize: {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '18',
+            Mobile: '16'
+        }
+    },
+    arrowSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    /** Arrow Space From Edges */
+    arrowSpaceFromEdges: {
+        type: 'object',
+        default: {
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
+        }
+    },
+    arrowSpaceFromEdgesUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    /** Arrow Spacing */
+    arrowPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowTabPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowMobilePadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    arrowPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    arrowMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    arrowDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowTabMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowMobileMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    arrowMarginLink: {
+        type: "boolean",
+        default: true
+    },
     
     /** Arrow Border */
     arrowBorder: {
@@ -254,6 +588,8 @@ const attributes = {
 		}
 	},
     
+    
+
     /** Start Global Setting */
 	sliderGlobalZIndex : {
         type: "object",
