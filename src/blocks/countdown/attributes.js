@@ -1374,6 +1374,17 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	/** Start Class & ID Setting */
+	countDownGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	countDownGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
 };
 
 export default attributes;
