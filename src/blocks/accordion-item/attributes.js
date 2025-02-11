@@ -518,6 +518,18 @@ const attributes = {
         type: "string",
         default: ""
     },
+
+    /** Start Class & ID Setting */
+    accordionItemGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+    accordionItemGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+    /** End Class & ID Setting */   
 };
 
 export default attributes;

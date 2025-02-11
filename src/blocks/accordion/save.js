@@ -6,11 +6,13 @@ export default function save({ attributes }) {
     const { 
         blockID,
         classHook,
+        accordionGlobalWraperID,
+        accordionGlobalWraperClass,
     } = attributes;
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-main-wrapper ${blockID}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass}`,
     });
 
 
@@ -18,7 +20,7 @@ export default function save({ attributes }) {
         <>
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} id={accordionGlobalWraperID}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">
