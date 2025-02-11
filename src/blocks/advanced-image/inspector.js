@@ -210,7 +210,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		overlayHoverBackgroundImageAttachment,
 		overlayHoverBackgroundImageRepeat,
 		overlayHoverBackgroundImageSize,
-		overlayOpacity
+		overlayOpacity,
+
+		advancedImageDesktopSwitcher,
+		advancedImageTabletSwitcher,
+		advancedImageMobileSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1839,6 +1843,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																boxGlobalBoxShadowCssValue: value,
 															})
 														}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedImageDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedImageTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedImageMobileSwitcher: value })}
 													/>
 												</PanelBody>
 											</div>

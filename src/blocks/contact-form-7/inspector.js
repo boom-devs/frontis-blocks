@@ -264,6 +264,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormGlobalBoxShadowHoverCssValue,
 		blockStyle,
 
+		contactFormDesktopSwitcher,
+		contactFormTabletSwitcher,
+		contactFormMobileSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3684,7 +3687,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
                                                 </PanelBody>
 
-
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormDesktopSwitcher}
+														onChange={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormTabletSwitcher}
+														onChange={(value) => setAttributes({ contactFormTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormMobileSwitcher}
+														onChange={(value) => setAttributes({ contactFormMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

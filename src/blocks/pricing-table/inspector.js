@@ -588,6 +588,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextColor,
 		priceFeatureAfterTextHoverColor,
 
+		pricingTableDesktopSwitcher,
+		pricingTableTabletSwitcher,
+		pricingTableMobileSwitcher,
     } = attributes;
 
 	const deviceType= useDeviceType();
@@ -6003,6 +6006,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														/>
 													)}
 
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={pricingTableDesktopSwitcher}
+														onChange={(value) => setAttributes({ pricingTableDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={pricingTableTabletSwitcher}
+														onChange={(value) => setAttributes({ pricingTableTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={pricingTableMobileSwitcher}
+														onChange={(value) => setAttributes({ pricingTableMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

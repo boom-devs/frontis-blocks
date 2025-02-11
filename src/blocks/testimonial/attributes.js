@@ -1185,6 +1185,18 @@ const attributes = {
         default: '',
     },
     
+    testimonialDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

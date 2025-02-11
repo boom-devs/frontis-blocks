@@ -358,8 +358,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBoxShadowHoverValues,
         fluentFormGlobalBoxShadowHoverCssValue,
 
-        blockStyle,
-
+        fluentFormDesktopSwitcher,
+		fluentFormTabletSwitcher,
+		fluentFormMobileSwitcher,
     } = attributes;
 
 	const deviceType= useDeviceType();
@@ -4888,7 +4889,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
                                                 </PanelBody>
 
-
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormDesktopSwitcher}
+														onChange={(value) => setAttributes({ fluentFormDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormTabletSwitcher}
+														onChange={(value) => setAttributes({ fluentFormTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormMobileSwitcher}
+														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

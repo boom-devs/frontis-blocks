@@ -777,6 +777,19 @@ const attributes = {
         default: 'none',
     },
 
+    advancedBtnDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedBtnTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedBtnMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
     buttonGlobalWraperID : { 
         type: "string",
         default: ""

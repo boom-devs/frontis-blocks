@@ -30,10 +30,13 @@ export default function save({ attributes }) {
 		socialIconBtnIcon,
 		teamMemberSocialProfileSeparatorPosition,
 
+		teamMemberDesktopSwitcher,
+		teamMemberTabletSwitcher,
+		teamMemberMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-team-member-main-wrapper ${blockID}`,
+        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
