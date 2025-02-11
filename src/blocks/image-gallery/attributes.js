@@ -1028,6 +1028,19 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
+    /** Start Class & ID Setting */
+	imageGalleryGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	imageGalleryGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+
 };
 
 export default attributes;

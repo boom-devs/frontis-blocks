@@ -53,6 +53,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -345,6 +346,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxDesktopSwitcher,
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
+
+		infoBoxGlobalWraperID,
+		infoBoxGlobalWraperClass,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3736,6 +3740,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={infoBoxGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ infoBoxGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={infoBoxGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ infoBoxGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody

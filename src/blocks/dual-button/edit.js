@@ -36,7 +36,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		buttonTwoIconAlign,
 		btnIconPosition,
 		btnTwoIconPosition,
-		buttonsDirection
+		buttonsDirection,
+
+		dualButtonGlobalWraperID,
+		dualButtonGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -68,8 +71,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
 
-            <div {...blockProps} id={blockID}>
-                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} ref={panelRef}>
+            <div {...blockProps} id={blockID}  className={dualButtonGlobalWraperClass} >
+                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} id={dualButtonGlobalWraperID} ref={panelRef}>
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 
 						flexDirection:
