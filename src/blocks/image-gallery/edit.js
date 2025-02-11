@@ -22,10 +22,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         lightboxIconSwitcher,
         lightboxIcon,
 
+        imageGalleryGlobalWraperID,
+        imageGalleryGlobalWraperClass,
+
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-gallery-main-wrapper ${blockID}`,
+        className: `fb-gallery-main-wrapper ${blockID} ${imageGalleryGlobalWraperClass}`,
     });
 
     /**
@@ -52,7 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-image-gallery-wrapper" ref={panelRef}>
+                <div className="fb-parent-wrapper fb-image-gallery-wrapper" id={imageGalleryGlobalWraperID} ref={panelRef}>
                         <div className="fb-image-gallery-items">
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (

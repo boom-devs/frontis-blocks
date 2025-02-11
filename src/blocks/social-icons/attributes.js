@@ -969,6 +969,16 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** Start Global Setting */
+	socialGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	socialGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 };
 
 export default attributes;

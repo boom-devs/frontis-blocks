@@ -2411,6 +2411,17 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+	/** Start Class & ID Setting */
+	teamMemberGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	teamMemberGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
+	/** End Class & ID Setting */
 };
 
 export default attributes;

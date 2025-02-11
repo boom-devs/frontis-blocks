@@ -2421,6 +2421,18 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	/** Start Class & ID Setting */
+	postGridGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	postGridGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
 };
 
 export default attributes;

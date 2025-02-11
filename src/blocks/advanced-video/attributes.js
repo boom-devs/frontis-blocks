@@ -578,6 +578,18 @@ const attributes = {
     },
     /** End Global Style */
 
+    /** Start Global Setting */
+    videoGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+    videoGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+    /** End Global Setting */
+
+    /** Start Responsive Control */
     advancedVideoDesktopSwitcher: {
         type: "boolean",
         default: false,

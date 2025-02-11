@@ -1625,6 +1625,19 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** Start Class & ID Setting */
+	infoBoxGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	infoBoxGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	
+	/** End Class & ID Setting */
 }
 //
 export default attributes;

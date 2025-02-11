@@ -865,6 +865,13 @@ const attributes = {
         default: false,
     },
 
+
+    /** Start Class & ID Setting */
+    sliderGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+    /** End Class & ID Setting */
     // /** Start Global Setting */
 	// sliderGlobalZIndex : {
     //     type: "object",

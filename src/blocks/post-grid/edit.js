@@ -43,10 +43,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showDateSwitcher,
         postSwitcher,
         postImageSize,
+
+        postGridGlobalWraperID,
+        postGridGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `${blockId}`,
+        className: `${blockId} ${postGridGlobalWraperClass}`,
     });
 
     const { useSelect } = wp.data;
@@ -96,7 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {postLists ? (
                 <div {...blockProps} id={blockId}>
                     {postLists.length > 0 ? (
-                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} ref={panelRef}> 
+                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}  ref={panelRef}> 
                             {postLists.map((item, index) => {
                                 return <LayoutGrid 
                                     data={item}

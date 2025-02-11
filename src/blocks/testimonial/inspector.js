@@ -256,6 +256,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialDesktopSwitcher,
 		testimonialTabletSwitcher,
 		testimonialMobileSwitcher,
+
+		testimonialGlobalWraperID,
+		testimonialGlobalWraperClass,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -3008,6 +3012,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
 
+                                                />
+
+                                                <FB_InputControl
+													label={__("CSS ID", "frontis-blocks")}
+													value={testimonialGlobalWraperID}
+													onChangeValue={(value) => setAttributes({ testimonialGlobalWraperID: value })}
+													helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+												/>  
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={testimonialGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ testimonialGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
                                                 />
                                             </PanelBody>
                                             

@@ -1993,5 +1993,18 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** End Responsive Control */
+
+    /** Start Global Setting */
+	fluentFormGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	fluentFormGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Global Setting */
 }
 export default attributes;
