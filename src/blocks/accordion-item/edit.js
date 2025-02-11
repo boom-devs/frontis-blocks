@@ -42,6 +42,9 @@ const Edit = (props) => {
         inheritedExpandedIcon,
         inheritedExpandedImageUrl,
 
+        accordionItemGlobalWraperID,
+        accordionItemGlobalWraperClass,
+
     } = attributes;
 
 
@@ -74,7 +77,7 @@ const Edit = (props) => {
     ])
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID} ${accordionItemGlobalWraperClass}`,
     });
 
     const accordionTitle = useRef(null);
@@ -99,7 +102,7 @@ const Edit = (props) => {
             {isSelected && <Inspector {...props} />}
 
             <div {...blockProps}>
-                <div className={`fb-accordion-item-wrapper for_edit_page`} ref={accordionTitle} data-id={parentBlockID}>
+                <div className={`fb-accordion-item-wrapper for_edit_page`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>
                     <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`} onClick={handleSlidingOfAccordion}>
                         <div className={`fb-accordion-title-inner`}>
                             {titlePrefixType !== 'none' && (

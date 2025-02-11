@@ -1388,5 +1388,18 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	/** Start Class & ID Setting */
+	dualButtonGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	dualButtonGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+
 };
 export default attributes;

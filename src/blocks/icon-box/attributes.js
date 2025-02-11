@@ -1633,6 +1633,18 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** Start Class & ID Setting */
+	iconBoxGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	iconBoxGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
 }
 //
 export default attributes;

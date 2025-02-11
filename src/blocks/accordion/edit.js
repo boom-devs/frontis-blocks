@@ -29,10 +29,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tagName,
         faqSchema,
         accordionChildCount,
+
+        accordionGlobalWraperID,
+        accordionGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-main-wrapper ${blockID}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass}`,
     });
 
     /**
@@ -111,7 +114,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} ref={panelRef}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} id={accordionGlobalWraperID} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">

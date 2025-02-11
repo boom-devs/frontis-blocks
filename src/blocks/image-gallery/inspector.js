@@ -39,6 +39,7 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -229,6 +230,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         lightboxTabBorderRadiusWidth,
         lightboxMobileBorderRadiusWidth,
         lightboxBorderRadiusLink,
+
+        imageGalleryGlobalWraperID,
+        imageGalleryGlobalWraperClass,
 
     } = attributes;
     
@@ -3312,6 +3316,21 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     resetFallbackValue={''}
                                                     isRangeUnit={false}
                                                 />
+
+                                                <FB_InputControl
+                                                    label={__("CSS ID", "frontis-blocks")}
+                                                    value={imageGalleryGlobalWraperID}
+                                                    onChangeValue={(value) => setAttributes({ imageGalleryGlobalWraperID: value })}
+                                                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                />
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={imageGalleryGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ imageGalleryGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                />
+                                                
                                             </PanelBody>
                                             <PanelBody
                                              title={__("Padding & Margin", "frontis-blocks")}

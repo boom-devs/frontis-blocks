@@ -40,6 +40,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -257,6 +258,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualBtnDesktopSwitcher,
 		dualBtnTabletSwitcher,
 		dualBtnMobileSwitcher,
+
+		dualButtonGlobalWraperID,
+		dualButtonGlobalWraperClass,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3449,6 +3453,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={dualButtonGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={dualButtonGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody
