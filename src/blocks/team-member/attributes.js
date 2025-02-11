@@ -2334,6 +2334,17 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+
+	/** Start Class & ID Setting */
+	teamMemberGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	teamMemberGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
+	/** End Class & ID Setting */
 };
 
 export default attributes;

@@ -32,7 +32,9 @@ import FB_ColorControl from '../../components/color-control/index.js';
 import FB_BackgroundImageControl from '../../components/background-image-control/index.js';
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
+import FB_InputControl from '@Components/input-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+
 import FB_SwitcherControl from '../../components/switcher-control/index.js';
 import {useDeviceType} from "@Config/displayType";
 
@@ -401,6 +403,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialProfileSeparatorMarginMobile,
 		socialProfileSeparatorMarginLink,
 
+
+		// Global Setting
+		teamMemberGlobalWraperID,
+		teamMemberGlobalWraperClass,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -4474,6 +4480,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={teamMemberGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ teamMemberGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>	
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={teamMemberGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ teamMemberGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody
