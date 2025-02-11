@@ -9,19 +9,26 @@ const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   const handleDemoDataImport = useCallback(() => {
+    // Get current page ID
+    const currentPageId = window.location.href.match(/post=(\d+)/)?.[1];
+    
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_demo_data',
         security: nonce,
+        page_id: currentPageId
       },
       success: function (response) {
         if (response.success) {
-          console.log('Page created successfully!', response.data);
-
-          // Show success message
+          console.log('Demo data imported successfully!', response.data);
+          
+          // Just show success message without redirecting
           alert(response.data.message);
+          
+          // Optionally refresh the current page content
+          window.location.reload();
         } else {
           console.error('Failed:', response.data);
           alert('Failed to import demo data: ' + response.data);

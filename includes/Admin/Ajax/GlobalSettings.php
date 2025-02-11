@@ -239,45 +239,19 @@ class GlobalSettings extends AjaxBase
     }
 
 
-    // public function import_demo_data()
-    // {
-    //     $nonce = $_POST['security'] ?? '';
-
-    //     if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
-    //         error_log('Nonce verification failed');
-    //         wp_send_json_error('Invalid nonce.');
-    //         return;
-    //     }
-
-    //     $json_file_path = FB_PLUGIN_URL . 'testing-page.json';
-
-    //     // Read and decode the JSON file
-    //     $json_data = file_get_contents($json_file_path);
-    //     $blocks = json_decode($json_data, true);
-
-    //     // Check if the decoding was successful
-    //     if (!$blocks || !is_array($blocks)) {
-    //         wp_send_json_error('Invalid JSON structure.');
-    //     }
-
-    //     // Prepare post content for Gutenberg blocks
-    //     $post_content = '';
-
-    //     // Process each block
-    //     foreach ($blocks as $block) {
-    //         // Convert block to serialized Gutenberg content
-    //         $post_content .= parse_block($block);
-    //     }
-
-    //     wp_send_json_success($post_content);
-    // }
-
     public function import_demo_data() {
         try {
             // Verify nonce
             $nonce = $_POST['security'] ?? '';
             if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
                 wp_send_json_error('Invalid nonce.');
+                return;
+            }
+    
+            // Get current page ID from POST
+            $current_page_id = $_POST['page_id'] ?? 0;
+            if (!$current_page_id) {
+                wp_send_json_error('Page ID is required.');
                 return;
             }
     
@@ -294,31 +268,30 @@ class GlobalSettings extends AjaxBase
                 return;
             }
     
-            // Create page with the blocks
+            // Update existing page with the blocks
             $page_data = array(
-                'post_title'    => 'Demo Import Page',
-                'post_content'  => serialize_blocks($blocks), // Convert blocks to Gutenberg serialized format
-                'post_status'   => 'publish',
-                'post_type'     => 'page'
+                'ID'            => $current_page_id,
+                'post_content'  => serialize_blocks($blocks)
             );
     
-            // Insert the page
-            $page_id = wp_insert_post($page_data);
+            // Update the page
+            $update_result = wp_update_post($page_data);
     
-            if (is_wp_error($page_id)) {
-                wp_send_json_error('Failed to create page.');
+            if (is_wp_error($update_result)) {
+                wp_send_json_error('Failed to update page.');
                 return;
             }
     
-            // Return success response with page details
+            // Return success response
             wp_send_json_success(array(
-                'page_id' => $page_id,
-                'page_url' => get_permalink($page_id),
-                'message' => 'Page created successfully with imported blocks!'
+                'page_id' => $current_page_id,
+                'message' => 'Page updated successfully with imported blocks!'
             ));
     
         } catch (Exception $e) {
             wp_send_json_error('An unexpected error occurred: ' . $e->getMessage());
         }
     }
+
+    
 }

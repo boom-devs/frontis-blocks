@@ -65,24 +65,26 @@ var TemplateCard = function TemplateCard(_ref) {
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
   var handleDemoDataImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    var _window$location$href;
+    // Get current page ID
+    var currentPageId = (_window$location$href = window.location.href.match(/post=(\d+)/)) === null || _window$location$href === void 0 ? void 0 : _window$location$href[1];
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_demo_data',
-        security: nonce
+        security: nonce,
+        page_id: currentPageId
       },
       success: function success(response) {
         if (response.success) {
-          console.log('Page created successfully!', response.data);
+          console.log('Demo data imported successfully!', response.data);
 
-          // Redirect to the WordPress editor for the new page
-          if (response.data.page_id) {
-            window.location.href = "".concat(frontisBlocksAdmin.adminUrl, "post.php?post=").concat(response.data.page_id, "&action=edit");
-          }
-
-          // Show success message
+          // Just show success message without redirecting
           alert(response.data.message);
+
+          // Optionally refresh the current page content
+          window.location.reload();
         } else {
           console.error('Failed:', response.data);
           alert('Failed to import demo data: ' + response.data);
