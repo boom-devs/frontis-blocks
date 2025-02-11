@@ -8,6 +8,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
 import './editor.scss';
 

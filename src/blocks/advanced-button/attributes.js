@@ -776,5 +776,15 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
+
+    buttonGlobalWraperID : { 
+        type: "string",
+        default: ""
+    },
+
+    buttonGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
 }
 export default attributes;

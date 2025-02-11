@@ -39,6 +39,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		buttonIconImageHeight,
 		buttonIconImageHeightUnits,
 		buttonIconImagedisplay,
+
+        buttonGlobalWraperID,
+        buttonGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps();
@@ -73,8 +76,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
             
-            <div {...blockProps} id={blockId}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} style={{ textAlign: buttonAlignment }} ref={panelRef}>
+            <div {...blockProps} id={blockId} className={`${buttonGlobalWraperClass}`}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
