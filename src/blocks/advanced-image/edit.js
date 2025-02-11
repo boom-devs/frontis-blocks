@@ -44,7 +44,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		titleText,
 		titleTag,
 		titlePosition,
-		showOverlay
+		showOverlay,
+
+		advancedImageGlobalWraperID,
+		advancedImageGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -93,8 +96,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				)}
 			</BlockControls>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`}>
+			<div {...blockProps} id={blockID} className={advancedImageGlobalWraperClass}>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`} id={advancedImageGlobalWraperID}>
 					<div
 						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition} ${
 							showOverlay ? "overlay-simple" : ""

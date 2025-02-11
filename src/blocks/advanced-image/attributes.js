@@ -1060,5 +1060,16 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	/** Start Class & ID Setting */
+	advancedImageGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	advancedImageGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */	
 }
 export default attributes;
