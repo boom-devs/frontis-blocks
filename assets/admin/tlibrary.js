@@ -45,12 +45,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * WordPress dependencies
  */
 
+
 var TemplateCard = function TemplateCard(_ref) {
   var imageUrl = _ref.imageUrl;
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  var handleDemoDataImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    window.jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_import_demo_data',
+        security: nonce
+      },
+      success: function success(response) {
+        if (response.success) {
+          console.log('Page created successfully!', response.data);
+
+          // Redirect to the WordPress editor for the new page
+          if (response.data.page_id) {
+            window.location.href = "".concat(frontisBlocksAdmin.adminUrl, "post.php?post=").concat(response.data.page_id, "&action=edit");
+          }
+
+          // Show success message
+          alert(response.data.message);
+        } else {
+          console.error('Failed:', response.data);
+          alert('Failed to import demo data: ' + response.data);
+        }
+      },
+      error: function error(xhr, status, _error) {
+        console.error('Ajax error:', status, _error);
+        alert('Failed to process request. Please try again.');
+      }
+    });
+  }, [ajaxUrl, nonce]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -61,7 +104,8 @@ var TemplateCard = function TemplateCard(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-import"
+    className: "fb-template-library-import",
+    onClick: handleDemoDataImport
   }, /*#__PURE__*/React.createElement("span", null, "Import"), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "18",
@@ -119,29 +163,37 @@ var TemplateCard = function TemplateCard(_ref) {
     fill: "#0B0C0E"
   }))))));
 };
-var TemplateLibrary = function TemplateLibrary() {
-  var defaultImageUrl = '';
-  if (typeof frontisBlocksAdmin !== 'undefined') {
-    defaultImageUrl = frontisBlocksAdmin.pluginUrl + 'assets/images/temp-1.svg';
-  }
-  var templates = [{
-    id: 1,
-    imageUrl: defaultImageUrl
-  }, {
-    id: 2,
-    imageUrl: defaultImageUrl
-  }, {
-    id: 3,
-    imageUrl: defaultImageUrl
-  }];
+var TemplateLibrary = function TemplateLibrary(_ref2) {
+  var activeTab = _ref2.activeTab,
+    activeCategory = _ref2.activeCategory,
+    data = _ref2.data;
+  var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    filteredTemplates = _useState2[0],
+    setFilteredTemplates = _useState2[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab && activeCategory) {
+      var _tabData$categories;
+      var tabData = schema[activeTab];
+      var selectedCategory = tabData === null || tabData === void 0 || (_tabData$categories = tabData.categories) === null || _tabData$categories === void 0 ? void 0 : _tabData$categories.find(function (category) {
+        return category.id === activeCategory;
+      });
+      if (selectedCategory && selectedCategory.items) {
+        setFilteredTemplates(selectedCategory.items);
+      } else {
+        setFilteredTemplates([]);
+      }
+    }
+  }, [activeTab, activeCategory]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
-  }, templates.map(function (template) {
+  }, filteredTemplates.map(function (template) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
       key: template.id,
-      imageUrl: template.imageUrl
+      imageUrl: template.image
     });
   })));
 };
@@ -308,10 +360,20 @@ __webpack_require__.r(__webpack_exports__);
 var TemplateSidebar = function TemplateSidebar(_ref) {
   var _schema$activeTab;
   var activeTab = _ref.activeTab,
+    activeCategory = _ref.activeCategory,
+    setActiveCategory = _ref.setActiveCategory,
     data = _ref.data;
   // Extract sections from the schema
   var schema = data.$schema;
   var categories = activeTab ? Object.values(((_schema$activeTab = schema[activeTab]) === null || _schema$activeTab === void 0 ? void 0 : _schema$activeTab.categories) || {}) : [];
+
+  // const [activeCategory, setActiveCategory] = useState(null);
+  // Set first category as active by default
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (categories.length > 0 && !activeCategory) {
+      setActiveCategory(categories[0].id);
+    }
+  }, [categories]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar"
   }, /*#__PURE__*/React.createElement("div", {
@@ -319,7 +381,10 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   }, categories.map(function (category) {
     return /*#__PURE__*/React.createElement("button", {
       key: category.id,
-      className: "fb-template-library-store-sidebar-tab"
+      className: "fb-template-library-store-sidebar-tab ".concat(activeCategory === category.id ? 'active' : ''),
+      onClick: function onClick() {
+        return setActiveCategory(category.id);
+      }
     }, /*#__PURE__*/React.createElement("span", {
       className: "fb-template-library-store-sidebar-tab-name"
     }, category.name), /*#__PURE__*/React.createElement("span", {
@@ -397,7 +462,7 @@ var PatternLibraryButton = function PatternLibraryButton() {
     setIsVisible(!isVisible);
   };
   var importDemo = function importDemo() {
-    console.log(frontisBlocksAdmin.nonce);
+    // console.log(frontisBlocksAdmin.nonce)
     jQuery.ajax({
       url: frontisBlocksAdmin.ajaxUrl,
       type: 'POST',
@@ -452,6 +517,10 @@ var PatternLibraryButton = function PatternLibraryButton() {
     _useState10 = _slicedToArray(_useState9, 2),
     activeTab = _useState10[0],
     setActiveTab = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeCategory = _useState12[0],
+    setActiveCategory = _useState12[1];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     onClick: function onClick() {
       return handleClick();
@@ -485,8 +554,14 @@ var PatternLibraryButton = function PatternLibraryButton() {
     className: "fb-template-library-store-sidebar-wrapper"
   }, /*#__PURE__*/React.createElement(_template_sidebar__WEBPACK_IMPORTED_MODULE_7__["default"], {
     activeTab: activeTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_9__,
+    activeCategory: activeCategory,
+    setActiveCategory: setActiveCategory
+  }), /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    activeTab: activeTab,
+    activeCategory: activeCategory,
     data: _data_json__WEBPACK_IMPORTED_MODULE_9__
-  }), /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], null))))));
+  }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PatternLibraryButton);
 
@@ -614,7 +689,7 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":{"all":{"id":"all","name":"All","count":30},"content-blocks":{"id":"content-blocks","name":"Content Blocks","count":14},"creative":{"id":"creative","name":"Creative","count":5},"dynamic":{"id":"dynamic","name":"Dynamic","count":30},"layout":{"id":"layout","name":"Layout","count":30},"form":{"id":"form","name":"Form","count":30},"social":{"id":"social","name":"Social","count":30}},"items":{"p_name":{"content":"p_content","categories":[]}}},"pages":{"name":"Pages","categories":{"all":{"id":"all","name":"All","count":30},"content-blocks":{"id":"content-blocks","name":"Content Blocks","count":14},"creative":{"id":"creative","name":"Creative","count":5},"dynamic":{"id":"dynamic","name":"Dynamic","count":30},"layout":{"id":"layout","name":"Layout","count":30},"form":{"id":"form","name":"Form","count":30},"social":{"id":"social","name":"Social","count":30}},"items":{"p_name":{"content":"p_content","categories":[]}}},"kits":{"name":"Kits","categories":{"all":{"id":"all","name":"All","count":30},"content-blocks":{"id":"content-blocks","name":"Content Blocks","count":14},"creative":{"id":"creative","name":"Creative","count":5},"dynamic":{"id":"dynamic","name":"Dynamic","count":30},"layout":{"id":"layout","name":"Layout","count":30},"form":{"id":"form","name":"Form","count":30},"social":{"id":"social","name":"Social","count":30}},"items":{"p_name":{"content":"p_content"}}},"template-library":{"name":"Template Library","categories":{"all":{"id":"all","name":"All","count":30},"content-blocks":{"id":"content-blocks","name":"Content Blocks","count":14},"creative":{"id":"creative","name":"Creative","count":5}},"items":{"p_name":{"content":"p_content"}}}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"/assets/images/temp-1.svg","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"/assets/images/pattern2.jpg","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"/assets/images/pattern3.jpg","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"/assets/images/pattern4.jpg","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"/assets/images/pattern5.jpg","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"/assets/images/pattern6.jpg","content":"Pattern 6 content here"},{"id":"pattern7","title":"Pattern 7","image":"/assets/images/pattern7.jpg","content":"Pattern 7 content here"},{"id":"pattern8","title":"Pattern 8","image":"/assets/images/pattern8.jpg","content":"Pattern 8 content here"},{"id":"pattern9","title":"Pattern 9","image":"/assets/images/pattern9.jpg","content":"Pattern 9 content here"},{"id":"pattern10","title":"Pattern 10","image":"/assets/images/pattern10.jpg","content":"Pattern 10 content here"},{"id":"pattern11","title":"Pattern 11","image":"/assets/images/pattern11.jpg","content":"Pattern 11 content here"},{"id":"pattern12","title":"Pattern 12","image":"/assets/images/pattern12.jpg","content":"Pattern 12 content here"},{"id":"pattern13","title":"Pattern 13","image":"/assets/images/pattern13.jpg","content":"Pattern 13 content here"},{"id":"pattern14","title":"Pattern 14","image":"/assets/images/pattern14.jpg","content":"Pattern 14 content here"},{"id":"pattern15","title":"Pattern 15","image":"/assets/images/pattern15.jpg","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"kits":{"name":"Kits","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
 
 /***/ })
 
