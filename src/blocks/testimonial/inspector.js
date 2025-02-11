@@ -41,6 +41,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
