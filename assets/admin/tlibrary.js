@@ -65,23 +65,30 @@ var TemplateCard = function TemplateCard(_ref) {
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
   var handleDemoDataImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    var selectedBlock = window.wp.data.select('core/block-editor').getSelectedBlock();
+    if (!selectedBlock || !selectedBlock.clientId) {
+      alert('Please select a block first!');
+      return;
+    }
+    var blockId = selectedBlock.clientId;
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_demo_data',
-        security: nonce
+        security: nonce,
+        block_id: blockId
       },
       success: function success(response) {
         if (response.success) {
-          console.log('Page created successfully!', response.data);
+          console.log('Demo data imported successfully!', response.data);
 
-          // Redirect to the WordPress editor for the new page
-          if (response.data.page_id) {
-            window.location.href = "".concat(frontisBlocksAdmin.adminUrl, "post.php?post=").concat(response.data.page_id, "&action=edit");
-          }
+          // Update block content using replaceBlocks
+          var _wp$data$dispatch = wp.data.dispatch('core/block-editor'),
+            replaceBlocks = _wp$data$dispatch.replaceBlocks;
+          var blocks = wp.blocks.parse(response.data.content); // Parse the content into blocks
 
-          // Show success message
+          replaceBlocks(blockId, blocks);
           alert(response.data.message);
         } else {
           console.error('Failed:', response.data);
@@ -735,9 +742,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			}
 /******/ 			var notFulfilled = Infinity;
 /******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
 /******/ 				var fulfilled = true;
 /******/ 				for (var j = 0; j < chunkIds.length; j++) {
 /******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
@@ -823,9 +828,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
@@ -848,7 +851,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkfrontis_blocks"] = self["webpackChunkfrontis_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkfrontis_blocks"] = globalThis["webpackChunkfrontis_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
