@@ -1033,7 +1033,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ...selectedPresetConfig,
             });
         } else {
-            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
+            console.warn(`Gallery: Preset "${selectedPreset}" not found.`);
         }
     };
     /** End Preset Style */
@@ -3534,7 +3534,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
-                                            {/* <PanelBody
+                                            <PanelBody
                                                 title={__("Responsive Control", "frontis-blocks")}
                                                 initialOpen={false}
                                                 className="fb-setting-responsive-control-wrapper"
@@ -3557,7 +3557,7 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     checked={GalleryMobileSwitcher}
                                                     onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
                                                 />
-                                            </PanelBody> */}
+                                            </PanelBody>
 
                                         </div>
                                     </div>

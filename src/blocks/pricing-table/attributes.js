@@ -2840,6 +2840,19 @@ const attributes = {
 		default: ""
 	},
 	/** End Price Feature After Text */
+
+	pricingTableDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 
 export default attributes;

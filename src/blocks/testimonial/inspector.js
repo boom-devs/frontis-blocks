@@ -253,6 +253,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         blockStyle,
 
+        testimonialDesktopSwitcher,
+		testimonialTabletSwitcher,
+		testimonialMobileSwitcher,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -3158,6 +3161,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialDesktopSwitcher}
+														onChange={(value) => setAttributes({ testimonialDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialTabletSwitcher}
+														onChange={(value) => setAttributes({ testimonialTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialMobileSwitcher}
+														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 </>
