@@ -39,11 +39,15 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         headingIcon,
         headingIconSwitcher,
         activeLineSwitcher,
+        headingGlobalWraperID,
+        headingGlobalWraperClass,
     } = attributes;
 
+
     const blockProps = useBlockProps({
-        className: `fb-advanced-heading-main-wrapper ${blockId}`,
+        className: `fb-advanced-heading-main-wrapper ${blockId} ${headingGlobalWraperClass}`,
     });
+
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -68,7 +72,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             </BlockControls>
 
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}} ref={panelRef}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}} ref={panelRef}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                         {headingIconAlign === 'icon' && headingIconSwitcher && (

@@ -892,6 +892,16 @@ const attributes = {
             Mobile: ''
         }
     },
+    headingGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+
+    headingGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+
 	/** Start Padding */
 	headingGlobalPaddingUnits: {
 		type: 'object',
