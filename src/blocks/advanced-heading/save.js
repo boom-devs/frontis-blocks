@@ -19,7 +19,10 @@ export default function save({ attributes }) {
         separator,
         separatorColor,
         activeLineSwitcher,
+        headingGlobalWraperID,
+        headingGlobalWraperClass,
     } = attributes;
+
 
     const blockProps = useBlockProps.save({
         id: blockId,
@@ -28,8 +31,8 @@ export default function save({ attributes }) {
 
     return (
         <>
-            <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+            <div {...blockProps} className={headingGlobalWraperClass}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                         {headingIconAlign === 'icon' && headingIconSwitcher && (
