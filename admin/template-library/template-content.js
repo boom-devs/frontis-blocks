@@ -21,9 +21,9 @@ const TemplateCard = ({ imageUrl }) => {
           console.log('Page created successfully!', response.data);
 
           // Redirect to the WordPress editor for the new page
-          if (response.data.page_id) {
-            window.location.href = `${frontisBlocksAdmin.adminUrl}post.php?post=${response.data.page_id}&action=edit`;
-          }
+          // if (response.data.page_id) {
+          //   window.location.href = `${frontisBlocksAdmin.adminUrl}post.php?post=${response.data.page_id}&action=edit`;
+          // }
 
           // Show success message
           alert(response.data.message);
@@ -46,7 +46,7 @@ const TemplateCard = ({ imageUrl }) => {
       </div>
       <div className="fb-template-library-card-content">
         <div className="fb-template-library-import" onClick={handleDemoDataImport}>
-          <span >Import</span>
+          <span>Import</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M3 9C3 12.3137 5.68629 15 9 15C12.3137 15 15 12.3137 15 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M9 3V10.5M9 10.5L11.25 8.25M9 10.5L6.75 8.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
