@@ -41,10 +41,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberDesktopSwitcher,
 		teamMemberTabletSwitcher,
 		teamMemberMobileSwitcher,
+
+		teamMemberGlobalWraperID,
+		teamMemberGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-        className: `fb-team-member-main-wrapper ${blockID}`,
+        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberGlobalWraperClass}`,
     });
 
 	/**
@@ -62,7 +65,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
 
 			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-team-member-wrapper ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'} ${blockID}`} ref={panelRef}>
+				<div className={`fb-parent-wrapper fb-team-member-wrapper ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'} ${blockID}`} id={teamMemberGlobalWraperID} ref={panelRef}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image`}>
