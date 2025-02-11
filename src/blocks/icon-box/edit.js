@@ -46,7 +46,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		iconBoxButtonLink,
 		iconBoxbtnTargetUrl,
 		iconBoxIconVerticalPosition,
-		iconBoxCardAlignment
+		iconBoxCardAlignment,
+
+		iconBoxGlobalWraperID,
+		iconBoxGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -79,8 +82,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} ref={panelRef}>
+			<div {...blockProps} id={blockID} className={iconBoxGlobalWraperClass}>
+				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">
 						<div
