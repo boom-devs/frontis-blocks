@@ -40,6 +40,7 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -340,6 +341,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaDesktopSwitcher,
 		ctaTabletSwitcher,
 		ctaMobileSwitcher,
+
+		ctaGlobalWraperID,
+		ctaGlobalWraperClass,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -3294,8 +3298,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														rangeStep={1}
 														resetFallbackValue={""}
 														isRangeUnit={false}
-
 													/>
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={ctaGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ ctaGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={ctaGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ ctaGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 												<PanelBody
 													title={__("Padding and Margin", "frontis-blocks")}
