@@ -239,57 +239,98 @@ class GlobalSettings extends AjaxBase
     }
 
 
+    // public function import_demo_data() {
+    //     try {
+    //         // Verify nonce
+    //         $nonce = $_POST['security'] ?? '';
+    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
+    //             wp_send_json_error('Invalid nonce.');
+    //             return;
+    //         }
+    
+    //         // Get current page ID from POST
+    //         $current_page_id = $_POST['page_id'] ?? 0;
+    //         if (!$current_page_id) {
+    //             wp_send_json_error('Page ID is required.');
+    //             return;
+    //         }
+    
+    //         // Get the JSON file path
+    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
+    
+    //         // Read and decode JSON
+    //         $json_data = file_get_contents($json_file_path);
+    //         $blocks = json_decode($json_data, true);
+    
+    //         // Validate JSON structure
+    //         if (!$blocks || !is_array($blocks)) {
+    //             wp_send_json_error('Invalid JSON structure.');
+    //             return;
+    //         }
+    
+    //         // Update existing page with the blocks
+    //         $page_data = array(
+    //             'ID'            => $current_page_id,
+    //             'post_content'  => serialize_blocks($blocks)
+    //         );
+    
+    //         // Update the page
+    //         $update_result = wp_update_post($page_data);
+    
+    //         if (is_wp_error($update_result)) {
+    //             wp_send_json_error('Failed to update page.');
+    //             return;
+    //         }
+    
+    //         // Return success response
+    //         wp_send_json_success(array(
+    //             'page_id' => $current_page_id,
+    //             'message' => 'Page updated successfully with imported blocks!'
+    //         ));
+    
+    //     } catch (Exception $e) {
+    //         wp_send_json_error('An unexpected error occurred: ' . $e->getMessage());
+    //     }
+    // }
+
     public function import_demo_data() {
         try {
-            // Verify nonce
+            // Security check
             $nonce = $_POST['security'] ?? '';
             if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
                 wp_send_json_error('Invalid nonce.');
                 return;
             }
     
-            // Get current page ID from POST
-            $current_page_id = $_POST['page_id'] ?? 0;
-            if (!$current_page_id) {
-                wp_send_json_error('Page ID is required.');
+            // Get block ID from POST
+            $block_id = $_POST['block_id'] ?? '';
+            if (empty($block_id)) {
+                wp_send_json_error('Block ID is required.');
                 return;
             }
     
-            // Get the JSON file path
+            // Get demo data from JSON
             $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-    
-            // Read and decode JSON
             $json_data = file_get_contents($json_file_path);
-            $blocks = json_decode($json_data, true);
+            $demo_data = json_decode($json_data, true);
     
-            // Validate JSON structure
-            if (!$blocks || !is_array($blocks)) {
-                wp_send_json_error('Invalid JSON structure.');
-                return;
-            }
-    
-            // Update existing page with the blocks
-            $page_data = array(
-                'ID'            => $current_page_id,
-                'post_content'  => serialize_blocks($blocks)
+            // Update specific block's content
+            $block_content = array(
+                'blockId' => $block_id,
+                'content' => $demo_data
             );
     
-            // Update the page
-            $update_result = wp_update_post($page_data);
+            // Store in transient for temporary use
+            set_transient('fb_block_' . $block_id, $block_content, HOUR_IN_SECONDS);
     
-            if (is_wp_error($update_result)) {
-                wp_send_json_error('Failed to update page.');
-                return;
-            }
-    
-            // Return success response
             wp_send_json_success(array(
-                'page_id' => $current_page_id,
-                'message' => 'Page updated successfully with imported blocks!'
+                'block_id' => $block_id,
+                'content' => serialize_blocks($demo_data),
+                'message' => 'Demo data imported successfully!'
             ));
     
         } catch (Exception $e) {
-            wp_send_json_error('An unexpected error occurred: ' . $e->getMessage());
+            wp_send_json_error('Error: ' . $e->getMessage());
         }
     }
 
