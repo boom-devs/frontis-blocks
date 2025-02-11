@@ -1203,6 +1203,19 @@ const attributes = {
 	customOrderMobile: {
 		type: 'number',
 	},
+
+	containerDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    containerTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    containerMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

@@ -957,6 +957,18 @@ const attributes = {
     },
     /*End Global Styles */
 
+    socialIconsDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    socialIconsTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    socialIconsMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

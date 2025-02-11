@@ -128,9 +128,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalBoxShadowValues,
         sliderGlobalBoxShadowCssValue,
         sliderGlobalBoxShadowHoverValues,
-        sliderGlobalBoxShadowHoverCssValue
+        sliderGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
 
+        sliderDesktopSwitcher,
+		sliderTabletSwitcher,
+		sliderMobileSwitcher,
     } = attributes;
     const deviceType = useDeviceType();
 
@@ -1529,6 +1532,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 )}
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderDesktopSwitcher}
+														onChange={(value) => setAttributes({ sliderDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderTabletSwitcher}
+														onChange={(value) => setAttributes({ sliderTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderMobileSwitcher}
+														onChange={(value) => setAttributes({ sliderMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 )}

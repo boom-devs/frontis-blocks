@@ -140,9 +140,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBoxShadowHoverValues,
         videoGlobalBoxShadowHoverCssValue,
 
+<<<<<<< HEAD
         videoGlobalWraperID,
         videoGlobalWraperClass,
 
+=======
+        advancedVideoDesktopSwitcher,
+		advancedVideoTabletSwitcher,
+		advancedVideoMobileSwitcher,
+>>>>>>> 914dde72b74f2bf53e283b265892f0781952903c
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1666,6 +1672,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
                                                 </PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>
