@@ -183,5 +183,28 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    progressbarDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Global Setting */
+	progressGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	progressGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 };
 export default attributes;

@@ -677,6 +677,19 @@ const attributes = {
         default: '',
     },
     /** End Global Style */
+
+	counterDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    counterTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    counterMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 
 export default attributes;

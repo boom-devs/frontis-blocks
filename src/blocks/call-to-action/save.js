@@ -33,7 +33,10 @@ export default function save({ attributes }) {
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
 		info_Button_Link,
-		btnTwoLink
+		btnTwoLink,
+
+		ctaGlobalWraperID,
+		ctaGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -42,8 +45,8 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`}>
+			<div {...blockProps} className={ctaGlobalWraperClass}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
 							{subHeadingSwitcher && (

@@ -1374,4 +1374,27 @@ export const attributes = {
         type: 'string',
         default: '',
     },
+
+	contactFormDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contactFormTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    contactFormMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	contactFormGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	contactFormGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Global Setting */
 }

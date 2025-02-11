@@ -37,6 +37,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
@@ -357,8 +358,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBoxShadowHoverValues,
         fluentFormGlobalBoxShadowHoverCssValue,
 
-        blockStyle,
+        fluentFormDesktopSwitcher,
+		fluentFormTabletSwitcher,
+		fluentFormMobileSwitcher,
 
+        fluentFormGlobalWraperID,
+        fluentFormGlobalWraperClass,
     } = attributes;
 
 	const deviceType= useDeviceType();
@@ -4748,6 +4753,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={fluentFormGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+                                                    <FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={fluentFormGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
                                                 </PanelBody>
 
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -4887,7 +4907,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
                                                 </PanelBody>
 
-
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormDesktopSwitcher}
+														onChange={(value) => setAttributes({ fluentFormDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormTabletSwitcher}
+														onChange={(value) => setAttributes({ fluentFormTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormMobileSwitcher}
+														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

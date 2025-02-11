@@ -852,6 +852,26 @@ const attributes = {
         default: '',
     },
 
+    sliderDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    sliderTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    sliderMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+
+    /** Start Class & ID Setting */
+    sliderGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+    /** End Class & ID Setting */
     // /** Start Global Setting */
 	// sliderGlobalZIndex : {
     //     type: "object",

@@ -40,6 +40,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoLink,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
+
+		ctaGlobalWraperID,
+		ctaGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -73,8 +76,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} ref={panelRef}>
+			<div {...blockProps} id={blockID} className={ctaGlobalWraperClass}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID} ref={panelRef}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">

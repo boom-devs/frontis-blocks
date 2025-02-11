@@ -2104,5 +2104,28 @@ const attributes = {
 		},
 	},
 	
+	ctaDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Class & ID Setting */
+	ctaGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	ctaGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */	
 }
 export default attributes;

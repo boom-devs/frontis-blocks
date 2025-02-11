@@ -22,6 +22,7 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
@@ -139,6 +140,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBoxShadowHoverValues,
         videoGlobalBoxShadowHoverCssValue,
 
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
+
+        advancedVideoDesktopSwitcher,
+		advancedVideoTabletSwitcher,
+		advancedVideoMobileSwitcher,
+        
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1509,6 +1517,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={videoGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={videoGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+                                                    
                                                 </PanelBody>
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
@@ -1648,6 +1670,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
                                                 </PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>
