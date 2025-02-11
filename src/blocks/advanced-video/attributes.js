@@ -578,6 +578,15 @@ const attributes = {
     },
     /** End Global Style */
 
+    /** Start Global Setting */
+    videoGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+    videoGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
 };
 
 export default attributes;
