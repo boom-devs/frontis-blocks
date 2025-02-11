@@ -7,6 +7,10 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
+	ctaPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	infoBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'
@@ -754,7 +758,7 @@ const attributes = {
         type: "string",
         default: "Learn More"
     },
-    info_Button_Switcher: {
+    ctaBtnOneSwitcher: {
         type: "boolean",
         default: true,
     },
