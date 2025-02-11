@@ -1,16 +1,52 @@
 /**
  * WordPress dependencies
  */
+import { useState, useEffect, useCallback } from "@wordpress/element";
+import { toast } from 'react-toastify';
 
 const TemplateCard = ({ imageUrl }) => {
+
+  const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+  const handleDemoDataImport = useCallback(() => {
+    window.jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_import_demo_data',
+        security: nonce,
+      },
+      success: function (response) {
+        if (response.success) {
+          console.log('Page created successfully!', response.data);
+
+          // Redirect to the WordPress editor for the new page
+          if (response.data.page_id) {
+            window.location.href = `${frontisBlocksAdmin.adminUrl}post.php?post=${response.data.page_id}&action=edit`;
+          }
+
+          // Show success message
+          alert(response.data.message);
+        } else {
+          console.error('Failed:', response.data);
+          alert('Failed to import demo data: ' + response.data);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error('Ajax error:', status, error);
+        alert('Failed to process request. Please try again.');
+      }
+    });
+  }, [ajaxUrl, nonce]);
+
   return (
     <div className="fb-template-library-card">
       <div className="fb-template-library-card-img">
         <img src={imageUrl} alt="Template preview" />
       </div>
       <div className="fb-template-library-card-content">
-        <div className="fb-template-library-import">
-          <span>Import</span>
+        <div className="fb-template-library-import" onClick={handleDemoDataImport}>
+          <span >Import</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M3 9C3 12.3137 5.68629 15 9 15C12.3137 15 15 12.3137 15 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M9 3V10.5M9 10.5L11.25 8.25M9 10.5L6.75 8.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -37,24 +73,32 @@ const TemplateCard = ({ imageUrl }) => {
   );
 };
 
-const TemplateLibrary = () => {
-  let defaultImageUrl = '';
-	if (typeof frontisBlocksAdmin !== 'undefined') {
-		defaultImageUrl = frontisBlocksAdmin.pluginUrl + 'assets/images/temp-1.svg';
-	}
-  const templates = [
-    { id: 1, imageUrl: defaultImageUrl },
-    { id: 2, imageUrl: defaultImageUrl },
-    { id: 3, imageUrl: defaultImageUrl }
-  ];
+const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
+  const schema = data?.$schema || {};
+  const [filteredTemplates, setFilteredTemplates] = useState([]);
+
+  useEffect(() => {
+    if (activeTab && activeCategory) {
+      const tabData = schema[activeTab];
+      const selectedCategory = tabData?.categories?.find(
+        (category) => category.id === activeCategory
+      );
+
+      if (selectedCategory && selectedCategory.items) {
+        setFilteredTemplates(selectedCategory.items);
+      } else {
+        setFilteredTemplates([]);
+      }
+    }
+  }, [activeTab, activeCategory]);
 
   return (
     <div className="fb-template-library-store-content">
       <div className="fb-template-library-cards">
-        {templates.map(template => (
-          <TemplateCard 
-            key={template.id} 
-            imageUrl={template.imageUrl}
+        {filteredTemplates.map((template) => (
+          <TemplateCard
+            key={template.id}
+            imageUrl={template.image}
           />
         ))}
       </div>

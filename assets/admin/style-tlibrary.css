@@ -151,6 +151,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards {
   display: flex;
   gap: 30px;
+  flex-wrap: wrap;
 }
 body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card {
   background: #fff;
