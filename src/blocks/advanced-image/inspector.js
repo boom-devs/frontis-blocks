@@ -25,6 +25,7 @@ import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
@@ -215,6 +216,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedImageDesktopSwitcher,
 		advancedImageTabletSwitcher,
 		advancedImageMobileSwitcher,
+
+		advancedImageGlobalWraperID,
+		advancedImageGlobalWraperClass,
+
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1653,7 +1658,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-setting-z-index-wrapper">
 												<PanelBody
 													title={__("Z Index", "frontis-blocks")}
-													initialOpen={false}
+													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
 													
@@ -1670,6 +1675,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														isRangeUnit={false}
 
 													/>
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={advancedImageGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ advancedImageGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={advancedImageGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ advancedImageGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 												<PanelBody
 													title={__("Padding and Margin", "frontis-blocks")}
