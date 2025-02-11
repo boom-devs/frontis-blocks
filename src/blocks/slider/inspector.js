@@ -8,6 +8,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
 import './editor.scss';
 
@@ -127,8 +128,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalBoxShadowValues,
         sliderGlobalBoxShadowCssValue,
         sliderGlobalBoxShadowHoverValues,
-        sliderGlobalBoxShadowHoverCssValue
+        sliderGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
+
+        sliderDesktopSwitcher,
+		sliderTabletSwitcher,
+		sliderMobileSwitcher,
+
+        sliderGlobalWraperID,
+        sliderGlobalWraperClass,
 
     } = attributes;
     const deviceType = useDeviceType();
@@ -1377,6 +1385,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
                                                 />
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={sliderGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ sliderGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                />
+                                                
                                             </PanelBody>
                                             <PanelBody
                                                 title={__("Background Color", "frontis-blocks")}
@@ -1528,6 +1544,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     />
                                                 )}
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderDesktopSwitcher}
+														onChange={(value) => setAttributes({ sliderDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderTabletSwitcher}
+														onChange={(value) => setAttributes({ sliderTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={sliderMobileSwitcher}
+														onChange={(value) => setAttributes({ sliderMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 )}

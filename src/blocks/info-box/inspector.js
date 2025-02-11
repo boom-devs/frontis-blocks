@@ -340,7 +340,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		infoButtonBorderLink,
 		infoIconVerticalPosition,
-		infoCardAlignment
+		infoCardAlignment,
+
+		infoBoxDesktopSwitcher,
+		infoBoxTabletSwitcher,
+		infoBoxMobileSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3907,6 +3911,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															}
 														/>
 													)}
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={infoBoxDesktopSwitcher}
+														onChange={(value) => setAttributes({ infoBoxDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={infoBoxTabletSwitcher}
+														onChange={(value) => setAttributes({ infoBoxTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={infoBoxMobileSwitcher}
+														onChange={(value) => setAttributes({ infoBoxMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

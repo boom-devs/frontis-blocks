@@ -892,6 +892,16 @@ const attributes = {
             Mobile: ''
         }
     },
+    headingGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+
+    headingGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+
 	/** Start Padding */
 	headingGlobalPaddingUnits: {
 		type: 'object',
@@ -1212,6 +1222,19 @@ const attributes = {
     blockStyle: {
         type: "string",
         default: "",
+    },
+
+    advancedHeadingDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingMobileSwitcher: {
+        type: "boolean",
+        default: false,
     },
 }
 export default attributes;

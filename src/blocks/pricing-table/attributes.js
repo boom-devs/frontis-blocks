@@ -2840,6 +2840,29 @@ const attributes = {
 		default: ""
 	},
 	/** End Price Feature After Text */
+
+	pricingTableDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Global Setting */
+	pricingTableGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	pricingTableGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 }
 
 export default attributes;

@@ -38,6 +38,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import "./editor.scss";
@@ -263,6 +264,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormGlobalBoxShadowHoverCssValue,
 		blockStyle,
 
+		contactFormDesktopSwitcher,
+		contactFormTabletSwitcher,
+		contactFormMobileSwitcher,
+
+		contactFormGlobalWraperID,
+		contactFormGlobalWraperClass,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -3544,6 +3551,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={contactFormGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ contactFormGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={contactFormGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ contactFormGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
                                                 </PanelBody>
 
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -3683,7 +3705,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
                                                 </PanelBody>
 
-
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormDesktopSwitcher}
+														onChange={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormTabletSwitcher}
+														onChange={(value) => setAttributes({ contactFormTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={contactFormMobileSwitcher}
+														onChange={(value) => setAttributes({ contactFormMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

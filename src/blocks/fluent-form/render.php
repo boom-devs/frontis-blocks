@@ -17,15 +17,18 @@ $fluentFormSubmitWidthSelect 	= isset($attributes['fluentFormSubmitWidthSelect']
 $fluentFormSubmitWidth 			= isset($attributes['fluentFormSubmitWidth']) ? array_map('intval', $attributes['fluentFormSubmitWidth']) : ['Desktop' => '', 'Tablet' => '', 'Mobile' => ''];
 $fluentFormSubmitWidthUnits     = isset($attributes['fluentFormSubmitWidthUnits']) ? array_map('sanitize_text_field', $attributes['fluentFormSubmitWidthUnits']) : ['Desktop' => 'px', 'Tablet' => 'px', 'Mobile' => 'px'];
 
+$fluentFormGlobalWraperID       = isset( $attributes['fluentFormGlobalWraperID'] ) ? sanitize_text_field( $attributes['fluentFormGlobalWraperID'] ) : '';
+$fluentFormGlobalWraperClass   = isset( $attributes['fluentFormGlobalWraperClass'] ) ? sanitize_text_field( $attributes['fluentFormGlobalWraperClass'] ) : '';
 
 $_wrapper_classes = [
-    "fb-parent-$blockID"
+    "fb-parent-$blockID",
 ];
 
 
 $_form_wrapper_classes = [
     $blockID,
     'fb-parent-wrapper fb-fluent-form-wrapper',
+    $fluentFormGlobalWraperClass,
     !$showLabels ? 'fb-fluent-form-hide-label' : '',
     !$showPlaceholder ? 'fb-fluent-form-hide-placeholder' : '',
     !$showErrorMessage ? 'fb-fluent-form-hide-error-message' : '',
@@ -55,7 +58,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 </style>
 
-<div <?php echo wp_kses_data( $wrapper_attributes ); ?> >
+<div <?php echo wp_kses_data( $wrapper_attributes ); ?> id="<?php echo esc_attr( $fluentFormGlobalWraperID ); ?>">
 	<div class="<?php echo esc_attr( implode( ' ', $_wrapper_classes ) ); ?> fb-parent-wrapper">
 		<div class="<?php echo esc_attr( implode( ' ', $_form_wrapper_classes ) ); ?>">
 			<?php

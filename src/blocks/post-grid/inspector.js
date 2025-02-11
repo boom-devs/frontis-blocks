@@ -32,6 +32,7 @@ import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclu
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
@@ -492,7 +493,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreIconMarginLink,
         /** End Load More */
 
-
+        postGridDesktopSwitcher,
+		postGridTabletSwitcher,
+		postGridMobileSwitcher,
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -6095,6 +6098,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         />
                                                     )}
 
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridDesktopSwitcher}
+														onChange={(value) => setAttributes({ postGridDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridTabletSwitcher}
+														onChange={(value) => setAttributes({ postGridTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={postGridMobileSwitcher}
+														onChange={(value) => setAttributes({ postGridMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

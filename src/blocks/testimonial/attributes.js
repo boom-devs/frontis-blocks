@@ -1185,6 +1185,28 @@ const attributes = {
         default: '',
     },
     
+    testimonialDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Global Setting */
+	testimonialGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	testimonialGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 };
 
 export default attributes;

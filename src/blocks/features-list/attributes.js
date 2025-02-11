@@ -1491,7 +1491,31 @@ const attributes = {
 	},
 	/** End Border Radius */
 
-    
+    featuresListDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    featuresListTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    featuresListMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** End Responsive Control */
+
+    /** Start Global Setting */
+	featuresListGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	featuresListGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Global Setting */   
 };
 
 export default attributes;

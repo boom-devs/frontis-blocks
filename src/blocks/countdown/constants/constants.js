@@ -13,20 +13,40 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
+export const PRESETS = [
+	{ label: __("Default", "frontis-blocks"), value: "default" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+];
+
 export const SELECT_SEPARATOR_TYPE = [
-	{ label: "Colon", value: ":" },
-	{ label: "Line", value: "|" },
-	{ label: "Slash", value: "/" },
+	{ label: "Colon", value: "colon" },
+	{ label: "Line", value: "line" },
+	{ label: "Slash", value: "slash" },
+	{ label: "Custom", value: "custom" },
 ];
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "em", value: "em" },
 ];
 
+export const LAYOUT_TYPE = [
+	{ label: "Flex", value: "flex" },
+	{ label: "Grid", value: "grid" },
+];
+
 export const separator_UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },
 	{ label: "em", value: "em" },
+];
+
+export const LAYOUT_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
 ];
 
 export const NORMAL_HOVER = [
@@ -61,12 +81,6 @@ export const mediaType = [
 export const iconType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
-];
-export const PRESETS = [
-	{ label: __("Default", "frontis-block"), value: "preset-0" },
-	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-block"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
 ];
 
 export const TEXT_ALIGN = [

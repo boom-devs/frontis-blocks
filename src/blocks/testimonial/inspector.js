@@ -41,6 +41,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
@@ -251,6 +252,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialGlobalBoxShadowHoverCssValue,
 
         blockStyle,
+
+        testimonialDesktopSwitcher,
+		testimonialTabletSwitcher,
+		testimonialMobileSwitcher,
+
+		testimonialGlobalWraperID,
+		testimonialGlobalWraperClass,
 
     } = attributes;
 
@@ -3005,6 +3013,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     isRangeUnit={false}
 
                                                 />
+
+                                                <FB_InputControl
+													label={__("CSS ID", "frontis-blocks")}
+													value={testimonialGlobalWraperID}
+													onChangeValue={(value) => setAttributes({ testimonialGlobalWraperID: value })}
+													helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+												/>  
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={testimonialGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ testimonialGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                />
                                             </PanelBody>
                                             
                                             <PanelBody
@@ -3157,6 +3179,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialDesktopSwitcher}
+														onChange={(value) => setAttributes({ testimonialDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialTabletSwitcher}
+														onChange={(value) => setAttributes({ testimonialTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialMobileSwitcher}
+														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 </>

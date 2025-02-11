@@ -2931,7 +2931,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
                                                 </PanelBody>
         
-                                                {/* <PanelBody
+                                                <PanelBody
                                                     title={__("Responsive Control", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-responsive-control-wrapper"
@@ -2954,7 +2954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         checked={accordionMobileSwitcher}
                                                         onChange={(value) => setAttributes({ accordionMobileSwitcher: value })}
                                                     />
-                                                </PanelBody> */}
+                                                </PanelBody>
         
                                             </div>
                                         </div>

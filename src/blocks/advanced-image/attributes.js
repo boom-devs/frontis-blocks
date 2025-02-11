@@ -1047,5 +1047,29 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	advancedImageDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedImageTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedImageMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Class & ID Setting */
+	advancedImageGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	advancedImageGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */	
 }
 export default attributes;

@@ -86,10 +86,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextSwitcher,
 		priceFeatureAfterText,
 
+		pricingTableGlobalWraperID,
+		pricingTableGlobalWraperClass,
+
 	} = attributes;
 
     const blockProps = useBlockProps({
-        className: `${blockId}`,
+        className: `${blockId} ${pricingTableGlobalWraperClass}`,
     });
 
     /**
@@ -106,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 			<div {...blockProps} id={blockId}>
-				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} ref={panelRef}> 
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}> 
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">

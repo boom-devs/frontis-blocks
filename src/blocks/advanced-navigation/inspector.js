@@ -20,6 +20,10 @@ export default function Inspector({ attributes, setAttributes }) {
         navVerticalAlign,
         hamburgerMenu,
         hamburgerCloseIconAlign,
+
+        advancedNavigationDesktopSwitcher,
+		advancedNavigationTabletSwitcher,
+		advancedNavigationMobileSwitcher,
     } = attributes;
 
     const generalTab = (
