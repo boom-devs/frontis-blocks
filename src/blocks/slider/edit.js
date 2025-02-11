@@ -70,6 +70,8 @@ const Edit = (props) => {
         reverseDirection,
         enableMouseWheel,
         effect,
+
+        sliderGlobalWraperClass,
     } = attributes;
 
 
@@ -88,7 +90,7 @@ const Edit = (props) => {
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
 	const blockProps = useBlockProps( {
-		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass}`,
 	} );
 
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {

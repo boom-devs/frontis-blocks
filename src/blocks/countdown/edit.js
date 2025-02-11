@@ -22,6 +22,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showHours,
 		showMinutes,
 		showSeconds,
+
+		countDownGlobalWraperID,
+		countDownGlobalWraperClass,
 	} = attributes;
 
 
@@ -98,8 +101,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} ref={panelRef}>
+			<div {...blockProps} id={blockID} className={countDownGlobalWraperClass}>
+				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} id={countDownGlobalWraperID} ref={panelRef}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time`}>{timeRemaining.days || 0}</span>

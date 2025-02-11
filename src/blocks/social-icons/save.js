@@ -9,16 +9,19 @@ export default function save({ attributes }) {
         socialIconUrl,
         socialIconTargetUrl,
 
+        socialGlobalWraperID,
+        socialGlobalWraperClass,
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-social-main-wrapper ${blockID}`,
+        className: `fb-social-main-wrapper ${blockID} ${socialGlobalWraperClass}`,
     });
     
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`} id={socialGlobalWraperID}>
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (

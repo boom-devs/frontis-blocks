@@ -12,6 +12,7 @@ export default function save( props ) {
         transitionSpeed,
         displayArrows,
 		displayDots,
+		sliderGlobalWraperClass,
     } = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -19,7 +20,7 @@ export default function save( props ) {
 	return (
 		<div
 			key={ blockId }
-			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container' ) }
+			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass ) }
 			data-block-id={ blockId }
 		>
 			<div className="fb-slides fb-swiper">

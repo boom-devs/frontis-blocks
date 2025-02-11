@@ -1197,6 +1197,16 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** Start Global Setting */
+	testimonialGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	testimonialGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 };
 
 export default attributes;

@@ -292,6 +292,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         featuresListDesktopSwitcher,
 		featuresListTabletSwitcher,
 		featuresListMobileSwitcher,
+
+		featuresListGlobalWraperID,
+		featuresListGlobalWraperClass,
+        
     } = attributes;
     
 	const deviceType= useDeviceType();
@@ -2750,6 +2754,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={featuresListGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ featuresListGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+                                                    <FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={featuresListGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ featuresListGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>

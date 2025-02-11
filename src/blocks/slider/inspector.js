@@ -134,6 +134,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderDesktopSwitcher,
 		sliderTabletSwitcher,
 		sliderMobileSwitcher,
+
+        sliderGlobalWraperID,
+        sliderGlobalWraperClass,
+
     } = attributes;
     const deviceType = useDeviceType();
 
@@ -1381,6 +1385,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
                                                 />
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={sliderGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ sliderGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                />
+                                                
                                             </PanelBody>
                                             <PanelBody
                                                 title={__("Background Color", "frontis-blocks")}

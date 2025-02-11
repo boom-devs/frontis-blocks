@@ -2853,6 +2853,16 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	/** Start Global Setting */
+	pricingTableGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	pricingTableGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
 }
 
 export default attributes;

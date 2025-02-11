@@ -9,24 +9,37 @@ const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   const handleDemoDataImport = useCallback(() => {
+    const selectedBlock = window.wp.data
+      .select('core/block-editor')
+      .getSelectedBlock();
+
+    if (!selectedBlock || !selectedBlock.clientId) {
+      alert('Please select a block first!');
+      return;
+    }
+
+    const blockId = selectedBlock.clientId;
+
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_demo_data',
         security: nonce,
+        block_id: blockId
       },
       success: function (response) {
         if (response.success) {
-          console.log('Page created successfully!', response.data);
+          console.log('Demo data imported successfully!', response.data);
 
-          // Redirect to the WordPress editor for the new page
-          if (response.data.page_id) {
-            window.location.href = `${frontisBlocksAdmin.adminUrl}post.php?post=${response.data.page_id}&action=edit`;
-          }
+          // Update block content using replaceBlocks
+          const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+          const blocks = wp.blocks.parse(response.data.content); // Parse the content into blocks
 
-          // Show success message
+          replaceBlocks(blockId, blocks);
+
           alert(response.data.message);
+          
         } else {
           console.error('Failed:', response.data);
           alert('Failed to import demo data: ' + response.data);
@@ -46,7 +59,7 @@ const TemplateCard = ({ imageUrl }) => {
       </div>
       <div className="fb-template-library-card-content">
         <div className="fb-template-library-import" onClick={handleDemoDataImport}>
-          <span >Import</span>
+          <span>Import</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
             <path d="M3 9C3 12.3137 5.68629 15 9 15C12.3137 15 15 12.3137 15 9" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
             <path d="M9 3V10.5M9 10.5L11.25 8.25M9 10.5L6.75 8.25" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

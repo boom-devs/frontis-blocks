@@ -140,9 +140,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBoxShadowHoverValues,
         videoGlobalBoxShadowHoverCssValue,
 
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
+
         advancedVideoDesktopSwitcher,
 		advancedVideoTabletSwitcher,
 		advancedVideoMobileSwitcher,
+        
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1513,6 +1517,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={videoGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={videoGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+                                                    
                                                 </PanelBody>
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 

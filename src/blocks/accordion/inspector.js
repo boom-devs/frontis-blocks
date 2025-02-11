@@ -34,6 +34,7 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
+import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -320,6 +321,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageAttachment,
         contentBgHoverImageRepeat,
         contentBgHoverImageSize,
+
+        accordionGlobalWraperID,
+        accordionGlobalWraperClass,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -2671,6 +2676,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={accordionGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ accordionGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={accordionGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ accordionGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
                                                     />
                                                 </PanelBody>
         
