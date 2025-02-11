@@ -72,6 +72,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         blockStyle,
 
+        progressbarDesktopSwitcher,
+		progressbarTabletSwitcher,
+		progressbarMobileSwitcher,
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -587,6 +590,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
                                                 </PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={progressbarDesktopSwitcher}
+														onChange={(value) => setAttributes({ progressbarDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={progressbarTabletSwitcher}
+														onChange={(value) => setAttributes({ progressbarTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={progressbarMobileSwitcher}
+														onChange={(value) => setAttributes({ progressbarMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

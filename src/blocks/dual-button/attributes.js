@@ -1375,5 +1375,18 @@ const attributes = {
         default: '',
     },
     /** End Global Style */
+
+	dualBtnDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    dualBtnTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    dualBtnMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 };
 export default attributes;

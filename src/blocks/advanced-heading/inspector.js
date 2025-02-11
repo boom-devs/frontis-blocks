@@ -294,7 +294,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         activeLineBeforeHeightUnits,
         activeLineBeforeColor,
 
-        blockStyle,
+        advancedHeadingDesktopSwitcher,
+		advancedHeadingTabletSwitcher,
+		advancedHeadingMobileSwitcher,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -3134,6 +3136,31 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                             onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowHoverCssValue: value })}
                                                         />
                                                     )}
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedHeadingDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedHeadingDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedHeadingTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedHeadingTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedHeadingMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedHeadingMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

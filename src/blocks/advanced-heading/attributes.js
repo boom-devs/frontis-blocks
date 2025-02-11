@@ -1223,5 +1223,18 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    advancedHeadingDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 export default attributes;

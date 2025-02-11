@@ -852,6 +852,19 @@ const attributes = {
         default: '',
     },
 
+    sliderDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    sliderTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    sliderMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
     // /** Start Global Setting */
 	// sliderGlobalZIndex : {
     //     type: "object",

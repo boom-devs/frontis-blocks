@@ -162,7 +162,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBorderRadiusMobile,
         counterGlobalBorderRadiusLink,
         counterGlobalBoxShadowValues,
-        counterGlobalBoxShadowCssValue
+        counterGlobalBoxShadowCssValue,
+
+        counterDesktopSwitcher,
+		counterTabletSwitcher,
+		counterMobileSwitcher,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -1715,6 +1719,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
 
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterDesktopSwitcher}
+														onChange={(value) => setAttributes({ counterDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterTabletSwitcher}
+														onChange={(value) => setAttributes({ counterTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterMobileSwitcher}
+														onChange={(value) => setAttributes({ counterMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 </>

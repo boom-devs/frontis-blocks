@@ -1047,5 +1047,18 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	advancedImageDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedImageTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedImageMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
 }
 export default attributes;
