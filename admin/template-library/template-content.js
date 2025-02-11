@@ -9,26 +9,37 @@ const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   const handleDemoDataImport = useCallback(() => {
-    // Get current page ID
-    const currentPageId = window.location.href.match(/post=(\d+)/)?.[1];
-    
+    const selectedBlock = window.wp.data
+      .select('core/block-editor')
+      .getSelectedBlock();
+
+    if (!selectedBlock || !selectedBlock.clientId) {
+      alert('Please select a block first!');
+      return;
+    }
+
+    const blockId = selectedBlock.clientId;
+
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_demo_data',
         security: nonce,
-        page_id: currentPageId
+        block_id: blockId
       },
       success: function (response) {
         if (response.success) {
           console.log('Demo data imported successfully!', response.data);
-          
-          // Just show success message without redirecting
+
+          // Update block content using replaceBlocks
+          const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+          const blocks = wp.blocks.parse(response.data.content); // Parse the content into blocks
+
+          replaceBlocks(blockId, blocks);
+
           alert(response.data.message);
           
-          // Optionally refresh the current page content
-          window.location.reload();
         } else {
           console.error('Failed:', response.data);
           alert('Failed to import demo data: ' + response.data);
