@@ -13,6 +13,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		progressNumber,
 		progressTitle,
 		progressHeadingTag,
+
+		progressGlobalWraperID,
+		progressGlobalWraperClass,
 	} = attributes;
 
 	const outSideprogressBarRef = useRef(null);
@@ -49,7 +52,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [progressNumber, progressTextPosition]);
 
     const blockProps = useBlockProps({
-        className: `fb-progress-bar-main-wrapper ${blockID}`,
+        className: `fb-progress-bar-main-wrapper ${blockID} ${progressGlobalWraperClass}`,
     });
 
     /**
@@ -67,7 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-				<div className='fb-parent-wrapper progress-bar-wrapper' ref={panelRef}>
+				<div className='fb-parent-wrapper progress-bar-wrapper' id={progressGlobalWraperID} ref={panelRef}>
 					{progressTextPosition === 'text-outSide' && (
 						<div className="progress-bar-text-outSide-wrapper">
 							<div className="progress-bar-label">

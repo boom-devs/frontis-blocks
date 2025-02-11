@@ -1387,4 +1387,14 @@ export const attributes = {
         type: "boolean",
         default: false,
     },
+
+	contactFormGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	contactFormGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Global Setting */
 }

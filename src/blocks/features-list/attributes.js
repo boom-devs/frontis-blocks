@@ -1503,6 +1503,19 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+    /** End Responsive Control */
+
+    /** Start Global Setting */
+	featuresListGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	featuresListGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Global Setting */   
 };
 
 export default attributes;

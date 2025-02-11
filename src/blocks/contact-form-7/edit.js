@@ -16,13 +16,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		formId,
 		blockID,
 		showPlaceholder,
-		showErrorMessage
+		showErrorMessage,
+
+		contactFormGlobalWraperID,
+		contactFormGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: [
-			'fb-contact-form-wrapper',
+			'fb-contact-form-wrapper' ,
 			blockID,
+			contactFormGlobalWraperClass,
 			!showPlaceholder && 'fb-contact-form-hide-placeholder',
 			!showErrorMessage && 'fb-contact-form-hide-error-message'
 		].filter(Boolean).join(' ')
@@ -63,7 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.contact_form_active ? (
-				<div className="fb-reusable_notice" ref={panelRef}>
+				<div className="fb-reusable_notice" id={contactFormGlobalWraperID} ref={panelRef}>
 					<h4 className="title">
 						<svg xmlns="http://www.w3.org/2000/svg" width="66" height="70" fill="none" viewBox="0 0 66 70">
 							<path fill="#399CFF" d="M46.161 30H12.84c-1.15 0-1.839.91-1.839 1.818v11.364c0 1.136.92 1.818 1.838 1.818h33.323c1.15 0 1.839-.91 1.839-1.818V31.818C48 30.91 47.31 30 46.161 30zm0 13.41H12.84V32.045H46.16v11.363z"></path>
@@ -78,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</p>
 				</div>
 				) : (
-				<div className="fb-parent-wrapper fb-contact-form-render" ref={panelRef}>
+				<div className="fb-parent-wrapper fb-contact-form-render" id={contactFormGlobalWraperID} ref={panelRef}>
 					{selectedForm ? (
 						<div dangerouslySetInnerHTML={{ __html: selectedForm }} />
 				) : (
