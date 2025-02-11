@@ -7,6 +7,10 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
+    infoBoxPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	infoBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'
