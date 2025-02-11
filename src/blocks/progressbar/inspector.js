@@ -10,6 +10,7 @@ import {
     RangeControl,
     SelectControl,
     TextControl,
+    ToggleControl,
 } from '@wordpress/components';
 
 import {
@@ -75,6 +76,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarDesktopSwitcher,
 		progressbarTabletSwitcher,
 		progressbarMobileSwitcher,
+
+        progressGlobalWraperID,
+		progressGlobalWraperClass,
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -589,6 +593,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={progressGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ progressGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={progressGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ progressGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+                                                    
                                                 </PanelBody>
 
                                                 <PanelBody

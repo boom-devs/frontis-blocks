@@ -14,11 +14,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showLabels,
 		showPlaceholder,
 		showErrorMessage,
+
+		fluentFormGlobalWraperID,
+		fluentFormGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: [
 			'fb-parent-wrapper fb-fluent-form-wrapper',
+			fluentFormGlobalWraperClass,
 			blockID,
 			!showLabels && 'fb-fluent-form-hide-label',
 			!showPlaceholder && 'fb-fluent-form-hide-placeholder',
@@ -48,7 +52,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.fluent_plugin_active ? (
-					<div className="fb-reusable_notice">
+					<div className="fb-reusable_notice" id={fluentFormGlobalWraperID}>
 						<h4 className="title">
 							<svg xmlns="http://www.w3.org/2000/svg" width="66" height="70" fill="none" viewBox="0 0 66 70">
 								<path fill="#399CFF" d="M46.161 30H12.84c-1.15 0-1.839.91-1.839 1.818v11.364c0 1.136.92 1.818 1.838 1.818h33.323c1.15 0 1.839-.91 1.839-1.818V31.818C48 30.91 47.31 30 46.161 30zm0 13.41H12.84V32.045H46.16v11.363z"></path>
@@ -64,25 +68,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				) : (
 					<>
-						{!formId && (
-							<SelectControl
-								label={__('Fluent Form', 'frontis-blocks')}
-								value={formId}
-								options={modifiedFormLists}
-								onChange={(newFormId) =>
-									setAttributes({ formId: newFormId })
-								}
-								className="fb-fluent-form-select"
-							/>
-						)}
+						<div id={fluentFormGlobalWraperID}>
+							{!formId && (
+								<SelectControl
+									label={__('Fluent Form', 'frontis-blocks')}
+									value={formId}
+									options={modifiedFormLists}
+									onChange={(newFormId) =>
+										setAttributes({ formId: newFormId })
+									}
+									className="fb-fluent-form-select"
+								/>
+							)}
 
-						{formId && (
-							<ServerSideRender
-								className="fb-fluent-form-rendered"
-								block="fluentfom/guten-block"
-								attributes={{ formId: formId }}
-							/>
-						)}
+							{formId && (
+								<ServerSideRender
+									className="fb-fluent-form-rendered"
+									block="fluentfom/guten-block"
+									attributes={{ formId: formId }}
+								/>
+							)}
+						</div>
 					</>
 				)}
 			</div>

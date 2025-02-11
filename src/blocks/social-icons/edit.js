@@ -14,10 +14,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialIconUrl,
         socialIconTargetUrl,
 
+        socialGlobalWraperID,
+        socialGlobalWraperClass,
+
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-social-main-wrapper ${blockID}`,
+        className: `fb-social-main-wrapper ${blockID} ${socialGlobalWraperClass}`,
     });
 
     const handleSocialClick = (event) => {
@@ -39,7 +42,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`} ref={panelRef}>
+                <div className={`fb-parent-wrapper fb-social-wrapper ${blockID}`} id={socialGlobalWraperID} ref={panelRef}>
                     <div className="fb-social-links-wrapper">
                         <ul className="fb-socials">
                             {socialItems.map(item => (
