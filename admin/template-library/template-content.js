@@ -20,11 +20,6 @@ const TemplateCard = ({ imageUrl }) => {
         if (response.success) {
           console.log('Page created successfully!', response.data);
 
-          // Redirect to the WordPress editor for the new page
-          // if (response.data.page_id) {
-          //   window.location.href = `${frontisBlocksAdmin.adminUrl}post.php?post=${response.data.page_id}&action=edit`;
-          // }
-
           // Show success message
           alert(response.data.message);
         } else {
