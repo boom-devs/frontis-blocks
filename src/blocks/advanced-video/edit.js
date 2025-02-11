@@ -19,10 +19,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         imageOverlaySwitcher,
         previewImageUrl,
         videoPlayIcon,
+
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-advanced-video-main-wrapper ${blockID}`,
+        className: `fb-advanced-video-main-wrapper ${blockID} ${videoGlobalWraperClass}`,
     });
 
     /**
@@ -40,7 +43,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper" ref={panelRef}>
+                <div className="fb-parent-wrapper" ref={panelRef} id={videoGlobalWraperID}>
                     <div className={`fb-advanced-video-wrapper ${blockID}`}>
                         <div className="fb-player-wrapper">
                             <div className="fb-player-option">
