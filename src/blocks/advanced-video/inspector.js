@@ -140,15 +140,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBoxShadowHoverValues,
         videoGlobalBoxShadowHoverCssValue,
 
-<<<<<<< HEAD
         videoGlobalWraperID,
         videoGlobalWraperClass,
 
-=======
         advancedVideoDesktopSwitcher,
 		advancedVideoTabletSwitcher,
 		advancedVideoMobileSwitcher,
->>>>>>> 914dde72b74f2bf53e283b265892f0781952903c
+        
     } = attributes;
 
     const deviceType= useDeviceType();

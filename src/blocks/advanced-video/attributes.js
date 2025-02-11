@@ -578,7 +578,6 @@ const attributes = {
     },
     /** End Global Style */
 
-<<<<<<< HEAD
     /** Start Global Setting */
     videoGlobalWraperID : {
         type: "string",
@@ -587,7 +586,10 @@ const attributes = {
     videoGlobalWraperClass : {
         type: "string",
         default: ""
-=======
+    },
+    /** End Global Setting */
+
+    /** Start Responsive Control */
     advancedVideoDesktopSwitcher: {
         type: "boolean",
         default: false,
@@ -599,7 +601,6 @@ const attributes = {
     advancedVideoMobileSwitcher: {
         type: "boolean",
         default: false,
->>>>>>> 914dde72b74f2bf53e283b265892f0781952903c
     },
 };
 
