@@ -11,7 +11,7 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, subscribe, select } from '@wordpress/data';
 import {useEffect, useState} from "@wordpress/element";
 import {useDeviceType} from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
@@ -30,9 +30,6 @@ const TypographySettings = (props) => {
 	const deviceType= useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
-
-	console.log("isFSE isFSE isFSE")
-
 
 	// Typography elements
 	const typographyElements = {
@@ -262,6 +259,7 @@ const TypographySettings = (props) => {
 			},
 		}));
 
+		updateLiveTypography(item, selectedHeading, value);
 		setIsMount(true);
 	}
 
@@ -553,109 +551,91 @@ const TypographySettings = (props) => {
 		setIsMount(true);
 	}
 
-	// Save to database
+	const updateLiveTypography = (...params) => {
+		const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+		const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
 
-	// Save colors after post save
-	const isAfterSave = useAfterSave();
+		console.log("globalTypographyElements globalTypographyElements");
+		console.log(deviceType)
+		console.log(typography)
 
-	useEffect(() => {
-		const handleUpdateSettings = async () => {
-			if (isAfterSave && isMount) {
-				if (typography) {
-					const response = await updateGlobalStyle(typography, 'fb_update_typography');
-					if (response.success) {
-						setTypography(response.data.data);
-						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-					}
-				}
-
-				if (customTypography) {
-					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
-					if (response.success) {
-						setCustomTypography(response.data.data);
-						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
-					}
-				}
-
-				if(fontFamilies) {
-					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
-					if (response.success) {
-						setFontFamilies(response.data.data);
-						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
-					}
-				}
-				setIsMount(false);
-			}
+		let styleContent = '';
+		if(params[0] == 'heading') {
+			let headingAttr = `${params[1]} {
+				font-size: ${params[2]?.['Desktop']}px;
+			};`;
+			styleContent = `body .wp-block-post-content ${headingAttr}, body .wp-site-blocks ${headingAttr}`;
 		}
 
-		handleUpdateSettings();
-	}, [isAfterSave]);
+		if (iframeDocument) {
+			let styleTag = iframeDocument.getElementById("global-typo-test");
+
+			if (!styleTag) {
+				styleTag = iframeDocument.createElement("style");
+				styleTag.id = "global-typo-test";
+				iframeDocument.head.appendChild(styleTag);
+			}
+
+			// Generate styles dynamically from typography settings
+			// let h1 = typography?
+			let styles = styleContent;
+
+			// Apply styles to the document or iframe document
+			styleTag.innerHTML = styles;
+		}
+	}
+
+	// Save to database
+
+	subscribe(() => {
+		const isSavingPost = select('core/editor').isSavingPost();
+		const isAutosavingPost = select('core/editor').isAutosavingPost();
+		
+		if (!isMount || isAutosavingPost || !isSavingPost) {
+			return;
+		}
+
+		if(isMount) {
+			handleUpdateSettings();
+		}
+		
+		setIsMount(false);
+	});
+	const handleUpdateSettings = async () => {
+		if (isMount) {
+			if (typography) {
+				const response = await updateGlobalStyle(typography, 'fb_update_typography');
+				if (response.success) {
+					setTypography(response.data.data);
+					localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+				}
+			}
+
+			if (customTypography) {
+				const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+				if (response.success) {
+					setCustomTypography(response.data.data);
+					localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+				}
+			}
+
+			if(fontFamilies) {
+				const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
+				if (response.success) {
+					setFontFamilies(response.data.data);
+					localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+				}
+			}
+			setIsMount(false);
+		}
+	}
 
 	useEffect(() => {
 		if(isMount) {
-
-			const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-			const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document;
-
-			if (iframeDocument) {
-				let styleTag = iframeDocument.getElementById("global-typo");
-
-				if (!styleTag) {
-					styleTag = iframeDocument.createElement("style");
-					styleTag.id = "global-typo";
-					iframeDocument.head.appendChild(styleTag);
-				}
-
-				// Generate styles dynamically from typography settings
-				let styles = "";
-
-				// Object.keys(typography).forEach((item) => {
-				// 	Object.keys(typography[item]).forEach((heading) => {
-				// 		const stylesForDevice = typography[item][heading];
-
-				// 		if (!stylesForDevice) return;
-
-				// 		const {
-				// 			fontFamily,
-				// 			fontSize,
-				// 			fontSizeUnit,
-				// 			fontWeight,
-				// 			fontStyle,
-				// 			textDecoration,
-				// 			textTransform,
-				// 			letterSpacing,
-				// 			letterSpacingUnit,
-				// 			lineHeight,
-				// 			lineHeightUnits,
-				// 		} = stylesForDevice;
-
-				// 		styles += `
-				// 			body .wp-site-blocks ${heading} {
-				// 				${fontFamily ? `font-family: ${fontFamily};` : ""}
-				// 				${fontSize?.[deviceType] ? `font-size: ${fontSize[deviceType]}${fontSizeUnit?.[deviceType] || "px"};` : ""}
-				// 				${fontWeight ? `font-weight: ${fontWeight};` : ""}
-				// 				${fontStyle ? `font-style: ${fontStyle};` : ""}
-				// 				${textDecoration ? `text-decoration: ${textDecoration};` : ""}
-				// 				${textTransform ? `text-transform: ${textTransform};` : ""}
-				// 				${letterSpacing?.[deviceType] ? `letter-spacing: ${letterSpacing[deviceType]}${letterSpacingUnit?.[deviceType] || "px"};` : ""}
-				// 				${lineHeight?.[deviceType] ? `line-height: ${lineHeight[deviceType]}${lineHeightUnits?.[deviceType] || "px"};` : ""}
-				// 			}
-				// 		`;
-				// 	});
-				// });
-
-				// Apply styles to the iframe document
-				styleTag.innerHTML = styles;
-			}
-
-		
 			editPost({ isDirty: true });
 		}
 		
 	}, [isMount]);
-
-
-	console.log(typography)
 
 	return (
 		<TabPanel
