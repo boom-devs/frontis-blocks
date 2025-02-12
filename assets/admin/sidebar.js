@@ -1096,7 +1096,6 @@ var TypographySettings = function TypographySettings(props) {
     editPost = _useDispatch.editPost;
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
-  console.log("isFSE isFSE isFSE");
 
   // Typography elements
   var typographyElements = {
@@ -1254,6 +1253,7 @@ var TypographySettings = function TypographySettings(props) {
         fontSize: _objectSpread(_objectSpread({}, (_typography$item$sele = typography[item][selectedHeading]) === null || _typography$item$sele === void 0 ? void 0 : _typography$item$sele.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    updateLiveTypography(item, selectedHeading, value);
     setIsMount(true);
   };
   var onChangeHeadingFontSizeUnit = function onChangeHeadingFontSizeUnit(value, item) {
@@ -1431,134 +1431,116 @@ var TypographySettings = function TypographySettings(props) {
     });
     setIsMount(true);
   };
+  var updateLiveTypography = function updateLiveTypography() {
+    var _iframe$contentWindow;
+    var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+    var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
+    console.log("globalTypographyElements globalTypographyElements");
+    console.log(deviceType);
+    console.log(typography);
+    var styleContent = '';
+    if ((arguments.length <= 0 ? undefined : arguments[0]) == 'heading') {
+      var _ref;
+      var headingAttr = "".concat(arguments.length <= 1 ? undefined : arguments[1], " {\n\t\t\t\tfont-size: ").concat((_ref = arguments.length <= 2 ? undefined : arguments[2]) === null || _ref === void 0 ? void 0 : _ref['Desktop'], "px;\n\t\t\t};");
+      styleContent = "body .wp-block-post-content ".concat(headingAttr, ", body .wp-site-blocks ").concat(headingAttr);
+    }
+    if (iframeDocument) {
+      var styleTag = iframeDocument.getElementById("global-typo-test");
+      if (!styleTag) {
+        styleTag = iframeDocument.createElement("style");
+        styleTag.id = "global-typo-test";
+        iframeDocument.head.appendChild(styleTag);
+      }
+
+      // Generate styles dynamically from typography settings
+      // let h1 = typography?
+      var styles = styleContent;
+
+      // Apply styles to the document or iframe document
+      styleTag.innerHTML = styles;
+    }
+  };
 
   // Save to database
 
-  // Save colors after post save
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    var handleUpdateSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, _response, _response2;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              if (!(isAfterSave && isMount)) {
-                _context.next = 17;
-                break;
-              }
-              if (!typography) {
-                _context.next = 6;
-                break;
-              }
-              _context.next = 4;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
-            case 4:
-              response = _context.sent;
-              if (response.success) {
-                setTypography(response.data.data);
-                localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-              }
-            case 6:
-              if (!customTypography) {
-                _context.next = 11;
-                break;
-              }
-              _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
-            case 9:
-              _response = _context.sent;
-              if (_response.success) {
-                setCustomTypography(_response.data.data);
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
-              }
-            case 11:
-              if (!fontFamilies) {
-                _context.next = 16;
-                break;
-              }
-              _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
-            case 14:
-              _response2 = _context.sent;
-              if (_response2.success) {
-                setFontFamilies(_response2.data.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response2.data.data));
-              }
-            case 16:
-              setIsMount(false);
-            case 17:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee);
-      }));
-      return function handleUpdateSettings() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-    handleUpdateSettings();
-  }, [isAfterSave]);
+  (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.subscribe)(function () {
+    var isSavingPost = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.select)('core/editor').isSavingPost();
+    var isAutosavingPost = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.select)('core/editor').isAutosavingPost();
+    if (!isMount || isAutosavingPost || !isSavingPost) {
+      return;
+    }
+    if (isMount) {
+      handleUpdateSettings();
+    }
+    setIsMount(false);
+  });
+  var handleUpdateSettings = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var response, _response, _response2;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!isMount) {
+              _context.next = 17;
+              break;
+            }
+            if (!typography) {
+              _context.next = 6;
+              break;
+            }
+            _context.next = 4;
+            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
+          case 4:
+            response = _context.sent;
+            if (response.success) {
+              setTypography(response.data.data);
+              localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+            }
+          case 6:
+            if (!customTypography) {
+              _context.next = 11;
+              break;
+            }
+            _context.next = 9;
+            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+          case 9:
+            _response = _context.sent;
+            if (_response.success) {
+              setCustomTypography(_response.data.data);
+              localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
+            }
+          case 11:
+            if (!fontFamilies) {
+              _context.next = 16;
+              break;
+            }
+            _context.next = 14;
+            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
+          case 14:
+            _response2 = _context.sent;
+            if (_response2.success) {
+              setFontFamilies(_response2.data.data);
+              localStorage.setItem('fb_fontFamilies', JSON.stringify(_response2.data.data));
+            }
+          case 16:
+            setIsMount(false);
+          case 17:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function handleUpdateSettings() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      var _iframe$contentWindow;
-      var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-      var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document);
-      if (iframeDocument) {
-        var styleTag = iframeDocument.getElementById("global-typo");
-        if (!styleTag) {
-          styleTag = iframeDocument.createElement("style");
-          styleTag.id = "global-typo";
-          iframeDocument.head.appendChild(styleTag);
-        }
-
-        // Generate styles dynamically from typography settings
-        var styles = "";
-
-        // Object.keys(typography).forEach((item) => {
-        // 	Object.keys(typography[item]).forEach((heading) => {
-        // 		const stylesForDevice = typography[item][heading];
-
-        // 		if (!stylesForDevice) return;
-
-        // 		const {
-        // 			fontFamily,
-        // 			fontSize,
-        // 			fontSizeUnit,
-        // 			fontWeight,
-        // 			fontStyle,
-        // 			textDecoration,
-        // 			textTransform,
-        // 			letterSpacing,
-        // 			letterSpacingUnit,
-        // 			lineHeight,
-        // 			lineHeightUnits,
-        // 		} = stylesForDevice;
-
-        // 		styles += `
-        // 			body .wp-site-blocks ${heading} {
-        // 				${fontFamily ? `font-family: ${fontFamily};` : ""}
-        // 				${fontSize?.[deviceType] ? `font-size: ${fontSize[deviceType]}${fontSizeUnit?.[deviceType] || "px"};` : ""}
-        // 				${fontWeight ? `font-weight: ${fontWeight};` : ""}
-        // 				${fontStyle ? `font-style: ${fontStyle};` : ""}
-        // 				${textDecoration ? `text-decoration: ${textDecoration};` : ""}
-        // 				${textTransform ? `text-transform: ${textTransform};` : ""}
-        // 				${letterSpacing?.[deviceType] ? `letter-spacing: ${letterSpacing[deviceType]}${letterSpacingUnit?.[deviceType] || "px"};` : ""}
-        // 				${lineHeight?.[deviceType] ? `line-height: ${lineHeight[deviceType]}${lineHeightUnits?.[deviceType] || "px"};` : ""}
-        // 			}
-        // 		`;
-        // 	});
-        // });
-
-        // Apply styles to the iframe document
-        styleTag.innerHTML = styles;
-      }
       editPost({
         isDirty: true
       });
     }
   }, [isMount]);
-  console.log(typography);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
