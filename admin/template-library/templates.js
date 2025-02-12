@@ -19,12 +19,9 @@ const PatternLibraryButton = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-
-
     const handleClick = () => {
         setIsVisible(!isVisible);
     };
-
 
     const importDemo = () => {
 
