@@ -21,6 +21,7 @@ const PatternLibraryButton = () => {
 
     const handleClick = () => {
         setIsVisible(!isVisible);
+        console.log("isVisible:", !isVisible); 
     };
 
     const importDemo = () => {
@@ -73,8 +74,6 @@ const PatternLibraryButton = () => {
             }
         });
     }
-
-    console.log(frontisBlocksAdmin)
 
     // State for active tab
     const schema = data.$schema;

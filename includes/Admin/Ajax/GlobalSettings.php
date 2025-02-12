@@ -334,5 +334,4 @@ class GlobalSettings extends AjaxBase
         }
     }
 
-    
 }
