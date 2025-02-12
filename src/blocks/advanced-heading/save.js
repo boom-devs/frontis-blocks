@@ -31,8 +31,8 @@ export default function save({ attributes }) {
 
     return (
         <>
-            <div {...blockProps} className={headingGlobalWraperClass}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
+            <div {...blockProps}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId} ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
 
                     <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                         {headingIconAlign === 'icon' && headingIconSwitcher && (
