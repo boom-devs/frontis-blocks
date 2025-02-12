@@ -1236,5 +1236,9 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+    advancedHeadingCustomCSS : {
+        type: "string",
+        default: "",
+    },
 }
 export default attributes;

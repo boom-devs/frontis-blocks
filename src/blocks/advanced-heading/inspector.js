@@ -55,6 +55,9 @@ import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
+
+import Editor from '@monaco-editor/react';
+
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -297,6 +300,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         advancedHeadingDesktopSwitcher,
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
+
+        advancedHeadingCustomCSS,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -324,7 +329,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             setAttributes({ headingBackgroundImageUrl: defaultImageUrl });
         }
     }, []);
-
 
 
     /** Start Preset Style */
@@ -1934,12 +1938,31 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingIconMobileBorderRadiusWidthValue
     ]);
 
+    const prefixSelectors = (css, prefix) => {
+        return css
+            .split('}') // Split CSS rules
+            .map(rule => {
+                const [selectors, properties] = rule.split('{'); // Separate selectors and properties
+                if (!selectors || !properties) return ''; // Skip if invalid
+                
+                // Prefix each selector with a space separator
+                const prefixedSelectors = selectors
+                    .split(',')
+                    .map(selector => `${prefix} ${selector.trim()}`) // Ensure a space separator
+                    .join(', '); // Keep selectors properly formatted
+    
+                return `${prefixedSelectors} {${properties}}`; // Add closing bracket properly
+            })
+            .join('\n'); // Add new line between each rule
+    };
+    
+    const addCustomCSS = prefixSelectors(advancedHeadingCustomCSS, `.${blockId}`);
+
     useEffect(() => {
-    setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+        setAttributes({blockStyle: `${allBlockStyle}${addCustomCSS}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle]);
 
-
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${addCustomCSS}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -3162,6 +3185,48 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														onChange={(value) => setAttributes({ advancedHeadingMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <div className="fb-advanced-heading-custom-css-editor-wrapper" style={{ height: '250px' }}>
+                                                        <Editor
+                                                            height="100%"
+                                                            defaultLanguage="css"
+                                                            theme="vs-dark"
+                                                            className="fb-advanced-heading-custom-css-editor"
+                                                            value={advancedHeadingCustomCSS}
+                                                            onChange={(value) => setAttributes({ advancedHeadingCustomCSS: value })}
+                                                            options={{
+                                                                automaticLayout: true,
+                                                                minimap: { enabled: false },
+                                                                padding: { top: 10, bottom: 10 },
+                                                                lineNumbers: 'on',
+                                                                lineNumbersMinChars: 2,
+                                                                fontSize: 14,
+                                                                fontFamily: 'Fira Code, monospace',
+                                                                scrollBeyondLastLine: true,
+                                                                wordWrap: 'off',
+                                                                tabSize: 4,
+                                                                insertSpaces: true,
+                                                                renderWhitespace: 'boundary',
+                                                                cursorBlinking: 'smooth',
+                                                                readOnly: false,
+                                                                autoClosingBrackets: 'always',
+                                                                formatOnPaste: true,
+                                                                formatOnType: true,
+                                                                quickSuggestions: true,
+                                                                bracketPairColorization: true,
+                                                                scrollBeyondLastColumn: 10,
+                                                                horizontalScrollbarSize: 10,
+                                                                verticalScrollbarSize: 10,
+                                                                smoothScrolling: true,
+                                                                cursorStyle: 'line',
+                                                                cursorWidth: 2
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </PanelBody>
 											</div>
 										</div>
                                     </>
