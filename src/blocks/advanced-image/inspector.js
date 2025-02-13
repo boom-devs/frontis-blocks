@@ -27,6 +27,8 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
@@ -220,6 +222,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
 
+		// Position
+		advancedImagePositionType,
+		advancedImageHZOrientationType,
+		advancedImageVROrientationType,
+		advancedImageHZLeftOffset,
+		advancedImageHZLeftOffsetUnits,
+		advancedImageHZRightOffset,
+		advancedImageHZRightOffsetUnits,
+		advancedImageVRTopOffset,
+		advancedImageVRTopOffsetUnits,
+		advancedImageVRBottomOffset,
+		advancedImageVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -919,8 +933,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const advancedImageStyle = useMemo(
 		() => `
-		.fb-advanced-image-wrapper.${blockID} {
+
+		.fb-advanced-image-area.${blockID} {
+			${advancedImagePositionType === 'default' ? `position: relative;` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' ? `width: 100%;` : ''}
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Desktop !== undefined ? `left: ${advancedImageHZLeftOffset.Desktop}${advancedImageHZLeftOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Desktop !== undefined ? `right: ${advancedImageHZRightOffset.Desktop}${advancedImageHZRightOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Desktop !== undefined ? `top: ${advancedImageVRTopOffset.Desktop}${advancedImageVRTopOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedImageVRBottomOffset.Desktop}${advancedImageVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+		}
+		.fb-advanced-image-wrapper.${blockID} {
 			padding: ${globalDeskPadding};
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -1014,8 +1038,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border: ${HeadingBorderHoverColor};
 		}
 		@media all and (max-width: 1024px) {
-		.fb-advanced-image-wrapper.${blockID} {
+		.fb-advanced-image-area.${blockID} {
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Tablet !== undefined ? `left: ${advancedImageHZLeftOffset.Tablet}${advancedImageHZLeftOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Tablet !== undefined ? `right: ${advancedImageHZRightOffset.Tablet}${advancedImageHZRightOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Tablet !== undefined ? `top: ${advancedImageVRTopOffset.Tablet}${advancedImageVRTopOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedImageVRBottomOffset.Tablet}${advancedImageVRBottomOffsetUnits.Tablet};` : ''}
 			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
+		}
+		.fb-advanced-image-wrapper.${blockID} {
 			padding: ${globalTabPadding};
 			margin: ${globalTabMargin};
 			border-width: ${globalTabBorder};
@@ -1038,8 +1069,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		}
 		@media all and (max-width: 767px) {
-		.fb-advanced-image-wrapper.${blockID} {
+		.fb-advanced-image-area.${blockID} {
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Mobile !== undefined ? `left: ${advancedImageHZLeftOffset.Mobile}${advancedImageHZLeftOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Mobile !== undefined ? `right: ${advancedImageHZRightOffset.Mobile}${advancedImageHZRightOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Mobile !== undefined ? `top: ${advancedImageVRTopOffset.Mobile}${advancedImageVRTopOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedImageVRBottomOffset.Mobile}${advancedImageVRBottomOffsetUnits.Mobile};` : ''}
 			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
+		}
+		.fb-advanced-image-wrapper.${blockID} {
 			padding: ${globalMobPadding};
 			margin: ${globalMobMargin};
 			border-width: ${globalMobBorder};
@@ -1146,6 +1184,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingDesktopMargin,
 			headingTabletMargin,
 			headingMobileMargin,
+
+			// Position
+			advancedImagePositionType,
+			advancedImageHZOrientationType,
+			advancedImageVROrientationType,
+			advancedImageHZLeftOffset,
+			advancedImageHZLeftOffsetUnits,
+			advancedImageHZRightOffset,
+			advancedImageHZRightOffsetUnits,
+			advancedImageVRTopOffset,
+			advancedImageVRTopOffsetUnits,
+			advancedImageVRBottomOffset,
+			advancedImageVRBottomOffsetUnits,
 		],
 	);
 
@@ -1674,6 +1725,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														resetFallbackValue={""}
 														isRangeUnit={false}
 
+													/>
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={advancedImagePositionType}
+														setPositionType={(value) => setAttributes({ advancedImagePositionType: value })}
+																										
+														HZOrientationType={advancedImageHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ advancedImageHZOrientationType: value })
+														}
+														VROrientationType={advancedImageVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ advancedImageVROrientationType: value })
+														}
+																											
+														HZLeftOffset={advancedImageHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ advancedImageHZLeftOffset: value })}
+														HZLeftOffsetUnits={advancedImageHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ advancedImageHZLeftOffsetUnits: value })}
+														HZRightOffset={advancedImageHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ advancedImageHZRightOffset: value })}
+														HZRightOffsetUnits={advancedImageHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ advancedImageHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={advancedImageVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ advancedImageVRTopOffset: value })}
+														VRTopOffsetUnits={advancedImageVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ advancedImageVRTopOffsetUnits: value })}
+														VRBottomOffset={advancedImageVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ advancedImageVRBottomOffset: value })}
+														VRBottomOffsetUnits={advancedImageVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ advancedImageVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
 													/>
 
 													<FB_InputControl
