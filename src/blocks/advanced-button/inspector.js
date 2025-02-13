@@ -43,6 +43,8 @@ import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_ImageControl from '@Components/image-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '../../components/position-control/index.js';
 
@@ -202,6 +204,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** Start Global Setting */
 		buttonGlobalWraperID,
 		buttonGlobalWraperClass,
+		buttonCustomCSS,
 		/** End Global Setting */
 
 		// Position
@@ -1373,12 +1376,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		advancedBtnVRBottomOffsetUnits,
 	]);
 
+
+	const customCss = getCustomCss(buttonCustomCSS, `.${blockId}`);
+
 	useEffect(() => {
-		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-	}, [allBlockStyle]);
+		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle, customCss]);
 
 
-	const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -2157,6 +2163,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														className="fb-setting-responsive-control"
 														checked={advancedBtnMobileSwitcher}
 														onChange={(value) => setAttributes({ advancedBtnMobileSwitcher: value })}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={buttonCustomCSS}
+														onChangeValue={(value) => setAttributes({ buttonCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

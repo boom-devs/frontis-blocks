@@ -44,7 +44,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonGlobalWraperClass,
     } = attributes;
 
-    const blockProps = useBlockProps();
+    // const blockProps = useBlockProps();
+
+    const blockProps = useBlockProps({
+        className: `fb-advanced-button-main-wrapper ${blockId}`,
+    });
+
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -76,8 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
             
-            <div {...blockProps} id={blockId} className={`fb-advanced-button-area ${blockId} ${buttonGlobalWraperClass}`}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
+            <div {...blockProps} id={blockId} className={`fb-advanced-button-area ${blockId}`}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId} ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
