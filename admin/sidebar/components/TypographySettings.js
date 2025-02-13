@@ -555,34 +555,128 @@ const TypographySettings = (props) => {
 		const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
 		const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
 
-		console.log("globalTypographyElements globalTypographyElements");
-		console.log(deviceType)
-		console.log(typography)
-
 		let styleContent = '';
-		if(params[0] == 'heading') {
-			let headingAttr = `${params[1]} {
-				font-size: ${params[2]?.['Desktop']}px;
-			};`;
-			styleContent = `body .wp-block-post-content ${headingAttr}, body .wp-site-blocks ${headingAttr}`;
+		let rootVariables = '';
+
+		if (params[0] === 'heading') {
+			const headingLevel = params[1].replace('h', ''); // Extract number from h1, h2, etc.
+			const fontSize = params[2]?.['Desktop'] || '20';
+			
+			// Create CSS variable name
+			const variableName = `--fb-global-typo-h-${headingLevel}`;
+			
+			// Create root variable
+			rootVariables = `:root { ${variableName}: ${fontSize}px; }`;
+			
+			// Use the variable in heading style
+			styleContent = `
+				${rootVariables}
+				body .wp-site-blocks ${params[1]} {
+					font-size: var(${variableName});
+				}
+
+				:root {
+					--fb-global-typography-body--font-size: "20px"
+					--fb-global-typography-body--font-weight: "500"
+					--fb-global-typography-body--font-transform: "default"
+					--fb-global-typography-body--font-decoration: "default"
+					--fb-global-typography-body--font-spacing: "inherit"
+					--fb-global-typography-body--font-line-height: "default"
+				}
+
+			`;
 		}
 
-		if (iframeDocument) {
-			let styleTag = iframeDocument.getElementById("global-typo-test");
+		if(params[0] === 'heading') {
+			rootVariables = `
+				--fb-global-typography-h1--font-size: "20px"
+				--fb-global-typography-h1--font-weight: "500"
+				--fb-global-typography-h1--font-transform: "default"
+				--fb-global-typography-h1--font-decoration: "default"
+				--fb-global-typography-h1--font-spacing: "inherit"
+				--fb-global-typography-h1--font-line-height: "default"
+				
+				--fb-global-typography-h2--font-size: "20px"
+				--fb-global-typography-h2--font-weight: "500"
+				--fb-global-typography-h2--font-transform: "default"
+				--fb-global-typography-h2--font-decoration: "default"
+				--fb-global-typography-h2--font-spacing: "inherit"
+				--fb-global-typography-h2--font-line-height: "default"
+				
+				--fb-global-typography-h3--font-size: "20px"
+				--fb-global-typography-h3--font-weight: "500"
+				--fb-global-typography-h3--font-transform: "default"
+				--fb-global-typography-h3--font-decoration: "default"
+				--fb-global-typography-h3--font-spacing: "inherit"
+				--fb-global-typography-h3--font-line-height: "default"
+				
+				--fb-global-typography-h4--font-size: "20px"
+				--fb-global-typography-h4--font-weight: "500"
+				--fb-global-typography-h4--font-transform: "default"
+				--fb-global-typography-h4--font-decoration: "default"
+				--fb-global-typography-h4--font-spacing: "inherit"
+				--fb-global-typography-h4--font-line-height: "default"
 
-			if (!styleTag) {
-				styleTag = iframeDocument.createElement("style");
-				styleTag.id = "global-typo-test";
-				iframeDocument.head.appendChild(styleTag);
+				--fb-global-typography-h5--font-size: "20px"
+				--fb-global-typography-h5--font-weight: "500"
+				--fb-global-typography-h5--font-transform: "default"
+				--fb-global-typography-h5--font-decoration: "default"
+				--fb-global-typography-h5--font-spacing: "inherit"
+				--fb-global-typography-h5--font-line-height: "default"
+
+				--fb-global-typography-h6--font-size: "20px"
+				--fb-global-typography-h6--font-weight: "500"
+				--fb-global-typography-h6--font-transform: "default"
+				--fb-global-typography-h6--font-decoration: "default"
+				--fb-global-typography-h6--font-spacing: "inherit"
+				--fb-global-typography-h6--font-line-height: "default"
+			`;
+		}
+		
+		if(params[0] === 'body') {
+			rootVariables = `
+				--fb-global-typography-body--font-size: "20px"
+				--fb-global-typography-body--font-weight: "500"
+				--fb-global-typography-body--font-transform: "default"
+				--fb-global-typography-body--font-decoration: "default"
+				--fb-global-typography-body--font-spacing: "inherit"
+				--fb-global-typography-body--font-line-height: "default"
+			`;
+		}
+
+		if(params[0] === 'link') {
+			rootVariables = `
+				--fb-global-typography-link--font-size: "20px"
+				--fb-global-typography-link--font-weight: "500"
+				--fb-global-typography-link--font-transform: "default"
+				--fb-global-typography-link--font-decoration: "default"
+				--fb-global-typography-link--font-spacing: "inherit"
+				--fb-global-typography-link--font-line-height: "default"
+			`;
+		}
+		
+		// Manage style tag
+		let styleTag = iframeDocument.getElementById("global-typo-test");
+		
+		if (!styleTag) {
+			styleTag = iframeDocument.createElement("style");
+			styleTag.id = "global-typo-test";
+			iframeDocument.head.appendChild(styleTag);
+		}
+		
+		// Update or add new variables without removing existing ones
+		if (styleTag.innerHTML) {
+			// Parse existing root variables
+			const existingRoot = styleTag.innerHTML.match(/:root\s*{([^}]*)}/);
+			if (existingRoot) {
+				const existingVars = existingRoot[1];
+				// Create new root section combining existing and new variables
+				const updatedRoot = `:root { ${existingVars} ${rootVariables.replace(/:root\s*{\s*|\s*}/g, '')} }`;
+				styleContent = styleContent.replace(/:root\s*{[^}]*}/, updatedRoot);
 			}
-
-			// Generate styles dynamically from typography settings
-			// let h1 = typography?
-			let styles = styleContent;
-
-			// Apply styles to the document or iframe document
-			styleTag.innerHTML = styles;
 		}
+
+		styleTag.innerHTML = styleContent;
 	}
 
 	// Save to database
@@ -945,3 +1039,13 @@ const TypographySettings = (props) => {
 }
 
 export default TypographySettings;
+
+
+// :root {
+// 	--fb-global-typography-body--font-size: "20px"
+// 	--fb-global-typography-body--font-weight: "500"
+// 	--fb-global-typography-body--font-transform: "default"
+// 	--fb-global-typography-body--font-decoration: "default"
+// 	--fb-global-typography-body--font-spacing: "inherit"
+// 	--fb-global-typography-body--font-line-height: "default"
+// }
