@@ -1435,30 +1435,55 @@ var TypographySettings = function TypographySettings(props) {
     var _iframe$contentWindow;
     var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
     var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
-    console.log("globalTypographyElements globalTypographyElements");
-    console.log(deviceType);
-    console.log(typography);
     var styleContent = '';
-    if ((arguments.length <= 0 ? undefined : arguments[0]) == 'heading') {
-      var _ref;
-      var headingAttr = "".concat(arguments.length <= 1 ? undefined : arguments[1], " {\n\t\t\t\tfont-size: ").concat((_ref = arguments.length <= 2 ? undefined : arguments[2]) === null || _ref === void 0 ? void 0 : _ref['Desktop'], "px;\n\t\t\t};");
-      styleContent = "body .wp-block-post-content ".concat(headingAttr, ", body .wp-site-blocks ").concat(headingAttr);
+    var rootVariables = '';
+    for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {
+      params[_key] = arguments[_key];
     }
-    if (iframeDocument) {
-      var styleTag = iframeDocument.getElementById("global-typo-test");
-      if (!styleTag) {
-        styleTag = iframeDocument.createElement("style");
-        styleTag.id = "global-typo-test";
-        iframeDocument.head.appendChild(styleTag);
+    if (params[0] === 'heading') {
+      var _params$;
+      var headingLevel = params[1].replace('h', ''); // Extract number from h1, h2, etc.
+      var fontSize = ((_params$ = params[2]) === null || _params$ === void 0 ? void 0 : _params$['Desktop']) || '20';
+
+      // Create CSS variable name
+      var variableName = "--fb-global-typo-h-".concat(headingLevel);
+
+      // Create root variable
+      rootVariables = ":root { ".concat(variableName, ": ").concat(fontSize, "px; }");
+
+      // Use the variable in heading style
+      styleContent = "\n\t\t\t\t".concat(rootVariables, "\n\t\t\t\tbody .wp-site-blocks ").concat(params[1], " {\n\t\t\t\t\tfont-size: var(").concat(variableName, ");\n\t\t\t\t}\n\n\t\t\t\t:root {\n\t\t\t\t\t--fb-global-typography-body--font-size: \"20px\"\n\t\t\t\t\t--fb-global-typography-body--font-weight: \"500\"\n\t\t\t\t\t--fb-global-typography-body--font-transform: \"default\"\n\t\t\t\t\t--fb-global-typography-body--font-decoration: \"default\"\n\t\t\t\t\t--fb-global-typography-body--font-spacing: \"inherit\"\n\t\t\t\t\t--fb-global-typography-body--font-line-height: \"default\"\n\t\t\t\t}\n\n\t\t\t");
+    }
+    if (params[0] === 'heading') {
+      rootVariables = "\n\t\t\t\t--fb-global-typography-h1--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h1--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h1--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h1--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h1--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h1--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h2--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h2--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h2--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h2--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h2--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h2--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h3--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h3--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h3--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h3--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h3--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h3--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h4--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h4--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h4--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h4--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h4--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h4--font-line-height: \"default\"\n\n\t\t\t\t--fb-global-typography-h5--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h5--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h5--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h5--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h5--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h5--font-line-height: \"default\"\n\n\t\t\t\t--fb-global-typography-h6--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h6--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h6--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h6--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h6--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h6--font-line-height: \"default\"\n\t\t\t";
+    }
+    if (params[0] === 'body') {
+      rootVariables = "\n\t\t\t\t--fb-global-typography-body--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-body--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-body--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-body--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-body--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-body--font-line-height: \"default\"\n\t\t\t";
+    }
+    if (params[0] === 'link') {
+      rootVariables = "\n\t\t\t\t--fb-global-typography-link--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-link--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-link--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-link--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-link--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-link--font-line-height: \"default\"\n\t\t\t";
+    }
+
+    // Manage style tag
+    var styleTag = iframeDocument.getElementById("global-typo-test");
+    if (!styleTag) {
+      styleTag = iframeDocument.createElement("style");
+      styleTag.id = "global-typo-test";
+      iframeDocument.head.appendChild(styleTag);
+    }
+
+    // Update or add new variables without removing existing ones
+    if (styleTag.innerHTML) {
+      // Parse existing root variables
+      var existingRoot = styleTag.innerHTML.match(/:root\s*{([^}]*)}/);
+      if (existingRoot) {
+        var existingVars = existingRoot[1];
+        // Create new root section combining existing and new variables
+        var updatedRoot = ":root { ".concat(existingVars, " ").concat(rootVariables.replace(/:root\s*{\s*|\s*}/g, ''), " }");
+        styleContent = styleContent.replace(/:root\s*{[^}]*}/, updatedRoot);
       }
-
-      // Generate styles dynamically from typography settings
-      // let h1 = typography?
-      var styles = styleContent;
-
-      // Apply styles to the document or iframe document
-      styleTag.innerHTML = styles;
     }
+    styleTag.innerHTML = styleContent;
   };
 
   // Save to database
@@ -1475,7 +1500,7 @@ var TypographySettings = function TypographySettings(props) {
     setIsMount(false);
   });
   var handleUpdateSettings = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response, _response, _response2;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -1531,7 +1556,7 @@ var TypographySettings = function TypographySettings(props) {
       }, _callee);
     }));
     return function handleUpdateSettings() {
-      return _ref2.apply(this, arguments);
+      return _ref.apply(this, arguments);
     };
   }();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
@@ -1888,6 +1913,15 @@ var TypographySettings = function TypographySettings(props) {
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
+
+// :root {
+// 	--fb-global-typography-body--font-size: "20px"
+// 	--fb-global-typography-body--font-weight: "500"
+// 	--fb-global-typography-body--font-transform: "default"
+// 	--fb-global-typography-body--font-decoration: "default"
+// 	--fb-global-typography-body--font-spacing: "inherit"
+// 	--fb-global-typography-body--font-line-height: "default"
+// }
 
 /***/ }),
 
@@ -2302,7 +2336,6 @@ var gradientDefaults = [{
   "var": "--fb-gradient-halloween"
 }];
 function FrontisBlocksSidebar(props) {
-  var _frontisBlocksAdmin, _frontisBlocksAdmin2, _frontisExtractTypoVa, _globalTypography$h, _globalTypographyElem, _globalTypographyElem2, _globalTypographyElem3, _globalTypographyElem4, _globalTypographyElem5, _globalTypographyElem6, _globalTypographyElem7, _globalTypographyElem8, _globalTypographyElem9, _globalTypographyElem10, _globalTypographyElem11, _globalTypographyElem12, _globalTypographyElem13, _globalTypographyElem14, _globalTypographyElem15, _globalTypography$lin, _globalTypography$lin2, _globalTypography$lin3, _globalTypography$lin4, _globalTypography$lin5, _globalTypography$lin6, _globalTypography$lin7, _globalTypography$lin8, _globalTypography$lin9, _globalTypography$lin10, _globalTypography$lin11, _globalTypography$lin12, _globalTypography$lin13, _globalTypography$lin14, _globalTypography$but, _globalTypography$but2, _globalTypography$but3, _globalTypography$but4, _globalTypography$but5, _globalTypography$but6, _globalTypography$but7, _globalTypography$but8, _globalTypography$but9, _globalTypography$but10, _globalTypography$but11, _globalTypography$but12, _globalTypography$but13, _globalTypography$but14, _globalTypography$hea, _frontisExtractTypoVa2, _globalTypography$hea2, _frontisExtractTypoVa3, _globalTypography$hea3, _frontisExtractTypoVa4, _globalTypography$hea4, _frontisExtractTypoVa5, _globalTypography$hea5, _frontisExtractTypoVa6, _globalTypography$hea6, _frontisExtractTypoVa7, _globalTypography$hea7, _frontisExtractTypoVa8, _globalTypography$hea8, _frontisExtractTypoVa9, _globalTypography$hea9, _frontisExtractTypoVa10, _globalTypography$hea10, _frontisExtractTypoVa11, _globalTypography$hea11, _frontisExtractTypoVa12, _globalTypography$hea12, _frontisExtractTypoVa13, _globalTypography$hea13, _globalTypography$hea14, _globalTypography$hea15, _globalTypography$hea16, _globalTypography$hea17, _frontisExtractTypoVa14, _globalTypography$hea18, _frontisExtractTypoVa15, _globalTypography$hea19, _frontisExtractTypoVa16, _globalTypography$hea20, _frontisExtractTypoVa17, _globalTypography$hea21, _frontisExtractTypoVa18, _globalTypography$hea22, _frontisExtractTypoVa19, _globalTypography$hea23, _globalTypography$h2, _frontisExtractTypoVa20, _globalTypography$h3, _frontisExtractTypoVa21, _globalTypography$h4, _frontisExtractTypoVa22, _globalTypography$h5, _frontisExtractTypoVa23, _globalTypography$h6, _frontisExtractTypoVa24, _globalTypography$h7, _frontisExtractTypoVa25, _globalTypography$h8, _frontisExtractTypoVa26, _globalTypography$h9, _frontisExtractTypoVa27, _globalTypography$h10, _frontisExtractTypoVa28, _globalTypography$h11, _frontisExtractTypoVa29, _globalTypography$h12, _frontisExtractTypoVa30, _globalTypography$h13, _frontisExtractTypoVa31, _globalTypography$h14, _globalTypography$h15, _globalTypography$h16, _globalTypography$h17, _globalTypography$h18, _frontisExtractTypoVa32, _globalTypography$h19, _frontisExtractTypoVa33, _globalTypography$h20, _frontisExtractTypoVa34, _globalTypography$h21, _frontisExtractTypoVa35, _globalTypography$h22, _frontisExtractTypoVa36, _globalTypography$h23, _frontisExtractTypoVa37, _globalTypography$h24, _globalTypography$h25, _frontisExtractTypoVa38, _globalTypography$h26, _frontisExtractTypoVa39, _globalTypography$h27, _frontisExtractTypoVa40, _globalTypography$h28, _frontisExtractTypoVa41, _globalTypography$h29, _frontisExtractTypoVa42, _globalTypography$h30, _frontisExtractTypoVa43, _globalTypography$h31, _frontisExtractTypoVa44, _globalTypography$h32, _frontisExtractTypoVa45, _globalTypography$h33, _frontisExtractTypoVa46, _globalTypography$h34, _frontisExtractTypoVa47, _globalTypography$h35, _frontisExtractTypoVa48, _globalTypography$h36, _frontisExtractTypoVa49, _globalTypography$h37, _globalTypography$h38, _globalTypography$h39, _globalTypography$h40, _globalTypography$h41, _frontisExtractTypoVa50, _globalTypography$h42, _frontisExtractTypoVa51, _globalTypography$h43, _frontisExtractTypoVa52, _globalTypography$h44, _frontisExtractTypoVa53, _globalTypography$h45, _frontisExtractTypoVa54, _globalTypography$h46, _frontisExtractTypoVa55, _globalTypography$h47, _globalTypography$h48, _frontisExtractTypoVa56, _globalTypography$h49, _frontisExtractTypoVa57, _globalTypography$h50, _frontisExtractTypoVa58, _globalTypography$h51, _frontisExtractTypoVa59, _globalTypography$h52, _frontisExtractTypoVa60, _globalTypography$h53, _frontisExtractTypoVa61, _globalTypography$h54, _frontisExtractTypoVa62, _globalTypography$h55, _frontisExtractTypoVa63, _globalTypography$h56, _frontisExtractTypoVa64, _globalTypography$h57, _frontisExtractTypoVa65, _globalTypography$h58, _frontisExtractTypoVa66, _globalTypography$h59, _frontisExtractTypoVa67, _globalTypography$h60, _globalTypography$h61, _globalTypography$h62, _globalTypography$h63, _globalTypography$h64, _frontisExtractTypoVa68, _globalTypography$h65, _frontisExtractTypoVa69, _globalTypography$h66, _frontisExtractTypoVa70, _globalTypography$h67, _frontisExtractTypoVa71, _globalTypography$h68, _frontisExtractTypoVa72, _globalTypography$h69, _frontisExtractTypoVa73, _globalTypography$h70, _globalTypography$h71, _frontisExtractTypoVa74, _globalTypography$h72, _frontisExtractTypoVa75, _globalTypography$h73, _frontisExtractTypoVa76, _globalTypography$h74, _frontisExtractTypoVa77, _globalTypography$h75, _frontisExtractTypoVa78, _globalTypography$h76, _frontisExtractTypoVa79, _globalTypography$h77, _frontisExtractTypoVa80, _globalTypography$h78, _frontisExtractTypoVa81, _globalTypography$h79, _frontisExtractTypoVa82, _globalTypography$h80, _frontisExtractTypoVa83, _globalTypography$h81, _frontisExtractTypoVa84, _globalTypography$h82, _frontisExtractTypoVa85, _globalTypography$h83, _globalTypography$h84, _globalTypography$h85, _globalTypography$h86, _globalTypography$h87, _frontisExtractTypoVa86, _globalTypography$h88, _frontisExtractTypoVa87, _globalTypography$h89, _frontisExtractTypoVa88, _globalTypography$h90, _frontisExtractTypoVa89, _globalTypography$h91, _frontisExtractTypoVa90, _globalTypography$h92, _frontisExtractTypoVa91, _globalTypography$h93, _globalTypography$h94, _frontisExtractTypoVa92, _globalTypography$h95, _frontisExtractTypoVa93, _globalTypography$h96, _frontisExtractTypoVa94, _globalTypography$h97, _frontisExtractTypoVa95, _globalTypography$h98, _frontisExtractTypoVa96, _globalTypography$h99, _frontisExtractTypoVa97, _globalTypography$h100, _frontisExtractTypoVa98, _globalTypography$h101, _frontisExtractTypoVa99, _globalTypography$h102, _frontisExtractTypoVa100, _globalTypography$h103, _frontisExtractTypoVa101, _globalTypography$h104, _frontisExtractTypoVa102, _globalTypography$h105, _frontisExtractTypoVa103, _globalTypography$h106, _globalTypography$h107, _globalTypography$h108, _globalTypography$h109, _globalTypography$h110, _frontisExtractTypoVa104, _globalTypography$h111, _frontisExtractTypoVa105, _globalTypography$h112, _frontisExtractTypoVa106, _globalTypography$h113, _frontisExtractTypoVa107, _globalTypography$h114, _frontisExtractTypoVa108, _globalTypography$h115, _frontisExtractTypoVa109, _globalTypography$h116, _globalTypography$h117, _frontisExtractTypoVa110, _globalTypography$h118, _frontisExtractTypoVa111, _globalTypography$h119, _frontisExtractTypoVa112, _globalTypography$h120, _frontisExtractTypoVa113, _globalTypography$h121, _frontisExtractTypoVa114, _globalTypography$h122, _frontisExtractTypoVa115, _globalTypography$h123, _frontisExtractTypoVa116, _globalTypography$h124, _frontisExtractTypoVa117, _globalTypography$h125, _frontisExtractTypoVa118, _globalTypography$h126, _frontisExtractTypoVa119, _globalTypography$h127, _frontisExtractTypoVa120, _globalTypography$h128, _frontisExtractTypoVa121, _globalTypography$h129, _globalTypography$h130, _globalTypography$h131, _globalTypography$h132, _globalTypography$h133, _frontisExtractTypoVa122, _globalTypography$h134, _frontisExtractTypoVa123, _globalTypography$h135, _frontisExtractTypoVa124, _globalTypography$h136, _frontisExtractTypoVa125, _globalTypography$h137, _frontisExtractTypoVa126, _globalTypography$h138, _frontisExtractTypoVa127, _globalTypography$h139;
   // Set state
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -2332,131 +2365,134 @@ function FrontisBlocksSidebar(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     fbGlobalSettingsLoading = _useState14[0],
     setFbGlobalSettingsLoading = _useState14[1];
-  var globalTypographyElements = (_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.global_styles;
-  var globalTypography = globalTypographyElements === null || globalTypographyElements === void 0 ? void 0 : globalTypographyElements.elements;
-  console.log("globalTypography.heading");
-  console.log((_frontisBlocksAdmin2 = frontisBlocksAdmin) === null || _frontisBlocksAdmin2 === void 0 ? void 0 : _frontisBlocksAdmin2.global_styles);
-  console.log("frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit");
-  console.log((_frontisExtractTypoVa = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h = globalTypography.h2) === null || _globalTypography$h === void 0 || (_globalTypography$h = _globalTypography$h.typography) === null || _globalTypography$h === void 0 ? void 0 : _globalTypography$h.fontSize)) === null || _frontisExtractTypoVa === void 0 ? void 0 : _frontisExtractTypoVa.value);
-  console.log((0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem = globalTypographyElements.typography) === null || _globalTypographyElem === void 0 ? void 0 : _globalTypographyElem.fontFamily));
+
+  // const globalTypographyElements = frontisBlocksAdmin?.global_styles;
+  // const globalTypography = globalTypographyElements?.elements;
+
+  // console.log("globalTypography.heading")
+  // console.log(frontisBlocksAdmin?.global_styles);
+
+  // console.log("frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit")
+  // console.log(frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value)
+  // console.log(getFontFamily(globalTypographyElements?.typography?.fontFamily));
   var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
       body: {
-        fontFamily: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem2 = globalTypographyElements.typography) === null || _globalTypographyElem2 === void 0 ? void 0 : _globalTypographyElem2.fontFamily,
+        fontFamily: 'Default',
         lineHeight: {
-          Desktop: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem3 = globalTypographyElements.typography) === null || _globalTypographyElem3 === void 0 ? void 0 : _globalTypographyElem3.lineHeight,
-          Tablet: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem4 = globalTypographyElements.typography) === null || _globalTypographyElem4 === void 0 ? void 0 : _globalTypographyElem4.lineHeight,
-          Mobile: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem5 = globalTypographyElements.typography) === null || _globalTypographyElem5 === void 0 ? void 0 : _globalTypographyElem5.lineHeight
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
         },
         lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
-        },
-        fontSize: {
-          Desktop: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem6 = globalTypographyElements.typography) === null || _globalTypographyElem6 === void 0 ? void 0 : _globalTypographyElem6.fontSize,
-          Tablet: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem7 = globalTypographyElements.typography) === null || _globalTypographyElem7 === void 0 ? void 0 : _globalTypographyElem7.fontSize,
-          Mobile: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem8 = globalTypographyElements.typography) === null || _globalTypographyElem8 === void 0 ? void 0 : _globalTypographyElem8.fontSize
         },
         fontSizeUnit: {
           Desktop: 'px',
           Tablet: 'px',
           Mobile: 'px'
         },
-        fontWeight: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem9 = globalTypographyElements.typography) === null || _globalTypographyElem9 === void 0 ? void 0 : _globalTypographyElem9.fontWeight,
-        fontStyle: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem10 = globalTypographyElements.typography) === null || _globalTypographyElem10 === void 0 ? void 0 : _globalTypographyElem10.fontStyle,
-        textTransform: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem11 = globalTypographyElements.typography) === null || _globalTypographyElem11 === void 0 ? void 0 : _globalTypographyElem11.textTransform,
-        textDecoration: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem12 = globalTypographyElements.typography) === null || _globalTypographyElem12 === void 0 ? void 0 : _globalTypographyElem12.textDecoration,
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
         letterSpacing: {
-          Desktop: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem13 = globalTypographyElements.typography) === null || _globalTypographyElem13 === void 0 ? void 0 : _globalTypographyElem13.letterSpacing,
-          Tablet: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem14 = globalTypographyElements.typography) === null || _globalTypographyElem14 === void 0 ? void 0 : _globalTypographyElem14.letterSpacing,
-          Mobile: globalTypographyElements === null || globalTypographyElements === void 0 || (_globalTypographyElem15 = globalTypographyElements.typography) === null || _globalTypographyElem15 === void 0 ? void 0 : _globalTypographyElem15.letterSpacing
-        },
-        letterSpacingUnit: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       link: {
-        fontFamily: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin = globalTypography.link) === null || _globalTypography$lin === void 0 || (_globalTypography$lin = _globalTypography$lin.typography) === null || _globalTypography$lin === void 0 ? void 0 : _globalTypography$lin.fontFamily,
+        fontFamily: 'Default',
         lineHeight: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin2 = globalTypography.link) === null || _globalTypography$lin2 === void 0 || (_globalTypography$lin2 = _globalTypography$lin2.typography) === null || _globalTypography$lin2 === void 0 ? void 0 : _globalTypography$lin2.lineHeight,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin3 = globalTypography.link) === null || _globalTypography$lin3 === void 0 || (_globalTypography$lin3 = _globalTypography$lin3.typography) === null || _globalTypography$lin3 === void 0 ? void 0 : _globalTypography$lin3.lineHeight,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin4 = globalTypography.link) === null || _globalTypography$lin4 === void 0 || (_globalTypography$lin4 = _globalTypography$lin4.typography) === null || _globalTypography$lin4 === void 0 ? void 0 : _globalTypography$lin4.lineHeight
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
         },
         lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
-        },
-        fontSize: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin5 = globalTypography.link) === null || _globalTypography$lin5 === void 0 || (_globalTypography$lin5 = _globalTypography$lin5.typography) === null || _globalTypography$lin5 === void 0 ? void 0 : _globalTypography$lin5.fontSize,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin6 = globalTypography.link) === null || _globalTypography$lin6 === void 0 || (_globalTypography$lin6 = _globalTypography$lin6.typography) === null || _globalTypography$lin6 === void 0 ? void 0 : _globalTypography$lin6.fontSize,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin7 = globalTypography.link) === null || _globalTypography$lin7 === void 0 || (_globalTypography$lin7 = _globalTypography$lin7.typography) === null || _globalTypography$lin7 === void 0 ? void 0 : _globalTypography$lin7.fontSize
         },
         fontSizeUnit: {
           Desktop: 'px',
           Tablet: 'px',
           Mobile: 'px'
         },
-        fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin8 = globalTypography.link) === null || _globalTypography$lin8 === void 0 || (_globalTypography$lin8 = _globalTypography$lin8.typography) === null || _globalTypography$lin8 === void 0 ? void 0 : _globalTypography$lin8.fontWeight,
-        fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin9 = globalTypography.link) === null || _globalTypography$lin9 === void 0 || (_globalTypography$lin9 = _globalTypography$lin9.typography) === null || _globalTypography$lin9 === void 0 ? void 0 : _globalTypography$lin9.fontStyle,
-        textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin10 = globalTypography.link) === null || _globalTypography$lin10 === void 0 || (_globalTypography$lin10 = _globalTypography$lin10.typography) === null || _globalTypography$lin10 === void 0 ? void 0 : _globalTypography$lin10.textTransform,
-        textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin11 = globalTypography.link) === null || _globalTypography$lin11 === void 0 || (_globalTypography$lin11 = _globalTypography$lin11.typography) === null || _globalTypography$lin11 === void 0 ? void 0 : _globalTypography$lin11.textDecoration,
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
         letterSpacing: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin12 = globalTypography.link) === null || _globalTypography$lin12 === void 0 || (_globalTypography$lin12 = _globalTypography$lin12.typography) === null || _globalTypography$lin12 === void 0 ? void 0 : _globalTypography$lin12.letterSpacing,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin13 = globalTypography.link) === null || _globalTypography$lin13 === void 0 || (_globalTypography$lin13 = _globalTypography$lin13.typography) === null || _globalTypography$lin13 === void 0 ? void 0 : _globalTypography$lin13.letterSpacing,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$lin14 = globalTypography.link) === null || _globalTypography$lin14 === void 0 || (_globalTypography$lin14 = _globalTypography$lin14.typography) === null || _globalTypography$lin14 === void 0 ? void 0 : _globalTypography$lin14.letterSpacing
-        },
-        letterSpacingUnit: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       button: {
-        fontFamily: globalTypography === null || globalTypography === void 0 || (_globalTypography$but = globalTypography.button) === null || _globalTypography$but === void 0 || (_globalTypography$but = _globalTypography$but.typography) === null || _globalTypography$but === void 0 ? void 0 : _globalTypography$but.fontFamily,
+        fontFamily: 'Default',
         lineHeight: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$but2 = globalTypography.button) === null || _globalTypography$but2 === void 0 || (_globalTypography$but2 = _globalTypography$but2.typography) === null || _globalTypography$but2 === void 0 ? void 0 : _globalTypography$but2.lineHeight,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$but3 = globalTypography.button) === null || _globalTypography$but3 === void 0 || (_globalTypography$but3 = _globalTypography$but3.typography) === null || _globalTypography$but3 === void 0 ? void 0 : _globalTypography$but3.lineHeight,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$but4 = globalTypography.button) === null || _globalTypography$but4 === void 0 || (_globalTypography$but4 = _globalTypography$but4.typography) === null || _globalTypography$but4 === void 0 ? void 0 : _globalTypography$but4.lineHeight
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
         },
         lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
-        },
-        fontSize: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$but5 = globalTypography.button) === null || _globalTypography$but5 === void 0 || (_globalTypography$but5 = _globalTypography$but5.typography) === null || _globalTypography$but5 === void 0 ? void 0 : _globalTypography$but5.fontSize,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$but6 = globalTypography.button) === null || _globalTypography$but6 === void 0 || (_globalTypography$but6 = _globalTypography$but6.typography) === null || _globalTypography$but6 === void 0 ? void 0 : _globalTypography$but6.fontSize,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$but7 = globalTypography.button) === null || _globalTypography$but7 === void 0 || (_globalTypography$but7 = _globalTypography$but7.typography) === null || _globalTypography$but7 === void 0 ? void 0 : _globalTypography$but7.fontSize
         },
         fontSizeUnit: {
           Desktop: 'px',
           Tablet: 'px',
           Mobile: 'px'
         },
-        fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$but8 = globalTypography.button) === null || _globalTypography$but8 === void 0 || (_globalTypography$but8 = _globalTypography$but8.typography) === null || _globalTypography$but8 === void 0 ? void 0 : _globalTypography$but8.fontWeight,
-        fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$but9 = globalTypography.button) === null || _globalTypography$but9 === void 0 || (_globalTypography$but9 = _globalTypography$but9.typography) === null || _globalTypography$but9 === void 0 ? void 0 : _globalTypography$but9.fontStyle,
-        textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$but10 = globalTypography.button) === null || _globalTypography$but10 === void 0 || (_globalTypography$but10 = _globalTypography$but10.typography) === null || _globalTypography$but10 === void 0 ? void 0 : _globalTypography$but10.textTransform,
-        textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$but11 = globalTypography.button) === null || _globalTypography$but11 === void 0 || (_globalTypography$but11 = _globalTypography$but11.typography) === null || _globalTypography$but11 === void 0 ? void 0 : _globalTypography$but11.textDecoration,
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
         letterSpacing: {
-          Desktop: globalTypography === null || globalTypography === void 0 || (_globalTypography$but12 = globalTypography.button) === null || _globalTypography$but12 === void 0 || (_globalTypography$but12 = _globalTypography$but12.typography) === null || _globalTypography$but12 === void 0 ? void 0 : _globalTypography$but12.letterSpacing,
-          Tablet: globalTypography === null || globalTypography === void 0 || (_globalTypography$but13 = globalTypography.button) === null || _globalTypography$but13 === void 0 || (_globalTypography$but13 = _globalTypography$but13.typography) === null || _globalTypography$but13 === void 0 ? void 0 : _globalTypography$but13.letterSpacing,
-          Mobile: globalTypography === null || globalTypography === void 0 || (_globalTypography$but14 = globalTypography.button) === null || _globalTypography$but14 === void 0 || (_globalTypography$but14 = _globalTypography$but14.typography) === null || _globalTypography$but14 === void 0 ? void 0 : _globalTypography$but14.letterSpacing
-        },
-        letterSpacingUnit: {
           Desktop: '',
           Tablet: '',
           Mobile: ''
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
         }
       },
       captions: {
         fontFamily: 'Default',
         lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
         },
         lineHeightUnits: {
           Desktop: 'px',
@@ -2473,10 +2509,10 @@ function FrontisBlocksSidebar(props) {
           Tablet: 'px',
           Mobile: 'px'
         },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
         letterSpacing: {
           Desktop: '',
           Tablet: '',
@@ -2490,262 +2526,262 @@ function FrontisBlocksSidebar(props) {
       },
       heading: {
         all: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea = globalTypography.heading) === null || _globalTypography$hea === void 0 || (_globalTypography$hea = _globalTypography$hea.typography) === null || _globalTypography$hea === void 0 ? void 0 : _globalTypography$hea.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa2 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea2 = globalTypography.heading) === null || _globalTypography$hea2 === void 0 || (_globalTypography$hea2 = _globalTypography$hea2.typography) === null || _globalTypography$hea2 === void 0 ? void 0 : _globalTypography$hea2.lineHeight)) === null || _frontisExtractTypoVa2 === void 0 ? void 0 : _frontisExtractTypoVa2.value) || '',
-            Tablet: ((_frontisExtractTypoVa3 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea3 = globalTypography.heading) === null || _globalTypography$hea3 === void 0 || (_globalTypography$hea3 = _globalTypography$hea3.typography) === null || _globalTypography$hea3 === void 0 ? void 0 : _globalTypography$hea3.lineHeight)) === null || _frontisExtractTypoVa3 === void 0 ? void 0 : _frontisExtractTypoVa3.value) || '',
-            Mobile: ((_frontisExtractTypoVa4 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea4 = globalTypography.heading) === null || _globalTypography$hea4 === void 0 || (_globalTypography$hea4 = _globalTypography$hea4.typography) === null || _globalTypography$hea4 === void 0 ? void 0 : _globalTypography$hea4.lineHeight)) === null || _frontisExtractTypoVa4 === void 0 ? void 0 : _frontisExtractTypoVa4.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa5 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea5 = globalTypography.heading) === null || _globalTypography$hea5 === void 0 || (_globalTypography$hea5 = _globalTypography$hea5.typography) === null || _globalTypography$hea5 === void 0 ? void 0 : _globalTypography$hea5.lineHeight)) === null || _frontisExtractTypoVa5 === void 0 ? void 0 : _frontisExtractTypoVa5.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa6 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea6 = globalTypography.heading) === null || _globalTypography$hea6 === void 0 || (_globalTypography$hea6 = _globalTypography$hea6.typography) === null || _globalTypography$hea6 === void 0 ? void 0 : _globalTypography$hea6.lineHeight)) === null || _frontisExtractTypoVa6 === void 0 ? void 0 : _frontisExtractTypoVa6.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa7 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea7 = globalTypography.heading) === null || _globalTypography$hea7 === void 0 || (_globalTypography$hea7 = _globalTypography$hea7.typography) === null || _globalTypography$hea7 === void 0 ? void 0 : _globalTypography$hea7.lineHeight)) === null || _frontisExtractTypoVa7 === void 0 ? void 0 : _frontisExtractTypoVa7.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa8 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea8 = globalTypography.heading) === null || _globalTypography$hea8 === void 0 || (_globalTypography$hea8 = _globalTypography$hea8.typography) === null || _globalTypography$hea8 === void 0 ? void 0 : _globalTypography$hea8.fontSize)) === null || _frontisExtractTypoVa8 === void 0 ? void 0 : _frontisExtractTypoVa8.value) || '',
-            Tablet: ((_frontisExtractTypoVa9 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea9 = globalTypography.heading) === null || _globalTypography$hea9 === void 0 || (_globalTypography$hea9 = _globalTypography$hea9.typography) === null || _globalTypography$hea9 === void 0 ? void 0 : _globalTypography$hea9.fontSize)) === null || _frontisExtractTypoVa9 === void 0 ? void 0 : _frontisExtractTypoVa9.value) || '',
-            Mobile: ((_frontisExtractTypoVa10 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea10 = globalTypography.heading) === null || _globalTypography$hea10 === void 0 || (_globalTypography$hea10 = _globalTypography$hea10.typography) === null || _globalTypography$hea10 === void 0 ? void 0 : _globalTypography$hea10.fontSize)) === null || _frontisExtractTypoVa10 === void 0 ? void 0 : _frontisExtractTypoVa10.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa11 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea11 = globalTypography.heading) === null || _globalTypography$hea11 === void 0 || (_globalTypography$hea11 = _globalTypography$hea11.typography) === null || _globalTypography$hea11 === void 0 ? void 0 : _globalTypography$hea11.fontSize)) === null || _frontisExtractTypoVa11 === void 0 ? void 0 : _frontisExtractTypoVa11.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa12 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea12 = globalTypography.heading) === null || _globalTypography$hea12 === void 0 || (_globalTypography$hea12 = _globalTypography$hea12.typography) === null || _globalTypography$hea12 === void 0 ? void 0 : _globalTypography$hea12.fontSize)) === null || _frontisExtractTypoVa12 === void 0 ? void 0 : _frontisExtractTypoVa12.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa13 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea13 = globalTypography.heading) === null || _globalTypography$hea13 === void 0 || (_globalTypography$hea13 = _globalTypography$hea13.typography) === null || _globalTypography$hea13 === void 0 ? void 0 : _globalTypography$hea13.fontSize)) === null || _frontisExtractTypoVa13 === void 0 ? void 0 : _frontisExtractTypoVa13.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$hea14 = globalTypography.heading) === null || _globalTypography$hea14 === void 0 || (_globalTypography$hea14 = _globalTypography$hea14.typography) === null || _globalTypography$hea14 === void 0 ? void 0 : _globalTypography$hea14.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$hea15 = globalTypography.heading) === null || _globalTypography$hea15 === void 0 || (_globalTypography$hea15 = _globalTypography$hea15.typography) === null || _globalTypography$hea15 === void 0 ? void 0 : _globalTypography$hea15.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$hea16 = globalTypography.heading) === null || _globalTypography$hea16 === void 0 || (_globalTypography$hea16 = _globalTypography$hea16.typography) === null || _globalTypography$hea16 === void 0 ? void 0 : _globalTypography$hea16.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$hea17 = globalTypography.heading) === null || _globalTypography$hea17 === void 0 || (_globalTypography$hea17 = _globalTypography$hea17.typography) === null || _globalTypography$hea17 === void 0 ? void 0 : _globalTypography$hea17.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa14 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea18 = globalTypography.heading) === null || _globalTypography$hea18 === void 0 || (_globalTypography$hea18 = _globalTypography$hea18.typography) === null || _globalTypography$hea18 === void 0 ? void 0 : _globalTypography$hea18.letterSpacing)) === null || _frontisExtractTypoVa14 === void 0 ? void 0 : _frontisExtractTypoVa14.value) || '',
-            Tablet: ((_frontisExtractTypoVa15 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea19 = globalTypography.heading) === null || _globalTypography$hea19 === void 0 || (_globalTypography$hea19 = _globalTypography$hea19.typography) === null || _globalTypography$hea19 === void 0 ? void 0 : _globalTypography$hea19.letterSpacing)) === null || _frontisExtractTypoVa15 === void 0 ? void 0 : _frontisExtractTypoVa15.value) || '',
-            Mobile: ((_frontisExtractTypoVa16 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea20 = globalTypography.heading) === null || _globalTypography$hea20 === void 0 || (_globalTypography$hea20 = _globalTypography$hea20.typography) === null || _globalTypography$hea20 === void 0 ? void 0 : _globalTypography$hea20.letterSpacing)) === null || _frontisExtractTypoVa16 === void 0 ? void 0 : _frontisExtractTypoVa16.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa17 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea21 = globalTypography.heading) === null || _globalTypography$hea21 === void 0 || (_globalTypography$hea21 = _globalTypography$hea21.typography) === null || _globalTypography$hea21 === void 0 ? void 0 : _globalTypography$hea21.letterSpacing)) === null || _frontisExtractTypoVa17 === void 0 ? void 0 : _frontisExtractTypoVa17.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa18 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea22 = globalTypography.heading) === null || _globalTypography$hea22 === void 0 || (_globalTypography$hea22 = _globalTypography$hea22.typography) === null || _globalTypography$hea22 === void 0 ? void 0 : _globalTypography$hea22.letterSpacing)) === null || _frontisExtractTypoVa18 === void 0 ? void 0 : _frontisExtractTypoVa18.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa19 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$hea23 = globalTypography.heading) === null || _globalTypography$hea23 === void 0 || (_globalTypography$hea23 = _globalTypography$hea23.typography) === null || _globalTypography$hea23 === void 0 ? void 0 : _globalTypography$hea23.letterSpacing)) === null || _frontisExtractTypoVa19 === void 0 ? void 0 : _frontisExtractTypoVa19.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h1: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h2 = globalTypography.h1) === null || _globalTypography$h2 === void 0 || (_globalTypography$h2 = _globalTypography$h2.typography) === null || _globalTypography$h2 === void 0 ? void 0 : _globalTypography$h2.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa20 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h3 = globalTypography.h1) === null || _globalTypography$h3 === void 0 || (_globalTypography$h3 = _globalTypography$h3.typography) === null || _globalTypography$h3 === void 0 ? void 0 : _globalTypography$h3.lineHeight)) === null || _frontisExtractTypoVa20 === void 0 ? void 0 : _frontisExtractTypoVa20.value) || '',
-            Tablet: ((_frontisExtractTypoVa21 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h4 = globalTypography.h1) === null || _globalTypography$h4 === void 0 || (_globalTypography$h4 = _globalTypography$h4.typography) === null || _globalTypography$h4 === void 0 ? void 0 : _globalTypography$h4.lineHeight)) === null || _frontisExtractTypoVa21 === void 0 ? void 0 : _frontisExtractTypoVa21.value) || '',
-            Mobile: ((_frontisExtractTypoVa22 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h5 = globalTypography.h1) === null || _globalTypography$h5 === void 0 || (_globalTypography$h5 = _globalTypography$h5.typography) === null || _globalTypography$h5 === void 0 ? void 0 : _globalTypography$h5.lineHeight)) === null || _frontisExtractTypoVa22 === void 0 ? void 0 : _frontisExtractTypoVa22.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa23 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h6 = globalTypography.h1) === null || _globalTypography$h6 === void 0 || (_globalTypography$h6 = _globalTypography$h6.typography) === null || _globalTypography$h6 === void 0 ? void 0 : _globalTypography$h6.lineHeight)) === null || _frontisExtractTypoVa23 === void 0 ? void 0 : _frontisExtractTypoVa23.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa24 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h7 = globalTypography.h1) === null || _globalTypography$h7 === void 0 || (_globalTypography$h7 = _globalTypography$h7.typography) === null || _globalTypography$h7 === void 0 ? void 0 : _globalTypography$h7.lineHeight)) === null || _frontisExtractTypoVa24 === void 0 ? void 0 : _frontisExtractTypoVa24.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa25 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h8 = globalTypography.h1) === null || _globalTypography$h8 === void 0 || (_globalTypography$h8 = _globalTypography$h8.typography) === null || _globalTypography$h8 === void 0 ? void 0 : _globalTypography$h8.lineHeight)) === null || _frontisExtractTypoVa25 === void 0 ? void 0 : _frontisExtractTypoVa25.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa26 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h9 = globalTypography.h1) === null || _globalTypography$h9 === void 0 || (_globalTypography$h9 = _globalTypography$h9.typography) === null || _globalTypography$h9 === void 0 ? void 0 : _globalTypography$h9.fontSize)) === null || _frontisExtractTypoVa26 === void 0 ? void 0 : _frontisExtractTypoVa26.value) || '',
-            Tablet: ((_frontisExtractTypoVa27 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h10 = globalTypography.h1) === null || _globalTypography$h10 === void 0 || (_globalTypography$h10 = _globalTypography$h10.typography) === null || _globalTypography$h10 === void 0 ? void 0 : _globalTypography$h10.fontSize)) === null || _frontisExtractTypoVa27 === void 0 ? void 0 : _frontisExtractTypoVa27.value) || '',
-            Mobile: ((_frontisExtractTypoVa28 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h11 = globalTypography.h1) === null || _globalTypography$h11 === void 0 || (_globalTypography$h11 = _globalTypography$h11.typography) === null || _globalTypography$h11 === void 0 ? void 0 : _globalTypography$h11.fontSize)) === null || _frontisExtractTypoVa28 === void 0 ? void 0 : _frontisExtractTypoVa28.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa29 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h12 = globalTypography.h1) === null || _globalTypography$h12 === void 0 || (_globalTypography$h12 = _globalTypography$h12.typography) === null || _globalTypography$h12 === void 0 ? void 0 : _globalTypography$h12.fontSize)) === null || _frontisExtractTypoVa29 === void 0 ? void 0 : _frontisExtractTypoVa29.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa30 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h13 = globalTypography.h1) === null || _globalTypography$h13 === void 0 || (_globalTypography$h13 = _globalTypography$h13.typography) === null || _globalTypography$h13 === void 0 ? void 0 : _globalTypography$h13.fontSize)) === null || _frontisExtractTypoVa30 === void 0 ? void 0 : _frontisExtractTypoVa30.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa31 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h14 = globalTypography.h1) === null || _globalTypography$h14 === void 0 || (_globalTypography$h14 = _globalTypography$h14.typography) === null || _globalTypography$h14 === void 0 ? void 0 : _globalTypography$h14.fontSize)) === null || _frontisExtractTypoVa31 === void 0 ? void 0 : _frontisExtractTypoVa31.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h15 = globalTypography.h1) === null || _globalTypography$h15 === void 0 || (_globalTypography$h15 = _globalTypography$h15.typography) === null || _globalTypography$h15 === void 0 ? void 0 : _globalTypography$h15.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h16 = globalTypography.h1) === null || _globalTypography$h16 === void 0 || (_globalTypography$h16 = _globalTypography$h16.typography) === null || _globalTypography$h16 === void 0 ? void 0 : _globalTypography$h16.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h17 = globalTypography.h1) === null || _globalTypography$h17 === void 0 || (_globalTypography$h17 = _globalTypography$h17.typography) === null || _globalTypography$h17 === void 0 ? void 0 : _globalTypography$h17.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h18 = globalTypography.h1) === null || _globalTypography$h18 === void 0 || (_globalTypography$h18 = _globalTypography$h18.typography) === null || _globalTypography$h18 === void 0 ? void 0 : _globalTypography$h18.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa32 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h19 = globalTypography.h1) === null || _globalTypography$h19 === void 0 || (_globalTypography$h19 = _globalTypography$h19.typography) === null || _globalTypography$h19 === void 0 ? void 0 : _globalTypography$h19.letterSpacing)) === null || _frontisExtractTypoVa32 === void 0 ? void 0 : _frontisExtractTypoVa32.value) || '',
-            Tablet: ((_frontisExtractTypoVa33 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h20 = globalTypography.h1) === null || _globalTypography$h20 === void 0 || (_globalTypography$h20 = _globalTypography$h20.typography) === null || _globalTypography$h20 === void 0 ? void 0 : _globalTypography$h20.letterSpacing)) === null || _frontisExtractTypoVa33 === void 0 ? void 0 : _frontisExtractTypoVa33.value) || '',
-            Mobile: ((_frontisExtractTypoVa34 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h21 = globalTypography.h1) === null || _globalTypography$h21 === void 0 || (_globalTypography$h21 = _globalTypography$h21.typography) === null || _globalTypography$h21 === void 0 ? void 0 : _globalTypography$h21.letterSpacing)) === null || _frontisExtractTypoVa34 === void 0 ? void 0 : _frontisExtractTypoVa34.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa35 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h22 = globalTypography.h1) === null || _globalTypography$h22 === void 0 || (_globalTypography$h22 = _globalTypography$h22.typography) === null || _globalTypography$h22 === void 0 ? void 0 : _globalTypography$h22.letterSpacing)) === null || _frontisExtractTypoVa35 === void 0 ? void 0 : _frontisExtractTypoVa35.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa36 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h23 = globalTypography.h1) === null || _globalTypography$h23 === void 0 || (_globalTypography$h23 = _globalTypography$h23.typography) === null || _globalTypography$h23 === void 0 ? void 0 : _globalTypography$h23.letterSpacing)) === null || _frontisExtractTypoVa36 === void 0 ? void 0 : _frontisExtractTypoVa36.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa37 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h24 = globalTypography.h1) === null || _globalTypography$h24 === void 0 || (_globalTypography$h24 = _globalTypography$h24.typography) === null || _globalTypography$h24 === void 0 ? void 0 : _globalTypography$h24.letterSpacing)) === null || _frontisExtractTypoVa37 === void 0 ? void 0 : _frontisExtractTypoVa37.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h2: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h25 = globalTypography.h2) === null || _globalTypography$h25 === void 0 || (_globalTypography$h25 = _globalTypography$h25.typography) === null || _globalTypography$h25 === void 0 ? void 0 : _globalTypography$h25.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa38 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h26 = globalTypography.h2) === null || _globalTypography$h26 === void 0 || (_globalTypography$h26 = _globalTypography$h26.typography) === null || _globalTypography$h26 === void 0 ? void 0 : _globalTypography$h26.lineHeight)) === null || _frontisExtractTypoVa38 === void 0 ? void 0 : _frontisExtractTypoVa38.value) || '',
-            Tablet: ((_frontisExtractTypoVa39 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h27 = globalTypography.h2) === null || _globalTypography$h27 === void 0 || (_globalTypography$h27 = _globalTypography$h27.typography) === null || _globalTypography$h27 === void 0 ? void 0 : _globalTypography$h27.lineHeight)) === null || _frontisExtractTypoVa39 === void 0 ? void 0 : _frontisExtractTypoVa39.value) || '',
-            Mobile: ((_frontisExtractTypoVa40 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h28 = globalTypography.h2) === null || _globalTypography$h28 === void 0 || (_globalTypography$h28 = _globalTypography$h28.typography) === null || _globalTypography$h28 === void 0 ? void 0 : _globalTypography$h28.lineHeight)) === null || _frontisExtractTypoVa40 === void 0 ? void 0 : _frontisExtractTypoVa40.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa41 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h29 = globalTypography.h2) === null || _globalTypography$h29 === void 0 || (_globalTypography$h29 = _globalTypography$h29.typography) === null || _globalTypography$h29 === void 0 ? void 0 : _globalTypography$h29.lineHeight)) === null || _frontisExtractTypoVa41 === void 0 ? void 0 : _frontisExtractTypoVa41.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa42 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h30 = globalTypography.h2) === null || _globalTypography$h30 === void 0 || (_globalTypography$h30 = _globalTypography$h30.typography) === null || _globalTypography$h30 === void 0 ? void 0 : _globalTypography$h30.lineHeight)) === null || _frontisExtractTypoVa42 === void 0 ? void 0 : _frontisExtractTypoVa42.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa43 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h31 = globalTypography.h2) === null || _globalTypography$h31 === void 0 || (_globalTypography$h31 = _globalTypography$h31.typography) === null || _globalTypography$h31 === void 0 ? void 0 : _globalTypography$h31.lineHeight)) === null || _frontisExtractTypoVa43 === void 0 ? void 0 : _frontisExtractTypoVa43.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa44 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h32 = globalTypography.h2) === null || _globalTypography$h32 === void 0 || (_globalTypography$h32 = _globalTypography$h32.typography) === null || _globalTypography$h32 === void 0 ? void 0 : _globalTypography$h32.fontSize)) === null || _frontisExtractTypoVa44 === void 0 ? void 0 : _frontisExtractTypoVa44.value) || '',
-            Tablet: ((_frontisExtractTypoVa45 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h33 = globalTypography.h2) === null || _globalTypography$h33 === void 0 || (_globalTypography$h33 = _globalTypography$h33.typography) === null || _globalTypography$h33 === void 0 ? void 0 : _globalTypography$h33.fontSize)) === null || _frontisExtractTypoVa45 === void 0 ? void 0 : _frontisExtractTypoVa45.value) || '',
-            Mobile: ((_frontisExtractTypoVa46 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h34 = globalTypography.h2) === null || _globalTypography$h34 === void 0 || (_globalTypography$h34 = _globalTypography$h34.typography) === null || _globalTypography$h34 === void 0 ? void 0 : _globalTypography$h34.fontSize)) === null || _frontisExtractTypoVa46 === void 0 ? void 0 : _frontisExtractTypoVa46.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa47 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h35 = globalTypography.h2) === null || _globalTypography$h35 === void 0 || (_globalTypography$h35 = _globalTypography$h35.typography) === null || _globalTypography$h35 === void 0 ? void 0 : _globalTypography$h35.fontSize)) === null || _frontisExtractTypoVa47 === void 0 ? void 0 : _frontisExtractTypoVa47.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa48 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h36 = globalTypography.h2) === null || _globalTypography$h36 === void 0 || (_globalTypography$h36 = _globalTypography$h36.typography) === null || _globalTypography$h36 === void 0 ? void 0 : _globalTypography$h36.fontSize)) === null || _frontisExtractTypoVa48 === void 0 ? void 0 : _frontisExtractTypoVa48.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa49 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h37 = globalTypography.h2) === null || _globalTypography$h37 === void 0 || (_globalTypography$h37 = _globalTypography$h37.typography) === null || _globalTypography$h37 === void 0 ? void 0 : _globalTypography$h37.fontSize)) === null || _frontisExtractTypoVa49 === void 0 ? void 0 : _frontisExtractTypoVa49.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h38 = globalTypography.h2) === null || _globalTypography$h38 === void 0 || (_globalTypography$h38 = _globalTypography$h38.typography) === null || _globalTypography$h38 === void 0 ? void 0 : _globalTypography$h38.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h39 = globalTypography.h2) === null || _globalTypography$h39 === void 0 || (_globalTypography$h39 = _globalTypography$h39.typography) === null || _globalTypography$h39 === void 0 ? void 0 : _globalTypography$h39.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h40 = globalTypography.h2) === null || _globalTypography$h40 === void 0 || (_globalTypography$h40 = _globalTypography$h40.typography) === null || _globalTypography$h40 === void 0 ? void 0 : _globalTypography$h40.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h41 = globalTypography.h2) === null || _globalTypography$h41 === void 0 || (_globalTypography$h41 = _globalTypography$h41.typography) === null || _globalTypography$h41 === void 0 ? void 0 : _globalTypography$h41.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa50 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h42 = globalTypography.h2) === null || _globalTypography$h42 === void 0 || (_globalTypography$h42 = _globalTypography$h42.typography) === null || _globalTypography$h42 === void 0 ? void 0 : _globalTypography$h42.letterSpacing)) === null || _frontisExtractTypoVa50 === void 0 ? void 0 : _frontisExtractTypoVa50.value) || '',
-            Tablet: ((_frontisExtractTypoVa51 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h43 = globalTypography.h2) === null || _globalTypography$h43 === void 0 || (_globalTypography$h43 = _globalTypography$h43.typography) === null || _globalTypography$h43 === void 0 ? void 0 : _globalTypography$h43.letterSpacing)) === null || _frontisExtractTypoVa51 === void 0 ? void 0 : _frontisExtractTypoVa51.value) || '',
-            Mobile: ((_frontisExtractTypoVa52 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h44 = globalTypography.h2) === null || _globalTypography$h44 === void 0 || (_globalTypography$h44 = _globalTypography$h44.typography) === null || _globalTypography$h44 === void 0 ? void 0 : _globalTypography$h44.letterSpacing)) === null || _frontisExtractTypoVa52 === void 0 ? void 0 : _frontisExtractTypoVa52.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa53 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h45 = globalTypography.h2) === null || _globalTypography$h45 === void 0 || (_globalTypography$h45 = _globalTypography$h45.typography) === null || _globalTypography$h45 === void 0 ? void 0 : _globalTypography$h45.letterSpacing)) === null || _frontisExtractTypoVa53 === void 0 ? void 0 : _frontisExtractTypoVa53.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa54 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h46 = globalTypography.h2) === null || _globalTypography$h46 === void 0 || (_globalTypography$h46 = _globalTypography$h46.typography) === null || _globalTypography$h46 === void 0 ? void 0 : _globalTypography$h46.letterSpacing)) === null || _frontisExtractTypoVa54 === void 0 ? void 0 : _frontisExtractTypoVa54.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa55 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h47 = globalTypography.h2) === null || _globalTypography$h47 === void 0 || (_globalTypography$h47 = _globalTypography$h47.typography) === null || _globalTypography$h47 === void 0 ? void 0 : _globalTypography$h47.letterSpacing)) === null || _frontisExtractTypoVa55 === void 0 ? void 0 : _frontisExtractTypoVa55.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h3: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h48 = globalTypography.h3) === null || _globalTypography$h48 === void 0 || (_globalTypography$h48 = _globalTypography$h48.typography) === null || _globalTypography$h48 === void 0 ? void 0 : _globalTypography$h48.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa56 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h49 = globalTypography.h3) === null || _globalTypography$h49 === void 0 || (_globalTypography$h49 = _globalTypography$h49.typography) === null || _globalTypography$h49 === void 0 ? void 0 : _globalTypography$h49.lineHeight)) === null || _frontisExtractTypoVa56 === void 0 ? void 0 : _frontisExtractTypoVa56.value) || '',
-            Tablet: ((_frontisExtractTypoVa57 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h50 = globalTypography.h3) === null || _globalTypography$h50 === void 0 || (_globalTypography$h50 = _globalTypography$h50.typography) === null || _globalTypography$h50 === void 0 ? void 0 : _globalTypography$h50.lineHeight)) === null || _frontisExtractTypoVa57 === void 0 ? void 0 : _frontisExtractTypoVa57.value) || '',
-            Mobile: ((_frontisExtractTypoVa58 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h51 = globalTypography.h3) === null || _globalTypography$h51 === void 0 || (_globalTypography$h51 = _globalTypography$h51.typography) === null || _globalTypography$h51 === void 0 ? void 0 : _globalTypography$h51.lineHeight)) === null || _frontisExtractTypoVa58 === void 0 ? void 0 : _frontisExtractTypoVa58.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa59 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h52 = globalTypography.h3) === null || _globalTypography$h52 === void 0 || (_globalTypography$h52 = _globalTypography$h52.typography) === null || _globalTypography$h52 === void 0 ? void 0 : _globalTypography$h52.lineHeight)) === null || _frontisExtractTypoVa59 === void 0 ? void 0 : _frontisExtractTypoVa59.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa60 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h53 = globalTypography.h3) === null || _globalTypography$h53 === void 0 || (_globalTypography$h53 = _globalTypography$h53.typography) === null || _globalTypography$h53 === void 0 ? void 0 : _globalTypography$h53.lineHeight)) === null || _frontisExtractTypoVa60 === void 0 ? void 0 : _frontisExtractTypoVa60.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa61 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h54 = globalTypography.h3) === null || _globalTypography$h54 === void 0 || (_globalTypography$h54 = _globalTypography$h54.typography) === null || _globalTypography$h54 === void 0 ? void 0 : _globalTypography$h54.lineHeight)) === null || _frontisExtractTypoVa61 === void 0 ? void 0 : _frontisExtractTypoVa61.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa62 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h55 = globalTypography.h3) === null || _globalTypography$h55 === void 0 || (_globalTypography$h55 = _globalTypography$h55.typography) === null || _globalTypography$h55 === void 0 ? void 0 : _globalTypography$h55.fontSize)) === null || _frontisExtractTypoVa62 === void 0 ? void 0 : _frontisExtractTypoVa62.value) || '',
-            Tablet: ((_frontisExtractTypoVa63 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h56 = globalTypography.h3) === null || _globalTypography$h56 === void 0 || (_globalTypography$h56 = _globalTypography$h56.typography) === null || _globalTypography$h56 === void 0 ? void 0 : _globalTypography$h56.fontSize)) === null || _frontisExtractTypoVa63 === void 0 ? void 0 : _frontisExtractTypoVa63.value) || '',
-            Mobile: ((_frontisExtractTypoVa64 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h57 = globalTypography.h3) === null || _globalTypography$h57 === void 0 || (_globalTypography$h57 = _globalTypography$h57.typography) === null || _globalTypography$h57 === void 0 ? void 0 : _globalTypography$h57.fontSize)) === null || _frontisExtractTypoVa64 === void 0 ? void 0 : _frontisExtractTypoVa64.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa65 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h58 = globalTypography.h3) === null || _globalTypography$h58 === void 0 || (_globalTypography$h58 = _globalTypography$h58.typography) === null || _globalTypography$h58 === void 0 ? void 0 : _globalTypography$h58.fontSize)) === null || _frontisExtractTypoVa65 === void 0 ? void 0 : _frontisExtractTypoVa65.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa66 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h59 = globalTypography.h3) === null || _globalTypography$h59 === void 0 || (_globalTypography$h59 = _globalTypography$h59.typography) === null || _globalTypography$h59 === void 0 ? void 0 : _globalTypography$h59.fontSize)) === null || _frontisExtractTypoVa66 === void 0 ? void 0 : _frontisExtractTypoVa66.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa67 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h60 = globalTypography.h3) === null || _globalTypography$h60 === void 0 || (_globalTypography$h60 = _globalTypography$h60.typography) === null || _globalTypography$h60 === void 0 ? void 0 : _globalTypography$h60.fontSize)) === null || _frontisExtractTypoVa67 === void 0 ? void 0 : _frontisExtractTypoVa67.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h61 = globalTypography.h3) === null || _globalTypography$h61 === void 0 || (_globalTypography$h61 = _globalTypography$h61.typography) === null || _globalTypography$h61 === void 0 ? void 0 : _globalTypography$h61.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h62 = globalTypography.h3) === null || _globalTypography$h62 === void 0 || (_globalTypography$h62 = _globalTypography$h62.typography) === null || _globalTypography$h62 === void 0 ? void 0 : _globalTypography$h62.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h63 = globalTypography.h3) === null || _globalTypography$h63 === void 0 || (_globalTypography$h63 = _globalTypography$h63.typography) === null || _globalTypography$h63 === void 0 ? void 0 : _globalTypography$h63.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h64 = globalTypography.h3) === null || _globalTypography$h64 === void 0 || (_globalTypography$h64 = _globalTypography$h64.typography) === null || _globalTypography$h64 === void 0 ? void 0 : _globalTypography$h64.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa68 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h65 = globalTypography.h3) === null || _globalTypography$h65 === void 0 || (_globalTypography$h65 = _globalTypography$h65.typography) === null || _globalTypography$h65 === void 0 ? void 0 : _globalTypography$h65.letterSpacing)) === null || _frontisExtractTypoVa68 === void 0 ? void 0 : _frontisExtractTypoVa68.value) || '',
-            Tablet: ((_frontisExtractTypoVa69 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h66 = globalTypography.h3) === null || _globalTypography$h66 === void 0 || (_globalTypography$h66 = _globalTypography$h66.typography) === null || _globalTypography$h66 === void 0 ? void 0 : _globalTypography$h66.letterSpacing)) === null || _frontisExtractTypoVa69 === void 0 ? void 0 : _frontisExtractTypoVa69.value) || '',
-            Mobile: ((_frontisExtractTypoVa70 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h67 = globalTypography.h3) === null || _globalTypography$h67 === void 0 || (_globalTypography$h67 = _globalTypography$h67.typography) === null || _globalTypography$h67 === void 0 ? void 0 : _globalTypography$h67.letterSpacing)) === null || _frontisExtractTypoVa70 === void 0 ? void 0 : _frontisExtractTypoVa70.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa71 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h68 = globalTypography.h3) === null || _globalTypography$h68 === void 0 || (_globalTypography$h68 = _globalTypography$h68.typography) === null || _globalTypography$h68 === void 0 ? void 0 : _globalTypography$h68.letterSpacing)) === null || _frontisExtractTypoVa71 === void 0 ? void 0 : _frontisExtractTypoVa71.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa72 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h69 = globalTypography.h3) === null || _globalTypography$h69 === void 0 || (_globalTypography$h69 = _globalTypography$h69.typography) === null || _globalTypography$h69 === void 0 ? void 0 : _globalTypography$h69.letterSpacing)) === null || _frontisExtractTypoVa72 === void 0 ? void 0 : _frontisExtractTypoVa72.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa73 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h70 = globalTypography.h3) === null || _globalTypography$h70 === void 0 || (_globalTypography$h70 = _globalTypography$h70.typography) === null || _globalTypography$h70 === void 0 ? void 0 : _globalTypography$h70.letterSpacing)) === null || _frontisExtractTypoVa73 === void 0 ? void 0 : _frontisExtractTypoVa73.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h4: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h71 = globalTypography.h4) === null || _globalTypography$h71 === void 0 || (_globalTypography$h71 = _globalTypography$h71.typography) === null || _globalTypography$h71 === void 0 ? void 0 : _globalTypography$h71.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa74 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h72 = globalTypography.h4) === null || _globalTypography$h72 === void 0 || (_globalTypography$h72 = _globalTypography$h72.typography) === null || _globalTypography$h72 === void 0 ? void 0 : _globalTypography$h72.lineHeight)) === null || _frontisExtractTypoVa74 === void 0 ? void 0 : _frontisExtractTypoVa74.value) || '',
-            Tablet: ((_frontisExtractTypoVa75 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h73 = globalTypography.h4) === null || _globalTypography$h73 === void 0 || (_globalTypography$h73 = _globalTypography$h73.typography) === null || _globalTypography$h73 === void 0 ? void 0 : _globalTypography$h73.lineHeight)) === null || _frontisExtractTypoVa75 === void 0 ? void 0 : _frontisExtractTypoVa75.value) || '',
-            Mobile: ((_frontisExtractTypoVa76 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h74 = globalTypography.h4) === null || _globalTypography$h74 === void 0 || (_globalTypography$h74 = _globalTypography$h74.typography) === null || _globalTypography$h74 === void 0 ? void 0 : _globalTypography$h74.lineHeight)) === null || _frontisExtractTypoVa76 === void 0 ? void 0 : _frontisExtractTypoVa76.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa77 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h75 = globalTypography.h4) === null || _globalTypography$h75 === void 0 || (_globalTypography$h75 = _globalTypography$h75.typography) === null || _globalTypography$h75 === void 0 ? void 0 : _globalTypography$h75.lineHeight)) === null || _frontisExtractTypoVa77 === void 0 ? void 0 : _frontisExtractTypoVa77.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa78 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h76 = globalTypography.h4) === null || _globalTypography$h76 === void 0 || (_globalTypography$h76 = _globalTypography$h76.typography) === null || _globalTypography$h76 === void 0 ? void 0 : _globalTypography$h76.lineHeight)) === null || _frontisExtractTypoVa78 === void 0 ? void 0 : _frontisExtractTypoVa78.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa79 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h77 = globalTypography.h4) === null || _globalTypography$h77 === void 0 || (_globalTypography$h77 = _globalTypography$h77.typography) === null || _globalTypography$h77 === void 0 ? void 0 : _globalTypography$h77.lineHeight)) === null || _frontisExtractTypoVa79 === void 0 ? void 0 : _frontisExtractTypoVa79.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa80 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h78 = globalTypography.h4) === null || _globalTypography$h78 === void 0 || (_globalTypography$h78 = _globalTypography$h78.typography) === null || _globalTypography$h78 === void 0 ? void 0 : _globalTypography$h78.fontSize)) === null || _frontisExtractTypoVa80 === void 0 ? void 0 : _frontisExtractTypoVa80.value) || '',
-            Tablet: ((_frontisExtractTypoVa81 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h79 = globalTypography.h4) === null || _globalTypography$h79 === void 0 || (_globalTypography$h79 = _globalTypography$h79.typography) === null || _globalTypography$h79 === void 0 ? void 0 : _globalTypography$h79.fontSize)) === null || _frontisExtractTypoVa81 === void 0 ? void 0 : _frontisExtractTypoVa81.value) || '',
-            Mobile: ((_frontisExtractTypoVa82 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h80 = globalTypography.h4) === null || _globalTypography$h80 === void 0 || (_globalTypography$h80 = _globalTypography$h80.typography) === null || _globalTypography$h80 === void 0 ? void 0 : _globalTypography$h80.fontSize)) === null || _frontisExtractTypoVa82 === void 0 ? void 0 : _frontisExtractTypoVa82.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa83 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h81 = globalTypography.h4) === null || _globalTypography$h81 === void 0 || (_globalTypography$h81 = _globalTypography$h81.typography) === null || _globalTypography$h81 === void 0 ? void 0 : _globalTypography$h81.fontSize)) === null || _frontisExtractTypoVa83 === void 0 ? void 0 : _frontisExtractTypoVa83.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa84 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h82 = globalTypography.h4) === null || _globalTypography$h82 === void 0 || (_globalTypography$h82 = _globalTypography$h82.typography) === null || _globalTypography$h82 === void 0 ? void 0 : _globalTypography$h82.fontSize)) === null || _frontisExtractTypoVa84 === void 0 ? void 0 : _frontisExtractTypoVa84.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa85 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h83 = globalTypography.h4) === null || _globalTypography$h83 === void 0 || (_globalTypography$h83 = _globalTypography$h83.typography) === null || _globalTypography$h83 === void 0 ? void 0 : _globalTypography$h83.fontSize)) === null || _frontisExtractTypoVa85 === void 0 ? void 0 : _frontisExtractTypoVa85.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h84 = globalTypography.h4) === null || _globalTypography$h84 === void 0 || (_globalTypography$h84 = _globalTypography$h84.typography) === null || _globalTypography$h84 === void 0 ? void 0 : _globalTypography$h84.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h85 = globalTypography.h4) === null || _globalTypography$h85 === void 0 || (_globalTypography$h85 = _globalTypography$h85.typography) === null || _globalTypography$h85 === void 0 ? void 0 : _globalTypography$h85.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h86 = globalTypography.h4) === null || _globalTypography$h86 === void 0 || (_globalTypography$h86 = _globalTypography$h86.typography) === null || _globalTypography$h86 === void 0 ? void 0 : _globalTypography$h86.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h87 = globalTypography.h4) === null || _globalTypography$h87 === void 0 || (_globalTypography$h87 = _globalTypography$h87.typography) === null || _globalTypography$h87 === void 0 ? void 0 : _globalTypography$h87.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa86 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h88 = globalTypography.h4) === null || _globalTypography$h88 === void 0 || (_globalTypography$h88 = _globalTypography$h88.typography) === null || _globalTypography$h88 === void 0 ? void 0 : _globalTypography$h88.letterSpacing)) === null || _frontisExtractTypoVa86 === void 0 ? void 0 : _frontisExtractTypoVa86.value) || '',
-            Tablet: ((_frontisExtractTypoVa87 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h89 = globalTypography.h4) === null || _globalTypography$h89 === void 0 || (_globalTypography$h89 = _globalTypography$h89.typography) === null || _globalTypography$h89 === void 0 ? void 0 : _globalTypography$h89.letterSpacing)) === null || _frontisExtractTypoVa87 === void 0 ? void 0 : _frontisExtractTypoVa87.value) || '',
-            Mobile: ((_frontisExtractTypoVa88 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h90 = globalTypography.h4) === null || _globalTypography$h90 === void 0 || (_globalTypography$h90 = _globalTypography$h90.typography) === null || _globalTypography$h90 === void 0 ? void 0 : _globalTypography$h90.letterSpacing)) === null || _frontisExtractTypoVa88 === void 0 ? void 0 : _frontisExtractTypoVa88.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa89 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h91 = globalTypography.h4) === null || _globalTypography$h91 === void 0 || (_globalTypography$h91 = _globalTypography$h91.typography) === null || _globalTypography$h91 === void 0 ? void 0 : _globalTypography$h91.letterSpacing)) === null || _frontisExtractTypoVa89 === void 0 ? void 0 : _frontisExtractTypoVa89.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa90 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h92 = globalTypography.h4) === null || _globalTypography$h92 === void 0 || (_globalTypography$h92 = _globalTypography$h92.typography) === null || _globalTypography$h92 === void 0 ? void 0 : _globalTypography$h92.letterSpacing)) === null || _frontisExtractTypoVa90 === void 0 ? void 0 : _frontisExtractTypoVa90.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa91 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h93 = globalTypography.h4) === null || _globalTypography$h93 === void 0 || (_globalTypography$h93 = _globalTypography$h93.typography) === null || _globalTypography$h93 === void 0 ? void 0 : _globalTypography$h93.letterSpacing)) === null || _frontisExtractTypoVa91 === void 0 ? void 0 : _frontisExtractTypoVa91.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h5: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h94 = globalTypography.h5) === null || _globalTypography$h94 === void 0 || (_globalTypography$h94 = _globalTypography$h94.typography) === null || _globalTypography$h94 === void 0 ? void 0 : _globalTypography$h94.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa92 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h95 = globalTypography.h5) === null || _globalTypography$h95 === void 0 || (_globalTypography$h95 = _globalTypography$h95.typography) === null || _globalTypography$h95 === void 0 ? void 0 : _globalTypography$h95.lineHeight)) === null || _frontisExtractTypoVa92 === void 0 ? void 0 : _frontisExtractTypoVa92.value) || '',
-            Tablet: ((_frontisExtractTypoVa93 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h96 = globalTypography.h5) === null || _globalTypography$h96 === void 0 || (_globalTypography$h96 = _globalTypography$h96.typography) === null || _globalTypography$h96 === void 0 ? void 0 : _globalTypography$h96.lineHeight)) === null || _frontisExtractTypoVa93 === void 0 ? void 0 : _frontisExtractTypoVa93.value) || '',
-            Mobile: ((_frontisExtractTypoVa94 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h97 = globalTypography.h5) === null || _globalTypography$h97 === void 0 || (_globalTypography$h97 = _globalTypography$h97.typography) === null || _globalTypography$h97 === void 0 ? void 0 : _globalTypography$h97.lineHeight)) === null || _frontisExtractTypoVa94 === void 0 ? void 0 : _frontisExtractTypoVa94.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa95 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h98 = globalTypography.h5) === null || _globalTypography$h98 === void 0 || (_globalTypography$h98 = _globalTypography$h98.typography) === null || _globalTypography$h98 === void 0 ? void 0 : _globalTypography$h98.lineHeight)) === null || _frontisExtractTypoVa95 === void 0 ? void 0 : _frontisExtractTypoVa95.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa96 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h99 = globalTypography.h5) === null || _globalTypography$h99 === void 0 || (_globalTypography$h99 = _globalTypography$h99.typography) === null || _globalTypography$h99 === void 0 ? void 0 : _globalTypography$h99.lineHeight)) === null || _frontisExtractTypoVa96 === void 0 ? void 0 : _frontisExtractTypoVa96.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa97 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h100 = globalTypography.h5) === null || _globalTypography$h100 === void 0 || (_globalTypography$h100 = _globalTypography$h100.typography) === null || _globalTypography$h100 === void 0 ? void 0 : _globalTypography$h100.lineHeight)) === null || _frontisExtractTypoVa97 === void 0 ? void 0 : _frontisExtractTypoVa97.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa98 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h101 = globalTypography.h5) === null || _globalTypography$h101 === void 0 || (_globalTypography$h101 = _globalTypography$h101.typography) === null || _globalTypography$h101 === void 0 ? void 0 : _globalTypography$h101.fontSize)) === null || _frontisExtractTypoVa98 === void 0 ? void 0 : _frontisExtractTypoVa98.value) || '',
-            Tablet: ((_frontisExtractTypoVa99 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h102 = globalTypography.h5) === null || _globalTypography$h102 === void 0 || (_globalTypography$h102 = _globalTypography$h102.typography) === null || _globalTypography$h102 === void 0 ? void 0 : _globalTypography$h102.fontSize)) === null || _frontisExtractTypoVa99 === void 0 ? void 0 : _frontisExtractTypoVa99.value) || '',
-            Mobile: ((_frontisExtractTypoVa100 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h103 = globalTypography.h5) === null || _globalTypography$h103 === void 0 || (_globalTypography$h103 = _globalTypography$h103.typography) === null || _globalTypography$h103 === void 0 ? void 0 : _globalTypography$h103.fontSize)) === null || _frontisExtractTypoVa100 === void 0 ? void 0 : _frontisExtractTypoVa100.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa101 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h104 = globalTypography.h5) === null || _globalTypography$h104 === void 0 || (_globalTypography$h104 = _globalTypography$h104.typography) === null || _globalTypography$h104 === void 0 ? void 0 : _globalTypography$h104.fontSize)) === null || _frontisExtractTypoVa101 === void 0 ? void 0 : _frontisExtractTypoVa101.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa102 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h105 = globalTypography.h5) === null || _globalTypography$h105 === void 0 || (_globalTypography$h105 = _globalTypography$h105.typography) === null || _globalTypography$h105 === void 0 ? void 0 : _globalTypography$h105.fontSize)) === null || _frontisExtractTypoVa102 === void 0 ? void 0 : _frontisExtractTypoVa102.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa103 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h106 = globalTypography.h5) === null || _globalTypography$h106 === void 0 || (_globalTypography$h106 = _globalTypography$h106.typography) === null || _globalTypography$h106 === void 0 ? void 0 : _globalTypography$h106.fontSize)) === null || _frontisExtractTypoVa103 === void 0 ? void 0 : _frontisExtractTypoVa103.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h107 = globalTypography.h5) === null || _globalTypography$h107 === void 0 || (_globalTypography$h107 = _globalTypography$h107.typography) === null || _globalTypography$h107 === void 0 ? void 0 : _globalTypography$h107.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h108 = globalTypography.h5) === null || _globalTypography$h108 === void 0 || (_globalTypography$h108 = _globalTypography$h108.typography) === null || _globalTypography$h108 === void 0 ? void 0 : _globalTypography$h108.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h109 = globalTypography.h5) === null || _globalTypography$h109 === void 0 || (_globalTypography$h109 = _globalTypography$h109.typography) === null || _globalTypography$h109 === void 0 ? void 0 : _globalTypography$h109.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h110 = globalTypography.h5) === null || _globalTypography$h110 === void 0 || (_globalTypography$h110 = _globalTypography$h110.typography) === null || _globalTypography$h110 === void 0 ? void 0 : _globalTypography$h110.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa104 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h111 = globalTypography.h5) === null || _globalTypography$h111 === void 0 || (_globalTypography$h111 = _globalTypography$h111.typography) === null || _globalTypography$h111 === void 0 ? void 0 : _globalTypography$h111.letterSpacing)) === null || _frontisExtractTypoVa104 === void 0 ? void 0 : _frontisExtractTypoVa104.value) || '',
-            Tablet: ((_frontisExtractTypoVa105 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h112 = globalTypography.h5) === null || _globalTypography$h112 === void 0 || (_globalTypography$h112 = _globalTypography$h112.typography) === null || _globalTypography$h112 === void 0 ? void 0 : _globalTypography$h112.letterSpacing)) === null || _frontisExtractTypoVa105 === void 0 ? void 0 : _frontisExtractTypoVa105.value) || '',
-            Mobile: ((_frontisExtractTypoVa106 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h113 = globalTypography.h5) === null || _globalTypography$h113 === void 0 || (_globalTypography$h113 = _globalTypography$h113.typography) === null || _globalTypography$h113 === void 0 ? void 0 : _globalTypography$h113.letterSpacing)) === null || _frontisExtractTypoVa106 === void 0 ? void 0 : _frontisExtractTypoVa106.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa107 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h114 = globalTypography.h5) === null || _globalTypography$h114 === void 0 || (_globalTypography$h114 = _globalTypography$h114.typography) === null || _globalTypography$h114 === void 0 ? void 0 : _globalTypography$h114.letterSpacing)) === null || _frontisExtractTypoVa107 === void 0 ? void 0 : _frontisExtractTypoVa107.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa108 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h115 = globalTypography.h5) === null || _globalTypography$h115 === void 0 || (_globalTypography$h115 = _globalTypography$h115.typography) === null || _globalTypography$h115 === void 0 ? void 0 : _globalTypography$h115.letterSpacing)) === null || _frontisExtractTypoVa108 === void 0 ? void 0 : _frontisExtractTypoVa108.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa109 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h116 = globalTypography.h5) === null || _globalTypography$h116 === void 0 || (_globalTypography$h116 = _globalTypography$h116.typography) === null || _globalTypography$h116 === void 0 ? void 0 : _globalTypography$h116.letterSpacing)) === null || _frontisExtractTypoVa109 === void 0 ? void 0 : _frontisExtractTypoVa109.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         },
         h6: {
-          fontFamily: (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.getFontFamily)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h117 = globalTypography.h6) === null || _globalTypography$h117 === void 0 || (_globalTypography$h117 = _globalTypography$h117.typography) === null || _globalTypography$h117 === void 0 ? void 0 : _globalTypography$h117.fontFamily) || '',
+          fontFamily: 'Default',
           lineHeight: {
-            Desktop: ((_frontisExtractTypoVa110 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h118 = globalTypography.h6) === null || _globalTypography$h118 === void 0 || (_globalTypography$h118 = _globalTypography$h118.typography) === null || _globalTypography$h118 === void 0 ? void 0 : _globalTypography$h118.lineHeight)) === null || _frontisExtractTypoVa110 === void 0 ? void 0 : _frontisExtractTypoVa110.value) || '',
-            Tablet: ((_frontisExtractTypoVa111 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h119 = globalTypography.h6) === null || _globalTypography$h119 === void 0 || (_globalTypography$h119 = _globalTypography$h119.typography) === null || _globalTypography$h119 === void 0 ? void 0 : _globalTypography$h119.lineHeight)) === null || _frontisExtractTypoVa111 === void 0 ? void 0 : _frontisExtractTypoVa111.value) || '',
-            Mobile: ((_frontisExtractTypoVa112 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h120 = globalTypography.h6) === null || _globalTypography$h120 === void 0 || (_globalTypography$h120 = _globalTypography$h120.typography) === null || _globalTypography$h120 === void 0 ? void 0 : _globalTypography$h120.lineHeight)) === null || _frontisExtractTypoVa112 === void 0 ? void 0 : _frontisExtractTypoVa112.value) || ''
+            Desktop: 'Default',
+            Tablet: 'Default',
+            Mobile: 'Default'
           },
           lineHeightUnits: {
-            Desktop: ((_frontisExtractTypoVa113 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h121 = globalTypography.h6) === null || _globalTypography$h121 === void 0 || (_globalTypography$h121 = _globalTypography$h121.typography) === null || _globalTypography$h121 === void 0 ? void 0 : _globalTypography$h121.lineHeight)) === null || _frontisExtractTypoVa113 === void 0 ? void 0 : _frontisExtractTypoVa113.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa114 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h122 = globalTypography.h6) === null || _globalTypography$h122 === void 0 || (_globalTypography$h122 = _globalTypography$h122.typography) === null || _globalTypography$h122 === void 0 ? void 0 : _globalTypography$h122.lineHeight)) === null || _frontisExtractTypoVa114 === void 0 ? void 0 : _frontisExtractTypoVa114.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa115 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h123 = globalTypography.h6) === null || _globalTypography$h123 === void 0 || (_globalTypography$h123 = _globalTypography$h123.typography) === null || _globalTypography$h123 === void 0 ? void 0 : _globalTypography$h123.lineHeight)) === null || _frontisExtractTypoVa115 === void 0 ? void 0 : _frontisExtractTypoVa115.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
-            Desktop: ((_frontisExtractTypoVa116 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h124 = globalTypography.h6) === null || _globalTypography$h124 === void 0 || (_globalTypography$h124 = _globalTypography$h124.typography) === null || _globalTypography$h124 === void 0 ? void 0 : _globalTypography$h124.fontSize)) === null || _frontisExtractTypoVa116 === void 0 ? void 0 : _frontisExtractTypoVa116.value) || '',
-            Tablet: ((_frontisExtractTypoVa117 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h125 = globalTypography.h6) === null || _globalTypography$h125 === void 0 || (_globalTypography$h125 = _globalTypography$h125.typography) === null || _globalTypography$h125 === void 0 ? void 0 : _globalTypography$h125.fontSize)) === null || _frontisExtractTypoVa117 === void 0 ? void 0 : _frontisExtractTypoVa117.value) || '',
-            Mobile: ((_frontisExtractTypoVa118 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h126 = globalTypography.h6) === null || _globalTypography$h126 === void 0 || (_globalTypography$h126 = _globalTypography$h126.typography) === null || _globalTypography$h126 === void 0 ? void 0 : _globalTypography$h126.fontSize)) === null || _frontisExtractTypoVa118 === void 0 ? void 0 : _frontisExtractTypoVa118.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           fontSizeUnit: {
-            Desktop: ((_frontisExtractTypoVa119 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h127 = globalTypography.h6) === null || _globalTypography$h127 === void 0 || (_globalTypography$h127 = _globalTypography$h127.typography) === null || _globalTypography$h127 === void 0 ? void 0 : _globalTypography$h127.fontSize)) === null || _frontisExtractTypoVa119 === void 0 ? void 0 : _frontisExtractTypoVa119.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa120 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h128 = globalTypography.h6) === null || _globalTypography$h128 === void 0 || (_globalTypography$h128 = _globalTypography$h128.typography) === null || _globalTypography$h128 === void 0 ? void 0 : _globalTypography$h128.fontSize)) === null || _frontisExtractTypoVa120 === void 0 ? void 0 : _frontisExtractTypoVa120.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa121 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h129 = globalTypography.h6) === null || _globalTypography$h129 === void 0 || (_globalTypography$h129 = _globalTypography$h129.typography) === null || _globalTypography$h129 === void 0 ? void 0 : _globalTypography$h129.fontSize)) === null || _frontisExtractTypoVa121 === void 0 ? void 0 : _frontisExtractTypoVa121.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           },
-          fontWeight: globalTypography === null || globalTypography === void 0 || (_globalTypography$h130 = globalTypography.h6) === null || _globalTypography$h130 === void 0 || (_globalTypography$h130 = _globalTypography$h130.typography) === null || _globalTypography$h130 === void 0 ? void 0 : _globalTypography$h130.fontWeight,
-          fontStyle: globalTypography === null || globalTypography === void 0 || (_globalTypography$h131 = globalTypography.h6) === null || _globalTypography$h131 === void 0 || (_globalTypography$h131 = _globalTypography$h131.typography) === null || _globalTypography$h131 === void 0 ? void 0 : _globalTypography$h131.fontStyle,
-          textTransform: globalTypography === null || globalTypography === void 0 || (_globalTypography$h132 = globalTypography.h6) === null || _globalTypography$h132 === void 0 || (_globalTypography$h132 = _globalTypography$h132.typography) === null || _globalTypography$h132 === void 0 ? void 0 : _globalTypography$h132.textTransform,
-          textDecoration: globalTypography === null || globalTypography === void 0 || (_globalTypography$h133 = globalTypography.h6) === null || _globalTypography$h133 === void 0 || (_globalTypography$h133 = _globalTypography$h133.typography) === null || _globalTypography$h133 === void 0 ? void 0 : _globalTypography$h133.textDecoration,
+          fontWeight: 'Default',
+          fontStyle: 'Default',
+          textTransform: 'Default',
+          textDecoration: 'Default',
           letterSpacing: {
-            Desktop: ((_frontisExtractTypoVa122 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h134 = globalTypography.h6) === null || _globalTypography$h134 === void 0 || (_globalTypography$h134 = _globalTypography$h134.typography) === null || _globalTypography$h134 === void 0 ? void 0 : _globalTypography$h134.letterSpacing)) === null || _frontisExtractTypoVa122 === void 0 ? void 0 : _frontisExtractTypoVa122.value) || '',
-            Tablet: ((_frontisExtractTypoVa123 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h135 = globalTypography.h6) === null || _globalTypography$h135 === void 0 || (_globalTypography$h135 = _globalTypography$h135.typography) === null || _globalTypography$h135 === void 0 ? void 0 : _globalTypography$h135.letterSpacing)) === null || _frontisExtractTypoVa123 === void 0 ? void 0 : _frontisExtractTypoVa123.value) || '',
-            Mobile: ((_frontisExtractTypoVa124 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h136 = globalTypography.h6) === null || _globalTypography$h136 === void 0 || (_globalTypography$h136 = _globalTypography$h136.typography) === null || _globalTypography$h136 === void 0 ? void 0 : _globalTypography$h136.letterSpacing)) === null || _frontisExtractTypoVa124 === void 0 ? void 0 : _frontisExtractTypoVa124.value) || ''
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
           },
           letterSpacingUnit: {
-            Desktop: ((_frontisExtractTypoVa125 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h137 = globalTypography.h6) === null || _globalTypography$h137 === void 0 || (_globalTypography$h137 = _globalTypography$h137.typography) === null || _globalTypography$h137 === void 0 ? void 0 : _globalTypography$h137.letterSpacing)) === null || _frontisExtractTypoVa125 === void 0 ? void 0 : _frontisExtractTypoVa125.unit) || 'px',
-            Tablet: ((_frontisExtractTypoVa126 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h138 = globalTypography.h6) === null || _globalTypography$h138 === void 0 || (_globalTypography$h138 = _globalTypography$h138.typography) === null || _globalTypography$h138 === void 0 ? void 0 : _globalTypography$h138.letterSpacing)) === null || _frontisExtractTypoVa126 === void 0 ? void 0 : _frontisExtractTypoVa126.unit) || 'px',
-            Mobile: ((_frontisExtractTypoVa127 = (0,_components_GetTypographyValue__WEBPACK_IMPORTED_MODULE_13__.frontisExtractTypoValue)(globalTypography === null || globalTypography === void 0 || (_globalTypography$h139 = globalTypography.h6) === null || _globalTypography$h139 === void 0 || (_globalTypography$h139 = _globalTypography$h139.typography) === null || _globalTypography$h139 === void 0 ? void 0 : _globalTypography$h139.letterSpacing)) === null || _frontisExtractTypoVa127 === void 0 ? void 0 : _frontisExtractTypoVa127.unit) || 'px'
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
           }
         }
       }
