@@ -799,5 +799,9 @@ const attributes = {
         type: "string",
         default: ""
     },
+    buttonCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 }
 export default attributes;

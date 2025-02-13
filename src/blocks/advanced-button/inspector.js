@@ -43,6 +43,8 @@ import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_ImageControl from '@Components/image-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';
@@ -201,6 +203,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalWraperID,
 		buttonGlobalWraperClass,
 		/** End Global Setting */
+
+		buttonCustomCSS,
     } = attributes;    
     
 	const deviceType= useDeviceType();
@@ -1323,12 +1327,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalWraperClass,
 	]);
 
+
+	const customCss = getCustomCss(buttonCustomCSS, `.${blockId}`);
+
 	useEffect(() => {
-		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-	}, [allBlockStyle]);
+		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle, customCss]);
 
 
-	const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -2071,6 +2078,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														className="fb-setting-responsive-control"
 														checked={advancedBtnMobileSwitcher}
 														onChange={(value) => setAttributes({ advancedBtnMobileSwitcher: value })}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={buttonCustomCSS}
+														onChangeValue={(value) => setAttributes({ buttonCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

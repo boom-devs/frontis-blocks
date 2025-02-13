@@ -34,8 +34,8 @@ export default function save({ attributes }) {
 
     return (
         <>
-            <div {...blockProps} id={blockId} className={`${buttonGlobalWraperClass}`}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }}>
+            <div {...blockProps} id={blockId}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId} ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
