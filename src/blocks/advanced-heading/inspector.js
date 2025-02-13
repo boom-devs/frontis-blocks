@@ -57,6 +57,7 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
 
 import './editor.scss';
 
@@ -303,6 +304,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         blockStyle,
         advancedHeadingCustomCSS,
+
+        // Position
+        advancedHeadingPositionType,
+        advancedHeadingHZOrientationType,
+        advancedHeadingVROrientationType,
+        advancedHeadingHZLeftOffset,
+        advancedHeadingHZLeftOffsetUnits,
+        advancedHeadingHZRightOffset,
+        advancedHeadingHZRightOffsetUnits,
+        advancedHeadingVRTopOffset,
+        advancedHeadingVRTopOffsetUnits,
+        advancedHeadingVRBottomOffset,
+        advancedHeadingVRBottomOffsetUnits,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1456,6 +1470,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     const allBlockStyle = useMemo(() => `
+        .fb-advanced-heading-main-wrapper.${blockId} {
+            ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Desktop !== undefined ? `left: ${advancedHeadingHZLeftOffset.Desktop}${advancedHeadingHZLeftOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Desktop !== undefined ? `right: ${advancedHeadingHZRightOffset.Desktop}${advancedHeadingHZRightOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Desktop !== undefined ? `top: ${advancedHeadingVRTopOffset.Desktop}${advancedHeadingVRTopOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Desktop}${advancedHeadingVRBottomOffsetUnits.Desktop};` : ''}
+            ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
+        }
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
             ${headingColor ? `color: ${headingColor};` : ''}
@@ -1587,7 +1610,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 : ''}
         }
         .${blockId} .fb-advanced-wrapper {
-            ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
             ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
@@ -1691,8 +1713,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         : ''}`
                     : ''}
             }
-            .${blockId} .fb-advanced-wrapper {
+
+            .fb-advanced-heading-main-wrapper.${blockId} {
+                ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Tablet !== undefined ? `left: ${advancedHeadingHZLeftOffset.Tablet}${advancedHeadingHZLeftOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Tablet !== undefined ? `right: ${advancedHeadingHZRightOffset.Tablet}${advancedHeadingHZRightOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Tablet !== undefined ? `top: ${advancedHeadingVRTopOffset.Tablet}${advancedHeadingVRTopOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Tablet}${advancedHeadingVRBottomOffsetUnits.Tablet};` : ''}
                 ${headingGlobalZIndex.Tablet ? `z-index: ${headingGlobalZIndex.Tablet};` : ''}
+            }
+            .${blockId}.fb-advanced-wrapper {
                 ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                 ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -1780,8 +1810,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         : ''}`
                     : ''}
             }
-            .${blockId} .fb-advanced-wrapper {
+
+            .fb-advanced-heading-main-wrapper.${blockId} {
+                ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Mobile !== undefined ? `left: ${advancedHeadingHZLeftOffset.Mobile}${advancedHeadingHZLeftOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Mobile !== undefined ? `right: ${advancedHeadingHZRightOffset.Mobile}${advancedHeadingHZRightOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Mobile !== undefined ? `top: ${advancedHeadingVRTopOffset.Mobile}${advancedHeadingVRTopOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Mobile}${advancedHeadingVRBottomOffsetUnits.Mobile};` : ''}
                 ${headingGlobalZIndex.Mobile ? `z-index: ${headingGlobalZIndex.Mobile};` : ''}
+            }
+            .${blockId}.fb-advanced-wrapper {
                 ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                 ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -1936,7 +1974,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingIconTabletBorderWidthValue,
     headingIconTabletBorderRadiusWidthValue,
     headingIconMobileBorderWidthValue,
-    headingIconMobileBorderRadiusWidthValue
+    headingIconMobileBorderRadiusWidthValue,
+
+    // Position
+    advancedHeadingPositionType,
+    advancedHeadingHZOrientationType,
+    advancedHeadingVROrientationType,
+    advancedHeadingHZLeftOffset,
+    advancedHeadingHZLeftOffsetUnits,
+    advancedHeadingHZRightOffset,
+    advancedHeadingHZRightOffsetUnits,
+    advancedHeadingVRTopOffset,
+    advancedHeadingVRTopOffsetUnits,
+    advancedHeadingVRBottomOffset,
+    advancedHeadingVRBottomOffsetUnits,
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -2985,6 +3036,42 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={advancedHeadingPositionType}
+                                                        setPositionType={(value) => setAttributes({ advancedHeadingPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={advancedHeadingHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ advancedHeadingHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={advancedHeadingVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ advancedHeadingVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={advancedHeadingHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ advancedHeadingHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={advancedHeadingHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ advancedHeadingHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={advancedHeadingHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ advancedHeadingHZRightOffset: value })}
+                                                        HZRightOffsetUnits={advancedHeadingHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ advancedHeadingHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={advancedHeadingVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ advancedHeadingVRTopOffset: value })}
+                                                        VRTopOffsetUnits={advancedHeadingVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ advancedHeadingVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={advancedHeadingVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ advancedHeadingVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={advancedHeadingVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ advancedHeadingVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
                                                     <FB_InputControl
                                                         label={__("CSS ID", "frontis-blocks")}
                                                         value={headingGlobalWraperID}

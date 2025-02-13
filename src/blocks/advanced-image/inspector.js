@@ -26,8 +26,6 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
-import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
@@ -221,7 +219,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
-		advancedImageCustomCSS,
 
 	} = attributes;
 
@@ -1152,16 +1149,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
-
-	const customCss = getCustomCss(advancedImageCustomCSS, `.${blockID}`);
-
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${advancedImageStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${advancedImageStyle}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [advancedImageStyle, customCss]);
+	}, [advancedImageStyle]);
 
-	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+	const editorStyle = advancedImageStyle.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1894,16 +1888,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={advancedImageMobileSwitcher}
 														onChange={(value) => setAttributes({ advancedImageMobileSwitcher: value })}
-													/>
-												</PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor  
-														value={advancedImageCustomCSS}
-														onChangeValue={(value) => setAttributes({ advancedImageCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>
