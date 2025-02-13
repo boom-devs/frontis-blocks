@@ -54,10 +54,10 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '../../components/position-control/index.js';
-
-import Editor from '@monaco-editor/react';
 
 import './editor.scss';
 
@@ -302,6 +302,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
 
+        blockStyle,
         advancedHeadingCustomCSS,
 
         // Position
@@ -1478,7 +1479,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Desktop}${advancedHeadingVRBottomOffsetUnits.Desktop};` : ''}
             ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
         }
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
             ${headingColor ? `color: ${headingColor};` : ''}
             ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
             ${headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
@@ -1515,7 +1517,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
             ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
@@ -1527,7 +1529,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''}
             ${subHeadingFontFamily && subHeadingFontFamily !== 'Default' ? `font-family: ${subHeadingFontFamily};` : ''}
@@ -1555,7 +1557,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
             ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
@@ -1591,7 +1593,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingIconHoverColor ? `fill: ${headingIconHoverColor};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-title-separator {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
             display: inline-block;
             ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
             ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
@@ -1607,7 +1609,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}`
                 : ''}
         }
-        .${blockId}.fb-advanced-wrapper {
+        .${blockId} .fb-advanced-wrapper {
             ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
@@ -1619,26 +1621,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
             position: relative;
         }
-        .${blockId}.fb-advanced-wrapper:hover {
+        .${blockId} .fb-advanced-wrapper:hover {
             ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
             ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
             ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
             ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
             ${activeLineAfterColor ? `background-color: ${activeLineAfterColor};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
             ${activeLineBeforeWidth.Desktop && activeLineBeforeWidthUnits.Desktop ? `width: ${activeLineBeforeWidth.Desktop}${activeLineBeforeWidthUnits.Desktop};` : ''}
             ${activeLineBeforeHeight.Desktop && activeLineBeforeHeightUnits.Desktop ? `height: ${activeLineBeforeHeight.Desktop}${activeLineBeforeHeightUnits.Desktop};` : ''}
             ${activeLineBeforeColor ? `background-color: ${activeLineBeforeColor};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
                 ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                 ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                 ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -1655,7 +1657,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                     -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
@@ -1664,7 +1666,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
                 ${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
                 ${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
@@ -1680,7 +1682,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                     -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
@@ -1698,7 +1700,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingIconSize.Tablet ? `width: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
                 ${headingIconSize.Tablet ? `height: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
             }
-            .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
                 ${separatorWidth.Tablet && separatorWidthUnits.Tablet ? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};` : ''}
                 ${separatorHeight.Tablet && separatorHeightUnits.Tablet ? `border-top-width: ${separatorHeight.Tablet}${separatorHeightUnits.Tablet};` : ''}
                 ${separatorPosition === 'bottom' ?
@@ -1726,18 +1728,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Tablet && activeLineAfterWidthUnits.Tablet ? `width: ${activeLineAfterWidth.Tablet}${activeLineAfterWidthUnits.Tablet};` : ''}
                 ${activeLineAfterHeight.Tablet && activeLineAfterHeightUnits.Tablet ? `height: ${activeLineAfterHeight.Tablet}${activeLineAfterHeightUnits.Tablet};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
                 ${activeLineBeforeWidth.Tablet && activeLineBeforeWidthUnits.Tablet ? `width: ${activeLineBeforeWidth.Tablet}${activeLineBeforeWidthUnits.Tablet};` : ''}
                 ${activeLineBeforeHeight.Tablet && activeLineBeforeHeightUnits.Tablet ? `height: ${activeLineBeforeHeight.Tablet}${activeLineBeforeHeightUnits.Tablet};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
                 ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                 ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                 ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -1753,7 +1755,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                     -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
@@ -1762,7 +1764,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
                 ${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
                 ${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
@@ -1777,7 +1779,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                     -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
@@ -1795,7 +1797,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingIconSize.Mobile ? `width: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
                 ${headingIconSize.Mobile ? `height: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
             }
-            .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
                 ${separatorWidth.Mobile && separatorWidthUnits.Mobile ? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};` : ''}
                 ${separatorHeight.Mobile && separatorHeightUnits.Mobile ? `border-top-width: ${separatorHeight.Mobile}${separatorHeightUnits.Mobile};` : ''}
                 ${separatorPosition === 'bottom' ?
@@ -1823,11 +1825,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
                 ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
                 ${activeLineBeforeWidth.Mobile && activeLineBeforeWidthUnits.Mobile ? `width: ${activeLineBeforeWidth.Mobile}${activeLineBeforeWidthUnits.Mobile};` : ''}
                 ${activeLineBeforeHeight.Mobile && activeLineBeforeHeightUnits.Mobile ? `height: ${activeLineBeforeHeight.Mobile}${activeLineBeforeHeightUnits.Mobile};` : ''}
             }
@@ -1988,31 +1990,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     advancedHeadingVRBottomOffsetUnits,
     ]);
 
-    const prefixSelectors = (css, prefix) => {
-        return css
-            .split('}') // Split CSS rules
-            .map(rule => {
-                const [selectors, properties] = rule.split('{'); // Separate selectors and properties
-                if (!selectors || !properties) return ''; // Skip if invalid
-                
-                // Prefix each selector with a space separator
-                const prefixedSelectors = selectors
-                    .split(',')
-                    .map(selector => `${prefix} ${selector.trim()}`) // Ensure a space separator
-                    .join(', '); // Keep selectors properly formatted
-    
-                return `${prefixedSelectors} {${properties}}`; // Add closing bracket properly
-            })
-            .join('\n'); // Add new line between each rule
-    };
-    
-    const addCustomCSS = prefixSelectors(advancedHeadingCustomCSS, `.${blockId}`);
+    const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
 
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}${addCustomCSS}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
 
-    const editorStyle = `${allBlockStyle} ${addCustomCSS}`.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -3275,43 +3259,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     title={__("Custom CSS", "frontis-blocks")}
                                                     initialOpen={false}
                                                 >
-                                                    <div className="fb-advanced-heading-custom-css-editor-wrapper" style={{ height: '250px' }}>
-                                                        <Editor
-                                                            height="100%"
-                                                            defaultLanguage="css"
-                                                            theme="vs-dark"
-                                                            className="fb-advanced-heading-custom-css-editor"
-                                                            value={advancedHeadingCustomCSS}
-                                                            onChange={(value) => setAttributes({ advancedHeadingCustomCSS: value })}
-                                                            options={{
-                                                                automaticLayout: true,
-                                                                minimap: { enabled: false },
-                                                                padding: { top: 10, bottom: 10 },
-                                                                lineNumbers: 'on',
-                                                                lineNumbersMinChars: 2,
-                                                                fontSize: 14,
-                                                                fontFamily: 'Fira Code, monospace',
-                                                                scrollBeyondLastLine: true,
-                                                                wordWrap: 'off',
-                                                                tabSize: 4,
-                                                                insertSpaces: true,
-                                                                renderWhitespace: 'boundary',
-                                                                cursorBlinking: 'smooth',
-                                                                readOnly: false,
-                                                                autoClosingBrackets: 'always',
-                                                                formatOnPaste: true,
-                                                                formatOnType: true,
-                                                                quickSuggestions: true,
-                                                                bracketPairColorization: true,
-                                                                scrollBeyondLastColumn: 10,
-                                                                horizontalScrollbarSize: 10,
-                                                                verticalScrollbarSize: 10,
-                                                                smoothScrolling: true,
-                                                                cursorStyle: 'line',
-                                                                cursorWidth: 2
-                                                            }}
-                                                        />
-                                                    </div>
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedHeadingCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ advancedHeadingCustomCSS: value })}
+                                                    />
                                                 </PanelBody>
 											</div>
 										</div>

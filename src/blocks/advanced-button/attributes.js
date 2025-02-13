@@ -799,7 +799,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-
+    
     advancedBtnPositionType: {
         type: "string",
         default: "default"
@@ -875,6 +875,11 @@ const attributes = {
             Tablet: 'px',
             Mobile: 'px',
         }
+    },
+
+    buttonCustomCSS : { 
+        type: "string",
+        default: "",
     },
 }
 export default attributes;
