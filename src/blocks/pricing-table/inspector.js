@@ -47,6 +47,8 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 
 import './editor.scss';

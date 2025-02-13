@@ -35,6 +35,8 @@ import './editor.scss';
 import { ButtonGroup } from '@wordpress/components';
 import { Button } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import FB_AlignmentControl from '../../components/alignment-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
