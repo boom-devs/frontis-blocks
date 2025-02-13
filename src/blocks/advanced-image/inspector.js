@@ -221,6 +221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
+		advancedImageCustomCSS,
 
 	} = attributes;
 
@@ -1151,13 +1152,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+
+	const customCss = getCustomCss(advancedImageCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${advancedImageStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${advancedImageStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [advancedImageStyle]);
+	}, [advancedImageStyle, customCss]);
 
-	const editorStyle = advancedImageStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1890,6 +1894,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={advancedImageMobileSwitcher}
 														onChange={(value) => setAttributes({ advancedImageMobileSwitcher: value })}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={advancedImageCustomCSS}
+														onChangeValue={(value) => setAttributes({ advancedImageCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

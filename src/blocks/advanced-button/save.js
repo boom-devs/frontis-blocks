@@ -29,13 +29,15 @@ export default function save({ attributes }) {
 
     } = attributes;
 
-    const blockProps = useBlockProps.save();
+    const blockProps = useBlockProps.save({
+        className: `frontis-block fb-advanced-button-main-wrapper ${blockId}`,
+    });
 
 
     return (
         <>
-            <div {...blockProps} id={blockId}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId} ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }}>
+            <div {...blockProps}>
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }}>
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 

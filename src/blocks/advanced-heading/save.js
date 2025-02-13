@@ -25,8 +25,7 @@ export default function save({ attributes }) {
 
 
     const blockProps = useBlockProps.save({
-        id: blockId,
-        className: `fb-advanced-heading-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId}`,
     });
 
 
