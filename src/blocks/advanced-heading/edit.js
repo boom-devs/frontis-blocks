@@ -45,8 +45,7 @@ export default function Edit({ attributes, setAttributes, clientId}) {
 
 
     const blockProps = useBlockProps({
-        id: blockId,
-        className: `fb-advanced-heading-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId}`,
     });
 
 
