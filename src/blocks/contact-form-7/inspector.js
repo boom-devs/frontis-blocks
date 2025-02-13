@@ -42,6 +42,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import "./editor.scss";
 
@@ -272,6 +274,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		contactFormGlobalWraperID,
 		contactFormGlobalWraperClass,
+
+		// Position
+		contactFormPositionType,
+		contactFormHZOrientationType,
+		contactFormVROrientationType,
+		contactFormHZLeftOffset,
+		contactFormHZLeftOffsetUnits,
+		contactFormHZRightOffset,
+		contactFormHZRightOffsetUnits,
+		contactFormVRTopOffset,
+		contactFormVRTopOffsetUnits,
+		contactFormVRBottomOffset,
+		contactFormVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1836,6 +1851,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
 		.${blockID}.fb-contact-form-wrapper {
+			${contactFormPositionType === 'default' ? `position: relative;` : ''}
+			${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Desktop !== undefined ? `left: ${contactFormHZLeftOffset.Desktop}${contactFormHZLeftOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Desktop !== undefined ? `right: ${contactFormHZRightOffset.Desktop}${contactFormHZRightOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Desktop !== undefined ? `top: ${contactFormVRTopOffset.Desktop}${contactFormVRTopOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Desktop !== undefined ? `bottom: ${contactFormVRBottomOffset.Desktop}${contactFormVRBottomOffsetUnits.Desktop};` : ''}
             ${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
             ${DesktopPadding != "" ? `padding: ${DesktopPadding};` : ""}
             ${DesktopMargin != "" ? `margin: ${DesktopMargin};` : ""}
@@ -1845,7 +1866,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 			${contactFormGlobalBoxShadowCssValue ? `box-shadow: ${contactFormGlobalBoxShadowCssValue};` : ''} 
 			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
-            position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {
@@ -2045,7 +2065,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockID}.fb-contact-form-wrapper {
 				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
-				position: relative;
+				${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Tablet !== undefined ? `left: ${contactFormHZLeftOffset.Tablet}${contactFormHZLeftOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Tablet !== undefined ? `right: ${contactFormHZRightOffset.Tablet}${contactFormHZRightOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Tablet !== undefined ? `top: ${contactFormVRTopOffset.Tablet}${contactFormVRTopOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Tablet !== undefined ? `bottom: ${contactFormVRBottomOffset.Tablet}${contactFormVRBottomOffsetUnits.Tablet};` : ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
@@ -2254,9 +2278,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
-				.${blockID}.fb-contact-form-wrapper {
+			.${blockID}.fb-contact-form-wrapper {
 				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
-				position: relative;
+				${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Mobile !== undefined ? `left: ${contactFormHZLeftOffset.Mobile}${contactFormHZLeftOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Mobile !== undefined ? `right: ${contactFormHZRightOffset.Mobile}${contactFormHZRightOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Mobile !== undefined ? `top: ${contactFormVRTopOffset.Mobile}${contactFormVRTopOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Mobile !== undefined ? `bottom: ${contactFormVRBottomOffset.Mobile}${contactFormVRBottomOffsetUnits.Mobile};` : ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
@@ -2750,7 +2778,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormGlobalBoxShadowHoverValues,
 		contactFormGlobalBoxShadowHoverCssValue,
 
-
+		// Position
+		contactFormPositionType,
+		contactFormHZOrientationType,
+		contactFormVROrientationType,
+		contactFormHZLeftOffset,
+		contactFormHZLeftOffsetUnits,
+		contactFormHZRightOffset,
+		contactFormHZRightOffsetUnits,
+		contactFormVRTopOffset,
+		contactFormVRTopOffsetUnits,
+		contactFormVRBottomOffset,
+		contactFormVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -3553,6 +3592,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={contactFormPositionType}
+														setPositionType={(value) => setAttributes({ contactFormPositionType: value })}
+																										
+														HZOrientationType={contactFormHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ contactFormHZOrientationType: value })
+														}
+														VROrientationType={contactFormVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ contactFormVROrientationType: value })
+														}
+																											
+														HZLeftOffset={contactFormHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ contactFormHZLeftOffset: value })}
+														HZLeftOffsetUnits={contactFormHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ contactFormHZLeftOffsetUnits: value })}
+														HZRightOffset={contactFormHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ contactFormHZRightOffset: value })}
+														HZRightOffsetUnits={contactFormHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ contactFormHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={contactFormVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ contactFormVRTopOffset: value })}
+														VRTopOffsetUnits={contactFormVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ contactFormVRTopOffsetUnits: value })}
+														VRBottomOffset={contactFormVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ contactFormVRBottomOffset: value })}
+														VRBottomOffsetUnits={contactFormVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ contactFormVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
 
 													<FB_InputControl
 														label={__("CSS ID", "frontis-blocks")}

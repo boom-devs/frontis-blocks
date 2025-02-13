@@ -1385,6 +1385,83 @@ const attributes = {
 		default: ""
 	},
 	/** End Class & ID Setting */
+
+	countDownPositionType: {
+		type: "string",
+		default: "default"
+	},
+	countDownHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	countDownVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	countDownHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 };
 
 export default attributes;

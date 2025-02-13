@@ -1401,5 +1401,82 @@ const attributes = {
 	},
 	/** End Class & ID Setting */
 
+	dualBtnPositionType: {
+		type: "string",
+		default: "default"
+	},
+	dualBtnHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	dualBtnVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	dualBtnHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dualBtnHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dualBtnHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dualBtnHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dualBtnVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dualBtnVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dualBtnVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dualBtnVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 };
 export default attributes;
