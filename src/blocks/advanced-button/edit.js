@@ -79,13 +79,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
             
-<<<<<<< HEAD
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
-=======
-            <div {...blockProps} id={blockId} className={`fb-advanced-button-area ${blockId}`}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${blockId} ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
->>>>>>> 5f13844a70cc59ab4dec2177fce8ff947217ff5f
                     <a 
                         className="fb-advanced-button" 
                         href={buttonUrl} 
