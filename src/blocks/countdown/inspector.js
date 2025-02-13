@@ -38,6 +38,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_AlignmentControl from '../../components/alignment-control';
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -312,6 +314,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
+
+		// Position
+		countDownPositionType,
+		countDownHZOrientationType,
+		countDownVROrientationType,
+		countDownHZLeftOffset,
+		countDownHZLeftOffsetUnits,
+		countDownHZRightOffset,
+		countDownHZRightOffsetUnits,
+		countDownVRTopOffset,
+		countDownVRTopOffsetUnits,
+		countDownVRBottomOffset,
+		countDownVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -2156,6 +2171,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const countDownStyle = useMemo(
 		() => `
+			.fb-count-down-area.${blockID} {
+				${countDownPositionType === 'default' ? `position: relative;` : ''}
+				${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Desktop !== undefined ? `left: ${countDownHZLeftOffset.Desktop}${countDownHZLeftOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Desktop !== undefined ? `right: ${countDownHZRightOffset.Desktop}${countDownHZRightOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop !== undefined ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop !== undefined ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
+			}
 			.fb-count-down-wrapper.${blockID} {
 				${countDownLayoutType === 'flex' ? `display: flex;` : ''}
 				${countDownLayoutType === 'flex' && countDownFlexWrap === true ? `flex-wrap: wrap;` : ''}
@@ -2353,6 +2376,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			` : ''}
 
 			@media only screen and (max-width: 1024px) {
+				.fb-count-down-area.${blockID} {
+					${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Tablet !== undefined ? `left: ${countDownHZLeftOffset.Tablet}${countDownHZLeftOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet !== undefined ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Tablet !== undefined ? `top: ${countDownVRTopOffset.Tablet}${countDownVRTopOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Tablet !== undefined ? `bottom: ${countDownVRBottomOffset.Tablet}${countDownVRBottomOffsetUnits.Tablet};` : ''}
+			    }
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Tablet}, 1fr);` : ''}
 					${countDownItemGap.Tablet ? `gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};` : ""}
@@ -2403,6 +2433,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			@media only screen and (max-width: 767px) {
+					.fb-count-down-area.${blockID} {
+						${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Mobile !== undefined ? `left: ${countDownHZLeftOffset.Mobile}${countDownHZLeftOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile !== undefined ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Mobile !== undefined ? `top: ${countDownVRTopOffset.Mobile}${countDownVRTopOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Mobile !== undefined ? `bottom: ${countDownVRBottomOffset.Mobile}${countDownVRBottomOffsetUnits.Mobile};` : ''}
+							
+					}
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Mobile}, 1fr);` : ''}
 					${countDownItemGap.Mobile ? `gap: ${countDownItemGap.Mobile}${countDownItemGapUnits.Mobile};` : ""}
@@ -2640,6 +2678,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownGrid,
 			countDownItemGap,
 			countDownItemGapUnits,
+
+			// Position
+			countDownPositionType,
+			countDownHZOrientationType,
+			countDownVROrientationType,
+			countDownHZLeftOffset,
+			countDownHZLeftOffsetUnits,
+			countDownHZRightOffset,
+			countDownHZRightOffsetUnits,
+			countDownVRTopOffset,
+			countDownVRTopOffsetUnits,
+			countDownVRBottomOffset,
+			countDownVRBottomOffsetUnits,
 		]
 	);
 	
@@ -3535,6 +3586,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Advanced", "frontis-blocks")}
 											initialOpen={true}
 										>
+											<FB_PositionControl
+												deviceType={deviceType}
+												positionType={countDownPositionType}
+												setPositionType={(value) => setAttributes({ countDownPositionType: value })}
+																								
+												HZOrientationType={countDownHZOrientationType}
+												setHZOrientationType={(value) =>
+													setAttributes({ countDownHZOrientationType: value })
+												}
+												VROrientationType={countDownVROrientationType}
+												setVROrientationType={(value) =>
+													setAttributes({ countDownVROrientationType: value })
+												}
+																									
+												HZLeftOffset={countDownHZLeftOffset}
+												setHZLeftOffset={(value) => setAttributes({ countDownHZLeftOffset: value })}
+												HZLeftOffsetUnits={countDownHZLeftOffsetUnits}
+												setHZLeftOffsetUnits={(value) => setAttributes({ countDownHZLeftOffsetUnits: value })}
+												HZRightOffset={countDownHZRightOffset}
+												setHZRightOffset={(value) => setAttributes({ countDownHZRightOffset: value })}
+												HZRightOffsetUnits={countDownHZRightOffsetUnits}
+												setHZRightOffsetUnits={(value) => setAttributes({ countDownHZRightOffsetUnits: value })}
+																								
+												VRTopOffset={countDownVRTopOffset}
+												setVRTopOffset={(value) => setAttributes({ countDownVRTopOffset: value })}
+												VRTopOffsetUnits={countDownVRTopOffsetUnits}
+												setVRTopOffsetUnits={(value) => setAttributes({ countDownVRTopOffsetUnits: value })}
+												VRBottomOffset={countDownVRBottomOffset}
+												setVRBottomOffset={(value) => setAttributes({ countDownVRBottomOffset: value })}
+												VRBottomOffsetUnits={countDownVRBottomOffsetUnits}
+												setVRBottomOffsetUnits={(value) => setAttributes({ countDownVRBottomOffsetUnits: value })}
+
+												setAttributes={setAttributes}
+											/>
+
 											<FB_InputControl
 												label={__("CSS ID", "frontis-blocks")}
 												value={countDownGlobalWraperID} 

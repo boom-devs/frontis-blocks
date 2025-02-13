@@ -1070,11 +1070,6 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-	/** End Class & ID Setting */
-	
-	advancedImageCustomCSS : {  
-        type: "string",
-        default: "",
-    },
+	/** End Class & ID Setting */	
 }
 export default attributes;
