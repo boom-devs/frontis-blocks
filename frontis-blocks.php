@@ -38,8 +38,3 @@ function wm_frontis_blocks(){
 wm_frontis_blocks();
 
 
-// add_action( 'init', 'process_post' );
-
-// function process_post() {
-//     add_editor_style( 'assets/css/fbe-common.css' );
-// }
