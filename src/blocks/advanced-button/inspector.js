@@ -44,6 +44,8 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_ImageControl from '@Components/image-control';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -201,6 +203,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalWraperID,
 		buttonGlobalWraperClass,
 		/** End Global Setting */
+
+		// Position
+		advancedBtnPositionType,
+		advancedBtnHZOrientationType,
+		advancedBtnVROrientationType,
+		advancedBtnHZLeftOffset,
+		advancedBtnHZLeftOffsetUnits,
+		advancedBtnHZRightOffset,
+		advancedBtnHZRightOffsetUnits,
+		advancedBtnVRTopOffset,
+		advancedBtnVRTopOffsetUnits,
+		advancedBtnVRBottomOffset,
+		advancedBtnVRBottomOffsetUnits,
     } = attributes;    
     
 	const deviceType= useDeviceType();
@@ -1011,8 +1026,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 	const allBlockStyle = useMemo(() => `
-		.${blockId}.fb-advanced-button-wrapper {
+		.fb-advanced-button-area.${blockId} {
+			${advancedBtnPositionType === 'default' ? `position: relative;` : ''}
+			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Desktop !== undefined ? `left: ${advancedBtnHZLeftOffset.Desktop}${advancedBtnHZLeftOffsetUnits.Desktop};` : ''}
+			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Desktop !== undefined ? `right: ${advancedBtnHZRightOffset.Desktop}${advancedBtnHZRightOffsetUnits.Desktop};` : ''}
+			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Desktop !== undefined ? `top: ${advancedBtnVRTopOffset.Desktop}${advancedBtnVRTopOffsetUnits.Desktop};` : ''}
+			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Desktop}${advancedBtnVRBottomOffsetUnits.Desktop};` : ''}
 			${buttonGlobalZIndex.Desktop ? `z-index: ${buttonGlobalZIndex.Desktop};` : ''}
+		}
+		.${blockId}.fb-advanced-button-wrapper {
 			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -1094,8 +1117,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.${blockId}.fb-advanced-button-wrapper {
+			.fb-advanced-button-area.${blockId} {
+				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Tablet !== undefined ? `left: ${advancedBtnHZLeftOffset.Tablet}${advancedBtnHZLeftOffsetUnits.Tablet};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Tablet !== undefined ? `right: ${advancedBtnHZRightOffset.Tablet}${advancedBtnHZRightOffsetUnits.Tablet};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Tablet !== undefined ? `top: ${advancedBtnVRTopOffset.Tablet}${advancedBtnVRTopOffsetUnits.Tablet};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Tablet}${advancedBtnVRBottomOffsetUnits.Tablet};` : ''}
 				${buttonGlobalZIndex.Tablet ? `z-index: ${buttonGlobalZIndex.Tablet};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper {
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
 				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -1152,8 +1182,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.${blockId}.fb-advanced-button-wrapper {
+			.fb-advanced-button-area.${blockId} {
+				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Mobile !== undefined ? `left: ${advancedBtnHZLeftOffset.Mobile}${advancedBtnHZLeftOffsetUnits.Mobile};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Mobile !== undefined ? `right: ${advancedBtnHZRightOffset.Mobile}${advancedBtnHZRightOffsetUnits.Mobile};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Mobile !== undefined ? `top: ${advancedBtnVRTopOffset.Mobile}${advancedBtnVRTopOffsetUnits.Mobile};` : ''}
+				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Mobile}${advancedBtnVRBottomOffsetUnits.Mobile};` : ''}
 				${buttonGlobalZIndex.Mobile ? `z-index: ${buttonGlobalZIndex.Mobile};` : ''}
+			}
+			.${blockId}.fb-advanced-button-wrapper {
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
 				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -1321,6 +1358,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 		buttonGlobalWraperID,
 		buttonGlobalWraperClass,
+
+		// Position
+		advancedBtnPositionType,
+		advancedBtnHZOrientationType,
+		advancedBtnVROrientationType,
+		advancedBtnHZLeftOffset,
+		advancedBtnHZLeftOffsetUnits,
+		advancedBtnHZRightOffset,
+		advancedBtnHZRightOffsetUnits,
+		advancedBtnVRTopOffset,
+		advancedBtnVRTopOffsetUnits,
+		advancedBtnVRBottomOffset,
+		advancedBtnVRBottomOffsetUnits,
 	]);
 
 	useEffect(() => {
@@ -1891,6 +1941,42 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         isRangeUnit={false}
 
                                                     />
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={advancedBtnPositionType}
+														setPositionType={(value) => setAttributes({ advancedBtnPositionType: value })}
+																										
+														HZOrientationType={advancedBtnHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ advancedBtnHZOrientationType: value })
+														}
+														VROrientationType={advancedBtnVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ advancedBtnVROrientationType: value })
+														}
+																											
+														HZLeftOffset={advancedBtnHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ advancedBtnHZLeftOffset: value })}
+														HZLeftOffsetUnits={advancedBtnHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ advancedBtnHZLeftOffsetUnits: value })}
+														HZRightOffset={advancedBtnHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ advancedBtnHZRightOffset: value })}
+														HZRightOffsetUnits={advancedBtnHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ advancedBtnHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={advancedBtnVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ advancedBtnVRTopOffset: value })}
+														VRTopOffsetUnits={advancedBtnVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ advancedBtnVRTopOffsetUnits: value })}
+														VRBottomOffset={advancedBtnVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ advancedBtnVRBottomOffset: value })}
+														VRBottomOffsetUnits={advancedBtnVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ advancedBtnVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
+
                                                     <FB_InputControl
                                                         label={__("CSS ID", "frontis-blocks")}
                                                         value={buttonGlobalWraperID}

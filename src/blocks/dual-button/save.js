@@ -31,7 +31,7 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps} id={blockID} className={dualButtonGlobalWraperClass}>
+			<div {...blockProps} id={blockID} className={`fb-dual-button-area ${blockID} ${dualButtonGlobalWraperClass}`}>
 				<div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} id={dualButtonGlobalWraperID}>
 					<div
 						className="fb-dual-button-wrapper"

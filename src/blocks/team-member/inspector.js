@@ -2283,6 +2283,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 
 			.fb-team-member-main-wrapper.${blockID} {
+				${teamMemberPositionType === 'default' ? `position: relative;` : ''}
 				${teamMemberPositionType !== 'default' ? `position: ${teamMemberPositionType};` : ''}
 				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'left' && teamMemberHZLeftOffset.Desktop !== undefined ? `left: ${teamMemberHZLeftOffset.Desktop}${teamMemberHZLeftOffsetUnits.Desktop};` : ''}
 				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'right' && teamMemberHZRightOffset.Desktop !== undefined ? `right: ${teamMemberHZRightOffset.Desktop}${teamMemberHZRightOffsetUnits.Desktop};` : ''}
