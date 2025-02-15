@@ -14,7 +14,6 @@ const FB_Range = ({
 	rangeUnitHandler,
 	deviceType,
 	units,
-	setAttributes,
 	rangeStep,
 	resetFallbackValue,
 	units_types_arr = null,
