@@ -39,9 +39,14 @@ export default function save({ attributes }) {
 		loadMoreText,
 		loadMoreIcon,
 		loadMoreIconAlign,
+
+		postGridGlobalWraperID,
+        postGridGlobalWraperClass,
 	} = attributes;
 
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		className: `fb-post-grid-area ${blockId} ${postGridGlobalWraperClass}`,
+	});
 
 	return (
 		<>
@@ -76,7 +81,7 @@ export default function save({ attributes }) {
 				data-load-more-icon={loadMoreIcon}
 				data-load-more-icon-align={loadMoreIconAlign}
 			>
-				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}>
+				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}>
 					<div className="load_more_button_icon">
 						{renderSVG(loadMoreIcon)}
 					</div>

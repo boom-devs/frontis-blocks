@@ -2407,10 +2407,109 @@ const attributes = {
 		type: "string",
 		default: "#FFFFFF"
 	},
-
-
 	/** End Load More */
 
+	postGridDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    postGridTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    postGridMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Class & ID Setting */
+	postGridGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	postGridGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+
+	postGridPositionType: {
+        type: "string",
+        default: "default"
+    },
+    postGridHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    postGridVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    postGridHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    postGridHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    postGridHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    postGridHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    postGridVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    postGridVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    postGridVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    postGridVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 };
 
 export default attributes;

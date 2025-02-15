@@ -17,7 +17,9 @@ export default function save({ attributes }) {
 
 	} = attributes;
 
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+        className: `fb-counter-main-wrapper ${blockID}`,
+    });
 
 	// Prepare the formatted counter number for the frontend
 	const formattedCounterNumber = showThousandsSeparator

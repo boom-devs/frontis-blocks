@@ -70,6 +70,10 @@ const Inspector = (props) => {
 			containerBgHoverBackgroundImageAttachment,
 			containerBgHoverBackgroundImageRepeat,
 			containerBgHoverBackgroundImageSize,
+
+			containerDesktopSwitcher,
+			containerTabletSwitcher,
+			containerMobileSwitcher,
 		},
 
 		setAttributes
@@ -776,6 +780,31 @@ const Inspector = (props) => {
 														})
 													}
 												/>
+											</PanelBody>
+
+											<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={containerDesktopSwitcher}
+														onChange={(value) => setAttributes({ containerDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={containerTabletSwitcher}
+														onChange={(value) => setAttributes({ containerTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={containerMobileSwitcher}
+														onChange={(value) => setAttributes({ containerMobileSwitcher: value })}
+													/>
 											</PanelBody>
 										</div>
 									</div>

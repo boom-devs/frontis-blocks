@@ -22,6 +22,10 @@ import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_InputControl from '@Components/input-control';
+import FB_PositionControl from '../../components/position-control/index.js';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
@@ -139,6 +143,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoGlobalBoxShadowHoverValues,
         videoGlobalBoxShadowHoverCssValue,
 
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
+
+        advancedVideoDesktopSwitcher,
+		advancedVideoTabletSwitcher,
+		advancedVideoMobileSwitcher,
+        
+        // Position
+        advancedVideoPositionType,
+        advancedVideoHZOrientationType,
+        advancedVideoVROrientationType,
+        advancedVideoHZLeftOffset,
+        advancedVideoHZLeftOffsetUnits,
+        advancedVideoHZRightOffset,
+        advancedVideoHZRightOffsetUnits,
+        advancedVideoVRTopOffset,
+        advancedVideoVRTopOffsetUnits,
+        advancedVideoVRBottomOffset,
+        advancedVideoVRBottomOffsetUnits,
+
+        advancedVideoCustomCSS,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -831,9 +856,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
         .${blockID}.fb-advanced-video-main-wrapper {
+            ${advancedVideoPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Desktop !== undefined ? `left: ${advancedVideoHZLeftOffset.Desktop}${advancedVideoHZLeftOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Desktop !== undefined ? `right: ${advancedVideoHZRightOffset.Desktop}${advancedVideoHZRightOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Desktop !== undefined ? `top: ${advancedVideoVRTopOffset.Desktop}${advancedVideoVRTopOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Desktop}${advancedVideoVRBottomOffsetUnits.Desktop};` : ''}
             ${videoGlobalZIndex.Desktop ? `z-index: ${videoGlobalZIndex.Desktop};` : ''}
         }
-        .${blockID}.fb-advanced-video-wrapper {
+        .${blockID} .fb-advanced-video-wrapper {
             ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
             padding: ${DesktopPadding};
             margin: ${DesktopMargin};
@@ -844,7 +876,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${videoGlobalBoxShadowCssValue ? `box-shadow: ${videoGlobalBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockID}.fb-advanced-video-wrapper:hover {
+        .${blockID} .fb-advanced-video-wrapper:hover {
             ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
             ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
             ${videoGlobalBoxShadowHoverCssValue ? `box-shadow: ${videoGlobalBoxShadowHoverCssValue};` : ''}
@@ -911,10 +943,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 1024px) {
 
             .${blockID}.fb-advanced-video-main-wrapper {
+                ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Tablet !== undefined ? `left: ${advancedVideoHZLeftOffset.Tablet}${advancedVideoHZLeftOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Tablet !== undefined ? `right: ${advancedVideoHZRightOffset.Tablet}${advancedVideoHZRightOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Tablet !== undefined ? `top: ${advancedVideoVRTopOffset.Tablet}${advancedVideoVRTopOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Tablet}${advancedVideoVRBottomOffsetUnits.Tablet};` : ''}
                 ${videoGlobalZIndex.Tablet ? `z-index: ${videoGlobalZIndex.Tablet};` : ''}
             }
 
-            .${blockID}.fb-advanced-video-wrapper {
+            .${blockID} .fb-advanced-video-wrapper {
                 padding: ${TabletPadding};
                 margin: ${TabletMargin};
                 border-width: ${BorderTabletWidth};
@@ -972,10 +1009,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 767px) {
 
             .${blockID}.fb-advanced-video-main-wrapper {
+                ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Mobile !== undefined ? `left: ${advancedVideoHZLeftOffset.Mobile}${advancedVideoHZLeftOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Mobile !== undefined ? `right: ${advancedVideoHZRightOffset.Mobile}${advancedVideoHZRightOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Mobile !== undefined ? `top: ${advancedVideoVRTopOffset.Mobile}${advancedVideoVRTopOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Mobile}${advancedVideoVRBottomOffsetUnits.Mobile};` : ''}
                 ${videoGlobalZIndex.Mobile ? `z-index: ${videoGlobalZIndex.Mobile};` : ''}
             }
 
-            .${blockID}.fb-advanced-video-wrapper {
+            .${blockID} .fb-advanced-video-wrapper {
                 padding: ${MobilePadding};
                 margin: ${MobileMargin};
                 border-width: ${BorderMobileWidth};
@@ -1167,14 +1209,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoPlayIconBorderMobileWidth,
         videoPlayIconBorderRadiusMobileWidth,
         IframeBorderMobileWidth,
-        IframeBorderRadiusMobileWidth
+        IframeBorderRadiusMobileWidth,
+
+        // Position
+        advancedVideoPositionType,
+        advancedVideoHZOrientationType,
+        advancedVideoVROrientationType,
+        advancedVideoHZLeftOffset,
+        advancedVideoHZLeftOffsetUnits,
+        advancedVideoHZRightOffset,
+        advancedVideoHZRightOffsetUnits,
+        advancedVideoVRTopOffset,
+        advancedVideoVRTopOffsetUnits,
+        advancedVideoVRBottomOffset,
+        advancedVideoVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [ allBlockStyle]);
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const customCss = getCustomCss(advancedVideoCustomCSS, `.${blockID}`);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
+
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -1509,6 +1567,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={advancedVideoPositionType}
+                                                        setPositionType={(value) => setAttributes({ advancedVideoPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={advancedVideoHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ advancedVideoHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={advancedVideoVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ advancedVideoVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={advancedVideoHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ advancedVideoHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={advancedVideoHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ advancedVideoHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={advancedVideoHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ advancedVideoHZRightOffset: value })}
+                                                        HZRightOffsetUnits={advancedVideoHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ advancedVideoHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={advancedVideoVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ advancedVideoVRTopOffset: value })}
+                                                        VRTopOffsetUnits={advancedVideoVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ advancedVideoVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={advancedVideoVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ advancedVideoVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={advancedVideoVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ advancedVideoVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={videoGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={videoGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+                                                    
                                                 </PanelBody>
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
                                                     <FB_Spacing 
@@ -1647,6 +1753,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowHoverCssValue: value })}
                                                         />
                                                     )}
+                                                </PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedVideoMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
+													/>
+												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedVideoCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ advancedVideoCustomCSS: value })}
+                                                    />
                                                 </PanelBody>
                                             </div>
                                         </div>

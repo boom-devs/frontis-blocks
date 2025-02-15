@@ -2334,6 +2334,94 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+
+	teamMemberPositionType: {
+		type: "string",
+		default: "default"
+	},
+	teamMemberHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	teamMemberVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	teamMemberHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	teamMemberVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	/** Start Class & ID Setting */
+	teamMemberGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	teamMemberGlobalWraperClass : {
+		type: "string",
+		default: ""
+	}
+	/** End Class & ID Setting */
 };
 
 export default attributes;

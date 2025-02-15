@@ -24,6 +24,9 @@ import FB_Range from "../../components/range";
 import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_ColorControl from "../../components/color-control";
+import FB_InputControl from "@Components/input-control";
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -77,7 +80,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
         accordionItemDesktopSwitcher,
         accordionItemTabletSwitcher,
-        accordionItemMobileSwitcher
+        accordionItemMobileSwitcher,
+
+        accordionItemGlobalWraperID,
+        accordionItemGlobalWraperClass,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -710,9 +716,23 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 isRangeUnit={false}
 
                                             />
+
+                                            <FB_InputControl
+                                                label={__("CSS ID", "frontis-blocks")}
+                                                value={accordionItemGlobalWraperID}
+                                                onChangeValue={(value) => setAttributes({ accordionItemGlobalWraperID: value })}
+                                                helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                            />
+
+                                            <FB_InputControl
+                                                label={__("CSS Class", "frontis-blocks")}
+                                                value={accordionItemGlobalWraperClass}
+                                                onChangeValue={(value) => setAttributes({ accordionItemGlobalWraperClass: value })}
+                                                helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                            />
                                         </PanelBody>
 
-                                        {/* <PanelBody
+                                        <PanelBody
                                             title={__("Responsive Control", "frontis-blocks")}
                                             initialOpen={false}
                                             className="fb-setting-responsive-control-wrapper"
@@ -735,7 +755,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                                 checked={accordionItemMobileSwitcher}
                                                 onChange={(value) => setAttributes({ accordionItemMobileSwitcher: value })}
                                             />
-                                        </PanelBody> */}
+                                        </PanelBody>
 
                                     </div>
                                 </div>

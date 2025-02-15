@@ -33,7 +33,12 @@ import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -188,7 +193,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// singleItemColorStyle,
 		blockStyle,
 
+		socialIconsDesktopSwitcher,
+		socialIconsTabletSwitcher,
+		socialIconsMobileSwitcher,
 
+		socialGlobalWraperID,
+		socialGlobalWraperClass,
+
+		// Position
+        socialIconsPositionType,
+        socialIconsHZOrientationType,
+        socialIconsVROrientationType,
+        socialIconsHZLeftOffset,
+        socialIconsHZLeftOffsetUnits,
+        socialIconsHZRightOffset,
+        socialIconsHZRightOffsetUnits,
+        socialIconsVRTopOffset,
+        socialIconsVRTopOffsetUnits,
+        socialIconsVRBottomOffset,
+        socialIconsVRBottomOffsetUnits,
     } = attributes;
 	
     const deviceType= useDeviceType();
@@ -2410,8 +2433,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 		const allBlockStyle = useMemo(() => `
-			.${blockID}.fb-social-wrapper {
+			.${blockID}.fb-social-main-wrapper {
+				${socialIconsPositionType === 'default' ? `position: relative;` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' ? `width: 100%;` : ''}
+				${socialIconsPositionType !== 'default' ? `position: ${socialIconsPositionType};` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'left' && socialIconsHZLeftOffset.Desktop !== undefined ? `left: ${socialIconsHZLeftOffset.Desktop}${socialIconsHZLeftOffsetUnits.Desktop};` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'right' && socialIconsHZRightOffset.Desktop !== undefined ? `right: ${socialIconsHZRightOffset.Desktop}${socialIconsHZRightOffsetUnits.Desktop};` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'top' && socialIconsVRTopOffset.Desktop !== undefined ? `top: ${socialIconsVRTopOffset.Desktop}${socialIconsVRTopOffsetUnits.Desktop};` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Desktop !== undefined ? `bottom: ${socialIconsVRBottomOffset.Desktop}${socialIconsVRBottomOffsetUnits.Desktop};` : ''}
 				${socialGlobalZIndex.Desktop ? `z-index: ${socialGlobalZIndex.Desktop};` : ''}
+			}
+			.${blockID}.fb-social-wrapper {
 				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
 				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -2484,8 +2516,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				color: ${socialTitleHoverColor};
 			}
 			@media only screen and (max-width: 1024px) {
-				.${blockID}.fb-social-wrapper {
+				.${blockID}.fb-social-main-wrapper {
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'left' && socialIconsHZLeftOffset.Tablet !== undefined ? `left: ${socialIconsHZLeftOffset.Tablet}${socialIconsHZLeftOffsetUnits.Tablet};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'right' && socialIconsHZRightOffset.Tablet !== undefined ? `right: ${socialIconsHZRightOffset.Tablet}${socialIconsHZRightOffsetUnits.Tablet};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'top' && socialIconsVRTopOffset.Tablet !== undefined ? `top: ${socialIconsVRTopOffset.Tablet}${socialIconsVRTopOffsetUnits.Tablet};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Tablet !== undefined ? `bottom: ${socialIconsVRBottomOffset.Tablet}${socialIconsVRBottomOffsetUnits.Tablet};` : ''}
 					${socialGlobalZIndex.Tablet ? `z-index: ${socialGlobalZIndex.Tablet};` : ''}
+				}
+				.${blockID}.fb-social-wrapper {
 					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
 					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -2521,8 +2559,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}	
 			}
 			@media only screen and (max-width: 767px) {
-				.${blockID}.fb-social-wrapper {
+				.${blockID}.fb-social-main-wrapper {
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'left' && socialIconsHZLeftOffset.Mobile !== undefined ? `left: ${socialIconsHZLeftOffset.Mobile}${socialIconsHZLeftOffsetUnits.Mobile};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'right' && socialIconsHZRightOffset.Mobile !== undefined ? `right: ${socialIconsHZRightOffset.Mobile}${socialIconsHZRightOffsetUnits.Mobile};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'top' && socialIconsVRTopOffset.Mobile !== undefined ? `top: ${socialIconsVRTopOffset.Mobile}${socialIconsVRTopOffsetUnits.Mobile};` : ''}
+					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Mobile !== undefined ? `bottom: ${socialIconsVRBottomOffset.Mobile}${socialIconsVRBottomOffsetUnits.Mobile};` : ''} 
 					${socialGlobalZIndex.Mobile ? `z-index: ${socialGlobalZIndex.Mobile};` : ''}
+				}
+				.${blockID}.fb-social-wrapper {
 					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
 					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -2629,7 +2673,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			SocialTitlePaddingTabletWidth,
 			SocialTitlePaddingMobileWidth,
 			socialIconsPresetStyle,
-			socialItems
+			socialItems,
+
+			// Position
+			socialIconsPositionType,
+			socialIconsHZOrientationType,
+			socialIconsVROrientationType,
+			socialIconsHZLeftOffset,
+			socialIconsHZLeftOffsetUnits,
+			socialIconsHZRightOffset,
+			socialIconsHZRightOffsetUnits,
+			socialIconsVRTopOffset,
+			socialIconsVRTopOffsetUnits,
+			socialIconsVRBottomOffset,
+			socialIconsVRBottomOffsetUnits,
 		]);
 
 		useEffect(() => {
@@ -3097,6 +3154,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+													<FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={socialIconsPositionType}
+                                                        setPositionType={(value) => setAttributes({ socialIconsPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={socialIconsHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ socialIconsHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={socialIconsVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ socialIconsVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={socialIconsHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ socialIconsHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={socialIconsHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ socialIconsHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={socialIconsHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ socialIconsHZRightOffset: value })}
+                                                        HZRightOffsetUnits={socialIconsHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ socialIconsHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={socialIconsVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ socialIconsVRTopOffset: value })}
+                                                        VRTopOffsetUnits={socialIconsVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ socialIconsVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={socialIconsVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ socialIconsVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={socialIconsVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ socialIconsVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={socialGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ socialGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={socialGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ socialGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -3236,6 +3343,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														/>
 													)}
 
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsDesktopSwitcher}
+														onChange={(value) => setAttributes({ socialIconsDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsTabletSwitcher}
+														onChange={(value) => setAttributes({ socialIconsTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={socialIconsMobileSwitcher}
+														onChange={(value) => setAttributes({ socialIconsMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

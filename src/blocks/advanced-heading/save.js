@@ -19,25 +19,26 @@ export default function save({ attributes }) {
         separator,
         separatorColor,
         activeLineSwitcher,
+        headingGlobalWraperID,
+        headingGlobalWraperClass,
     } = attributes;
 
+
     const blockProps = useBlockProps.save({
-        id: blockId,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId}`,
     });
 
 
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
 
-                    <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
-                        {headingIconAlign === 'icon' && headingIconSwitcher && (
-                            <div className="fb-advanced-icon">
-                            {renderSVG(headingIcon)}
-                            </div>
-                        )}
-                    </div>
+                    {headingIconAlign === 'icon' && headingIconSwitcher && (
+                        <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
+                            <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
+                        </div>
+                    )}
 
                     {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'>

@@ -7,6 +7,10 @@ const attributes = {
 		type: "string",
 		default: "Desktop"
 	},
+	ctaPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
 	infoBoxBg: {
 		type: 'string',
 		default: '#EBF5FF'
@@ -754,7 +758,7 @@ const attributes = {
         type: "string",
         default: "Learn More"
     },
-    info_Button_Switcher: {
+    ctaBtnOneSwitcher: {
         type: "boolean",
         default: true,
     },
@@ -2100,5 +2104,111 @@ const attributes = {
 		},
 	},
 	
+	ctaDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    ctaMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Class & ID Setting */
+	ctaGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	ctaGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */	
+
+	ctaPositionType: {
+		type: "string",
+		default: "default"
+	},
+	ctaHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	ctaVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	ctaHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	ctaHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	ctaHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	ctaHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	ctaVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	ctaVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	ctaVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	ctaVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	ctaCustomCSS : { 
+        type: "string",
+        default: "",
+    },
+
 }
 export default attributes;

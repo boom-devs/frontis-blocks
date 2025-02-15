@@ -20,31 +20,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		Heading_Text,
 		headingTag,
 		Alignment,
-		separator,
-		Sub_Heading_Switcher,
-		Show_Separator_Switcher,
 		Sub_Heading_Text,
 		Sub_Heading_Tag,
-		info_Button_Switcher,
-		subHeadingSwitcher,
-		subTitleAlignment,
-		subTitleTag,
-		subTitleText,
+		ctaBtnOneSwitcher,
 		descriptionSwitcher,
 		info_Button_Text,
 		info_Button_Link,
-		wrapperAlignment,
-		infoBoxBg,
 		descAlignment,
 		buttonAlignment,
-		icon,
-		mediaSwitcher,
 		contentAlignment,
-		mediaSize,
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition,
 		btnTwoSwitcher,
 		btnTwoIconPosition,
 		btnTwoIcon,
@@ -53,11 +40,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoLink,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
-		FeatureItems,
-		imageSwitcher
+
+		ctaGlobalWraperID,
+		ctaGlobalWraperClass,
 	} = attributes;
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: `fb-cta-main-wrapper ${blockID}`,
+	});
 
 	/**
 	* Manages tab button settings and switches to block settings on click
@@ -68,9 +58,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const handleBtnClick = (e) =>{
 		e.preventDefault();
 	}
+
 	const handleBtnTwoClick = (e) =>{
 		e.preventDefault();
 	}
+
 	return (
 		<>
 			<Inspector
@@ -86,44 +78,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} ref={panelRef}>
+			<div {...blockProps} id={blockID} className={`fb-cta-wrapper ${blockID} ${ctaGlobalWraperClass}`}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID} ref={panelRef}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
-							{imageSwitcher && (
-								
-								<div className="fb-cta-image-wrapper">
-								{FeatureItems.map(item => {
-									return (
-										<div key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
-											{item.teamMemberImageUrl && (
-												<img
-													src={item.teamMemberImageUrl}
-													alt={item.teamMemberImageAlt || "Preview Image"}
-													width="200"
-													height="200"
-												/>
-											)}
-										</div>
-									);
-								})}
-								</div>
-								
-								
-							)}
-							{subHeadingSwitcher && (
-								<RichText
-									tagName={subTitleTag}
-									value={subTitleText}
-									onChange={(value) =>
-										setAttributes({ subTitleText: value })
-									}
-									placeholder={__("CTA Sub Heading", "frontis-block")}
-									className="fb-cta-sub-heading"
-									style={{ textAlign: subTitleAlignment }}
-								/>
-							)}
 							<RichText
 								tagName={headingTag}
 								value={Heading_Text}
@@ -147,7 +106,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							)}
 
 							<div className="fb-cta-buttons-wrapper" style={{ justifyContent: buttonAlignment }}>
-								{info_Button_Switcher && (
+								{ctaBtnOneSwitcher && (
 									<div className="fb-cta-btn-one-wrapper" style={{
 
 									}}>

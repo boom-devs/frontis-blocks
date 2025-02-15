@@ -37,7 +37,12 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -357,8 +362,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBoxShadowHoverValues,
         fluentFormGlobalBoxShadowHoverCssValue,
 
-        blockStyle,
+        fluentFormDesktopSwitcher,
+		fluentFormTabletSwitcher,
+		fluentFormMobileSwitcher,
 
+        fluentFormGlobalWraperID,
+        fluentFormGlobalWraperClass,
+
+        // Position
+        fluentFormPositionType,
+        fluentFormHZOrientationType,
+        fluentFormVROrientationType,
+        fluentFormHZLeftOffset,
+        fluentFormHZLeftOffsetUnits,
+        fluentFormHZRightOffset,
+        fluentFormHZRightOffsetUnits,
+        fluentFormVRTopOffset,
+        fluentFormVRTopOffsetUnits,
+        fluentFormVRBottomOffset,
+        fluentFormVRBottomOffsetUnits,
     } = attributes;
 
 	const deviceType= useDeviceType();
@@ -2311,9 +2333,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-width: ${BorderDesktopWidth};
             border-radius: ${BorderRadiusDesktopWidth} !important;
             ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+            ${fluentFormPositionType === 'default' ? `position: relative;` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Desktop !== undefined ? `left: ${fluentFormHZLeftOffset.Desktop}${fluentFormHZLeftOffsetUnits.Desktop};` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Desktop !== undefined ? `right: ${fluentFormHZRightOffset.Desktop}${fluentFormHZRightOffsetUnits.Desktop};` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'top' && fluentFormVRTopOffset.Desktop !== undefined ? `top: ${fluentFormVRTopOffset.Desktop}${fluentFormVRTopOffsetUnits.Desktop};` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'bottom' && fluentFormVRBottomOffset.Desktop !== undefined ? `bottom: ${fluentFormVRBottomOffset.Desktop}${fluentFormVRBottomOffsetUnits.Desktop};` : ''}
             ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
             ${fluentFormGlobalBoxShadowCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowCssValue};` : ''} 
-            position: relative;
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper:hover {
@@ -2594,6 +2622,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderTabletWidth};
                 border-radius: ${BorderRadiusTabletWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Tablet !== undefined ? `left: ${fluentFormHZLeftOffset.Tablet}${fluentFormHZLeftOffsetUnits.Tablet};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Tablet !== undefined ? `right: ${fluentFormHZRightOffset.Tablet}${fluentFormHZRightOffsetUnits.Tablet};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'top' && fluentFormVRTopOffset.Tablet !== undefined ? `top: ${fluentFormVRTopOffset.Tablet}${fluentFormVRTopOffsetUnits.Tablet};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'bottom' && fluentFormVRBottomOffset.Tablet !== undefined ? `bottom: ${fluentFormVRBottomOffset.Tablet}${fluentFormVRBottomOffsetUnits.Tablet};` : ''}
                 ${fluentFormGlobalZIndex.Tablet ? `z-index: ${fluentFormGlobalZIndex.Tablet};` : ''}
                 position: relative;
                 transition: all .3s ease-in-out;
@@ -2911,6 +2944,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-width: ${BorderMobileWidth};
                 border-radius: ${BorderRadiusMobileWidth} !important;
                 ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Mobile !== undefined ? `left: ${fluentFormHZLeftOffset.Mobile}${fluentFormHZLeftOffsetUnits.Mobile};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Mobile !== undefined ? `right: ${fluentFormHZRightOffset.Mobile}${fluentFormHZRightOffsetUnits.Mobile};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'top' && fluentFormVRTopOffset.Mobile !== undefined ? `top: ${fluentFormVRTopOffset.Mobile}${fluentFormVRTopOffsetUnits.Mobile};` : ''}
+                ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'bottom' && fluentFormVRBottomOffset.Mobile !== undefined ? `bottom: ${fluentFormVRBottomOffset.Mobile}${fluentFormVRBottomOffsetUnits.Mobile};` : ''}                
                 ${fluentFormGlobalZIndex.Mobile ? `z-index: ${fluentFormGlobalZIndex.Mobile};` : ''}
                 position: relative; 
                 transition: all .3s ease-in-out;
@@ -3571,7 +3609,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormGlobalBoxShadowHoverValues,
         fluentFormGlobalBoxShadowHoverCssValue,
 
-
+        // Position
+        fluentFormPositionType,
+        fluentFormHZOrientationType,
+        fluentFormVROrientationType,
+        fluentFormHZLeftOffset,
+        fluentFormHZLeftOffsetUnits,
+        fluentFormHZRightOffset,
+        fluentFormHZRightOffsetUnits,
+        fluentFormVRTopOffset,
+        fluentFormVRTopOffsetUnits,
+        fluentFormVRBottomOffset,
+        fluentFormVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -4748,6 +4797,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={fluentFormPositionType}
+                                                        setPositionType={(value) => setAttributes({ fluentFormPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={fluentFormHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ fluentFormHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={fluentFormVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ fluentFormVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={fluentFormHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ fluentFormHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={fluentFormHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ fluentFormHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={fluentFormHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ fluentFormHZRightOffset: value })}
+                                                        HZRightOffsetUnits={fluentFormHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ fluentFormHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={fluentFormVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ fluentFormVRTopOffset: value })}
+                                                        VRTopOffsetUnits={fluentFormVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ fluentFormVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={fluentFormVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ fluentFormVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={fluentFormVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ fluentFormVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={fluentFormGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+                                                    <FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={fluentFormGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
                                                 </PanelBody>
 
                                                 <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -4887,7 +4986,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													)}
                                                 </PanelBody>
 
-
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormDesktopSwitcher}
+														onChange={(value) => setAttributes({ fluentFormDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormTabletSwitcher}
+														onChange={(value) => setAttributes({ fluentFormTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={fluentFormMobileSwitcher}
+														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
+													/>
+												</PanelBody>
                                             </div>
                                         </div>
                                     </>

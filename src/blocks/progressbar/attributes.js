@@ -183,5 +183,105 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    progressbarDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    progressbarMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Global Setting */
+	progressGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	progressGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+
+    progressbarPositionType: {
+        type: "string",
+        default: "default"
+    },
+    progressbarHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    progressbarVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    progressbarHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    progressbarHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    progressbarHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    progressbarHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    progressbarVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    progressbarVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    progressbarVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    progressbarVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 };
 export default attributes;

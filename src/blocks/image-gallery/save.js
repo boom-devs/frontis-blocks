@@ -18,17 +18,20 @@ export default function Save({ attributes }) {
         GalleryButtonText,
         GalleryButtonLink,
 
+        imageGalleryGlobalWraperID,
+        imageGalleryGlobalWraperClass,
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-gallery-main-wrapper ${blockID}`,
+        className: `fb-gallery-main-wrapper ${blockID} ${imageGalleryGlobalWraperClass}`,
     });
     
 
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-image-gallery-wrapper">
+                <div className="fb-parent-wrapper fb-image-gallery-wrapper" id={imageGalleryGlobalWraperID}>
                     <div className="fb-image-gallery-items" data-id={blockID}>
                         {GalleryItems.map(item => 
                             item?.image?.url && (

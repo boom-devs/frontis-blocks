@@ -1185,6 +1185,105 @@ const attributes = {
         default: '',
     },
     
+    testimonialDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    testimonialMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Global Setting */
+	testimonialGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	testimonialGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+
+    testimonialPositionType: {
+        type: "string",
+        default: "default"
+    },
+    testimonialHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    testimonialVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    testimonialHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    testimonialVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    testimonialVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 };
 
 export default attributes;

@@ -2840,6 +2840,106 @@ const attributes = {
 		default: ""
 	},
 	/** End Price Feature After Text */
+
+	pricingTableDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    pricingTableMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Global Setting */
+	pricingTableGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	pricingTableGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+
+	pricingTablePositionType: {
+        type: "string",
+        default: "default"
+    },
+    pricingTableHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    pricingTableVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    pricingTableHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    pricingTableHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    pricingTableHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    pricingTableHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    pricingTableVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    pricingTableVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    pricingTableVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    pricingTableVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 }
 
 export default attributes;

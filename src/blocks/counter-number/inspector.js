@@ -35,6 +35,8 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -162,7 +164,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBorderRadiusMobile,
         counterGlobalBorderRadiusLink,
         counterGlobalBoxShadowValues,
-        counterGlobalBoxShadowCssValue
+        counterGlobalBoxShadowCssValue,
+
+        counterDesktopSwitcher,
+		counterTabletSwitcher,
+		counterMobileSwitcher,
+
+        // Position
+        counterPositionType,
+        counterHZOrientationType,
+        counterVROrientationType,
+        counterHZLeftOffset,
+        counterHZLeftOffsetUnits,
+        counterHZRightOffset,
+        counterHZRightOffsetUnits,
+        counterVRTopOffset,
+        counterVRTopOffsetUnits,
+        counterVRBottomOffset,
+        counterVRBottomOffsetUnits,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -931,6 +950,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const counterBlockStyle = useMemo(() => `
+    .fb-counter-main-wrapper.${blockID}{
+        ${counterPositionType === 'default' ? `position: relative;` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' ? `width: 100%;` : ''}
+        ${counterPositionType !== 'default' ? `position: ${counterPositionType};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Desktop !== undefined ? `left: ${counterHZLeftOffset.Desktop}${counterHZLeftOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Desktop !== undefined ? `right: ${counterHZRightOffset.Desktop}${counterHZRightOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Desktop !== undefined ? `top: ${counterVRTopOffset.Desktop}${counterVRTopOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Desktop !== undefined ? `bottom: ${counterVRBottomOffset.Desktop}${counterVRBottomOffsetUnits.Desktop};` : ''}
+        ${counterGlobalZIndex.Desktop ? `z-index: ${counterGlobalZIndex.Desktop};` : ''}
+    }
     .fb-counter-wrapper.${blockID}{
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
         ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
@@ -1002,6 +1031,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterNumberTitleFontHoverColor ? `color: ${counterNumberTitleFontHoverColor};` : ''}
     }
     @media only screen and (max-width: 1024px) {
+        .fb-counter-main-wrapper.${blockID}{
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Tablet !== undefined ? `left: ${counterHZLeftOffset.Tablet}${counterHZLeftOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Tablet !== undefined ? `right: ${counterHZRightOffset.Tablet}${counterHZRightOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Tablet !== undefined ? `top: ${counterVRTopOffset.Tablet}${counterVRTopOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Tablet !== undefined ? `bottom: ${counterVRBottomOffset.Tablet}${counterVRBottomOffsetUnits.Tablet};` : ''}
+            ${counterGlobalZIndex.Tablet ? `z-index: ${counterGlobalZIndex.Tablet};` : ''}        
+        }
         .fb-counter-wrapper.${blockID}{
             ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
             ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""}
@@ -1023,6 +1059,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }
     @media only screen and (max-width: 767px) {
+        .fb-counter-main-wrapper.${blockID}{
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Mobile !== undefined ? `left: ${counterHZLeftOffset.Mobile}${counterHZLeftOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Mobile !== undefined ? `right: ${counterHZRightOffset.Mobile}${counterHZRightOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Mobile !== undefined ? `top: ${counterVRTopOffset.Mobile}${counterVRTopOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Mobile !== undefined ? `bottom: ${counterVRBottomOffset.Mobile}${counterVRBottomOffsetUnits.Mobile};` : ''} 
+            ${counterGlobalZIndex.Mobile ? `z-index: ${counterGlobalZIndex.Mobile};` : ''}
+        }
         .fb-counter-wrapper.${blockID}{
             ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ""}
             ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ""}
@@ -1095,7 +1138,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalDesktopBorderRadiusWidth,
         counterGlobalBgHoverColor,
         counterGlobalBorderHoverColor,
-        counterGlobalBoxShadowCssValue
+        counterGlobalBoxShadowCssValue,
+        counterGlobalZIndex,
+
+        // Position
+        counterPositionType,
+        counterHZOrientationType,
+        counterVROrientationType,
+        counterHZLeftOffset,
+        counterHZLeftOffsetUnits,
+        counterHZRightOffset,
+        counterHZRightOffsetUnits,
+        counterVRTopOffset,
+        counterVRTopOffsetUnits,
+        counterVRBottomOffset,
+        counterVRBottomOffsetUnits,
     ]);
  
     useEffect(() => {
@@ -1577,18 +1634,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 initialOpen={true}
                                                 className='fb-setting-z-index-header'
                                             >
-                                            <FB_Range
-                                                min={0}
-                                                max={10000000}
-                                                label={__("Z Index", "frontis-blocks")}
-                                                rangeValue={counterGlobalZIndex}
-                                                onChangeHandler={(value) => setAttributes({ counterGlobalZIndex: value === 0 ? undefined : value })}
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                                isRangeUnit={false}
-                                            />
+                                                <FB_Range
+                                                    min={0}
+                                                    max={10000000}
+                                                    label={__("Z Index", "frontis-blocks")}
+                                                    rangeValue={counterGlobalZIndex}
+                                                    onChangeHandler={(value) => setAttributes({ counterGlobalZIndex: value === 0 ? undefined : value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={""}
+                                                    isRangeUnit={false}
+                                                />
+
+                                                <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={counterPositionType}
+                                                        setPositionType={(value) => setAttributes({ counterPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={counterHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ counterHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={counterVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ counterVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={counterHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ counterHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={counterHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ counterHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={counterHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ counterHZRightOffset: value })}
+                                                        HZRightOffsetUnits={counterHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ counterHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={counterVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ counterVRTopOffset: value })}
+                                                        VRTopOffsetUnits={counterVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ counterVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={counterVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ counterVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={counterVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ counterVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
                                             </PanelBody>
 
                                             <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -1715,6 +1807,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
 
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterDesktopSwitcher}
+														onChange={(value) => setAttributes({ counterDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterTabletSwitcher}
+														onChange={(value) => setAttributes({ counterTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={counterMobileSwitcher}
+														onChange={(value) => setAttributes({ counterMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 </>

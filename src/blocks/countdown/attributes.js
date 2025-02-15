@@ -7,6 +7,12 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	countDownPresetStyle: {
+        type: "string",
+        default: "default",
+    },
+
 	// Show Hide Label Attributes
 	showDays: {
 		type: 'boolean',
@@ -125,28 +131,28 @@ const attributes = {
 	countDownItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderRadiusLink : {
@@ -177,40 +183,62 @@ const attributes = {
 	countDownItemBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemBorderTypeLink : {
 		type : "boolean",
 		default: true
 	},
+
+	countDownFlexWrap : {
+		type : "boolean",
+		default: true
+	},
+	countDownLayoutType: {
+		type: "string",
+		default: "flex"
+	},
+	countDownLayoutAlignment: {
+		type: "string",
+		default: "center"
+	},
+	countDownGrid: {
+		type: 'object',
+		default: {
+			Desktop: '4',
+			Tablet: '4',
+			Mobile: '2'
+		}
+	},
+
 	countDownItemGap: {
 		type: 'object',
 		default: {
-			Desktop: 25,
-			Tablet: 25,
-			Mobile: 25
+			Desktop: '104',
+			Tablet: '104',
+			Mobile: '104'
 		}
 	},
 	countDownItemGapUnits: {
@@ -234,12 +262,16 @@ const attributes = {
 		default: ""
 	},
 
+	countDownItemSizeHeight: {
+		type: "boolean",
+		default: true,
+	},
 	countDownItemSize: {
 		type: 'object',
 		default: {
-			Desktop: 144,
-			Tablet: 120,
-			Mobile: 100
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownItemSizeUnits: {
@@ -326,28 +358,28 @@ const attributes = {
 	countDownItemWrapperBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownItemWrapperBorderTypeLink : {
@@ -368,28 +400,28 @@ const attributes = {
 	countDownItemWrapperBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '14',
+			bottom: '14',
+			left: '14',
+			right: '14',
 		},
 	},
 	countDownItemWrapperBorderRadiusLink : {
@@ -421,28 +453,28 @@ const attributes = {
 	countDownItemWrapperPaddingDesktop: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingTablet: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingMobile: {
 		type: "object",
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '42',
+			right: '42',
 		},
 	},
 	countDownItemWrapperPaddingLink : {
@@ -570,9 +602,9 @@ const attributes = {
 	digitFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '48',
-			Tablet: '42',
-			Mobile: '38'
+			Desktop: '62',
+			Tablet: '48',
+			Mobile: '32'
 		}
 	},
 	digitFontSizeUnits: {
@@ -585,7 +617,7 @@ const attributes = {
 	},
 	digitFontWeight: {
 		type: 'string',
-		default: ''
+		default: '500'
 	},
 	digitFontStyle: {
 		type: 'string',
@@ -618,9 +650,9 @@ const attributes = {
 	digitLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '80',
+			Tablet: '60',
+			Mobile: '42'
 		}
 	},
 	digitLineHeightUnits: {
@@ -662,7 +694,7 @@ const attributes = {
 	labelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '14',
+			Desktop: '18',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -729,7 +761,11 @@ const attributes = {
 	},
 	countDownSeparatorType: {
 		type: 'string',
-		default: ":",
+		default: "colon",
+	},
+	countDownSeparatorCustom: {
+		type: 'string',
+		default: "",
 	},
 	countDownSeparatorFontColorSwitcher: {
 		type: "string",
@@ -835,9 +871,9 @@ const attributes = {
 	countDownSeparatorVerticalGap: {
 		type: 'object',
 		default: {
-			Desktop: '20',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '40',
+			Tablet: '40',
+			Mobile: '40'
 		}
 	},
 	countDownSeparatorVerticalGapUnits: {
@@ -849,6 +885,14 @@ const attributes = {
 		}
 	},
 	/** End Vertical Spacing */
+	countDownZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
 	globalBgColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -978,28 +1022,28 @@ const attributes = {
 	countDownLabelBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownLabelBorderTypeLink : {
@@ -1050,20 +1094,60 @@ const attributes = {
 	},
 	/** Label End Border Radius */
 
+	countDownLabelMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownLabelMarginDesktop: {
+		type: "object",
+		default: {
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	countDownLabelMarginTablet: {
+		type: "object",
+		default: {
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	countDownLabelMarginMobile: {
+		type: "object",
+		default: {
+			top: '10',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	countDownLabelMarginLink : {
+		type : "boolean",
+		default: true
+	},
+
 	countDownLabelWidth: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	countDownLabelWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		}
 	},
 	countDownLabelHeight: {
@@ -1082,6 +1166,14 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	countDownLabelAlignmentHz: {
+        type: "string",
+        default: "center",
+    },
+	countDownLabelAlignmentVr: {
+        type: "string",
+        default: "center",
+    },
 	/** Label End */
 
 
@@ -1124,28 +1216,28 @@ const attributes = {
 	countDownDigitBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	countDownDigitBorderTypeLink : {
@@ -1195,21 +1287,61 @@ const attributes = {
 		default: true
 	},
 	/** Digit End Border Radius */
+
+	countDownDigitMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	countDownDigitMarginDesktop: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginTablet: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginMobile: {
+		type: "object",
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	countDownDigitMarginLink : {
+		type : "boolean",
+		default: true
+	},
 	
 	countDownDigitWidth: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	countDownDigitWidthUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		}
 	},
 	countDownDigitHeight: {
@@ -1228,8 +1360,116 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	countDownDigitAlignmentHz: {
+        type: "string",
+        default: "center",
+    },
+	countDownDigitAlignmentVr: {
+        type: "string",
+        default: "center",
+    },
 	/** Digit End */
 	
+	countDownDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    countDownTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    countDownMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+	/** Start Class & ID Setting */
+	countDownGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	countDownGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+
+	countDownPositionType: {
+		type: "string",
+		default: "default"
+	},
+	countDownHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	countDownVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	countDownHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	countDownVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	countDownVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 };
 
 export default attributes;

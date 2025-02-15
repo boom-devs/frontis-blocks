@@ -75,13 +75,13 @@ class Admin {
             'global_styles' => wp_get_global_styles()
 		);
 
-		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
+		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){ 
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
 			$tl_script_asset      = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
 			$tl_script_asset['dependencies'][] = 'jquery';
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
-			$localizeArray['nonce'] = wp_create_nonce('fb_sidebar_nonce');
+			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
 			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
 		}
 
@@ -101,6 +101,8 @@ class Admin {
 
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
 
+
+        // responsiveCss.js
         // Localize the script with new data
 		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }
@@ -862,8 +864,6 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
     }
-
-
 
     public function register_block_assets_in_site_editor() {
         global $pagenow;
