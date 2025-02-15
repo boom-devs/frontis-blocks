@@ -43,7 +43,6 @@ const FB_SidebarTypography = ({
 								  lineHeightUnits,
 								  onChangeLineHeightUnit,
 								  deviceType,
-								  setAttributes,
 								  heading
 							  }) => {
 	const handleFontFamilyChange = (newFontFamily) => {
@@ -108,7 +107,6 @@ const FB_SidebarTypography = ({
 					rangeUnitHandler={handleFontSizeUnitChange}
 					deviceType={deviceType}
 					units={fontSizeUnits}
-					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={''}
 				/>
@@ -153,7 +151,6 @@ const FB_SidebarTypography = ({
 						rangeUnitHandler={handleLetterSpacingUnitChange}
 						deviceType={deviceType}
 						units={letterSpacingUnits}
-						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={''}
 					/>
@@ -168,7 +165,6 @@ const FB_SidebarTypography = ({
 						rangeUnitHandler={handleLineHeightUnitChange}
 						deviceType={deviceType}
 						units={lineHeightUnits}
-						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={''}
 					/>
