@@ -45,7 +45,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		ctaGlobalWraperClass,
 	} = attributes;
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: `fb-cta-main-wrapper ${blockID}`,
+	});
 
 	/**
 	* Manages tab button settings and switches to block settings on click
