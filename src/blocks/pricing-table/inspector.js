@@ -47,7 +47,11 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -594,6 +598,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		pricingTableGlobalWraperID,
 		pricingTableGlobalWraperClass,
+
+		// Position
+        pricingTablePositionType,
+        pricingTableHZOrientationType,
+        pricingTableVROrientationType,
+        pricingTableHZLeftOffset,
+        pricingTableHZLeftOffsetUnits,
+        pricingTableHZRightOffset,
+        pricingTableHZRightOffsetUnits,
+        pricingTableVRTopOffset,
+        pricingTableVRTopOffsetUnits,
+        pricingTableVRBottomOffset,
+        pricingTableVRBottomOffsetUnits,
     } = attributes;
 
 	const deviceType= useDeviceType();
@@ -2565,6 +2582,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const allBlockStyle = useMemo(() => ` 
 
+		.${blockId}.fb-pricing-area {
+			${pricingTablePositionType === 'default' ? `position: relative;` : ''}
+			${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' ? `width: 100%;` : ''}
+            ${pricingTablePositionType !== 'default' ? `position: ${pricingTablePositionType};` : ''}
+            ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset.Desktop !== undefined ? `left: ${pricingTableHZLeftOffset.Desktop}${pricingTableHZLeftOffsetUnits.Desktop};` : ''}
+            ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset.Desktop !== undefined ? `right: ${pricingTableHZRightOffset.Desktop}${pricingTableHZRightOffsetUnits.Desktop};` : ''}
+            ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset.Desktop !== undefined ? `top: ${pricingTableVRTopOffset.Desktop}${pricingTableVRTopOffsetUnits.Desktop};` : ''}
+            ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset.Desktop !== undefined ? `bottom: ${pricingTableVRBottomOffset.Desktop}${pricingTableVRBottomOffsetUnits.Desktop};` : ''}
+			${priceGlobalZIndex.Desktop ? `z-index: ${priceGlobalZIndex.Desktop};` : ''}
+		}
 		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
 		    ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
                 background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
@@ -2616,7 +2643,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
 			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-			${priceGlobalZIndex.Desktop ? `z-index: ${priceGlobalZIndex.Desktop};` : ''}
 			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
 			position: relative;
@@ -2926,6 +2952,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		@media only screen and (max-width: 1024px) {
 
+			.${blockId}.fb-pricing-area {
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset.Tablet !== undefined ? `left: ${pricingTableHZLeftOffset.Tablet}${pricingTableHZLeftOffsetUnits.Tablet};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset.Tablet !== undefined ? `right: ${pricingTableHZRightOffset.Tablet}${pricingTableHZRightOffsetUnits.Tablet};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset.Tablet !== undefined ? `top: ${pricingTableVRTopOffset.Tablet}${pricingTableVRTopOffsetUnits.Tablet};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset.Tablet !== undefined ? `bottom: ${pricingTableVRBottomOffset.Tablet}${pricingTableVRBottomOffsetUnits.Tablet};` : ''}
+				${priceGlobalZIndex.Tablet ? `z-index: ${priceGlobalZIndex.Tablet};` : ''}
+			}
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
 				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
@@ -2977,7 +3010,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-				${priceGlobalZIndex.Tablet ? `z-index: ${priceGlobalZIndex.Tablet};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
             	transition: all .3s ease-in-out;
 				position: relative;
@@ -3141,6 +3173,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
+			.${blockId}.fb-pricing-area {
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset.Mobile !== undefined ? `left: ${pricingTableHZLeftOffset.Mobile}${pricingTableHZLeftOffsetUnits.Mobile};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset.Mobile !== undefined ? `right: ${pricingTableHZRightOffset.Mobile}${pricingTableHZRightOffsetUnits.Mobile};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset.Mobile !== undefined ? `top: ${pricingTableVRTopOffset.Mobile}${pricingTableVRTopOffsetUnits.Mobile};` : ''}
+				${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset.Mobile !== undefined ? `bottom: ${pricingTableVRBottomOffset.Mobile}${pricingTableVRBottomOffsetUnits.Mobile};` : ''} 
+				${priceGlobalZIndex.Mobile ? `z-index: ${priceGlobalZIndex.Mobile};` : ''}
+			}
 			.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
 				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
@@ -3192,7 +3231,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
-				${priceGlobalZIndex.Mobile ? `z-index: ${priceGlobalZIndex.Mobile};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
             	transition: all .3s ease-in-out;
 				position: relative;
@@ -3938,6 +3976,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTopSectionTextTabletPaddingWidth,
 		pricingTopSectionTextMobilePaddingWidth,
 
+		// Position
+        pricingTablePositionType,
+        pricingTableHZOrientationType,
+        pricingTableVROrientationType,
+        pricingTableHZLeftOffset,
+        pricingTableHZLeftOffsetUnits,
+        pricingTableHZRightOffset,
+        pricingTableHZRightOffsetUnits,
+        pricingTableVRTopOffset,
+        pricingTableVRTopOffsetUnits,
+        pricingTableVRBottomOffset,
+        pricingTableVRBottomOffsetUnits,
 	]);
 
 	useEffect(() => {
@@ -5858,6 +5908,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+													<FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={pricingTablePositionType}
+                                                        setPositionType={(value) => setAttributes({ pricingTablePositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={pricingTableHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ pricingTableHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={pricingTableVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ pricingTableVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={pricingTableHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ pricingTableHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={pricingTableHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ pricingTableHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={pricingTableHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ pricingTableHZRightOffset: value })}
+                                                        HZRightOffsetUnits={pricingTableHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ pricingTableHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={pricingTableVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ pricingTableVRTopOffset: value })}
+                                                        VRTopOffsetUnits={pricingTableVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ pricingTableVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={pricingTableVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ pricingTableVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={pricingTableVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ pricingTableVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
 
 													<FB_InputControl

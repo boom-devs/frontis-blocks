@@ -101,7 +101,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			<div {...blockProps} id={blockID} className={countDownGlobalWraperClass}>
+			<div {...blockProps} id={blockID} className={`fb-count-down-area ${blockID} ${countDownGlobalWraperClass}`}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} id={countDownGlobalWraperID} ref={panelRef}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>

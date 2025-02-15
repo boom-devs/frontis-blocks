@@ -54,7 +54,11 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -349,6 +353,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		infoBoxGlobalWraperID,
 		infoBoxGlobalWraperClass,
+
+		// Position
+        infoBoxPositionType,
+        infoBoxHZOrientationType,
+        infoBoxVROrientationType,
+        infoBoxHZLeftOffset,
+        infoBoxHZLeftOffsetUnits,
+        infoBoxHZRightOffset,
+        infoBoxHZRightOffsetUnits,
+        infoBoxVRTopOffset,
+        infoBoxVRTopOffsetUnits,
+        infoBoxVRBottomOffset,
+        infoBoxVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -2062,9 +2079,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
+		  .fb-info-box-area.${blockID} {
+			${infoBoxPositionType === 'default' ? `position: relative;` : ''}
+			${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${infoBoxPositionType !== 'default' ? `position: ${infoBoxPositionType};` : ''}
+            ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Desktop !== undefined ? `left: ${infoBoxHZLeftOffset.Desktop}${infoBoxHZLeftOffsetUnits.Desktop};` : ''}
+            ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Desktop !== undefined ? `right: ${infoBoxHZRightOffset.Desktop}${infoBoxHZRightOffsetUnits.Desktop};` : ''}
+            ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Desktop !== undefined ? `top: ${infoBoxVRTopOffset.Desktop}${infoBoxVRTopOffsetUnits.Desktop};` : ''}
+            ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'bottom' && infoBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${infoBoxVRBottomOffset.Desktop}${infoBoxVRBottomOffsetUnits.Desktop};` : ''}
+			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
+		  }
 		  .fb-info-box-wrapper.${blockID} {
 		  	  position: relative;
-			  ${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
 			  ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -2084,8 +2110,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-wrapper.${blockID} {
+			  .fb-info-box-area.${blockID} {
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Tablet !== undefined ? `left: ${infoBoxHZLeftOffset.Tablet}${infoBoxHZLeftOffsetUnits.Tablet};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Tablet !== undefined ? `right: ${infoBoxHZRightOffset.Tablet}${infoBoxHZRightOffsetUnits.Tablet};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Tablet !== undefined ? `top: ${infoBoxVRTopOffset.Tablet}${infoBoxVRTopOffsetUnits.Tablet};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'bottom' && infoBoxVRBottomOffset.Tablet !== undefined ? `bottom: ${infoBoxVRBottomOffset.Tablet}${infoBoxVRBottomOffsetUnits.Tablet};` : ''}
 				${globalZIndex.Tablet !== undefined ? `z-index: ${globalZIndex.Tablet};` : ""}
+			  }
+			  .fb-info-box-wrapper.${blockID} {
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -2095,7 +2127,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	  
 		  @media only screen and (max-width: 767px) {
 			  .fb-info-box-wrapper.${blockID} {
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Mobile !== undefined ? `left: ${infoBoxHZLeftOffset.Mobile}${infoBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Mobile !== undefined ? `right: ${infoBoxHZRightOffset.Mobile}${infoBoxHZRightOffsetUnits.Mobile};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Mobile !== undefined ? `top: ${infoBoxVRTopOffset.Mobile}${infoBoxVRTopOffsetUnits.Mobile};` : ''}
+				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'bottom' && infoBoxVRBottomOffset.Mobile !== undefined ? `bottom: ${infoBoxVRBottomOffset.Mobile}${infoBoxVRBottomOffsetUnits.Mobile};` : ''} 
 				${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
+			  }
+			  .fb-info-box-wrapper.${blockID} {
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -2618,7 +2656,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaHoverBackgroundImageSize,
 			mediaHoverBackgroundImageRepeat,
 			infoIconVerticalPosition,
-			infoCardAlignment
+			infoCardAlignment,
+
+			// Position
+			infoBoxPositionType,
+			infoBoxHZOrientationType,
+			infoBoxVROrientationType,
+			infoBoxHZLeftOffset,
+			infoBoxHZLeftOffsetUnits,
+			infoBoxHZRightOffset,
+			infoBoxHZRightOffsetUnits,
+			infoBoxVRTopOffset,
+			infoBoxVRTopOffsetUnits,
+			infoBoxVRBottomOffset,
+			infoBoxVRBottomOffsetUnits,
 		],
 	);
 
@@ -3739,6 +3790,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeStep={1}
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
+                                                    />
+
+													<FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={infoBoxPositionType}
+                                                        setPositionType={(value) => setAttributes({ infoBoxPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={infoBoxHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ infoBoxHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={infoBoxVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ infoBoxVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={infoBoxHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ infoBoxHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={infoBoxHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ infoBoxHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={infoBoxHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ infoBoxHZRightOffset: value })}
+                                                        HZRightOffsetUnits={infoBoxHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ infoBoxHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={infoBoxVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ infoBoxVRTopOffset: value })}
+                                                        VRTopOffsetUnits={infoBoxVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ infoBoxVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={infoBoxVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ infoBoxVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={infoBoxVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ infoBoxVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
 
 													<FB_InputControl

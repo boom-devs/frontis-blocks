@@ -25,6 +25,8 @@ import FB_BackgroundImageControl from "../../components/background-image-control
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_ColorControl from "../../components/color-control";
 import FB_InputControl from "@Components/input-control";
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {

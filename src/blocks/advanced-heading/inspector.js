@@ -54,7 +54,11 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -297,6 +301,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         advancedHeadingDesktopSwitcher,
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
+
+        blockStyle,
+        advancedHeadingCustomCSS,
+
+        // Position
+        advancedHeadingPositionType,
+        advancedHeadingHZOrientationType,
+        advancedHeadingVROrientationType,
+        advancedHeadingHZLeftOffset,
+        advancedHeadingHZLeftOffsetUnits,
+        advancedHeadingHZRightOffset,
+        advancedHeadingHZRightOffsetUnits,
+        advancedHeadingVRTopOffset,
+        advancedHeadingVRTopOffsetUnits,
+        advancedHeadingVRBottomOffset,
+        advancedHeadingVRBottomOffsetUnits,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -324,7 +344,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             setAttributes({ headingBackgroundImageUrl: defaultImageUrl });
         }
     }, []);
-
 
 
     /** Start Preset Style */
@@ -1451,8 +1470,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     const allBlockStyle = useMemo(() => `
+        .fb-advanced-heading-main-wrapper.${blockId} {
+            ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Desktop !== undefined ? `left: ${advancedHeadingHZLeftOffset.Desktop}${advancedHeadingHZLeftOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Desktop !== undefined ? `right: ${advancedHeadingHZRightOffset.Desktop}${advancedHeadingHZRightOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Desktop !== undefined ? `top: ${advancedHeadingVRTopOffset.Desktop}${advancedHeadingVRTopOffsetUnits.Desktop};` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Desktop}${advancedHeadingVRBottomOffsetUnits.Desktop};` : ''}
+            ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
+        }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
             ${headingColor ? `color: ${headingColor};` : ''}
             ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
             ${headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
@@ -1489,7 +1518,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
             ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
@@ -1501,7 +1530,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''}
             ${subHeadingFontFamily && subHeadingFontFamily !== 'Default' ? `font-family: ${subHeadingFontFamily};` : ''}
@@ -1529,7 +1558,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
             ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
@@ -1565,7 +1594,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingIconHoverColor ? `fill: ${headingIconHoverColor};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-title-separator {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
             display: inline-block;
             ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
             ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
@@ -1581,8 +1610,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}`
                 : ''}
         }
-        .${blockId}.fb-advanced-wrapper {
-            ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
+        .${blockId} .fb-advanced-wrapper {
             ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
@@ -1594,26 +1622,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
             position: relative;
         }
-        .${blockId}.fb-advanced-wrapper:hover {
+        .${blockId} .fb-advanced-wrapper:hover {
             ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
             ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
             ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
             ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
             ${activeLineAfterColor ? `background-color: ${activeLineAfterColor};` : ''}
         }
 
-        .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
             ${activeLineBeforeWidth.Desktop && activeLineBeforeWidthUnits.Desktop ? `width: ${activeLineBeforeWidth.Desktop}${activeLineBeforeWidthUnits.Desktop};` : ''}
             ${activeLineBeforeHeight.Desktop && activeLineBeforeHeightUnits.Desktop ? `height: ${activeLineBeforeHeight.Desktop}${activeLineBeforeHeightUnits.Desktop};` : ''}
             ${activeLineBeforeColor ? `background-color: ${activeLineBeforeColor};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
                 ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                 ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                 ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -1630,7 +1658,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                     -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
@@ -1639,7 +1667,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
                 ${subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
                 ${subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
@@ -1655,7 +1683,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                     -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
@@ -1673,7 +1701,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingIconSize.Tablet ? `width: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
                 ${headingIconSize.Tablet ? `height: ${headingIconSize.Tablet}${headingIconSizeUnits.Tablet};` : ''}
             }
-            .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
                 ${separatorWidth.Tablet && separatorWidthUnits.Tablet ? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};` : ''}
                 ${separatorHeight.Tablet && separatorHeightUnits.Tablet ? `border-top-width: ${separatorHeight.Tablet}${separatorHeightUnits.Tablet};` : ''}
                 ${separatorPosition === 'bottom' ?
@@ -1686,25 +1714,33 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         : ''}`
                     : ''}
             }
-            .${blockId}.fb-advanced-wrapper {
+
+            .fb-advanced-heading-main-wrapper.${blockId} {
+                ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Tablet !== undefined ? `left: ${advancedHeadingHZLeftOffset.Tablet}${advancedHeadingHZLeftOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Tablet !== undefined ? `right: ${advancedHeadingHZRightOffset.Tablet}${advancedHeadingHZRightOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Tablet !== undefined ? `top: ${advancedHeadingVRTopOffset.Tablet}${advancedHeadingVRTopOffsetUnits.Tablet};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Tablet}${advancedHeadingVRBottomOffsetUnits.Tablet};` : ''}
                 ${headingGlobalZIndex.Tablet ? `z-index: ${headingGlobalZIndex.Tablet};` : ''}
+            }
+            .${blockId}.fb-advanced-wrapper {
                 ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                 ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Tablet && activeLineAfterWidthUnits.Tablet ? `width: ${activeLineAfterWidth.Tablet}${activeLineAfterWidthUnits.Tablet};` : ''}
                 ${activeLineAfterHeight.Tablet && activeLineAfterHeightUnits.Tablet ? `height: ${activeLineAfterHeight.Tablet}${activeLineAfterHeightUnits.Tablet};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
                 ${activeLineBeforeWidth.Tablet && activeLineBeforeWidthUnits.Tablet ? `width: ${activeLineBeforeWidth.Tablet}${activeLineBeforeWidthUnits.Tablet};` : ''}
                 ${activeLineBeforeHeight.Tablet && activeLineBeforeHeightUnits.Tablet ? `height: ${activeLineBeforeHeight.Tablet}${activeLineBeforeHeightUnits.Tablet};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
                 ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                 ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                 ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -1720,7 +1756,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                     -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
@@ -1729,7 +1765,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
                 ${subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
                 ${subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
                 ${subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
@@ -1744,7 +1780,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                     -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
@@ -1762,7 +1798,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingIconSize.Mobile ? `width: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
                 ${headingIconSize.Mobile ? `height: ${headingIconSize.Mobile}${headingIconSizeUnits.Mobile};` : ''}
             }
-            .fb-advanced-wrapper.${blockId} .fb-advanced-title-separator {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
                 ${separatorWidth.Mobile && separatorWidthUnits.Mobile ? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};` : ''}
                 ${separatorHeight.Mobile && separatorHeightUnits.Mobile ? `border-top-width: ${separatorHeight.Mobile}${separatorHeightUnits.Mobile};` : ''}
                 ${separatorPosition === 'bottom' ?
@@ -1775,18 +1811,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         : ''}`
                     : ''}
             }
-            .${blockId}.fb-advanced-wrapper {
+
+            .fb-advanced-heading-main-wrapper.${blockId} {
+                ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Mobile !== undefined ? `left: ${advancedHeadingHZLeftOffset.Mobile}${advancedHeadingHZLeftOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Mobile !== undefined ? `right: ${advancedHeadingHZRightOffset.Mobile}${advancedHeadingHZRightOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Mobile !== undefined ? `top: ${advancedHeadingVRTopOffset.Mobile}${advancedHeadingVRTopOffsetUnits.Mobile};` : ''}
+                ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Mobile}${advancedHeadingVRBottomOffsetUnits.Mobile};` : ''}
                 ${headingGlobalZIndex.Mobile ? `z-index: ${headingGlobalZIndex.Mobile};` : ''}
+            }
+            .${blockId}.fb-advanced-wrapper {
                 ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                 ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
                 ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
             }
-            .${blockId}.fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
                 ${activeLineBeforeWidth.Mobile && activeLineBeforeWidthUnits.Mobile ? `width: ${activeLineBeforeWidth.Mobile}${activeLineBeforeWidthUnits.Mobile};` : ''}
                 ${activeLineBeforeHeight.Mobile && activeLineBeforeHeightUnits.Mobile ? `height: ${activeLineBeforeHeight.Mobile}${activeLineBeforeHeightUnits.Mobile};` : ''}
             }
@@ -1931,15 +1975,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingIconTabletBorderWidthValue,
     headingIconTabletBorderRadiusWidthValue,
     headingIconMobileBorderWidthValue,
-    headingIconMobileBorderRadiusWidthValue
+    headingIconMobileBorderRadiusWidthValue,
+
+    // Position
+    advancedHeadingPositionType,
+    advancedHeadingHZOrientationType,
+    advancedHeadingVROrientationType,
+    advancedHeadingHZLeftOffset,
+    advancedHeadingHZLeftOffsetUnits,
+    advancedHeadingHZRightOffset,
+    advancedHeadingHZRightOffsetUnits,
+    advancedHeadingVRTopOffset,
+    advancedHeadingVRTopOffsetUnits,
+    advancedHeadingVRBottomOffset,
+    advancedHeadingVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
+
     useEffect(() => {
-    setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
 
-
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -2979,6 +3037,42 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={advancedHeadingPositionType}
+                                                        setPositionType={(value) => setAttributes({ advancedHeadingPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={advancedHeadingHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ advancedHeadingHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={advancedHeadingVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ advancedHeadingVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={advancedHeadingHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ advancedHeadingHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={advancedHeadingHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ advancedHeadingHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={advancedHeadingHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ advancedHeadingHZRightOffset: value })}
+                                                        HZRightOffsetUnits={advancedHeadingHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ advancedHeadingHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={advancedHeadingVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ advancedHeadingVRTopOffset: value })}
+                                                        VRTopOffsetUnits={advancedHeadingVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ advancedHeadingVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={advancedHeadingVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ advancedHeadingVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={advancedHeadingVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ advancedHeadingVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
                                                     <FB_InputControl
                                                         label={__("CSS ID", "frontis-blocks")}
                                                         value={headingGlobalWraperID}
@@ -3162,6 +3256,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														onChange={(value) => setAttributes({ advancedHeadingMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedHeadingCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ advancedHeadingCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
                                     </>

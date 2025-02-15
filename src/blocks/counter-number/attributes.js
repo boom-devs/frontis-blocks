@@ -3,6 +3,11 @@ const attributes = {
         type: "string",
         default: ""
     },
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
+	
 	deviceType: {
 		type: "string",
 		default: "Desktop"
@@ -462,6 +467,24 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+
+	counterItemSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterItemSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 	/** Start Global Setting */
 	counterGlobalZIndex : {
         type: "object",
@@ -689,6 +712,83 @@ const attributes = {
     counterMobileSwitcher: {
         type: "boolean",
         default: false,
+    },
+
+	counterPositionType: {
+        type: "string",
+        default: "default"
+    },
+    counterHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    counterVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    counterHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
 };
 
