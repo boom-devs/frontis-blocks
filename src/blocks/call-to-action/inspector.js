@@ -1921,6 +1921,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 			.fb-cta-wrapper.${blockID} {
 				${ctaPositionType === 'default' ? `position: relative;` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' ? `width: 100%;` : ''}
 				${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Desktop !== undefined ? `left: ${ctaHZLeftOffset.Desktop}${ctaHZLeftOffsetUnits.Desktop};` : ''}
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Desktop !== undefined ? `right: ${ctaHZRightOffset.Desktop}${ctaHZRightOffsetUnits.Desktop};` : ''}

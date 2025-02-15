@@ -1130,6 +1130,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         let styles = `
           .fb-accordion-main-wrapper.${blockID} {
             ${accordionPositionType === 'default' ? `position: relative;` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' ? `width: 100%;` : ''}
             ${accordionPositionType !== 'default' ? `position: ${accordionPositionType};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'left' && accordionHZLeftOffset.Desktop !== undefined ? `left: ${accordionHZLeftOffset.Desktop}${accordionHZLeftOffsetUnits.Desktop};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'right' && accordionHZRightOffset.Desktop !== undefined ? `right: ${accordionHZRightOffset.Desktop}${accordionHZRightOffsetUnits.Desktop};` : ''}

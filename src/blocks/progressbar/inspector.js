@@ -195,6 +195,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockID}.fb-progress-bar-main-wrapper {
             ${progressbarPositionType === 'default' ? `position: relative;` : ''}
+            ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' ? `width: 100%;` : ''}
             ${progressbarPositionType !== 'default' ? `position: ${progressbarPositionType};` : ''}
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Desktop !== undefined ? `left: ${progressbarHZLeftOffset.Desktop}${progressbarHZLeftOffsetUnits.Desktop};` : ''}
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Desktop !== undefined ? `right: ${progressbarHZRightOffset.Desktop}${progressbarHZRightOffsetUnits.Desktop};` : ''}
