@@ -25,6 +25,9 @@ export default function save({ attributes }) {
 		wrapperLink,
 		wrapperTargetUrl,
 		wrapperUrlSwitcher,
+
+		iconBoxGlobalWraperID,
+		iconBoxGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -33,14 +36,14 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps} id={blockID}>
+			<div {...blockProps} id={blockID} className={`fb-icon-box-area ${blockID} ${iconBoxGlobalWraperClass}`}>
 				{wrapperUrlSwitcher ? (
 					<a
 						href={wrapperLink}
 						target={wrapperTargetUrl ? "_blank" : undefined}
 						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
 					>
-						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} id={iconBoxGlobalWraperID}>
 							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 								<div className="fb-icon-media-container">
 									<div className="fb-icon-media-wrapper">
@@ -102,7 +105,7 @@ export default function save({ attributes }) {
 						</div>
 					</a>
 					) : (
-						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`}>
+						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} id={iconBoxGlobalWraperID}>
 							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 								<div className="fb-icon-media-container">
 									<div className="fb-icon-media-wrapper">

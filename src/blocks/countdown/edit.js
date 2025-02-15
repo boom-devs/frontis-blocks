@@ -22,6 +22,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showHours,
 		showMinutes,
 		showSeconds,
+
+		countDownGlobalWraperID,
+		countDownGlobalWraperClass,
 	} = attributes;
 
 
@@ -98,32 +101,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} ref={panelRef}>
+			<div {...blockProps} id={blockID} className={`fb-count-down-area ${blockID} ${countDownGlobalWraperClass}`}>
+				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} id={countDownGlobalWraperID} ref={panelRef}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time days`}>{timeRemaining.days || 0}</span>
+							<span className={`fb-count-down-time`}>{timeRemaining.days || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelDay || __('Days', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showHours && (
 						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time hours`}>{timeRemaining.hours || 0}</span>
+							<span className={`fb-count-down-time`}>{timeRemaining.hours || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelHour || __('Hours', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showMinutes && (
 						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time minutes`}>{timeRemaining.minutes || 0}</span>
+							<span className={`fb-count-down-time`}>{timeRemaining.minutes || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelMinute || __('Minutes', 'frontis-blocks')}</span>
 						</div>
 					)}
 
 					{showSeconds && (
 						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time seconds`}>{timeRemaining.seconds || 0}</span>
+							<span className={`fb-count-down-time`}>{timeRemaining.seconds || 0}</span>
 							<span className={`fb-count-down-label`}>{countDownLabelSecond || __('Seconds', 'frontis-blocks')}</span>
 						</div>
 					)}

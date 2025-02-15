@@ -26,3 +26,6 @@ class GenerateFrontendCss {
 		return $block_content;
 	}
 }
+
+
+

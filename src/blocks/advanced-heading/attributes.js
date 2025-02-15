@@ -892,6 +892,16 @@ const attributes = {
             Mobile: ''
         }
     },
+    headingGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+
+    headingGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+
 	/** Start Padding */
 	headingGlobalPaddingUnits: {
 		type: 'object',
@@ -1212,6 +1222,100 @@ const attributes = {
     blockStyle: {
         type: "string",
         default: "",
+    },
+
+    advancedHeadingDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    advancedHeadingCustomCSS : {
+        type: "string",
+        default: "",
+    },
+
+    advancedHeadingPositionType: {
+        type: "string",
+        default: "default"
+    },
+    advancedHeadingHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    advancedHeadingVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    advancedHeadingHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    advancedHeadingHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    advancedHeadingHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    advancedHeadingHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    advancedHeadingVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    advancedHeadingVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    advancedHeadingVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    advancedHeadingVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
     },
 }
 export default attributes;

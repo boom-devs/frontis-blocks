@@ -23,18 +23,14 @@ import {
  * Internal depencencies
  */
 import {
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	TEXT_ALIGN,
 	ICON_ALIGN,
-	FONT_FAMILYS,
 	BORDER_STYLES,
 	ICON_POSITION,
 	BUTTONS_DIRECTION,
+	PRESETS
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
-import FB_Color from "@Components/color";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
@@ -44,12 +40,18 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
+		dualButtonPresetStyle,
 		ButtonText,
 		ButtonUrl,
 		ButtonTargetUrl,
@@ -256,6 +258,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBoxShadowHoverValues,
 		globalBoxShadowCssValue,
 		globalHoverBoxShadowCssValue,
+
+		dualBtnDesktopSwitcher,
+		dualBtnTabletSwitcher,
+		dualBtnMobileSwitcher,
+
+		dualButtonGlobalWraperID,
+		dualButtonGlobalWraperClass,
+
+		// Position
+		dualBtnPositionType,
+		dualBtnHZOrientationType,
+		dualBtnVROrientationType,
+		dualBtnHZLeftOffset,
+		dualBtnHZLeftOffsetUnits,
+		dualBtnHZRightOffset,
+		dualBtnHZRightOffsetUnits,
+		dualBtnVRTopOffset,
+		dualBtnVRTopOffsetUnits,
+		dualBtnVRBottomOffset,
+		dualBtnVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -284,6 +306,315 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIconSizeUnits: value });
 	};
 
+	/** Start Preset Style */
+    const changeDualButtonPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+				connectorSwitcher: true,
+				buttonsDirection: 'vertical',
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-2": {
+                buttonIconAlign: 'icon-text',
+                buttonTwoIconAlign: 'icon-text',
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-3": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+				connectorSwitcher: false,
+				buttonsDirection: 'vertical',
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            "preset-4": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+                buttonsDirection: 'horizontal',
+				connectorSwitcher: false,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+				ButtonDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+                },
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '15',
+					Tablet: '15',
+					Mobile: '15'
+				},
+            },
+			"preset-5": {
+                buttonIconAlign: 'none',
+                buttonTwoIconAlign: 'none',
+                buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+                ButtonDesktopPadding: {
+                    top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+                },
+                ButtonDesktopBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTabBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonMobileBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoDesktopBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoTabBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+                ButtonTwoMobileBorderRadiusWidth: {
+                    top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+                },
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                dualButtonPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style */
+	
 	/** Button One **/
 	/** Border **/
 	const handleButtonOneBorderUnitChange = (event, position) => {
@@ -1680,8 +2011,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const dualButtonStyle = useMemo(
 		() => `
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType === 'default' ? `position: relative;` : ''}
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Desktop !== undefined ? `left: ${dualBtnHZLeftOffset.Desktop}${dualBtnHZLeftOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Desktop !== undefined ? `right: ${dualBtnHZRightOffset.Desktop}${dualBtnHZRightOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Desktop !== undefined ? `top: ${dualBtnVRTopOffset.Desktop}${dualBtnVRTopOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${dualBtnVRBottomOffset.Desktop}${dualBtnVRBottomOffsetUnits.Desktop};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : "" }
+		}
 		.fb-dual-button-container.${blockID} {
-            ${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex};` : "" }
             ${dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""} 
@@ -1816,6 +2155,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
     
 		@media only screen and (max-width: 1024px) {
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Tablet !== undefined ? `left: ${dualBtnHZLeftOffset.Tablet}${dualBtnHZLeftOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Tablet !== undefined ? `right: ${dualBtnHZRightOffset.Tablet}${dualBtnHZRightOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Tablet !== undefined ? `top: ${dualBtnVRTopOffset.Tablet}${dualBtnVRTopOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Tablet !== undefined ? `bottom: ${dualBtnVRBottomOffset.Tablet}${dualBtnVRBottomOffsetUnits.Tablet};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Tablet};` : "" }
+		}
 		.fb-dual-button-container.${blockID} {
 			${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
 			${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""} 
@@ -1861,6 +2208,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		}
 		@media only screen and (max-width: 767px) {
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Mobile !== undefined ? `left: ${dualBtnHZLeftOffset.Mobile}${dualBtnHZLeftOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Mobile !== undefined ? `right: ${dualBtnHZRightOffset.Mobile}${dualBtnHZRightOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Mobile !== undefined ? `top: ${dualBtnVRTopOffset.Mobile}${dualBtnVRTopOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Mobile !== undefined ? `bottom: ${dualBtnVRBottomOffset.Mobile}${dualBtnVRBottomOffsetUnits.Mobile};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Mobile};` : "" }
+		}	
 		.fb-dual-button-container.${blockID} {
 			${globalMobilePadding ? `padding: ${globalMobilePadding};` : ""}
 			${globalMobileMargin ? `margin: ${globalMobileMargin};` : ""} 
@@ -2019,6 +2374,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBoxShadowHoverValues,
 			globalBoxShadowCssValue,
 			globalHoverBoxShadowCssValue,
+
+			// Position
+			dualBtnPositionType,
+			dualBtnHZOrientationType,
+			dualBtnVROrientationType,
+			dualBtnHZLeftOffset,
+			dualBtnHZLeftOffsetUnits,
+			dualBtnHZRightOffset,
+			dualBtnHZRightOffsetUnits,
+			dualBtnVRTopOffset,
+			dualBtnVRTopOffsetUnits,
+			dualBtnVRBottomOffset,
+			dualBtnVRBottomOffsetUnits,
 		],
 	);
 
@@ -2063,6 +2431,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
+										<div className="fb-dual-button-pressets">
+										<PanelBody
+											title={__("Presets", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<SelectControl
+												label={__("Preset Style", "frontis-blocks")}
+												value={dualButtonPresetStyle}
+												options={PRESETS}
+												onChange={(selected) => changeDualButtonPreset(selected)}
+											/>	
+										</PanelBody>
+										</div>
 										<div className="fb-dual-button-container">
 											{/*Button One*/}
 											<div className="fb-dual-button-one-wrapper">
@@ -3126,6 +3507,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={dualBtnPositionType}
+														setPositionType={(value) => setAttributes({ dualBtnPositionType: value })}
+																										
+														HZOrientationType={dualBtnHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ dualBtnHZOrientationType: value })
+														}
+														VROrientationType={dualBtnVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ dualBtnVROrientationType: value })
+														}
+																											
+														HZLeftOffset={dualBtnHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ dualBtnHZLeftOffset: value })}
+														HZLeftOffsetUnits={dualBtnHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ dualBtnHZLeftOffsetUnits: value })}
+														HZRightOffset={dualBtnHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ dualBtnHZRightOffset: value })}
+														HZRightOffsetUnits={dualBtnHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ dualBtnHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={dualBtnVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ dualBtnVRTopOffset: value })}
+														VRTopOffsetUnits={dualBtnVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ dualBtnVRTopOffsetUnits: value })}
+														VRBottomOffset={dualBtnVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ dualBtnVRBottomOffset: value })}
+														VRBottomOffsetUnits={dualBtnVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ dualBtnVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={dualButtonGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={dualButtonGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody
@@ -3268,6 +3699,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
 														/>
 													)}
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnDesktopSwitcher}
+														onChange={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnTabletSwitcher}
+														onChange={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={dualBtnMobileSwitcher}
+														onChange={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

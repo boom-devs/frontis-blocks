@@ -15,10 +15,8 @@ import {
 	TabPanel,
 	BaseControl,
 	Button,
-	ButtonGroup,
 	ToggleControl,
 	TextareaControl,
-	RangeControl,
 	__experimentalHStack as HStack,
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
@@ -34,7 +32,8 @@ import {
 	ICON_POSITION,
 	ICON_ICON_POSITION,
 	ICON_ICON_VERTICAL_POSITION,
-	ICON_WRAP_ALIGNMENT
+	ICON_WRAP_ALIGNMENT,
+	PRESETS
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
@@ -52,12 +51,18 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		iconBoxPresetStyle,
 		Heading_Text,
 		headingTag,
 		Heading_Background_Color,
@@ -343,6 +348,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		wrapperLink,
 		wrapperTargetUrl,
 		wrapperUrlSwitcher,
+
+		iconBoxDesktopSwitcher,
+		iconBoxTabletSwitcher,
+		iconBoxMobileSwitcher,
+
+		iconBoxGlobalWraperID,
+		iconBoxGlobalWraperClass,
+
+		// Position
+        iconBoxPositionType,
+        iconBoxHZOrientationType,
+        iconBoxVROrientationType,
+        iconBoxHZLeftOffset,
+        iconBoxHZLeftOffsetUnits,
+        iconBoxHZRightOffset,
+        iconBoxHZRightOffsetUnits,
+        iconBoxVRTopOffset,
+        iconBoxVRTopOffsetUnits,
+        iconBoxVRBottomOffset,
+        iconBoxVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -368,14 +393,221 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, []);
 
-
-
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
 	};
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
 	};
+
+	/** Start Preset Style **/
+	const changeIconBoxPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+				buttonIconSwitcher: false,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'center',
+				Alignment: 'center',
+				descAlignment: 'center',
+				buttonAlignment: 'center',
+                mediaClassicColor: '#D7EBFF',
+                mediaHoverClassicColor: '#D7EBFF',
+				globalBgColor: '',
+                globalBgHoverColor: '',
+                mediaIconColor: '#399CFF',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#399CFF',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",
+                },
+				mediaMarginDesktop: {
+                    top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-2": {
+				buttonIconSwitcher: true,
+				iconBoxIconPosition: 'left',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '',
+                mediaHoverClassicColor: '',
+				globalBgColor: '#ffffff',
+                globalBgHoverColor: '#ffffff',
+                mediaIconColor: '#399CFF',
+                mediaIconHoverColor: '#399CFF',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaMarginDesktop: {
+                    top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-3": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'center',
+				Alignment: 'center',
+				descAlignment: 'center',
+				buttonAlignment: 'center',
+                mediaClassicColor: '#F89B2E',
+                mediaHoverClassicColor: '#F89B2E',
+				globalBgColor: '#FFFBF5',
+                globalBgHoverColor: '#FFFBF5',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#F89B2E',
+                btnIconColor: '#F89B2E',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaMarginDesktop: {
+					top: '-64',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            "preset-4": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '#F89B2E',
+                mediaHoverClassicColor: '#F89B2E',
+				globalBgColor: '',
+                globalBgHoverColor: '',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#F89B2E',
+                btnIconColor: '#F89B2E',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "",
+					bottom: "",
+					left: "",
+					right: "",
+                },
+				mediaMarginDesktop: {
+					top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+			"preset-5": {
+                buttonIconSwitcher: true,
+				iconBoxIconPosition: 'top',
+				wrapperAlignment: 'left',
+				Alignment: 'left',
+				descAlignment: 'left',
+				buttonAlignment: 'left',
+                mediaClassicColor: '#15171C',
+                mediaHoverClassicColor: '#15171C',
+				globalBgColor: '#F7F7F7',
+                globalBgHoverColor: '#F7F7F7',
+                mediaIconColor: '#ffffff',
+                mediaIconHoverColor: '#ffffff',
+                Heading_Color: '#15171C',
+                Heading_Hover_Color: '#15171C',
+                SubHeadingColor: '#555E72',
+                SubHeadingHoverColor: '#555E72',
+                buttonTextColor: '#15171C',
+                btnIconColor: '#15171C',
+                globalBorderRadiusDesktop: {
+                    top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+                },
+				mediaBorderRadiusDesktop: {
+                    top: "14",
+					bottom: "14",
+					left: "14",
+					right: "14",
+                },
+				mediaMarginDesktop: {
+					top: '0',
+					bottom: '32',
+					left: '12',
+					right: '12',
+                },
+            },
+            
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                iconBoxPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+        }
+    };
+    /** End Preset Style **/
 
 	/** Heading Margin */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1910,9 +2142,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbIconBoxStyle = useMemo(
 		() => `
+		  .fb-icon-box-area.${blockID} {
+			${iconBoxPositionType === 'default' ? `position: relative;` : ''}
+			${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${iconBoxPositionType !== 'default' ? `position: ${iconBoxPositionType};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Desktop !== undefined ? `left: ${iconBoxHZLeftOffset.Desktop}${iconBoxHZLeftOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Desktop !== undefined ? `right: ${iconBoxHZRightOffset.Desktop}${iconBoxHZRightOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Desktop !== undefined ? `top: ${iconBoxVRTopOffset.Desktop}${iconBoxVRTopOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${iconBoxVRBottomOffset.Desktop}${iconBoxVRBottomOffsetUnits.Desktop};` : ''} 
+			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}  
+		  }
 		  .fb-icon-box-wrapper.${blockID} {
 		  	  position: relative;
-			  ${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
 			  ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -1932,8 +2173,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-icon-box-wrapper.${blockID} {
+			.fb-icon-box-area.${blockID} {
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Mobile !== undefined ? `bottom: ${iconBoxVRBottomOffset.Mobile}${iconBoxVRBottomOffsetUnits.Mobile};` : ''}
 				${globalZIndex.Tablet !== undefined ? `z-index: ${globalZIndex.Tablet};` : ""}
+			}
+			  .fb-icon-box-wrapper.${blockID} {
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -1942,8 +2189,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
+			  .fb-icon-box-area.${blockID} {
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Mobile !== undefined ? `bottom: ${iconBoxVRBottomOffset.Mobile}${iconBoxVRBottomOffsetUnits.Mobile};` : ''} 
+			  	${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
+			  }
 			  .fb-icon-box-wrapper.${blockID} {
-				${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -2147,6 +2400,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
+		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper{
+			${iconBoxPresetStyle === "preset-4" ? 
+				`
+				border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+				` : ''
+			}
+		}
 		@media only screen and (max-width: 1024px) {
 			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper {
 				padding: ${mediaTabletPadding};
@@ -2459,7 +2719,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaHoverBackgroundImageSize,
 			mediaHoverBackgroundImageRepeat,
 			iconBoxIconVerticalPosition,
-			iconBoxCardAlignment
+			iconBoxCardAlignment,
+
+			// Position
+			iconBoxPositionType,
+			iconBoxHZOrientationType,
+			iconBoxVROrientationType,
+			iconBoxHZLeftOffset,
+			iconBoxHZLeftOffsetUnits,
+			iconBoxHZRightOffset,
+			iconBoxHZRightOffsetUnits,
+			iconBoxVRTopOffset,
+			iconBoxVRTopOffsetUnits,
+			iconBoxVRBottomOffset,
+			iconBoxVRBottomOffsetUnits,
 		],
 	);
 
@@ -2508,7 +2781,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												title={__("Icon/Image", "frontis-block")}
 												initialOpen={true}
 											>
-												
+												<SelectControl
+													label={__("Preset Style", "frontis-blocks")}
+													value={iconBoxPresetStyle}
+													options={PRESETS}
+													onChange={(selected) => changeIconBoxPreset(selected)}
+												/>
+
 												<FB_AlignmentControl
 													label={__("Alignment", "frontis-blocks")}
 													globalAlignment={wrapperAlignment}
@@ -3574,6 +3853,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={iconBoxPositionType}
+                                                        setPositionType={(value) => setAttributes({ iconBoxPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={iconBoxHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ iconBoxHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={iconBoxVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ iconBoxVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={iconBoxHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ iconBoxHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={iconBoxHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ iconBoxHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={iconBoxHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ iconBoxHZRightOffset: value })}
+                                                        HZRightOffsetUnits={iconBoxHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ iconBoxHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={iconBoxVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ iconBoxVRTopOffset: value })}
+                                                        VRTopOffsetUnits={iconBoxVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ iconBoxVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={iconBoxVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ iconBoxVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={iconBoxVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ iconBoxVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={iconBoxGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={iconBoxGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody
@@ -3773,6 +4102,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 														/>
 													)}
+												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={iconBoxDesktopSwitcher}
+														onChange={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={iconBoxTabletSwitcher}
+														onChange={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={iconBoxMobileSwitcher}
+														onChange={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

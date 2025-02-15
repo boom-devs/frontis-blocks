@@ -12,17 +12,20 @@ export default function save({ attributes }) {
         imageOverlaySwitcher,
         previewImageUrl,
         videoPlayIcon,
+
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-advanced-video ${blockID}`
+        className: `fb-advanced-video-main-wrapper ${blockID}`
     });
 
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-parent-wrapper">
-                    <div className={`fb-advanced-video-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} id={videoGlobalWraperID}>
+                    <div className={`fb-advanced-video-wrapper`}>
                         <div className="fb-player-wrapper">
                             {imageOverlaySwitcher && (
                                 <span className="fb-play-icon" style={{ display: 'block' }}>{renderSVG(videoPlayIcon)}</span>

@@ -19,6 +19,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         imageOverlaySwitcher,
         previewImageUrl,
         videoPlayIcon,
+
+        videoGlobalWraperID,
+        videoGlobalWraperClass,
      } = attributes;
 
     const blockProps = useBlockProps({
@@ -40,8 +43,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper" ref={panelRef}>
-                    <div className={`fb-advanced-video-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} ref={panelRef} id={videoGlobalWraperID}>
+                    <div className={`fb-advanced-video-wrapper`}>
                         <div className="fb-player-wrapper">
                             <div className="fb-player-option">
                                 <ReactPlayer

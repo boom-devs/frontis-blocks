@@ -25,12 +25,21 @@ import FB_UrlControl from "@Components/url-control";
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
 import {
 	BORDER_STYLES,
-} from "../advanced-image/constants/constants";
+	STYLES,
+	TITLE_POSITION,
+	HOVER_EFFECTS,
+	AUTO_FIT
+} from "./constants/constants";
 import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -206,7 +215,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		overlayHoverBackgroundImageAttachment,
 		overlayHoverBackgroundImageRepeat,
 		overlayHoverBackgroundImageSize,
-		overlayOpacity
+		overlayOpacity,
+
+		advancedImageDesktopSwitcher,
+		advancedImageTabletSwitcher,
+		advancedImageMobileSwitcher,
+
+		advancedImageCustomCSS,
+		advancedImageGlobalWraperID,
+		advancedImageGlobalWraperClass,
+
+		// Position
+		advancedImagePositionType,
+		advancedImageHZOrientationType,
+		advancedImageVROrientationType,
+		advancedImageHZLeftOffset,
+		advancedImageHZLeftOffsetUnits,
+		advancedImageHZRightOffset,
+		advancedImageHZRightOffsetUnits,
+		advancedImageVRTopOffset,
+		advancedImageVRTopOffsetUnits,
+		advancedImageVRBottomOffset,
+		advancedImageVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -228,15 +258,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	/** Image **/
 	if (typeof FrontisBlocksData !== 'undefined') {
-		// Map each class to its corresponding image URL
 		const imageMapping = {
-			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
-			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
-			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
 			'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
+			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
+			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
+			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
 			'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
 			'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
-			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
+			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
 		};
 	
 		// Apply the URLs dynamically to each element
@@ -248,7 +277,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		});
 	}
-	
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -908,8 +936,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const advancedImageStyle = useMemo(
 		() => `
-		.fb-advanced-image-wrapper.${blockID} {
+		.fb-advanced-image-main-wrapper.${blockID} {
+			${advancedImagePositionType === 'default' ? `position: relative;` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' ? `width: 100%;` : ''}
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Desktop !== undefined ? `left: ${advancedImageHZLeftOffset.Desktop}${advancedImageHZLeftOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Desktop !== undefined ? `right: ${advancedImageHZRightOffset.Desktop}${advancedImageHZRightOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Desktop !== undefined ? `top: ${advancedImageVRTopOffset.Desktop}${advancedImageVRTopOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedImageVRBottomOffset.Desktop}${advancedImageVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+		}
+		.${blockID} .fb-advanced-image-wrapper{
 			padding: ${globalDeskPadding};
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -930,7 +967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			transition: all .3s ease-in-out;
 		}
-		.fb-advanced-image-wrapper.${blockID}:hover{
+		.${blockID} .fb-advanced-image-wrapper:hover{
 			${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : ""}
 			${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
 			${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
@@ -939,7 +976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
 			${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner{
 			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop}`
 			};
@@ -949,10 +986,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${ overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor };
 			`
 			: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
@@ -968,7 +1005,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
 			${overlayHoverBackgroundType === 'gradient' ? `  
                 background: ${overlayHoverCustomGradientSwitcher && overlayHoverCustomGradientInputValue ? overlayHoverCustomGradientInputValue : overlayHoverGradientColor};
             `: `
@@ -976,10 +1013,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `}
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image-caption figcaption {
 			text-align: ${captionAlignment};
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			display: block;
 			${HeadingColor !== undefined ? `color: ${HeadingColor};` : ""}
 			${HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ""}
@@ -997,26 +1034,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
 			${HeadingHoverColor !== undefined ? `color: ${HeadingHoverColor};` : ""}
 			${HeadingBorderHoverColor !== undefined ? `background-color: ${HeadingBorderHoverColor};` : ""}
 			border: ${HeadingBorderHoverColor};
 		}
 		@media all and (max-width: 1024px) {
-		.fb-advanced-image-wrapper.${blockID} {
+		.fb-advanced-image-main-wrapper.${blockID} {
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Tablet !== undefined ? `left: ${advancedImageHZLeftOffset.Tablet}${advancedImageHZLeftOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Tablet !== undefined ? `right: ${advancedImageHZRightOffset.Tablet}${advancedImageHZRightOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Tablet !== undefined ? `top: ${advancedImageVRTopOffset.Tablet}${advancedImageVRTopOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedImageVRBottomOffset.Tablet}${advancedImageVRBottomOffsetUnits.Tablet};` : ''}
 			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
+		}
+		.${blockID} .fb-advanced-image-wrapper {
 			padding: ${globalTabPadding};
 			margin: ${globalTabMargin};
 			border-width: ${globalTabBorder};
 			border-radius: ${globalTabBorderRadius} !important;
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageTabletBorder ? `border-width: ${imageTabletBorder};` : ''}
             ${imageTabletBorderRadius ? `border-radius: ${imageTabletBorderRadius};` : ''}
 			width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
 			${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
 			${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -1027,21 +1071,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		}
 		@media all and (max-width: 767px) {
-		.fb-advanced-image-wrapper.${blockID} {
+		.fb-advanced-image-main-wrapper.${blockID} {
+			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Mobile !== undefined ? `left: ${advancedImageHZLeftOffset.Mobile}${advancedImageHZLeftOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Mobile !== undefined ? `right: ${advancedImageHZRightOffset.Mobile}${advancedImageHZRightOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Mobile !== undefined ? `top: ${advancedImageVRTopOffset.Mobile}${advancedImageVRTopOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedImageVRBottomOffset.Mobile}${advancedImageVRBottomOffsetUnits.Mobile};` : ''}
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
+		}
+		.${blockID} .fb-advanced-image-wrapper {
 			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
 			padding: ${globalMobPadding};
 			margin: ${globalMobMargin};
 			border-width: ${globalMobBorder};
 			border-radius: ${globalMobBorderRadius} !important;
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageMobileBorder ? `border-width: ${imageMobileBorder};` : ''}
             ${imageMobileBorderRadius ? `border-radius: ${imageMobileBorderRadius};` : ''}
 			width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
 			${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
 			${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -1051,7 +1103,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingMobileMargin ? `margin: ${headingMobileMargin};` : ""}
 		}
 		}
-		
 	`,
 		[
 			blockID,
@@ -1136,16 +1187,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingDesktopMargin,
 			headingTabletMargin,
 			headingMobileMargin,
+
+			// Position
+			advancedImagePositionType,
+			advancedImageHZOrientationType,
+			advancedImageVROrientationType,
+			advancedImageHZLeftOffset,
+			advancedImageHZLeftOffsetUnits,
+			advancedImageHZRightOffset,
+			advancedImageHZRightOffsetUnits,
+			advancedImageVRTopOffset,
+			advancedImageVRTopOffsetUnits,
+			advancedImageVRBottomOffset,
+			advancedImageVRBottomOffsetUnits,
 		],
 	);
 
+	const customCss = getCustomCss(advancedImageCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${advancedImageStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${advancedImageStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [advancedImageStyle]);
+	}, [advancedImageStyle, customCss]);
 
-	const editorStyle = advancedImageStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1266,91 +1332,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
                                             	</BaseControl>
 
+												
 												<SelectControl
 													label={__("Styles", "frontis-blocks")}
 													value={imageStyle || "square"}
-													options={[
-														{
-															label: __("Square", "frontis-blocks"),
-															value: "square",
-														},
-														{
-															label: __("Octagon", "frontis-blocks"),
-															value: "octagon",
-														},
-														{
-															label: __("Triangle", "frontis-blocks"),
-															value: "triangle",
-														},
-														{
-															label: __("Rhombus", "frontis-blocks"),
-															value: "rhombus",
-														},
-														{
-															label: __("Hexagon", "frontis-blocks"),
-															value: "hexagon",
-														},
-														{
-															label: __("Bevel", "frontis-blocks"),
-															value: "bevel",
-														},
-														{
-															label: __("Abstract", "frontis-blocks"),
-															value: "abstract",
-														},
-														{
-															label: __("Container", "frontis-blocks"),
-															value: "container",
-														},
-														{
-															label: __("Aesthetic Blob", "frontis-blocks"),
-															value: "aesthetic-blob",
-														},
-														{
-															label: __("Aesthetic Blob 2", "frontis-blocks"),
-															value: "aesthetic-blob-2",
-														},
-														{
-															label: __("Aesthetic Blob 3", "frontis-blocks"),
-															value: "aesthetic-blob-3",
-														},
-														{
-															label: __("Aesthetic Blob 4", "frontis-blocks"),
-															value: "aesthetic-blob-4",
-														},
-														{
-															label: __("Irregular Blob", "frontis-blocks"),
-															value: "irregular-blob",
-														},
-														{
-															label: __("Triangle Blob", "frontis-blocks"),
-															value: "triangle-blob",
-														},
-														{
-															label: __("Overlaped Blob", "frontis-blocks"),
-															value: "overlaped-blob",
-														},
-														{
-															label: __("Seperate Blob", "frontis-blocks"),
-															value: "seperate-blob",
-														},
-														{
-															label: __("Pattern", "frontis-blocks"),
-															value: "pattern",
-														},
-														
-													]}
-													onChange={(newStyle) =>
-														setAttributes({ imageStyle: newStyle })
-													}
+													options={STYLES}
+													onChange={(value) => {
+														setAttributes({ imageStyle: value }); 
+													}}
 													__nextHasNoMarginBottom
 												/>
+
 												<ToggleControl
 													__nextHasNoMarginBottom
 													label={__("Show Overlay", "frontis-block")}
 													checked={showOverlay}
-													onChange={(newValue) => {
-														setAttributes({ showOverlay: newValue });
+													onChange={(value) => {
+														setAttributes({ showOverlay: value });
 													}}
 												/>
 												{/* Display Caption */}
@@ -1358,8 +1356,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Display Caption", "frontis-block")}
 													checked={displayCaption}
-													onChange={(newValue) => {
-														setAttributes({ displayCaption: newValue });
+													onChange={(value) => {
+														setAttributes({ displayCaption: value });
 													}}
 												/>
 
@@ -1377,8 +1375,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Display Title", "frontis-block")}
 													checked={displayTitle}
-													onChange={(newValue) => {
-														setAttributes({ displayTitle: newValue });
+													onChange={(value) => {
+														setAttributes({ displayTitle: value });
 													}}
 												/>
 												{displayTitle && (
@@ -1400,51 +1398,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<SelectControl
 															label={__("Title Position", "frontis-blocks")}
 															value={titlePosition || "center"}
-															options={[
-																{
-																	label: __("Center", "frontis-blocks"),
-																	value: "center",
-																},
-																{
-																	label: __("Center Left", "frontis-blocks"),
-																	value: "center-left",
-																},
-																{
-																	label: __("Center Right", "frontis-blocks"),
-																	value: "center-right",
-																},
-																{
-																	label: __("Top Left", "frontis-blocks"),
-																	value: "top-left",
-																},
-																{
-																	label: __("Top Center", "frontis-blocks"),
-																	value: "top-center",
-																},
-																{
-																	label: __("Top Right", "frontis-blocks"),
-																	value: "top-right",
-																},
-																{
-																	label: __("Bottom Left", "frontis-blocks"),
-																	value: "bottom-left",
-																},
-																{
-																	label: __("Bottom Center", "frontis-blocks"),
-																	value: "bottom-center",
-																},
-																{
-																	label: __("Bottom Right", "frontis-blocks"),
-																	value: "bottom-right",
-																},
-																{
-																	label: __(
-																		"Vertically Center",
-																		"frontis-blocks",
-																	),
-																	value: "vertical-center",
-																},
-															]}
+															options={TITLE_POSITION}
 															onChange={(value) =>
 																setAttributes({ titlePosition: value })
 															}
@@ -1458,8 +1412,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													__nextHasNoMarginBottom
 													label={__("Enable Link?", "frontis-block")}
 													checked={linkSwitch}
-													onChange={(newValue) => {
-														setAttributes({ linkSwitch: newValue });
+													onChange={(value) => {
+														setAttributes({ linkSwitch: value });
 													}}
 												/>
 
@@ -1479,42 +1433,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<SelectControl
 													label={__("Hover Effect", "frontis-blocks")}
 													value={imageHover}
-													options={[
-														{
-															label: __("No Effect", "frontis-blocks"),
-															value: "no-effect",
-														},
-														{
-															label: __("Zoom In", "frontis-blocks"),
-															value: "zoom-in",
-														},
-														{
-															label: __("Zoom Out", "frontis-blocks"),
-															value: "zoom-out",
-														},
-														{
-															label: __("Slide", "frontis-blocks"),
-															value: "slide",
-														},
-														{
-															label: __("Blur", "frontis-blocks"),
-															value: "blur",
-														},
-														{
-															label: __("Overlay", "frontis-blocks"),
-															value: "overlay",
-														},
-														{
-															label: __("Tilt", "frontis-blocks"),
-															value: "tilt",
-														},
-														{
-															label: __("Skew", "frontis-blocks"),
-															value: "skew",
-														},
-													]}
-													onChange={(size) =>
-														setAttributes({ imageHover: size })
+													options={HOVER_EFFECTS}
+													onChange={(value) =>
+														setAttributes({ imageHover: value })
 													}
 													__nextHasNoMarginBottom
 												/>
@@ -1677,20 +1598,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<SelectControl
 												label={__("Image Fit Options", "frontis-blocks")}
 												value={imageFit || "cover"}
-												options={[
-													{
-														label: __("Cover", "frontis-blocks"),
-														value: "cover",
-													},
-													{
-														label: __("Fill", "frontis-blocks"),
-														value: "fill",
-													},
-													{
-														label: __("Contain", "frontis-blocks"),
-														value: "contain",
-													},
-												]}
+												options={AUTO_FIT}
 												onChange={(size) =>
 													setAttributes({ imageFit: size })
 												}
@@ -1806,7 +1714,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											<div className="fb-setting-z-index-wrapper">
 												<PanelBody
 													title={__("Z Index", "frontis-blocks")}
-													initialOpen={false}
+													initialOpen={true}
 													className="fb-setting-z-index-header"
 												>
 													
@@ -1823,6 +1731,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														isRangeUnit={false}
 
 													/>
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={advancedImagePositionType}
+														setPositionType={(value) => setAttributes({ advancedImagePositionType: value })}
+																										
+														HZOrientationType={advancedImageHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ advancedImageHZOrientationType: value })
+														}
+														VROrientationType={advancedImageVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ advancedImageVROrientationType: value })
+														}
+																											
+														HZLeftOffset={advancedImageHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ advancedImageHZLeftOffset: value })}
+														HZLeftOffsetUnits={advancedImageHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ advancedImageHZLeftOffsetUnits: value })}
+														HZRightOffset={advancedImageHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ advancedImageHZRightOffset: value })}
+														HZRightOffsetUnits={advancedImageHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ advancedImageHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={advancedImageVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ advancedImageVRTopOffset: value })}
+														VRTopOffsetUnits={advancedImageVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ advancedImageVRTopOffsetUnits: value })}
+														VRBottomOffset={advancedImageVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ advancedImageVRBottomOffset: value })}
+														VRBottomOffsetUnits={advancedImageVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ advancedImageVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
+
+													<FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={advancedImageGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ advancedImageGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={advancedImageGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ advancedImageGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 												<PanelBody
 													title={__("Padding and Margin", "frontis-blocks")}
@@ -1998,6 +1956,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														}
 													/>
 												</PanelBody>
+
+												<PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageDesktopSwitcher}
+														onChange={(value) => setAttributes({ advancedImageDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageTabletSwitcher}
+														onChange={(value) => setAttributes({ advancedImageTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={advancedImageMobileSwitcher}
+														onChange={(value) => setAttributes({ advancedImageMobileSwitcher: value })}
+													/>
+												</PanelBody>
+												<PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedImageCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ advancedImageCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
 									</>

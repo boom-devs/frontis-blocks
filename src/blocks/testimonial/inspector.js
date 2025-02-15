@@ -41,7 +41,12 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -252,6 +257,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         blockStyle,
 
+        testimonialDesktopSwitcher,
+		testimonialTabletSwitcher,
+		testimonialMobileSwitcher,
+
+		testimonialGlobalWraperID,
+		testimonialGlobalWraperClass,
+
+        // Position
+        testimonialPositionType,
+        testimonialHZOrientationType,
+        testimonialVROrientationType,
+        testimonialHZLeftOffset,
+        testimonialHZLeftOffsetUnits,
+        testimonialHZRightOffset,
+        testimonialHZRightOffsetUnits,
+        testimonialVRTopOffset,
+        testimonialVRTopOffsetUnits,
+        testimonialVRBottomOffset,
+        testimonialVRBottomOffsetUnits,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1584,8 +1608,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-testimonial-main-wrapper {
+            ${testimonialPositionType === 'default' ? `position: relative;` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${testimonialPositionType !== 'default' ? `position: ${testimonialPositionType};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Desktop !== undefined ? `left: ${testimonialHZLeftOffset.Desktop}${testimonialHZLeftOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Desktop !== undefined ? `right: ${testimonialHZRightOffset.Desktop}${testimonialHZRightOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Desktop !== undefined ? `top: ${testimonialVRTopOffset.Desktop}${testimonialVRTopOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Desktop !== undefined ? `bottom: ${testimonialVRBottomOffset.Desktop}${testimonialVRBottomOffsetUnits.Desktop};` : ''}
             ${TestimonialGlobalZIndex.Desktop ? `z-index: ${TestimonialGlobalZIndex.Desktop};` : ''}
-            position: relative;
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
@@ -1739,8 +1769,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
             .${blockID}.fb-testimonial-main-wrapper {
+                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Tablet !== undefined ? `left: ${testimonialHZLeftOffset.Tablet}${testimonialHZLeftOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Tablet !== undefined ? `right: ${testimonialHZRightOffset.Tablet}${testimonialHZRightOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Tablet !== undefined ? `top: ${testimonialVRTopOffset.Tablet}${testimonialVRTopOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Tablet !== undefined ? `bottom: ${testimonialVRBottomOffset.Tablet}${testimonialVRBottomOffsetUnits.Tablet};` : ''}
                 ${TestimonialGlobalZIndex.Tablet ? `z-index: ${TestimonialGlobalZIndex.Tablet};` : ''}
-                position: relative;
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                 ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
@@ -1794,8 +1827,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         @media only screen and (max-width: 767px) {
             .${blockID}.fb-testimonial-main-wrapper {
+                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Mobile !== undefined ? `left: ${testimonialHZLeftOffset.Mobile}${testimonialHZLeftOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Mobile !== undefined ? `right: ${testimonialHZRightOffset.Mobile}${testimonialHZRightOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Mobile !== undefined ? `top: ${testimonialVRTopOffset.Mobile}${testimonialVRTopOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Mobile !== undefined ? `bottom: ${testimonialVRBottomOffset.Mobile}${testimonialVRBottomOffsetUnits.Mobile};` : ''} 
                 ${TestimonialGlobalZIndex.Mobile ? `z-index: ${TestimonialGlobalZIndex.Mobile};` : ''}
-                position: relative;
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
                 ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
@@ -2103,6 +2139,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalTabletBorderRadiusWidth,
         globalMobileBorderRadiusWidth,
 
+        // Position
+        testimonialPositionType,
+        testimonialHZOrientationType,
+        testimonialVROrientationType,
+        testimonialHZLeftOffset,
+        testimonialHZLeftOffsetUnits,
+        testimonialHZRightOffset,
+        testimonialHZRightOffsetUnits,
+        testimonialVRTopOffset,
+        testimonialVRTopOffsetUnits,
+        testimonialVRBottomOffset,
+        testimonialVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -3005,6 +3053,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     isRangeUnit={false}
 
                                                 />
+
+                                                <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={testimonialPositionType}
+                                                        setPositionType={(value) => setAttributes({ testimonialPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={testimonialHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ testimonialHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={testimonialVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ testimonialVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={testimonialHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ testimonialHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={testimonialHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ testimonialHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={testimonialHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ testimonialHZRightOffset: value })}
+                                                        HZRightOffsetUnits={testimonialHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ testimonialHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={testimonialVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ testimonialVRTopOffset: value })}
+                                                        VRTopOffsetUnits={testimonialVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ testimonialVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={testimonialVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ testimonialVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={testimonialVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ testimonialVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                <FB_InputControl
+													label={__("CSS ID", "frontis-blocks")}
+													value={testimonialGlobalWraperID}
+													onChangeValue={(value) => setAttributes({ testimonialGlobalWraperID: value })}
+													helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+												/>  
+
+                                                <FB_InputControl
+                                                    label={__("CSS Class", "frontis-blocks")}
+                                                    value={testimonialGlobalWraperClass}
+                                                    onChangeValue={(value) => setAttributes({ testimonialGlobalWraperClass: value })}
+                                                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                />
                                             </PanelBody>
                                             
                                             <PanelBody
@@ -3157,6 +3254,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                             </PanelBody>
+
+                                            <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialDesktopSwitcher}
+														onChange={(value) => setAttributes({ testimonialDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialTabletSwitcher}
+														onChange={(value) => setAttributes({ testimonialTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={testimonialMobileSwitcher}
+														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
+													/>
+											</PanelBody>
                                         </div>
                                     </div>
                                 </>

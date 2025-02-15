@@ -34,7 +34,12 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -320,6 +325,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageAttachment,
         contentBgHoverImageRepeat,
         contentBgHoverImageSize,
+
+        accordionGlobalWraperID,
+        accordionGlobalWraperClass,
+
+        // Position
+        accordionPositionType,
+        accordionHZOrientationType,
+        accordionVROrientationType,
+        accordionHZLeftOffset,
+        accordionHZLeftOffsetUnits,
+        accordionHZRightOffset,
+        accordionHZRightOffsetUnits,
+        accordionVRTopOffset,
+        accordionVRTopOffsetUnits,
+        accordionVRBottomOffset,
+        accordionVRBottomOffsetUnits,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1106,9 +1128,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const fbaccordionItemstyle = useMemo(() => {
         let styles = `
+          .fb-accordion-main-wrapper.${blockID} {
+            ${accordionPositionType === 'default' ? `position: relative;` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${accordionPositionType !== 'default' ? `position: ${accordionPositionType};` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'left' && accordionHZLeftOffset.Desktop !== undefined ? `left: ${accordionHZLeftOffset.Desktop}${accordionHZLeftOffsetUnits.Desktop};` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'right' && accordionHZRightOffset.Desktop !== undefined ? `right: ${accordionHZRightOffset.Desktop}${accordionHZRightOffsetUnits.Desktop};` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'top' && accordionVRTopOffset.Desktop !== undefined ? `top: ${accordionVRTopOffset.Desktop}${accordionVRTopOffsetUnits.Desktop};` : ''}
+            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset.Desktop !== undefined ? `bottom: ${accordionVRBottomOffset.Desktop}${accordionVRBottomOffsetUnits.Desktop};` : ''}
+            ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
+          }
           .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 position: relative;
-                ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
                 ${accordionDesktopPadding !== undefined ? `padding: ${accordionPaddingDesktopWidth};` : ''}
                 ${accordionDesktopMargin !== undefined ? `margin: ${accordionMarginDesktopWidth};` : ''}
                 ${accordionBorder !== undefined ? `border-style: ${accordionBorder};` : ''}
@@ -1374,8 +1405,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
       
         @media only screen and (max-width: 1024px) {
-            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+            .fb-accordion-main-wrapper.${blockID} {
+                ${accordionPositionType !== 'default' ? `position: ${accordionPositionType};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'left' && accordionHZLeftOffset.Tablet !== undefined ? `left: ${accordionHZLeftOffset.Tablet}${accordionHZLeftOffsetUnits.Tablet};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'right' && accordionHZRightOffset.Tablet !== undefined ? `right: ${accordionHZRightOffset.Tablet}${accordionHZRightOffsetUnits.Tablet};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'top' && accordionVRTopOffset.Tablet !== undefined ? `top: ${accordionVRTopOffset.Tablet}${accordionVRTopOffsetUnits.Tablet};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset.Tablet !== undefined ? `bottom: ${accordionVRBottomOffset.Tablet}${accordionVRBottomOffsetUnits.Tablet};` : ''}
                 ${accordionZIndex.Tablet !== undefined ? `z-index: ${accordionZIndex.Tablet};` : ''}
+            }
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionTabPadding !== undefined ? `padding: ${accordionPaddingTabletWidth};` : ''}
                 ${accordionTabMargin !== undefined ? `margin: ${accordionMarginTabletWidth};` : ''}
                 ${accordionTabBorderRadiusWidth !== undefined ? `border-radius: ${accordionBorderRadiusTabletWidth};` : ''}
@@ -1448,8 +1486,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
       
         @media only screen and (max-width: 767px) {
-            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+            .fb-accordion-main-wrapper.${blockID} {
+                ${accordionPositionType !== 'default' ? `position: ${accordionPositionType};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'left' && accordionHZLeftOffset.Mobile !== undefined ? `left: ${accordionHZLeftOffset.Mobile}${accordionHZLeftOffsetUnits.Mobile};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'right' && accordionHZRightOffset.Mobile !== undefined ? `right: ${accordionHZRightOffset.Mobile}${accordionHZRightOffsetUnits.Mobile};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'top' && accordionVRTopOffset.Mobile !== undefined ? `top: ${accordionVRTopOffset.Mobile}${accordionVRTopOffsetUnits.Mobile};` : ''}
+                ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset.Mobile !== undefined ? `bottom: ${accordionVRBottomOffset.Mobile}${accordionVRBottomOffsetUnits.Mobile};` : ''}
                 ${accordionZIndex.Mobile !== undefined ? `z-index: ${accordionZIndex.Mobile};` : ''}
+            }
+            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionMobilePadding !== undefined ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMobileMargin !== undefined ? `margin: ${accordionMarginMobileWidth};` : ''}
                 ${accordionMobileBorderRadiusWidth !== undefined ? `border-radius: ${accordionBorderRadiusMobileWidth};` : ''}
@@ -1746,6 +1791,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageAttachment,
         contentBgHoverImageRepeat,
         contentBgHoverImageSize,
+
+        // Position
+        accordionPositionType,
+        accordionHZOrientationType,
+        accordionVROrientationType,
+        accordionHZLeftOffset,
+        accordionHZLeftOffsetUnits,
+        accordionHZRightOffset,
+        accordionHZRightOffsetUnits,
+        accordionVRTopOffset,
+        accordionVRTopOffsetUnits,
+        accordionVRBottomOffset,
+        accordionVRBottomOffsetUnits,
       ]);
       
       useEffect(() => {
@@ -2672,6 +2730,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={accordionPositionType}
+                                                        setPositionType={(value) => setAttributes({ accordionPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={accordionHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ accordionHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={accordionVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ accordionVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={accordionHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ accordionHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={accordionHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ accordionHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={accordionHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ accordionHZRightOffset: value })}
+                                                        HZRightOffsetUnits={accordionHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ accordionHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={accordionVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ accordionVRTopOffset: value })}
+                                                        VRTopOffsetUnits={accordionVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ accordionVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={accordionVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ accordionVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={accordionVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ accordionVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={accordionGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ accordionGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={accordionGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ accordionGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
                                                 </PanelBody>
         
                                                 <PanelBody
@@ -2931,7 +3038,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     )}
                                                 </PanelBody>
         
-                                                {/* <PanelBody
+                                                <PanelBody
                                                     title={__("Responsive Control", "frontis-blocks")}
                                                     initialOpen={false}
                                                     className="fb-setting-responsive-control-wrapper"
@@ -2954,7 +3061,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         checked={accordionMobileSwitcher}
                                                         onChange={(value) => setAttributes({ accordionMobileSwitcher: value })}
                                                     />
-                                                </PanelBody> */}
+                                                </PanelBody>
         
                                             </div>
                                         </div>

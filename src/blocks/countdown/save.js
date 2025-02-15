@@ -16,6 +16,9 @@ export default function save({ attributes }) {
 		showHours,
 		showMinutes,
 		showSeconds,
+
+		countDownGlobalWraperID,
+		countDownGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({ id: blockID });
@@ -23,8 +26,8 @@ export default function save({ attributes }) {
 	{/* Inspector Controls */}
 	return (
 		<>
-			<div {...blockProps} data-target-date={targetDate}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`}>
+			<div {...blockProps} data-target-date={targetDate} className={`fb-count-down-area ${blockID} ${countDownGlobalWraperClass}`}>
+				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID}`} id={countDownGlobalWraperID}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>
 							<span className={`fb-count-down-time days`}>00</span>

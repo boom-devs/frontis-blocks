@@ -957,6 +957,105 @@ const attributes = {
     },
     /*End Global Styles */
 
+    socialIconsDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    socialIconsTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    socialIconsMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Global Setting */
+	socialGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	socialGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+
+    socialIconsPositionType: {
+        type: "string",
+        default: "default"
+    },
+    socialIconsHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    socialIconsVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    socialIconsHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    socialIconsHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    socialIconsHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    socialIconsHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    socialIconsVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    socialIconsVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    socialIconsVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    socialIconsVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 };
 
 export default attributes;

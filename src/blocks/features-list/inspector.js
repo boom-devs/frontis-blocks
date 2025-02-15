@@ -13,7 +13,12 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import { 
     SelectControl,
@@ -286,9 +291,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconImageBorderRadiusTablet,
         FeatureIconImageBorderRadiusMobile,
         FeatureIconImageBorderRadiusLink,
-
         /** FeatureIconImage */
 
+        featuresListDesktopSwitcher,
+		featuresListTabletSwitcher,
+		featuresListMobileSwitcher,
+
+		featuresListGlobalWraperID,
+		featuresListGlobalWraperClass,
+        
+        // Position
+        featuresListPositionType,
+        featuresListHZOrientationType,
+        featuresListVROrientationType,
+        featuresListHZLeftOffset,
+        featuresListHZLeftOffsetUnits,
+        featuresListHZRightOffset,
+        featuresListHZRightOffsetUnits,
+        featuresListVRTopOffset,
+        featuresListVRTopOffsetUnits,
+        featuresListVRBottomOffset,
+        featuresListVRBottomOffsetUnits,
     } = attributes;
     
 	const deviceType= useDeviceType();
@@ -1495,8 +1518,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
                 ${FeatureGlobalBorderColor ? `border-color: ${FeatureGlobalBorderColor};` : ''}
                 ${FeatureGlobalBoxShadowCssValue ? `box-shadow: ${FeatureGlobalBoxShadowCssValue};` : ''}
+                ${featuresListPositionType === 'default' ? `position: relative;` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' ? `width: 100%;` : ''}
+                ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Desktop !== undefined ? `left: ${featuresListHZLeftOffset.Desktop}${featuresListHZLeftOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Desktop !== undefined ? `right: ${featuresListHZRightOffset.Desktop}${featuresListHZRightOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Desktop !== undefined ? `top: ${featuresListVRTopOffset.Desktop}${featuresListVRTopOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Desktop !== undefined ? `bottom: ${featuresListVRBottomOffset.Desktop}${featuresListVRBottomOffsetUnits.Desktop};` : ''}
                 ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ''}
-                position: relative;
                 transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID}:hover {
@@ -1630,6 +1659,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             @media only screen and (max-width: 1024px) {
                 .fb-feature-main-wrapper.${blockID} {
+                    ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Tablet !== undefined ? `left: ${featuresListHZLeftOffset.Tablet}${featuresListHZLeftOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Tablet !== undefined ? `right: ${featuresListHZRightOffset.Tablet}${featuresListHZRightOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Tablet !== undefined ? `top: ${featuresListVRTopOffset.Tablet}${featuresListVRTopOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Tablet !== undefined ? `bottom: ${featuresListVRBottomOffset.Tablet}${featuresListVRBottomOffsetUnits.Tablet};` : ''}
                     ${FeatureGlobalZIndex.Tablet ? `z-index: ${FeatureGlobalZIndex.Tablet};` : ''}
                     ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
                     ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
@@ -1697,6 +1731,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             @media only screen and (max-width: 767px) {
                 .fb-feature-main-wrapper.${blockID} {
+                    ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Mobile !== undefined ? `left: ${featuresListHZLeftOffset.Mobile}${featuresListHZLeftOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Mobile !== undefined ? `right: ${featuresListHZRightOffset.Mobile}${featuresListHZRightOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Mobile !== undefined ? `top: ${featuresListVRTopOffset.Mobile}${featuresListVRTopOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Mobile !== undefined ? `bottom: ${featuresListVRBottomOffset.Mobile}${featuresListVRBottomOffsetUnits.Mobile};` : ''}
                     ${FeatureGlobalZIndex.Mobile ? `z-index: ${FeatureGlobalZIndex.Mobile};` : ''}
                     ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
                     ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
@@ -2018,6 +2057,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         featureIconImageTabletBorderRadiusWidth,
         featureIconImageMobileBorderRadiusWidth,
         
+        // Position
+        featuresListPositionType,
+        featuresListHZOrientationType,
+        featuresListVROrientationType,
+        featuresListHZLeftOffset,
+        featuresListHZLeftOffsetUnits,
+        featuresListHZRightOffset,
+        featuresListHZRightOffsetUnits,
+        featuresListVRTopOffset,
+        featuresListVRTopOffsetUnits,
+        featuresListVRBottomOffset,
+        featuresListVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -2747,6 +2798,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={featuresListPositionType}
+                                                        setPositionType={(value) => setAttributes({ featuresListPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={featuresListHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ featuresListHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={featuresListVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ featuresListVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={featuresListHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ featuresListHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={featuresListHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ featuresListHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={featuresListHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ featuresListHZRightOffset: value })}
+                                                        HZRightOffsetUnits={featuresListHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ featuresListHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={featuresListVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ featuresListVRTopOffset: value })}
+                                                        VRTopOffsetUnits={featuresListVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ featuresListVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={featuresListVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ featuresListVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={featuresListVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ featuresListVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={featuresListGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ featuresListGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+                                                    <FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={featuresListGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ featuresListGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
+													
 												</PanelBody>
 
 												<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -2919,6 +3020,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverCssValue: value })}
                                                         />
                                                     )}
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Responsive Control", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-responsive-control-wrapper"
+												>
+													<ToggleControl
+														label={__("Hide on Desktop", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListDesktopSwitcher}
+														onChange={(value) => setAttributes({ featuresListDesktopSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Tablet", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListTabletSwitcher}
+														onChange={(value) => setAttributes({ featuresListTabletSwitcher: value })}
+													/>
+													<ToggleControl
+														label={__("Hide on Mobile", "frontis-blocks")}
+														className="fb-setting-responsive-control"
+														checked={featuresListMobileSwitcher}
+														onChange={(value) => setAttributes({ featuresListMobileSwitcher: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

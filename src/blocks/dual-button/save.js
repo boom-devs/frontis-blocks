@@ -21,15 +21,18 @@ export default function save({ attributes }) {
 		buttonIconAlign,
 		buttonsDirection,
 		btnIconPosition,
-		btnTwoIconPosition
+		btnTwoIconPosition,
+
+		dualButtonGlobalWraperID,
+		dualButtonGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
 
 	return (
 		<>
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`}>
+			<div {...blockProps} id={blockID} className={`fb-dual-button-area ${blockID} ${dualButtonGlobalWraperClass}`}>
+				<div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} id={dualButtonGlobalWraperID}>
 					<div
 						className="fb-dual-button-wrapper"
 						style={{

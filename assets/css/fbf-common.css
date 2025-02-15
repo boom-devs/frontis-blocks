@@ -1,0 +1,22 @@
+/* Common Css */
+
+/* Responsive common css */
+.fb-desktop-responsive {
+    display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+    .fb-tablet-responsive {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .fb-mobile-responsive {
+        display: none;
+    }
+}
+/* Responsive common css */
+
+/* Common Css */
+

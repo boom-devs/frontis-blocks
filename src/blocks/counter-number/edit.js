@@ -90,7 +90,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		setAttributes({icon: iconName || 'star' })
 	}
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+        className: `fb-counter-main-wrapper ${blockID}`,
+    });
+
 
 	return (
 		<>

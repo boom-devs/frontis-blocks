@@ -70,6 +70,8 @@ const Edit = (props) => {
         reverseDirection,
         enableMouseWheel,
         effect,
+
+        sliderGlobalWraperClass,
     } = attributes;
 
 
@@ -88,7 +90,7 @@ const Edit = (props) => {
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
 	const blockProps = useBlockProps( {
-		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() }`,
+		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass}`,
 	} );
 
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
@@ -151,6 +153,15 @@ const Edit = (props) => {
                         crossFade: true
                     }
                 };
+            case 'cube':
+                return {
+                    cubeEffect: {
+                        shadow: true,
+                        slideShadows: true,
+                        shadowOffset: 20,
+                        shadowScale: 0.94
+                    }
+                };
             case 'coverflow':
                 return {
                     coverflowEffect: {
@@ -177,6 +188,13 @@ const Edit = (props) => {
                         next: {
                             translate: ['100%', 0, 0],
                         },
+                    }
+                };
+            case 'cards':
+                return {
+                    cardsEffect: {
+                        perSlideOffset: 8,
+                        perSlideRotate: 2
                     }
                 };
             default:
@@ -227,7 +245,6 @@ const Edit = (props) => {
         loop,
         allowTouchMove,
         effect,
-        enableMouseWheel,
     ]);
 
     // Add useEffect to update Swiper when settings change

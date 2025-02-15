@@ -39,11 +39,15 @@ export default function Edit({ attributes, setAttributes, clientId}) {
         headingIcon,
         headingIconSwitcher,
         activeLineSwitcher,
+        headingGlobalWraperID,
+        headingGlobalWraperClass,
     } = attributes;
 
+
     const blockProps = useBlockProps({
-        className: `fb-advanced-heading-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId}`,
     });
+
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -68,13 +72,13 @@ export default function Edit({ attributes, setAttributes, clientId}) {
             </BlockControls>
 
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${blockId}`} style={{textAlign: headingAlignment}} ref={panelRef}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}} ref={panelRef}>
 
-                    <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
-                        {headingIconAlign === 'icon' && headingIconSwitcher && (
+                    {headingIconAlign === 'icon' && headingIconSwitcher && (
+                        <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                             <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
-                        )}
-                    </div>
+                        </div>
+                    )}
 
                     {showSeparatorSwitcher && separatorPosition === "top" && (
                         <div className='fb-advanced-title-separator'>
