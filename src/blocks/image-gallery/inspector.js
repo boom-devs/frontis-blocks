@@ -43,6 +43,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
@@ -236,6 +238,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
+        // Position
+        GalleryPositionType,
+        GalleryHZOrientationType,
+        GalleryVROrientationType,
+        GalleryHZLeftOffset,
+        GalleryHZLeftOffsetUnits,
+        GalleryHZRightOffset,
+        GalleryHZRightOffsetUnits,
+        GalleryVRTopOffset,
+        GalleryVRTopOffsetUnits,
+        GalleryVRBottomOffset,
+        GalleryVRBottomOffsetUnits,
     } = attributes;
     
     const deviceType= useDeviceType();
@@ -2063,6 +2077,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     const fbGalleryStyle = useMemo(() => `
+        .fb-gallery-main-wrapper.${blockID} {
+            ${GalleryPositionType === 'default' ? `position: relative;` : ''}
+            ${GalleryPositionType !== 'default' ? `position: ${GalleryPositionType};` : ''}
+            ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'left' && GalleryHZLeftOffset.Desktop !== undefined ? `left: ${GalleryHZLeftOffset.Desktop}${GalleryHZLeftOffsetUnits.Desktop};` : ''}
+            ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'right' && GalleryHZRightOffset.Desktop !== undefined ? `right: ${GalleryHZRightOffset.Desktop}${GalleryHZRightOffsetUnits.Desktop};` : ''}
+            ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'top' && GalleryVRTopOffset.Desktop !== undefined ? `top: ${GalleryVRTopOffset.Desktop}${GalleryVRTopOffsetUnits.Desktop};` : ''}
+            ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'bottom' && GalleryVRBottomOffset.Desktop !== undefined ? `bottom: ${GalleryVRBottomOffset.Desktop}${GalleryVRBottomOffsetUnits.Desktop};` : ''}
+            ${GalleryZIndex?.Desktop !== undefined ? `z-index: ${GalleryZIndex.Desktop};` : ''}
+        }
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
             position: relative;
             overflow: hidden;
@@ -2090,7 +2113,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${GalleryBorderDesktopWidth !== undefined ? `border-width: ${GalleryBorderDesktopWidth};` : ''}
             ${GalleryBorderColor !== undefined ? `border-color: ${GalleryBorderColor};` : ''}
             ${GalleryBorderRadiusDesktopWidth !== undefined ? `border-radius: ${GalleryBorderRadiusDesktopWidth};` : ''}
-            ${GalleryZIndex?.Desktop !== undefined ? `z-index: ${GalleryZIndex.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
         .fb-gallery-main-wrapper.${blockID}:hover {
@@ -2190,11 +2212,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         @media only screen and (max-width: 1024px) {
+            .fb-gallery-main-wrapper.${blockID} {
+                ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'left' && GalleryHZLeftOffset.Tablet !== undefined ? `left: ${GalleryHZLeftOffset.Tablet}${GalleryHZLeftOffsetUnits.Tablet};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'right' && GalleryHZRightOffset.Tablet !== undefined ? `right: ${GalleryHZRightOffset.Tablet}${GalleryHZRightOffsetUnits.Tablet};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'top' && GalleryVRTopOffset.Tablet !== undefined ? `top: ${GalleryVRTopOffset.Tablet}${GalleryVRTopOffsetUnits.Tablet};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'bottom' && GalleryVRBottomOffset.Tablet !== undefined ? `bottom: ${GalleryVRBottomOffset.Tablet}${GalleryVRBottomOffsetUnits.Tablet};` : ''}
+                ${GalleryZIndex?.Tablet !== undefined ? `z-index: ${GalleryZIndex.Tablet};` : ''}
+            }
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingTabletWidth !== undefined ? `${GalleryPaddingTabletWidth}` : ''};
                 margin: ${GalleryMarginTabletWidth !== undefined ? `${GalleryMarginTabletWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusTabletWidth !== undefined ? `${GalleryBorderRadiusTabletWidth}` : ''};
-                ${GalleryZIndex?.Tablet !== undefined ? `z-index: ${GalleryZIndex.Tablet};` : ''}
             }
 
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
@@ -2228,11 +2256,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
+            .fb-gallery-main-wrapper.${blockID} {
+                ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'left' && GalleryHZLeftOffset.Mobile !== undefined ? `left: ${GalleryHZLeftOffset.Mobile}${GalleryHZLeftOffsetUnits.Mobile};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'right' && GalleryHZRightOffset.Mobile !== undefined ? `right: ${GalleryHZRightOffset.Mobile}${GalleryHZRightOffsetUnits.Mobile};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'top' && GalleryVRTopOffset.Mobile !== undefined ? `top: ${GalleryVRTopOffset.Mobile}${GalleryVRTopOffsetUnits.Mobile};` : ''}
+				${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'bottom' && GalleryVRBottomOffset.Mobile !== undefined ? `bottom: ${GalleryVRBottomOffset.Mobile}${GalleryVRBottomOffsetUnits.Mobile};` : ''}
+                ${GalleryZIndex?.Mobile !== undefined ? `z-index: ${GalleryZIndex.Mobile};` : ''}
+            }
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
                 padding: ${GalleryPaddingMobileWidth !== undefined ? `${GalleryPaddingMobileWidth}` : ''};
                 margin: ${GalleryMarginMobileWidth !== undefined ? `${GalleryMarginMobileWidth}` : ''};
                 border-radius: ${GalleryBorderRadiusMobileWidth !== undefined ? `${GalleryBorderRadiusMobileWidth}` : ''};
-                ${GalleryZIndex?.Mobile !== undefined ? `z-index: ${GalleryZIndex.Mobile};` : ''}
             }
 
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items {
@@ -2551,6 +2585,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         lightboxTabBorderRadiusWidth,
         lightboxMobileBorderRadiusWidth,
         lightboxBorderRadiusLink,
+
+        // Position
+        GalleryPositionType,
+        GalleryHZOrientationType,
+        GalleryVROrientationType,
+        GalleryHZLeftOffset,
+        GalleryHZLeftOffsetUnits,
+        GalleryHZRightOffset,
+        GalleryHZRightOffsetUnits,
+        GalleryVRTopOffset,
+        GalleryVRTopOffsetUnits,
+        GalleryVRBottomOffset,
+        GalleryVRBottomOffsetUnits,
     ]
 );
 
@@ -3318,6 +3365,41 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     resetFallbackValue={''}
                                                     isRangeUnit={false}
                                                 />
+
+                                                <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={GalleryPositionType}
+                                                        setPositionType={(value) => setAttributes({ GalleryPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={GalleryHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ GalleryHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={GalleryVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ GalleryVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={GalleryHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ GalleryHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={GalleryHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ GalleryHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={GalleryHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ GalleryHZRightOffset: value })}
+                                                        HZRightOffsetUnits={GalleryHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ GalleryHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={GalleryVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ GalleryVRTopOffset: value })}
+                                                        VRTopOffsetUnits={GalleryVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ GalleryVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={GalleryVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ GalleryVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={GalleryVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ GalleryVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
 
                                                 <FB_InputControl
                                                     label={__("CSS ID", "frontis-blocks")}

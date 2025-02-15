@@ -28,6 +28,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -81,6 +83,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         progressGlobalWraperID,
 		progressGlobalWraperClass,
+
+        // Position
+        progressbarPositionType,
+        progressbarHZOrientationType,
+        progressbarVROrientationType,
+        progressbarHZLeftOffset,
+        progressbarHZLeftOffsetUnits,
+        progressbarHZRightOffset,
+        progressbarHZRightOffsetUnits,
+        progressbarVRTopOffset,
+        progressbarVRTopOffsetUnits,
+        progressbarVRBottomOffset,
+        progressbarVRBottomOffsetUnits,
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -178,10 +193,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockID} .progress-bar-wrapper {
+        .${blockID}.fb-progress-bar-main-wrapper {
+            ${progressbarPositionType === 'default' ? `position: relative;` : ''}
+            ${progressbarPositionType !== 'default' ? `position: ${progressbarPositionType};` : ''}
+            ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Desktop !== undefined ? `left: ${progressbarHZLeftOffset.Desktop}${progressbarHZLeftOffsetUnits.Desktop};` : ''}
+            ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Desktop !== undefined ? `right: ${progressbarHZRightOffset.Desktop}${progressbarHZRightOffsetUnits.Desktop};` : ''}
+            ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Desktop !== undefined ? `top: ${progressbarVRTopOffset.Desktop}${progressbarVRTopOffsetUnits.Desktop};` : ''}
+            ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'bottom' && progressbarVRBottomOffset.Desktop !== undefined ? `bottom: ${progressbarVRBottomOffset.Desktop}${progressbarVRBottomOffsetUnits.Desktop};` : ''}
             ${progressGlobalZIndex.Desktop ? `z-index: ${progressGlobalZIndex.Desktop};` : ''}
-            position: relative;
         }
+        
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
             ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
             ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
@@ -256,10 +277,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockID} .progress-bar-wrapper {
+            .${blockID}.fb-progress-bar-main-wrapper {
+                ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Tablet !== undefined ? `left: ${progressbarHZLeftOffset.Tablet}${progressbarHZLeftOffsetUnits.Tablet};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Tablet !== undefined ? `right: ${progressbarHZRightOffset.Tablet}${progressbarHZRightOffsetUnits.Tablet};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Tablet !== undefined ? `top: ${progressbarVRTopOffset.Tablet}${progressbarVRTopOffsetUnits.Tablet};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'bottom' && progressbarVRBottomOffset.Tablet !== undefined ? `bottom: ${progressbarVRBottomOffset.Tablet}${progressbarVRBottomOffsetUnits.Tablet};` : ''}
                 ${progressGlobalZIndex.Tablet ? `z-index: ${progressGlobalZIndex.Tablet};` : ''}
-                position: relative;
             }
+
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -276,10 +301,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 767px) {
 
-            .${blockID} .progress-bar-wrapper {
+            .${blockID}.fb-progress-bar-main-wrapper {
+                ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Mobile !== undefined ? `left: ${progressbarHZLeftOffset.Mobile}${progressbarHZLeftOffsetUnits.Mobile};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Mobile !== undefined ? `right: ${progressbarHZRightOffset.Mobile}${progressbarHZRightOffsetUnits.Mobile};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Mobile !== undefined ? `top: ${progressbarVRTopOffset.Mobile}${progressbarVRTopOffsetUnits.Mobile};` : ''}
+				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'bottom' && progressbarVRBottomOffset.Mobile !== undefined ? `bottom: ${progressbarVRBottomOffset.Mobile}${progressbarVRBottomOffsetUnits.Mobile};` : ''} 
                 ${progressGlobalZIndex.Mobile ? `z-index: ${progressGlobalZIndex.Mobile};` : ''}
-                position: relative;
             }
+
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
@@ -338,6 +367,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressTabletBorderRadiusWidth,
         progressMobileBorderRadiusWidth,
 
+        // Position
+        progressbarPositionType,
+        progressbarHZOrientationType,
+        progressbarVROrientationType,
+        progressbarHZLeftOffset,
+        progressbarHZLeftOffsetUnits,
+        progressbarHZRightOffset,
+        progressbarHZRightOffsetUnits,
+        progressbarVRTopOffset,
+        progressbarVRTopOffsetUnits,
+        progressbarVRBottomOffset,
+        progressbarVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -594,6 +635,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={progressbarPositionType}
+                                                        setPositionType={(value) => setAttributes({ progressbarPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={progressbarHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ progressbarHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={progressbarVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ progressbarVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={progressbarHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ progressbarHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={progressbarHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ progressbarHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={progressbarHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ progressbarHZRightOffset: value })}
+                                                        HZRightOffsetUnits={progressbarHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ progressbarHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={progressbarVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ progressbarVRTopOffset: value })}
+                                                        VRTopOffsetUnits={progressbarVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ progressbarVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={progressbarVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ progressbarVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={progressbarVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ progressbarVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
 
                                                     <FB_InputControl
