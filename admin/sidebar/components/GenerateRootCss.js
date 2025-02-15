@@ -1,4 +1,5 @@
 const generateCSSVariables = (data) => {
+
     const createValueWithUnit = (value, unit) => {
         if (!value || value === 'Default') return '0px';
         return `${value}${unit || ''}`;
@@ -15,6 +16,8 @@ const generateCSSVariables = (data) => {
         return obj?.[prop]?.unit?.[breakpoint] || obj?.[prop]?.unit || '';
     };
 
+    const fontFamilies = new Set(); // to track added font families
+
     let rootStyles = '';
     let desktopStyles = '';
     let tabletStyles = '';
@@ -22,12 +25,18 @@ const generateCSSVariables = (data) => {
 
     let paragraphStyles = '';
     let linkStyles = '';
+    let buttonStyles = '';
+    let captionStyles = '';
+    let headingStyles = ''; // Separate styles for each heading (h1, h2, h3, ...)
 
-    ['body', 'link'].forEach((key) => {
+    let combinedHeadingStyles = ''; // Combined styles for "all" headings
+
+    // Loop through the data to generate CSS for each tag
+    ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach((key) => {
         if (!data[key]) return;
 
         // Apply global properties (fontFamily, fontWeight, etc.)
-        ['fontFamily', 'fontWeight', 'fontStyle', 'fontTransform', 'fontDecoration'].forEach((prop) => {
+        ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach((prop) => {
             const value = getValue(data[key], prop);
             if (value !== null) {
                 rootStyles += `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: ${value};\n`;
@@ -38,11 +47,25 @@ const generateCSSVariables = (data) => {
                 if (key === 'link') {
                     linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
                 }
+                if (key === 'button') {
+                    buttonStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'captions') {
+                    captionStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+
+                if (key === 'all') {
+                    combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+
+                if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
+                    headingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
             }
         });
 
         // Apply font size, letter spacing, line height
-        ['fontSize', 'fontLetterspacing', 'fontLineheight'].forEach((prop) => {
+        ['fontSize', 'letterSpacing', 'lineHeight'].forEach((prop) => {
             const desktopValue = getValue(data[key], prop, 'Desktop');
             const tabletValue = getValue(data[key], prop, 'Tablet');
             const mobileValue = getValue(data[key], prop, 'Mobile');
@@ -61,6 +84,18 @@ const generateCSSVariables = (data) => {
                 if (key === 'link') {
                     linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
+                if (key === 'button') {
+                    buttonStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'captions') {
+                    captionStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'all') {
+                    combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
+                    headingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
             }
             if (tabletValue !== null) {
                 const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
@@ -71,14 +106,65 @@ const generateCSSVariables = (data) => {
                 mobileStyles += `${cssVar}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
             }
         });
+
+        // Add fontFamily to iframe context if not already added
+        ['fontFamily'].forEach((prop) => {
+            const fontFamily = getValue(data[key], prop);
+            if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
+                fontFamilies.add(fontFamily);
+                const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+                const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+
+                // Generate font URL and add to the iframe's document
+                const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
+                const linkElement = iframeDocument.createElement('link');
+                linkElement.rel = 'stylesheet';
+                linkElement.href = fontUrl;
+                iframeDocument.head.appendChild(linkElement);
+            }
+        });
     });
+
+    // Apply individual styles for each heading (h1, h2, h3, etc.)
+    const headingGrouped = `
+        body .wp-site-blocks h1 {
+            ${headingStyles}
+        }
+        body .wp-site-blocks h2 {
+            ${headingStyles}
+        }
+        body .wp-site-blocks h3 {
+            ${headingStyles}
+        }
+        body .wp-site-blocks h4 {
+            ${headingStyles}
+        }
+        body .wp-site-blocks h5 {
+            ${headingStyles}
+        }
+        body .wp-site-blocks h6 {
+            ${headingStyles}
+        }
+    `;
+
+    // Styles for the "all" combined typography
+    const allCombinedStyles = `
+        body .wp-site-blocks h1,
+        body .wp-site-blocks h2,
+        body .wp-site-blocks h3,
+        body .wp-site-blocks h4,
+        body .wp-site-blocks h5,
+        body .wp-site-blocks h6 {
+            ${combinedHeadingStyles}
+        }
+    `;
 
     const styles = `
         :root {
             ${rootStyles}
             ${desktopStyles}
         }
-        @media (max-width: 991px) {
+        @media (max-width: 1024px) {
             :root {
                 ${tabletStyles}
             }
@@ -96,6 +182,16 @@ const generateCSSVariables = (data) => {
         body .wp-site-blocks a {
             ${linkStyles}
         }
+
+        body .wp-site-blocks button {
+            ${buttonStyles}
+        }
+
+        body .wp-site-blocks figcaption {
+            ${captionStyles}
+        }
+        ${allCombinedStyles}
+        ${headingGrouped}
     `;
 
     const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
@@ -109,10 +205,6 @@ const generateCSSVariables = (data) => {
     }
 
     styleTag.innerHTML = styles;
-
-    // const styleElement = document.createElement('style');
-    // styleElement.textContent = styles;
-    // document.head.appendChild(styleElement);
 
     return styles;
 };
