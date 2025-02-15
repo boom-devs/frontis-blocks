@@ -78,9 +78,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID} className={`fb-cta-wrapper ${blockID}`}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID} ${ctaGlobalWraperClass}`} id={ctaGlobalWraperID} ref={panelRef}>
-					<div className={`fb-cta-content-wrapper-inner`}>
+			<div {...blockProps} id={blockID} className={`fb-cta-wrapper ${blockID} ${ctaGlobalWraperClass}`}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID} ref={panelRef}>
+					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">
 							<RichText
