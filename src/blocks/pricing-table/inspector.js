@@ -2584,6 +2584,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockId}.fb-pricing-area {
 			${pricingTablePositionType === 'default' ? `position: relative;` : ''}
+			${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' ? `width: 100%;` : ''}
             ${pricingTablePositionType !== 'default' ? `position: ${pricingTablePositionType};` : ''}
             ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset.Desktop !== undefined ? `left: ${pricingTableHZLeftOffset.Desktop}${pricingTableHZLeftOffsetUnits.Desktop};` : ''}
             ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset.Desktop !== undefined ? `right: ${pricingTableHZRightOffset.Desktop}${pricingTableHZRightOffsetUnits.Desktop};` : ''}

@@ -2334,6 +2334,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-radius: ${BorderRadiusDesktopWidth} !important;
             ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
             ${fluentFormPositionType === 'default' ? `position: relative;` : ''}
+            ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' ? `width: 100%;` : ''}
             ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Desktop !== undefined ? `left: ${fluentFormHZLeftOffset.Desktop}${fluentFormHZLeftOffsetUnits.Desktop};` : ''}
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Desktop !== undefined ? `right: ${fluentFormHZRightOffset.Desktop}${fluentFormHZRightOffsetUnits.Desktop};` : ''}

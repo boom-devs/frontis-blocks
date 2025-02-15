@@ -952,6 +952,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const counterBlockStyle = useMemo(() => `
     .fb-counter-main-wrapper.${blockID}{
         ${counterPositionType === 'default' ? `position: relative;` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' ? `width: 100%;` : ''}
         ${counterPositionType !== 'default' ? `position: ${counterPositionType};` : ''}
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Desktop !== undefined ? `left: ${counterHZLeftOffset.Desktop}${counterHZLeftOffsetUnits.Desktop};` : ''}
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Desktop !== undefined ? `right: ${counterHZRightOffset.Desktop}${counterHZRightOffsetUnits.Desktop};` : ''}

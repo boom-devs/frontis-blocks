@@ -2144,6 +2144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 		  .fb-icon-box-area.${blockID} {
 			${iconBoxPositionType === 'default' ? `position: relative;` : ''}
+			${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' ? `width: 100%;` : ''}
             ${iconBoxPositionType !== 'default' ? `position: ${iconBoxPositionType};` : ''}
             ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Desktop !== undefined ? `left: ${iconBoxHZLeftOffset.Desktop}${iconBoxHZLeftOffsetUnits.Desktop};` : ''}
             ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Desktop !== undefined ? `right: ${iconBoxHZRightOffset.Desktop}${iconBoxHZRightOffsetUnits.Desktop};` : ''}

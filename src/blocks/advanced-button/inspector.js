@@ -1033,6 +1033,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		.${blockId} .fb-advanced-button-wrapper {
 		.fb-advanced-button-area.${blockId} {
 			${advancedBtnPositionType === 'default' ? `position: relative;` : ''}
+			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' ? `width: 100%;` : ''}
 			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Desktop !== undefined ? `left: ${advancedBtnHZLeftOffset.Desktop}${advancedBtnHZLeftOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Desktop !== undefined ? `right: ${advancedBtnHZRightOffset.Desktop}${advancedBtnHZRightOffsetUnits.Desktop};` : ''}
