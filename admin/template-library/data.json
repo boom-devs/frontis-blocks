@@ -211,14 +211,33 @@
                 }
             ]
         },
-        "kits": {
-            "name": "Kits",
+        "sites": {
+            "name": "Sites",
             "categories": [
                 {
                     "id": "all",
                     "name": "All",
                     "count": 30,
-                    "items": []
+                    "items": [
+                        {
+                            "id": "item1",
+                            "title": "Item 1",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
+                            "content": "Site 1 content here"
+                        },
+                        {
+                            "id": "item2",
+                            "title": "Item 2",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "content": "Site 2 content here"
+                        },
+                        {
+                            "id": "item3",
+                            "title": "Item 3",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "content": "Site 3 content here"
+                        }
+                    ]
                 },
                 {
                     "id": "content-blocks",
