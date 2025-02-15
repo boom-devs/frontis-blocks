@@ -316,6 +316,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownGlobalWraperClass,
 
 		// Position
+		countDownZIndex,
 		countDownPositionType,
 		countDownHZOrientationType,
 		countDownVROrientationType,
@@ -2173,11 +2174,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 			.fb-count-down-area.${blockID} {
 				${countDownPositionType === 'default' ? `position: relative;` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' ? `width: 100%;` : ''}
 				${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Desktop !== undefined ? `left: ${countDownHZLeftOffset.Desktop}${countDownHZLeftOffsetUnits.Desktop};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Desktop !== undefined ? `right: ${countDownHZRightOffset.Desktop}${countDownHZRightOffsetUnits.Desktop};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop !== undefined ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop !== undefined ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
+        		${countDownZIndex.Desktop ? `z-index: ${countDownZIndex.Desktop};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} {
 				${countDownLayoutType === 'flex' ? `display: flex;` : ''}
@@ -2382,7 +2385,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet !== undefined ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Tablet !== undefined ? `top: ${countDownVRTopOffset.Tablet}${countDownVRTopOffsetUnits.Tablet};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Tablet !== undefined ? `bottom: ${countDownVRBottomOffset.Tablet}${countDownVRBottomOffsetUnits.Tablet};` : ''}
-			    }
+					${countDownZIndex.Tablet ? `z-index: ${countDownZIndex.Tablet};` : ''}
+				}
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Tablet}, 1fr);` : ''}
 					${countDownItemGap.Tablet ? `gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};` : ""}
@@ -2439,7 +2443,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile !== undefined ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Mobile !== undefined ? `top: ${countDownVRTopOffset.Mobile}${countDownVRTopOffsetUnits.Mobile};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Mobile !== undefined ? `bottom: ${countDownVRBottomOffset.Mobile}${countDownVRBottomOffsetUnits.Mobile};` : ''}
-							
+						${countDownZIndex.Mobile ? `z-index: ${countDownZIndex.Mobile};` : ''}
 					}
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Mobile}, 1fr);` : ''}
@@ -2680,6 +2684,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownItemGapUnits,
 
 			// Position
+			countDownZIndex,
 			countDownPositionType,
 			countDownHZOrientationType,
 			countDownVROrientationType,
@@ -3586,6 +3591,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Advanced", "frontis-blocks")}
 											initialOpen={true}
 										>
+											<FB_Range
+												min={0}
+												max={10000000}
+												label={__("Z Index", "frontis-blocks")}
+												rangeValue={countDownZIndex}
+												onChangeHandler={(value) => setAttributes({ countDownZIndex: value === 0 ? undefined : value })}
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+												isRangeUnit={false}
+											/>
+
 											<FB_PositionControl
 												deviceType={deviceType}
 												positionType={countDownPositionType}

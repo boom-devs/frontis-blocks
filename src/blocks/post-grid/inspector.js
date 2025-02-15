@@ -2738,6 +2738,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb-post-grid-area {
             ${postGridPositionType === 'default' ? `position: relative;` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' ? `width: 100%;` : ''}
             ${postGridPositionType !== 'default' ? `position: ${postGridPositionType};` : ''}
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'left' && postGridHZLeftOffset.Desktop !== undefined ? `left: ${postGridHZLeftOffset.Desktop}${postGridHZLeftOffsetUnits.Desktop};` : ''}
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'right' && postGridHZRightOffset.Desktop !== undefined ? `right: ${postGridHZRightOffset.Desktop}${postGridHZRightOffsetUnits.Desktop};` : ''}

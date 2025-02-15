@@ -2079,6 +2079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const fbGalleryStyle = useMemo(() => `
         .fb-gallery-main-wrapper.${blockID} {
             ${GalleryPositionType === 'default' ? `position: relative;` : ''}
+            ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' ? `width: 100%;` : ''}
             ${GalleryPositionType !== 'default' ? `position: ${GalleryPositionType};` : ''}
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'left' && GalleryHZLeftOffset.Desktop !== undefined ? `left: ${GalleryHZLeftOffset.Desktop}${GalleryHZLeftOffsetUnits.Desktop};` : ''}
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryHZOrientationType === 'right' && GalleryHZRightOffset.Desktop !== undefined ? `right: ${GalleryHZRightOffset.Desktop}${GalleryHZRightOffsetUnits.Desktop};` : ''}
