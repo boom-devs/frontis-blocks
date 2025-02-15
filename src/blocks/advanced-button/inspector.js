@@ -1031,7 +1031,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 	const allBlockStyle = useMemo(() => `
 		.${blockId} .fb-advanced-button-wrapper {
-		.fb-advanced-button-area.${blockId} {
 			${advancedBtnPositionType === 'default' ? `position: relative;` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' ? `width: 100%;` : ''}
 			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
@@ -1041,7 +1040,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Desktop}${advancedBtnVRBottomOffsetUnits.Desktop};` : ''}
 			${buttonGlobalZIndex.Desktop ? `z-index: ${buttonGlobalZIndex.Desktop};` : ''}
 		}
-		.${blockId}.fb-advanced-button-wrapper {
+		.${blockId} .fb-advanced-button-wrapper {
 			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -1124,7 +1123,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 		@media only screen and (max-width: 1024px) {
 			.${blockId} .fb-advanced-button-wrapper {
-			.fb-advanced-button-area.${blockId} {
 				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Tablet !== undefined ? `left: ${advancedBtnHZLeftOffset.Tablet}${advancedBtnHZLeftOffsetUnits.Tablet};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Tablet !== undefined ? `right: ${advancedBtnHZRightOffset.Tablet}${advancedBtnHZRightOffsetUnits.Tablet};` : ''}
@@ -1132,7 +1130,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Tablet}${advancedBtnVRBottomOffsetUnits.Tablet};` : ''}
 				${buttonGlobalZIndex.Tablet ? `z-index: ${buttonGlobalZIndex.Tablet};` : ''}
 			}
-			.${blockId}.fb-advanced-button-wrapper {
+			.${blockId} .fb-advanced-button-wrapper {
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
 				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -1190,7 +1188,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 		@media only screen and (max-width: 767px) {
 			.${blockId} .fb-advanced-button-wrapper {
-			.fb-advanced-button-area.${blockId} {
 				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Mobile !== undefined ? `left: ${advancedBtnHZLeftOffset.Mobile}${advancedBtnHZLeftOffsetUnits.Mobile};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Mobile !== undefined ? `right: ${advancedBtnHZRightOffset.Mobile}${advancedBtnHZRightOffsetUnits.Mobile};` : ''}
@@ -1198,7 +1195,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Mobile}${advancedBtnVRBottomOffsetUnits.Mobile};` : ''}
 				${buttonGlobalZIndex.Mobile ? `z-index: ${buttonGlobalZIndex.Mobile};` : ''}
 			}
-			.${blockId}.fb-advanced-button-wrapper {
+			.${blockId} .fb-advanced-button-wrapper {
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
 				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
