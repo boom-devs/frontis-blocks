@@ -221,7 +221,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontDecoration': {
+				'textDecoration': {
 					variable: `--fb-global-${item}--font-decoration`,
 					value: value
 				}
@@ -243,7 +243,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontTransform': {
+				'textTransform': {
 					variable: `--fb-global-${item}--font-transform`,
 					value: value
 				}
@@ -268,7 +268,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLetterspacing': {
+				'letterSpacing': {
 					variable: `--fb-global-${item}--font-letter-spacing`,
 					value: value,
 					unit: {
@@ -298,8 +298,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLetterspacing': {
-					...globalTypography[item]['fontLetterspacing'],
+				'letterSpacing': {
+					...globalTypography[item]['letterSpacing'],
 					unit: value
 				}
 			}
@@ -323,7 +323,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLineheight': {
+				'lineHeight': {
 					variable: `--fb-global-${item}--font-line-height`,
 					value: value,
 					unit: {
@@ -353,8 +353,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLineheight': {
-					...globalTypography[item]['fontLineheight'],
+				'lineHeight': {
+					...globalTypography[item]['lineHeight'],
 					unit: value
 				}
 			}
@@ -528,7 +528,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontDecoration': {
+				'textDecoration': {
 					variable: `--fb-global-${selectedHeading}--font-decoration`,
 					value: value
 				}
@@ -553,7 +553,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontTransform': {
+				'textTransform': {
 					variable: `--fb-global-${selectedHeading}--font-transform`,
 					value: value
 				}
@@ -581,7 +581,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontLetterspacing': {
+				'letterSpacing': {
 					variable: `--fb-global-${selectedHeading}--font-letter-spacing`,
 					value: value,
 					unit: {
@@ -614,8 +614,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontLetterspacing': {
-					...globalTypography[selectedHeading]['fontLetterspacing'],
+				'letterSpacing': {
+					...globalTypography[selectedHeading]['letterSpacing'],
 					unit: value
 				}
 			}
@@ -642,7 +642,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontLineheight': {
+				'lineHeight': {
 					variable: `--fb-global-${selectedHeading}--font-line-height`,
 					value: value,
 					unit: {
@@ -675,8 +675,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
-				'fontLineheight': {
-					...globalTypography[selectedHeading]['fontLineheight'],
+				'lineHeight': {
+					...globalTypography[selectedHeading]['lineHeight'],
 					unit: value
 				}
 			}
@@ -826,7 +826,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontDecoration': {
+				'textDecoration': {
 					variable: `--fb-global-${item}--font-decoration`,
 					value: value
 				}
@@ -848,8 +848,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontDecoration': {
-					variable: `--fb-global-${item}--font-decoration`,
+				'textTransform': {
+					variable: `--fb-global-${item}--font-transform`,
 					value: value
 				}
 			}
@@ -873,7 +873,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLetterspacing': {
+				'letterSpacing': {
 					variable: `--fb-global-${item}--font-letter-spacing`,
 					value: value
 				}
@@ -898,8 +898,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLetterspacing': {
-					...globalTypography[item]['fontLetterspacing'],
+				'letterSpacing': {
+					...globalTypography[item]['letterSpacing'],
 					unit: value
 				}
 			}
@@ -923,7 +923,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLineheight': {
+				'lineHeight': {
 					variable: `--fb-global-${item}--font-line-height`,
 					value: value
 				}
@@ -948,8 +948,8 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'fontLineheight': {
-					...globalTypography[item]['fontLineheight'],
+				'Lineheight': {
+					...globalTypography[item]['lineHeight'],
 					unit: value
 				}
 			}

@@ -677,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var generateCSSVariables = function generateCSSVariables(data) {
-  var _iframe$contentWindow;
+  var _iframe$contentWindow2;
   var createValueWithUnit = function createValueWithUnit(value, unit) {
     if (!value || value === 'Default') return '0px';
     return "".concat(value).concat(unit || '');
@@ -695,17 +695,26 @@ var generateCSSVariables = function generateCSSVariables(data) {
     var _obj$prop3, _obj$prop4;
     return (obj === null || obj === void 0 || (_obj$prop3 = obj[prop]) === null || _obj$prop3 === void 0 || (_obj$prop3 = _obj$prop3.unit) === null || _obj$prop3 === void 0 ? void 0 : _obj$prop3[breakpoint]) || (obj === null || obj === void 0 || (_obj$prop4 = obj[prop]) === null || _obj$prop4 === void 0 ? void 0 : _obj$prop4.unit) || '';
   };
+  var fontFamilies = new Set(); // to track added font families
+
   var rootStyles = '';
   var desktopStyles = '';
   var tabletStyles = '';
   var mobileStyles = '';
   var paragraphStyles = '';
   var linkStyles = '';
-  ['body', 'link'].forEach(function (key) {
+  var buttonStyles = '';
+  var captionStyles = '';
+  var headingStyles = ''; // Separate styles for each heading (h1, h2, h3, ...)
+
+  var combinedHeadingStyles = ''; // Combined styles for "all" headings
+
+  // Loop through the data to generate CSS for each tag
+  ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach(function (key) {
     if (!data[key]) return;
 
     // Apply global properties (fontFamily, fontWeight, etc.)
-    ['fontFamily', 'fontWeight', 'fontStyle', 'fontTransform', 'fontDecoration'].forEach(function (prop) {
+    ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach(function (prop) {
       var value = getValue(data[key], prop);
       if (value !== null) {
         rootStyles += "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": ").concat(value, ";\n");
@@ -715,11 +724,23 @@ var generateCSSVariables = function generateCSSVariables(data) {
         if (key === 'link') {
           linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
         }
+        if (key === 'button') {
+          buttonStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
+        if (key === 'captions') {
+          captionStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
+        if (key === 'all') {
+          combinedHeadingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
+        if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
+          headingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
       }
     });
 
     // Apply font size, letter spacing, line height
-    ['fontSize', 'fontLetterspacing', 'fontLineheight'].forEach(function (prop) {
+    ['fontSize', 'letterSpacing', 'lineHeight'].forEach(function (prop) {
       var desktopValue = getValue(data[key], prop, 'Desktop');
       var tabletValue = getValue(data[key], prop, 'Tablet');
       var mobileValue = getValue(data[key], prop, 'Mobile');
@@ -735,6 +756,18 @@ var generateCSSVariables = function generateCSSVariables(data) {
         if (key === 'link') {
           linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
         }
+        if (key === 'button') {
+          buttonStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
+        }
+        if (key === 'captions') {
+          captionStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
+        }
+        if (key === 'all') {
+          combinedHeadingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
+        }
+        if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
+          headingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
+        }
       }
       if (tabletValue !== null) {
         var _cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
@@ -745,10 +778,34 @@ var generateCSSVariables = function generateCSSVariables(data) {
         mobileStyles += "".concat(_cssVar2, ": ").concat(createValueWithUnit(mobileValue, mobileUnit), ";\n");
       }
     });
+
+    // Add fontFamily to iframe context if not already added
+    ['fontFamily'].forEach(function (prop) {
+      var fontFamily = getValue(data[key], prop);
+      if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
+        var _iframe$contentWindow;
+        fontFamilies.add(fontFamily);
+        var _iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+        var _iframeDocument = (_iframe === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || (_iframe === null || _iframe === void 0 || (_iframe$contentWindow = _iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
+
+        // Generate font URL and add to the iframe's document
+        var fontUrl = "https://fonts.googleapis.com/css?family=".concat(fontFamily.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
+        var linkElement = _iframeDocument.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.href = fontUrl;
+        _iframeDocument.head.appendChild(linkElement);
+      }
+    });
   });
-  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 991px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a {\n            ").concat(linkStyles, "\n        }\n    ");
+
+  // Apply individual styles for each heading (h1, h2, h3, etc.)
+  var headingGrouped = "\n        body .wp-site-blocks h1 {\n            ".concat(headingStyles, "\n        }\n        body .wp-site-blocks h2 {\n            ").concat(headingStyles, "\n        }\n        body .wp-site-blocks h3 {\n            ").concat(headingStyles, "\n        }\n        body .wp-site-blocks h4 {\n            ").concat(headingStyles, "\n        }\n        body .wp-site-blocks h5 {\n            ").concat(headingStyles, "\n        }\n        body .wp-site-blocks h6 {\n            ").concat(headingStyles, "\n        }\n    ");
+
+  // Styles for the "all" combined typography
+  var allCombinedStyles = "\n        body .wp-site-blocks h1,\n        body .wp-site-blocks h2,\n        body .wp-site-blocks h3,\n        body .wp-site-blocks h4,\n        body .wp-site-blocks h5,\n        body .wp-site-blocks h6 {\n            ".concat(combinedHeadingStyles, "\n        }\n    ");
+  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 1024px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a {\n            ").concat(linkStyles, "\n        }\n\n        body .wp-site-blocks button {\n            ").concat(buttonStyles, "\n        }\n\n        body .wp-site-blocks figcaption {\n            ").concat(captionStyles, "\n        }\n        ").concat(allCombinedStyles, "\n        ").concat(headingGrouped, "\n    ");
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-  var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
+  var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow2 = iframe.contentWindow) === null || _iframe$contentWindow2 === void 0 ? void 0 : _iframe$contentWindow2.document) || document;
   var styleTag = iframeDocument.getElementById("global-typo-test");
   if (!styleTag) {
     styleTag = iframeDocument.createElement("style");
@@ -756,11 +813,6 @@ var generateCSSVariables = function generateCSSVariables(data) {
     iframeDocument.head.appendChild(styleTag);
   }
   styleTag.innerHTML = styles;
-
-  // const styleElement = document.createElement('style');
-  // styleElement.textContent = styles;
-  // document.head.appendChild(styleElement);
-
   return styles;
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSSVariables);
@@ -1331,7 +1383,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontDecoration': {
+      'textDecoration': {
         variable: "--fb-global-".concat(item, "--font-decoration"),
         value: value
       }
@@ -1345,7 +1397,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontTransform': {
+      'textTransform': {
         variable: "--fb-global-".concat(item, "--font-transform"),
         value: value
       }
@@ -1360,7 +1412,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLetterspacing': {
+      'letterSpacing': {
         variable: "--fb-global-".concat(item, "--font-letter-spacing"),
         value: value,
         unit: {
@@ -1380,7 +1432,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[item]['fontLetterspacing']), {}, {
+      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
         unit: value
       })
     }))));
@@ -1394,7 +1446,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLineheight': {
+      'lineHeight': {
         variable: "--fb-global-".concat(item, "--font-line-height"),
         value: value,
         unit: {
@@ -1414,7 +1466,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[item]['fontLineheight']), {}, {
+      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
         unit: value
       })
     }))));
@@ -1508,7 +1560,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontDecoration': {
+      'textDecoration': {
         variable: "--fb-global-".concat(selectedHeading, "--font-decoration"),
         value: value
       }
@@ -1522,7 +1574,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontTransform': {
+      'textTransform': {
         variable: "--fb-global-".concat(selectedHeading, "--font-transform"),
         value: value
       }
@@ -1537,7 +1589,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontLetterspacing': {
+      'letterSpacing': {
         variable: "--fb-global-".concat(selectedHeading, "--font-letter-spacing"),
         value: value,
         unit: {
@@ -1557,7 +1609,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontLetterspacing']), {}, {
+      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['letterSpacing']), {}, {
         unit: value
       })
     }))));
@@ -1571,7 +1623,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontLineheight': {
+      'lineHeight': {
         variable: "--fb-global-".concat(selectedHeading, "--font-line-height"),
         value: value,
         unit: {
@@ -1591,7 +1643,7 @@ var TypographySettings = function TypographySettings(props) {
       })))));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontLineheight']), {}, {
+      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['lineHeight']), {}, {
         unit: value
       })
     }))));
@@ -1684,7 +1736,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontDecoration': {
+      'textDecoration': {
         variable: "--fb-global-".concat(item, "--font-decoration"),
         value: value
       }
@@ -1698,8 +1750,8 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
+      'textTransform': {
+        variable: "--fb-global-".concat(item, "--font-transform"),
         value: value
       }
     }))));
@@ -1713,7 +1765,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLetterspacing': {
+      'letterSpacing': {
         variable: "--fb-global-".concat(item, "--font-letter-spacing"),
         value: value
       }
@@ -1728,7 +1780,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[item]['fontLetterspacing']), {}, {
+      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
         unit: value
       })
     }))));
@@ -1742,7 +1794,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLineheight': {
+      'lineHeight': {
         variable: "--fb-global-".concat(item, "--font-line-height"),
         value: value
       }
@@ -1757,7 +1809,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[item]['fontLineheight']), {}, {
+      'Lineheight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
         unit: value
       })
     }))));
