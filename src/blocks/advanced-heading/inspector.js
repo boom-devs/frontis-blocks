@@ -1472,6 +1472,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const allBlockStyle = useMemo(() => `
         .fb-advanced-heading-main-wrapper.${blockId} {
             ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' ? `width: 100%;` : ''}
             ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Desktop !== undefined ? `left: ${advancedHeadingHZLeftOffset.Desktop}${advancedHeadingHZLeftOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Desktop !== undefined ? `right: ${advancedHeadingHZRightOffset.Desktop}${advancedHeadingHZRightOffsetUnits.Desktop};` : ''}

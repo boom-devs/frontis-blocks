@@ -2435,6 +2435,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const allBlockStyle = useMemo(() => `
 			.${blockID}.fb-social-main-wrapper {
 				${socialIconsPositionType === 'default' ? `position: relative;` : ''}
+				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' ? `width: 100%;` : ''}
 				${socialIconsPositionType !== 'default' ? `position: ${socialIconsPositionType};` : ''}
 				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'left' && socialIconsHZLeftOffset.Desktop !== undefined ? `left: ${socialIconsHZLeftOffset.Desktop}${socialIconsHZLeftOffsetUnits.Desktop};` : ''}
 				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsHZOrientationType === 'right' && socialIconsHZRightOffset.Desktop !== undefined ? `right: ${socialIconsHZRightOffset.Desktop}${socialIconsHZRightOffsetUnits.Desktop};` : ''}

@@ -1852,6 +1852,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockID}.fb-contact-form-wrapper {
 			${contactFormPositionType === 'default' ? `position: relative;` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' ? `width: 100%;` : ''}
 			${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
 			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Desktop !== undefined ? `left: ${contactFormHZLeftOffset.Desktop}${contactFormHZLeftOffsetUnits.Desktop};` : ''}
 			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Desktop !== undefined ? `right: ${contactFormHZRightOffset.Desktop}${contactFormHZRightOffsetUnits.Desktop};` : ''}

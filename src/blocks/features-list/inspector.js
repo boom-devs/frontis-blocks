@@ -1519,6 +1519,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureGlobalBorderColor ? `border-color: ${FeatureGlobalBorderColor};` : ''}
                 ${FeatureGlobalBoxShadowCssValue ? `box-shadow: ${FeatureGlobalBoxShadowCssValue};` : ''}
                 ${featuresListPositionType === 'default' ? `position: relative;` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' ? `width: 100%;` : ''}
                 ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Desktop !== undefined ? `left: ${featuresListHZLeftOffset.Desktop}${featuresListHZLeftOffsetUnits.Desktop};` : ''}
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Desktop !== undefined ? `right: ${featuresListHZRightOffset.Desktop}${featuresListHZRightOffsetUnits.Desktop};` : ''}

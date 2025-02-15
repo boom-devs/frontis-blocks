@@ -773,6 +773,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const sliderBlockStyle = useMemo(() => `
         .fb-block-${ blockId }.fb-slider-container{
             ${sliderPositionType === 'default' ? `position: relative;` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' ? `width: 100%;` : ''}
             ${sliderPositionType !== 'default' ? `position: ${sliderPositionType};` : ''}
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Desktop !== undefined ? `left: ${sliderHZLeftOffset.Desktop}${sliderHZLeftOffsetUnits.Desktop};` : ''}
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Desktop !== undefined ? `right: ${sliderHZRightOffset.Desktop}${sliderHZRightOffsetUnits.Desktop};` : ''}

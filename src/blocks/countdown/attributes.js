@@ -885,6 +885,14 @@ const attributes = {
 		}
 	},
 	/** End Vertical Spacing */
+	countDownZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
 	globalBgColorSwitcher: {
 		type: "string",
 		default: "normal"
