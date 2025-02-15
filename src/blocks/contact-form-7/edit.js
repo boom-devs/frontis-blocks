@@ -81,9 +81,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</p>
 				</div>
 				) : (
-				<div className="fb-parent-wrapper fb-contact-form-render" id={contactFormGlobalWraperID} ref={panelRef}>
+				<div className="fb-parent-wrapper fb-contact-form-render" ref={panelRef}>
 					{selectedForm ? (
-						<div dangerouslySetInnerHTML={{ __html: selectedForm }} />
+						<div className={`fb-contact-form ${contactFormGlobalWraperClass}`} id={contactFormGlobalWraperID} dangerouslySetInnerHTML={{ __html: selectedForm }} />
 				) : (
 					<SelectControl
 						label={__('Contact Form 7', 'frontis-blocks')}
