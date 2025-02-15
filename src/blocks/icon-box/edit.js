@@ -82,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID} className={iconBoxGlobalWraperClass}>
+			<div {...blockProps} id={blockID} className={`fb-icon-box-area ${blockID} ${iconBoxGlobalWraperClass}`}>
 				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">
