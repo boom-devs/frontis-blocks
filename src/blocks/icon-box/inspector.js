@@ -55,6 +55,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -353,6 +355,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		iconBoxGlobalWraperID,
 		iconBoxGlobalWraperClass,
+
+		// Position
+        iconBoxPositionType,
+        iconBoxHZOrientationType,
+        iconBoxVROrientationType,
+        iconBoxHZLeftOffset,
+        iconBoxHZLeftOffsetUnits,
+        iconBoxHZRightOffset,
+        iconBoxHZRightOffsetUnits,
+        iconBoxVRTopOffset,
+        iconBoxVRTopOffsetUnits,
+        iconBoxVRBottomOffset,
+        iconBoxVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -2127,9 +2142,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbIconBoxStyle = useMemo(
 		() => `
+		  .fb-icon-box-area.${blockID} {
+			${iconBoxPositionType === 'default' ? `position: relative;` : ''}
+            ${iconBoxPositionType !== 'default' ? `position: ${iconBoxPositionType};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Desktop !== undefined ? `left: ${iconBoxHZLeftOffset.Desktop}${iconBoxHZLeftOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Desktop !== undefined ? `right: ${iconBoxHZRightOffset.Desktop}${iconBoxHZRightOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Desktop !== undefined ? `top: ${iconBoxVRTopOffset.Desktop}${iconBoxVRTopOffsetUnits.Desktop};` : ''}
+            ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${iconBoxVRBottomOffset.Desktop}${iconBoxVRBottomOffsetUnits.Desktop};` : ''} 
+			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}  
+		  }
 		  .fb-icon-box-wrapper.${blockID} {
 		  	  position: relative;
-			  ${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
 			  ${globalBgColor !== undefined ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 			  ${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
@@ -2149,8 +2172,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-icon-box-wrapper.${blockID} {
+			.fb-icon-box-area.${blockID} {
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Mobile !== undefined ? `bottom: ${iconBoxVRBottomOffset.Mobile}${iconBoxVRBottomOffsetUnits.Mobile};` : ''}
 				${globalZIndex.Tablet !== undefined ? `z-index: ${globalZIndex.Tablet};` : ""}
+			}
+			  .fb-icon-box-wrapper.${blockID} {
 				${TabletPadding ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -2159,8 +2188,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
+			  .fb-icon-box-area.${blockID} {
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
+				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Mobile !== undefined ? `bottom: ${iconBoxVRBottomOffset.Mobile}${iconBoxVRBottomOffsetUnits.Mobile};` : ''} 
+			  	${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
+			  }
 			  .fb-icon-box-wrapper.${blockID} {
-				${globalZIndex.Mobile !== undefined ? `z-index: ${globalZIndex.Mobile};` : ""}
 				${MobilePadding ? `padding: ${TabletPadding};` : ""}
 				${MobileMargin ? `margin: ${TabletMargin};` : ""}
 				${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -2683,7 +2718,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaHoverBackgroundImageSize,
 			mediaHoverBackgroundImageRepeat,
 			iconBoxIconVerticalPosition,
-			iconBoxCardAlignment
+			iconBoxCardAlignment,
+
+			// Position
+			iconBoxPositionType,
+			iconBoxHZOrientationType,
+			iconBoxVROrientationType,
+			iconBoxHZLeftOffset,
+			iconBoxHZLeftOffsetUnits,
+			iconBoxHZRightOffset,
+			iconBoxHZRightOffsetUnits,
+			iconBoxVRTopOffset,
+			iconBoxVRTopOffsetUnits,
+			iconBoxVRBottomOffset,
+			iconBoxVRBottomOffsetUnits,
 		],
 	);
 
@@ -3803,6 +3851,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeStep={1}
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
+                                                    />
+
+													<FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={iconBoxPositionType}
+                                                        setPositionType={(value) => setAttributes({ iconBoxPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={iconBoxHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ iconBoxHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={iconBoxVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ iconBoxVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={iconBoxHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ iconBoxHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={iconBoxHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ iconBoxHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={iconBoxHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ iconBoxHZRightOffset: value })}
+                                                        HZRightOffsetUnits={iconBoxHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ iconBoxHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={iconBoxVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ iconBoxVRTopOffset: value })}
+                                                        VRTopOffsetUnits={iconBoxVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ iconBoxVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={iconBoxVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ iconBoxVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={iconBoxVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ iconBoxVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
 
 													<FB_InputControl
