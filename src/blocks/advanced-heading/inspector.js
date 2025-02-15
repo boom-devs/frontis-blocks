@@ -1470,7 +1470,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
     const allBlockStyle = useMemo(() => `
-        .fb-advanced-heading-main-wrapper.${blockId} {
+        .${blockId}.fb-advanced-heading-main-wrapper {
             ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' ? `width: 100%;` : ''}
             ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
@@ -1715,7 +1715,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}
             }
 
-            .fb-advanced-heading-main-wrapper.${blockId} {
+            .${blockId}.fb-advanced-heading-main-wrapper {
                 ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
                 ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Tablet !== undefined ? `left: ${advancedHeadingHZLeftOffset.Tablet}${advancedHeadingHZLeftOffsetUnits.Tablet};` : ''}
                 ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Tablet !== undefined ? `right: ${advancedHeadingHZRightOffset.Tablet}${advancedHeadingHZRightOffsetUnits.Tablet};` : ''}
@@ -1812,7 +1812,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}
             }
 
-            .fb-advanced-heading-main-wrapper.${blockId} {
+            .${blockId}.fb-advanced-heading-main-wrapper {
                 ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
                 ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Mobile !== undefined ? `left: ${advancedHeadingHZLeftOffset.Mobile}${advancedHeadingHZLeftOffsetUnits.Mobile};` : ''}
                 ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Mobile !== undefined ? `right: ${advancedHeadingHZRightOffset.Mobile}${advancedHeadingHZRightOffsetUnits.Mobile};` : ''}
