@@ -679,6 +679,10 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    advancedVideoCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 };
 
 export default attributes;
