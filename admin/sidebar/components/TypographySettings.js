@@ -11,36 +11,30 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, subscribe, select } from '@wordpress/data';
 import {useEffect, useState} from "@wordpress/element";
+import {useDeviceType} from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
 import {useAfterSave, loadGoogleFont} from "../helper";
 import {updateGlobalStyle} from "../fetch";
-
-import { useSelect } from '@wordpress/data';
 import FrontPreview from "./FontPreview";
-
-
-/**
- * WordPress dependencies
- */
-// import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-// import { unlock } from './unlock.js';
-
-// const { useGlobalStyle } = unlock( blockEditorPrivateApis );
+import generateCSSVariables from "./GenerateRootCss";
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
-	const [deviceType, setDeviceType] = useState('Desktop');
+	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
+	const [globalTypography, setGlobalTypography] = useState([])
 	const { editPost } = useDispatch('core/editor');
+	const deviceType= useDeviceType();
+
+	console.log("deviceType deviceType")
+	console.log(deviceType)
+
+	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
 
 	// Typography elements
 	const typographyElements = {
@@ -82,21 +76,6 @@ const TypographySettings = (props) => {
 		setCustomTypography({ ...tempTypography })
 	};
 
-	const setAttributes = (attr) => {
-		// Check if the input is an object
-		if (typeof attr === "object" && attr !== null) {
-			if (attr.typography) {
-				setTypography(attr.typography);
-			} else if (attr.deviceType) {
-				setDeviceType(attr.deviceType)
-			} else {
-				console.log("Unknown structure in attributes:", attr);
-			}
-		} else {
-			console.log("Input is not a valid object:", attr);
-		}
-	}
-
 	// Body link font typography
 	const onChangeFontFamily = (value, item) => {
 		setTypography(prevTypography => ({
@@ -108,11 +87,22 @@ const TypographySettings = (props) => {
 		}));
 
 		loadGoogleFont(value);
-
 		setFontFamilies({
 			...fontFamilies,
 			[item]: value
 		});
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontFamily': {
+					variable: `--fb-global-${item}--font-family`,
+					value: value
+				}
+			}
+		});
+
 		setIsMount(true);
 	}
 
@@ -127,6 +117,23 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					variable: `--fb-global-${item}--font-size`,
+					value: value,
+					unit: {
+						"Desktop": "px",
+						"Tablet": "px",
+						"Mobile": "px"
+					}
+				}
+			}
+		});
+
 		setIsMount(true);
 	}
 
@@ -141,6 +148,18 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					...globalTypography[item]['fontSize'],
+					unit: value
+				}
+			}
+		});
+		
 		setIsMount(true);
 	}
 
@@ -152,6 +171,17 @@ const TypographySettings = (props) => {
 				fontWeight: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontWeight': {
+					variable: `--fb-global-${item}--font-weight`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -163,6 +193,18 @@ const TypographySettings = (props) => {
 				fontStyle: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontStyle': {
+					variable: `--fb-global-${item}--font-style`,
+					value: value
+				}
+			}
+		});
+
 		setIsMount(true);
 	}
 
@@ -174,6 +216,17 @@ const TypographySettings = (props) => {
 				textDecoration: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textDecoration': {
+					variable: `--fb-global-${item}--font-decoration`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -185,6 +238,17 @@ const TypographySettings = (props) => {
 				textTransform: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textTransform': {
+					variable: `--fb-global-${item}--font-transform`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -199,6 +263,22 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					variable: `--fb-global-${item}--font-letter-spacing`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px'
+					}
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -213,6 +293,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					...globalTypography[item]['letterSpacing'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -227,6 +318,22 @@ const TypographySettings = (props) => {
 					},
 				},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'lineHeight': {
+					variable: `--fb-global-${item}--font-line-height`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px'
+					}
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -241,6 +348,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'lineHeight': {
+					...globalTypography[item]['lineHeight'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -260,6 +378,17 @@ const TypographySettings = (props) => {
 
 		loadGoogleFont(value);
 		setIsMount(true);
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'fontFamily': {
+					variable: `--fb-global-${selectedHeading}--font-family`,
+					value: value
+				}
+			}
+		});
 
 		setFontFamilies({
 			...fontFamilies,
@@ -285,6 +414,22 @@ const TypographySettings = (props) => {
 			},
 		}));
 
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'fontSize': {
+					variable: `--fb-global-${selectedHeading}--font-size`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px'
+					}
+				}
+			}
+		});
+
 		setIsMount(true);
 	}
 
@@ -302,6 +447,18 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'fontSize': {
+					...globalTypography[selectedHeading]['fontSize'],
+					unit: value
+				}
+			}
+		});
+
 		setIsMount(true);
 	}
 
@@ -316,6 +473,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'fontWeight': {
+					variable: `--fb-global-${selectedHeading}--font-weight`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -330,6 +498,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'fontStyle': {
+					variable: `--fb-global-${selectedHeading}--font-style`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -344,6 +523,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'textDecoration': {
+					variable: `--fb-global-${selectedHeading}--font-decoration`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -358,6 +548,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'textTransform': {
+					variable: `--fb-global-${selectedHeading}--font-transform`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -375,6 +576,22 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'letterSpacing': {
+					variable: `--fb-global-${selectedHeading}--font-letter-spacing`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -392,6 +609,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'letterSpacing': {
+					...globalTypography[selectedHeading]['letterSpacing'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -409,6 +637,22 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'lineHeight': {
+					variable: `--fb-global-${selectedHeading}--font-line-height`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -426,6 +670,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[selectedHeading]: {
+				...globalTypography[selectedHeading],
+				'lineHeight': {
+					...globalTypography[selectedHeading]['lineHeight'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -444,6 +699,17 @@ const TypographySettings = (props) => {
 			[item]: value
 		});
 
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontFamily': {
+					variable: `--fb-global-${item}--font-family`,
+					value: value
+				}
+			}
+		});
+
 		loadGoogleFont(value);
 		setIsMount(true);
 	}
@@ -459,6 +725,22 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					variable: `--fb-global-${item}--font-size`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px'
+					}
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -473,6 +755,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					...globalTypography[item]['fontSize'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -484,6 +777,17 @@ const TypographySettings = (props) => {
 				fontWeight: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontWeight': {
+					variable: `--fb-global-${item}--font-weight`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -495,6 +799,17 @@ const TypographySettings = (props) => {
 				fontStyle: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontStyle': {
+					variable: `--fb-global-${item}--font-style`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -506,6 +821,17 @@ const TypographySettings = (props) => {
 				textDecoration: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textDecoration': {
+					variable: `--fb-global-${item}--font-decoration`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -517,6 +843,17 @@ const TypographySettings = (props) => {
 				textTransform: value,
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textTransform': {
+					variable: `--fb-global-${item}--font-transform`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -531,6 +868,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					variable: `--fb-global-${item}--font-letter-spacing`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -545,6 +893,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					...globalTypography[item]['letterSpacing'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -559,6 +918,17 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'lineHeight': {
+					variable: `--fb-global-${item}--font-line-height`,
+					value: value
+				}
+			}
+		});
 		setIsMount(true);
 	}
 
@@ -573,46 +943,69 @@ const TypographySettings = (props) => {
 				},
 			},
 		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'Lineheight': {
+					...globalTypography[item]['lineHeight'],
+					unit: value
+				}
+			}
+		});
 		setIsMount(true);
+	}
+
+	const updateLiveTypography = (...params) => {
+		
 	}
 
 	// Save to database
 
-	// Save colors after post save
-	const isAfterSave = useAfterSave();
-
-	useEffect(() => {
-		const handleUpdateSettings = async () => {
-			if (isAfterSave && isMount) {
-				if (typography) {
-					const response = await updateGlobalStyle(typography, 'fb_update_typography');
-					if (response.success) {
-						setTypography(response.data.data);
-						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-					}
-				}
-
-				if (customTypography) {
-					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
-					if (response.success) {
-						setCustomTypography(response.data.data);
-						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
-					}
-				}
-
-				if(fontFamilies) {
-					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
-					if (response.success) {
-						setFontFamilies(response.data.data);
-						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
-					}
-				}
-				setIsMount(false);
-			}
+	subscribe(() => {
+		const isSavingPost = select('core/editor').isSavingPost();
+		const isAutosavingPost = select('core/editor').isAutosavingPost();
+		
+		if (!isMount || isAutosavingPost || !isSavingPost) {
+			return;
 		}
 
-		handleUpdateSettings();
-	}, [isAfterSave]);
+		if(isMount) {
+			handleUpdateSettings();
+		}
+		
+		setIsMount(false);
+	});
+
+	const handleUpdateSettings = async () => {
+		if (isMount) {
+			if (typography) {
+				const response = await updateGlobalStyle(typography, 'fb_update_typography');
+				if (response.success) {
+					setTypography(response.data.data);
+					localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+				}
+			}
+
+			if (customTypography) {
+				const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+				if (response.success) {
+					setCustomTypography(response.data.data);
+					localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+				}
+			}
+
+			if(fontFamilies) {
+				const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
+				if (response.success) {
+					setFontFamilies(response.data.data);
+					localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+				}
+			}
+			setIsMount(false);
+		}
+	}
 
 	useEffect(() => {
 		if(isMount) {
@@ -620,6 +1013,14 @@ const TypographySettings = (props) => {
 		}
 		
 	}, [isMount]);
+
+	useEffect(() => {
+		if(globalTypography) {
+			let css = generateCSSVariables(globalTypography);
+			console.log(css)
+		}
+		
+	}, [globalTypography]);
 
 	return (
 		<TabPanel
@@ -726,7 +1127,6 @@ const TypographySettings = (props) => {
 																			lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}
 																			onChangeLineHeightUnit={(value) => onChangeHeadingLineHeightUnit(value, item)}
 																			deviceType={deviceType}
-																			setAttributes={setAttributes}
 																			heading={selectedHeading}
 																		/>
 
@@ -766,7 +1166,6 @@ const TypographySettings = (props) => {
 																	lineHeightUnits={typography?.[item]?.lineHeightUnits}
 																	onChangeLineHeightUnit={(value) => onChangeLineHeightUnit(value, item)}
 																	deviceType={deviceType}
-																	setAttributes={setAttributes}
 																/>
 															</div>
 														</>
@@ -913,7 +1312,6 @@ const TypographySettings = (props) => {
 																lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
 																onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
 																deviceType={deviceType}
-																setAttributes={setAttributes}
 															/>
 														</div>
 													</NavigatorScreen>
@@ -932,3 +1330,13 @@ const TypographySettings = (props) => {
 }
 
 export default TypographySettings;
+
+
+// :root {
+// 	--fb-global-typography-body--font-size: "20px"
+// 	--fb-global-typography-body--font-weight: "500"
+// 	--fb-global-typography-body--font-transform: "default"
+// 	--fb-global-typography-body--font-decoration: "default"
+// 	--fb-global-typography-body--font-spacing: "inherit"
+// 	--fb-global-typography-body--font-line-height: "default"
+// }
