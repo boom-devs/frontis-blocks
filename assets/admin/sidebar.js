@@ -666,6 +666,107 @@ function FrontPreview(_ref) {
 
 /***/ }),
 
+/***/ "./admin/sidebar/components/GenerateRootCss.js":
+/*!*****************************************************!*\
+  !*** ./admin/sidebar/components/GenerateRootCss.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var generateCSSVariables = function generateCSSVariables(data) {
+  var _iframe$contentWindow;
+  var createValueWithUnit = function createValueWithUnit(value, unit) {
+    if (!value || value === 'Default') return '0px';
+    return "".concat(value).concat(unit || '');
+  };
+  var getValue = function getValue(obj, prop) {
+    var _obj$prop2;
+    var breakpoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+    if (breakpoint) {
+      var _obj$prop;
+      return (obj === null || obj === void 0 || (_obj$prop = obj[prop]) === null || _obj$prop === void 0 || (_obj$prop = _obj$prop.value) === null || _obj$prop === void 0 ? void 0 : _obj$prop[breakpoint]) || null;
+    }
+    return (obj === null || obj === void 0 || (_obj$prop2 = obj[prop]) === null || _obj$prop2 === void 0 ? void 0 : _obj$prop2.value) || null;
+  };
+  var getUnit = function getUnit(obj, prop, breakpoint) {
+    var _obj$prop3, _obj$prop4;
+    return (obj === null || obj === void 0 || (_obj$prop3 = obj[prop]) === null || _obj$prop3 === void 0 || (_obj$prop3 = _obj$prop3.unit) === null || _obj$prop3 === void 0 ? void 0 : _obj$prop3[breakpoint]) || (obj === null || obj === void 0 || (_obj$prop4 = obj[prop]) === null || _obj$prop4 === void 0 ? void 0 : _obj$prop4.unit) || '';
+  };
+  var rootStyles = '';
+  var desktopStyles = '';
+  var tabletStyles = '';
+  var mobileStyles = '';
+  var paragraphStyles = '';
+  var linkStyles = '';
+  ['body', 'link'].forEach(function (key) {
+    if (!data[key]) return;
+
+    // Apply global properties (fontFamily, fontWeight, etc.)
+    ['fontFamily', 'fontWeight', 'fontStyle', 'fontTransform', 'fontDecoration'].forEach(function (prop) {
+      var value = getValue(data[key], prop);
+      if (value !== null) {
+        rootStyles += "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": ").concat(value, ";\n");
+        if (key === 'body') {
+          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
+        if (key === 'link') {
+          linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
+        }
+      }
+    });
+
+    // Apply font size, letter spacing, line height
+    ['fontSize', 'fontLetterspacing', 'fontLineheight'].forEach(function (prop) {
+      var desktopValue = getValue(data[key], prop, 'Desktop');
+      var tabletValue = getValue(data[key], prop, 'Tablet');
+      var mobileValue = getValue(data[key], prop, 'Mobile');
+      var desktopUnit = getUnit(data[key], prop, 'Desktop');
+      var tabletUnit = getUnit(data[key], prop, 'Tablet');
+      var mobileUnit = getUnit(data[key], prop, 'Mobile');
+      if (desktopValue !== null) {
+        var cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        desktopStyles += "".concat(cssVar, ": ").concat(createValueWithUnit(desktopValue, desktopUnit), ";\n");
+        if (key === 'body') {
+          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ") !important;\n");
+        }
+        if (key === 'link') {
+          linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
+        }
+      }
+      if (tabletValue !== null) {
+        var _cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        tabletStyles += "".concat(_cssVar, ": ").concat(createValueWithUnit(tabletValue, tabletUnit), ";\n");
+      }
+      if (mobileValue !== null) {
+        var _cssVar2 = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        mobileStyles += "".concat(_cssVar2, ": ").concat(createValueWithUnit(mobileValue, mobileUnit), ";\n");
+      }
+    });
+  });
+  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 991px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a {\n            ").concat(linkStyles, "\n        }\n    ");
+  var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+  var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
+  var styleTag = iframeDocument.getElementById("global-typo-test");
+  if (!styleTag) {
+    styleTag = iframeDocument.createElement("style");
+    styleTag.id = "global-typo-test";
+    iframeDocument.head.appendChild(styleTag);
+  }
+  styleTag.innerHTML = styles;
+
+  // const styleElement = document.createElement('style');
+  // styleElement.textContent = styles;
+  // document.head.appendChild(styleElement);
+
+  return styles;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSSVariables);
+
+/***/ }),
+
 /***/ "./admin/sidebar/components/GetTypographyValue.js":
 /*!********************************************************!*\
   !*** ./admin/sidebar/components/GetTypographyValue.js ***!
@@ -1042,6 +1143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
 /* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
 /* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
+/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -1057,6 +1159,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
@@ -1092,9 +1195,15 @@ var TypographySettings = function TypographySettings(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    globalTypography = _useState14[0],
+    setGlobalTypography = _useState14[1];
   var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
     editPost = _useDispatch.editPost;
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
+  console.log("deviceType deviceType");
+  console.log(deviceType);
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
   // Typography elements
@@ -1145,6 +1254,12 @@ var TypographySettings = function TypographySettings(props) {
     });
     (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
     setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontFamily': {
+        variable: "--fb-global-".concat(item, "--font-family"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeFontSize = function onChangeFontSize(value, item) {
@@ -1154,6 +1269,17 @@ var TypographySettings = function TypographySettings(props) {
         fontSize: _objectSpread(_objectSpread({}, (_typography$item = typography[item]) === null || _typography$item === void 0 ? void 0 : _typography$item.fontSize), {}, _defineProperty({}, deviceType, parseInt(value[deviceType])))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontSize': {
+        variable: "--fb-global-".concat(item, "--font-size"),
+        value: value,
+        unit: {
+          "Desktop": "px",
+          "Tablet": "px",
+          "Mobile": "px"
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeFontSizeUnit = function onChangeFontSizeUnit(value, item) {
@@ -1163,6 +1289,11 @@ var TypographySettings = function TypographySettings(props) {
         fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item2 = typography[item]) === null || _typography$item2 === void 0 ? void 0 : _typography$item2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var _onChangeFontWeight = function onChangeFontWeight(value, item) {
@@ -1171,6 +1302,12 @@ var TypographySettings = function TypographySettings(props) {
         fontWeight: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontWeight': {
+        variable: "--fb-global-".concat(item, "--font-weight"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeFontStyle = function onChangeFontStyle(value, item) {
@@ -1179,6 +1316,12 @@ var TypographySettings = function TypographySettings(props) {
         fontStyle: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontStyle': {
+        variable: "--fb-global-".concat(item, "--font-style"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeTextDecoration = function onChangeTextDecoration(value, item) {
@@ -1187,6 +1330,12 @@ var TypographySettings = function TypographySettings(props) {
         textDecoration: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontDecoration': {
+        variable: "--fb-global-".concat(item, "--font-decoration"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeTextTransform = function onChangeTextTransform(value, item) {
@@ -1195,6 +1344,12 @@ var TypographySettings = function TypographySettings(props) {
         textTransform: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontTransform': {
+        variable: "--fb-global-".concat(item, "--font-transform"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeLetterSpacing = function onChangeLetterSpacing(value, item) {
@@ -1204,6 +1359,17 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacing: _objectSpread(_objectSpread({}, (_typography$item3 = typography[item]) === null || _typography$item3 === void 0 ? void 0 : _typography$item3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLetterspacing': {
+        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeLetterSpacingUnit = function onChangeLetterSpacingUnit(value, item) {
@@ -1213,6 +1379,11 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item4 = typography[item]) === null || _typography$item4 === void 0 ? void 0 : _typography$item4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[item]['fontLetterspacing']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var _onChangeLineHeight = function onChangeLineHeight(value, item) {
@@ -1222,6 +1393,17 @@ var TypographySettings = function TypographySettings(props) {
         lineHeight: _objectSpread(_objectSpread({}, (_typography$item5 = typography[item]) === null || _typography$item5 === void 0 ? void 0 : _typography$item5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLineheight': {
+        variable: "--fb-global-".concat(item, "--font-line-height"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var _onChangeLineHeightUnit = function onChangeLineHeightUnit(value, item) {
@@ -1231,6 +1413,11 @@ var TypographySettings = function TypographySettings(props) {
         lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item6 = typography[item]) === null || _typography$item6 === void 0 ? void 0 : _typography$item6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[item]['fontLineheight']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
 
@@ -1244,6 +1431,12 @@ var TypographySettings = function TypographySettings(props) {
     });
     (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
     setIsMount(true);
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontFamily': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-family"),
+        value: value
+      }
+    }))));
     setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, fontFamilies.heading), {}, _defineProperty({}, selectedHeading, value)))));
   };
   var onChangeHeadingFontSize = function onChangeHeadingFontSize(value, item) {
@@ -1253,7 +1446,17 @@ var TypographySettings = function TypographySettings(props) {
         fontSize: _objectSpread(_objectSpread({}, (_typography$item$sele = typography[item][selectedHeading]) === null || _typography$item$sele === void 0 ? void 0 : _typography$item$sele.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
-    updateLiveTypography(item, selectedHeading, value);
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontSize': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-size"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingFontSizeUnit = function onChangeHeadingFontSizeUnit(value, item) {
@@ -1263,6 +1466,11 @@ var TypographySettings = function TypographySettings(props) {
         fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item$sele2 = typography[item][selectedHeading]) === null || _typography$item$sele2 === void 0 ? void 0 : _typography$item$sele2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontSize': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontSize']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingFontWeight = function onChangeHeadingFontWeight(value, item) {
@@ -1271,6 +1479,12 @@ var TypographySettings = function TypographySettings(props) {
         fontWeight: value
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontWeight': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-weight"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingFontStyle = function onChangeHeadingFontStyle(value, item) {
@@ -1279,6 +1493,12 @@ var TypographySettings = function TypographySettings(props) {
         fontStyle: value
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontStyle': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-style"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingTextDecoration = function onChangeHeadingTextDecoration(value, item) {
@@ -1287,6 +1507,12 @@ var TypographySettings = function TypographySettings(props) {
         textDecoration: value
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontDecoration': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-decoration"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingTextTransform = function onChangeHeadingTextTransform(value, item) {
@@ -1295,6 +1521,12 @@ var TypographySettings = function TypographySettings(props) {
         textTransform: value
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontTransform': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-transform"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingLetterSpacing = function onChangeHeadingLetterSpacing(value, item) {
@@ -1304,6 +1536,17 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacing: _objectSpread(_objectSpread({}, (_typography$item$sele3 = typography[item][selectedHeading]) === null || _typography$item$sele3 === void 0 ? void 0 : _typography$item$sele3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontLetterspacing': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-letter-spacing"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingLetterSpacingUnit = function onChangeHeadingLetterSpacingUnit(value, item) {
@@ -1313,6 +1556,11 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item$sele4 = typography[item][selectedHeading]) === null || _typography$item$sele4 === void 0 ? void 0 : _typography$item$sele4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontLetterspacing']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingLineHeight = function onChangeHeadingLineHeight(value, item) {
@@ -1322,6 +1570,17 @@ var TypographySettings = function TypographySettings(props) {
         lineHeight: _objectSpread(_objectSpread({}, (_typography$item$sele5 = typography[item][selectedHeading]) === null || _typography$item$sele5 === void 0 ? void 0 : _typography$item$sele5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontLineheight': {
+        variable: "--fb-global-".concat(selectedHeading, "--font-line-height"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeHeadingLineHeightUnit = function onChangeHeadingLineHeightUnit(value, item) {
@@ -1331,6 +1590,11 @@ var TypographySettings = function TypographySettings(props) {
         lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item$sele6 = typography[item][selectedHeading]) === null || _typography$item$sele6 === void 0 ? void 0 : _typography$item$sele6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
       })))));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
+      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontLineheight']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
 
@@ -1342,6 +1606,12 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontFamily': {
+        variable: "--fb-global-".concat(item, "--font-family"),
+        value: value
+      }
+    }))));
     (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
     setIsMount(true);
   };
@@ -1352,6 +1622,17 @@ var TypographySettings = function TypographySettings(props) {
         fontSize: _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontSize': {
+        variable: "--fb-global-".concat(item, "--font-size"),
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomFontSizeUnit = function onChangeCustomFontSizeUnit(value, item) {
@@ -1361,6 +1642,11 @@ var TypographySettings = function TypographySettings(props) {
         fontSizeUnit: _objectSpread(_objectSpread({}, (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var onChangeCustomFontWeight = function onChangeCustomFontWeight(value, item) {
@@ -1369,6 +1655,12 @@ var TypographySettings = function TypographySettings(props) {
         fontWeight: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontWeight': {
+        variable: "--fb-global-".concat(item, "--font-weight"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomFontStyle = function onChangeCustomFontStyle(value, item) {
@@ -1377,6 +1669,12 @@ var TypographySettings = function TypographySettings(props) {
         fontStyle: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontStyle': {
+        variable: "--fb-global-".concat(item, "--font-style"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomTextDecoration = function onChangeCustomTextDecoration(value, item) {
@@ -1385,6 +1683,12 @@ var TypographySettings = function TypographySettings(props) {
         textDecoration: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontDecoration': {
+        variable: "--fb-global-".concat(item, "--font-decoration"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomTextTransform = function onChangeCustomTextTransform(value, item) {
@@ -1393,6 +1697,12 @@ var TypographySettings = function TypographySettings(props) {
         textTransform: value
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontDecoration': {
+        variable: "--fb-global-".concat(item, "--font-decoration"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomLetterSpacing = function onChangeCustomLetterSpacing(value, item) {
@@ -1402,6 +1712,12 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacing: _objectSpread(_objectSpread({}, (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLetterspacing': {
+        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomLetterSpacingUnit = function onChangeCustomLetterSpacingUnit(value, item) {
@@ -1411,6 +1727,11 @@ var TypographySettings = function TypographySettings(props) {
         letterSpacingUnit: _objectSpread(_objectSpread({}, (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLetterspacing': _objectSpread(_objectSpread({}, globalTypography[item]['fontLetterspacing']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
   var onChangeCustomLineHeight = function onChangeCustomLineHeight(value, item) {
@@ -1420,6 +1741,12 @@ var TypographySettings = function TypographySettings(props) {
         lineHeight: _objectSpread(_objectSpread({}, (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLineheight': {
+        variable: "--fb-global-".concat(item, "--font-line-height"),
+        value: value
+      }
+    }))));
     setIsMount(true);
   };
   var onChangeCustomLineHeightUnit = function onChangeCustomLineHeightUnit(value, item) {
@@ -1429,62 +1756,14 @@ var TypographySettings = function TypographySettings(props) {
         lineHeightUnits: _objectSpread(_objectSpread({}, (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
       })));
     });
+    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
+      'fontLineheight': _objectSpread(_objectSpread({}, globalTypography[item]['fontLineheight']), {}, {
+        unit: value
+      })
+    }))));
     setIsMount(true);
   };
-  var updateLiveTypography = function updateLiveTypography() {
-    var _iframe$contentWindow;
-    var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-    var iframeDocument = (iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) || (iframe === null || iframe === void 0 || (_iframe$contentWindow = iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
-    var styleContent = '';
-    var rootVariables = '';
-    for (var _len = arguments.length, params = new Array(_len), _key = 0; _key < _len; _key++) {
-      params[_key] = arguments[_key];
-    }
-    if (params[0] === 'heading') {
-      var _params$;
-      var headingLevel = params[1].replace('h', ''); // Extract number from h1, h2, etc.
-      var fontSize = ((_params$ = params[2]) === null || _params$ === void 0 ? void 0 : _params$['Desktop']) || '20';
-
-      // Create CSS variable name
-      var variableName = "--fb-global-typo-h-".concat(headingLevel);
-
-      // Create root variable
-      rootVariables = ":root { ".concat(variableName, ": ").concat(fontSize, "px; }");
-
-      // Use the variable in heading style
-      styleContent = "\n\t\t\t\t".concat(rootVariables, "\n\t\t\t\tbody .wp-site-blocks ").concat(params[1], " {\n\t\t\t\t\tfont-size: var(").concat(variableName, ");\n\t\t\t\t}\n\n\t\t\t\t:root {\n\t\t\t\t\t--fb-global-typography-body--font-size: \"20px\"\n\t\t\t\t\t--fb-global-typography-body--font-weight: \"500\"\n\t\t\t\t\t--fb-global-typography-body--font-transform: \"default\"\n\t\t\t\t\t--fb-global-typography-body--font-decoration: \"default\"\n\t\t\t\t\t--fb-global-typography-body--font-spacing: \"inherit\"\n\t\t\t\t\t--fb-global-typography-body--font-line-height: \"default\"\n\t\t\t\t}\n\n\t\t\t");
-    }
-    if (params[0] === 'heading') {
-      rootVariables = "\n\t\t\t\t--fb-global-typography-h1--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h1--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h1--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h1--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h1--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h1--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h2--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h2--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h2--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h2--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h2--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h2--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h3--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h3--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h3--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h3--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h3--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h3--font-line-height: \"default\"\n\t\t\t\t\n\t\t\t\t--fb-global-typography-h4--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h4--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h4--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h4--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h4--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h4--font-line-height: \"default\"\n\n\t\t\t\t--fb-global-typography-h5--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h5--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h5--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h5--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h5--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h5--font-line-height: \"default\"\n\n\t\t\t\t--fb-global-typography-h6--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-h6--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-h6--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-h6--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-h6--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-h6--font-line-height: \"default\"\n\t\t\t";
-    }
-    if (params[0] === 'body') {
-      rootVariables = "\n\t\t\t\t--fb-global-typography-body--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-body--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-body--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-body--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-body--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-body--font-line-height: \"default\"\n\t\t\t";
-    }
-    if (params[0] === 'link') {
-      rootVariables = "\n\t\t\t\t--fb-global-typography-link--font-size: \"20px\"\n\t\t\t\t--fb-global-typography-link--font-weight: \"500\"\n\t\t\t\t--fb-global-typography-link--font-transform: \"default\"\n\t\t\t\t--fb-global-typography-link--font-decoration: \"default\"\n\t\t\t\t--fb-global-typography-link--font-spacing: \"inherit\"\n\t\t\t\t--fb-global-typography-link--font-line-height: \"default\"\n\t\t\t";
-    }
-
-    // Manage style tag
-    var styleTag = iframeDocument.getElementById("global-typo-test");
-    if (!styleTag) {
-      styleTag = iframeDocument.createElement("style");
-      styleTag.id = "global-typo-test";
-      iframeDocument.head.appendChild(styleTag);
-    }
-
-    // Update or add new variables without removing existing ones
-    if (styleTag.innerHTML) {
-      // Parse existing root variables
-      var existingRoot = styleTag.innerHTML.match(/:root\s*{([^}]*)}/);
-      if (existingRoot) {
-        var existingVars = existingRoot[1];
-        // Create new root section combining existing and new variables
-        var updatedRoot = ":root { ".concat(existingVars, " ").concat(rootVariables.replace(/:root\s*{\s*|\s*}/g, ''), " }");
-        styleContent = styleContent.replace(/:root\s*{[^}]*}/, updatedRoot);
-      }
-    }
-    styleTag.innerHTML = styleContent;
-  };
+  var updateLiveTypography = function updateLiveTypography() {};
 
   // Save to database
 
@@ -1566,6 +1845,12 @@ var TypographySettings = function TypographySettings(props) {
       });
     }
   }, [isMount]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    if (globalTypography) {
+      var css = (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography);
+      console.log(css);
+    }
+  }, [globalTypography]);
   return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
