@@ -38,3 +38,23 @@ function wm_frontis_blocks(){
 wm_frontis_blocks();
 
 
+// function fb_common_enqueue_editor_styles() {
+//     wp_enqueue_style(
+//         'fb-responsive-control-editor',
+//         get_template_directory_uri() . '/assets/css/fbe-common.css',
+//         array(), // Dependencies
+//         filemtime(get_template_directory() . '/assets/css/fbe-common.css') // Cache busting
+//     );
+// }
+// add_action('enqueue_block_editor_assets', 'fb_common_enqueue_editor_styles');
+
+// function fb_common_enqueue_styles() {
+//     wp_enqueue_style(
+//         'fb-responsive-control',
+//         get_template_directory_uri() . '/assets/css/fbe-common.css',
+//         array(),
+//         filemtime(get_template_directory() . '/assets/css/fbe-common.css')
+//     );
+// }
+// add_action('wp_enqueue_scripts', 'fb_common_enqueue_styles');
+
