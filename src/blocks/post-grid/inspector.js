@@ -33,7 +33,11 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 import './editor.scss';
 
@@ -499,6 +503,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         postGridGlobalWraperID,
         postGridGlobalWraperClass,
+
+        // Position
+        postGridPositionType,
+        postGridHZOrientationType,
+        postGridVROrientationType,
+        postGridHZLeftOffset,
+        postGridHZLeftOffsetUnits,
+        postGridHZRightOffset,
+        postGridHZRightOffsetUnits,
+        postGridVRTopOffset,
+        postGridVRTopOffsetUnits,
+        postGridVRBottomOffset,
+        postGridVRBottomOffsetUnits,
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -2719,8 +2736,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockId}.fb_post_grid_container {
+        .${blockId}.fb-post-grid-area {
+            ${postGridPositionType === 'default' ? `position: relative;` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${postGridPositionType !== 'default' ? `position: ${postGridPositionType};` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'left' && postGridHZLeftOffset.Desktop !== undefined ? `left: ${postGridHZLeftOffset.Desktop}${postGridHZLeftOffsetUnits.Desktop};` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'right' && postGridHZRightOffset.Desktop !== undefined ? `right: ${postGridHZRightOffset.Desktop}${postGridHZRightOffsetUnits.Desktop};` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'top' && postGridVRTopOffset.Desktop !== undefined ? `top: ${postGridVRTopOffset.Desktop}${postGridVRTopOffsetUnits.Desktop};` : ''}
+            ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'bottom' && postGridVRBottomOffset.Desktop !== undefined ? `bottom: ${postGridVRBottomOffset.Desktop}${postGridVRBottomOffsetUnits.Desktop};` : ''}
             ${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ''}
+        }
+        .${blockId}.fb_post_grid_container {
             ${postGlobalDesktopPaddingWidth ? `padding: ${postGlobalDesktopPaddingWidth};` : ''}
             ${postGlobalDesktopMarginWidth ? `margin: ${postGlobalDesktopMarginWidth};` : ''} 
             ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -3070,8 +3096,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockId}.fb_post_grid_container {
+            .${blockId}.fb-post-grid-area {
+                ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'left' && postGridHZLeftOffset.Tablet !== undefined ? `left: ${postGridHZLeftOffset.Tablet}${postGridHZLeftOffsetUnits.Tablet};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'right' && postGridHZRightOffset.Tablet !== undefined ? `right: ${postGridHZRightOffset.Tablet}${postGridHZRightOffsetUnits.Tablet};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'top' && postGridVRTopOffset.Tablet !== undefined ? `top: ${postGridVRTopOffset.Tablet}${postGridVRTopOffsetUnits.Tablet};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'bottom' && postGridVRBottomOffset.Tablet !== undefined ? `bottom: ${postGridVRBottomOffset.Tablet}${postGridVRBottomOffsetUnits.Tablet};` : ''}
                 ${postGlobalZIndex.Tablet ? `z-index: ${postGlobalZIndex.Tablet};` : ''}
+            }
+            .${blockId}.fb_post_grid_container {
                 ${postGlobalTabletPaddingWidth ? `padding: ${postGlobalTabletPaddingWidth};` : ''} 
                 ${postGlobalTabletMarginWidth ? `margin: ${postGlobalTabletMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -3382,8 +3414,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 767px) {
 
 
-            .${blockId}.fb_post_grid_container {
+            .${blockId}.fb-post-grid-area {
+                ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'left' && postGridHZLeftOffset.Mobile !== undefined ? `left: ${postGridHZLeftOffset.Mobile}${postGridHZLeftOffsetUnits.Mobile};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridHZOrientationType === 'right' && postGridHZRightOffset.Mobile !== undefined ? `right: ${postGridHZRightOffset.Mobile}${postGridHZRightOffsetUnits.Mobile};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'top' && postGridVRTopOffset.Mobile !== undefined ? `top: ${postGridVRTopOffset.Mobile}${postGridVRTopOffsetUnits.Mobile};` : ''}
+				${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'bottom' && postGridVRBottomOffset.Mobile !== undefined ? `bottom: ${postGridVRBottomOffset.Mobile}${postGridVRBottomOffsetUnits.Mobile};` : ''} 
                 ${postGlobalZIndex.Mobile ? `z-index: ${postGlobalZIndex.Mobile};` : ''}
+            }
+            .${blockId}.fb_post_grid_container {
                 ${postGlobalMobilePaddingWidth ? `padding: ${postGlobalMobilePaddingWidth};` : ''} 
                 ${postGlobalMobileMarginWidth ? `margin: ${postGlobalMobileMarginWidth};` : ''}  
                 ${postGlobalBorder ? `border: ${postGlobalBorder};` : ''} 
@@ -4225,6 +4263,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreIconDesktopMarginWidth,
         loadMoreIconTabletMarginWidth,
         loadMoreIconMobileMarginWidth,
+
+        // Position
+        postGridPositionType,
+        postGridHZOrientationType,
+        postGridVROrientationType,
+        postGridHZLeftOffset,
+        postGridHZLeftOffsetUnits,
+        postGridHZRightOffset,
+        postGridHZRightOffsetUnits,
+        postGridVRTopOffset,
+        postGridVRTopOffsetUnits,
+        postGridVRBottomOffset,
+        postGridVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -5953,6 +6004,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={postGridPositionType}
+                                                        setPositionType={(value) => setAttributes({ postGridPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={postGridHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ postGridHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={postGridVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ postGridVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={postGridHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ postGridHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={postGridHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ postGridHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={postGridHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ postGridHZRightOffset: value })}
+                                                        HZRightOffsetUnits={postGridHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ postGridHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={postGridVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ postGridVRTopOffset: value })}
+                                                        VRTopOffsetUnits={postGridVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ postGridVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={postGridVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ postGridVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={postGridVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ postGridVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
 
                                                     <FB_InputControl

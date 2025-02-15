@@ -41,7 +41,11 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -344,6 +348,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
+
+		// Position
+		ctaPositionType,
+		ctaHZOrientationType,
+		ctaVROrientationType,
+		ctaHZLeftOffset,
+		ctaHZLeftOffsetUnits,
+		ctaHZRightOffset,
+		ctaHZRightOffsetUnits,
+		ctaVRTopOffset,
+		ctaVRTopOffsetUnits,
+		ctaVRBottomOffset,
+		ctaVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -1902,8 +1919,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const ctaContentStyle = useMemo(
 		() => `
-			.fb-cta-content-wrapper.${blockID} {
+			.fb-cta-wrapper.${blockID} {
+				${ctaPositionType === 'default' ? `position: relative;` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' ? `width: 100%;` : ''}
+				${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Desktop !== undefined ? `left: ${ctaHZLeftOffset.Desktop}${ctaHZLeftOffsetUnits.Desktop};` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Desktop !== undefined ? `right: ${ctaHZRightOffset.Desktop}${ctaHZRightOffsetUnits.Desktop};` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'top' && ctaVRTopOffset.Desktop !== undefined ? `top: ${ctaVRTopOffset.Desktop}${ctaVRTopOffsetUnits.Desktop};` : ''}
+				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'bottom' && ctaVRBottomOffset.Desktop !== undefined ? `bottom: ${ctaVRBottomOffset.Desktop}${ctaVRBottomOffsetUnits.Desktop};` : ''}
 				${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+			}
+			.fb-cta-content-wrapper.${blockID} {
 				${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
 				${DesktopMargin ? `margin: ${DesktopMargin};` : ""}
 				${globalBorder ? `border: ${globalBorder};` : ""}
@@ -2054,8 +2080,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
 			}
 			@media only screen and (max-width: 1024px) {
-				.fb-cta-content-wrapper.${blockID} {
+				.fb-cta-wrapper.${blockID} {
+					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Tablet !== undefined ? `left: ${ctaHZLeftOffset.Tablet}${ctaHZLeftOffsetUnits.Tablet};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Tablet !== undefined ? `right: ${ctaHZRightOffset.Tablet}${ctaHZRightOffsetUnits.Tablet};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'top' && ctaVRTopOffset.Tablet !== undefined ? `top: ${ctaVRTopOffset.Tablet}${ctaVRTopOffsetUnits.Tablet};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'bottom' && ctaVRBottomOffset.Tablet !== undefined ? `bottom: ${ctaVRBottomOffset.Tablet}${ctaVRBottomOffsetUnits.Tablet};` : ''}
 					${globalZIndex.Tablet ? `z-index: ${globalZIndex.Desktop};` : ''}
+				}
+				.fb-cta-content-wrapper.${blockID} {
 					${TabletPadding ? `padding: ${TabletPadding};` : ""}
 					${TabletMargin ? `margin: ${TabletMargin};` : ""}
 					${BorderTabletWidth ? `border-width: ${BorderTabletWidth};` : ""}
@@ -2107,8 +2140,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			}
 			@media only screen and (max-width: 767px) {
-				.fb-cta-content-wrapper.${blockID} {
+				.fb-cta-wrapper.${blockID} {
+					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Mobile !== undefined ? `left: ${ctaHZLeftOffset.Mobile}${ctaHZLeftOffsetUnits.Mobile};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Mobile !== undefined ? `right: ${ctaHZRightOffset.Mobile}${ctaHZRightOffsetUnits.Mobile};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'top' && ctaVRTopOffset.Mobile !== undefined ? `top: ${ctaVRTopOffset.Mobile}${ctaVRTopOffsetUnits.Mobile};` : ''}
+					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'bottom' && ctaVRBottomOffset.Mobile !== undefined ? `bottom: ${ctaVRBottomOffset.Mobile}${ctaVRBottomOffsetUnits.Mobile};` : ''}
 					${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
+				}
+				.fb-cta-content-wrapper.${blockID} {
 					${MobilePadding ? `padding: ${MobilePadding};` : ""}
 					${MobileMargin ? `margin: ${MobileMargin};` : ""}
 					${BorderMobileWidth ? `border-width: ${BorderMobileWidth};` : ""}
@@ -2338,6 +2378,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBoxShadowCssValue,
 			globalHoverBoxShadowCssValue,
 
+			// Position
+			ctaPositionType,
+			ctaHZOrientationType,
+			ctaVROrientationType,
+			ctaHZLeftOffset,
+			ctaHZLeftOffsetUnits,
+			ctaHZRightOffset,
+			ctaHZRightOffsetUnits,
+			ctaVRTopOffset,
+			ctaVRTopOffsetUnits,
+			ctaVRBottomOffset,
+			ctaVRBottomOffsetUnits,
 		],
 	);
 
@@ -3298,6 +3350,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														rangeStep={1}
 														resetFallbackValue={""}
 														isRangeUnit={false}
+													/>
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={ctaPositionType}
+														setPositionType={(value) => setAttributes({ ctaPositionType: value })}
+																										
+														HZOrientationType={ctaHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ ctaHZOrientationType: value })
+														}
+														VROrientationType={ctaVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ ctaVROrientationType: value })
+														}
+																											
+														HZLeftOffset={ctaHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ ctaHZLeftOffset: value })}
+														HZLeftOffsetUnits={ctaHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ ctaHZLeftOffsetUnits: value })}
+														HZRightOffset={ctaHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ ctaHZRightOffset: value })}
+														HZRightOffsetUnits={ctaHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ ctaHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={ctaVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ ctaVRTopOffset: value })}
+														VRTopOffsetUnits={ctaVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ ctaVRTopOffsetUnits: value })}
+														VRBottomOffset={ctaVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ ctaVRBottomOffset: value })}
+														VRBottomOffsetUnits={ctaVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ ctaVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
 													/>
 
 													<FB_InputControl

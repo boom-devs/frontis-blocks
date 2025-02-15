@@ -23,6 +23,9 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
+import FB_PositionControl from '../../components/position-control/index.js';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
@@ -147,6 +150,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedVideoTabletSwitcher,
 		advancedVideoMobileSwitcher,
         
+        // Position
+        advancedVideoPositionType,
+        advancedVideoHZOrientationType,
+        advancedVideoVROrientationType,
+        advancedVideoHZLeftOffset,
+        advancedVideoHZLeftOffsetUnits,
+        advancedVideoHZRightOffset,
+        advancedVideoHZRightOffsetUnits,
+        advancedVideoVRTopOffset,
+        advancedVideoVRTopOffsetUnits,
+        advancedVideoVRBottomOffset,
+        advancedVideoVRBottomOffsetUnits,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -839,6 +854,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
         .${blockID}.fb-advanced-video-main-wrapper {
+            ${advancedVideoPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Desktop !== undefined ? `left: ${advancedVideoHZLeftOffset.Desktop}${advancedVideoHZLeftOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Desktop !== undefined ? `right: ${advancedVideoHZRightOffset.Desktop}${advancedVideoHZRightOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Desktop !== undefined ? `top: ${advancedVideoVRTopOffset.Desktop}${advancedVideoVRTopOffsetUnits.Desktop};` : ''}
+            ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Desktop}${advancedVideoVRBottomOffsetUnits.Desktop};` : ''}
             ${videoGlobalZIndex.Desktop ? `z-index: ${videoGlobalZIndex.Desktop};` : ''}
         }
         .${blockID}.fb-advanced-video-wrapper {
@@ -919,6 +941,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 1024px) {
 
             .${blockID}.fb-advanced-video-main-wrapper {
+                ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Tablet !== undefined ? `left: ${advancedVideoHZLeftOffset.Tablet}${advancedVideoHZLeftOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Tablet !== undefined ? `right: ${advancedVideoHZRightOffset.Tablet}${advancedVideoHZRightOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Tablet !== undefined ? `top: ${advancedVideoVRTopOffset.Tablet}${advancedVideoVRTopOffsetUnits.Tablet};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Tablet}${advancedVideoVRBottomOffsetUnits.Tablet};` : ''}
                 ${videoGlobalZIndex.Tablet ? `z-index: ${videoGlobalZIndex.Tablet};` : ''}
             }
 
@@ -980,6 +1007,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 767px) {
 
             .${blockID}.fb-advanced-video-main-wrapper {
+                ${advancedVideoPositionType !== 'default' ? `position: ${advancedVideoPositionType};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'left' && advancedVideoHZLeftOffset.Mobile !== undefined ? `left: ${advancedVideoHZLeftOffset.Mobile}${advancedVideoHZLeftOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoHZOrientationType === 'right' && advancedVideoHZRightOffset.Mobile !== undefined ? `right: ${advancedVideoHZRightOffset.Mobile}${advancedVideoHZRightOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Mobile !== undefined ? `top: ${advancedVideoVRTopOffset.Mobile}${advancedVideoVRTopOffsetUnits.Mobile};` : ''}
+                ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Mobile}${advancedVideoVRBottomOffsetUnits.Mobile};` : ''}
                 ${videoGlobalZIndex.Mobile ? `z-index: ${videoGlobalZIndex.Mobile};` : ''}
             }
 
@@ -1175,7 +1207,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         videoPlayIconBorderMobileWidth,
         videoPlayIconBorderRadiusMobileWidth,
         IframeBorderMobileWidth,
-        IframeBorderRadiusMobileWidth
+        IframeBorderRadiusMobileWidth,
+
+        // Position
+        advancedVideoPositionType,
+        advancedVideoHZOrientationType,
+        advancedVideoVROrientationType,
+        advancedVideoHZLeftOffset,
+        advancedVideoHZLeftOffsetUnits,
+        advancedVideoHZRightOffset,
+        advancedVideoHZRightOffsetUnits,
+        advancedVideoVRTopOffset,
+        advancedVideoVRTopOffsetUnits,
+        advancedVideoVRBottomOffset,
+        advancedVideoVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -1516,6 +1561,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={advancedVideoPositionType}
+                                                        setPositionType={(value) => setAttributes({ advancedVideoPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={advancedVideoHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ advancedVideoHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={advancedVideoVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ advancedVideoVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={advancedVideoHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ advancedVideoHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={advancedVideoHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ advancedVideoHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={advancedVideoHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ advancedVideoHZRightOffset: value })}
+                                                        HZRightOffsetUnits={advancedVideoHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ advancedVideoHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={advancedVideoVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ advancedVideoVRTopOffset: value })}
+                                                        VRTopOffsetUnits={advancedVideoVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ advancedVideoVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={advancedVideoVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ advancedVideoVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={advancedVideoVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ advancedVideoVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
                                                     />
                                                     <FB_InputControl
                                                         label={__("CSS ID", "frontis-blocks")}

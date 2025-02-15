@@ -33,10 +33,12 @@ import FB_BackgroundImageControl from '../../components/background-image-control
 import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
 import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
 import FB_SwitcherControl from '../../components/switcher-control/index.js';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -403,6 +405,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialProfileSeparatorMarginMobile,
 		socialProfileSeparatorMarginLink,
 
+		// Position
+		teamMemberPositionType,
+		teamMemberHZOrientationType,
+		teamMemberVROrientationType,
+		teamMemberHZLeftOffset,
+		teamMemberHZLeftOffsetUnits,
+		teamMemberHZRightOffset,
+		teamMemberHZRightOffsetUnits,
+		teamMemberVRTopOffset,
+		teamMemberVRTopOffsetUnits,
+		teamMemberVRBottomOffset,
+		teamMemberVRBottomOffsetUnits,
 
 		// Global Setting
 		teamMemberGlobalWraperID,
@@ -2268,6 +2282,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	const fbTeamMemberStyle = useMemo(
 		() => `
+
+			.fb-team-member-main-wrapper.${blockID} {
+				${teamMemberPositionType === 'default' ? `position: relative;` : ''}
+				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' ? `width: 100%;` : ''}
+				${teamMemberPositionType !== 'default' ? `position: ${teamMemberPositionType};` : ''}
+				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'left' && teamMemberHZLeftOffset.Desktop !== undefined ? `left: ${teamMemberHZLeftOffset.Desktop}${teamMemberHZLeftOffsetUnits.Desktop};` : ''}
+				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'right' && teamMemberHZRightOffset.Desktop !== undefined ? `right: ${teamMemberHZRightOffset.Desktop}${teamMemberHZRightOffsetUnits.Desktop};` : ''}
+				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'top' && teamMemberVRTopOffset.Desktop !== undefined ? `top: ${teamMemberVRTopOffset.Desktop}${teamMemberVRTopOffsetUnits.Desktop};` : ''}
+				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'bottom' && teamMemberVRBottomOffset.Desktop !== undefined ? `bottom: ${teamMemberVRBottomOffset.Desktop}${teamMemberVRBottomOffsetUnits.Desktop};` : ''}
+				${teamMemberZIndex.Desktop !== undefined ? `z-index: ${teamMemberZIndex.Desktop};` : ''}
+			}
 			.fb-team-member-main-wrapper.${blockID} .fb-team-member-wrapper {
 				position: relative;
 				${
@@ -2293,7 +2318,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberBorderDesktopWidth !== undefined ? `border-width: ${teamMemberBorderDesktopWidth};` : ''}
 				${teamMemberBorderColor !== undefined ? `border-color: ${teamMemberBorderColor};` : ''}
 				${teamMemberBorderRadiusDesktopWidth !== undefined ? `border-radius: ${teamMemberBorderRadiusDesktopWidth};` : ''}
-				${teamMemberZIndex.Desktop !== undefined ? `z-index: ${teamMemberZIndex.Desktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-main-wrapper.${blockID} .fb-team-member-wrapper:hover {
@@ -2708,12 +2732,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 			@media only screen and (max-width: 1024px) {
+				.fb-team-member-main-wrapper.${blockID} {
+					${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'left' && teamMemberHZLeftOffset.Tablet !== undefined ? `left: ${teamMemberHZLeftOffset.Tablet}${teamMemberHZLeftOffsetUnits.Tablet};` : ''}
+					${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'right' && teamMemberHZRightOffset.Tablet !== undefined ? `right: ${teamMemberHZRightOffset.Tablet}${teamMemberHZRightOffsetUnits.Tablet};` : ''}
+					${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'top' && teamMemberVRTopOffset.Tablet !== undefined ? `top: ${teamMemberVRTopOffset.Tablet}${teamMemberVRTopOffsetUnits.Tablet};` : ''}
+					${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'bottom' && teamMemberVRBottomOffset.Tablet !== undefined ? `bottom: ${teamMemberVRBottomOffset.Tablet}${teamMemberVRBottomOffsetUnits.Tablet};` : ''}
+					${teamMemberZIndex.Tablet !== undefined ? `z-index: ${teamMemberZIndex.Tablet};` : ''}
+				}
 				.fb-team-member-main-wrapper.${blockID} .fb-team-member-wrapper {
 					${teamMemberPaddingTabletWidth !== undefined ? `padding: ${teamMemberPaddingTabletWidth};` : ''}
 					${teamMemberMarginTabletWidth !== undefined ? `margin: ${teamMemberMarginTabletWidth};` : ''}
 					${teamMemberBorderTabletWidth !== undefined ? `border-width: ${teamMemberBorderTabletWidth};` : ''}
 					${teamMemberBorderRadiusTabletWidth !== undefined ? `border-radius: ${teamMemberBorderRadiusTabletWidth};` : ''}
-					${teamMemberZIndex.Tablet !== undefined ? `z-index: ${teamMemberZIndex.Tablet};` : ''}
 				}
 
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
@@ -2780,12 +2810,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 				@media only screen and (max-width: 767px) {
+					.fb-team-member-main-wrapper.${blockID} {
+						${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'left' && teamMemberHZLeftOffset.Mobile !== undefined ? `left: ${teamMemberHZLeftOffset.Mobile}${teamMemberHZLeftOffsetUnits.Mobile};` : ''}
+						${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberHZOrientationType === 'right' && teamMemberHZRightOffset.Mobile !== undefined ? `right: ${teamMemberHZRightOffset.Mobile}${teamMemberHZRightOffsetUnits.Mobile};` : ''}
+						${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'top' && teamMemberVRTopOffset.Mobile !== undefined ? `top: ${teamMemberVRTopOffset.Mobile}${teamMemberVRTopOffsetUnits.Mobile};` : ''}
+						${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'bottom' && teamMemberVRBottomOffset.Mobile !== undefined ? `bottom: ${teamMemberVRBottomOffset.Mobile}${teamMemberVRBottomOffsetUnits.Mobile};` : ''}
+						${teamMemberZIndex.Mobile !== undefined ? `z-index: ${teamMemberZIndex.Mobile};` : ''}
+					}
 					.fb-team-member-main-wrapper.${blockID} .fb-team-member-wrapper {
 						${teamMemberPaddingMobileWidth !== undefined ? `padding: ${teamMemberPaddingMobileWidth};` : ''}
 						${teamMemberMarginMobileWidth !== undefined ? `margin: ${teamMemberMarginMobileWidth};` : ''}
 						${teamMemberBorderMobileWidth !== undefined ? `border-width: ${teamMemberBorderMobileWidth};` : ''}
 						${teamMemberBorderRadiusMobileWidth !== undefined ? `border-radius: ${teamMemberBorderRadiusMobileWidth};` : ''}
-						${teamMemberZIndex.Mobile !== undefined ? `z-index: ${teamMemberZIndex.Mobile};` : ''}
 					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
@@ -3157,6 +3193,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			socialProfileSeparatorMarginTab,
 			socialProfileSeparatorMarginMobile,
 			socialProfileSeparatorMarginLink,
+
+			teamMemberPositionType,
+			teamMemberHZOrientationType,
+			teamMemberVROrientationType,
+			teamMemberHZLeftOffset,
+			teamMemberHZLeftOffsetUnits,
+			teamMemberHZRightOffset,
+			teamMemberHZRightOffsetUnits,
+			teamMemberVRTopOffset,
+			teamMemberVRTopOffsetUnits,
+			teamMemberVRBottomOffset,
+			teamMemberVRBottomOffsetUnits,
 		]
 	);
 	
@@ -4481,6 +4529,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
                                                     />
 
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={teamMemberPositionType}
+														setPositionType={(value) => setAttributes({ teamMemberPositionType: value })}
+													
+														HZOrientationType={teamMemberHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ teamMemberHZOrientationType: value })
+														}
+														VROrientationType={teamMemberVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ teamMemberVROrientationType: value })
+														}
+														
+														HZLeftOffset={teamMemberHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ teamMemberHZLeftOffset: value })}
+														HZLeftOffsetUnits={teamMemberHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ teamMemberHZLeftOffsetUnits: value })}
+														HZRightOffset={teamMemberHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ teamMemberHZRightOffset: value })}
+														HZRightOffsetUnits={teamMemberHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ teamMemberHZRightOffsetUnits: value })}
+													
+														VRTopOffset={teamMemberVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ teamMemberVRTopOffset: value })}
+														VRTopOffsetUnits={teamMemberVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ teamMemberVRTopOffsetUnits: value })}
+														VRBottomOffset={teamMemberVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ teamMemberVRBottomOffset: value })}
+														VRBottomOffsetUnits={teamMemberVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ teamMemberVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
+													
 													<FB_InputControl
 														label={__("CSS ID", "frontis-blocks")}
 														value={teamMemberGlobalWraperID}

@@ -41,7 +41,11 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_PositionControl from '../../components/position-control/index.js';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -261,6 +265,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		dualButtonGlobalWraperID,
 		dualButtonGlobalWraperClass,
+
+		// Position
+		dualBtnPositionType,
+		dualBtnHZOrientationType,
+		dualBtnVROrientationType,
+		dualBtnHZLeftOffset,
+		dualBtnHZLeftOffsetUnits,
+		dualBtnHZRightOffset,
+		dualBtnHZRightOffsetUnits,
+		dualBtnVRTopOffset,
+		dualBtnVRTopOffsetUnits,
+		dualBtnVRBottomOffset,
+		dualBtnVRBottomOffsetUnits,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1994,8 +2011,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const dualButtonStyle = useMemo(
 		() => `
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType === 'default' ? `position: relative;` : ''}
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Desktop !== undefined ? `left: ${dualBtnHZLeftOffset.Desktop}${dualBtnHZLeftOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Desktop !== undefined ? `right: ${dualBtnHZRightOffset.Desktop}${dualBtnHZRightOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Desktop !== undefined ? `top: ${dualBtnVRTopOffset.Desktop}${dualBtnVRTopOffsetUnits.Desktop};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${dualBtnVRBottomOffset.Desktop}${dualBtnVRBottomOffsetUnits.Desktop};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : "" }
+		}
 		.fb-dual-button-container.${blockID} {
-            ${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex};` : "" }
             ${dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""} 
@@ -2130,6 +2155,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
     
 		@media only screen and (max-width: 1024px) {
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Tablet !== undefined ? `left: ${dualBtnHZLeftOffset.Tablet}${dualBtnHZLeftOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Tablet !== undefined ? `right: ${dualBtnHZRightOffset.Tablet}${dualBtnHZRightOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Tablet !== undefined ? `top: ${dualBtnVRTopOffset.Tablet}${dualBtnVRTopOffsetUnits.Tablet};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Tablet !== undefined ? `bottom: ${dualBtnVRBottomOffset.Tablet}${dualBtnVRBottomOffsetUnits.Tablet};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Tablet};` : "" }
+		}
 		.fb-dual-button-container.${blockID} {
 			${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
 			${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""} 
@@ -2175,6 +2208,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		}
 		@media only screen and (max-width: 767px) {
+		.fb-dual-button-area.${blockID} {
+			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Mobile !== undefined ? `left: ${dualBtnHZLeftOffset.Mobile}${dualBtnHZLeftOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Mobile !== undefined ? `right: ${dualBtnHZRightOffset.Mobile}${dualBtnHZRightOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Mobile !== undefined ? `top: ${dualBtnVRTopOffset.Mobile}${dualBtnVRTopOffsetUnits.Mobile};` : ''}
+			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Mobile !== undefined ? `bottom: ${dualBtnVRBottomOffset.Mobile}${dualBtnVRBottomOffsetUnits.Mobile};` : ''}
+			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Mobile};` : "" }
+		}	
 		.fb-dual-button-container.${blockID} {
 			${globalMobilePadding ? `padding: ${globalMobilePadding};` : ""}
 			${globalMobileMargin ? `margin: ${globalMobileMargin};` : ""} 
@@ -2333,6 +2374,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBoxShadowHoverValues,
 			globalBoxShadowCssValue,
 			globalHoverBoxShadowCssValue,
+
+			// Position
+			dualBtnPositionType,
+			dualBtnHZOrientationType,
+			dualBtnVROrientationType,
+			dualBtnHZLeftOffset,
+			dualBtnHZLeftOffsetUnits,
+			dualBtnHZRightOffset,
+			dualBtnHZRightOffsetUnits,
+			dualBtnVRTopOffset,
+			dualBtnVRTopOffsetUnits,
+			dualBtnVRBottomOffset,
+			dualBtnVRBottomOffsetUnits,
 		],
 	);
 
@@ -3453,6 +3507,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
                                                     />
+
+													<FB_PositionControl
+														deviceType={deviceType}
+														positionType={dualBtnPositionType}
+														setPositionType={(value) => setAttributes({ dualBtnPositionType: value })}
+																										
+														HZOrientationType={dualBtnHZOrientationType}
+														setHZOrientationType={(value) =>
+															setAttributes({ dualBtnHZOrientationType: value })
+														}
+														VROrientationType={dualBtnVROrientationType}
+														setVROrientationType={(value) =>
+															setAttributes({ dualBtnVROrientationType: value })
+														}
+																											
+														HZLeftOffset={dualBtnHZLeftOffset}
+														setHZLeftOffset={(value) => setAttributes({ dualBtnHZLeftOffset: value })}
+														HZLeftOffsetUnits={dualBtnHZLeftOffsetUnits}
+														setHZLeftOffsetUnits={(value) => setAttributes({ dualBtnHZLeftOffsetUnits: value })}
+														HZRightOffset={dualBtnHZRightOffset}
+														setHZRightOffset={(value) => setAttributes({ dualBtnHZRightOffset: value })}
+														HZRightOffsetUnits={dualBtnHZRightOffsetUnits}
+														setHZRightOffsetUnits={(value) => setAttributes({ dualBtnHZRightOffsetUnits: value })}
+																										
+														VRTopOffset={dualBtnVRTopOffset}
+														setVRTopOffset={(value) => setAttributes({ dualBtnVRTopOffset: value })}
+														VRTopOffsetUnits={dualBtnVRTopOffsetUnits}
+														setVRTopOffsetUnits={(value) => setAttributes({ dualBtnVRTopOffsetUnits: value })}
+														VRBottomOffset={dualBtnVRBottomOffset}
+														setVRBottomOffset={(value) => setAttributes({ dualBtnVRBottomOffset: value })}
+														VRBottomOffsetUnits={dualBtnVRBottomOffsetUnits}
+														setVRBottomOffsetUnits={(value) => setAttributes({ dualBtnVRBottomOffsetUnits: value })}
+
+														setAttributes={setAttributes}
+													/>
 
 													<FB_InputControl
 														label={__("CSS ID", "frontis-blocks")}

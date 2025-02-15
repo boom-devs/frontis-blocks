@@ -71,7 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
 
-            <div {...blockProps} id={blockID}  className={dualButtonGlobalWraperClass} >
+            <div {...blockProps} id={blockID}  className={`fb-dual-button-area ${blockID} ${dualButtonGlobalWraperClass}`} >
                 <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} id={dualButtonGlobalWraperID} ref={panelRef}>
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 

@@ -9,7 +9,11 @@ import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from '@Config/displayType';
+import FB_PositionControl from '../../components/position-control/index.js';
+
 import './editor.scss';
 
 import {
@@ -138,6 +142,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalWraperID,
         sliderGlobalWraperClass,
 
+        // Position
+        sliderPositionType,
+        sliderHZOrientationType,
+        sliderVROrientationType,
+        sliderHZLeftOffset,
+        sliderHZLeftOffsetUnits,
+        sliderHZRightOffset,
+        sliderHZRightOffsetUnits,
+        sliderVRTopOffset,
+        sliderVRTopOffsetUnits,
+        sliderVRBottomOffset,
+        sliderVRBottomOffsetUnits,
     } = attributes;
     const deviceType = useDeviceType();
 
@@ -756,6 +772,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const sliderBlockStyle = useMemo(() => `
         .fb-block-${ blockId }.fb-slider-container{
+            ${sliderPositionType === 'default' ? `position: relative;` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${sliderPositionType !== 'default' ? `position: ${sliderPositionType};` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Desktop !== undefined ? `left: ${sliderHZLeftOffset.Desktop}${sliderHZLeftOffsetUnits.Desktop};` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Desktop !== undefined ? `right: ${sliderHZRightOffset.Desktop}${sliderHZRightOffsetUnits.Desktop};` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Desktop !== undefined ? `top: ${sliderVRTopOffset.Desktop}${sliderVRTopOffsetUnits.Desktop};` : ''}
+            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Desktop !== undefined ? `bottom: ${sliderVRBottomOffset.Desktop}${sliderVRBottomOffsetUnits.Desktop};` : ''}
             ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
             ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
             ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
@@ -774,7 +797,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 background: ${sliderGlobalBgNormalClassicColor};
             `}
             transition: all .3s ease-in-out;
-            position: relative;
             box-sizing: border-box;
         }
         .fb-block-${ blockId }.fb-slider-container:hover{
@@ -834,6 +856,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
             .fb-block-${ blockId }.fb-slider-container{
+                ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Tablet !== undefined ? `left: ${sliderHZLeftOffset.Tablet}${sliderHZLeftOffsetUnits.Tablet};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Tablet !== undefined ? `right: ${sliderHZRightOffset.Tablet}${sliderHZRightOffsetUnits.Tablet};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Tablet !== undefined ? `top: ${sliderVRTopOffset.Tablet}${sliderVRTopOffsetUnits.Tablet};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Tablet !== undefined ? `bottom: ${sliderVRBottomOffset.Tablet}${sliderVRBottomOffsetUnits.Tablet};` : ''}
                 ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
                 ${sliderGlobalPaddingTabletWidth ? `padding: ${sliderGlobalPaddingTabletWidth};` : ''}
                 ${sliderGlobalMarginTabletWidth ? `margin: ${sliderGlobalMarginTabletWidth};` : ''}
@@ -852,7 +878,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${sliderGlobalBgNormalClassicColor};
                 `}
                 transition: all .3s ease-in-out;
-                position: relative;
                 box-sizing: border-box;
             }
             .fb-block-${ blockId }.fb-slider-container:hover{
@@ -895,6 +920,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             
         @media only screen and (max-width: 767px) {
             .fb-block-${ blockId }.fb-slider-container{
+                ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Mobile !== undefined ? `left: ${sliderHZLeftOffset.Mobile}${sliderHZLeftOffsetUnits.Mobile};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Mobile !== undefined ? `right: ${sliderHZRightOffset.Mobile}${sliderHZRightOffsetUnits.Mobile};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Mobile !== undefined ? `top: ${sliderVRTopOffset.Mobile}${sliderVRTopOffsetUnits.Mobile};` : ''}
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Mobile !== undefined ? `bottom: ${sliderVRBottomOffset.Mobile}${sliderVRBottomOffsetUnits.Mobile};` : ''} 
                 ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
                 ${sliderGlobalPaddingMobileWidth ? `padding: ${sliderGlobalPaddingMobileWidth};` : ''}
                 ${sliderGlobalMarginMobileWidth ? `margin: ${sliderGlobalMarginMobileWidth};` : ''}
@@ -913,7 +942,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     background: ${sliderGlobalBgNormalClassicColor};
                 `}
                 transition: all .3s ease-in-out;
-                position: relative;
                 box-sizing: border-box;
             }
             .fb-block-${ blockId }.fb-slider-container:hover{
@@ -1049,8 +1077,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalBoxShadowValues,
         sliderGlobalBoxShadowCssValue,
         sliderGlobalBoxShadowHoverValues,
-        sliderGlobalBoxShadowHoverCssValue
+        sliderGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
+
+        // Position
+        sliderPositionType,
+        sliderHZOrientationType,
+        sliderVROrientationType,
+        sliderHZLeftOffset,
+        sliderHZLeftOffsetUnits,
+        sliderHZRightOffset,
+        sliderHZRightOffsetUnits,
+        sliderVRTopOffset,
+        sliderVRTopOffsetUnits,
+        sliderVRBottomOffset,
+        sliderVRBottomOffsetUnits,
     ]);
 
     useEffect(() => {
@@ -1385,6 +1426,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
                                                 />
+
+                                                <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={sliderPositionType}
+                                                        setPositionType={(value) => setAttributes({ sliderPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={sliderHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ sliderHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={sliderVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ sliderVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={sliderHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ sliderHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={sliderHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ sliderHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={sliderHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ sliderHZRightOffset: value })}
+                                                        HZRightOffsetUnits={sliderHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ sliderHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={sliderVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ sliderVRTopOffset: value })}
+                                                        VRTopOffsetUnits={sliderVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ sliderVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={sliderVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ sliderVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={sliderVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ sliderVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
 
                                                 <FB_InputControl
                                                     label={__("CSS Class", "frontis-blocks")}
