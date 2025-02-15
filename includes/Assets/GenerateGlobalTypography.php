@@ -17,7 +17,6 @@ class GenerateGlobalTypography {
 		if($data) {
 			 foreach($data as $key => $single_code) {
 				$selector = '';
-
 				$editor_selector = '';
 
 				if(current_user_can('editor') || current_user_can('administrator')) {
@@ -96,7 +95,7 @@ class GenerateGlobalTypography {
 				}
 
 				// For other keys such as 'body', 'link', 'button'
-				if ($key !== 'heading') {
+				if (($key !== 'heading') && $key !== 'all') {
 					if( (isset($single_code['fontFamily']) && !empty($single_code['fontFamily'])) || (isset($single_code['fontWeight']) && !empty($single_code['fontWeight'])) || (isset($single_code['fontStyle']) && !empty($single_code['fontStyle'])) || (isset($single_code['textTransform']) && !empty($single_code['textTransform'])) || (isset($single_code['textDecoration']) && !empty($single_code['textDecoration'])) || (isset($single_code['lineHeight']) && !empty($single_code['lineHeight'])) || (isset($single_code['fontSize']) && !empty($single_code['fontSize'])) || (isset($single_code['letterSpacing']) && !empty($single_code['letterSpacing'])) ) {
 						$css .= "$selector {\n";
 						if (isset($single_code['fontFamily']) && !empty($single_code['fontFamily']) && $single_code['fontFamily'] !== 'Default') {

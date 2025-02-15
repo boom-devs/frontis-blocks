@@ -1474,4 +1474,9 @@ export const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+	contactFormCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 }

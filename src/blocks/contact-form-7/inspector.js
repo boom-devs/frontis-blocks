@@ -272,6 +272,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormTabletSwitcher,
 		contactFormMobileSwitcher,
 
+		contactFormCustomCSS,
 		contactFormGlobalWraperID,
 		contactFormGlobalWraperClass,
 
@@ -2793,12 +2794,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(contactFormCustomCSS, `.${blockID}`); 
+
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
 
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -3806,6 +3809,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ contactFormMobileSwitcher: value })}
 													/>
 												</PanelBody>
+												<PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={contactFormCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ contactFormCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                             </div>
                                         </div>
                                     </>

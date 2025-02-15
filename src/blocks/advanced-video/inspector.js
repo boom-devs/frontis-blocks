@@ -162,6 +162,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         advancedVideoVRTopOffsetUnits,
         advancedVideoVRBottomOffset,
         advancedVideoVRBottomOffsetUnits,
+
+        advancedVideoCustomCSS,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -863,7 +865,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Desktop}${advancedVideoVRBottomOffsetUnits.Desktop};` : ''}
             ${videoGlobalZIndex.Desktop ? `z-index: ${videoGlobalZIndex.Desktop};` : ''}
         }
-        .${blockID}.fb-advanced-video-wrapper {
+        .${blockID} .fb-advanced-video-wrapper {
             ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
             padding: ${DesktopPadding};
             margin: ${DesktopMargin};
@@ -874,7 +876,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${videoGlobalBoxShadowCssValue ? `box-shadow: ${videoGlobalBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockID}.fb-advanced-video-wrapper:hover {
+        .${blockID} .fb-advanced-video-wrapper:hover {
             ${videoGlobalBgHoverColor !== undefined ? `background-color: ${videoGlobalBgHoverColor};` : ''};
             ${videoGlobalBorderHoverColor !== undefined ? `border-color: ${videoGlobalBorderHoverColor};` : ''};
             ${videoGlobalBoxShadowHoverCssValue ? `box-shadow: ${videoGlobalBoxShadowHoverCssValue};` : ''}
@@ -949,7 +951,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${videoGlobalZIndex.Tablet ? `z-index: ${videoGlobalZIndex.Tablet};` : ''}
             }
 
-            .${blockID}.fb-advanced-video-wrapper {
+            .${blockID} .fb-advanced-video-wrapper {
                 padding: ${TabletPadding};
                 margin: ${TabletMargin};
                 border-width: ${BorderTabletWidth};
@@ -1015,7 +1017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${videoGlobalZIndex.Mobile ? `z-index: ${videoGlobalZIndex.Mobile};` : ''}
             }
 
-            .${blockID}.fb-advanced-video-wrapper {
+            .${blockID} .fb-advanced-video-wrapper {
                 padding: ${MobilePadding};
                 margin: ${MobileMargin};
                 border-width: ${BorderMobileWidth};
@@ -1223,11 +1225,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         advancedVideoVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [ allBlockStyle]);
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const customCss = getCustomCss(advancedVideoCustomCSS, `.${blockID}`);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
+
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -1774,6 +1779,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedVideoCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ advancedVideoCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                             </div>
                                         </div>
                                     </>
