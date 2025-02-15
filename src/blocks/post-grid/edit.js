@@ -49,7 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `${blockId} ${postGridGlobalWraperClass}`,
+        className: `fb-post-grid-area ${blockId} ${postGridGlobalWraperClass}`,
     });
 
     const { useSelect } = wp.data;

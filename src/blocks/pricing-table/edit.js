@@ -92,7 +92,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
     const blockProps = useBlockProps({
-        className: `${blockId} ${pricingTableGlobalWraperClass}`,
+        className: `fb-pricing-area ${blockId} ${pricingTableGlobalWraperClass}`,
     });
 
     /**

@@ -42,7 +42,7 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps} id={blockID} className={infoBoxGlobalWraperClass}>
+			<div {...blockProps} id={blockID} className={`fb-info-box-area ${blockID} ${infoBoxGlobalWraperClass}`}>
 				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} id={infoBoxGlobalWraperID}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">

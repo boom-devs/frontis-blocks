@@ -45,7 +45,7 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: postGridGlobalWraperClass,
+		className: `fb-post-grid-area ${blockId} ${postGridGlobalWraperClass}`,
 	});
 
 	return (

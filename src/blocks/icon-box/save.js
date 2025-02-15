@@ -36,7 +36,7 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps} id={blockID} className={iconBoxGlobalWraperClass}>
+			<div {...blockProps} id={blockID} className={`fb-icon-box-area ${blockID} ${iconBoxGlobalWraperClass}`}>
 				{wrapperUrlSwitcher ? (
 					<a
 						href={wrapperLink}
