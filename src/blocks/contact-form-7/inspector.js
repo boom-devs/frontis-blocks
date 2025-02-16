@@ -26,6 +26,7 @@ import {
 	BORDER_STYLES,
 	FONT_FAMILYS,
 	WIDTH_STYLES,
+	OVERFLOW_OP,
 } from "./constants/constants";
 
 import FB_Spacing from "@Components/spacing";
@@ -52,6 +53,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockID,
 		// deviceType,
 		contactFormGlobalZIndex,
+		contactFormOverflow,
 		formId,
 		showPlaceholder,
 		showErrorMessage,
@@ -1868,6 +1870,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 			${contactFormGlobalBoxShadowCssValue ? `box-shadow: ${contactFormGlobalBoxShadowCssValue};` : ''} 
 			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
+			${contactFormOverflow !== 'default' ? `overflow: ${contactFormOverflow};` : ''}
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {
@@ -2497,6 +2500,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockID,
 		deviceType,
 		contactFormGlobalZIndex,
+		contactFormOverflow,
 		formId,
 		showPlaceholder,
 		showErrorMessage,
@@ -3595,6 +3599,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={contactFormOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ contactFormOverflow: value })}
                                                     />
 
 													<FB_PositionControl

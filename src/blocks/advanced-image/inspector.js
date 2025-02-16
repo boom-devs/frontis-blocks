@@ -38,7 +38,8 @@ import {
 	STYLES,
 	TITLE_POSITION,
 	HOVER_EFFECTS,
-	AUTO_FIT
+	AUTO_FIT,
+	OVERFLOW_OP
 } from "./constants/constants";
 import "./editor.scss";
 
@@ -186,6 +187,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBorderRadiusMobile,
 		globalBorderRadiusLink,
 		globalZIndex,
+		advancedImageOverflow,
 		blockStyle,
 		showOverlay,
 
@@ -945,6 +947,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Desktop !== undefined ? `top: ${advancedImageVRTopOffset.Desktop}${advancedImageVRTopOffsetUnits.Desktop};` : ''}
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedImageVRBottomOffset.Desktop}${advancedImageVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
 			padding: ${globalDeskPadding};
@@ -1120,6 +1123,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalTabBorderRadius,
 			globalMobBorderRadius,
 			globalBorderColor,
+			globalZIndex,
+			advancedImageOverflow,
 			boxGlobalBoxShadowCssValue,
 			testBackgroundType,
 			testCustomGradientSwitcher,
@@ -1731,6 +1736,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														isRangeUnit={false}
 
 													/>
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={advancedImageOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ advancedImageOverflow: value })}
+                                                    />
 
 													<FB_PositionControl
 														deviceType={deviceType}
