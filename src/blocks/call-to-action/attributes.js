@@ -145,7 +145,7 @@ const attributes = {
 	},
     btnIconColor: {
 		type: 'string',
-        default: '#15171C'
+        default: '#ffffff'
 	},
     btnIconHoverColor: {
 		type: 'string',
@@ -186,7 +186,7 @@ const attributes = {
 	},
 	btnTwoIconColor: {
 		type: 'string',
-		default: '#ffffff'
+		default: '#004AAD'
 	},
 	btnTwoIconHoverColor: {
 		type: 'string',
@@ -1030,7 +1030,7 @@ const attributes = {
 	},
 	buttonTwoTextColor: {
 		type: "string",
-		default: '#ffffff'
+		default: '#004AAD'
 	},
 	buttonTwoTextHoverColor: {
 		type: "string"
@@ -1160,7 +1160,7 @@ const attributes = {
 	},
 	btnTwoBorderColor: {
 		type: 'string',
-        default: '#404655'
+        default: '#004AAD'
 	},
 	btnTwoHoverBorderColor: {
 		type: 'string',
@@ -1467,7 +1467,7 @@ const attributes = {
 	},
 	buttonTextColor : {
 		type: "string",
-		default: '#15171C'
+		default: '#ffffff'
 	},
 	buttonTextHoverColor : {
 		type: "string"
@@ -1478,7 +1478,7 @@ const attributes = {
 	},
 	buttonBgColor : {
 		type: "string",
-		default: '#ffffff'
+		default: '#4361EE'
 	},
 	buttonBgHoverColor : {
 		type: "string"
@@ -1874,22 +1874,22 @@ const attributes = {
         type: "string",
         default: "normal"
     },
-    testBackgroundType: {
+    ctaGlobalBackgroundType: {
         type: "string",
         default: "classic"
     },
-    testClassicColor: {
+    ctaGlobalClassicColor: {
         type: "string",
-        default: "#15171C"
+        default: "#399CFF"
     },
-    testGradientColor: {
+    ctaGlobalGradientColor: {
         type: "string",
     },
-    testCustomGradientSwitcher: {
+    ctaGlobalCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    testCustomGradientInputValue: {
+    ctaGlobalCustomGradientInputValue: {
         type: "string",
         default: ""
     },
@@ -1897,7 +1897,7 @@ const attributes = {
         type: "string",
         default: ""
     },
-    testBackgroundImageUrl: {
+    ctaGlobalBackgroundImageUrl: {
         type: "string",
         default: ""
     },
@@ -1909,19 +1909,19 @@ const attributes = {
         type: "string",
         default: ""
     },
-    testBackgroundImagePosition: {
+    ctaGlobalBackgroundImagePosition: {
         type: "string",
         default: ""
     },
-    testBackgroundImageAttachment: {
+    ctaGlobalBackgroundImageAttachment: {
         type: "string",
         default: ""
     },
-    testBackgroundImageSize: {
+    ctaGlobalBackgroundImageSize: {
         type: "string",
         default: ""
     },
-    testBackgroundImageRepeat: {
+    ctaGlobalBackgroundImageRepeat: {
         type: "string",
         default: ""
     },
