@@ -26,6 +26,7 @@ import {
     BORDER_STYLES,
     FONT_FAMILYS,
     WIDTH_STYLES,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -51,6 +52,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         // deviceType,
         fluentFormGlobalZIndex,
+        fluentFormOverflow,
         formId,
         showLabels,
         showPlaceholder,
@@ -2342,6 +2344,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'top' && fluentFormVRTopOffset.Desktop !== undefined ? `top: ${fluentFormVRTopOffset.Desktop}${fluentFormVRTopOffsetUnits.Desktop};` : ''}
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'bottom' && fluentFormVRBottomOffset.Desktop !== undefined ? `bottom: ${fluentFormVRBottomOffset.Desktop}${fluentFormVRBottomOffsetUnits.Desktop};` : ''}
             ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
+            ${fluentFormOverflow !== 'default' ? `overflow: ${fluentFormOverflow};` : ''}
             ${fluentFormGlobalBoxShadowCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowCssValue};` : ''} 
             transition: all .3s ease-in-out;
         }
@@ -3198,6 +3201,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         deviceType,
         fluentFormGlobalZIndex,
+        fluentFormOverflow,
         formId,
         showLabels,
         showPlaceholder,
@@ -4799,6 +4803,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={fluentFormOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ fluentFormOverflow: value })}
                                                     />
 
                                                     <FB_PositionControl

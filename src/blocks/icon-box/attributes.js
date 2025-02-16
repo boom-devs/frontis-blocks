@@ -1104,6 +1104,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    iconBoxOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalPaddingUnits: {
 		type: 'object',
 		default: {

@@ -15,6 +15,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    fluentFormOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	formId: {
 		type: 'string'
 	},

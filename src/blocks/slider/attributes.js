@@ -591,13 +591,17 @@ const attributes = {
     
 
     /** Start Global Setting */
-	sliderGlobalZIndex : {
+	sliderGlobalZIndex: {
         type: "object",
         default: {
             Desktop: '',
             Tablet: '',
             Mobile: ''
         }
+    },
+    sliderOverflow: {
+        type: 'string',
+        default: "default",
     },
 	/** Start Padding */
 	sliderGlobalPaddingUnits: {

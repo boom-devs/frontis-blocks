@@ -15,7 +15,7 @@ import {
     TextControl,
 } from '@wordpress/components';
 
-import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN } from './constants/constants';
+import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN, OVERFLOW_OP } from './constants/constants';
 
 /**
  * External Dependencies
@@ -376,6 +376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Global Setting */
         postGlobalZIndex,
+        postGridOverflow,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
         postGlobalPaddingTablet,
@@ -2746,6 +2747,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'top' && postGridVRTopOffset.Desktop !== undefined ? `top: ${postGridVRTopOffset.Desktop}${postGridVRTopOffsetUnits.Desktop};` : ''}
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'bottom' && postGridVRBottomOffset.Desktop !== undefined ? `bottom: ${postGridVRBottomOffset.Desktop}${postGridVRBottomOffsetUnits.Desktop};` : ''}
             ${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ''}
+            ${postGridOverflow !== 'default' ? `overflow: ${postGridOverflow};` : ''}
         }
         .${blockId}.fb_post_grid_container {
             ${postGlobalDesktopPaddingWidth ? `padding: ${postGlobalDesktopPaddingWidth};` : ''}
@@ -4125,6 +4127,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         postGlobalZIndex,
+        postGridOverflow,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
         postGlobalPaddingTablet,
@@ -6007,6 +6010,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={postGridOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ postGridOverflow: value })}
                                                     />
 
                                                     <FB_PositionControl

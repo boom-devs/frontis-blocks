@@ -15,6 +15,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    progressbarOverflow: {
+        type: 'string',
+        default: "default",
+    },
     progressTextPosition: {
         type: "string",
         default: "text-outSide",

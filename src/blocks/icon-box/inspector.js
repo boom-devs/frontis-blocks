@@ -33,7 +33,8 @@ import {
 	ICON_ICON_POSITION,
 	ICON_ICON_VERTICAL_POSITION,
 	ICON_WRAP_ALIGNMENT,
-	PRESETS
+	PRESETS,
+	OVERFLOW_OP
 } from "./constants/constants";
 
 import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
@@ -222,6 +223,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
+		iconBoxOverflow,
 		globalPaddingUnits,
 		globalPaddingDesktop,
 		globalPaddingTablet,
@@ -2152,6 +2154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Desktop !== undefined ? `top: ${iconBoxVRTopOffset.Desktop}${iconBoxVRTopOffsetUnits.Desktop};` : ''}
             ${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'bottom' && iconBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${iconBoxVRBottomOffset.Desktop}${iconBoxVRBottomOffsetUnits.Desktop};` : ''} 
 			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}  
+            ${iconBoxOverflow !== 'default' ? `overflow: ${iconBoxOverflow};` : ''}
 		  }
 		  .fb-icon-box-wrapper.${blockID} {
 		  	  position: relative;
@@ -2618,6 +2621,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaSize,
 			mediaSizeUnits,
 			globalZIndex,
+			iconBoxOverflow,
 			globalPaddingUnits,
 			globalPaddingDesktop,
 			globalPaddingTablet,
@@ -3856,6 +3860,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeStep={1}
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={iconBoxOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ iconBoxOverflow: value })}
                                                     />
 
 													<FB_PositionControl

@@ -893,6 +893,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	countDownOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalBgColorSwitcher: {
 		type: "string",
 		default: "normal"

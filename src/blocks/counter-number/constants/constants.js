@@ -24,6 +24,14 @@ export const separator_UNIT_TYPES = [
 	{ label: "em", value: "em" },
 ];
 
+export const OVERFLOW_OP = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
+    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },
