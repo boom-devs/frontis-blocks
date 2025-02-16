@@ -17,6 +17,14 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
+export const OVERFLOW_OP = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
+    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
 export const HEADING = [
 	{ label: __("H1", "frontis-blocks"), value: "h1" },
 	{ label: __("H2", "frontis-blocks"), value: "h2" },

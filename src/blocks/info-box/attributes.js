@@ -1105,6 +1105,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    infoBoxOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalPaddingUnits: {
 		type: 'object',
 		default: {
