@@ -21,11 +21,15 @@ export default function save({ attributes }) {
         activeLineSwitcher,
         headingGlobalWraperID,
         headingGlobalWraperClass,
+
+        advancedHeadingDesktopSwitcher,
+        advancedHeadingTabletSwitcher,
+        advancedHeadingMobileSwitcher,
     } = attributes;
 
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
