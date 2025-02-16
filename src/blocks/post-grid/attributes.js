@@ -1795,6 +1795,10 @@ const attributes = {
 			Mobile: '',
 		}
 	},
+	postGridOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	postGlobalPaddingUnits: {
 		type: 'object',
@@ -2423,6 +2427,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	postGridGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	postGridGlobalWraperID : {
 		type: "string",
 		default: ""

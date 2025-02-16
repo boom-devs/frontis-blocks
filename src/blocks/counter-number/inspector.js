@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES} from "./constants/constants";
+import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -36,6 +36,9 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '../../components/position-control/index.js';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -136,6 +139,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         //Global attributes
         counterGlobalZIndex,
+        counterOverflow,
         counterGlobalPaddingUnits,
         counterGlobalPaddingDesktop,
         counterGlobalPaddingTablet,
@@ -182,6 +186,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRTopOffsetUnits,
         counterVRBottomOffset,
         counterVRBottomOffsetUnits,
+
+        counterGlobalWraperCustomCSS,
+        counterGlobalWraperID,
+        counterGlobalWraperClass,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -959,6 +967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Desktop !== undefined ? `top: ${counterVRTopOffset.Desktop}${counterVRTopOffsetUnits.Desktop};` : ''}
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Desktop !== undefined ? `bottom: ${counterVRBottomOffset.Desktop}${counterVRBottomOffsetUnits.Desktop};` : ''}
         ${counterGlobalZIndex.Desktop ? `z-index: ${counterGlobalZIndex.Desktop};` : ''}
+        ${counterOverflow !== 'default' ? `overflow: ${counterOverflow};` : ''}
     }
     .fb-counter-wrapper.${blockID}{
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
@@ -1140,6 +1149,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBorderHoverColor,
         counterGlobalBoxShadowCssValue,
         counterGlobalZIndex,
+        counterOverflow,
 
         // Position
         counterPositionType,
@@ -1155,12 +1165,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRBottomOffsetUnits,
     ]);
  
+    const customCss = getCustomCss(counterGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-    setAttributes({blockStyle: `${counterBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [counterBlockStyle]);
+        setAttributes({blockStyle: `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [counterBlockStyle, customCss]);
 
 
-    const editorStyle = counterBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1647,6 +1659,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     isRangeUnit={false}
                                                 />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={counterOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ counterOverflow: value })}
+                                                    />
+
                                                 <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={counterPositionType}
@@ -1680,6 +1699,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setVRBottomOffsetUnits={(value) => setAttributes({ counterVRBottomOffsetUnits: value })}
 
                                                         setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={counterGlobalWraperID} 
+                                                        onChangeValue={(value) => setAttributes({ counterGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={counterGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ counterGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
                                                     />
                                             </PanelBody>
 
@@ -1832,6 +1865,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ counterMobileSwitcher: value })}
 													/>
 											</PanelBody>
+
+                                            <PanelBody
+                                                title={__("Custom CSS", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_CustomCSSEditor
+                                                    value={counterGlobalWraperCustomCSS}
+                                                    onChangeValue={(value) => setAttributes({ counterGlobalWraperCustomCSS: value })}
+                                                />
+                                            </PanelBody>
                                         </div>
                                     </div>
                                 </>

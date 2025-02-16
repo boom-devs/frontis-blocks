@@ -19,6 +19,7 @@ import './editor.scss';
 import {
     BORDER_STYLES,
     EFFECT_OPTIONS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -86,6 +87,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Settings */
         sliderGlobalZIndex,
+        sliderOverflow,
         
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
@@ -139,7 +141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		sliderTabletSwitcher,
 		sliderMobileSwitcher,
 
-        sliderGlobalWraperID,
+        sliderGlobalCustomCSS,
         sliderGlobalWraperClass,
 
         // Position
@@ -780,6 +782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Desktop !== undefined ? `top: ${sliderVRTopOffset.Desktop}${sliderVRTopOffsetUnits.Desktop};` : ''}
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Desktop !== undefined ? `bottom: ${sliderVRBottomOffset.Desktop}${sliderVRBottomOffsetUnits.Desktop};` : ''}
             ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
+            ${sliderOverflow !== 'default' ? `overflow: ${sliderOverflow};` : ''}
             ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
             ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
             ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
@@ -1018,6 +1021,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Settings */
         sliderGlobalZIndex,
+        sliderOverflow,
         
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
@@ -1094,11 +1098,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-    setAttributes({blockStyle: `${sliderBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [sliderBlockStyle]);
+    const customCss = getCustomCss(sliderGlobalCustomCSS, `.${blockId}`);
 
-    const editorStyle = sliderBlockStyle.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${sliderBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [sliderBlockStyle, customCss]);
+
+    const editorStyle = `${sliderBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -1427,41 +1433,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     isRangeUnit={false}
                                                 />
 
-                                                <FB_PositionControl
-                                                        deviceType={deviceType}
-                                                        positionType={sliderPositionType}
-                                                        setPositionType={(value) => setAttributes({ sliderPositionType: value })}
-                                                                                                        
-                                                        HZOrientationType={sliderHZOrientationType}
-                                                        setHZOrientationType={(value) =>
-                                                            setAttributes({ sliderHZOrientationType: value })
-                                                        }
-                                                        VROrientationType={sliderVROrientationType}
-                                                        setVROrientationType={(value) =>
-                                                            setAttributes({ sliderVROrientationType: value })
-                                                        }
-                                                                                                            
-                                                        HZLeftOffset={sliderHZLeftOffset}
-                                                        setHZLeftOffset={(value) => setAttributes({ sliderHZLeftOffset: value })}
-                                                        HZLeftOffsetUnits={sliderHZLeftOffsetUnits}
-                                                        setHZLeftOffsetUnits={(value) => setAttributes({ sliderHZLeftOffsetUnits: value })}
-                                                        HZRightOffset={sliderHZRightOffset}
-                                                        setHZRightOffset={(value) => setAttributes({ sliderHZRightOffset: value })}
-                                                        HZRightOffsetUnits={sliderHZRightOffsetUnits}
-                                                        setHZRightOffsetUnits={(value) => setAttributes({ sliderHZRightOffsetUnits: value })}
-                                                                                                        
-                                                        VRTopOffset={sliderVRTopOffset}
-                                                        setVRTopOffset={(value) => setAttributes({ sliderVRTopOffset: value })}
-                                                        VRTopOffsetUnits={sliderVRTopOffsetUnits}
-                                                        setVRTopOffsetUnits={(value) => setAttributes({ sliderVRTopOffsetUnits: value })}
-                                                        VRBottomOffset={sliderVRBottomOffset}
-                                                        setVRBottomOffset={(value) => setAttributes({ sliderVRBottomOffset: value })}
-                                                        VRBottomOffsetUnits={sliderVRBottomOffsetUnits}
-                                                        setVRBottomOffsetUnits={(value) => setAttributes({ sliderVRBottomOffsetUnits: value })}
-
-                                                        setAttributes={setAttributes}
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={sliderOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ sliderOverflow: value })}
                                                     />
 
+                                                <FB_PositionControl
+                                                    deviceType={deviceType}
+                                                    positionType={sliderPositionType}
+                                                    setPositionType={(value) => setAttributes({ sliderPositionType: value })}
+                                                                                                    
+                                                    HZOrientationType={sliderHZOrientationType}
+                                                    setHZOrientationType={(value) =>
+                                                        setAttributes({ sliderHZOrientationType: value })
+                                                    }
+                                                    VROrientationType={sliderVROrientationType}
+                                                    setVROrientationType={(value) =>
+                                                        setAttributes({ sliderVROrientationType: value })
+                                                    }
+                                                                                                        
+                                                    HZLeftOffset={sliderHZLeftOffset}
+                                                    setHZLeftOffset={(value) => setAttributes({ sliderHZLeftOffset: value })}
+                                                    HZLeftOffsetUnits={sliderHZLeftOffsetUnits}
+                                                    setHZLeftOffsetUnits={(value) => setAttributes({ sliderHZLeftOffsetUnits: value })}
+                                                    HZRightOffset={sliderHZRightOffset}
+                                                    setHZRightOffset={(value) => setAttributes({ sliderHZRightOffset: value })}
+                                                    HZRightOffsetUnits={sliderHZRightOffsetUnits}
+                                                    setHZRightOffsetUnits={(value) => setAttributes({ sliderHZRightOffsetUnits: value })}
+                                                                                                    
+                                                    VRTopOffset={sliderVRTopOffset}
+                                                    setVRTopOffset={(value) => setAttributes({ sliderVRTopOffset: value })}
+                                                    VRTopOffsetUnits={sliderVRTopOffsetUnits}
+                                                    setVRTopOffsetUnits={(value) => setAttributes({ sliderVRTopOffsetUnits: value })}
+                                                    VRBottomOffset={sliderVRBottomOffset}
+                                                    setVRBottomOffset={(value) => setAttributes({ sliderVRBottomOffset: value })}
+                                                    VRBottomOffsetUnits={sliderVRBottomOffsetUnits}
+                                                    setVRBottomOffsetUnits={(value) => setAttributes({ sliderVRBottomOffsetUnits: value })}
+
+                                                    setAttributes={setAttributes}
+                                                />
                                                 <FB_InputControl
                                                     label={__("CSS Class", "frontis-blocks")}
                                                     value={sliderGlobalWraperClass}
@@ -1644,6 +1656,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														checked={sliderMobileSwitcher}
 														onChange={(value) => setAttributes({ sliderMobileSwitcher: value })}
 													/>
+											</PanelBody>
+
+                                            <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+                                                    <FB_CustomCSSEditor  
+                                                        value={sliderGlobalCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ sliderGlobalCustomCSS: value })}
+                                                    />
 											</PanelBody>
                                         </div>
                                     </div>

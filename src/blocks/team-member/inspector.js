@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '../../components/spacing/index.js';
@@ -264,6 +264,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Team Member
 		teamMemberZIndex,
+		teamMemberOverflow,
 		teamMemberPaddingUnits,
 		teamMemberDesktopPadding,
 		teamMemberTabPadding,
@@ -419,6 +420,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberVRBottomOffsetUnits,
 
 		// Global Setting
+		teamMemberCustomCSS,
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
 	} = attributes;
@@ -2292,6 +2294,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'top' && teamMemberVRTopOffset.Desktop !== undefined ? `top: ${teamMemberVRTopOffset.Desktop}${teamMemberVRTopOffsetUnits.Desktop};` : ''}
 				${teamMemberPositionType !== 'default' && teamMemberPositionType !== 'relative' && teamMemberVROrientationType === 'bottom' && teamMemberVRBottomOffset.Desktop !== undefined ? `bottom: ${teamMemberVRBottomOffset.Desktop}${teamMemberVRBottomOffsetUnits.Desktop};` : ''}
 				${teamMemberZIndex.Desktop !== undefined ? `z-index: ${teamMemberZIndex.Desktop};` : ''}
+				${teamMemberOverflow !== 'default' ? `overflow: ${teamMemberOverflow};` : ''}
 			}
 			.fb-team-member-main-wrapper.${blockID} .fb-team-member-wrapper {
 				position: relative;
@@ -3080,6 +3083,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			// Team Member
 			teamMemberZIndex,
+			teamMemberOverflow,
 			teamMemberPaddingUnits,
 			teamMemberDesktopPadding,
 			teamMemberTabPadding,
@@ -3208,15 +3212,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		]
 	);
 	
+	const customCss = getCustomCss(teamMemberCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: fbTeamMemberStyle.replace(/\s+/g, " ").trim(),
+			blockStyle: `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [fbTeamMemberStyle]);
+	}, [fbTeamMemberStyle, customCss]);
 
-	const editorStyle = fbTeamMemberStyle.replace(/\s+/g, " ").trim();
+	const editorStyle = `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 	
-
 	return (
 		<>
 			<style>
@@ -4529,6 +4534,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
                                                     />
 
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={teamMemberOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ teamMemberOverflow: value })}
+                                                    />
+
 													<FB_PositionControl
 														deviceType={deviceType}
 														positionType={teamMemberPositionType}
@@ -4847,6 +4859,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={teamMemberCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ teamMemberCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
 									</>

@@ -16,6 +16,7 @@ import {
 import {
     PROGRESS_TEXT_OPTIONS,
 	HEADING,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -38,6 +39,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockID,
 		// deviceType,
         progressGlobalZIndex,
+        progressbarOverflow,
 		progressTextPosition,
 		progressNumber,
 
@@ -81,6 +83,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressbarTabletSwitcher,
 		progressbarMobileSwitcher,
 
+        progressGlobalCustomCSS,
         progressGlobalWraperID,
 		progressGlobalWraperClass,
 
@@ -202,6 +205,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Desktop !== undefined ? `top: ${progressbarVRTopOffset.Desktop}${progressbarVRTopOffsetUnits.Desktop};` : ''}
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'bottom' && progressbarVRBottomOffset.Desktop !== undefined ? `bottom: ${progressbarVRBottomOffset.Desktop}${progressbarVRBottomOffsetUnits.Desktop};` : ''}
             ${progressGlobalZIndex.Desktop ? `z-index: ${progressGlobalZIndex.Desktop};` : ''}
+            ${progressbarOverflow !== 'default' ? `overflow: ${progressbarOverflow};` : ''}
         }
         
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
@@ -327,6 +331,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockID,
 		deviceType,
         progressGlobalZIndex,
+        progressbarOverflow,
 		progressTextPosition,
 		progressNumber,
 
@@ -382,11 +387,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+    const customCss = getCustomCss(progressGlobalCustomCSS, `.${blockID}`);
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
+
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -638,6 +645,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={progressbarOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ progressbarOverflow: value })}
+                                                    />
+
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={progressbarPositionType}
@@ -712,6 +726,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ progressbarMobileSwitcher: value })}
 													/>
 												</PanelBody>
+
+                                                <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>   
+                                                    <FB_CustomCSSEditor  
+                                                        value={progressGlobalCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ progressGlobalCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                             </div>
                                         </div>
                                     </>

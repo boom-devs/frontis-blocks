@@ -15,7 +15,7 @@ import {
     TextControl,
 } from '@wordpress/components';
 
-import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN } from './constants/constants';
+import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN, OVERFLOW_OP } from './constants/constants';
 
 /**
  * External Dependencies
@@ -376,6 +376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Global Setting */
         postGlobalZIndex,
+        postGridOverflow,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
         postGlobalPaddingTablet,
@@ -501,6 +502,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		postGridTabletSwitcher,
 		postGridMobileSwitcher,
 
+        postGridGlobalCustomCSS,
         postGridGlobalWraperID,
         postGridGlobalWraperClass,
 
@@ -2745,6 +2747,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'top' && postGridVRTopOffset.Desktop !== undefined ? `top: ${postGridVRTopOffset.Desktop}${postGridVRTopOffsetUnits.Desktop};` : ''}
             ${postGridPositionType !== 'default' && postGridPositionType !== 'relative' && postGridVROrientationType === 'bottom' && postGridVRBottomOffset.Desktop !== undefined ? `bottom: ${postGridVRBottomOffset.Desktop}${postGridVRBottomOffsetUnits.Desktop};` : ''}
             ${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ''}
+            ${postGridOverflow !== 'default' ? `overflow: ${postGridOverflow};` : ''}
         }
         .${blockId}.fb_post_grid_container {
             ${postGlobalDesktopPaddingWidth ? `padding: ${postGlobalDesktopPaddingWidth};` : ''}
@@ -4124,6 +4127,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         postGlobalZIndex,
+        postGridOverflow,
         postGlobalPaddingUnits,
         postGlobalPaddingDesktop,
         postGlobalPaddingTablet,
@@ -4278,11 +4282,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+    const customCss = getCustomCss(postGridGlobalCustomCSS, `.${blockId}`);
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
+
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -6006,6 +6012,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={postGridOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ postGridOverflow: value })}
+                                                    />
+
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={postGridPositionType}
@@ -6226,6 +6239,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={postGridMobileSwitcher}
 														onChange={(value) => setAttributes({ postGridMobileSwitcher: value })}
+													/>
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={postGridGlobalCustomCSS} 
+														onChangeValue={(value) => setAttributes({ postGridGlobalCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

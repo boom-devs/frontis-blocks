@@ -494,6 +494,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	counterOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	counterGlobalPaddingUnits: {
 		type: 'object',
@@ -790,6 +794,21 @@ const attributes = {
             Mobile: 'px',
         }
     },
+
+	/** Start Class & ID Setting */
+	counterGlobalWraperCustomCSS : { 
+		type: "string",
+		default: "",
+	},
+	counterGlobalWraperID : {
+		type: "string",
+		default: ""
+	},
+	counterGlobalWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
 };
 
 export default attributes;

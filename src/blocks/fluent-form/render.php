@@ -58,9 +58,9 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 </style>
 
-<div <?php echo wp_kses_data( $wrapper_attributes ); ?> id="<?php echo esc_attr( $fluentFormGlobalWraperID ); ?>">
+<div <?php echo wp_kses_data( $wrapper_attributes ); ?>>
 	<div class="<?php echo esc_attr( implode( ' ', $_wrapper_classes ) ); ?> fb-parent-wrapper">
-		<div class="<?php echo esc_attr( implode( ' ', $_form_wrapper_classes ) ); ?>">
+		<div class="<?php echo esc_attr( implode( ' ', $_form_wrapper_classes ) ); ?>" id="<?php echo esc_attr( $fluentFormGlobalWraperID ); ?>">
 			<?php
                 $shortcode = sprintf( '[fluentform id="%s"]', esc_attr( $formId ) );
                 echo do_shortcode( shortcode_unautop( wp_kses_post( $shortcode ) ) );

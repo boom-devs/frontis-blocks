@@ -1149,6 +1149,10 @@ const attributes = {
 			Mobile: '',
 		},
 	},
+	dualBtnOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	dualButtonGlobalPaddingUnits: {
 		type: 'object',
@@ -1390,6 +1394,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	dualButtonGlobalWraperCustomCSS : {
+		type: "string",
+		default: "",
+	},
 	dualButtonGlobalWraperID : {
 		type: "string",
 		default: ""

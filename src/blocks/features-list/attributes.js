@@ -1038,6 +1038,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    featuresListOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	FeatureGlobalPaddingUnits: {
 		type: 'object',
@@ -1507,6 +1511,10 @@ const attributes = {
     /** End Responsive Control */
 
     /** Start Global Setting */
+    featuresListGlobalWraperCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	featuresListGlobalWraperID : {
 		type: "string",
 		default: ""

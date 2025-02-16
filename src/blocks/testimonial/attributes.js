@@ -926,6 +926,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    TestimonialOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	TestimonialGlobalPaddingUnits: {
 		type: 'object',
@@ -1199,6 +1203,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    testimonialCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	testimonialGlobalWraperID : {
 		type: "string",
 		default: ""

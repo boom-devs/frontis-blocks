@@ -629,6 +629,10 @@ const attributes = {
             Mobile: ''
         }
     },
+    GalleryOverflow: {
+        type: 'string',
+        default: "default",
+    },
     
 
     GalleryPaddingUnits : {
@@ -1030,6 +1034,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    imageGalleryCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 	imageGalleryGlobalWraperID : {
 		type: "string",
 		default: ""

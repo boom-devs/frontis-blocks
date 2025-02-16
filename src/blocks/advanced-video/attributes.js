@@ -19,6 +19,10 @@ const attributes = {
             Mobile: '',
         }
     },
+    advancedVideoOverflow: {
+        type: 'string',
+        default: "default",
+    },
     videoURL: {
         type: "string",
         default: "https://www.youtube.com/watch?v=WZdCL4Y5EBY",

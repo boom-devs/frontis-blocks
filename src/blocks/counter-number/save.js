@@ -15,10 +15,16 @@ export default function save({ attributes }) {
 		mediaSwitcher,
 		counterMediaUrl,
 
+		counterGlobalWraperID,
+		counterGlobalWraperClass,
+
+		counterDesktopSwitcher,
+		counterTabletSwitcher,
+		counterMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-counter-main-wrapper ${blockID}`,
+        className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 	// Prepare the formatted counter number for the frontend
@@ -28,8 +34,8 @@ export default function save({ attributes }) {
 
 
 	return (
-		<div {...blockProps} id={blockID}>
-			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
+		<div {...blockProps}>
+			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 				<div className="fb-counter-item">
 					<div className={`fb-counter-icon-wrapper`}>
 						{/* Conditionally render image or icon */}

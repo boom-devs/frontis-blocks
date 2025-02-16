@@ -15,6 +15,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    progressbarOverflow: {
+        type: 'string',
+        default: "default",
+    },
     progressTextPosition: {
         type: "string",
         default: "text-outSide",
@@ -198,6 +202,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    progressGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	progressGlobalWraperID : {
 		type: "string",
 		default: ""

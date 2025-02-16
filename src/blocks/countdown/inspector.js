@@ -20,6 +20,7 @@ import {
 	BORDER_STYLES,
 	LAYOUT_ALIGNMENT,
 	LAYOUT_TYPE,
+	OVERFLOW_OP,
 	PRESETS,
 } from "./constants/constants";
 
@@ -312,11 +313,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
 
+		countDownGlobalWraperCustomCSS,
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
 
 		// Position
 		countDownZIndex,
+		countDownOverflow,
 		countDownPositionType,
 		countDownHZOrientationType,
 		countDownVROrientationType,
@@ -2172,7 +2175,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const countDownStyle = useMemo(
 		() => `
-			.fb-count-down-area.${blockID} {
+			.fb-count-down-main-wrapper.${blockID} {
 				${countDownPositionType === 'default' ? `position: relative;` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' ? `width: 100%;` : ''}
 				${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
@@ -2181,6 +2184,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop !== undefined ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop !== undefined ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
         		${countDownZIndex.Desktop ? `z-index: ${countDownZIndex.Desktop};` : ''}
+				${countDownOverflow !== 'default' ? `overflow: ${countDownOverflow};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} {
 				${countDownLayoutType === 'flex' ? `display: flex;` : ''}
@@ -2379,7 +2383,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			` : ''}
 
 			@media only screen and (max-width: 1024px) {
-				.fb-count-down-area.${blockID} {
+				.fb-count-down-main-wrapper.${blockID} {
 					${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Tablet !== undefined ? `left: ${countDownHZLeftOffset.Tablet}${countDownHZLeftOffsetUnits.Tablet};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet !== undefined ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
@@ -2437,7 +2441,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			@media only screen and (max-width: 767px) {
-					.fb-count-down-area.${blockID} {
+					.fb-count-down-main-wrapper.${blockID} {
 						${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Mobile !== undefined ? `left: ${countDownHZLeftOffset.Mobile}${countDownHZLeftOffsetUnits.Mobile};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile !== undefined ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}
@@ -2685,6 +2689,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			// Position
 			countDownZIndex,
+			countDownOverflow,
 			countDownPositionType,
 			countDownHZOrientationType,
 			countDownVROrientationType,
@@ -2698,14 +2703,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownVRBottomOffsetUnits,
 		]
 	);
+
+	const customCss = getCustomCss(countDownGlobalWraperCustomCSS, `.${blockID}`);
 	
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${countDownStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${countDownStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [countDownStyle]);
+	}, [countDownStyle, customCss]);
 	
-	const editorStyle = countDownStyle.replace(/\s+/g, " ").trim();
+	const editorStyle = `${countDownStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 	
 	return (
 		<>
@@ -3604,6 +3611,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												isRangeUnit={false}
 											/>
 
+											<SelectControl
+												label={__("Overflow", "frontis-blocks")}
+												value={countDownOverflow}
+												options={OVERFLOW_OP}
+												onChange={(value) => setAttributes({ countDownOverflow: value })}
+											/>
+
 											<FB_PositionControl
 												deviceType={deviceType}
 												positionType={countDownPositionType}
@@ -3814,6 +3828,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ countDownMobileSwitcher: value })}
 													/>
 												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={countDownGlobalWraperCustomCSS}
+														onChangeValue={(value) => setAttributes({ countDownGlobalWraperCustomCSS: value })}
+													/>
+												</PanelBody>	
 									</>
 								)}
 							</div>
