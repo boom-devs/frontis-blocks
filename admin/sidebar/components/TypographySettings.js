@@ -15,7 +15,7 @@ import { useDispatch, subscribe, select } from '@wordpress/data';
 import {useEffect, useState} from "@wordpress/element";
 import {useDeviceType} from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
-import {useAfterSave, loadGoogleFont} from "../helper";
+import {loadGoogleFont, useAfterSave} from "../helper";
 import {updateGlobalStyle} from "../fetch";
 import FrontPreview from "./FontPreview";
 import generateCSSVariables from "./GenerateRootCss";
@@ -1012,42 +1012,48 @@ const TypographySettings = (props) => {
 	// 	}
 	// });
 
-	const handleUpdateSettings = async () => {
-		if (isMount) {
-			if (typography) {
-				const response = await updateGlobalStyle(typography, 'fb_update_typography');
-				if (response.success) {
-					setTypography(response.data.data);
-					localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-				}
-			}
+	const isAfterSave = useAfterSave();
 
-			if (customTypography) {
-				const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
-				if (response.success) {
-					setCustomTypography(response.data.data);
-					localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+	useEffect(() => {
+		const handleUpdateSettings = async () => {
+			if (isAfterSave && isMount) {
+				if (typography) {
+					const response = await updateGlobalStyle(typography, 'fb_update_typography');
+					if (response.success) {
+						setTypography(response.data.data);
+						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+					}
 				}
-			}
-
-			if(globalTypography) {
-				const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
-				if (response.success) {
-					setGlobalTypography(response.data.data);
-					localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
+	
+				if (customTypography) {
+					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+					if (response.success) {
+						setCustomTypography(response.data.data);
+						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+					}
 				}
-			}
-
-			if(fontFamilies) {
-				const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
-				if (response.success) {
-					setFontFamilies(response.data.data);
-					localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+	
+				if(globalTypography) {
+					const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
+					if (response.success) {
+						setGlobalTypography(response.data.data);
+						localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
+					}
 				}
+	
+				if(fontFamilies) {
+					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
+					if (response.success) {
+						setFontFamilies(response.data.data);
+						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+					}
+				}
+				setIsMount(false);
 			}
-			setIsMount(false);
 		}
-	}
+
+		handleUpdateSettings();
+	}, [isAfterSave])
 
 	useEffect(() => {
 		if(isMount) {
@@ -1055,7 +1061,6 @@ const TypographySettings = (props) => {
 		}
 	}, [isMount]);
 
-	console.log(globalTypography)
 	useEffect(() => {
 		if(globalTypography) {
 			generateCSSVariables(globalTypography, deviceType);
@@ -1379,7 +1384,6 @@ const TypographySettings = (props) => {
 					</div>
 				)}
 			</TabPanel>
-			<button aria-disabled="true" className="components-button editor-post-publish-button editor-post-publish-button__button is-primary is-compact" onClick={() => handleUpdateSettings()}>Save</button>
 		</>
 	)
 }
