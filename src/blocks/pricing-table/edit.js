@@ -89,10 +89,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTableGlobalWraperID,
 		pricingTableGlobalWraperClass,
 
+		pricingTableDesktopSwitcher,
+		pricingTableTabletSwitcher,
+		pricingTableMobileSwitcher,
 	} = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-pricing-area ${blockId} ${pricingTableGlobalWraperClass}`,
+        className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**
@@ -108,8 +111,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
-			<div {...blockProps} id={blockId}>
-				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}> 
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}> 
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">

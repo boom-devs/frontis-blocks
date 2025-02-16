@@ -34,6 +34,10 @@ export const attributes = {
 			Mobile: '',
 		}
 	},
+	contactFormOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	showPlaceholder: {
 		type: "boolean",
 		default: true,

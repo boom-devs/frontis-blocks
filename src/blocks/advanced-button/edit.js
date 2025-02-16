@@ -42,10 +42,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
+
+        advancedBtnDesktopSwitcher,
+        advancedBtnTabletSwitcher,
+        advancedBtnMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-button-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 

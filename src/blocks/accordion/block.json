@@ -6,7 +6,7 @@
 	"title": "Accordion",
 	"category": "frontis-blocks",
 	"textdomain": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable accordion block for organizing content in a collapsible format.",
 	"example": {},
     "supports": {
         "anchor": false,

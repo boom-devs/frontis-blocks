@@ -366,6 +366,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		fluentFormTabletSwitcher,
 		fluentFormMobileSwitcher,
 
+        fluentFormGlobalWraperCustomCSS,
         fluentFormGlobalWraperID,
         fluentFormGlobalWraperClass,
 
@@ -3623,12 +3624,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(fluentFormGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
 
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
  
 
     return (
@@ -5010,6 +5013,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={fluentFormGlobalWraperCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
+                                                
                                             </div>
                                         </div>
                                     </>

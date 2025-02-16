@@ -34,16 +34,20 @@ export default function save({ attributes }) {
 
 		infoBoxGlobalWraperID,
 		infoBoxGlobalWraperClass,
+
+		infoBoxDesktopSwitcher,
+		infoBoxTabletSwitcher,
+		infoBoxMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		id: blockID,
+		className: `fb-info-box-main-wrapper ${blockID} ${infoBoxDesktopSwitcher && 'fb-desktop-responsive'} ${infoBoxTabletSwitcher && 'fb-tablet-responsive'} ${infoBoxMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	return (
 		<>
-			<div {...blockProps} id={blockID} className={`fb-info-box-area ${blockID} ${infoBoxGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} id={infoBoxGlobalWraperID}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
 							<div className="fb-info-media-wrapper">

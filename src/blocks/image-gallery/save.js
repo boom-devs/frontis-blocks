@@ -21,17 +21,20 @@ export default function Save({ attributes }) {
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
+        GalleryDesktopSwitcher,
+		GalleryTabletSwitcher,
+		GalleryMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-gallery-main-wrapper ${blockID} ${imageGalleryGlobalWraperClass}`,
+        className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
     });
     
 
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-image-gallery-wrapper" id={imageGalleryGlobalWraperID}>
+                <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID}>
                     <div className="fb-image-gallery-items" data-id={blockID}>
                         {GalleryItems.map(item => 
                             item?.image?.url && (

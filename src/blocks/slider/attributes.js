@@ -871,6 +871,10 @@ const attributes = {
         type: "string",
         default: ""
     },
+    sliderGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
     /** End Class & ID Setting */
     // /** Start Global Setting */
 	// sliderGlobalZIndex : {

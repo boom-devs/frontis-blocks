@@ -7,13 +7,13 @@
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
     "icon": "facebook-alt",
-    "description": "Example block scaffolded with Create Block tool.",
+    "description": "A customizable accordion item block for organizing content in a collapsible format.",
     "example": {},
-      "supports": {
-          "anchor": false,
+    "supports": {
+      "anchor": false,
       "align": ["wide", "full"],
-          "customClassName": false
-      },
+      "customClassName": false
+    },
 	  "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",

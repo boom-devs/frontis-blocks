@@ -1384,6 +1384,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	countDownGlobalWraperCustomCSS : {
+		type: "string",
+		default: "",
+	},
 	countDownGlobalWraperID : {
 		type: "string",
 		default: ""

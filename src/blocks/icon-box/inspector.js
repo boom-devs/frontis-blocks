@@ -353,6 +353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		iconBoxTabletSwitcher,
 		iconBoxMobileSwitcher,
 
+		iconBoxCustomCSS,
 		iconBoxGlobalWraperID,
 		iconBoxGlobalWraperClass,
 
@@ -2142,7 +2143,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbIconBoxStyle = useMemo(
 		() => `
-		  .fb-icon-box-area.${blockID} {
+		  .fb-icon-box-main-wrapper.${blockID} {
 			${iconBoxPositionType === 'default' ? `position: relative;` : ''}
 			${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' ? `width: 100%;` : ''}
             ${iconBoxPositionType !== 'default' ? `position: ${iconBoxPositionType};` : ''}
@@ -2173,7 +2174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			.fb-icon-box-area.${blockID} {
+			.fb-icon-box-main-wrapper.${blockID} {
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
@@ -2189,7 +2190,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-icon-box-area.${blockID} {
+			  .fb-icon-box-main-wrapper.${blockID} {
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'left' && iconBoxHZLeftOffset.Mobile !== undefined ? `left: ${iconBoxHZLeftOffset.Mobile}${iconBoxHZLeftOffsetUnits.Mobile};` : ''}
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxHZOrientationType === 'right' && iconBoxHZRightOffset.Mobile !== undefined ? `right: ${iconBoxHZRightOffset.Mobile}${iconBoxHZRightOffsetUnits.Mobile};` : ''}
 				${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' && iconBoxVROrientationType === 'top' && iconBoxVRTopOffset.Mobile !== undefined ? `top: ${iconBoxVRTopOffset.Mobile}${iconBoxVRTopOffsetUnits.Mobile};` : ''}
@@ -2736,17 +2737,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+	const customCss = getCustomCss(iconBoxCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${fbIconBoxStyle}`.replace(/\s+/g, ' ').trim(),
+			blockStyle: `${fbIconBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
 		});
-	}, [fbIconBoxStyle]);
+	}, [fbIconBoxStyle, customCss]);
 
-	const editorStyle = fbIconBoxStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${fbIconBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
 	return (
 		<>
 			<style>
-			{editorStyle}
+				{editorStyle}
 			</style>
 
 			<InspectorControls key="controls">
@@ -4126,6 +4130,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={iconBoxMobileSwitcher}
 														onChange={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={iconBoxCustomCSS} 
+														onChangeValue={(value) => setAttributes({ iconBoxCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

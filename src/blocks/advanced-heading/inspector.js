@@ -40,6 +40,7 @@ import {
     PRESETS,
     BORDER_STYLES,
     ICON_ALIGN,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -235,6 +236,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         /** Start Global Setting */
         headingGlobalZIndex,
+        advancedHeadingOverflow,
         headingGlobalWraperID,
         headingGlobalWraperClass,
 
@@ -1479,6 +1481,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Desktop !== undefined ? `top: ${advancedHeadingVRTopOffset.Desktop}${advancedHeadingVRTopOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'bottom' && advancedHeadingVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedHeadingVRBottomOffset.Desktop}${advancedHeadingVRBottomOffsetUnits.Desktop};` : ''}
             ${headingGlobalZIndex.Desktop ? `z-index: ${headingGlobalZIndex.Desktop};` : ''}
+            ${advancedHeadingOverflow !== 'default' ? `overflow: ${advancedHeadingOverflow};` : ''}
         }
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -1937,6 +1940,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     separatorSpacing,
     separatorSpacingUnits,
     headingGlobalZIndex,
+    advancedHeadingOverflow,
     headingGlobalWraperID,
     headingGlobalWraperClass,
     headingGlobalBgColor,
@@ -3036,6 +3040,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={advancedHeadingOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ advancedHeadingOverflow: value })}
                                                     />
 
                                                     <FB_PositionControl

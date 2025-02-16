@@ -235,6 +235,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         lightboxMobileBorderRadiusWidth,
         lightboxBorderRadiusLink,
 
+        imageGalleryCustomCSS,
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
@@ -2602,13 +2603,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     ]
 );
 
+const customCss = getCustomCss(imageGalleryCustomCSS, `.${blockID}`);
 useEffect(() => {
     setAttributes({
-        blockStyle: fbGalleryStyle.replace(/\s+/g, ' ').trim(),
+        blockStyle: `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
     });
-}, [fbGalleryStyle]);
+}, [fbGalleryStyle, customCss]);
 
-const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
+const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -3663,6 +3665,16 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
+                                            <PanelBody
+                                                title={__("Custom CSS", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_CustomCSSEditor  
+                                                    value={imageGalleryCustomCSS} 
+                                                    onChangeValue={(value) => setAttributes({ imageGalleryCustomCSS: value })}
+                                                />
+
+                                            </PanelBody>
                                         </div>
                                     </div>
                                 </>
