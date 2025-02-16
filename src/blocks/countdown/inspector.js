@@ -312,6 +312,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
 
+		countDownGlobalWraperCustomCSS,
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
 
@@ -2698,14 +2699,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownVRBottomOffsetUnits,
 		]
 	);
+
+	const customCss = getCustomCss(countDownGlobalWraperCustomCSS, `.${blockID}`);
 	
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${countDownStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${countDownStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [countDownStyle]);
+	}, [countDownStyle, customCss]);
 	
-	const editorStyle = countDownStyle.replace(/\s+/g, " ").trim();
+	const editorStyle = `${countDownStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 	
 	return (
 		<>
@@ -3814,6 +3817,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ countDownMobileSwitcher: value })}
 													/>
 												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={countDownGlobalWraperCustomCSS}
+														onChangeValue={(value) => setAttributes({ countDownGlobalWraperCustomCSS: value })}
+													/>
+												</PanelBody>	
 									</>
 								)}
 							</div>
