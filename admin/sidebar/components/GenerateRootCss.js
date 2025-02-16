@@ -220,7 +220,7 @@ const generateCSSVariables = (data, deviceType) => {
             ${paragraphStyles}
         }
 
-        body .wp-site-blocks a {
+        body .wp-site-blocks a, body .wp-site-blocks p a {
             ${linkStyles}
         }
 
