@@ -15,13 +15,13 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-progress-bar-main-wrapper ${blockID} ${progressGlobalWraperClass}`,
+        className: `fb-progress-bar-main-wrapper ${blockID}`,
     });
     
     return (
         <>
             <div {...blockProps}>
-                <div className='fb-parent-wrapper progress-bar-wrapper' id={progressGlobalWraperID}>
+                <div className={`fb-parent-wrapper progress-bar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID}>
                     {progressTextPosition === 'text-outSide' && (
                         <div className="progress-bar-text-outSide-wrapper">
                             <div className="progress-bar-label">

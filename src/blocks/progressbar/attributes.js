@@ -198,6 +198,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    progressGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	progressGlobalWraperID : {
 		type: "string",
 		default: ""
