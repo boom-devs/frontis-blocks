@@ -40,7 +40,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnTwoLink,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
-
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
 
