@@ -1507,6 +1507,10 @@ const attributes = {
     /** End Responsive Control */
 
     /** Start Global Setting */
+    featuresListGlobalWraperCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	featuresListGlobalWraperID : {
 		type: "string",
 		default: ""

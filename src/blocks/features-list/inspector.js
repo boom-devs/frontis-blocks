@@ -297,6 +297,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		featuresListTabletSwitcher,
 		featuresListMobileSwitcher,
 
+        featuresListGlobalWraperCustomCSS,
 		featuresListGlobalWraperID,
 		featuresListGlobalWraperClass,
         
@@ -2071,13 +2072,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         featuresListVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(featuresListGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [featureSingleItemStyle, allBlockStyle]);
+        setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [featureSingleItemStyle, allBlockStyle, customCss]);
 
-
-
-    const editorStyle = featureSingleItemStyle + allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -3046,6 +3047,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ featuresListMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={featuresListGlobalWraperCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ featuresListGlobalWraperCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
+                                                
 											</div>
 										</div>
                                 </>
