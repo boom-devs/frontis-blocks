@@ -39,15 +39,15 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberGlobalWraperClass} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
 	return (
 		<>
 			
-			<div {...blockProps} id={blockID}>
-			<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID}`} id={teamMemberGlobalWraperID}>
+			<div {...blockProps}>
+			<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image`}>

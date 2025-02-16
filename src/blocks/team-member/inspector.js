@@ -419,6 +419,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberVRBottomOffsetUnits,
 
 		// Global Setting
+		teamMemberCustomCSS,
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
 	} = attributes;
@@ -3208,15 +3209,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		]
 	);
 	
+	const customCss = getCustomCss(teamMemberCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: fbTeamMemberStyle.replace(/\s+/g, " ").trim(),
+			blockStyle: `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [fbTeamMemberStyle]);
+	}, [fbTeamMemberStyle, customCss]);
 
-	const editorStyle = fbTeamMemberStyle.replace(/\s+/g, " ").trim();
+	const editorStyle = `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 	
-
 	return (
 		<>
 			<style>
@@ -4847,6 +4849,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={teamMemberCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ teamMemberCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
 									</>
