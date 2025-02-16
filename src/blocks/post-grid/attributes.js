@@ -1795,6 +1795,10 @@ const attributes = {
 			Mobile: '',
 		}
 	},
+	postGridOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	postGlobalPaddingUnits: {
 		type: 'object',

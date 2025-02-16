@@ -25,6 +25,7 @@ import {
     TEXT_ALIGN,
     BORDER_STYLES,
     PRESETS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -127,6 +128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ButtonBorderRadiusLink,
         
         GalleryZIndex,
+        GalleryOverflow,
         GalleryPaddingUnits,
         GalleryDesktopPadding,
         GalleryTabPadding,
@@ -2087,6 +2089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'top' && GalleryVRTopOffset.Desktop !== undefined ? `top: ${GalleryVRTopOffset.Desktop}${GalleryVRTopOffsetUnits.Desktop};` : ''}
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'bottom' && GalleryVRBottomOffset.Desktop !== undefined ? `bottom: ${GalleryVRBottomOffset.Desktop}${GalleryVRBottomOffsetUnits.Desktop};` : ''}
             ${GalleryZIndex?.Desktop !== undefined ? `z-index: ${GalleryZIndex.Desktop};` : ''}
+            ${GalleryOverflow !== 'default' ? `overflow: ${GalleryOverflow};` : ''}
         }
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
             position: relative;
@@ -2480,6 +2483,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ButtonBorderRadiusLink,
         
         GalleryZIndex,
+        GalleryOverflow,
         GalleryPaddingUnits,
         GalleryDesktopPadding,
         GalleryTabPadding,
@@ -3368,6 +3372,13 @@ const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim()
                                                     resetFallbackValue={''}
                                                     isRangeUnit={false}
                                                 />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={GalleryOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ GalleryOverflow: value })}
+                                                    />
 
                                                 <FB_PositionControl
                                                         deviceType={deviceType}

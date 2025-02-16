@@ -28,6 +28,7 @@ import {
 	RIBBON_POSITION,
 	BORDER_STYLES,
 	NORMAL_HOVER,
+	OVERFLOW_OP,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -479,6 +480,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		/** Start Global Settings */
 		priceGlobalZIndex,
+		pricingTableOverflow,
 		priceGlobalPaddingUnits,
         priceGlobalPaddingDesktop,
         priceGlobalPaddingTablet,
@@ -2592,6 +2594,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset.Desktop !== undefined ? `top: ${pricingTableVRTopOffset.Desktop}${pricingTableVRTopOffsetUnits.Desktop};` : ''}
             ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset.Desktop !== undefined ? `bottom: ${pricingTableVRBottomOffset.Desktop}${pricingTableVRBottomOffsetUnits.Desktop};` : ''}
 			${priceGlobalZIndex.Desktop ? `z-index: ${priceGlobalZIndex.Desktop};` : ''}
+            ${pricingTableOverflow !== 'default' ? `overflow: ${pricingTableOverflow};` : ''}
 		}
 		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section {
 		    ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
@@ -3720,6 +3723,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonIconSizeUnits,
 
 		priceGlobalZIndex,
+		pricingTableOverflow,
 		priceGlobalPaddingUnits,
 		priceGlobalPaddingDesktop,
 		priceGlobalPaddingTablet,
@@ -5911,6 +5915,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={pricingTableOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ pricingTableOverflow: value })}
                                                     />
 
 													<FB_PositionControl

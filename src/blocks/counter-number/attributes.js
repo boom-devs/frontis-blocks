@@ -494,6 +494,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	counterOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	counterGlobalPaddingUnits: {
 		type: 'object',

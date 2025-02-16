@@ -42,6 +42,7 @@ import {
     HEADING,
     FONT_FAMILYS,
     BORDER_STYLES,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -201,6 +202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Style */
         FeatureGlobalZIndex,
+        featuresListOverflow,
         FeatureGlobalPaddingUnits,
         FeatureGlobalPaddingDesktop,
         FeatureGlobalPaddingTablet,
@@ -1527,6 +1529,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Desktop !== undefined ? `top: ${featuresListVRTopOffset.Desktop}${featuresListVRTopOffsetUnits.Desktop};` : ''}
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Desktop !== undefined ? `bottom: ${featuresListVRBottomOffset.Desktop}${featuresListVRBottomOffsetUnits.Desktop};` : ''}
                 ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ''}
+                ${featuresListOverflow !== 'default' ? `overflow: ${featuresListOverflow};` : ''}
                 transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID}:hover {
@@ -1923,6 +1926,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureSingleItemBoxShadowHoverValues,
         FeatureSingleItemBoxShadowHoverCssValue,
         FeatureGlobalZIndex,
+        featuresListOverflow,
         FeatureGlobalPaddingUnits,
         FeatureGlobalPaddingDesktop,
         FeatureGlobalPaddingTablet,
@@ -2798,6 +2802,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={featuresListOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ featuresListOverflow: value })}
                                                     />
 
                                                     <FB_PositionControl
