@@ -89,10 +89,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTableGlobalWraperID,
 		pricingTableGlobalWraperClass,
 
+		pricingTableDesktopSwitcher,
+		pricingTableTabletSwitcher,
+		pricingTableMobileSwitcher,
 	} = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-pricing-area ${blockId}`,
+        className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**

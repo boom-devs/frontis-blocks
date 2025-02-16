@@ -25,10 +25,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
+        GalleryDesktopSwitcher,
+		GalleryTabletSwitcher,
+		GalleryMobileSwitcher,
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-gallery-main-wrapper ${blockID}`, 
+        className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`, 
     });
 
     /**

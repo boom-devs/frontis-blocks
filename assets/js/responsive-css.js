@@ -23,57 +23,61 @@ function injectStyleIntoIframe(iframe) {
     style.id = "fb-responsive-controls";
     style.textContent = `
         @media only screen and (min-width: 1025px) {
-            .fb-desktop-responsive {
-                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+            .fb-desktop-responsive > div {
                 opacity: .4;
+            }
+            .fb-desktop-responsive::after {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+                z-index: 1;
             }
         }
 
         @media only screen and (min-width: 768px) and (max-width: 1024px) {
-            .fb-tablet-responsive {
-                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+            .fb-tablet-responsive > div {
                 opacity: .4;
+            }
+            .fb-tablet-responsive::after {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+                z-index: 1;
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .fb-mobile-responsive {
-                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+            .fb-mobile-responsive > div {
                 opacity: .4;
+            }
+            .fb-mobile-responsive::after {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px) !important;
+                z-index: 1;
             }
         }
     `;
 
     if (iframe.contentDocument && iframe.contentDocument.head) {
         iframe.contentDocument.head.appendChild(style);
-        console.log("Style injected successfully!");
     } else {
         console.error("Iframe head not accessible!");
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // setTimeout(() => {
-    //     const iframe = document.querySelector('body.block-editor-page iframe');
-
-    //     if (!iframe) {
-    //         console.error("Iframe not found!");
-    //         return;
-    //     }
-
-    //     // Check if iframe is already loaded
-    //     if (iframe.contentDocument && iframe.contentDocument.readyState === "complete") {
-    //         injectStyleIntoIframe(iframe);
-    //     } else {
-    //         iframe.onload = function () {
-    //             injectStyleIntoIframe(iframe);
-    //         };
-    //     }
-    // }, 10000);
-    
-    
-
-});
 
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {

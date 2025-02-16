@@ -28,15 +28,19 @@ export default function save({ attributes }) {
 
 		iconBoxGlobalWraperID,
 		iconBoxGlobalWraperClass,
+
+		iconBoxDesktopSwitcher,
+		iconBoxTabletSwitcher,
+		iconBoxMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-icon-box-main-wrapper ${blockID}`,
+		className: `fb-icon-box-main-wrapper ${blockID} ${iconBoxDesktopSwitcher && 'fb-desktop-responsive'} ${iconBoxTabletSwitcher && 'fb-tablet-responsive'} ${iconBoxMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	return (
 		<>
-			<div {...blockProps} className={`fb-icon-box-area ${blockID}`}> 
+			<div {...blockProps}> 
 				{wrapperUrlSwitcher ? (
 					<a
 						href={wrapperLink}

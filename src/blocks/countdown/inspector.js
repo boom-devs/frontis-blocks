@@ -2173,7 +2173,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const countDownStyle = useMemo(
 		() => `
-			.fb-count-down-area.${blockID} {
+			.fb-count-down-main-wrapper.${blockID} {
 				${countDownPositionType === 'default' ? `position: relative;` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' ? `width: 100%;` : ''}
 				${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
@@ -2380,7 +2380,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			` : ''}
 
 			@media only screen and (max-width: 1024px) {
-				.fb-count-down-area.${blockID} {
+				.fb-count-down-main-wrapper.${blockID} {
 					${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Tablet !== undefined ? `left: ${countDownHZLeftOffset.Tablet}${countDownHZLeftOffsetUnits.Tablet};` : ''}
 					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet !== undefined ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
@@ -2438,7 +2438,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			@media only screen and (max-width: 767px) {
-					.fb-count-down-area.${blockID} {
+					.fb-count-down-main-wrapper.${blockID} {
 						${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Mobile !== undefined ? `left: ${countDownHZLeftOffset.Mobile}${countDownHZLeftOffsetUnits.Mobile};` : ''}
 						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile !== undefined ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}

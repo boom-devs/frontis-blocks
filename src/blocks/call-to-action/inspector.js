@@ -1922,7 +1922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const ctaContentStyle = useMemo(
 		() => `
-			.fb-cta-wrapper.${blockID} {
+			.fb-cta-main-wrapper.${blockID} {
 				${ctaPositionType === 'default' ? `position: relative;` : ''}
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' ? `width: 100%;` : ''}
 				${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
@@ -2084,7 +2084,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
 			}
 			@media only screen and (max-width: 1024px) {
-				.fb-cta-wrapper.${blockID} {
+				.fb-cta-main-wrapper.${blockID} {
 					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Tablet !== undefined ? `left: ${ctaHZLeftOffset.Tablet}${ctaHZLeftOffsetUnits.Tablet};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Tablet !== undefined ? `right: ${ctaHZRightOffset.Tablet}${ctaHZRightOffsetUnits.Tablet};` : ''}
@@ -2144,7 +2144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			}
 			@media only screen and (max-width: 767px) {
-				.fb-cta-wrapper.${blockID} {
+				.fb-cta-main-wrapper.${blockID} {
 					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Mobile !== undefined ? `left: ${ctaHZLeftOffset.Mobile}${ctaHZLeftOffsetUnits.Mobile};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Mobile !== undefined ? `right: ${ctaHZRightOffset.Mobile}${ctaHZRightOffsetUnits.Mobile};` : ''}

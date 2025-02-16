@@ -15,10 +15,13 @@ export default function Save({ attributes }) {
         featuresListGlobalWraperID,
         featuresListGlobalWraperClass,
         
+        featuresListDesktopSwitcher,
+		featuresListTabletSwitcher,
+		featuresListMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-feature-main-wrapper ${blockID}`,
+        className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
