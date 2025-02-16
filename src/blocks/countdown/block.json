@@ -8,8 +8,8 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
+		"align": ["wide", "full"],
 		"anchor": false,
-		"align": false,
 		"customClassName": false
 	},
 	"textdomain": "frontis-blocks",
