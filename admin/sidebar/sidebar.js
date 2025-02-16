@@ -1095,7 +1095,6 @@ function FrontisBlocksSidebar(props) {
 										</div>
 									</div>
 									<TypographySettings typography={typography} customTypography={customTypography} />
-
 								</>
 							</NavigatorScreen>
 
