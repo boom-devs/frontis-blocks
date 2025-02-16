@@ -1388,6 +1388,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    accordionCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	accordionGlobalWraperID : {
 		type: "string",
 		default: ""
