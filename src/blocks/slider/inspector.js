@@ -19,6 +19,7 @@ import './editor.scss';
 import {
     BORDER_STYLES,
     EFFECT_OPTIONS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -86,6 +87,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Settings */
         sliderGlobalZIndex,
+        sliderOverflow,
         
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
@@ -780,6 +782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Desktop !== undefined ? `top: ${sliderVRTopOffset.Desktop}${sliderVRTopOffsetUnits.Desktop};` : ''}
             ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Desktop !== undefined ? `bottom: ${sliderVRBottomOffset.Desktop}${sliderVRBottomOffsetUnits.Desktop};` : ''}
             ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
+            ${sliderOverflow !== 'default' ? `overflow: ${sliderOverflow};` : ''}
             ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
             ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
             ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
@@ -1018,6 +1021,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Settings */
         sliderGlobalZIndex,
+        sliderOverflow,
         
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
@@ -1428,6 +1432,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
                                                 />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={sliderOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ sliderOverflow: value })}
+                                                    />
 
                                                 <FB_PositionControl
                                                     deviceType={deviceType}

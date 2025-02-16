@@ -29,6 +29,7 @@ import {
     BORDER_STYLES,
     HEADING,
     PRESETS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -209,6 +210,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialRatingIconMarginLink,
 
         TestimonialGlobalZIndex,
+        TestimonialOverflow,
         TestimonialGlobalPaddingUnits,
         TestimonialGlobalPaddingDesktop,
         TestimonialGlobalPaddingTablet,
@@ -1617,6 +1619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Desktop !== undefined ? `top: ${testimonialVRTopOffset.Desktop}${testimonialVRTopOffsetUnits.Desktop};` : ''}
             ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Desktop !== undefined ? `bottom: ${testimonialVRBottomOffset.Desktop}${testimonialVRBottomOffsetUnits.Desktop};` : ''}
             ${TestimonialGlobalZIndex.Desktop ? `z-index: ${TestimonialGlobalZIndex.Desktop};` : ''}
+            ${TestimonialOverflow !== 'default' ? `overflow: ${TestimonialOverflow};` : ''}
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
@@ -2045,6 +2048,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialRatingIconMarginLink,
 
         TestimonialGlobalZIndex,
+        TestimonialOverflow,
         TestimonialGlobalPaddingUnits,
         TestimonialGlobalPaddingDesktop,
         TestimonialGlobalPaddingTablet,
@@ -3054,8 +3058,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeStep={1}
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
-
                                                 />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={TestimonialOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ TestimonialOverflow: value })}
+                                                    />
 
                                                 <FB_PositionControl
                                                         deviceType={deviceType}

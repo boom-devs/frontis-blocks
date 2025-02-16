@@ -1,4 +1,3 @@
-
 {
     "$schema": {
         "patterns": {
@@ -12,93 +11,93 @@
                         {
                             "id": "pattern1",
                             "title": "Pattern 1",
-                            "image": "/assets/images/temp-1.svg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 1 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern2",
                             "title": "Pattern 2",
-                            "image": "/assets/images/pattern2.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
                             "content": "Pattern 2 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern3",
                             "title": "Pattern 3",
-                            "image": "/assets/images/pattern3.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
                             "content": "Pattern 3 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern4",
                             "title": "Pattern 4",
-                            "image": "/assets/images/pattern4.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
                             "content": "Pattern 4 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern5",
                             "title": "Pattern 5",
-                            "image": "/assets/images/pattern5.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 5 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern6",
                             "title": "Pattern 6",
-                            "image": "/assets/images/pattern6.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
                             "content": "Pattern 6 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern7",
                             "title": "Pattern 7",
-                            "image": "/assets/images/pattern7.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 7 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern8",
                             "title": "Pattern 8",
-                            "image": "/assets/images/pattern8.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 8 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern9",
                             "title": "Pattern 9",
-                            "image": "/assets/images/pattern9.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 9 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern10",
                             "title": "Pattern 10",
-                            "image": "/assets/images/pattern10.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 10 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern11",
                             "title": "Pattern 11",
-                            "image": "/assets/images/pattern11.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 11 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern12",
                             "title": "Pattern 12",
-                            "image": "/assets/images/pattern12.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 12 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern13",
                             "title": "Pattern 13",
-                            "image": "/assets/images/pattern13.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 13 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern14",
                             "title": "Pattern 14",
-                            "image": "/assets/images/pattern14.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 14 content here"
-                          },
-                          {
+                        },
+                        {
                             "id": "pattern15",
                             "title": "Pattern 15",
-                            "image": "/assets/images/pattern15.jpg",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
                             "content": "Pattern 15 content here"
-                          }
+                        }
                     ]
                 },
                 {
@@ -212,14 +211,33 @@
                 }
             ]
         },
-        "kits": {
-            "name": "Kits",
+        "sites": {
+            "name": "Sites",
             "categories": [
                 {
                     "id": "all",
                     "name": "All",
                     "count": 30,
-                    "items": []
+                    "items": [
+                        {
+                            "id": "item1",
+                            "title": "Item 1",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
+                            "content": "Site 1 content here"
+                        },
+                        {
+                            "id": "item2",
+                            "title": "Item 2",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "content": "Site 2 content here"
+                        },
+                        {
+                            "id": "item3",
+                            "title": "Item 3",
+                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "content": "Site 3 content here"
+                        }
+                    ]
                 },
                 {
                     "id": "content-blocks",

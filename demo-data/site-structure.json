@@ -1,0 +1,38 @@
+{
+    "homepage": "home",
+    "pages": [
+      {
+        "title": "Home",
+        "slug": "home",
+        "content_file": "home.json",
+        "template": "front-page.php",
+        "meta": {
+          "custom_field": "value"
+        }
+      },
+      {
+        "title": "Services",
+        "slug": "services",
+        "content_file": "services.json",
+        "parent": "about"
+      }
+    ],
+    "menus": {
+      "primary": [
+        {
+          "title": "Home",
+          "page_slug": "home"
+        },
+        {
+          "title": "Services",
+          "page_slug": "services",
+          "children": [
+            {
+              "title": "Web Design",
+              "custom_url": "/services/web-design"
+            }
+          ]
+        }
+      ]
+    }
+  }

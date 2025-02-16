@@ -35,7 +35,8 @@ import {
 	INFO_ICON_POSITION,
 	INFO_ICON_VERTICAL_POSITION,
 	INFO_WRAP_ALIGNMENT,
-	PRESETS
+	PRESETS,
+	OVERFLOW_OP
 } from "./constants/constants";
 
 import { useEffect, useMemo } from "@wordpress/element";
@@ -224,6 +225,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
+		infoBoxOverflow,
 		globalPaddingUnits,
 		globalPaddingDesktop,
 		globalPaddingTablet,
@@ -2089,6 +2091,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Desktop !== undefined ? `top: ${infoBoxVRTopOffset.Desktop}${infoBoxVRTopOffsetUnits.Desktop};` : ''}
             ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'bottom' && infoBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${infoBoxVRBottomOffset.Desktop}${infoBoxVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
+            ${infoBoxOverflow !== 'default' ? `overflow: ${infoBoxOverflow};` : ''}
 		  }
 		  .fb-info-box-wrapper.${blockID} {
 		  	  position: relative;
@@ -2555,6 +2558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaSize,
 			mediaSizeUnits,
 			globalZIndex,
+			infoBoxOverflow,
 			globalPaddingUnits,
 			globalPaddingDesktop,
 			globalPaddingTablet,
@@ -3793,6 +3797,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeStep={1}
                                                         resetFallbackValue={''}
                                                         isRangeUnit={false}
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={infoBoxOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ infoBoxOverflow: value })}
                                                     />
 
 													<FB_PositionControl

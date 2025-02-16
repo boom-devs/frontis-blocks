@@ -39,7 +39,8 @@ class GlobalSettings extends AjaxBase
             'get_globaltypo',
             'get_custom_css',
             'get_fontfamilies',
-            'import_demo_data'
+            'import_demo_data',
+            'import_full_site'
         ];
 
         $this->init_ajax_events($events);
@@ -253,62 +254,171 @@ class GlobalSettings extends AjaxBase
         }
     }
 
-
+    //Demo import for blocks
     // public function import_demo_data() {
     //     try {
-    //         // Verify nonce
+    //         // Security check
     //         $nonce = $_POST['security'] ?? '';
     //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
     //             wp_send_json_error('Invalid nonce.');
     //             return;
     //         }
-    
-    //         // Get current page ID from POST
-    //         $current_page_id = $_POST['page_id'] ?? 0;
-    //         if (!$current_page_id) {
-    //             wp_send_json_error('Page ID is required.');
+
+    //         // Get block ID from POST
+    //         $block_id = $_POST['block_id'] ?? '';
+    //         if (empty($block_id)) {
+    //             wp_send_json_error('Block ID is required.');
     //             return;
     //         }
-    
-    //         // Get the JSON file path
+
+    //         // Get demo data from JSON
     //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-    
-    //         // Read and decode JSON
     //         $json_data = file_get_contents($json_file_path);
-    //         $blocks = json_decode($json_data, true);
-    
-    //         // Validate JSON structure
-    //         if (!$blocks || !is_array($blocks)) {
-    //             wp_send_json_error('Invalid JSON structure.');
-    //             return;
-    //         }
-    
-    //         // Update existing page with the blocks
-    //         $page_data = array(
-    //             'ID'            => $current_page_id,
-    //             'post_content'  => serialize_blocks($blocks)
+    //         $demo_data = json_decode($json_data, true);
+
+    //         // Update specific block's content
+    //         $block_content = array(
+    //             'blockId' => $block_id,
+    //             'content' => $demo_data
     //         );
-    
-    //         // Update the page
-    //         $update_result = wp_update_post($page_data);
-    
-    //         if (is_wp_error($update_result)) {
-    //             wp_send_json_error('Failed to update page.');
-    //             return;
-    //         }
-    
-    //         // Return success response
+
+    //         // Store in transient for temporary use
+    //         set_transient('fb_block_' . $block_id, $block_content, HOUR_IN_SECONDS);
+
     //         wp_send_json_success(array(
-    //             'page_id' => $current_page_id,
-    //             'message' => 'Page updated successfully with imported blocks!'
+    //             'block_id' => $block_id,
+    //             'content' => serialize_blocks($demo_data),
+    //             'message' => 'Demo data imported successfully!'
     //         ));
-    
+
     //     } catch (Exception $e) {
-    //         wp_send_json_error('An unexpected error occurred: ' . $e->getMessage());
+    //         wp_send_json_error('Error: ' . $e->getMessage());
     //     }
     // }
 
-    public function import_demo_data() {
+    //Demo import for pages
+    // public function import_demo_data() {
+    //     try {
+    //         // Security check
+    //         $nonce = $_POST['security'] ?? '';
+    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
+    //             wp_send_json_error('Invalid nonce.');
+    //             return;
+    //         }
+
+    //         // Get block ID and post ID
+    //         $block_id = $_POST['block_id'] ?? '';
+    //         $post_id = $_POST['post_id'] ?? 0; // Get post ID from AJAX
+
+    //         if (empty($post_id)) {
+    //             wp_send_json_error('Post ID is required.');
+    //             return;
+    //         }
+
+    //         // Get demo data from JSON
+    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
+    //         $json_data = file_get_contents($json_file_path);
+    //         $demo_data = json_decode($json_data, true);
+    //         $serialized_content = serialize_blocks($demo_data);
+
+    //         if (!empty($block_id)) {
+    //             // Store block-specific content
+    //             set_transient('fb_block_' . $block_id, [
+    //                 'blockId' => $block_id,
+    //                 'content' => $demo_data
+    //             ], HOUR_IN_SECONDS);
+
+    //             wp_send_json_success([
+    //                 'block_id' => $block_id,
+    //                 'content' => $serialized_content,
+    //                 'message' => 'Demo data imported successfully!'
+    //             ]);
+    //         } else {
+    //             // Update full page content
+    //             $post_data = [
+    //                 'ID'           => $post_id,
+    //                 'post_content' => $serialized_content
+    //             ];
+
+    //             $update_result = wp_update_post($post_data, true);
+
+    //             if (is_wp_error($update_result)) {
+    //                 wp_send_json_error('Failed to update post: ' . $update_result->get_error_message());
+    //             } else {
+    //                 wp_send_json_success([
+    //                     'content' => $serialized_content,
+    //                     'message' => 'Page content updated with demo data!'
+    //                 ]);
+    //             }
+    //         }
+    //     } catch (Exception $e) {
+    //         wp_send_json_error('Error: ' . $e->getMessage());
+    //     }
+    // }     
+
+    //demo import for full site
+    // public function import_demo_data() {
+    //     try {
+    //         // Security check
+    //         $nonce = $_POST['security'] ?? '';
+    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
+    //             wp_send_json_error('Invalid nonce.');
+    //             return;
+    //         }
+
+    //         // Get block ID and post ID
+    //         $block_id = $_POST['block_id'] ?? '';
+    //         $post_id = $_POST['post_id'] ?? 0; // Get post ID from AJAX
+
+    //         if (empty($post_id)) {
+    //             wp_send_json_error('Post ID is required.');
+    //             return;
+    //         }
+
+    //         // Get demo data from JSON
+    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
+    //         $json_data = file_get_contents($json_file_path);
+    //         $demo_data = json_decode($json_data, true);
+    //         $serialized_content = serialize_blocks($demo_data);
+
+    //         if (!empty($block_id)) {
+    //             // Store block-specific content
+    //             set_transient('fb_block_' . $block_id, [
+    //                 'blockId' => $block_id,
+    //                 'content' => $demo_data
+    //             ], HOUR_IN_SECONDS);
+
+    //             wp_send_json_success([
+    //                 'block_id' => $block_id,
+    //                 'content' => $serialized_content,
+    //                 'message' => 'Demo data imported successfully!'
+    //             ]);
+    //         } else {
+    //             // Update full page content
+    //             $post_data = [
+    //                 'ID'           => $post_id,
+    //                 'post_content' => $serialized_content
+    //             ];
+
+    //             $update_result = wp_update_post($post_data, true);
+
+    //             if (is_wp_error($update_result)) {
+    //                 wp_send_json_error('Failed to update post: ' . $update_result->get_error_message());
+    //             } else {
+    //                 wp_send_json_success([
+    //                     'content' => $serialized_content,
+    //                     'message' => 'Page content updated with demo data!'
+    //                 ]);
+    //             }
+    //         }
+    //     } catch (Exception $e) {
+    //         wp_send_json_error('Error: ' . $e->getMessage());
+    //     }
+    // }  
+
+    // PHP: Import Full Site
+    public function import_full_site()
+    {
         try {
             // Security check
             $nonce = $_POST['security'] ?? '';
@@ -316,38 +426,149 @@ class GlobalSettings extends AjaxBase
                 wp_send_json_error('Invalid nonce.');
                 return;
             }
-    
-            // Get block ID from POST
-            $block_id = $_POST['block_id'] ?? '';
-            if (empty($block_id)) {
-                wp_send_json_error('Block ID is required.');
-                return;
+
+            $config = isset($_POST['config']) ? $_POST['config'] : array();
+
+            // Store the configuration
+            if (!empty($config)) {
+                $colors = isset($config['colors']) ? $config['colors'] : array();
+                $typography = isset($config['typography']) ? $config['typography'] : array();
+
+                // Store colors in wp_options instead of theme_mods
+                $color_styles = $this->generate_color_css($colors);
+                $typography_styles = $this->generate_typography_css($typography);
+
+                // Combine all styles
+                $custom_styles = $color_styles . $typography_styles;
+
+                // Save the CSS to wp_options
+                update_option('fb_global_styles', $custom_styles);
+
+                // Add action to output CSS in header if not already added
+
+                add_action('wp_head', array($this, 'output_global_styles'));
             }
-    
-            // Get demo data from JSON
-            $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-            $json_data = file_get_contents($json_file_path);
-            $demo_data = json_decode($json_data, true);
-    
-            // Update specific block's content
-            $block_content = array(
-                'blockId' => $block_id,
-                'content' => $demo_data
-            );
-    
-            // Store in transient for temporary use
-            set_transient('fb_block_' . $block_id, $block_content, HOUR_IN_SECONDS);
-    
-            wp_send_json_success(array(
-                'block_id' => $block_id,
-                'content' => serialize_blocks($demo_data),
-                'message' => 'Demo data imported successfully!'
-            ));
-    
+
+            // Rest of your page import code...
+            // [Previous page import logic remains the same]
+
+            wp_send_json_success(['message' => 'Full site imported successfully!']);
         } catch (Exception $e) {
             wp_send_json_error('Error: ' . $e->getMessage());
         }
     }
 
-    
+    /**
+     * Generate CSS for colors
+     */
+    private function generate_color_css($colors)
+    {
+        $css = '';
+
+        if (!empty($colors)) {
+            $css .= "/* Global Color Styles */\n";
+
+            if (isset($colors['text'])) {
+                $css .= "p, span, li, td, div:not(.fb-template-library-card *) { color: {$colors['text']}; }\n";
+            }
+
+            if (isset($colors['primary'])) {
+                $css .= "h1, h2, h3, h4, h5, h6 { color: {$colors['primary']}; }\n";
+                $css .= "a { color: {$colors['primary']}; }\n";
+            }
+
+            if (isset($colors['secondary'])) {
+                $css .= ".secondary-elements { color: {$colors['secondary']}; }\n";
+            }
+
+            if (isset($colors['accent'])) {
+                $css .= "blockquote, .accent-elements { color: {$colors['accent']}; }\n";
+            }
+
+            if (isset($colors['background'])) {
+                $css .= "body { background-color: {$colors['background']}; }\n";
+            }
+        }
+
+        return $css;
+    }
+
+    /**
+     * Generate CSS for typography
+     */
+    private function generate_typography_css($typography)
+    {
+        $css = '';
+
+        if (!empty($typography)) {
+            $css .= "/* Global Typography Styles */\n";
+
+            if (isset($typography['headingFont'])) {
+                $css .= "h1, h2, h3, h4, h5, h6 { font-family: '{$typography['headingFont']}', sans-serif; }\n";
+            }
+
+            if (isset($typography['bodyFont'])) {
+                $css .= "body, p, span, li, td { font-family: '{$typography['bodyFont']}', sans-serif; }\n";
+            }
+
+            if (isset($typography['baseSize'])) {
+                $css .= "body { font-size: {$typography['baseSize']}; }\n";
+            }
+
+            if (isset($typography['scale'])) {
+                $scale = floatval($typography['scale']);
+                $css .= "h1 { font-size: " . ($scale * 2.5) . "em; }\n";
+                $css .= "h2 { font-size: " . ($scale * 2) . "em; }\n";
+                $css .= "h3 { font-size: " . ($scale * 1.75) . "em; }\n";
+                $css .= "h4 { font-size: " . ($scale * 1.5) . "em; }\n";
+                $css .= "h5 { font-size: " . ($scale * 1.25) . "em; }\n";
+                $css .= "h6 { font-size: " . ($scale * 1.1) . "em; }\n";
+            }
+        }
+
+        return $css;
+    }
+
+    /**
+     * Output the global styles in wp_head
+     */
+    public function output_global_styles()
+    {
+        $styles = get_option('fb_global_styles', '');
+        if (!empty($styles)) {
+            echo "<style id='fb-global-styles'>\n{$styles}\n</style>";
+        }
+    }
+
+    /**
+     * Add this method to load Google Fonts if needed
+     */
+    public function enqueue_google_fonts()
+    {
+        $typography = get_option('fb_typography_settings', array());
+
+        if (!empty($typography)) {
+            $fonts = array();
+
+            if (!empty($typography['headingFont'])) {
+                $fonts[] = $typography['headingFont'];
+            }
+
+            if (!empty($typography['bodyFont'])) {
+                $fonts[] = $typography['bodyFont'];
+            }
+
+            if (!empty($fonts)) {
+                $fonts = array_unique($fonts);
+                $fonts_string = implode('|', str_replace(' ', '+', $fonts));
+                wp_enqueue_style(
+                    'fb-google-fonts',
+                    "https://fonts.googleapis.com/css?family={$fonts_string}&display=swap",
+                    array(),
+                    null
+                );
+            }
+        }
+    }
+
 }
