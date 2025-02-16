@@ -56,7 +56,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 
@@ -4124,24 +4125,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxDesktopSwitcher}
-														onChange={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxTabletSwitcher}
-														onChange={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxMobileSwitcher}
-														onChange={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={iconBoxDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
+
+                                                        tabletValue={iconBoxTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
+
+                                                        mobileValue={iconBoxMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody

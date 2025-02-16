@@ -45,7 +45,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -3720,24 +3721,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={dualBtnDesktopSwitcher}
-														onChange={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={dualBtnTabletSwitcher}
-														onChange={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={dualBtnMobileSwitcher}
-														onChange={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={dualBtnDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
+
+                                                        tabletValue={dualBtnTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
+
+                                                        mobileValue={dualBtnMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody

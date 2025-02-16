@@ -24,21 +24,22 @@ import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
-import FB_Spacing from '../../components/spacing/index.js';
-import FB_AlignmentControl from '../../components/alignment-control/index.js';
-import FB_Range from '../../components/range/index.js';
-import FB_TypographyControl from '../../components/typography-control/index.js';
-import FB_ColorControl from '../../components/color-control/index.js';
-import FB_BackgroundImageControl from '../../components/background-image-control/index.js';
-import FB_HtmlTagControl from '../../components/html-tag-control/index.js';
-import FB_BackgroundColorControl from '../../components/background-color-control/index.js';
+import FB_Spacing from '@Components/spacing';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_Range from '@Components/range';
+import FB_TypographyControl from '@Components/typography-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundImageControl from '@Components/background-image-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import FB_SwitcherControl from '../../components/switcher-control/index.js';
+import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -4839,24 +4840,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={teamMemberDesktopSwitcher}
-														onChange={(value) => setAttributes({ teamMemberDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={teamMemberTabletSwitcher}
-														onChange={(value) => setAttributes({ teamMemberTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={teamMemberMobileSwitcher}
-														onChange={(value) => setAttributes({ teamMemberMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={teamMemberDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ teamMemberDesktopSwitcher: value })}
+
+                                                        tabletValue={teamMemberTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ teamMemberTabletSwitcher: value })}
+
+                                                        mobileValue={teamMemberMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ teamMemberMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
                                                 <PanelBody
