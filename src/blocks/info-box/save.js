@@ -37,13 +37,13 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		id: blockID,
+		className: `fb-info-box-main-wrapper ${blockID}`,
 	});
 
 	return (
 		<>
-			<div {...blockProps} id={blockID} className={`fb-info-box-area ${blockID} ${infoBoxGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} id={infoBoxGlobalWraperID}>
+			<div {...blockProps} className={`fb-info-box-area ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
 							<div className="fb-info-media-wrapper">
