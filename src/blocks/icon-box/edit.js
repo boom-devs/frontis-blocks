@@ -50,10 +50,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		iconBoxGlobalWraperID,
 		iconBoxGlobalWraperClass,
+
+		iconBoxDesktopSwitcher,
+		iconBoxTabletSwitcher,
+		iconBoxMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-icon-box-main-wrapper ${blockID}`,
+		className: `fb-icon-box-main-wrapper ${blockID} ${iconBoxDesktopSwitcher && 'fb-desktop-responsive'} ${iconBoxTabletSwitcher && 'fb-tablet-responsive'} ${iconBoxMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	// Prevent link navigation in the editor and focus on text
@@ -84,7 +88,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} className={`fb-icon-box-area ${blockID}`}>
+			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID} ${iconBoxGlobalWraperClass}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">

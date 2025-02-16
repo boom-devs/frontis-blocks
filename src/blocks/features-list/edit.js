@@ -18,10 +18,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         featuresListGlobalWraperID,
         featuresListGlobalWraperClass,
 
+        featuresListDesktopSwitcher,
+		featuresListTabletSwitcher,
+		featuresListMobileSwitcher,
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-feature-main-wrapper ${blockID}`,
+        className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**

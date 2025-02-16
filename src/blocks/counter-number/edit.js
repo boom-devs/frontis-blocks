@@ -21,6 +21,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		mediaSwitcher,
 		counterGlobalWraperID,
 		counterGlobalWraperClass,
+
+		counterDesktopSwitcher,
+		counterTabletSwitcher,
+		counterMobileSwitcher,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -93,7 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
 	const blockProps = useBlockProps({
-        className: `fb-counter-main-wrapper ${blockID}`,
+        className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 

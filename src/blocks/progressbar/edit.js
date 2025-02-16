@@ -16,6 +16,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		progressGlobalWraperID,
 		progressGlobalWraperClass,
+
+		progressbarDesktopSwitcher,
+		progressbarTabletSwitcher,
+		progressbarMobileSwitcher,
 	} = attributes;
 
 	const outSideprogressBarRef = useRef(null);
@@ -52,7 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [progressNumber, progressTextPosition]);
 
     const blockProps = useBlockProps({
-        className: `fb-progress-bar-main-wrapper ${blockID}`,
+        className: `fb-progress-bar-main-wrapper ${blockID} ${progressbarDesktopSwitcher && 'fb-desktop-responsive'} ${progressbarTabletSwitcher && 'fb-tablet-responsive'} ${progressbarMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**

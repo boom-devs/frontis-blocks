@@ -72,6 +72,10 @@ const Edit = (props) => {
         effect,
 
         sliderGlobalWraperClass,
+
+        sliderDesktopSwitcher,
+		sliderTabletSwitcher,
+		sliderMobileSwitcher,
     } = attributes;
 
 
@@ -90,7 +94,7 @@ const Edit = (props) => {
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
 	const blockProps = useBlockProps( {
-		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass}`,
+		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
 	} );
 
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {

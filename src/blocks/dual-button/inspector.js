@@ -2012,7 +2012,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const dualButtonStyle = useMemo(
 		() => `
-		.fb-dual-button-area.${blockID} {
+		.fb-dual-button-main-wrapper.${blockID} {
 			${dualBtnPositionType === 'default' ? `position: relative;` : ''}
 			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Desktop !== undefined ? `left: ${dualBtnHZLeftOffset.Desktop}${dualBtnHZLeftOffsetUnits.Desktop};` : ''}
@@ -2156,7 +2156,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
     
 		@media only screen and (max-width: 1024px) {
-		.fb-dual-button-area.${blockID} {
+		.fb-dual-button-main-wrapper.${blockID} {
 			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Tablet !== undefined ? `left: ${dualBtnHZLeftOffset.Tablet}${dualBtnHZLeftOffsetUnits.Tablet};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Tablet !== undefined ? `right: ${dualBtnHZRightOffset.Tablet}${dualBtnHZRightOffsetUnits.Tablet};` : ''}
@@ -2209,7 +2209,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		}
 		@media only screen and (max-width: 767px) {
-		.fb-dual-button-area.${blockID} {
+		.fb-dual-button-main-wrapper.${blockID} {
 			${dualBtnPositionType !== 'default' ? `position: ${dualBtnPositionType};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'left' && dualBtnHZLeftOffset.Mobile !== undefined ? `left: ${dualBtnHZLeftOffset.Mobile}${dualBtnHZLeftOffsetUnits.Mobile};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Mobile !== undefined ? `right: ${dualBtnHZRightOffset.Mobile}${dualBtnHZRightOffsetUnits.Mobile};` : ''}

@@ -12,10 +12,13 @@ export default function save({ attributes }) {
         socialGlobalWraperID,
         socialGlobalWraperClass,
 
+        socialIconsDesktopSwitcher,
+		socialIconsTabletSwitcher,
+		socialIconsMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-social-main-wrapper ${blockID}`,
+        className: `fb-social-main-wrapper ${blockID} ${socialIconsDesktopSwitcher && 'fb-desktop-responsive'} ${socialIconsTabletSwitcher && 'fb-tablet-responsive'} ${socialIconsMobileSwitcher && 'fb-mobile-responsive'}`,
     });
     
     return (

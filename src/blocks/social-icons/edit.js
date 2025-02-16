@@ -17,10 +17,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialGlobalWraperID,
         socialGlobalWraperClass,
 
+        socialIconsDesktopSwitcher,
+		socialIconsTabletSwitcher,
+		socialIconsMobileSwitcher,
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-social-main-wrapper ${blockID}`,
+        className: `fb-social-main-wrapper ${blockID} ${socialIconsDesktopSwitcher && 'fb-desktop-responsive'} ${socialIconsTabletSwitcher && 'fb-tablet-responsive'} ${socialIconsMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     const handleSocialClick = (event) => {

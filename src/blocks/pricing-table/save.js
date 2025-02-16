@@ -54,10 +54,13 @@ export default function save({ attributes }) {
         pricingTableGlobalWraperID,
         pricingTableGlobalWraperClass,
 
+        pricingTableDesktopSwitcher,
+		pricingTableTabletSwitcher,
+		pricingTableMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-pricing-area ${blockId}`,
+        className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (

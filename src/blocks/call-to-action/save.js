@@ -49,8 +49,8 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			<div {...blockProps} className={`fb-cta-wrapper ${blockID} ${ctaGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID} ${ctaGlobalWraperClass}`} id={ctaGlobalWraperID}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
 							{subHeadingSwitcher && (
