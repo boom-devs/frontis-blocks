@@ -1030,6 +1030,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    imageGalleryCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 	imageGalleryGlobalWraperID : {
 		type: "string",
 		default: ""

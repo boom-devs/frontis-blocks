@@ -28,7 +28,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-gallery-main-wrapper ${blockID} ${imageGalleryGlobalWraperClass}`,
+        className: `fb-gallery-main-wrapper ${blockID}`, 
     });
 
     /**
@@ -55,7 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
             
             <div {...blockProps}>
-                <div className="fb-parent-wrapper fb-image-gallery-wrapper" id={imageGalleryGlobalWraperID} ref={panelRef}>
+                <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID} ref={panelRef}>
                         <div className="fb-image-gallery-items">
                             {GalleryItems.map(item => 
                                 item?.image?.url ? (
