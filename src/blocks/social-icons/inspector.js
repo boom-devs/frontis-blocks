@@ -38,7 +38,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 import './editor.scss';
 
@@ -3364,24 +3365,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={socialIconsDesktopSwitcher}
-														onChange={(value) => setAttributes({ socialIconsDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={socialIconsTabletSwitcher}
-														onChange={(value) => setAttributes({ socialIconsTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={socialIconsMobileSwitcher}
-														onChange={(value) => setAttributes({ socialIconsMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={socialIconsDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ socialIconsDesktopSwitcher: value })}
+
+                                                        tabletValue={socialIconsTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ socialIconsTabletSwitcher: value })}
+
+                                                        mobileValue={socialIconsMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ socialIconsMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody

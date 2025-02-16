@@ -29,7 +29,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 import './editor.scss';
@@ -707,24 +708,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={progressbarDesktopSwitcher}
-														onChange={(value) => setAttributes({ progressbarDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={progressbarTabletSwitcher}
-														onChange={(value) => setAttributes({ progressbarTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={progressbarMobileSwitcher}
-														onChange={(value) => setAttributes({ progressbarMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={progressbarDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ progressbarDesktopSwitcher: value })}
+
+                                                        tabletValue={progressbarTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ progressbarTabletSwitcher: value })}
+
+                                                        mobileValue={progressbarMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ progressbarMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
                                                 <PanelBody

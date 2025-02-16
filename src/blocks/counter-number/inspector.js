@@ -35,10 +35,11 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -1846,24 +1847,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={counterDesktopSwitcher}
-														onChange={(value) => setAttributes({ counterDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={counterTabletSwitcher}
-														onChange={(value) => setAttributes({ counterTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={counterMobileSwitcher}
-														onChange={(value) => setAttributes({ counterMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={counterDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ counterDesktopSwitcher: value })}
+
+                                                        tabletValue={counterTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ counterTabletSwitcher: value })}
+
+                                                        mobileValue={counterMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ counterMobileSwitcher: value })}
+                                                    />
 											</PanelBody>
 
                                             <PanelBody
