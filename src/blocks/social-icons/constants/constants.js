@@ -17,6 +17,14 @@ export const ICON_ALIGN = [
 	{ label: __("Icon"), value: "icon" },
 ];
 
+export const OVERFLOW_OP = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
+    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },

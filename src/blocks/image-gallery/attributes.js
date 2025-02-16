@@ -629,6 +629,10 @@ const attributes = {
             Mobile: ''
         }
     },
+    GalleryOverflow: {
+        type: 'string',
+        default: "default",
+    },
     
 
     GalleryPaddingUnits : {

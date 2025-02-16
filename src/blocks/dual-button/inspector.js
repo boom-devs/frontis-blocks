@@ -27,7 +27,8 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 	BUTTONS_DIRECTION,
-	PRESETS
+	PRESETS,
+	OVERFLOW_OP
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -224,6 +225,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		connectorBorderRadiusMobile,
 		connectorBorderRadiusLink,
 		dualButtonGlobalZIndex,
+		dualBtnOverflow,
 		dualButtonGlobalPaddingUnits,
 		dualButtonGlobalPaddingDesktop,
 		dualButtonGlobalPaddingTablet,
@@ -2020,6 +2022,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Desktop !== undefined ? `top: ${dualBtnVRTopOffset.Desktop}${dualBtnVRTopOffsetUnits.Desktop};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${dualBtnVRBottomOffset.Desktop}${dualBtnVRBottomOffsetUnits.Desktop};` : ''}
 			${dualButtonGlobalZIndex !== undefined ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : "" }
+			${dualBtnOverflow !== 'default' ? `overflow: ${dualBtnOverflow};` : ''}
 		}
 		.fb-dual-button-container.${blockID} {
             ${dualButtonGlobalBgColor !== undefined ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
@@ -2263,6 +2266,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[
 			blockID,
 			dualButtonGlobalZIndex,
+			dualBtnOverflow,
 			dualButtonGlobalBgColor,
 			globalDesktopPadding,
 			globalDesktopMargin,
@@ -3509,6 +3513,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         rangeStep={1}
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={dualBtnOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ dualBtnOverflow: value })}
                                                     />
 
 													<FB_PositionControl

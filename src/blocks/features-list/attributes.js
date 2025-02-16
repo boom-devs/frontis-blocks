@@ -1038,6 +1038,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    featuresListOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	FeatureGlobalPaddingUnits: {
 		type: 'object',
