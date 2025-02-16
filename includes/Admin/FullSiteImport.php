@@ -18,6 +18,7 @@ class FullSiteImport {
 
     // Add this new method to provide the nonce
     public function add_nonce() {
+        // Localize the script
         wp_localize_script('fb-import-site-demo-data', 'fbSiteImport', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('fb_import_site_demo_data')

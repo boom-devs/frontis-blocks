@@ -10,6 +10,7 @@ const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
   const [isLoading, setIsLoading] = useState(false);
 
+  //Demo import for blocks
   // const handleDemoDataImport = useCallback(() => {
   //   const selectedBlock = window.wp.data
   //     .select('core/block-editor')
@@ -50,6 +51,7 @@ const TemplateCard = ({ imageUrl }) => {
   //   });
   // }, [ajaxUrl, nonce]);
 
+  // demo import for pages
   // const handleDemoDataImport = useCallback(() => {
   //   const selectedBlock = window.wp.data
   //     .select('core/block-editor')
@@ -96,33 +98,81 @@ const TemplateCard = ({ imageUrl }) => {
   //   });
   // }, [ajaxUrl, nonce]);
 
-  const handleSiteDemoImport = useCallback(() => {
+  //demo import full site
+
+  // const handleDemoDataImport = useCallback(() => {
+  //   const selectedBlock = window.wp.data
+  //     .select('core/block-editor')
+  //     .getSelectedBlock();
+
+  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+
+  //   setIsLoading(true);
+
+  //   window.jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_import_demo_data',
+  //       security: nonce,
+  //       block_id: selectedBlock ? selectedBlock.clientId : '',
+  //       post_id: postId  // Send post ID explicitly
+  //     },
+  //     success: function (response) {
+  //       setIsLoading(false);
+
+  //       if (response.success) {
+  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+  //         const { editPost } = wp.data.dispatch('core/editor');
+
+  //         if (selectedBlock) {
+  //           // Update selected block
+  //           const blocks = wp.blocks.parse(response.data.content);
+  //           replaceBlocks(selectedBlock.clientId, blocks);
+  //         } else {
+  //           // Update full page content
+  //           editPost({ content: response.data.content });
+  //         }
+
+  //         toast.success(response.data.message || 'Demo data imported successfully!');
+  //       } else {
+  //         toast.error('Failed to import demo data: ' + response.data);
+  //       }
+  //     },
+  //     error: function () {
+  //       setIsLoading(false);
+  //       toast.error('Failed to process request. Please try again.');
+  //     }
+  //   });
+  // }, [ajaxUrl, nonce]); 
+
+  const handleFullSiteImport = useCallback(() => {
     setIsLoading(true);
 
     window.jQuery.ajax({
-      url: fbSiteImport.ajaxUrl,  // Use the localized ajaxUrl
+      url: ajaxUrl,
       type: 'POST',
       data: {
-        action: 'fb_import_site_demo_data',
-        security: fbSiteImport.nonce  // Use the localized nonce
+        action: 'fb_import_full_site',
+        security: nonce
       },
       success: function (response) {
         setIsLoading(false);
 
         if (response.success) {
-          window.location.href = response.data.redirect_url || '/';
-          toast.success(response.data.message || 'Site demo data imported successfully!');
+          toast.success(response.data.message || 'Full site imported successfully!');
+          const siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
+          window.location.href = siteUrl;
         } else {
-          toast.error('Failed to import site demo data: ' + response.data.message);
+          toast.error('Failed to import full site: ' + response.data);
         }
       },
-      error: function (xhr, status, error) {
+      error: function () {
         setIsLoading(false);
-        toast.error(`Failed to process request: ${error}. Please try again.`);
+        toast.error('Failed to process request. Please try again.');
       }
     });
-  }, []);  
-
+  }, [ajaxUrl, nonce]);
 
   return (
     <>
@@ -133,7 +183,7 @@ const TemplateCard = ({ imageUrl }) => {
         <div className="fb-template-library-card-content">
           <div
             className={`fb-template-library-import ${isLoading ? 'disabled' : ''}`}
-            onClick={!isLoading ? handleSiteDemoImport : null}
+            onClick={!isLoading ? handleFullSiteImport : null}
           >
             <span>{isLoading ? 'Importing...' : 'Import'}</span>
             {isLoading ? (
