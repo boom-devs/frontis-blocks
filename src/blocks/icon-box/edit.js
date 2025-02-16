@@ -52,7 +52,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		iconBoxGlobalWraperClass,
 	} = attributes;
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: `fb-icon-box-main-wrapper ${blockID}`,
+	});
 
 	// Prevent link navigation in the editor and focus on text
     const handleButtonClick = (event) => {
@@ -82,8 +84,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID} className={`fb-icon-box-area ${blockID} ${iconBoxGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID}`} id={iconBoxGlobalWraperID} ref={panelRef}>
+			<div {...blockProps} className={`fb-icon-box-area ${blockID}`}>
+				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID} ${iconBoxGlobalWraperClass}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">
 						<div
