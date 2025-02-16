@@ -2423,6 +2423,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	postGridGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	postGridGlobalWraperID : {
 		type: "string",
 		default: ""

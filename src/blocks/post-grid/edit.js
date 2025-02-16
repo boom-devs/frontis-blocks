@@ -49,7 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-post-grid-area ${blockId} ${postGridGlobalWraperClass}`,
+        className: `fb-post-grid-area ${blockId}`,
     });
 
     const { useSelect } = wp.data;
@@ -97,9 +97,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             />
 
             {postLists ? (
-                <div {...blockProps} id={blockId}>
+                <div {...blockProps}>
                     {postLists.length > 0 ? (
-                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}  ref={panelRef}> 
+                        <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}  ref={panelRef}> 
                             {postLists.map((item, index) => {
                                 return <LayoutGrid 
                                     data={item}

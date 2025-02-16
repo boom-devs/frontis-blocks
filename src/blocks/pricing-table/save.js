@@ -57,13 +57,13 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-pricing-area ${blockId} ${pricingTableGlobalWraperClass}`,
+        className: `fb-pricing-area ${blockId}`,
     });
 
     return (
         <>
         <div {...blockProps} id={blockId}>
-            <div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID}>
+            <div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID}>
                 {pricingSectionTopSwitcher && (
                     <div className="fb-pricing-inner-wrapper">
                         <div className="fb-pricing-top-wrapper">

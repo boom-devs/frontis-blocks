@@ -2855,6 +2855,10 @@ const attributes = {
     },
 
 	/** Start Global Setting */
+	pricingTableGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	pricingTableGlobalWraperID : {
 		type: "string",
 		default: ""
