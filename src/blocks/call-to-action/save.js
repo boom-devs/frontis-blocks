@@ -37,10 +37,14 @@ export default function save({ attributes }) {
 
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
+
+		ctaDesktopSwitcher,
+        ctaTabletSwitcher,
+        ctaMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-cta-main-wrapper ${blockID}`,
+		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	return (

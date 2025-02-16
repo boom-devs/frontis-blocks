@@ -32,10 +32,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
+
+        accordionDesktopSwitcher,
+        accordionTabletSwitcher,
+        accordionMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**

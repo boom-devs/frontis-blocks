@@ -8,11 +8,15 @@ export default function save({ attributes }) {
         classHook,
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
+
+        accordionDesktopSwitcher,
+        accordionTabletSwitcher,
+        accordionMobileSwitcher,
     } = attributes;
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 

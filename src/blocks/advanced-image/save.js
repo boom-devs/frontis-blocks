@@ -47,10 +47,14 @@ export default function save({ attributes }) {
 
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
+
+		advancedImageDesktopSwitcher,
+        advancedImageTabletSwitcher,
+        advancedImageMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-advanced-image-main-wrapper ${blockID}`,
+        className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 

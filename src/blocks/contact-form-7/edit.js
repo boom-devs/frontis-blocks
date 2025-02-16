@@ -20,12 +20,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		contactFormGlobalWraperID,
 		contactFormGlobalWraperClass,
+
+		contactFormDesktopSwitcher,
+        contactFormTabletSwitcher,
+        contactFormMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: [
 			'fb-contact-form-wrapper' ,
 			blockID,
+			`${contactFormDesktopSwitcher && 'fb-desktop-responsive'} ${contactFormTabletSwitcher && 'fb-tablet-responsive'} ${contactFormMobileSwitcher && 'fb-mobile-responsive'}`,
 			!showPlaceholder && 'fb-contact-form-hide-placeholder',
 			!showErrorMessage && 'fb-contact-form-hide-error-message'
 		].filter(Boolean).join(' ')
