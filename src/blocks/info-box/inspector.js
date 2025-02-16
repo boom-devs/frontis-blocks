@@ -35,7 +35,8 @@ import {
 	INFO_ICON_POSITION,
 	INFO_ICON_VERTICAL_POSITION,
 	INFO_WRAP_ALIGNMENT,
-	PRESETS
+	PRESETS,
+	OVERFLOW_OP
 } from "./constants/constants";
 
 import { useEffect, useMemo } from "@wordpress/element";
@@ -224,6 +225,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaSize,
 		mediaSizeUnits,
 		globalZIndex,
+		infoBoxOverflow,
 		globalPaddingUnits,
 		globalPaddingDesktop,
 		globalPaddingTablet,
@@ -351,6 +353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
 
+		infoBoxGlobalCustomCSS,
 		infoBoxGlobalWraperID,
 		infoBoxGlobalWraperClass,
 
@@ -2079,7 +2082,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
-		  .fb-info-box-area.${blockID} {
+		  .fb-info-box-main-wrapper.${blockID} {
 			${infoBoxPositionType === 'default' ? `position: relative;` : ''}
 			${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' ? `width: 100%;` : ''}
             ${infoBoxPositionType !== 'default' ? `position: ${infoBoxPositionType};` : ''}
@@ -2088,6 +2091,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Desktop !== undefined ? `top: ${infoBoxVRTopOffset.Desktop}${infoBoxVRTopOffsetUnits.Desktop};` : ''}
             ${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'bottom' && infoBoxVRBottomOffset.Desktop !== undefined ? `bottom: ${infoBoxVRBottomOffset.Desktop}${infoBoxVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop !== undefined ? `z-index: ${globalZIndex.Desktop};` : ""}
+            ${infoBoxOverflow !== 'default' ? `overflow: ${infoBoxOverflow};` : ''}
 		  }
 		  .fb-info-box-wrapper.${blockID} {
 		  	  position: relative;
@@ -2110,7 +2114,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-area.${blockID} {
+			  .fb-info-box-main-wrapper.${blockID} {
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Tablet !== undefined ? `left: ${infoBoxHZLeftOffset.Tablet}${infoBoxHZLeftOffsetUnits.Tablet};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Tablet !== undefined ? `right: ${infoBoxHZRightOffset.Tablet}${infoBoxHZRightOffsetUnits.Tablet};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Tablet !== undefined ? `top: ${infoBoxVRTopOffset.Tablet}${infoBoxVRTopOffsetUnits.Tablet};` : ''}
@@ -2126,7 +2130,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-info-box-wrapper.${blockID} {
+			  .fb-info-box-main-wrapper.${blockID} {
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Mobile !== undefined ? `left: ${infoBoxHZLeftOffset.Mobile}${infoBoxHZLeftOffsetUnits.Mobile};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Mobile !== undefined ? `right: ${infoBoxHZRightOffset.Mobile}${infoBoxHZRightOffsetUnits.Mobile};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Mobile !== undefined ? `top: ${infoBoxVRTopOffset.Mobile}${infoBoxVRTopOffsetUnits.Mobile};` : ''}
@@ -2554,6 +2558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaSize,
 			mediaSizeUnits,
 			globalZIndex,
+			infoBoxOverflow,
 			globalPaddingUnits,
 			globalPaddingDesktop,
 			globalPaddingTablet,
@@ -2673,13 +2678,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+	const customCss = getCustomCss(infoBoxGlobalCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${fbInfoBoxStyle}`.replace(/\s+/g, ' ').trim(),
+			blockStyle: `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
 		});
-	}, [fbInfoBoxStyle]);
+	}, [fbInfoBoxStyle, customCss]);
 
-	const editorStyle = fbInfoBoxStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 	return (
 		<>
 			<style>
@@ -3792,6 +3799,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
                                                     />
 
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={infoBoxOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ infoBoxOverflow: value })}
+                                                    />
+
 													<FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={infoBoxPositionType}
@@ -4040,6 +4054,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={infoBoxMobileSwitcher}
 														onChange={(value) => setAttributes({ infoBoxMobileSwitcher: value })}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={infoBoxGlobalCustomCSS} 
+														onChangeValue={(value) => setAttributes({ infoBoxGlobalCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

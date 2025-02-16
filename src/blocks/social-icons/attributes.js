@@ -753,6 +753,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    socialIconsOverflow: {
+        type: 'string',
+        default: "default",
+    },
     socialGlobalPaddingUnits: {
 		type: 'object',
 		default: {
@@ -971,6 +975,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    socialGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	socialGlobalWraperID : {
 		type: "string",
 		default: ""

@@ -505,6 +505,11 @@ const attributes = {
             Mobile: '',
         }
     },
+
+    advancedBtnOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	buttonGlobalPaddingUnits: {
 		type: 'object',

@@ -1105,6 +1105,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    infoBoxOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalPaddingUnits: {
 		type: 'object',
 		default: {
@@ -1627,6 +1631,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    infoBoxGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	infoBoxGlobalWraperID : {
 		type: "string",
 		default: ""

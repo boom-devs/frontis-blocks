@@ -37,14 +37,14 @@ const save = ({ attributes }) => {
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID} ${accordionItemGlobalWraperClass}`,
+        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
     });
 
 
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-accordion-item-wrapper`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
+                <div className={`fb-accordion-item-wrapper ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
                     <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`}>
                         <div className={`fb-accordion-title-inner`}>
                             {titlePrefixType !== 'none' && (

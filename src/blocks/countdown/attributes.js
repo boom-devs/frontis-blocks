@@ -893,6 +893,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	countDownOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalBgColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -1384,6 +1388,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	countDownGlobalWraperCustomCSS : {
+		type: "string",
+		default: "",
+	},
 	countDownGlobalWraperID : {
 		type: "string",
 		default: ""

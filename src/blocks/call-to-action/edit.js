@@ -43,10 +43,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
+
+		ctaDesktopSwitcher,
+        ctaTabletSwitcher,
+        ctaMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-cta-main-wrapper ${blockID}`,
+		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	/**
@@ -78,8 +82,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID} className={`fb-cta-wrapper ${blockID} ${ctaGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID}`} id={ctaGlobalWraperID} ref={panelRef}>
+			<div {...blockProps} id={blockID}>
+				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID} ${ctaGlobalWraperClass}`} id={ctaGlobalWraperID} ref={panelRef}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 
 						<div className="fb-cta-content-wrapper">

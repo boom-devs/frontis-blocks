@@ -15,6 +15,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    fluentFormOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	formId: {
 		type: 'string'
 	},
@@ -1997,6 +2001,10 @@ const attributes = {
     /** End Responsive Control */
 
     /** Start Global Setting */
+    fluentFormGlobalWraperCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	fluentFormGlobalWraperID : {
 		type: "string",
 		default: ""

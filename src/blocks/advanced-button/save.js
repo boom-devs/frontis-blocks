@@ -27,10 +27,13 @@ export default function save({ attributes }) {
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
 
+        advancedBtnDesktopSwitcher,
+        advancedBtnTabletSwitcher,
+        advancedBtnMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-button-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 

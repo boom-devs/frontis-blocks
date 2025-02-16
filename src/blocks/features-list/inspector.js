@@ -42,6 +42,7 @@ import {
     HEADING,
     FONT_FAMILYS,
     BORDER_STYLES,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -201,6 +202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Style */
         FeatureGlobalZIndex,
+        featuresListOverflow,
         FeatureGlobalPaddingUnits,
         FeatureGlobalPaddingDesktop,
         FeatureGlobalPaddingTablet,
@@ -297,6 +299,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		featuresListTabletSwitcher,
 		featuresListMobileSwitcher,
 
+        featuresListGlobalWraperCustomCSS,
 		featuresListGlobalWraperID,
 		featuresListGlobalWraperClass,
         
@@ -1526,6 +1529,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Desktop !== undefined ? `top: ${featuresListVRTopOffset.Desktop}${featuresListVRTopOffsetUnits.Desktop};` : ''}
                 ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Desktop !== undefined ? `bottom: ${featuresListVRBottomOffset.Desktop}${featuresListVRBottomOffsetUnits.Desktop};` : ''}
                 ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ''}
+                ${featuresListOverflow !== 'default' ? `overflow: ${featuresListOverflow};` : ''}
                 transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID}:hover {
@@ -1922,6 +1926,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureSingleItemBoxShadowHoverValues,
         FeatureSingleItemBoxShadowHoverCssValue,
         FeatureGlobalZIndex,
+        featuresListOverflow,
         FeatureGlobalPaddingUnits,
         FeatureGlobalPaddingDesktop,
         FeatureGlobalPaddingTablet,
@@ -2071,13 +2076,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         featuresListVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(featuresListGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [featureSingleItemStyle, allBlockStyle]);
+        setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [featureSingleItemStyle, allBlockStyle, customCss]);
 
-
-
-    const editorStyle = featureSingleItemStyle + allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -2799,6 +2804,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={featuresListOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ featuresListOverflow: value })}
+                                                    />
+
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={featuresListPositionType}
@@ -3046,6 +3058,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ featuresListMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={featuresListGlobalWraperCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ featuresListGlobalWraperCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
+                                                
 											</div>
 										</div>
                                 </>

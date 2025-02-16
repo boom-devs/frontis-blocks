@@ -5,11 +5,11 @@
 	"version": "1.0.0",
 	"title": "Countdown",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable countdown block with various styling options.",
 	"example": {},
 	"supports": {
+		"align": ["wide", "full"],
 		"anchor": false,
-		"align": false,
 		"customClassName": false
 	},
 	"textdomain": "frontis-blocks",

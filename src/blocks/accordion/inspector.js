@@ -20,6 +20,7 @@ import {
     TITLE_ALIGNMENT,
     ICON_POSITIONS,
     ICON_SWITCHER,
+    OVERFLOW_OP,
 } from "./constants/constants";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -177,6 +178,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         // Accordion Advance
         accordionZIndex,
+        accordionOverflow,
         accordionPaddingUnits,
         accordionDesktopPadding,
         accordionTabPadding,
@@ -326,6 +328,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageRepeat,
         contentBgHoverImageSize,
 
+        accordionCustomCSS,
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
 
@@ -1137,6 +1140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'top' && accordionVRTopOffset.Desktop !== undefined ? `top: ${accordionVRTopOffset.Desktop}${accordionVRTopOffsetUnits.Desktop};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset.Desktop !== undefined ? `bottom: ${accordionVRBottomOffset.Desktop}${accordionVRBottomOffsetUnits.Desktop};` : ''}
             ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
+            ${accordionOverflow !== 'default' ? `overflow: ${accordionOverflow};` : ''}
           }
           .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 position: relative;
@@ -1643,6 +1647,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         // Accordion Advance
         accordionZIndex,
+        accordionOverflow,
         accordionPaddingUnits,
         accordionDesktopPadding,
         accordionTabPadding,
@@ -1806,13 +1811,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionVRBottomOffsetUnits,
       ]);
       
+      const customCss = getCustomCss(accordionCustomCSS, `.${blockID}`);
+
       useEffect(() => {
         setAttributes({
-          blockStyle: fbaccordionItemstyle.replace(/\s+/g, ' ').trim(),
+          blockStyle: `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
         });
-      }, [fbaccordionItemstyle]);
+      }, [fbaccordionItemstyle, customCss]);
 
-      const editorStyle = fbaccordionItemstyle.replace(/\s+/g, ' ').trim();
+      const editorStyle = `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim();
       
 
     
@@ -2731,6 +2738,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={accordionOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ accordionOverflow: value })}
+                                                    />
+
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={accordionPositionType}
@@ -3062,7 +3076,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ accordionMobileSwitcher: value })}
                                                     />
                                                 </PanelBody>
-        
+
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={accordionCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ accordionCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                             </div>
                                         </div>
                                     </>

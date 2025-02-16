@@ -82,6 +82,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemTabletSwitcher,
         accordionItemMobileSwitcher,
 
+        accordionItemCustomCSS,
         accordionItemGlobalWraperID,
         accordionItemGlobalWraperClass,
     } = attributes;
@@ -333,13 +334,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		]
 	  );
 	  
+	  const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
+
 	  useEffect(() => {
 		setAttributes({
-		  blockStyle: fbAccordionItemStyle.replace(/\s+/g, ' ').trim(),
+		  blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
 		});
-	  }, [fbAccordionItemStyle]);
+	  }, [fbAccordionItemStyle, customCss]);
 
-	  const editorStyle = fbAccordionItemStyle.replace(/\s+/g, ' ').trim();
+	  const editorStyle = `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	  const fbAccordionItemStyleTwo = useMemo(() => `
 		.fb-accordion-item-main-wrapper.${blockID} {
@@ -438,10 +441,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		]);
 
 		useEffect(() => {
-		setAttributes({
-			blockStyleTwo: fbAccordionItemStyleTwo.replace(/\s+/g, ' ').trim(),
-		});
-		}, [fbAccordionItemStyleTwo]);
+            setAttributes({
+                blockStyleTwo: `${fbAccordionItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
+            });
+		}, [fbAccordionItemStyleTwo, customCss]);
 
 
 
@@ -757,6 +760,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             />
                                         </PanelBody>
 
+                                        <PanelBody
+                                            title={__("Custom CSS", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <FB_CustomCSSEditor  
+                                                value={accordionItemCustomCSS} 
+                                                onChangeValue={(value) => setAttributes({ accordionItemCustomCSS: value })}
+                                            />
+                                        </PanelBody>
                                     </div>
                                 </div>
                             </>

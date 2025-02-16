@@ -29,6 +29,7 @@ import {
     BORDER_STYLES,
     HEADING,
     PRESETS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -209,6 +210,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialRatingIconMarginLink,
 
         TestimonialGlobalZIndex,
+        TestimonialOverflow,
         TestimonialGlobalPaddingUnits,
         TestimonialGlobalPaddingDesktop,
         TestimonialGlobalPaddingTablet,
@@ -261,6 +263,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		testimonialTabletSwitcher,
 		testimonialMobileSwitcher,
 
+        testimonialCustomCSS,
 		testimonialGlobalWraperID,
 		testimonialGlobalWraperClass,
 
@@ -1616,6 +1619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Desktop !== undefined ? `top: ${testimonialVRTopOffset.Desktop}${testimonialVRTopOffsetUnits.Desktop};` : ''}
             ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Desktop !== undefined ? `bottom: ${testimonialVRBottomOffset.Desktop}${testimonialVRBottomOffsetUnits.Desktop};` : ''}
             ${TestimonialGlobalZIndex.Desktop ? `z-index: ${TestimonialGlobalZIndex.Desktop};` : ''}
+            ${TestimonialOverflow !== 'default' ? `overflow: ${TestimonialOverflow};` : ''}
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
             ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
@@ -2044,6 +2048,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialRatingIconMarginLink,
 
         TestimonialGlobalZIndex,
+        TestimonialOverflow,
         TestimonialGlobalPaddingUnits,
         TestimonialGlobalPaddingDesktop,
         TestimonialGlobalPaddingTablet,
@@ -2153,12 +2158,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(testimonialCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
 
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -3051,8 +3058,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     rangeStep={1}
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
-
                                                 />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={TestimonialOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ TestimonialOverflow: value })}
+                                                    />
 
                                                 <FB_PositionControl
                                                         deviceType={deviceType}
@@ -3279,6 +3292,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
 													/>
 											</PanelBody>
+
+                                            <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+                                                    <FB_CustomCSSEditor  
+                                                        value={testimonialCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ testimonialCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                         </div>
                                     </div>
                                 </>

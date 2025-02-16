@@ -892,6 +892,10 @@ const attributes = {
             Mobile: ''
         }
     },
+    advancedHeadingOverflow: {
+        type: 'string',
+        default: "default",
+    },
     headingGlobalWraperID : {
         type: "string",
         default: ""

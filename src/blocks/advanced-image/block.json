@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "title": "Advanced Image",
     "category": "frontis-blocks",
-    "description": "Example block scaffolded with Create Block tool.",
+    "description": "A customizable advanced image block with various styling options.",
     "example": {},
     "supports": {
         "html": false,

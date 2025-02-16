@@ -20,6 +20,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+	teamMemberOverflow: {
+        type: 'string',
+        default: "default",
+    },
 
     teamMemberPaddingUnits : {
         type: 'object',
@@ -2420,8 +2424,13 @@ const attributes = {
 	teamMemberGlobalWraperClass : {
 		type: "string",
 		default: ""
-	}
+	},
 	/** End Class & ID Setting */
+
+	teamMemberCustomCSS : {
+        type: "string",
+        default: "",
+    },
 };
 
 export default attributes;

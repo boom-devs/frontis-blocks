@@ -24,6 +24,7 @@ import {
 import {
 	BORDER_STYLES,
 	ICON_POSITION,
+	OVERFLOW_OP,
 	PRESETS
 } from "./constants/constants";
 import { useEffect, useMemo, useState } from "@wordpress/element";
@@ -309,6 +310,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBoxShadowCssValue,
 		globalHoverBoxShadowCssValue,
 		globalZIndex,
+		ctaOverflow,
 		globalPaddingUnits,
 		globalPaddingDesktop,
 		globalPaddingTablet,
@@ -1920,7 +1922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const ctaContentStyle = useMemo(
 		() => `
-			.fb-cta-wrapper.${blockID} {
+			.fb-cta-main-wrapper.${blockID} {
 				${ctaPositionType === 'default' ? `position: relative;` : ''}
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' ? `width: 100%;` : ''}
 				${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
@@ -1929,6 +1931,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'top' && ctaVRTopOffset.Desktop !== undefined ? `top: ${ctaVRTopOffset.Desktop}${ctaVRTopOffsetUnits.Desktop};` : ''}
 				${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaVROrientationType === 'bottom' && ctaVRBottomOffset.Desktop !== undefined ? `bottom: ${ctaVRBottomOffset.Desktop}${ctaVRBottomOffsetUnits.Desktop};` : ''}
 				${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
+				${ctaOverflow !== 'default' ? `overflow: ${ctaOverflow};` : ''}
 			}
 			.fb-cta-content-wrapper.${blockID} {
 				${DesktopPadding ? `padding: ${DesktopPadding};` : ""}
@@ -2081,7 +2084,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${btnTwoIconHoverColor !== undefined ? `fill: ${btnTwoIconHoverColor};` : "#ffffff" };
 			}
 			@media only screen and (max-width: 1024px) {
-				.fb-cta-wrapper.${blockID} {
+				.fb-cta-main-wrapper.${blockID} {
 					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Tablet !== undefined ? `left: ${ctaHZLeftOffset.Tablet}${ctaHZLeftOffsetUnits.Tablet};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Tablet !== undefined ? `right: ${ctaHZRightOffset.Tablet}${ctaHZRightOffsetUnits.Tablet};` : ''}
@@ -2141,7 +2144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			}
 			@media only screen and (max-width: 767px) {
-				.fb-cta-wrapper.${blockID} {
+				.fb-cta-main-wrapper.${blockID} {
 					${ctaPositionType !== 'default' ? `position: ${ctaPositionType};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'left' && ctaHZLeftOffset.Mobile !== undefined ? `left: ${ctaHZLeftOffset.Mobile}${ctaHZLeftOffsetUnits.Mobile};` : ''}
 					${ctaPositionType !== 'default' && ctaPositionType !== 'relative' && ctaHZOrientationType === 'right' && ctaHZRightOffset.Mobile !== undefined ? `right: ${ctaHZRightOffset.Mobile}${ctaHZRightOffsetUnits.Mobile};` : ''}
@@ -2371,6 +2374,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnOneTabletBorderRadiusWidth,
 			btnOneMobileBorderRadiusWidth,
 			globalZIndex,
+			ctaOverflow,
 			btnIconRotate,
 			btnTwoIconRotate,
 			globalBoxShadowSwitcher,
@@ -3354,6 +3358,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														resetFallbackValue={""}
 														isRangeUnit={false}
 													/>
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={ctaOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ ctaOverflow: value })}
+                                                    />
 
 													<FB_PositionControl
 														deviceType={deviceType}

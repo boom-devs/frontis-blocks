@@ -25,6 +25,7 @@ import {
     TEXT_ALIGN,
     BORDER_STYLES,
     PRESETS,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -127,6 +128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ButtonBorderRadiusLink,
         
         GalleryZIndex,
+        GalleryOverflow,
         GalleryPaddingUnits,
         GalleryDesktopPadding,
         GalleryTabPadding,
@@ -235,6 +237,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         lightboxMobileBorderRadiusWidth,
         lightboxBorderRadiusLink,
 
+        imageGalleryCustomCSS,
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
@@ -2086,6 +2089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'top' && GalleryVRTopOffset.Desktop !== undefined ? `top: ${GalleryVRTopOffset.Desktop}${GalleryVRTopOffsetUnits.Desktop};` : ''}
             ${GalleryPositionType !== 'default' && GalleryPositionType !== 'relative' && GalleryVROrientationType === 'bottom' && GalleryVRBottomOffset.Desktop !== undefined ? `bottom: ${GalleryVRBottomOffset.Desktop}${GalleryVRBottomOffsetUnits.Desktop};` : ''}
             ${GalleryZIndex?.Desktop !== undefined ? `z-index: ${GalleryZIndex.Desktop};` : ''}
+            ${GalleryOverflow !== 'default' ? `overflow: ${GalleryOverflow};` : ''}
         }
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper {
             position: relative;
@@ -2479,6 +2483,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ButtonBorderRadiusLink,
         
         GalleryZIndex,
+        GalleryOverflow,
         GalleryPaddingUnits,
         GalleryDesktopPadding,
         GalleryTabPadding,
@@ -2602,13 +2607,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     ]
 );
 
+const customCss = getCustomCss(imageGalleryCustomCSS, `.${blockID}`);
 useEffect(() => {
     setAttributes({
-        blockStyle: fbGalleryStyle.replace(/\s+/g, ' ').trim(),
+        blockStyle: `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
     });
-}, [fbGalleryStyle]);
+}, [fbGalleryStyle, customCss]);
 
-const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
+const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -3367,6 +3373,13 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                     isRangeUnit={false}
                                                 />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={GalleryOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ GalleryOverflow: value })}
+                                                    />
+
                                                 <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={GalleryPositionType}
@@ -3663,6 +3676,16 @@ const editorStyle = fbGalleryStyle.replace(/\s+/g, ' ').trim();
                                                 />
                                             </PanelBody>
 
+                                            <PanelBody
+                                                title={__("Custom CSS", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_CustomCSSEditor  
+                                                    value={imageGalleryCustomCSS} 
+                                                    onChangeValue={(value) => setAttributes({ imageGalleryCustomCSS: value })}
+                                                />
+
+                                            </PanelBody>
                                         </div>
                                     </div>
                                 </>

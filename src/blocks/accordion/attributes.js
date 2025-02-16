@@ -623,6 +623,11 @@ const attributes = {
             Mobile: ''
         }
     },
+
+    accordionOverflow: {
+        type: 'string',
+        default: "default",
+    },
     
     accordionPaddingUnits : {
         type: 'object',
@@ -1383,6 +1388,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    accordionCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	accordionGlobalWraperID : {
 		type: "string",
 		default: ""

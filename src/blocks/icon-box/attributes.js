@@ -1104,6 +1104,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    iconBoxOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalPaddingUnits: {
 		type: 'object',
 		default: {
@@ -1635,6 +1639,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    iconBoxCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	iconBoxGlobalWraperID : {
 		type: "string",
 		default: ""

@@ -19,6 +19,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showThousandsSeparator,
 		icon,
 		mediaSwitcher,
+		counterGlobalWraperID,
+		counterGlobalWraperClass,
+
+		counterDesktopSwitcher,
+		counterTabletSwitcher,
+		counterMobileSwitcher,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -91,7 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
 	const blockProps = useBlockProps({
-        className: `fb-counter-main-wrapper ${blockID}`,
+        className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
@@ -102,8 +108,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 					<div className="fb-counter-item">
 						<div className={`fb-counter-icon-wrapper`}>
 							{mediaSwitcher === 'image' && attributes.counterMediaUrl && (

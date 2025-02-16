@@ -26,6 +26,7 @@ import {
     BORDER_STYLES,
     FONT_FAMILYS,
     WIDTH_STYLES,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -51,6 +52,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         // deviceType,
         fluentFormGlobalZIndex,
+        fluentFormOverflow,
         formId,
         showLabels,
         showPlaceholder,
@@ -366,6 +368,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		fluentFormTabletSwitcher,
 		fluentFormMobileSwitcher,
 
+        fluentFormGlobalWraperCustomCSS,
         fluentFormGlobalWraperID,
         fluentFormGlobalWraperClass,
 
@@ -2341,6 +2344,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'top' && fluentFormVRTopOffset.Desktop !== undefined ? `top: ${fluentFormVRTopOffset.Desktop}${fluentFormVRTopOffsetUnits.Desktop};` : ''}
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormVROrientationType === 'bottom' && fluentFormVRBottomOffset.Desktop !== undefined ? `bottom: ${fluentFormVRBottomOffset.Desktop}${fluentFormVRBottomOffsetUnits.Desktop};` : ''}
             ${fluentFormGlobalZIndex.Desktop ? `z-index: ${fluentFormGlobalZIndex.Desktop};` : ''}
+            ${fluentFormOverflow !== 'default' ? `overflow: ${fluentFormOverflow};` : ''}
             ${fluentFormGlobalBoxShadowCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowCssValue};` : ''} 
             transition: all .3s ease-in-out;
         }
@@ -3197,6 +3201,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         deviceType,
         fluentFormGlobalZIndex,
+        fluentFormOverflow,
         formId,
         showLabels,
         showPlaceholder,
@@ -3623,12 +3628,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(fluentFormGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
 
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
  
 
     return (
@@ -4798,6 +4805,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     />
 
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={fluentFormOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ fluentFormOverflow: value })}
+                                                    />
+
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
                                                         positionType={fluentFormPositionType}
@@ -5010,6 +5024,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
 													/>
 												</PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={fluentFormGlobalWraperCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ fluentFormGlobalWraperCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
+                                                
                                             </div>
                                         </div>
                                     </>
