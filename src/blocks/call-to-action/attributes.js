@@ -2204,5 +2204,11 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+	ctaCustomCSS : { 
+        type: "string",
+        default: "",
+    },
+
 }
 export default attributes;

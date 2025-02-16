@@ -1148,5 +1148,9 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	advancedImageCustomCSS : {
+        type: "string",
+        default: "",
+    },
 }
 export default attributes;

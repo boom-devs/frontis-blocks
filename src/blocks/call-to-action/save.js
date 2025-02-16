@@ -40,7 +40,7 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		id: blockID,
+		className: `fb-cta-main-wrapper ${blockID}`,
 	});
 
 	return (

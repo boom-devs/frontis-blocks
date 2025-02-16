@@ -346,6 +346,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaTabletSwitcher,
 		ctaMobileSwitcher,
 
+		ctaCustomCSS,
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
 
@@ -2393,13 +2394,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+	const customCss = getCustomCss(ctaCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${ctaContentStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${ctaContentStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [ctaContentStyle]);
+	}, [ctaContentStyle, customCss]);
 
-	const editorStyle = ctaContentStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${ctaContentStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -3717,6 +3720,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={ctaMobileSwitcher}
 														onChange={(value) => setAttributes({ ctaMobileSwitcher: value })}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={ctaCustomCSS} 
+														onChangeValue={(value) => setAttributes({ ctaCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>
