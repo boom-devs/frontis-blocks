@@ -20,6 +20,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+	teamMemberOverflow: {
+        type: 'string',
+        default: "default",
+    },
 
     teamMemberPaddingUnits : {
         type: 'object',

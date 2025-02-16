@@ -43,6 +43,13 @@ export const SELECT_BG_IMAGE_SIZE_TYPE = [
 ];
 /** End Backgorund Image */
 
+export const OVERFLOW_OP = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
+    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
 
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },

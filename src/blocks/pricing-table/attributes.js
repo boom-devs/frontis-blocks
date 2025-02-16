@@ -2201,6 +2201,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+	pricingTableOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	/** Start Padding */
 	priceGlobalPaddingUnits: {
 		type: 'object',
