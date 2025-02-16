@@ -623,6 +623,11 @@ const attributes = {
             Mobile: ''
         }
     },
+
+    accordionOverflow: {
+        type: 'string',
+        default: "default",
+    },
     
     accordionPaddingUnits : {
         type: 'object',
