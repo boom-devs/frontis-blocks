@@ -16,7 +16,7 @@ export default function save({ attributes }) {
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
@@ -24,7 +24,7 @@ export default function save({ attributes }) {
         <>
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} id={accordionGlobalWraperID}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">
