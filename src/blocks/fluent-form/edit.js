@@ -22,7 +22,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const blockProps = useBlockProps({
 		className: [
 			'fb-parent-wrapper fb-fluent-form-wrapper',
-			fluentFormGlobalWraperClass,
 			blockID,
 			!showLabels && 'fb-fluent-form-hide-label',
 			!showPlaceholder && 'fb-fluent-form-hide-placeholder',
@@ -68,7 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				) : (
 					<>
-						<div id={fluentFormGlobalWraperID}>
+						<div className={fluentFormGlobalWraperClass} id={fluentFormGlobalWraperID}>
 							{!formId && (
 								<SelectControl
 									label={__('Fluent Form', 'frontis-blocks')}
