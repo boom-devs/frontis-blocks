@@ -836,23 +836,49 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   if (paragraphStyles === '') {
     return false;
   }
-
-  // Apply individual styles for each heading (h1, h2, h3, etc.)
-  var headingGrouped = "\n        body .wp-site-blocks h1 {\n            ".concat(heading1Styles, "\n        }\n        body .wp-site-blocks h2 {\n            ").concat(heading2Styles, "\n        }\n        body .wp-site-blocks h3 {\n            ").concat(heading3Styles, "\n        }\n        body .wp-site-blocks h4 {\n            ").concat(heading4Styles, "\n        }\n        body .wp-site-blocks h5 {\n            ").concat(heading5Styles, "\n        }\n        body .wp-site-blocks h6 {\n            ").concat(heading6Styles, "\n        }\n    ");
-
-  // Styles for the "all" combined typography
-  var allCombinedStyles = "\n        body .wp-site-blocks h1,\n        body .wp-site-blocks h2,\n        body .wp-site-blocks h3,\n        body .wp-site-blocks h4,\n        body .wp-site-blocks h5,\n        body .wp-site-blocks h6 {\n            ".concat(combinedHeadingStyles, "\n        }\n    ");
-  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 1024px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a, body .wp-site-blocks p a {\n            ").concat(linkStyles, "\n        }\n\n        body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n            ").concat(buttonStyles, "\n        }\n\n        body .wp-site-blocks figcaption {\n            ").concat(captionStyles, "\n        }\n        ").concat(allCombinedStyles, "\n        ").concat(headingGrouped, "\n    ");
   var path = window.location.pathname;
   var fileName = path.substring(path.lastIndexOf('/') + 1);
+  var headingGrouped = '';
+  var allCombinedStyles = '';
+  var styles = '';
+  console.log(fileName === 'post.php');
+  if (fileName === 'post.php') {
+    console.log(deviceType);
+    // Apply individual styles for each heading (h1, h2, h3, etc.)
+    if (deviceType !== 'Desktop') {
+      headingGrouped = "\n                body .is-root-container h1 {\n                    ".concat(heading1Styles, "\n                }\n                body .is-root-container h2 {\n                    ").concat(heading2Styles, "\n                }\n                body .is-root-container h3 {\n                    ").concat(heading3Styles, "\n                }\n                body .is-root-container h4 {\n                    ").concat(heading4Styles, "\n                }\n                body .is-root-container h5 {\n                    ").concat(heading5Styles, "\n                }\n                body .is-root-container h6 {\n                    ").concat(heading6Styles, "\n                }\n            ");
+
+      // Styles for the "all" combined typography
+      allCombinedStyles = "\n                body .is-root-container h1{\n                    ".concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h2{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h3{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h4{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h5{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h6 {\n                    ").concat(combinedHeadingStyles, "\n                }\n            ");
+      styles = "\n                :root {\n                    ".concat(rootStyles, "\n                    ").concat(desktopStyles, "\n                }\n                @media (max-width: 1024px) {\n                    :root {\n                        ").concat(tabletStyles, "\n                    }\n                }\n                @media (max-width: 767px) {\n                    :root {\n                        ").concat(mobileStyles, "\n                    }\n                }\n\n                body .is-root-container p {\n                    ").concat(paragraphStyles, "\n                }\n\n                body .is-root-container a{\n                    ").concat(linkStyles, "\n                }\n                body .is-root-container p a {\n                    ").concat(linkStyles, "\n                }\n\n                body .is-root-container .wp-block-button__link {\n                    ").concat(buttonStyles, "\n                }\n                body .is-root-container button {\n                    ").concat(buttonStyles, "\n                }\n\n                body .is-root-container figcaption {\n                    ").concat(captionStyles, "\n                }\n                ").concat(allCombinedStyles, "\n                ").concat(headingGrouped, "\n            ");
+    } else {
+      headingGrouped = "\n                body .editor-visual-editor h1 {\n                    ".concat(heading1Styles, "\n                }\n                body .editor-visual-editor h2 {\n                    ").concat(heading2Styles, "\n                }\n                body .editor-visual-editor h3 {\n                    ").concat(heading3Styles, "\n                }\n                body .editor-visual-editor h4 {\n                    ").concat(heading4Styles, "\n                }\n                body .editor-visual-editor h5 {\n                    ").concat(heading5Styles, "\n                }\n                body .editor-visual-editor h6 {\n                    ").concat(heading6Styles, "\n                }\n            ");
+
+      // Styles for the "all" combined typography
+      allCombinedStyles = "\n                body .editor-visual-editor h1,\n                body .editor-visual-editor h2,\n                body .editor-visual-editor h3,\n                body .editor-visual-editor h4,\n                body .editor-visual-editor h5,\n                body .editor-visual-editor h6 {\n                    ".concat(combinedHeadingStyles, "\n                }\n            ");
+      styles = "\n                :root {\n                    ".concat(rootStyles, "\n                    ").concat(desktopStyles, "\n                }\n                @media (max-width: 1024px) {\n                    :root {\n                        ").concat(tabletStyles, "\n                    }\n                }\n                @media (max-width: 767px) {\n                    :root {\n                        ").concat(mobileStyles, "\n                    }\n                }\n\n                body .editor-visual-editor p {\n                    ").concat(paragraphStyles, "\n                }\n\n                body .editor-visual-editor a, body .editor-visual-editor p a {\n                    ").concat(linkStyles, "\n                }\n\n                body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {\n                    ").concat(buttonStyles, "\n                }\n\n                body .editor-visual-editor figcaption {\n                    ").concat(captionStyles, "\n                }\n                ").concat(allCombinedStyles, "\n                ").concat(headingGrouped, "\n            ");
+    }
+  } else {
+    // Apply individual styles for each heading (h1, h2, h3, etc.)
+    headingGrouped = "\n            body .wp-site-blocks h1 {\n                ".concat(heading1Styles, "\n            }\n            body .wp-site-blocks h2 {\n                ").concat(heading2Styles, "\n            }\n            body .wp-site-blocks h3 {\n                ").concat(heading3Styles, "\n            }\n            body .wp-site-blocks h4 {\n                ").concat(heading4Styles, "\n            }\n            body .wp-site-blocks h5 {\n                ").concat(heading5Styles, "\n            }\n            body .wp-site-blocks h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
+
+    // Styles for the "all" combined typography
+    allCombinedStyles = "\n            body .wp-site-blocks h1,\n            body .wp-site-blocks h2,\n            body .wp-site-blocks h3,\n            body .wp-site-blocks h4,\n            body .wp-site-blocks h5,\n            body .wp-site-blocks h6 {\n                ".concat(combinedHeadingStyles, "\n            }\n        ");
+    styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .wp-site-blocks p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .wp-site-blocks a, body .wp-site-blocks p a {\n                ").concat(linkStyles, "\n            }\n\n            body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n                ").concat(buttonStyles, "\n            }\n\n            body .wp-site-blocks figcaption {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
+  }
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
   var iframeDocument = ((_iframe2 = iframe) === null || _iframe2 === void 0 ? void 0 : _iframe2.contentDocument) || ((_iframe3 = iframe) === null || _iframe3 === void 0 || (_iframe3 = _iframe3.contentWindow) === null || _iframe3 === void 0 ? void 0 : _iframe3.document) || document;
   var styleTag = iframeDocument.getElementById("global-typo");
   if (fileName === 'post.php') {
-    if (deviceType !== 'Desktop') {} else {
+    if (deviceType !== 'Desktop') {
       var _iframe4, _iframe5;
       iframe = document.querySelector('iframe[name="editor-canvas"]');
       iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
+      styleTag = iframeDocument.getElementById("global-typo");
+    } else {
+      var _iframe6, _iframe7;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe6 = iframe) === null || _iframe6 === void 0 ? void 0 : _iframe6.contentDocument) || ((_iframe7 = iframe) === null || _iframe7 === void 0 || (_iframe7 = _iframe7.contentWindow) === null || _iframe7 === void 0 ? void 0 : _iframe7.document) || document;
       styleTag = iframeDocument.getElementById("global-typo");
     }
   }
@@ -1100,7 +1126,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     onChangeFontSize = _ref.onChangeFontSize,
     fontSizeUnits = _ref.fontSizeUnits,
     onChangeFontSizeUnit = _ref.onChangeFontSizeUnit,
-    fontWeightState = _ref.fontWeightState,
+    fontWeight = _ref.fontWeight,
     onChangeFontWeight = _ref.onChangeFontWeight,
     fontStyle = _ref.fontStyle,
     onChangeFontStyle = _ref.onChangeFontStyle,
@@ -1172,7 +1198,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Appearance", "frontis-blocks"),
     options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
-    value: fontWeightState,
+    value: fontWeight,
     onChange: handleFontWeightChange
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
@@ -2002,6 +2028,7 @@ var TypographySettings = function TypographySettings(props) {
       });
     }
   }, [isMount]);
+  console.log(globalTypography);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (globalTypography) {
       (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
@@ -2017,7 +2044,7 @@ var TypographySettings = function TypographySettings(props) {
         setGlobalTypography(globalTypoData);
       }
     }, 1000);
-  }, []);
+  }, [deviceType]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",

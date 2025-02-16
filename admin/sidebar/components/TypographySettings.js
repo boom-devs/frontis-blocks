@@ -1055,6 +1055,7 @@ const TypographySettings = (props) => {
 		}
 	}, [isMount]);
 
+	console.log(globalTypography)
 	useEffect(() => {
 		if(globalTypography) {
 			generateCSSVariables(globalTypography, deviceType);
@@ -1071,7 +1072,7 @@ const TypographySettings = (props) => {
 				setGlobalTypography(globalTypoData)
 			}
 		}, 1000);
-	}, [])
+	}, [deviceType])
 
 	return (
 		<>
