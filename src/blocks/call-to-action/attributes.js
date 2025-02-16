@@ -186,7 +186,7 @@ const attributes = {
 	},
 	btnTwoIconColor: {
 		type: 'string',
-		default: '#004AAD'
+		default: '#4361EE'
 	},
 	btnTwoIconHoverColor: {
 		type: 'string',
@@ -962,9 +962,9 @@ const attributes = {
 	buttonTwoFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
 		}
 	},
 	buttonTwoFontSizeUnits: {
@@ -1030,7 +1030,7 @@ const attributes = {
 	},
 	buttonTwoTextColor: {
 		type: "string",
-		default: '#004AAD'
+		default: '#4361EE'
 	},
 	buttonTwoTextHoverColor: {
 		type: "string"
@@ -1160,7 +1160,7 @@ const attributes = {
 	},
 	btnTwoBorderColor: {
 		type: 'string',
-        default: '#004AAD'
+        default: '#4361EE'
 	},
 	btnTwoHoverBorderColor: {
 		type: 'string',
