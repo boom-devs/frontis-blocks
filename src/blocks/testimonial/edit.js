@@ -51,7 +51,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-testimonial-main-wrapper ${blockID} ${testimonialGlobalWraperClass}`,
+        className: `fb-testimonial-main-wrapper ${blockID}`,
     });
 
     /** Helper function to render rating icons based on the number of ratings */
@@ -114,8 +114,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`} id={testimonialGlobalWraperID} ref={panelRef}>
-                    <div className={`fb-testimonial-wrapper ${blockID}`}>
+                <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment} ${testimonialGlobalWraperClass}`} id={testimonialGlobalWraperID} ref={panelRef}>
+                    <div className={`fb-testimonial-wrapper`}>
                         <div className="fb-testimonial-inner-wrapper">
                             <div className='fb-testimonial-container'>
 
