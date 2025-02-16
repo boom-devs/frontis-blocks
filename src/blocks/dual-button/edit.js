@@ -42,7 +42,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		dualButtonGlobalWraperClass,
     } = attributes;
 
-    const blockProps = useBlockProps();
+    const blockProps = useBlockProps({
+		className: `fb-dual-button-main-wrapper ${blockID}`,
+	});
 
 	/**
 	* Manages tab button settings and switches to block settings on click
@@ -71,8 +73,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
 
-            <div {...blockProps} id={blockID}  className={`fb-dual-button-area ${blockID} ${dualButtonGlobalWraperClass}`} >
-                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID}`} id={dualButtonGlobalWraperID} ref={panelRef}>
+            <div {...blockProps} className={`fb-dual-button-area ${blockID}`} >
+                <div className={`fb-parent-wrapper fb-dual-button-container ${blockID} ${dualButtonGlobalWraperClass}`} id={dualButtonGlobalWraperID} ref={panelRef}>
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 
 						flexDirection:
