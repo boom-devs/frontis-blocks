@@ -25,6 +25,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
+
+		countDownDesktopSwitcher,
+		countDownTabletSwitcher,
+		countDownMobileSwitcher,
 	} = attributes;
 
 
@@ -91,7 +95,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [targetDate]);
 
 	const blockProps = useBlockProps({
-		className: `fb-count-down-main-wrapper ${blockID}`,
+		className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	return (
@@ -103,7 +107,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			<div {...blockProps} className={`fb-count-down-area ${blockID}`}>
+			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID} ref={panelRef}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>

@@ -40,10 +40,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		dualButtonGlobalWraperID,
 		dualButtonGlobalWraperClass,
+
+		dualBtnDesktopSwitcher,
+		dualBtnTabletSwitcher,
+		dualBtnMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
-		className: `fb-dual-button-main-wrapper ${blockID}`,
+		className: `fb-dual-button-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	/**
@@ -73,7 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 />
             </BlockControls>
 
-            <div {...blockProps} className={`fb-dual-button-area ${blockID}`} >
+            <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-dual-button-container ${blockID} ${dualButtonGlobalWraperClass}`} id={dualButtonGlobalWraperID} ref={panelRef}>
 					<div className="fb-dual-button-wrapper" style={{ 
 						justifyContent: ButtonAlignment, 

@@ -42,10 +42,14 @@ export default function save({ attributes }) {
 
 		postGridGlobalWraperID,
         postGridGlobalWraperClass,
+
+		postGridDesktopSwitcher,
+		postGridTabletSwitcher,
+		postGridMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-post-grid-area ${blockId}`,
+		className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	return (

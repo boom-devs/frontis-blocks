@@ -46,10 +46,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         postGridGlobalWraperID,
         postGridGlobalWraperClass,
+
+        postGridDesktopSwitcher,
+		postGridTabletSwitcher,
+		postGridMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-post-grid-area ${blockId}`,
+        className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     const { useSelect } = wp.data;

@@ -19,16 +19,20 @@ export default function save({ attributes }) {
 
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
+
+		countDownDesktopSwitcher,
+		countDownTabletSwitcher,
+		countDownMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-count-down-main-wrapper ${blockID}`,
+		className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	{/* Inspector Controls */}
 	return (
 		<>
-			<div {...blockProps} data-target-date={targetDate} className={`fb-count-down-area ${blockID}`}>
+			<div {...blockProps} data-target-date={targetDate}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID}>
 					{showDays && (
 						<div className={`fb-count-down-item`}>
