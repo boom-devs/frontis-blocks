@@ -19,6 +19,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showThousandsSeparator,
 		icon,
 		mediaSwitcher,
+		counterGlobalWraperID,
+		counterGlobalWraperClass,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -102,8 +104,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 					<div className="fb-counter-item">
 						<div className={`fb-counter-icon-wrapper`}>
 							{mediaSwitcher === 'image' && attributes.counterMediaUrl && (
