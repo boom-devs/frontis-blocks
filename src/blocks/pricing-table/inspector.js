@@ -596,6 +596,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTableTabletSwitcher,
 		pricingTableMobileSwitcher,
 
+		pricingTableGlobalCustomCSS,
 		pricingTableGlobalWraperID,
 		pricingTableGlobalWraperClass,
 
@@ -3990,11 +3991,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pricingTableVRBottomOffsetUnits,
 	]);
 
-	useEffect(() => {
-		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-	}, [allBlockStyle]);
+	const customCss = getCustomCss(pricingTableGlobalCustomCSS, `.${blockId}`);
 
-	const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle, customCss]);
+
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
 
@@ -6135,6 +6138,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ pricingTableMobileSwitcher: value })}
 													/>
 												</PanelBody>
+
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={pricingTableGlobalCustomCSS} 
+														onChangeValue={(value) => setAttributes({ pricingTableGlobalCustomCSS: value })}
+													/>
+												</PanelBody>
+													
 											</div>
 										</div>
 									</>
