@@ -36,6 +36,9 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '../../components/position-control/index.js';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -182,6 +185,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRTopOffsetUnits,
         counterVRBottomOffset,
         counterVRBottomOffsetUnits,
+
+        counterGlobalWraperCustomCSS,
+        counterGlobalWraperID,
+        counterGlobalWraperClass,
 	} = attributes;
 
 	const counterRef = useRef(null);
@@ -1155,12 +1162,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRBottomOffsetUnits,
     ]);
  
+    const customCss = getCustomCss(counterGlobalWraperCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-    setAttributes({blockStyle: `${counterBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [counterBlockStyle]);
+        setAttributes({blockStyle: `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [counterBlockStyle, customCss]);
 
 
-    const editorStyle = counterBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1681,6 +1690,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                         setAttributes={setAttributes}
                                                     />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={counterGlobalWraperID} 
+                                                        onChangeValue={(value) => setAttributes({ counterGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={counterGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ counterGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
                                             </PanelBody>
 
                                             <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -1832,6 +1855,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ counterMobileSwitcher: value })}
 													/>
 											</PanelBody>
+
+                                            <PanelBody
+                                                title={__("Custom CSS", "frontis-blocks")}
+                                                initialOpen={false}
+                                            >
+                                                <FB_CustomCSSEditor
+                                                    value={counterGlobalWraperCustomCSS}
+                                                    onChangeValue={(value) => setAttributes({ counterGlobalWraperCustomCSS: value })}
+                                                />
+                                            </PanelBody>
                                         </div>
                                     </div>
                                 </>

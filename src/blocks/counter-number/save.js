@@ -15,6 +15,9 @@ export default function save({ attributes }) {
 		mediaSwitcher,
 		counterMediaUrl,
 
+		counterGlobalWraperID,
+		counterGlobalWraperClass,
+
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -28,8 +31,8 @@ export default function save({ attributes }) {
 
 
 	return (
-		<div {...blockProps} id={blockID}>
-			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID}`}>
+		<div {...blockProps}>
+			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 				<div className="fb-counter-item">
 					<div className={`fb-counter-icon-wrapper`}>
 						{/* Conditionally render image or icon */}
