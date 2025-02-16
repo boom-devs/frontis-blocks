@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Counter Number",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable counter number block with various styling options.",
 	"example": {},
 	"supports": {
 		"anchor": false,
