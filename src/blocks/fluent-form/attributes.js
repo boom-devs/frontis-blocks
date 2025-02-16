@@ -1997,6 +1997,10 @@ const attributes = {
     /** End Responsive Control */
 
     /** Start Global Setting */
+    fluentFormGlobalWraperCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	fluentFormGlobalWraperID : {
 		type: "string",
 		default: ""
