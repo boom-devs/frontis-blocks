@@ -197,6 +197,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialIconsTabletSwitcher,
 		socialIconsMobileSwitcher,
 
+		socialGlobalCustomCSS,
 		socialGlobalWraperID,
 		socialGlobalWraperClass,
 
@@ -2443,7 +2444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Desktop !== undefined ? `bottom: ${socialIconsVRBottomOffset.Desktop}${socialIconsVRBottomOffsetUnits.Desktop};` : ''}
 				${socialGlobalZIndex.Desktop ? `z-index: ${socialGlobalZIndex.Desktop};` : ''}
 			}
-			.${blockID}.fb-social-wrapper {
+			.${blockID} .fb-social-wrapper {
 				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
 				${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
@@ -2455,7 +2456,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 				position: relative;
 			}
-			.${blockID}.fb-social-wrapper:hover {
+			.${blockID} .fb-social-wrapper:hover {
 				${socialGlobalBgHoverColor ? `background-color: ${socialGlobalBgHoverColor};` : ''}
 				${socialGlobalBorderHoverColor ? `border-color: ${socialGlobalBorderHoverColor};` : ''}
 				${socialGlobalBoxShadowHoverCssValue  ? `box-shadow: ${socialGlobalBoxShadowHoverCssValue};` : ''}
@@ -2523,7 +2524,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Tablet !== undefined ? `bottom: ${socialIconsVRBottomOffset.Tablet}${socialIconsVRBottomOffsetUnits.Tablet};` : ''}
 					${socialGlobalZIndex.Tablet ? `z-index: ${socialGlobalZIndex.Tablet};` : ''}
 				}
-				.${blockID}.fb-social-wrapper {
+				.${blockID} .fb-social-wrapper {
 					${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''} 
 					${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -2566,7 +2567,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Mobile !== undefined ? `bottom: ${socialIconsVRBottomOffset.Mobile}${socialIconsVRBottomOffsetUnits.Mobile};` : ''} 
 					${socialGlobalZIndex.Mobile ? `z-index: ${socialGlobalZIndex.Mobile};` : ''}
 				}
-				.${blockID}.fb-social-wrapper {
+				.${blockID} .fb-social-wrapper {
 					${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''} 
 					${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -2689,11 +2690,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			socialIconsVRBottomOffsetUnits,
 		]);
 
-		useEffect(() => {
-			setAttributes({blockStyle: `${socialItemColorStyle}${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-		}, [socialItemColorStyle, allBlockStyle]);
+		const customCss = getCustomCss(socialGlobalCustomCSS, `.${blockID}`);
 
-		const editorStyle = socialItemColorStyle + allBlockStyle.replace(/\s+/g, ' ').trim();
+		useEffect(() => {
+			setAttributes({blockStyle: `${socialItemColorStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+		}, [socialItemColorStyle, allBlockStyle, customCss]);
+
+		const editorStyle = `${socialItemColorStyle} ${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
     
 
     return (
@@ -3368,6 +3371,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														checked={socialIconsMobileSwitcher}
 														onChange={(value) => setAttributes({ socialIconsMobileSwitcher: value })}
 													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+                                                        value={socialGlobalCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ socialGlobalCustomCSS: value })}
+                                                    />
 												</PanelBody>
 											</div>
 										</div>
