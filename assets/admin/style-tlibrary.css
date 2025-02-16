@@ -17,6 +17,9 @@
   path-fill: #fff;
 }
 
+body .components-modal__frame {
+  max-height: 90% !important;
+}
 body .components-modal__frame.fb-template-library-popover {
   min-width: calc(100% - 32px);
   height: 100% !important;

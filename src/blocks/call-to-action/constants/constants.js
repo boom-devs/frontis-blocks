@@ -19,6 +19,7 @@ export const PRESETS = [
 	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
 ];
 
+
 export const OVERFLOW_OP = [
     { label: __('Default', 'frontis-blocks'), value: 'default' },
     { label: __('Auto', 'frontis-blocks'), value: 'auto' },
