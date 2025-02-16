@@ -2,6 +2,225 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./admin/template-library/fullsiteimport.js":
+/*!**************************************************!*\
+  !*** ./admin/template-library/fullsiteimport.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+var SiteImportModal = function SiteImportModal(_ref) {
+  var isOpen = _ref.isOpen,
+    onClose = _ref.onClose,
+    onImport = _ref.onImport;
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      primary: '#007bff',
+      secondary: '#6c757d',
+      accent: '#ffc107',
+      text: '#212529',
+      background: '#ffffff'
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    colors = _useState2[0],
+    setColors = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      headingFont: 'Inter',
+      bodyFont: 'Open Sans',
+      baseSize: '16px',
+      scale: '1.2'
+    }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    typography = _useState4[0],
+    setTypography = _useState4[1];
+  var fontOptions = ['Inter', 'Open Sans', 'Roboto', 'Lato', 'Poppins', 'Montserrat'];
+  var handleImport = function handleImport() {
+    var configData = {
+      colors: colors,
+      typography: typography
+    };
+    window.jQuery.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: {
+        action: 'fb_import_full_site',
+        security: nonce,
+        config: configData
+      },
+      success: function success(response) {
+        if (response.success) {
+          window.wp.data.dispatch('core/notices').createSuccessNotice(response.data.message || 'Site imported with custom configuration!', {
+            type: 'snackbar'
+          });
+          var siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
+          window.location.href = siteUrl;
+        } else {
+          window.wp.data.dispatch('core/notices').createErrorNotice('Failed to import site: ' + response.data, {
+            type: 'snackbar'
+          });
+        }
+      },
+      error: function error() {
+        window.wp.data.dispatch('core/notices').createErrorNotice('Failed to process request. Please try again.', {
+          type: 'snackbar'
+        });
+      }
+    });
+    onClose();
+  };
+  if (!isOpen) return null;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-overlay"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-header"
+  }, /*#__PURE__*/React.createElement("h2", null, "Site Import Configuration"), /*#__PURE__*/React.createElement("button", {
+    className: "fb-modal-close",
+    onClick: onClose
+  }, "\xD7")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-section"
+  }, /*#__PURE__*/React.createElement("h3", null, "Global Colors"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-grid"
+  }, Object.entries(colors).map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+      key = _ref3[0],
+      value = _ref3[1];
+    return /*#__PURE__*/React.createElement("div", {
+      key: key,
+      className: "fb-color-field"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "fb-label"
+    }, key.charAt(0).toUpperCase() + key.slice(1), " Color"), /*#__PURE__*/React.createElement("div", {
+      className: "fb-color-inputs"
+    }, /*#__PURE__*/React.createElement("input", {
+      type: "color",
+      value: value,
+      onChange: function onChange(e) {
+        return setColors(function (prev) {
+          return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, key, e.target.value));
+        });
+      },
+      className: "fb-color-picker"
+    }), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      value: value,
+      onChange: function onChange(e) {
+        return setColors(function (prev) {
+          return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, key, e.target.value));
+        });
+      },
+      className: "fb-text-input"
+    })));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-section"
+  }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-typography-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "fb-label"
+  }, "Heading Font"), /*#__PURE__*/React.createElement("select", {
+    value: typography.headingFont,
+    onChange: function onChange(e) {
+      return setTypography(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          headingFont: e.target.value
+        });
+      });
+    },
+    className: "fb-select"
+  }, fontOptions.map(function (font) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: font,
+      value: font
+    }, font);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "fb-label"
+  }, "Body Font"), /*#__PURE__*/React.createElement("select", {
+    value: typography.bodyFont,
+    onChange: function onChange(e) {
+      return setTypography(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          bodyFont: e.target.value
+        });
+      });
+    },
+    className: "fb-select"
+  }, fontOptions.map(function (font) {
+    return /*#__PURE__*/React.createElement("option", {
+      key: font,
+      value: font
+    }, font);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "fb-label"
+  }, "Base Font Size"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: typography.baseSize,
+    onChange: function onChange(e) {
+      return setTypography(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          baseSize: e.target.value
+        });
+      });
+    },
+    className: "fb-text-input"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-field"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "fb-label"
+  }, "Type Scale"), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    step: "0.1",
+    value: typography.scale,
+    onChange: function onChange(e) {
+      return setTypography(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          scale: e.target.value
+        });
+      });
+    },
+    className: "fb-text-input"
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-footer"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "button button-secondary",
+    onClick: onClose
+  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+    className: "button button-primary",
+    onClick: handleImport
+  }, "Import Site"))), /*#__PURE__*/React.createElement("style", null, "\n          .fb-modal-overlay {\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(0, 0, 0, 0.5);\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            z-index: 160000;\n          }\n  \n          .fb-modal {\n            background: white;\n            border-radius: 3px;\n            max-width: 800px;\n            width: 90%;\n            max-height: 90vh;\n            overflow-y: auto;\n          }\n  \n          .fb-modal-header {\n            padding: 15px 20px;\n            border-bottom: 1px solid #ddd;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n          }\n  \n          .fb-modal-close {\n            border: none;\n            background: none;\n            font-size: 24px;\n            cursor: pointer;\n            padding: 0 5px;\n          }\n  \n          .fb-modal-content {\n            padding: 20px;\n          }\n  \n          .fb-section {\n            margin-bottom: 24px;\n          }\n  \n          .fb-color-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 16px;\n          }\n  \n          .fb-typography-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 16px;\n          }\n  \n          .fb-color-field {\n            margin-bottom: 12px;\n          }\n  \n          .fb-color-inputs {\n            display: flex;\n            gap: 8px;\n          }\n  \n          .fb-label {\n            display: block;\n            margin-bottom: 6px;\n          }\n  \n          .fb-color-picker {\n            width: 50px;\n            height: 30px;\n            padding: 0;\n          }\n  \n          .fb-text-input {\n            width: 100%;\n            height: 30px;\n            padding: 4px 8px;\n          }\n  \n          .fb-select {\n            width: 100%;\n            height: 30px;\n          }\n  \n          .fb-modal-footer {\n            padding: 15px 20px;\n            border-top: 1px solid #ddd;\n            display: flex;\n            justify-content: flex-end;\n            gap: 10px;\n          }\n        "));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteImportModal);
+
+/***/ }),
+
 /***/ "./admin/template-library/index.js":
 /*!*****************************************!*\
   !*** ./admin/template-library/index.js ***!
@@ -48,6 +267,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _fullsiteimport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fullsiteimport */ "./admin/template-library/fullsiteimport.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -59,49 +281,163 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  */
 
 
+
+
+
 var TemplateCard = function TemplateCard(_ref) {
   var imageUrl = _ref.imageUrl;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
-  var handleDemoDataImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
-    var selectedBlock = window.wp.data.select('core/block-editor').getSelectedBlock();
-    if (!selectedBlock || !selectedBlock.clientId) {
-      alert('Please select a block first!');
-      return;
-    }
-    var blockId = selectedBlock.clientId;
-    window.jQuery.ajax({
-      url: ajaxUrl,
-      type: 'POST',
-      data: {
-        action: 'fb_import_demo_data',
-        security: nonce,
-        block_id: blockId
-      },
-      success: function success(response) {
-        if (response.success) {
-          console.log('Demo data imported successfully!', response.data);
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isLoading = _useState2[0],
+    setIsLoading = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isModalOpen = _useState4[0],
+    setIsModalOpen = _useState4[1];
 
-          // Update block content using replaceBlocks
-          var _wp$data$dispatch = wp.data.dispatch('core/block-editor'),
-            replaceBlocks = _wp$data$dispatch.replaceBlocks;
-          var blocks = wp.blocks.parse(response.data.content); // Parse the content into blocks
+  //Demo import for blocks
+  // const handleDemoDataImport = useCallback(() => {
+  //   const selectedBlock = window.wp.data
+  //     .select('core/block-editor')
+  //     .getSelectedBlock();
 
-          replaceBlocks(blockId, blocks);
-          alert(response.data.message);
-        } else {
-          console.error('Failed:', response.data);
-          alert('Failed to import demo data: ' + response.data);
-        }
-      },
-      error: function error(xhr, status, _error) {
-        console.error('Ajax error:', status, _error);
-        alert('Failed to process request. Please try again.');
-      }
-    });
-  }, [ajaxUrl, nonce]);
-  return /*#__PURE__*/React.createElement("div", {
+  //   if (!selectedBlock || !selectedBlock.clientId) {
+  //     toast.warn('Please select a block first!');
+  //     return;
+  //   }
+
+  //   const blockId = selectedBlock.clientId;
+  //   setIsLoading(true);
+
+  //   window.jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_import_demo_data',
+  //       security: nonce,
+  //       block_id: blockId
+  //     },
+  //     success: function (response) {
+  //       setIsLoading(false);
+
+  //       if (response.success) {
+  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+  //         const blocks = wp.blocks.parse(response.data.content);
+  //         replaceBlocks(blockId, blocks);
+  //         toast.success(response.data.message || 'Demo data imported successfully!');
+  //       } else {
+  //         toast.error('Failed to import demo data: ' + response.data);
+  //       }
+  //     },
+  //     error: function (xhr, status, error) {
+  //       setIsLoading(false);
+  //       toast.error('Failed to process request. Please try again.');
+  //     }
+  //   });
+  // }, [ajaxUrl, nonce]);
+
+  // demo import for pages
+  // const handleDemoDataImport = useCallback(() => {
+  //   const selectedBlock = window.wp.data
+  //     .select('core/block-editor')
+  //     .getSelectedBlock();
+
+  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+
+  //   setIsLoading(true);
+
+  //   window.jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_import_demo_data',
+  //       security: nonce,
+  //       block_id: selectedBlock ? selectedBlock.clientId : '',
+  //       post_id: postId  // Send post ID explicitly
+  //     },
+  //     success: function (response) {
+  //       setIsLoading(false);
+
+  //       if (response.success) {
+  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+  //         const { editPost } = wp.data.dispatch('core/editor');
+
+  //         if (selectedBlock) {
+  //           // Update selected block
+  //           const blocks = wp.blocks.parse(response.data.content);
+  //           replaceBlocks(selectedBlock.clientId, blocks);
+  //         } else {
+  //           // Update full page content
+  //           editPost({ content: response.data.content });
+  //         }
+
+  //         toast.success(response.data.message || 'Demo data imported successfully!');
+  //       } else {
+  //         toast.error('Failed to import demo data: ' + response.data);
+  //       }
+  //     },
+  //     error: function () {
+  //       setIsLoading(false);
+  //       toast.error('Failed to process request. Please try again.');
+  //     }
+  //   });
+  // }, [ajaxUrl, nonce]);
+
+  //demo import full site
+
+  // const handleDemoDataImport = useCallback(() => {
+  //   const selectedBlock = window.wp.data
+  //     .select('core/block-editor')
+  //     .getSelectedBlock();
+
+  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+
+  //   setIsLoading(true);
+
+  //   window.jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_import_demo_data',
+  //       security: nonce,
+  //       block_id: selectedBlock ? selectedBlock.clientId : '',
+  //       post_id: postId  // Send post ID explicitly
+  //     },
+  //     success: function (response) {
+  //       setIsLoading(false);
+
+  //       if (response.success) {
+  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+  //         const { editPost } = wp.data.dispatch('core/editor');
+
+  //         if (selectedBlock) {
+  //           // Update selected block
+  //           const blocks = wp.blocks.parse(response.data.content);
+  //           replaceBlocks(selectedBlock.clientId, blocks);
+  //         } else {
+  //           // Update full page content
+  //           editPost({ content: response.data.content });
+  //         }
+
+  //         toast.success(response.data.message || 'Demo data imported successfully!');
+  //       } else {
+  //         toast.error('Failed to import demo data: ' + response.data);
+  //       }
+  //     },
+  //     error: function () {
+  //       setIsLoading(false);
+  //       toast.error('Failed to process request. Please try again.');
+  //     }
+  //   });
+  // }, [ajaxUrl, nonce]); 
+
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsModalOpen(true);
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-img"
@@ -111,9 +447,12 @@ var TemplateCard = function TemplateCard(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-import",
-    onClick: handleDemoDataImport
-  }, /*#__PURE__*/React.createElement("span", null, "Import"), /*#__PURE__*/React.createElement("svg", {
+    className: "fb-template-library-import ".concat(isLoading ? 'disabled' : ''),
+    onClick: !isLoading ? handleFullSiteImport : null
+  }, /*#__PURE__*/React.createElement("span", null, isLoading ? 'Importing...' : 'Import'), isLoading ? /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    color: "#fff",
+    size: 18
+  }) : /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "18",
     height: "18",
@@ -168,17 +507,26 @@ var TemplateCard = function TemplateCard(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M9 4.12547L8.5947 4.51554C8.59725 4.51815 8.5998 4.52073 8.60235 4.52329L9 4.12547ZM10.1024 6.02275C10.322 6.24238 10.6782 6.24231 10.8978 6.0226C11.1175 5.80289 11.1174 5.44673 10.8976 5.2271L10.1024 6.02275ZM7.06954 13.7414C5.93279 12.8453 4.6898 11.9702 3.70372 10.8598C2.73692 9.77114 2.0625 8.50087 2.0625 6.85282H0.9375C0.9375 8.85194 1.77038 10.3771 2.86254 11.6068C3.93542 12.8149 5.30308 13.7814 6.37306 14.6249L7.06954 13.7414ZM2.0625 6.85282C2.0625 5.23967 2.97403 3.88688 4.21827 3.31814C5.42705 2.7656 7.05125 2.91193 8.5947 4.51554L9.4053 3.73539C7.57387 1.83263 5.44807 1.51904 3.75057 2.29496C2.08853 3.05468 0.9375 4.81877 0.9375 6.85282H2.0625ZM6.37306 14.6249C6.75724 14.9278 7.16966 15.2507 7.5876 15.4949C8.00543 15.739 8.4822 15.9375 9 15.9375V14.8125C8.7678 14.8125 8.49458 14.722 8.1552 14.5236C7.81598 14.3254 7.46406 14.0524 7.06954 13.7414L6.37306 14.6249ZM11.6269 14.6249C12.6969 13.7814 14.0646 12.8149 15.1375 11.6068C16.2296 10.3771 17.0625 8.85194 17.0625 6.85282H15.9375C15.9375 8.50087 15.2631 9.77114 14.2963 10.8598C13.3102 11.9702 12.0672 12.8453 10.9305 13.7414L11.6269 14.6249ZM17.0625 6.85282C17.0625 4.81877 15.9115 3.05468 14.2494 2.29496C12.5519 1.51904 10.4261 1.83263 8.5947 3.73539L9.4053 4.51554C10.9487 2.91193 12.5729 2.7656 13.7817 3.31814C15.026 3.88688 15.9375 5.23967 15.9375 6.85282H17.0625ZM10.9305 13.7414C10.5359 14.0524 10.184 14.3254 9.8448 14.5236C9.50543 14.722 9.2322 14.8125 9 14.8125V15.9375C9.5178 15.9375 9.99457 15.739 10.4124 15.4949C10.8304 15.2507 11.2427 14.9278 11.6269 14.6249L10.9305 13.7414ZM8.60235 4.52329L10.1024 6.02275L10.8976 5.2271L9.39765 3.72765L8.60235 4.52329Z",
     fill: "#0B0C0E"
-  }))))));
+  })))))), /*#__PURE__*/React.createElement(_fullsiteimport__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    isOpen: isModalOpen,
+    onClose: function onClose() {
+      return setIsModalOpen(false);
+    }
+  }), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_1__.ToastContainer, {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false
+  }));
 };
 var TemplateLibrary = function TemplateLibrary(_ref2) {
   var activeTab = _ref2.activeTab,
     activeCategory = _ref2.activeCategory,
     data = _ref2.data;
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    filteredTemplates = _useState2[0],
-    setFilteredTemplates = _useState2[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    filteredTemplates = _useState6[0],
+    setFilteredTemplates = _useState6[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (activeTab && activeCategory) {
       var _tabData$categories;
@@ -467,6 +815,7 @@ var PatternLibraryButton = function PatternLibraryButton() {
     setError = _useState8[1];
   var handleClick = function handleClick() {
     setIsVisible(!isVisible);
+    console.log("isVisible:", !isVisible);
   };
   var importDemo = function importDemo() {
     // console.log(frontisBlocksAdmin.nonce)
@@ -516,7 +865,6 @@ var PatternLibraryButton = function PatternLibraryButton() {
       }
     });
   };
-  console.log(frontisBlocksAdmin);
 
   // State for active tab
   var schema = _data_json__WEBPACK_IMPORTED_MODULE_9__.$schema;
@@ -574,6 +922,18 @@ var PatternLibraryButton = function PatternLibraryButton() {
 
 /***/ }),
 
+/***/ "./node_modules/react-toastify/dist/ReactToastify.css":
+/*!************************************************************!*\
+  !*** ./node_modules/react-toastify/dist/ReactToastify.css ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./admin/template-library/style.scss":
 /*!*******************************************!*\
   !*** ./admin/template-library/style.scss ***!
@@ -582,6 +942,166 @@ var PatternLibraryButton = function PatternLibraryButton() {
 
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./node_modules/react-spinners/esm/ClipLoader.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/react-spinners/esm/ClipLoader.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_unitConverter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/unitConverter */ "./node_modules/react-spinners/esm/helpers/unitConverter.js");
+/* harmony import */ var _helpers_animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/animation */ "./node_modules/react-spinners/esm/helpers/animation.js");
+var __assign = (undefined && undefined.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __rest = (undefined && undefined.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+
+
+
+var clip = (0,_helpers_animation__WEBPACK_IMPORTED_MODULE_1__.createAnimation)("ClipLoader", "0% {transform: rotate(0deg) scale(1)} 50% {transform: rotate(180deg) scale(0.8)} 100% {transform: rotate(360deg) scale(1)}", "clip");
+function ClipLoader(_a) {
+    var _b = _a.loading, loading = _b === void 0 ? true : _b, _c = _a.color, color = _c === void 0 ? "#000000" : _c, _d = _a.speedMultiplier, speedMultiplier = _d === void 0 ? 1 : _d, _e = _a.cssOverride, cssOverride = _e === void 0 ? {} : _e, _f = _a.size, size = _f === void 0 ? 35 : _f, additionalprops = __rest(_a, ["loading", "color", "speedMultiplier", "cssOverride", "size"]);
+    var style = __assign({ background: "transparent !important", width: (0,_helpers_unitConverter__WEBPACK_IMPORTED_MODULE_2__.cssValue)(size), height: (0,_helpers_unitConverter__WEBPACK_IMPORTED_MODULE_2__.cssValue)(size), borderRadius: "100%", border: "2px solid", borderTopColor: color, borderBottomColor: "transparent", borderLeftColor: color, borderRightColor: color, display: "inline-block", animation: "".concat(clip, " ").concat(0.75 / speedMultiplier, "s 0s infinite linear"), animationFillMode: "both" }, cssOverride);
+    if (!loading) {
+        return null;
+    }
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", __assign({ style: style }, additionalprops));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ClipLoader);
+
+
+/***/ }),
+
+/***/ "./node_modules/react-spinners/esm/helpers/animation.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/react-spinners/esm/helpers/animation.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createAnimation: () => (/* binding */ createAnimation)
+/* harmony export */ });
+var createAnimation = function (loaderName, frames, suffix) {
+    var animationName = "react-spinners-".concat(loaderName, "-").concat(suffix);
+    if (typeof window == "undefined" || !window.document) {
+        return animationName;
+    }
+    var styleEl = document.createElement("style");
+    document.head.appendChild(styleEl);
+    var styleSheet = styleEl.sheet;
+    var keyFrames = "\n    @keyframes ".concat(animationName, " {\n      ").concat(frames, "\n    }\n  ");
+    if (styleSheet) {
+        styleSheet.insertRule(keyFrames, 0);
+    }
+    return animationName;
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/react-spinners/esm/helpers/unitConverter.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/react-spinners/esm/helpers/unitConverter.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cssValue: () => (/* binding */ cssValue),
+/* harmony export */   parseLengthAndUnit: () => (/* binding */ parseLengthAndUnit)
+/* harmony export */ });
+var cssUnit = {
+    cm: true,
+    mm: true,
+    in: true,
+    px: true,
+    pt: true,
+    pc: true,
+    em: true,
+    ex: true,
+    ch: true,
+    rem: true,
+    vw: true,
+    vh: true,
+    vmin: true,
+    vmax: true,
+    "%": true,
+};
+/**
+ * If size is a number, append px to the value as default unit.
+ * If size is a string, validate against list of valid units.
+ * If unit is valid, return size as is.
+ * If unit is invalid, console warn issue, replace with px as the unit.
+ *
+ * @param {(number | string)} size
+ * @return {LengthObject} LengthObject
+ */
+function parseLengthAndUnit(size) {
+    if (typeof size === "number") {
+        return {
+            value: size,
+            unit: "px",
+        };
+    }
+    var value;
+    var valueString = (size.match(/^[0-9.]*/) || "").toString();
+    if (valueString.includes(".")) {
+        value = parseFloat(valueString);
+    }
+    else {
+        value = parseInt(valueString, 10);
+    }
+    var unit = (size.match(/[^0-9]*$/) || "").toString();
+    if (cssUnit[unit]) {
+        return {
+            value: value,
+            unit: unit,
+        };
+    }
+    console.warn("React Spinners: ".concat(size, " is not a valid css value. Defaulting to ").concat(value, "px."));
+    return {
+        value: value,
+        unit: "px",
+    };
+}
+/**
+ * Take value as an input and return valid css value
+ *
+ * @param {(number | string)} value
+ * @return {string} valid css value
+ */
+function cssValue(value) {
+    var lengthWithunit = parseLengthAndUnit(value);
+    return "".concat(lengthWithunit.value).concat(lengthWithunit.unit);
+}
 
 
 /***/ }),
@@ -696,7 +1216,7 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"/assets/images/temp-1.svg","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"/assets/images/pattern2.jpg","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"/assets/images/pattern3.jpg","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"/assets/images/pattern4.jpg","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"/assets/images/pattern5.jpg","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"/assets/images/pattern6.jpg","content":"Pattern 6 content here"},{"id":"pattern7","title":"Pattern 7","image":"/assets/images/pattern7.jpg","content":"Pattern 7 content here"},{"id":"pattern8","title":"Pattern 8","image":"/assets/images/pattern8.jpg","content":"Pattern 8 content here"},{"id":"pattern9","title":"Pattern 9","image":"/assets/images/pattern9.jpg","content":"Pattern 9 content here"},{"id":"pattern10","title":"Pattern 10","image":"/assets/images/pattern10.jpg","content":"Pattern 10 content here"},{"id":"pattern11","title":"Pattern 11","image":"/assets/images/pattern11.jpg","content":"Pattern 11 content here"},{"id":"pattern12","title":"Pattern 12","image":"/assets/images/pattern12.jpg","content":"Pattern 12 content here"},{"id":"pattern13","title":"Pattern 13","image":"/assets/images/pattern13.jpg","content":"Pattern 13 content here"},{"id":"pattern14","title":"Pattern 14","image":"/assets/images/pattern14.jpg","content":"Pattern 14 content here"},{"id":"pattern15","title":"Pattern 15","image":"/assets/images/pattern15.jpg","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"kits":{"name":"Kits","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 6 content here"},{"id":"pattern7","title":"Pattern 7","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 7 content here"},{"id":"pattern8","title":"Pattern 8","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 8 content here"},{"id":"pattern9","title":"Pattern 9","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 9 content here"},{"id":"pattern10","title":"Pattern 10","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 10 content here"},{"id":"pattern11","title":"Pattern 11","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 11 content here"},{"id":"pattern12","title":"Pattern 12","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 12 content here"},{"id":"pattern13","title":"Pattern 13","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 13 content here"},{"id":"pattern14","title":"Pattern 14","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 14 content here"},{"id":"pattern15","title":"Pattern 15","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
 
 /***/ })
 
@@ -742,9 +1262,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			}
 /******/ 			var notFulfilled = Infinity;
 /******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
 /******/ 				var fulfilled = true;
 /******/ 				for (var j = 0; j < chunkIds.length; j++) {
 /******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
@@ -830,9 +1348,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
@@ -855,7 +1371,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkfrontis_blocks"] = self["webpackChunkfrontis_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkfrontis_blocks"] = globalThis["webpackChunkfrontis_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
