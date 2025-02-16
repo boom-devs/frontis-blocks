@@ -5,7 +5,7 @@
 	"name": "frontis-blocks/call-to-action",
 	"version": "1.0.0",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable call to action block with various styling options.",
 	"example": {},
 	"supports": {
 		"align": ["wide", "full"],
