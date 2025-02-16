@@ -26,6 +26,8 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '../../components/position-control/index.js';
 
@@ -219,6 +221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedImageTabletSwitcher,
 		advancedImageMobileSwitcher,
 
+		advancedImageCustomCSS,
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
 
@@ -943,7 +946,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedImageVRBottomOffset.Desktop}${advancedImageVRBottomOffsetUnits.Desktop};` : ''}
 			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} {
+		.${blockID} .fb-advanced-image-wrapper{
 			padding: ${globalDeskPadding};
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -964,7 +967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			transition: all .3s ease-in-out;
 		}
-		.fb-advanced-image-wrapper.${blockID}:hover{
+		.${blockID} .fb-advanced-image-wrapper:hover{
 			${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : ""}
 			${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
 			${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
@@ -973,7 +976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
 			${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` : `background: ${hoverClassicColor};` }
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner{
 			width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop}`
 			};
@@ -983,10 +986,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${ overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor };
 			`
 			: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
@@ -1002,7 +1005,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover:before{
 			${overlayHoverBackgroundType === 'gradient' ? `  
                 background: ${overlayHoverCustomGradientSwitcher && overlayHoverCustomGradientInputValue ? overlayHoverCustomGradientInputValue : overlayHoverGradientColor};
             `: `
@@ -1010,10 +1013,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `}
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image-caption figcaption {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image-caption figcaption {
 			text-align: ${captionAlignment};
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			display: block;
 			${HeadingColor !== undefined ? `color: ${HeadingColor};` : ""}
 			${HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ""}
@@ -1031,7 +1034,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
 			${HeadingHoverColor !== undefined ? `color: ${HeadingHoverColor};` : ""}
 			${HeadingBorderHoverColor !== undefined ? `background-color: ${HeadingBorderHoverColor};` : ""}
 			border: ${HeadingBorderHoverColor};
@@ -1045,19 +1048,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Tablet !== undefined ? `bottom: ${advancedImageVRBottomOffset.Tablet}${advancedImageVRBottomOffsetUnits.Tablet};` : ''}
 			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} {
+		.${blockID} .fb-advanced-image-wrapper {
 			padding: ${globalTabPadding};
 			margin: ${globalTabMargin};
 			border-width: ${globalTabBorder};
 			border-radius: ${globalTabBorderRadius} !important;
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageTabletBorder ? `border-width: ${imageTabletBorder};` : ''}
             ${imageTabletBorderRadius ? `border-radius: ${imageTabletBorderRadius};` : ''}
 			width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
 			${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
 			${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -1076,21 +1079,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Mobile !== undefined ? `bottom: ${advancedImageVRBottomOffset.Mobile}${advancedImageVRBottomOffsetUnits.Mobile};` : ''}
 			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
 		}
-		.fb-advanced-image-wrapper.${blockID} {
+		.${blockID} .fb-advanced-image-wrapper {
 			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
 			padding: ${globalMobPadding};
 			margin: ${globalMobMargin};
 			border-width: ${globalMobBorder};
 			border-radius: ${globalMobBorderRadius} !important;
 		}
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-inner {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageMobileBorder ? `border-width: ${imageMobileBorder};` : ''}
             ${imageMobileBorderRadius ? `border-radius: ${imageMobileBorderRadius};` : ''}
 			width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 		}
 		
-		.fb-advanced-image-wrapper.${blockID} .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
+		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
 			${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
 			${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
 			${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -1200,13 +1203,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+	const customCss = getCustomCss(advancedImageCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${advancedImageStyle}`.replace(/\s+/g, " ").trim(),
+			blockStyle: `${advancedImageStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
-	}, [advancedImageStyle]);
+	}, [advancedImageStyle, customCss]);
 
-	const editorStyle = advancedImageStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1976,6 +1981,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ advancedImageMobileSwitcher: value })}
 													/>
 												</PanelBody>
+												<PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={advancedImageCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ advancedImageCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
 									</>

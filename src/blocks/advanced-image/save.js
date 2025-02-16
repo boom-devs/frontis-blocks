@@ -50,15 +50,15 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageGlobalWraperClass}`,
+        className: `fb-advanced-image-main-wrapper ${blockID}`,
     });
 
 
 	return (
 		<>
 			
-			<div {...blockProps} id={blockID}>
-				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${blockID}`} id={advancedImageGlobalWraperID}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
 					<div
 						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
 						<div className="fb-advanced-image-inner">
