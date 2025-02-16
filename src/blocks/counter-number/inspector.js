@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES} from "./constants/constants";
+import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -139,6 +139,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         //Global attributes
         counterGlobalZIndex,
+        counterOverflow,
         counterGlobalPaddingUnits,
         counterGlobalPaddingDesktop,
         counterGlobalPaddingTablet,
@@ -966,6 +967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Desktop !== undefined ? `top: ${counterVRTopOffset.Desktop}${counterVRTopOffsetUnits.Desktop};` : ''}
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Desktop !== undefined ? `bottom: ${counterVRBottomOffset.Desktop}${counterVRBottomOffsetUnits.Desktop};` : ''}
         ${counterGlobalZIndex.Desktop ? `z-index: ${counterGlobalZIndex.Desktop};` : ''}
+        ${counterOverflow !== 'default' ? `overflow: ${counterOverflow};` : ''}
     }
     .fb-counter-wrapper.${blockID}{
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
@@ -1147,6 +1149,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBorderHoverColor,
         counterGlobalBoxShadowCssValue,
         counterGlobalZIndex,
+        counterOverflow,
 
         // Position
         counterPositionType,
@@ -1655,6 +1658,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     resetFallbackValue={""}
                                                     isRangeUnit={false}
                                                 />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={counterOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ counterOverflow: value })}
+                                                    />
 
                                                 <FB_PositionControl
                                                         deviceType={deviceType}
