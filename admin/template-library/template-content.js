@@ -4,11 +4,13 @@
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from 'react-spinners'; // Lightweight loader for UI
+import { ClipLoader } from 'react-spinners'; 
+import SiteImportModal from "./fullsiteimport";
 
 const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   //Demo import for blocks
   // const handleDemoDataImport = useCallback(() => {
@@ -146,33 +148,11 @@ const TemplateCard = ({ imageUrl }) => {
   //   });
   // }, [ajaxUrl, nonce]); 
 
+  
+
   const handleFullSiteImport = useCallback(() => {
-    setIsLoading(true);
-
-    window.jQuery.ajax({
-      url: ajaxUrl,
-      type: 'POST',
-      data: {
-        action: 'fb_import_full_site',
-        security: nonce
-      },
-      success: function (response) {
-        setIsLoading(false);
-
-        if (response.success) {
-          toast.success(response.data.message || 'Full site imported successfully!');
-          const siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
-          window.location.href = siteUrl;
-        } else {
-          toast.error('Failed to import full site: ' + response.data);
-        }
-      },
-      error: function () {
-        setIsLoading(false);
-        toast.error('Failed to process request. Please try again.');
-      }
-    });
-  }, [ajaxUrl, nonce]);
+    setIsModalOpen(true);
+  }, []);
 
   return (
     <>
@@ -214,6 +194,11 @@ const TemplateCard = ({ imageUrl }) => {
           </div>
         </div>
       </div>
+
+      <SiteImportModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </>
   );
