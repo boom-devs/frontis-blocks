@@ -261,6 +261,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		testimonialTabletSwitcher,
 		testimonialMobileSwitcher,
 
+        testimonialCustomCSS,
 		testimonialGlobalWraperID,
 		testimonialGlobalWraperClass,
 
@@ -2153,12 +2154,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRBottomOffsetUnits,
     ]);
 
+    const customCss = getCustomCss(testimonialCustomCSS, `.${blockID}`);
+
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
 
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -3279,6 +3282,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
 													/>
 											</PanelBody>
+
+                                            <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+                                                    <FB_CustomCSSEditor  
+                                                        value={testimonialCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ testimonialCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                         </div>
                                     </div>
                                 </>
