@@ -1948,79 +1948,83 @@ var TypographySettings = function TypographySettings(props) {
   // 	}
   // });
 
-  var handleUpdateSettings = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response, _response, _response2, _response3;
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            if (!isMount) {
-              _context.next = 22;
-              break;
-            }
-            if (!typography) {
-              _context.next = 6;
-              break;
-            }
-            _context.next = 4;
-            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
-          case 4:
-            response = _context.sent;
-            if (response.success) {
-              setTypography(response.data.data);
-              localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-            }
-          case 6:
-            if (!customTypography) {
-              _context.next = 11;
-              break;
-            }
-            _context.next = 9;
-            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
-          case 9:
-            _response = _context.sent;
-            if (_response.success) {
-              setCustomTypography(_response.data.data);
-              localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
-            }
-          case 11:
-            if (!globalTypography) {
-              _context.next = 16;
-              break;
-            }
-            _context.next = 14;
-            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
-          case 14:
-            _response2 = _context.sent;
-            if (_response2.success) {
-              setGlobalTypography(_response2.data.data);
-              localStorage.setItem('fb_globaltypo', JSON.stringify(_response2.data.data));
-            }
-          case 16:
-            if (!fontFamilies) {
-              _context.next = 21;
-              break;
-            }
-            _context.next = 19;
-            return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
-          case 19:
-            _response3 = _context.sent;
-            if (_response3.success) {
-              setFontFamilies(_response3.data.data);
-              localStorage.setItem('fb_fontFamilies', JSON.stringify(_response3.data.data));
-            }
-          case 21:
-            setIsMount(false);
-          case 22:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee);
-    }));
-    return function handleUpdateSettings() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    var handleUpdateSettings = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response, _response, _response2, _response3;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!(isAfterSave && isMount)) {
+                _context.next = 22;
+                break;
+              }
+              if (!typography) {
+                _context.next = 6;
+                break;
+              }
+              _context.next = 4;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
+            case 4:
+              response = _context.sent;
+              if (response.success) {
+                setTypography(response.data.data);
+                localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+              }
+            case 6:
+              if (!customTypography) {
+                _context.next = 11;
+                break;
+              }
+              _context.next = 9;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+            case 9:
+              _response = _context.sent;
+              if (_response.success) {
+                setCustomTypography(_response.data.data);
+                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
+              }
+            case 11:
+              if (!globalTypography) {
+                _context.next = 16;
+                break;
+              }
+              _context.next = 14;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
+            case 14:
+              _response2 = _context.sent;
+              if (_response2.success) {
+                setGlobalTypography(_response2.data.data);
+                localStorage.setItem('fb_globaltypo', JSON.stringify(_response2.data.data));
+              }
+            case 16:
+              if (!fontFamilies) {
+                _context.next = 21;
+                break;
+              }
+              _context.next = 19;
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
+            case 19:
+              _response3 = _context.sent;
+              if (_response3.success) {
+                setFontFamilies(_response3.data.data);
+                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response3.data.data));
+              }
+            case 21:
+              setIsMount(false);
+            case 22:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }));
+      return function handleUpdateSettings() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    handleUpdateSettings();
+  }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
       editPost({
@@ -2028,7 +2032,6 @@ var TypographySettings = function TypographySettings(props) {
       });
     }
   }, [isMount]);
-  console.log(globalTypography);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (globalTypography) {
       (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
@@ -2389,13 +2392,7 @@ var TypographySettings = function TypographySettings(props) {
         deviceType: deviceType
       }))));
     }))))));
-  }), /*#__PURE__*/React.createElement("button", {
-    "aria-disabled": "true",
-    className: "components-button editor-post-publish-button editor-post-publish-button__button is-primary is-compact",
-    onClick: function onClick() {
-      return handleUpdateSettings();
-    }
-  }, "Save"));
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
 
@@ -3635,85 +3632,86 @@ function FrontisBlocksSidebar(props) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               if (!(isAfterSave && fbGlobalSettingsLoading)) {
-                _context3.next = 34;
+                _context3.next = 35;
                 break;
               }
-              _context3.prev = 1;
+              console.log("Hello world");
+              _context3.prev = 2;
               settingsState = ['fb_update_global_colors', 'fb_update_custom_colors', 'fb_update_gradient_colors', 'fb_update_custom_gradient_colors'];
               _i2 = 0, _settingsState = settingsState;
-            case 4:
+            case 5:
               if (!(_i2 < _settingsState.length)) {
-                _context3.next = 29;
+                _context3.next = 30;
                 break;
               }
               key = _settingsState[_i2];
               if (!(key === 'fb_update_global_colors')) {
-                _context3.next = 11;
+                _context3.next = 12;
                 break;
               }
-              _context3.next = 9;
+              _context3.next = 10;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(globalColors, key);
-            case 9:
+            case 10:
               response = _context3.sent;
               if (response.success) {
                 setGlobalColors(response.data.data);
                 localStorage.setItem('fb_global_colors', JSON.stringify(response.data.data));
               }
-            case 11:
+            case 12:
               if (!(key === 'fb_update_custom_colors')) {
-                _context3.next = 16;
+                _context3.next = 17;
                 break;
               }
-              _context3.next = 14;
+              _context3.next = 15;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customColors, key);
-            case 14:
+            case 15:
               _response = _context3.sent;
               if (_response.success) {
                 setCustomColors(_response.data.data);
                 localStorage.setItem('fb_custom_colors', JSON.stringify(_response.data.data));
               }
-            case 16:
+            case 17:
               if (!(key === 'fb_update_gradient_colors')) {
-                _context3.next = 21;
+                _context3.next = 22;
                 break;
               }
-              _context3.next = 19;
+              _context3.next = 20;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(gradientColors, key);
-            case 19:
+            case 20:
               _response2 = _context3.sent;
               if (_response2.success) {
                 setGradientColors(_response2.data.data);
                 localStorage.setItem('fb_gradient_colors', JSON.stringify(_response2.data.data));
               }
-            case 21:
+            case 22:
               if (!(key === 'fb_update_custom_gradient_colors')) {
-                _context3.next = 26;
+                _context3.next = 27;
                 break;
               }
-              _context3.next = 24;
+              _context3.next = 25;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customGradientColors, key);
-            case 24:
+            case 25:
               _response3 = _context3.sent;
               if (_response3.success) {
                 setCustomGradientColors(_response3.data.data);
                 localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_response3.data.data));
               }
-            case 26:
+            case 27:
               _i2++;
-              _context3.next = 4;
+              _context3.next = 5;
               break;
-            case 29:
-              _context3.next = 34;
+            case 30:
+              _context3.next = 35;
               break;
-            case 31:
-              _context3.prev = 31;
-              _context3.t0 = _context3["catch"](1);
+            case 32:
+              _context3.prev = 32;
+              _context3.t0 = _context3["catch"](2);
               console.error('Error updating settings:', _context3.t0);
-            case 34:
+            case 35:
             case "end":
               return _context3.stop();
           }
-        }, _callee2, null, [[1, 31]]);
+        }, _callee2, null, [[2, 32]]);
       }));
       return function handleUpdateSettings() {
         return _ref2.apply(this, arguments);
@@ -3806,7 +3804,8 @@ function FrontisBlocksSidebar(props) {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__["default"], {
     typography: typography,
-    customTypography: customTypography
+    customTypography: customTypography,
+    isAfterSave: isAfterSave
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
     path: "/colors"
   }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -3862,6 +3861,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_unit_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/unit-control */ "./src/components/unit-control/index.js");
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -3887,7 +3892,10 @@ var FB_Range = function FB_Range(_ref) {
     _ref$units_types_arr = _ref.units_types_arr,
     units_types_arr = _ref$units_types_arr === void 0 ? null : _ref$units_types_arr,
     _ref$isRangeUnit = _ref.isRangeUnit,
-    isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit;
+    isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
+    _ref$globalIcon = _ref.globalIcon,
+    globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
+    globalTypographyType = _ref.globalTypographyType;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3912,6 +3920,20 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+  var globalTypo = FrontisBlocksData.global_typography;
+  var GB_TYPO = [];
+  Object.entries(globalTypo).forEach(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+      label = _ref3[0],
+      properties = _ref3[1];
+    if (globalTypographyType === 'fontSize') {
+      GB_TYPO.push({
+        label: label,
+        value: properties.fontSize
+      });
+    }
+  });
+  console.log(GB_TYPO);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3921,6 +3943,48 @@ var FB_Range = function FB_Range(_ref) {
   }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
     device: deviceType
+  }), globalIcon === true && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+    className: "fb-setting-global-typo-setting-icon-dropdown",
+    contentClassName: "fb-setting-global-typo-setting-icon-dropdown-content",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref4) {
+      var isOpen = _ref4.isOpen,
+        onToggle = _ref4.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "fb-setting-global-typo-setting-icon-btn"
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "19",
+        height: "19",
+        viewBox: "0 0 19 19",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      })));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-global-typo-popup-wrapper"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select", "frontis-blocks"),
+        options: GB_TYPO
+        // value={fontWeight}
+        // onChange={handleFontWeightChange}
+      }));
+    }
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-unit-wrapper"
   }, rangeValue[deviceType] && /*#__PURE__*/React.createElement("div", {
