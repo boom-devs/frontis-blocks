@@ -351,6 +351,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
 
+		infoBoxGlobalCustomCSS,
 		infoBoxGlobalWraperID,
 		infoBoxGlobalWraperClass,
 
@@ -2673,13 +2674,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
+	const customCss = getCustomCss(infoBoxGlobalCustomCSS, `.${blockID}`);
+
 	useEffect(() => {
 		setAttributes({
-			blockStyle: `${fbInfoBoxStyle}`.replace(/\s+/g, ' ').trim(),
+			blockStyle: `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
 		});
-	}, [fbInfoBoxStyle]);
+	}, [fbInfoBoxStyle, customCss]);
 
-	const editorStyle = fbInfoBoxStyle.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 	return (
 		<>
 			<style>
@@ -4040,6 +4043,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={infoBoxMobileSwitcher}
 														onChange={(value) => setAttributes({ infoBoxMobileSwitcher: value })}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={infoBoxGlobalCustomCSS} 
+														onChangeValue={(value) => setAttributes({ infoBoxGlobalCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>
