@@ -1491,6 +1491,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	ctaOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	globalPaddingUnits: {
 		type: 'object',
 		default: {
