@@ -29,10 +29,13 @@ export default function Save({ attributes }) {
         testimonialGlobalWraperID,
         testimonialGlobalWraperClass,
 
+        testimonialDesktopSwitcher,
+		testimonialTabletSwitcher,
+		testimonialMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-testimonial-main-wrapper ${blockID}`,
+        className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /** Helper function to render rating icons based on the number of ratings */

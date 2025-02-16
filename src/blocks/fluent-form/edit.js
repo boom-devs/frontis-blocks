@@ -17,12 +17,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		fluentFormGlobalWraperID,
 		fluentFormGlobalWraperClass,
+
+		fluentFormDesktopSwitcher,
+		fluentFormTabletSwitcher,
+		fluentFormMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: [
 			'fb-parent-wrapper fb-fluent-form-wrapper',
 			blockID,
+			`${fluentFormDesktopSwitcher && 'fb-desktop-responsive'} ${fluentFormTabletSwitcher && 'fb-tablet-responsive'} ${fluentFormMobileSwitcher && 'fb-mobile-responsive'}`,
 			!showLabels && 'fb-fluent-form-hide-label',
 			!showPlaceholder && 'fb-fluent-form-hide-placeholder',
 			!showErrorMessage && 'fb-fluent-form-hide-error-message',

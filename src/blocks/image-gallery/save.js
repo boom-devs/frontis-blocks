@@ -21,10 +21,13 @@ export default function Save({ attributes }) {
         imageGalleryGlobalWraperID,
         imageGalleryGlobalWraperClass,
 
+        GalleryDesktopSwitcher,
+		GalleryTabletSwitcher,
+		GalleryMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-gallery-main-wrapper ${blockID}`,
+        className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
     });
     
 

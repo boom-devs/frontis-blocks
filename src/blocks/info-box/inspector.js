@@ -2080,7 +2080,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
-		  .fb-info-box-area.${blockID} {
+		  .fb-info-box-main-wrapper.${blockID} {
 			${infoBoxPositionType === 'default' ? `position: relative;` : ''}
 			${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' ? `width: 100%;` : ''}
             ${infoBoxPositionType !== 'default' ? `position: ${infoBoxPositionType};` : ''}
@@ -2111,7 +2111,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-area.${blockID} {
+			  .fb-info-box-main-wrapper.${blockID} {
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Tablet !== undefined ? `left: ${infoBoxHZLeftOffset.Tablet}${infoBoxHZLeftOffsetUnits.Tablet};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Tablet !== undefined ? `right: ${infoBoxHZRightOffset.Tablet}${infoBoxHZRightOffsetUnits.Tablet};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Tablet !== undefined ? `top: ${infoBoxVRTopOffset.Tablet}${infoBoxVRTopOffsetUnits.Tablet};` : ''}
@@ -2127,7 +2127,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
-			  .fb-info-box-wrapper.${blockID} {
+			  .fb-info-box-main-wrapper.${blockID} {
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'left' && infoBoxHZLeftOffset.Mobile !== undefined ? `left: ${infoBoxHZLeftOffset.Mobile}${infoBoxHZLeftOffsetUnits.Mobile};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxHZOrientationType === 'right' && infoBoxHZRightOffset.Mobile !== undefined ? `right: ${infoBoxHZRightOffset.Mobile}${infoBoxHZRightOffsetUnits.Mobile};` : ''}
 				${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' && infoBoxVROrientationType === 'top' && infoBoxVRTopOffset.Mobile !== undefined ? `top: ${infoBoxVRTopOffset.Mobile}${infoBoxVRTopOffsetUnits.Mobile};` : ''}

@@ -12,10 +12,13 @@ export default function save({ attributes }) {
 		progressGlobalWraperID,
 		progressGlobalWraperClass,
 
+        progressbarDesktopSwitcher,
+		progressbarTabletSwitcher,
+		progressbarMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-progress-bar-main-wrapper ${blockID}`,
+        className: `fb-progress-bar-main-wrapper ${blockID} ${progressbarDesktopSwitcher && 'fb-desktop-responsive'} ${progressbarTabletSwitcher && 'fb-tablet-responsive'} ${progressbarMobileSwitcher && 'fb-mobile-responsive'}`,
     });
     
     return (
