@@ -842,7 +842,7 @@ class Admin {
     public function render_generated_css() {
 		$css_content = get_option('fb_global_typo_css');
 		if($css_content){
-			echo '<style id="global-typo-css" type="text/css" >'.$css_content.'</style>';
+			// echo '<style id="global-typo-css" type="text/css" >'.$css_content.'</style>';
 		}
 	}
 

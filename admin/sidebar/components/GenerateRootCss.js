@@ -1,4 +1,4 @@
-const generateCSSVariables = (data) => {
+const generateCSSVariables = (data, deviceType) => {
 
     const createValueWithUnit = (value, unit) => {
         if (!value || value === 'Default') return '0px';
@@ -27,7 +27,12 @@ const generateCSSVariables = (data) => {
     let linkStyles = '';
     let buttonStyles = '';
     let captionStyles = '';
-    let headingStyles = ''; // Separate styles for each heading (h1, h2, h3, ...)
+    let heading1Styles = '';
+    let heading2Styles = '';
+    let heading3Styles = '';
+    let heading4Styles = '';
+    let heading5Styles = '';
+    let heading6Styles = '';
 
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
 
@@ -53,13 +58,26 @@ const generateCSSVariables = (data) => {
                 if (key === 'captions') {
                     captionStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
                 }
-
                 if (key === 'all') {
                     combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
                 }
-
-                if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
-                    headingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                if (key === 'h1') {
+                    heading1Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'h2') {
+                    heading2Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'h3') {
+                    heading3Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'h4') {
+                    heading4Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'h5') {
+                    heading5Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                }
+                if (key === 'h6') {
+                    heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
                 }
             }
         });
@@ -93,8 +111,23 @@ const generateCSSVariables = (data) => {
                 if (key === 'all') {
                     combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
-                if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(key)) {
-                    headingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                if (key === 'h1') {
+                    heading1Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'h2') {
+                    heading2Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'h3') {
+                    heading3Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'h4') {
+                    heading4Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'h5') {
+                    heading5Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
+                }
+                if (key === 'h6') {
+                    heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
             }
             if (tabletValue !== null) {
@@ -125,25 +158,33 @@ const generateCSSVariables = (data) => {
         });
     });
 
+
+    console.log("paragraphStyles paragraphStyles")
+    console.log(paragraphStyles)
+
+    if(paragraphStyles === '') {
+        return false;
+    }
+
     // Apply individual styles for each heading (h1, h2, h3, etc.)
     const headingGrouped = `
         body .wp-site-blocks h1 {
-            ${headingStyles}
+            ${heading1Styles}
         }
         body .wp-site-blocks h2 {
-            ${headingStyles}
+            ${heading2Styles}
         }
         body .wp-site-blocks h3 {
-            ${headingStyles}
+            ${heading3Styles}
         }
         body .wp-site-blocks h4 {
-            ${headingStyles}
+            ${heading4Styles}
         }
         body .wp-site-blocks h5 {
-            ${headingStyles}
+            ${heading5Styles}
         }
         body .wp-site-blocks h6 {
-            ${headingStyles}
+            ${heading6Styles}
         }
     `;
 
@@ -183,7 +224,7 @@ const generateCSSVariables = (data) => {
             ${linkStyles}
         }
 
-        body .wp-site-blocks button {
+        body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {
             ${buttonStyles}
         }
 
@@ -194,13 +235,28 @@ const generateCSSVariables = (data) => {
         ${headingGrouped}
     `;
 
-    const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-    const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-    let styleTag = iframeDocument.getElementById("global-typo-test");
+
+    const path = window.location.pathname;
+    const fileName = path.substring(path.lastIndexOf('/') + 1);
+    let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+    let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+    let styleTag = iframeDocument.getElementById("global-typo");
+
+    if(fileName === 'post.php') {
+        if(deviceType !== 'Desktop') {
+            
+        } else {
+            iframe = document.querySelector('iframe[name="editor-canvas"]');
+            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+            styleTag = iframeDocument.getElementById("global-typo");
+        }
+    }
+
+    
 
     if (!styleTag) {
         styleTag = iframeDocument.createElement("style");
-        styleTag.id = "global-typo-test";
+        styleTag.id = "global-typo";
         iframeDocument.head.appendChild(styleTag);
     }
 
