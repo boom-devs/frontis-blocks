@@ -15,10 +15,14 @@ export default function save({ attributes }) {
 
         videoGlobalWraperID,
         videoGlobalWraperClass,
+
+        advancedVideoDesktopSwitcher,
+        advancedVideoTabletSwitcher,
+        advancedVideoMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-advanced-video-main-wrapper ${blockID}`
+        className: `fb-advanced-video-main-wrapper ${blockID} ${advancedVideoDesktopSwitcher && 'fb-desktop-responsive'} ${advancedVideoTabletSwitcher && 'fb-tablet-responsive'} ${advancedVideoMobileSwitcher && 'fb-mobile-responsive'}`
     });
 
     return (

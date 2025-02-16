@@ -6,7 +6,7 @@
     "title": "Slide Item",
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
-    "description": "A single slide in the slider.",
+	"description": "A customizable slide item block with various styling options.", 
     "icon": "format-image",
     "example": {},
     "supports": {

@@ -13,6 +13,7 @@ import {
 
 import {
     BORDER_STYLES,
+    OVERFLOW_OP,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -35,6 +36,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         // deviceType,
         blockStyle,
         videoGlobalZIndex,
+        advancedVideoOverflow,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
@@ -864,6 +866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'top' && advancedVideoVRTopOffset.Desktop !== undefined ? `top: ${advancedVideoVRTopOffset.Desktop}${advancedVideoVRTopOffsetUnits.Desktop};` : ''}
             ${advancedVideoPositionType !== 'default' && advancedVideoPositionType !== 'relative' && advancedVideoVROrientationType === 'bottom' && advancedVideoVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedVideoVRBottomOffset.Desktop}${advancedVideoVRBottomOffsetUnits.Desktop};` : ''}
             ${videoGlobalZIndex.Desktop ? `z-index: ${videoGlobalZIndex.Desktop};` : ''}
+            ${advancedVideoOverflow !== 'default' ? `overflow: ${advancedVideoOverflow};` : ''}
         }
         .${blockID} .fb-advanced-video-wrapper {
             ${videoGlobalBgColor !== undefined ? `background-color: ${videoGlobalBgColor};` : ''};
@@ -1077,6 +1080,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         deviceType,
         blockStyle,
         videoGlobalZIndex,
+        advancedVideoOverflow,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
@@ -1566,6 +1570,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={advancedVideoOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ advancedVideoOverflow: value })}
                                                     />
                                                     <FB_PositionControl
                                                         deviceType={deviceType}

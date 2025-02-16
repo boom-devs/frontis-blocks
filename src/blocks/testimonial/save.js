@@ -29,10 +29,13 @@ export default function Save({ attributes }) {
         testimonialGlobalWraperID,
         testimonialGlobalWraperClass,
 
+        testimonialDesktopSwitcher,
+		testimonialTabletSwitcher,
+		testimonialMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-testimonial-main-wrapper ${blockID} ${testimonialGlobalWraperClass}`,
+        className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /** Helper function to render rating icons based on the number of ratings */
@@ -50,8 +53,8 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment}`} id={testimonialGlobalWraperID}>
-                <div className={`fb-testimonial-wrapper ${blockID}`}>
+            <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment} ${testimonialGlobalWraperClass}`} id={testimonialGlobalWraperID}>
+                <div className={`fb-testimonial-wrapper`}>
                     <div className="fb-testimonial-inner-wrapper">
                         <div className="fb-testimonial-container">
                             {TestimonialPresetStyle === "preset-4" ? (

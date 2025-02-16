@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Contact Form 7",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable contact form 7 block with various styling options.",
 	"example": {},
     "supports": {
         "anchor": false,

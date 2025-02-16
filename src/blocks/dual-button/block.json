@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Dual Button",
 	"category": "frontis-blocks",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "A customizable dual button block with various styling options.",
 	"example": {},
     "supports": {
         "anchor": false,

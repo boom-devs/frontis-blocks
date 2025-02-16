@@ -1199,6 +1199,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    testimonialCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	testimonialGlobalWraperID : {
 		type: "string",
 		default: ""

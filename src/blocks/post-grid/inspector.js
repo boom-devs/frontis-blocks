@@ -501,6 +501,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		postGridTabletSwitcher,
 		postGridMobileSwitcher,
 
+        postGridGlobalCustomCSS,
         postGridGlobalWraperID,
         postGridGlobalWraperClass,
 
@@ -4278,11 +4279,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridVRBottomOffsetUnits,
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle]);
+    const customCss = getCustomCss(postGridGlobalCustomCSS, `.${blockId}`);
 
-    const editorStyle = allBlockStyle.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
+
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     return (
         <>
@@ -6226,6 +6229,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														className="fb-setting-responsive-control"
 														checked={postGridMobileSwitcher}
 														onChange={(value) => setAttributes({ postGridMobileSwitcher: value })}
+													/>
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={postGridGlobalCustomCSS} 
+														onChangeValue={(value) => setAttributes({ postGridGlobalCustomCSS: value })}
 													/>
 												</PanelBody>
 											</div>

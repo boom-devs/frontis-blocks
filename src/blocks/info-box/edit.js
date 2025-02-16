@@ -50,9 +50,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		infoBoxGlobalWraperID,
 		infoBoxGlobalWraperClass,
+
+		infoBoxDesktopSwitcher,
+		infoBoxTabletSwitcher,
+		infoBoxMobileSwitcher,
 	} = attributes;
 
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: `fb-info-box-main-wrapper ${blockID} ${infoBoxDesktopSwitcher && 'fb-desktop-responsive'} ${infoBoxTabletSwitcher && 'fb-tablet-responsive'} ${infoBoxMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
 
 	// Prevent link navigation in the editor and focus on text
     const handleButtonClick = (event) => {
@@ -82,8 +88,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				/>
 			</BlockControls>
 
-			<div {...blockProps} id={blockID} className={`fb-info-box-area ${blockID} ${infoBoxGlobalWraperClass}`}>
-				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID}`} id={infoBoxGlobalWraperID} ref={panelRef}>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
 						<div

@@ -1390,6 +1390,10 @@ const attributes = {
     },
 
 	/** Start Class & ID Setting */
+	dualButtonGlobalWraperCustomCSS : {
+		type: "string",
+		default: "",
+	},
 	dualButtonGlobalWraperID : {
 		type: "string",
 		default: ""

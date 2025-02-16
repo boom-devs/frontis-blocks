@@ -520,6 +520,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    accordionItemCustomCSS : {
+        type: "string",
+        default: "",
+    },
     accordionItemGlobalWraperID : {
 		type: "string",
 		default: ""
