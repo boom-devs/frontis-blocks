@@ -74,6 +74,7 @@ var TemplateCard = function TemplateCard(_ref) {
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
 
+  //Demo import for blocks
   // const handleDemoDataImport = useCallback(() => {
   //   const selectedBlock = window.wp.data
   //     .select('core/block-editor')
@@ -114,6 +115,7 @@ var TemplateCard = function TemplateCard(_ref) {
   //   });
   // }, [ajaxUrl, nonce]);
 
+  // demo import for pages
   // const handleDemoDataImport = useCallback(() => {
   //   const selectedBlock = window.wp.data
   //     .select('core/block-editor')
@@ -160,31 +162,79 @@ var TemplateCard = function TemplateCard(_ref) {
   //   });
   // }, [ajaxUrl, nonce]);
 
-  var handleSiteDemoImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+  //demo import full site
+
+  // const handleDemoDataImport = useCallback(() => {
+  //   const selectedBlock = window.wp.data
+  //     .select('core/block-editor')
+  //     .getSelectedBlock();
+
+  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+
+  //   setIsLoading(true);
+
+  //   window.jQuery.ajax({
+  //     url: ajaxUrl,
+  //     type: 'POST',
+  //     data: {
+  //       action: 'fb_import_demo_data',
+  //       security: nonce,
+  //       block_id: selectedBlock ? selectedBlock.clientId : '',
+  //       post_id: postId  // Send post ID explicitly
+  //     },
+  //     success: function (response) {
+  //       setIsLoading(false);
+
+  //       if (response.success) {
+  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
+  //         const { editPost } = wp.data.dispatch('core/editor');
+
+  //         if (selectedBlock) {
+  //           // Update selected block
+  //           const blocks = wp.blocks.parse(response.data.content);
+  //           replaceBlocks(selectedBlock.clientId, blocks);
+  //         } else {
+  //           // Update full page content
+  //           editPost({ content: response.data.content });
+  //         }
+
+  //         toast.success(response.data.message || 'Demo data imported successfully!');
+  //       } else {
+  //         toast.error('Failed to import demo data: ' + response.data);
+  //       }
+  //     },
+  //     error: function () {
+  //       setIsLoading(false);
+  //       toast.error('Failed to process request. Please try again.');
+  //     }
+  //   });
+  // }, [ajaxUrl, nonce]); 
+
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     setIsLoading(true);
     window.jQuery.ajax({
-      url: fbSiteImport.ajaxUrl,
-      // Use the localized ajaxUrl
+      url: ajaxUrl,
       type: 'POST',
       data: {
-        action: 'fb_import_site_demo_data',
-        security: fbSiteImport.nonce // Use the localized nonce
+        action: 'fb_import_full_site',
+        security: nonce
       },
       success: function success(response) {
         setIsLoading(false);
         if (response.success) {
-          window.location.href = response.data.redirect_url || '/';
-          react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.success(response.data.message || 'Site demo data imported successfully!');
+          react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.success(response.data.message || 'Full site imported successfully!');
+          var siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
+          window.location.href = siteUrl;
         } else {
-          react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.error('Failed to import site demo data: ' + response.data.message);
+          react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.error('Failed to import full site: ' + response.data);
         }
       },
-      error: function error(xhr, status, _error) {
+      error: function error() {
         setIsLoading(false);
-        react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.error("Failed to process request: ".concat(_error, ". Please try again."));
+        react_toastify__WEBPACK_IMPORTED_MODULE_1__.toast.error('Failed to process request. Please try again.');
       }
     });
-  }, []);
+  }, [ajaxUrl, nonce]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card"
   }, /*#__PURE__*/React.createElement("div", {
@@ -196,7 +246,7 @@ var TemplateCard = function TemplateCard(_ref) {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-import ".concat(isLoading ? 'disabled' : ''),
-    onClick: !isLoading ? handleSiteDemoImport : null
+    onClick: !isLoading ? handleFullSiteImport : null
   }, /*#__PURE__*/React.createElement("span", null, isLoading ? 'Importing...' : 'Import'), isLoading ? /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
     color: "#fff",
     size: 18
@@ -1005,9 +1055,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			}
 /******/ 			var notFulfilled = Infinity;
 /******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
 /******/ 				var fulfilled = true;
 /******/ 				for (var j = 0; j < chunkIds.length; j++) {
 /******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
@@ -1093,9 +1141,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
@@ -1118,7 +1164,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkfrontis_blocks"] = self["webpackChunkfrontis_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkfrontis_blocks"] = globalThis["webpackChunkfrontis_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
