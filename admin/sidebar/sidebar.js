@@ -863,7 +863,9 @@ function FrontisBlocksSidebar(props) {
 
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
+			
 			if (isAfterSave && fbGlobalSettingsLoading) {
+				console.log("Hello world")
 				try {
 					const settingsState = [
 						'fb_update_global_colors',
@@ -1094,7 +1096,7 @@ function FrontisBlocksSidebar(props) {
 											<p>Available fonts, typographic styles, application of those styles.</p>
 										</div>
 									</div>
-									<TypographySettings typography={typography} customTypography={customTypography} />
+									<TypographySettings typography={typography} customTypography={customTypography} isAfterSave={isAfterSave} />
 								</>
 							</NavigatorScreen>
 
