@@ -1635,6 +1635,10 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
+    iconBoxCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	iconBoxGlobalWraperID : {
 		type: "string",
 		default: ""

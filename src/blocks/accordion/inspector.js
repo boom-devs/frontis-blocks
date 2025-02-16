@@ -328,6 +328,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contentBgHoverImageRepeat,
         contentBgHoverImageSize,
 
+        accordionCustomCSS,
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
 
@@ -1810,13 +1811,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionVRBottomOffsetUnits,
       ]);
       
+      const customCss = getCustomCss(accordionCustomCSS, `.${blockID}`);
+
       useEffect(() => {
         setAttributes({
-          blockStyle: fbaccordionItemstyle.replace(/\s+/g, ' ').trim(),
+          blockStyle: `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
         });
-      }, [fbaccordionItemstyle]);
+      }, [fbaccordionItemstyle, customCss]);
 
-      const editorStyle = fbaccordionItemstyle.replace(/\s+/g, ' ').trim();
+      const editorStyle = `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim();
       
 
     
@@ -3073,7 +3076,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ accordionMobileSwitcher: value })}
                                                     />
                                                 </PanelBody>
-        
+
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={accordionCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ accordionCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
                                             </div>
                                         </div>
                                     </>

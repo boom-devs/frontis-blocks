@@ -39,7 +39,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-main-wrapper ${blockID} ${accordionGlobalWraperClass} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-accordion-main-wrapper ${blockID} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**
@@ -118,7 +118,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook}`} id={accordionGlobalWraperID} ref={panelRef}
+                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">
