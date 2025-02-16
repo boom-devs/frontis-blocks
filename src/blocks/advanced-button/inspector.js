@@ -27,6 +27,7 @@ import {
 	ICON_ALIGN,
 	BORDER_STYLES,
 	ICON_POSITION,
+	OVERFLOW_OP,
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -148,6 +149,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         /** Start Global Setting */
         buttonGlobalZIndex,
+		advancedBtnOverflow,
         buttonGlobalPaddingUnits,
         buttonGlobalPaddingDesktop,
         buttonGlobalPaddingTablet,
@@ -1039,6 +1041,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Desktop !== undefined ? `top: ${advancedBtnVRTopOffset.Desktop}${advancedBtnVRTopOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'bottom' && advancedBtnVRBottomOffset.Desktop !== undefined ? `bottom: ${advancedBtnVRBottomOffset.Desktop}${advancedBtnVRBottomOffsetUnits.Desktop};` : ''}
 			${buttonGlobalZIndex.Desktop ? `z-index: ${buttonGlobalZIndex.Desktop};` : ''}
+			${advancedBtnOverflow !== 'default' ? `overflow: ${advancedBtnOverflow};` : ''}
 		}
 		.${blockId} .fb-advanced-button-wrapper {
 			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
@@ -1252,6 +1255,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		blockId,
 		blockStyle,
 		buttonGlobalZIndex,
+		advancedBtnOverflow,
 		buttonGlobalBgColor,
 		globalDesktopPadding,
 		globalDesktopMargin,
@@ -1950,6 +1954,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         isRangeUnit={false}
 
                                                     />
+
+													<SelectControl
+														label={__("Overflow", "frontis-blocks")}
+														value={advancedBtnOverflow}
+														options={OVERFLOW_OP}
+														onChange={(value) => setAttributes({ advancedBtnOverflow: value })}
+													/>
 
 													<FB_PositionControl
 														deviceType={deviceType}

@@ -1043,6 +1043,10 @@ const attributes = {
             Mobile: ''
         }
     },
+	advancedImageOverflow: {
+        type: 'string',
+        default: "default",
+    },
 	blockStyle: {
         type: "string",
         default: "",
