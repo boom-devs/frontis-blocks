@@ -43,10 +43,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
+
+		ctaDesktopSwitcher,
+        ctaTabletSwitcher,
+        ctaMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-cta-main-wrapper ${blockID}`,
+		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	/**
