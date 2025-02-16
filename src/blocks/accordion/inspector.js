@@ -20,6 +20,7 @@ import {
     TITLE_ALIGNMENT,
     ICON_POSITIONS,
     ICON_SWITCHER,
+    OVERFLOW_OP,
 } from "./constants/constants";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -177,6 +178,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         // Accordion Advance
         accordionZIndex,
+        accordionOverflow,
         accordionPaddingUnits,
         accordionDesktopPadding,
         accordionTabPadding,
@@ -1137,6 +1139,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'top' && accordionVRTopOffset.Desktop !== undefined ? `top: ${accordionVRTopOffset.Desktop}${accordionVRTopOffsetUnits.Desktop};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset.Desktop !== undefined ? `bottom: ${accordionVRBottomOffset.Desktop}${accordionVRBottomOffsetUnits.Desktop};` : ''}
             ${accordionZIndex.Desktop !== undefined ? `z-index: ${accordionZIndex.Desktop};` : ''}
+            ${accordionOverflow !== 'default' ? `overflow: ${accordionOverflow};` : ''}
           }
           .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 position: relative;
@@ -1643,6 +1646,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         // Accordion Advance
         accordionZIndex,
+        accordionOverflow,
         accordionPaddingUnits,
         accordionDesktopPadding,
         accordionTabPadding,
@@ -2729,6 +2733,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={accordionOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ accordionOverflow: value })}
                                                     />
 
                                                     <FB_PositionControl
