@@ -20,6 +20,7 @@ import {
 	BORDER_STYLES,
 	LAYOUT_ALIGNMENT,
 	LAYOUT_TYPE,
+	OVERFLOW_OP,
 	PRESETS,
 } from "./constants/constants";
 
@@ -318,6 +319,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Position
 		countDownZIndex,
+		countDownOverflow,
 		countDownPositionType,
 		countDownHZOrientationType,
 		countDownVROrientationType,
@@ -2182,6 +2184,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop !== undefined ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop !== undefined ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
         		${countDownZIndex.Desktop ? `z-index: ${countDownZIndex.Desktop};` : ''}
+				${countDownOverflow !== 'default' ? `overflow: ${countDownOverflow};` : ''}
 			}
 			.fb-count-down-wrapper.${blockID} {
 				${countDownLayoutType === 'flex' ? `display: flex;` : ''}
@@ -2686,6 +2689,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			// Position
 			countDownZIndex,
+			countDownOverflow,
 			countDownPositionType,
 			countDownHZOrientationType,
 			countDownVROrientationType,
@@ -3605,6 +3609,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												rangeStep={1}
 												resetFallbackValue={""}
 												isRangeUnit={false}
+											/>
+
+											<SelectControl
+												label={__("Overflow", "frontis-blocks")}
+												value={countDownOverflow}
+												options={OVERFLOW_OP}
+												onChange={(value) => setAttributes({ countDownOverflow: value })}
 											/>
 
 											<FB_PositionControl

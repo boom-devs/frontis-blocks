@@ -24,6 +24,7 @@ import {
     TEXT_ALIGN,
     BORDER_STYLES,
 	PRESETS,
+	OVERFLOW_OP,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
@@ -149,6 +150,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Global Styles */
         socialGlobalZIndex,
+		socialIconsOverflow,
 
         socialGlobalPaddingLink,
         socialGlobalPaddingUnits,
@@ -2443,6 +2445,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'top' && socialIconsVRTopOffset.Desktop !== undefined ? `top: ${socialIconsVRTopOffset.Desktop}${socialIconsVRTopOffsetUnits.Desktop};` : ''}
 				${socialIconsPositionType !== 'default' && socialIconsPositionType !== 'relative' && socialIconsVROrientationType === 'bottom' && socialIconsVRBottomOffset.Desktop !== undefined ? `bottom: ${socialIconsVRBottomOffset.Desktop}${socialIconsVRBottomOffsetUnits.Desktop};` : ''}
 				${socialGlobalZIndex.Desktop ? `z-index: ${socialGlobalZIndex.Desktop};` : ''}
+				${socialIconsOverflow !== 'default' ? `overflow: ${socialIconsOverflow};` : ''}
 			}
 			.${blockID} .fb-social-wrapper {
 				${socialGlobalBgColor ? `background-color: ${socialGlobalBgColor};` : ''} 
@@ -2601,6 +2604,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		`, [
 			blockID,
 			socialGlobalZIndex,
+			socialIconsOverflow,
 			socialGlobalBgColor,
 			globalDesktopPadding,
 			globalDesktopMargin,
@@ -3156,6 +3160,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         resetFallbackValue={""}
                                                         isRangeUnit={false}
 
+                                                    />
+
+													<SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={socialIconsOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ socialIconsOverflow: value })}
                                                     />
 
 													<FB_PositionControl

@@ -753,6 +753,10 @@ const attributes = {
 			Mobile: '',
 		}
     },
+    socialIconsOverflow: {
+        type: 'string',
+        default: "default",
+    },
     socialGlobalPaddingUnits: {
 		type: 'object',
 		default: {
