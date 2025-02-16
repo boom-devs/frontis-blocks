@@ -971,6 +971,10 @@ const attributes = {
     },
 
     /** Start Global Setting */
+    socialGlobalCustomCSS : {
+        type: "string",
+        default: "",
+    },
 	socialGlobalWraperID : {
 		type: "string",
 		default: ""
