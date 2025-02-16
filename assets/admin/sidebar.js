@@ -842,7 +842,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
 
   // Styles for the "all" combined typography
   var allCombinedStyles = "\n        body .wp-site-blocks h1,\n        body .wp-site-blocks h2,\n        body .wp-site-blocks h3,\n        body .wp-site-blocks h4,\n        body .wp-site-blocks h5,\n        body .wp-site-blocks h6 {\n            ".concat(combinedHeadingStyles, "\n        }\n    ");
-  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 1024px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a {\n            ").concat(linkStyles, "\n        }\n\n        body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n            ").concat(buttonStyles, "\n        }\n\n        body .wp-site-blocks figcaption {\n            ").concat(captionStyles, "\n        }\n        ").concat(allCombinedStyles, "\n        ").concat(headingGrouped, "\n    ");
+  var styles = "\n        :root {\n            ".concat(rootStyles, "\n            ").concat(desktopStyles, "\n        }\n        @media (max-width: 1024px) {\n            :root {\n                ").concat(tabletStyles, "\n            }\n        }\n        @media (max-width: 767px) {\n            :root {\n                ").concat(mobileStyles, "\n            }\n        }\n\n        body .wp-site-blocks p {\n            ").concat(paragraphStyles, "\n        }\n\n        body .wp-site-blocks a, body .wp-site-blocks p a {\n            ").concat(linkStyles, "\n        }\n\n        body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n            ").concat(buttonStyles, "\n        }\n\n        body .wp-site-blocks figcaption {\n            ").concat(captionStyles, "\n        }\n        ").concat(allCombinedStyles, "\n        ").concat(headingGrouped, "\n    ");
   var path = window.location.pathname;
   var fileName = path.substring(path.lastIndexOf('/') + 1);
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
@@ -2010,11 +2010,13 @@ var TypographySettings = function TypographySettings(props) {
 
   // Load saved data and generate root css
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    var globalTypoData = localStorage.getItem("fb_globaltypo");
-    if (globalTypoData) {
-      globalTypoData = JSON.parse(globalTypoData);
-      setGlobalTypography(globalTypoData);
-    }
+    setTimeout(function () {
+      var globalTypoData = localStorage.getItem("fb_globaltypo");
+      if (globalTypoData) {
+        globalTypoData = JSON.parse(globalTypoData);
+        setGlobalTypography(globalTypoData);
+      }
+    }, 1000);
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
@@ -3270,220 +3272,236 @@ function FrontisBlocksSidebar(props) {
     var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies', 'fb_globaltypo'];
     var handleUpdateState = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _i, _localStorageKeys, key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+        var _loop, _i, _localStorageKeys;
+        return _regeneratorRuntime().wrap(function _callee$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              _context.prev = 0;
+              _context2.prev = 0;
+              _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+                var key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
+                return _regeneratorRuntime().wrap(function _loop$(_context) {
+                  while (1) switch (_context.prev = _context.next) {
+                    case 0:
+                      key = _localStorageKeys[_i];
+                      localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
+                      if (!(key === 'fb_global_colors')) {
+                        _context.next = 11;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 10;
+                        break;
+                      }
+                      _context.next = 6;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
+                    case 6:
+                      res = _context.sent;
+                      if (!res.success) {
+                        setGlobalColors(defaultsColors);
+                        localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+                      } else {
+                        setGlobalColors(res.data);
+                        localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+                      }
+                      _context.next = 11;
+                      break;
+                    case 10:
+                      setGlobalColors(localStorageData);
+                    case 11:
+                      if (!(key === 'fb_custom_colors')) {
+                        _context.next = 20;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 19;
+                        break;
+                      }
+                      _context.next = 15;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
+                    case 15:
+                      _res = _context.sent;
+                      if (!_res.success) {
+                        setCustomColors([]);
+                      } else {
+                        setCustomColors(_res.data);
+                        localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
+                      }
+                      _context.next = 20;
+                      break;
+                    case 19:
+                      setCustomColors(localStorageData);
+                    case 20:
+                      if (!(key === 'fb_gradient_colors')) {
+                        _context.next = 29;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 28;
+                        break;
+                      }
+                      _context.next = 24;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
+                    case 24:
+                      _res2 = _context.sent;
+                      if (!_res2.success) {
+                        setGradientColors(gradientDefaults);
+                        localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
+                      } else {
+                        setGradientColors(_res2.data);
+                        localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
+                      }
+                      _context.next = 29;
+                      break;
+                    case 28:
+                      setGradientColors(localStorageData);
+                    case 29:
+                      if (!(key === 'fb_custom_gradient_colors')) {
+                        _context.next = 38;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 37;
+                        break;
+                      }
+                      _context.next = 33;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
+                    case 33:
+                      _res3 = _context.sent;
+                      if (!_res3.success) {
+                        setCustomGradientColors([]);
+                      } else {
+                        setCustomGradientColors(_res3.data);
+                        localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
+                      }
+                      _context.next = 38;
+                      break;
+                    case 37:
+                      setCustomGradientColors(localStorageData);
+                    case 38:
+                      if (!(key === 'fb_typography')) {
+                        _context.next = 47;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 46;
+                        break;
+                      }
+                      _context.next = 42;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
+                    case 42:
+                      _res4 = _context.sent;
+                      if (!_res4.success) {
+                        localStorage.setItem('fb_typography', JSON.stringify(typography));
+                      } else {
+                        setTypography(_res4.data);
+                        localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
+                      }
+                      _context.next = 47;
+                      break;
+                    case 46:
+                      setTypography(localStorageData);
+                    case 47:
+                      if (!(key === 'fb_custom_typography')) {
+                        _context.next = 56;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 55;
+                        break;
+                      }
+                      _context.next = 51;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
+                    case 51:
+                      _res5 = _context.sent;
+                      if (!_res5.success) {
+                        setCustomTypography([]);
+                      } else {
+                        setCustomTypography(_res5.data);
+                        localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
+                      }
+                      _context.next = 56;
+                      break;
+                    case 55:
+                      setCustomTypography(localStorageData);
+                    case 56:
+                      if (!(key === 'fb_fontfamilies')) {
+                        _context.next = 66;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 64;
+                        break;
+                      }
+                      _context.next = 60;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
+                    case 60:
+                      _res6 = _context.sent;
+                      if (!_res6.success) {
+                        setFontfamilies([]);
+                      } else {
+                        setFontfamilies(_res6.data);
+                        getAllFontFamilies(_res6.data);
+                        localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
+                      }
+                      _context.next = 66;
+                      break;
+                    case 64:
+                      getAllFontFamilies(localStorageData);
+                      setFontfamilies(localStorageData);
+                    case 66:
+                      if (!(key === 'fb_globaltypo')) {
+                        _context.next = 75;
+                        break;
+                      }
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 74;
+                        break;
+                      }
+                      _context.next = 70;
+                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
+                    case 70:
+                      _res7 = _context.sent;
+                      if (_res7.success) {
+                        setTimeout(function () {
+                          (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_14__["default"])(_res7.data, deviceType);
+                        }, 1000);
+                        localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
+                      }
+                      _context.next = 75;
+                      break;
+                    case 74:
+                      setTimeout(function () {
+                        (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_14__["default"])(localStorageData, deviceType);
+                      }, 1000);
+                    case 75:
+                    case "end":
+                      return _context.stop();
+                  }
+                }, _loop);
+              });
               _i = 0, _localStorageKeys = localStorageKeys;
-            case 2:
+            case 3:
               if (!(_i < _localStorageKeys.length)) {
-                _context.next = 81;
+                _context2.next = 8;
                 break;
               }
-              key = _localStorageKeys[_i];
-              localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
-              if (!(key === 'fb_global_colors')) {
-                _context.next = 14;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 13;
-                break;
-              }
-              _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
-            case 9:
-              res = _context.sent;
-              if (!res.success) {
-                setGlobalColors(defaultsColors);
-                localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
-              } else {
-                setGlobalColors(res.data);
-                localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
-              }
-              _context.next = 14;
-              break;
-            case 13:
-              setGlobalColors(localStorageData);
-            case 14:
-              if (!(key === 'fb_custom_colors')) {
-                _context.next = 23;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 22;
-                break;
-              }
-              _context.next = 18;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
-            case 18:
-              _res = _context.sent;
-              if (!_res.success) {
-                setCustomColors([]);
-              } else {
-                setCustomColors(_res.data);
-                localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
-              }
-              _context.next = 23;
-              break;
-            case 22:
-              setCustomColors(localStorageData);
-            case 23:
-              if (!(key === 'fb_gradient_colors')) {
-                _context.next = 32;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 31;
-                break;
-              }
-              _context.next = 27;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
-            case 27:
-              _res2 = _context.sent;
-              if (!_res2.success) {
-                setGradientColors(gradientDefaults);
-                localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
-              } else {
-                setGradientColors(_res2.data);
-                localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
-              }
-              _context.next = 32;
-              break;
-            case 31:
-              setGradientColors(localStorageData);
-            case 32:
-              if (!(key === 'fb_custom_gradient_colors')) {
-                _context.next = 41;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 40;
-                break;
-              }
-              _context.next = 36;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
-            case 36:
-              _res3 = _context.sent;
-              if (!_res3.success) {
-                setCustomGradientColors([]);
-              } else {
-                setCustomGradientColors(_res3.data);
-                localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
-              }
-              _context.next = 41;
-              break;
-            case 40:
-              setCustomGradientColors(localStorageData);
-            case 41:
-              if (!(key === 'fb_typography')) {
-                _context.next = 50;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 49;
-                break;
-              }
-              _context.next = 45;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
-            case 45:
-              _res4 = _context.sent;
-              if (!_res4.success) {
-                localStorage.setItem('fb_typography', JSON.stringify(typography));
-              } else {
-                setTypography(_res4.data);
-                localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
-              }
-              _context.next = 50;
-              break;
-            case 49:
-              setTypography(localStorageData);
-            case 50:
-              if (!(key === 'fb_custom_typography')) {
-                _context.next = 59;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 58;
-                break;
-              }
-              _context.next = 54;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
-            case 54:
-              _res5 = _context.sent;
-              if (!_res5.success) {
-                setCustomTypography([]);
-              } else {
-                setCustomTypography(_res5.data);
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
-              }
-              _context.next = 59;
-              break;
-            case 58:
-              setCustomTypography(localStorageData);
-            case 59:
-              if (!(key === 'fb_fontfamilies')) {
-                _context.next = 69;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 67;
-                break;
-              }
-              _context.next = 63;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
-            case 63:
-              _res6 = _context.sent;
-              if (!_res6.success) {
-                setFontfamilies([]);
-              } else {
-                setFontfamilies(_res6.data);
-                getAllFontFamilies(_res6.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
-              }
-              _context.next = 69;
-              break;
-            case 67:
-              getAllFontFamilies(localStorageData);
-              setFontfamilies(localStorageData);
-            case 69:
-              if (!(key === 'fb_globaltypo')) {
-                _context.next = 78;
-                break;
-              }
-              if (!(localStorageData.length < 1)) {
-                _context.next = 77;
-                break;
-              }
-              _context.next = 73;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
-            case 73:
-              _res7 = _context.sent;
-              if (!_res7.success) {
-                (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_14__["default"])(_res7.data, deviceType);
-                localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
-              }
-              _context.next = 78;
-              break;
-            case 77:
-              (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_14__["default"])(localStorageData, deviceType);
-            case 78:
+              return _context2.delegateYield(_loop(), "t0", 5);
+            case 5:
               _i++;
-              _context.next = 2;
+              _context2.next = 3;
               break;
-            case 81:
-              _context.next = 86;
+            case 8:
+              _context2.next = 13;
               break;
-            case 83:
-              _context.prev = 83;
-              _context.t0 = _context["catch"](0);
-              console.error("Error fetching global colors:", _context.t0);
-            case 86:
+            case 10:
+              _context2.prev = 10;
+              _context2.t1 = _context2["catch"](0);
+              console.error("Error fetching global colors:", _context2.t1);
+            case 13:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
-        }, _callee, null, [[0, 83]]);
+        }, _callee, null, [[0, 10]]);
       }));
       return function handleUpdateState() {
         return _ref.apply(this, arguments);
@@ -3586,87 +3604,87 @@ function FrontisBlocksSidebar(props) {
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
             case 0:
               if (!(isAfterSave && fbGlobalSettingsLoading)) {
-                _context2.next = 34;
+                _context3.next = 34;
                 break;
               }
-              _context2.prev = 1;
+              _context3.prev = 1;
               settingsState = ['fb_update_global_colors', 'fb_update_custom_colors', 'fb_update_gradient_colors', 'fb_update_custom_gradient_colors'];
               _i2 = 0, _settingsState = settingsState;
             case 4:
               if (!(_i2 < _settingsState.length)) {
-                _context2.next = 29;
+                _context3.next = 29;
                 break;
               }
               key = _settingsState[_i2];
               if (!(key === 'fb_update_global_colors')) {
-                _context2.next = 11;
+                _context3.next = 11;
                 break;
               }
-              _context2.next = 9;
+              _context3.next = 9;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(globalColors, key);
             case 9:
-              response = _context2.sent;
+              response = _context3.sent;
               if (response.success) {
                 setGlobalColors(response.data.data);
                 localStorage.setItem('fb_global_colors', JSON.stringify(response.data.data));
               }
             case 11:
               if (!(key === 'fb_update_custom_colors')) {
-                _context2.next = 16;
+                _context3.next = 16;
                 break;
               }
-              _context2.next = 14;
+              _context3.next = 14;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customColors, key);
             case 14:
-              _response = _context2.sent;
+              _response = _context3.sent;
               if (_response.success) {
                 setCustomColors(_response.data.data);
                 localStorage.setItem('fb_custom_colors', JSON.stringify(_response.data.data));
               }
             case 16:
               if (!(key === 'fb_update_gradient_colors')) {
-                _context2.next = 21;
+                _context3.next = 21;
                 break;
               }
-              _context2.next = 19;
+              _context3.next = 19;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(gradientColors, key);
             case 19:
-              _response2 = _context2.sent;
+              _response2 = _context3.sent;
               if (_response2.success) {
                 setGradientColors(_response2.data.data);
                 localStorage.setItem('fb_gradient_colors', JSON.stringify(_response2.data.data));
               }
             case 21:
               if (!(key === 'fb_update_custom_gradient_colors')) {
-                _context2.next = 26;
+                _context3.next = 26;
                 break;
               }
-              _context2.next = 24;
+              _context3.next = 24;
               return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customGradientColors, key);
             case 24:
-              _response3 = _context2.sent;
+              _response3 = _context3.sent;
               if (_response3.success) {
                 setCustomGradientColors(_response3.data.data);
                 localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_response3.data.data));
               }
             case 26:
               _i2++;
-              _context2.next = 4;
+              _context3.next = 4;
               break;
             case 29:
-              _context2.next = 34;
+              _context3.next = 34;
               break;
             case 31:
-              _context2.prev = 31;
-              _context2.t0 = _context2["catch"](1);
-              console.error('Error updating settings:', _context2.t0);
+              _context3.prev = 31;
+              _context3.t0 = _context3["catch"](1);
+              console.error('Error updating settings:', _context3.t0);
             case 34:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }, _callee2, null, [[1, 31]]);
       }));

@@ -740,12 +740,17 @@ function FrontisBlocksSidebar(props) {
 						if (localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_globaltypo');
 
-							if(!res.success) {
-								generateCSSVariables(res.data, deviceType);
+							if(res.success) {
+								setTimeout(() => {
+									generateCSSVariables(res.data, deviceType);
+								}, 1000);
+								
 								localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
 							}
 						} else {
-							generateCSSVariables(localStorageData, deviceType);
+							setTimeout(() => {
+								generateCSSVariables(localStorageData, deviceType);
+							}, 1000);
 						}
 					}
 				}

@@ -1064,11 +1064,13 @@ const TypographySettings = (props) => {
 
 	// Load saved data and generate root css
 	useEffect(() => {
-		let globalTypoData = localStorage.getItem("fb_globaltypo");
-		if(globalTypoData) {
-			globalTypoData = JSON.parse(globalTypoData);
-			setGlobalTypography(globalTypoData)
-		}
+		setTimeout(() => {
+			let globalTypoData = localStorage.getItem("fb_globaltypo");
+			if(globalTypoData) {
+				globalTypoData = JSON.parse(globalTypoData);
+				setGlobalTypography(globalTypoData)
+			}
+		}, 1000);
 	}, [])
 
 	return (
