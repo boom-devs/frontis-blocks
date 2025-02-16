@@ -26,7 +26,7 @@ const FB_SidebarTypography = ({
 								  onChangeFontSize,
 								  fontSizeUnits,
 								  onChangeFontSizeUnit,
-								  fontWeightState,
+								  fontWeight,
 								  onChangeFontWeight,
 								  fontStyle,
 								  onChangeFontStyle,
@@ -115,7 +115,7 @@ const FB_SidebarTypography = ({
 				<SelectControl
 					label={__("Appearance", "frontis-blocks")}
 					options={FONT_WEIGHT}
-					value={fontWeightState}
+					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>
 				<SelectControl
