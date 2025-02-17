@@ -1506,8 +1506,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
             ${headingTextStroke ? `
                 -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
-                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
-                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
                 text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
             ` : ''}
             ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
@@ -1528,8 +1526,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
             ${headingTextStrokeHoverColor ? `
                 -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
-                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
-                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
                 text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
             ` : ''}
         }
@@ -1554,8 +1550,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingTextShadowCssValue ? `text-shadow: ${subHeadingTextShadowCssValue};` : ''}
             ${subHeadingTextStroke ? `
                 -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
-                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
-                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
                 text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
             ` : ''}
             ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
@@ -1568,8 +1562,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
             ${subHeadingTextStroke ? `
                 -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
-                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
-                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
                 text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
             ` : ''}
         }
@@ -1656,8 +1648,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 ${headingTextStroke ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
-                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
-                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
                     text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
                 ` : ''}
             }
@@ -1665,8 +1655,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
-                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
-                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                     text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1681,8 +1669,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingTabletBorderRadiusWidth ? `border-radius: ${subHeadingTabletBorderRadiusWidth};` : ''}
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
                     text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
@@ -1690,8 +1676,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                     text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1754,8 +1738,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingMobileBorderRadiusWidth ? `border-radius: ${headingMobileBorderRadiusWidth};` : ''}
                 ${headingTextStroke ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
-                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
-                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
                     text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
                 ` : ''}
             }
@@ -1763,8 +1745,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
-                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
-                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                     text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1779,16 +1759,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingMobileBorderRadiusWidth ? `border-radius: ${subHeadingMobileBorderRadiusWidth};` : ''}
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
             .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                 ` : ''}
             }

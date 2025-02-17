@@ -2634,7 +2634,7 @@
   box-shadow: none;
   cursor: pointer;
   height: 46px;
-  padding: 10px 16px;
+  padding: 10px 14px;
 }
 .fb-inspector-control .components-tab-panel__tabs .fb-tab.general.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.styles.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.advance.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.advanced.active-tab {
   background: #DBEBFC;
