@@ -2806,10 +2806,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
-										<div className="fb-advanced-wrapper">
+										<div className="fb-presets-wrapper">
 											<PanelBody
-												title={__("Icon/Image", "frontis-block")}
-												initialOpen={true}
+											title={__("Presets", "frontis-block")}
+											initialOpen={true}
 											>
 												<SelectControl
 													label={__("Preset Style", "frontis-blocks")}
@@ -2817,7 +2817,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													options={PRESETS}
 													onChange={(selected) => changeIconBoxPreset(selected)}
 												/>
-
+											</PanelBody>
+										</div>
+										<div className="fb-advanced-wrapper">
+											<PanelBody
+												title={__("Icon/Image", "frontis-block")}
+												initialOpen={false}
+											>
 												<FB_AlignmentControl
 													label={__("Alignment", "frontis-blocks")}
 													globalAlignment={wrapperAlignment}
