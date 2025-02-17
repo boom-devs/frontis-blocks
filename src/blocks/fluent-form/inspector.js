@@ -42,7 +42,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 import './editor.scss';
@@ -5005,24 +5006,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={fluentFormDesktopSwitcher}
-														onChange={(value) => setAttributes({ fluentFormDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={fluentFormTabletSwitcher}
-														onChange={(value) => setAttributes({ fluentFormTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={fluentFormMobileSwitcher}
-														onChange={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={fluentFormDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ fluentFormDesktopSwitcher: value })}
+
+                                                        tabletValue={fluentFormTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ fluentFormTabletSwitcher: value })}
+
+                                                        mobileValue={fluentFormMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ fluentFormMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
                                                 <PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}

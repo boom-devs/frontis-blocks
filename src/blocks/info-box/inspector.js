@@ -58,7 +58,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -4037,24 +4038,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={infoBoxDesktopSwitcher}
-														onChange={(value) => setAttributes({ infoBoxDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={infoBoxTabletSwitcher}
-														onChange={(value) => setAttributes({ infoBoxTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={infoBoxMobileSwitcher}
-														onChange={(value) => setAttributes({ infoBoxMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={infoBoxDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ infoBoxDesktopSwitcher: value })}
+
+                                                        tabletValue={infoBoxTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ infoBoxTabletSwitcher: value })}
+
+                                                        mobileValue={infoBoxMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ infoBoxMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 												<PanelBody
 													title={__("Custom CSS", "frontis-blocks")}
