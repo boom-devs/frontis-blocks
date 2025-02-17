@@ -72,6 +72,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
 		headingFontFamily,
+		headingGlobalFontSize,
 		headingFontSize,
 		headingFontSizeUnits,
 		headingFontWeight,
@@ -2229,6 +2230,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
 			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
 			  ${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			  ${headingGlobalFontSize !== 'var(undefined)' && headingGlobalFontSize !== 'none' ? `font-size: ${headingGlobalFontSize};` : ''}
 			  ${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
 			  ${headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
 			  ${headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
@@ -2490,6 +2492,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Background_Color,
 			Alignment,
 			headingFontFamily,
+			headingGlobalFontSize,
 			headingFontSize,
 			headingFontSizeUnits,
 			headingFontWeight,
@@ -2741,6 +2744,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			iconBoxVRBottomOffsetUnits,
 		],
 	);
+
+	console.log(headingGlobalFontSize);
 
 	const customCss = getCustomCss(iconBoxCustomCSS, `.${blockID}`);
 
@@ -3384,6 +3389,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 fontSizeUnits={headingFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+
+												globalFontSize={headingGlobalFontSize}
+												onChangeGlobalFontSize={(value) => setAttributes({ headingGlobalFontSize: value })}
 
                                                 fontWeight={headingFontWeight}
                                                 onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value })}
