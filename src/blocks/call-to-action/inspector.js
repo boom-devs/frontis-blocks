@@ -45,7 +45,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -276,19 +277,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoMobileBorderradiusWidth,
 		btnTwoBorderRadiusLink,
 		testBgColorSwitcher,
-		testBackgroundType,
-		testClassicColor,
-		testGradientColor,
-		testCustomGradientSwitcher,
-		testCustomGradientInputValue,
+		ctaGlobalBackgroundType,
+		ctaGlobalClassicColor,
+		ctaGlobalGradientColor,
+		ctaGlobalCustomGradientSwitcher,
+		ctaGlobalCustomGradientInputValue,
 		testBackgroundColorStyle,
-		testBackgroundImageUrl,
+		ctaGlobalBackgroundImageUrl,
 		testBackgroundImageAlt,
 		testBackgroundImageID,
-		testBackgroundImagePosition,
-		testBackgroundImageAttachment,
-		testBackgroundImageSize,
-		testBackgroundImageRepeat,
+		ctaGlobalBackgroundImagePosition,
+		ctaGlobalBackgroundImageAttachment,
+		ctaGlobalBackgroundImageSize,
+		ctaGlobalBackgroundImageRepeat,
 		hoverBackgroundType,
 		hoverClassicColor,
 		hoverGradientColor,
@@ -392,7 +393,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				ctaBtnOneSwitcher: true,
 				btnTwoSwitcher: true,
 				buttonIconSwitcher: true,
-				testClassicColor: '#15171C',
+				ctaGlobalClassicColor: '#15171C',
 				buttonBgColor: '#ffffff',
                 headingColor: '#ffffff',
                 SubHeadingColor: '#ffffff',
@@ -411,7 +412,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				btnTwoSwitcher: false,
 				buttonIconSwitcher: false,
 				buttonBgColor: '#399CFF',
-				testClassicColor: '#ffffff',
+				ctaGlobalClassicColor: '#ffffff',
                 headingColor: '#15171C',
                 SubHeadingColor: '#15171C',
                 SubHeadingHoverColor: '#15171C',
@@ -1941,21 +1942,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${BorderRadiusDesktopWidth ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
 				${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : "" }
 				${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : "" }
-				${testBackgroundType === "gradient" 
-					? (testCustomGradientSwitcher && testCustomGradientInputValue 
-						? `background: ${testCustomGradientInputValue};` 
-						: (testGradientColor 
-							? `background: ${testGradientColor};` 
-							: `background: ${testClassicColor};`))
-					: (testBackgroundImageUrl && testBackgroundImageUrl !== "null" 
+				${ctaGlobalBackgroundType === "gradient" 
+					? (ctaGlobalCustomGradientSwitcher && ctaGlobalCustomGradientInputValue 
+						? `background: ${ctaGlobalCustomGradientInputValue};` 
+						: (ctaGlobalGradientColor 
+							? `background: ${ctaGlobalGradientColor};` 
+							: `background: ${ctaGlobalClassicColor};`))
+					: (ctaGlobalBackgroundImageUrl && ctaGlobalBackgroundImageUrl !== "null" 
 						? `
-							${testBackgroundImageUrl ? `background-image: url(${testBackgroundImageUrl});` : "" }
-							${testBackgroundImagePosition ? `background-position: ${testBackgroundImagePosition};` : "" }
-							${testBackgroundImageAttachment ? `background-attachment: ${testBackgroundImageAttachment};` : "" }
-							${testBackgroundImageRepeat ? `background-repeat: ${testBackgroundImageRepeat};` : "" }
-							${testBackgroundImageSize ? `background-size: ${testBackgroundImageSize};` : "" } 
+							${ctaGlobalBackgroundImageUrl ? `background-image: url(${ctaGlobalBackgroundImageUrl});` : "" }
+							${ctaGlobalBackgroundImagePosition ? `background-position: ${ctaGlobalBackgroundImagePosition};` : "" }
+							${ctaGlobalBackgroundImageAttachment ? `background-attachment: ${ctaGlobalBackgroundImageAttachment};` : "" }
+							${ctaGlobalBackgroundImageRepeat ? `background-repeat: ${ctaGlobalBackgroundImageRepeat};` : "" }
+							${ctaGlobalBackgroundImageSize ? `background-size: ${ctaGlobalBackgroundImageSize};` : "" } 
 						`
-						: `background: ${testClassicColor};`)
+						: `background: ${ctaGlobalClassicColor};`)
 				}
 				transition: all .3s ease-in-out;
 			}
@@ -2219,16 +2220,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			BorderRadiusMobileWidth,
 			globalBorderColor,
 			boxGlobalBoxShadowCssValue,
-			testBackgroundType,
-			testCustomGradientSwitcher,
-			testCustomGradientInputValue,
-			testGradientColor,
-			testBackgroundImageUrl,
-			testBackgroundImagePosition,
-			testBackgroundImageAttachment,
-			testBackgroundImageRepeat,
-			testBackgroundImageSize,
-			testClassicColor,
+			ctaGlobalBackgroundType,
+			ctaGlobalCustomGradientSwitcher,
+			ctaGlobalCustomGradientInputValue,
+			ctaGlobalGradientColor,
+			ctaGlobalBackgroundImageUrl,
+			ctaGlobalBackgroundImagePosition,
+			ctaGlobalBackgroundImageAttachment,
+			ctaGlobalBackgroundImageRepeat,
+			ctaGlobalBackgroundImageSize,
+			ctaGlobalClassicColor,
 			hoverBackgroundType,
 			hoverCustomGradientSwitcher,
 			hoverCustomGradientInputValue,
@@ -3464,37 +3465,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setBgColorSwitcher={(value) =>
 															setAttributes({ testBgColorSwitcher: value })
 														}
-														normalBackgroundType={testBackgroundType}
+														normalBackgroundType={ctaGlobalBackgroundType}
 														setNormalBackgroundType={(value) =>
-															setAttributes({ testBackgroundType: value })
+															setAttributes({ ctaGlobalBackgroundType: value })
 														}
-														normalClassicColor={testClassicColor}
+														normalClassicColor={ctaGlobalClassicColor}
 														setNormalClassicColor={(value) =>
-															setAttributes({ testClassicColor: value })
+															setAttributes({ ctaGlobalClassicColor: value })
 														}
-														normalGradientColor={testGradientColor}
+														normalGradientColor={ctaGlobalGradientColor}
 														setNormalGradientColor={(value) =>
-															setAttributes({ testGradientColor: value })
+															setAttributes({ ctaGlobalGradientColor: value })
 														}
 														normalCustomGradientSwitcher={
-															testCustomGradientSwitcher
+															ctaGlobalCustomGradientSwitcher
 														}
 														setNormalCustomGradientSwitcher={(value) =>
 															setAttributes({
-																testCustomGradientSwitcher: value,
+																ctaGlobalCustomGradientSwitcher: value,
 															})
 														}
 														normalCustomGradientInputValue={
-															testCustomGradientInputValue
+															ctaGlobalCustomGradientInputValue
 														}
 														setNormalCustomGradientInputValue={(value) =>
 															setAttributes({
-																testCustomGradientInputValue: value,
+																ctaGlobalCustomGradientInputValue: value,
 															})
 														}
-														normalBackgroundImageUrl={testBackgroundImageUrl}
+														normalBackgroundImageUrl={ctaGlobalBackgroundImageUrl}
 														setNormalBackgroundImageUrl={(value) =>
-															setAttributes({ testBackgroundImageUrl: value })
+															setAttributes({ ctaGlobalBackgroundImageUrl: value })
 														}
 														normalBackgroundImageAlt={testBackgroundImageAlt}
 														setNormalBackgroundImageAlt={(value) =>
@@ -3505,32 +3506,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															setAttributes({ testBackgroundImageID: value })
 														}
 														normalBackgroundImagePosition={
-															testBackgroundImagePosition
+															ctaGlobalBackgroundImagePosition
 														}
 														setNormalBackgroundImagePosition={(value) =>
 															setAttributes({
-																testBackgroundImagePosition: value,
+																ctaGlobalBackgroundImagePosition: value,
 															})
 														}
 														normalBackgroundImageAttachment={
-															testBackgroundImageAttachment
+															ctaGlobalBackgroundImageAttachment
 														}
 														setNormalBackgroundImageAttachment={(value) =>
 															setAttributes({
-																testBackgroundImageAttachment: value,
+																ctaGlobalBackgroundImageAttachment: value,
 															})
 														}
 														normalBackgroundImageRepeat={
-															testBackgroundImageRepeat
+															ctaGlobalBackgroundImageRepeat
 														}
 														setNormalBackgroundImageRepeat={(value) =>
 															setAttributes({
-																testBackgroundImageRepeat: value,
+																ctaGlobalBackgroundImageRepeat: value,
 															})
 														}
-														normalBackgroundImageSize={testBackgroundImageSize}
+														normalBackgroundImageSize={ctaGlobalBackgroundImageSize}
 														setNormalBackgroundImageSize={(value) =>
-															setAttributes({ testBackgroundImageSize: value })
+															setAttributes({ ctaGlobalBackgroundImageSize: value })
 														}
 														hoverBackgroundType={hoverBackgroundType}
 														setHoverBackgroundType={(value) =>
@@ -3714,24 +3715,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaDesktopSwitcher}
-														onChange={(value) => setAttributes({ ctaDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaTabletSwitcher}
-														onChange={(value) => setAttributes({ ctaTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaMobileSwitcher}
-														onChange={(value) => setAttributes({ ctaMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={ctaDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ ctaDesktopSwitcher: value })}
+
+                                                        tabletValue={ctaTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ ctaTabletSwitcher: value })}
+
+                                                        mobileValue={ctaMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ ctaMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody

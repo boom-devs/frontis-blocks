@@ -33,6 +33,7 @@ class GlobalSettings extends AjaxBase
             'update_custom_gradient_colors',
             'update_typography',
             'update_custom_typography',
+            'update_globaltypo',
             'update_fontfamilies',
             'get_global_colors',
             'get_gradient_colors',
@@ -40,6 +41,7 @@ class GlobalSettings extends AjaxBase
             'get_custom_gradient_colors',
             'get_typography',
             'get_custom_typography',
+            'get_globaltypo',
             'get_custom_css',
             'get_fontfamilies',
             'import_demo_data',
@@ -77,6 +79,10 @@ class GlobalSettings extends AjaxBase
     public function update_custom_typography()
     {
         $this->handle_option_update('custom_typography', 'array');
+    }
+
+    public function update_globaltypo() {
+        $this->handle_option_update('globaltypo', 'array');
     }
 
     public function update_fontfamilies()
@@ -143,6 +149,15 @@ class GlobalSettings extends AjaxBase
         }
 
         wp_send_json_error('Typography not found.');
+    }
+
+    public function get_globaltypo() {
+        $global_typography = get_option('fb_globaltypo');
+        if ($global_typography) {
+            wp_send_json_success($global_typography);
+        }
+
+        wp_send_json_error('Global Typography not found.');
     }
 
     public function get_fontfamilies()

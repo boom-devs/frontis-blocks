@@ -44,7 +44,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -3656,23 +3657,15 @@ const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim()
                                                 initialOpen={false}
                                                 className="fb-setting-responsive-control-wrapper"
                                             >
-                                                <ToggleControl
-                                                    label={__("Hide on Desktop", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={GalleryDesktopSwitcher}
-                                                    onChange={(value) => setAttributes({ GalleryDesktopSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Hide on Tablet", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={GalleryTabletSwitcher}
-                                                    onChange={(value) => setAttributes({ GalleryTabletSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Hide on Mobile", "frontis-blocks")}
-                                                    className="fb-setting-responsive-control"
-                                                    checked={GalleryMobileSwitcher}
-                                                    onChange={(value) => setAttributes({ GalleryMobileSwitcher: value })}
+                                                <FB_VisibilityControl
+                                                    desktopValue={GalleryDesktopSwitcher}
+                                                    setDesktopValue={(value) => setAttributes({ GalleryDesktopSwitcher: value })}
+
+                                                    tabletValue={GalleryTabletSwitcher}
+                                                    setTabletValue={(value) => setAttributes({ GalleryTabletSwitcher: value })}
+
+                                                    mobileValue={GalleryMobileSwitcher}
+                                                    setMobileValue={(value) => setAttributes({ GalleryMobileSwitcher: value })}
                                                 />
                                             </PanelBody>
 
