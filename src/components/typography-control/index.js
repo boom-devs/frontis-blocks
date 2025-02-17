@@ -30,6 +30,9 @@ const FB_TypographyControl = ({
 	onChangeFontSize,
 	fontSizeUnits,
 	onChangeFontSizeUnit,
+	globalFontSize = '',
+	onChangeGlobalFontSize = '',
+
     fontWeight,
     onChangeFontWeight,
     fontStyle,
@@ -80,6 +83,9 @@ const FB_TypographyControl = ({
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
+	};
+	const handleGlobalFontSizeChange = (globalFontSize) => {
+		onChangeGlobalFontSize(globalFontSize);
 	};
 
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
@@ -177,6 +183,8 @@ const FB_TypographyControl = ({
 								resetFallbackValue={''}
                                 globalIcon={true}
                                 globalTypographyType={'fontSize'}
+                                globalTypographyValue={globalFontSize}
+                                setGlobalTypographyValue={handleGlobalFontSizeChange}
 							/>
                             <SelectControl
                                 label={__("Font Weight", "frontis-blocks")}
