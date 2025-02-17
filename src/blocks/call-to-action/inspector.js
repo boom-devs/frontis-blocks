@@ -45,7 +45,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -3714,24 +3715,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaDesktopSwitcher}
-														onChange={(value) => setAttributes({ ctaDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaTabletSwitcher}
-														onChange={(value) => setAttributes({ ctaTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={ctaMobileSwitcher}
-														onChange={(value) => setAttributes({ ctaMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={ctaDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ ctaDesktopSwitcher: value })}
+
+                                                        tabletValue={ctaTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ ctaTabletSwitcher: value })}
+
+                                                        mobileValue={ctaMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ ctaMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody

@@ -46,8 +46,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
-
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 import './editor.scss';
 
@@ -3273,24 +3273,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={testimonialDesktopSwitcher}
-														onChange={(value) => setAttributes({ testimonialDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={testimonialTabletSwitcher}
-														onChange={(value) => setAttributes({ testimonialTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={testimonialMobileSwitcher}
-														onChange={(value) => setAttributes({ testimonialMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={testimonialDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ testimonialDesktopSwitcher: value })}
+
+                                                        tabletValue={testimonialTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ testimonialTabletSwitcher: value })}
+
+                                                        mobileValue={testimonialMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ testimonialMobileSwitcher: value })}
+                                                    />
+
 											</PanelBody>
 
                                             <PanelBody

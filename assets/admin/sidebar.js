@@ -3861,6 +3861,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_unit_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/unit-control */ "./src/components/unit-control/index.js");
 /* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -3886,7 +3892,10 @@ var FB_Range = function FB_Range(_ref) {
     _ref$units_types_arr = _ref.units_types_arr,
     units_types_arr = _ref$units_types_arr === void 0 ? null : _ref$units_types_arr,
     _ref$isRangeUnit = _ref.isRangeUnit,
-    isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit;
+    isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
+    _ref$globalIcon = _ref.globalIcon,
+    globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
+    globalTypographyType = _ref.globalTypographyType;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3911,6 +3920,20 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+  var globalTypo = FrontisBlocksData.global_typography;
+  var GB_TYPO = [];
+  Object.entries(globalTypo).forEach(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+      label = _ref3[0],
+      properties = _ref3[1];
+    if (globalTypographyType === 'fontSize') {
+      GB_TYPO.push({
+        label: label,
+        value: properties.fontSize
+      });
+    }
+  });
+  console.log(GB_TYPO);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3920,6 +3943,48 @@ var FB_Range = function FB_Range(_ref) {
   }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
     device: deviceType
+  }), globalIcon === true && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+    className: "fb-setting-global-typo-setting-icon-dropdown",
+    contentClassName: "fb-setting-global-typo-setting-icon-dropdown-content",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref4) {
+      var isOpen = _ref4.isOpen,
+        onToggle = _ref4.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "fb-setting-global-typo-setting-icon-btn"
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "19",
+        height: "19",
+        viewBox: "0 0 19 19",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      })));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-global-typo-popup-wrapper"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select", "frontis-blocks"),
+        options: GB_TYPO
+        // value={fontWeight}
+        // onChange={handleFontWeightChange}
+      }));
+    }
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-unit-wrapper"
   }, rangeValue[deviceType] && /*#__PURE__*/React.createElement("div", {
