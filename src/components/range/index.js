@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button, ButtonGroup, RangeControl } from '@wordpress/components';
+import { BaseControl, Button, ButtonGroup, Dropdown, RangeControl, SelectControl } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
 import './editor.lazy.scss';
@@ -18,6 +18,10 @@ const FB_Range = ({
 	resetFallbackValue,
 	units_types_arr = null,
 	isRangeUnit = true,
+	globalIcon = false,
+	globalTypographyType,
+	globalTypographyValue,
+	setGlobalTypographyValue,
 }) => {
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
@@ -46,6 +50,22 @@ const FB_Range = ({
 		setRangeValue(resetFallbackValue);
 	};
 
+	const handleGlobalTypographyValue = (value) => {
+		setGlobalTypographyValue(value);
+	};
+
+	const globalTypo = FrontisBlocksData.global_typography;
+	const GB_TYPO = [{ label: 'None', value: 'none' }];
+
+    Object.entries(globalTypo).forEach(([label, properties]) => {
+
+		if(globalTypographyType === 'fontSize') {
+			GB_TYPO.push({ label: label, value: `var(${properties?.fontSize?.variable})` });
+		}
+	});
+
+	console.log(GB_TYPO);
+
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
@@ -54,6 +74,7 @@ const FB_Range = ({
 						labelText={__(label, 'frontis-blocks')}
 						device={deviceType}
 					/>
+					
 					<div className="fb-unit-wrapper">
 						{rangeValue[deviceType] && (
 							<div className="fb-reset-control-container" onClick={resetRangeValue}>
@@ -69,7 +90,39 @@ const FB_Range = ({
 								onUnitChange={setRangeUnit}
 							/>
 						)}
+						
+					{globalIcon === true && <Dropdown
+							className="fb-setting-global-icon-wrapper"
+							contentClassName="fb-setting-global-icon-content"
+							popoverProps={{ placement: 'bottom-start' }}
+							renderToggle={({ isOpen, onToggle }) => (
+							<Button
+								variant="primary"
+								onClick={onToggle}
+								aria-expanded={isOpen}
+								className={`fb-setting-global-icon-btn ${globalTypographyValue !== 'none' && 'global-active'}`}
+							>
+								<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+							</Button>
+						)}
+						renderContent={() => (
+							<div className="fb-setting-typography-popup">
+								<BaseControl className="fb-setting-typography-popup-inner">
+									<SelectControl
+										label={__("Global Styles", "frontis-blocks")}
+										options={GB_TYPO}
+										value={globalTypographyValue}
+										onChange={handleGlobalTypographyValue}
+									/>
+								</BaseControl>
+							</div>
+						)}
+					/>}
 					</div>
+
 				</div>
 				<RangeControl
 					// value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}

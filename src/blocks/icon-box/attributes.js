@@ -225,6 +225,10 @@ const attributes = {
         type: "string",
         default: "Default",
     },
+    headingGlobalFontSize: {
+        type: "string",
+        default: "none",
+    },
     headingFontSize: {
 		type: 'object',
 		default: {

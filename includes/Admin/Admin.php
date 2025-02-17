@@ -72,7 +72,8 @@ class Admin {
 			'pro_url' => FB_UPGRADE_PRO_URL,
 			'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
 			'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
-            'global_styles' => wp_get_global_styles()
+            'global_styles' => wp_get_global_styles(),
+            'global_typography' => get_option('fb_globaltypo')
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){ 
@@ -842,7 +843,7 @@ class Admin {
     public function render_generated_css() {
 		$css_content = get_option('fb_global_typo_css');
 		if($css_content){
-			echo '<style id="global-typo-css" type="text/css" >'.$css_content.'</style>';
+			// echo '<style id="global-typo-css" type="text/css" >'.$css_content.'</style>';
 		}
 	}
 

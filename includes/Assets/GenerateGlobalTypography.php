@@ -10,6 +10,12 @@ class GenerateGlobalTypography {
 
 	public static function generate_global_typography() {
 		self::enqueue_fonts();
+
+		$global_typography = get_option('fb_globaltypo');
+		if($global_typography) {
+			// add_action('wp_enqueue_scripts', self::enqueue_google_fonts($global_typography));
+			add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_google_fonts']);
+		}
 	}
 
 	private static function generate_css_file($data, $devices) {
@@ -151,19 +157,68 @@ class GenerateGlobalTypography {
 		return $css;
 	}
 
+	public static function generateCSS($styles) {
+		$css = ":root {\n";
+	
+		// Generate variables for Desktop, Tablet, and Mobile
+		foreach ($styles as $selector => $properties) {
+			foreach ($properties as $property => $details) {
+				if (isset($details['variable']) && isset($details['value'])) {
+					if (is_array($details['value'])) {
+						foreach ($details['value'] as $device => $value) {
+							if (!empty($value)) {
+								$unit = $details['unit'][$device];
+								$css .= "    {$details['variable']}-$device: $value$unit;\n";
+							}
+						}
+					} else {
+						$css .= "    {$details['variable']}: {$details['value']};\n";
+					}
+				}
+			}
+		}
+	
+		$css .= "}\n\n";
+	
+		// Generate responsive CSS for body, h1-h6, p, and fb_customtypo
+		$css .= "body .wp-site-blocks h1,\n";
+		$css .= "body .wp-site-blocks h2,\n";
+		$css .= "body .wp-site-blocks h3,\n";
+		$css .= "body .wp-site-blocks h4,\n";
+		$css .= "body .wp-site-blocks h5,\n";
+		$css .= "body .wp-site-blocks h6 {\n";
+		$css .= "    font-family: var(--fb-global-all--font-family);\n";
+		$css .= "}\n\n";
+	
+		$css .= "body .wp-site-blocks p {\n";
+		$css .= "    font-size: var(--fb-global-body--font-size-Desktop);\n";
+		$css .= "    font-family: var(--fb-global-body--font-family);\n";
+		$css .= "    font-weight: var(--fb-global-body--font-weight);\n";
+		$css .= "}\n\n";
+	
+		$css .= "@media (max-width: 1024px) {\n";
+		$css .= "    body .wp-site-blocks p {\n";
+		$css .= "        font-size: var(--fb-global-body--font-size-Tablet);\n";
+		$css .= "    }\n";
+		$css .= "}\n\n";
+	
+		$css .= "@media (max-width: 768px) {\n";
+		$css .= "    body .wp-site-blocks p {\n";
+		$css .= "        font-size: var(--fb-global-body--font-size-Mobile);\n";
+		$css .= "    }\n";
+		$css .= "}\n\n";
+	
+		return $css;
+	}
+
 	public static function enqueue_fonts() {
-		$global_typography = get_option('fb_typography');
+		// $global_typography = get_option('fb_typography');
+		$global_typography = get_option('fb_globaltypo');
+		
+		if($global_typography) {
+			$styles = self::generateCSS($global_typography);
 
-		if($global_typography){
-			// Device breakpoints (you can customize as per your needs)
-			$devices = array(
-				'Desktop' => 1200,  // Desktop breakpoint at 1200px
-				'Tablet' => 768,    // Tablet breakpoint at 768px
-				'Mobile' => 480     // Mobile breakpoint at 480px
-			);
-			$css_content = self::generate_css_file($global_typography, $devices);
-
-			if($css_content) {
+			if($styles) {
 				$upload_dir = wp_upload_dir();
 				$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
 
@@ -174,10 +229,59 @@ class GenerateGlobalTypography {
 
 				$css_file_name = 'frontis-global-typography.css';
 				$css_file = $css_dir . $css_file_name;
-				file_put_contents( $css_file, $css_content );
-
-				update_option('fb_global_typo_css', $css_content);
+				file_put_contents( $css_file, $styles );
 			}
+		}
+		
+		// if($global_typography){
+		// 	// Device breakpoints (you can customize as per your needs)
+		// 	$devices = array(
+		// 		'Desktop' => 1200,  // Desktop breakpoint at 1200px
+		// 		'Tablet' => 768,    // Tablet breakpoint at 768px
+		// 		'Mobile' => 480     // Mobile breakpoint at 480px
+		// 	);
+		// 	$css_content = self::generate_css_file($global_typography, $devices);
+
+		// 	if($css_content) {
+		// 		$upload_dir = wp_upload_dir();
+		// 		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+
+		// 		// Ensure the target directory exists
+		// 		if (!file_exists($css_dir)) {
+		// 			wp_mkdir_p($css_dir);
+		// 		}
+
+		// 		$css_file_name = 'frontis-global-typography.css';
+		// 		$css_file = $css_dir . $css_file_name;
+		// 		file_put_contents( $css_file, $css_content );
+
+		// 		update_option('fb_global_typo_css', $css_content);
+		// 	}
+		// }
+	}
+
+	public static function enqueue_google_fonts($styles) {
+		$font_families = [];
+		$global_typography = get_option('fb_globaltypo');
+		// Extract all unique font families
+		foreach ($global_typography as $selector => $properties) {
+			if (isset($properties['fontFamily'])) {
+				$font_family = $properties['fontFamily']['value'];
+				if (!in_array($font_family, $font_families)) {
+					$font_families[] = $font_family;
+				}
+			}
+		}
+	
+		// If there are font families, enqueue them
+		if (!empty($font_families)) {
+			$font_url = "https://fonts.googleapis.com/css?family=";
+			$font_url .= implode("|", array_map(function($font) {
+				return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
+			}, $font_families));
+	
+			// Enqueue the Google Fonts
+			wp_enqueue_style('fb-google-fonts', $font_url, array(), null);
 		}
 	}
 }

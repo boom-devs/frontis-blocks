@@ -24,7 +24,8 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
@@ -1770,24 +1771,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedVideoDesktopSwitcher}
-														onChange={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedVideoTabletSwitcher}
-														onChange={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedVideoMobileSwitcher}
-														onChange={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={advancedVideoDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
+
+                                                        tabletValue={advancedVideoTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
+
+                                                        mobileValue={advancedVideoMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
                                                 <PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}

@@ -15,7 +15,7 @@ import { useDispatch, subscribe, select } from '@wordpress/data';
 import {useEffect, useState} from "@wordpress/element";
 import {useDeviceType} from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
-import {useAfterSave, loadGoogleFont} from "../helper";
+import {loadGoogleFont, useAfterSave} from "../helper";
 import {updateGlobalStyle} from "../fetch";
 import FrontPreview from "./FontPreview";
 import generateCSSVariables from "./GenerateRootCss";
@@ -24,15 +24,13 @@ const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
+	const [isSaving, setIsSaving] = useState(false);
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState([])
 	const { editPost } = useDispatch('core/editor');
 	const deviceType= useDeviceType();
-
-	console.log("deviceType deviceType")
-	console.log(deviceType)
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
 
@@ -957,237 +955,150 @@ const TypographySettings = (props) => {
 		setIsMount(true);
 	}
 
-	const updateLiveTypography = (...params) => {
-		
-	}
-
 	// Save to database
-
-	subscribe(() => {
-		const isSavingPost = select('core/editor').isSavingPost();
-		const isAutosavingPost = select('core/editor').isAutosavingPost();
+	// subscribe(() => {
+	// 	const isSavingPost = select('core/editor').isSavingPost();
+	// 	const isAutosavingPost = select('core/editor').isAutosavingPost();
 		
-		if (!isMount || isAutosavingPost || !isSavingPost) {
-			return;
-		}
+	// 	if (!isMount || isAutosavingPost || !isSavingPost) {
+	// 		return;
+	// 	}
 
-		if(isMount) {
-			handleUpdateSettings();
-		}
+	// 	if(isMount) {
+	// 		handleUpdateSettings();
+	// 	}
 		
-		setIsMount(false);
-	});
+	// 	setIsMount(false);
+	// });
 
-	const handleUpdateSettings = async () => {
-		if (isMount) {
-			if (typography) {
-				const response = await updateGlobalStyle(typography, 'fb_update_typography');
-				if (response.success) {
-					setTypography(response.data.data);
-					localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-				}
-			}
 
-			if (customTypography) {
-				const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
-				if (response.success) {
-					setCustomTypography(response.data.data);
-					localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
-				}
-			}
 
-			if(fontFamilies) {
-				const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
-				if (response.success) {
-					setFontFamilies(response.data.data);
-					localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+	// useEffect(() => {
+    //     const unsubscribe = subscribe(() => {
+    //         const editor = select('core/editor');
+    //         const isSavingPost = editor.isSavingPost();
+    //         const isAutoSaving = editor.isAutosavingPost();
+
+    //         // Manual save detect
+    //         if (isSavingPost && !isAutoSaving && !isSaving) {
+    //             setIsSaving(true);
+    //             handleUpdateSettings();
+    //         }
+
+    //         // Reset state after saving completes
+    //         if (!isSavingPost) {
+    //             setIsSaving(false);
+    //         }
+    //     });
+
+    //     return () => unsubscribe();
+    // }, []);
+
+	// wp.data.subscribe(() => {
+	// 	const isSavingPost = wp.data.select('core/editor').isSavingPost();
+	// 	const isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+	// 	const isPublishingPost = wp.data.select('core/editor').isPublishingPost();
+	
+	// 	if (isSavingPost && !isAutosavingPost && isMount) {
+	// 		handleUpdateSettings();
+	// 		setIsMount(false);
+	// 	}
+	
+	// 	console.log("Hey checking isMount wp")
+	// 	console.log(isMount)
+
+	// 	if (isPublishingPost) {
+	// 		console.log('Post is being published.');
+	// 	}
+	// });
+
+	const isAfterSave = useAfterSave();
+
+	useEffect(() => {
+		const handleUpdateSettings = async () => {
+			if (isAfterSave && isMount) {
+				if (typography) {
+					const response = await updateGlobalStyle(typography, 'fb_update_typography');
+					if (response.success) {
+						setTypography(response.data.data);
+						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+					}
 				}
+	
+				if (customTypography) {
+					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+					if (response.success) {
+						setCustomTypography(response.data.data);
+						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+					}
+				}
+	
+				if(globalTypography) {
+					const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
+					if (response.success) {
+						setGlobalTypography(response.data.data);
+						localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
+					}
+				}
+	
+				if(fontFamilies) {
+					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
+					if (response.success) {
+						setFontFamilies(response.data.data);
+						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+					}
+				}
+				setIsMount(false);
 			}
-			setIsMount(false);
 		}
-	}
+
+		handleUpdateSettings();
+	}, [isAfterSave])
 
 	useEffect(() => {
 		if(isMount) {
 			editPost({ isDirty: true });
 		}
-		
 	}, [isMount]);
 
 	useEffect(() => {
 		if(globalTypography) {
-			let css = generateCSSVariables(globalTypography);
-			console.log(css)
+			generateCSSVariables(globalTypography, deviceType);
 		}
 		
-	}, [globalTypography]);
+	}, [globalTypography, deviceType]);
+
+	// Load saved data and generate root css
+	useEffect(() => {
+		setTimeout(() => {
+			let globalTypoData = localStorage.getItem("fb_globaltypo");
+			if(globalTypoData) {
+				globalTypoData = JSON.parse(globalTypoData);
+				setGlobalTypography(globalTypoData)
+			}
+		}, 1000);
+	}, [deviceType])
 
 	return (
-		<TabPanel
+		<>
+			<TabPanel
 			className="fb-blocks-color-tabs"
 			activeClass="active-tab"
 			tabs={[
 				{name: "elements", title: "Elements"},
 				{name: "custom", title: "Custom"},
 			]}
-		>
-			{(tab) => (
-				<div>
-					{tab.name === "elements" && (
-						<>
-							<div className={'fb-global-typo-elements'}>
-								<div className="fb-global-typo-elements-wrap">
-									<NavigatorProvider initialPath="/">
-										<NavigatorScreen path="/">
-											{/* <p>Select Element to set Typography</p> */}
-											{typographyElements && Object.keys(typographyElements).map((item, index) => (
-												<div
-													key={index}
-													className="fb-custom-element fb-global-typography-element"
-												>
-													<NavigatorButton
-														path={`/${item}`}
-													>
-                                                    <span
-														className="font_preview"
-													>
-														<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z" fill="currentcolor"/>
-														</svg>
-													</span>
-														{typographyElements[item]}
-														{(typography[item] || (item === 'heading' && isHeadingSaved())) && (
-															<span className="edit_indecator"></span>
-														)}
-													</NavigatorButton>
-												</div>
-											))}
-										</NavigatorScreen>
-
-										{typographyElements && Object.keys(typographyElements).map((item, index) => (
-											<div
-												key={index}
-												className="fb-global-typography-element-content"
-											>
-												<NavigatorScreen path={`/${item}`}>
-													<NavigatorBackButton className="fb-global-back">
-													<span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> {typographyElements[item]}
-													</NavigatorBackButton>
-													 {/*<p className="note">Typography Controls for <strong>{item}</strong></p>*/}
-
-													{/* Heading Typography option */}
-													{item === 'heading' && (
-														<>
-															<FrontPreview fontProps={typography?.[item]?.[selectedHeading]} deviceType={deviceType} fontSize={true} />
-															<ToggleGroupControl
-																__nextHasNoMarginBottom
-																isBlock
-																className={`fb-global-typography-headings-wrap`}
-																label="Select Heading"
-																value={selectedHeading}
-																hideLabelFromVision={true}
-																onChange={(value) => setSelectedHeading(value)}
-															>
-																{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
-																	<ToggleGroupControlOption
-																		key={headingIndex}
-																		className={`fb-global-typography-element-heading ${typography[heading] ? 'edited' : ''}`}
-																		label={TypographyHeadingElements[heading]}
-																		value={heading}
-																	/>
-																))}
-															</ToggleGroupControl>
-															{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
-																<div
-																	key={headingIndex}
-																	style={{ display: heading === selectedHeading ? 'block' : 'none' }}
-																>
-																	<div className="fb-typography-settings">
-																		<FB_SidebarTypography
-																			fontFamily={typography?.[item]?.[selectedHeading]?.fontFamily}
-																			onChangeFontFamily={(value) => onChangeHeadingFontFamily(value, item)}
-																			fontSize={typography?.[item]?.[selectedHeading]?.fontSize}
-																			onChangeFontSize={(value) => onChangeHeadingFontSize(value, item)}
-																			fontSizeUnits={typography?.[item]?.[selectedHeading]?.fontSizeUnit}
-																			onChangeFontSizeUnit={(value) => onChangeHeadingFontSizeUnit(value, item)}
-																			fontWeight={typography?.[item]?.[selectedHeading]?.fontWeight}
-																			onChangeFontWeight={(value) => onChangeHeadingFontWeight(value, item)}
-																			fontStyle={typography?.[item]?.[selectedHeading]?.fontStyle}
-																			onChangeFontStyle={(value) => onChangeHeadingFontStyle(value, item)}
-																			textTransform={typography?.[item]?.[selectedHeading]?.textTransform}
-																			onChangeTextTransform={(value) => onChangeHeadingTextTransform(value, item)}
-																			textDecoration={typography?.[item]?.[selectedHeading]?.textDecoration}
-																			onChangeTextDecoration={(value) => onChangeHeadingTextDecoration(value, item)}
-																			letterSpacing={typography?.[item]?.[selectedHeading]?.letterSpacing}
-																			onChangeLetterSpacing={(value) => onChangeHeadingLetterSpacing(value, item)}
-																			letterSpacingUnits={typography?.[item]?.[selectedHeading]?.letterSpacingUnit}
-																			onChangeLetterSpacingUnit={(value) => onChangeHeadingLetterSpacingUnit(value, item)}
-																			lineHeight={typography?.[item]?.[selectedHeading]?.lineHeight}
-																			onChangeLineHeight={(value) => onChangeHeadingLineHeight(value, item)}
-																			lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}
-																			onChangeLineHeightUnit={(value) => onChangeHeadingLineHeightUnit(value, item)}
-																			deviceType={deviceType}
-																			heading={selectedHeading}
-																		/>
-
-																	</div>
-																</div>
-															))}
-														</>
-													)}
-													{/* End Heading Typography option */}
-
-													{/*	Not Heading Typography option*/}
-													{item !== 'heading' && (
-														<>
-															<div className="fb-typography-settings">
-																<FrontPreview fontProps={typography[item]} deviceType={deviceType} fontSize={true} />
-																<FB_SidebarTypography
-																	fontFamily={typography?.[item]?.fontFamily}
-																	onChangeFontFamily={(value) => onChangeFontFamily(value, item)}
-																	fontSize={typography?.[item]?.fontSize}
-																	onChangeFontSize={(value) => onChangeFontSize(value, item)}
-																	fontSizeUnits={typography?.[item]?.fontSizeUnit}
-																	onChangeFontSizeUnit={(value) => onChangeFontSizeUnit(value, item)}
-																	fontWeight={typography?.[item]?.fontWeight}
-																	onChangeFontWeight={(value) => onChangeFontWeight(value, item)}
-																	fontStyle={typography?.[item]?.fontStyle}
-																	onChangeFontStyle={(value) => onChangeFontStyle(value, item)}
-																	textTransform={typography?.[item]?.textTransform}
-																	onChangeTextTransform={(value) => onChangeTextTransform(value, item)}
-																	textDecoration={typography?.[item]?.textDecoration}
-																	onChangeTextDecoration={(value) => onChangeTextDecoration(value, item)}
-																	letterSpacing={typography?.[item]?.letterSpacing}
-																	onChangeLetterSpacing={(value) => onChangeLetterSpacing(value, item)}
-																	letterSpacingUnits={typography?.[item]?.letterSpacingUnit}
-																	onChangeLetterSpacingUnit={(value) => onChangeLetterSpacingUnit(value, item)}
-																	lineHeight={typography?.[item]?.lineHeight}
-																	onChangeLineHeight={(value) => onChangeLineHeight(value, item)}
-																	lineHeightUnits={typography?.[item]?.lineHeightUnits}
-																	onChangeLineHeightUnit={(value) => onChangeLineHeightUnit(value, item)}
-																	deviceType={deviceType}
-																/>
-															</div>
-														</>
-													)}
-
-													{/* End	Not Heading Typography option*/}
-												</NavigatorScreen>
-											</div>
-										))}
-									</NavigatorProvider >
-								</div>
-							</div>
-						</>
-					)}
-					{tab.name === "custom" && (
-						<>
-							<div className={'fb-global-typo-elements'}>
-								<div className="fb-global-typo-elements-wrap">
-									{customTypography && typeof customTypography === 'object' && (
+			>
+				{(tab) => (
+					<div>
+						{tab.name === "elements" && (
+							<>
+								<div className={'fb-global-typo-elements'}>
+									<div className="fb-global-typo-elements-wrap">
 										<NavigatorProvider initialPath="/">
 											<NavigatorScreen path="/">
-												{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+												{/* <p>Select Element to set Typography</p> */}
+												{typographyElements && Object.keys(typographyElements).map((item, index) => (
 													<div
 														key={index}
 														className="fb-custom-element fb-global-typography-element"
@@ -1195,148 +1106,286 @@ const TypographySettings = (props) => {
 														<NavigatorButton
 															path={`/${item}`}
 														>
-																<span
-																	className="font_preview"
-																>Aa</span>
-															{customTypography[item]?.name}
-														</NavigatorButton>
-														<Button className="fb-delete-custom-typo">
-															<span
-																className={'fb-delete'}
-																title="Delete"
-																onClick={() => deleteItem(item)}
-															><Dashicon icon={'trash'}/></span>
-														</Button>
-													</div>
-												))}
-
-												<div className="add-custom-color">
-													<Button
-														className="add-custom-color-btn"
-														onClick={() => setCustomTypography({
-															...customTypography,
-															[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
-																name: `Custom Typography`,
-																fontFamily: "default",
-																lineHeight: {
-																	Desktop: 0,
-																	Tablet: 0,
-																	Mobile: 0
-																},
-																lineHeightUnits: {
-																	Desktop: 'px',
-																	Tablet: 'em',
-																	Mobile: '%'
-																},
-																fontSize: {
-																	Desktop: 0,
-																	Tablet: 0,
-																	Mobile: 0
-																},
-																fontSizeUnit: {
-																	Desktop: 'px',
-																	Tablet: 'em',
-																	Mobile: '%'
-																},
-																fontWeight: 0,
-																fontStyle: 0,
-																textTransform: 0,
-																textDecoration: 0,
-																letterSpacing: {
-																	Desktop: 0,
-																	Tablet: 0,
-																	Mobile: 0
-																},
-																letterSpacingUnit: {
-																	Desktop: 'px',
-																	Tablet: 'em',
-																	Mobile: '%'
-																}
-															}
-														})}
-													>
-														Add Custom Typography
-														<span>
-															<svg width="15" height="14" viewBox="0 0 15 14"
-																 fill="none"
-																 xmlns="http://www.w3.org/2000/svg">
-																<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
-																	  stroke="white"
-																	  strokeWidth="1.5" strokeLinecap="round"
-																	  strokeLinejoin="round"/>
+														<span
+															className="font_preview"
+														>
+															<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path d="M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z" fill="currentcolor"/>
 															</svg>
 														</span>
-													</Button>
-												</div>
+															{typographyElements[item]}
+															{(typography[item] || (item === 'heading' && isHeadingSaved())) && (
+																<span className="edit_indecator"></span>
+															)}
+														</NavigatorButton>
+													</div>
+												))}
 											</NavigatorScreen>
 
-											{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+											{typographyElements && Object.keys(typographyElements).map((item, index) => (
 												<div
 													key={index}
 													className="fb-global-typography-element-content"
 												>
 													<NavigatorScreen path={`/${item}`}>
-														<NavigatorBackButton>
-															<Dashicon
-																icon="arrow-left-alt2"/> {customTypography[item]?.name}
+														<NavigatorBackButton className="fb-global-back">
+														<span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> {typographyElements[item]}
 														</NavigatorBackButton>
+														{/*<p className="note">Typography Controls for <strong>{item}</strong></p>*/}
 
-														<div className="fb-typography-settings">
-															<FrontPreview fontProps={customTypography[item]} deviceType={deviceType} fontSize={true} />
-															<TextControl
-																label={__('Typography Name', 'frontis-blocks')}
-																value={customTypography[item]?.name}
-																onChange={(value) => changeCustomTypoName(item, value)}
-															/>
-															<FB_SidebarTypography
-																fontFamily={customTypography?.[item]?.fontFamily}
-																onChangeFontFamily={(value) => onChangeCustomFontFamily(value, item)}
-																fontSize={customTypography?.[item]?.fontSize}
-																onChangeFontSize={(value) => onChangeCustomFontSize(value, item)}
-																fontSizeUnits={customTypography?.[item]?.fontSizeUnit}
-																onChangeFontSizeUnit={(value) => onChangeCustomFontSizeUnit(value, item)}
-																fontWeight={customTypography?.[item]?.fontWeight}
-																onChangeFontWeight={(value) => onChangeCustomFontWeight(value, item)}
-																fontStyle={customTypography?.[item]?.fontStyle}
-																onChangeFontStyle={(value) => onChangeCustomFontStyle(value, item)}
-																textTransform={customTypography?.[item]?.textTransform}
-																onChangeTextTransform={(value) => onChangeCustomTextTransform(value, item)}
-																textDecoration={customTypography?.[item]?.textDecoration}
-																onChangeTextDecoration={(value) => onChangeCustomTextDecoration(value, item)}
-																letterSpacing={customTypography?.[item]?.letterSpacing}
-																onChangeLetterSpacing={(value) => onChangeCustomLetterSpacing(value, item)}
-																letterSpacingUnits={customTypography?.[item]?.letterSpacingUnit}
-																onChangeLetterSpacingUnit={(value) => onChangeCustomLetterSpacingUnit(value, item)}
-																lineHeight={customTypography?.[item]?.lineHeight}
-																onChangeLineHeight={(value) => onChangeCustomLineHeight(value, item)}
-																lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
-																onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
-																deviceType={deviceType}
-															/>
-														</div>
+														{/* Heading Typography option */}
+														{item === 'heading' && (
+															<>
+																<FrontPreview fontProps={typography?.[item]?.[selectedHeading]} deviceType={deviceType} fontSize={true} />
+																<ToggleGroupControl
+																	__nextHasNoMarginBottom
+																	isBlock
+																	className={`fb-global-typography-headings-wrap`}
+																	label="Select Heading"
+																	value={selectedHeading}
+																	hideLabelFromVision={true}
+																	onChange={(value) => setSelectedHeading(value)}
+																>
+																	{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
+																		<ToggleGroupControlOption
+																			key={headingIndex}
+																			className={`fb-global-typography-element-heading ${typography[heading] ? 'edited' : ''}`}
+																			label={TypographyHeadingElements[heading]}
+																			value={heading}
+																		/>
+																	))}
+																</ToggleGroupControl>
+																{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
+																	<div
+																		key={headingIndex}
+																		style={{ display: heading === selectedHeading ? 'block' : 'none' }}
+																	>
+																		<div className="fb-typography-settings">
+																			<FB_SidebarTypography
+																				fontFamily={typography?.[item]?.[selectedHeading]?.fontFamily}
+																				onChangeFontFamily={(value) => onChangeHeadingFontFamily(value, item)}
+																				fontSize={typography?.[item]?.[selectedHeading]?.fontSize}
+																				onChangeFontSize={(value) => onChangeHeadingFontSize(value, item)}
+																				fontSizeUnits={typography?.[item]?.[selectedHeading]?.fontSizeUnit}
+																				onChangeFontSizeUnit={(value) => onChangeHeadingFontSizeUnit(value, item)}
+																				fontWeight={typography?.[item]?.[selectedHeading]?.fontWeight}
+																				onChangeFontWeight={(value) => onChangeHeadingFontWeight(value, item)}
+																				fontStyle={typography?.[item]?.[selectedHeading]?.fontStyle}
+																				onChangeFontStyle={(value) => onChangeHeadingFontStyle(value, item)}
+																				textTransform={typography?.[item]?.[selectedHeading]?.textTransform}
+																				onChangeTextTransform={(value) => onChangeHeadingTextTransform(value, item)}
+																				textDecoration={typography?.[item]?.[selectedHeading]?.textDecoration}
+																				onChangeTextDecoration={(value) => onChangeHeadingTextDecoration(value, item)}
+																				letterSpacing={typography?.[item]?.[selectedHeading]?.letterSpacing}
+																				onChangeLetterSpacing={(value) => onChangeHeadingLetterSpacing(value, item)}
+																				letterSpacingUnits={typography?.[item]?.[selectedHeading]?.letterSpacingUnit}
+																				onChangeLetterSpacingUnit={(value) => onChangeHeadingLetterSpacingUnit(value, item)}
+																				lineHeight={typography?.[item]?.[selectedHeading]?.lineHeight}
+																				onChangeLineHeight={(value) => onChangeHeadingLineHeight(value, item)}
+																				lineHeightUnits={typography?.[item]?.[selectedHeading]?.lineHeightUnits}
+																				onChangeLineHeightUnit={(value) => onChangeHeadingLineHeightUnit(value, item)}
+																				deviceType={deviceType}
+																				heading={selectedHeading}
+																			/>
+
+																		</div>
+																	</div>
+																))}
+															</>
+														)}
+														{/* End Heading Typography option */}
+
+														{/*	Not Heading Typography option*/}
+														{item !== 'heading' && (
+															<>
+																<div className="fb-typography-settings">
+																	<FrontPreview fontProps={typography[item]} deviceType={deviceType} fontSize={true} />
+																	<FB_SidebarTypography
+																		fontFamily={typography?.[item]?.fontFamily}
+																		onChangeFontFamily={(value) => onChangeFontFamily(value, item)}
+																		fontSize={typography?.[item]?.fontSize}
+																		onChangeFontSize={(value) => onChangeFontSize(value, item)}
+																		fontSizeUnits={typography?.[item]?.fontSizeUnit}
+																		onChangeFontSizeUnit={(value) => onChangeFontSizeUnit(value, item)}
+																		fontWeight={typography?.[item]?.fontWeight}
+																		onChangeFontWeight={(value) => onChangeFontWeight(value, item)}
+																		fontStyle={typography?.[item]?.fontStyle}
+																		onChangeFontStyle={(value) => onChangeFontStyle(value, item)}
+																		textTransform={typography?.[item]?.textTransform}
+																		onChangeTextTransform={(value) => onChangeTextTransform(value, item)}
+																		textDecoration={typography?.[item]?.textDecoration}
+																		onChangeTextDecoration={(value) => onChangeTextDecoration(value, item)}
+																		letterSpacing={typography?.[item]?.letterSpacing}
+																		onChangeLetterSpacing={(value) => onChangeLetterSpacing(value, item)}
+																		letterSpacingUnits={typography?.[item]?.letterSpacingUnit}
+																		onChangeLetterSpacingUnit={(value) => onChangeLetterSpacingUnit(value, item)}
+																		lineHeight={typography?.[item]?.lineHeight}
+																		onChangeLineHeight={(value) => onChangeLineHeight(value, item)}
+																		lineHeightUnits={typography?.[item]?.lineHeightUnits}
+																		onChangeLineHeightUnit={(value) => onChangeLineHeightUnit(value, item)}
+																		deviceType={deviceType}
+																	/>
+																</div>
+															</>
+														)}
+
+														{/* End	Not Heading Typography option*/}
 													</NavigatorScreen>
 												</div>
 											))}
-										</NavigatorProvider>
-									)}
+										</NavigatorProvider >
+									</div>
 								</div>
-							</div>
-						</>
-					)}
-				</div>
-			)}
-		</TabPanel>
+							</>
+						)}
+						{tab.name === "custom" && (
+							<>
+								<div className={'fb-global-typo-elements'}>
+									<div className="fb-global-typo-elements-wrap">
+										{customTypography && typeof customTypography === 'object' && (
+											<NavigatorProvider initialPath="/">
+												<NavigatorScreen path="/">
+													{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+														<div
+															key={index}
+															className="fb-custom-element fb-global-typography-element"
+														>
+															<NavigatorButton
+																path={`/${item}`}
+															>
+																	<span
+																		className="font_preview"
+																	>Aa</span>
+																{customTypography[item]?.name}
+															</NavigatorButton>
+															<Button className="fb-delete-custom-typo">
+																<span
+																	className={'fb-delete'}
+																	title="Delete"
+																	onClick={() => deleteItem(item)}
+																><Dashicon icon={'trash'}/></span>
+															</Button>
+														</div>
+													))}
+
+													<div className="add-custom-color">
+														<Button
+															className="add-custom-color-btn"
+															onClick={() => setCustomTypography({
+																...customTypography,
+																[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
+																	name: `Custom Typography`,
+																	fontFamily: "default",
+																	lineHeight: {
+																		Desktop: 0,
+																		Tablet: 0,
+																		Mobile: 0
+																	},
+																	lineHeightUnits: {
+																		Desktop: 'px',
+																		Tablet: 'em',
+																		Mobile: '%'
+																	},
+																	fontSize: {
+																		Desktop: 0,
+																		Tablet: 0,
+																		Mobile: 0
+																	},
+																	fontSizeUnit: {
+																		Desktop: 'px',
+																		Tablet: 'em',
+																		Mobile: '%'
+																	},
+																	fontWeight: 0,
+																	fontStyle: 0,
+																	textTransform: 0,
+																	textDecoration: 0,
+																	letterSpacing: {
+																		Desktop: 0,
+																		Tablet: 0,
+																		Mobile: 0
+																	},
+																	letterSpacingUnit: {
+																		Desktop: 'px',
+																		Tablet: 'em',
+																		Mobile: '%'
+																	}
+																}
+															})}
+														>
+															Add Custom Typography
+															<span>
+																<svg width="15" height="14" viewBox="0 0 15 14"
+																	fill="none"
+																	xmlns="http://www.w3.org/2000/svg">
+																	<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
+																		stroke="white"
+																		strokeWidth="1.5" strokeLinecap="round"
+																		strokeLinejoin="round"/>
+																</svg>
+															</span>
+														</Button>
+													</div>
+												</NavigatorScreen>
+
+												{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+													<div
+														key={index}
+														className="fb-global-typography-element-content"
+													>
+														<NavigatorScreen path={`/${item}`}>
+															<NavigatorBackButton>
+																<Dashicon
+																	icon="arrow-left-alt2"/> {customTypography[item]?.name}
+															</NavigatorBackButton>
+
+															<div className="fb-typography-settings">
+																<FrontPreview fontProps={customTypography[item]} deviceType={deviceType} fontSize={true} />
+																<TextControl
+																	label={__('Typography Name', 'frontis-blocks')}
+																	value={customTypography[item]?.name}
+																	onChange={(value) => changeCustomTypoName(item, value)}
+																/>
+																<FB_SidebarTypography
+																	fontFamily={customTypography?.[item]?.fontFamily}
+																	onChangeFontFamily={(value) => onChangeCustomFontFamily(value, item)}
+																	fontSize={customTypography?.[item]?.fontSize}
+																	onChangeFontSize={(value) => onChangeCustomFontSize(value, item)}
+																	fontSizeUnits={customTypography?.[item]?.fontSizeUnit}
+																	onChangeFontSizeUnit={(value) => onChangeCustomFontSizeUnit(value, item)}
+																	fontWeight={customTypography?.[item]?.fontWeight}
+																	onChangeFontWeight={(value) => onChangeCustomFontWeight(value, item)}
+																	fontStyle={customTypography?.[item]?.fontStyle}
+																	onChangeFontStyle={(value) => onChangeCustomFontStyle(value, item)}
+																	textTransform={customTypography?.[item]?.textTransform}
+																	onChangeTextTransform={(value) => onChangeCustomTextTransform(value, item)}
+																	textDecoration={customTypography?.[item]?.textDecoration}
+																	onChangeTextDecoration={(value) => onChangeCustomTextDecoration(value, item)}
+																	letterSpacing={customTypography?.[item]?.letterSpacing}
+																	onChangeLetterSpacing={(value) => onChangeCustomLetterSpacing(value, item)}
+																	letterSpacingUnits={customTypography?.[item]?.letterSpacingUnit}
+																	onChangeLetterSpacingUnit={(value) => onChangeCustomLetterSpacingUnit(value, item)}
+																	lineHeight={customTypography?.[item]?.lineHeight}
+																	onChangeLineHeight={(value) => onChangeCustomLineHeight(value, item)}
+																	lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
+																	onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
+																	deviceType={deviceType}
+																/>
+															</div>
+														</NavigatorScreen>
+													</div>
+												))}
+											</NavigatorProvider>
+										)}
+									</div>
+								</div>
+							</>
+						)}
+					</div>
+				)}
+			</TabPanel>
+		</>
 	)
 }
 
 export default TypographySettings;
-
-
-// :root {
-// 	--fb-global-typography-body--font-size: "20px"
-// 	--fb-global-typography-body--font-weight: "500"
-// 	--fb-global-typography-body--font-transform: "default"
-// 	--fb-global-typography-body--font-decoration: "default"
-// 	--fb-global-typography-body--font-spacing: "inherit"
-// 	--fb-global-typography-body--font-line-height: "default"
-// }

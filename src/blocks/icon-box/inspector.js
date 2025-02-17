@@ -56,7 +56,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 
@@ -71,6 +72,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
 		headingFontFamily,
+		headingGlobalFontSize,
 		headingFontSize,
 		headingFontSizeUnits,
 		headingFontWeight,
@@ -2228,6 +2230,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
 			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
 			  ${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			  ${headingGlobalFontSize !== 'var(undefined)' && headingGlobalFontSize !== 'none' ? `font-size: ${headingGlobalFontSize};` : ''}
 			  ${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
 			  ${headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
 			  ${headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
@@ -2489,6 +2492,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Background_Color,
 			Alignment,
 			headingFontFamily,
+			headingGlobalFontSize,
 			headingFontSize,
 			headingFontSizeUnits,
 			headingFontWeight,
@@ -2740,6 +2744,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			iconBoxVRBottomOffsetUnits,
 		],
 	);
+
+	console.log(headingGlobalFontSize);
 
 	const customCss = getCustomCss(iconBoxCustomCSS, `.${blockID}`);
 
@@ -3383,6 +3389,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                 fontSizeUnits={headingFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+
+												globalFontSize={headingGlobalFontSize}
+												onChangeGlobalFontSize={(value) => setAttributes({ headingGlobalFontSize: value })}
 
                                                 fontWeight={headingFontWeight}
                                                 onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value })}
@@ -4124,24 +4133,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxDesktopSwitcher}
-														onChange={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxTabletSwitcher}
-														onChange={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={iconBoxMobileSwitcher}
-														onChange={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={iconBoxDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
+
+                                                        tabletValue={iconBoxTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
+
+                                                        mobileValue={iconBoxMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 
 												<PanelBody
