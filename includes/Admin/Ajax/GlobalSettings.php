@@ -14,6 +14,11 @@ class GlobalSettings extends AjaxBase
 
     use Singleton;
 
+    public function __construct() {
+        // Other initialization code...
+        add_action('wp_head', array($this, 'output_global_styles'), 999);
+        add_action('wp_enqueue_scripts', array($this, 'enqueue_google_fonts'));
+    }
     /**
      * register_global_settings_events
      *
@@ -430,8 +435,6 @@ class GlobalSettings extends AjaxBase
                 update_option('fb_global_styles', $custom_styles);
 
                 // Add action to output CSS in header if not already added
-
-                add_action('wp_head', array($this, 'output_global_styles'));
             }
 
             // Rest of your page import code...
