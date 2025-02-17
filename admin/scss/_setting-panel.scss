@@ -152,8 +152,10 @@
                         color: $primary-color;
                     }
                 }
+
             }
-            .components-button.fb-setting-background-color-setting-icon-btn{
+            .components-button.fb-setting-background-color-setting-icon-btn,
+            .components-button.fb-setting-color-setting-icon-btn{
 				height: auto;
                 padding: 6px;
 			}
