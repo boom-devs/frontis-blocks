@@ -6,34 +6,27 @@ export default function save({ attributes }) {
 	const {
 		blockID,
 		Heading_Text,
-		headingTag,
 		Alignment,
-		Sub_Heading_Switcher,
 		Sub_Heading_Text,
-
-		info_Button_Switcher,
-		info_Button_Text,
+		descriptionSwitcher,
+		Sub_Heading_Tag,
 		descAlignment,
 		buttonAlignment,
-		icon,
-
-		Sub_Heading_Tag,
-		subHeadingSwitcher,
-		subTitleAlignment,
-		subTitleTag,
-		subTitleText,
+		info_Button_Switcher,
+		info_Button_Link,
+		info_Button_Text,
 		btnIconPosition,
 		buttonIconSwitcher,
 		btnIcon,
 		btnTwoSwitcher,
-		btnTwoIconPosition,
-		btnTwoIcon,
-		buttonTwoIconSwitcher,
+		btnTwoLink,
 		btnTwoText,
+		btnTwoIconPosition,
+		buttonTwoIconSwitcher,
+		btnTwoIcon,
 		btnOneTargetUrl,
 		btnTwoTargetUrl,
-		info_Button_Link,
-		btnTwoLink,
+		ctaBtnOneSwitcher,
 
 		ctaGlobalWraperID,
 		ctaGlobalWraperClass,
@@ -53,23 +46,14 @@ export default function save({ attributes }) {
 				<div className={`fb-parent-wrapper fb-cta-content-wrapper ${blockID} ${ctaGlobalWraperClass}`} id={ctaGlobalWraperID}>
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
-							{subHeadingSwitcher && (
-								<RichText.Content
-									tagName={subTitleTag}
-									value={subTitleText}
-									placeholder={__("CTA Sub Heading", "frontis-block")}
-									className="fb-cta-sub-heading"
-									style={{ textAlign: subTitleAlignment }}
-								/>
-							)}
 							<RichText.Content
-								tagName={headingTag}
+								tagName="h2"
 								value={Heading_Text}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
 							/>
-							{Sub_Heading_Switcher && (
+							{descriptionSwitcher && (
 								<RichText.Content
 									tagName={Sub_Heading_Tag}
 									value={Sub_Heading_Text}
@@ -82,7 +66,7 @@ export default function save({ attributes }) {
 								className="fb-cta-buttons-wrapper"
 								style={{ justifyContent: buttonAlignment }}
 							>
-								{info_Button_Switcher && (
+								{ctaBtnOneSwitcher && (
 									<div className="fb-cta-btn-one-wrapper">
 										<div
 											className="fb-cta-btn-wrapper"
@@ -145,7 +129,6 @@ export default function save({ attributes }) {
 					</div>
 				</div>
 			</div>
-
 		</>
 	);
 }

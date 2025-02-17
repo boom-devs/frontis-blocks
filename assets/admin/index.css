@@ -947,7 +947,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.4;
   color: #555E72;
@@ -1114,7 +1114,7 @@
   gap: 14px;
 }
 .fb-block-card-link {
-  font-size: 14px;
+  font-size: 13px;
   color: #6A758E;
   text-decoration: none;
   display: inline-flex;
@@ -2072,7 +2072,7 @@
   flex: 1;
   color: #0B0C0E;
   font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.4;
   text-transform: capitalize !important;
@@ -2627,7 +2627,7 @@
   display: inline-block;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 14px;
   border: 1px solid transparent;
   border-radius: 0;
@@ -2668,24 +2668,24 @@
   height: 50px;
   margin-bottom: 10px;
   font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.4;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label, .fb-inspector-control .components-panel__body .components-base-control__field label {
   color: #0B0C0E;
   font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.4;
-  margin: 14px 0 10px 0;
+  margin: 10px 0;
   min-height: auto;
   text-transform: capitalize !important;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-text-control__input,
 .fb-inspector-control .components-panel__body .components-base-control__field .components-textarea-control__input {
   font-family: "Work Sans", sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   background: #F7F7F7;
   border: 1px solid #C3C8D2;
   color: #6A758E;
@@ -2706,9 +2706,9 @@
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-select-control__input {
   background: #F7F7F7;
-  height: unset;
+  height: 40px;
   border-radius: 8px;
-  padding: 12px;
+  padding: 0px 12px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-select-control__input:focus {
   outline: none;
