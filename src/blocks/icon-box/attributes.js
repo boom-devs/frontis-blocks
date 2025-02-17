@@ -225,74 +225,113 @@ const attributes = {
         type: "string",
         default: "Default",
     },
+    headingGlobalFontFamily: {
+        type: "string",
+        default: "none",
+    },
+
+    headingFontSize: {
+        type: "object",
+        default: {
+            Desktop: "24",
+            Tablet: "18",
+            Mobile: "16"
+        }
+    },
     headingGlobalFontSize: {
         type: "string",
         default: "none",
     },
-    headingFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '24',
-			Tablet: '18',
-			Mobile: '16'
-		}
-	},
-	headingFontSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-    headingFontWeight : {
+
+    headingFontSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
+    },
+
+    headingFontWeight: {
         type: "string",
         default: "600"
     },
-    headingFontStyle : {
+    headingGlobalFontWeight: {
+        type: "string",
+        default: "none"
+    },
+
+    headingFontStyle: {
         type: "string",
         default: ""
     },
-    headingTextTransform : {
+    headingGlobalFontStyle: {
+        type: "string",
+        default: "none"
+    },
+
+    headingTextTransform: {
         type: "string",
         default: ""
     },
-    headingTextDecoration : {
+    headingGlobalTextTransform: {
+        type: "string",
+        default: "none"
+    },
+
+    headingTextDecoration: {
         type: "string",
         default: ""
     },
+    headingGlobalTextDecoration: {
+        type: "string",
+        default: "none"
+    },
+
     headingLetterSpacing: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	headingLetterSpacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    headingGlobalLetterSpacing: {
+        type: "string",
+        default: "none"
+    },
+
+    headingLetterSpacingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
+    },
+
     headingLineHeight: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	headingLineHeightUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    headingGlobalLineHeight: {
+        type: "string",
+        default: "none"
+    },
+
+    headingLineHeightUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        }
+    },
+
     /** Heading Color **/
     Heading_Color_Switcher : {
         type: "string",
