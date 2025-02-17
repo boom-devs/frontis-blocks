@@ -3895,9 +3895,12 @@ var FB_Range = function FB_Range(_ref) {
     isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
     _ref$globalIcon = _ref.globalIcon,
     globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
-    globalTypographyType = _ref.globalTypographyType,
-    globalTypographyValue = _ref.globalTypographyValue,
-    setGlobalTypographyValue = _ref.setGlobalTypographyValue;
+    _ref$globalTypography = _ref.globalTypographyType,
+    globalTypographyType = _ref$globalTypography === void 0 ? null : _ref$globalTypography,
+    _ref$globalTypography2 = _ref.globalTypographyValue,
+    globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
+    _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3939,6 +3942,20 @@ var FB_Range = function FB_Range(_ref) {
       GB_TYPO.push({
         label: label,
         value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable, ")")
+      });
+    }
+    if (globalTypographyType === 'lineHeight') {
+      var _properties$lineHeigh;
+      GB_TYPO.push({
+        label: label,
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable, ")")
+      });
+    }
+    if (globalTypographyType === 'letterSpacing') {
+      var _properties$letterSpa;
+      GB_TYPO.push({
+        label: label,
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable, ")")
       });
     }
   });
@@ -3987,22 +4004,14 @@ var FB_Range = function FB_Range(_ref) {
         "aria-expanded": isOpen,
         className: "fb-setting-global-icon-btn ".concat(globalTypographyValue !== 'none' && 'global-active')
       }, /*#__PURE__*/React.createElement("svg", {
-        width: "19",
-        height: "19",
-        viewBox: "0 0 19 19",
-        fill: "none",
+        width: "16px",
+        height: "16px",
+        viewBox: "0 0 25 25",
         xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      })));
+      }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
+        "class": "st0",
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+      }))));
     },
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement("div", {
@@ -4011,6 +4020,7 @@ var FB_Range = function FB_Range(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Styles", "frontis-blocks"),
+        className: "fb-setting-global-typo-select",
         options: GB_TYPO,
         value: globalTypographyValue,
         onChange: handleGlobalTypographyValue
