@@ -111,9 +111,7 @@ var SiteImportModal = function SiteImportModal(_ref) {
     return /*#__PURE__*/React.createElement("div", {
       key: key,
       className: "fb-color-field"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "fb-label"
-    }, key.charAt(0).toUpperCase() + key.slice(1), " Color"), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("div", {
       className: "fb-color-inputs"
     }, /*#__PURE__*/React.createElement("input", {
       type: "color",
@@ -124,15 +122,6 @@ var SiteImportModal = function SiteImportModal(_ref) {
         });
       },
       className: "fb-color-picker"
-    }), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      value: value,
-      onChange: function onChange(e) {
-        return setColors(function (prev) {
-          return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, key, e.target.value));
-        });
-      },
-      className: "fb-text-input"
     })));
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-section"
@@ -215,7 +204,7 @@ var SiteImportModal = function SiteImportModal(_ref) {
   }, "Cancel"), /*#__PURE__*/React.createElement("button", {
     className: "button button-primary",
     onClick: handleImport
-  }, "Import Site"))), /*#__PURE__*/React.createElement("style", null, "\n          .fb-modal-overlay {\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(0, 0, 0, 0.5);\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            z-index: 160000;\n          }\n  \n          .fb-modal {\n            background: white;\n            border-radius: 3px;\n            max-width: 800px;\n            width: 90%;\n            max-height: 90vh;\n            overflow-y: auto;\n          }\n  \n          .fb-modal-header {\n            padding: 15px 20px;\n            border-bottom: 1px solid #ddd;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n          }\n  \n          .fb-modal-close {\n            border: none;\n            background: none;\n            font-size: 24px;\n            cursor: pointer;\n            padding: 0 5px;\n          }\n  \n          .fb-modal-content {\n            padding: 20px;\n          }\n  \n          .fb-section {\n            margin-bottom: 24px;\n          }\n  \n          .fb-color-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 16px;\n          }\n  \n          .fb-typography-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 16px;\n          }\n  \n          .fb-color-field {\n            margin-bottom: 12px;\n          }\n  \n          .fb-color-inputs {\n            display: flex;\n            gap: 8px;\n          }\n  \n          .fb-label {\n            display: block;\n            margin-bottom: 6px;\n          }\n  \n          .fb-color-picker {\n            width: 50px;\n            height: 30px;\n            padding: 0;\n          }\n  \n          .fb-text-input {\n            width: 100%;\n            height: 30px;\n            padding: 4px 8px;\n          }\n  \n          .fb-select {\n            width: 100%;\n            height: 30px;\n          }\n  \n          .fb-modal-footer {\n            padding: 15px 20px;\n            border-top: 1px solid #ddd;\n            display: flex;\n            justify-content: flex-end;\n            gap: 10px;\n          }\n        "));
+  }, "Import Site"))), /*#__PURE__*/React.createElement("style", null, "\n          .fb-modal-overlay {\n            position: fixed;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: rgba(0, 0, 0, 0.5);\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            z-index: 160000;\n          }\n  \n          .fb-modal {\n            background: white;\n            border-radius: 3px;\n            max-width: 800px;\n            width: 90%;\n            max-height: 90vh;\n            overflow-y: auto;\n          }\n  \n          .fb-modal-header {\n            padding: 15px 20px;\n            border-bottom: 1px solid #ddd;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n          }\n  \n          .fb-modal-close {\n            border: none;\n            background: none;\n            font-size: 24px;\n            cursor: pointer;\n            padding: 0 5px;\n          }\n  \n          .fb-modal-content {\n            padding: 20px;\n          }\n  \n          .fb-section {\n              margin-bottom: 24px;\n          }\n\n          .fb-color-grid {\n              display: flex;\n              gap: 8px;\n          }\n\n          .fb-color-field {\n              margin-bottom: 12px;\n              position: relative;\n          }\n\n          .fb-color-picker {\n              -webkit-appearance: none;\n              -moz-appearance: none;\n              appearance: none;\n              width: 40px;\n              height: 40px;\n              padding: 0;\n              border: none;\n              border-radius: 50% !important;\n              cursor: pointer;\n              background-color: transparent;\n          }\n\n          /* Style the color input */\n          .fb-color-picker::-webkit-color-swatch-wrapper {\n              padding: 0;\n          }\n\n          .fb-color-picker::-webkit-color-swatch {\n              border: none;\n              border-radius: 50%;\n          }\n\n          .fb-color-picker::-moz-color-swatch {\n              border: none;\n              border-radius: 50%;\n          }\n\n          /* Add hover effect */\n          .fb-color-picker:hover::before {\n              border-color: #999;\n          }\n\n          /* Add focus state */\n          .fb-color-picker:focus {\n              outline: none;\n          }\n\n          .fb-color-picker:focus::before {\n              border-color: #666;\n          }\n    \n          .fb-typography-grid {\n            display: grid;\n            grid-template-columns: repeat(2, 1fr);\n            gap: 16px;\n          }\n  \n          .fb-label {\n            display: block;\n            margin-bottom: 6px;\n          }\n  \n          .fb-text-input {\n            width: 100%;\n            height: 30px;\n            padding: 4px 8px;\n          }\n  \n          .fb-select {\n            width: 100%;\n            height: 30px;\n          }\n  \n          .fb-modal-footer {\n            padding: 15px 20px;\n            border-top: 1px solid #ddd;\n            display: flex;\n            justify-content: flex-end;\n            gap: 10px;\n          }\n        "));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteImportModal);
 
