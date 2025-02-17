@@ -58,7 +58,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 import './editor.scss';
 
@@ -1505,8 +1506,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingTextShadowCssValue ? `text-shadow: ${headingTextShadowCssValue};` : ''}
             ${headingTextStroke ? `
                 -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
-                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
-                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
                 text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeColor};
             ` : ''}
             ${headingBoxShadowCssValue ? `box-shadow: ${headingBoxShadowCssValue};` : ''}
@@ -1527,8 +1526,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
             ${headingTextStrokeHoverColor ? `
                 -webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
-                -moz-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
-                -ms-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
                 text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};
             ` : ''}
         }
@@ -1553,8 +1550,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingTextShadowCssValue ? `text-shadow: ${subHeadingTextShadowCssValue};` : ''}
             ${subHeadingTextStroke ? `
                 -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
-                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
-                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
                 text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeColor};
             ` : ''}
             ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
@@ -1567,8 +1562,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
             ${subHeadingTextStroke ? `
                 -webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
-                -moz-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
-                -ms-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
                 text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};
             ` : ''}
         }
@@ -1655,8 +1648,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 ${headingTextStroke ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
-                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
-                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
                     text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeColor};
                 ` : ''}
             }
@@ -1664,8 +1655,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
-                    -moz-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
-                    -ms-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                     text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1680,8 +1669,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingTabletBorderRadiusWidth ? `border-radius: ${subHeadingTabletBorderRadiusWidth};` : ''}
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
                     text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
@@ -1689,8 +1676,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                     text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1753,8 +1738,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingMobileBorderRadiusWidth ? `border-radius: ${headingMobileBorderRadiusWidth};` : ''}
                 ${headingTextStroke ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
-                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
-                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
                     text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeColor};
                 ` : ''}
             }
@@ -1762,8 +1745,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
                 ${headingTextStrokeHoverColor ? `
                     -webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
-                    -moz-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
-                    -ms-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                     text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -1778,16 +1759,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingMobileBorderRadiusWidth ? `border-radius: ${subHeadingMobileBorderRadiusWidth};` : ''}
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeColor};
                 ` : ''}
             }
             .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
                 ${subHeadingTextStroke ? `
                     -webkit-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
-                    -moz-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
-                    -ms-text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                     text-stroke: ${subHeadingTextStroke.Mobile}px ${subHeadingTextStrokeHoverColor};
                 ` : ''}
             }
@@ -3248,24 +3225,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedHeadingDesktopSwitcher}
-														onChange={(value) => setAttributes({ advancedHeadingDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedHeadingTabletSwitcher}
-														onChange={(value) => setAttributes({ advancedHeadingTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={advancedHeadingMobileSwitcher}
-														onChange={(value) => setAttributes({ advancedHeadingMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={advancedHeadingDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ advancedHeadingDesktopSwitcher: value })}
+
+                                                        tabletValue={advancedHeadingTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ advancedHeadingTabletSwitcher: value })}
+
+                                                        mobileValue={advancedHeadingMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ advancedHeadingMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
                                                 <PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}

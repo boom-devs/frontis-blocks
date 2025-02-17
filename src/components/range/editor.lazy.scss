@@ -4,6 +4,39 @@ $background_color: #dcdcde;
 $white_color: #ffffff;
 $border_color: #dddddd;
 
+.fb-setting-global-icon-wrapper{
+
+    .fb-setting-global-icon-btn{
+        fill: #3c434a;
+        border-radius: 0 6px 6px 0;
+        background-color: #F7F7F7;
+        padding: 6px;
+        border-left: 1px solid $white_color;
+        height: auto;
+
+        &:hover {
+            background-color: #DBEBFC !important;
+            fill: #4B9DEF;
+        }
+
+        &.global-active {
+            background-color: #DBEBFC;
+            fill: #4B9DEF;
+
+        }
+
+        svg {
+            fill: #3c434a;
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+.fb-unit-wrapper {
+    .fb-reset-button {
+        padding: 0;
+    }
+}
 // .fb-range-control {
 // 	.fb-range-control__mobile-controls {
 // 		display: flex;

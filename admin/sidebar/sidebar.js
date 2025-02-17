@@ -16,12 +16,14 @@ import { PanelColorSettings, } from "@wordpress/block-editor";
 import GradientColorPallet from './components/GradientColorPallet';
 import ColorPalletWrapper from './components/ColorPalletWrapper';
 import { useEffect, useState } from "@wordpress/element";
-import "./sidebar.scss";
+import {useDeviceType} from "@Config/displayType";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import { getFbLocalStorage, loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import TypographySettings from "./components/TypographySettings";
 import {frontisExtractTypoValue, getFontFamily} from "./components/GetTypographyValue";
+import generateCSSVariables from "./components/GenerateRootCss";
+import "./sidebar.scss";
 
 const defaultsColors = [
 	{
@@ -156,7 +158,7 @@ const gradientDefaults = [
 
 function FrontisBlocksSidebar(props) {
 
-	// Set state
+	let deviceType = useDeviceType();
 	const [customColors, setCustomColors] = useState([]);
 	const [activeTab, setActiveTab] = useState("solid");
 	const [gradientColors, setGradientColors] = useState([]);
@@ -174,6 +176,7 @@ function FrontisBlocksSidebar(props) {
 	// console.log("frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit")
 	// console.log(frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value)
 	// console.log(getFontFamily(globalTypographyElements?.typography?.fontFamily));
+
 	const [typography, setTypography] = useState({
 		body: {
 			fontFamily: 'Default',
@@ -615,7 +618,8 @@ function FrontisBlocksSidebar(props) {
 			'fb_custom_gradient_colors',
 			'fb_typography',
 			'fb_custom_typography',
-			'fb_fontfamilies'
+			'fb_fontfamilies',
+			'fb_globaltypo'
 		];
 
 		const handleUpdateState = async () => {
@@ -730,6 +734,25 @@ function FrontisBlocksSidebar(props) {
 							setFontfamilies(localStorageData);
 						}
 					}
+
+					// Add globaltypo
+					if (key === 'fb_globaltypo') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_globaltypo');
+
+							if(res.success) {
+								setTimeout(() => {
+									generateCSSVariables(res.data, deviceType);
+								}, 1000);
+								
+								localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
+							}
+						} else {
+							setTimeout(() => {
+								generateCSSVariables(localStorageData, deviceType);
+							}, 1000);
+						}
+					}
 				}
 			} catch (error) {
 				console.error("Error fetching global colors:", error);
@@ -840,7 +863,9 @@ function FrontisBlocksSidebar(props) {
 
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
+			
 			if (isAfterSave && fbGlobalSettingsLoading) {
+				console.log("Hello world")
 				try {
 					const settingsState = [
 						'fb_update_global_colors',
@@ -1071,8 +1096,7 @@ function FrontisBlocksSidebar(props) {
 											<p>Available fonts, typographic styles, application of those styles.</p>
 										</div>
 									</div>
-									<TypographySettings typography={typography} customTypography={customTypography} />
-
+									<TypographySettings typography={typography} customTypography={customTypography} isAfterSave={isAfterSave} />
 								</>
 							</NavigatorScreen>
 

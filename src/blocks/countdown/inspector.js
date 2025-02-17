@@ -38,8 +38,9 @@ import { Button } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import FB_AlignmentControl from '../../components/alignment-control';
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_AlignmentControl from '@Components/alignment-control';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -3805,38 +3806,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										/>
 										</PanelBody>
 										<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={countDownDesktopSwitcher}
-														onChange={(value) => setAttributes({ countDownDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={countDownTabletSwitcher}
-														onChange={(value) => setAttributes({ countDownTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={countDownMobileSwitcher}
-														onChange={(value) => setAttributes({ countDownMobileSwitcher: value })}
-													/>
-												</PanelBody>
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor  
-														value={countDownGlobalWraperCustomCSS}
-														onChangeValue={(value) => setAttributes({ countDownGlobalWraperCustomCSS: value })}
-													/>
-												</PanelBody>	
+											title={__("Responsive Control", "frontis-blocks")}
+											initialOpen={false}
+											className="fb-setting-responsive-control-wrapper"
+										>
+											<FB_VisibilityControl
+                                                desktopValue={countDownDesktopSwitcher}
+                                                setDesktopValue={(value) => setAttributes({ countDownDesktopSwitcher: value })}
+
+                                                tabletValue={countDownTabletSwitcher}
+                                                setTabletValue={(value) => setAttributes({ countDownTabletSwitcher: value })}
+
+                                                mobileValue={countDownMobileSwitcher}
+                                                setMobileValue={(value) => setAttributes({ countDownMobileSwitcher: value })}
+                                            />
+										</PanelBody>
+										<PanelBody
+											title={__("Custom CSS", "frontis-blocks")}
+											initialOpen={false}
+										>
+											<FB_CustomCSSEditor  
+												value={countDownGlobalWraperCustomCSS}
+												onChangeValue={(value) => setAttributes({ countDownGlobalWraperCustomCSS: value })}
+											/>
+										</PanelBody>	
 									</>
 								)}
 							</div>

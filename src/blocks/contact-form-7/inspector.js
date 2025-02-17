@@ -43,7 +43,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 import "./editor.scss";
@@ -3801,24 +3802,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={contactFormDesktopSwitcher}
-														onChange={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={contactFormTabletSwitcher}
-														onChange={(value) => setAttributes({ contactFormTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={contactFormMobileSwitcher}
-														onChange={(value) => setAttributes({ contactFormMobileSwitcher: value })}
-													/>
+													<FB_VisibilityControl
+                                                        desktopValue={contactFormDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
+
+                                                        tabletValue={contactFormTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ contactFormTabletSwitcher: value })}
+
+                                                        mobileValue={contactFormMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ contactFormMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
 												<PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}

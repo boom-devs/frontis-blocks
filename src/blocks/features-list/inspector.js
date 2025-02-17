@@ -17,7 +17,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
-import FB_PositionControl from '../../components/position-control/index.js';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 import { 
@@ -3039,24 +3040,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
 												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={featuresListDesktopSwitcher}
-														onChange={(value) => setAttributes({ featuresListDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={featuresListTabletSwitcher}
-														onChange={(value) => setAttributes({ featuresListTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={featuresListMobileSwitcher}
-														onChange={(value) => setAttributes({ featuresListMobileSwitcher: value })}
-													/>
+                                                    <FB_VisibilityControl
+                                                        desktopValue={featuresListDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ featuresListDesktopSwitcher: value })}
+
+                                                        tabletValue={featuresListTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ featuresListTabletSwitcher: value })}
+
+                                                        mobileValue={featuresListMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ featuresListMobileSwitcher: value })}
+                                                    />
 												</PanelBody>
                                                 <PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}

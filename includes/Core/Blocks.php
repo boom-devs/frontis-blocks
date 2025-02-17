@@ -77,7 +77,8 @@ class Blocks
 						'image_sizes' => Helper::get_image_sizes(),
 						'desktop_breakpoint' => 1200,
 						'tablet_breakpoint' => 1024,
-						'mobile_breakpoint' => 768
+						'mobile_breakpoint' => 768,
+						'global_typography' => get_option('fb_globaltypo')
 					];
 
 					$localize_array = array_merge($localize_array, $admin_localize_array);

@@ -30,6 +30,9 @@ const FB_TypographyControl = ({
 	onChangeFontSize,
 	fontSizeUnits,
 	onChangeFontSizeUnit,
+	globalFontSize = '',
+	onChangeGlobalFontSize = '',
+
     fontWeight,
     onChangeFontWeight,
     fontStyle,
@@ -81,6 +84,9 @@ const FB_TypographyControl = ({
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
 	};
+	const handleGlobalFontSizeChange = (globalFontSize) => {
+		onChangeGlobalFontSize(globalFontSize);
+	};
 
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
 		onChangeFontSizeUnit(newFontSizeUnit);
@@ -117,6 +123,13 @@ const FB_TypographyControl = ({
     const handleLineHeightUnitChange = (newLineHeightUnit) => {
         onChangeLineHeightUnit(newLineHeightUnit);
     };
+
+    const globalTypo = FrontisBlocksData.global_typography;
+    // console.log(globalTypo)
+
+    Object.entries(globalTypo).forEach(([label, properties]) => {
+        // console.log(label);
+    });
 
     return (
         <BaseControl
@@ -168,6 +181,10 @@ const FB_TypographyControl = ({
 								setAttributes={setAttributes}
 								rangeStep={1}
 								resetFallbackValue={''}
+                                globalIcon={true}
+                                globalTypographyType={'fontSize'}
+                                globalTypographyValue={globalFontSize}
+                                setGlobalTypographyValue={handleGlobalFontSizeChange}
 							/>
                             <SelectControl
                                 label={__("Font Weight", "frontis-blocks")}
