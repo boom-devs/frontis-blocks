@@ -3895,7 +3895,9 @@ var FB_Range = function FB_Range(_ref) {
     isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
     _ref$globalIcon = _ref.globalIcon,
     globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
-    globalTypographyType = _ref.globalTypographyType;
+    globalTypographyType = _ref.globalTypographyType,
+    globalTypographyValue = _ref.globalTypographyValue,
+    setGlobalTypographyValue = _ref.setGlobalTypographyValue;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3920,16 +3922,23 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+  var handleGlobalTypographyValue = function handleGlobalTypographyValue(value) {
+    setGlobalTypographyValue(value);
+  };
   var globalTypo = FrontisBlocksData.global_typography;
-  var GB_TYPO = [];
+  var GB_TYPO = [{
+    label: 'None',
+    value: 'none'
+  }];
   Object.entries(globalTypo).forEach(function (_ref2) {
     var _ref3 = _slicedToArray(_ref2, 2),
       label = _ref3[0],
       properties = _ref3[1];
     if (globalTypographyType === 'fontSize') {
+      var _properties$fontSize;
       GB_TYPO.push({
         label: label,
-        value: properties.fontSize
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable, ")")
       });
     }
   });
@@ -3943,48 +3952,6 @@ var FB_Range = function FB_Range(_ref) {
   }, /*#__PURE__*/React.createElement(_Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
     labelText: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)(label, 'frontis-blocks'),
     device: deviceType
-  }), globalIcon === true && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-    className: "fb-setting-global-typo-setting-icon-dropdown",
-    contentClassName: "fb-setting-global-typo-setting-icon-dropdown-content",
-    popoverProps: {
-      placement: 'bottom-start'
-    },
-    renderToggle: function renderToggle(_ref4) {
-      var isOpen = _ref4.isOpen,
-        onToggle = _ref4.onToggle;
-      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        variant: "primary",
-        onClick: onToggle,
-        "aria-expanded": isOpen,
-        className: "fb-setting-global-typo-setting-icon-btn"
-      }, /*#__PURE__*/React.createElement("svg", {
-        width: "19",
-        height: "19",
-        viewBox: "0 0 19 19",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      })));
-    },
-    renderContent: function renderContent() {
-      return /*#__PURE__*/React.createElement("div", {
-        className: "fb-setting-global-typo-popup-wrapper"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Select", "frontis-blocks"),
-        options: GB_TYPO
-        // value={fontWeight}
-        // onChange={handleFontWeightChange}
-      }));
-    }
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-unit-wrapper"
   }, rangeValue[deviceType] && /*#__PURE__*/React.createElement("div", {
@@ -4005,6 +3972,50 @@ var FB_Range = function FB_Range(_ref) {
     currentUnit: units[deviceType],
     unitTypes: units_types_arr,
     onUnitChange: setRangeUnit
+  }), globalIcon === true && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
+    className: "fb-setting-global-icon-wrapper",
+    contentClassName: "fb-setting-global-icon-content",
+    popoverProps: {
+      placement: 'bottom-start'
+    },
+    renderToggle: function renderToggle(_ref4) {
+      var isOpen = _ref4.isOpen,
+        onToggle = _ref4.onToggle;
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "fb-setting-global-icon-btn ".concat(globalTypographyValue !== 'none' && 'global-active')
+      }, /*#__PURE__*/React.createElement("svg", {
+        width: "19",
+        height: "19",
+        viewBox: "0 0 19 19",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
+        stroke: "black",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      })));
+    },
+    renderContent: function renderContent() {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "fb-setting-typography-popup"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.BaseControl, {
+        className: "fb-setting-typography-popup-inner"
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Styles", "frontis-blocks"),
+        options: GB_TYPO,
+        value: globalTypographyValue,
+        onChange: handleGlobalTypographyValue
+      })));
+    }
   }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl
   // value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
   , {
