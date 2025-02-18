@@ -1,22 +1,35 @@
 import React from 'react';
 
-export default function LayoutGrid({ data, index, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize }) {
-    const src = data.fb_featured_image_src[postImageSize][0];
+export default function LayoutGrid({ 
+    data, 
+    index,
+    postTitleTag, 
+    postDescriptionTag, 
+    postDescriptionExcerptLength, 
+    showExcerptSwitcher,
+    showAuthorSwitcher, 
+    showCategorySwitcher, 
+    showTagSwitcher, 
+    postAuthorPrefixSwitcher,
+    postAuthorPrefix,
+    showDateSwitcher, 
+    postAuthorAvatarSwitcher,
+    postImageSize,
+    defaultImageUrl }) {
+    const src = data.fb_featured_image_src?.[postImageSize]?.[0] || defaultImageUrl;
     const author = data.fb_author_info;
     const title = data.title.rendered;
     const categories = data.fb_category_info;
     const tags = data.fb_post_tag_info;
-    const excerpt = trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10);
+    const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';    
     
     return (
         <div className="fb_post_grid_wrapper">
             <div className="fb_post_grid_image_wrapper">
                 <div className="fb_post_grid_image">
-                    {src ? (
-                        <img src={src} alt="" />
-                    ) : (
-                        <img src="https://placehold.co/600x400/000000/FFFFFF/png" alt="Placeholder" />
-                    )}
+                    <a href={data.link}>
+                        <img src={src} alt={title || "Post image"} />
+                    </a>
                 </div>
             </div>
 

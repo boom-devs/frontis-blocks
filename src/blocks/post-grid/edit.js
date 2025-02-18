@@ -33,6 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		postTitleTag,
 		postDescriptionTag,
         postDescriptionExcerptLength,
+        showExcerptSwitcher,
         showAuthorSwitcher,
         showCategorySwitcher,
         showTagSwitcher,
@@ -55,6 +56,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
     });
+
+    let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+	}
 
     const { useSelect } = wp.data;
 
@@ -111,6 +117,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     postTitleTag={postTitleTag}
                                     postDescriptionTag={postDescriptionTag}
                                     postDescriptionExcerptLength={postDescriptionExcerptLength}
+                                    showExcerptSwitcher={showExcerptSwitcher}
                                     showAuthorSwitcher={showAuthorSwitcher}
                                     showCategorySwitcher={showCategorySwitcher}
                                     showTagSwitcher={showTagSwitcher}
@@ -119,6 +126,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     showDateSwitcher={showDateSwitcher}
                                     postAuthorAvatarSwitcher={postAuthorAvatarSwitcher}
                                     postImageSize={postImageSize}
+                                    defaultImageUrl={defaultImageUrl}
                                 />
                             })}
                         </div>
