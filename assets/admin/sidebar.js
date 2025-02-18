@@ -3953,21 +3953,6 @@ var FB_Range = function FB_Range(_ref) {
       name: customTypoData[key].name
     };
   });
-
-  // Object.entries(globalTypo).forEach(([label, properties]) => {
-
-  // 	if(globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
-
-  // 		GB_TYPO.push({ label: label, value: `var(${properties?.fontSize?.variable})` });
-  // 	}
-  // 	if(globalTypographyType === 'lineHeight' && properties?.lineHeight?.variable !== undefined) {
-  // 		GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
-  // 	}
-  // 	if(globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
-  // 		GB_TYPO.push({ label: label, value: `var(${properties?.letterSpacing?.variable})` });
-  // 	}
-  // });
-
   Object.entries(globalTypo).forEach(function (_ref2) {
     var _properties$fontSize, _properties$lineHeigh, _properties$letterSpa;
     var _ref3 = _slicedToArray(_ref2, 2),
@@ -4002,7 +3987,6 @@ var FB_Range = function FB_Range(_ref) {
       item.label = matchedTypo.name;
     }
   });
-  console.log(GB_TYPO);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {

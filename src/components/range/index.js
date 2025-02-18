@@ -67,21 +67,6 @@ const FB_Range = ({
 	}));
 
 
-    // Object.entries(globalTypo).forEach(([label, properties]) => {
-
-	// 	if(globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
-			
-
-	// 		GB_TYPO.push({ label: label, value: `var(${properties?.fontSize?.variable})` });
-	// 	}
-	// 	if(globalTypographyType === 'lineHeight' && properties?.lineHeight?.variable !== undefined) {
-	// 		GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
-	// 	}
-	// 	if(globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
-	// 		GB_TYPO.push({ label: label, value: `var(${properties?.letterSpacing?.variable})` });
-	// 	}
-	// });
-
 	Object.entries(globalTypo).forEach(([label, properties]) => {
 		let updatedValue = null;
 	
@@ -120,7 +105,6 @@ const FB_Range = ({
 		}
 	});
 	
-	console.log(GB_TYPO);
 
 
 	return (
