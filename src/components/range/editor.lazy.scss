@@ -14,6 +14,10 @@ $border_color: #dddddd;
         border-left: 1px solid $white_color;
         height: auto;
 
+        &:active:not(:disabled){
+            background-color: #DBEBFC;
+            border-color: $white_color;
+        }
         &:hover {
             background-color: #DBEBFC !important;
             

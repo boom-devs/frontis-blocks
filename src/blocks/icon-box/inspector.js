@@ -2236,16 +2236,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
 			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
-			  ${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
-			  ${headingGlobalFontSize !== 'var(undefined)' && headingGlobalFontSize !== 'none' ? `font-size: ${headingGlobalFontSize};` : ''}
-			  ${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
-			  ${headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
-			  ${headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
-			  ${headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
-			  ${headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
-			  ${headingGlobalLetterSpacing !== 'var(undefined)' && headingGlobalLetterSpacing !== 'none' ? `letter-spacing: ${headingGlobalLetterSpacing};` : ''}
-			  ${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
-			  ${headingGlobalLineHeight !== 'var(undefined)' && headingGlobalLineHeight !== 'none' ? `line-height: ${headingGlobalLineHeight};` : ''}
+			  ${headingGlobalFontSize === 'none' && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			  ${headingGlobalFontWeight === 'none' && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
+			  ${headingGlobalFontStyle === 'none' && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
+			  ${headingGlobalTextTransform === 'none' && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
+			  ${headingGlobalTextDecoration === 'none' && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
+			  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
+			  ${headingGlobalLineHeight === 'none' && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
+			  ${headingGlobalFontSize !== 'none' ? `font-size: ${headingGlobalFontSize};` : ''}
+			  ${headingGlobalFontWeight !== 'none' ? `font-weight: ${headingGlobalFontWeight};` : ''}
+			  ${headingGlobalFontStyle !== 'none' ? `font-style: ${headingGlobalFontStyle};` : ''}
+			  ${headingGlobalTextTransform !== 'none' ? `text-transform: ${headingGlobalTextTransform};` : ''}
+			  ${headingGlobalTextDecoration !== 'none' ? `text-decoration: ${headingGlobalTextDecoration};` : ''}
+			  ${headingGlobalLetterSpacing !== 'none' ? `letter-spacing: ${headingGlobalLetterSpacing};` : ''}
+			  ${headingGlobalLineHeight !== 'none' ? `line-height: ${headingGlobalLineHeight};` : ''}
 			  padding: ${headingPaddingDesktopWidthValue};
 			  margin: ${headingMarginDesktopWidthValue};
 			  ${Heading_Border !== undefined ? `border-style: ${Heading_Border};` : ''}
@@ -2264,9 +2268,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	  
 		  @media only screen and (max-width: 1024px) {
 			  .fb-icon-box-wrapper.${blockID} .fb-heading {
-				  ${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
-                  ${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
-                  ${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
+				  ${headingGlobalFontSize === 'none' && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+                  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+                  ${headingGlobalLineHeight === 'none' && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
 				  padding: ${headingPaddingTabWidthValue};
 				  margin: ${headingMarginTabWidthValue};
 				  ${headingBorderTabWidthValue !== undefined ? `border-width: ${headingBorderTabWidthValue};` : ''}
@@ -2275,9 +2279,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 		  @media only screen and (max-width: 724px) {
 			  .fb-icon-box-wrapper.${blockID} .fb-heading {
-				  ${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
-                  ${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
-                  ${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
+				  ${headingGlobalFontSize === 'none' && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+                  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+                  ${headingGlobalLineHeight === 'none' && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
 				  padding: ${headingPaddingMobileWidthValue};
 				  margin: ${headingMarginMobileWidthValue};
 				  ${headingBorderMobileWidthValue !== undefined ? `border-width: ${headingBorderMobileWidthValue};` : ''}

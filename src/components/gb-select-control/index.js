@@ -31,16 +31,16 @@ const FB_GBSelectControl = ({
 
     Object.entries(globalTypo).forEach(([label, properties]) => {
 
-		if(globalTypographyType === 'fontWeight') {
+		if(globalTypographyType === 'fontWeight' && properties?.fontWeight?.variable !== undefined) {
 			GB_TYPO.push({ label: label, value: `var(${properties?.fontWeight?.variable})` });
 		}
-		if(globalTypographyType === 'fontStyle') {
+		if(globalTypographyType === 'fontStyle' && properties?.fontStyle?.variable !== undefined) {
 			GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
 		}
-		if(globalTypographyType === 'textDecoration') {
+		if(globalTypographyType === 'textDecoration' && properties?.textDecoration?.variable !== undefined) {
 			GB_TYPO.push({ label: label, value: `var(${properties?.textDecoration?.variable})` });
 		}
-		if(globalTypographyType === 'textTransform') {
+		if(globalTypographyType === 'textTransform' && properties?.textTransform?.variable !== undefined) {
 			GB_TYPO.push({ label: label, value: `var(${properties?.textTransform?.variable})` });
 		}
 	});
@@ -51,13 +51,10 @@ const FB_GBSelectControl = ({
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
 				<div className="fb-setting-spacing-label-container">
-					<BaseControl
-						label={label}
-					>
-					</BaseControl>
+					<span className="fb-setting-gb-select-control-label">{label}</span>
 					<div className="fb-unit-wrapper">
 						{globalIcon === true && <Dropdown
-								className="fb-setting-global-icon-wrapper"
+								className="fb-setting-global-icon-wrapper gb-select-control"
 								contentClassName="fb-setting-global-icon-content"
 								popoverProps={{ placement: 'bottom-start' }}
 								renderToggle={({ isOpen, onToggle }) => (
