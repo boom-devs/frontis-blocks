@@ -399,7 +399,7 @@ const attributes = {
 	/** Start Image */
 	postImageSize: {
 		type: "string",
-		default: "large",
+		default: "medium",
 	},
 	postImageWidth: {
 		type: "object",
@@ -420,17 +420,17 @@ const attributes = {
 	postImageHeight: {
 		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '400',
+			Tablet: '300',
+			Mobile: '200'
 		}
 	},
 	postImageHeightUnits: {
 		type: "object",
 		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%'
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
 	postImageBorder: {
@@ -1414,6 +1414,10 @@ const attributes = {
 
 	/** Start Author */
 	showAuthorSwitcher: {
+		type: "boolean",
+		default: true
+	},
+	showExcerptSwitcher: {
 		type: "boolean",
 		default: true
 	},
