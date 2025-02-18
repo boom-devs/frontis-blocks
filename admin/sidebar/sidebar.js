@@ -24,6 +24,7 @@ import TypographySettings from "./components/TypographySettings";
 import {frontisExtractTypoValue, getFontFamily} from "./components/GetTypographyValue";
 import generateCSSVariables from "./components/GenerateRootCss";
 import "./sidebar.scss";
+import FrontisColorPanel from "./components/Colorpanel";
 
 const defaultsColors = [
 	{
@@ -166,7 +167,7 @@ function FrontisBlocksSidebar(props) {
 	const [globalColors, setGlobalColors] = useState([]);
 	const [customCSS, setCustomCSS] = useState('');
 	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
-	
+
 	// const globalTypographyElements = frontisBlocksAdmin?.global_styles;
 	// const globalTypography = globalTypographyElements?.elements;
 
@@ -744,7 +745,7 @@ function FrontisBlocksSidebar(props) {
 								setTimeout(() => {
 									generateCSSVariables(res.data, deviceType);
 								}, 1000);
-								
+
 								localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
 							}
 						} else {
@@ -763,6 +764,12 @@ function FrontisBlocksSidebar(props) {
 
 	}, []);
 
+
+	let customTypographydata = localStorage.getItem("fb_custom_typography");
+
+	if(customTypographydata) {
+		console.log(customTypographydata);
+	}
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
 			return [];
@@ -863,7 +870,7 @@ function FrontisBlocksSidebar(props) {
 
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
-			
+
 			if (isAfterSave && fbGlobalSettingsLoading) {
 				console.log("Hello world")
 				try {
@@ -1116,6 +1123,7 @@ function FrontisBlocksSidebar(props) {
 											<p>Available texts, links, Button, Headings global colors</p>
 										</div>
 									</div>
+									<FrontisColorPanel />
 									<PanelColorSettings
 										title={__("Colors", "frontis-blocks")}
 										className={"fb-color-panel fb-global-color-panel"}
