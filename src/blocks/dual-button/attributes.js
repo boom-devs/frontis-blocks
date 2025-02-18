@@ -336,8 +336,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '12',
+			Mobile: '11'
 		}
 	},
 	connectorFontSizeUnits: {
@@ -383,9 +383,9 @@ const attributes = {
 	connectorLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '35',
-			Tablet: '35',
-			Mobile: '35'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	connectorLineHeightUnits: {
@@ -421,9 +421,9 @@ const attributes = {
 	connectorSize: {
 		type: "object",
 		default: {
-			Desktop: 35,
-			Tablet: 25,
-			Mobile: 15,
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
 		},
 	},
 	connectorSizeUnits: {

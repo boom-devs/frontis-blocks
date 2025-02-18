@@ -2194,15 +2194,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 			${connectorFontSize.Tablet && connectorFontSizeUnits.Tablet ? `font-size: ${connectorFontSize.Tablet}${connectorFontSizeUnits.Tablet};` : ''}
 			${connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
-			${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : ''}
-            width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
-        	height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};
+			${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : '1.3'}
+            ${connectorSize.Tablet && connectorSizeUnits.Tablet ? `width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};` : ''}
 			border-width: ${connectorTabletBorderWidth};
 			border-radius: ${connectorTabletBorderRadius};
         }
-		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-			width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};
-		}
+		
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
             ${iconTabletBorderWidth ? `border-width: ${iconTabletBorderWidth};` : "" }
             ${iconTabletBorderRadius ? `border-radius: ${iconTabletBorderRadius};` : "" }
@@ -2247,9 +2244,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 			${connectorFontSize.Mobile && connectorFontSizeUnits.Mobile ? `font-size: ${connectorFontSize.Mobile}${connectorFontSizeUnits.Mobile};` : ''}
 			${connectorLetterSpacing.Mobile && connectorLetterSpacingUnits.Mobile ? `letter-spacing: ${connectorLetterSpacing.Mobile}${connectorLetterSpacingUnits.Mobile};` : ''}
-			${connectorLineHeight.Mobile && connectorLineHeightUnits.Mobile ? `line-height: ${connectorLineHeight.Mobile}${connectorLineHeightUnits.Mobile};` : ''}
-            width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
-            height: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};
+			${connectorLineHeight.Mobile && connectorLineHeightUnits.Mobile ? `line-height: ${connectorLineHeight.Mobile}${connectorLineHeightUnits.Mobile};` : '1.3'}
+			${connectorSize.Mobile && connectorSizeUnits.Mobile ? `width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};` : ''}
 			border-width: ${connectorMobileBorderWidth};
 			border-radius: ${connectorMobileBorderRadius};
         }
