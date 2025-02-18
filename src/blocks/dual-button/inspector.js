@@ -540,9 +540,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '10',
 				},
 				ButtonWidth: {
-					Desktop: '15',
-					Tablet: '15',
-					Mobile: '15'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
             },
 			"preset-5": {
