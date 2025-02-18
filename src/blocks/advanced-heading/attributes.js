@@ -1239,7 +1239,7 @@ const attributes = {
     advancedHeadingMobileSwitcher: {
         type: "boolean",
         default: false,
-    },
+    }, 
     advancedHeadingCustomCSS : {
         type: "string",
         default: "",

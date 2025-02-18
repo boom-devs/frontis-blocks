@@ -26,7 +26,7 @@
             box-shadow: none;
             cursor: pointer;
             height: 46px;
-            padding: 10px 16px;
+            padding: 10px 14px;
             &.general,
             &.styles,
             &.advance,
@@ -152,8 +152,10 @@
                         color: $primary-color;
                     }
                 }
+
             }
-            .components-button.fb-setting-background-color-setting-icon-btn{
+            .components-button.fb-setting-background-color-setting-icon-btn,
+            .components-button.fb-setting-color-setting-icon-btn{
 				height: auto;
                 padding: 6px;
 			}

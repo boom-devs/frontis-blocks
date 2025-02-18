@@ -26,26 +26,50 @@ const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
     fontFamily,
 	onChangeFontFamily,
+    globalFontFamily = '',
+	onChangeGlobalFontFamily = '',
+
 	fontSize,
 	onChangeFontSize,
 	fontSizeUnits,
 	onChangeFontSizeUnit,
+	globalFontSize = '',
+	onChangeGlobalFontSize = '',
+
     fontWeight,
     onChangeFontWeight,
+    globalFontWeight = '',
+	onChangeGlobalFontWeight = '',
+
     fontStyle,
     onChangeFontStyle,
+    globalFontStyle = '',
+	onChangeGlobalFontStyle = '',
+
     textTransform,
     onChangeTextTransform,
+    globalTextTransform = '',
+	onChangeGlobalTextTransform = '',
+
     textDecoration,
     onChangeTextDecoration,
+    globalTextDecoration = '',
+	onChangeGlobalTextDecoration = '',
+
     letterSpacing,
 	onChangeLetterSpacing,
+    globalLetterSpacing = '',
+	onChangeGlobalLetterSpacing = '',
 	letterSpacingUnits,
 	onChangeLetterSpacingUnit,
+
     lineHeight,
 	onChangeLineHeight,
+    globalLineHeight = '',
+	onChangeGlobalLineHeight = '',
 	lineHeightUnits,
 	onChangeLineHeightUnit,
+
     deviceType,
     setAttributes,
 }) => {
@@ -78,8 +102,15 @@ const FB_TypographyControl = ({
     //     }
 	// };
 
+	const handleGlobalFontFamilyChange = (newFontSize) => {
+		onChangeGlobalFontFamily(newFontSize);
+	};
+
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
+	};
+	const handleGlobalFontSizeChange = (globalFontSize) => {
+		onChangeGlobalFontSize(globalFontSize);
 	};
 
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
@@ -90,20 +121,40 @@ const FB_TypographyControl = ({
 		onChangeFontWeight(newFontWeight);
 	};
 
+	const handleGlobalFontWeightChange = (globalFontWeight) => {
+		onChangeGlobalFontWeight(globalFontWeight);
+	};
+
     const handleFontStyleChange = (newFontStyle) => {
 		onChangeFontStyle(newFontStyle);
+	};
+
+    const handleGlobalFontStyleChange = (globalFontStyle) => {
+		onChangeGlobalFontStyle(globalFontStyle);
 	};
 
     const handleTextTransformChange = (newTextTransform) => {
 		onChangeTextTransform(newTextTransform);
 	};
 
+    const handleGlobalTextTransformChange = (globalTextTransform) => {
+		onChangeGlobalTextTransform(globalTextTransform);
+	};
+
     const handleTextDecorationChange = (newTextDecoration) => {
 		onChangeTextDecoration(newTextDecoration);
 	};
 
+    const handleGlobalTextDecorationChange = (globalTextDecoration) => {
+		onChangeGlobalTextDecoration(globalTextDecoration);
+	};
+
     const handleLetterSpacingChange = (newLetterSpacing) => {
         onChangeLetterSpacing(newLetterSpacing);
+    };
+
+    const handleGlobalLetterSpacingChange = (globalLetterSpacing) => {
+        onChangeGlobalLetterSpacing(globalLetterSpacing);
     };
 
     const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
@@ -112,6 +163,10 @@ const FB_TypographyControl = ({
     
     const handleLineHeightChange = (newLineHeight) => {
         onChangeLineHeight(newLineHeight);
+    };
+
+    const handleGlobalLineHeightChange = (globalLineHeight) => {
+        onChangeGlobalLineHeight(globalLineHeight);
     };
 
     const handleLineHeightUnitChange = (newLineHeightUnit) => {
@@ -177,6 +232,8 @@ const FB_TypographyControl = ({
 								resetFallbackValue={''}
                                 globalIcon={true}
                                 globalTypographyType={'fontSize'}
+                                globalTypographyValue={globalFontSize}
+                                setGlobalTypographyValue={handleGlobalFontSizeChange}
 							/>
                             <SelectControl
                                 label={__("Font Weight", "frontis-blocks")}
@@ -214,6 +271,10 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
+                                globalIcon={true}
+                                globalTypographyType={'letterSpacing'}
+                                globalTypographyValue={globalLetterSpacing}
+                                setGlobalTypographyValue={handleGlobalLetterSpacingChange}
                             />
                             <FB_Range
                                 min={0}
@@ -227,6 +288,10 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
+                                globalIcon={true}
+                                globalTypographyType={'lineHeight'}
+                                globalTypographyValue={globalLineHeight}
+                                setGlobalTypographyValue={handleGlobalLineHeightChange}
                             />
                         </BaseControl>
                     </div>
