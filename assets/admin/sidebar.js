@@ -3959,7 +3959,6 @@ var FB_Range = function FB_Range(_ref) {
       });
     }
   });
-  console.log(GB_TYPO);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {

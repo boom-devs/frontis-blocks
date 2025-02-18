@@ -21,6 +21,7 @@ import {
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.lazy.scss';
+import FB_GBSelectControl from '@Components/gb-select-control';
 
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
@@ -241,6 +242,18 @@ const FB_TypographyControl = ({
                                 value={fontWeight}
                                 onChange={handleFontWeightChange}
                             />
+
+                            <FB_GBSelectControl
+                                label={__("Font Weight", "frontis-blocks")}
+                                controlOptions={FONT_STYLE}
+                                selectValue={fontStyle}
+                                setSelectValue={handleFontStyleChange}
+                                globalIcon={true}
+                                globalTypographyType={'fontWeight'}
+                                globalTypographyValue={globalFontWeight}
+                                setGlobalTypographyValue={handleGlobalFontWeightChange}
+                            />
+                            
                             <SelectControl
                                 label={__("Font Style", "frontis-blocks")}
                                 options={FONT_STYLE}
