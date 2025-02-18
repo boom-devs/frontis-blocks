@@ -12,6 +12,7 @@ class GenerateGlobalTypography {
 		self::enqueue_fonts();
 
 		$global_typography = get_option('fb_globaltypo');
+
 		if($global_typography) {
 			// add_action('wp_enqueue_scripts', self::enqueue_google_fonts($global_typography));
 			add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_google_fonts']);

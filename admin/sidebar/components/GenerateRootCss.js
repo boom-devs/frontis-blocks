@@ -158,10 +158,6 @@ const generateCSSVariables = (data, deviceType) => {
         });
     });
 
-
-    console.log("paragraphStyles paragraphStyles")
-    console.log(paragraphStyles)
-
     if(paragraphStyles === '') {
         return false;
     }
@@ -172,10 +168,9 @@ const generateCSSVariables = (data, deviceType) => {
     let headingGrouped = '';
     let allCombinedStyles = '';
     let styles = '';
-    console.log(fileName === 'post.php')
-    if(fileName === 'post.php') {
 
-        console.log(deviceType);
+    if(fileName === 'post.php') {
+        
         // Apply individual styles for each heading (h1, h2, h3, etc.)
         if(deviceType !== 'Desktop') {
             headingGrouped = `
