@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postTitleTag = parentElement.getAttribute("data-post-title-tag");
 				const postDescriptionTag = parentElement.getAttribute("data-post-description-tag");
 				const postDescriptionExcerptLength = parentElement.getAttribute("data-post-description-excerpt-length");
+				const showExcerptSwitcher = parentElement.getAttribute("data-show-excerpt-switcher");
 
 				const showAuthorSwitcher = parentElement.getAttribute("data-show-author-switcher");
 				const showCategorySwitcher = parentElement.getAttribute("data-show-category-switcher");
@@ -57,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
 				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
 				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
 
+				const defaultImageUrl = parentElement.getAttribute("data-default-image-url");
+
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
 
@@ -73,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postTitleTag = postTitleTag ? postTitleTag : 'h3';
 				filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
 				filterPost.postDescriptionExcerptLength = postDescriptionExcerptLength ? postDescriptionExcerptLength : 10;
+				filterPost.showExcerptSwitcher = showExcerptSwitcher ? showExcerptSwitcher : true;
 
 				filterPost.showAuthorSwitcher = showAuthorSwitcher ? showAuthorSwitcher : false;
 				filterPost.showCategorySwitcher = showCategorySwitcher ? showCategorySwitcher : false;
@@ -93,9 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
+				filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
+
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
 
 				if (loadMoreIconAlign === 'icon') {
 					document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
@@ -117,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		filterPost.category = cat ? cat.split(',') : [];
@@ -137,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.postTitleTag = postTitleTag ? postTitleTag : 'h3';
 		filterPost.postDescriptionTag = postDescriptionTag ? postDescriptionTag : 'p';
 		filterPost.postDescriptionExcerptLength = postDescriptionExcerptLength ? postDescriptionExcerptLength : 10;
+		filterPost.showExcerptSwitcher = showExcerptSwitcher ? showExcerptSwitcher : true;
 
 		filterPost.postAuthorPrefixSwitcher = postAuthorPrefixSwitcher ? postAuthorPrefixSwitcher : false;
 		filterPost.postAuthorPrefix = postAuthorPrefix ? postAuthorPrefix : 'Posted By';
@@ -151,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
 		filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 		filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
+
+		filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
 
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
@@ -233,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size'), block.getAttribute('data-show-load-more-switcher'), block.getAttribute('data-load-more-text'), block.getAttribute('data-load-more-icon'), block.getAttribute('data-load-more-icon-align')); 
+		loadMorePosts(block.getAttribute('data-post-type'), block.getAttribute('data-block-id'), block.getAttribute('data-cat'), block.getAttribute('data-perpage'), block.getAttribute('data-orderby'), block.getAttribute('data-sortorder'), block.getAttribute('data-tag'), block.getAttribute('data-author'), block.getAttribute('data-deauthor'), block.getAttribute('data-detag'), block.getAttribute('data-decat'), block.getAttribute('data-post-title-tag'), block.getAttribute('data-post-description-tag'), block.getAttribute('data-post-description-excerpt-length'), block.getAttribute('data-show-excerpt-switcher'), block.getAttribute('data-show-author-switcher'), block.getAttribute('data-show-category-switcher'), block.getAttribute('data-show-tag-switcher'), block.getAttribute('data-post-author-prefix-switcher'), block.getAttribute('data-post-author-prefix'), block.getAttribute('data-show-date-switcher'), block.getAttribute('data-post-author-avatar-switcher'), block.getAttribute('data-post-image-size'), block.getAttribute('data-show-load-more-switcher'), block.getAttribute('data-load-more-text'), block.getAttribute('data-load-more-icon'), block.getAttribute('data-load-more-icon-align'), block.getAttribute('data-default-image-url')); 
 	});
 
 
