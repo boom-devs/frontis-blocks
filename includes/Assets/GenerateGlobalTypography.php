@@ -182,29 +182,29 @@ class GenerateGlobalTypography {
 		$css .= "}\n\n";
 	
 		// Generate responsive CSS for body, h1-h6, p, and fb_customtypo
-		$css .= "body .wp-site-blocks h1,\n";
-		$css .= "body .wp-site-blocks h2,\n";
-		$css .= "body .wp-site-blocks h3,\n";
-		$css .= "body .wp-site-blocks h4,\n";
-		$css .= "body .wp-site-blocks h5,\n";
-		$css .= "body .wp-site-blocks h6 {\n";
+		$css .= "body h1,\n";
+		$css .= "body h2,\n";
+		$css .= "body h3,\n";
+		$css .= "body h4,\n";
+		$css .= "body h5,\n";
+		$css .= "body h6 {\n";
 		$css .= "    font-family: var(--fb-global-all--font-family);\n";
 		$css .= "}\n\n";
 	
-		$css .= "body .wp-site-blocks p {\n";
+		$css .= "body p {\n";
 		$css .= "    font-size: var(--fb-global-body--font-size-Desktop);\n";
 		$css .= "    font-family: var(--fb-global-body--font-family);\n";
 		$css .= "    font-weight: var(--fb-global-body--font-weight);\n";
 		$css .= "}\n\n";
 	
 		$css .= "@media (max-width: 1024px) {\n";
-		$css .= "    body .wp-site-blocks p {\n";
+		$css .= "    body p {\n";
 		$css .= "        font-size: var(--fb-global-body--font-size-Tablet);\n";
 		$css .= "    }\n";
 		$css .= "}\n\n";
 	
 		$css .= "@media (max-width: 768px) {\n";
-		$css .= "    body .wp-site-blocks p {\n";
+		$css .= "    body p {\n";
 		$css .= "        font-size: var(--fb-global-body--font-size-Mobile);\n";
 		$css .= "    }\n";
 		$css .= "}\n\n";

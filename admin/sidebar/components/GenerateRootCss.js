@@ -145,7 +145,14 @@ const generateCSSVariables = (data, deviceType) => {
             const fontFamily = getValue(data[key], prop);
             if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
                 fontFamilies.add(fontFamily);
-                const iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+
+                let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+                
+                // If not found, try the editor-canvas iframe
+                if (!iframe) {
+                    iframe = document.querySelector('iframe[name="editor-canvas"]');
+                }
+                
                 const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
 
                 // Generate font URL and add to the iframe's document
@@ -170,161 +177,161 @@ const generateCSSVariables = (data, deviceType) => {
     let styles = '';
 
     if(fileName === 'post.php') {
-        
-        // Apply individual styles for each heading (h1, h2, h3, etc.)
-        if(deviceType !== 'Desktop') {
-            headingGrouped = `
-                body .is-root-container h1 {
-                    ${heading1Styles}
-                }
-                body .is-root-container h2 {
-                    ${heading2Styles}
-                }
-                body .is-root-container h3 {
-                    ${heading3Styles}
-                }
-                body .is-root-container h4 {
-                    ${heading4Styles}
-                }
-                body .is-root-container h5 {
-                    ${heading5Styles}
-                }
-                body .is-root-container h6 {
-                    ${heading6Styles}
-                }
-            `;
+        headingGrouped = `
+            body .is-root-container h1 {
+                ${heading1Styles}
+            }
+            body .is-root-container h2 {
+                ${heading2Styles}
+            }
+            body .is-root-container h3 {
+                ${heading3Styles}
+            }
+            body .is-root-container h4 {
+                ${heading4Styles}
+            }
+            body .is-root-container h5 {
+                ${heading5Styles}
+            }
+            body .is-root-container h6 {
+                ${heading6Styles}
+            }
+        `;
 
-            // Styles for the "all" combined typography
-            allCombinedStyles = `
-                body .is-root-container h1{
-                    ${combinedHeadingStyles}
-                }
-                body .is-root-container h2{
-                    ${combinedHeadingStyles}
-                }
-                body .is-root-container h3{
-                    ${combinedHeadingStyles}
-                }
-                body .is-root-container h4{
-                    ${combinedHeadingStyles}
-                }
-                body .is-root-container h5{
-                    ${combinedHeadingStyles}
-                }
-                body .is-root-container h6 {
-                    ${combinedHeadingStyles}
-                }
-            `;
+        // Styles for the "all" combined typography
+        allCombinedStyles = `
+            body .is-root-container h1{
+                ${combinedHeadingStyles}
+            }
+            body .is-root-container h2{
+                ${combinedHeadingStyles}
+            }
+            body .is-root-container h3{
+                ${combinedHeadingStyles}
+            }
+            body .is-root-container h4{
+                ${combinedHeadingStyles}
+            }
+            body .is-root-container h5{
+                ${combinedHeadingStyles}
+            }
+            body .is-root-container h6 {
+                ${combinedHeadingStyles}
+            }
+        `;
 
-            styles = `
+        styles = `
+            :root {
+                ${rootStyles}
+                ${desktopStyles}
+            }
+            @media (max-width: 1024px) {
                 :root {
-                    ${rootStyles}
-                    ${desktopStyles}
+                    ${tabletStyles}
                 }
-                @media (max-width: 1024px) {
-                    :root {
-                        ${tabletStyles}
-                    }
-                }
-                @media (max-width: 767px) {
-                    :root {
-                        ${mobileStyles}
-                    }
-                }
-
-                body .is-root-container p {
-                    ${paragraphStyles}
-                }
-
-                body .is-root-container a{
-                    ${linkStyles}
-                }
-                body .is-root-container p a {
-                    ${linkStyles}
-                }
-
-                body .is-root-container .wp-block-button__link {
-                    ${buttonStyles}
-                }
-                body .is-root-container button {
-                    ${buttonStyles}
-                }
-
-                body .is-root-container figcaption {
-                    ${captionStyles}
-                }
-                ${allCombinedStyles}
-                ${headingGrouped}
-            `;
-        } else {
-            headingGrouped = `
-                body .editor-visual-editor h1 {
-                    ${heading1Styles}
-                }
-                body .editor-visual-editor h2 {
-                    ${heading2Styles}
-                }
-                body .editor-visual-editor h3 {
-                    ${heading3Styles}
-                }
-                body .editor-visual-editor h4 {
-                    ${heading4Styles}
-                }
-                body .editor-visual-editor h5 {
-                    ${heading5Styles}
-                }
-                body .editor-visual-editor h6 {
-                    ${heading6Styles}
-                }
-            `;
-
-            // Styles for the "all" combined typography
-            allCombinedStyles = `
-                body .editor-visual-editor h1,
-                body .editor-visual-editor h2,
-                body .editor-visual-editor h3,
-                body .editor-visual-editor h4,
-                body .editor-visual-editor h5,
-                body .editor-visual-editor h6 {
-                    ${combinedHeadingStyles}
-                }
-            `;
-
-            styles = `
+            }
+            @media (max-width: 767px) {
                 :root {
-                    ${rootStyles}
-                    ${desktopStyles}
+                    ${mobileStyles}
                 }
-                @media (max-width: 1024px) {
-                    :root {
-                        ${tabletStyles}
-                    }
-                }
-                @media (max-width: 767px) {
-                    :root {
-                        ${mobileStyles}
-                    }
-                }
+            }
 
-                body .editor-visual-editor p {
-                    ${paragraphStyles}
-                }
+            body .is-root-container p {
+                ${paragraphStyles}
+            }
 
-                body .editor-visual-editor a, body .editor-visual-editor p a {
-                    ${linkStyles}
-                }
+            body .is-root-container a{
+                ${linkStyles}
+            }
+            body .is-root-container p a {
+                ${linkStyles}
+            }
 
-                body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
-                    ${buttonStyles}
-                }
+            body .is-root-container .wp-block-button__link {
+                ${buttonStyles}
+            }
+            body .is-root-container button {
+                ${buttonStyles}
+            }
 
-                body .editor-visual-editor figcaption {
-                    ${captionStyles}
-                }
-                ${allCombinedStyles}
-                ${headingGrouped}
-            `;
-        }
+            body .is-root-container figcaption {
+                ${captionStyles}
+            }
+            ${allCombinedStyles}
+            ${headingGrouped}
+        `;
+        // // Apply individual styles for each heading (h1, h2, h3, etc.)
+        // if(deviceType !== 'Desktop') {
+            
+        // } else {
+        //     headingGrouped = `
+        //         body .editor-visual-editor h1 {
+        //             ${heading1Styles}
+        //         }
+        //         body .editor-visual-editor h2 {
+        //             ${heading2Styles}
+        //         }
+        //         body .editor-visual-editor h3 {
+        //             ${heading3Styles}
+        //         }
+        //         body .editor-visual-editor h4 {
+        //             ${heading4Styles}
+        //         }
+        //         body .editor-visual-editor h5 {
+        //             ${heading5Styles}
+        //         }
+        //         body .editor-visual-editor h6 {
+        //             ${heading6Styles}
+        //         }
+        //     `;
+
+        //     // Styles for the "all" combined typography
+        //     allCombinedStyles = `
+        //         body .editor-visual-editor h1,
+        //         body .editor-visual-editor h2,
+        //         body .editor-visual-editor h3,
+        //         body .editor-visual-editor h4,
+        //         body .editor-visual-editor h5,
+        //         body .editor-visual-editor h6 {
+        //             ${combinedHeadingStyles}
+        //         }
+        //     `;
+
+        //     styles = `
+        //         :root {
+        //             ${rootStyles}
+        //             ${desktopStyles}
+        //         }
+        //         @media (max-width: 1024px) {
+        //             :root {
+        //                 ${tabletStyles}
+        //             }
+        //         }
+        //         @media (max-width: 767px) {
+        //             :root {
+        //                 ${mobileStyles}
+        //             }
+        //         }
+
+        //         body .editor-visual-editor p {
+        //             ${paragraphStyles}
+        //         }
+
+        //         body .editor-visual-editor a, body .editor-visual-editor p a {
+        //             ${linkStyles}
+        //         }
+
+        //         body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
+        //             ${buttonStyles}
+        //         }
+
+        //         body .editor-visual-editor figcaption {
+        //             ${captionStyles}
+        //         }
+        //         ${allCombinedStyles}
+        //         ${headingGrouped}
+        //     `;
+        // }
     } else {
 
         // Apply individual styles for each heading (h1, h2, h3, etc.)
@@ -402,10 +409,14 @@ const generateCSSVariables = (data, deviceType) => {
     let styleTag = iframeDocument.getElementById("global-typo");
 
     if(fileName === 'post.php') {
+        
         if(deviceType !== 'Desktop') {
             iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
+
+            console.log("iframeDocument")
+            console.log(iframeDocument)
         } else {
             iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
