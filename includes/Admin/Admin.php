@@ -613,18 +613,24 @@ class Admin {
                 <div class="fb_post_grid_wrapper">
                     <div class="fb_post_grid_image_wrapper">
                         <div class="fb_post_grid_image">
-                            <?php if (has_post_thumbnail($single_post->ID)): ?>
-                                <?php
+                            <?php 
+                                if (has_post_thumbnail($single_post->ID)) : 
+                                    // If the post has a thumbnail, get the thumbnail image
                                     $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                     $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                     $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
-                                ?>
-                                <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
-                                    <img src="<?php echo esc_url($image_url); ?>"
-                                        srcset="<?php echo esc_attr($image_srcset); ?>"
-                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
-                                </a>
-                            <?php endif; ?>
+                                else :
+                                    // If the post doesn't have a thumbnail, use the default image
+                                    $image_url = $default_image_url;
+                                    $image_srcset = ''; 
+                                endif;
+                            ?>
+
+                            <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
+                                <img src="<?php echo esc_url($image_url); ?>"
+                                    srcset="<?php echo esc_attr($image_srcset); ?>"
+                                    alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
+                            </a>
                         </div>
                     </div>
 
