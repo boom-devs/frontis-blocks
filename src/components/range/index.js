@@ -57,18 +57,71 @@ const FB_Range = ({
 	const globalTypo = FrontisBlocksData.global_typography;
 	const GB_TYPO = [{ label: 'None', value: 'none' }];
 
-    Object.entries(globalTypo).forEach(([label, properties]) => {
+	const storedData = localStorage.getItem("fb_custom_typography");
+	const customTypoData = storedData ? JSON.parse(storedData) : {};
 
-		if(globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.fontSize?.variable})` });
+	// Convert object to array
+	const customTypoArray = Object.keys(customTypoData).map(key => ({
+		id: key,
+		name: customTypoData[key].name
+	}));
+
+
+    // Object.entries(globalTypo).forEach(([label, properties]) => {
+
+	// 	if(globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
+			
+
+	// 		GB_TYPO.push({ label: label, value: `var(${properties?.fontSize?.variable})` });
+	// 	}
+	// 	if(globalTypographyType === 'lineHeight' && properties?.lineHeight?.variable !== undefined) {
+	// 		GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
+	// 	}
+	// 	if(globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
+	// 		GB_TYPO.push({ label: label, value: `var(${properties?.letterSpacing?.variable})` });
+	// 	}
+	// });
+
+	Object.entries(globalTypo).forEach(([label, properties]) => {
+		let updatedValue = null;
+	
+		if (globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
+			updatedValue = `var(${properties?.fontSize?.variable})`;
 		}
-		if(globalTypographyType === 'lineHeight' && properties?.lineHeight?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
+		if (globalTypographyType === 'lineHeight' && properties?.lineHeight?.variable !== undefined) {
+			updatedValue = `var(${properties?.lineHeight?.variable})`;
 		}
-		if(globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.letterSpacing?.variable})` });
+		if (globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
+			updatedValue = `var(${properties?.letterSpacing?.variable})`;
+		}
+	
+		if (updatedValue !== null) {
+			let newLabel =
+				label === 'body' ? 'Body' :
+				label === 'captions' ? 'Captions' :
+				label === 'button' ? 'Button' :
+				label === 'link' ? 'Link' :
+				label === 'h1' ? 'Heading One' :
+				label === 'h2' ? 'Heading Two' :
+				label === 'h3' ? 'Heading Three' :
+				label === 'h4' ? 'Heading Four' :
+				label === 'h5' ? 'Heading Five' :
+				label === 'h6' ? 'Heading Six' :
+				label;
+		
+			GB_TYPO.push({ label: newLabel, value: updatedValue });
 		}
 	});
+	
+	GB_TYPO.forEach(item => {
+		const matchedTypo = customTypoArray.find(typo => typo.id === item.label);
+		if (matchedTypo) {
+			item.label = matchedTypo.name;
+		}
+	});
+	
+	console.log(GB_TYPO);
+
 
 	return (
 		<div className="fb-setting-spacing-container">
