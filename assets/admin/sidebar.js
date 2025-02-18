@@ -3944,28 +3944,29 @@ var FB_Range = function FB_Range(_ref) {
     value: 'none'
   }];
   Object.entries(globalTypo).forEach(function (_ref2) {
+    var _properties$fontSize, _properties$lineHeigh, _properties$letterSpa;
     var _ref3 = _slicedToArray(_ref2, 2),
       label = _ref3[0],
       properties = _ref3[1];
-    if (globalTypographyType === 'fontSize') {
-      var _properties$fontSize;
+    if (globalTypographyType === 'fontSize' && (properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable) !== undefined) {
+      var _properties$fontSize2;
       GB_TYPO.push({
         label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable, ")")
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize2 = properties.fontSize) === null || _properties$fontSize2 === void 0 ? void 0 : _properties$fontSize2.variable, ")")
       });
     }
-    if (globalTypographyType === 'lineHeight') {
-      var _properties$lineHeigh;
+    if (globalTypographyType === 'lineHeight' && (properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable) !== undefined) {
+      var _properties$lineHeigh2;
       GB_TYPO.push({
         label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable, ")")
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh2 = properties.lineHeight) === null || _properties$lineHeigh2 === void 0 ? void 0 : _properties$lineHeigh2.variable, ")")
       });
     }
-    if (globalTypographyType === 'letterSpacing') {
-      var _properties$letterSpa;
+    if (globalTypographyType === 'letterSpacing' && (properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable) !== undefined) {
+      var _properties$letterSpa2;
       GB_TYPO.push({
         label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable, ")")
+        value: "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa2 = properties.letterSpacing) === null || _properties$letterSpa2 === void 0 ? void 0 : _properties$letterSpa2.variable, ")")
       });
     }
   });
