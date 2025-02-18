@@ -236,42 +236,51 @@ const FB_TypographyControl = ({
                                 globalTypographyValue={globalFontSize}
                                 setGlobalTypographyValue={handleGlobalFontSizeChange}
 							/>
-                            <SelectControl
-                                label={__("Font Weight", "frontis-blocks")}
-								options={FONT_WEIGHT}
-                                value={fontWeight}
-                                onChange={handleFontWeightChange}
-                            />
 
                             <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
-                                controlOptions={FONT_STYLE}
-                                selectValue={fontStyle}
-                                setSelectValue={handleFontStyleChange}
+                                controlOptions={FONT_WEIGHT}
+                                selectValue={fontWeight}
+                                setSelectValue={handleFontWeightChange}
                                 globalIcon={true}
                                 globalTypographyType={'fontWeight'}
                                 globalTypographyValue={globalFontWeight}
                                 setGlobalTypographyValue={handleGlobalFontWeightChange}
                             />
-                            
-                            <SelectControl
+
+                            <FB_GBSelectControl
                                 label={__("Font Style", "frontis-blocks")}
-                                options={FONT_STYLE}
-                                value={fontStyle}
-                                onChange={handleFontStyleChange}
+                                controlOptions={FONT_STYLE}
+                                selectValue={fontStyle}
+                                setSelectValue={handleFontStyleChange}
+                                globalIcon={true}
+                                globalTypographyType={'fontStyle'}
+                                globalTypographyValue={globalFontStyle}
+                                setGlobalTypographyValue={handleGlobalFontStyleChange}
                             />
-                            <SelectControl
+
+                            <FB_GBSelectControl
                                 label={__("Text Transform", "frontis-blocks")}
-                                options={TEXT_TRANSFORM}
-                                value={textTransform}
-                                onChange={handleTextTransformChange}
+                                controlOptions={TEXT_TRANSFORM}
+                                selectValue={textTransform}
+                                setSelectValue={handleTextTransformChange}
+                                globalIcon={true}
+                                globalTypographyType={'textTransform'}
+                                globalTypographyValue={globalTextTransform}
+                                setGlobalTypographyValue={handleGlobalTextTransformChange}
                             />
-                            <SelectControl
+                            
+                            <FB_GBSelectControl
                                 label={__("Text Decoration", "frontis-blocks")}
-                                options={TEXT_DECORATION}
-                                value={textDecoration}
-                                onChange={handleTextDecorationChange}
+                                controlOptions={TEXT_DECORATION}
+                                selectValue={textDecoration}
+                                setSelectValue={handleTextDecorationChange}
+                                globalIcon={true}
+                                globalTypographyType={'textDecoration'}
+                                globalTypographyValue={globalTextDecoration}
+                                setGlobalTypographyValue={handleGlobalTextDecorationChange}
                             />
+                            
                             <FB_Range
                                 min={0}
                                 max={100}
