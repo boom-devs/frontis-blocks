@@ -17,6 +17,10 @@
   border-left: 1px solid #ffffff;
   height: auto;
 }
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:active:not(:disabled) {
+  background-color: #DBEBFC;
+  border-color: #ffffff;
+}
 .fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:hover {
   background-color: #DBEBFC !important;
 }
