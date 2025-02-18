@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
 
         if (!iframe) {
-            console.error("Iframe not found!");
             return;
         }
 
