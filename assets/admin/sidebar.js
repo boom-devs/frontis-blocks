@@ -831,8 +831,6 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
       }
     });
   });
-  console.log("paragraphStyles paragraphStyles");
-  console.log(paragraphStyles);
   if (paragraphStyles === '') {
     return false;
   }
@@ -841,9 +839,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var headingGrouped = '';
   var allCombinedStyles = '';
   var styles = '';
-  console.log(fileName === 'post.php');
   if (fileName === 'post.php') {
-    console.log(deviceType);
     // Apply individual styles for each heading (h1, h2, h3, etc.)
     if (deviceType !== 'Desktop') {
       headingGrouped = "\n                body .is-root-container h1 {\n                    ".concat(heading1Styles, "\n                }\n                body .is-root-container h2 {\n                    ").concat(heading2Styles, "\n                }\n                body .is-root-container h3 {\n                    ").concat(heading3Styles, "\n                }\n                body .is-root-container h4 {\n                    ").concat(heading4Styles, "\n                }\n                body .is-root-container h5 {\n                    ").concat(heading5Styles, "\n                }\n                body .is-root-container h6 {\n                    ").concat(heading6Styles, "\n                }\n            ");
