@@ -32,7 +32,7 @@ const FB_GBSelectControl = ({
     Object.entries(globalTypo).forEach(([label, properties]) => {
 
 		if(globalTypographyType === 'fontWeight' && properties?.fontWeight?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.fontWeight?.variable})` });
+			GB_TYPO.push({ label: {label}, value: `var(${properties?.fontWeight?.variable})` });
 		}
 		if(globalTypographyType === 'fontStyle' && properties?.fontStyle?.variable !== undefined) {
 			GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
@@ -45,6 +45,7 @@ const FB_GBSelectControl = ({
 		}
 	});
 
+	console.log(globalTypo);
 	console.log(GB_TYPO);
 
 	return (
