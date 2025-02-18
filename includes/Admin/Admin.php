@@ -463,7 +463,8 @@ class Admin {
         $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
         $post_description_excerpt_length = isset($_POST['postDescriptionExcerptLength']) ? intval($_POST['postDescriptionExcerptLength']) : 10;
-
+        $show_excerpt_switcher = isset($_POST['showExcerptSwitcher']) ? $_POST['showExcerptSwitcher'] : true;
+        
         $show_author_switcher = isset($_POST['showAuthorSwitcher']) ? $_POST['showAuthorSwitcher'] : false;
         $show_category_switcher = isset($_POST['showCategorySwitcher']) ? $_POST['showCategorySwitcher'] : false;
         $show_tag_switcher = isset($_POST['showTagSwitcher']) ? $_POST['showTagSwitcher'] : false;
@@ -479,6 +480,7 @@ class Admin {
 
         $show_load_more_switcher = isset($_POST['showLoadMoreSwitcher']) ? $_POST['showLoadMoreSwitcher'] : true;
 
+        $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
         ob_start();
 
@@ -614,9 +616,10 @@ class Admin {
                                 <?php
                                     $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                     $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
+                                    $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
                                 ?>
                                 <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
-                                    <img src="<?php echo esc_url($image[0]); ?>"
+                                    <img src="<?php echo esc_url($image_url); ?>"
                                         srcset="<?php echo esc_attr($image_srcset); ?>"
                                         alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
                                 </a>
@@ -703,11 +706,11 @@ class Admin {
                                 </<?php echo esc_html($post_title_tag); ?>>
                             </a>
 
-                            <?php if (!empty($single_post->post_excerpt)): ?>
+                            <?php if (!empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true'): ?>
                                 <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
                                     <?php echo esc_html(wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...')); ?>
                                 </<?php echo esc_html($post_description_tag); ?>>
-                            <?php elseif (!empty($single_post->post_content)): ?>
+                            <?php elseif (!empty($single_post->post_content) && $show_excerpt_switcher == 'true'): ?>
                                 <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
                                     <?php echo esc_html(wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...')); ?>
                                 </<?php echo esc_html($post_description_tag); ?>>
