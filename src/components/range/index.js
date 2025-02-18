@@ -70,7 +70,6 @@ const FB_Range = ({
 		}
 	});
 
-	console.log(GB_TYPO);
 
 	return (
 		<div className="fb-setting-spacing-container">
