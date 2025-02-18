@@ -194,6 +194,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionMarginMobile,
         postDescriptionMarginLink,
         postDescriptionExcerptLength,
+        showExcerptSwitcher,
         /** End description */
 
         /** Start category */
@@ -2921,7 +2922,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postImageDesktopBorderRadiusWidth ? `border-radius: ${postImageDesktopBorderRadiusWidth};` : ''}
             ${postImageMarginDesktopWidth ? `margin: ${postImageMarginDesktopWidth};` : ''}
             ${postImageWidth.Desktop ? `width: ${postImageWidth.Desktop}${postImageWidthUnits.Desktop};` : ''}
-            ${postImageHeight.Desktop ? `height: ${postImageHeight.Desktop}${postImageHeightUnits.Desktop};` : ''}
+            height: clamp(
+                ${postImageHeight.Desktop ? `${postImageHeight.Desktop - 3}${postImageHeightUnits.Desktop}` : '18.75rem'}, 
+                ${postImageHeight.Desktop ? `calc(${postImageHeight.Desktop}${postImageHeightUnits.Desktop} + 5vw)` : '25vw'}, 
+                ${postImageHeight.Desktop ? `${postImageHeight.Desktop}${postImageHeightUnits.Desktop}` : '21.875rem'}
+            );
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
@@ -3194,7 +3199,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postImageTabletBorderRadiusWidth ? `border-radius: ${postImageTabletBorderRadiusWidth};` : ''}
                 ${postImageMarginTabletWidth ? `margin: ${postImageMarginTabletWidth};` : ''}
                 ${postImageWidth.Tablet ? `width: ${postImageWidth.Tablet}${postImageWidthUnits.Tablet};` : ''}
-                ${postImageHeight.Tablet ? `height: ${postImageHeight.Tablet}${postImageHeightUnits.Tablet};` : ''}
+
+                height: clamp(
+                    ${postImageHeight.Tablet ? `${postImageHeight.Tablet - 3}${postImageHeightUnits.Tablet}` : '14rem'}, 
+                    ${postImageHeight.Tablet ? `calc(${postImageHeight.Tablet}${postImageHeightUnits.Tablet} + 4vw)` : '20vw'}, 
+                    ${postImageHeight.Tablet ? `${postImageHeight.Tablet}${postImageHeightUnits.Tablet}` : '16rem'}
+                );
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
@@ -3531,7 +3541,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postImageMobileBorderRadiusWidth ? `border-radius: ${postImageMobileBorderRadiusWidth};` : ''}
                 ${postImageMarginMobileWidth ? `margin: ${postImageMarginMobileWidth};` : ''}
                 ${postImageWidth.Mobile ? `width: ${postImageWidth.Mobile}${postImageWidthUnits.Mobile};` : ''}
-                ${postImageHeight.Mobile ? `height: ${postImageHeight.Mobile}${postImageHeightUnits.Mobile};` : ''}
+                height: clamp(
+                    ${postImageHeight.Mobile ? `${postImageHeight.Mobile - 3}${postImageHeightUnits.Mobile}` : '10rem'}, 
+                    ${postImageHeight.Mobile ? `calc(${postImageHeight.Mobile}${postImageHeightUnits.Mobile} + 3vw)` : '15vw'}, 
+                    ${postImageHeight.Mobile ? `${postImageHeight.Mobile}${postImageHeightUnits.Mobile}` : '12rem'}
+                );
             }
 
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image:hover img {
@@ -4342,6 +4356,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         onChange={(value) => setAttributes({ showAuthorSwitcher: value })}
                                                     />
                                                     <ToggleControl
+                                                        label={__("Show Excerpt", "frontis-blocks")}
+                                                        checked={showExcerptSwitcher}
+                                                        onChange={(value) => setAttributes({ showExcerptSwitcher: value })}
+                                                    />
+                                                    <ToggleControl
                                                         label={__("Show Category", "frontis-blocks")}
                                                         checked={showCategorySwitcher}
                                                         onChange={(value) => setAttributes({ showCategorySwitcher: value })}
@@ -4829,7 +4848,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Range
                                                 min={1}
-                                                max={2000}
+                                                max={100}
                                                 label={__("Width", "frontis-blocks")}
                                                 rangeValue={postImageWidth}
                                                 onChangeHandler={(value) => setAttributes({ postImageWidth: value })}
@@ -4842,7 +4861,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
                                             <FB_Range
                                                 min={1}
-                                                max={2000}
+                                                max={1000}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={postImageHeight}
                                                 onChangeHandler={(value) => setAttributes({ postImageHeight: value })}
@@ -4851,7 +4870,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={postImageHeightUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={"100"}
+                                                resetFallbackValue={"400"}
                                             />
                                             <SelectControl
                                                 label={__("Border Style", "frontis-blocks")}
