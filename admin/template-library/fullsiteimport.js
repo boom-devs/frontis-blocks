@@ -1,15 +1,20 @@
 import { useState, useEffect } from "@wordpress/element";
+import TypographyPanel from "./fullSiteTypography";
+import { ColorPicker, Dropdown } from '@wordpress/components';
 
 const SiteImportModal = ({ isOpen, onClose, onImport }) => {
 
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-  const [colors, setColors] = useState({
-    primary: '#007bff',
-    secondary: '#6c757d',
-    accent: '#ffc107',
-    text: '#212529',
-    background: '#ffffff'
-  });
+
+  const [activeTooltip, setActiveTooltip] = useState(null);
+
+  const colors = [
+    { hex: '#007bff', name: 'Primary Color' },
+    { hex: '#6c757d', name: 'Secondary Color' },
+    { hex: '#ffc107', name: 'Warning Color' },
+    { hex: '#212529', name: 'Dark Color' },
+    { hex: '#ffffff', name: 'Light Color' }
+  ];
 
   const [typography, setTypography] = useState({
     headingFont: 'Inter',
@@ -70,241 +75,97 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fb-modal-overlay">
-      <div className="fb-modal">
-        <div className="fb-modal-header">
+    <div className="fb-fsi-modal-overlay">
+      <div className="fb-fsi-modal">
+        <div className="fb-fsi-modal-header">
           <h2>Site Import Configuration</h2>
-          <button className="fb-modal-close" onClick={onClose}>×</button>
+          <button className="fb-fsi-modal-close" onClick={onClose}>×</button>
         </div>
 
-        <div className="fb-modal-content">
-          {/* Colors Section */}
-          <div className="fb-section">
-            <h3>Global Colors</h3>
-            <div className="fb-color-grid">
-              {Object.entries(colors).map(([key, value]) => (
-                <div key={key} className="fb-color-field">
-
-                  <div className="fb-color-inputs">
-                    <input
-                      type="color"
-                      value={value}
-                      onChange={(e) => setColors(prev => ({
-                        ...prev,
-                        [key]: e.target.value
-                      }))}
-                      className="fb-color-picker"
-                    />
-
-                  </div>
-                </div>
-              ))}
+        <div className="fb-fsi-modal-content-wrapper">
+          <div className="fb-fsi-modal-sidebar-content">
+            <div className="fb-global-color-section">
+              <FullSiteImportColorPicker/>
             </div>
+            <TypographyPanel />
           </div>
-
-          {/* Typography Section */}
-          <div className="fb-section">
-            <h3>Typography</h3>
-            <div className="fb-typography-grid">
-              <div className="fb-field">
-                <label className="fb-label">Heading Font</label>
-                <select
-                  value={typography.headingFont}
-                  onChange={(e) => setTypography(prev => ({
-                    ...prev,
-                    headingFont: e.target.value
-                  }))}
-                  className="fb-select"
-                >
-                  {fontOptions.map(font => (
-                    <option key={font} value={font}>{font}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="fb-field">
-                <label className="fb-label">Body Font</label>
-                <select
-                  value={typography.bodyFont}
-                  onChange={(e) => setTypography(prev => ({
-                    ...prev,
-                    bodyFont: e.target.value
-                  }))}
-                  className="fb-select"
-                >
-                  {fontOptions.map(font => (
-                    <option key={font} value={font}>{font}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="fb-field">
-                <label className="fb-label">Base Font Size</label>
-                <input
-                  type="text"
-                  value={typography.baseSize}
-                  onChange={(e) => setTypography(prev => ({
-                    ...prev,
-                    baseSize: e.target.value
-                  }))}
-                  className="fb-text-input"
-                />
-              </div>
-
-              <div className="fb-field">
-                <label className="fb-label">Type Scale</label>
-                <input
-                  type="number"
-                  step="0.1"
-                  value={typography.scale}
-                  onChange={(e) => setTypography(prev => ({
-                    ...prev,
-                    scale: e.target.value
-                  }))}
-                  className="fb-text-input"
-                />
-              </div>
-            </div>
+          <div className="fb-fsi-modal-main-content">
+                hello main content
           </div>
         </div>
 
-        <div className="fb-modal-footer">
+
+        <div className="fb-fsi-modal-footer">
           <button className="button button-secondary" onClick={onClose}>Cancel</button>
           <button className="button button-primary" onClick={handleImport}>Import Site</button>
         </div>
       </div>
-
-      <style>{`
-          .fb-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 160000;
-          }
-  
-          .fb-modal {
-            background: white;
-            border-radius: 3px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-          }
-  
-          .fb-modal-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          }
-  
-          .fb-modal-close {
-            border: none;
-            background: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0 5px;
-          }
-  
-          .fb-modal-content {
-            padding: 20px;
-          }
-  
-          .fb-section {
-              margin-bottom: 24px;
-          }
-
-          .fb-color-grid {
-              display: flex;
-              gap: 8px;
-          }
-
-          .fb-color-field {
-              margin-bottom: 12px;
-              position: relative;
-          }
-
-          .fb-color-picker {
-              -webkit-appearance: none;
-              -moz-appearance: none;
-              appearance: none;
-              width: 40px;
-              height: 40px;
-              padding: 0;
-              border: none;
-              border-radius: 50% !important;
-              cursor: pointer;
-              background-color: transparent;
-          }
-
-          /* Style the color input */
-          .fb-color-picker::-webkit-color-swatch-wrapper {
-              padding: 0;
-          }
-
-          .fb-color-picker::-webkit-color-swatch {
-              border: none;
-              border-radius: 50%;
-          }
-
-          .fb-color-picker::-moz-color-swatch {
-              border: none;
-              border-radius: 50%;
-          }
-
-          /* Add hover effect */
-          .fb-color-picker:hover::before {
-              border-color: #999;
-          }
-
-          /* Add focus state */
-          .fb-color-picker:focus {
-              outline: none;
-          }
-
-          .fb-color-picker:focus::before {
-              border-color: #666;
-          }
-    
-          .fb-typography-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-          }
-  
-          .fb-label {
-            display: block;
-            margin-bottom: 6px;
-          }
-  
-          .fb-text-input {
-            width: 100%;
-            height: 30px;
-            padding: 4px 8px;
-          }
-  
-          .fb-select {
-            width: 100%;
-            height: 30px;
-          }
-  
-          .fb-modal-footer {
-            padding: 15px 20px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-          }
-        `}</style>
     </div>
   );
 };
 
 export default SiteImportModal;
+
+const FullSiteImportColorPicker = () => {
+  const [activeTooltip, setActiveTooltip] = useState(null);
+  const [colors, setColors] = useState([
+    { hex: '#007bff', name: 'Primary Color' },
+    { hex: '#6c757d', name: 'Secondary Color' },
+    { hex: '#ffc107', name: 'Warning Color' },
+    { hex: '#212529', name: 'Dark Color' },
+    { hex: '#ffffff', name: 'Light Color' }
+  ]);
+
+  const handleColorChange = (color, index) => {
+    const updatedColors = [...colors];
+    updatedColors[index].hex = color; // Directly use color string
+    setColors(updatedColors);
+  };
+
+  return (
+    <div className="fb-global-color-section">
+      <h3>Global Colors</h3>
+      <div className="fb-color-grid" style={{ display: 'flex', gap: '20px' }}>
+        {colors.map((color, index) => (
+          <div
+            key={index}
+            className="fb-color-item"
+            onMouseEnter={() => setActiveTooltip(index)}
+            onMouseLeave={() => setActiveTooltip(null)}
+            style={{ position: 'relative' }}
+          >
+            <Dropdown
+              renderToggle={({ isOpen, onToggle }) => (
+                <div
+                  className="fb-color-circle"
+                  style={{
+                    backgroundColor: color.hex,
+                    border: color.hex === '#ffffff' ? '1px solid #ddd' : 'none',
+                    transition: 'background-color 0.3s ease'
+                  }}
+                  onClick={onToggle}
+                />
+              )}
+              renderContent={() => (
+                <div className="fb-color-picker-content" style={{ padding: '10px' }}>
+                  <h4>{color.name}</h4>
+                  <ColorPicker
+                    color={color.hex}
+                    onChangeComplete={(newColor) => handleColorChange(newColor.hex, index)}
+                    disableAlpha
+                  />
+                </div>
+              )}
+            />
+            {activeTooltip === index && (
+              <div className="fb-color-tooltip" style={{ position: 'absolute', top: '-25px', left: 0 }}>
+                {color.name}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
