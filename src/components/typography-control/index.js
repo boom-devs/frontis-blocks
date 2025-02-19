@@ -21,11 +21,15 @@ import {
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.lazy.scss';
+import FB_GBSelectControl from '@Components/gb-select-control';
 
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
     fontFamily,
 	onChangeFontFamily,
+    globalFontFamily = '',
+	onChangeGlobalFontFamily = '',
+
 	fontSize,
 	onChangeFontSize,
 	fontSizeUnits,
@@ -35,20 +39,38 @@ const FB_TypographyControl = ({
 
     fontWeight,
     onChangeFontWeight,
+    globalFontWeight = '',
+	onChangeGlobalFontWeight = '',
+
     fontStyle,
     onChangeFontStyle,
+    globalFontStyle = '',
+	onChangeGlobalFontStyle = '',
+
     textTransform,
     onChangeTextTransform,
+    globalTextTransform = '',
+	onChangeGlobalTextTransform = '',
+
     textDecoration,
     onChangeTextDecoration,
+    globalTextDecoration = '',
+	onChangeGlobalTextDecoration = '',
+
     letterSpacing,
 	onChangeLetterSpacing,
+    globalLetterSpacing = '',
+	onChangeGlobalLetterSpacing = '',
 	letterSpacingUnits,
 	onChangeLetterSpacingUnit,
+
     lineHeight,
 	onChangeLineHeight,
+    globalLineHeight = '',
+	onChangeGlobalLineHeight = '',
 	lineHeightUnits,
 	onChangeLineHeightUnit,
+
     deviceType,
     setAttributes,
 }) => {
@@ -81,6 +103,10 @@ const FB_TypographyControl = ({
     //     }
 	// };
 
+	const handleGlobalFontFamilyChange = (newFontSize) => {
+		onChangeGlobalFontFamily(newFontSize);
+	};
+
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
 	};
@@ -96,20 +122,40 @@ const FB_TypographyControl = ({
 		onChangeFontWeight(newFontWeight);
 	};
 
+	const handleGlobalFontWeightChange = (globalFontWeight) => {
+		onChangeGlobalFontWeight(globalFontWeight);
+	};
+
     const handleFontStyleChange = (newFontStyle) => {
 		onChangeFontStyle(newFontStyle);
+	};
+
+    const handleGlobalFontStyleChange = (globalFontStyle) => {
+		onChangeGlobalFontStyle(globalFontStyle);
 	};
 
     const handleTextTransformChange = (newTextTransform) => {
 		onChangeTextTransform(newTextTransform);
 	};
 
+    const handleGlobalTextTransformChange = (globalTextTransform) => {
+		onChangeGlobalTextTransform(globalTextTransform);
+	};
+
     const handleTextDecorationChange = (newTextDecoration) => {
 		onChangeTextDecoration(newTextDecoration);
 	};
 
+    const handleGlobalTextDecorationChange = (globalTextDecoration) => {
+		onChangeGlobalTextDecoration(globalTextDecoration);
+	};
+
     const handleLetterSpacingChange = (newLetterSpacing) => {
         onChangeLetterSpacing(newLetterSpacing);
+    };
+
+    const handleGlobalLetterSpacingChange = (globalLetterSpacing) => {
+        onChangeGlobalLetterSpacing(globalLetterSpacing);
     };
 
     const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
@@ -118,6 +164,10 @@ const FB_TypographyControl = ({
     
     const handleLineHeightChange = (newLineHeight) => {
         onChangeLineHeight(newLineHeight);
+    };
+
+    const handleGlobalLineHeightChange = (globalLineHeight) => {
+        onChangeGlobalLineHeight(globalLineHeight);
     };
 
     const handleLineHeightUnitChange = (newLineHeightUnit) => {
@@ -130,6 +180,7 @@ const FB_TypographyControl = ({
     Object.entries(globalTypo).forEach(([label, properties]) => {
         // console.log(label);
     });
+
 
     return (
         <BaseControl
@@ -186,30 +237,51 @@ const FB_TypographyControl = ({
                                 globalTypographyValue={globalFontSize}
                                 setGlobalTypographyValue={handleGlobalFontSizeChange}
 							/>
-                            <SelectControl
+
+                            <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
-								options={FONT_WEIGHT}
-                                value={fontWeight}
-                                onChange={handleFontWeightChange}
+                                controlOptions={FONT_WEIGHT}
+                                selectValue={fontWeight}
+                                setSelectValue={handleFontWeightChange}
+                                globalIcon={true}
+                                globalTypographyType={'fontWeight'}
+                                globalTypographyValue={globalFontWeight}
+                                setGlobalTypographyValue={handleGlobalFontWeightChange}
                             />
-                            <SelectControl
+
+                            <FB_GBSelectControl
                                 label={__("Font Style", "frontis-blocks")}
-                                options={FONT_STYLE}
-                                value={fontStyle}
-                                onChange={handleFontStyleChange}
+                                controlOptions={FONT_STYLE}
+                                selectValue={fontStyle}
+                                setSelectValue={handleFontStyleChange}
+                                globalIcon={true}
+                                globalTypographyType={'fontStyle'}
+                                globalTypographyValue={globalFontStyle}
+                                setGlobalTypographyValue={handleGlobalFontStyleChange}
                             />
-                            <SelectControl
+
+                            <FB_GBSelectControl
                                 label={__("Text Transform", "frontis-blocks")}
-                                options={TEXT_TRANSFORM}
-                                value={textTransform}
-                                onChange={handleTextTransformChange}
+                                controlOptions={TEXT_TRANSFORM}
+                                selectValue={textTransform}
+                                setSelectValue={handleTextTransformChange}
+                                globalIcon={true}
+                                globalTypographyType={'textTransform'}
+                                globalTypographyValue={globalTextTransform}
+                                setGlobalTypographyValue={handleGlobalTextTransformChange}
                             />
-                            <SelectControl
+                            
+                            <FB_GBSelectControl
                                 label={__("Text Decoration", "frontis-blocks")}
-                                options={TEXT_DECORATION}
-                                value={textDecoration}
-                                onChange={handleTextDecorationChange}
+                                controlOptions={TEXT_DECORATION}
+                                selectValue={textDecoration}
+                                setSelectValue={handleTextDecorationChange}
+                                globalIcon={true}
+                                globalTypographyType={'textDecoration'}
+                                globalTypographyValue={globalTextDecoration}
+                                setGlobalTypographyValue={handleGlobalTextDecorationChange}
                             />
+                            
                             <FB_Range
                                 min={0}
                                 max={100}
@@ -222,6 +294,10 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
+                                globalIcon={true}
+                                globalTypographyType={'letterSpacing'}
+                                globalTypographyValue={globalLetterSpacing}
+                                setGlobalTypographyValue={handleGlobalLetterSpacingChange}
                             />
                             <FB_Range
                                 min={0}
@@ -235,6 +311,10 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
+                                globalIcon={true}
+                                globalTypographyType={'lineHeight'}
+                                globalTypographyValue={globalLineHeight}
+                                setGlobalTypographyValue={handleGlobalLineHeightChange}
                             />
                         </BaseControl>
                     </div>

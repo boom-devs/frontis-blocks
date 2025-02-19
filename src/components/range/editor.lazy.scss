@@ -14,21 +14,37 @@ $border_color: #dddddd;
         border-left: 1px solid $white_color;
         height: auto;
 
+        &:active:not(:disabled){
+            background-color: #DBEBFC;
+            border-color: $white_color;
+        }
         &:hover {
             background-color: #DBEBFC !important;
-            fill: #4B9DEF;
+            
+            svg {
+                path {
+                    fill: #4B9DEF;
+                }
+            }
         }
 
         &.global-active {
             background-color: #DBEBFC;
-            fill: #4B9DEF;
 
+            svg {
+                path {
+                    fill: #4B9DEF;
+                }
+            }
         }
 
         svg {
-            fill: #3c434a;
             width: 16px;
             height: 16px;
+
+            path {
+                fill: #555E72;
+            }
         }
     }
 }

@@ -386,59 +386,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnTwoIcon: iconName });
 	};
 	
-	/** Start Preset Style **/
-	const changeCtaPreset = (selectedPreset) => {
-        const presetConfigurations = {
-            "preset-1": {
-				ctaBtnOneSwitcher: true,
-				btnTwoSwitcher: true,
-				buttonIconSwitcher: true,
-				ctaGlobalClassicColor: '#15171C',
-				buttonBgColor: '#ffffff',
-                headingColor: '#ffffff',
-                SubHeadingColor: '#ffffff',
-                SubHeadingHoverColor: '#ffffff',
-                buttonTextColor: '#15171C',
-                btnIconColor: '#15171C',
-                globalBorderRadiusDesktop: {
-                    top: "",
-					bottom: "",
-					left: "",
-					right: "",
-                },
-            },
-            "preset-2": {
-				ctaBtnOneSwitcher: true,
-				btnTwoSwitcher: false,
-				buttonIconSwitcher: false,
-				buttonBgColor: '#399CFF',
-				ctaGlobalClassicColor: '#ffffff',
-                headingColor: '#15171C',
-                SubHeadingColor: '#15171C',
-                SubHeadingHoverColor: '#15171C',
-				buttonTextColor: '#ffffff',
-                globalBorderRadiusDesktop: {
-                    top: "16",
-					bottom: "16",
-					left: "16",
-					right: "16",
-                },
-            },
-            
-        };
-
-        const selectedPresetConfig = presetConfigurations[selectedPreset];
-
-        if (selectedPresetConfig) {
-            setAttributes({
-                ctaPresetStyle: selectedPreset,
-                ...selectedPresetConfig,
-            });
-        } else {
-            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
-        }
-    };
-    /** End Preset Style **/
+	
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -2442,17 +2390,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
-										<PanelBody
-										title={__("Presets", "frontis-block")}
-										initialOpen={true}
-										>
-											<SelectControl
-												label={__("Preset Style", "frontis-blocks")}
-												value={ctaPresetStyle}
-												options={PRESETS}
-												onChange={(selected) => changeCtaPreset(selected)}
-											/>
-										</PanelBody>
 										{/* Title Element */}
 										<div className="fb-advanced-wrapper">
 											<PanelBody

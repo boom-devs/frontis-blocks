@@ -955,63 +955,6 @@ const TypographySettings = (props) => {
 		setIsMount(true);
 	}
 
-	// Save to database
-	// subscribe(() => {
-	// 	const isSavingPost = select('core/editor').isSavingPost();
-	// 	const isAutosavingPost = select('core/editor').isAutosavingPost();
-		
-	// 	if (!isMount || isAutosavingPost || !isSavingPost) {
-	// 		return;
-	// 	}
-
-	// 	if(isMount) {
-	// 		handleUpdateSettings();
-	// 	}
-		
-	// 	setIsMount(false);
-	// });
-
-
-
-	// useEffect(() => {
-    //     const unsubscribe = subscribe(() => {
-    //         const editor = select('core/editor');
-    //         const isSavingPost = editor.isSavingPost();
-    //         const isAutoSaving = editor.isAutosavingPost();
-
-    //         // Manual save detect
-    //         if (isSavingPost && !isAutoSaving && !isSaving) {
-    //             setIsSaving(true);
-    //             handleUpdateSettings();
-    //         }
-
-    //         // Reset state after saving completes
-    //         if (!isSavingPost) {
-    //             setIsSaving(false);
-    //         }
-    //     });
-
-    //     return () => unsubscribe();
-    // }, []);
-
-	// wp.data.subscribe(() => {
-	// 	const isSavingPost = wp.data.select('core/editor').isSavingPost();
-	// 	const isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
-	// 	const isPublishingPost = wp.data.select('core/editor').isPublishingPost();
-	
-	// 	if (isSavingPost && !isAutosavingPost && isMount) {
-	// 		handleUpdateSettings();
-	// 		setIsMount(false);
-	// 	}
-	
-	// 	console.log("Hey checking isMount wp")
-	// 	console.log(isMount)
-
-	// 	if (isPublishingPost) {
-	// 		console.log('Post is being published.');
-	// 	}
-	// });
-
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
