@@ -95,14 +95,6 @@ const FB_TypographyControl = ({
         }
     };
 
-	// const handleFontFamilyChange = (newFontFamily) => {
-	// 	onChangeFontFamily(newFontFamily);
-
-    //     if (newFontFamily !== 'Default') {
-    //         loadGoogleFont(newFontFamily);
-    //     }
-	// };
-
 	const handleGlobalFontFamilyChange = (newFontSize) => {
 		onChangeGlobalFontFamily(newFontSize);
 	};
@@ -208,35 +200,33 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            {/* <SelectControl
+                            <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
-                                options={FONT_FAMILYS}
-                                value={fontFamily}
-                                onChange={handleFontFamilyChange}
-                            /> */}
-                            <Select2 
-                                options={FONT_FAMILYS}
-                                value={selectedFontFamilyOption}
-                                onChange={handleFontFamilyChange}
-                                className="fb-select2-control"
-                            />
-							<FB_Range
-								min={0}
-								max={200}
-								label={__("Font Size", "frontis-blocks")}
-								rangeValue={fontSize}
-								onChangeHandler={handleFontSizeChange}
-								rangeUnitHandler={handleFontSizeUnitChange}
-								deviceType={deviceType}
-								units={fontSizeUnits}
-								setAttributes={setAttributes}
-								rangeStep={1}
-								resetFallbackValue={''}
-                                globalIcon={true}
-                                globalTypographyType={'fontSize'}
-                                globalTypographyValue={globalFontSize}
-                                setGlobalTypographyValue={handleGlobalFontSizeChange}
-							/>
+                            >
+                                <Select2 
+                                    options={FONT_FAMILYS}
+                                    value={selectedFontFamilyOption}
+                                    onChange={handleFontFamilyChange}
+                                    className="fb-select2-control"
+                                />
+                            </BaseControl>
+				<FB_Range
+					min={0}
+					max={200}
+					label={__("Font Size", "frontis-blocks")}
+					rangeValue={fontSize}
+					onChangeHandler={handleFontSizeChange}
+					rangeUnitHandler={handleFontSizeUnitChange}
+					deviceType={deviceType}
+					units={fontSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={''}
+					globalIcon={true}
+					globalTypographyType={'fontSize'}
+					globalTypographyValue={globalFontSize}
+					setGlobalTypographyValue={handleGlobalFontSizeChange}
+				/>
 
                             <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
