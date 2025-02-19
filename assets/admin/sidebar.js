@@ -677,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var generateCSSVariables = function generateCSSVariables(data, deviceType) {
-  var _iframe2, _iframe3;
+  var _iframe4, _iframe5;
   var createValueWithUnit = function createValueWithUnit(value, unit) {
     if (!value || value === 'Default') return '0px';
     return "".concat(value).concat(unit || '');
@@ -817,10 +817,15 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
     ['fontFamily'].forEach(function (prop) {
       var fontFamily = getValue(data[key], prop);
       if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
-        var _iframe$contentWindow;
+        var _iframe2, _iframe3;
         fontFamilies.add(fontFamily);
         var _iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-        var _iframeDocument = (_iframe === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || (_iframe === null || _iframe === void 0 || (_iframe$contentWindow = _iframe.contentWindow) === null || _iframe$contentWindow === void 0 ? void 0 : _iframe$contentWindow.document) || document;
+
+        // If not found, try the editor-canvas iframe
+        if (!_iframe) {
+          _iframe = document.querySelector('iframe[name="editor-canvas"]');
+        }
+        var _iframeDocument = ((_iframe2 = _iframe) === null || _iframe2 === void 0 ? void 0 : _iframe2.contentDocument) || ((_iframe3 = _iframe) === null || _iframe3 === void 0 || (_iframe3 = _iframe3.contentWindow) === null || _iframe3 === void 0 ? void 0 : _iframe3.document) || document;
 
         // Generate font URL and add to the iframe's document
         var fontUrl = "https://fonts.googleapis.com/css?family=".concat(fontFamily.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
@@ -831,8 +836,6 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
       }
     });
   });
-  console.log("paragraphStyles paragraphStyles");
-  console.log(paragraphStyles);
   if (paragraphStyles === '') {
     return false;
   }
@@ -841,23 +844,84 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var headingGrouped = '';
   var allCombinedStyles = '';
   var styles = '';
-  console.log(fileName === 'post.php');
   if (fileName === 'post.php') {
-    console.log(deviceType);
-    // Apply individual styles for each heading (h1, h2, h3, etc.)
-    if (deviceType !== 'Desktop') {
-      headingGrouped = "\n                body .is-root-container h1 {\n                    ".concat(heading1Styles, "\n                }\n                body .is-root-container h2 {\n                    ").concat(heading2Styles, "\n                }\n                body .is-root-container h3 {\n                    ").concat(heading3Styles, "\n                }\n                body .is-root-container h4 {\n                    ").concat(heading4Styles, "\n                }\n                body .is-root-container h5 {\n                    ").concat(heading5Styles, "\n                }\n                body .is-root-container h6 {\n                    ").concat(heading6Styles, "\n                }\n            ");
+    headingGrouped = "\n            body .is-root-container h1 {\n                ".concat(heading1Styles, "\n            }\n            body .is-root-container h2 {\n                ").concat(heading2Styles, "\n            }\n            body .is-root-container h3 {\n                ").concat(heading3Styles, "\n            }\n            body .is-root-container h4 {\n                ").concat(heading4Styles, "\n            }\n            body .is-root-container h5 {\n                ").concat(heading5Styles, "\n            }\n            body .is-root-container h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
 
-      // Styles for the "all" combined typography
-      allCombinedStyles = "\n                body .is-root-container h1{\n                    ".concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h2{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h3{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h4{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h5{\n                    ").concat(combinedHeadingStyles, "\n                }\n                body .is-root-container h6 {\n                    ").concat(combinedHeadingStyles, "\n                }\n            ");
-      styles = "\n                :root {\n                    ".concat(rootStyles, "\n                    ").concat(desktopStyles, "\n                }\n                @media (max-width: 1024px) {\n                    :root {\n                        ").concat(tabletStyles, "\n                    }\n                }\n                @media (max-width: 767px) {\n                    :root {\n                        ").concat(mobileStyles, "\n                    }\n                }\n\n                body .is-root-container p {\n                    ").concat(paragraphStyles, "\n                }\n\n                body .is-root-container a{\n                    ").concat(linkStyles, "\n                }\n                body .is-root-container p a {\n                    ").concat(linkStyles, "\n                }\n\n                body .is-root-container .wp-block-button__link {\n                    ").concat(buttonStyles, "\n                }\n                body .is-root-container button {\n                    ").concat(buttonStyles, "\n                }\n\n                body .is-root-container figcaption {\n                    ").concat(captionStyles, "\n                }\n                ").concat(allCombinedStyles, "\n                ").concat(headingGrouped, "\n            ");
-    } else {
-      headingGrouped = "\n                body .editor-visual-editor h1 {\n                    ".concat(heading1Styles, "\n                }\n                body .editor-visual-editor h2 {\n                    ").concat(heading2Styles, "\n                }\n                body .editor-visual-editor h3 {\n                    ").concat(heading3Styles, "\n                }\n                body .editor-visual-editor h4 {\n                    ").concat(heading4Styles, "\n                }\n                body .editor-visual-editor h5 {\n                    ").concat(heading5Styles, "\n                }\n                body .editor-visual-editor h6 {\n                    ").concat(heading6Styles, "\n                }\n            ");
+    // Styles for the "all" combined typography
+    allCombinedStyles = "\n            body .is-root-container h1{\n                ".concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h2{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h3{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h4{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h5{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h6 {\n                ").concat(combinedHeadingStyles, "\n            }\n        ");
+    styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .is-root-container p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .is-root-container a{\n                ").concat(linkStyles, "\n            }\n            body .is-root-container p a {\n                ").concat(linkStyles, "\n            }\n\n            body .is-root-container .wp-block-button__link {\n                ").concat(buttonStyles, "\n            }\n            body .is-root-container button {\n                ").concat(buttonStyles, "\n            }\n\n            body .is-root-container figcaption {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
+    // // Apply individual styles for each heading (h1, h2, h3, etc.)
+    // if(deviceType !== 'Desktop') {
 
-      // Styles for the "all" combined typography
-      allCombinedStyles = "\n                body .editor-visual-editor h1,\n                body .editor-visual-editor h2,\n                body .editor-visual-editor h3,\n                body .editor-visual-editor h4,\n                body .editor-visual-editor h5,\n                body .editor-visual-editor h6 {\n                    ".concat(combinedHeadingStyles, "\n                }\n            ");
-      styles = "\n                :root {\n                    ".concat(rootStyles, "\n                    ").concat(desktopStyles, "\n                }\n                @media (max-width: 1024px) {\n                    :root {\n                        ").concat(tabletStyles, "\n                    }\n                }\n                @media (max-width: 767px) {\n                    :root {\n                        ").concat(mobileStyles, "\n                    }\n                }\n\n                body .editor-visual-editor p {\n                    ").concat(paragraphStyles, "\n                }\n\n                body .editor-visual-editor a, body .editor-visual-editor p a {\n                    ").concat(linkStyles, "\n                }\n\n                body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {\n                    ").concat(buttonStyles, "\n                }\n\n                body .editor-visual-editor figcaption {\n                    ").concat(captionStyles, "\n                }\n                ").concat(allCombinedStyles, "\n                ").concat(headingGrouped, "\n            ");
-    }
+    // } else {
+    //     headingGrouped = `
+    //         body .editor-visual-editor h1 {
+    //             ${heading1Styles}
+    //         }
+    //         body .editor-visual-editor h2 {
+    //             ${heading2Styles}
+    //         }
+    //         body .editor-visual-editor h3 {
+    //             ${heading3Styles}
+    //         }
+    //         body .editor-visual-editor h4 {
+    //             ${heading4Styles}
+    //         }
+    //         body .editor-visual-editor h5 {
+    //             ${heading5Styles}
+    //         }
+    //         body .editor-visual-editor h6 {
+    //             ${heading6Styles}
+    //         }
+    //     `;
+
+    //     // Styles for the "all" combined typography
+    //     allCombinedStyles = `
+    //         body .editor-visual-editor h1,
+    //         body .editor-visual-editor h2,
+    //         body .editor-visual-editor h3,
+    //         body .editor-visual-editor h4,
+    //         body .editor-visual-editor h5,
+    //         body .editor-visual-editor h6 {
+    //             ${combinedHeadingStyles}
+    //         }
+    //     `;
+
+    //     styles = `
+    //         :root {
+    //             ${rootStyles}
+    //             ${desktopStyles}
+    //         }
+    //         @media (max-width: 1024px) {
+    //             :root {
+    //                 ${tabletStyles}
+    //             }
+    //         }
+    //         @media (max-width: 767px) {
+    //             :root {
+    //                 ${mobileStyles}
+    //             }
+    //         }
+
+    //         body .editor-visual-editor p {
+    //             ${paragraphStyles}
+    //         }
+
+    //         body .editor-visual-editor a, body .editor-visual-editor p a {
+    //             ${linkStyles}
+    //         }
+
+    //         body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
+    //             ${buttonStyles}
+    //         }
+
+    //         body .editor-visual-editor figcaption {
+    //             ${captionStyles}
+    //         }
+    //         ${allCombinedStyles}
+    //         ${headingGrouped}
+    //     `;
+    // }
   } else {
     // Apply individual styles for each heading (h1, h2, h3, etc.)
     headingGrouped = "\n            body .wp-site-blocks h1 {\n                ".concat(heading1Styles, "\n            }\n            body .wp-site-blocks h2 {\n                ").concat(heading2Styles, "\n            }\n            body .wp-site-blocks h3 {\n                ").concat(heading3Styles, "\n            }\n            body .wp-site-blocks h4 {\n                ").concat(heading4Styles, "\n            }\n            body .wp-site-blocks h5 {\n                ").concat(heading5Styles, "\n            }\n            body .wp-site-blocks h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
@@ -867,18 +931,20 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
     styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .wp-site-blocks p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .wp-site-blocks a, body .wp-site-blocks p a {\n                ").concat(linkStyles, "\n            }\n\n            body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n                ").concat(buttonStyles, "\n            }\n\n            body .wp-site-blocks figcaption {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
   }
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-  var iframeDocument = ((_iframe2 = iframe) === null || _iframe2 === void 0 ? void 0 : _iframe2.contentDocument) || ((_iframe3 = iframe) === null || _iframe3 === void 0 || (_iframe3 = _iframe3.contentWindow) === null || _iframe3 === void 0 ? void 0 : _iframe3.document) || document;
+  var iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
   var styleTag = iframeDocument.getElementById("global-typo");
   if (fileName === 'post.php') {
     if (deviceType !== 'Desktop') {
-      var _iframe4, _iframe5;
-      iframe = document.querySelector('iframe[name="editor-canvas"]');
-      iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
-      styleTag = iframeDocument.getElementById("global-typo");
-    } else {
       var _iframe6, _iframe7;
       iframe = document.querySelector('iframe[name="editor-canvas"]');
       iframeDocument = ((_iframe6 = iframe) === null || _iframe6 === void 0 ? void 0 : _iframe6.contentDocument) || ((_iframe7 = iframe) === null || _iframe7 === void 0 || (_iframe7 = _iframe7.contentWindow) === null || _iframe7 === void 0 ? void 0 : _iframe7.document) || document;
+      styleTag = iframeDocument.getElementById("global-typo");
+      console.log("iframeDocument");
+      console.log(iframeDocument);
+    } else {
+      var _iframe8, _iframe9;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe8 = iframe) === null || _iframe8 === void 0 ? void 0 : _iframe8.contentDocument) || ((_iframe9 = iframe) === null || _iframe9 === void 0 || (_iframe9 = _iframe9.contentWindow) === null || _iframe9 === void 0 ? void 0 : _iframe9.document) || document;
       styleTag = iframeDocument.getElementById("global-typo");
     }
   }
@@ -1892,62 +1958,6 @@ var TypographySettings = function TypographySettings(props) {
     }))));
     setIsMount(true);
   };
-
-  // Save to database
-  // subscribe(() => {
-  // 	const isSavingPost = select('core/editor').isSavingPost();
-  // 	const isAutosavingPost = select('core/editor').isAutosavingPost();
-
-  // 	if (!isMount || isAutosavingPost || !isSavingPost) {
-  // 		return;
-  // 	}
-
-  // 	if(isMount) {
-  // 		handleUpdateSettings();
-  // 	}
-
-  // 	setIsMount(false);
-  // });
-
-  // useEffect(() => {
-  //     const unsubscribe = subscribe(() => {
-  //         const editor = select('core/editor');
-  //         const isSavingPost = editor.isSavingPost();
-  //         const isAutoSaving = editor.isAutosavingPost();
-
-  //         // Manual save detect
-  //         if (isSavingPost && !isAutoSaving && !isSaving) {
-  //             setIsSaving(true);
-  //             handleUpdateSettings();
-  //         }
-
-  //         // Reset state after saving completes
-  //         if (!isSavingPost) {
-  //             setIsSaving(false);
-  //         }
-  //     });
-
-  //     return () => unsubscribe();
-  // }, []);
-
-  // wp.data.subscribe(() => {
-  // 	const isSavingPost = wp.data.select('core/editor').isSavingPost();
-  // 	const isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
-  // 	const isPublishingPost = wp.data.select('core/editor').isPublishingPost();
-
-  // 	if (isSavingPost && !isAutosavingPost && isMount) {
-  // 		handleUpdateSettings();
-  // 		setIsMount(false);
-  // 	}
-
-  // 	console.log("Hey checking isMount wp")
-  // 	console.log(isMount)
-
-  // 	if (isPublishingPost) {
-  // 		console.log('Post is being published.');
-  // 	}
-  // });
-
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
@@ -3895,9 +3905,12 @@ var FB_Range = function FB_Range(_ref) {
     isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
     _ref$globalIcon = _ref.globalIcon,
     globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
-    globalTypographyType = _ref.globalTypographyType,
-    globalTypographyValue = _ref.globalTypographyValue,
-    setGlobalTypographyValue = _ref.setGlobalTypographyValue;
+    _ref$globalTypography = _ref.globalTypographyType,
+    globalTypographyType = _ref$globalTypography === void 0 ? null : _ref$globalTypography,
+    _ref$globalTypography2 = _ref.globalTypographyValue,
+    globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
+    _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3930,19 +3943,50 @@ var FB_Range = function FB_Range(_ref) {
     label: 'None',
     value: 'none'
   }];
+  var storedData = localStorage.getItem("fb_custom_typography");
+  var customTypoData = storedData ? JSON.parse(storedData) : {};
+
+  // Convert object to array
+  var customTypoArray = Object.keys(customTypoData).map(function (key) {
+    return {
+      id: key,
+      name: customTypoData[key].name
+    };
+  });
   Object.entries(globalTypo).forEach(function (_ref2) {
+    var _properties$fontSize, _properties$lineHeigh, _properties$letterSpa;
     var _ref3 = _slicedToArray(_ref2, 2),
       label = _ref3[0],
       properties = _ref3[1];
-    if (globalTypographyType === 'fontSize') {
-      var _properties$fontSize;
+    var updatedValue = null;
+    if (globalTypographyType === 'fontSize' && (properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable) !== undefined) {
+      var _properties$fontSize2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$fontSize2 = properties.fontSize) === null || _properties$fontSize2 === void 0 ? void 0 : _properties$fontSize2.variable, ")");
+    }
+    if (globalTypographyType === 'lineHeight' && (properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable) !== undefined) {
+      var _properties$lineHeigh2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh2 = properties.lineHeight) === null || _properties$lineHeigh2 === void 0 ? void 0 : _properties$lineHeigh2.variable, ")");
+    }
+    if (globalTypographyType === 'letterSpacing' && (properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable) !== undefined) {
+      var _properties$letterSpa2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa2 = properties.letterSpacing) === null || _properties$letterSpa2 === void 0 ? void 0 : _properties$letterSpa2.variable, ")");
+    }
+    if (updatedValue !== null) {
+      var newLabel = label === 'body' ? 'Body' : label === 'captions' ? 'Captions' : label === 'button' ? 'Button' : label === 'link' ? 'Link' : label === 'h1' ? 'Heading One' : label === 'h2' ? 'Heading Two' : label === 'h3' ? 'Heading Three' : label === 'h4' ? 'Heading Four' : label === 'h5' ? 'Heading Five' : label === 'h6' ? 'Heading Six' : label;
       GB_TYPO.push({
-        label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable, ")")
+        label: newLabel,
+        value: updatedValue
       });
     }
   });
-  console.log(GB_TYPO);
+  GB_TYPO.forEach(function (item) {
+    var matchedTypo = customTypoArray.find(function (typo) {
+      return typo.id === item.label;
+    });
+    if (matchedTypo) {
+      item.label = matchedTypo.name;
+    }
+  });
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -3987,22 +4031,14 @@ var FB_Range = function FB_Range(_ref) {
         "aria-expanded": isOpen,
         className: "fb-setting-global-icon-btn ".concat(globalTypographyValue !== 'none' && 'global-active')
       }, /*#__PURE__*/React.createElement("svg", {
-        width: "19",
-        height: "19",
-        viewBox: "0 0 19 19",
-        fill: "none",
+        width: "16px",
+        height: "16px",
+        viewBox: "0 0 25 25",
         xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      })));
+      }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
+        "class": "st0",
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+      }))));
     },
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement("div", {
@@ -4011,6 +4047,7 @@ var FB_Range = function FB_Range(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Styles", "frontis-blocks"),
+        className: "fb-setting-global-typo-select",
         options: GB_TYPO,
         value: globalTypographyValue,
         onChange: handleGlobalTypographyValue
