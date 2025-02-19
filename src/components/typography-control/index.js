@@ -25,6 +25,12 @@ import FB_GBSelectControl from '@Components/gb-select-control';
 
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
+
+    globalTypoSwitcher,
+    onChangeGlobalTypoSwitcher,
+    globalTypoType,
+    onChangeGlobalTypoType,
+
     fontFamily,
 	onChangeFontFamily,
     globalFontFamily = '',
@@ -95,16 +101,21 @@ const FB_TypographyControl = ({
         }
     };
 
-	const handleGlobalFontFamilyChange = (newFontSize) => {
-		onChangeGlobalFontFamily(newFontSize);
+	const handleGlobalTypoTypeChange = (globalTypo) => {
+		onChangeGlobalTypoType(globalTypo);
 	};
+
+	// const handleGlobalFontFamilyChange = (newFontSize) => {
+	// 	onChangeGlobalFontFamily(newFontSize);
+	// };
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
 	};
-	const handleGlobalFontSizeChange = (globalFontSize) => {
-		onChangeGlobalFontSize(globalFontSize);
-	};
+
+	// const handleGlobalFontSizeChange = (globalFontSize) => {
+	// 	onChangeGlobalFontSize(globalFontSize);
+	// };
 
 	const handleFontSizeUnitChange = (newFontSizeUnit) => {
 		onChangeFontSizeUnit(newFontSizeUnit);
@@ -114,41 +125,41 @@ const FB_TypographyControl = ({
 		onChangeFontWeight(newFontWeight);
 	};
 
-	const handleGlobalFontWeightChange = (globalFontWeight) => {
-		onChangeGlobalFontWeight(globalFontWeight);
-	};
+	// const handleGlobalFontWeightChange = (globalFontWeight) => {
+	// 	onChangeGlobalFontWeight(globalFontWeight);
+	// };
 
     const handleFontStyleChange = (newFontStyle) => {
 		onChangeFontStyle(newFontStyle);
 	};
 
-    const handleGlobalFontStyleChange = (globalFontStyle) => {
-		onChangeGlobalFontStyle(globalFontStyle);
-	};
+    // const handleGlobalFontStyleChange = (globalFontStyle) => {
+	// 	onChangeGlobalFontStyle(globalFontStyle);
+	// };
 
     const handleTextTransformChange = (newTextTransform) => {
 		onChangeTextTransform(newTextTransform);
 	};
 
-    const handleGlobalTextTransformChange = (globalTextTransform) => {
-		onChangeGlobalTextTransform(globalTextTransform);
-	};
+    // const handleGlobalTextTransformChange = (globalTextTransform) => {
+	// 	onChangeGlobalTextTransform(globalTextTransform);
+	// };
 
     const handleTextDecorationChange = (newTextDecoration) => {
 		onChangeTextDecoration(newTextDecoration);
 	};
 
-    const handleGlobalTextDecorationChange = (globalTextDecoration) => {
-		onChangeGlobalTextDecoration(globalTextDecoration);
-	};
+    // const handleGlobalTextDecorationChange = (globalTextDecoration) => {
+	// 	onChangeGlobalTextDecoration(globalTextDecoration);
+	// };
 
     const handleLetterSpacingChange = (newLetterSpacing) => {
         onChangeLetterSpacing(newLetterSpacing);
     };
 
-    const handleGlobalLetterSpacingChange = (globalLetterSpacing) => {
-        onChangeGlobalLetterSpacing(globalLetterSpacing);
-    };
+    // const handleGlobalLetterSpacingChange = (globalLetterSpacing) => {
+    //     onChangeGlobalLetterSpacing(globalLetterSpacing);
+    // };
 
     const handleLetterSpacingUnitChange = (newLetterSpacingUnit) => {
         onChangeLetterSpacingUnit(newLetterSpacingUnit);
@@ -158,20 +169,102 @@ const FB_TypographyControl = ({
         onChangeLineHeight(newLineHeight);
     };
 
-    const handleGlobalLineHeightChange = (globalLineHeight) => {
-        onChangeGlobalLineHeight(globalLineHeight);
-    };
+    // const handleGlobalLineHeightChange = (globalLineHeight) => {
+    //     onChangeGlobalLineHeight(globalLineHeight);
+    // };
 
     const handleLineHeightUnitChange = (newLineHeightUnit) => {
         onChangeLineHeightUnit(newLineHeightUnit);
     };
 
-    const globalTypo = FrontisBlocksData.global_typography;
-    // console.log(globalTypo)
 
-    Object.entries(globalTypo).forEach(([label, properties]) => {
-        // console.log(label);
+    const globalTypoData = FrontisBlocksData.global_typography;
+    const GB_TYPO = [{ label: 'None', value: 'none' }];
+    console.log(globalTypoData);
+
+    const storedData = localStorage.getItem("fb_custom_typography");
+    const customTypoData = storedData ? JSON.parse(storedData) : {};
+
+    // Convert object to array
+    const customTypoArray = Object.keys(customTypoData).map(key => ({
+        id: key,
+        name: customTypoData[key].name
+    }));
+
+    Object.entries(globalTypoData).forEach(([label, properties]) => {
+
+            let newLabel =
+                label === 'body' ? 'Body' :
+                label === 'captions' ? 'Captions' :
+                label === 'button' ? 'Button' :
+                label === 'link' ? 'Link' :
+                label === 'h1' ? 'Heading One' :
+                label === 'h2' ? 'Heading Two' :
+                label === 'h3' ? 'Heading Three' :
+                label === 'h4' ? 'Heading Four' :
+                label === 'h5' ? 'Heading Five' :
+                label === 'h6' ? 'Heading Six' :
+                label; // Default label
+
+            GB_TYPO.push({ label: newLabel, value: label });
+
+            if (globalTypoType === label) {
+                Object.entries(properties).forEach(([itemLabel, itemProperties]) => {
+                    if (itemLabel === 'fontFamily') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalFontFamilyChange(itemProperties.variable);
+                        onChangeGlobalFontFamily(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'fontSize') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalFontSizeChange(itemProperties.variable);
+                        onChangeGlobalFontSize(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'fontWeight') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalFontWeightChange(itemProperties.variable);
+                        onChangeGlobalFontWeight(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'fontStyle') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalFontStyleChange(itemProperties.variable);
+                        onChangeGlobalFontStyle(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'textTransform') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalTextTransformChange(itemProperties.variable);
+                        onChangeGlobalTextTransform(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'textDecoration') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalTextDecorationChange(itemProperties.variable);
+                        onChangeGlobalTextDecoration(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'letterSpacing') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalLetterSpacingChange(itemProperties.variable);
+                        onChangeGlobalLetterSpacing(`var(${itemProperties.variable})`)
+                    } 
+                    if (itemLabel === 'lineHeight') {
+                        console.log(itemProperties.variable);
+                        // handleGlobalLineHeightChange(itemProperties.variable);
+                        onChangeGlobalLineHeight(`var(${itemProperties.variable})`)
+                    } 
+                });
+            }
     });
+
+    // Fix: Update GB_TYPO if label matches customTypoArray id
+    GB_TYPO.forEach(item => {
+        const matchedTypo = customTypoArray.find(typo => typo.id === item.label);
+        if (matchedTypo) {
+            item.label = matchedTypo.name; // Update label to match name from customTypoArray
+        }
+    });
+
+    // onChangeGlobalTypo(GB_TYPO_DATA);
+    console.log("GB_TYPO:", GB_TYPO);
+
 
 
     return (
@@ -201,6 +294,16 @@ const FB_TypographyControl = ({
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
                             <BaseControl
+                                label={__("Global Fonts", "frontis-blocks")}
+                            >
+                                <SelectControl 
+                                    options={GB_TYPO}
+                                    value={globalTypoType}
+                                    onChange={handleGlobalTypoTypeChange}
+                                />
+                            </BaseControl>
+
+                            <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
                             >
                                 <Select2 
@@ -222,10 +325,7 @@ const FB_TypographyControl = ({
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={''}
-					globalIcon={true}
-					globalTypographyType={'fontSize'}
-					globalTypographyValue={globalFontSize}
-					setGlobalTypographyValue={handleGlobalFontSizeChange}
+                    globalReset={globalTypoSwitcher.fontSize}
 				/>
 
                             <FB_GBSelectControl
@@ -233,10 +333,6 @@ const FB_TypographyControl = ({
                                 controlOptions={FONT_WEIGHT}
                                 selectValue={fontWeight}
                                 setSelectValue={handleFontWeightChange}
-                                globalIcon={true}
-                                globalTypographyType={'fontWeight'}
-                                globalTypographyValue={globalFontWeight}
-                                setGlobalTypographyValue={handleGlobalFontWeightChange}
                             />
 
                             <FB_GBSelectControl
@@ -244,10 +340,6 @@ const FB_TypographyControl = ({
                                 controlOptions={FONT_STYLE}
                                 selectValue={fontStyle}
                                 setSelectValue={handleFontStyleChange}
-                                globalIcon={true}
-                                globalTypographyType={'fontStyle'}
-                                globalTypographyValue={globalFontStyle}
-                                setGlobalTypographyValue={handleGlobalFontStyleChange}
                             />
 
                             <FB_GBSelectControl
@@ -255,10 +347,6 @@ const FB_TypographyControl = ({
                                 controlOptions={TEXT_TRANSFORM}
                                 selectValue={textTransform}
                                 setSelectValue={handleTextTransformChange}
-                                globalIcon={true}
-                                globalTypographyType={'textTransform'}
-                                globalTypographyValue={globalTextTransform}
-                                setGlobalTypographyValue={handleGlobalTextTransformChange}
                             />
                             
                             <FB_GBSelectControl
@@ -266,10 +354,6 @@ const FB_TypographyControl = ({
                                 controlOptions={TEXT_DECORATION}
                                 selectValue={textDecoration}
                                 setSelectValue={handleTextDecorationChange}
-                                globalIcon={true}
-                                globalTypographyType={'textDecoration'}
-                                globalTypographyValue={globalTextDecoration}
-                                setGlobalTypographyValue={handleGlobalTextDecorationChange}
                             />
                             
                             <FB_Range
@@ -284,10 +368,6 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
-                                globalIcon={true}
-                                globalTypographyType={'letterSpacing'}
-                                globalTypographyValue={globalLetterSpacing}
-                                setGlobalTypographyValue={handleGlobalLetterSpacingChange}
                             />
                             <FB_Range
                                 min={0}
@@ -301,10 +381,6 @@ const FB_TypographyControl = ({
                                 setAttributes={setAttributes}
                                 rangeStep={1}
                                 resetFallbackValue={''}
-                                globalIcon={true}
-                                globalTypographyType={'lineHeight'}
-                                globalTypographyValue={globalLineHeight}
-                                setGlobalTypographyValue={handleGlobalLineHeightChange}
                             />
                         </BaseControl>
                     </div>
