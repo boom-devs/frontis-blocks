@@ -4044,31 +4044,48 @@ var FB_Range = function FB_Range(_ref) {
     label: 'None',
     value: 'none'
   }];
+  var storedData = localStorage.getItem("fb_custom_typography");
+  var customTypoData = storedData ? JSON.parse(storedData) : {};
+
+  // Convert object to array
+  var customTypoArray = Object.keys(customTypoData).map(function (key) {
+    return {
+      id: key,
+      name: customTypoData[key].name
+    };
+  });
   Object.entries(globalTypo).forEach(function (_ref2) {
     var _properties$fontSize, _properties$lineHeigh, _properties$letterSpa;
     var _ref3 = _slicedToArray(_ref2, 2),
       label = _ref3[0],
       properties = _ref3[1];
+    var updatedValue = null;
     if (globalTypographyType === 'fontSize' && (properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable) !== undefined) {
       var _properties$fontSize2;
-      GB_TYPO.push({
-        label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize2 = properties.fontSize) === null || _properties$fontSize2 === void 0 ? void 0 : _properties$fontSize2.variable, ")")
-      });
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$fontSize2 = properties.fontSize) === null || _properties$fontSize2 === void 0 ? void 0 : _properties$fontSize2.variable, ")");
     }
     if (globalTypographyType === 'lineHeight' && (properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable) !== undefined) {
       var _properties$lineHeigh2;
-      GB_TYPO.push({
-        label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh2 = properties.lineHeight) === null || _properties$lineHeigh2 === void 0 ? void 0 : _properties$lineHeigh2.variable, ")")
-      });
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh2 = properties.lineHeight) === null || _properties$lineHeigh2 === void 0 ? void 0 : _properties$lineHeigh2.variable, ")");
     }
     if (globalTypographyType === 'letterSpacing' && (properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable) !== undefined) {
       var _properties$letterSpa2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa2 = properties.letterSpacing) === null || _properties$letterSpa2 === void 0 ? void 0 : _properties$letterSpa2.variable, ")");
+    }
+    if (updatedValue !== null) {
+      var newLabel = label === 'body' ? 'Body' : label === 'captions' ? 'Captions' : label === 'button' ? 'Button' : label === 'link' ? 'Link' : label === 'h1' ? 'Heading One' : label === 'h2' ? 'Heading Two' : label === 'h3' ? 'Heading Three' : label === 'h4' ? 'Heading Four' : label === 'h5' ? 'Heading Five' : label === 'h6' ? 'Heading Six' : label;
       GB_TYPO.push({
-        label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa2 = properties.letterSpacing) === null || _properties$letterSpa2 === void 0 ? void 0 : _properties$letterSpa2.variable, ")")
+        label: newLabel,
+        value: updatedValue
       });
+    }
+  });
+  GB_TYPO.forEach(function (item) {
+    var matchedTypo = customTypoArray.find(function (typo) {
+      return typo.id === item.label;
+    });
+    if (matchedTypo) {
+      item.label = matchedTypo.name;
     }
   });
   return /*#__PURE__*/React.createElement("div", {
