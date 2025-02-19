@@ -77,9 +77,9 @@
                 font-size: $medium-font-size;
                 font-weight: 400;
                 line-height: $body-line-height;
-                margin: 10px 0;
+                margin: 0 0 10px;
                 min-height: auto;
-                text-transform: capitalize !important;
+                text-transform: capitalize;
             }
 			
             .components-text-control__input,
