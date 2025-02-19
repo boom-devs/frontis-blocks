@@ -2749,7 +2749,8 @@
   background: #DBEBFC;
   color: #4B9DEF;
 }
-.fb-inspector-control .components-panel__body .components-base-control__field .components-button.fb-setting-background-color-setting-icon-btn {
+.fb-inspector-control .components-panel__body .components-base-control__field .components-button.fb-setting-background-color-setting-icon-btn,
+.fb-inspector-control .components-panel__body .components-base-control__field .components-button.fb-setting-color-setting-icon-btn {
   height: auto;
   padding: 6px;
 }
