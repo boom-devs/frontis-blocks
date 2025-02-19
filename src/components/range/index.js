@@ -22,6 +22,7 @@ const FB_Range = ({
 	globalTypographyType = null,
 	globalTypographyValue = 'none',
 	setGlobalTypographyValue = null,
+	globalReset = false,
 }) => {
 	// Ensure default/fallback value for the current deviceType
 	useEffect(() => {
@@ -49,6 +50,10 @@ const FB_Range = ({
 	const resetRangeValue = () => {
 		setRangeValue(resetFallbackValue);
 	};
+
+	// if(globalReset === true) {
+	// 	setRangeValue(resetFallbackValue);
+	// }
 
 	const handleGlobalTypographyValue = (value) => {
 		setGlobalTypographyValue(value);
