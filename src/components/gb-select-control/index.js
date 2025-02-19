@@ -26,26 +26,61 @@ const FB_GBSelectControl = ({
 		setGlobalTypographyValue(value);
 	};
 
+
 	const globalTypo = FrontisBlocksData.global_typography;
 	const GB_TYPO = [{ label: 'None', value: 'none' }];
 
-    Object.entries(globalTypo).forEach(([label, properties]) => {
+	const storedData = localStorage.getItem("fb_custom_typography");
+	const customTypoData = storedData ? JSON.parse(storedData) : {};
 
-		if(globalTypographyType === 'fontWeight' && properties?.fontWeight?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.fontWeight?.variable})` });
+	// Convert object to array
+	const customTypoArray = Object.keys(customTypoData).map(key => ({
+		id: key,
+		name: customTypoData[key].name
+	}));
+
+	Object.entries(globalTypo).forEach(([label, properties]) => {
+		let updatedValue = null;
+	
+		if (globalTypographyType === 'fontWeight' && properties?.fontWeight?.variable !== undefined) {
+			updatedValue = `var(${properties?.fontWeight?.variable})`;
 		}
-		if(globalTypographyType === 'fontStyle' && properties?.fontStyle?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.lineHeight?.variable})` });
+		if (globalTypographyType === 'fontStyle' && properties?.fontStyle?.variable !== undefined) {
+			updatedValue = `var(${properties?.fontStyle?.variable})`;
 		}
-		if(globalTypographyType === 'textDecoration' && properties?.textDecoration?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.textDecoration?.variable})` });
+		if (globalTypographyType === 'textDecoration' && properties?.textDecoration?.variable !== undefined) {
+			updatedValue = `var(${properties?.textDecoration?.variable})`;
 		}
-		if(globalTypographyType === 'textTransform' && properties?.textTransform?.variable !== undefined) {
-			GB_TYPO.push({ label: label, value: `var(${properties?.textTransform?.variable})` });
+		if (globalTypographyType === 'textTransform' && properties?.textTransform?.variable !== undefined) {
+			updatedValue = `var(${properties?.textTransform?.variable})`;
+		}
+	
+		if (updatedValue !== null) {
+			let newLabel =
+				label === 'body' ? 'Body' :
+				label === 'captions' ? 'Captions' :
+				label === 'button' ? 'Button' :
+				label === 'link' ? 'Link' :
+				label === 'h1' ? 'Heading One' :
+				label === 'h2' ? 'Heading Two' :
+				label === 'h3' ? 'Heading Three' :
+				label === 'h4' ? 'Heading Four' :
+				label === 'h5' ? 'Heading Five' :
+				label === 'h6' ? 'Heading Six' :
+				label;
+		
+			GB_TYPO.push({ label: newLabel, value: updatedValue });
 		}
 	});
+	
+	GB_TYPO.forEach(item => {
+		const matchedTypo = customTypoArray.find(typo => typo.id === item.label);
+		if (matchedTypo) {
+			item.label = matchedTypo.name;
+		}
+	});
+	
 
-	console.log(GB_TYPO);
 
 	return (
 		<div className="fb-setting-spacing-container">
