@@ -3420,6 +3420,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 											<FB_TypographyControl
+												globalTypoControlActive={true}
 												globalTypoSwitcher={headingGlobalTypoSwitcher}
 
 												globalTypoType={headingGlobalTypoType}

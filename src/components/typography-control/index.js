@@ -26,8 +26,9 @@ import FB_GBSelectControl from '@Components/gb-select-control';
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
 
-    globalTypoSwitcher,
-    globalTypoType,
+    globalTypoControlActive = false,
+    globalTypoSwitcher = {'fontFamily': 'false', 'fontSize': 'false', 'fontWeight': 'false', 'fontStyle': 'false', 'textTransform': 'false', 'textDecoration': 'false', 'letterSpacing': 'false', 'lineHeight': 'false' },
+    globalTypoType = 'none',
     onChangeGlobalTypoType,
 
     fontFamily,
@@ -261,8 +262,6 @@ const FB_TypographyControl = ({
         }
     });
 
-    // onChangeGlobalTypo(GB_TYPO_DATA);
-    console.log("GB_TYPO:", GB_TYPO);
 
 
 
@@ -292,14 +291,14 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            <BaseControl>
+                            {globalTypoControlActive === true && <BaseControl>
                                 <SelectControl
                                     label={__("Global Fonts", "frontis-blocks")}
                                     options={GB_TYPO}
                                     value={globalTypoType}
                                     onChange={handleGlobalTypoTypeChange}
                                 />
-                            </BaseControl>
+                            </BaseControl>}
 
                             <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
