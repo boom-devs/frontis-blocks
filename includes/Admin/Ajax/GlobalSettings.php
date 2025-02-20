@@ -568,7 +568,8 @@ class GlobalSettings extends AjaxBase
                     'fb-google-fonts',
                     "https://fonts.googleapis.com/css?family={$fonts_string}&display=swap",
                     array(),
-                    null
+                    FB_VERSION,
+                    true
                 );
             }
         }
