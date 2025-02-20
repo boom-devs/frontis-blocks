@@ -220,7 +220,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'textDecoration': {
-					variable: `--fb-global-${item}--font-decoration`,
+					variable: `--fb-global-${item}--text-decoration`,
 					value: value
 				}
 			}
@@ -242,7 +242,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'textTransform': {
-					variable: `--fb-global-${item}--font-transform`,
+					variable: `--fb-global-${item}--text-transform`,
 					value: value
 				}
 			}
@@ -267,7 +267,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'letterSpacing': {
-					variable: `--fb-global-${item}--font-letter-spacing`,
+					variable: `--fb-global-${item}--letter-spacing`,
 					value: value,
 					unit: {
 						'Desktop': 'px',
@@ -322,7 +322,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'lineHeight': {
-					variable: `--fb-global-${item}--font-line-height`,
+					variable: `--fb-global-${item}--line-height`,
 					value: value,
 					unit: {
 						'Desktop': 'px',

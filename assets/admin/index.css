@@ -2294,7 +2294,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .fb-setting-typography .components-base-control__field {
@@ -2338,7 +2338,6 @@
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field {
   display: flex;
   flex-direction: column;
-  gap: 15px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field .components-flex {
   gap: 0;
@@ -2353,6 +2352,16 @@
   margin: 10px 0 !important;
   min-height: auto;
   text-transform: capitalize !important;
+}
+.fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field .components-base-control__label {
+  color: #0B0C0E;
+  font-family: "Work Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  min-height: auto;
+  text-transform: capitalize;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header {
   display: flex;
@@ -2472,6 +2481,22 @@
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-range-control__wrapper .components-range-control__thumb-wrapper span {
   background-color: #399CFF;
+}
+
+.fb-setting-gb-select-control-label {
+  color: #0B0C0E;
+  font-family: "Work Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0 0 10px;
+  min-height: auto;
+  text-transform: capitalize;
+}
+
+.components-base-control__field .components-input-control__container .components-input-control__input {
+  height: 30px !important;
+  min-height: 30px !important;
 }
 
 .components-form-toggle.is-checked .components-form-toggle__track {
@@ -2678,9 +2703,9 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 1.4;
-  margin: 10px 0;
+  margin: 0 0 10px;
   min-height: auto;
-  text-transform: capitalize !important;
+  text-transform: capitalize;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-text-control__input,
 .fb-inspector-control .components-panel__body .components-base-control__field .components-textarea-control__input {

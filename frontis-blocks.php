@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Plugin Name: Frontis Blocks
- * Plugin URI: https://frontisblocks.com
- * Description: The ultimate blocks library for Gutenberg editor.
- * Author: WPmessiah
- * Author URI: https://WPmessiah.com
- * Version: 1.0.0
- * License: GPL3+
- * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain: frontis-blocks
- *
- * @package Frontis_Blocks
+ * Plugin Name:       Frontis Blocks – The Ultimate WordPress Block Plugin
+ * Plugin URI:        https://wpmessiah.com/products/frontis-blocks/
+ * Description:       The ultimate blocks library for Gutenberg editor.
+ * Version:           1.0.1
+ * Author:            WPmessiah
+ * Author URI:        https://wpmessiah.com/
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:       frontis-blocks
+ * Domain Path:       /languages
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -34,5 +34,4 @@ function wm_frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
 }
 
-//Kick of the plugin.
 wm_frontis_blocks();
