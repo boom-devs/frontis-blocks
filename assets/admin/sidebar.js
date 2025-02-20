@@ -1527,7 +1527,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'textDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
+        variable: "--fb-global-".concat(item, "--text-decoration"),
         value: value
       }
     }))));
@@ -1541,7 +1541,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'textTransform': {
-        variable: "--fb-global-".concat(item, "--font-transform"),
+        variable: "--fb-global-".concat(item, "--text-transform"),
         value: value
       }
     }))));
@@ -1556,7 +1556,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
+        variable: "--fb-global-".concat(item, "--letter-spacing"),
         value: value,
         unit: {
           'Desktop': 'px',
@@ -1590,7 +1590,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'lineHeight': {
-        variable: "--fb-global-".concat(item, "--font-line-height"),
+        variable: "--fb-global-".concat(item, "--line-height"),
         value: value,
         unit: {
           'Desktop': 'px',
