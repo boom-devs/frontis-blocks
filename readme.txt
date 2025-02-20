@@ -1,59 +1,112 @@
-# === Frontis Blocks ===
-
-**Contributors:** [wpmessiah](https://profiles.wordpress.org/wpmessiah/)  
-**Tags:** blocks, gutenberg, page builder  
-**Requires at least:** 6.0  
-**Tested up to:** 6.4  
-**Stable tag:** 1.0.0  
-**Requires PHP:** 7.4  
-**License:** GPLv2 or later  
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html  
+=== Frontis Blocks – The Ultimate WordPress Block Plugin ===
+Contributors: wpmessiah
+Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
+Requires at least: 6.0
+Tested up to: 6.7.2
+Stable tag: 1.0.1
+Requires PHP: 7.4
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Enhance your WordPress Gutenberg editor with powerful and flexible custom blocks.
 
-## Description
+== Description ==
 
-Frontis Blocks is a collection of custom Gutenberg blocks designed to extend the functionality of the WordPress block editor. Our blocks provide you with more design options and flexibility, allowing you to create stunning pages and posts with ease.
+Introducing Frontis Blocks, the ultimate Custom Gutenberg blocks plugin for WordPress users who value design freedom and ease of customization. With Frontis Blocks, you can edit your website in a more intuitive manner or create stunning websites in a matter of minutes.
 
-### Key Features
+Works flawlessly with all WordPress themes, but is equally best with our own **Frontis block theme**. Frontis Blocks provides a feature-packed collection of **block plugins**. It’s the perfect solution for anyone who wants to transform the native Gutenberg editor into a dynamic page builder. No matter your level of experience as a developer or as a complete beginner, you’ll enjoy the simplicity of drag-and-drop customization combined with advanced controls.
 
-- **Multiple Custom Blocks**: A variety of blocks for different purposes, from layout to content presentation.
-- **Easy to Use**: Intuitive controls that integrate seamlessly with the Gutenberg editor.
-- **Responsive Design**: All blocks are fully responsive and look great on any device.
-- **Performance Optimized**: Lightweight and fast-loading blocks that won't slow down your website.
-- **Regular Updates**: We're constantly improving and adding new features based on user feedback.
+If you’re considering popular solutions like Spectra (a well-known name in the WordPress world), rest assured that **Frontis Blocks** stands out thanks to its deep integration with our **Frontis theme**, high performance, and user-focused design. Explore why this is one of the most **Popular WordPress block plugin choices right now**.
 
-## Installation
+== Features at a Glance ==
+Our **WordPress Gutenberg blocks plugin** offers a rich set of blocks to cover almost any design need. With **Frontis Blocks**, you can build dynamic layouts, interactive sections, and polished content elements in a snap:
 
-1. Upload the plugin files to the `/wp-content/plugins/frontis-blocks` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress.
-3. Use the new blocks in the Gutenberg editor by searching for 'Frontis' in the block inserter.
+ - **Accordion:** Features collapsible elements for displaying content in a limited space. It allows users to expand and collapse sections as needed, which is ideal for FAQs or detailed lists that require space efficiency.
+ - **Advanced Image Features(Coming Soon):** Enhances images with text overlays, gradient backgrounds for readability, strategic content placement, and dynamic effects like blur and zoom to elevate visual engagement.
+ - **Advanced Heading Styles:** Offers diverse heading designs using various fonts, and decorative elements. Includes unique image masking techniques that highlight headings with creative backgrounds and shapes to capture attention.
+ - **Image Gallery:** Various layouts and hover effects for displaying images, suitable for portfolios, product galleries, or visual storytelling, enhancing the visual appeal and user engagement on websites.
+ - **Info Box:** Information boxes that combine icons, headings, and text in a structured layout, ideal for quick facts or highlights that need to stand out on a page.
+ - **Icon Box:** Utilizes icons combined with text to visually represent different services or features succinctly. This design is effective for quick scanning by users, offering an immediate understanding of the core services or features offered.
+ - **Advanced Button:** A variety of button styles including gradients, icons, and different shapes, providing versatile options for different design needs and interaction cues.
+ - **Dual Button:** Dual button designs for situations requiring two actions, like 'Buy Now' vs. 'Learn More', with stylistic coherence that ensures both options are visually balanced.
+ - **Advanced Video:** Displays different styles for embedding video content that enhance the visual appeal and engage users. These styles might include overlays, animations, or unique graphical elements that draw attention to the video content.
+ - **Countdown Timer:** Offers various countdown styles that can be used to highlight upcoming events, sales, or deadlines. Styles may range from simple numeric countdowns to more elaborate designs with full background images or animations.
+ - **Feature List:** Lists the key attributes or services of a product in an organized manner, using icons, short descriptions, and varying background colors to highlight individual features effectively.
+ - **Testimonials:** Features customer reviews in multiple styles, from simple text formats to more graphical interfaces with star ratings and photos, enhancing credibility and trust through user experiences
+ - **Counter(Coming Soon):** Displays numerical information such as user counts or project stats in an aesthetically pleasing format. Options include plain numbers, progress bars, and icons that cater to various design preferences.
+ - **Flip Box(Coming Soon):** Interactive boxes that flip to reveal additional content on hover or click, offering a dynamic way to present information such as team profiles or service details in a compact space.
+ - **Contact Form 7:** Different form designs that are crucial for gathering visitor information or inquiries. These designs vary in layout and styling, ensuring they can be seamlessly integrated into any site design while maintaining functionality and user engagement.
+ - **Fluent Form:** Showcases various styles of contact forms, each with aesthetically pleasing layouts that encourage user interaction. These forms are designed to be inviting with clear, user-friendly fields that make submitting information easy and straightforward.
+ - **Call to Action:** Various button styles for engaging users to take action, with contrasting colors and different shapes, including round and rectangle. Placement on boldly colored backgrounds enhances visibility and prompts user interaction.
+ - **Pricing Table:** Showcases different pricing plans or product packages in a clear and comparative way. This feature helps potential customers quickly scan different options and features, facilitating easier decision-making based on cost and service level.
+ - **Social Icons:** Multiple styles showcasing social media icons, ranging from minimalistic to brightly colored backgrounds, with or without text labels. This offers flexibility for integration into different website themes while maintaining brand consistency.
+ - **Post Grid:** Arrange posts or articles in a grid layout, optimizing the use of space and providing a clean, organized way to browse content. Different styles may include varying image sizes, hover effects, and metadata configurations.
+ - **Team Member:** Displays team member profiles in various formats, from basic lists to more dynamic presentations with social media links and detailed bios. This helps personalize a brand and showcase the people behind it in a visually engaging manner.
+ - **Advanced Navigation(Coming Soon):** Provides various navigation menu styles that can enhance the user interface of websites or applications. This feature includes options like multi-level dropdowns, mega menus, or icon-based navigation that improve the discoverability of site content.
+ - **Slider:** Sliders offer an interactive way to view multiple images or content pieces within a confined space. They can be customized with various effects, transitions, and controls, making it easy for users to browse through content seamlessly and intuitively.
 
-## Frequently Asked Questions
+This collection of **block plugins** is curated to fit any project—whether you’re building a portfolio, business site, blog, or e-commerce store.
 
-### Is Frontis Blocks compatible with my theme?
+== Why Choose Frontis Blocks? ==
 
-Yes, Frontis Blocks is designed to work with any WordPress theme that supports Gutenberg.
+**Seamless Theme Integration**
+While it pairs perfectly with our Frontis theme for a complete full-site editing experience, you can also use **Frontis Blocks on any WordPress theme**. You don’t need to switch your current setup—just install and start enjoying the benefits of **custom Gutenberg blocks plugin** enhancements.
 
-### Do I need coding knowledge to use Frontis Blocks?
+**Lightweight & Fast**
+Nobody likes a slow website. That’s why Frontis Blocks is engineered to keep your performance top-notch, ensuring your pages load quickly and **maintain high Core Web Vitals scores**.
 
-No, our blocks are designed to be user-friendly and don't require any coding knowledge.
+**Beginner-Friendly, Developer Approved**
+From first-time site creators to WordPress experts, our intuitive interface and extensive customization options make it easy to build professional layouts. You get the freedom to tweak almost every detail with minimal effort.
 
-## Screenshots
+**Gutenberg as a Page Builder**
+If you’ve ever wondered, **“Is Gutenberg a page builder?”** or **“What is the difference between Gutenberg blocks and Elementor?”**—**Frontis Blocks** fills that gap by offering flexible design options similar to a traditional page builder, all within the native editor environment.
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
-2. This is the second screen shot
+**Future-Proof & Constantly Evolving**
+We stay updated with the latest WordPress developments. Each release of **Frontis Blocks** includes new features, improvements, and performance enhancements, making it one of the best Gutenberg blocks plugin options out there.
 
-## Changelog
+== Get Started With Frontis Blocks ==
 
-### 1.0.0
-* Initial release
+If you’re ready to take full advantage of everything WordPress has to offer—without the complexities of traditional page builders—give **Frontis Blocks** a try. Whether you’re coming from an ultimate addon background, exploring **“wordpress gutenberg blocks plugin”** options, or simply looking for a **popular wordpress block plugin** to level up your site, **Frontis Blocks** provides a seamless, code-free path to creating truly custom designs.
+Download Frontis Blocks today and enjoy the freedom to build, customize, and launch the website you’ve always envisioned.
 
-## Upgrade Notice
+**Pro Tip:** Don’t forget to install the **Frontis theme** if you want the most unified full-site editing experience, or use **Frontis Blocks** with your current theme—either way, you’ll love the power of this **custom Gutenberg blocks plugin**.
 
-### 1.0.0
-This is the first version of Frontis Blocks. Enjoy!
+== Frequently Asked Questions ==
 
-## Additional Information
+= Is Frontis Gutenberg Blocks Free? =
+Yes, it's completely free.
 
-For more information, please visit [Wpmessiah](https://wpmessiah.com).
+= Is Frontis Blocks compatible with my theme? =  
+Yes, the core Gutenberg editor is free in WordPress, and Frontis Blocks extends its functionalities at no extra cost. 
+
+= What Is the Difference Between Gutenberg Blocks and Elementor? =  
+Gutenberg blocks are native to WordPress, offering a lightweight and more streamlined approach without needing an external page builder. Elementor, on the other hand, is a separate plugin with its own editor. Frontis Blocks leverages Gutenberg’s built-in capabilities and transforms it into a powerful, easy-to-use design framework—no need to juggle multiple page builders.
+
+= Is Gutenberg a Page Builder? =  
+Many people ask this question because of the editor’s block-based approach. While Gutenberg started as a basic content editor, with robust add-ons (like Frontis Blocks, or other block plugins), it can function similarly to a traditional page builder. That means advanced layout controls, design customizations, and a wide array of elements—right inside the familiar WordPress interface.
+
+
+== Support ==
+
+If you have any questions, please email us at **[contact@wpmessiah.com](mailto:contact@wpmessiah.com)**
+
+== Screenshots ==
+
+== Installation ==
+
+There is no prerequisites for installing **Frontis Blocks**. You can follow the steps below to complete the installation.
+
+= Automatic Installation =
+1.  Go to `Plugins > Add New` screen from your WordPress website dashboard.
+2.  Search for `Frontis Blocks`.
+3.  Install and activate the plugin, that's it!
+
+
+== Changelog ==
+
+= 1.0.1 - 20 Feb 2025 =
+- Resolved minor issues for improved stability.
+- Added a redirect feature in the dashboard for better navigation.
+
+= 1.0.0 - 19 Feb 2025 =
+- Initial release.
