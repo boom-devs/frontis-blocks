@@ -3910,7 +3910,9 @@ var FB_Range = function FB_Range(_ref) {
     _ref$globalTypography2 = _ref.globalTypographyValue,
     globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
     _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
-    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra,
+    _ref$globalReset = _ref.globalReset,
+    globalReset = _ref$globalReset === void 0 ? false : _ref$globalReset;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3935,6 +3937,11 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+
+  // if(globalReset === true) {
+  // 	setRangeValue(resetFallbackValue);
+  // }
+
   var handleGlobalTypographyValue = function handleGlobalTypographyValue(value) {
     setGlobalTypographyValue(value);
   };

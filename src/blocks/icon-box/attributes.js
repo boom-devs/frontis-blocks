@@ -221,6 +221,25 @@ const attributes = {
         default: "h2"
     },
     /** Start Heading Style */
+
+    headingGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    headingGlobalTypoType: {
+        type: "string",
+        default: 'none',
+    },
+
     headingFontFamily: {
         type: "string",
         default: "Default",

@@ -71,6 +71,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Alignment,
 		Sub_Heading_Switcher,
 		Sub_Heading_Text,
+		headingGlobalTypoSwitcher,
+		headingGlobalTypoType,
 		headingFontFamily,
 		headingGlobalFontFamily,
 		headingFontSize,
@@ -382,7 +384,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         iconBoxVRBottomOffsetUnits,
 	} = attributes;
 
+	console.log(headingGlobalTypoSwitcher);
+
 	const deviceType= useDeviceType();
+
+
+	const globalTypographyState = [
+		{
+			'fontSIze': false
+		}
+	]
 
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
@@ -2504,6 +2515,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			blockID,
 			Heading_Background_Color,
 			Alignment,
+			headingGlobalTypoSwitcher,
+			headingGlobalTypoType,
 			headingFontFamily,
 			headingGlobalFontFamily,
 			headingFontSize,
@@ -2765,7 +2778,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		],
 	);
 
-	console.log(headingGlobalFontSize);
 
 	const customCss = getCustomCss(iconBoxCustomCSS, `.${blockID}`);
 
@@ -3407,14 +3419,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={false}
 										>
 											<FB_TypographyControl
+												globalTypoSwitcher={headingGlobalTypoSwitcher}
+
+												globalTypoType={headingGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ headingGlobalTypoType: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,} })
+													console.log('globalType: ',value && 'click')
+												}}
+
 												fontFamily={headingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value })}
+												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
 
 												globalFontFamily={headingGlobalFontFamily}
 												onChangeGlobalFontFamily={(value) => setAttributes({ headingGlobalFontFamily: value })}
 
 												fontSize={headingFontSize}
-												onChangeFontSize={(value) => setAttributes({ headingFontSize: value })}
+												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
 
 												globalFontSize={headingGlobalFontSize}
 												onChangeGlobalFontSize={(value) => setAttributes({ headingGlobalFontSize: value })}
@@ -3423,31 +3443,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
 												fontWeight={headingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value })}
+												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
 
 												globalFontWeight={headingGlobalFontWeight}
 												onChangeGlobalFontWeight={(value) => setAttributes({ headingGlobalFontWeight: value })}
 
 												fontStyle={headingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value })}
+												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
 
 												globalFontStyle={headingGlobalFontStyle}
 												onChangeGlobalFontStyle={(value) => setAttributes({ headingGlobalFontStyle: value })}
 
 												textTransform={headingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value })}
+												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
 
 												globalTextTransform={headingGlobalTextTransform}
 												onChangeGlobalTextTransform={(value) => setAttributes({ headingGlobalTextTransform: value })}
 
 												textDecoration={headingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value })}
+												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
 
 												globalTextDecoration={headingGlobalTextDecoration}
 												onChangeGlobalTextDecoration={(value) => setAttributes({ headingGlobalTextDecoration: value })}
 
 												letterSpacing={headingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value })}
+												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
 
 												globalLetterSpacing={headingGlobalLetterSpacing}
 												onChangeGlobalLetterSpacing={(value) => setAttributes({ headingGlobalLetterSpacing: value })}
@@ -3456,7 +3476,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
 												lineHeight={headingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value })}
+												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
 
 												globalLineHeight={headingGlobalLineHeight}
 												onChangeGlobalLineHeight={(value) => setAttributes({ headingGlobalLineHeight: value })}
