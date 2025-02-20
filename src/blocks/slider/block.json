@@ -7,7 +7,6 @@
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
     "description": "A customizable slider block for displaying slides with various styling options.",
-    "icon": "images-alt2",
     "example": {},
     "supports": {
         "anchor": false,
