@@ -246,7 +246,7 @@ const attributes = {
     },
     headingGlobalFontFamily: {
         type: "string",
-        default: "none",
+        default: "",
     },
 
     headingFontSize: {
@@ -259,7 +259,7 @@ const attributes = {
     },
     headingGlobalFontSize: {
         type: "string",
-        default: "none",
+        default: "",
     },
 
     headingFontSizeUnits: {
@@ -277,7 +277,7 @@ const attributes = {
     },
     headingGlobalFontWeight: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingFontStyle: {
@@ -286,7 +286,7 @@ const attributes = {
     },
     headingGlobalFontStyle: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingTextTransform: {
@@ -295,7 +295,7 @@ const attributes = {
     },
     headingGlobalTextTransform: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingTextDecoration: {
@@ -304,7 +304,7 @@ const attributes = {
     },
     headingGlobalTextDecoration: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingLetterSpacing: {
@@ -317,7 +317,7 @@ const attributes = {
     },
     headingGlobalLetterSpacing: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingLetterSpacingUnits: {
@@ -339,7 +339,7 @@ const attributes = {
     },
     headingGlobalLineHeight: {
         type: "string",
-        default: "none"
+        default: ""
     },
 
     headingLineHeightUnits: {
