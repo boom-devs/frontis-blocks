@@ -539,7 +539,7 @@ class GlobalSettings extends AjaxBase
     {
         $styles = get_option('fb_global_styles', '');
         if (!empty($styles)) {
-            echo "<style id='fb-global-styles'>\n{$styles}\n</style>";
+            echo "<style id='fb-global-styles'>\n" . esc_html($styles) . "\n</style>";
         }
     }
 
@@ -568,7 +568,8 @@ class GlobalSettings extends AjaxBase
                     'fb-google-fonts',
                     "https://fonts.googleapis.com/css?family={$fonts_string}&display=swap",
                     array(),
-                    null
+                    FB_VERSION,
+                    true
                 );
             }
         }

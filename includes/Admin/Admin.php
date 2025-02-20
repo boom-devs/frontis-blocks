@@ -640,7 +640,7 @@ class Admin {
                                 endif;
                             ?>
 
-                            <a href="<?php echo get_permalink($single_post->ID); ?>" aria-label="Read more about <?php echo esc_attr($single_post->post_title); ?>">
+                            <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
                                 <img src="<?php echo esc_url($image_url); ?>"
                                     srcset="<?php echo esc_attr($image_srcset); ?>"
                                     alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
@@ -654,9 +654,17 @@ class Admin {
                                 <?php if ($post_author_avatar_switcher == 'true'): ?>
                                     <div class="fb_post_grid_author_avatar">
                                         <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                        aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                            <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>"
-                                                alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
+                                            aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                            <?php 
+                                            echo wp_kses_post(
+                                                get_avatar(
+                                                    $single_post->post_author,
+                                                    96,
+                                                    '',
+                                                    esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                    array('class' => 'avatar')
+                                                )
+                                            ); ?>
                                         </a>
                                     </div>
                                 <?php endif; ?>
@@ -743,7 +751,7 @@ class Admin {
 
             if ($total_pages > $current_page && $show_load_more_switcher == 'true') { ?>
                 <div class="fb_load_more_wrapper">
-                    <div class="fb_load_more" data-current_page="<?php echo $current_page; ?>"></div>
+                    <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
                 </div>
             <?php }
         } else { ?>

@@ -43,7 +43,6 @@
 		.components-base-control__field {
 			display: flex;
 			flex-direction: column;
-			gap: 15px;
 			.components-flex{
 				gap: 0;
 			}
@@ -57,6 +56,16 @@
 				margin: 10px 0 !important;
 				min-height: auto;
 				text-transform: capitalize !important;
+			}
+			.components-base-control__label {
+                color: $neutral-color-950;
+                font-family: $body-font-family;
+                font-size: $medium-font-size;
+                font-weight: 400;
+                line-height: $body-line-height;
+                margin: 0 0 10px;
+                min-height: auto;
+                text-transform: capitalize;
 			}
 		}
 		.fb-setting-fontsize-wrapper {
@@ -198,6 +207,25 @@
 					background-color: $primary-color-base;
 				}
 			}
+		}
+	}
+}
+
+.fb-setting-gb-select-control-label {
+	color: $neutral-color-950;
+	font-family: $body-font-family;
+	font-size: $medium-font-size;
+	font-weight: 400;
+	line-height: $body-line-height;
+	margin: 0 0 10px;
+	min-height: auto;
+	text-transform: capitalize;
+}
+.components-base-control__field {
+	.components-input-control__container {
+		.components-input-control__input {
+			height: 30px !important;
+			min-height: 30px !important;
 		}
 	}
 }

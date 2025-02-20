@@ -221,13 +221,32 @@ const attributes = {
         default: "h2"
     },
     /** Start Heading Style */
+
+    headingGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    headingGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    headingGlobalTypoType: {
+        type: "string",
+        default: 'none',
+    },
+
     headingFontFamily: {
         type: "string",
         default: "Default",
-    },
-    headingGlobalFontFamily: {
-        type: "string",
-        default: "none",
     },
 
     headingFontSize: {
@@ -237,10 +256,6 @@ const attributes = {
             Tablet: "18",
             Mobile: "16"
         }
-    },
-    headingGlobalFontSize: {
-        type: "string",
-        default: "none",
     },
 
     headingFontSizeUnits: {
@@ -256,36 +271,20 @@ const attributes = {
         type: "string",
         default: "600"
     },
-    headingGlobalFontWeight: {
-        type: "string",
-        default: "none"
-    },
 
     headingFontStyle: {
         type: "string",
         default: ""
-    },
-    headingGlobalFontStyle: {
-        type: "string",
-        default: "none"
     },
 
     headingTextTransform: {
         type: "string",
         default: ""
     },
-    headingGlobalTextTransform: {
-        type: "string",
-        default: "none"
-    },
 
     headingTextDecoration: {
         type: "string",
         default: ""
-    },
-    headingGlobalTextDecoration: {
-        type: "string",
-        default: "none"
     },
 
     headingLetterSpacing: {
@@ -295,10 +294,6 @@ const attributes = {
             Tablet: "",
             Mobile: ""
         }
-    },
-    headingGlobalLetterSpacing: {
-        type: "string",
-        default: "none"
     },
 
     headingLetterSpacingUnits: {
@@ -317,10 +312,6 @@ const attributes = {
             Tablet: "",
             Mobile: ""
         }
-    },
-    headingGlobalLineHeight: {
-        type: "string",
-        default: "none"
     },
 
     headingLineHeightUnits: {

@@ -91,14 +91,16 @@ final class Plugin
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
+        register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
+        add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
+
 	}
 
 	public function enqueue_scripts()
 	{
 
 		if (has_block('frontis-blocks/advanced-video')) {
-			// wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
-			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', '1.0.0', true);;
+			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
 		}
 		if (has_block('frontis-blocks/slider')) {
 			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
@@ -110,7 +112,7 @@ final class Plugin
 
 	public function enqueue_editor_scripts()
 	{
-		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), '1.0.0', true);
+		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), FB_VERSION, true);
 		wp_enqueue_style('fb-responsive-control', FB_PLUGIN_URL . 'assets/css/fbe-common.css', [], FB_VERSION);
 	}
 
@@ -204,4 +206,27 @@ final class Plugin
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 
 	}
+
+	/**
+     * Set flag to trigger redirect on activation
+     */
+    public function set_activation_redirect() {
+        add_option('frontis_blocks_do_activation_redirect', true);
+    }
+
+    /**
+     * Handle redirect to settings page after activation
+     */
+    public function handle_activation_redirect() {
+        if (
+            get_option('frontis_blocks_do_activation_redirect', false) 
+            && current_user_can('manage_options')
+            && !isset($_GET['activate-multi'])
+        ) {
+            delete_option('frontis_blocks_do_activation_redirect');
+            
+            wp_safe_redirect(admin_url('admin.php?page=frontis-blocks'));
+            exit;
+        }
+    }
 }

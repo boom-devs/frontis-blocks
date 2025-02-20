@@ -37,23 +37,41 @@ class FluentForms
 		}
 		return false;
 	}
-
+	/**
+	 * Get the list of FluentForm forms.
+	 *
+	 * @return array
+	 */
 	public static function form_list() {
-		 $options = [  ];
-
-		if ( defined( 'FLUENTFORM' ) ) {
-			global $wpdb;
-			$options[ 0 ][ 'value' ] = '';
-			$options[ 0 ][ 'label' ] = __( 'Select a form', 'frontis-blocks' );
-			$result                  = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}fluentform_forms" );
-			if ( $result ) {
-				foreach ( $result as $key => $form ) {
-					$options[ $key + 1 ][ 'value' ] = $form->id;
-					$options[ $key + 1 ][ 'label' ] = $form->title;
-					$options[ $key + 1 ][ 'attr' ]  = self::get_form_meta( $form->id );
+		$cache_key = 'frontis_blocks_fluent_forms';
+		$options = wp_cache_get($cache_key);
+	
+		if ($options === false) { // Cache miss, so we query the database
+			$options = [];
+			
+			// Ensure FluentForm is active
+			if (defined('FLUENTFORM')) {
+				// Use FluentForm's internal API to fetch all forms
+				$forms = \FluentForm\App\Models\Form::all(); // FluentForm API call
+				
+				// Default option for selecting a form
+				$options[0]['value'] = '';
+				$options[0]['label'] = __('Select a form', 'frontis-blocks');
+				
+				if ($forms) {
+					foreach ($forms as $key => $form) {
+						$options[$key + 1]['value'] = $form->id;
+						$options[$key + 1]['label'] = $form->title;
+						$options[$key + 1]['attr'] = self::get_form_meta($form->id);
+					}
 				}
+	
+				// Cache the results for 12 hours
+				wp_cache_set($cache_key, $options, '', 12 * HOUR_IN_SECONDS);
 			}
 		}
+	
 		return $options;
-	}
+	}	
+	
 }
