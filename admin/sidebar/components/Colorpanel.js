@@ -5,6 +5,13 @@ import { useCallback, useRef, useState } from '@wordpress/element';
 import { MenuGroup, MenuItemsChoice } from '@wordpress/components';
 
 export default function FrontisColorPanel() {
+
+	let colorsVar = frontisBlocksAdmin?.global_styles;
+
+	// const features = wp.data.select( 'core/block-editor' ).getFeatures();
+	const features = wp.data.select('core').getSettings().__experimentalFeatures;
+
+	console.log(features)
 	const elements = [
 		{
 			name: 'text',
