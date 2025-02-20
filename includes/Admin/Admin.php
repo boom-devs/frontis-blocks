@@ -640,7 +640,7 @@ class Admin {
                                 <?php if ($post_author_avatar_switcher == 'true'): ?>
                                     <div class="fb_post_grid_author_avatar">
                                         <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                            aria-label="<?php esc_attr_e('View all posts by', 'text-domain'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                            aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
                                             <?php 
                                             echo wp_kses_post(
                                                 get_avatar(
