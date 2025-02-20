@@ -170,6 +170,7 @@ class Rollback
             '<a href="%s" class="button frontis-rollback-button" onclick="return confirm(\'%s\');">%s</a>',
             esc_url($rollback_url),
             esc_js(__('Are you sure you want to rollback to this version? The process is irreversible.', 'frontis-blocks')),
+            /* translators: %s is the version number to rollback to */
             sprintf(__('Rollback to v%s', 'frontis-blocks'), $this->version)
         );
     }

@@ -98,7 +98,7 @@ final class Plugin
 
 		if (has_block('frontis-blocks/advanced-video')) {
 			// wp_enqueue_script('frontis-advanced-video', 'https://cdn.jsdelivr.net/npm/react-player/dist/ReactPlayer.standalone.js');
-			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', '1.0.0', true);;
+			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
 		}
 		if (has_block('frontis-blocks/slider')) {
 			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
@@ -110,7 +110,7 @@ final class Plugin
 
 	public function enqueue_editor_scripts()
 	{
-		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), '1.0.0', true);
+		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), FB_VERSION, true);
 		wp_enqueue_style('fb-responsive-control', FB_PLUGIN_URL . 'assets/css/fbe-common.css', [], FB_VERSION);
 	}
 

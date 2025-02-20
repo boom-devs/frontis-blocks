@@ -62,7 +62,7 @@ class EnqueueBlocksCss {
 			// Enqueue the CSS
 			if(!Helper::is_gutenberg_editor()) {
 				$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-				wp_enqueue_style('frontis-block-styles', $css_url);
+				wp_enqueue_style('frontis-block-styles', $css_url, [], FB_VERSION, true);
 			}
 		}
 	}
