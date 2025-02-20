@@ -2246,21 +2246,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-icon-box-wrapper.${blockID} .fb-heading {
 			  ${Heading_Color !== undefined ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color !== undefined ? `background-color: ${Heading_Background_Color};` : "" }
-			  ${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
-			  ${headingGlobalFontSize === 'none' && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
-			  ${headingGlobalFontWeight === 'none' && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
-			  ${headingGlobalFontStyle === 'none' && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
-			  ${headingGlobalTextTransform === 'none' && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
-			  ${headingGlobalTextDecoration === 'none' && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
-			  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
-			  ${headingGlobalLineHeight === 'none' && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
-			  ${headingGlobalFontSize !== 'none' ? `font-size: ${headingGlobalFontSize};` : ''}
-			  ${headingGlobalFontWeight !== 'none' ? `font-weight: ${headingGlobalFontWeight};` : ''}
-			  ${headingGlobalFontStyle !== 'none' ? `font-style: ${headingGlobalFontStyle};` : ''}
-			  ${headingGlobalTextTransform !== 'none' ? `text-transform: ${headingGlobalTextTransform};` : ''}
-			  ${headingGlobalTextDecoration !== 'none' ? `text-decoration: ${headingGlobalTextDecoration};` : ''}
-			  ${headingGlobalLetterSpacing !== 'none' ? `letter-spacing: ${headingGlobalLetterSpacing};` : ''}
-			  ${headingGlobalLineHeight !== 'none' ? `line-height: ${headingGlobalLineHeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontFamily === true && headingGlobalFontFamily ? `font-family: ${headingGlobalFontFamily};` : ''}
+			  ${headingGlobalTypoSwitcher.fontSize === true && headingGlobalFontSize ? `font-size: ${headingGlobalFontSize};` : ''}
+			  ${headingGlobalTypoSwitcher.fontWeight === true && headingGlobalFontWeight ? `font-weight: ${headingGlobalFontWeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontStyle === true && headingGlobalFontStyle ? `font-style: ${headingGlobalFontStyle};` : ''}
+			  ${headingGlobalTypoSwitcher.textTransform === true && headingGlobalTextTransform ? `text-transform: ${headingGlobalTextTransform};` : ''}
+			  ${headingGlobalTypoSwitcher.textDecoration === true && headingGlobalTextDecoration ? `text-decoration: ${headingGlobalTextDecoration};` : ''}
+			  ${headingGlobalTypoSwitcher.letterSpacing === true && headingGlobalLetterSpacing ? `letter-spacing: ${headingGlobalLetterSpacing};` : ''}
+			  ${headingGlobalTypoSwitcher.lineHeight === true && headingGlobalLineHeight ? `line-height: ${headingGlobalLineHeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontFamily === false && headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
+			  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			  ${headingGlobalTypoSwitcher.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
+			  ${headingGlobalTypoSwitcher.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
+			  ${headingGlobalTypoSwitcher.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
+			  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
+			  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
 			  padding: ${headingPaddingDesktopWidthValue};
 			  margin: ${headingMarginDesktopWidthValue};
 			  ${Heading_Border !== undefined ? `border-style: ${Heading_Border};` : ''}
@@ -2279,9 +2280,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	  
 		  @media only screen and (max-width: 1024px) {
 			  .fb-icon-box-wrapper.${blockID} .fb-heading {
-				  ${headingGlobalFontSize === 'none' && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
-                  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
-                  ${headingGlobalLineHeight === 'none' && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
+				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+                  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+                  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
 				  padding: ${headingPaddingTabWidthValue};
 				  margin: ${headingMarginTabWidthValue};
 				  ${headingBorderTabWidthValue !== undefined ? `border-width: ${headingBorderTabWidthValue};` : ''}
@@ -2290,9 +2291,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 		  @media only screen and (max-width: 724px) {
 			  .fb-icon-box-wrapper.${blockID} .fb-heading {
-				  ${headingGlobalFontSize === 'none' && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
-                  ${headingGlobalLetterSpacing === 'none' && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
-                  ${headingGlobalLineHeight === 'none' && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
+				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+                  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+                  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
 				  padding: ${headingPaddingMobileWidthValue};
 				  margin: ${headingMarginMobileWidthValue};
 				  ${headingBorderMobileWidthValue !== undefined ? `border-width: ${headingBorderMobileWidthValue};` : ''}
@@ -3423,8 +3424,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												globalTypoType={headingGlobalTypoType}
 												onChangeGlobalTypoType={(value) => {
-													setAttributes({ headingGlobalTypoType: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,} })
-													console.log('globalType: ',value && 'click')
+													setAttributes({ 
+														headingGlobalTypoType: value, 
+														headingGlobalTypoSwitcher: value === 'none' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+													console.log(value)
 												}}
 
 												fontFamily={headingFontFamily}

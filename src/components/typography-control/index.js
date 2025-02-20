@@ -27,7 +27,6 @@ const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
 
     globalTypoSwitcher,
-    onChangeGlobalTypoSwitcher,
     globalTypoType,
     onChangeGlobalTypoType,
 
@@ -293,10 +292,9 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            <BaseControl
-                                label={__("Global Fonts", "frontis-blocks")}
-                            >
-                                <SelectControl 
+                            <BaseControl>
+                                <SelectControl
+                                    label={__("Global Fonts", "frontis-blocks")}
                                     options={GB_TYPO}
                                     value={globalTypoType}
                                     onChange={handleGlobalTypoTypeChange}
@@ -305,6 +303,7 @@ const FB_TypographyControl = ({
 
                             <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
+                                // className={globalTypoSwitcher.fontFamily === true && 'fb-global-typo-active'}
                             >
                                 <Select2 
                                     options={FONT_FAMILYS}
@@ -313,49 +312,73 @@ const FB_TypographyControl = ({
                                     className="fb-select2-control"
                                 />
                             </BaseControl>
-				<FB_Range
-					min={0}
-					max={200}
-					label={__("Font Size", "frontis-blocks")}
-					rangeValue={fontSize}
-					onChangeHandler={handleFontSizeChange}
-					rangeUnitHandler={handleFontSizeUnitChange}
-					deviceType={deviceType}
-					units={fontSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={''}
-                    globalReset={globalTypoSwitcher.fontSize}
-				/>
 
+                            <BaseControl
+                                className={globalTypoSwitcher.fontSize === true && 'fb-global-typo-active'}
+                            >
+                            <FB_Range
+                                min={0}
+                                max={200}
+                                label={__("Font Size", "frontis-blocks")}
+                                rangeValue={fontSize}
+                                onChangeHandler={handleFontSizeChange}
+                                rangeUnitHandler={handleFontSizeUnitChange}
+                                deviceType={deviceType}
+                                units={fontSizeUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={''}
+                                globalReset={globalTypoSwitcher.fontSize}
+                            />
+                            </BaseControl>
+
+                            <BaseControl
+                                className={globalTypoSwitcher.fontWeight === true && 'fb-global-typo-active'}
+                            >
                             <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
                                 controlOptions={FONT_WEIGHT}
                                 selectValue={fontWeight}
                                 setSelectValue={handleFontWeightChange}
                             />
+                            </BaseControl>
 
+                            <BaseControl
+                                className={globalTypoSwitcher.fontStyle === true && 'fb-global-typo-active'}
+                            >
                             <FB_GBSelectControl
                                 label={__("Font Style", "frontis-blocks")}
                                 controlOptions={FONT_STYLE}
                                 selectValue={fontStyle}
                                 setSelectValue={handleFontStyleChange}
                             />
+                            </BaseControl>
 
+                            <BaseControl
+                                className={globalTypoSwitcher.textTransform === true && 'fb-global-typo-active'}
+                            >
                             <FB_GBSelectControl
                                 label={__("Text Transform", "frontis-blocks")}
                                 controlOptions={TEXT_TRANSFORM}
                                 selectValue={textTransform}
                                 setSelectValue={handleTextTransformChange}
                             />
+                            </BaseControl>
                             
+                            <BaseControl
+                                className={globalTypoSwitcher.textDecoration === true && 'fb-global-typo-active'}
+                            >
                             <FB_GBSelectControl
                                 label={__("Text Decoration", "frontis-blocks")}
                                 controlOptions={TEXT_DECORATION}
                                 selectValue={textDecoration}
                                 setSelectValue={handleTextDecorationChange}
                             />
+                            </BaseControl>
                             
+                            <BaseControl
+                                className={globalTypoSwitcher.letterSpacing === true && 'fb-global-typo-active'}
+                            >
                             <FB_Range
                                 min={0}
                                 max={100}
@@ -369,6 +392,11 @@ const FB_TypographyControl = ({
                                 rangeStep={1}
                                 resetFallbackValue={''}
                             />
+                            </BaseControl>
+
+                            <BaseControl
+                                className={globalTypoSwitcher.lineHeight === true && 'fb-global-typo-active'}
+                            >
                             <FB_Range
                                 min={0}
                                 max={200}
@@ -382,6 +410,7 @@ const FB_TypographyControl = ({
                                 rangeStep={1}
                                 resetFallbackValue={''}
                             />
+                            </BaseControl>
                         </BaseControl>
                     </div>
                 )}
