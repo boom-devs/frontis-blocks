@@ -113,7 +113,7 @@ class FullSiteImport {
         // Load page content from separate JSON file
         $content_file = $this->demo_data_dir . 'pages/' . $page_data['content_file'];
         if (!file_exists($content_file)) {
-            throw new Exception("Content file not found: {$page_data['content_file']}");
+            throw new Exception(sprintf("Content file not found: %s", esc_html($page_data['content_file'])));
         }
 
         $content = file_get_contents($content_file);

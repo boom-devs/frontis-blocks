@@ -60,7 +60,7 @@ class Rollback
         check_admin_referer('frontis_rollback');
 
         if (!current_user_can('update_plugins')) {
-            wp_die(__('You do not have sufficient permissions to perform this action.', 'frontis-blocks'));
+            wp_die(esc_html__('You do not have sufficient permissions to perform this action.', 'frontis-blocks'));
         }
 
         $this->apply_package();
