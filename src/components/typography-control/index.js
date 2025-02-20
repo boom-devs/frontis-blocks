@@ -191,7 +191,18 @@ const FB_TypographyControl = ({
         name: customTypoData[key].name
     }));
 
+    const GB_TYPO_DATA = [];
+
     Object.entries(globalTypoData).forEach(([label, properties]) => {
+
+        const itemData = {};
+
+        // Fix: Corrected object assignment
+        Object.entries(properties).forEach(([itemLabel, itemProperties]) => {
+            itemData[itemLabel] = itemProperties.variable; // Correct assignment
+        });
+
+        GB_TYPO_DATA.push({ label: label, value: itemData });
 
             let newLabel =
                 label === 'body' ? 'Body' :
@@ -211,47 +222,31 @@ const FB_TypographyControl = ({
             if (globalTypoType === label) {
                 Object.entries(properties).forEach(([itemLabel, itemProperties]) => {
                     if (itemLabel === 'fontFamily') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalFontFamilyChange(itemProperties.variable);
                         onChangeGlobalFontFamily(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'fontSize') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalFontSizeChange(itemProperties.variable);
                         onChangeGlobalFontSize(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'fontWeight') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalFontWeightChange(itemProperties.variable);
                         onChangeGlobalFontWeight(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'fontStyle') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalFontStyleChange(itemProperties.variable);
                         onChangeGlobalFontStyle(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'textTransform') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalTextTransformChange(itemProperties.variable);
                         onChangeGlobalTextTransform(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'textDecoration') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalTextDecorationChange(itemProperties.variable);
                         onChangeGlobalTextDecoration(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'letterSpacing') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalLetterSpacingChange(itemProperties.variable);
                         onChangeGlobalLetterSpacing(`var(${itemProperties.variable})`)
                     } 
                     if (itemLabel === 'lineHeight') {
-                        console.log(itemProperties.variable);
-                        // handleGlobalLineHeightChange(itemProperties.variable);
                         onChangeGlobalLineHeight(`var(${itemProperties.variable})`)
                     } 
                 });
-            }
+            } 
     });
 
     // Fix: Update GB_TYPO if label matches customTypoArray id
@@ -262,7 +257,7 @@ const FB_TypographyControl = ({
         }
     });
 
-
+console.log('GB_TYPO_DATA: ', GB_TYPO_DATA)
 
 
     return (
