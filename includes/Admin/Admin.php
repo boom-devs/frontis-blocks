@@ -6,6 +6,7 @@ use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Assets\GenerateGlobalTypography;
+use FrontisBlocks\Assets\GenerateGlobalColors;
 
 class Admin {
 
@@ -29,6 +30,7 @@ class Admin {
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
 
 		GenerateGlobalTypography::generate_global_typography();
+		GenerateGlobalColors::generate_global_colors();
 // 		add_action( 'admin_enqueue_scripts', GenerateGlobalTypography::generate_global_typography() );
     }
 
@@ -60,6 +62,17 @@ class Admin {
     public function enqueue_scripts($hook){
 
 		// Get the blocks list
+		$theme_colors = [];
+		$theme_json = wp_get_global_settings();
+
+		if ($theme_json && isset($theme_json['color']) && isset($theme_json['color']['palette'])) {
+    		$theme_json = $theme_json['color']['palette'];
+
+    		if (isset($theme_json['theme'])) {
+        		$theme_colors = $theme_json['theme'];
+    		}
+		}
+
 		$blocks = BlockList::get_instance()->get_blocks();
 		$localizeArray = array(
 			'blocks' => $blocks,
@@ -74,10 +87,11 @@ class Admin {
 			'isProActive' => FB_IS_PRO_ACTIVE ? 'true' : 'false',
 			'logo' => FB_PLUGIN_URL . 'assets/images/logo.svg',
             'global_styles' => wp_get_global_styles(),
-            'global_typography' => get_option('fb_globaltypo')
+            'global_typography' => get_option('fb_globaltypo'),
+            'theme_colors' => $theme_colors
 		);
 
-		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){ 
+		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
 			$tl_script_asset      = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
 			$tl_script_asset['dependencies'][] = 'jquery';
@@ -109,31 +123,31 @@ class Admin {
 		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }
 
-        /**
-         * Menu Action Links
-         *
-         * @since 1.0.0
-         */
-        public function fb_menu_action_links( $links, $file )
-        {
-            if ( $file === FB_PLUGIN_BASENAME ) {
-                $settings_links = sprintf(
-                    '<a href="%1$s">Settings</a>',
-                    admin_url( 'admin.php?page=frontis-blocks' )
+    /**
+     * Menu Action Links
+     *
+     * @since 1.0.0
+     */
+    public function fb_menu_action_links( $links, $file )
+    {
+        if ( $file === FB_PLUGIN_BASENAME ) {
+            $settings_links = sprintf(
+                '<a href="%1$s">Settings</a>',
+                admin_url( 'admin.php?page=frontis-blocks' )
+            );
+            array_unshift( $links, $settings_links );
+
+            if ( ! class_exists( 'FrontisBlocks\Pro\Plugin' ) ) {
+                $go_pro_link = sprintf(
+                    '<a target="_blank" href="%1$s"><strong style="color:#5e2eff;display: inline-block;">Go Pro</strong></a>',
+                    FB_UPGRADE_PRO_URL
                 );
-                array_unshift( $links, $settings_links );
-
-                if ( ! class_exists( 'FrontisBlocks\Pro\Plugin' ) ) {
-                    $go_pro_link = sprintf(
-                        '<a target="_blank" href="%1$s"><strong style="color:#5e2eff;display: inline-block;">Go Pro</strong></a>',
-                        FB_UPGRADE_PRO_URL
-                    );
-                    array_push( $links, $go_pro_link );
-                }
+                array_push( $links, $go_pro_link );
             }
-
-            return $links;
         }
+
+        return $links;
+    }
 
     /**
      * Save settings via AJAX
@@ -465,7 +479,7 @@ class Admin {
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
         $post_description_excerpt_length = isset($_POST['postDescriptionExcerptLength']) ? intval($_POST['postDescriptionExcerptLength']) : 10;
         $show_excerpt_switcher = isset($_POST['showExcerptSwitcher']) ? $_POST['showExcerptSwitcher'] : true;
-        
+
         $show_author_switcher = isset($_POST['showAuthorSwitcher']) ? $_POST['showAuthorSwitcher'] : false;
         $show_category_switcher = isset($_POST['showCategorySwitcher']) ? $_POST['showCategorySwitcher'] : false;
         $show_tag_switcher = isset($_POST['showTagSwitcher']) ? $_POST['showTagSwitcher'] : false;
@@ -613,8 +627,8 @@ class Admin {
                 <div class="fb_post_grid_wrapper">
                     <div class="fb_post_grid_image_wrapper">
                         <div class="fb_post_grid_image">
-                            <?php 
-                                if (has_post_thumbnail($single_post->ID)) : 
+                            <?php
+                                if (has_post_thumbnail($single_post->ID)) :
                                     // If the post has a thumbnail, get the thumbnail image
                                     $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                     $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
@@ -622,7 +636,7 @@ class Admin {
                                 else :
                                     // If the post doesn't have a thumbnail, use the default image
                                     $image_url = $default_image_url;
-                                    $image_srcset = ''; 
+                                    $image_srcset = '';
                                 endif;
                             ?>
 
