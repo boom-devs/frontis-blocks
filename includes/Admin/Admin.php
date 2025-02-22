@@ -20,18 +20,12 @@ class Admin {
         add_action( 'plugin_action_links', [ $this, 'fb_menu_action_links' ], 10, 2 );
         add_action('admin_init', [$this, 'register_block_assets_in_site_editor']);
 
-        // add_action( 'wp_ajax_fb_save_settings', array( $this, 'save_settings' ) );
-
-        // add_action( 'wp_ajax_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
-        // add_action( 'wp_ajax_nopriv_fb_save_all_block_settings', array( $this, 'save_all_block_settings' ) );
-
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
 
 		GenerateGlobalTypography::generate_global_typography();
 		GenerateGlobalColors::generate_global_colors();
-// 		add_action( 'admin_enqueue_scripts', GenerateGlobalTypography::generate_global_typography() );
     }
 
     public function add_menu_page(){
