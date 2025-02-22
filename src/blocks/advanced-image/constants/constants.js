@@ -36,17 +36,6 @@ export const STYLES = [
     { label: __("Rhombus", "frontis-block"), value: "rhombus" },
     { label: __("Hexagon", "frontis-block"), value: "hexagon" },
     { label: __("Bevel", "frontis-block"), value: "bevel" },
-    { label: __("Aesthetic Blob", "frontis-block"), value: "aesthetic-blob" },
-    { label: __("Aesthetic Blob 2", "frontis-block"), value: "aesthetic-blob" },
-    { label: __("Aesthetic Blob 3", "frontis-block"), value: "aesthetic-blob-3" },
-    { label: __("Aesthetic Blob 4", "frontis-block"), value: "aesthetic-blob-4" },
-    { label: __("Irregular Blob", "frontis-block"), value: "irregular-blob" },
-    { label: __("Abstract", "frontis-block"), value: "abstract" },
-    { label: __("Container", "frontis-block"), value: "container" },
-    { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
-    { label: __("Overlaped Blob", "frontis-block"), value: "overlaped-blob" },
-    { label: __("Seperate Blob", "frontis-block"), value: "seperate-blob" },
-    { label: __("Pattern", "frontis-block"), value: "pattern" },
 ];
 
 export const TITLE_POSITION = [
