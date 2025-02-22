@@ -58,9 +58,9 @@ class GenerateGlobalTypography {
             foreach($globalProps as $prop) {
                 if (isset($data[$key][$prop]['value'])) {
                     $variable = $data[$key][$prop]['variable'];
-					$cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+                    $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
                     $styleValue = "var({$variable})";
-					$rootStyles .= "{$variable}: {$data[$key][$prop]['value']};\n";
+                    $rootStyles .= "{$variable}: {$data[$key][$prop]['value']};\n";
                     
                     switch($key) {
                         case 'body':
@@ -69,33 +69,33 @@ class GenerateGlobalTypography {
                         case 'link':
                             $linkStyles .= "{$cssProperty}: {$styleValue};\n";
                             break;
-						case 'button':
-							$linkStyles .= "{$cssProperty}: {$styleValue};\n";
-							break;
-						case 'captions':
-							$linkStyles .= "{$cssProperty}: {$styleValue};\n";
-							break;
+                        case 'button':
+                            $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'captions':
+                            $captionStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
                         case 'all':
                             $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
                             break;
                         case 'h1':
                             $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
                             break;
-						case 'h2':
-							$heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-							break;
-						case 'h3':
-							$heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-							break;
-						case 'h4':
-							$heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-							break;
-						case 'h5':
-							$heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-							break;
-						case 'h6':
-							$heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-							break;
+                        case 'h2':
+                            $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h3':
+                            $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h4':
+                            $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h5':
+                            $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h6':
+                            $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
                     }
                 }
             }
@@ -120,33 +120,33 @@ class GenerateGlobalTypography {
                             case 'link':
                                 $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
                                 break;
-							case 'button':
-								$paragraphStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
-								break;
-							case 'captions':
-								$paragraphStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
-								break;
+                            case 'button':
+                                $buttonStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                break;
+                            case 'captions':
+                                $captionStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                break;
                             case 'all':
                                 $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
                                 break;
                             case 'h1':
                                 $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
                                 break;
-							case 'h2':
-								$heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-								break;
-							case 'h3':
-								$heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-								break;
-							case 'h4':
-								$heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-								break;
-							case 'h5':
-								$heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-								break;
-							case 'h6':
-								$heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-								break;
+                            case 'h2':
+                                $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h3':
+                                $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h4':
+                                $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h5':
+                                $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h6':
+                                $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
                         }
                     }
 
@@ -167,29 +167,95 @@ class GenerateGlobalTypography {
             }
         }
 
-        // Generate the final CSS output
         $headingGrouped = "
+            " . ($heading1Styles !== '' ? "
             body h1 {
                 {$heading1Styles}
             }
+            " : "") . "
+            " . ($heading2Styles !== '' ? "
             body h2 {
                 {$heading2Styles}
             }
+            " : "") . "
+            " . ($heading3Styles !== '' ? "
             body h3 {
                 {$heading3Styles}
             }
+            " : "") . "
+            " . ($heading4Styles !== '' ? "
             body h4 {
                 {$heading4Styles}
             }
+            " : "") . "
+            " . ($heading5Styles !== '' ? "
             body h5 {
                 {$heading5Styles}
             }
+            " : "") . "
+            " . ($heading6Styles !== '' ? "
             body h6 {
                 {$heading6Styles}
             }
+            " : "") . "
         ";
 
-        $allCombinedStyles = "
+        $finalCSS = "
+            " . ($rootStyles !== '' || $desktopStyles !== '' ? "
+            :root {
+                {$rootStyles}
+                {$desktopStyles}
+            }
+            " : "") . "
+            
+            " . ($tabletStyles !== '' ? "
+            @media (max-width: 1024px) {
+                :root {
+                    {$tabletStyles}
+                }
+            }
+            " : "") . "
+            
+            " . ($mobileStyles !== '' ? "
+            @media (max-width: 767px) {
+                :root {
+                    {$mobileStyles}
+                }
+            }
+            " : "") . "
+
+            " . ($paragraphStyles !== '' ? "
+            body p {
+                {$paragraphStyles}
+            }
+            " : "") . "
+
+            " . ($linkStyles !== '' ? "
+            body a,
+            body p a {
+                {$linkStyles}
+            }
+            " : "") . "
+
+            " . ($buttonStyles !== '' ? "
+            body .wp-block-button__link,
+            :root :where(.wp-element-button, .wp-block-button__link),
+            body button {
+                {$buttonStyles}
+            }
+            " : "") . "
+
+            " . ($captionStyles !== '' ? "
+            body figcaption,
+            :root :where(.wp-element-caption, .wp-block-audio figcaption,
+                .wp-block-embed figcaption, .wp-block-gallery figcaption,
+                .wp-block-image figcaption, .wp-block-table figcaption,
+                .wp-block-video figcaption) {
+                {$captionStyles}
+            }
+            " : "") . "
+
+            " . ($combinedHeadingStyles !== '' ? "
             body h1,
             body h2,
             body h3,
@@ -198,50 +264,8 @@ class GenerateGlobalTypography {
             body h6 {
                 {$combinedHeadingStyles}
             }
-        ";
+            " : "") . "
 
-        $finalCSS = "
-            :root {
-                {$rootStyles}
-                {$desktopStyles}
-            }
-            
-            @media (max-width: 1024px) {
-                :root {
-                    {$tabletStyles}
-                }
-            }
-            
-            @media (max-width: 767px) {
-                :root {
-                    {$mobileStyles}
-                }
-            }
-
-            body p {
-                {$paragraphStyles}
-            }
-
-            body a,
-            body p a {
-                {$linkStyles}
-            }
-
-            body .wp-block-button__link,
-            :root :where(.wp-element-button, .wp-block-button__link),
-            body button {
-                {$buttonStyles}
-            }
-
-            body figcaption,
-            :root :where(.wp-element-caption, .wp-block-audio figcaption,
-                .wp-block-embed figcaption, .wp-block-gallery figcaption,
-                .wp-block-image figcaption, .wp-block-table figcaption,
-                .wp-block-video figcaption) {
-                {$captionStyles}
-            }
-
-            {$allCombinedStyles}
             {$headingGrouped}
         ";
         
