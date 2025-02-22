@@ -115,60 +115,6 @@
 	&.bevel .fb-advanced-image-inner {
 		clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
 	}
-	&.aesthetic-blob .fb-advanced-image-inner {
-		border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
-	}
-	&.aesthetic-blob-2 .fb-advanced-image-inner {
-		border-radius: 52% 47% 83% 13% / 79% 40% 60% 23%;
-	}
-	&.aesthetic-blob-3 .fb-advanced-image-inner {
-		border-radius: 100% 100% 100% 100% / 37% 100% 21% 100%;
-	}
-	&.aesthetic-blob-4 .fb-advanced-image-inner {
-		border-radius: 50% 50% 50% 100% / 56% 70% 21% 100%;
-	}
-	&.irregular-blob .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/irregular-blob.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.triangle-blob .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/triangle-blob.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.overlaped-blob .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/overlaped-blob.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.seperate-blob .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/seperate-blob.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.pattern .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/pattern.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.abstract .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/abstract.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
-	&.container .fb-advanced-image-inner {
-		mask-image: url(http://localhost/block-test/wp-content/uploads/2024/10/container.svg);
-		mask-size: auto;
-		mask-position: center center;
-		mask-repeat: no-repeat;
-	}
 	&.cover img {
 		object-fit: cover;
 	}
