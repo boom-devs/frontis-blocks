@@ -268,18 +268,23 @@ body {
 	align-items: center;
 	justify-content: center;
 	z-index: 160000;
+	height: 100vh;
+
 	.fb-fsi-modal {
-		background: white;
+		background: #ffffff;
 		border-radius: 3px;
-		width: 100%;
-		max-height: 90vh;
+		width: 100vw;
+		height: 100vh;
+		max-height: 100vh;
 		overflow-y: auto;
+
 		.fb-fsi-modal-header {
 			padding: 15px 20px;
 			border-bottom: 1px solid #ddd;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+
 			.fb-fsi-modal-close {
 				border: none;
 				background: none;
@@ -288,25 +293,31 @@ body {
 				padding: 0 5px;
 			}
 		}
+
 		.fb-fsi-modal-content-wrapper {
 			display: flex;
+
 			.fb-fsi-modal-sidebar-content {
 				flex: 1;
 				padding: 20px;
 				position: relative;
+
 				.fb-global-color-section {
 					margin-bottom: 24px;
+
 					.fb-color-circle {
 						width: 40px;
 						height: 40px;
 						border-radius: 50%;
 						cursor: pointer;
 						transition: transform 0.2s ease;
+
 						&:hover {
 							transform: scale(1.1);
 						}
 					}
-					.fb-color-item{
+
+					.fb-color-item {
 						.fb-color-tooltip {
 							position: absolute;
 							top: -30px;
@@ -320,6 +331,7 @@ body {
 							white-space: nowrap;
 							z-index: 1000;
 							pointer-events: none;
+
 							&:after {
 								content: '';
 								position: absolute;
@@ -333,27 +345,32 @@ body {
 						}
 					}
 				}
+
 				.fb-fsi-typography-panel {
 					.dashicons {
 						&::before {
 							font-size: 14px;
 						}
 					}
+
 					.fb-fsi-typography-header {
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
 						margin-bottom: 24px;
+
 						h3 {
 							margin: 0;
 							font-size: 16px;
 							font-weight: 600;
 						}
 					}
+
 					.fb-fsi-panel-section {
 						border: 1px solid #ddd;
 						border-radius: 12px;
 						margin-bottom: 10px;
+
 						.fb-fsi-panel-header {
 							width: 100%;
 							display: flex;
@@ -368,16 +385,20 @@ body {
 							text-align: left;
 							transition: background-color 0.2s ease;
 						}
+
 						.fb-fsi-panel-content {
 							padding: 8px 16px;
+
 							.fb-font-item {
 								display: flex;
 								align-items: center;
 								padding: 8px 0;
 								gap: 12px;
-								&:last-child{
+
+								&:last-child {
 									border-bottom: none;
 								}
+
 								.fb-font-preview {
 									width: 40px;
 									height: 40px;
@@ -388,15 +409,18 @@ body {
 									justify-content: center;
 									font-size: 18px;
 								}
+
 								.fb-font-details {
 									display: flex;
 									justify-content: space-between;
 									align-items: center;
 									flex-grow: 1;
+
 									span {
 										color: #1e1e1e;
 										font-size: 13px;
 									}
+
 									.fb-edit-button {
 										background: none;
 										border: none;
@@ -408,22 +432,27 @@ body {
 							}
 						}
 					}
-					.fb-fsi-typography-popup{
+
+					.fb-fsi-typography-popup {
 						background: #fff;
 						position: absolute;
 						top: 100px;
 						left: 100%;
 						width: 100%;
+						margin-left: 20px;
 						border: 1px solid #ddd;
 						border-radius: 12px;
 						padding: 24px;
+						z-index: 99;
 					}
 				}
 			}
+
 			.fb-fsi-modal-main-content {
 				flex: 6;
 			}
 		}
+
 		.fb-fsi-modal-footer {
 			padding: 15px 20px;
 			border-top: 1px solid #ddd;
@@ -434,9 +463,53 @@ body {
 	}
 }
 
+.fb-fsi-modal-main-content {
+	position: relative;
+	height: 600px;
+	background: #f0f0f1;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	overflow: hidden;
+}
 
+.fb-site-preview-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 
+.fb-preview-frame {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
 
+.fb-preview-loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
 
+.fb-loader-spinner {
+	width: 40px;
+	height: 40px;
+	border: 3px solid #f3f3f3;
+	border-top: 3px solid #646970;
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+}
 
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
 
+	100% {
+		transform: rotate(360deg);
+	}
+}
