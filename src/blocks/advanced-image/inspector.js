@@ -260,26 +260,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	
 	/** Image **/
-	if (typeof FrontisBlocksData !== 'undefined') {
-		const imageMapping = {
-			'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
-			'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
-			'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
-			'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
-			'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
-			'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
-			'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
-		};
+	// if (typeof FrontisBlocksData !== 'undefined') {
+	// 	const imageMapping = {
+	// 		'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
+	// 		'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
+	// 		'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
+	// 		'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
+	// 		'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
+	// 		'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
+	// 		'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
+	// 	};
 	
-		// Apply the URLs dynamically to each element
-		Object.entries(imageMapping).forEach(([className, imageUrl]) => {
-			const targetElements = document.querySelectorAll(`.fb-advanced-image.${className} .fb-advanced-image-inner`);
-			targetElements.forEach(element => {
-				element.style.maskImage = `url(${imageUrl})`;
-				element.style.webkitMaskImage = `url(${imageUrl})`;
-			});
-		});
-	}
+	// 	// Apply the URLs dynamically to each element
+	// 	Object.entries(imageMapping).forEach(([className, imageUrl]) => {
+	// 		const targetElements = document.querySelectorAll(`.fb-advanced-image.${className} .fb-advanced-image-inner`);
+	// 		targetElements.forEach(element => {
+	// 			element.style.maskImage = `url(${imageUrl})`;
+	// 			element.style.webkitMaskImage = `url(${imageUrl})`;
+	// 		});
+	// 	});
+	// }
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1254,7 +1254,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										<div className="fb-advanced-wrapper">
 											<PanelBody
 												title={__("General", "frontis-blocks")}
-												initialOpen={false}
+												initialOpen={true}
 											>
 											{/** Image Uploader **/}
 											<BaseControl
@@ -1456,7 +1456,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{displayTitle && (
 											<PanelBody
 											title={__("Title", "frontis-blocks")}
-											initialOpen={false}
+											initialOpen={true}
 										>
 											<FB_TypographyControl
                                                 fontFamily={headingFontFamily}
