@@ -396,6 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullSiteTypography__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fullSiteTypography */ "./admin/template-library/fullSiteTypography.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _sitePreview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sitePreview */ "./admin/template-library/sitePreview.js");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -409,6 +410,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var SiteImportModal = function SiteImportModal(_ref) {
   var isOpen = _ref.isOpen,
     onClose = _ref.onClose,
@@ -416,11 +418,7 @@ var SiteImportModal = function SiteImportModal(_ref) {
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState2 = _slicedToArray(_useState, 2),
-    activeTooltip = _useState2[0],
-    setActiveTooltip = _useState2[1];
-  var colors = [{
+  var initialColors = [{
     hex: '#007bff',
     name: 'Primary Color'
   }, {
@@ -436,6 +434,10 @@ var SiteImportModal = function SiteImportModal(_ref) {
     hex: '#ffffff',
     name: 'Light Color'
   }];
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(initialColors),
+    _useState2 = _slicedToArray(_useState, 2),
+    colors = _useState2[0],
+    setColors = _useState2[1];
   var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
       headingFont: 'Inter',
       bodyFont: 'Open Sans',
@@ -445,39 +447,61 @@ var SiteImportModal = function SiteImportModal(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     typography = _useState4[0],
     setTypography = _useState4[1];
-  var fontOptions = ['Inter', 'Open Sans', 'Roboto', 'Lato', 'Poppins', 'Montserrat'];
+
+  // Handle Import Click
   var handleImport = function handleImport() {
+    // Get selected block and post ID
+    var selectedBlock = window.wp.data.select('core/block-editor').getSelectedBlock();
+    var postId = window.wp.data.select('core/editor').getCurrentPostId();
+
+    // Ensure postId is valid
+    if (!postId) {
+      window.wp.data.dispatch('core/notices').createErrorNotice('Error: Unable to fetch current post ID.', {
+        type: 'snackbar'
+      });
+      return;
+    }
+
+    // Prepare config data
     var configData = {
       colors: colors,
       typography: typography
     };
+
+    // AJAX request
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_full_site',
         security: nonce,
-        config: configData
+        config: configData,
+        post_id: postId,
+        block_id: selectedBlock ? selectedBlock.clientId : ''
       },
       success: function success(response) {
         if (response.success) {
-          window.wp.data.dispatch('core/notices').createSuccessNotice(response.data.message || 'Site imported with custom configuration!', {
+          window.wp.data.dispatch('core/notices').createSuccessNotice(response.data.message || 'Site imported with demo content and global settings!', {
             type: 'snackbar'
           });
-          var siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
+
+          // Redirect to home page after import
+          var siteUrl = "".concat(window.location.origin).concat(window.location.pathname.replace(/wp-admin.*/, ''), "home/");
           window.location.href = siteUrl;
         } else {
-          window.wp.data.dispatch('core/notices').createErrorNotice('Failed to import site: ' + response.data, {
+          window.wp.data.dispatch('core/notices').createErrorNotice("Failed to import site: ".concat(response.data || 'Unknown error occurred.'), {
             type: 'snackbar'
           });
         }
       },
       error: function error() {
-        window.wp.data.dispatch('core/notices').createErrorNotice('Failed to process request. Please try again.', {
+        window.wp.data.dispatch('core/notices').createErrorNotice('Error: AJAX request failed. Please try again.', {
           type: 'snackbar'
         });
       }
     });
+
+    // Close the modal if applicable
     onClose();
   };
   if (!isOpen) return null;
@@ -494,11 +518,15 @@ var SiteImportModal = function SiteImportModal(_ref) {
     className: "fb-fsi-modal-content-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-sidebar-content"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-color-section"
-  }, /*#__PURE__*/React.createElement(FullSiteImportColorPicker, null)), /*#__PURE__*/React.createElement(_fullSiteTypography__WEBPACK_IMPORTED_MODULE_1__["default"], null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(FullSiteImportColorPicker, {
+    colors: colors,
+    setColors: setColors
+  }), /*#__PURE__*/React.createElement(_fullSiteTypography__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    typography: typography,
+    setTypography: setTypography
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-main-content"
-  }, "hello main content")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_sitePreview__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-footer"
   }, /*#__PURE__*/React.createElement("button", {
     className: "button button-secondary",
@@ -509,33 +537,18 @@ var SiteImportModal = function SiteImportModal(_ref) {
   }, "Import Site"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteImportModal);
-var FullSiteImportColorPicker = function FullSiteImportColorPicker() {
+
+// Updated FullSiteImportColorPicker
+var FullSiteImportColorPicker = function FullSiteImportColorPicker(_ref2) {
+  var colors = _ref2.colors,
+    setColors = _ref2.setColors;
   var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
     activeTooltip = _useState6[0],
     setActiveTooltip = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([{
-      hex: '#007bff',
-      name: 'Primary Color'
-    }, {
-      hex: '#6c757d',
-      name: 'Secondary Color'
-    }, {
-      hex: '#ffc107',
-      name: 'Warning Color'
-    }, {
-      hex: '#212529',
-      name: 'Dark Color'
-    }, {
-      hex: '#ffffff',
-      name: 'Light Color'
-    }]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    colors = _useState8[0],
-    setColors = _useState8[1];
   var handleColorChange = function handleColorChange(color, index) {
     var updatedColors = _toConsumableArray(colors);
-    updatedColors[index].hex = color; // Directly use color string
+    updatedColors[index].hex = color;
     setColors(updatedColors);
   };
   return /*#__PURE__*/React.createElement("div", {
@@ -560,9 +573,8 @@ var FullSiteImportColorPicker = function FullSiteImportColorPicker() {
         position: 'relative'
       }
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dropdown, {
-      renderToggle: function renderToggle(_ref2) {
-        var isOpen = _ref2.isOpen,
-          onToggle = _ref2.onToggle;
+      renderToggle: function renderToggle(_ref3) {
+        var onToggle = _ref3.onToggle;
         return /*#__PURE__*/React.createElement("div", {
           className: "fb-color-circle",
           style: {
@@ -588,12 +600,7 @@ var FullSiteImportColorPicker = function FullSiteImportColorPicker() {
         }));
       }
     }), activeTooltip === index && /*#__PURE__*/React.createElement("div", {
-      className: "fb-color-tooltip",
-      style: {
-        position: 'absolute',
-        top: '-25px',
-        left: 0
-      }
+      className: "fb-color-tooltip"
     }, color.name));
   })));
 };
@@ -630,6 +637,58 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+/***/ }),
+
+/***/ "./admin/template-library/sitePreview.js":
+/*!***********************************************!*\
+  !*** ./admin/template-library/sitePreview.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+var SitePreview = function SitePreview() {
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    previewUrl = _useState2[0],
+    setPreviewUrl = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isLoading = _useState4[0],
+    setIsLoading = _useState4[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/?hide_admin_bar=true&preview=true';
+    setPreviewUrl(siteUrl);
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-site-preview-container"
+  }, isLoading && /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-loader"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-loader-spinner"
+  }), /*#__PURE__*/React.createElement("span", null, "Loading preview...")), /*#__PURE__*/React.createElement("iframe", {
+    src: previewUrl,
+    className: "fb-preview-frame",
+    title: "Site Preview",
+    onLoad: function onLoad() {
+      return setIsLoading(false);
+    },
+    scrolling: "yes"
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePreview);
 
 /***/ }),
 
@@ -768,11 +827,11 @@ var TemplateCard = function TemplateCard(_ref) {
   //demo import full site
 
   // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
+  // const selectedBlock = window.wp.data
+  //   .select('core/block-editor')
+  //   .getSelectedBlock();
 
-  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+  // const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
 
   //   setIsLoading(true);
 
@@ -1355,9 +1414,12 @@ var FB_Range = function FB_Range(_ref) {
     isRangeUnit = _ref$isRangeUnit === void 0 ? true : _ref$isRangeUnit,
     _ref$globalIcon = _ref.globalIcon,
     globalIcon = _ref$globalIcon === void 0 ? false : _ref$globalIcon,
-    globalTypographyType = _ref.globalTypographyType,
-    globalTypographyValue = _ref.globalTypographyValue,
-    setGlobalTypographyValue = _ref.setGlobalTypographyValue;
+    _ref$globalTypography = _ref.globalTypographyType,
+    globalTypographyType = _ref$globalTypography === void 0 ? null : _ref$globalTypography,
+    _ref$globalTypography2 = _ref.globalTypographyValue,
+    globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
+    _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -1390,19 +1452,50 @@ var FB_Range = function FB_Range(_ref) {
     label: 'None',
     value: 'none'
   }];
+  var storedData = localStorage.getItem("fb_custom_typography");
+  var customTypoData = storedData ? JSON.parse(storedData) : {};
+
+  // Convert object to array
+  var customTypoArray = Object.keys(customTypoData).map(function (key) {
+    return {
+      id: key,
+      name: customTypoData[key].name
+    };
+  });
   Object.entries(globalTypo).forEach(function (_ref2) {
+    var _properties$fontSize, _properties$lineHeigh, _properties$letterSpa;
     var _ref3 = _slicedToArray(_ref2, 2),
       label = _ref3[0],
       properties = _ref3[1];
-    if (globalTypographyType === 'fontSize') {
-      var _properties$fontSize;
+    var updatedValue = null;
+    if (globalTypographyType === 'fontSize' && (properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable) !== undefined) {
+      var _properties$fontSize2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$fontSize2 = properties.fontSize) === null || _properties$fontSize2 === void 0 ? void 0 : _properties$fontSize2.variable, ")");
+    }
+    if (globalTypographyType === 'lineHeight' && (properties === null || properties === void 0 || (_properties$lineHeigh = properties.lineHeight) === null || _properties$lineHeigh === void 0 ? void 0 : _properties$lineHeigh.variable) !== undefined) {
+      var _properties$lineHeigh2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$lineHeigh2 = properties.lineHeight) === null || _properties$lineHeigh2 === void 0 ? void 0 : _properties$lineHeigh2.variable, ")");
+    }
+    if (globalTypographyType === 'letterSpacing' && (properties === null || properties === void 0 || (_properties$letterSpa = properties.letterSpacing) === null || _properties$letterSpa === void 0 ? void 0 : _properties$letterSpa.variable) !== undefined) {
+      var _properties$letterSpa2;
+      updatedValue = "var(".concat(properties === null || properties === void 0 || (_properties$letterSpa2 = properties.letterSpacing) === null || _properties$letterSpa2 === void 0 ? void 0 : _properties$letterSpa2.variable, ")");
+    }
+    if (updatedValue !== null) {
+      var newLabel = label === 'body' ? 'Body' : label === 'captions' ? 'Captions' : label === 'button' ? 'Button' : label === 'link' ? 'Link' : label === 'h1' ? 'Heading One' : label === 'h2' ? 'Heading Two' : label === 'h3' ? 'Heading Three' : label === 'h4' ? 'Heading Four' : label === 'h5' ? 'Heading Five' : label === 'h6' ? 'Heading Six' : label;
       GB_TYPO.push({
-        label: label,
-        value: "var(".concat(properties === null || properties === void 0 || (_properties$fontSize = properties.fontSize) === null || _properties$fontSize === void 0 ? void 0 : _properties$fontSize.variable, ")")
+        label: newLabel,
+        value: updatedValue
       });
     }
   });
-  console.log(GB_TYPO);
+  GB_TYPO.forEach(function (item) {
+    var matchedTypo = customTypoArray.find(function (typo) {
+      return typo.id === item.label;
+    });
+    if (matchedTypo) {
+      item.label = matchedTypo.name;
+    }
+  });
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-setting-spacing-container"
   }, /*#__PURE__*/React.createElement("div", {
@@ -1447,22 +1540,14 @@ var FB_Range = function FB_Range(_ref) {
         "aria-expanded": isOpen,
         className: "fb-setting-global-icon-btn ".concat(globalTypographyValue !== 'none' && 'global-active')
       }, /*#__PURE__*/React.createElement("svg", {
-        width: "19",
-        height: "19",
-        viewBox: "0 0 19 19",
-        fill: "none",
+        width: "16px",
+        height: "16px",
+        viewBox: "0 0 25 25",
         xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12",
-        stroke: "black",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
-      })));
+      }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
+        "class": "st0",
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+      }))));
     },
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement("div", {
@@ -1471,6 +1556,7 @@ var FB_Range = function FB_Range(_ref) {
         className: "fb-setting-typography-popup-inner"
       }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Global Styles", "frontis-blocks"),
+        className: "fb-setting-global-typo-select",
         options: GB_TYPO,
         value: globalTypographyValue,
         onChange: handleGlobalTypographyValue

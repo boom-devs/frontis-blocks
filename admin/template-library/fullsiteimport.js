@@ -1,14 +1,12 @@
 import { useState, useEffect } from "@wordpress/element";
 import TypographyPanel from "./fullSiteTypography";
 import { ColorPicker, Dropdown } from '@wordpress/components';
+import SitePreview from "./sitePreview";
 
 const SiteImportModal = ({ isOpen, onClose, onImport }) => {
-
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
-  const [activeTooltip, setActiveTooltip] = useState(null);
-
-  const colors = [
+  const initialColors = [
     { hex: '#007bff', name: 'Primary Color' },
     { hex: '#6c757d', name: 'Secondary Color' },
     { hex: '#ffc107', name: 'Warning Color' },
@@ -16,61 +14,78 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
     { hex: '#ffffff', name: 'Light Color' }
   ];
 
+  const [colors, setColors] = useState(initialColors);
   const [typography, setTypography] = useState({
     headingFont: 'Inter',
     bodyFont: 'Open Sans',
     baseSize: '16px',
-    scale: '1.2'
+    scale: '1.2',
   });
 
-  const fontOptions = [
-    'Inter',
-    'Open Sans',
-    'Roboto',
-    'Lato',
-    'Poppins',
-    'Montserrat'
-  ];
-
+  // Handle Import Click
   const handleImport = () => {
+    // Get selected block and post ID
+    const selectedBlock = window.wp.data
+      .select('core/block-editor')
+      .getSelectedBlock();
+  
+    const postId = window.wp.data.select('core/editor').getCurrentPostId();
+  
+    // Ensure postId is valid
+    if (!postId) {
+      window.wp.data.dispatch('core/notices').createErrorNotice(
+        'Error: Unable to fetch current post ID.',
+        { type: 'snackbar' }
+      );
+      return;
+    }
+  
+    // Prepare config data
     const configData = {
       colors,
       typography,
     };
-
+  
+    // AJAX request
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
       data: {
         action: 'fb_import_full_site',
         security: nonce,
-        config: configData
+        config: configData,
+        post_id: postId,
+        block_id: selectedBlock ? selectedBlock.clientId : '',
       },
       success: function (response) {
         if (response.success) {
           window.wp.data.dispatch('core/notices').createSuccessNotice(
-            response.data.message || 'Site imported with custom configuration!',
+            response.data.message || 'Site imported with demo content and global settings!',
             { type: 'snackbar' }
           );
-          const siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/';
+  
+          // Redirect to home page after import
+          const siteUrl = `${window.location.origin}${window.location.pathname.replace(/wp-admin.*/, '')}home/`;
           window.location.href = siteUrl;
         } else {
           window.wp.data.dispatch('core/notices').createErrorNotice(
-            'Failed to import site: ' + response.data,
+            `Failed to import site: ${response.data || 'Unknown error occurred.'}`,
             { type: 'snackbar' }
           );
         }
       },
       error: function () {
         window.wp.data.dispatch('core/notices').createErrorNotice(
-          'Failed to process request. Please try again.',
+          'Error: AJAX request failed. Please try again.',
           { type: 'snackbar' }
         );
-      }
+      },
     });
-
+  
+    // Close the modal if applicable
     onClose();
   };
+  
 
   if (!isOpen) return null;
 
@@ -84,16 +99,13 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
 
         <div className="fb-fsi-modal-content-wrapper">
           <div className="fb-fsi-modal-sidebar-content">
-            <div className="fb-global-color-section">
-              <FullSiteImportColorPicker/>
-            </div>
-            <TypographyPanel />
+            <FullSiteImportColorPicker colors={colors} setColors={setColors} />
+            <TypographyPanel typography={typography} setTypography={setTypography} />
           </div>
           <div className="fb-fsi-modal-main-content">
-                hello main content
+            <SitePreview />
           </div>
         </div>
-
 
         <div className="fb-fsi-modal-footer">
           <button className="button button-secondary" onClick={onClose}>Cancel</button>
@@ -106,19 +118,13 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
 
 export default SiteImportModal;
 
-const FullSiteImportColorPicker = () => {
+// Updated FullSiteImportColorPicker
+const FullSiteImportColorPicker = ({ colors, setColors }) => {
   const [activeTooltip, setActiveTooltip] = useState(null);
-  const [colors, setColors] = useState([
-    { hex: '#007bff', name: 'Primary Color' },
-    { hex: '#6c757d', name: 'Secondary Color' },
-    { hex: '#ffc107', name: 'Warning Color' },
-    { hex: '#212529', name: 'Dark Color' },
-    { hex: '#ffffff', name: 'Light Color' }
-  ]);
 
   const handleColorChange = (color, index) => {
     const updatedColors = [...colors];
-    updatedColors[index].hex = color; // Directly use color string
+    updatedColors[index].hex = color;
     setColors(updatedColors);
   };
 
@@ -135,7 +141,7 @@ const FullSiteImportColorPicker = () => {
             style={{ position: 'relative' }}
           >
             <Dropdown
-              renderToggle={({ isOpen, onToggle }) => (
+              renderToggle={({ onToggle }) => (
                 <div
                   className="fb-color-circle"
                   style={{
@@ -157,15 +163,10 @@ const FullSiteImportColorPicker = () => {
                 </div>
               )}
             />
-            {activeTooltip === index && (
-              <div className="fb-color-tooltip" style={{ position: 'absolute', top: '-25px', left: 0 }}>
-                {color.name}
-              </div>
-            )}
+            {activeTooltip === index && <div className="fb-color-tooltip">{color.name}</div>}
           </div>
         ))}
       </div>
     </div>
   );
 };
-
