@@ -595,6 +595,27 @@ const attributes = {
 		default: "#FFFFFF"
 	},
 
+	digitGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	digitGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	digitGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	digitFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -687,6 +708,27 @@ const attributes = {
 		type: 'string',
 		default: ""
 	},
+	labelGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	labelGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	labelGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	labelFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -778,6 +820,27 @@ const attributes = {
 	countDownSeparatorFontHoverColor: {
 		type: 'string',
 		default: "#ffffff"
+	},
+	countDownSeparatorGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	countDownSeparatorGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	countDownSeparatorGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	countDownSeparatorFontFamily: {
 		type: 'string',
