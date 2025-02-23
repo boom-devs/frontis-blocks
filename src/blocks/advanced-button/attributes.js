@@ -39,6 +39,28 @@ const attributes = {
 			Mobile: '%',
 		}
 	},
+
+    buttonGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    buttonGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    buttonGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     buttonFontFamily: {
         type: "string",
         default: "Default",

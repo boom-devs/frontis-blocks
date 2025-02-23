@@ -247,6 +247,27 @@ const attributes = {
 		}
 	},
 
+    titleGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    titleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    titleGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     titleFontFamily: {
         type: "string",
         default: "",

@@ -93,6 +93,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		displayTitle,
 		titleText,
 		titleTag,
+		headingGlobalTypoSwitcher,
+		headingGlobalTypographyData,
+		headingGlobalTypoType,
 		headingFontFamily,
 		headingFontSize,
 		headingFontSizeUnits,
@@ -1024,19 +1027,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			display: block;
 			${HeadingColor !== undefined ? `color: ${HeadingColor};` : ""}
 			${HeadingBackgroundColor !== undefined ? `background-color: ${HeadingBackgroundColor};` : ""}
-			${headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
-			${headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
-			${headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
-			${headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
-			${headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
-			${headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
-			${headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
-			${headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
-			transition: all .3s ease-in-out;
+
+			${headingGlobalTypoSwitcher.fontFamily === true && headingGlobalTypographyData.fontFamily ? `font-family: ${headingGlobalTypographyData.fontFamily};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === true && headingGlobalTypographyData.fontSize ? `font-size: ${headingGlobalTypographyData.fontSize};` : ''}
+			${headingGlobalTypoSwitcher.fontWeight === true && headingGlobalTypographyData.fontWeight ? `font-weight: ${headingGlobalTypographyData.fontWeight};` : ''}
+			${headingGlobalTypoSwitcher.fontStyle === true && headingGlobalTypographyData.fontStyle ? `font-style: ${headingGlobalTypographyData.fontStyle};` : ''}
+			${headingGlobalTypoSwitcher.textTransform === true && headingGlobalTypographyData.textTransform ? `text-transform: ${headingGlobalTypographyData.textTransform};` : ''}
+			${headingGlobalTypoSwitcher.textDecoration === true && headingGlobalTypographyData.textDecoration ? `text-decoration: ${headingGlobalTypographyData.textDecoration};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === true && headingGlobalTypographyData.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData.letterSpacing};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === true && headingGlobalTypographyData.lineHeight ? `line-height: ${headingGlobalTypographyData.lineHeight};` : ''}
+
+			${headingGlobalTypoSwitcher.fontFamily === false && headingFontFamily ? `font-family: ${headingFontFamily};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			${headingGlobalTypoSwitcher.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
+			${headingGlobalTypoSwitcher.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
+			${headingGlobalTypoSwitcher.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
+			${headingGlobalTypoSwitcher.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
+			
 			${headingDesktopPadding ? `padding: ${headingDesktopPadding};` : ""}
 			${headingDesktopMargin ? `margin: ${headingDesktopMargin};` : ""}
 			border: ${HeadingBorder};
 			${HeadingBorderColor !== undefined ? `border-color: ${HeadingBorderColor};` : "" }
+			transition: all .3s ease-in-out;
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title:hover {
 			${HeadingHoverColor !== undefined ? `color: ${HeadingHoverColor};` : ""}
@@ -1065,9 +1079,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
-			${headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
-			${headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
-			${headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
 			width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet}` };
 			${headingTabletPadding ? `padding: ${headingTabletPadding};` : ""}
@@ -1098,9 +1112,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
-			${headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
-			${headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
-			${headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
 			width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};
 			${autoHeightSwitch ? `height: auto;` : `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile}` };
 			${headingMobilePadding ? `padding: ${headingMobilePadding};` : ""}
@@ -1175,6 +1189,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			captionAlignment,
 			HeadingColor,
 			HeadingBackgroundColor,
+			headingGlobalTypoSwitcher,
+			headingGlobalTypographyData,
+			headingGlobalTypoType,
 			headingFontFamily,
 			headingFontSize,
 			headingFontSizeUnits,
@@ -1459,42 +1476,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											initialOpen={true}
 										>
 											<FB_TypographyControl
-                                                fontFamily={headingFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value })}
+												globalTypoControlActive={true}
+												globalTypoSwitcher={headingGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
 
-                                                fontSize={headingFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ headingFontSize: value })}
+												globalTypoType={headingGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														headingGlobalTypoType: value, 
+														headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSizeUnits={headingFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+												fontFamily={headingFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={headingFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value })}
+												fontSize={headingFontSize}
+												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={headingFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value })}
+												fontSizeUnits={headingFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
-                                                textTransform={headingTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value })}
+												fontWeight={headingFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={headingTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value })}
+												fontStyle={headingFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={headingLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value })}
+												textTransform={headingTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={headingLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
+												textDecoration={headingTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={headingLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value })}
+												letterSpacing={headingLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={headingLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+												letterSpacingUnits={headingLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeight={headingLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={headingLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 
 											<FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
