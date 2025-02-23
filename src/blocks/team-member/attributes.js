@@ -737,6 +737,27 @@ const attributes = {
 		default: "#555E72"
 	},
 	// Typography
+	teamMemberDesignationGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	teamMemberDesignationGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	teamMemberDesignationGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	teamMemberDesignationFontFamily: {
         type: "string",
         default: "Default",
@@ -1115,6 +1136,27 @@ const attributes = {
 	},
 
 	// Typography
+	teamMemberNameGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	teamMemberNameGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	teamMemberNameGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	teamMemberNameFontFamily: {
         type: "string",
         default: "Default",
@@ -2044,6 +2086,27 @@ const attributes = {
 		default: "#000"
 	},
 	// Typography
+	teamMemberDescGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	teamMemberDescGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	teamMemberDescGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	teamMemberDescFontFamily: {
 		type: "string",
 		default: "Default",

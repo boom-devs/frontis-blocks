@@ -351,6 +351,27 @@ const attributes = {
         type: "string",
         default: "h3"
     },
+    TestimonialTitleGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    TestimonialTitleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    TestimonialTitleGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     TestimonialTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -474,6 +495,27 @@ const attributes = {
 	},
 	/** End Margin */
 
+    TestimonialDescGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    TestimonialDescGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    TestimonialDescGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     TestimonialDescFontFamily: {
         type: "string",
         default: "Default",
@@ -597,6 +639,27 @@ const attributes = {
     /** End Margin */
 
 
+    TestimonialAuthorGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    TestimonialAuthorGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    TestimonialAuthorGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     TestimonialAuthorFontFamily: {
         type: "string",
         default: "Default",
@@ -721,6 +784,27 @@ const attributes = {
     /** End Margin */
 
 
+    TestimonialDesignationGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    TestimonialDesignationGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    TestimonialDesignationGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     TestimonialDesignationFontFamily: {
         type: "string",
         default: "Default",
