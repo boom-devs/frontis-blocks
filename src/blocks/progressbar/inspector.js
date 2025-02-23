@@ -66,6 +66,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
 
+        progressGlobalTypoSwitcher,
+        progressGlobalTypographyData,
+        progressGlobalTypoType,
         progressFontFamily,
         progressFontSize,
         progressFontSizeUnits,
@@ -211,14 +214,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
             ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
-            ${progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
-            ${progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
-            ${progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
-            ${progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
-            ${progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
-            ${progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
-            ${progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
-            ${progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
+
+            ${progressGlobalTypoSwitcher.fontFamily === true && progressGlobalTypographyData.fontFamily ? `font-family: ${progressGlobalTypographyData.fontFamily};` : ''}
+            ${progressGlobalTypoSwitcher.fontSize === true && progressGlobalTypographyData.fontSize ? `font-size: ${progressGlobalTypographyData.fontSize};` : ''}
+            ${progressGlobalTypoSwitcher.fontWeight === true && progressGlobalTypographyData.fontWeight ? `font-weight: ${progressGlobalTypographyData.fontWeight};` : ''}
+            ${progressGlobalTypoSwitcher.fontStyle === true && progressGlobalTypographyData.fontStyle ? `font-style: ${progressGlobalTypographyData.fontStyle};` : ''}
+            ${progressGlobalTypoSwitcher.textTransform === true && progressGlobalTypographyData.textTransform ? `text-transform: ${progressGlobalTypographyData.textTransform};` : ''}
+            ${progressGlobalTypoSwitcher.textDecoration === true && progressGlobalTypographyData.textDecoration ? `text-decoration: ${progressGlobalTypographyData.textDecoration};` : ''}
+            ${progressGlobalTypoSwitcher.letterSpacing === true && progressGlobalTypographyData.letterSpacing ? `letter-spacing: ${progressGlobalTypographyData.letterSpacing};` : ''}
+            ${progressGlobalTypoSwitcher.lineHeight === true && progressGlobalTypographyData.lineHeight ? `line-height: ${progressGlobalTypographyData.lineHeight};` : ''}
+
+            ${progressGlobalTypoSwitcher.fontFamily === false && progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
+            ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
+            ${progressGlobalTypoSwitcher.fontWeight === false && progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
+            ${progressGlobalTypoSwitcher.fontStyle === false && progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
+            ${progressGlobalTypoSwitcher.textTransform === false && progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
+            ${progressGlobalTypoSwitcher.textDecoration === false && progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
+            ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
+            ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
             color: ${progressTextHoverColor} !important;
@@ -299,9 +312,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-                ${progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
-                ${progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
-                ${progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
+                ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
+                ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
+                ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
             }
         }
 
@@ -322,9 +335,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 border-radius: ${progressMobileBorderRadiusWidth} !important;                      
             }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
-                ${progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
-                ${progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
-                ${progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
+                ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
+                ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
+                ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
             }
         }
 
@@ -358,6 +371,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
 
+        progressGlobalTypoSwitcher,
+        progressGlobalTypographyData,
+        progressGlobalTypoType,
         progressFontFamily,
         progressFontSize,
         progressFontSizeUnits,
@@ -502,40 +518,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
-                                            <FB_TypographyControl 
+                                            <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={progressGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ progressGlobalTypographyData: value })}
+
+                                                globalTypoType={progressGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        progressGlobalTypoType: value, 
+                                                        progressGlobalTypoSwitcher: value === 'default' ? {...progressGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={progressFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value })}
-                                                
+                                                onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontFamily: value && false} })}
+
                                                 fontSize={progressFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ progressFontSize: value })}
-                                                
+                                                onChangeFontSize={(value) => setAttributes({ progressFontSize: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontSize: value && false} })}
+
                                                 fontSizeUnits={progressFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ progressFontSizeUnits: value })}
-                                                
+
                                                 fontWeight={progressFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value })}
-                                                
+                                                onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontWeight: value && false} })}
+
                                                 fontStyle={progressFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value })}
-                                                
+                                                onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontStyle: value && false} })}
+
                                                 textTransform={progressTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value })}
-                                                
+                                                onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textTransform: value && false} })}
+
                                                 textDecoration={progressTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value })}
-                                                
+                                                onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textDecoration: value && false} })}
+
                                                 letterSpacing={progressLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value })}
-                                                
+                                                onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, letterSpacing: value && false} })}
+
                                                 letterSpacingUnits={progressLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ progressLetterSpacingUnits: value })}
-                                                
+
                                                 lineHeight={progressLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value })}
-                                                
+                                                onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, lineHeight: value && false} })}
+
                                                 lineHeightUnits={progressLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
-                                                
+
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
