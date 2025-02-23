@@ -59,6 +59,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ButtonTargetUrl,
 		ButtonWidth,
 		ButtonWidthWidthUnits,
+		ButtonGlobalTypoSwitcher,
+		ButtonGlobalTypographyData,
+		ButtonGlobalTypoType,
 		ButtonFontFamily,
 		ButtonFontSize,
 		ButtonFontSizeUnits,
@@ -180,6 +183,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		iconTwoBorderRadiusLink,
 		connectorSwitcher,
 		connectorText,
+		connectorGlobalTypoSwitcher,
+		connectorGlobalTypographyData,
+		connectorGlobalTypoType,
 		connectorFontFamily,
 		connectorFontSize,
 		connectorFontSizeUnits,
@@ -2043,14 +2049,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : "" }
         }
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
-			font-family: ${ButtonFontFamily !== "default" ? ButtonFontFamily : ButtonFontFamily };
-			${ButtonFontSize.Desktop && ButtonFontSizeUnits.Desktop ? `font-size: ${ButtonFontSize.Desktop}${ButtonFontSizeUnits.Desktop};` : ''}
-			${ButtonLetterSpacing.Desktop && ButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${ButtonLetterSpacing.Desktop}${ButtonLetterSpacingUnits.Desktop};` : ''}
-			${ButtonLineHeight.Desktop && ButtonLineHeightUnits.Desktop ? `line-height: ${ButtonLineHeight.Desktop}${ButtonLineHeightUnits.Desktop};` : ''}
-			font-weight: ${ButtonFontWeight};
-			font-style: ${ButtonFontStyle};
-			text-transform: ${ButtonTextTransform};
-			text-decoration: ${ButtonTextDecoration};
+			${ButtonGlobalTypoSwitcher.fontFamily === true && ButtonGlobalTypographyData.fontFamily ? `font-family: ${ButtonGlobalTypographyData.fontFamily};` : ''}
+			${ButtonGlobalTypoSwitcher.fontSize === true && ButtonGlobalTypographyData.fontSize ? `font-size: ${ButtonGlobalTypographyData.fontSize};` : ''}
+			${ButtonGlobalTypoSwitcher.fontWeight === true && ButtonGlobalTypographyData.fontWeight ? `font-weight: ${ButtonGlobalTypographyData.fontWeight};` : ''}
+			${ButtonGlobalTypoSwitcher.fontStyle === true && ButtonGlobalTypographyData.fontStyle ? `font-style: ${ButtonGlobalTypographyData.fontStyle};` : ''}
+			${ButtonGlobalTypoSwitcher.textTransform === true && ButtonGlobalTypographyData.textTransform ? `text-transform: ${ButtonGlobalTypographyData.textTransform};` : ''}
+			${ButtonGlobalTypoSwitcher.textDecoration === true && ButtonGlobalTypographyData.textDecoration ? `text-decoration: ${ButtonGlobalTypographyData.textDecoration};` : ''}
+			${ButtonGlobalTypoSwitcher.letterSpacing === true && ButtonGlobalTypographyData.letterSpacing ? `letter-spacing: ${ButtonGlobalTypographyData.letterSpacing};` : ''}
+			${ButtonGlobalTypoSwitcher.lineHeight === true && ButtonGlobalTypographyData.lineHeight ? `line-height: ${ButtonGlobalTypographyData.lineHeight};` : ''}
+			
+			${ButtonGlobalTypoSwitcher.fontFamily === false && ButtonFontFamily !== "default" ? `font-family: ${ButtonFontFamily}` : "" };
+			${ButtonGlobalTypoSwitcher.fontSize === false && ButtonFontSize.Desktop && ButtonFontSizeUnits.Desktop ? `font-size: ${ButtonFontSize.Desktop}${ButtonFontSizeUnits.Desktop};` : ''}
+			${ButtonGlobalTypoSwitcher.fontWeight === false && ButtonFontWeight !== "default" ? `font-weight: ${ButtonFontWeight}` : "" };
+			${ButtonGlobalTypoSwitcher.fontStyle === false && ButtonFontStyle !== "default" ? `font-style: ${ButtonFontStyle}` : "" };
+			${ButtonGlobalTypoSwitcher.textTransform === false && ButtonTextTransform !== "default" ? `text-transform: ${ButtonTextTransform}` : "" };
+			${ButtonGlobalTypoSwitcher.textDecoration === false && ButtonTextDecoration !== "default" ? `text-decoration: ${ButtonTextDecoration}` : "" };
+			${ButtonGlobalTypoSwitcher.letterSpacing === false && ButtonLetterSpacing.Desktop && ButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${ButtonLetterSpacing.Desktop}${ButtonLetterSpacingUnits.Desktop};` : ''}
+			${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Desktop && ButtonLineHeightUnits.Desktop ? `line-height: ${ButtonLineHeight.Desktop}${ButtonLineHeightUnits.Desktop};` : ''}
+			
 			padding: ${buttonDesktopPadding};
 			margin: ${buttonDesktopMargin};
 			z-index: ${ButtonZIndex !== undefined ? ButtonZIndex : ""};
@@ -2100,14 +2116,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     	.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 			${connectorColor !== undefined ? `color: ${connectorColor};` : ""}
 			${connectorBgColor !== undefined ? `background-color: ${connectorBgColor};` : "" }
-			font-family: ${ connectorFontFamily !== "default" ? connectorFontFamily : connectorFontFamily };
-			${connectorFontSize.Desktop && connectorFontSizeUnits.Desktop ? `font-size: ${connectorFontSize.Desktop}${connectorFontSizeUnits.Desktop};` : ''}
-			${connectorLetterSpacing.Desktop && connectorLetterSpacingUnits.Desktop ? `letter-spacing: ${connectorLetterSpacing.Desktop}${connectorLetterSpacingUnits.Desktop};` : ''}
+
+			${connectorGlobalTypoSwitcher.fontFamily === true && connectorGlobalTypographyData.fontFamily ? `font-family: ${connectorGlobalTypographyData.fontFamily};` : ''}
+			${connectorGlobalTypoSwitcher.fontSize === true && connectorGlobalTypographyData.fontSize ? `font-size: ${connectorGlobalTypographyData.fontSize};` : ''}
+			${connectorGlobalTypoSwitcher.fontWeight === true && connectorGlobalTypographyData.fontWeight ? `font-weight: ${connectorGlobalTypographyData.fontWeight};` : ''}
+			${connectorGlobalTypoSwitcher.fontStyle === true && connectorGlobalTypographyData.fontStyle ? `font-style: ${connectorGlobalTypographyData.fontStyle};` : ''}
+			${connectorGlobalTypoSwitcher.textTransform === true && connectorGlobalTypographyData.textTransform ? `text-transform: ${connectorGlobalTypographyData.textTransform};` : ''}
+			${connectorGlobalTypoSwitcher.textDecoration === true && connectorGlobalTypographyData.textDecoration ? `text-decoration: ${connectorGlobalTypographyData.textDecoration};` : ''}
+			${connectorGlobalTypoSwitcher.letterSpacing === true && connectorGlobalTypographyData.letterSpacing ? `letter-spacing: ${connectorGlobalTypographyData.letterSpacing};` : ''}
+			${connectorGlobalTypoSwitcher.lineHeight === true && connectorGlobalTypographyData.lineHeight ? `line-height: ${connectorGlobalTypographyData.lineHeight};` : ''}
+
+			${connectorGlobalTypoSwitcher.fontFamily === false && connectorFontFamily !== "default" ? `font-family: ${connectorFontFamily}` : "" };
+			${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Desktop && connectorFontSizeUnits.Desktop ? `font-size: ${connectorFontSize.Desktop}${connectorFontSizeUnits.Desktop};` : ''}
+			${connectorGlobalTypoSwitcher.fontWeight === false && connectorFontWeight !== "default" ? `font-weight: ${connectorFontWeight}` : "" };
+			${connectorGlobalTypoSwitcher.fontStyle === false && connectorFontStyle !== "default" ? `font-style: ${connectorFontStyle}` : "" };
+			${connectorGlobalTypoSwitcher.textTransform === false && connectorTextTransform !== "default" ? `text-transform: ${connectorTextTransform}` : "" };
+			${connectorGlobalTypoSwitcher.textDecoration === false && connectorTextDecoration !== "default" ? `text-decoration: ${connectorTextDecoration}` : "" };
+			${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Desktop && connectorLetterSpacingUnits.Desktop ? `letter-spacing: ${connectorLetterSpacing.Desktop}${connectorLetterSpacingUnits.Desktop};` : ''}
 			${connectorSize.Desktop && connectorSizeUnits.Desktop ? `line-height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
-			font-weight: ${connectorFontWeight};
-			font-style: ${connectorFontStyle};
-			text-transform: ${connectorTextTransform};
-			text-decoration: ${connectorTextDecoration};
+			
 			border: ${connectorBorder};
 			border-color: ${connectorBorderColor};
 			border-width: ${connectorDesktopBorderWidth};
@@ -2176,9 +2203,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
 			${ButtonWidth.Tablet && ButtonWidthWidthUnits.Tablet ? `width: ${ButtonWidth.Tablet}${ButtonWidthWidthUnits.Tablet};` : ''}
-			${ButtonFontSize.Tablet && ButtonFontSizeUnits.Tablet ? `font-size: ${ButtonFontSize.Tablet}${ButtonFontSizeUnits.Tablet};` : ''}
-			${ButtonLetterSpacing.Tablet && ButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${ButtonLetterSpacing.Tablet}${ButtonLetterSpacingUnits.Tablet};` : ''}
-			${ButtonLineHeight.Tablet && ButtonLineHeightUnits.Tablet ? `line-height: ${ButtonLineHeight.Tablet}${ButtonLineHeightUnits.Tablet};` : ''}
+			${ButtonGlobalTypoSwitcher.fontSize === false && ButtonFontSize.Tablet && ButtonFontSizeUnits.Tablet ? `font-size: ${ButtonFontSize.Tablet}${ButtonFontSizeUnits.Tablet};` : ''}
+			${ButtonGlobalTypoSwitcher.letterSpacing === false && ButtonLetterSpacing.Tablet && ButtonLetterSpacingUnits.Tablet ? `letter-spacing: ${ButtonLetterSpacing.Tablet}${ButtonLetterSpacingUnits.Tablet};` : ''}
+			${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Tablet && ButtonLineHeightUnits.Tablet ? `line-height: ${ButtonLineHeight.Tablet}${ButtonLineHeightUnits.Tablet};` : ''}
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
 				padding: ${buttonTabPadding};
@@ -2192,8 +2219,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             border-radius: ${buttonBorderRadiusTabletWidth};
         }
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-			${connectorFontSize.Tablet && connectorFontSizeUnits.Tablet ? `font-size: ${connectorFontSize.Tablet}${connectorFontSizeUnits.Tablet};` : ''}
-			${connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
+			${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Tablet && connectorFontSizeUnits.Tablet ? `font-size: ${connectorFontSize.Tablet}${connectorFontSizeUnits.Tablet};` : ''}
+			${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
 			${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : '1.3'}
             ${connectorSize.Tablet && connectorSizeUnits.Tablet ? `width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};` : ''}
 			border-width: ${connectorTabletBorderWidth};
@@ -2226,9 +2253,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
 			${ButtonWidth.Mobile && ButtonWidthWidthUnits.Mobile ? `width: ${ButtonWidth.Mobile}${ButtonWidthWidthUnits.Mobile};` : ''}
-			${ButtonFontSize.Mobile && ButtonFontSizeUnits.Mobile ? `font-size: ${ButtonFontSize.Mobile}${ButtonFontSizeUnits.Mobile};` : ''}
-			${ButtonLetterSpacing.Mobile && ButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${ButtonLetterSpacing.Mobile}${ButtonLetterSpacingUnits.Mobile};` : ''}
-			${ButtonLineHeight.Mobile && ButtonLineHeightUnits.Mobile ? `line-height: ${ButtonLineHeight.Mobile}${ButtonLineHeightUnits.Mobile};` : ''}
+			${ButtonGlobalTypoSwitcher.fontSize === false && ButtonFontSize.Mobile && ButtonFontSizeUnits.Mobile ? `font-size: ${ButtonFontSize.Mobile}${ButtonFontSizeUnits.Mobile};` : ''}
+			${ButtonGlobalTypoSwitcher.letterSpacing === false && ButtonLetterSpacing.Mobile && ButtonLetterSpacingUnits.Mobile ? `letter-spacing: ${ButtonLetterSpacing.Mobile}${ButtonLetterSpacingUnits.Mobile};` : ''}
+			${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Mobile && ButtonLineHeightUnits.Mobile ? `line-height: ${ButtonLineHeight.Mobile}${ButtonLineHeightUnits.Mobile};` : ''}
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
 			padding: ${buttonMobilePadding};
@@ -2242,8 +2269,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			border-radius: ${buttonBorderRadiusMobileWidth};
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
-			${connectorFontSize.Mobile && connectorFontSizeUnits.Mobile ? `font-size: ${connectorFontSize.Mobile}${connectorFontSizeUnits.Mobile};` : ''}
-			${connectorLetterSpacing.Mobile && connectorLetterSpacingUnits.Mobile ? `letter-spacing: ${connectorLetterSpacing.Mobile}${connectorLetterSpacingUnits.Mobile};` : ''}
+			${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Mobile && connectorFontSizeUnits.Mobile ? `font-size: ${connectorFontSize.Mobile}${connectorFontSizeUnits.Mobile};` : ''}
+			${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Mobile && connectorLetterSpacingUnits.Mobile ? `letter-spacing: ${connectorLetterSpacing.Mobile}${connectorLetterSpacingUnits.Mobile};` : ''}
 			${connectorLineHeight.Mobile && connectorLineHeightUnits.Mobile ? `line-height: ${connectorLineHeight.Mobile}${connectorLineHeightUnits.Mobile};` : '1.3'}
 			${connectorSize.Mobile && connectorSizeUnits.Mobile ? `width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};` : ''}
 			border-width: ${connectorMobileBorderWidth};
@@ -2274,6 +2301,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			dualButtonGlobalBoxShadowCssValue,
 			dualButtonGlobalBgHoverColor,
 			dualButtonGlobalBorderHoverColor,
+			ButtonGlobalTypoSwitcher,
+			ButtonGlobalTypographyData,
+			ButtonGlobalTypoType,
 			ButtonFontFamily,
 			ButtonFontSize,
 			ButtonFontSizeUnits,
@@ -2339,6 +2369,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			connectorBgHoverColor,
 			connectorColor,
 			connectorHoverColor,
+			connectorGlobalTypoSwitcher,
+			connectorGlobalTypographyData,
+			connectorGlobalTypoType,
 			connectorFontFamily,
 			connectorFontSize,
 			connectorFontSizeUnits,
@@ -2737,42 +2770,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
 											/>
 											<FB_TypographyControl
-                                                fontFamily={ButtonFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value })}
+												globalTypoControlActive={true}
+												globalTypoSwitcher={ButtonGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ ButtonGlobalTypographyData: value })}
 
-                                                fontSize={ButtonFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value })}
+												globalTypoType={ButtonGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														ButtonGlobalTypoType: value, 
+														ButtonGlobalTypoSwitcher: value === 'default' ? {...ButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...ButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSizeUnits={ButtonFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ ButtonFontSizeUnits: value })}
+												fontFamily={ButtonFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={ButtonFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value })}
+												fontSize={ButtonFontSize}
+												onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={ButtonFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value })}
+												fontSizeUnits={ButtonFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ ButtonFontSizeUnits: value })}
 
-                                                textTransform={ButtonTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value })}
+												fontWeight={ButtonFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={ButtonTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value })}
+												fontStyle={ButtonFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={ButtonLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value })}
+												textTransform={ButtonTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={ButtonLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ ButtonLetterSpacingUnits: value })}
+												textDecoration={ButtonTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={ButtonLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value })}
+												letterSpacing={ButtonLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={ButtonLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ ButtonLineHeightUnits: value })}
+												letterSpacingUnits={ButtonLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ ButtonLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeight={ButtonLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={ButtonLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ ButtonLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 											
 
 											{/*	Spacing */}
@@ -3060,42 +3105,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												resetFallbackValue={50}
 											/>
 											<FB_TypographyControl
-                                                fontFamily={connectorFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value })}
+												globalTypoControlActive={true}
+												globalTypoSwitcher={connectorGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ connectorGlobalTypographyData: value })}
 
-                                                fontSize={connectorFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ connectorFontSize: value })}
+												globalTypoType={connectorGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														connectorGlobalTypoType: value, 
+														connectorGlobalTypoSwitcher: value === 'default' ? {...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSizeUnits={connectorFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
+												fontFamily={connectorFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={connectorFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value })}
+												fontSize={connectorFontSize}
+												onChangeFontSize={(value) => setAttributes({ connectorFontSize: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={connectorFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value })}
+												fontSizeUnits={connectorFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
 
-                                                textTransform={connectorTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value })}
+												fontWeight={connectorFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={connectorTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value })}
+												fontStyle={connectorFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={connectorLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value })}
+												textTransform={connectorTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={connectorLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
+												textDecoration={connectorTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={connectorSize}
-                                                onChangeLineHeight={(value) => setAttributes({ connectorSize: value })}
+												letterSpacing={connectorLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={connectorSizeUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ connectorSizeUnits: value })}
+												letterSpacingUnits={connectorLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeight={connectorLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ connectorLineHeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={connectorLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ connectorLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 
 											{/* Text Color */}
 											<FB_SwitcherControl

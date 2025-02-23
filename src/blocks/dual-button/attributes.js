@@ -50,6 +50,27 @@ const attributes = {
 			Mobile: '%'
 		}
 	},
+	ButtonGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	ButtonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	ButtonGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	ButtonFontFamily: {
 		type: "string",
 		default: "Default",
@@ -327,6 +348,27 @@ const attributes = {
 	connectorText: {
 		type: "string",
 		default: "OR",
+	},
+	connectorGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	connectorGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	connectorGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	connectorFontFamily: {
 		type: "string",
