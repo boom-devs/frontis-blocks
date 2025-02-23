@@ -84,6 +84,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ImageHeightUnits,
 
         GalleryButtonAlignment,
+        GalleryButtonGlobalTypoSwitcher,
+        GalleryButtonGlobalTypographyData,
+        GalleryButtonGlobalTypoType,
         GalleryButtonFontFamily,
         GalleryButtonFontSize,
         GalleryButtonFontSizeUnits,
@@ -2180,41 +2183,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper {
             ${GalleryButtonSwitcher === true ? 'display: flex;' : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonAlignment !== undefined ? `justify-content: ${GalleryButtonAlignment};` : ''}
+            ${GalleryButtonAlignment !== undefined ? `justify-content: ${GalleryButtonAlignment};` : ''}
         }
 
-        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-            ${GalleryButtonSwitcher === true && ButtonBorder !== undefined ? `border-style: ${ButtonBorder};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher !== undefined ? `border-color: ${ButtonBorderColor};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderDesktopWidth !== undefined ? `border-width: ${ButtonBorderDesktopWidth};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderRadiusDesktopWidth !== undefined ? `border-radius: ${ButtonBorderRadiusDesktopWidth};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonMarginDesktopWidth !== undefined ? `margin: ${ButtonMarginDesktopWidth};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonPaddingDesktopWidth !== undefined ? `padding: ${ButtonPaddingDesktopWidth};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonFontFamily !== undefined ? `font-family: ${GalleryButtonFontFamily};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Desktop !== undefined ? 
-                `font-size: ${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonFontWeight !== undefined ? `font-weight: ${GalleryButtonFontWeight};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonFontStyle !== undefined ? `font-style: ${GalleryButtonFontStyle};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonTextTransform !== undefined ? `text-transform: ${GalleryButtonTextTransform};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonTextDecoration !== undefined ? `text-decoration: ${GalleryButtonTextDecoration};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Desktop !== undefined ? 
-                `letter-spacing: ${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop};` : ''}
-            ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Desktop !== undefined ? 
-                `line-height: ${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'normal' && GalleryButtonColor !== undefined ? 
-                `color: ${GalleryButtonColor};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'normal' && GalleryButtonBGColor !== undefined ? 
-                `background-color: ${GalleryButtonBGColor};` : ''}
-            transition: all 0.3s ease-in-out;
-        }
+        ${GalleryButtonSwitcher === true && `
+            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                ${ButtonBorder !== undefined ? `border-style: ${ButtonBorder};` : ''}
+                ${ButtonBorderColorSwitcher !== undefined ? `border-color: ${ButtonBorderColor};` : ''}
+                ${ButtonBorderDesktopWidth !== undefined ? `border-width: ${ButtonBorderDesktopWidth};` : ''}
+                ${ButtonBorderRadiusDesktopWidth !== undefined ? `border-radius: ${ButtonBorderRadiusDesktopWidth};` : ''}
+                ${ButtonMarginDesktopWidth !== undefined ? `margin: ${ButtonMarginDesktopWidth};` : ''}
+                ${ButtonPaddingDesktopWidth !== undefined ? `padding: ${ButtonPaddingDesktopWidth};` : ''}
+    
+                ${GalleryButtonGlobalTypoSwitcher.fontFamily === true && GalleryButtonGlobalTypographyData.fontFamily ? `font-family: ${GalleryButtonGlobalTypographyData.fontFamily};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontSize === true && GalleryButtonGlobalTypographyData.fontSize ? `font-size: ${GalleryButtonGlobalTypographyData.fontSize};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontWeight === true && GalleryButtonGlobalTypographyData.fontWeight ? `font-weight: ${GalleryButtonGlobalTypographyData.fontWeight};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontStyle === true && GalleryButtonGlobalTypographyData.fontStyle ? `font-style: ${GalleryButtonGlobalTypographyData.fontStyle};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.textTransform === true && GalleryButtonGlobalTypographyData.textTransform ? `text-transform: ${GalleryButtonGlobalTypographyData.textTransform};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.textDecoration === true && GalleryButtonGlobalTypographyData.textDecoration ? `text-decoration: ${GalleryButtonGlobalTypographyData.textDecoration};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.letterSpacing === true && GalleryButtonGlobalTypographyData.letterSpacing ? `letter-spacing: ${GalleryButtonGlobalTypographyData.letterSpacing};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.lineHeight === true && GalleryButtonGlobalTypographyData.lineHeight ? `line-height: ${GalleryButtonGlobalTypographyData.lineHeight};` : ''}
+    
+                ${GalleryButtonGlobalTypoSwitcher.fontFamily === false && GalleryButtonFontFamily !== undefined ? `font-family: ${GalleryButtonFontFamily};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontSize === false && GalleryButtonFontSize.Desktop !== undefined ? `font-size: ${GalleryButtonFontSize.Desktop}${GalleryButtonFontSizeUnits.Desktop};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontWeight === false && GalleryButtonFontWeight !== undefined ? `font-weight: ${GalleryButtonFontWeight};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.fontStyle === false && GalleryButtonFontStyle !== undefined ? `font-style: ${GalleryButtonFontStyle};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.textTransform === false && GalleryButtonTextTransform !== undefined ? `text-transform: ${GalleryButtonTextTransform};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.textDecoration === false && GalleryButtonTextDecoration !== undefined ? `text-decoration: ${GalleryButtonTextDecoration};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.letterSpacing === false && GalleryButtonLetterSpacing.Desktop !== undefined ? `letter-spacing: ${GalleryButtonLetterSpacing.Desktop}${GalleryButtonLetterSpacingUnits.Desktop};` : ''}
+                ${GalleryButtonGlobalTypoSwitcher.lineHeight === false && GalleryButtonLineHeight.Desktop !== undefined ? `line-height: ${GalleryButtonLineHeight.Desktop}${GalleryButtonLineHeightUnits.Desktop};` : ''}
+                ${ButtonBorderColorSwitcher === 'normal' && GalleryButtonColor !== undefined ? `color: ${GalleryButtonColor};` : ''}
+                ${ButtonBorderColorSwitcher === 'normal' && GalleryButtonBGColor !== undefined ? `background-color: ${GalleryButtonBGColor};` : ''}
+                transition: all 0.3s ease-in-out;
+                }
 
-        .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn:hover {
-            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'hover' && GalleryButtonHoverColor !== undefined ? 
-                `color: ${GalleryButtonHoverColor};` : ''}
-            ${GalleryButtonSwitcher === true && ButtonBorderColorSwitcher === 'hover' && GalleryButtonBGHoverColor !== undefined ? 
-                `background-color: ${GalleryButtonBGHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-        }
+                .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn:hover {
+                    ${ButtonBorderColorSwitcher === 'hover' && GalleryButtonHoverColor !== undefined ? 
+                        `color: ${GalleryButtonHoverColor};` : ''}
+                    ${ButtonBorderColorSwitcher === 'hover' && GalleryButtonBGHoverColor !== undefined ? 
+                        `background-color: ${GalleryButtonBGHoverColor};` : ''}
+                    transition: all 0.3s ease-in-out;
+                }
+                
+                @media only screen and (max-width: 1024px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                        ${ButtonBorderRadiusTabletWidth !== undefined ? `border-radius: ${ButtonBorderRadiusTabletWidth};` : ''}
+                        ${ButtonMarginTabletWidth !== undefined ? `margin: ${ButtonMarginTabletWidth};` : ''}
+                        ${ButtonPaddingTabletWidth !== undefined ? `padding: ${ButtonPaddingTabletWidth};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.fontSize === false && GalleryButtonFontSize.Tablet !== undefined ? `font-size: ${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.letterSpacing === false && GalleryButtonLetterSpacing.Tablet !== undefined ? `letter-spacing: ${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.lineHeight === false && GalleryButtonLineHeight.Tablet !== undefined ? `line-height: ${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet};` : ''}
+                    }
+                }
+                @media only screen and (max-width: 767px) {
+                    .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
+                        ${ButtonBorderRadiusMobileWidth !== undefined ? `border-radius: ${ButtonBorderRadiusMobileWidth};` : ''}
+                        ${ButtonMarginMobileWidth !== undefined ? `margin: ${ButtonMarginMobileWidth};` : ''}
+                        ${ButtonPaddingMobileWidth !== undefined ? `padding: ${ButtonPaddingMobileWidth};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.fontSize === false && GalleryButtonFontSize.Mobile !== undefined ? `font-size: ${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.letterSpacing === false && GalleryButtonLetterSpacing.Mobile !== undefined ? `letter-spacing: ${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile};` : ''}
+                        ${GalleryButtonGlobalTypoSwitcher.lineHeight === false && GalleryButtonLineHeight.Mobile !== undefined ? `line-height: ${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile};` : ''}
+                    }
+                }
+        `}
 
 
         @media only screen and (max-width: 1024px) {
@@ -2241,18 +2272,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
                 ${ImageWidth.Tablet !== undefined ? `width: ${ImageWidth.Tablet}${ImageWidthUnits.Tablet};` : ''}
                 ${ImageHeight.Tablet !== undefined ? `height: ${ImageHeight.Tablet}${ImageHeightUnits.Tablet};` : ''}
-            }
-
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-                ${GalleryButtonSwitcher === true && ButtonBorderRadiusTabletWidth !== undefined ? `border-radius: ${ButtonBorderRadiusTabletWidth};` : ''}
-                ${GalleryButtonSwitcher === true && ButtonMarginTabletWidth !== undefined ? `margin: ${ButtonMarginTabletWidth};` : ''}
-                ${GalleryButtonSwitcher === true && ButtonPaddingTabletWidth !== undefined ? `padding: ${ButtonPaddingTabletWidth};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Tablet !== undefined ? 
-                    `font-size: ${GalleryButtonFontSize.Tablet}${GalleryButtonFontSizeUnits.Tablet};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Tablet !== undefined ? 
-                    `letter-spacing: ${GalleryButtonLetterSpacing.Tablet}${GalleryButtonLetterSpacingUnits.Tablet};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Tablet !== undefined ? 
-                    `line-height: ${GalleryButtonLineHeight.Tablet}${GalleryButtonLineHeightUnits.Tablet};` : ''}
             }
 
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
@@ -2285,18 +2304,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item .fb-image-gallery-image {
                 ${ImageWidth.Mobile !== undefined ? `width: ${ImageWidth.Mobile}${ImageWidthUnits.Mobile};` : ''}
                 ${ImageHeight.Mobile !== undefined ? `height: ${ImageHeight.Mobile}${ImageHeightUnits.Mobile};` : ''}
-            }
-
-            .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-wrapper .fb-image-gallery-btn-wrapper .fb-image-gallery-btn {
-                ${GalleryButtonSwitcher === true && ButtonBorderRadiusMobileWidth !== undefined ? `border-radius: ${ButtonBorderRadiusMobileWidth};` : ''}
-                ${GalleryButtonSwitcher === true && ButtonMarginMobileWidth !== undefined ? `margin: ${ButtonMarginMobileWidth};` : ''}
-                ${GalleryButtonSwitcher === true && ButtonPaddingMobileWidth !== undefined ? `padding: ${ButtonPaddingMobileWidth};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonFontSize.Mobile !== undefined ? 
-                    `font-size: ${GalleryButtonFontSize.Mobile}${GalleryButtonFontSizeUnits.Mobile};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonLetterSpacing.Mobile !== undefined ? 
-                    `letter-spacing: ${GalleryButtonLetterSpacing.Mobile}${GalleryButtonLetterSpacingUnits.Mobile};` : ''}
-                ${GalleryButtonSwitcher === true && GalleryButtonLineHeight.Mobile !== undefined ? 
-                    `line-height: ${GalleryButtonLineHeight.Mobile}${GalleryButtonLineHeightUnits.Mobile};` : ''}
             }
 
             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item {
@@ -2439,6 +2446,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ImageHeightUnits,
 
         GalleryButtonAlignment,
+        GalleryButtonGlobalTypoSwitcher,
+        GalleryButtonGlobalTypographyData,
+        GalleryButtonGlobalTypoType,
         GalleryButtonFontFamily,
         GalleryButtonFontSize,
         GalleryButtonFontSizeUnits,
@@ -3024,39 +3034,51 @@ const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim()
                                                 />
 
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={GalleryButtonGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ GalleryButtonGlobalTypographyData: value })}
+
+                                                    globalTypoType={GalleryButtonGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            GalleryButtonGlobalTypoType: value, 
+                                                            GalleryButtonGlobalTypoSwitcher: value === 'default' ? {...GalleryButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...GalleryButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={GalleryButtonFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ GalleryButtonFontFamily: value })}
-                                                    
+                                                    onChangeFontFamily={(value) => setAttributes({ GalleryButtonFontFamily: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, fontFamily: value && false} })}
+
                                                     fontSize={GalleryButtonFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ GalleryButtonFontSize: value })}
-                                                    
+                                                    onChangeFontSize={(value) => setAttributes({ GalleryButtonFontSize: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, fontSize: value && false} })}
+
                                                     fontSizeUnits={GalleryButtonFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ GalleryButtonFontSizeUnits: value })}
-                                                    
+
                                                     fontWeight={GalleryButtonFontWeight}
-                                                    onChangeFontWeight={(value) => setAttributes({ GalleryButtonFontWeight: value })}
-                                                    
+                                                    onChangeFontWeight={(value) => setAttributes({ GalleryButtonFontWeight: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, fontWeight: value && false} })}
+
                                                     fontStyle={GalleryButtonFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ GalleryButtonFontStyle: value })}
-                                                    
+                                                    onChangeFontStyle={(value) => setAttributes({ GalleryButtonFontStyle: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, fontStyle: value && false} })}
+
                                                     textTransform={GalleryButtonTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ GalleryButtonTextTransform: value })}
-                                                    
+                                                    onChangeTextTransform={(value) => setAttributes({ GalleryButtonTextTransform: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, textTransform: value && false} })}
+
                                                     textDecoration={GalleryButtonTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ GalleryButtonTextDecoration: value })}
-                                                    
+                                                    onChangeTextDecoration={(value) => setAttributes({ GalleryButtonTextDecoration: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, textDecoration: value && false} })}
+
                                                     letterSpacing={GalleryButtonLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ GalleryButtonLetterSpacing: value })}
-                                                    
+                                                    onChangeLetterSpacing={(value) => setAttributes({ GalleryButtonLetterSpacing: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, letterSpacing: value && false} })}
+
                                                     letterSpacingUnits={GalleryButtonLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ GalleryButtonLetterSpacingUnits: value })}
-                                                    
+
                                                     lineHeight={GalleryButtonLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ GalleryButtonLineHeight: value })}
-                                                    
+                                                    onChangeLineHeight={(value) => setAttributes({ GalleryButtonLineHeight: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, lineHeight: value && false} })}
+
                                                     lineHeightUnits={GalleryButtonLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ GalleryButtonLineHeightUnits: value })}
-                                                    
+
                                                     deviceType={deviceType}
                                                     setAttributes={setAttributes}
                                                 />
