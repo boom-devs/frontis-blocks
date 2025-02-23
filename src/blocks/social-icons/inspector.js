@@ -87,6 +87,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		/** Title Styles */
 		socialTitleSwitcher,
+		socialTitleGlobalTypoSwitcher,
+		socialTitleGlobalTypographyData,
+		socialTitleGlobalTypoType,
         socialTitleFontFamily,
         socialTitleFontSize,
         socialTitleFontSizeUnits,
@@ -2506,14 +2509,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				fill: ${socialIconGlobalHoverColor};
 			}
 			.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-				${socialTitleFontFamily ? `font-family: ${socialTitleFontFamily};` : ''}
-				${socialTitleFontSize.Desktop && socialTitleFontSizeUnits.Desktop ? `font-size: ${socialTitleFontSize.Desktop}${socialTitleFontSizeUnits.Desktop};` : ''}
-				${socialTitleFontWeight ? `font-weight: ${socialTitleFontWeight};` : ''}
-				${socialTitleFontStyle ? `font-style: ${socialTitleFontStyle};` : ''}
-				${socialTitleTextTransform ? `text-transform: ${socialTitleTextTransform};` : ''}
-				${socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
-				${socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
-				${socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontFamily === true && socialTitleGlobalTypographyData.fontFamily ? `font-family: ${socialTitleGlobalTypographyData.fontFamily};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontSize === true && socialTitleGlobalTypographyData.fontSize ? `font-size: ${socialTitleGlobalTypographyData.fontSize};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontWeight === true && socialTitleGlobalTypographyData.fontWeight ? `font-weight: ${socialTitleGlobalTypographyData.fontWeight};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontStyle === true && socialTitleGlobalTypographyData.fontStyle ? `font-style: ${socialTitleGlobalTypographyData.fontStyle};` : ''}
+				${socialTitleGlobalTypoSwitcher.textTransform === true && socialTitleGlobalTypographyData.textTransform ? `text-transform: ${socialTitleGlobalTypographyData.textTransform};` : ''}
+				${socialTitleGlobalTypoSwitcher.textDecoration === true && socialTitleGlobalTypographyData.textDecoration ? `text-decoration: ${socialTitleGlobalTypographyData.textDecoration};` : ''}
+				${socialTitleGlobalTypoSwitcher.letterSpacing === true && socialTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${socialTitleGlobalTypographyData.letterSpacing};` : ''}
+				${socialTitleGlobalTypoSwitcher.lineHeight === true && socialTitleGlobalTypographyData.lineHeight ? `line-height: ${socialTitleGlobalTypographyData.lineHeight};` : ''}
+				
+				${socialTitleGlobalTypoSwitcher.fontFamily === false && socialTitleFontFamily ? `font-family: ${socialTitleFontFamily};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontSize === false && socialTitleFontSize.Desktop && socialTitleFontSizeUnits.Desktop ? `font-size: ${socialTitleFontSize.Desktop}${socialTitleFontSizeUnits.Desktop};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontWeight === false && socialTitleFontWeight ? `font-weight: ${socialTitleFontWeight};` : ''}
+				${socialTitleGlobalTypoSwitcher.fontStyle === false && socialTitleFontStyle ? `font-style: ${socialTitleFontStyle};` : ''}
+				${socialTitleGlobalTypoSwitcher.textTransform === false && socialTitleTextTransform ? `text-transform: ${socialTitleTextTransform};` : ''}
+				${socialTitleGlobalTypoSwitcher.textDecoration === false && socialTitleTextDecoration ? `text-decoration: ${socialTitleTextDecoration};` : ''}
+				${socialTitleGlobalTypoSwitcher.letterSpacing === false && socialTitleLetterSpacing.Desktop && socialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${socialTitleLetterSpacing.Desktop}${socialTitleLetterSpacingUnits.Desktop};` : ''}
+				${socialTitleGlobalTypoSwitcher.lineHeight === false && socialTitleLineHeight.Desktop && socialTitleLineHeightUnits.Desktop ? `line-height: ${socialTitleLineHeight.Desktop}${socialTitleLineHeightUnits.Desktop};` : ''}
 				${socialTitleColor ? `color: ${socialTitleColor};` : ''}
 				${SocialTitlePaddingDesktopWidth ? `padding: ${SocialTitlePaddingDesktopWidth};` : ''}
 			}
@@ -2557,9 +2569,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-					${socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
-					${socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
-					${socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
+					${socialTitleGlobalTypoSwitcher.fontSize === false && socialTitleFontSize.Tablet && socialTitleFontSizeUnits.Tablet ? `font-size: ${socialTitleFontSize.Tablet}${socialTitleFontSizeUnits.Tablet};` : ''}
+					${socialTitleGlobalTypoSwitcher.letterSpacing === false && socialTitleLetterSpacing.Tablet && socialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${socialTitleLetterSpacing.Tablet}${socialTitleLetterSpacingUnits.Tablet};` : ''}
+					${socialTitleGlobalTypoSwitcher.lineHeight === false && socialTitleLineHeight.Tablet && socialTitleLineHeightUnits.Tablet ? `line-height: ${socialTitleLineHeight.Tablet}${socialTitleLineHeightUnits.Tablet};` : ''}
 					${SocialTitlePaddingTabletWidth ? `padding: ${SocialTitlePaddingTabletWidth};` : ''}
 				}	
 			}
@@ -2596,9 +2608,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					height: ${socialIconSize.Mobile}${socialIconSizeUnits.Mobile};
 				}
 				.${blockID} .fb-social-list-item .fb-social-icon-link .fb-social-icon-title {
-					${socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
-					${socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
-					${socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
+					${socialTitleGlobalTypoSwitcher.fontSize === false && socialTitleFontSize.Mobile && socialTitleFontSizeUnits.Mobile ? `font-size: ${socialTitleFontSize.Mobile}${socialTitleFontSizeUnits.Mobile};` : ''}
+					${socialTitleGlobalTypoSwitcher.letterSpacing === false && socialTitleLetterSpacing.Mobile && socialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${socialTitleLetterSpacing.Mobile}${socialTitleLetterSpacingUnits.Mobile};` : ''}
+					${socialTitleGlobalTypoSwitcher.lineHeight === false && socialTitleLineHeight.Mobile && socialTitleLineHeightUnits.Mobile ? `line-height: ${socialTitleLineHeight.Mobile}${socialTitleLineHeightUnits.Mobile};` : ''}
 					${SocialTitlePaddingMobileWidth ? `padding: ${SocialTitlePaddingMobileWidth};` : ''}
 				}
 			}
@@ -2648,6 +2660,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			socialIconSizeUnits,
 			socialIconGlobalColor,
 			socialIconGlobalHoverColor,
+			socialTitleGlobalTypoSwitcher,
+			socialTitleGlobalTypographyData,
+			socialTitleGlobalTypoType,
 			socialTitleFontFamily,
 			socialTitleFontSize,
 			socialTitleFontSizeUnits,
@@ -2934,38 +2949,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											{socialTitleSwitcher && (
 												<>
 													<FB_TypographyControl
+														globalTypoControlActive={true}
+														globalTypoSwitcher={socialTitleGlobalTypoSwitcher}
+														storeGlobalTypographyData={(value) => setAttributes({ socialTitleGlobalTypographyData: value })}
+
+														globalTypoType={socialTitleGlobalTypoType}
+														onChangeGlobalTypoType={(value) => {
+															setAttributes({ 
+																socialTitleGlobalTypoType: value, 
+																socialTitleGlobalTypoSwitcher: value === 'default' ? {...socialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...socialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+															})
+														}}
+
 														fontFamily={socialTitleFontFamily}
-														onChangeFontFamily={(value) => setAttributes({ socialTitleFontFamily: value })}
+														onChangeFontFamily={(value) => setAttributes({ socialTitleFontFamily: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
 														fontSize={socialTitleFontSize}
-														onChangeFontSize={(value) => setAttributes({ socialTitleFontSize: value })}
+														onChangeFontSize={(value) => setAttributes({ socialTitleFontSize: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, fontSize: value && false} })}
 
 														fontSizeUnits={socialTitleFontSizeUnits}
 														onChangeFontSizeUnit={(value) => setAttributes({ socialTitleFontSizeUnits: value })}
 
 														fontWeight={socialTitleFontWeight}
-														onChangeFontWeight={(value) => setAttributes({ socialTitleFontWeight: value })}
+														onChangeFontWeight={(value) => setAttributes({ socialTitleFontWeight: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, fontWeight: value && false} })}
 
 														fontStyle={socialTitleFontStyle}
-														onChangeFontStyle={(value) => setAttributes({ socialTitleFontStyle: value })}
+														onChangeFontStyle={(value) => setAttributes({ socialTitleFontStyle: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, fontStyle: value && false} })}
 
 														textTransform={socialTitleTextTransform}
-														onChangeTextTransform={(value) => setAttributes({ socialTitleTextTransform: value })}
+														onChangeTextTransform={(value) => setAttributes({ socialTitleTextTransform: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, textTransform: value && false} })}
 
 														textDecoration={socialTitleTextDecoration}
-														onChangeTextDecoration={(value) => setAttributes({ socialTitleTextDecoration: value })}
+														onChangeTextDecoration={(value) => setAttributes({ socialTitleTextDecoration: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, textDecoration: value && false} })}
 
 														letterSpacing={socialTitleLetterSpacing}
-														onChangeLetterSpacing={(value) => setAttributes({ socialTitleLetterSpacing: value })}
+														onChangeLetterSpacing={(value) => setAttributes({ socialTitleLetterSpacing: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
 
 														letterSpacingUnits={socialTitleLetterSpacingUnits}
 														onChangeLetterSpacingUnit={(value) => setAttributes({ socialTitleLetterSpacingUnits: value })}
 
 														lineHeight={socialTitleLineHeight}
-														onChangeLineHeight={(value) => setAttributes({ socialTitleLineHeight: value })}
+														onChangeLineHeight={(value) => setAttributes({ socialTitleLineHeight: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, lineHeight: value && false} })}
 
 														lineHeightUnits={socialTitleLineHeightUnits}
-														onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+														onChangeLineHeightUnit={(value) => setAttributes({ socialTitleLineHeightUnits: value })}
 
 														deviceType={deviceType}
 														setAttributes={setAttributes}
