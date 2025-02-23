@@ -18,9 +18,6 @@ class GlobalSettings extends AjaxBase
     {
         // Other initialization code...
         add_action('wp_head', array($this, 'output_global_styles'), 999);
-        add_action('admin_head', array($this, 'output_global_styles'), 999);
-        // add_action('wp_enqueue_scripts', array($this, 'enqueue_google_fonts'));
-        // add_action('wp', array($this, 'hide_admin_bar_on_preview'));
     }
     /**
      * register_global_settings_events
@@ -518,15 +515,48 @@ class GlobalSettings extends AjaxBase
     
 
     private function generate_color_css($colors) {
-        $css = '';
-        foreach ($colors as $color) {
-            $css .= "--{$color['name']}: {$color['hex']};\n";
+        if (empty($colors) || !is_array($colors)) {
+            return '';
         }
+    
+        $css = ':root {'; 
+        $color_map = [];
+    
+        foreach ($colors as $index => $color) {
+            $slug = sanitize_key($color['slug']);
+            $hex = sanitize_hex_color($color['hex']);
+            $css .= "--{$slug}: {$hex};\n";
+            $color_map[$slug] = $hex;
+        }
+    
+        $css .= "}\n";
+    
+        // Apply primary color to all text elements (p, span, h1-h6)
+        if (!empty($colors[0])) {
+            $primary_slug = sanitize_key($colors[0]['slug']);
+            $css .= "p, span, h1, h2, h3, h4, h5, h6 { color: var(--{$primary_slug}); }\n";
+        }
+    
+        // Apply secondary color to all anchor (a) elements
+        if (!empty($colors[1])) {
+            $secondary_slug = sanitize_key($colors[1]['slug']);
+            $css .= "a { color: var(--{$secondary_slug}); }\n";
+        }
+    
+        // Apply remaining colors to other elements
+        $extra_elements = ['button', 'input', 'blockquote', 'label', 'code'];
+        foreach (array_slice($colors, 2) as $index => $color) {
+            $element = $extra_elements[$index % count($extra_elements)];
+            $slug = sanitize_key($color['slug']);
+            $css .= "{$element} { color: var(--{$slug}); }\n";
+        }
+    
         return $css;
     }
     
+    
     private function generate_typography_css($typography) {
-        return "body { font-family: {$typography['bodyFont']}; font-size: {$typography['baseSize']}; }\n" .
+        return "html { font-family: {$typography['bodyFont']}; font-size: {$typography['baseSize']}; }\n" .
                "h1, h2, h3 { font-family: {$typography['headingFont']}; }\n";
     }
 
@@ -541,13 +571,22 @@ class GlobalSettings extends AjaxBase
         if (!current_user_can('manage_options')) {
             wp_send_json_error('Unauthorized', 403);
         }
-
+    
         $data = json_decode(file_get_contents('php://input'), true);
         if (!isset($data['colors'])) {
             wp_send_json_error('Invalid Data', 400);
         }
-
+    
         update_option('global_site_colors', $data['colors']);
+    
+        // Generate and return the updated CSS
+        $colors = $data['colors'];
+        $css = $this->generate_color_css($colors);
+        $typography = get_option('fb_global_typography', []);
+        $css .= $this->generate_typography_css($typography);
+    
+        update_option('fb_global_styles', $css);
+    
         wp_send_json_success();
     }
 
