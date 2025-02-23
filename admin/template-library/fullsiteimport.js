@@ -7,18 +7,18 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   const initialColors = [
-    { hex: '#007bff', name: 'Primary Color' },
-    { hex: '#6c757d', name: 'Secondary Color' },
-    { hex: '#ffc107', name: 'Warning Color' },
-    { hex: '#212529', name: 'Dark Color' },
-    { hex: '#ffffff', name: 'Light Color' }
+    { hex: '#007bff', name: 'Primary Color' , slug: 'fb-global-primary-color'},
+    { hex: '#6c757d', name: 'Secondary Color' , slug: 'fb-global-secondary-color'},
+    { hex: '#ffc107', name: 'Warning Color' , slug: 'fb-global-warning-color'},
+    { hex: '#212529', name: 'Dark Color' , slug: 'fb-global-dark-color'},
+    { hex: '#ffffff', name: 'Light Color' , slug: 'fb-global-light-color'}
   ];
 
   const [colors, setColors] = useState(initialColors);
   const [typography, setTypography] = useState({
     headingFont: 'Inter',
     bodyFont: 'Open Sans',
-    baseSize: '16px',
+    baseSize: '20px',
     scale: '1.2',
   });
 
@@ -118,14 +118,55 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
 
 export default SiteImportModal;
 
-// Updated FullSiteImportColorPicker
+
 const FullSiteImportColorPicker = ({ colors, setColors }) => {
   const [activeTooltip, setActiveTooltip] = useState(null);
 
-  const handleColorChange = (color, index) => {
+  const handleColorChange = async (color, index) => {
     const updatedColors = [...colors];
     updatedColors[index].hex = color;
     setColors(updatedColors);
+
+    try {
+      // Send the updated colors to the server using AJAX
+      const response = await fetch('/wp-admin/admin-ajax.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          action: 'save_global_colors',  // Action name
+          colors: updatedColors,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // If the save is successful, update the CSS in the <head>
+        updateGlobalStyles();
+      } else {
+        console.error('Failed to save colors', data);
+      }
+    } catch (error) {
+      console.error('Error in saving colors:', error);
+    }
+  };
+
+  const updateGlobalStyles = async () => {
+    try {
+      // Fetch the updated styles from the backend
+      const stylesResponse = await fetch('/wp-admin/admin-ajax.php?action=output_global_styles');
+      const stylesText = await stylesResponse.text();
+
+      // Insert the styles into the <head>
+      const styleElement = document.getElementById('fb-global-styles');
+      if (styleElement) {
+        styleElement.innerHTML = stylesText;
+      }
+    } catch (error) {
+      console.error('Error updating styles:', error);
+    }
   };
 
   return (
@@ -147,7 +188,7 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
                   style={{
                     backgroundColor: color.hex,
                     border: color.hex === '#ffffff' ? '1px solid #ddd' : 'none',
-                    transition: 'background-color 0.3s ease'
+                    transition: 'background-color 0.3s ease',
                   }}
                   onClick={onToggle}
                 />
@@ -170,3 +211,4 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
     </div>
   );
 };
+
