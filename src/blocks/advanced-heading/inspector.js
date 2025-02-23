@@ -1239,8 +1239,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalMobilePadding     = `${headingGlobalPaddingMobile.top}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.right}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.bottom}${headingGlobalPaddingUnits.Mobile} ${headingGlobalPaddingMobile.left}${headingGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
 
-    console.log(globalTabletPadding)
-
 	/** Start Global Margin */
 	const handleGlobalMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
