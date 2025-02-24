@@ -11,6 +11,7 @@ const TypographyPanel = () => {
   const [typographyState, setTypographyState] = useState({
     fontFamily: '',
     fontSize: '',
+    fontSizeUnit: 'px',
     fontSizeUnits: [
       { label: 'px', value: 'px' },
       { label: 'em', value: 'em' },
@@ -21,11 +22,13 @@ const TypographyPanel = () => {
     textTransform: '',
     textDecoration: '',
     letterSpacing: '',
+    letterSpacingUnit: 'px',
     letterSpacingUnits: [
       { label: 'px', value: 'px' },
       { label: 'em', value: 'em' }
     ],
     lineHeight: '',
+    lineHeightUnit: 'px',
     lineHeightUnits: [
       { label: 'px', value: 'px' },
       { label: 'em', value: 'em' }
@@ -149,7 +152,7 @@ const TypographyPanel = () => {
 
       {/* Typography Settings Popup */}
       {isTypographyOpen && activeTypographyItem && (
-      <div className='fb-fsi-typography-popup'>
+        <div className='fb-fsi-typography-popup'>
           <FB_SidebarTypography
             {...typographyState}
             heading={activeTypographyItem}
@@ -180,8 +183,11 @@ const TypographyPanel = () => {
             lineHeightUnits={typographyState.lineHeightUnits}
             onChangeLineHeightUnit={(value) => handleTypographyChange('lineHeightUnit', value)}
             deviceType={typographyState.deviceType}
+            fontSizeUnit={typographyState.fontSizeUnit}
+            letterSpacingUnit={typographyState.letterSpacingUnit}
+            lineHeightUnit={typographyState.lineHeightUnit}
           />
-      </div>
+        </div>
       )}
     </div>
   );
