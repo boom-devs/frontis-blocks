@@ -241,7 +241,7 @@ const attributes = {
     },
     headingGlobalTypoType: {
         type: "string",
-        default: 'none',
+        default: 'default',
     },
 
     headingFontFamily: {
@@ -514,6 +514,27 @@ const attributes = {
     },
 
     /** Start Sub Heading Style */  
+    subHeadingGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    subHeadingGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    subHeadingGlobalTypoType: {
+        type: "string",
+        default: 'defalut',
+    },
     subHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -1038,6 +1059,27 @@ const attributes = {
 		},
 	},
 	// Button
+    buttonGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    buttonGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    buttonGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
 	buttonFontFamily: {
 		type: "string",
 		default: "Default",

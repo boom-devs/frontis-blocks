@@ -29,7 +29,7 @@ const FB_TypographyControl = ({
     globalTypoControlActive = false,
     storeGlobalTypographyData,
     globalTypoSwitcher = {'fontFamily': 'false', 'fontSize': 'false', 'fontWeight': 'false', 'fontStyle': 'false', 'textTransform': 'false', 'textDecoration': 'false', 'letterSpacing': 'false', 'lineHeight': 'false' },
-    globalTypoType = 'none',
+    globalTypoType = 'default',
     onChangeGlobalTypoType,
 
     fontFamily,
@@ -70,6 +70,8 @@ const FB_TypographyControl = ({
         FONT_FAMILYS.find(option => option.value === fontFamily)
     );
 
+    const [selectedGlobalTypoOption, setSelectedGlobalTypoOption] = useState();
+
     useEffect(() => {
 		if (fontFamily !== 'Default') {
 			loadGoogleFont(fontFamily);
@@ -86,10 +88,12 @@ const FB_TypographyControl = ({
         }
     };
 
+    const handleGlobalTypoTypeChange = (selectedOption) => {
+        setSelectedGlobalTypoOption(selectedOption);
+        const newGlobalTypoType = selectedOption?.value || 'default';
+        onChangeGlobalTypoType(newGlobalTypoType);
+    };
 
-	const handleGlobalTypoTypeChange = (globalTypo) => {
-		onChangeGlobalTypoType(globalTypo);
-	};
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
@@ -133,7 +137,7 @@ const FB_TypographyControl = ({
 
     
         const globalTypoData = FrontisBlocksData.global_typography;
-        const GB_TYPO = [{ label: 'None', value: 'none' }];
+        const GB_TYPO = [{ label: 'Default', value: 'default' }];
 
         const storedData = localStorage.getItem("fb_custom_typography");
         const customTypoData = storedData ? JSON.parse(storedData) : {};
@@ -212,12 +216,12 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            {globalTypoControlActive === true && <BaseControl>
-                                <SelectControl
-                                    label={__("Global Fonts", "frontis-blocks")}
+                            {globalTypoControlActive === true && <BaseControl label={__("Presets", "frontis-blocks")}>
+                                <Select2 
                                     options={GB_TYPO}
-                                    value={globalTypoType}
+                                    value={selectedGlobalTypoOption}
                                     onChange={handleGlobalTypoTypeChange}
+                                    className="fb-select2-control"
                                 />
                             </BaseControl>}
 

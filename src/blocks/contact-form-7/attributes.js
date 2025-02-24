@@ -57,6 +57,28 @@ export const attributes = {
 	contactFormLabelHoverColor: {
 		type: 'string',
 	},
+
+	contactFormLabelGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	contactFormLabelGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	contactFormLabelGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	contactFormLabelFontFamily: {
 		type: "string",
 		default: "Default",
@@ -138,6 +160,27 @@ export const attributes = {
 		type: 'string',
 		default: "#399CFF",
 
+	},
+	contactFormInputGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	contactFormInputGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	contactFormInputGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	contactFormInputFontFamily: {
 		type: "string",
@@ -613,6 +656,28 @@ export const attributes = {
 	contactFormSubmitBgHoverColor: {
 		type: 'string',
 	},
+
+	contactFormSubmitGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	contactFormSubmitGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	contactFormSubmitGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	contactFormSubmitFontFamily: {
 		type: "string",
 		default: "Default",
@@ -860,6 +925,27 @@ export const attributes = {
 	contactFormSuccessBgColor: {
 		type: 'string',
 	},
+	contactFormSuccessGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	contactFormSuccessGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	contactFormSuccessGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	contactFormSuccessFontFamily: {
 		type: "string",
 		default: "Default",
@@ -1025,6 +1111,27 @@ export const attributes = {
 	contactFormErrorColor: {
 		type: 'string',
 		default: "#f56c6c" 
+	},
+	contactFormErrorGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	contactFormErrorGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	contactFormErrorGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	contactFormErrorFontFamily: {
 		type: "string",

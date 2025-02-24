@@ -644,6 +644,27 @@ const attributes = {
     /** End Icon Box Shadow */
 
     /** Start Title */
+    FeatureTitleGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    FeatureTitleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    FeatureTitleGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     FeatureTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -728,6 +749,27 @@ const attributes = {
     /** End Title */
 
     /** Start Description */
+    FeatureDescGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    FeatureDescGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    FeatureDescGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     FeatureDescFontFamily: {
         type: "string",
         default: "Default",
