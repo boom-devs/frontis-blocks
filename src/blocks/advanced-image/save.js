@@ -1,5 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import { RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
 	const {
@@ -13,41 +12,14 @@ export default function save({ attributes }) {
 		displayCaption,
 		imageStyle,
 		imageSize,
-		mediaSize,
-		mediaHeight,
-		mediaSizeUnits,
-		mediaHeightUnits,
-		captionAlignment,
 		imageHover,
-		autoHeightSwitch,
 		imageFit,
 		titleText,
 		titleTag,
 		displayTitle,
 		titlePosition,
-		HeadingColor,
-		HeadingBackgroundColor,
-		HeadingFontFamily,
-		HeadingFontSize,
-		HeadingFontSizeUnits,
-		HeadingFontWeight,
-		HeadingFontStyle,
-		HeadingTextTransform,
-		HeadingTextDecoration,
-		HeadingLetterSpacing,
-		HeadingLetterSpacingUnits,
-		HeadingLineHeight,
-		HeadingLineHeightUnits,
-		padding,
-		margin,
-		HeadingBorder,
-		borderWidth,
-		borderRadiusWidth,
-		HeadingBorderColor,
-
 		advancedImageGlobalWraperID,
 		advancedImageGlobalWraperClass,
-
 		advancedImageDesktopSwitcher,
         advancedImageTabletSwitcher,
         advancedImageMobileSwitcher,

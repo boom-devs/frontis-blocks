@@ -149,7 +149,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonIconBorderRadiusLink,
         buttonIconGapSize,
         buttonIconGapUnits,
+		buttonIconRotateSwitcher,
 		buttonIconRotate,
+		buttonIconRotateHover,
+
 
         /** Start Global Setting */
         buttonGlobalZIndex,
@@ -1127,9 +1130,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop ? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};` : ''}
 			${buttonIconColor ? `fill: ${buttonIconColor};` : ''}
 			transform: rotate(${buttonIconRotate.Desktop}deg);
+			transition: all .3s ease-in-out;
+			
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 			${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
+			transform: rotate(${buttonIconRotateHover.Desktop}deg); 
 		}
 
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
@@ -1194,6 +1200,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				transform: rotate(${buttonIconRotate.Tablet}deg);
+				transition: all .3s ease-in-out;
+			}
+
+			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+				transform: rotate(${buttonIconRotateHover.Tablet}deg); 
 			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
@@ -1258,6 +1269,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				transform: rotate(${buttonIconRotate.Mobile}deg);
+				transition: all .3s ease-in-out;
+			}
+			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
+				transform: rotate(${buttonIconRotateHover.Mobile}deg); 
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
@@ -1372,7 +1387,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconBorderLink,
 		buttonIconBorderRadiusUnits,
 		buttonIconBorderRadiusLink,
+		buttonIconRotateSwitcher,
 		buttonIconRotate,
+		buttonIconRotateHover,
 
 		buttonIconImageUrl,
 		buttonIconImageAlt,
@@ -1890,19 +1907,45 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													rangeStep={1}
 													resetFallbackValue={''}
 												/>
-												<FB_Range
-													min={0}
-													max={360}
-													label={__("Icon Rotation", "frontis-blocks")}
-													rangeValue={buttonIconRotate}
-													onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
-													deviceType={deviceType}
-													setAttributes={setAttributes}
-													rangeStep={1}
-													resetFallbackValue={""}
-													isRangeUnit={false}
 
+
+												<FB_SwitcherControl
+													label={__("Icon Rotation", "frontis-blocks")}
+													globalSwitcher={buttonIconRotateSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonIconRotateSwitcher: value })}
 												/>
+
+												{buttonIconRotateSwitcher === 'normal' && (
+													<FB_Range 
+														min={0}
+														max={360}
+														label={__("Icon Rotation", "frontis-blocks")}
+														rangeValue={buttonIconRotate}
+														onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+
+													/>
+												)}
+
+												{buttonIconRotateSwitcher === 'hover' && (
+													<FB_Range
+														min={0}
+														max={360}
+														label={__("Icon Rotation", "frontis-blocks")}
+														rangeValue={buttonIconRotateHover}
+														onChangeHandler={(value) => setAttributes({ buttonIconRotateHover: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+													/>
+												)}
+
 											</PanelBody>
 										)}
 										{(buttonIconAlign === 'image') &&(
