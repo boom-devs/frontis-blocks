@@ -390,7 +390,7 @@ const TypographyPanel = () => {
         path: '/wp/v2/settings',
         method: 'POST',
         data: {
-          fb_global_styles: true // This will trigger regeneration of styles
+          fb_global_styles: true 
         }
       });
 
@@ -399,6 +399,68 @@ const TypographyPanel = () => {
       console.error('Error saving typography settings:', error);
     }
   };
+
+  const injectTypographyStylesIntoIframe = (iframe, elementType, styles) => {
+  if (!iframe || !iframe.contentDocument) return;
+
+  const iframeDocument = iframe.contentDocument;
+
+  let selector;
+  switch (elementType) {
+    case 'Text':
+      selector = 'body';
+      break;
+    case 'Link':
+      selector = 'a';
+      break;
+    case 'Button':
+      selector = 'button, .button';
+      break;
+    case 'H1':
+      selector = 'h1';
+      break;
+    case 'H2':
+      selector = 'h2';
+      break;
+    case 'H3':
+      selector = 'h3';
+      break;
+    case 'H4':
+      selector = 'h4';
+      break;
+    case 'H5':
+      selector = 'h5';
+      break;
+    case 'H6':
+      selector = 'h6';
+      break;
+    default:
+      selector = elementType;
+  }
+
+  const css = `
+    ${selector} {
+      ${styles.fontFamily ? `font-family: ${styles.fontFamily};` : ''}
+      ${styles.fontSize ? `font-size: ${styles.fontSize}${styles.fontSizeUnit};` : ''}
+      ${styles.fontWeight ? `font-weight: ${styles.fontWeight};` : ''}
+      ${styles.fontStyle ? `font-style: ${styles.fontStyle};` : ''}
+      ${styles.textTransform ? `text-transform: ${styles.textTransform};` : ''}
+      ${styles.textDecoration ? `text-decoration: ${styles.textDecoration};` : ''}
+      ${styles.letterSpacing ? `letter-spacing: ${styles.letterSpacing}${styles.letterSpacingUnit};` : ''}
+      ${styles.lineHeight ? `line-height: ${styles.lineHeight}${styles.lineHeightUnit};` : ''}
+    }
+  `;
+
+  let styleElement = iframeDocument.getElementById(`fb-typography-${elementType}`);
+
+  if (!styleElement) {
+    styleElement = iframeDocument.createElement('style');
+    styleElement.id = `fb-typography-${elementType}`;
+    iframeDocument.head.appendChild(styleElement);
+  }
+
+  styleElement.textContent = css;
+};
 
   const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
 

@@ -15,12 +15,7 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   ];
 
   const [colors, setColors] = useState(initialColors);
-  const [typography, setTypography] = useState({
-    headingFont: 'Inter',
-    bodyFont: 'Open Sans',
-    baseSize: '16px',
-    scale: '1.2',
-  });
+  const [typography, setTypography] = useState();
 
   const handleImport = () => {
     const selectedBlock = window.wp.data
@@ -73,7 +68,7 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
       },
       error: function () {
         window.wp.data.dispatch('core/notices').createErrorNotice(
-          'Error: AJAX request failed. Please try again.', 
+          'Error: AJAX request failed. Please try again.',
           { type: 'snackbar' }
         );
       },
@@ -123,11 +118,12 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
 
     const injectStyles = (targetDocument) => {
       if (targetDocument) {
-        let styleTag = targetDocument.getElementById('fb-global-styles');
+        let colorStyleTag = targetDocument.getElementById('fb-global-color-styles');
 
-        if (!styleTag) {
-          styleTag = targetDocument.createElement('style');
-          styleTag.id = 'fb-global-styles';
+        if (!colorStyleTag) {
+          colorStyleTag = targetDocument.createElement('style');
+          colorStyleTag.id = 'fb-global-color-styles';
+          targetDocument.head.appendChild(colorStyleTag);
         }
 
         const css = `
@@ -142,12 +138,12 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
           }
         `;
 
-        styleTag.innerHTML = css;
+        colorStyleTag.textContent = css; // Use textContent instead of innerHTML to avoid HTML parsing issues
       }
     };
 
     if (iframe && iframe.contentDocument) {
-      injectStyles(iframe.contentDocument); // Inside iframe (block editor)
+      injectStyles(iframe.contentDocument);
     }
   };
 
