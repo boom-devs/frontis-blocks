@@ -1,5 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
-import { InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import attributes from './attributes.js';
 
 const v1_0_3 = {
