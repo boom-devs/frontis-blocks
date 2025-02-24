@@ -410,6 +410,27 @@ const attributes = {
         default: false,
     },
 
+    socialTitleGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    socialTitleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    socialTitleGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     socialTitleFontFamily: {
         type: "string",
         default: "Default",

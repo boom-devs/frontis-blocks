@@ -559,7 +559,7 @@ class GlobalSettings extends AjaxBase
     public function output_global_styles() {
         $styles = get_option('fb_global_styles', '');
         if (!empty($styles)) {
-            echo "<style id='fb-global-styles'>\n{$styles}\n</style>";
+            echo "<style id='fb-global-styles'>\n" . esc_html($styles) . "\n</style>";
         }
     }
 

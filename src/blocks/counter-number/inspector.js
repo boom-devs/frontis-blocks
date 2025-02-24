@@ -98,6 +98,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterNumberFontColorSwitcher,
 		counterNumberFontColor,
 		counterNumberFontHoverColor,
+        counterNumberGlobalTypoSwitcher,
+        counterNumberGlobalTypographyData,
+        counterNumberGlobalTypoType,
 		counterNumberFontFamily,
 		counterNumberFontSize,
 		counterNumberFontSizeUnits,
@@ -117,6 +120,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterNumberMarginLink,
 
         //Counter Number Title attributes
+        counterNumberTitleGlobalTypoSwitcher,
+        counterNumberTitleGlobalTypographyData,
+        counterNumberTitleGlobalTypoType,
 		counterNumberTitleFontFamily,
 		counterNumberTitleFontSize,
 		counterNumberTitleFontSizeUnits,
@@ -1011,14 +1017,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
         ${counterNumberFontColor ? `color: ${counterNumberFontColor};` : ''}
-        ${counterNumberFontFamily ? `font-family: ${counterNumberFontFamily};` : ''}
-        ${counterNumberFontSize[deviceType] ? `font-size: ${counterNumberFontSize[deviceType]}${counterNumberFontSizeUnits[deviceType]};` : ''}
-        ${counterNumberFontWeight ? `font-weight: ${counterNumberFontWeight};` : ''}
-        ${counterNumberFontStyle ? `font-style: ${counterNumberFontStyle};` : ''}
-        ${counterNumberTextTransform ? `text-transform: ${counterNumberTextTransform};` : ''}
-        ${counterNumberTextDecoration ? `text-decoration: ${counterNumberTextDecoration};` : ''}
-        ${counterNumberLetterSpacing[deviceType] ? `letter-spacing: ${counterNumberLetterSpacing[deviceType]}${counterNumberLetterSpacingUnits[deviceType]};` : ''}
-        ${counterNumberLineHeight[deviceType] ? `line-height: ${counterNumberLineHeight[deviceType]}${counterNumberLineHeightUnits[deviceType]};` : ''}
+
+        ${counterNumberGlobalTypoSwitcher.fontFamily === true && counterNumberGlobalTypographyData.fontFamily ? `font-family: ${counterNumberGlobalTypographyData.fontFamily};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontSize === true && counterNumberGlobalTypographyData.fontSize ? `font-size: ${counterNumberGlobalTypographyData.fontSize};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontWeight === true && counterNumberGlobalTypographyData.fontWeight ? `font-weight: ${counterNumberGlobalTypographyData.fontWeight};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontStyle === true && counterNumberGlobalTypographyData.fontStyle ? `font-style: ${counterNumberGlobalTypographyData.fontStyle};` : ''}
+        ${counterNumberGlobalTypoSwitcher.textTransform === true && counterNumberGlobalTypographyData.textTransform ? `text-transform: ${counterNumberGlobalTypographyData.textTransform};` : ''}
+        ${counterNumberGlobalTypoSwitcher.textDecoration === true && counterNumberGlobalTypographyData.textDecoration ? `text-decoration: ${counterNumberGlobalTypographyData.textDecoration};` : ''}
+        ${counterNumberGlobalTypoSwitcher.letterSpacing === true && counterNumberGlobalTypographyData.letterSpacing ? `letter-spacing: ${counterNumberGlobalTypographyData.letterSpacing};` : ''}
+        ${counterNumberGlobalTypoSwitcher.lineHeight === true && counterNumberGlobalTypographyData.lineHeight ? `line-height: ${counterNumberGlobalTypographyData.lineHeight};` : ''}
+
+        ${counterNumberGlobalTypoSwitcher.fontFamily === false && counterNumberFontFamily ? `font-family: ${counterNumberFontFamily};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontSize === false && counterNumberFontSize.Desktop ? `font-size: ${counterNumberFontSize.Desktop}${counterNumberFontSizeUnits.Desktop};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontWeight === false && counterNumberFontWeight ? `font-weight: ${counterNumberFontWeight};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontStyle === false && counterNumberFontStyle ? `font-style: ${counterNumberFontStyle};` : ''}
+        ${counterNumberGlobalTypoSwitcher.textTransform === false && counterNumberTextTransform ? `text-transform: ${counterNumberTextTransform};` : ''}
+        ${counterNumberGlobalTypoSwitcher.textDecoration === false && counterNumberTextDecoration ? `text-decoration: ${counterNumberTextDecoration};` : ''}
+        ${counterNumberGlobalTypoSwitcher.letterSpacing === false && counterNumberLetterSpacing.Desktop ? `letter-spacing: ${counterNumberLetterSpacing.Desktop}${counterNumberLetterSpacingUnits.Desktop};` : ''}
+        ${counterNumberGlobalTypoSwitcher.lineHeight === false && counterNumberLineHeight.Desktop ? `line-height: ${counterNumberLineHeight.Desktop}${counterNumberLineHeightUnits.Desktop};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-number,
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-number-prefix,
@@ -1027,14 +1043,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
         ${counterNumberTitleFontColor ? `color: ${counterNumberTitleFontColor};` : ''}
-        ${counterNumberTitleFontFamily ? `font-family: ${counterNumberTitleFontFamily};` : ''}
-        ${counterNumberTitleFontSize[deviceType] ? `font-size: ${counterNumberTitleFontSize[deviceType]}${counterNumberTitleFontSizeUnits[deviceType]};` : ''}
-        ${counterNumberTitleFontWeight ? `font-weight: ${counterNumberTitleFontWeight};` : ''}
-        ${counterNumberTitleFontStyle ? `font-style: ${counterNumberTitleFontStyle};` : ''}
-        ${counterNumberTitleTextTransform ? `text-transform: ${counterNumberTitleTextTransform};` : ''}
-        ${counterNumberTitleTextDecoration ? `text-decoration: ${counterNumberTitleTextDecoration};` : ''}
-        ${counterNumberTitleLetterSpacing[deviceType] ? `letter-spacing: ${counterNumberTitleLetterSpacing[deviceType]}${counterNumberTitleLetterSpacingUnits[deviceType]};` : ''}
-        ${counterNumberTitleLineHeight[deviceType] ? `line-height: ${counterNumberTitleLineHeight[deviceType]}${counterNumberTitleLineHeightUnits[deviceType]};` : ''}
+
+        ${counterNumberTitleGlobalTypoSwitcher.fontFamily === true && counterNumberTitleGlobalTypographyData.fontFamily ? `font-family: ${counterNumberTitleGlobalTypographyData.fontFamily};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontSize === true && counterNumberTitleGlobalTypographyData.fontSize ? `font-size: ${counterNumberTitleGlobalTypographyData.fontSize};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontWeight === true && counterNumberTitleGlobalTypographyData.fontWeight ? `font-weight: ${counterNumberTitleGlobalTypographyData.fontWeight};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontStyle === true && counterNumberTitleGlobalTypographyData.fontStyle ? `font-style: ${counterNumberTitleGlobalTypographyData.fontStyle};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.textTransform === true && counterNumberTitleGlobalTypographyData.textTransform ? `text-transform: ${counterNumberTitleGlobalTypographyData.textTransform};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.textDecoration === true && counterNumberTitleGlobalTypographyData.textDecoration ? `text-decoration: ${counterNumberTitleGlobalTypographyData.textDecoration};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === true && counterNumberTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${counterNumberTitleGlobalTypographyData.letterSpacing};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.lineHeight === true && counterNumberTitleGlobalTypographyData.lineHeight ? `line-height: ${counterNumberTitleGlobalTypographyData.lineHeight};` : ''}
+
+        ${counterNumberTitleGlobalTypoSwitcher.fontFamily === false && counterNumberTitleFontFamily ? `font-family: ${counterNumberTitleFontFamily};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontSize === false && counterNumberTitleFontSize.Desktop ? `font-size: ${counterNumberTitleFontSize.Desktop}${counterNumberTitleFontSizeUnits.Desktop};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontWeight === false && counterNumberTitleFontWeight ? `font-weight: ${counterNumberTitleFontWeight};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontStyle === false && counterNumberTitleFontStyle ? `font-style: ${counterNumberTitleFontStyle};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.textTransform === false && counterNumberTitleTextTransform ? `text-transform: ${counterNumberTitleTextTransform};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.textDecoration === false && counterNumberTitleTextDecoration ? `text-decoration: ${counterNumberTitleTextDecoration};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === false && counterNumberTitleLetterSpacing.Desktop ? `letter-spacing: ${counterNumberTitleLetterSpacing.Desktop}${counterNumberTitleLetterSpacingUnits.Desktop};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.lineHeight === false && counterNumberTitleLineHeight.Desktop ? `line-height: ${counterNumberTitleLineHeight.Desktop}${counterNumberTitleLineHeightUnits.Desktop};` : ''}
         ${counterNumberTitleDesktopMargin ? `margin: ${counterNumberTitleDesktopMargin};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-title{
@@ -1067,6 +1093,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
             ${counterNumberTitleTabletMargin ? `margin: ${counterNumberTitleTabletMargin};` : ''}
         }
+
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
+            ${counterNumberGlobalTypoSwitcher.fontSize === false && counterNumberFontSize.Tablet ? `font-size: ${counterNumberFontSize.Tablet}${counterNumberFontSizeUnits.Tablet};` : ''}
+            ${counterNumberGlobalTypoSwitcher.letterSpacing === false && counterNumberLetterSpacing.Tablet ? `letter-spacing: ${counterNumberLetterSpacing.Tablet}${counterNumberLetterSpacingUnits.Tablet};` : ''}
+            ${counterNumberGlobalTypoSwitcher.lineHeight === false && counterNumberLineHeight.Tablet ? `line-height: ${counterNumberLineHeight.Tablet}${counterNumberLineHeightUnits.Tablet};` : ''}
+        }
+
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+            ${counterNumberTitleGlobalTypoSwitcher.fontSize === false && counterNumberTitleFontSize.Tablet ? `font-size: ${counterNumberTitleFontSize.Tablet}${counterNumberTitleFontSizeUnits.Tablet};` : ''}
+            ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === false && counterNumberTitleLetterSpacing.Tablet ? `letter-spacing: ${counterNumberTitleLetterSpacing.Tablet}${counterNumberTitleLetterSpacingUnits.Tablet};` : ''}
+            ${counterNumberTitleGlobalTypoSwitcher.lineHeight === false && counterNumberTitleLineHeight.Tablet ? `line-height: ${counterNumberTitleLineHeight.Tablet}${counterNumberTitleLineHeightUnits.Tablet};` : ''}
+        }
     }
     @media only screen and (max-width: 767px) {
         .fb-counter-main-wrapper.${blockID}{
@@ -1095,6 +1135,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
             ${counterNumberTitleMobileMargin ? `margin: ${counterNumberTitleMobileMargin};` : ''}
         }
+
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-suffix {
+            ${counterNumberGlobalTypoSwitcher.fontSize === false && counterNumberFontSize.Mobile ? `font-size: ${counterNumberFontSize.Mobile}${counterNumberFontSizeUnits.Mobile};` : ''}
+            ${counterNumberGlobalTypoSwitcher.letterSpacing === false && counterNumberLetterSpacing.Mobile ? `letter-spacing: ${counterNumberLetterSpacing.Mobile}${counterNumberLetterSpacingUnits.Mobile};` : ''}
+            ${counterNumberGlobalTypoSwitcher.lineHeight === false && counterNumberLineHeight.Mobile ? `line-height: ${counterNumberLineHeight.Mobile}${counterNumberLineHeightUnits.Mobile};` : ''}
+        }
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
+            ${counterNumberTitleGlobalTypoSwitcher.fontSize === false && counterNumberTitleFontSize.Mobile ? `font-size: ${counterNumberTitleFontSize.Mobile}${counterNumberTitleFontSizeUnits.Mobile};` : ''}
+            ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === false && counterNumberTitleLetterSpacing.Mobile ? `letter-spacing: ${counterNumberTitleLetterSpacing.Mobile}${counterNumberTitleLetterSpacingUnits.Mobile};` : ''}
+            ${counterNumberTitleGlobalTypoSwitcher.lineHeight === false && counterNumberTitleLineHeight.Mobile ? `line-height: ${counterNumberTitleLineHeight.Mobile}${counterNumberTitleLineHeightUnits.Mobile};` : ''}
+        }
     }
     `, [
         blockID,
@@ -1116,6 +1169,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterIconHoverColor,
         counterNumberFontColor,
         counterNumberFontHoverColor,
+        counterNumberGlobalTypoSwitcher,
+        counterNumberGlobalTypographyData,
+        counterNumberGlobalTypoType,
         counterNumberFontFamily,
         counterNumberFontSize,
         counterNumberFontSizeUnits,
@@ -1128,6 +1184,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberLineHeight,
         counterNumberLineHeightUnits,
         counterNumberTitleFontColor,
+        counterNumberTitleGlobalTypoSwitcher,
+        counterNumberTitleGlobalTypographyData,
+        counterNumberTitleGlobalTypoType,
         counterNumberTitleFontFamily,
         counterNumberTitleFontSize,
         counterNumberTitleFontSizeUnits,
@@ -1506,40 +1565,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}
 
-											<FB_TypographyControl
+                                            <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={counterNumberGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ counterNumberGlobalTypographyData: value })}
+
+                                                globalTypoType={counterNumberGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        counterNumberGlobalTypoType: value, 
+                                                        counterNumberGlobalTypoSwitcher: value === 'default' ? {...counterNumberGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={counterNumberFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value })}
-                                
+                                                onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontFamily: value && false} })}
+
                                                 fontSize={counterNumberFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ counterNumberFontSize: value })}
-                                
+                                                onChangeFontSize={(value) => setAttributes({ counterNumberFontSize: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontSize: value && false} })}
+
                                                 fontSizeUnits={counterNumberFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ counterNumberFontSizeUnits: value })}
-                                
+
                                                 fontWeight={counterNumberFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ counterNumberFontWeight: value })}
-                                
+                                                onChangeFontWeight={(value) => setAttributes({ counterNumberFontWeight: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontWeight: value && false} })}
+
                                                 fontStyle={counterNumberFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ counterNumberFontStyle: value })}
-                                
+                                                onChangeFontStyle={(value) => setAttributes({ counterNumberFontStyle: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontStyle: value && false} })}
+
                                                 textTransform={counterNumberTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTextTransform: value })}
-                                
+                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTextTransform: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, textTransform: value && false} })}
+
                                                 textDecoration={counterNumberTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTextDecoration: value })}
-                                
+                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTextDecoration: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, textDecoration: value && false} })}
+
                                                 letterSpacing={counterNumberLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberLetterSpacing: value })}
-                                
+                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberLetterSpacing: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, letterSpacing: value && false} })}
+
                                                 letterSpacingUnits={counterNumberLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberLetterSpacingUnits: value })}
-                                
+
                                                 lineHeight={counterNumberLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ counterNumberLineHeight: value })}
-                                
+                                                onChangeLineHeight={(value) => setAttributes({ counterNumberLineHeight: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, lineHeight: value && false} })}
+
                                                 lineHeightUnits={counterNumberLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ counterNumberLineHeightUnits: value })}
-                                
+
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
@@ -1585,39 +1656,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={counterNumberTitleGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ counterNumberTitleGlobalTypographyData: value })}
+
+                                                globalTypoType={counterNumberTitleGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        counterNumberTitleGlobalTypoType: value, 
+                                                        counterNumberTitleGlobalTypoSwitcher: value === 'default' ? {...counterNumberTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={counterNumberTitleFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value })}
-                                
+                                                onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontFamily: value && false} })}
+
                                                 fontSize={counterNumberTitleFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ counterNumberTitleFontSize: value })}
-                                
+                                                onChangeFontSize={(value) => setAttributes({ counterNumberTitleFontSize: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontSize: value && false} })}
+
                                                 fontSizeUnits={counterNumberTitleFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ counterNumberTitleFontSizeUnits: value })}
-                                
+
                                                 fontWeight={counterNumberTitleFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ counterNumberTitleFontWeight: value })}
-                                
+                                                onChangeFontWeight={(value) => setAttributes({ counterNumberTitleFontWeight: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontWeight: value && false} })}
+
                                                 fontStyle={counterNumberTitleFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ counterNumberTitleFontStyle: value })}
-                                
+                                                onChangeFontStyle={(value) => setAttributes({ counterNumberTitleFontStyle: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontStyle: value && false} })}
+
                                                 textTransform={counterNumberTitleTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTitleTextTransform: value })}
-                                
+                                                onChangeTextTransform={(value) => setAttributes({ counterNumberTitleTextTransform: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, textTransform: value && false} })}
+
                                                 textDecoration={counterNumberTitleTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTitleTextDecoration: value })}
-                                
+                                                onChangeTextDecoration={(value) => setAttributes({ counterNumberTitleTextDecoration: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, textDecoration: value && false} })}
+
                                                 letterSpacing={counterNumberTitleLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberTitleLetterSpacing: value })}
-                                
+                                                onChangeLetterSpacing={(value) => setAttributes({ counterNumberTitleLetterSpacing: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
+
                                                 letterSpacingUnits={counterNumberTitleLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberTitleLetterSpacingUnits: value })}
-                                
+
                                                 lineHeight={counterNumberTitleLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ counterNumberTitleLineHeight: value })}
-                                
+                                                onChangeLineHeight={(value) => setAttributes({ counterNumberTitleLineHeight: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, lineHeight: value && false} })}
+
                                                 lineHeightUnits={counterNumberTitleLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ counterNumberTitleLineHeightUnits: value })}
-                                
+
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />

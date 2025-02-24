@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Social Icons",
 	"category": "frontis-blocks",
-	"icon": "facebook-alt",
 	"description": "A customizable social icons block with various styling options.",
 	"example": {},
     "supports": {

@@ -233,32 +233,6 @@ class GenerateGlobalTypography {
 				file_put_contents( $css_file, $styles );
 			}
 		}
-		
-		// if($global_typography){
-		// 	// Device breakpoints (you can customize as per your needs)
-		// 	$devices = array(
-		// 		'Desktop' => 1200,  // Desktop breakpoint at 1200px
-		// 		'Tablet' => 768,    // Tablet breakpoint at 768px
-		// 		'Mobile' => 480     // Mobile breakpoint at 480px
-		// 	);
-		// 	$css_content = self::generate_css_file($global_typography, $devices);
-
-		// 	if($css_content) {
-		// 		$upload_dir = wp_upload_dir();
-		// 		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-
-		// 		// Ensure the target directory exists
-		// 		if (!file_exists($css_dir)) {
-		// 			wp_mkdir_p($css_dir);
-		// 		}
-
-		// 		$css_file_name = 'frontis-global-typography.css';
-		// 		$css_file = $css_dir . $css_file_name;
-		// 		file_put_contents( $css_file, $css_content );
-
-		// 		update_option('fb_global_typo_css', $css_content);
-		// 	}
-		// }
 	}
 
 	public static function enqueue_google_fonts($styles) {
@@ -282,7 +256,7 @@ class GenerateGlobalTypography {
 			}, $font_families));
 	
 			// Enqueue the Google Fonts
-			wp_enqueue_style('fb-google-fonts', $font_url, array(), null);
+			wp_enqueue_style('fb-google-fonts', $font_url, array(), FB_VERSION, true);
 		}
 	}
 }

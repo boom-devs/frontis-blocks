@@ -1527,7 +1527,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'textDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
+        variable: "--fb-global-".concat(item, "--text-decoration"),
         value: value
       }
     }))));
@@ -1541,7 +1541,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'textTransform': {
-        variable: "--fb-global-".concat(item, "--font-transform"),
+        variable: "--fb-global-".concat(item, "--text-transform"),
         value: value
       }
     }))));
@@ -1556,7 +1556,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
+        variable: "--fb-global-".concat(item, "--letter-spacing"),
         value: value,
         unit: {
           'Desktop': 'px',
@@ -1590,7 +1590,7 @@ var TypographySettings = function TypographySettings(props) {
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'lineHeight': {
-        variable: "--fb-global-".concat(item, "--font-line-height"),
+        variable: "--fb-global-".concat(item, "--line-height"),
         value: value,
         unit: {
           'Desktop': 'px',
@@ -3910,7 +3910,9 @@ var FB_Range = function FB_Range(_ref) {
     _ref$globalTypography2 = _ref.globalTypographyValue,
     globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
     _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
-    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra,
+    _ref$globalReset = _ref.globalReset,
+    globalReset = _ref$globalReset === void 0 ? false : _ref$globalReset;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -3935,6 +3937,11 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+
+  // if(globalReset === true) {
+  // 	setRangeValue(resetFallbackValue);
+  // }
+
   var handleGlobalTypographyValue = function handleGlobalTypographyValue(value) {
     setGlobalTypographyValue(value);
   };
