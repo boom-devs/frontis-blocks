@@ -308,6 +308,27 @@ const attributes = {
         default: "h4"
     },
     /** Start Heading Style */
+	headingGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	headingGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	headingGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
     headingFontFamily: {
         type: "string",
         default: "Default",
@@ -568,6 +589,27 @@ const attributes = {
     },    
 
     //Sub Heading
+	SubHeadingGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	SubHeadingGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	SubHeadingGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
     SubHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -955,6 +997,27 @@ const attributes = {
     },
 
 	//Button Two
+	buttonTwoGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	buttonTwoGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	buttonTwoGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	buttonTwoFontFamily: {
 		type: "string",
 		default: "Default",
@@ -1395,6 +1458,27 @@ const attributes = {
 		},
 	},
 	// Button One Typography
+	buttonGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	buttonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	buttonGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	buttonFontFamily: {
 		type: "string",
 		default: "Default",

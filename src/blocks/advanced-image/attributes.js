@@ -227,6 +227,27 @@ const attributes = {
 		default: "tilt"
 	},
 	/** Start Heading Style */
+	headingGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	headingGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	headingGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
     headingFontFamily: {
         type: "string",
         default: "inherit",
