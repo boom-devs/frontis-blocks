@@ -682,7 +682,7 @@ var TypographyPanel = function TypographyPanel() {
               path: '/wp/v2/settings',
               method: 'POST',
               data: {
-                fb_global_styles: true // This will trigger regeneration of styles
+                fb_global_styles: true
               }
             });
           case 6:
@@ -703,6 +703,50 @@ var TypographyPanel = function TypographyPanel() {
       return _ref2.apply(this, arguments);
     };
   }();
+  var injectTypographyStylesIntoIframe = function injectTypographyStylesIntoIframe(iframe, elementType, styles) {
+    if (!iframe || !iframe.contentDocument) return;
+    var iframeDocument = iframe.contentDocument;
+    var selector;
+    switch (elementType) {
+      case 'Text':
+        selector = 'body';
+        break;
+      case 'Link':
+        selector = 'a';
+        break;
+      case 'Button':
+        selector = 'button, .button';
+        break;
+      case 'H1':
+        selector = 'h1';
+        break;
+      case 'H2':
+        selector = 'h2';
+        break;
+      case 'H3':
+        selector = 'h3';
+        break;
+      case 'H4':
+        selector = 'h4';
+        break;
+      case 'H5':
+        selector = 'h5';
+        break;
+      case 'H6':
+        selector = 'h6';
+        break;
+      default:
+        selector = elementType;
+    }
+    var css = "\n    ".concat(selector, " {\n      ").concat(styles.fontFamily ? "font-family: ".concat(styles.fontFamily, ";") : '', "\n      ").concat(styles.fontSize ? "font-size: ".concat(styles.fontSize).concat(styles.fontSizeUnit, ";") : '', "\n      ").concat(styles.fontWeight ? "font-weight: ".concat(styles.fontWeight, ";") : '', "\n      ").concat(styles.fontStyle ? "font-style: ".concat(styles.fontStyle, ";") : '', "\n      ").concat(styles.textTransform ? "text-transform: ".concat(styles.textTransform, ";") : '', "\n      ").concat(styles.textDecoration ? "text-decoration: ".concat(styles.textDecoration, ";") : '', "\n      ").concat(styles.letterSpacing ? "letter-spacing: ".concat(styles.letterSpacing).concat(styles.letterSpacingUnit, ";") : '', "\n      ").concat(styles.lineHeight ? "line-height: ".concat(styles.lineHeight).concat(styles.lineHeightUnit, ";") : '', "\n    }\n  ");
+    var styleElement = iframeDocument.getElementById("fb-typography-".concat(elementType));
+    if (!styleElement) {
+      styleElement = iframeDocument.createElement('style');
+      styleElement.id = "fb-typography-".concat(elementType);
+      iframeDocument.head.appendChild(styleElement);
+    }
+    styleElement.textContent = css;
+  };
   var headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-typography-panel"
@@ -890,12 +934,7 @@ var SiteImportModal = function SiteImportModal(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     colors = _useState2[0],
     setColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      headingFont: 'Inter',
-      bodyFont: 'Open Sans',
-      baseSize: '16px',
-      scale: '1.2'
-    }),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(),
     _useState4 = _slicedToArray(_useState3, 2),
     typography = _useState4[0],
     setTypography = _useState4[1];
@@ -995,19 +1034,20 @@ var FullSiteImportColorPicker = function FullSiteImportColorPicker(_ref2) {
     var iframe = document.querySelector('iframe.fb-preview-frame');
     var injectStyles = function injectStyles(targetDocument) {
       if (targetDocument) {
-        var styleTag = targetDocument.getElementById('fb-global-styles');
-        if (!styleTag) {
-          styleTag = targetDocument.createElement('style');
-          styleTag.id = 'fb-global-styles';
+        var colorStyleTag = targetDocument.getElementById('fb-global-color-styles');
+        if (!colorStyleTag) {
+          colorStyleTag = targetDocument.createElement('style');
+          colorStyleTag.id = 'fb-global-color-styles';
+          targetDocument.head.appendChild(colorStyleTag);
         }
         var css = "\n          :root {\n            ".concat(updatedColors.map(function (color) {
           return "--".concat(color.slug, ": ").concat(color.hex, ";");
         }).join('\n'), "\n          }\n          body p, body span, body h1, body h2, body h3, body h4, body h5, body h6 {\n            color: var(--fb-global-primary-color);\n          }\n          body a {\n            color: var(--fb-global-secondary-color);\n          }\n        ");
-        styleTag.innerHTML = css;
+        colorStyleTag.textContent = css; // Use textContent instead of innerHTML to avoid HTML parsing issues
       }
     };
     if (iframe && iframe.contentDocument) {
-      injectStyles(iframe.contentDocument); // Inside iframe (block editor)
+      injectStyles(iframe.contentDocument);
     }
   };
 
