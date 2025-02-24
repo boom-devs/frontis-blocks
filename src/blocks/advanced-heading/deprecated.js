@@ -3,7 +3,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import attributes from './attributes.js';
 
 const v1_0_3 = {
-
+    
     attributes,
 
     supports: {
@@ -70,7 +70,6 @@ const v1_0_3 = {
                             )}
                         </div>
                     )}
-
 
                     {subHeadingSwitcher && subHeadingPosition === 'top' && ( 
                         <div className="fb-advanced-sub-heading-wrapper">
