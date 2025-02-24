@@ -46,7 +46,6 @@ class GlobalSettings extends AjaxBase
             'get_fontfamilies',
             'import_demo_data',
             'import_full_site',
-            'save_global_colors'
         ];
 
         $this->init_ajax_events($events);
@@ -448,12 +447,10 @@ class GlobalSettings extends AjaxBase
             if (!empty($config)) {
                 $colors = $config['colors'] ?? [];
                 $typography = $config['typography'] ?? [];
-    
-                // Save globally
+            
                 update_option('global_site_colors', $colors);
                 update_option('fb_typography_settings', $typography);
-    
-                // Generate and save global CSS
+            
                 $custom_styles = $this->generate_color_css($colors) . $this->generate_typography_css($typography);
                 update_option('fb_global_styles', $custom_styles);
             }
@@ -513,7 +510,6 @@ class GlobalSettings extends AjaxBase
     }    
 
     
-
     private function generate_color_css($colors) {
         if (empty($colors) || !is_array($colors)) {
             return '';
@@ -534,17 +530,17 @@ class GlobalSettings extends AjaxBase
         // Apply primary color to all text elements (p, span, h1-h6)
         if (!empty($colors[0])) {
             $primary_slug = sanitize_key($colors[0]['slug']);
-            $css .= "p, span, h1, h2, h3, h4, h5, h6 { color: var(--{$primary_slug}); }\n";
+            $css .= "body p, body span, body h1, body h2, body h3, body h4, body h5, body h6 { color: var(--{$primary_slug}); }\n";
         }
     
         // Apply secondary color to all anchor (a) elements
         if (!empty($colors[1])) {
             $secondary_slug = sanitize_key($colors[1]['slug']);
-            $css .= "a { color: var(--{$secondary_slug}); }\n";
+            $css .= "body a { color: var(--{$secondary_slug}); }\n";
         }
     
         // Apply remaining colors to other elements
-        $extra_elements = ['button', 'input', 'blockquote', 'label', 'code'];
+        $extra_elements = ['body button', 'body input', 'body blockquote', 'body label', 'body code'];
         foreach (array_slice($colors, 2) as $index => $color) {
             $element = $extra_elements[$index % count($extra_elements)];
             $slug = sanitize_key($color['slug']);
@@ -565,29 +561,6 @@ class GlobalSettings extends AjaxBase
         if (!empty($styles)) {
             echo "<style id='fb-global-styles'>\n{$styles}\n</style>";
         }
-    }
-
-    public function save_global_colors() {
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error('Unauthorized', 403);
-        }
-    
-        $data = json_decode(file_get_contents('php://input'), true);
-        if (!isset($data['colors'])) {
-            wp_send_json_error('Invalid Data', 400);
-        }
-    
-        update_option('global_site_colors', $data['colors']);
-    
-        // Generate and return the updated CSS
-        $colors = $data['colors'];
-        $css = $this->generate_color_css($colors);
-        $typography = get_option('fb_global_typography', []);
-        $css .= $this->generate_typography_css($typography);
-    
-        update_option('fb_global_styles', $css);
-    
-        wp_send_json_success();
     }
 
 }
