@@ -1753,7 +1753,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 												)}
                                         </PanelBody>
 
-										{buttonIconAlign === 'icon-text' && buttonIconAlign ==='icon-only' (
+										{(buttonIconAlign === 'icon-text' || buttonIconAlign === 'icon-only') && (
 											<PanelBody
 												title={__("Icon Styles", "frontis-blocks")}
 												initialOpen={false}
