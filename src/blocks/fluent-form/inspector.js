@@ -2751,7 +2751,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
                 ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && luentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
+                ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
