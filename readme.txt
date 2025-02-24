@@ -109,7 +109,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 = 1.0.2 - 22 Feb 2025 =
 - Add Advanced Image Blocks
 
-
 = 1.0.1 - 20 Feb 2025 =
 - Resolved minor issues for improved stability.
 - Added a redirect feature in the dashboard for better navigation.
