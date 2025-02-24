@@ -208,6 +208,27 @@ const attributes = {
 		type: 'string',
 		default: "#FFFFFF",
 	},
+	pricingTopSectionTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	pricingTopSectionTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	pricingTopSectionTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	pricingTopSectionTextFontFamily: {
 		type: 'string',
 		default: "Default",
@@ -828,6 +849,27 @@ const attributes = {
 		type: "string",
 		default: "left"
 	},
+	normalPricingGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	normalPricingGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	normalPricingGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	normalPricingFontFamily: {
         type: "string",
         default: "Default",
@@ -909,6 +951,27 @@ const attributes = {
 		default: ''
 	},
 
+	salePricingGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	salePricingGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	salePricingGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	salePricingFontFamily: {
         type: "string",
         default: "Default",
@@ -990,6 +1053,27 @@ const attributes = {
 		default: ''
 	},
 
+	priceCurrencyGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	priceCurrencyGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	priceCurrencyGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	priceCurrencyFontFamily: {
 		type: 'string',
 		default: 'Default'
@@ -1071,6 +1155,27 @@ const attributes = {
 		default: ''
 	},
 
+	pricePeriodGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	pricePeriodGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	pricePeriodGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	pricePeriodFontFamily: {
 		type: "string",
 		default: "Default"
@@ -1213,6 +1318,27 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	pricingTitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	pricingTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	pricingTitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	pricingTitleFontFamily: {
 		type: "string",
 		default: "Default",
@@ -1293,6 +1419,27 @@ const attributes = {
 	pricingSubtitleHoverColor: {
 		type: 'string',
 		default: ''
+	},
+	pricingSubtitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	pricingSubtitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	pricingSubtitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	pricingSubtitleFontFamily: {
 		type: "string",
@@ -1411,6 +1558,27 @@ const attributes = {
 	pricingfeatureTitleHoverColor: {
 		type: "string",
 		default: ""
+	},
+	pricingfeatureTitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	pricingfeatureTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	pricingfeatureTitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	pricingfeatureTitleFontFamily: {
 		type: "string",
@@ -1736,6 +1904,28 @@ const attributes = {
 			Tablet: '%',
 			Mobile: '%',
 		}
+	},
+
+	priceButtonGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	priceButtonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	priceButtonGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	priceButtonFontFamily: {
 		type: "string",
@@ -2470,6 +2660,27 @@ const attributes = {
 		type: "string",
 		default: "What Value Add For Your Business"
 	},
+	priceAfterTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	priceAfterTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	priceAfterTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	priceAfterTextFontFamily: {
 		type: "string",
 		default: "Default",
@@ -2761,7 +2972,27 @@ const attributes = {
 		default: "Billed every year Popular amongst entrepeneurs $497 per year"
 	},
 
-
+	priceFeatureAfterTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	priceFeatureAfterTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	priceFeatureAfterTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	priceFeatureAfterTextFontFamily: {
 		type: "string",
 		default: "Default",
