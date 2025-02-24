@@ -202,6 +202,7 @@ var TypographyPanel = function TypographyPanel() {
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
       fontFamily: '',
       fontSize: '',
+      fontSizeUnit: 'px',
       fontSizeUnits: [{
         label: 'px',
         value: 'px'
@@ -217,6 +218,7 @@ var TypographyPanel = function TypographyPanel() {
       textTransform: '',
       textDecoration: '',
       letterSpacing: '',
+      letterSpacingUnit: 'px',
       letterSpacingUnits: [{
         label: 'px',
         value: 'px'
@@ -225,6 +227,7 @@ var TypographyPanel = function TypographyPanel() {
         value: 'em'
       }],
       lineHeight: '',
+      lineHeightUnit: 'px',
       lineHeightUnits: [{
         label: 'px',
         value: 'px'
@@ -374,7 +377,10 @@ var TypographyPanel = function TypographyPanel() {
     onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
       return handleTypographyChange('lineHeightUnit', value);
     },
-    deviceType: typographyState.deviceType
+    deviceType: typographyState.deviceType,
+    fontSizeUnit: typographyState.fontSizeUnit,
+    letterSpacingUnit: typographyState.letterSpacingUnit,
+    lineHeightUnit: typographyState.lineHeightUnit
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyPanel);
@@ -1446,7 +1452,9 @@ var FB_Range = function FB_Range(_ref) {
     _ref$globalTypography2 = _ref.globalTypographyValue,
     globalTypographyValue = _ref$globalTypography2 === void 0 ? 'none' : _ref$globalTypography2,
     _ref$setGlobalTypogra = _ref.setGlobalTypographyValue,
-    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra;
+    setGlobalTypographyValue = _ref$setGlobalTypogra === void 0 ? null : _ref$setGlobalTypogra,
+    _ref$globalReset = _ref.globalReset,
+    globalReset = _ref$globalReset === void 0 ? false : _ref$globalReset;
   // Ensure default/fallback value for the current deviceType
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (rangeValue[deviceType] === undefined) {
@@ -1471,6 +1479,11 @@ var FB_Range = function FB_Range(_ref) {
   var resetRangeValue = function resetRangeValue() {
     setRangeValue(resetFallbackValue);
   };
+
+  // if(globalReset === true) {
+  // 	setRangeValue(resetFallbackValue);
+  // }
+
   var handleGlobalTypographyValue = function handleGlobalTypographyValue(value) {
     setGlobalTypographyValue(value);
   };
