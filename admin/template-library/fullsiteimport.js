@@ -7,31 +7,28 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   const initialColors = [
-    { hex: '#007bff', name: 'Primary Color' , slug: 'fb-global-primary-color'},
-    { hex: '#6c757d', name: 'Secondary Color' , slug: 'fb-global-secondary-color'},
-    { hex: '#ffc107', name: 'Warning Color' , slug: 'fb-global-warning-color'},
-    { hex: '#212529', name: 'Dark Color' , slug: 'fb-global-dark-color'},
-    { hex: '#ffffff', name: 'Light Color' , slug: 'fb-global-light-color'}
+    { hex: '#007bff', name: 'Primary Color', slug: 'fb-global-primary-color' },
+    { hex: '#6c757d', name: 'Secondary Color', slug: 'fb-global-secondary-color' },
+    { hex: '#ffc107', name: 'Warning Color', slug: 'fb-global-warning-color' },
+    { hex: '#212529', name: 'Dark Color', slug: 'fb-global-dark-color' },
+    { hex: '#ffffff', name: 'Light Color', slug: 'fb-global-light-color' }
   ];
 
   const [colors, setColors] = useState(initialColors);
   const [typography, setTypography] = useState({
     headingFont: 'Inter',
     bodyFont: 'Open Sans',
-    baseSize: '20px',
+    baseSize: '16px',
     scale: '1.2',
   });
 
-  // Handle Import Click
   const handleImport = () => {
-    // Get selected block and post ID
     const selectedBlock = window.wp.data
       .select('core/block-editor')
       .getSelectedBlock();
-  
+
     const postId = window.wp.data.select('core/editor').getCurrentPostId();
-  
-    // Ensure postId is valid
+
     if (!postId) {
       window.wp.data.dispatch('core/notices').createErrorNotice(
         'Error: Unable to fetch current post ID.',
@@ -39,14 +36,14 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
       );
       return;
     }
-  
-    // Prepare config data
+
+    // Combine color and typography data
     const configData = {
       colors,
       typography,
     };
-  
-    // AJAX request
+
+    // Send everything in one request
     window.jQuery.ajax({
       url: ajaxUrl,
       type: 'POST',
@@ -63,8 +60,8 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
             response.data.message || 'Site imported with demo content and global settings!',
             { type: 'snackbar' }
           );
-  
-          // Redirect to home page after import
+
+          // Redirect after import
           const siteUrl = `${window.location.origin}${window.location.pathname.replace(/wp-admin.*/, '')}home/`;
           window.location.href = siteUrl;
         } else {
@@ -76,16 +73,14 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
       },
       error: function () {
         window.wp.data.dispatch('core/notices').createErrorNotice(
-          'Error: AJAX request failed. Please try again.',
+          'Error: AJAX request failed. Please try again.', 
           { type: 'snackbar' }
         );
       },
     });
-  
-    // Close the modal if applicable
+
     onClose();
   };
-  
 
   if (!isOpen) return null;
 
@@ -122,51 +117,53 @@ export default SiteImportModal;
 const FullSiteImportColorPicker = ({ colors, setColors }) => {
   const [activeTooltip, setActiveTooltip] = useState(null);
 
-  const handleColorChange = async (color, index) => {
-    const updatedColors = [...colors];
-    updatedColors[index].hex = color;
-    setColors(updatedColors);
+  // Update iframe and main document styles dynamically
+  const updateGlobalStyles = (updatedColors) => {
+    const iframe = document.querySelector('iframe.fb-preview-frame');
 
-    try {
-      // Send the updated colors to the server using AJAX
-      const response = await fetch('/wp-admin/admin-ajax.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'save_global_colors',  // Action name
-          colors: updatedColors,
-        }),
-      });
+    const injectStyles = (targetDocument) => {
+      if (targetDocument) {
+        let styleTag = targetDocument.getElementById('fb-global-styles');
 
-      const data = await response.json();
+        if (!styleTag) {
+          styleTag = targetDocument.createElement('style');
+          styleTag.id = 'fb-global-styles';
+        }
 
-      if (data.success) {
-        // If the save is successful, update the CSS in the <head>
-        updateGlobalStyles();
-      } else {
-        console.error('Failed to save colors', data);
+        const css = `
+          :root {
+            ${updatedColors.map(color => `--${color.slug}: ${color.hex};`).join('\n')}
+          }
+          body p, body span, body h1, body h2, body h3, body h4, body h5, body h6 {
+            color: var(--fb-global-primary-color);
+          }
+          body a {
+            color: var(--fb-global-secondary-color);
+          }
+        `;
+
+        styleTag.innerHTML = css;
       }
-    } catch (error) {
-      console.error('Error in saving colors:', error);
+    };
+
+    if (iframe && iframe.contentDocument) {
+      injectStyles(iframe.contentDocument); // Inside iframe (block editor)
     }
   };
 
-  const updateGlobalStyles = async () => {
-    try {
-      // Fetch the updated styles from the backend
-      const stylesResponse = await fetch('/wp-admin/admin-ajax.php?action=output_global_styles');
-      const stylesText = await stylesResponse.text();
+  // Apply styles on mount
+  useEffect(() => {
+    updateGlobalStyles(colors);
+  }, [colors]);
 
-      // Insert the styles into the <head>
-      const styleElement = document.getElementById('fb-global-styles');
-      if (styleElement) {
-        styleElement.innerHTML = stylesText;
-      }
-    } catch (error) {
-      console.error('Error updating styles:', error);
-    }
+  // Handle color change
+  const handleColorChange = (newColor, index) => {
+    const updatedColors = [...colors];
+    updatedColors[index].hex = newColor;
+    setColors(updatedColors);
+
+    // Update styles live
+    updateGlobalStyles(updatedColors);
   };
 
   return (
@@ -211,4 +208,3 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
     </div>
   );
 };
-
