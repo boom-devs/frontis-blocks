@@ -129,6 +129,27 @@ const attributes = {
 		type: 'string',
 		default: "#0D173B"
 	},
+	counterNumberGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	counterNumberGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	counterNumberGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	counterNumberFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -250,6 +271,27 @@ const attributes = {
 	counterNumberTitleFontHoverColor: {
 		type: 'string',
 		default: "#0d173bb3"
+	},
+	counterNumberTitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	counterNumberTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	counterNumberTitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	counterNumberTitleFontFamily: {
 		type: 'string',

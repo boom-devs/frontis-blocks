@@ -117,6 +117,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialQuoteIconMarginLink,
 
         TestimonialTitleTag,
+        TestimonialTitleGlobalTypoSwitcher,
+        TestimonialTitleGlobalTypographyData,
+        TestimonialTitleGlobalTypoType,
         TestimonialTitleFontFamily,
         TestimonialTitleFontSize,
         TestimonialTitleFontSizeUnits,
@@ -137,6 +140,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleMarginMobile,
         TestimonialTitleMarginLink,
 
+        TestimonialDescGlobalTypoSwitcher,
+        TestimonialDescGlobalTypographyData,
+        TestimonialDescGlobalTypoType,
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
         TestimonialDescFontSizeUnits,
@@ -157,6 +163,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDescMarginMobile,
         TestimonialDescMarginLink,
 
+        TestimonialAuthorGlobalTypoSwitcher,
+        TestimonialAuthorGlobalTypographyData,
+        TestimonialAuthorGlobalTypoType,
         TestimonialAuthorFontFamily,
         TestimonialAuthorFontSize,
         TestimonialAuthorFontSizeUnits,
@@ -178,6 +187,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialAuthorMarginMobile,
         TestimonialAuthorMarginLink,
 
+        TestimonialDesignationGlobalTypoSwitcher,
+        TestimonialDesignationGlobalTypographyData,
+        TestimonialDesignationGlobalTypoType,
         TestimonialDesignationFontFamily,
         TestimonialDesignationFontSize,
         TestimonialDesignationFontSizeUnits,
@@ -1679,14 +1691,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             fill: ${TestimonialQuoteIconHoverColor};
         }
         .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
-            ${TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
-            ${TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : '24px'}
-            ${TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
-            ${TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
-            ${TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
-            ${TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
-            ${TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
-            ${TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontFamily === true && TestimonialTitleGlobalTypographyData.fontFamily ? `font-family: ${TestimonialTitleGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontSize === true && TestimonialTitleGlobalTypographyData.fontSize ? `font-size: ${TestimonialTitleGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontWeight === true && TestimonialTitleGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialTitleGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontStyle === true && TestimonialTitleGlobalTypographyData.fontStyle ? `font-style: ${TestimonialTitleGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textTransform === true && TestimonialTitleGlobalTypographyData.textTransform ? `text-transform: ${TestimonialTitleGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textDecoration === true && TestimonialTitleGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialTitleGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === true && TestimonialTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialTitleGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.lineHeight === true && TestimonialTitleGlobalTypographyData.lineHeight ? `line-height: ${TestimonialTitleGlobalTypographyData.lineHeight};` : ''}
+            
+            ${TestimonialTitleGlobalTypoSwitcher.fontFamily === false && TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : '24px'}
+            ${TestimonialTitleGlobalTypoSwitcher.fontWeight === false && TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontStyle === false && TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textTransform === false && TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textDecoration === false && TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
             ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
             ${testimonialTitleDesktopMargin ? `margin: ${testimonialTitleDesktopMargin};` : ''}
             
@@ -1695,14 +1716,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
         }
         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-            ${TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
-            ${TestimonialDescFontSize.Desktop && TestimonialDescFontSizeUnits.Desktop ? `font-size: ${TestimonialDescFontSize.Desktop}${TestimonialDescFontSizeUnits.Desktop};` : ''}
-            ${TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
-            ${TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
-            ${TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
-            ${TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
-            ${TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
-            ${TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontFamily === true && TestimonialDescGlobalTypographyData.fontFamily ? `font-family: ${TestimonialDescGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontSize === true && TestimonialDescGlobalTypographyData.fontSize ? `font-size: ${TestimonialDescGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontWeight === true && TestimonialDescGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialDescGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontStyle === true && TestimonialDescGlobalTypographyData.fontStyle ? `font-style: ${TestimonialDescGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textTransform === true && TestimonialDescGlobalTypographyData.textTransform ? `text-transform: ${TestimonialDescGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textDecoration === true && TestimonialDescGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialDescGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.letterSpacing === true && TestimonialDescGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialDescGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.lineHeight === true && TestimonialDescGlobalTypographyData.lineHeight ? `line-height: ${TestimonialDescGlobalTypographyData.lineHeight};` : ''}
+            
+            ${TestimonialDescGlobalTypoSwitcher.fontFamily === false && TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Desktop && TestimonialDescFontSizeUnits.Desktop ? `font-size: ${TestimonialDescFontSize.Desktop}${TestimonialDescFontSizeUnits.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontWeight === false && TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontStyle === false && TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textTransform === false && TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textDecoration === false && TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
             ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
             ${testimonialDescDesktopMargin ? `margin: ${testimonialDescDesktopMargin};` : ''}
         }
@@ -1711,15 +1741,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user {
-            font-family: ${TestimonialAuthorFontFamily};
-            font-size: ${TestimonialAuthorFontSize.Desktop}${TestimonialAuthorFontSizeUnits.Desktop};
-            font-weight: ${TestimonialAuthorFontWeight};
-            font-style: ${TestimonialAuthorFontStyle};
-            text-transform: ${TestimonialAuthorTextTransform};
-            text-decoration: ${TestimonialAuthorTextDecoration};
-            letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};
-            line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};
-            color: ${TestimonialAuthorColor};
+            ${TestimonialAuthorGlobalTypoSwitcher.fontFamily === true && TestimonialAuthorGlobalTypographyData.fontFamily ? `font-family: ${TestimonialAuthorGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontSize === true && TestimonialAuthorGlobalTypographyData.fontSize ? `font-size: ${TestimonialAuthorGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontWeight === true && TestimonialAuthorGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialAuthorGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontStyle === true && TestimonialAuthorGlobalTypographyData.fontStyle ? `font-style: ${TestimonialAuthorGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textTransform === true && TestimonialAuthorGlobalTypographyData.textTransform ? `text-transform: ${TestimonialAuthorGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textDecoration === true && TestimonialAuthorGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialAuthorGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === true && TestimonialAuthorGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialAuthorGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === true && TestimonialAuthorGlobalTypographyData.lineHeight ? `line-height: ${TestimonialAuthorGlobalTypographyData.lineHeight};` : ''}
+            
+            ${TestimonialAuthorGlobalTypoSwitcher.fontFamily === false && TestimonialAuthorFontFamily ? `font-family: ${TestimonialAuthorFontFamily};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Desktop ? `font-size: ${TestimonialAuthorFontSize.Desktop}${TestimonialAuthorFontSizeUnits.Desktop};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontWeight === false && TestimonialAuthorFontWeight ? `font-weight: ${TestimonialAuthorFontWeight};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontStyle === false && TestimonialAuthorFontStyle ? `font-style: ${TestimonialAuthorFontStyle};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textTransform === false && TestimonialAuthorTextTransform ? `text-transform: ${TestimonialAuthorTextTransform};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textDecoration === false && TestimonialAuthorTextDecoration ? `text-decoration: ${TestimonialAuthorTextDecoration};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Desktop ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Desktop ? `line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};` : ''}
+            
+            ${TestimonialAuthorColor ? `color: ${TestimonialAuthorColor};` : ''}
             ${testimonialAuthorDesktopMargin ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
@@ -1727,15 +1767,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
-            font-family: ${TestimonialDesignationFontFamily};
-            font-size: ${TestimonialDesignationFontSize.Desktop}${TestimonialDesignationFontSizeUnits.Desktop};
-            font-weight: ${TestimonialDesignationFontWeight};
-            font-style: ${TestimonialDesignationFontStyle};
-            text-transform: ${TestimonialDesignationTextTransform};
-            text-decoration: ${TestimonialDesignationTextDecoration};
-            letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};
-            line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};
-            color: ${TestimonialDesignationColor};
+            ${TestimonialDesignationGlobalTypoSwitcher.fontFamily === true && TestimonialDesignationGlobalTypographyData.fontFamily ? `font-family: ${TestimonialDesignationGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontSize === true && TestimonialDesignationGlobalTypographyData.fontSize ? `font-size: ${TestimonialDesignationGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontWeight === true && TestimonialDesignationGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialDesignationGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontStyle === true && TestimonialDesignationGlobalTypographyData.fontStyle ? `font-style: ${TestimonialDesignationGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textTransform === true && TestimonialDesignationGlobalTypographyData.textTransform ? `text-transform: ${TestimonialDesignationGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textDecoration === true && TestimonialDesignationGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialDesignationGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === true && TestimonialDesignationGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialDesignationGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === true && TestimonialDesignationGlobalTypographyData.lineHeight ? `line-height: ${TestimonialDesignationGlobalTypographyData.lineHeight};` : ''}
+            
+            ${TestimonialDesignationGlobalTypoSwitcher.fontFamily === false && TestimonialDesignationFontFamily ? `font-family: ${TestimonialDesignationFontFamily};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Desktop ? `font-size: ${TestimonialDesignationFontSize.Desktop}${TestimonialDesignationFontSizeUnits.Desktop};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontWeight === false && TestimonialDesignationFontWeight ? `font-weight: ${TestimonialDesignationFontWeight};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontStyle === false && TestimonialDesignationFontStyle ? `font-style: ${TestimonialDesignationFontStyle};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textTransform === false && TestimonialDesignationTextTransform ? `text-transform: ${TestimonialDesignationTextTransform};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textDecoration === false && TestimonialDesignationTextDecoration ? `text-decoration: ${TestimonialDesignationTextDecoration};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Desktop ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Desktop ? `line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};` : ''}
+            
+            ${TestimonialDesignationColor ? `color: ${TestimonialDesignationColor};` : ''}
             ${testimonialDesignationDesktopMargin ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
@@ -1805,27 +1855,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Tablet && TestimonialImageLeftPositionUnits.Tablet ? `${TestimonialImageLeftPosition.Tablet}${TestimonialImageLeftPositionUnits.Tablet}` : '0'};` : ''}
             }
             .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
-                ${TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
-                ${TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
-                ${TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
                 ${testimonialTitleTabletMargin ? `margin: ${testimonialTitleTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-                ${TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
-                ${TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
-                ${TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
                 ${testimonialDescTabletMargin ? `margin: ${testimonialDescTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user {
-                font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};
-                letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};
-                line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};
+                ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Tablet ? `font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Tablet ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Tablet ? `line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};` : ''}
+                
                 ${testimonialAuthorTabletMargin ? `margin: ${testimonialAuthorTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
-                font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};
-                letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};
-                line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};
+                ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Tablet ? `font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Tablet ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Tablet ? `line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};` : ''}
+                
                 ${testimonialDesignationTabletMargin ? `margin: ${testimonialDesignationTabletMargin};` : ''}
             }
         }
@@ -1863,28 +1915,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Mobile && TestimonialImageLeftPositionUnits.Mobile ? `${TestimonialImageLeftPosition.Mobile}${TestimonialImageLeftPositionUnits.Mobile}` : '0'};` : ''}
             }
             .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
-                ${TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
-                ${TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
-                ${TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
                 ${testimonialTitleMobileMargin ? `margin: ${testimonialTitleMobileMargin};` : ''}
 
             }
             .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
-                ${TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
-                ${TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
-                ${TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
                 ${testimonialDescMobileMargin ? `margin: ${testimonialDescMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user {
-                font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};
-                letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};
-                line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};
+                ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Mobile ? `font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Mobile ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Mobile ? `line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};` : ''}
+                
                 ${testimonialAuthorMobileMargin ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
-                font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};
-                letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};
-                line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};
+                ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Mobile ? `font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Mobile ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Mobile ? `line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};` : ''}
+                
                 ${testimonialDesignationMobileMargin ? `margin: ${testimonialDesignationMobileMargin};` : ''}
             }  
         }
@@ -1955,6 +2009,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialQuoteIconMarginLink,
 
         TestimonialTitleTag,
+        TestimonialTitleGlobalTypoSwitcher,
+        TestimonialTitleGlobalTypographyData,
+        TestimonialTitleGlobalTypoType,
         TestimonialTitleFontFamily,
         TestimonialTitleFontSize,
         TestimonialTitleFontSizeUnits,
@@ -1975,6 +2032,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleMarginMobile,
         TestimonialTitleMarginLink,
 
+        TestimonialDescGlobalTypoSwitcher,
+        TestimonialDescGlobalTypographyData,
+        TestimonialDescGlobalTypoType,
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
         TestimonialDescFontSizeUnits,
@@ -1995,6 +2055,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDescMarginMobile,
         TestimonialDescMarginLink,
 
+        TestimonialAuthorGlobalTypoSwitcher,
+        TestimonialAuthorGlobalTypographyData,
+        TestimonialAuthorGlobalTypoType,
         TestimonialAuthorFontFamily,
         TestimonialAuthorFontSize,
         TestimonialAuthorFontSizeUnits,
@@ -2016,6 +2079,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialAuthorMarginMobile,
         TestimonialAuthorMarginLink,
 
+        TestimonialDesignationGlobalTypoSwitcher,
+        TestimonialDesignationGlobalTypographyData,
+        TestimonialDesignationGlobalTypoType,
         TestimonialDesignationFontFamily,
         TestimonialDesignationFontSize,
         TestimonialDesignationFontSizeUnits,
@@ -2533,35 +2599,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
 
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={TestimonialTitleGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialTitleGlobalTypographyData: value })}
+
+                                                    globalTypoType={TestimonialTitleGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            TestimonialTitleGlobalTypoType: value, 
+                                                            TestimonialTitleGlobalTypoSwitcher: value === 'default' ? {...TestimonialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={TestimonialTitleFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value })}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                     fontSize={TestimonialTitleFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ TestimonialTitleFontSize: value })}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialTitleFontSize: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                     fontSizeUnits={TestimonialTitleFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ TestimonialTitleFontSizeUnits: value })}
 
                                                     fontWeight={TestimonialTitleFontWeight}
-                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialTitleFontWeight: value })}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialTitleFontWeight: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                     fontStyle={TestimonialTitleFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialTitleFontStyle: value })}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialTitleFontStyle: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                     textTransform={TestimonialTitleTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialTitleTextTransform: value })}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialTitleTextTransform: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                     textDecoration={TestimonialTitleTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialTitleTextDecoration: value })}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialTitleTextDecoration: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                     letterSpacing={TestimonialTitleLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialTitleLetterSpacing: value })}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialTitleLetterSpacing: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                     letterSpacingUnits={TestimonialTitleLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialTitleLetterSpacingUnits: value })}
 
                                                     lineHeight={TestimonialTitleLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialTitleLineHeight: value })}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialTitleLineHeight: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                     lineHeightUnits={TestimonialTitleLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ TestimonialTitleLineHeightUnits: value })}
@@ -2616,35 +2694,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             className="fb-setting-testimonial-description-wrapper"
                                         >
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={TestimonialDescGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ TestimonialDescGlobalTypographyData: value })}
+
+                                                globalTypoType={TestimonialDescGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        TestimonialDescGlobalTypoType: value, 
+                                                        TestimonialDescGlobalTypoSwitcher: value === 'default' ? {...TestimonialDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={TestimonialDescFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value })}
+                                                onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                 fontSize={TestimonialDescFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ TestimonialDescFontSize: value })}
+                                                onChangeFontSize={(value) => setAttributes({ TestimonialDescFontSize: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                 fontSizeUnits={TestimonialDescFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDescFontSizeUnits: value })}
 
                                                 fontWeight={TestimonialDescFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ TestimonialDescFontWeight: value })}
+                                                onChangeFontWeight={(value) => setAttributes({ TestimonialDescFontWeight: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                 fontStyle={TestimonialDescFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ TestimonialDescFontStyle: value })}
+                                                onChangeFontStyle={(value) => setAttributes({ TestimonialDescFontStyle: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                 textTransform={TestimonialDescTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ TestimonialDescTextTransform: value })}
+                                                onChangeTextTransform={(value) => setAttributes({ TestimonialDescTextTransform: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                 textDecoration={TestimonialDescTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ TestimonialDescTextDecoration: value })}
+                                                onChangeTextDecoration={(value) => setAttributes({ TestimonialDescTextDecoration: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                 letterSpacing={TestimonialDescLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ TestimonialDescLetterSpacing: value })}
+                                                onChangeLetterSpacing={(value) => setAttributes({ TestimonialDescLetterSpacing: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                 letterSpacingUnits={TestimonialDescLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDescLetterSpacingUnits: value })}
 
                                                 lineHeight={TestimonialDescLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ TestimonialDescLineHeight: value })}
+                                                onChangeLineHeight={(value) => setAttributes({ TestimonialDescLineHeight: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                 lineHeightUnits={TestimonialDescLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDescLineHeightUnits: value })}
@@ -2785,35 +2875,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 className="fb-setting-testimonial-author-wrapper"
                                             >
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={TestimonialAuthorGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialAuthorGlobalTypographyData: value })}
+
+                                                    globalTypoType={TestimonialAuthorGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            TestimonialAuthorGlobalTypoType: value, 
+                                                            TestimonialAuthorGlobalTypoSwitcher: value === 'default' ? {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={TestimonialAuthorFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value })}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                     fontSize={TestimonialAuthorFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ TestimonialAuthorFontSize: value })}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialAuthorFontSize: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                     fontSizeUnits={TestimonialAuthorFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ TestimonialAuthorFontSizeUnits: value })}
 
                                                     fontWeight={TestimonialAuthorFontWeight}
-                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialAuthorFontWeight: value })}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialAuthorFontWeight: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                     fontStyle={TestimonialAuthorFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialAuthorFontStyle: value })}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialAuthorFontStyle: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                     textTransform={TestimonialAuthorTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialAuthorTextTransform: value })}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialAuthorTextTransform: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                     textDecoration={TestimonialAuthorTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialAuthorTextDecoration: value })}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialAuthorTextDecoration: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                     letterSpacing={TestimonialAuthorLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialAuthorLetterSpacing: value })}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialAuthorLetterSpacing: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                     letterSpacingUnits={TestimonialAuthorLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialAuthorLetterSpacingUnits: value })}
 
                                                     lineHeight={TestimonialAuthorLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialAuthorLineHeight: value })}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialAuthorLineHeight: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                     lineHeightUnits={TestimonialAuthorLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ TestimonialAuthorLineHeightUnits: value })}
@@ -2868,35 +2970,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 className="fb-setting-testimonial-designation-wrapper"
                                             >
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={TestimonialDesignationGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialDesignationGlobalTypographyData: value })}
+
+                                                    globalTypoType={TestimonialDesignationGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            TestimonialDesignationGlobalTypoType: value, 
+                                                            TestimonialDesignationGlobalTypoSwitcher: value === 'default' ? {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={TestimonialDesignationFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value })}
+                                                    onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                     fontSize={TestimonialDesignationFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ TestimonialDesignationFontSize: value })}
+                                                    onChangeFontSize={(value) => setAttributes({ TestimonialDesignationFontSize: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                     fontSizeUnits={TestimonialDesignationFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDesignationFontSizeUnits: value })}
 
                                                     fontWeight={TestimonialDesignationFontWeight}
-                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialDesignationFontWeight: value })}
+                                                    onChangeFontWeight={(value) => setAttributes({ TestimonialDesignationFontWeight: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                     fontStyle={TestimonialDesignationFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialDesignationFontStyle: value })}
+                                                    onChangeFontStyle={(value) => setAttributes({ TestimonialDesignationFontStyle: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                     textTransform={TestimonialDesignationTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialDesignationTextTransform: value })}
+                                                    onChangeTextTransform={(value) => setAttributes({ TestimonialDesignationTextTransform: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                     textDecoration={TestimonialDesignationTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialDesignationTextDecoration: value })}
+                                                    onChangeTextDecoration={(value) => setAttributes({ TestimonialDesignationTextDecoration: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                     letterSpacing={TestimonialDesignationLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialDesignationLetterSpacing: value })}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialDesignationLetterSpacing: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                     letterSpacingUnits={TestimonialDesignationLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDesignationLetterSpacingUnits: value })}
 
                                                     lineHeight={TestimonialDesignationLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialDesignationLineHeight: value })}
+                                                    onChangeLineHeight={(value) => setAttributes({ TestimonialDesignationLineHeight: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                     lineHeightUnits={TestimonialDesignationLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDesignationLineHeightUnits: value })}

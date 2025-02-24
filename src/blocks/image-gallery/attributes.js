@@ -348,6 +348,27 @@ const attributes = {
         type: "string",
         default: "center",
     },
+    GalleryButtonGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    GalleryButtonGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    GalleryButtonGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     GalleryButtonFontFamily: {
         type: "string",
         default: "Default",

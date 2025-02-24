@@ -6,7 +6,6 @@
     "title": "Accordion Item",
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
-    "icon": "facebook-alt",
     "description": "A customizable accordion item block for organizing content in a collapsible format.",
     "example": {},
     "supports": {

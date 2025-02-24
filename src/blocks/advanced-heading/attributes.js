@@ -18,6 +18,27 @@ const attributes = {
         default: "h2" 
     },
     /** Start Heading Style */
+    headingGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    headingGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    headingGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     headingFontFamily: {
         type: "string",
         default: "Default",
@@ -335,7 +356,28 @@ const attributes = {
         default: "bottom",
     },
 
-    /** Start Sub Heading Style */  
+    /** Start Sub Heading Style */ 
+    subHeadingGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    subHeadingGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    subHeadingGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    }, 
     subHeadingFontFamily: {
         type: "string",
         default: "Default",

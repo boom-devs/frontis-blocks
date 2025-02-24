@@ -114,6 +114,27 @@ const attributes = {
         default: true
     },
 
+    progressGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    progressGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    progressGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     progressFontFamily: {
         type: "string",
         default: "Default",

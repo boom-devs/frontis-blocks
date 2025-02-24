@@ -62,6 +62,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormLabelColorSwitcher,
 		contactFormLabelColor,
 		contactFormLabelHoverColor,
+		contactFormLabelGlobalTypoSwitcher,
+		contactFormLabelGlobalTypographyData,
+		contactFormLabelGlobalTypoType,
 		contactFormLabelFontFamily,
 		contactFormLabelFontSize,
 		contactFormLabelFontSizeUnits,
@@ -77,6 +80,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormInputBgColor,
 		contactFormInputColor,
 		contactFormInputFocusColor,
+		contactFormInputGlobalTypoSwitcher,
+		contactFormInputGlobalTypographyData,
+		contactFormInputGlobalTypoType,
 		contactFormInputFontFamily,
 		contactFormInputFontSize,
 		contactFormInputFontSizeUnits,
@@ -149,6 +155,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSubmitBgColorSwitcher,
 		contactFormSubmitBgColor,
 		contactFormSubmitBgHoverColor,
+		contactFormSubmitGlobalTypoSwitcher,
+		contactFormSubmitGlobalTypographyData,
+		contactFormSubmitGlobalTypoType,
 		contactFormSubmitFontFamily,
 		contactFormSubmitFontSize,
 		contactFormSubmitFontSizeUnits,
@@ -187,6 +196,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		contactFormSuccessColor,
 		contactFormSuccessBgColor,
+		contactFormSuccessGlobalTypoSwitcher,
+		contactFormSuccessGlobalTypographyData,
+		contactFormSuccessGlobalTypoType,
 		contactFormSuccessFontFamily,
 		contactFormSuccessFontSize,
 		contactFormSuccessFontSizeUnits,
@@ -214,6 +226,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSuccessBorderRadiusLink,
 
 		contactFormErrorColor,
+		contactFormErrorGlobalTypoSwitcher,
+		contactFormErrorGlobalTypographyData,
+		contactFormErrorGlobalTypoType,
 		contactFormErrorFontFamily,
 		contactFormErrorFontSize,
 		contactFormErrorFontSizeUnits,
@@ -1910,14 +1925,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
             ${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
-			${contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
-            ${contactFormLabelFontSize.Desktop != "" ? `font-size: ${contactFormLabelFontSize.Desktop}${contactFormLabelFontSizeUnits.Desktop};` : ''}
-            ${contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
-            ${contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
-            ${contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
-            ${contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
-            ${contactFormLabelLetterSpacing.Desktop && contactFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormLabelLetterSpacing.Desktop}${contactFormLabelLetterSpacingUnits.Desktop};` : ''}
-            ${contactFormLabelLineHeight.Desktop && contactFormLabelLineHeightUnits.Desktop ? `line-height: ${contactFormLabelLineHeight.Desktop}${contactFormLabelLineHeightUnits.Desktop};` : ''}
+
+			${contactFormLabelGlobalTypoSwitcher.fontFamily === true && contactFormLabelGlobalTypographyData.fontFamily ? `font-family: ${contactFormLabelGlobalTypographyData.fontFamily};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.fontSize === true && contactFormLabelGlobalTypographyData.fontSize ? `font-size: ${contactFormLabelGlobalTypographyData.fontSize};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.fontWeight === true && contactFormLabelGlobalTypographyData.fontWeight ? `font-weight: ${contactFormLabelGlobalTypographyData.fontWeight};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.fontStyle === true && contactFormLabelGlobalTypographyData.fontStyle ? `font-style: ${contactFormLabelGlobalTypographyData.fontStyle};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.textTransform === true && contactFormLabelGlobalTypographyData.textTransform ? `text-transform: ${contactFormLabelGlobalTypographyData.textTransform};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.textDecoration === true && contactFormLabelGlobalTypographyData.textDecoration ? `text-decoration: ${contactFormLabelGlobalTypographyData.textDecoration};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.letterSpacing === true && contactFormLabelGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormLabelGlobalTypographyData.letterSpacing};` : ''}
+			${contactFormLabelGlobalTypoSwitcher.lineHeight === true && contactFormLabelGlobalTypographyData.lineHeight ? `line-height: ${contactFormLabelGlobalTypographyData.lineHeight};` : ''}
+				
+			${contactFormLabelGlobalTypoSwitcher.fontFamily === false &&contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher.fontSize === false &&contactFormLabelFontSize.Desktop != "" ? `font-size: ${contactFormLabelFontSize.Desktop}${contactFormLabelFontSizeUnits.Desktop};` : ''}
+            ${contactFormLabelGlobalTypoSwitcher.fontWeight === false &&contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher.fontStyle === false &&contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher.textTransform === false &&contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher.textDecoration === false &&contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher.letterSpacing === false &&contactFormLabelLetterSpacing.Desktop && contactFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormLabelLetterSpacing.Desktop}${contactFormLabelLetterSpacingUnits.Desktop};` : ''}
+            ${contactFormLabelGlobalTypoSwitcher.lineHeight === false &&contactFormLabelLineHeight.Desktop && contactFormLabelLineHeightUnits.Desktop ? `line-height: ${contactFormLabelLineHeight.Desktop}${contactFormLabelLineHeightUnits.Desktop};` : ''}
         }
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
             ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
@@ -1929,14 +1954,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-contact-form-wrapper select {
             ${contactFormInputBgColor ? `background-color: ${contactFormInputBgColor};` : ""}
             ${contactFormInputColor ? `color: ${contactFormInputColor};` : ""}
-            ${contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
-            ${contactFormInputFontSize.Desktop != "" ? `font-size: ${contactFormInputFontSize.Desktop}${contactFormInputFontSizeUnits.Desktop};` : ''}
-            ${contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
-            ${contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
-            ${contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
-            ${contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
-            ${contactFormInputLetterSpacing.Desktop != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Desktop}${contactFormInputLetterSpacingUnits.Desktop};` : ''}
-            ${contactFormInputLineHeight.Desktop != "" ? `line-height: ${contactFormInputLineHeight.Desktop}${contactFormInputLineHeightUnits.Desktop};` : ''}
+
+			${contactFormInputGlobalTypoSwitcher.fontFamily === true && contactFormInputGlobalTypographyData.fontFamily ? `font-family: ${contactFormInputGlobalTypographyData.fontFamily};` : ''}
+			${contactFormInputGlobalTypoSwitcher.fontSize === true && contactFormInputGlobalTypographyData.fontSize ? `font-size: ${contactFormInputGlobalTypographyData.fontSize};` : ''}
+			${contactFormInputGlobalTypoSwitcher.fontWeight === true && contactFormInputGlobalTypographyData.fontWeight ? `font-weight: ${contactFormInputGlobalTypographyData.fontWeight};` : ''}
+			${contactFormInputGlobalTypoSwitcher.fontStyle === true && contactFormInputGlobalTypographyData.fontStyle ? `font-style: ${contactFormInputGlobalTypographyData.fontStyle};` : ''}
+			${contactFormInputGlobalTypoSwitcher.textTransform === true && contactFormInputGlobalTypographyData.textTransform ? `text-transform: ${contactFormInputGlobalTypographyData.textTransform};` : ''}
+			${contactFormInputGlobalTypoSwitcher.textDecoration === true && contactFormInputGlobalTypographyData.textDecoration ? `text-decoration: ${contactFormInputGlobalTypographyData.textDecoration};` : ''}
+			${contactFormInputGlobalTypoSwitcher.letterSpacing === true && contactFormInputGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormInputGlobalTypographyData.letterSpacing};` : ''}
+			${contactFormInputGlobalTypoSwitcher.lineHeight === true && contactFormInputGlobalTypographyData.lineHeight ? `line-height: ${contactFormInputGlobalTypographyData.lineHeight};` : ''}
+				
+            ${contactFormInputGlobalTypoSwitcher.fontFamily === false && contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.fontSize === false && contactFormInputFontSize.Desktop != "" ? `font-size: ${contactFormInputFontSize.Desktop}${contactFormInputFontSizeUnits.Desktop};` : ''}
+            ${contactFormInputGlobalTypoSwitcher.fontWeight === false && contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.fontStyle === false && contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.textTransform === false && contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.textDecoration === false && contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.letterSpacing === false && contactFormInputLetterSpacing.Desktop != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Desktop}${contactFormInputLetterSpacingUnits.Desktop};` : ''}
+            ${contactFormInputGlobalTypoSwitcher.lineHeight === false && contactFormInputLineHeight.Desktop != "" ? `line-height: ${contactFormInputLineHeight.Desktop}${contactFormInputLineHeightUnits.Desktop};` : ''}
             ${contactFormTextIndentSize.Desktop != "" ? `text-indent: ${contactFormTextIndentSize.Desktop}${contactFormTextIndentSizeUnits.Desktop};` : ""}
             ${contactFormInputWidthSize.Desktop != "" ? `width: ${contactFormInputWidthSize.Desktop}${contactFormInputWidthSizeUnits.Desktop};` : ""}
             ${contactFormInputHeightSize.Desktop != "" ? `height: ${contactFormInputHeightSize.Desktop}${contactFormInputHeightSizeUnits.Desktop};` : ""}
@@ -2002,14 +2037,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormSubmitHeight.Desktop ? `height: ${contactFormSubmitHeight.Desktop}${contactFormSubmitHeightUnits.Desktop};` : ""}
             ${contactFormSubmitColor ? `color: ${contactFormSubmitColor};` : ""}
             ${contactFormSubmitBgColor ? `background: ${contactFormSubmitBgColor};` : ""}
-            ${contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
-            ${contactFormSubmitFontSize.Desktop && contactFormSubmitFontSizeUnits.Desktop ? `font-size: ${contactFormSubmitFontSize.Desktop}${contactFormSubmitFontSizeUnits.Desktop};` : ''} 
-            ${contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
-            ${contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
-            ${contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
-            ${contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
-            ${contactFormSubmitLetterSpacing.Desktop && contactFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSubmitLetterSpacing.Desktop}${contactFormSubmitLetterSpacingUnits.Desktop};` : ''}
-            ${contactFormSubmitLineHeight.Desktop && contactFormSubmitLineHeightUnits.Desktop ? `line-height: ${contactFormSubmitLineHeight.Desktop}${contactFormSubmitLineHeightUnits.Desktop};` : ''} 
+
+			${contactFormSubmitGlobalTypoSwitcher.fontFamily === true && contactFormSubmitGlobalTypographyData.fontFamily ? `font-family: ${contactFormSubmitGlobalTypographyData.fontFamily};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.fontSize === true && contactFormSubmitGlobalTypographyData.fontSize ? `font-size: ${contactFormSubmitGlobalTypographyData.fontSize};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.fontWeight === true && contactFormSubmitGlobalTypographyData.fontWeight ? `font-weight: ${contactFormSubmitGlobalTypographyData.fontWeight};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.fontStyle === true && contactFormSubmitGlobalTypographyData.fontStyle ? `font-style: ${contactFormSubmitGlobalTypographyData.fontStyle};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.textTransform === true && contactFormSubmitGlobalTypographyData.textTransform ? `text-transform: ${contactFormSubmitGlobalTypographyData.textTransform};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.textDecoration === true && contactFormSubmitGlobalTypographyData.textDecoration ? `text-decoration: ${contactFormSubmitGlobalTypographyData.textDecoration};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.letterSpacing === true && contactFormSubmitGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSubmitGlobalTypographyData.letterSpacing};` : ''}
+			${contactFormSubmitGlobalTypoSwitcher.lineHeight === true && contactFormSubmitGlobalTypographyData.lineHeight ? `line-height: ${contactFormSubmitGlobalTypographyData.lineHeight};` : ''}
+				
+            ${contactFormSubmitGlobalTypoSwitcher.fontFamily === false && contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Desktop && contactFormSubmitFontSizeUnits.Desktop ? `font-size: ${contactFormSubmitFontSize.Desktop}${contactFormSubmitFontSizeUnits.Desktop};` : ''} 
+            ${contactFormSubmitGlobalTypoSwitcher.fontWeight === false && contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.fontStyle === false && contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.textTransform === false && contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.textDecoration === false && contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Desktop && contactFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSubmitLetterSpacing.Desktop}${contactFormSubmitLetterSpacingUnits.Desktop};` : ''}
+            ${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Desktop && contactFormSubmitLineHeightUnits.Desktop ? `line-height: ${contactFormSubmitLineHeight.Desktop}${contactFormSubmitLineHeightUnits.Desktop};` : ''} 
             ${contactFormSubmitDesktopPadding ? `padding: ${contactFormSubmitDesktopPadding};` : ""}
             ${contactFormSubmitDesktopMargin ? `margin: ${contactFormSubmitDesktopMargin};` : ""}
 
@@ -2034,14 +2079,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
             ${contactFormErrorColor ? `color: ${contactFormErrorColor};` : ""}
-            ${contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
-            ${contactFormErrorFontSize.Desktop && contactFormErrorFontSizeUnits.Desktop ? `font-size: ${contactFormErrorFontSize.Desktop}${contactFormErrorFontSizeUnits.Desktop};` : ''} 
-            ${contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
-            ${contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
-            ${contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
-            ${contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
-            ${contactFormErrorLetterSpacing.Desktop && contactFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormErrorLetterSpacing.Desktop}${contactFormErrorLetterSpacingUnits.Desktop};` : ''}
-            ${contactFormErrorLineHeight.Desktop && contactFormErrorLineHeightUnits.Desktop ? `line-height: ${contactFormErrorLineHeight.Desktop}${contactFormErrorLineHeightUnits.Desktop};` : ''} 
+
+			${contactFormErrorGlobalTypoSwitcher.fontFamily === true && contactFormErrorGlobalTypographyData.fontFamily ? `font-family: ${contactFormErrorGlobalTypographyData.fontFamily};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.fontSize === true && contactFormErrorGlobalTypographyData.fontSize ? `font-size: ${contactFormErrorGlobalTypographyData.fontSize};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.fontWeight === true && contactFormErrorGlobalTypographyData.fontWeight ? `font-weight: ${contactFormErrorGlobalTypographyData.fontWeight};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.fontStyle === true && contactFormErrorGlobalTypographyData.fontStyle ? `font-style: ${contactFormErrorGlobalTypographyData.fontStyle};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.textTransform === true && contactFormErrorGlobalTypographyData.textTransform ? `text-transform: ${contactFormErrorGlobalTypographyData.textTransform};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.textDecoration === true && contactFormErrorGlobalTypographyData.textDecoration ? `text-decoration: ${contactFormErrorGlobalTypographyData.textDecoration};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.letterSpacing === true && contactFormErrorGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormErrorGlobalTypographyData.letterSpacing};` : ''}
+			${contactFormErrorGlobalTypoSwitcher.lineHeight === true && contactFormErrorGlobalTypographyData.lineHeight ? `line-height: ${contactFormErrorGlobalTypographyData.lineHeight};` : ''}
+				
+            ${contactFormErrorGlobalTypoSwitcher.fontFamily === false && contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Desktop && contactFormErrorFontSizeUnits.Desktop ? `font-size: ${contactFormErrorFontSize.Desktop}${contactFormErrorFontSizeUnits.Desktop};` : ''} 
+            ${contactFormErrorGlobalTypoSwitcher.fontWeight === false && contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.fontStyle === false && contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.textTransform === false && contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.textDecoration === false && contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Desktop && contactFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormErrorLetterSpacing.Desktop}${contactFormErrorLetterSpacingUnits.Desktop};` : ''}
+            ${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Desktop && contactFormErrorLineHeightUnits.Desktop ? `line-height: ${contactFormErrorLineHeight.Desktop}${contactFormErrorLineHeightUnits.Desktop};` : ''} 
             ${contactFormErrorDesktopPadding ? `padding: ${contactFormErrorDesktopPadding};` : ""}
             ${contactFormErrorDesktopMargin ? `margin: ${contactFormErrorDesktopMargin};` : ""}
 			margin-top: 4px;
@@ -2049,14 +2104,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
             ${contactFormSuccessColor ? `color: ${contactFormSuccessColor};` : ""}
             ${contactFormSuccessBgColor ? `background: ${contactFormSuccessBgColor};` : ""}
-            ${contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
-            ${contactFormSuccessFontSize.Desktop && contactFormSuccessFontSizeUnits.Desktop ? `font-size: ${contactFormSuccessFontSize.Desktop}${contactFormSuccessFontSizeUnits.Desktop};` : ''} 
-            ${contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
-            ${contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
-            ${contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
-            ${contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
-            ${contactFormSuccessLetterSpacing.Desktop && contactFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSuccessLetterSpacing.Desktop}${contactFormSuccessLetterSpacingUnits.Desktop};` : ''}
-            ${contactFormSuccessLineHeight.Desktop && contactFormSuccessLineHeightUnits.Desktop ? `line-height: ${contactFormSuccessLineHeight.Desktop}${contactFormSuccessLineHeightUnits.Desktop};` : ''}
+
+			${contactFormSuccessGlobalTypoSwitcher.fontFamily === true && contactFormSuccessGlobalTypographyData.fontFamily ? `font-family: ${contactFormSuccessGlobalTypographyData.fontFamily};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.fontSize === true && contactFormSuccessGlobalTypographyData.fontSize ? `font-size: ${contactFormSuccessGlobalTypographyData.fontSize};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.fontWeight === true && contactFormSuccessGlobalTypographyData.fontWeight ? `font-weight: ${contactFormSuccessGlobalTypographyData.fontWeight};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.fontStyle === true && contactFormSuccessGlobalTypographyData.fontStyle ? `font-style: ${contactFormSuccessGlobalTypographyData.fontStyle};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.textTransform === true && contactFormSuccessGlobalTypographyData.textTransform ? `text-transform: ${contactFormSuccessGlobalTypographyData.textTransform};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.textDecoration === true && contactFormSuccessGlobalTypographyData.textDecoration ? `text-decoration: ${contactFormSuccessGlobalTypographyData.textDecoration};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.letterSpacing === true && contactFormSuccessGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSuccessGlobalTypographyData.letterSpacing};` : ''}
+			${contactFormSuccessGlobalTypoSwitcher.lineHeight === true && contactFormSuccessGlobalTypographyData.lineHeight ? `line-height: ${contactFormSuccessGlobalTypographyData.lineHeight};` : ''}
+				
+            ${contactFormSuccessGlobalTypoSwitcher.fontFamily === false && contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Desktop && contactFormSuccessFontSizeUnits.Desktop ? `font-size: ${contactFormSuccessFontSize.Desktop}${contactFormSuccessFontSizeUnits.Desktop};` : ''} 
+            ${contactFormSuccessGlobalTypoSwitcher.fontWeight === false && contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.fontStyle === false && contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.textTransform === false && contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.textDecoration === false && contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Desktop && contactFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSuccessLetterSpacing.Desktop}${contactFormSuccessLetterSpacingUnits.Desktop};` : ''}
+            ${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Desktop && contactFormSuccessLineHeightUnits.Desktop ? `line-height: ${contactFormSuccessLineHeight.Desktop}${contactFormSuccessLineHeightUnits.Desktop};` : ''}
             ${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
             ${contactFormSuccessDesktopBorderWidth ? `border-width: ${contactFormSuccessDesktopBorderWidth};` : ""}
             ${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
@@ -2071,7 +2136,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockID}.fb-contact-form-wrapper {
 				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
-				${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
 				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Tablet !== undefined ? `left: ${contactFormHZLeftOffset.Tablet}${contactFormHZLeftOffsetUnits.Tablet};` : ''}
 				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Tablet !== undefined ? `right: ${contactFormHZRightOffset.Tablet}${contactFormHZRightOffsetUnits.Tablet};` : ''}
 				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Tablet !== undefined ? `top: ${contactFormVRTopOffset.Tablet}${contactFormVRTopOffsetUnits.Tablet};` : ''}
@@ -2079,18 +2143,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
-				${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
 				${TabletPadding != "" ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin != "" ? `margin: ${TabletMargin};` : ""}
-				${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
 				${BorderTabletWidth != "" ? `border-width: ${BorderTabletWidth};` : ""}
 				${BorderRadiusTabletWidth != "" ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ""}
-				${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 				transition: all .3s ease-in-out;
-			}
-			.${blockID}.fb-contact-form-wrapper:hover {
-				${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
-				${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
 			}
 
 			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-error-message .wpcf7-not-valid-tip {
@@ -2122,41 +2179,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
-				${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
-				${contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
-				${contactFormLabelFontSize.Tablet != "" ? `font-size: ${contactFormLabelFontSize.Tablet}${contactFormLabelFontSizeUnits.Tablet};` : ''}
-				${contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
-				${contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
-				${contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
-				${contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
-				${contactFormLabelLetterSpacing.Tablet && contactFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormLabelLetterSpacing.Tablet}${contactFormLabelLetterSpacingUnits.Tablet};` : ''}
-				${contactFormLabelLineHeight.Tablet && contactFormLabelLineHeightUnits.Tablet ? `line-height: ${contactFormLabelLineHeight.Tablet}${contactFormLabelLineHeightUnits.Tablet};` : ''}
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
-				${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+				${contactFormLabelGlobalTypoSwitcher.fontSize === false && contactFormLabelFontSize.Tablet != "" ? `font-size: ${contactFormLabelFontSize.Tablet}${contactFormLabelFontSizeUnits.Tablet};` : ''}
+				${contactFormLabelGlobalTypoSwitcher.letterSpacing === false && contactFormLabelLetterSpacing.Tablet && contactFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormLabelLetterSpacing.Tablet}${contactFormLabelLetterSpacingUnits.Tablet};` : ''}
+				${contactFormLabelGlobalTypoSwitcher.lineHeight === false && contactFormLabelLineHeight.Tablet && contactFormLabelLineHeightUnits.Tablet ? `line-height: ${contactFormLabelLineHeight.Tablet}${contactFormLabelLineHeightUnits.Tablet};` : ''}
 			}
 
 
 			.${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
 			.${blockID}.fb-contact-form-wrapper textarea, 
 			.${blockID}.fb-contact-form-wrapper select {
-				${contactFormInputBgColor ? `background-color: ${contactFormInputBgColor};` : ""}
-				${contactFormInputColor ? `color: ${contactFormInputColor};` : ""}
-				${contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
-				${contactFormInputFontSize.Tablet != "" ? `font-size: ${contactFormInputFontSize.Tablet}${contactFormInputFontSizeUnits.Tablet};` : ''}
-				${contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
-				${contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
-				${contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
-				${contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
-				${contactFormInputLetterSpacing.Tablet != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Tablet}${contactFormInputLetterSpacingUnits.Tablet};` : ''}
-				${contactFormInputLineHeight.Tablet != "" ? `line-height: ${contactFormInputLineHeight.Tablet}${contactFormInputLineHeightUnits.Tablet};` : ''}
+				${contactFormInputGlobalTypoSwitcher.fontSize === false && contactFormInputFontSize.Tablet != "" ? `font-size: ${contactFormInputFontSize.Tablet}${contactFormInputFontSizeUnits.Tablet};` : ''}
+				${contactFormInputGlobalTypoSwitcher.letterSpacing === false && contactFormInputLetterSpacing.Tablet != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Tablet}${contactFormInputLetterSpacingUnits.Tablet};` : ''}
+				${contactFormInputGlobalTypoSwitcher.lineHeight === false && contactFormInputLineHeight.Tablet != "" ? `line-height: ${contactFormInputLineHeight.Tablet}${contactFormInputLineHeightUnits.Tablet};` : ''}
 				${contactFormTextIndentSize.Tablet != "" ? `text-indent: ${contactFormTextIndentSize.Tablet}${contactFormTextIndentSizeUnits.Tablet};` : ""}
 				${contactFormInputWidthSize.Tablet != "" ? `width: ${contactFormInputWidthSize.Tablet}${contactFormInputWidthSizeUnits.Tablet};` : ""}
 				${contactFormInputHeightSize.Tablet != "" ? `height: ${contactFormInputHeightSize.Tablet}${contactFormInputHeightSizeUnits.Tablet};` : ""}
 				${contactFormTabletPadding != "" ? `padding: ${contactFormTabletPadding};` : ""}
-				${contactFormBorder ? `border: ${contactFormBorder};` : ""}
 				${contactFormBorderTabletWidth != "" ? `border-width: ${contactFormBorderTabletWidth};` : ""}
-				${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
 				${contactFormBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormBorderRadiusTabletWidth};` : ""}
 				transition: all .3s ease-in-out;
 			}
@@ -2164,12 +2203,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
 			.${blockID}.fb-contact-form-wrapper textarea:focus, 
 			.${blockID}.fb-contact-form-wrapper select:focus {
-				${contactFormFocusBorder ? `border: ${contactFormFocusBorder};` : ""}
 				${contactFormFocusBorderTabletWidth != "" ? `border-width: ${contactFormFocusBorderTabletWidth};` : ""}
 				${contactFormFocusBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusTabletWidth};` : ""}
-				${contactFormInputFocusColor ? `border-color: ${contactFormInputFocusColor};` : ""}
-				box-shadow: none;
-				outline: none;
 			}
 
 			.${blockID}.fb-contact-form-wrapper textarea {
@@ -2180,31 +2215,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form p {
 				${contactFormSpacingSize.Tablet != "" ? `margin: ${contactFormSpacingSize.Tablet}${contactFormSpacingUnits.Tablet} 0;` : ""} 
 			}
-
-			.${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitAlignment === 'center' ? 'margin: 0 auto; display: block;' : ''}
 				${contactFormSubmitAlignment === 'right' ? 'margin-left: auto; display: block;' : ''}
@@ -2213,30 +2223,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit { 
 				${contactFormSubmitHeight.Tablet ? `height: ${contactFormSubmitHeight.Tablet}${contactFormSubmitHeightUnits.Tablet};` : ""}
-				${contactFormSubmitColor ? `color: ${contactFormSubmitColor};` : ""}
-				${contactFormSubmitBgColor ? `background: ${contactFormSubmitBgColor};` : ""}
-				${contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
-				${contactFormSubmitFontSize.Tablet && contactFormSubmitFontSizeUnits.Tablet ? `font-size: ${contactFormSubmitFontSize.Tablet}${contactFormSubmitFontSizeUnits.Tablet};` : ''} 
-				${contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
-				${contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
-				${contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
-				${contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
-				${contactFormSubmitLetterSpacing.Tablet && contactFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSubmitLetterSpacing.Tablet}${contactFormSubmitLetterSpacingUnits.Tablet};` : ''}
-				${contactFormSubmitLineHeight.Tablet && contactFormSubmitLineHeightUnits.Tablet ? `line-height: ${contactFormSubmitLineHeight.Tablet}${contactFormSubmitLineHeightUnits.Tablet};` : ''} 
+				${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Tablet && contactFormSubmitFontSizeUnits.Tablet ? `font-size: ${contactFormSubmitFontSize.Tablet}${contactFormSubmitFontSizeUnits.Tablet};` : ''} 
+				${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Tablet && contactFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSubmitLetterSpacing.Tablet}${contactFormSubmitLetterSpacingUnits.Tablet};` : ''}
+				${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Tablet && contactFormSubmitLineHeightUnits.Tablet ? `line-height: ${contactFormSubmitLineHeight.Tablet}${contactFormSubmitLineHeightUnits.Tablet};` : ''} 
 				${contactFormSubmitTabletPadding ? `padding: ${contactFormSubmitTabletPadding};` : ""}
 				${contactFormSubmitTabletMargin ? `margin: ${contactFormSubmitTabletMargin};` : ""}
 
 				${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
 				${contactFormSubmitTabletBorderWidth ? `border-width: ${contactFormSubmitTabletBorderWidth};` : ""}
-				${contactFormSubmitBorderColor ? `border-color: ${contactFormSubmitBorderColor};` : ""}
 				${contactFormSubmitTabletBorderRadiusWidth ? `border-radius: ${contactFormSubmitTabletBorderRadiusWidth};` : ""}
 				cursor: pointer;
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit:hover {
-				${contactFormSubmitHoverColor ? `color: ${contactFormSubmitHoverColor};` : ""}
-				${contactFormSubmitBgHoverColor ? `background: ${contactFormSubmitBgHoverColor};` : ""}
-				${contactFormSubmitBorderHoverColor ? `border-color: ${contactFormSubmitBorderHoverColor};` : ""}
-				opacity: 0.8;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -2246,39 +2242,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
-				${contactFormErrorColor ? `color: ${contactFormErrorColor};` : ""}
-				${contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
-				${contactFormErrorFontSize.Tablet && contactFormErrorFontSizeUnits.Tablet ? `font-size: ${contactFormErrorFontSize.Tablet}${contactFormErrorFontSizeUnits.Tablet};` : ''} 
-				${contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
-				${contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
-				${contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
-				${contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
-				${contactFormErrorLetterSpacing.Tablet && contactFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormErrorLetterSpacing.Tablet}${contactFormErrorLetterSpacingUnits.Tablet};` : ''}
-				${contactFormErrorLineHeight.Tablet && contactFormErrorLineHeightUnits.Tablet ? `line-height: ${contactFormErrorLineHeight.Tablet}${contactFormErrorLineHeightUnits.Tablet};` : ''} 
+				${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Tablet && contactFormErrorFontSizeUnits.Tablet ? `font-size: ${contactFormErrorFontSize.Tablet}${contactFormErrorFontSizeUnits.Tablet};` : ''} 
+				${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Tablet && contactFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormErrorLetterSpacing.Tablet}${contactFormErrorLetterSpacingUnits.Tablet};` : ''}
+				${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Tablet && contactFormErrorLineHeightUnits.Tablet ? `line-height: ${contactFormErrorLineHeight.Tablet}${contactFormErrorLineHeightUnits.Tablet};` : ''} 
 				${contactFormErrorTabletPadding ? `padding: ${contactFormErrorTabletPadding};` : ""}
 				${contactFormErrorTabletMargin ? `margin: ${contactFormErrorTabletMargin};` : ""}
 				margin-top: 4px;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
-				${contactFormSuccessColor ? `color: ${contactFormSuccessColor};` : ""}
-				${contactFormSuccessBgColor ? `background: ${contactFormSuccessBgColor};` : ""}
-				${contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
-				${contactFormSuccessFontSize.Tablet && contactFormSuccessFontSizeUnits.Tablet ? `font-size: ${contactFormSuccessFontSize.Tablet}${contactFormSuccessFontSizeUnits.Tablet};` : ''} 
-				${contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
-				${contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
-				${contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
-				${contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
-				${contactFormSuccessLetterSpacing.Tablet && contactFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSuccessLetterSpacing.Tablet}${contactFormSuccessLetterSpacingUnits.Tablet};` : ''}
-				${contactFormSuccessLineHeight.Tablet && contactFormSuccessLineHeightUnits.Tablet ? `line-height: ${contactFormSuccessLineHeight.Tablet}${contactFormSuccessLineHeightUnits.Tablet};` : ''}
+				${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Tablet && contactFormSuccessFontSizeUnits.Tablet ? `font-size: ${contactFormSuccessFontSize.Tablet}${contactFormSuccessFontSizeUnits.Tablet};` : ''} 
+				${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Tablet && contactFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSuccessLetterSpacing.Tablet}${contactFormSuccessLetterSpacingUnits.Tablet};` : ''}
+				${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Tablet && contactFormSuccessLineHeightUnits.Tablet ? `line-height: ${contactFormSuccessLineHeight.Tablet}${contactFormSuccessLineHeightUnits.Tablet};` : ''}
 				${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
 				${contactFormSuccessTabletBorderWidth ? `border-width: ${contactFormSuccessTabletBorderWidth};` : ""}
-				${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
 				${contactFormSuccessTabletBorderRadiusWidth ? `border-radius: ${contactFormSuccessTabletBorderRadiusWidth};` : ""}
 				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 				padding: 10px 15px;
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
-				${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
 			}
 			
 		}
@@ -2294,18 +2273,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
-				${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
 				${MobilePadding != "" ? `padding: ${MobilePadding};` : ""} 
 				${MobileMargin != "" ? `margin: ${MobileMargin};` : ""}
 				${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
 				${BorderMobileWidth != "" ? `border-width: ${BorderMobileWidth};` : ""}
 				${BorderRadiusMobileWidth != "" ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""}
-				${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 				transition: all .3s ease-in-out;
-			}
-			.${blockID}.fb-contact-form-wrapper:hover {
-				${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
-				${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
 			}
 
 			.${blockID}.fb-contact-form-wrapper.fb-contact-form-hide-error-message .wpcf7-not-valid-tip {
@@ -2337,41 +2310,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
-				${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
-				${contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
-				${contactFormLabelFontSize.Mobile != "" ? `font-size: ${contactFormLabelFontSize.Mobile}${contactFormLabelFontSizeUnits.Mobile};` : ''}
-				${contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
-				${contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
-				${contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
-				${contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
-				${contactFormLabelLetterSpacing.Mobile && contactFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormLabelLetterSpacing.Mobile}${contactFormLabelLetterSpacingUnits.Mobile};` : ''}
-				${contactFormLabelLineHeight.Mobile && contactFormLabelLineHeightUnits.Mobile ? `line-height: ${contactFormLabelLineHeight.Mobile}${contactFormLabelLineHeightUnits.Mobile};` : ''}
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
-				${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+				${contactFormLabelGlobalTypoSwitcher.fontSize === false && contactFormLabelFontSize.Mobile != "" ? `font-size: ${contactFormLabelFontSize.Mobile}${contactFormLabelFontSizeUnits.Mobile};` : ''}
+				${contactFormLabelGlobalTypoSwitcher.letterSpacing === false && contactFormLabelLetterSpacing.Mobile && contactFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormLabelLetterSpacing.Mobile}${contactFormLabelLetterSpacingUnits.Mobile};` : ''}
+				${contactFormLabelGlobalTypoSwitcher.lineHeight === false && contactFormLabelLineHeight.Mobile && contactFormLabelLineHeightUnits.Mobile ? `line-height: ${contactFormLabelLineHeight.Mobile}${contactFormLabelLineHeightUnits.Mobile};` : ''}
 			}
 
 
 			.${blockID}.fb-contact-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
 			.${blockID}.fb-contact-form-wrapper textarea, 
 			.${blockID}.fb-contact-form-wrapper select {
-				${contactFormInputBgColor ? `background-color: ${contactFormInputBgColor};` : ""}
-				${contactFormInputColor ? `color: ${contactFormInputColor};` : ""}
-				${contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
-				${contactFormInputFontSize.Mobile != "" ? `font-size: ${contactFormInputFontSize.Mobile}${contactFormInputFontSizeUnits.Mobile};` : ''}
-				${contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
-				${contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
-				${contactFormInputTextTransform ? `text-transform: ${contactFormInputTextTransform};` : ""}
-				${contactFormInputTextDecoration ? `text-decoration: ${contactFormInputTextDecoration};` : ""}
-				${contactFormInputLetterSpacing.Mobile != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Mobile}${contactFormInputLetterSpacingUnits.Mobile};` : ''}
-				${contactFormInputLineHeight.Mobile != "" ? `line-height: ${contactFormInputLineHeight.Mobile}${contactFormInputLineHeightUnits.Mobile};` : ''}
+				${contactFormInputGlobalTypoSwitcher.fontSize === false && contactFormInputFontSize.Mobile != "" ? `font-size: ${contactFormInputFontSize.Mobile}${contactFormInputFontSizeUnits.Mobile};` : ''}
+				${contactFormInputGlobalTypoSwitcher.letterSpacing === false && contactFormInputLetterSpacing.Mobile != "" ? `letter-spacing: ${contactFormInputLetterSpacing.Mobile}${contactFormInputLetterSpacingUnits.Mobile};` : ''}
+				${contactFormInputGlobalTypoSwitcher.lineHeight === false && contactFormInputLineHeight.Mobile != "" ? `line-height: ${contactFormInputLineHeight.Mobile}${contactFormInputLineHeightUnits.Mobile};` : ''}
 				${contactFormTextIndentSize.Mobile != "" ? `text-indent: ${contactFormTextIndentSize.Mobile}${contactFormTextIndentSizeUnits.Mobile};` : ""}
 				${contactFormInputWidthSize.Mobile != "" ? `width: ${contactFormInputWidthSize.Mobile}${contactFormInputWidthSizeUnits.Mobile};` : ""}
 				${contactFormInputHeightSize.Mobile != "" ? `height: ${contactFormInputHeightSize.Mobile}${contactFormInputHeightSizeUnits.Mobile};` : ""}
 				${contactFormMobilePadding != "" ? `padding: ${contactFormMobilePadding};` : ""}
-				${contactFormBorder ? `border: ${contactFormBorder};` : ""}
 				${contactFormBorderMobileWidth != "" ? `border-width: ${contactFormBorderMobileWidth};` : ""}
-				${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
 				${contactFormBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormBorderRadiusMobileWidth};` : ""}
 				transition: all .3s ease-in-out;
 			}
@@ -2379,10 +2334,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
 			.${blockID}.fb-contact-form-wrapper textarea:focus, 
 			.${blockID}.fb-contact-form-wrapper select:focus {
-				${contactFormFocusBorder ? `border: ${contactFormFocusBorder};` : ""}
 				${contactFormFocusBorderMobileWidth != "" ? `border-width: ${contactFormFocusBorderMobileWidth};` : ""}
 				${contactFormFocusBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusMobileWidth};` : ""}
-				${contactFormInputFocusColor ? `border-color: ${contactFormInputFocusColor};` : ""}
 				box-shadow: none;
 				outline: none;
 			}
@@ -2396,30 +2349,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormSpacingSize.Tablet != "" ? `margin: ${contactFormSpacingSize.Tablet}${contactFormSpacingUnits.Tablet} 0;` : ""} 
 			}
 
-			.${blockID}.fb-contact-form-wrapper input::-webkit-input-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea::-webkit-input-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input::-moz-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea::-moz-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input:-ms-input-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea:-ms-input-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
-			.${blockID}.fb-contact-form-wrapper input:-moz-placeholder,
-			.${blockID}.fb-contact-form-wrapper textarea:-moz-placeholder {
-				${contactFormPlaceholderColor ? `color: ${contactFormPlaceholderColor};` : ""}
-				font-weight: 300;
-			}
-
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitAlignment === 'center' ? 'margin: 0 auto; display: block;' : ''}
 				${contactFormSubmitAlignment === 'right' ? 'margin-left: auto; display: block;' : ''}
@@ -2428,30 +2357,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit { 
 				${contactFormSubmitHeight.Mobile ? `height: ${contactFormSubmitHeight.Mobile}${contactFormSubmitHeightUnits.Mobile};` : ""}
-				${contactFormSubmitColor ? `color: ${contactFormSubmitColor};` : ""}
-				${contactFormSubmitBgColor ? `background: ${contactFormSubmitBgColor};` : ""}
-				${contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
-				${contactFormSubmitFontSize.Mobile && contactFormSubmitFontSizeUnits.Mobile ? `font-size: ${contactFormSubmitFontSize.Mobile}${contactFormSubmitFontSizeUnits.Mobile};` : ''} 
-				${contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
-				${contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
-				${contactFormSubmitTextTransform ? `text-transform: ${contactFormSubmitTextTransform};` : ""}
-				${contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
-				${contactFormSubmitLetterSpacing.Mobile && contactFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSubmitLetterSpacing.Mobile}${contactFormSubmitLetterSpacingUnits.Mobile};` : ''}
-				${contactFormSubmitLineHeight.Mobile && contactFormSubmitLineHeightUnits.Mobile ? `line-height: ${contactFormSubmitLineHeight.Mobile}${contactFormSubmitLineHeightUnits.Mobile};` : ''} 
+				${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Mobile && contactFormSubmitFontSizeUnits.Mobile ? `font-size: ${contactFormSubmitFontSize.Mobile}${contactFormSubmitFontSizeUnits.Mobile};` : ''} 
+				${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Mobile && contactFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSubmitLetterSpacing.Mobile}${contactFormSubmitLetterSpacingUnits.Mobile};` : ''}
+				${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Mobile && contactFormSubmitLineHeightUnits.Mobile ? `line-height: ${contactFormSubmitLineHeight.Mobile}${contactFormSubmitLineHeightUnits.Mobile};` : ''} 
 				${contactFormSubmitMobilePadding ? `padding: ${contactFormSubmitMobilePadding};` : ""}
 				${contactFormSubmitMobileMargin ? `margin: ${contactFormSubmitMobileMargin};` : ""}
 
-				${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
 				${contactFormSubmitMobileBorderWidth ? `border-width: ${contactFormSubmitMobileBorderWidth};` : ""}
-				${contactFormSubmitBorderColor ? `border-color: ${contactFormSubmitBorderColor};` : ""}
 				${contactFormSubmitMobileBorderRadiusWidth ? `border-radius: ${contactFormSubmitMobileBorderRadiusWidth};` : ""}
 				cursor: pointer;
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit:hover {
-				${contactFormSubmitHoverColor ? `color: ${contactFormSubmitHoverColor};` : ""}
-				${contactFormSubmitBgHoverColor ? `background: ${contactFormSubmitBgHoverColor};` : ""}
-				${contactFormSubmitBorderHoverColor ? `border-color: ${contactFormSubmitBorderHoverColor};` : ""}
-				opacity: 0.8;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -2461,39 +2375,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
-				${contactFormErrorColor ? `color: ${contactFormErrorColor};` : ""}
-				${contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
-				${contactFormErrorFontSize.Mobile && contactFormErrorFontSizeUnits.Mobile ? `font-size: ${contactFormErrorFontSize.Mobile}${contactFormErrorFontSizeUnits.Mobile};` : ''} 
-				${contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
-				${contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
-				${contactFormErrorTextTransform ? `text-transform: ${contactFormErrorTextTransform};` : ""}
-				${contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
-				${contactFormErrorLetterSpacing.Mobile && contactFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormErrorLetterSpacing.Mobile}${contactFormErrorLetterSpacingUnits.Mobile};` : ''}
-				${contactFormErrorLineHeight.Mobile && contactFormErrorLineHeightUnits.Mobile ? `line-height: ${contactFormErrorLineHeight.Mobile}${contactFormErrorLineHeightUnits.Mobile};` : ''} 
+				${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Mobile && contactFormErrorFontSizeUnits.Mobile ? `font-size: ${contactFormErrorFontSize.Mobile}${contactFormErrorFontSizeUnits.Mobile};` : ''} 
+				${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Mobile && contactFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormErrorLetterSpacing.Mobile}${contactFormErrorLetterSpacingUnits.Mobile};` : ''}
+				${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Mobile && contactFormErrorLineHeightUnits.Mobile ? `line-height: ${contactFormErrorLineHeight.Mobile}${contactFormErrorLineHeightUnits.Mobile};` : ''} 
 				${contactFormErrorMobilePadding ? `padding: ${contactFormErrorMobilePadding};` : ""}
 				${contactFormErrorMobileMargin ? `margin: ${contactFormErrorMobileMargin};` : ""}
 				margin-top: 4px;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
-				${contactFormSuccessColor ? `color: ${contactFormSuccessColor};` : ""}
-				${contactFormSuccessBgColor ? `background: ${contactFormSuccessBgColor};` : ""}
-				${contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
-				${contactFormSuccessFontSize.Mobile && contactFormSuccessFontSizeUnits.Mobile ? `font-size: ${contactFormSuccessFontSize.Mobile}${contactFormSuccessFontSizeUnits.Mobile};` : ''} 
-				${contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
-				${contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
-				${contactFormSuccessTextTransform ? `text-transform: ${contactFormSuccessTextTransform};` : ""}
-				${contactFormSuccessTextDecoration ? `text-decoration: ${contactFormSuccessTextDecoration};` : ""}
-				${contactFormSuccessLetterSpacing.Mobile && contactFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSuccessLetterSpacing.Mobile}${contactFormSuccessLetterSpacingUnits.Mobile};` : ''}
-				${contactFormSuccessLineHeight.Mobile && contactFormSuccessLineHeightUnits.Mobile ? `line-height: ${contactFormSuccessLineHeight.Mobile}${contactFormSuccessLineHeightUnits.Mobile};` : ''}
-				${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
+				${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Mobile && contactFormSuccessFontSizeUnits.Mobile ? `font-size: ${contactFormSuccessFontSize.Mobile}${contactFormSuccessFontSizeUnits.Mobile};` : ''} 
+				${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Mobile && contactFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSuccessLetterSpacing.Mobile}${contactFormSuccessLetterSpacingUnits.Mobile};` : ''}
+				${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Mobile && contactFormSuccessLineHeightUnits.Mobile ? `line-height: ${contactFormSuccessLineHeight.Mobile}${contactFormSuccessLineHeightUnits.Mobile};` : ''}
 				${contactFormSuccessMobileBorderWidth ? `border-width: ${contactFormSuccessMobileBorderWidth};` : ""}
-				${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
 				${contactFormSuccessMobileBorderRadiusWidth ? `border-radius: ${contactFormSuccessMobileBorderRadiusWidth};` : ""}
 				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 				padding: 10px 15px;
-			}
-			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
-				${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
 			}
 		}
 
@@ -2509,6 +2405,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormLabelColorSwitcher,
 		contactFormLabelColor,
 		contactFormLabelHoverColor,
+		contactFormLabelGlobalTypoSwitcher,
+		contactFormLabelGlobalTypographyData,
+		contactFormLabelGlobalTypoType,
 		contactFormLabelFontFamily,
 		contactFormLabelFontSize,
 		contactFormLabelFontSizeUnits,
@@ -2524,6 +2423,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormInputBgColor,
 		contactFormInputColor,
 		contactFormInputFocusColor,
+		contactFormInputGlobalTypoSwitcher,
+		contactFormInputGlobalTypographyData,
+		contactFormInputGlobalTypoType,
 		contactFormInputFontFamily,
 		contactFormInputFontSize,
 		contactFormInputFontSizeUnits,
@@ -2603,6 +2505,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSubmitBgColorSwitcher,
 		contactFormSubmitBgColor,
 		contactFormSubmitBgHoverColor,
+		contactFormSubmitGlobalTypoSwitcher,
+		contactFormSubmitGlobalTypographyData,
+		contactFormSubmitGlobalTypoType,
 		contactFormSubmitFontFamily,
 		contactFormSubmitFontSize,
 		contactFormSubmitFontSizeUnits,
@@ -2641,6 +2546,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		contactFormSuccessColor,
 		contactFormSuccessBgColor,
+		contactFormSuccessGlobalTypoSwitcher,
+		contactFormSuccessGlobalTypographyData,
+		contactFormSuccessGlobalTypoType,
 		contactFormSuccessFontFamily,
 		contactFormSuccessFontSize,
 		contactFormSuccessFontSizeUnits,
@@ -2668,6 +2576,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSuccessBorderRadiusLink,
 
 		contactFormErrorColor,
+		contactFormErrorGlobalTypoSwitcher,
+		contactFormErrorGlobalTypographyData,
+		contactFormErrorGlobalTypoType,
 		contactFormErrorFontFamily,
 		contactFormErrorFontSize,
 		contactFormErrorFontSizeUnits,
@@ -2906,44 +2817,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}
 
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={contactFormLabelGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ contactFormLabelGlobalTypographyData: value })}
 
-                                            <FB_TypographyControl
-                                                fontFamily={contactFormLabelFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value })}
+												globalTypoType={contactFormLabelGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														contactFormLabelGlobalTypoType: value, 
+														contactFormLabelGlobalTypoSwitcher: value === 'default' ? {...contactFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSize={contactFormLabelFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value })}
+												fontFamily={contactFormLabelFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontSizeUnits={contactFormLabelFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ contactFormLabelFontSizeUnits: value })}
+												fontSize={contactFormLabelFontSize}
+												onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontWeight={contactFormLabelFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value })}
+												fontSizeUnits={contactFormLabelFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ contactFormLabelFontSizeUnits: value })}
 
-                                                fontStyle={contactFormLabelFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value })}
+												fontWeight={contactFormLabelFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textTransform={contactFormLabelTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value })}
+												fontStyle={contactFormLabelFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                textDecoration={contactFormLabelTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value })}
+												textTransform={contactFormLabelTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacing={contactFormLabelLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value })}
+												textDecoration={contactFormLabelTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                letterSpacingUnits={contactFormLabelLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormLabelLetterSpacingUnits: value })}
+												letterSpacing={contactFormLabelLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeight={contactFormLabelLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value })}
+												letterSpacingUnits={contactFormLabelLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormLabelLetterSpacingUnits: value })}
 
-                                                lineHeightUnits={contactFormLabelLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ contactFormLabelLineHeightUnits: value })}
+												lineHeight={contactFormLabelLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeightUnits={contactFormLabelLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ contactFormLabelLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
                                         </PanelBody>
                                         <PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
 
@@ -2960,43 +2882,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={contactFormInputFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value })}
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={contactFormInputGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ contactFormInputGlobalTypographyData: value })}
 
-                                                fontSize={contactFormInputFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value })}
+												globalTypoType={contactFormInputGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														contactFormInputGlobalTypoType: value, 
+														contactFormInputGlobalTypoSwitcher: value === 'default' ? {...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSizeUnits={contactFormInputFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ contactFormInputFontSizeUnits: value })}
+												fontFamily={contactFormInputFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={contactFormInputFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value })}
+												fontSize={contactFormInputFontSize}
+												onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={contactFormInputFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value })}
+												fontSizeUnits={contactFormInputFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ contactFormInputFontSizeUnits: value })}
 
-                                                textTransform={contactFormInputTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value })}
+												fontWeight={contactFormInputFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={contactFormInputTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value })}
+												fontStyle={contactFormInputFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={contactFormInputLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value })}
+												textTransform={contactFormInputTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={contactFormInputLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormInputLetterSpacingUnits: value })}
+												textDecoration={contactFormInputTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={contactFormInputLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value })}
+												letterSpacing={contactFormInputLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={contactFormInputLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ contactFormInputLineHeightUnits: value })}
+												letterSpacingUnits={contactFormInputLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormInputLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeight={contactFormInputLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={contactFormInputLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ contactFormInputLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
                                             <FB_Range
                                                 min={1}
                                                 max={100}
@@ -3227,43 +3161,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={contactFormSubmitFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value })}
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={contactFormSubmitGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ contactFormSubmitGlobalTypographyData: value })}
 
-                                                fontSize={contactFormSubmitFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value })}
+												globalTypoType={contactFormSubmitGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														contactFormSubmitGlobalTypoType: value, 
+														contactFormSubmitGlobalTypoSwitcher: value === 'default' ? {...contactFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
 
-                                                fontSizeUnits={contactFormSubmitFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ contactFormSubmitFontSizeUnits: value })}
+												fontFamily={contactFormSubmitFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={contactFormSubmitFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value })}
+												fontSize={contactFormSubmitFontSize}
+												onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={contactFormSubmitFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value })}
+												fontSizeUnits={contactFormSubmitFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ contactFormSubmitFontSizeUnits: value })}
 
-                                                textTransform={contactFormSubmitTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value })}
+												fontWeight={contactFormSubmitFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={contactFormSubmitTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value })}
+												fontStyle={contactFormSubmitFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={contactFormSubmitLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value })}
+												textTransform={contactFormSubmitTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={contactFormSubmitLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSubmitLetterSpacingUnits: value })}
+												textDecoration={contactFormSubmitTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={contactFormSubmitLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value })}
+												letterSpacing={contactFormSubmitLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={contactFormSubmitLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ contactFormSubmitLineHeightUnits: value })}
+												letterSpacingUnits={contactFormSubmitLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSubmitLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												lineHeight={contactFormSubmitLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={contactFormSubmitLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ contactFormSubmitLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
                                             
                                             <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
@@ -3396,43 +3342,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={contactFormSuccessFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value })}
+										<FB_TypographyControl
+											globalTypoControlActive={true}
+											globalTypoSwitcher={contactFormSuccessGlobalTypoSwitcher}
+											storeGlobalTypographyData={(value) => setAttributes({ contactFormSuccessGlobalTypographyData: value })}
 
-                                                fontSize={contactFormSuccessFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value })}
+											globalTypoType={contactFormSuccessGlobalTypoType}
+											onChangeGlobalTypoType={(value) => {
+												setAttributes({ 
+													contactFormSuccessGlobalTypoType: value, 
+													contactFormSuccessGlobalTypoSwitcher: value === 'default' ? {...contactFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+												})
+											}}
 
-                                                fontSizeUnits={contactFormSuccessFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
+											fontFamily={contactFormSuccessFontFamily}
+											onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={contactFormSuccessFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value })}
+											fontSize={contactFormSuccessFontSize}
+											onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={contactFormSuccessFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value })}
+											fontSizeUnits={contactFormSuccessFontSizeUnits}
+											onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
 
-                                                textTransform={contactFormSuccessTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value })}
+											fontWeight={contactFormSuccessFontWeight}
+											onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={contactFormSuccessTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value })}
+											fontStyle={contactFormSuccessFontStyle}
+											onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={contactFormSuccessLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value })}
+											textTransform={contactFormSuccessTextTransform}
+											onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
+											textDecoration={contactFormSuccessTextDecoration}
+											onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={contactFormSuccessLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value })}
+											letterSpacing={contactFormSuccessLetterSpacing}
+											onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={contactFormSuccessLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
+											letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
+											onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+											lineHeight={contactFormSuccessLineHeight}
+											onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, lineHeight: value && false} })}
+
+											lineHeightUnits={contactFormSuccessLineHeightUnits}
+											onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
+
+											deviceType={deviceType}
+											setAttributes={setAttributes}
+										/>
 
                                             <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}
@@ -3505,43 +3463,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={contactFormErrorFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value })}
+										<FB_TypographyControl
+											globalTypoControlActive={true}
+											globalTypoSwitcher={contactFormErrorGlobalTypoSwitcher}
+											storeGlobalTypographyData={(value) => setAttributes({ contactFormErrorGlobalTypographyData: value })}
 
-                                                fontSize={contactFormErrorFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value })}
+											globalTypoType={contactFormErrorGlobalTypoType}
+											onChangeGlobalTypoType={(value) => {
+												setAttributes({ 
+													contactFormErrorGlobalTypoType: value, 
+													contactFormErrorGlobalTypoSwitcher: value === 'default' ? {...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+												})
+											}}
 
-                                                fontSizeUnits={contactFormErrorFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
+											fontFamily={contactFormErrorFontFamily}
+											onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={contactFormErrorFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value })}
+											fontSize={contactFormErrorFontSize}
+											onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={contactFormErrorFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value })}
+											fontSizeUnits={contactFormErrorFontSizeUnits}
+											onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
 
-                                                textTransform={contactFormErrorTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value })}
+											fontWeight={contactFormErrorFontWeight}
+											onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={contactFormErrorTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value })}
+											fontStyle={contactFormErrorFontStyle}
+											onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={contactFormErrorLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value })}
+											textTransform={contactFormErrorTextTransform}
+											onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={contactFormErrorLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
+											textDecoration={contactFormErrorTextDecoration}
+											onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={contactFormErrorLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value })}
+											letterSpacing={contactFormErrorLetterSpacing}
+											onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={contactFormErrorLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
+											letterSpacingUnits={contactFormErrorLetterSpacingUnits}
+											onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+											lineHeight={contactFormErrorLineHeight}
+											onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, lineHeight: value && false} })}
+
+											lineHeightUnits={contactFormErrorLineHeightUnits}
+											onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
+
+											deviceType={deviceType}
+											setAttributes={setAttributes}
+										/>
 
                                             <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}

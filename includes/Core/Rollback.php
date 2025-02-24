@@ -60,7 +60,7 @@ class Rollback
         check_admin_referer('frontis_rollback');
 
         if (!current_user_can('update_plugins')) {
-            wp_die(__('You do not have sufficient permissions to perform this action.', 'frontis-blocks'));
+            wp_die(esc_html__('You do not have sufficient permissions to perform this action.', 'frontis-blocks'));
         }
 
         $this->apply_package();
@@ -170,6 +170,7 @@ class Rollback
             '<a href="%s" class="button frontis-rollback-button" onclick="return confirm(\'%s\');">%s</a>',
             esc_url($rollback_url),
             esc_js(__('Are you sure you want to rollback to this version? The process is irreversible.', 'frontis-blocks')),
+            /* translators: %s is the version number to rollback to */
             sprintf(__('Rollback to v%s', 'frontis-blocks'), $this->version)
         );
     }
