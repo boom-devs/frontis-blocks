@@ -1,4 +1,4 @@
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import FB_SidebarTypography from '../sidebar/components/SidebarTypography';
 
 const TypographyPanel = () => {
@@ -40,6 +40,92 @@ const TypographyPanel = () => {
     setExpandedSection(expandedSection === section ? null : section);
   };
 
+  useEffect(() => {
+    const loadSavedSettings = async () => {
+      try {
+        const response = await wp.apiFetch({
+          path: '/wp/v2/settings'
+        });
+        
+        // Load settings for each element type
+        ['Text', 'Link', 'Button', ...headings].forEach(elementType => {
+          const savedSettings = response[`fb_typography_${elementType.toLowerCase()}`];
+          if (savedSettings) {
+            const parsedSettings = JSON.parse(savedSettings);
+            applyTypographyStyles(elementType, parsedSettings);
+          }
+        });
+      } catch (error) {
+        console.error('Error loading typography settings:', error);
+      }
+    };
+  
+    loadSavedSettings();
+  }, []);
+
+  const generateTypographyCSS = (element, styles) => {
+    return `
+      ${element} {
+        ${styles.fontFamily ? `font-family: ${styles.fontFamily};` : ''}
+        ${styles.fontSize ? `font-size: ${styles.fontSize}${styles.fontSizeUnit};` : ''}
+        ${styles.fontWeight ? `font-weight: ${styles.fontWeight};` : ''}
+        ${styles.fontStyle ? `font-style: ${styles.fontStyle};` : ''}
+        ${styles.textTransform ? `text-transform: ${styles.textTransform};` : ''}
+        ${styles.textDecoration ? `text-decoration: ${styles.textDecoration};` : ''}
+        ${styles.letterSpacing ? `letter-spacing: ${styles.letterSpacing}${styles.letterSpacingUnit};` : ''}
+        ${styles.lineHeight ? `line-height: ${styles.lineHeight}${styles.lineHeightUnit};` : ''}
+      }
+    `;
+  };
+
+  const applyTypographyStyles = (elementType, styles) => {
+    let selector;
+    
+    // Define selectors for different element types
+    switch(elementType) {
+      case 'Text':
+        selector = 'body';
+        break;
+      case 'Link':
+        selector = 'a';
+        break;
+      case 'Button':
+        selector = 'button, .button';
+        break;
+      case 'H1':
+        selector = 'h1';
+        break;
+      case 'H2':
+        selector = 'h2';
+        break;
+      case 'H3':
+        selector = 'h3';
+        break;
+      case 'H4':
+        selector = 'h4';
+        break;
+      case 'H5':
+        selector = 'h5';
+        break;
+      case 'H6':
+        selector = 'h6';
+        break;
+      default:
+        selector = elementType;
+    }
+  
+    const css = generateTypographyCSS(selector, styles);
+    
+    // Create or update style element
+    let styleElement = document.getElementById(`fb-typography-${elementType}`);
+    if (!styleElement) {
+      styleElement = document.createElement('style');
+      styleElement.id = `fb-typography-${elementType}`;
+      document.head.appendChild(styleElement);
+    }
+    styleElement.textContent = css;
+  }
+
   const handleEditClick = (item) => {
     // If the same item is clicked again, close the panel
     if (activeTypographyItem === item && isTypographyOpen) {
@@ -53,13 +139,50 @@ const TypographyPanel = () => {
   };
 
   const handleTypographyChange = (property, value) => {
-    setTypographyState(prev => ({
-      ...prev,
-      [property]: value
-    }));
+    setTypographyState(prev => {
+      const newState = {
+        ...prev,
+        [property]: value
+      };
+      
+      // Apply styles immediately when changes occur
+      if (activeTypographyItem) {
+        applyTypographyStyles(activeTypographyItem, newState);
+        
+        // Save to WordPress options (add this if you want to persist changes)
+        saveTypographySettings(activeTypographyItem, newState);
+      }
+      
+      return newState;
+    });
   };
 
-  const headings = ['H2', 'H3', 'H4', 'H5', 'H6'];
+  const saveTypographySettings = async (elementType, settings) => {
+    try {
+      const response = await wp.apiFetch({
+        path: '/wp/v2/settings',
+        method: 'POST',
+        data: {
+          [`fb_typography_${elementType.toLowerCase()}`]: JSON.stringify(settings)
+        }
+      });
+      
+      // Trigger style regeneration
+      await wp.apiFetch({
+        path: '/wp/v2/settings',
+        method: 'POST',
+        data: {
+          fb_global_styles: true // This will trigger regeneration of styles
+        }
+      });
+      
+      console.log('Typography settings saved:', response);
+    } catch (error) {
+      console.error('Error saving typography settings:', error);
+    }
+  };
+
+  const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
 
   return (
     <div className="fb-fsi-typography-panel">
