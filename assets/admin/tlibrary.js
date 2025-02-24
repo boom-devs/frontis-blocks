@@ -556,7 +556,7 @@ var TypographyPanel = function TypographyPanel() {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var loadSavedSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+        var response, iframe;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -567,25 +567,26 @@ var TypographyPanel = function TypographyPanel() {
               });
             case 3:
               response = _context.sent;
-              // Load settings for each element type
-              ['Text', 'Link', 'Button'].concat(headings).forEach(function (elementType) {
+              iframe = document.querySelector('iframe.fb-preview-frame');
+              ['Text', 'Link', 'Button', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].forEach(function (elementType) {
                 var savedSettings = response["fb_typography_".concat(elementType.toLowerCase())];
                 if (savedSettings) {
                   var parsedSettings = JSON.parse(savedSettings);
                   applyTypographyStyles(elementType, parsedSettings);
+                  injectTypographyStylesIntoIframe(iframe, elementType, parsedSettings);
                 }
               });
-              _context.next = 10;
+              _context.next = 11;
               break;
-            case 7:
-              _context.prev = 7;
+            case 8:
+              _context.prev = 8;
               _context.t0 = _context["catch"](0);
               console.error('Error loading typography settings:', _context.t0);
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }));
       return function loadSavedSettings() {
         return _ref.apply(this, arguments);
@@ -655,12 +656,13 @@ var TypographyPanel = function TypographyPanel() {
   };
   var handleTypographyChange = function handleTypographyChange(property, value) {
     if (!activeTypographyItem) return;
+    var updatedStyles = _objectSpread(_objectSpread({}, typographyStates[activeTypographyItem]), {}, _defineProperty({}, property, value));
     setTypographyStates(function (prev) {
-      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, activeTypographyItem, _objectSpread(_objectSpread({}, prev[activeTypographyItem]), {}, _defineProperty({}, property, value))));
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, activeTypographyItem, updatedStyles));
     });
-
-    // Save only the active element's typography settings
-    saveTypographySettings(activeTypographyItem, _objectSpread(_objectSpread({}, typographyStates[activeTypographyItem]), {}, _defineProperty({}, property, value)));
+    var iframe = document.querySelector('iframe.fb-preview-frame');
+    injectTypographyStylesIntoIframe(iframe, activeTypographyItem, updatedStyles);
+    saveTypographySettings(activeTypographyItem, updatedStyles);
   };
   var saveTypographySettings = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(elementType, settings) {
@@ -682,7 +684,7 @@ var TypographyPanel = function TypographyPanel() {
               path: '/wp/v2/settings',
               method: 'POST',
               data: {
-                fb_global_styles: true
+                fb_global_styles: true // This will trigger regeneration of styles
               }
             });
           case 6:
@@ -706,39 +708,31 @@ var TypographyPanel = function TypographyPanel() {
   var injectTypographyStylesIntoIframe = function injectTypographyStylesIntoIframe(iframe, elementType, styles) {
     if (!iframe || !iframe.contentDocument) return;
     var iframeDocument = iframe.contentDocument;
-    var selector;
-    switch (elementType) {
-      case 'Text':
-        selector = 'body';
-        break;
-      case 'Link':
-        selector = 'a';
-        break;
-      case 'Button':
-        selector = 'button, .button';
-        break;
-      case 'H1':
-        selector = 'h1';
-        break;
-      case 'H2':
-        selector = 'h2';
-        break;
-      case 'H3':
-        selector = 'h3';
-        break;
-      case 'H4':
-        selector = 'h4';
-        break;
-      case 'H5':
-        selector = 'h5';
-        break;
-      case 'H6':
-        selector = 'h6';
-        break;
-      default:
-        selector = elementType;
-    }
-    var css = "\n    ".concat(selector, " {\n      ").concat(styles.fontFamily ? "font-family: ".concat(styles.fontFamily, ";") : '', "\n      ").concat(styles.fontSize ? "font-size: ".concat(styles.fontSize).concat(styles.fontSizeUnit, ";") : '', "\n      ").concat(styles.fontWeight ? "font-weight: ".concat(styles.fontWeight, ";") : '', "\n      ").concat(styles.fontStyle ? "font-style: ".concat(styles.fontStyle, ";") : '', "\n      ").concat(styles.textTransform ? "text-transform: ".concat(styles.textTransform, ";") : '', "\n      ").concat(styles.textDecoration ? "text-decoration: ".concat(styles.textDecoration, ";") : '', "\n      ").concat(styles.letterSpacing ? "letter-spacing: ".concat(styles.letterSpacing).concat(styles.letterSpacingUnit, ";") : '', "\n      ").concat(styles.lineHeight ? "line-height: ".concat(styles.lineHeight).concat(styles.lineHeightUnit, ";") : '', "\n    }\n  ");
+
+    // Map element type to CSS selectors
+    var selectorMap = {
+      Text: 'body',
+      Link: 'a',
+      Button: 'button, .button',
+      H1: 'h1',
+      H2: 'h2',
+      H3: 'h3',
+      H4: 'h4',
+      H5: 'h5',
+      H6: 'h6'
+    };
+    var selector = selectorMap[elementType] || elementType;
+
+    // Helper function to extract value based on device type
+    var getDeviceValue = function getDeviceValue(obj) {
+      var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      return obj && obj[styles.deviceType] ? "".concat(obj[styles.deviceType]).concat(unit) : '';
+    };
+
+    // Generate CSS
+    var css = "\n      ".concat(selector, " {\n        ").concat(styles.fontFamily ? "font-family: ".concat(styles.fontFamily, ";") : '', "\n        ").concat(styles.fontSize ? "font-size: ".concat(getDeviceValue(styles.fontSize, styles.fontSizeUnit), ";") : '', "\n        ").concat(styles.fontWeight ? "font-weight: ".concat(styles.fontWeight, ";") : '', "\n        ").concat(styles.fontStyle ? "font-style: ".concat(styles.fontStyle, ";") : '', "\n        ").concat(styles.textTransform ? "text-transform: ".concat(styles.textTransform, ";") : '', "\n        ").concat(styles.textDecoration ? "text-decoration: ".concat(styles.textDecoration, ";") : '', "\n        ").concat(styles.letterSpacing ? "letter-spacing: ".concat(getDeviceValue(styles.letterSpacing, styles.letterSpacingUnit), ";") : '', "\n        ").concat(styles.lineHeight ? "line-height: ".concat(getDeviceValue(styles.lineHeight, styles.lineHeightUnit), ";") : '', "\n      }\n    ");
+
+    // Inject or update the style element inside the iframe
     var styleElement = iframeDocument.getElementById("fb-typography-".concat(elementType));
     if (!styleElement) {
       styleElement = iframeDocument.createElement('style');
