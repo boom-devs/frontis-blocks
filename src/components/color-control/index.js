@@ -59,6 +59,9 @@ const FB_ColorControl = ({
         }
         setGlobalColors(combinedColors);
     }, []);
+    const storedData = localStorage.getItem("fb_global_colors");
+    const customTypoData = storedData ? JSON.parse(storedData) : {};
+    console.log(customTypoData)
 
     return (
         <div className="fb-setting-color-container">
@@ -119,7 +122,7 @@ const FB_ColorControl = ({
                                         value={globalColor}
                                         onChange={setGlobalColor}
                                     />
-                                    {themeColors.length > 0 && (
+                                    {/* {themeColors.length > 0 && (
                                         <>
                                             <div className="fb-setting-color-label">{__("Theme Colors", "frontis-blocks")}</div>
                                             <ColorPalette
@@ -129,7 +132,7 @@ const FB_ColorControl = ({
                                                 onChange={setGlobalColor}
                                             />
                                         </>
-                                    )}
+                                    )} */}
                                 </div>
                             </BaseControl>
                         </div>
