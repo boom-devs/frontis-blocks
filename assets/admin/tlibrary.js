@@ -202,47 +202,354 @@ var TypographyPanel = function TypographyPanel() {
     setActiveTypographyItem = _useState8[1];
 
   // Default typography state values
+  // Create separate typography states for each element
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      fontFamily: '',
-      fontSize: '',
-      fontSizeUnit: 'px',
-      fontSizeUnits: [{
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'em',
-        value: 'em'
-      }, {
-        label: 'rem',
-        value: 'rem'
-      }],
-      fontWeight: '',
-      fontStyle: '',
-      textTransform: '',
-      textDecoration: '',
-      letterSpacing: '',
-      letterSpacingUnit: 'px',
-      letterSpacingUnits: [{
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      lineHeight: '',
-      lineHeightUnit: 'px',
-      lineHeightUnits: [{
-        label: 'px',
-        value: 'px'
-      }, {
-        label: 'em',
-        value: 'em'
-      }],
-      deviceType: 'desktop'
+      Text: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      Link: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      Button: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H1: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H2: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H3: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H4: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H5: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      },
+      H6: {
+        fontFamily: '',
+        fontSize: '',
+        fontSizeUnit: 'px',
+        fontSizeUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }, {
+          label: 'rem',
+          value: 'rem'
+        }],
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
+        letterSpacing: '',
+        letterSpacingUnit: 'px',
+        letterSpacingUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        lineHeight: '',
+        lineHeightUnit: 'px',
+        lineHeightUnits: [{
+          label: 'px',
+          value: 'px'
+        }, {
+          label: 'em',
+          value: 'em'
+        }],
+        deviceType: 'desktop'
+      }
     }),
     _useState10 = _slicedToArray(_useState9, 2),
-    typographyState = _useState10[0],
-    setTypographyState = _useState10[1];
+    typographyStates = _useState10[0],
+    setTypographyStates = _useState10[1];
   var handleSectionClick = function handleSectionClick(section) {
     setExpandedSection(expandedSection === section ? null : section);
   };
@@ -347,18 +654,13 @@ var TypographyPanel = function TypographyPanel() {
     }
   };
   var handleTypographyChange = function handleTypographyChange(property, value) {
-    setTypographyState(function (prev) {
-      var newState = _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, property, value));
-
-      // Apply styles immediately when changes occur
-      if (activeTypographyItem) {
-        applyTypographyStyles(activeTypographyItem, newState);
-
-        // Save to WordPress options (add this if you want to persist changes)
-        saveTypographySettings(activeTypographyItem, newState);
-      }
-      return newState;
+    if (!activeTypographyItem) return;
+    setTypographyStates(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, activeTypographyItem, _objectSpread(_objectSpread({}, prev[activeTypographyItem]), {}, _defineProperty({}, property, value))));
     });
+
+    // Save only the active element's typography settings
+    saveTypographySettings(activeTypographyItem, _objectSpread(_objectSpread({}, typographyStates[activeTypographyItem]), {}, _defineProperty({}, property, value)));
   };
   var saveTypographySettings = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(elementType, settings) {
@@ -469,60 +771,57 @@ var TypographyPanel = function TypographyPanel() {
     className: "fb-fsi-panel-content"
   })), isTypographyOpen && activeTypographyItem && /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-typography-popup"
-  }, /*#__PURE__*/React.createElement(_sidebar_components_SidebarTypography__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, typographyState, {
+  }, /*#__PURE__*/React.createElement(_sidebar_components_SidebarTypography__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, typographyStates[activeTypographyItem], {
     heading: activeTypographyItem,
     onClose: function onClose() {
       setIsTypographyOpen(false);
       setActiveTypographyItem(null);
     },
-    fontFamily: typographyState.fontFamily,
+    fontFamily: typographyStates[activeTypographyItem].fontFamily,
     onChangeFontFamily: function onChangeFontFamily(value) {
       return handleTypographyChange('fontFamily', value);
     },
-    fontSize: typographyState.fontSize,
+    fontSize: typographyStates[activeTypographyItem].fontSize,
     onChangeFontSize: function onChangeFontSize(value) {
       return handleTypographyChange('fontSize', value);
     },
-    fontSizeUnits: typographyState.fontSizeUnits,
+    fontSizeUnits: typographyStates[activeTypographyItem].fontSizeUnits,
     onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
       return handleTypographyChange('fontSizeUnit', value);
     },
-    fontWeight: typographyState.fontWeight,
+    fontWeight: typographyStates[activeTypographyItem].fontWeight,
     onChangeFontWeight: function onChangeFontWeight(value) {
       return handleTypographyChange('fontWeight', value);
     },
-    fontStyle: typographyState.fontStyle,
+    fontStyle: typographyStates[activeTypographyItem].fontStyle,
     onChangeFontStyle: function onChangeFontStyle(value) {
       return handleTypographyChange('fontStyle', value);
     },
-    textTransform: typographyState.textTransform,
+    textTransform: typographyStates[activeTypographyItem].textTransform,
     onChangeTextTransform: function onChangeTextTransform(value) {
       return handleTypographyChange('textTransform', value);
     },
-    textDecoration: typographyState.textDecoration,
+    textDecoration: typographyStates[activeTypographyItem].textDecoration,
     onChangeTextDecoration: function onChangeTextDecoration(value) {
       return handleTypographyChange('textDecoration', value);
     },
-    letterSpacing: typographyState.letterSpacing,
+    letterSpacing: typographyStates[activeTypographyItem].letterSpacing,
     onChangeLetterSpacing: function onChangeLetterSpacing(value) {
       return handleTypographyChange('letterSpacing', value);
     },
-    letterSpacingUnits: typographyState.letterSpacingUnits,
+    letterSpacingUnits: typographyStates[activeTypographyItem].letterSpacingUnits,
     onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
       return handleTypographyChange('letterSpacingUnit', value);
     },
-    lineHeight: typographyState.lineHeight,
+    lineHeight: typographyStates[activeTypographyItem].lineHeight,
     onChangeLineHeight: function onChangeLineHeight(value) {
       return handleTypographyChange('lineHeight', value);
     },
-    lineHeightUnits: typographyState.lineHeightUnits,
+    lineHeightUnits: typographyStates[activeTypographyItem].lineHeightUnits,
     onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
       return handleTypographyChange('lineHeightUnit', value);
     },
-    deviceType: typographyState.deviceType,
-    fontSizeUnit: typographyState.fontSizeUnit,
-    letterSpacingUnit: typographyState.letterSpacingUnit,
-    lineHeightUnit: typographyState.lineHeightUnit
+    deviceType: typographyStates[activeTypographyItem].deviceType
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyPanel);

@@ -562,82 +562,134 @@ class GlobalSettings extends AjaxBase
     }
 
 
-    private function generate_typography_css($typography)
-    {
+    private function generate_typography_css($typography) {
         if (empty($typography)) {
             return '';
         }
-
-        $css = '';
+    
+        $css = ':root {';
         $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-
+        
+        // First define all typography variables in root
         foreach ($elements as $element) {
-            $settings = get_option("fb_typography_{$element}"); 
+            $settings = get_option("fb_typography_{$element}");
             if (empty($settings)) {
                 continue;
             }
-
+    
             $settings = json_decode($settings, true);
             if (empty($settings)) {
                 continue;
             }
-
-            // Determine CSS selector based on element type
-            $selector = match ($element) {
+    
+            // Define variables for each property
+            if (!empty($settings['fontSize']['desktop'])) {
+                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['desktop']}{$settings['fontSizeUnit']};";
+            }
+            if (!empty($settings['fontFamily'])) {
+                $css .= "\n  --fb-{$element}-font-family: {$settings['fontFamily']};";
+            }
+            if (!empty($settings['fontWeight'])) {
+                $css .= "\n  --fb-{$element}-font-weight: {$settings['fontWeight']};";
+            }
+            if (!empty($settings['fontStyle'])) {
+                $css .= "\n  --fb-{$element}-font-style: {$settings['fontStyle']};";
+            }
+            if (!empty($settings['textTransform'])) {
+                $css .= "\n  --fb-{$element}-text-transform: {$settings['textTransform']};";
+            }
+            if (!empty($settings['textDecoration'])) {
+                $css .= "\n  --fb-{$element}-text-decoration: {$settings['textDecoration']};";
+            }
+            if (!empty($settings['letterSpacing']['desktop'])) {
+                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['desktop']}{$settings['letterSpacingUnit']};";
+            }
+            if (!empty($settings['lineHeight']['desktop'])) {
+                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['desktop']}{$settings['lineHeightUnit']};";
+            }
+        }
+        $css .= "\n}\n\n";
+    
+        // Then use the variables in selectors
+        foreach ($elements as $element) {
+            $settings = get_option("fb_typography_{$element}");
+            if (empty($settings)) {
+                continue;
+            }
+    
+            // Define selector based on element type
+            $selector = match($element) {
                 'text' => 'body p, body span',
                 'link' => 'a',
                 'button' => 'button, .button',
                 default => $element,
             };
-
+    
             $css .= "{$selector} {\n";
-
-            // Font Family
-            if (!empty($settings['fontFamily'])) {
-                $css .= "  font-family: {$settings['fontFamily']};\n";
-            }
-
-            // Font Size with units
-            if (!empty($settings['fontSize']['desktop'])) {
-                $css .= "  font-size: {$settings['fontSize']['desktop']}{$settings['fontSizeUnit']};\n";
-            }
-
-            // Font Weight
-            if (!empty($settings['fontWeight'])) {
-                $css .= "  font-weight: {$settings['fontWeight']};\n";
-            }
-
-            // Font Style
-            if (!empty($settings['fontStyle'])) {
-                $css .= "  font-style: {$settings['fontStyle']};\n";
-            }
-
-            // Text Transform
-            if (!empty($settings['textTransform'])) {
-                $css .= "  text-transform: {$settings['textTransform']};\n";
-            }
-
-            // Text Decoration
-            if (!empty($settings['textDecoration'])) {
-                $css .= "  text-decoration: {$settings['textDecoration']};\n";
-            }
-
-            // Letter Spacing
-            if (!empty($settings['letterSpacing']['desktop'])) {
-                $css .= "  letter-spacing: {$settings['letterSpacing']['desktop']}{$settings['letterSpacingUnit']};\n";
-            }
-
-            // Line Height
-            if (!empty($settings['lineHeight']['desktop'])) {
-                $css .= "  line-height: {$settings['lineHeight']['desktop']}{$settings['lineHeightUnit']};\n";
-            }
-
+            
+            // Use the CSS variables
+            $css .= "  font-size: var(--fb-{$element}-font-size);\n";
+            $css .= "  font-family: var(--fb-{$element}-font-family);\n";
+            $css .= "  font-weight: var(--fb-{$element}-font-weight);\n";
+            $css .= "  font-style: var(--fb-{$element}-font-style);\n";
+            $css .= "  text-transform: var(--fb-{$element}-text-transform);\n";
+            $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
+            $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
+            $css .= "  line-height: var(--fb-{$element}-line-height);\n";
+            
             $css .= "}\n\n";
-
-            // Add responsive styles if needed
-            $css .= $this->add_responsive_typography($selector, $settings);
         }
-
+    
+        // Add responsive styles if needed
+        foreach ($elements as $element) {
+            $settings = get_option("fb_typography_{$element}");
+            if (empty($settings)) {
+                continue;
+            }
+    
+            $settings = json_decode($settings, true);
+            if (empty($settings)) {
+                continue;
+            }
+    
+            $selector = match($element) {
+                'text' => 'body p, body span',
+                'link' => 'a',
+                'button' => 'button, .button',
+                default => $element,
+            };
+    
+            // Tablet styles
+            if (!empty($settings['fontSize']['tablet'])) {
+                $css .= "@media (max-width: 768px) {\n";
+                $css .= "  :root {\n";
+                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
+                if (!empty($settings['letterSpacing']['tablet'])) {
+                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
+                }
+                if (!empty($settings['lineHeight']['tablet'])) {
+                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
+                }
+                $css .= "  }\n";
+                $css .= "}\n\n";
+            }
+    
+            // Mobile styles
+            if (!empty($settings['fontSize']['mobile'])) {
+                $css .= "@media (max-width: 480px) {\n";
+                $css .= "  :root {\n";
+                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
+                if (!empty($settings['letterSpacing']['mobile'])) {
+                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
+                }
+                if (!empty($settings['lineHeight']['mobile'])) {
+                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
+                }
+                $css .= "  }\n";
+                $css .= "}\n";
+            }
+        }
+    
         return $css;
     }
 
