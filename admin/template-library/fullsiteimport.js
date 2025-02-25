@@ -2,6 +2,8 @@ import { useState, useEffect } from "@wordpress/element";
 import TypographyPanel from "./fullSiteTypography";
 import { ColorPicker, Dropdown } from '@wordpress/components';
 import SitePreview from "./sitePreview";
+import TypographySettings from "../sidebar/components/TypographySettings";
+import { useAfterSave } from "../sidebar/helper";
 
 const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
@@ -15,7 +17,419 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
   ];
 
   const [colors, setColors] = useState(initialColors);
-  const [typography, setTypography] = useState();
+  const [typography, setTypography] = useState({
+    body: {
+      fontFamily: 'Default',
+      lineHeight: {
+        Desktop: 'Default',
+        Tablet: 'Default',
+        Mobile: 'Default'
+      },
+      lineHeightUnits: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontSize: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
+      },
+      fontSizeUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontWeight: 'Default',
+      fontStyle: 'Default',
+      textTransform: 'Default',
+      textDecoration: 'Default',
+      letterSpacing: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: '',
+      },
+      letterSpacingUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px',
+      }
+    },
+    link: {
+      fontFamily: 'Default',
+      lineHeight: {
+        Desktop: 'Default',
+        Tablet: 'Default',
+        Mobile: 'Default'
+      },
+      lineHeightUnits: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontSize: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
+      },
+      fontSizeUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontWeight: 'Default',
+      fontStyle: 'Default',
+      textTransform: 'Default',
+      textDecoration: 'Default',
+      letterSpacing: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: '',
+      },
+      letterSpacingUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px',
+      }
+    },
+    button: {
+      fontFamily: 'Default',
+      lineHeight: {
+        Desktop: 'Default',
+        Tablet: 'Default',
+        Mobile: 'Default'
+      },
+      lineHeightUnits: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontSize: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
+      },
+      fontSizeUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontWeight: 'Default',
+      fontStyle: 'Default',
+      textTransform: 'Default',
+      textDecoration: 'Default',
+      letterSpacing: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: '',
+      },
+      letterSpacingUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px',
+      }
+    },
+    captions: {
+      fontFamily: 'Default',
+      lineHeight: {
+        Desktop: 'Default',
+        Tablet: 'Default',
+        Mobile: 'Default'
+      },
+      lineHeightUnits: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontSize: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: ''
+      },
+      fontSizeUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px'
+      },
+      fontWeight: 'Default',
+      fontStyle: 'Default',
+      textTransform: 'Default',
+      textDecoration: 'Default',
+      letterSpacing: {
+        Desktop: '',
+        Tablet: '',
+        Mobile: '',
+      },
+      letterSpacingUnit: {
+        Desktop: 'px',
+        Tablet: 'px',
+        Mobile: 'px',
+      }
+    },
+    heading: {
+      all: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h1: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h2: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h3: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h4: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h5: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      },
+      h6: {
+        fontFamily: 'Default',
+        lineHeight: {
+          Desktop: 'Default',
+          Tablet: 'Default',
+          Mobile: 'Default'
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 'Default',
+        fontStyle: 'Default',
+        textTransform: 'Default',
+        textDecoration: 'Default',
+        letterSpacing: {
+          Desktop: '',
+          Tablet: '',
+          Mobile: '',
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px',
+        }
+      }
+    }
+  });
+  const [customTypography, setCustomTypography] = useState({});
+  const isAfterSave = useAfterSave();
 
   const handleImport = () => {
     const selectedBlock = window.wp.data
@@ -90,7 +504,9 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
         <div className="fb-fsi-modal-content-wrapper">
           <div className="fb-fsi-modal-sidebar-content">
             <FullSiteImportColorPicker colors={colors} setColors={setColors} />
-            <TypographyPanel typography={typography} setTypography={setTypography} />
+            {/* <TypographyPanel typography={typography} setTypography={setTypography} /> */}
+            <h3>Typography</h3>
+            <TypographySettings typography={typography} customTypography={customTypography} isAfterSave={isAfterSave} />
           </div>
           <div className="fb-fsi-modal-main-content">
             <SitePreview />
@@ -138,7 +554,7 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
           }
         `;
 
-        colorStyleTag.textContent = css; // Use textContent instead of innerHTML to avoid HTML parsing issues
+        colorStyleTag.textContent = css;
       }
     };
 
@@ -164,7 +580,7 @@ const FullSiteImportColorPicker = ({ colors, setColors }) => {
 
   return (
     <div className="fb-global-color-section">
-      <h3>Global Colors</h3>
+      <h3>Colors</h3>
       <div className="fb-color-grid" style={{ display: 'flex', gap: '20px' }}>
         {colors.map((color, index) => (
           <div

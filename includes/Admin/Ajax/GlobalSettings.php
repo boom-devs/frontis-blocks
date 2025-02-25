@@ -449,17 +449,19 @@ class GlobalSettings extends AjaxBase
             if (!empty($config)) {
                 $colors = $config['colors'] ?? [];
                 $typography = $config['typography'] ?? [];
-            
+
+                error_log('Imported typography data: ' . print_r($typography, true));
+
                 // Update colors
                 update_option('global_site_colors', $colors);
-                
+
                 // Update typography for each element
                 if (!empty($typography)) {
                     foreach ($typography as $element => $settings) {
                         update_option("fb_typography_{$element}", $settings);
                     }
                 }
-                
+
                 // Generate and save combined styles
                 $custom_styles = $this->generate_color_css($colors) . $this->generate_typography_css($typography);
                 update_option('fb_global_styles', $custom_styles);
@@ -562,26 +564,30 @@ class GlobalSettings extends AjaxBase
     }
 
 
-    private function generate_typography_css($typography) {
+    private function generate_typography_css($typography)
+    {
+        error_log('Typography data: ' . print_r($typography, true));
         if (empty($typography)) {
             return '';
         }
-    
+
         $css = ':root {';
         $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-        
+
         // First define all typography variables in root
         foreach ($elements as $element) {
-            $settings = get_option("fb_typography_{$element}");
+            $option_name = "fb_typography_{$element}";
+            $settings = get_option($option_name);
+            error_log("Option {$option_name} value: " . print_r($settings, true));
             if (empty($settings)) {
                 continue;
             }
-    
+
             $settings = json_decode($settings, true);
             if (empty($settings)) {
                 continue;
             }
-    
+
             // Define variables for each property
             if (!empty($settings['fontSize']['desktop'])) {
                 $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['desktop']}{$settings['fontSizeUnit']};";
@@ -609,24 +615,24 @@ class GlobalSettings extends AjaxBase
             }
         }
         $css .= "\n}\n\n";
-    
+
         // Then use the variables in selectors
         foreach ($elements as $element) {
             $settings = get_option("fb_typography_{$element}");
             if (empty($settings)) {
                 continue;
             }
-    
+
             // Define selector based on element type
-            $selector = match($element) {
+            $selector = match ($element) {
                 'text' => 'body p, body span',
                 'link' => 'a',
                 'button' => 'button, .button',
                 default => $element,
             };
-    
+
             $css .= "{$selector} {\n";
-            
+
             // Use the CSS variables
             $css .= "  font-size: var(--fb-{$element}-font-size);\n";
             $css .= "  font-family: var(--fb-{$element}-font-family);\n";
@@ -636,29 +642,29 @@ class GlobalSettings extends AjaxBase
             $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
             $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
             $css .= "  line-height: var(--fb-{$element}-line-height);\n";
-            
+
             $css .= "}\n\n";
         }
-    
+
         // Add responsive styles if needed
         foreach ($elements as $element) {
             $settings = get_option("fb_typography_{$element}");
             if (empty($settings)) {
                 continue;
             }
-    
+
             $settings = json_decode($settings, true);
             if (empty($settings)) {
                 continue;
             }
-    
-            $selector = match($element) {
+
+            $selector = match ($element) {
                 'text' => 'body p, body span',
                 'link' => 'a',
                 'button' => 'button, .button',
                 default => $element,
             };
-    
+
             // Tablet styles
             if (!empty($settings['fontSize']['tablet'])) {
                 $css .= "@media (max-width: 768px) {\n";
@@ -673,7 +679,7 @@ class GlobalSettings extends AjaxBase
                 $css .= "  }\n";
                 $css .= "}\n\n";
             }
-    
+
             // Mobile styles
             if (!empty($settings['fontSize']['mobile'])) {
                 $css .= "@media (max-width: 480px) {\n";
@@ -689,7 +695,7 @@ class GlobalSettings extends AjaxBase
                 $css .= "}\n";
             }
         }
-    
+
         return $css;
     }
 
@@ -740,7 +746,13 @@ class GlobalSettings extends AjaxBase
     {
         $styles = get_option('fb_global_styles', '');
         if (!empty($styles)) {
-            echo "<style id='fb-global-styles'>\n" . esc_html($styles) . "\n</style>";
+            // Add debugging comment
+            echo "<!-- Typography styles begin -->\n";
+            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
+            echo "<!-- Typography styles end -->\n";
+        } else {
+            // Debug if no styles were found
+            echo "<!-- No global styles found in database -->";
         }
     }
 
