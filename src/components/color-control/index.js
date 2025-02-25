@@ -11,9 +11,9 @@ const FB_ColorControl = ({
     setGlobalColor,
 }) => {
 
-    const themeColors = useSelect((select) => {
-		return select("core/editor").getEditorSettings().colors;
-	}, []);
+    // const themeColors = useSelect((select) => {
+	// 	return select("core/editor").getEditorSettings().colors;
+	// }, []);
 
     const defaultColors = [
         { color: '#F72585' },
@@ -32,36 +32,28 @@ const FB_ColorControl = ({
 
         let combinedColors = [];
 
-        if (storedColors) {
-            try {
-                const parsedColors = JSON.parse(storedColors);
-                if (Array.isArray(parsedColors)) {
-                    combinedColors = [...parsedColors];
-                } else {
-                    console.warn('Global colors is not an array:', parsedColors);
+        // Function to safely parse and add colors
+        const addColors = (storedData, label) => {
+            if (storedData) {
+                try {
+                    const parsedData = JSON.parse(storedData);
+                    if (Array.isArray(parsedData)) {
+                        combinedColors = [...combinedColors, ...parsedData];
+                    } else {
+                        console.warn(`${label} is not an array:`, parsedData);
+                    }
+                } catch (error) {
+                    console.error(`Error parsing ${label}:`, error);
                 }
-            } catch (error) {
-                console.error('Error parsing global colors:', error);
             }
-        }
+        };
 
-        if (storedCustomColors) {
-            try {
-                const parsedCustomColors = JSON.parse(storedCustomColors);
-                if (Array.isArray(parsedCustomColors)) {
-                    combinedColors = [...combinedColors, ...parsedCustomColors];
-                } else {
-                    console.warn('Custom colors is not an array:', parsedCustomColors);
-                }
-            } catch (error) {
-                console.error('Error parsing custom colors:', error);
-            }
-        }
+        addColors(storedColors, 'Global colors');
+        addColors(storedCustomColors, 'Custom colors');
+
         setGlobalColors(combinedColors);
     }, []);
-    const storedData = localStorage.getItem("fb_global_colors");
-    const customTypoData = storedData ? JSON.parse(storedData) : {};
-    console.log(customTypoData)
+
 
     return (
         <div className="fb-setting-color-container">
