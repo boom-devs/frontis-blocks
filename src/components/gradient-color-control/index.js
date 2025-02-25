@@ -27,9 +27,9 @@ const FB_GradientColorControl = ({
                 if (Array.isArray(parsedGradientColors)) {
                     // Transforming the first format to match the second
                     const transformedGradientColors = parsedGradientColors.map(item => ({
-                        gradient: item.color, // Use the `color` as the gradient
-                        name: item.name,
-                        slug: item.slug
+                            gradient: `var(--wp--frontis--color--${item.slug})`,
+                            name: item.name,
+                            slug: item.slug
                     }));
                     combinedColors = [...transformedGradientColors];
                 }
@@ -46,7 +46,7 @@ const FB_GradientColorControl = ({
                         .map(item => {
                             if (item.color !== "") {
                                 return {
-                                    gradient: item.color,
+                                    gradient: `var(--wp--frontis--color--${item.slug})`,
                                     name: item.name,
                                     slug: item.slug
                                 };
@@ -66,6 +66,8 @@ const FB_GradientColorControl = ({
     
         setGlobalGradientColors(combinedColors);
     }, [])
+
+
 
     return (
         <BaseControl 

@@ -48,8 +48,6 @@ const FB_ColorControl = ({
     }, []);
     
     const matchedObject = globalColors.find(item => item.color === globalColor);
-    console.log(matchedObject);
-
 
 
     return (
