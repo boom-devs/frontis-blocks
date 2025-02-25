@@ -1117,7 +1117,8 @@
 	},
     "supports": {
         "anchor": true,
-		"html": true
+		"html": true,
+        "align": ["wide", "full"]
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

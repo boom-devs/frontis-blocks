@@ -47,9 +47,10 @@ class EnqueueBlocksCss {
 			if (file_exists($combined_css_file_path)) {
 				$existing_css_content = file_get_contents($combined_css_file_path);
 				if (md5($existing_css_content) === md5($new_css_content)) {
-					$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-					wp_enqueue_style('frontis-block-styles', $css_url, [], FB_VERSION);
-
+					if (!Helper::is_gutenberg_editor()) {
+						$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
+						wp_enqueue_style('frontis-block-styles', $css_url, [], FB_VERSION);
+					}
 					return false;
 				}
 			}
