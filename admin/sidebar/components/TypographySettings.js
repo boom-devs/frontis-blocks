@@ -157,7 +157,7 @@ const TypographySettings = (props) => {
 				}
 			}
 		});
-		
+
 		setIsMount(true);
 	}
 
@@ -967,7 +967,7 @@ const TypographySettings = (props) => {
 						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
 					}
 				}
-	
+
 				if (customTypography) {
 					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
 					if (response.success) {
@@ -975,7 +975,7 @@ const TypographySettings = (props) => {
 						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
 					}
 				}
-	
+
 				if(globalTypography) {
 					const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
 					if (response.success) {
@@ -983,7 +983,7 @@ const TypographySettings = (props) => {
 						localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
 					}
 				}
-	
+
 				if(fontFamilies) {
 					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
 					if (response.success) {
@@ -1008,7 +1008,7 @@ const TypographySettings = (props) => {
 		if(globalTypography) {
 			generateCSSVariables(globalTypography, deviceType);
 		}
-		
+
 	}, [globalTypography, deviceType]);
 
 	// Load saved data and generate root css
