@@ -1,7 +1,6 @@
-import { useBlockProps, RichText } from "@wordpress/block-editor";
-import { Card } from "@wordpress/components";
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import { __ } from "@wordpress/i18n";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 export default function save({ attributes }) {
 	const {
 		blockID,
@@ -12,7 +11,6 @@ export default function save({ attributes }) {
 		Sub_Heading_Tag,
 		descAlignment,
 		buttonAlignment,
-		info_Button_Switcher,
 		info_Button_Link,
 		info_Button_Text,
 		btnIconPosition,
