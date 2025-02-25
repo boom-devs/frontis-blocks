@@ -358,4 +358,19 @@ class Helper
 			$gfonts = '';
 		}
 	}
+
+
+    public static function get_blocks_inside_template($block_name) {
+        global $wpdb;
+        $template_post = get_posts([
+            'post_type' => $wpdb->prefix.'template',
+            'numberposts' => 1,
+        ]);
+        
+        if (!empty($template_post)) {
+            $template_content = $template_post[0]->post_content;
+           return strpos($template_content, $block_name) !== false;
+        }
+        return false;
+    }
 }
