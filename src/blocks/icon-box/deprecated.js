@@ -95,14 +95,11 @@ const v1_0_3 = {
                                                     rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
                                                     className="fb-icon-btn-wrapper"
                                                 >
-                                                    
-
-
-                                                        <RichText.Content
-                                                            value={icon_Box_Button_Text}
-                                                            tagName={"span"}
-                                                            className="fb-icon-button"
-                                                        />
+                                                    <RichText.Content
+                                                        value={icon_Box_Button_Text}
+                                                        tagName={"span"}
+                                                        className="fb-icon-button"
+                                                    />
                                                     
                                                     {buttonIconSwitcher && (
                                                         <div className="fb-btn-icon-wrapper">
@@ -157,15 +154,12 @@ const v1_0_3 = {
                                                     rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
                                                     className="fb-icon-btn-wrapper"
                                                 >
-                                                    
-
-
-                                                        <RichText.Content
-                                                            value={icon_Box_Button_Text}
-                                                            tagName={"span"}
-                                                            className="fb-icon-button"
-                                                        />
-                                                    
+                                                    <RichText.Content
+                                                        value={icon_Box_Button_Text}
+                                                        tagName={"span"}
+                                                        className="fb-icon-button"
+                                                    />
+                                                
                                                     {buttonIconSwitcher && (
                                                         <div className="fb-btn-icon-wrapper">
                                                             {renderSVG(btnIcon)}
