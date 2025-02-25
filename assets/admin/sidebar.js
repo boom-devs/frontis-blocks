@@ -666,6 +666,49 @@ function FrontPreview(_ref) {
 
 /***/ }),
 
+/***/ "./admin/sidebar/components/GenerateColorRoot.js":
+/*!*******************************************************!*\
+  !*** ./admin/sidebar/components/GenerateColorRoot.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var generateColorsVariables = function generateColorsVariables(colors, deviceType) {
+  var _iframe, _iframe2;
+  if (!colors.length) {
+    return false;
+  }
+  var cssVariables = ":root {\n        ".concat(colors.map(function (color) {
+    return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.color, ";");
+  }).join('\n    '), "\n    }");
+  var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+  var iframeDocument = ((_iframe = iframe) === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || ((_iframe2 = iframe) === null || _iframe2 === void 0 || (_iframe2 = _iframe2.contentWindow) === null || _iframe2 === void 0 ? void 0 : _iframe2.document) || document;
+  var styleTag = iframeDocument.getElementById("global-colors");
+  var path = window.location.pathname;
+  var fileName = path.substring(path.lastIndexOf('/') + 1);
+  if (fileName === 'post.php') {
+    var _iframe3, _iframe4;
+    iframe = document.querySelector('iframe[name="editor-canvas"]');
+    iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
+    styleTag = iframeDocument.getElementById("global-colors");
+  }
+  if (!styleTag) {
+    styleTag = iframeDocument.createElement("style");
+    styleTag.id = "global-colors";
+    iframeDocument.head.appendChild(styleTag);
+  }
+
+  // Instead of appending, we replace the content
+  styleTag.textContent = cssVariables;
+  return cssVariables;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateColorsVariables);
+
+/***/ }),
+
 /***/ "./admin/sidebar/components/GenerateRootCss.js":
 /*!*****************************************************!*\
   !*** ./admin/sidebar/components/GenerateRootCss.js ***!
@@ -2622,7 +2665,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fetch */ "./admin/sidebar/fetch.js");
 /* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
 /* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/GenerateColorRoot'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/sidebar/components/GenerateColorRoot.js");
 /* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3516,7 +3559,7 @@ function FrontisBlocksSidebar(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     setTimeout(function () {
       var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-      Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/GenerateColorRoot'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())(mergedColors);
+      (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors);
     }, 1000);
   }, [globalColors, customColors, customGradientColors, gradientColors]);
 
