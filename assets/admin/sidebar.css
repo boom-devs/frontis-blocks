@@ -75,11 +75,29 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-inner-con
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-label-container {
   margin: 14px -7px !important;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-color-panel .components-tools-panel-header {
+  padding-bottom: 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-custom-color-panel {
+  border-right: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-custom-color-panel .components-tools-panel-header {
+  padding-bottom: 16px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-gradient-color-panel {
+  border-top: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs {
   padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs {
-  border-bottom: 1px solid #E1E3E8;
+  padding-left: 16px;
+  border-top: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
   font-size: 13px;
@@ -91,7 +109,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
   padding-left: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-flex.components-h-stack {
-  padding-top: 24px;
+  padding-top: 16px;
   padding-left: 12px;
   padding-right: 3px;
 }
@@ -101,6 +119,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item {
   border-left: 0;
   border-right: 0;
+  margin-top: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button {
   border-right: 0;
@@ -342,7 +361,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
-  padding: 24px 16px;
+  padding: 0;
+  border-left: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
 }
 
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {

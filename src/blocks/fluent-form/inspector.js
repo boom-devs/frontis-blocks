@@ -62,6 +62,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelColorSwitcher,
         fluentFormLabelColor,
         fluentFormLabelHoverColor,
+        fluentFormLabelGlobalTypoSwitcher,
+        fluentFormLabelGlobalTypographyData,
+        fluentFormLabelGlobalTypoType,
         fluentFormLabelFontFamily,
         fluentFormLabelFontSize,
         fluentFormLabelFontSizeUnits,
@@ -77,6 +80,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormInputBgColor,
         fluentFormInputColor,
         fluentFormInputFocusColor,
+        fluentFormInputGlobalTypoSwitcher,
+        fluentFormInputGlobalTypographyData,
+        fluentFormInputGlobalTypoType,
         fluentFormInputFontFamily,
         fluentFormInputFontSize,
         fluentFormInputFontSizeUnits,
@@ -159,6 +165,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakTitleColorSwitcher,
         fluentFormSectionBreakTitleColor,
         fluentFormSectionBreakTitleHoverColor,
+        fluentFormSectionBreakTitleGlobalTypoSwitcher,
+        fluentFormSectionBreakTitleGlobalTypographyData,
+        fluentFormSectionBreakTitleGlobalTypoType,
         fluentFormSectionBreakTitleFontFamily,
         fluentFormSectionBreakTitleFontSize,
         fluentFormSectionBreakTitleFontSizeUnits,
@@ -184,6 +193,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakDescColorSwitcher,
         fluentFormSectionBreakDescColor,
         fluentFormSectionBreakDescHoverColor,
+        fluentFormSectionBreakDescGlobalTypoSwitcher,
+        fluentFormSectionBreakDescGlobalTypographyData,
+        fluentFormSectionBreakDescGlobalTypoType,
         fluentFormSectionBreakDescFontFamily,
         fluentFormSectionBreakDescFontSize,
         fluentFormSectionBreakDescFontSizeUnits,
@@ -210,6 +222,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormHtmlColorSwitcher,
         fluentFormHtmlColor,
         fluentFormHtmlHoverColor,
+        fluentFormHtmlGlobalTypoSwitcher,
+        fluentFormHtmlGlobalTypographyData,
+        fluentFormHtmlGlobalTypoType,
         fluentFormHtmlFontFamily,
         fluentFormHtmlFontSize,
         fluentFormHtmlFontSizeUnits,
@@ -244,6 +259,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSubmitBgColorSwitcher,
         fluentFormSubmitBgColor,
         fluentFormSubmitBgHoverColor,
+        fluentFormSubmitGlobalTypoSwitcher,
+        fluentFormSubmitGlobalTypographyData,
+        fluentFormSubmitGlobalTypoType,
         fluentFormSubmitFontFamily,
         fluentFormSubmitFontSize,
         fluentFormSubmitFontSizeUnits,
@@ -282,6 +300,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         fluentFormSuccessColor,
         fluentFormSuccessBgColor,
+        fluentFormSuccessGlobalTypoSwitcher,
+        fluentFormSuccessGlobalTypographyData,
+        fluentFormSuccessGlobalTypoType,
         fluentFormSuccessFontFamily,
         fluentFormSuccessFontSize,
         fluentFormSuccessFontSizeUnits,
@@ -309,6 +330,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSuccessBorderRadiusLink,
 
         fluentFormErrorColor,
+        fluentFormErrorGlobalTypoSwitcher,
+        fluentFormErrorGlobalTypographyData,
+        fluentFormErrorGlobalTypoType,
         fluentFormErrorFontFamily,
         fluentFormErrorFontSize,
         fluentFormErrorFontSizeUnits,
@@ -2393,14 +2417,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
             ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
-            ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
-            ${fluentFormLabelFontSize.Desktop && fluentFormLabelFontSizeUnits.Desktop ? `font-size: ${fluentFormLabelFontSize.Desktop}${fluentFormLabelFontSizeUnits.Desktop};` : ''}
-            ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
-            ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
-            ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
-            ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
-            ${fluentFormLabelLetterSpacing.Desktop && fluentFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormLabelLetterSpacing.Desktop}${fluentFormLabelLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormLabelLineHeight.Desktop && fluentFormLabelLineHeightUnits.Desktop ? `line-height: ${fluentFormLabelLineHeight.Desktop}${fluentFormLabelLineHeightUnits.Desktop};` : ''}
+
+            ${fluentFormLabelGlobalTypoSwitcher.fontFamily === true && fluentFormLabelGlobalTypographyData.fontFamily ? `font-family: ${fluentFormLabelGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.fontSize === true && fluentFormLabelGlobalTypographyData.fontSize ? `font-size: ${fluentFormLabelGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.fontWeight === true && fluentFormLabelGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormLabelGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.fontStyle === true && fluentFormLabelGlobalTypographyData.fontStyle ? `font-style: ${fluentFormLabelGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.textTransform === true && fluentFormLabelGlobalTypographyData.textTransform ? `text-transform: ${fluentFormLabelGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.textDecoration === true && fluentFormLabelGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormLabelGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === true && fluentFormLabelGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormLabelGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.lineHeight === true && fluentFormLabelGlobalTypographyData.lineHeight ? `line-height: ${fluentFormLabelGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormLabelGlobalTypoSwitcher.fontFamily === false && fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Desktop && fluentFormLabelFontSizeUnits.Desktop ? `font-size: ${fluentFormLabelFontSize.Desktop}${fluentFormLabelFontSizeUnits.Desktop};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.fontWeight === false && fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.fontStyle === false && fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.textTransform === false && fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.textDecoration === false && fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Desktop && fluentFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormLabelLetterSpacing.Desktop}${fluentFormLabelLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Desktop && fluentFormLabelLineHeightUnits.Desktop ? `line-height: ${fluentFormLabelLineHeight.Desktop}${fluentFormLabelLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
@@ -2412,14 +2446,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
             ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
             ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
-            ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
-            ${fluentFormInputFontSize.Desktop && fluentFormInputFontSizeUnits.Desktop ? `font-size: ${fluentFormInputFontSize.Desktop}${fluentFormInputFontSizeUnits.Desktop};` : ''}
-            ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
-            ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
-            ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
-            ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
-            ${fluentFormInputLetterSpacing.Desktop && fluentFormInputLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormInputLetterSpacing.Desktop}${fluentFormInputLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormInputLineHeight.Desktop && fluentFormInputLineHeightUnits.Desktop ? `line-height: ${fluentFormInputLineHeight.Desktop}${fluentFormInputLineHeightUnits.Desktop};` : ''}
+
+            ${fluentFormInputGlobalTypoSwitcher.fontFamily === true && fluentFormInputGlobalTypographyData.fontFamily ? `font-family: ${fluentFormInputGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.fontSize === true && fluentFormInputGlobalTypographyData.fontSize ? `font-size: ${fluentFormInputGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.fontWeight === true && fluentFormInputGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormInputGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.fontStyle === true && fluentFormInputGlobalTypographyData.fontStyle ? `font-style: ${fluentFormInputGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.textTransform === true && fluentFormInputGlobalTypographyData.textTransform ? `text-transform: ${fluentFormInputGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.textDecoration === true && fluentFormInputGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormInputGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.letterSpacing === true && fluentFormInputGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormInputGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.lineHeight === true && fluentFormInputGlobalTypographyData.lineHeight ? `line-height: ${fluentFormInputGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormInputGlobalTypoSwitcher.fontFamily === false && fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.fontSize === false && fluentFormInputFontSize.Desktop && fluentFormInputFontSizeUnits.Desktop ? `font-size: ${fluentFormInputFontSize.Desktop}${fluentFormInputFontSizeUnits.Desktop};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.fontWeight === false && fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.fontStyle === false && fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.textTransform === false && fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.textDecoration === false && fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.letterSpacing === false && fluentFormInputLetterSpacing.Desktop && fluentFormInputLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormInputLetterSpacing.Desktop}${fluentFormInputLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormInputGlobalTypoSwitcher.lineHeight === false && fluentFormInputLineHeight.Desktop && fluentFormInputLineHeightUnits.Desktop ? `line-height: ${fluentFormInputLineHeight.Desktop}${fluentFormInputLineHeightUnits.Desktop};` : ''}
             ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
             ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
             ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
@@ -2499,14 +2543,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
             ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
-            ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
-            ${fluentFormSectionBreakTitleFontSize.Desktop && fluentFormSectionBreakTitleFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakTitleFontSize.Desktop}${fluentFormSectionBreakTitleFontSizeUnits.Desktop};` : ''}
-            ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
-            ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
-            ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
-            ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
-            ${fluentFormSectionBreakTitleLetterSpacing.Desktop && fluentFormSectionBreakTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Desktop}${fluentFormSectionBreakTitleLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormSectionBreakTitleLineHeight.Desktop && fluentFormSectionBreakTitleLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Desktop}${fluentFormSectionBreakTitleLineHeightUnits.Desktop};` : ''}
+
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontFamily === true && fluentFormSectionBreakTitleGlobalTypographyData.fontFamily ? `font-family: ${fluentFormSectionBreakTitleGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === true && fluentFormSectionBreakTitleGlobalTypographyData.fontSize ? `font-size: ${fluentFormSectionBreakTitleGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontWeight === true && fluentFormSectionBreakTitleGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormSectionBreakTitleGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontStyle === true && fluentFormSectionBreakTitleGlobalTypographyData.fontStyle ? `font-style: ${fluentFormSectionBreakTitleGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.textTransform === true && fluentFormSectionBreakTitleGlobalTypographyData.textTransform ? `text-transform: ${fluentFormSectionBreakTitleGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.textDecoration === true && fluentFormSectionBreakTitleGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormSectionBreakTitleGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === true && fluentFormSectionBreakTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSectionBreakTitleGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === true && fluentFormSectionBreakTitleGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSectionBreakTitleGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Desktop && fluentFormSectionBreakTitleFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakTitleFontSize.Desktop}${fluentFormSectionBreakTitleFontSizeUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontWeight === false && fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontStyle === false && fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.textTransform === false && fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.textDecoration === false && fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Desktop && fluentFormSectionBreakTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Desktop}${fluentFormSectionBreakTitleLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Desktop && fluentFormSectionBreakTitleLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Desktop}${fluentFormSectionBreakTitleLineHeightUnits.Desktop};` : ''}
             ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
             ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
         }
@@ -2515,14 +2569,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
             ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
-            ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
-            ${fluentFormSectionBreakDescFontSize.Desktop && fluentFormSectionBreakDescFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakDescFontSize.Desktop}${fluentFormSectionBreakDescFontSizeUnits.Desktop};` : ''} 
-            ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
-            ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
-            ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
-            ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
-            ${fluentFormSectionBreakDescLetterSpacing.Desktop && fluentFormSectionBreakDescLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Desktop}${fluentFormSectionBreakDescLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormSectionBreakDescLineHeight.Desktop && fluentFormSectionBreakDescLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakDescLineHeight.Desktop}${fluentFormSectionBreakDescLineHeightUnits.Desktop};` : ''}
+
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontFamily === true && fluentFormSectionBreakDescGlobalTypographyData.fontFamily ? `font-family: ${fluentFormSectionBreakDescGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === true && fluentFormSectionBreakDescGlobalTypographyData.fontSize ? `font-size: ${fluentFormSectionBreakDescGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontWeight === true && fluentFormSectionBreakDescGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormSectionBreakDescGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontStyle === true && fluentFormSectionBreakDescGlobalTypographyData.fontStyle ? `font-style: ${fluentFormSectionBreakDescGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.textTransform === true && fluentFormSectionBreakDescGlobalTypographyData.textTransform ? `text-transform: ${fluentFormSectionBreakDescGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.textDecoration === true && fluentFormSectionBreakDescGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormSectionBreakDescGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === true && fluentFormSectionBreakDescGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSectionBreakDescGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === true && fluentFormSectionBreakDescGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSectionBreakDescGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Desktop && fluentFormSectionBreakDescFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakDescFontSize.Desktop}${fluentFormSectionBreakDescFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontWeight === false && fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontStyle === false && fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.textTransform === false && fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.textDecoration === false && fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Desktop && fluentFormSectionBreakDescLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Desktop}${fluentFormSectionBreakDescLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Desktop && fluentFormSectionBreakDescLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakDescLineHeight.Desktop}${fluentFormSectionBreakDescLineHeightUnits.Desktop};` : ''}
             ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
             ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
         }
@@ -2533,14 +2597,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
             ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
             ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
-            ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
-            ${fluentFormHtmlFontSize.Desktop && fluentFormHtmlFontSizeUnits.Desktop ? `font-size: ${fluentFormHtmlFontSize.Desktop}${fluentFormHtmlFontSizeUnits.Desktop};` : ''} 
-            ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
-            ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
-            ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
-            ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
-            ${fluentFormHtmlLetterSpacing.Desktop && fluentFormHtmlLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Desktop}${fluentFormHtmlLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormHtmlLineHeight.Desktop && fluentFormHtmlLineHeightUnits.Desktop ? `line-height: ${fluentFormHtmlLineHeight.Desktop}${fluentFormHtmlLineHeightUnits.Desktop};` : ''} 
+
+            ${fluentFormHtmlGlobalTypoSwitcher.fontFamily === true && fluentFormHtmlGlobalTypographyData.fontFamily ? `font-family: ${fluentFormHtmlGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontSize === true && fluentFormHtmlGlobalTypographyData.fontSize ? `font-size: ${fluentFormHtmlGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontWeight === true && fluentFormHtmlGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormHtmlGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontStyle === true && fluentFormHtmlGlobalTypographyData.fontStyle ? `font-style: ${fluentFormHtmlGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.textTransform === true && fluentFormHtmlGlobalTypographyData.textTransform ? `text-transform: ${fluentFormHtmlGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.textDecoration === true && fluentFormHtmlGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormHtmlGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === true && fluentFormHtmlGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormHtmlGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === true && fluentFormHtmlGlobalTypographyData.lineHeight ? `line-height: ${fluentFormHtmlGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormHtmlGlobalTypoSwitcher.fontFamily === false && fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Desktop && fluentFormHtmlFontSizeUnits.Desktop ? `font-size: ${fluentFormHtmlFontSize.Desktop}${fluentFormHtmlFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormHtmlGlobalTypoSwitcher.fontWeight === false && fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontStyle === false && fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.textTransform === false && fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.textDecoration === false && fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Desktop && fluentFormHtmlLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Desktop}${fluentFormHtmlLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Desktop && fluentFormHtmlLineHeightUnits.Desktop ? `line-height: ${fluentFormHtmlLineHeight.Desktop}${fluentFormHtmlLineHeightUnits.Desktop};` : ''} 
             ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
             ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
         }
@@ -2555,14 +2629,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSubmitHeight.Desktop ? `height: ${fluentFormSubmitHeight.Desktop}${fluentFormSubmitHeightUnits.Desktop};` : ""}
             ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
             ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
-            ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
-            ${fluentFormSubmitFontSize.Desktop && fluentFormSubmitFontSizeUnits.Desktop ? `font-size: ${fluentFormSubmitFontSize.Desktop}${fluentFormSubmitFontSizeUnits.Desktop};` : ''} 
-            ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
-            ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
-            ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
-            ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
-            ${fluentFormSubmitLetterSpacing.Desktop && fluentFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Desktop}${fluentFormSubmitLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormSubmitLineHeight.Desktop && fluentFormSubmitLineHeightUnits.Desktop ? `line-height: ${fluentFormSubmitLineHeight.Desktop}${fluentFormSubmitLineHeightUnits.Desktop};` : ''} 
+
+            ${fluentFormSubmitGlobalTypoSwitcher.fontFamily === true && fluentFormSubmitGlobalTypographyData.fontFamily ? `font-family: ${fluentFormSubmitGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontSize === true && fluentFormSubmitGlobalTypographyData.fontSize ? `font-size: ${fluentFormSubmitGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontWeight === true && fluentFormSubmitGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormSubmitGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontStyle === true && fluentFormSubmitGlobalTypographyData.fontStyle ? `font-style: ${fluentFormSubmitGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.textTransform === true && fluentFormSubmitGlobalTypographyData.textTransform ? `text-transform: ${fluentFormSubmitGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.textDecoration === true && fluentFormSubmitGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormSubmitGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === true && fluentFormSubmitGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSubmitGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === true && fluentFormSubmitGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSubmitGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormSubmitGlobalTypoSwitcher.fontFamily === false && fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Desktop && fluentFormSubmitFontSizeUnits.Desktop ? `font-size: ${fluentFormSubmitFontSize.Desktop}${fluentFormSubmitFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSubmitGlobalTypoSwitcher.fontWeight === false && fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontStyle === false && fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.textTransform === false && fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.textDecoration === false && fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Desktop && fluentFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Desktop}${fluentFormSubmitLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Desktop && fluentFormSubmitLineHeightUnits.Desktop ? `line-height: ${fluentFormSubmitLineHeight.Desktop}${fluentFormSubmitLineHeightUnits.Desktop};` : ''} 
             ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
             ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
 
@@ -2586,14 +2670,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-fluent-form-wrapper .ff-message-success {
             ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
             ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
-            ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
-            ${fluentFormSuccessFontSize.Desktop && fluentFormSuccessFontSizeUnits.Desktop ? `font-size: ${fluentFormSuccessFontSize.Desktop}${fluentFormSuccessFontSizeUnits.Desktop};` : ''} 
-            ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
-            ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
-            ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
-            ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
-            ${fluentFormSuccessLetterSpacing.Desktop && fluentFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Desktop}${fluentFormSuccessLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormSuccessLineHeight.Desktop && fluentFormSuccessLineHeightUnits.Desktop ? `line-height: ${fluentFormSuccessLineHeight.Desktop}${fluentFormSuccessLineHeightUnits.Desktop};` : ''}
+
+            ${fluentFormSuccessGlobalTypoSwitcher.fontFamily === true && fluentFormSuccessGlobalTypographyData.fontFamily ? `font-family: ${fluentFormSuccessGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontSize === true && fluentFormSuccessGlobalTypographyData.fontSize ? `font-size: ${fluentFormSuccessGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontWeight === true && fluentFormSuccessGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormSuccessGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontStyle === true && fluentFormSuccessGlobalTypographyData.fontStyle ? `font-style: ${fluentFormSuccessGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.textTransform === true && fluentFormSuccessGlobalTypographyData.textTransform ? `text-transform: ${fluentFormSuccessGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.textDecoration === true && fluentFormSuccessGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormSuccessGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === true && fluentFormSuccessGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSuccessGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === true && fluentFormSuccessGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSuccessGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormSuccessGlobalTypoSwitcher.fontFamily === false && fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Desktop && fluentFormSuccessFontSizeUnits.Desktop ? `font-size: ${fluentFormSuccessFontSize.Desktop}${fluentFormSuccessFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormSuccessGlobalTypoSwitcher.fontWeight === false && fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontStyle === false && fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.textTransform === false && fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.textDecoration === false && fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Desktop && fluentFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Desktop}${fluentFormSuccessLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Desktop && fluentFormSuccessLineHeightUnits.Desktop ? `line-height: ${fluentFormSuccessLineHeight.Desktop}${fluentFormSuccessLineHeightUnits.Desktop};` : ''}
             ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
             ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
             ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
@@ -2605,14 +2699,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockID}.fb-fluent-form-wrapper .error.text-danger {
             ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
-            ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
-            ${fluentFormErrorFontSize.Desktop && fluentFormErrorFontSizeUnits.Desktop ? `font-size: ${fluentFormErrorFontSize.Desktop}${fluentFormErrorFontSizeUnits.Desktop};` : ''} 
-            ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
-            ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
-            ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
-            ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
-            ${fluentFormErrorLetterSpacing.Desktop && fluentFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormErrorLetterSpacing.Desktop}${fluentFormErrorLetterSpacingUnits.Desktop};` : ''}
-            ${fluentFormErrorLineHeight.Desktop && fluentFormErrorLineHeightUnits.Desktop ? `line-height: ${fluentFormErrorLineHeight.Desktop}${fluentFormErrorLineHeightUnits.Desktop};` : ''} 
+
+            ${fluentFormErrorGlobalTypoSwitcher.fontFamily === true && fluentFormErrorGlobalTypographyData.fontFamily ? `font-family: ${fluentFormErrorGlobalTypographyData.fontFamily};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.fontSize === true && fluentFormErrorGlobalTypographyData.fontSize ? `font-size: ${fluentFormErrorGlobalTypographyData.fontSize};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.fontWeight === true && fluentFormErrorGlobalTypographyData.fontWeight ? `font-weight: ${fluentFormErrorGlobalTypographyData.fontWeight};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.fontStyle === true && fluentFormErrorGlobalTypographyData.fontStyle ? `font-style: ${fluentFormErrorGlobalTypographyData.fontStyle};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.textTransform === true && fluentFormErrorGlobalTypographyData.textTransform ? `text-transform: ${fluentFormErrorGlobalTypographyData.textTransform};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.textDecoration === true && fluentFormErrorGlobalTypographyData.textDecoration ? `text-decoration: ${fluentFormErrorGlobalTypographyData.textDecoration};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === true && fluentFormErrorGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormErrorGlobalTypographyData.letterSpacing};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.lineHeight === true && fluentFormErrorGlobalTypographyData.lineHeight ? `line-height: ${fluentFormErrorGlobalTypographyData.lineHeight};` : ''}
+
+            ${fluentFormErrorGlobalTypoSwitcher.fontFamily === false && fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Desktop && fluentFormErrorFontSizeUnits.Desktop ? `font-size: ${fluentFormErrorFontSize.Desktop}${fluentFormErrorFontSizeUnits.Desktop};` : ''} 
+            ${fluentFormErrorGlobalTypoSwitcher.fontWeight === false && fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.fontStyle === false && fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.textTransform === false && fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.textDecoration === false && fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Desktop && fluentFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormErrorLetterSpacing.Desktop}${fluentFormErrorLetterSpacingUnits.Desktop};` : ''}
+            ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Desktop && fluentFormErrorLineHeightUnits.Desktop ? `line-height: ${fluentFormErrorLineHeight.Desktop}${fluentFormErrorLineHeightUnits.Desktop};` : ''} 
             ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
             ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
         }     
@@ -2645,34 +2749,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Tablet}${fluentFormSpacingUnits.Tablet};` : ""} 
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
-                ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
-                ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
-                ${fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
-                ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
-                ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
-                ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
-                ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
-                ${fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
-                transition: all .3s ease-in-out;
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
-                ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+                ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
+                ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
-                ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
-                ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
-                ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
-                ${fluentFormInputFontSize.Tablet && fluentFormInputFontSizeUnits.Tablet ? `font-size: ${fluentFormInputFontSize.Tablet}${fluentFormInputFontSizeUnits.Tablet};` : ''}
-                ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
-                ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
-                ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
-                ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
-                ${fluentFormInputLetterSpacing.Tablet && fluentFormInputLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormInputLetterSpacing.Tablet}${fluentFormInputLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormInputLineHeight.Tablet && fluentFormInputLineHeightUnits.Tablet ? `line-height: ${fluentFormInputLineHeight.Tablet}${fluentFormInputLineHeightUnits.Tablet};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.fontSize === false && fluentFormInputFontSize.Tablet && fluentFormInputFontSizeUnits.Tablet ? `font-size: ${fluentFormInputFontSize.Tablet}${fluentFormInputFontSizeUnits.Tablet};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.letterSpacing === false && fluentFormInputLetterSpacing.Tablet && fluentFormInputLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormInputLetterSpacing.Tablet}${fluentFormInputLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.lineHeight === false && fluentFormInputLineHeight.Tablet && fluentFormInputLineHeightUnits.Tablet ? `line-height: ${fluentFormInputLineHeight.Tablet}${fluentFormInputLineHeightUnits.Tablet};` : ''}
                 ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Tablet}${fluentFormTextIndentSizeUnits.Tablet};` : ""}
                 ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Tablet}${fluentFormInputWidthSizeUnits.Tablet};` : ""}
                 ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Tablet}${fluentFormInputHeightSizeUnits.Tablet};` : ""}
@@ -2751,15 +2838,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 text-align: ${fluentFormSectionBreakAlignment};
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
-                ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
-                ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
-                ${fluentFormSectionBreakTitleFontSize.Tablet && fluentFormSectionBreakTitleFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakTitleFontSize.Tablet}${fluentFormSectionBreakTitleFontSizeUnits.Tablet};` : ''}
-                ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
-                ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
-                ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
-                ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
-                ${fluentFormSectionBreakTitleLetterSpacing.Tablet && fluentFormSectionBreakTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Tablet}${fluentFormSectionBreakTitleLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormSectionBreakTitleLineHeight.Tablet && fluentFormSectionBreakTitleLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Tablet}${fluentFormSectionBreakTitleLineHeightUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Tablet && fluentFormSectionBreakTitleFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakTitleFontSize.Tablet}${fluentFormSectionBreakTitleFontSizeUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Tablet && fluentFormSectionBreakTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Tablet}${fluentFormSectionBreakTitleLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Tablet && fluentFormSectionBreakTitleLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Tablet}${fluentFormSectionBreakTitleLineHeightUnits.Tablet};` : ''}
                 ${fluentFormSectionBreakTitleTabletPadding ? `padding: ${fluentFormSectionBreakTitleTabletPadding};` : ""}
                 ${fluentFormSectionBreakTitleTabletMargin ? `margin: ${fluentFormSectionBreakTitleTabletMargin};` : ""}
             }
@@ -2767,38 +2848,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
-                ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
-                ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
-                ${fluentFormSectionBreakDescFontSize.Tablet && fluentFormSectionBreakDescFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakDescFontSize.Tablet}${fluentFormSectionBreakDescFontSizeUnits.Tablet};` : ''} 
-                ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
-                ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
-                ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
-                ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
-                ${fluentFormSectionBreakDescLetterSpacing.Tablet && fluentFormSectionBreakDescLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Tablet}${fluentFormSectionBreakDescLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormSectionBreakDescLineHeight.Tablet && fluentFormSectionBreakDescLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakDescLineHeight.Tablet}${fluentFormSectionBreakDescLineHeightUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Tablet && fluentFormSectionBreakDescFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakDescFontSize.Tablet}${fluentFormSectionBreakDescFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Tablet && fluentFormSectionBreakDescLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Tablet}${fluentFormSectionBreakDescLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Tablet && fluentFormSectionBreakDescLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakDescLineHeight.Tablet}${fluentFormSectionBreakDescLineHeightUnits.Tablet};` : ''}
                 ${fluentFormSectionBreakDescTabletPadding ? `padding: ${fluentFormSectionBreakDescTabletPadding};` : ""}
                 ${fluentFormSectionBreakDescTabletMargin ? `margin: ${fluentFormSectionBreakDescTabletMargin};` : ""}
             }
-            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
-                ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
-            }
 
             .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
-                ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
-                ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
-                ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
-                ${fluentFormHtmlFontSize.Tablet && fluentFormHtmlFontSizeUnits.Tablet ? `font-size: ${fluentFormHtmlFontSize.Tablet}${fluentFormHtmlFontSizeUnits.Tablet};` : ''} 
-                ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
-                ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
-                ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
-                ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
-                ${fluentFormHtmlLetterSpacing.Tablet && fluentFormHtmlLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Tablet}${fluentFormHtmlLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormHtmlLineHeight.Tablet && fluentFormHtmlLineHeightUnits.Tablet ? `line-height: ${fluentFormHtmlLineHeight.Tablet}${fluentFormHtmlLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Tablet && fluentFormHtmlFontSizeUnits.Tablet ? `font-size: ${fluentFormHtmlFontSize.Tablet}${fluentFormHtmlFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Tablet && fluentFormHtmlLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Tablet}${fluentFormHtmlLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Tablet && fluentFormHtmlLineHeightUnits.Tablet ? `line-height: ${fluentFormHtmlLineHeight.Tablet}${fluentFormHtmlLineHeightUnits.Tablet};` : ''} 
                 ${fluentFormHtmlTabletPadding ? `padding: ${fluentFormHtmlTabletPadding};` : ""}
                 ${fluentFormHtmlTabletMargin ? `margin: ${fluentFormHtmlTabletMargin};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
-                ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
             }
             
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
@@ -2806,28 +2868,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
                 ${fluentFormSubmitHeight.Tablet ? `height: ${fluentFormSubmitHeight.Tablet}${fluentFormSubmitHeightUnits.Tablet};` : ""}
-                ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
-                ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
-                ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
-                ${fluentFormSubmitFontSize.Tablet && fluentFormSubmitFontSizeUnits.Tablet ? `font-size: ${fluentFormSubmitFontSize.Tablet}${fluentFormSubmitFontSizeUnits.Tablet};` : ''} 
-                ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
-                ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
-                ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
-                ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
-                ${fluentFormSubmitLetterSpacing.Tablet && fluentFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Tablet}${fluentFormSubmitLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormSubmitLineHeight.Tablet && fluentFormSubmitLineHeightUnits.Tablet ? `line-height: ${fluentFormSubmitLineHeight.Tablet}${fluentFormSubmitLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Tablet && fluentFormSubmitFontSizeUnits.Tablet ? `font-size: ${fluentFormSubmitFontSize.Tablet}${fluentFormSubmitFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Tablet && fluentFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Tablet}${fluentFormSubmitLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Tablet && fluentFormSubmitLineHeightUnits.Tablet ? `line-height: ${fluentFormSubmitLineHeight.Tablet}${fluentFormSubmitLineHeightUnits.Tablet};` : ''} 
                 ${fluentFormSubmitTabletPadding ? `padding: ${fluentFormSubmitTabletPadding};` : ""}
                 ${fluentFormSubmitTabletMargin ? `margin: ${fluentFormSubmitTabletMargin};` : ""}
 
-                ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
                 ${fluentFormSubmitTabletBorderWidth ? `border-width: ${fluentFormSubmitTabletBorderWidth};` : ""}
-                ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
                 ${fluentFormSubmitTabletBorderRadiusWidth ? `border-radius: ${fluentFormSubmitTabletBorderRadiusWidth};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
-                ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
-                ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
-                ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
                 ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -2837,35 +2885,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-message-success {
-                ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
-                ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
-                ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
-                ${fluentFormSuccessFontSize.Tablet && fluentFormSuccessFontSizeUnits.Tablet ? `font-size: ${fluentFormSuccessFontSize.Tablet}${fluentFormSuccessFontSizeUnits.Tablet};` : ''} 
-                ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
-                ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
-                ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
-                ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
-                ${fluentFormSuccessLetterSpacing.Tablet && fluentFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Tablet}${fluentFormSuccessLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormSuccessLineHeight.Tablet && fluentFormSuccessLineHeightUnits.Tablet ? `line-height: ${fluentFormSuccessLineHeight.Tablet}${fluentFormSuccessLineHeightUnits.Tablet};` : ''}
-                ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+                ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Tablet && fluentFormSuccessFontSizeUnits.Tablet ? `font-size: ${fluentFormSuccessFontSize.Tablet}${fluentFormSuccessFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Tablet && fluentFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Tablet}${fluentFormSuccessLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Tablet && fluentFormSuccessLineHeightUnits.Tablet ? `line-height: ${fluentFormSuccessLineHeight.Tablet}${fluentFormSuccessLineHeightUnits.Tablet};` : ''}
                 ${fluentFormSuccessTabletBorderWidth ? `border-width: ${fluentFormSuccessTabletBorderWidth};` : ""}
-                ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
                 ${fluentFormSuccessTabletBorderRadiusWidth ? `border-radius: ${fluentFormSuccessTabletBorderRadiusWidth};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
-                ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .error.text-danger {
-                ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
-                ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
-                ${fluentFormErrorFontSize.Tablet && fluentFormErrorFontSizeUnits.Tablet ? `font-size: ${fluentFormErrorFontSize.Tablet}${fluentFormErrorFontSizeUnits.Tablet};` : ''} 
-                ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
-                ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
-                ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
-                ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
-                ${fluentFormErrorLetterSpacing.Tablet && fluentFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormErrorLetterSpacing.Tablet}${fluentFormErrorLetterSpacingUnits.Tablet};` : ''}
-                ${fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
+                ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Tablet && fluentFormErrorFontSizeUnits.Tablet ? `font-size: ${fluentFormErrorFontSize.Tablet}${fluentFormErrorFontSizeUnits.Tablet};` : ''} 
+                ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Tablet && fluentFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormErrorLetterSpacing.Tablet}${fluentFormErrorLetterSpacingUnits.Tablet};` : ''}
+                ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
                 ${fluentFormErrorTabletPadding ? `padding: ${fluentFormErrorTabletPadding};` : ""}
                 ${fluentFormErrorTabletMargin ? `margin: ${fluentFormErrorTabletMargin};` : ""} 
             }
@@ -2967,34 +2997,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSpacingSize ? `margin-bottom: ${fluentFormSpacingSize.Mobile}${fluentFormSpacingUnits.Mobile};` : ""}  
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-group label {
-                ${fluentFormLabelColor ? `color: ${fluentFormLabelColor};` : ""}
-                ${fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
-                ${fluentFormLabelFontSize.Mobile && fluentFormLabelFontSizeUnits.Mobile ? `font-size: ${fluentFormLabelFontSize.Mobile}${fluentFormLabelFontSizeUnits.Mobile};` : ''}
-                ${fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
-                ${fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
-                ${fluentFormLabelTextTransform ? `text-transform: ${fluentFormLabelTextTransform};` : ""}
-                ${fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
-                ${fluentFormLabelLetterSpacing.Mobile && fluentFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormLabelLetterSpacing.Mobile}${fluentFormLabelLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormLabelLineHeight.Mobile && fluentFormLabelLineHeightUnits.Mobile ? `line-height: ${fluentFormLabelLineHeight.Mobile}${fluentFormLabelLineHeightUnits.Mobile};` : ''}
-                transition: all .3s ease-in-out;
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
-                ${fluentFormLabelHoverColor ? `color: ${fluentFormLabelHoverColor};` : ""}
+                ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Mobile && fluentFormLabelFontSizeUnits.Mobile ? `font-size: ${fluentFormLabelFontSize.Mobile}${fluentFormLabelFontSizeUnits.Mobile};` : ''}
+                ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Mobile && fluentFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormLabelLetterSpacing.Mobile}${fluentFormLabelLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Mobile && fluentFormLabelLineHeightUnits.Mobile ? `line-height: ${fluentFormLabelLineHeight.Mobile}${fluentFormLabelLineHeightUnits.Mobile};` : ''}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select {
-                ${fluentFormInputBgColor ? `background-color: ${fluentFormInputBgColor};` : ""}
-                ${fluentFormInputColor ? `color: ${fluentFormInputColor};` : ""}
-                ${fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
-                ${fluentFormInputFontSize.Mobile && fluentFormInputFontSizeUnits.Mobile ? `font-size: ${fluentFormInputFontSize.Mobile}${fluentFormInputFontSizeUnits.Mobile};` : ''}
-                ${fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
-                ${fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
-                ${fluentFormInputTextTransform ? `text-transform: ${fluentFormInputTextTransform};` : ""}
-                ${fluentFormInputTextDecoration ? `text-decoration: ${fluentFormInputTextDecoration};` : ""}
-                ${fluentFormInputLetterSpacing.Mobile && fluentFormInputLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormInputLetterSpacing.Mobile}${fluentFormInputLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormInputLineHeight.Mobile && fluentFormInputLineHeightUnits.Mobile ? `line-height: ${fluentFormInputLineHeight.Mobile}${fluentFormInputLineHeightUnits.Mobile};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.fontSize === false && fluentFormInputFontSize.Mobile && fluentFormInputFontSizeUnits.Mobile ? `font-size: ${fluentFormInputFontSize.Mobile}${fluentFormInputFontSizeUnits.Mobile};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.letterSpacing === false && fluentFormInputLetterSpacing.Mobile && fluentFormInputLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormInputLetterSpacing.Mobile}${fluentFormInputLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormInputGlobalTypoSwitcher.lineHeight === false && fluentFormInputLineHeight.Mobile && fluentFormInputLineHeightUnits.Mobile ? `line-height: ${fluentFormInputLineHeight.Mobile}${fluentFormInputLineHeightUnits.Mobile};` : ''}
                 ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Mobile}${fluentFormTextIndentSizeUnits.Mobile};` : ""}
                 ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Mobile}${fluentFormInputWidthSizeUnits.Mobile};` : ""}
                 ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Mobile}${fluentFormInputHeightSizeUnits.Mobile};` : ""}
@@ -3073,15 +3086,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 text-align: ${fluentFormSectionBreakAlignment};
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
-                ${fluentFormSectionBreakTitleColor ? `color: ${fluentFormSectionBreakTitleColor};` : ""}
-                ${fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
-                ${fluentFormSectionBreakTitleFontSize.Mobile && fluentFormSectionBreakTitleFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakTitleFontSize.Mobile}${fluentFormSectionBreakTitleFontSizeUnits.Mobile};` : ''}
-                ${fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
-                ${fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
-                ${fluentFormSectionBreakTitleTextTransform ? `text-transform: ${fluentFormSectionBreakTitleTextTransform};` : ""}
-                ${fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
-                ${fluentFormSectionBreakTitleLetterSpacing.Mobile && fluentFormSectionBreakTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Mobile}${fluentFormSectionBreakTitleLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormSectionBreakTitleLineHeight.Mobile && fluentFormSectionBreakTitleLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Mobile}${fluentFormSectionBreakTitleLineHeightUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Mobile && fluentFormSectionBreakTitleFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakTitleFontSize.Mobile}${fluentFormSectionBreakTitleFontSizeUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Mobile && fluentFormSectionBreakTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Mobile}${fluentFormSectionBreakTitleLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Mobile && fluentFormSectionBreakTitleLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Mobile}${fluentFormSectionBreakTitleLineHeightUnits.Mobile};` : ''}
                 ${fluentFormSectionBreakTitleMobilePadding ? `padding: ${fluentFormSectionBreakTitleMobilePadding};` : ""}
                 ${fluentFormSectionBreakTitleMobileMargin ? `margin: ${fluentFormSectionBreakTitleMobileMargin};` : ""}
             }
@@ -3089,67 +3096,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk {
-                ${fluentFormSectionBreakDescColor ? `color: ${fluentFormSectionBreakDescColor};` : ""}
-                ${fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
-                ${fluentFormSectionBreakDescFontSize.Mobile && fluentFormSectionBreakDescFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakDescFontSize.Mobile}${fluentFormSectionBreakDescFontSizeUnits.Mobile};` : ''} 
-                ${fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
-                ${fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
-                ${fluentFormSectionBreakDescTextTransform ? `text-transform: ${fluentFormSectionBreakDescTextTransform};` : ""}
-                ${fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
-                ${fluentFormSectionBreakDescLetterSpacing.Mobile && fluentFormSectionBreakDescLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Mobile}${fluentFormSectionBreakDescLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormSectionBreakDescLineHeight.Mobile && fluentFormSectionBreakDescLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakDescLineHeight.Mobile}${fluentFormSectionBreakDescLineHeightUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Mobile && fluentFormSectionBreakDescFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakDescFontSize.Mobile}${fluentFormSectionBreakDescFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Mobile && fluentFormSectionBreakDescLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Mobile}${fluentFormSectionBreakDescLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Mobile && fluentFormSectionBreakDescLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakDescLineHeight.Mobile}${fluentFormSectionBreakDescLineHeightUnits.Mobile};` : ''}
                 ${fluentFormSectionBreakDescMobilePadding ? `padding: ${fluentFormSectionBreakDescMobilePadding};` : ""}
                 ${fluentFormSectionBreakDescMobileMargin ? `margin: ${fluentFormSectionBreakDescMobileMargin};` : ""}
             }
-            .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
-                ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
-            }
 
             .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
-                ${fluentFormHtmlAlignment ? `text-align: ${fluentFormHtmlAlignment};` : ""}
-                ${fluentFormHtmlColor ? `color: ${fluentFormHtmlColor};` : ""}
-                ${fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
-                ${fluentFormHtmlFontSize.Mobile && fluentFormHtmlFontSizeUnits.Mobile ? `font-size: ${fluentFormHtmlFontSize.Mobile}${fluentFormHtmlFontSizeUnits.Mobile};` : ''} 
-                ${fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
-                ${fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
-                ${fluentFormHtmlTextTransform ? `text-transform: ${fluentFormHtmlTextTransform};` : ""}
-                ${fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
-                ${fluentFormHtmlLetterSpacing.Mobile && fluentFormHtmlLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Mobile}${fluentFormHtmlLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormHtmlLineHeight.Mobile && fluentFormHtmlLineHeightUnits.Mobile ? `line-height: ${fluentFormHtmlLineHeight.Mobile}${fluentFormHtmlLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Mobile && fluentFormHtmlFontSizeUnits.Mobile ? `font-size: ${fluentFormHtmlFontSize.Mobile}${fluentFormHtmlFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Mobile && fluentFormHtmlLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Mobile}${fluentFormHtmlLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Mobile && fluentFormHtmlLineHeightUnits.Mobile ? `line-height: ${fluentFormHtmlLineHeight.Mobile}${fluentFormHtmlLineHeightUnits.Mobile};` : ''} 
                 ${fluentFormHtmlMobilePadding ? `padding: ${fluentFormHtmlMobilePadding};` : ""}
                 ${fluentFormHtmlMobileMargin ? `margin: ${fluentFormHtmlMobileMargin};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
-                ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
             }
             
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
                 ${fluentFormSubmitAlignment ? `text-align: ${fluentFormSubmitAlignment};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
-                ${fluentFormSubmitHeight.Mobile ? `height: ${fluentFormSubmitHeight.Mobile}${fluentFormSubmitHeightUnits.Mobile};` : ""} 
-                ${fluentFormSubmitColor ? `color: ${fluentFormSubmitColor};` : ""}
-                ${fluentFormSubmitBgColor ? `background: ${fluentFormSubmitBgColor};` : ""}
-                ${fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
-                ${fluentFormSubmitFontSize.Mobile && fluentFormSubmitFontSizeUnits.Mobile ? `font-size: ${fluentFormSubmitFontSize.Mobile}${fluentFormSubmitFontSizeUnits.Mobile};` : ''} 
-                ${fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
-                ${fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
-                ${fluentFormSubmitTextTransform ? `text-transform: ${fluentFormSubmitTextTransform};` : ""}
-                ${fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
-                ${fluentFormSubmitLetterSpacing.Mobile && fluentFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Mobile}${fluentFormSubmitLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormSubmitLineHeight.Mobile && fluentFormSubmitLineHeightUnits.Mobile ? `line-height: ${fluentFormSubmitLineHeight.Mobile}${fluentFormSubmitLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormSubmitHeight.Mobile ? `height: ${fluentFormSubmitHeight.Mobile}${fluentFormSubmitHeightUnits.Mobile};` : ""}
+                ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Mobile && fluentFormSubmitFontSizeUnits.Mobile ? `font-size: ${fluentFormSubmitFontSize.Mobile}${fluentFormSubmitFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Mobile && fluentFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Mobile}${fluentFormSubmitLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Mobile && fluentFormSubmitLineHeightUnits.Mobile ? `line-height: ${fluentFormSubmitLineHeight.Mobile}${fluentFormSubmitLineHeightUnits.Mobile};` : ''} 
                 ${fluentFormSubmitMobilePadding ? `padding: ${fluentFormSubmitMobilePadding};` : ""}
                 ${fluentFormSubmitMobileMargin ? `margin: ${fluentFormSubmitMobileMargin};` : ""}
 
-                ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
                 ${fluentFormSubmitMobileBorderWidth ? `border-width: ${fluentFormSubmitMobileBorderWidth};` : ""}
-                ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
                 ${fluentFormSubmitMobileBorderRadiusWidth ? `border-radius: ${fluentFormSubmitMobileBorderRadiusWidth};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
-                ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
-                ${fluentFormSubmitBgHoverColor ? `background: ${fluentFormSubmitBgHoverColor};` : ""}
-                ${fluentFormSubmitBorderHoverColor ? `border-color: ${fluentFormSubmitBorderHoverColor};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
                 ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -3159,35 +3133,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-message-success {
-                ${fluentFormSuccessColor ? `color: ${fluentFormSuccessColor};` : ""}
-                ${fluentFormSuccessBgColor ? `background: ${fluentFormSuccessBgColor};` : ""}
-                ${fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
-                ${fluentFormSuccessFontSize.Mobile && fluentFormSuccessFontSizeUnits.Mobile ? `font-size: ${fluentFormSuccessFontSize.Mobile}${fluentFormSuccessFontSizeUnits.Mobile};` : ''} 
-                ${fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
-                ${fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
-                ${fluentFormSuccessTextTransform ? `text-transform: ${fluentFormSuccessTextTransform};` : ""}
-                ${fluentFormSuccessTextDecoration ? `text-decoration: ${fluentFormSuccessTextDecoration};` : ""}
-                ${fluentFormSuccessLetterSpacing.Mobile && fluentFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Mobile}${fluentFormSuccessLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormSuccessLineHeight.Mobile && fluentFormSuccessLineHeightUnits.Mobile ? `line-height: ${fluentFormSuccessLineHeight.Mobile}${fluentFormSuccessLineHeightUnits.Mobile};` : ''}
-                ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
+                ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Mobile && fluentFormSuccessFontSizeUnits.Mobile ? `font-size: ${fluentFormSuccessFontSize.Mobile}${fluentFormSuccessFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Mobile && fluentFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Mobile}${fluentFormSuccessLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Mobile && fluentFormSuccessLineHeightUnits.Mobile ? `line-height: ${fluentFormSuccessLineHeight.Mobile}${fluentFormSuccessLineHeightUnits.Mobile};` : ''}
                 ${fluentFormSuccessMobileBorderWidth ? `border-width: ${fluentFormSuccessMobileBorderWidth};` : ""}
-                ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
                 ${fluentFormSuccessMobileBorderRadiusWidth ? `border-radius: ${fluentFormSuccessMobileBorderRadiusWidth};` : ""}
-            }
-            .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
-                ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .error.text-danger {
-                ${fluentFormErrorColor ? `color: ${fluentFormErrorColor};` : ""}
-                ${fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
-                ${fluentFormErrorFontSize.Mobile && fluentFormErrorFontSizeUnits.Mobile ? `font-size: ${fluentFormErrorFontSize.Mobile}${fluentFormErrorFontSizeUnits.Mobile};` : ''} 
-                ${fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
-                ${fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
-                ${fluentFormErrorTextTransform ? `text-transform: ${fluentFormErrorTextTransform};` : ""}
-                ${fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
-                ${fluentFormErrorLetterSpacing.Mobile && fluentFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormErrorLetterSpacing.Mobile}${fluentFormErrorLetterSpacingUnits.Mobile};` : ''}
-                ${fluentFormErrorLineHeight.Mobile && fluentFormErrorLineHeightUnits.Mobile ? `line-height: ${fluentFormErrorLineHeight.Mobile}${fluentFormErrorLineHeightUnits.Mobile};` : ''} 
+                ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Mobile && fluentFormErrorFontSizeUnits.Mobile ? `font-size: ${fluentFormErrorFontSize.Mobile}${fluentFormErrorFontSizeUnits.Mobile};` : ''} 
+                ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Mobile && fluentFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormErrorLetterSpacing.Mobile}${fluentFormErrorLetterSpacingUnits.Mobile};` : ''}
+                ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Mobile && fluentFormErrorLineHeightUnits.Mobile ? `line-height: ${fluentFormErrorLineHeight.Mobile}${fluentFormErrorLineHeightUnits.Mobile};` : ''} 
                 ${fluentFormErrorMobilePadding ? `padding: ${fluentFormErrorMobilePadding};` : ""}
                 ${fluentFormErrorMobileMargin ? `margin: ${fluentFormErrorMobileMargin};` : ""} 
             } 
@@ -3211,6 +3167,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelColorSwitcher,
         fluentFormLabelColor,
         fluentFormLabelHoverColor,
+        fluentFormLabelGlobalTypoSwitcher,
+        fluentFormLabelGlobalTypographyData,
+        fluentFormLabelGlobalTypoType,
         fluentFormLabelFontFamily,
         fluentFormLabelFontSize,
         fluentFormLabelFontSizeUnits,
@@ -3226,6 +3185,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormInputBgColor,
         fluentFormInputColor,
         fluentFormInputFocusColor,
+        fluentFormInputGlobalTypoSwitcher,
+        fluentFormInputGlobalTypographyData,
+        fluentFormInputGlobalTypoType,
         fluentFormInputFontFamily,
         fluentFormInputFontSize,
         fluentFormInputFontSizeUnits,
@@ -3317,6 +3279,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakTitleColorSwitcher,
         fluentFormSectionBreakTitleColor,
         fluentFormSectionBreakTitleHoverColor,
+        fluentFormSectionBreakTitleGlobalTypoSwitcher,
+        fluentFormSectionBreakTitleGlobalTypographyData,
+        fluentFormSectionBreakTitleGlobalTypoType,
         fluentFormSectionBreakTitleFontFamily,
         fluentFormSectionBreakTitleFontSize,
         fluentFormSectionBreakTitleFontSizeUnits,
@@ -3342,6 +3307,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakDescColorSwitcher,
         fluentFormSectionBreakDescColor,
         fluentFormSectionBreakDescHoverColor,
+        fluentFormSectionBreakDescGlobalTypoSwitcher,
+        fluentFormSectionBreakDescGlobalTypographyData,
+        fluentFormSectionBreakDescGlobalTypoType,
         fluentFormSectionBreakDescFontFamily,
         fluentFormSectionBreakDescFontSize,
         fluentFormSectionBreakDescFontSizeUnits,
@@ -3368,6 +3336,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormHtmlColorSwitcher,
         fluentFormHtmlColor,
         fluentFormHtmlHoverColor,
+        fluentFormHtmlGlobalTypoSwitcher,
+        fluentFormHtmlGlobalTypographyData,
+        fluentFormHtmlGlobalTypoType,
         fluentFormHtmlFontFamily,
         fluentFormHtmlFontSize,
         fluentFormHtmlFontSizeUnits,
@@ -3402,6 +3373,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSubmitBgColorSwitcher,
         fluentFormSubmitBgColor,
         fluentFormSubmitBgHoverColor,
+        fluentFormSubmitGlobalTypoSwitcher,
+        fluentFormSubmitGlobalTypographyData,
+        fluentFormSubmitGlobalTypoType,
         fluentFormSubmitFontFamily,
         fluentFormSubmitFontSize,
         fluentFormSubmitFontSizeUnits,
@@ -3440,6 +3414,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         fluentFormSuccessColor,
         fluentFormSuccessBgColor,
+        fluentFormSuccessGlobalTypoSwitcher,
+        fluentFormSuccessGlobalTypographyData,
+        fluentFormSuccessGlobalTypoType,
         fluentFormSuccessFontFamily,
         fluentFormSuccessFontSize,
         fluentFormSuccessFontSizeUnits,
@@ -3467,6 +3444,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSuccessBorderRadiusLink,
 
         fluentFormErrorColor,
+        fluentFormErrorGlobalTypoSwitcher,
+        fluentFormErrorGlobalTypographyData,
+        fluentFormErrorGlobalTypoType,
         fluentFormErrorFontFamily,
         fluentFormErrorFontSize,
         fluentFormErrorFontSizeUnits,
@@ -3743,35 +3723,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={fluentFormLabelGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ fluentFormLabelGlobalTypographyData: value })}
+
+                                                globalTypoType={fluentFormLabelGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        fluentFormLabelGlobalTypoType: value, 
+                                                        fluentFormLabelGlobalTypoSwitcher: value === 'default' ? {...fluentFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={fluentFormLabelFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormLabelFontFamily: value })}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormLabelFontFamily: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                 fontSize={fluentFormLabelFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormLabelFontSize: value })}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormLabelFontSize: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                 fontSizeUnits={fluentFormLabelFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ fluentFormLabelFontSizeUnits: value })}
 
                                                 fontWeight={fluentFormLabelFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormLabelFontWeight: value })}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormLabelFontWeight: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                 fontStyle={fluentFormLabelFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormLabelFontStyle: value })}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormLabelFontStyle: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                 textTransform={fluentFormLabelTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormLabelTextTransform: value })}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormLabelTextTransform: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                 textDecoration={fluentFormLabelTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormLabelTextDecoration: value })}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormLabelTextDecoration: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                 letterSpacing={fluentFormLabelLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormLabelLetterSpacing: value })}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormLabelLetterSpacing: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                 letterSpacingUnits={fluentFormLabelLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormLabelLetterSpacingUnits: value })}
 
                                                 lineHeight={fluentFormLabelLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormLabelLineHeight: value })}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormLabelLineHeight: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                 lineHeightUnits={fluentFormLabelLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ fluentFormLabelLineHeightUnits: value })}
@@ -3796,35 +3788,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={fluentFormInputGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ fluentFormInputGlobalTypographyData: value })}
+
+                                                globalTypoType={fluentFormInputGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        fluentFormInputGlobalTypoType: value, 
+                                                        fluentFormInputGlobalTypoSwitcher: value === 'default' ? {...fluentFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={fluentFormInputFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormInputFontFamily: value })}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormInputFontFamily: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                 fontSize={fluentFormInputFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormInputFontSize: value })}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormInputFontSize: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                 fontSizeUnits={fluentFormInputFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ fluentFormInputFontSizeUnits: value })}
 
                                                 fontWeight={fluentFormInputFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormInputFontWeight: value })}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormInputFontWeight: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                 fontStyle={fluentFormInputFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormInputFontStyle: value })}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormInputFontStyle: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                 textTransform={fluentFormInputTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormInputTextTransform: value })}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormInputTextTransform: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                 textDecoration={fluentFormInputTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormInputTextDecoration: value })}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormInputTextDecoration: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                 letterSpacing={fluentFormInputLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormInputLetterSpacing: value })}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormInputLetterSpacing: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                 letterSpacingUnits={fluentFormInputLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormInputLetterSpacingUnits: value })}
 
                                                 lineHeight={fluentFormInputLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormInputLineHeight: value })}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormInputLineHeight: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                 lineHeightUnits={fluentFormInputLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ fluentFormInputLineHeightUnits: value })}
@@ -4134,35 +4138,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 )}
 
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={fluentFormSectionBreakTitleGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ fluentFormSectionBreakTitleGlobalTypographyData: value })}
+
+                                                    globalTypoType={fluentFormSectionBreakTitleGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            fluentFormSectionBreakTitleGlobalTypoType: value, 
+                                                            fluentFormSectionBreakTitleGlobalTypoSwitcher: value === 'default' ? {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={fluentFormSectionBreakTitleFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value })}
+                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                     fontSize={fluentFormSectionBreakTitleFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakTitleFontSize: value })}
+                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakTitleFontSize: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                     fontSizeUnits={fluentFormSectionBreakTitleFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSectionBreakTitleFontSizeUnits: value })}
 
                                                     fontWeight={fluentFormSectionBreakTitleFontWeight}
-                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakTitleFontWeight: value })}
+                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakTitleFontWeight: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                     fontStyle={fluentFormSectionBreakTitleFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakTitleFontStyle: value })}
+                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakTitleFontStyle: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                     textTransform={fluentFormSectionBreakTitleTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakTitleTextTransform: value })}
+                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakTitleTextTransform: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                     textDecoration={fluentFormSectionBreakTitleTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakTitleTextDecoration: value })}
+                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakTitleTextDecoration: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                     letterSpacing={fluentFormSectionBreakTitleLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacing: value })}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacing: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                     letterSpacingUnits={fluentFormSectionBreakTitleLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSectionBreakTitleLetterSpacingUnits: value })}
 
                                                     lineHeight={fluentFormSectionBreakTitleLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeight: value })}
+                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeight: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                     lineHeightUnits={fluentFormSectionBreakTitleLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSectionBreakTitleLineHeightUnits: value })}
@@ -4222,35 +4238,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                                 <FB_TypographyControl
+                                                    globalTypoControlActive={true}
+                                                    globalTypoSwitcher={fluentFormSectionBreakDescGlobalTypoSwitcher}
+                                                    storeGlobalTypographyData={(value) => setAttributes({ fluentFormSectionBreakDescGlobalTypographyData: value })}
+
+                                                    globalTypoType={fluentFormSectionBreakDescGlobalTypoType}
+                                                    onChangeGlobalTypoType={(value) => {
+                                                        setAttributes({ 
+                                                            fluentFormSectionBreakDescGlobalTypoType: value, 
+                                                            fluentFormSectionBreakDescGlobalTypoSwitcher: value === 'default' ? {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        })
+                                                    }}
+
                                                     fontFamily={fluentFormSectionBreakDescFontFamily}
-                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value })}
+                                                    onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                     fontSize={fluentFormSectionBreakDescFontSize}
-                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakDescFontSize: value })}
+                                                    onChangeFontSize={(value) => setAttributes({ fluentFormSectionBreakDescFontSize: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                     fontSizeUnits={fluentFormSectionBreakDescFontSizeUnits}
                                                     onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSectionBreakDescFontSizeUnits: value })}
 
-                                                    fontWeight={fluentFormSectionBreakDescFontWeight} 
-                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakDescFontWeight: value })}
+                                                    fontWeight={fluentFormSectionBreakDescFontWeight}
+                                                    onChangeFontWeight={(value) => setAttributes({ fluentFormSectionBreakDescFontWeight: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                     fontStyle={fluentFormSectionBreakDescFontStyle}
-                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakDescFontStyle: value })}
+                                                    onChangeFontStyle={(value) => setAttributes({ fluentFormSectionBreakDescFontStyle: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                     textTransform={fluentFormSectionBreakDescTextTransform}
-                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakDescTextTransform: value })}
+                                                    onChangeTextTransform={(value) => setAttributes({ fluentFormSectionBreakDescTextTransform: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                     textDecoration={fluentFormSectionBreakDescTextDecoration}
-                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakDescTextDecoration: value })}
+                                                    onChangeTextDecoration={(value) => setAttributes({ fluentFormSectionBreakDescTextDecoration: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                     letterSpacing={fluentFormSectionBreakDescLetterSpacing}
-                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacing: value })}
+                                                    onChangeLetterSpacing={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacing: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                     letterSpacingUnits={fluentFormSectionBreakDescLetterSpacingUnits}
                                                     onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSectionBreakDescLetterSpacingUnits: value })}
 
                                                     lineHeight={fluentFormSectionBreakDescLineHeight}
-                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakDescLineHeight: value })}
+                                                    onChangeLineHeight={(value) => setAttributes({ fluentFormSectionBreakDescLineHeight: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                     lineHeightUnits={fluentFormSectionBreakDescLineHeightUnits}
                                                     onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSectionBreakDescLineHeightUnits: value })}
@@ -4321,35 +4349,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={fluentFormHtmlGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ fluentFormHtmlGlobalTypographyData: value })}
+
+                                                globalTypoType={fluentFormHtmlGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        fluentFormHtmlGlobalTypoType: value, 
+                                                        fluentFormHtmlGlobalTypoSwitcher: value === 'default' ? {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={fluentFormHtmlFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormHtmlFontFamily: value })}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormHtmlFontFamily: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                 fontSize={fluentFormHtmlFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormHtmlFontSize: value })}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormHtmlFontSize: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                 fontSizeUnits={fluentFormHtmlFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ fluentFormHtmlFontSizeUnits: value })}
 
-                                                fontWeight={fluentFormHtmlFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormHtmlFontWeight: value })}
+                                                fontWeight={fluentFormHtmlFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormHtmlFontWeight: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                 fontStyle={fluentFormHtmlFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormHtmlFontStyle: value })}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormHtmlFontStyle: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                 textTransform={fluentFormHtmlTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormHtmlTextTransform: value })}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormHtmlTextTransform: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                 textDecoration={fluentFormHtmlTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormHtmlTextDecoration: value })}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormHtmlTextDecoration: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                 letterSpacing={fluentFormHtmlLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormHtmlLetterSpacing: value })}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormHtmlLetterSpacing: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                 letterSpacingUnits={fluentFormHtmlLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormHtmlLetterSpacingUnits: value })}
 
                                                 lineHeight={fluentFormHtmlLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormHtmlLineHeight: value })}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormHtmlLineHeight: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                 lineHeightUnits={fluentFormHtmlLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ fluentFormHtmlLineHeightUnits: value })}
@@ -4432,35 +4472,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={fluentFormSubmitGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ fluentFormSubmitGlobalTypographyData: value })}
+
+                                                globalTypoType={fluentFormSubmitGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        fluentFormSubmitGlobalTypoType: value, 
+                                                        fluentFormSubmitGlobalTypoSwitcher: value === 'default' ? {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
+
                                                 fontFamily={fluentFormSubmitFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormSubmitFontFamily: value })}
+                                                onChangeFontFamily={(value) => setAttributes({ fluentFormSubmitFontFamily: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
 
                                                 fontSize={fluentFormSubmitFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormSubmitFontSize: value })}
+                                                onChangeFontSize={(value) => setAttributes({ fluentFormSubmitFontSize: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, fontSize: value && false} })}
 
                                                 fontSizeUnits={fluentFormSubmitFontSizeUnits}
                                                 onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSubmitFontSizeUnits: value })}
 
-                                                fontWeight={fluentFormSubmitFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormSubmitFontWeight: value })}
+                                                fontWeight={fluentFormSubmitFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ fluentFormSubmitFontWeight: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, fontWeight: value && false} })}
 
                                                 fontStyle={fluentFormSubmitFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormSubmitFontStyle: value })}
+                                                onChangeFontStyle={(value) => setAttributes({ fluentFormSubmitFontStyle: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, fontStyle: value && false} })}
 
                                                 textTransform={fluentFormSubmitTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormSubmitTextTransform: value })}
+                                                onChangeTextTransform={(value) => setAttributes({ fluentFormSubmitTextTransform: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, textTransform: value && false} })}
 
                                                 textDecoration={fluentFormSubmitTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormSubmitTextDecoration: value })}
+                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormSubmitTextDecoration: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, textDecoration: value && false} })}
 
                                                 letterSpacing={fluentFormSubmitLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormSubmitLetterSpacing: value })}
+                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormSubmitLetterSpacing: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, letterSpacing: value && false} })}
 
                                                 letterSpacingUnits={fluentFormSubmitLetterSpacingUnits}
                                                 onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSubmitLetterSpacingUnits: value })}
 
                                                 lineHeight={fluentFormSubmitLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormSubmitLineHeight: value })}
+                                                onChangeLineHeight={(value) => setAttributes({ fluentFormSubmitLineHeight: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, lineHeight: value && false} })}
 
                                                 lineHeightUnits={fluentFormSubmitLineHeightUnits}
                                                 onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSubmitLineHeightUnits: value })}
@@ -4600,43 +4652,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={fluentFormSuccessFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormSuccessFontFamily: value })}
+                                        <FB_TypographyControl
+                                            globalTypoControlActive={true}
+                                            globalTypoSwitcher={fluentFormSuccessGlobalTypoSwitcher}
+                                            storeGlobalTypographyData={(value) => setAttributes({ fluentFormSuccessGlobalTypographyData: value })}
 
-                                                fontSize={fluentFormSuccessFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormSuccessFontSize: value })}
+                                            globalTypoType={fluentFormSuccessGlobalTypoType}
+                                            onChangeGlobalTypoType={(value) => {
+                                                setAttributes({ 
+                                                    fluentFormSuccessGlobalTypoType: value, 
+                                                    fluentFormSuccessGlobalTypoSwitcher: value === 'default' ? {...fluentFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                })
+                                            }}
 
-                                                fontSizeUnits={fluentFormSuccessFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSuccessFontSizeUnits: value })}
+                                            fontFamily={fluentFormSuccessFontFamily}
+                                            onChangeFontFamily={(value) => setAttributes({ fluentFormSuccessFontFamily: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={fluentFormSuccessFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormSuccessFontWeight: value })}
+                                            fontSize={fluentFormSuccessFontSize}
+                                            onChangeFontSize={(value) => setAttributes({ fluentFormSuccessFontSize: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={fluentFormSuccessFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormSuccessFontStyle: value })}
+                                            fontSizeUnits={fluentFormSuccessFontSizeUnits}
+                                            onChangeFontSizeUnit={(value) => setAttributes({ fluentFormSuccessFontSizeUnits: value })}
 
-                                                textTransform={fluentFormSuccessTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormSuccessTextTransform: value })}
+                                            fontWeight={fluentFormSuccessFontWeight}
+                                            onChangeFontWeight={(value) => setAttributes({ fluentFormSuccessFontWeight: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={fluentFormSuccessTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormSuccessTextDecoration: value })}
+                                            fontStyle={fluentFormSuccessFontStyle}
+                                            onChangeFontStyle={(value) => setAttributes({ fluentFormSuccessFontStyle: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={fluentFormSuccessLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormSuccessLetterSpacing: value })}
+                                            textTransform={fluentFormSuccessTextTransform}
+                                            onChangeTextTransform={(value) => setAttributes({ fluentFormSuccessTextTransform: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={fluentFormSuccessLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSuccessLetterSpacingUnits: value })}
+                                            textDecoration={fluentFormSuccessTextDecoration}
+                                            onChangeTextDecoration={(value) => setAttributes({ fluentFormSuccessTextDecoration: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={fluentFormSuccessLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormSuccessLineHeight: value })}
+                                            letterSpacing={fluentFormSuccessLetterSpacing}
+                                            onChangeLetterSpacing={(value) => setAttributes({ fluentFormSuccessLetterSpacing: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={fluentFormSuccessLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSuccessLineHeightUnits: value })}
+                                            letterSpacingUnits={fluentFormSuccessLetterSpacingUnits}
+                                            onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormSuccessLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+                                            lineHeight={fluentFormSuccessLineHeight}
+                                            onChangeLineHeight={(value) => setAttributes({ fluentFormSuccessLineHeight: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                                            lineHeightUnits={fluentFormSuccessLineHeightUnits}
+                                            onChangeLineHeightUnit={(value) => setAttributes({ fluentFormSuccessLineHeightUnits: value })}
+
+                                            deviceType={deviceType}
+                                            setAttributes={setAttributes}
+                                        />
 
                                             <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}
@@ -4709,43 +4773,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
 
 
-                                            <FB_TypographyControl
-                                                fontFamily={fluentFormErrorFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ fluentFormErrorFontFamily: value })}
+                                        <FB_TypographyControl
+                                            globalTypoControlActive={true}
+                                            globalTypoSwitcher={fluentFormErrorGlobalTypoSwitcher}
+                                            storeGlobalTypographyData={(value) => setAttributes({ fluentFormErrorGlobalTypographyData: value })}
 
-                                                fontSize={fluentFormErrorFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ fluentFormErrorFontSize: value })}
+                                            globalTypoType={fluentFormErrorGlobalTypoType}
+                                            onChangeGlobalTypoType={(value) => {
+                                                setAttributes({ 
+                                                    fluentFormErrorGlobalTypoType: value, 
+                                                    fluentFormErrorGlobalTypoSwitcher: value === 'default' ? {...fluentFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                })
+                                            }}
 
-                                                fontSizeUnits={fluentFormErrorFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ fluentFormErrorFontSizeUnits: value })}
+                                            fontFamily={fluentFormErrorFontFamily}
+                                            onChangeFontFamily={(value) => setAttributes({ fluentFormErrorFontFamily: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontWeight={fluentFormErrorFontWeight} 
-                                                onChangeFontWeight={(value) => setAttributes({ fluentFormErrorFontWeight: value })}
+                                            fontSize={fluentFormErrorFontSize}
+                                            onChangeFontSize={(value) => setAttributes({ fluentFormErrorFontSize: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontStyle={fluentFormErrorFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ fluentFormErrorFontStyle: value })}
+                                            fontSizeUnits={fluentFormErrorFontSizeUnits}
+                                            onChangeFontSizeUnit={(value) => setAttributes({ fluentFormErrorFontSizeUnits: value })}
 
-                                                textTransform={fluentFormErrorTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ fluentFormErrorTextTransform: value })}
+                                            fontWeight={fluentFormErrorFontWeight}
+                                            onChangeFontWeight={(value) => setAttributes({ fluentFormErrorFontWeight: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                textDecoration={fluentFormErrorTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ fluentFormErrorTextDecoration: value })}
+                                            fontStyle={fluentFormErrorFontStyle}
+                                            onChangeFontStyle={(value) => setAttributes({ fluentFormErrorFontStyle: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                letterSpacing={fluentFormErrorLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ fluentFormErrorLetterSpacing: value })}
+                                            textTransform={fluentFormErrorTextTransform}
+                                            onChangeTextTransform={(value) => setAttributes({ fluentFormErrorTextTransform: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                letterSpacingUnits={fluentFormErrorLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormErrorLetterSpacingUnits: value })}
+                                            textDecoration={fluentFormErrorTextDecoration}
+                                            onChangeTextDecoration={(value) => setAttributes({ fluentFormErrorTextDecoration: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                lineHeight={fluentFormErrorLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ fluentFormErrorLineHeight: value })}
+                                            letterSpacing={fluentFormErrorLetterSpacing}
+                                            onChangeLetterSpacing={(value) => setAttributes({ fluentFormErrorLetterSpacing: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                lineHeightUnits={fluentFormErrorLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ fluentFormErrorLineHeightUnits: value })}
+                                            letterSpacingUnits={fluentFormErrorLetterSpacingUnits}
+                                            onChangeLetterSpacingUnit={(value) => setAttributes({ fluentFormErrorLetterSpacingUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+                                            lineHeight={fluentFormErrorLineHeight}
+                                            onChangeLineHeight={(value) => setAttributes({ fluentFormErrorLineHeight: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                                            lineHeightUnits={fluentFormErrorLineHeightUnits}
+                                            onChangeLineHeightUnit={(value) => setAttributes({ fluentFormErrorLineHeightUnits: value })}
+
+                                            deviceType={deviceType}
+                                            setAttributes={setAttributes}
+                                        />
 
                                             <FB_ColorControl
                                                 label={__("Color", "frontis-blocks")}

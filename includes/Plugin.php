@@ -13,6 +13,7 @@ use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
+use FrontisBlocks\Utils\Helper;
 final class Plugin
 {
 	/**
@@ -20,7 +21,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.3';
+	const VERSION = '1.0.4';
 
 	/**
 	 * Plugin slug
@@ -100,6 +101,10 @@ final class Plugin
 
 		if (has_block('frontis-blocks/advanced-video')) {
 			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
+		}else{
+			if(Helper::get_blocks_inside_template('frontis-blocks/advanced-video')){
+				wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
+			}
 		}
 		if (has_block('frontis-blocks/slider')) {
 			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);

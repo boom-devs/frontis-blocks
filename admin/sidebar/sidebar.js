@@ -1,15 +1,12 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
-import { useDispatch, useSelect } from '@wordpress/data';
-
+import { useDispatch } from '@wordpress/data';
 import {
 	Button,
-	PanelBody,
 	TabPanel,
 	__experimentalNavigatorProvider as NavigatorProvider,
 	__experimentalNavigatorScreen as NavigatorScreen,
-	__experimentalNavigatorButton as NavigatorButton,
-	__experimentalNavigatorBackButton as NavigatorBackButton
+	__experimentalNavigatorButton as NavigatorButton
 } from "@wordpress/components";
 
 import { PanelColorSettings, } from "@wordpress/block-editor";
@@ -21,11 +18,12 @@ import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import { getFbLocalStorage, loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import TypographySettings from "./components/TypographySettings";
-import {frontisExtractTypoValue, getFontFamily} from "./components/GetTypographyValue";
 import generateCSSVariables from "./components/GenerateRootCss";
+import generateColorsVariables from "./components/GenerateColorRoot";
+
 import "./sidebar.scss";
 
-const defaultsColors = [
+let defaultsColors = [
 	{
 		"name": __("Primary Color", "frontis-blocks"),
 		"color": '#399CFF',
@@ -75,8 +73,13 @@ const defaultsColors = [
 		"name": __("Gray Color", "frontis-blocks"),
 		"color": '#808080',
 		"slug": 'gray-color',
-	}
+	},
 
+	{
+		"name": __("Gray Color2", "frontis-blocks"),
+		"color": '#808080',
+		"slug": 'gray-color2',
+	}
 ];
 
 const gradientDefaults = [
@@ -84,73 +87,61 @@ const gradientDefaults = [
 		"color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
 		"name": "Primary Color",
 		"slug": "gradientPrimary",
-		"var": "--fb-gradient-primary-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
 		"name": "Secondary Color",
 		"slug": "gradientSecondary",
-		"var": "--fb-gradient-secondary-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
 		"name": "Tertiary Color",
 		"slug": "gradientTertiary",
-		"var": "--fb-gradient-tertiary-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
 		"name": "Accent Color",
 		"slug": "gradientAccent",
-		"var": "--fb-gradient-accent-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
 		"name": "Neutral Background",
 		"slug": "gradientBackground",
-		"var": "--fb-gradient-background-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
 		"name": "Vibrant Glow",
 		"slug": "gradientGradient",
-		"var": "--fb-gradient-gradient-color"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
 		"name": "Sunset Bliss",
 		"slug": "gradientSunsetBliss",
-		"var": "--fb-gradient-sunset-bliss"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
 		"name": "Ocean Breeze",
 		"slug": "gradientOceanBreeze",
-		"var": "--fb-gradient-ocean-breeze"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
 		"name": "Tangerine Dream",
 		"slug": "gradientTangerineDream",
-		"var": "--fb-gradient-tangerine-dream"
 	},
 	{
 		"color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
 		"name": "Lavender Kiss",
 		"slug": "gradientLavenderKiss",
-		"var": "--fb-gradient-lavender-kiss"
 	},
 	{
 		"color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
 		"name": "Minty Fresh",
 		"slug": "gradientMintyFresh",
-		"var": "--fb-gradient-minty-fresh"
 	},
 	{
 		"color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
 		"name": "Halloween",
 		"slug": "gradientHalloween",
-		"var": "--fb-gradient-halloween"
 	}
 
 
@@ -164,9 +155,14 @@ function FrontisBlocksSidebar(props) {
 	const [gradientColors, setGradientColors] = useState([]);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [globalColors, setGlobalColors] = useState([]);
-	const [customCSS, setCustomCSS] = useState('');
 	const [fbGlobalSettingsLoading, setFbGlobalSettingsLoading] = useState(false);
-	
+	const { editPost } = useDispatch('core/editor');
+	let themeColors = frontisBlocksAdmin?.theme_colors;
+
+	if(themeColors) {
+		defaultsColors = themeColors;
+	}
+
 	// const globalTypographyElements = frontisBlocksAdmin?.global_styles;
 	// const globalTypography = globalTypographyElements?.elements;
 
@@ -744,7 +740,7 @@ function FrontisBlocksSidebar(props) {
 								setTimeout(() => {
 									generateCSSVariables(res.data, deviceType);
 								}, 1000);
-								
+
 								localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
 							}
 						} else {
@@ -788,7 +784,6 @@ function FrontisBlocksSidebar(props) {
 		setGlobalColors([...colors]);
 		setFbGlobalSettingsLoading(true);
 
-
 		// // Select the Save button and update its aria-disabled attribute
 		// const saveButton = document.querySelector(
 		// 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
@@ -805,6 +800,13 @@ function FrontisBlocksSidebar(props) {
 		// }
 
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			const mergedColors = [...customColors, ...globalColors, ...customGradientColors, ...gradientColors];
+			generateColorsVariables(mergedColors);
+		}, 1000)
+	}, [globalColors, customColors, customGradientColors, gradientColors])
 
 	//Update Gradient Colors
 	const setGradientColor = (index, color) => {
@@ -842,7 +844,6 @@ function FrontisBlocksSidebar(props) {
 					color: '#000000',
 					name: `Custom Color ${index}`,
 					slug: `custom-color-${index}`,
-					var: `--fb-custom-color-${index}`
 				}
 			];
 		});
@@ -863,9 +864,8 @@ function FrontisBlocksSidebar(props) {
 
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
-			
+
 			if (isAfterSave && fbGlobalSettingsLoading) {
-				console.log("Hello world")
 				try {
 					const settingsState = [
 						'fb_update_global_colors',
@@ -916,7 +916,11 @@ function FrontisBlocksSidebar(props) {
 		handleUpdateSettings();
 	}, [isAfterSave]);
 
-	const [activeStep, setActiveStep] = useState("solid");
+	useEffect(() => {
+		if(fbGlobalSettingsLoading) {
+			editPost({ isDirty: true });
+		}
+	}, [fbGlobalSettingsLoading]);
 
 	return (
 		<>
@@ -1116,15 +1120,107 @@ function FrontisBlocksSidebar(props) {
 											<p>Available texts, links, Button, Headings global colors</p>
 										</div>
 									</div>
-									<PanelColorSettings
+									{/* <PanelColorSettings
 										title={__("Colors", "frontis-blocks")}
 										className={"fb-color-panel fb-global-color-panel"}
 										initialOpen={true}
 										disableAlpha={true}
 										disableCustomGradients={false}
 										colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
-									/>
+									/> */}
 
+										<TabPanel
+											className="fb-blocks-color-tabs"
+											activeClass="active-tab"
+											onSelect={(tabName) => setActiveTab(tabName)}
+											tabs={[
+												{name: "solid", title: "Solid"},
+												{name: "gradient", title: "Gradient"},
+											]}
+										>
+										{(tab) => (
+											<div>
+												{tab.name === "solid" && (
+													<>
+														<PanelColorSettings
+															title={__("Global Colors", "frontis-blocks")}
+															className={"fb-color-panel fb-global-color-panel"}
+															initialOpen={true}
+															disableAlpha={true}
+															disableCustomGradients={false}
+															colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
+														/>
+														{customColors && customColors.length > 0 && (
+															<ColorPalletWrapper
+																colorPanelArray={colorPanelArray}
+																customColors={customColors}
+																setCustomColor={setCustomColor}
+																setCustomColors={setCustomColors}
+															/>
+														)}
+														<div className="add-custom-color">
+															<Button
+																className="add-custom-color-btn"
+																onClick={() => setNewCustomColorFn()}
+															>Add Custom Color <span>
+																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+																</svg>
+															</span>
+															</Button>
+														</div>
+													</>
+												)}
+												{tab.name === "gradient" && (
+													<>
+														{/* Gradient Color Pallet */}
+														<GradientColorPallet
+															title={"Gradient Colors"}
+															colors={gradientColors}
+															setColor={setGradientColor}
+															setColors={setGradientColors}
+															wrapperClass={"fb-gradient-color-panel"}
+															resetAction={true}
+														/>
+
+														{customGradientColors.length > 0 &&
+															<CustomGradientColorPallet
+																title={"Custom Gradient Colors"}
+																colors={customGradientColors}
+																setColor={setCustomGradientColor}
+																setColors={setCustomGradientColors}
+																wrapperClass={"fb-gradient-color-panel"}
+																resetAction={false}
+																deleteAction={true}
+																onDelete={deleteCustomGradientColor}
+															/>
+
+														}
+
+														<div className="add-custom-color">
+															<Button
+																className="add-custom-color-btn"
+																onClick={() => setCustomGradientColors([
+																	...customGradientColors,
+																	{
+																		color: '#000000',
+																		name: `Gradient Color ${customGradientColors.length + 1}`,
+																		slug: `custom-gradient-color-${customGradientColors.length + 1}`,
+																		var: `--fb-custom-gradient-color-${customGradientColors.length + 1}`
+																	}
+																])}
+															>Add Custom Color <span>
+																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+																</svg>
+															</span>
+															</Button>
+														</div>
+													</>
+												)}
+											</div>
+										)}
+									</TabPanel>
 								</>
 							</NavigatorScreen>
 							{/* Blocks Screen */}
