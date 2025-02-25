@@ -9,10 +9,12 @@ import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
+import deprecated from './deprecated';
 
 registerBlockType( metadata.name, {	
 	attributes,
 	icon: FB_Block_Icons.call_to_action,
 	edit: Edit,
 	save,
+	deprecated,
 } );
