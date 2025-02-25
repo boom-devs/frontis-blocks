@@ -261,9 +261,6 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-sidebar-content .fb-global-color-section .fb-color-circle:hover {
-  transform: scale(1.1);
-}
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-sidebar-content .fb-global-color-section .fb-color-item .fb-color-tooltip {
   position: absolute;
   top: -30px;
