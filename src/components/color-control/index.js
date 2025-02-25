@@ -16,8 +16,6 @@ const FB_ColorControl = ({
 	// }, []);
 
     const defaultColors = [
-        { color: '#F72585' },
-        { color: '#7209B7' },
         { color: '#3A0CA3' },
         { color: '#4361EE' },
         { color: '#4CC9F0' },
@@ -27,32 +25,31 @@ const FB_ColorControl = ({
 
     useEffect(() => {
         // Retrieve colors from local storage
-        const storedColors = localStorage.getItem('fb_global_colors');
-        const storedCustomColors = localStorage.getItem('fb_custom_colors');
+        const storedColors = JSON.parse(localStorage.getItem('fb_global_colors')) || [];
+        const storedCustomColors = JSON.parse(localStorage.getItem('fb_custom_colors')) || [];
 
         let combinedColors = [];
 
-        // Function to safely parse and add colors
-        const addColors = (storedData, label) => {
-            if (storedData) {
-                try {
-                    const parsedData = JSON.parse(storedData);
-                    if (Array.isArray(parsedData)) {
-                        combinedColors = [...combinedColors, ...parsedData];
-                    } else {
-                        console.warn(`${label} is not an array:`, parsedData);
-                    }
-                } catch (error) {
-                    console.error(`Error parsing ${label}:`, error);
+        // Function to extract name & slug and push into combinedColors
+        const extractColors = (colorArray) => {
+            colorArray.forEach(({ name, color, slug }) => {
+                if (name && color && slug) {
+                    combinedColors.push({ name, color: `var(--wp--frontis--color--${slug})`, value: color });
                 }
-            }
+            });
         };
 
-        addColors(storedColors, 'Global colors');
-        addColors(storedCustomColors, 'Custom colors');
+        // Extract colors from both stored arrays
+        extractColors(storedColors);
+        extractColors(storedCustomColors);
 
         setGlobalColors(combinedColors);
+
     }, []);
+    
+    const matchedObject = globalColors.find(item => item.color === globalColor);
+    console.log(matchedObject);
+
 
 
     return (
@@ -74,7 +71,7 @@ const FB_ColorControl = ({
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {globalColor || ''}
+                                    {matchedObject !== undefined ? matchedObject.value : globalColor || ''}
                                 </span>
                                 <div
                                     className="fb-setting-color-display"
