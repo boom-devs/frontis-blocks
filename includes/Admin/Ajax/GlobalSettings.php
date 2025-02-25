@@ -14,10 +14,11 @@ class GlobalSettings extends AjaxBase
 
     use Singleton;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Other initialization code...
         add_action('wp_head', array($this, 'output_global_styles'), 999);
-        add_action('wp_enqueue_scripts', array($this, 'enqueue_google_fonts'));
+        add_action('rest_api_init', array($this, 'typography_init'), 999);
     }
     /**
      * register_global_settings_events
@@ -45,7 +46,7 @@ class GlobalSettings extends AjaxBase
             'get_custom_css',
             'get_fontfamilies',
             'import_demo_data',
-            'import_full_site'
+            'import_full_site',
         ];
 
         $this->init_ajax_events($events);
@@ -81,7 +82,8 @@ class GlobalSettings extends AjaxBase
         $this->handle_option_update('custom_typography', 'array');
     }
 
-    public function update_globaltypo() {
+    public function update_globaltypo()
+    {
         $this->handle_option_update('globaltypo', 'array');
     }
 
@@ -151,7 +153,8 @@ class GlobalSettings extends AjaxBase
         wp_send_json_error('Typography not found.');
     }
 
-    public function get_globaltypo() {
+    public function get_globaltypo()
+    {
         $global_typography = get_option('fb_globaltypo');
         if ($global_typography) {
             wp_send_json_success($global_typography);
@@ -432,109 +435,307 @@ class GlobalSettings extends AjaxBase
                 return;
             }
 
-            $config = isset($_POST['config']) ? $_POST['config'] : array();
+            // Get data from AJAX request
+            $config = $_POST['config'] ?? [];
+            $block_id = sanitize_text_field($_POST['block_id'] ?? '');
+            $post_id = intval($_POST['post_id'] ?? 0);
 
-            // Store the configuration
-            if (!empty($config)) {
-                $colors = isset($config['colors']) ? $config['colors'] : array();
-                $typography = isset($config['typography']) ? $config['typography'] : array();
-
-                // Store colors in wp_options instead of theme_mods
-                $color_styles = $this->generate_color_css($colors);
-                $typography_styles = $this->generate_typography_css($typography);
-
-                // Combine all styles
-                $custom_styles = $color_styles . $typography_styles;
-
-                // Save the CSS to wp_options
-                update_option('fb_global_styles', $custom_styles);
-
-                // Add action to output CSS in header if not already added
+            if (empty($post_id)) {
+                wp_send_json_error('Error: Post ID is required.');
+                return;
             }
 
-            // Rest of your page import code...
-            // [Previous page import logic remains the same]
+            // Handle global colors and typography
+            if (!empty($config)) {
+                $colors = $config['colors'] ?? [];
+                $typography = $config['typography'] ?? [];
+            
+                // Update colors
+                update_option('global_site_colors', $colors);
+                
+                // Update typography for each element
+                if (!empty($typography)) {
+                    foreach ($typography as $element => $settings) {
+                        update_option("fb_typography_{$element}", $settings);
+                    }
+                }
+                
+                // Generate and save combined styles
+                $custom_styles = $this->generate_color_css($colors) . $this->generate_typography_css($typography);
+                update_option('fb_global_styles', $custom_styles);
+            }
 
-            wp_send_json_success(['message' => 'Full site imported successfully!']);
+            // Validate demo content file existence
+            $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/full-site.json';
+            if (!file_exists($json_file_path)) {
+                wp_send_json_error('Error: Demo data file not found.');
+                return;
+            }
+
+            // Read and decode demo content
+            $json_data = file_get_contents($json_file_path);
+            $demo_data = json_decode($json_data, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE || empty($demo_data)) {
+                wp_send_json_error('Error: Invalid or empty demo content.');
+                return;
+            }
+
+            // Ensure proper block serialization
+            $serialized_content = serialize_blocks($demo_data['blocks'] ?? $demo_data);
+
+            if (!empty($block_id)) {
+                // Store block-specific content using transient
+                set_transient('fb_block_' . $block_id, [
+                    'blockId' => $block_id,
+                    'content' => $demo_data
+                ], HOUR_IN_SECONDS);
+
+                wp_send_json_success([
+                    'block_id' => $block_id,
+                    'content' => $serialized_content,
+                    'message' => 'Block imported successfully with global settings!',
+                ]);
+            } else {
+                // Update full post content
+                $post_data = [
+                    'ID' => $post_id,
+                    'post_content' => $serialized_content,
+                ];
+
+                $update_result = wp_update_post($post_data, true);
+
+                if (is_wp_error($update_result)) {
+                    wp_send_json_error('Error: Failed to update post - ' . $update_result->get_error_message());
+                } else {
+                    wp_send_json_success([
+                        'content' => $serialized_content,
+                        'message' => 'Full site imported successfully with global settings!',
+                    ]);
+                }
+            }
         } catch (Exception $e) {
             wp_send_json_error('Error: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Generate CSS for colors
-     */
+
     private function generate_color_css($colors)
     {
-        $css = '';
+        if (empty($colors) || !is_array($colors)) {
+            return '';
+        }
 
-        if (!empty($colors)) {
-            $css .= "/* Global Color Styles */\n";
+        $css = ':root {';
+        $color_map = [];
 
-            if (isset($colors['text'])) {
-                $css .= "p, span, li, td, div:not(.fb-template-library-card *) { color: {$colors['text']}; }\n";
-            }
+        foreach ($colors as $index => $color) {
+            $slug = sanitize_key($color['slug']);
+            $hex = sanitize_hex_color($color['hex']);
+            $css .= "--{$slug}: {$hex};\n";
+            $color_map[$slug] = $hex;
+        }
 
-            if (isset($colors['primary'])) {
-                $css .= "h1, h2, h3, h4, h5, h6 { color: {$colors['primary']}; }\n";
-                $css .= "a { color: {$colors['primary']}; }\n";
-            }
+        $css .= "}\n";
 
-            if (isset($colors['secondary'])) {
-                $css .= ".secondary-elements { color: {$colors['secondary']}; }\n";
-            }
+        // Apply primary color to all text elements (p, span, h1-h6)
+        if (!empty($colors[0])) {
+            $primary_slug = sanitize_key($colors[0]['slug']);
+            $css .= "body p, body span, body h1, body h2, body h3, body h4, body h5, body h6 { color: var(--{$primary_slug}); }\n";
+        }
 
-            if (isset($colors['accent'])) {
-                $css .= "blockquote, .accent-elements { color: {$colors['accent']}; }\n";
-            }
+        // Apply secondary color to all anchor (a) elements
+        if (!empty($colors[1])) {
+            $secondary_slug = sanitize_key($colors[1]['slug']);
+            $css .= "body a { color: var(--{$secondary_slug}); }\n";
+        }
 
-            if (isset($colors['background'])) {
-                $css .= "body { background-color: {$colors['background']}; }\n";
-            }
+        // Apply remaining colors to other elements
+        $extra_elements = ['body button', 'body input', 'body blockquote', 'body label', 'body code'];
+        foreach (array_slice($colors, 2) as $index => $color) {
+            $element = $extra_elements[$index % count($extra_elements)];
+            $slug = sanitize_key($color['slug']);
+            $css .= "{$element} { color: var(--{$slug}); }\n";
         }
 
         return $css;
     }
 
-    /**
-     * Generate CSS for typography
-     */
-    private function generate_typography_css($typography)
+
+    private function generate_typography_css($typography) {
+        if (empty($typography)) {
+            return '';
+        }
+    
+        $css = ':root {';
+        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+        
+        // First define all typography variables in root
+        foreach ($elements as $element) {
+            $settings = get_option("fb_typography_{$element}");
+            if (empty($settings)) {
+                continue;
+            }
+    
+            $settings = json_decode($settings, true);
+            if (empty($settings)) {
+                continue;
+            }
+    
+            // Define variables for each property
+            if (!empty($settings['fontSize']['desktop'])) {
+                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['desktop']}{$settings['fontSizeUnit']};";
+            }
+            if (!empty($settings['fontFamily'])) {
+                $css .= "\n  --fb-{$element}-font-family: {$settings['fontFamily']};";
+            }
+            if (!empty($settings['fontWeight'])) {
+                $css .= "\n  --fb-{$element}-font-weight: {$settings['fontWeight']};";
+            }
+            if (!empty($settings['fontStyle'])) {
+                $css .= "\n  --fb-{$element}-font-style: {$settings['fontStyle']};";
+            }
+            if (!empty($settings['textTransform'])) {
+                $css .= "\n  --fb-{$element}-text-transform: {$settings['textTransform']};";
+            }
+            if (!empty($settings['textDecoration'])) {
+                $css .= "\n  --fb-{$element}-text-decoration: {$settings['textDecoration']};";
+            }
+            if (!empty($settings['letterSpacing']['desktop'])) {
+                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['desktop']}{$settings['letterSpacingUnit']};";
+            }
+            if (!empty($settings['lineHeight']['desktop'])) {
+                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['desktop']}{$settings['lineHeightUnit']};";
+            }
+        }
+        $css .= "\n}\n\n";
+    
+        // Then use the variables in selectors
+        foreach ($elements as $element) {
+            $settings = get_option("fb_typography_{$element}");
+            if (empty($settings)) {
+                continue;
+            }
+    
+            // Define selector based on element type
+            $selector = match($element) {
+                'text' => 'body p, body span',
+                'link' => 'a',
+                'button' => 'button, .button',
+                default => $element,
+            };
+    
+            $css .= "{$selector} {\n";
+            
+            // Use the CSS variables
+            $css .= "  font-size: var(--fb-{$element}-font-size);\n";
+            $css .= "  font-family: var(--fb-{$element}-font-family);\n";
+            $css .= "  font-weight: var(--fb-{$element}-font-weight);\n";
+            $css .= "  font-style: var(--fb-{$element}-font-style);\n";
+            $css .= "  text-transform: var(--fb-{$element}-text-transform);\n";
+            $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
+            $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
+            $css .= "  line-height: var(--fb-{$element}-line-height);\n";
+            
+            $css .= "}\n\n";
+        }
+    
+        // Add responsive styles if needed
+        foreach ($elements as $element) {
+            $settings = get_option("fb_typography_{$element}");
+            if (empty($settings)) {
+                continue;
+            }
+    
+            $settings = json_decode($settings, true);
+            if (empty($settings)) {
+                continue;
+            }
+    
+            $selector = match($element) {
+                'text' => 'body p, body span',
+                'link' => 'a',
+                'button' => 'button, .button',
+                default => $element,
+            };
+    
+            // Tablet styles
+            if (!empty($settings['fontSize']['tablet'])) {
+                $css .= "@media (max-width: 768px) {\n";
+                $css .= "  :root {\n";
+                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
+                if (!empty($settings['letterSpacing']['tablet'])) {
+                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
+                }
+                if (!empty($settings['lineHeight']['tablet'])) {
+                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
+                }
+                $css .= "  }\n";
+                $css .= "}\n\n";
+            }
+    
+            // Mobile styles
+            if (!empty($settings['fontSize']['mobile'])) {
+                $css .= "@media (max-width: 480px) {\n";
+                $css .= "  :root {\n";
+                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
+                if (!empty($settings['letterSpacing']['mobile'])) {
+                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
+                }
+                if (!empty($settings['lineHeight']['mobile'])) {
+                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
+                }
+                $css .= "  }\n";
+                $css .= "}\n";
+            }
+        }
+    
+        return $css;
+    }
+
+    private function add_responsive_typography($selector, $settings)
     {
         $css = '';
 
-        if (!empty($typography)) {
-            $css .= "/* Global Typography Styles */\n";
+        // Tablet styles
+        if (!empty($settings['fontSize']['tablet'])) {
+            $css .= "@media (max-width: 768px) {\n";
+            $css .= "  {$selector} {\n";
+            $css .= "    font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
 
-            if (isset($typography['headingFont'])) {
-                $css .= "h1, h2, h3, h4, h5, h6 { font-family: '{$typography['headingFont']}', sans-serif; }\n";
+            if (!empty($settings['letterSpacing']['tablet'])) {
+                $css .= "    letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
             }
 
-            if (isset($typography['bodyFont'])) {
-                $css .= "body, p, span, li, td { font-family: '{$typography['bodyFont']}', sans-serif; }\n";
+            if (!empty($settings['lineHeight']['tablet'])) {
+                $css .= "    line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
             }
 
-            if (isset($typography['baseSize'])) {
-                $css .= "body { font-size: {$typography['baseSize']}; }\n";
+            $css .= "  }\n";
+            $css .= "}\n\n";
+        }
+
+        // Mobile styles
+        if (!empty($settings['fontSize']['mobile'])) {
+            $css .= "@media (max-width: 480px) {\n";
+            $css .= "  {$selector} {\n";
+            $css .= "    font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
+
+            if (!empty($settings['letterSpacing']['mobile'])) {
+                $css .= "    letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
             }
 
-            if (isset($typography['scale'])) {
-                $scale = floatval($typography['scale']);
-                $css .= "h1 { font-size: " . ($scale * 2.5) . "em; }\n";
-                $css .= "h2 { font-size: " . ($scale * 2) . "em; }\n";
-                $css .= "h3 { font-size: " . ($scale * 1.75) . "em; }\n";
-                $css .= "h4 { font-size: " . ($scale * 1.5) . "em; }\n";
-                $css .= "h5 { font-size: " . ($scale * 1.25) . "em; }\n";
-                $css .= "h6 { font-size: " . ($scale * 1.1) . "em; }\n";
+            if (!empty($settings['lineHeight']['mobile'])) {
+                $css .= "    line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
             }
+
+            $css .= "  }\n";
+            $css .= "}\n";
         }
 
         return $css;
     }
 
-    /**
-     * Output the global styles in wp_head
-     */
     public function output_global_styles()
     {
         $styles = get_option('fb_global_styles', '');
@@ -543,35 +744,20 @@ class GlobalSettings extends AjaxBase
         }
     }
 
-    /**
-     * Add this method to load Google Fonts if needed
-     */
-    public function enqueue_google_fonts()
+    public function typography_init()
     {
-        $typography = get_option('fb_typography_settings', array());
+        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
-        if (!empty($typography)) {
-            $fonts = array();
-
-            if (!empty($typography['headingFont'])) {
-                $fonts[] = $typography['headingFont'];
-            }
-
-            if (!empty($typography['bodyFont'])) {
-                $fonts[] = $typography['bodyFont'];
-            }
-
-            if (!empty($fonts)) {
-                $fonts = array_unique($fonts);
-                $fonts_string = implode('|', str_replace(' ', '+', $fonts));
-                wp_enqueue_style(
-                    'fb-google-fonts',
-                    "https://fonts.googleapis.com/css?family={$fonts_string}&display=swap",
-                    array(),
-                    FB_VERSION,
-                    true
-                );
-            }
+        foreach ($elements as $element) {
+            register_setting(
+                'fb_typography',
+                'fb_typography_' . $element,
+                [
+                    'type' => 'string',
+                    'show_in_rest' => true,
+                    'default' => ''
+                ]
+            );
         }
     }
 
