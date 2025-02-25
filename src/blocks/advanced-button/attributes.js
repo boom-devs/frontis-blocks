@@ -508,11 +508,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    buttonIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     buttonIconRotate: {
         type: 'object',
         default: {
             Desktop: "",
             Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
             Mobile: "",
         }
     },
