@@ -103,11 +103,11 @@ const TemplateCard = ({ imageUrl }) => {
   //demo import full site
 
   // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
+    // const selectedBlock = window.wp.data
+    //   .select('core/block-editor')
+    //   .getSelectedBlock();
 
-  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
+    // const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
 
   //   setIsLoading(true);
 
@@ -194,7 +194,6 @@ const TemplateCard = ({ imageUrl }) => {
           </div>
         </div>
       </div>
-
       <SiteImportModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
