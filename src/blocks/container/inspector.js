@@ -7,7 +7,8 @@ import {
 	PanelBody,
 	RangeControl,
 	SelectControl,
-	TabPanel
+	TabPanel,
+	ToggleControl
 } from "@wordpress/components";
 
 import FB_AlignmentControl from '@Components/alignment-control';

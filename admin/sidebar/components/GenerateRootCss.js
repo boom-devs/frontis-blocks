@@ -147,12 +147,12 @@ const generateCSSVariables = (data, deviceType) => {
                 fontFamilies.add(fontFamily);
 
                 let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-                
+
                 // If not found, try the editor-canvas iframe
                 if (!iframe) {
                     iframe = document.querySelector('iframe[name="editor-canvas"]');
                 }
-                
+
                 const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
 
                 // Generate font URL and add to the iframe's document
@@ -246,9 +246,11 @@ const generateCSSVariables = (data, deviceType) => {
             body .is-root-container p a {
                 ${linkStyles}
             }
-
             body .is-root-container .wp-block-button__link {
                 ${buttonStyles}
+            }
+            :root :where(.wp-element-button, .wp-block-button__link) {
+				${buttonStyles}
             }
             body .is-root-container button {
                 ${buttonStyles}
@@ -257,12 +259,15 @@ const generateCSSVariables = (data, deviceType) => {
             body .is-root-container figcaption {
                 ${captionStyles}
             }
+            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
+                ${captionStyles}
+            }
             ${allCombinedStyles}
             ${headingGrouped}
         `;
         // // Apply individual styles for each heading (h1, h2, h3, etc.)
         // if(deviceType !== 'Desktop') {
-            
+
         // } else {
         //     headingGrouped = `
         //         body .editor-visual-editor h1 {
@@ -399,17 +404,20 @@ const generateCSSVariables = (data, deviceType) => {
             body .wp-site-blocks figcaption {
                 ${captionStyles}
             }
+            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
+                ${captionStyles}
+            }
             ${allCombinedStyles}
             ${headingGrouped}
         `;
     }
-    
+
     let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
     let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
     let styleTag = iframeDocument.getElementById("global-typo");
 
     if(fileName === 'post.php') {
-        
+
         if(deviceType !== 'Desktop') {
             iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;

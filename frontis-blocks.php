@@ -34,5 +34,5 @@ function wm_frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
 }
 
-//Kick of the plugin.
 wm_frontis_blocks();
+
