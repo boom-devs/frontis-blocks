@@ -13,7 +13,6 @@ use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
-use FrontisBlocks\Admin\FullSiteImport;
 use FrontisBlocks\Utils\Helper;
 final class Plugin
 {
@@ -205,8 +204,6 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		SupportSVG::get_instance();
-
-		FullSiteImport::get_instance();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 

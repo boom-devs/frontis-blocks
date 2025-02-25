@@ -19,32 +19,32 @@ import FB_Range from '@Components/range';
 
 
 const FB_SidebarTypography = ({
-								  label = __("Typography", "frontis-blocks"),
-								  fontFamily,
-								  onChangeFontFamily,
-								  fontSize,
-								  onChangeFontSize,
-								  fontSizeUnits,
-								  onChangeFontSizeUnit,
-								  fontWeight,
-								  onChangeFontWeight,
-								  fontStyle,
-								  onChangeFontStyle,
-								  textTransform,
-								  onChangeTextTransform,
-								  textDecoration,
-								  onChangeTextDecoration,
-								  letterSpacing,
-								  onChangeLetterSpacing,
-								  letterSpacingUnits,
-								  onChangeLetterSpacingUnit,
-								  lineHeight,
-								  onChangeLineHeight,
-								  lineHeightUnits,
-								  onChangeLineHeightUnit,
-								  deviceType,
-								  heading
-							  }) => {
+	label = __("Typography", "frontis-blocks"),
+	fontFamily,
+	onChangeFontFamily,
+	fontSize,
+	onChangeFontSize,
+	fontSizeUnits,
+	onChangeFontSizeUnit,
+	fontWeight,
+	onChangeFontWeight,
+	fontStyle,
+	onChangeFontStyle,
+	textTransform,
+	onChangeTextTransform,
+	textDecoration,
+	onChangeTextDecoration,
+	letterSpacing,
+	onChangeLetterSpacing,
+	letterSpacingUnits,
+	onChangeLetterSpacingUnit,
+	lineHeight,
+	onChangeLineHeight,
+	lineHeightUnits,
+	onChangeLineHeightUnit,
+	deviceType,
+	heading
+}) => {
 	const handleFontFamilyChange = (newFontFamily) => {
 		onChangeFontFamily(newFontFamily);
 	};
@@ -139,7 +139,7 @@ const FB_SidebarTypography = ({
 					onChange={handleTextDecorationChange}
 				/>
 			</div>
-			
+
 			<div className='fb_global_typo_wrap'>
 				{letterSpacingUnits &&
 					<FB_Range
