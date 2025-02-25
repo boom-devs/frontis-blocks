@@ -16,3 +16,4 @@ registerBlockType( metadata.name, {
 	save,
 	icon: FB_Block_Icons.icon_box,
 } );
+

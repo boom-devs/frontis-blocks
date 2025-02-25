@@ -6,257 +6,323 @@ use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 
 class GenerateGlobalTypography {
-	use Singleton;
+    use Singleton;
+    
+    /**
+     * Generate global typography settings
+     */
+    public static function generate_global_typography() {
+        self::enqueue_fonts();
 
-	public static function generate_global_typography() {
-		self::enqueue_fonts();
+        $global_typography = get_option('fb_globaltypo');
+        if($global_typography) {
+            add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_google_fonts']);
+        }
+    }
 
-		$global_typography = get_option('fb_globaltypo');
+    /**
+     * Helper function to get value with unit
+     */
+    private static function createValueWithUnit($value, $unit) {
+        return $value . $unit;
+    }
 
-		if($global_typography) {
-			// add_action('wp_enqueue_scripts', self::enqueue_google_fonts($global_typography));
-			add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_google_fonts']);
-		}
-	}
+    /**
+     * Process data and generate CSS
+     */
+    public static function processData($data) {
+        // Initialize style variables
+        $rootStyles = '';
+        $desktopStyles = '';
+        $tabletStyles = '';
+        $mobileStyles = '';
 
-	private static function generate_css_file($data, $devices) {
-		$css = '';
-		if($data) {
-			 foreach($data as $key => $single_code) {
-				$selector = '';
-				$editor_selector = '';
+        $paragraphStyles = '';
+        $linkStyles = '';
+        $buttonStyles = '';
+        $captionStyles = '';
+        $heading1Styles = '';
+        $heading2Styles = '';
+        $heading3Styles = '';
+        $heading4Styles = '';
+        $heading5Styles = '';
+        $heading6Styles = '';
+        $combinedHeadingStyles = '';
 
-				if(current_user_can('editor') || current_user_can('administrator')) {
-					$editor_selector = 'body .wp-block-post-content, body .wp-site-blocks';
-				} else {
-					$editor_selector = 'body';
-				}
+        // Process global properties for each element
+        foreach(['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as $key) {
+            if (!isset($data[$key])) continue;
 
-				if ($key === 'body') {
-					$selector = $editor_selector.' p';
-				}
+            // Process global properties
+            $globalProps = ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'];
+            foreach($globalProps as $prop) {
+                if (isset($data[$key][$prop]['value'])) {
+                    $variable = $data[$key][$prop]['variable'];
+                    $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+                    $styleValue = "var({$variable})";
+                    $rootStyles .= "{$variable}: {$data[$key][$prop]['value']};\n";
+                    
+                    switch($key) {
+                        case 'body':
+                            $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'link':
+                            $linkStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'button':
+                            $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'captions':
+                            $captionStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'all':
+                            $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h1':
+                            $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h2':
+                            $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h3':
+                            $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h4':
+                            $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h5':
+                            $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                        case 'h6':
+                            $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
+                            break;
+                    }
+                }
+            }
 
-				if ($key === 'link') {
-					$selector = $editor_selector.' a';
-				}
+            // Process responsive properties
+            $responsiveProps = ['fontSize', 'letterSpacing', 'lineHeight'];
+            foreach($responsiveProps as $prop) {
+                if (isset($data[$key][$prop]['value'])) {
+                    $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+                    $cssVar = $data[$key][$prop]['variable'];
 
-				if ($key === 'button') {
-					$selector = $editor_selector.' button';
-				}
+                    // Desktop
+                    if (!empty($data[$key][$prop]['value']['Desktop'])) {
+                        $value = $data[$key][$prop]['value']['Desktop'];
+                        $unit = $data[$key][$prop]['unit']['Desktop'];
+                        $desktopStyles .= "{$cssVar}: " . self::createValueWithUnit($value, $unit) . ";\n";
+                        
+                        switch($key) {
+                            case 'body':
+                                $paragraphStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                break;
+                            case 'link':
+                                $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'button':
+                                $buttonStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                break;
+                            case 'captions':
+                                $captionStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                break;
+                            case 'all':
+                                $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h1':
+                                $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h2':
+                                $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h3':
+                                $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h4':
+                                $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h5':
+                                $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                            case 'h6':
+                                $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                break;
+                        }
+                    }
 
-				if ($key === 'heading') {
-					foreach ($single_code as $key => $styles) {
-						$heading_selector = $editor_selector.' ' . $key;
+                    // Tablet
+                    if (!empty($data[$key][$prop]['value']['Tablet'])) {
+                        $value = $data[$key][$prop]['value']['Tablet'];
+                        $unit = $data[$key][$prop]['unit']['Tablet'];
+                        $tabletStyles .= "{$cssVar}: " . self::createValueWithUnit($value, $unit) . ";\n";
+                    }
 
-						if( (isset($styles['fontFamily']) && !empty($styles['fontFamily']) && $styles['fontFamily'] !== 'Default') || (isset($styles['fontWeight']) && !empty($styles['fontWeight'])) || (isset($styles['fontStyle']) && !empty($styles['fontStyle'])) || (isset($styles['textTransform']) && !empty($styles['textTransform'])) || (isset($styles['textDecoration']) && !empty($styles['textDecoration'])) || (isset($styles['lineHeight']) && !empty($styles['lineHeight'])) || (isset($styles['fontSize']) && !empty($styles['fontSize'])) || (isset($styles['letterSpacing']) && !empty($styles['letterSpacing'])) ) {
-							$css .= "$heading_selector {\n";
-							if (isset($styles['fontFamily']) && !empty($styles['fontFamily']) && $styles['fontFamily'] !== 'Default') {
-								$css .= "    font-family: {$styles['fontFamily']};\n";
-							}
-							if (isset($styles['fontWeight']) && !empty($styles['fontWeight'])) {
-								$css .= "    font-weight: {$styles['fontWeight']};\n";
-							}
-							if (isset($styles['fontStyle']) && !empty($styles['fontStyle'])) {
-								$css .= "    font-style: {$styles['fontStyle']};\n";
-							}
-							if (isset($styles['textTransform']) && !empty($styles['textTransform'])) {
-								$css .= "    text-transform: {$styles['textTransform']};\n";
-							}
-							if (isset($styles['textDecoration']) && !empty($styles['textDecoration'])) {
-								$css .= "    text-decoration: {$styles['textDecoration']};\n";
-							}
-							if (isset($styles['lineHeight']['Desktop']) && !empty($styles['lineHeight']['Desktop'])) {
-								$css .= "    line-height: {$styles['lineHeight']['Desktop']}{$styles['lineHeightUnits']['Desktop']};\n";
-							}
-							if (isset($styles['fontSize']['Desktop']) && !empty($styles['fontSize']['Desktop'])) {
-								$css .= "    font-size: {$styles['fontSize']['Desktop']}{$styles['fontSizeUnit']['Desktop']};\n";
-							}
-							if (isset($styles['letterSpacing']['Desktop']) && !empty($styles['letterSpacing']['Desktop'])) {
-								$css .= "    letter-spacing: {$styles['letterSpacing']['Desktop']}{$styles['letterSpacingUnit']['Desktop']};\n";
-							}
-							$css .= "}\n";
-
-						}
-
-						foreach ($devices as $device => $breakpoint) {
-							if($device !== 'Desktop') {
-								if ((isset($styles['lineHeight'][$device]) && $styles['lineHeight'][$device] !== '0') || (isset($styles['fontSize'][$device]) && $styles['fontSize'][$device] !== '0') || (isset($styles['letterSpacing'][$device]) && $styles['letterSpacing'][$device] !== '0')) {
-
-									$css .= "@media (max-width: {$breakpoint}px) {\n";
-									$css .= "    $heading_selector {\n";
-										if (isset($styles['lineHeight'][$device]) && !empty($styles['lineHeight'][$device])) {
-											$css .= "        line-height: {$styles['lineHeight'][$device]}{$styles['lineHeightUnits'][$device]};\n";
-										}
-										if (isset($styles['fontSize'][$device]) && !empty($styles['fontSize'][$device])) {
-											$css .= "        font-size: {$styles['fontSize'][$device]}{$styles['fontSizeUnit'][$device]};\n";
-										}
-										if (isset($styles['letterSpacing'][$device]) && !empty($styles['letterSpacing'][$device])) {
-											$css .= "        letter-spacing: {$styles['letterSpacing'][$device]}{$styles['letterSpacingUnit'][$device]};\n";
-										}
-										$css .= "    }\n";
-									$css .= "}\n";
-								}
-							}
-						}
-					}
-				}
-
-				// For other keys such as 'body', 'link', 'button'
-				if (($key !== 'heading') && $key !== 'all') {
-					if( (isset($single_code['fontFamily']) && !empty($single_code['fontFamily'])) || (isset($single_code['fontWeight']) && !empty($single_code['fontWeight'])) || (isset($single_code['fontStyle']) && !empty($single_code['fontStyle'])) || (isset($single_code['textTransform']) && !empty($single_code['textTransform'])) || (isset($single_code['textDecoration']) && !empty($single_code['textDecoration'])) || (isset($single_code['lineHeight']) && !empty($single_code['lineHeight'])) || (isset($single_code['fontSize']) && !empty($single_code['fontSize'])) || (isset($single_code['letterSpacing']) && !empty($single_code['letterSpacing'])) ) {
-						$css .= "$selector {\n";
-						if (isset($single_code['fontFamily']) && !empty($single_code['fontFamily']) && $single_code['fontFamily'] !== 'Default') {
-							$css .= "    font-family: {$single_code['fontFamily']};\n";
-						}
-						if (isset($single_code['fontWeight']) && !empty($single_code['fontWeight'])) {
-							$css .= "    font-weight: {$single_code['fontWeight']};\n";
-						}
-						if (isset($single_code['fontStyle']) && !empty($single_code['fontStyle'])) {
-							$css .= "    font-style: {$single_code['fontStyle']};\n";
-						}
-						if (isset($single_code['textTransform']) && !empty($single_code['textTransform'])) {
-							$css .= "    text-transform: {$single_code['textTransform']};\n";
-						}
-						if (isset($single_code['textDecoration']) && !empty($single_code['textDecoration'])) {
-							$css .= "    text-decoration: {$single_code['textDecoration']};\n";
-						}
-						if (isset($single_code['lineHeight']['Desktop']) && !empty($single_code['lineHeight']['Desktop'])) {
-							$css .= "    line-height: {$single_code['lineHeight']['Desktop']}{$single_code['lineHeightUnits']['Desktop']};\n";
-						}
-						if (isset($single_code['fontSize']['Desktop']) && !empty($single_code['fontSize']['Desktop'])) {
-							$css .= "    font-size: {$single_code['fontSize']['Desktop']}{$single_code['fontSizeUnit']['Desktop']};\n";
-						}
-						if (isset($single_code['letterSpacing']['Desktop']) && !empty($single_code['letterSpacing']['Desktop'])) {
-							$css .= "    letter-spacing: {$single_code['letterSpacing']['Desktop']}{$single_code['letterSpacingUnit']['Desktop']};\n";
-						}
-						$css .= "}\n";
-					}
-
-					foreach ($devices as $device => $breakpoint) {
-						if($device !== 'Desktop') {
-							if ((isset($single_code['lineHeight'][$device]) && $single_code['lineHeight'][$device] !== '0') || (isset($single_code['fontSize'][$device]) && $single_code['fontSize'][$device] !== '0') || (isset($single_code['letterSpacing'][$device]) && $single_code['letterSpacing'][$device] !== '0')) {
-								$css .= "@media (max-width: {$breakpoint}px) {\n";
-								$css .= "    $selector {\n";
-								if (isset($single_code['lineHeight'][$device]) && !empty($single_code['lineHeight'][$device])) {
-									$css .= "        line-height: {$single_code['lineHeight'][$device]}{$single_code['lineHeightUnits'][$device]};\n";
-								}
-								if (isset($single_code['fontSize'][$device]) && !empty($single_code['fontSize'][$device])) {
-									$css .= "        font-size: {$single_code['fontSize'][$device]}{$single_code['fontSizeUnit'][$device]};\n";
-								}
-								if (isset($single_code['letterSpacing'][$device]) && !empty($single_code['letterSpacing'][$device])) {
-									$css .= "        letter-spacing: {$single_code['letterSpacing'][$device]}{$single_code['letterSpacingUnit'][$device]};\n";
-								}
-								$css .= "    }\n";
-								$css .= "}\n";
-							}
-						}
-					}
-				}
-			}
+                    // Mobile
+                    if (!empty($data[$key][$prop]['value']['Mobile'])) {
+                        $value = $data[$key][$prop]['value']['Mobile'];
+                        $unit = $data[$key][$prop]['unit']['Mobile'];
+                        $mobileStyles .= "{$cssVar}: " . self::createValueWithUnit($value, $unit) . ";\n";
+                    }
+                }
+            }
         }
 
-		return $css;
-	}
+        $headingGrouped = "
+            " . ($heading1Styles !== '' ? "
+            body h1 {
+                {$heading1Styles}
+            }
+            " : "") . "
+            " . ($heading2Styles !== '' ? "
+            body h2 {
+                {$heading2Styles}
+            }
+            " : "") . "
+            " . ($heading3Styles !== '' ? "
+            body h3 {
+                {$heading3Styles}
+            }
+            " : "") . "
+            " . ($heading4Styles !== '' ? "
+            body h4 {
+                {$heading4Styles}
+            }
+            " : "") . "
+            " . ($heading5Styles !== '' ? "
+            body h5 {
+                {$heading5Styles}
+            }
+            " : "") . "
+            " . ($heading6Styles !== '' ? "
+            body h6 {
+                {$heading6Styles}
+            }
+            " : "") . "
+        ";
 
-	public static function generateCSS($styles) {
-		$css = ":root {\n";
-	
-		// Generate variables for Desktop, Tablet, and Mobile
-		foreach ($styles as $selector => $properties) {
-			foreach ($properties as $property => $details) {
-				if (isset($details['variable']) && isset($details['value'])) {
-					if (is_array($details['value'])) {
-						foreach ($details['value'] as $device => $value) {
-							if (!empty($value)) {
-								$unit = $details['unit'][$device];
-								$css .= "    {$details['variable']}-$device: $value$unit;\n";
-							}
-						}
-					} else {
-						$css .= "    {$details['variable']}: {$details['value']};\n";
-					}
-				}
-			}
-		}
-	
-		$css .= "}\n\n";
-	
-		// Generate responsive CSS for body, h1-h6, p, and fb_customtypo
-		$css .= "body h1,\n";
-		$css .= "body h2,\n";
-		$css .= "body h3,\n";
-		$css .= "body h4,\n";
-		$css .= "body h5,\n";
-		$css .= "body h6 {\n";
-		$css .= "    font-family: var(--fb-global-all--font-family);\n";
-		$css .= "}\n\n";
-	
-		$css .= "body p {\n";
-		$css .= "    font-size: var(--fb-global-body--font-size-Desktop);\n";
-		$css .= "    font-family: var(--fb-global-body--font-family);\n";
-		$css .= "    font-weight: var(--fb-global-body--font-weight);\n";
-		$css .= "}\n\n";
-	
-		$css .= "@media (max-width: 1024px) {\n";
-		$css .= "    body p {\n";
-		$css .= "        font-size: var(--fb-global-body--font-size-Tablet);\n";
-		$css .= "    }\n";
-		$css .= "}\n\n";
-	
-		$css .= "@media (max-width: 768px) {\n";
-		$css .= "    body p {\n";
-		$css .= "        font-size: var(--fb-global-body--font-size-Mobile);\n";
-		$css .= "    }\n";
-		$css .= "}\n\n";
-	
-		return $css;
-	}
+        $finalCSS = "
+            " . ($rootStyles !== '' || $desktopStyles !== '' ? "
+            :root {
+                {$rootStyles}
+                {$desktopStyles}
+            }
+            " : "") . "
+            
+            " . ($tabletStyles !== '' ? "
+            @media (max-width: 1024px) {
+                :root {
+                    {$tabletStyles}
+                }
+            }
+            " : "") . "
+            
+            " . ($mobileStyles !== '' ? "
+            @media (max-width: 767px) {
+                :root {
+                    {$mobileStyles}
+                }
+            }
+            " : "") . "
 
-	public static function enqueue_fonts() {
-		// $global_typography = get_option('fb_typography');
-		$global_typography = get_option('fb_globaltypo');
-		
-		if($global_typography) {
-			$styles = self::generateCSS($global_typography);
+            " . ($paragraphStyles !== '' ? "
+            body p {
+                {$paragraphStyles}
+            }
+            " : "") . "
 
-			if($styles) {
-				$upload_dir = wp_upload_dir();
-				$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+            " . ($linkStyles !== '' ? "
+            body a,
+            body p a {
+                {$linkStyles}
+            }
+            " : "") . "
 
-				// Ensure the target directory exists
-				if (!file_exists($css_dir)) {
-					wp_mkdir_p($css_dir);
-				}
+            " . ($buttonStyles !== '' ? "
+            body .wp-block-button__link,
+            :root :where(.wp-element-button, .wp-block-button__link),
+            body button {
+                {$buttonStyles}
+            }
+            " : "") . "
 
-				$css_file_name = 'frontis-global-typography.css';
-				$css_file = $css_dir . $css_file_name;
-				file_put_contents( $css_file, $styles );
-			}
-		}
-	}
+            " . ($captionStyles !== '' ? "
+            body figcaption,
+            :root :where(.wp-element-caption, .wp-block-audio figcaption,
+                .wp-block-embed figcaption, .wp-block-gallery figcaption,
+                .wp-block-image figcaption, .wp-block-table figcaption,
+                .wp-block-video figcaption) {
+                {$captionStyles}
+            }
+            " : "") . "
 
-	public static function enqueue_google_fonts($styles) {
-		$font_families = [];
-		$global_typography = get_option('fb_globaltypo');
-		// Extract all unique font families
-		foreach ($global_typography as $selector => $properties) {
-			if (isset($properties['fontFamily'])) {
-				$font_family = $properties['fontFamily']['value'];
-				if (!in_array($font_family, $font_families)) {
-					$font_families[] = $font_family;
-				}
-			}
-		}
-	
-		// If there are font families, enqueue them
-		if (!empty($font_families)) {
-			$font_url = "https://fonts.googleapis.com/css?family=";
-			$font_url .= implode("|", array_map(function($font) {
-				return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
-			}, $font_families));
-	
-			// Enqueue the Google Fonts
-			wp_enqueue_style('fb-google-fonts', $font_url, array(), FB_VERSION, true);
-		}
-	}
+            " . ($combinedHeadingStyles !== '' ? "
+            body h1,
+            body h2,
+            body h3,
+            body h4,
+            body h5,
+            body h6 {
+                {$combinedHeadingStyles}
+            }
+            " : "") . "
+
+            {$headingGrouped}
+        ";
+        
+        return $finalCSS;
+    }
+
+    /**
+     * Enqueue font styles
+     */
+    public static function enqueue_fonts() {
+        $global_typography = get_option('fb_globaltypo');
+        
+        if($global_typography) {
+            $styles = self::processData($global_typography);
+
+            if($styles) {
+                $upload_dir = wp_upload_dir();
+                $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+
+                // Ensure the target directory exists
+                if (!file_exists($css_dir)) {
+                    wp_mkdir_p($css_dir);
+                }
+
+                $css_file_name = 'frontis-global-typography.css';
+                $css_file = $css_dir . $css_file_name;
+                file_put_contents($css_file, $styles);
+            }
+        }
+    }
+
+    /**
+     * Enqueue Google Fonts
+     */
+    public static function enqueue_google_fonts() {
+        $font_families = [];
+        $global_typography = get_option('fb_globaltypo');
+        
+        // Extract all unique font families
+        foreach ($global_typography as $selector => $properties) {
+            if (isset($properties['fontFamily'])) {
+                $font_family = $properties['fontFamily']['value'];
+                if (!in_array($font_family, $font_families)) {
+                    $font_families[] = $font_family;
+                }
+            }
+        }  
+    
+        // If there are font families, enqueue them
+        if (!empty($font_families)) {
+            $font_url = "https://fonts.googleapis.com/css?family=";
+            $font_url .= implode("|", array_map(function($font) {
+                return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
+            }, $font_families));
+    
+            // Enqueue the Google Fonts
+            wp_enqueue_style('fb-google-fonts', $font_url, array(), null);
+        }
+    }
 }

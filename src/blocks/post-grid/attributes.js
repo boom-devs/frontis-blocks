@@ -573,6 +573,27 @@ const attributes = {
 		type: "string",
 		default: "h3"
 	},
+	postTitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postTitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	postTitleFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -701,6 +722,27 @@ const attributes = {
 	postDescriptionTag: {
 		type: "string",
 		default: "p"
+	},
+	postDescriptionGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postDescriptionGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postDescriptionGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	postDescriptionFontFamily: {
 		type: "string",
@@ -834,6 +876,27 @@ const attributes = {
 	showCategorySwitcher: {
 		type: "boolean",
 		default: false
+	},
+	postCategoryGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postCategoryGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postCategoryGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	postCategoryFontFamily: {
 		type: "string",
@@ -1125,6 +1188,27 @@ const attributes = {
 	showTagSwitcher: {
 		type: "boolean",
 		default: false
+	},
+	postTagGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postTagGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postTagGlobalTypoType: {
+		type: "string",
+		default: 'default',
 	},
 	postTagFontFamily: {
 		type: "string",
@@ -1596,6 +1680,27 @@ const attributes = {
 		default: true
 	},
 
+	postAuthorGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postAuthorGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postAuthorGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	postAuthorFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -1706,6 +1811,27 @@ const attributes = {
 		default: true
 	},
 
+	postDateGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	postDateGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	postDateGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	postDateFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -2254,6 +2380,27 @@ const attributes = {
 		default: true
 	},
 
+	loadMoreTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	loadMoreTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	loadMoreTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
 	loadMoreTextFontFamily: { 
 		type: "string",
 		default: "Default",
