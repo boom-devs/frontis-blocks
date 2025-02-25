@@ -45,6 +45,27 @@ const attributes = {
     fluentFormLabelHoverColor: {
         type: 'string',
     },
+    fluentFormLabelGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormLabelGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormLabelGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     fluentFormLabelFontFamily: {
         type: "string",
         default: "Default",
@@ -125,6 +146,27 @@ const attributes = {
         type: 'string',
         default: "#1a7efb",
 
+    },
+    fluentFormInputGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormInputGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormInputGlobalTypoType: {
+        type: "string",
+        default: 'default',
     },
     fluentFormInputFontFamily: {
         type: "string",
@@ -684,6 +726,27 @@ const attributes = {
     fluentFormSectionBreakTitleHoverColor: {
         type: 'string',
     },
+    fluentFormSectionBreakTitleGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormSectionBreakTitleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormSectionBreakTitleGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     fluentFormSectionBreakTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -842,6 +905,27 @@ const attributes = {
     },
     fluentFormSectionBreakDescHoverColor: {
         type: 'string',
+    },
+    fluentFormSectionBreakDescGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormSectionBreakDescGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormSectionBreakDescGlobalTypoType: {
+        type: "string",
+        default: 'default',
     },
     fluentFormSectionBreakDescFontFamily: {
         type: "string",
@@ -1004,6 +1088,27 @@ const attributes = {
     },
     fluentFormHtmlHoverColor: {
         type: 'string',
+    },
+    fluentFormHtmlGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormHtmlGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormHtmlGlobalTypoType: {
+        type: "string",
+        default: 'default',
     },
     fluentFormHtmlFontFamily: {
         type: "string",
@@ -1214,6 +1319,27 @@ const attributes = {
     },
     fluentFormSubmitBgHoverColor: {
         type: 'string',
+    },
+    fluentFormSubmitGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormSubmitGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormSubmitGlobalTypoType: {
+        type: "string",
+        default: 'default',
     },
     fluentFormSubmitFontFamily: {
         type: "string",
@@ -1461,6 +1587,27 @@ const attributes = {
     fluentFormSuccessBgColor: {
         type: 'string',
     },
+    fluentFormSuccessGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormSuccessGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormSuccessGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
     fluentFormSuccessFontFamily: {
         type: "string",
         default: "Default",
@@ -1625,6 +1772,27 @@ const attributes = {
     /** Start Error message Setting */
     fluentFormErrorColor: {
         type: 'string',
+    },
+    fluentFormErrorGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    fluentFormErrorGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    fluentFormErrorGlobalTypoType: {
+        type: "string",
+        default: 'default',
     },
     fluentFormErrorFontFamily: {
         type: "string",
