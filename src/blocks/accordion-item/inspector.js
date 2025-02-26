@@ -257,7 +257,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		() => `
 		.fb-accordion-item-main-wrapper.${blockID} {
 			position: relative;
-			${accordionItemZIndex !== undefined ? `z-index: ${accordionItemZIndex};` : ''}
+			${accordionItemZIndex.Desktop ? `z-index: ${accordionItemZIndex.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
 		}
 		
@@ -276,26 +276,29 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixColor !== undefined ? `fill: ${titlePrefixColor};` : ''}
+			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
             transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixColor !== undefined ? `fill: ${titleSuffixColor};` : ''}
+			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
             transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixHoverColor !== undefined ? `fill: ${titlePrefixHoverColor};` : ''}
+			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
             transition: all 0.3s ease-in-out;
 		  }
 	  
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixHoverColor !== undefined ? `fill: ${titleSuffixHoverColor};` : ''}
+			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
             transition: all 0.3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
+            .fb-accordion-item-main-wrapper.${blockID} {
+                ${accordionItemZIndex.Tablet ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
+            }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
 			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
@@ -303,6 +306,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
+            .fb-accordion-item-main-wrapper.${blockID} {
+                ${accordionItemZIndex.Mobile ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
+            }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
 			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
@@ -349,7 +355,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			position: relative;
 			display: block;
 			overflow: hidden;
-			${accordionItemZIndex.Desktop !== undefined ? `z-index: ${accordionItemZIndex.Desktop};` : ''}
+			${accordionItemZIndex.Desktop ? `z-index: ${accordionItemZIndex.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
 		}
 
@@ -401,7 +407,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 		@media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex.Tablet !== undefined ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
+                ${accordionItemZIndex.Tablet ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
@@ -411,7 +417,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 		@media only screen and (max-width: 767px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex.Mobile !== undefined ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
+                ${accordionItemZIndex.Mobile ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
 				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
