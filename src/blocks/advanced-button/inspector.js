@@ -1052,11 +1052,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 		.${blockId} .fb-advanced-button-wrapper {
 			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
-			${globalDesktopPadding !== 'px px px px' ? `padding: ${globalDesktopPadding};` : ''}
-			${globalDesktopMargin !== 'px px px px' ? `margin: ${globalDesktopMargin};` : ''} 
+			${globalDesktopPadding && buttonGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
+			${globalDesktopMargin && buttonGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
 			${buttonGlobalBorder ? `border: ${buttonGlobalBorder};` : ''} 
-			${globalDesktopBorderWidth !== 'px px px px' ? `border-width: ${globalDesktopBorderWidth};` : ''}
-			${globalDesktopBorderRadiusWidth !== 'px px px px' ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+			${globalDesktopBorderWidth && buttonGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+			${globalDesktopBorderRadiusWidth && buttonGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${buttonGlobalBorderColor ? `border-color: ${buttonGlobalBorderColor};` : ''}
 			${buttonGlobalBoxShadowCssValue ? `box-shadow: ${buttonGlobalBoxShadowCssValue};` : ''}
 			transition: all .3s ease-in-out;
@@ -1087,11 +1087,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Desktop && buttonLineHeightUnits.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
 			
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ''}
-			${buttonDesktopPaddingStr !== 'px px px px' ? `padding: ${buttonDesktopPaddingStr};` : ''}
-			${buttonDesktopMarginStr !== 'px px px px' ? `margin: ${buttonDesktopMarginStr};` : ''}
+			${buttonDesktopPaddingStr && buttonDesktopPadding?.top ? `padding: ${buttonDesktopPaddingStr};` : ''}
+			${buttonDesktopMarginStr && buttonDesktopMargin?.top ? `margin: ${buttonDesktopMarginStr};` : ''}
 			${buttonBorder ? `border: ${buttonBorder};` : ''}
-			${buttonDesktopBorderWidthStr !== 'px px px px' ? `border-width: ${buttonDesktopBorderWidthStr};` : ''}
-			${buttonDesktopBorderRadiusStr !== 'px px px px' ? `border-radius: ${buttonDesktopBorderRadiusStr};` : ''}
+			${buttonDesktopBorderWidthStr && buttonDesktopBorderWidth?.top ? `border-width: ${buttonDesktopBorderWidthStr};` : ''}
+			${buttonDesktopBorderRadiusStr && buttonDesktopBorderRadiusWidth?.top ? `border-radius: ${buttonDesktopBorderRadiusStr};` : ''}
 			${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
 			${buttonBoxShadowCssValue ? `box-shadow: ${buttonBoxShadowCssValue};` : ''} 
 			${buttonWidth.Desktop && buttonWidthUnits.Desktop ? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};` : ''}
@@ -1154,18 +1154,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonGlobalZIndex.Tablet ? `z-index: ${buttonGlobalZIndex.Tablet};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper {
-				${globalTabletPadding !== 'px px px px' ? `padding: ${globalTabletPadding};` : ''}
-				${globalTabletMargin !== 'px px px px' ? `margin: ${globalTabletMargin};` : ''}
-				${globalTabletBorderWidth !== 'px px px px' ? `border-width: ${globalTabletBorderWidth};` : ''}
-				${globalTabletBorderRadiusWidth !== 'px px px px' ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+				${globalTabletPadding && buttonGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
+				${globalTabletMargin && buttonGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
+				${globalTabletBorderWidth && buttonGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+				${globalTabletBorderRadiusWidth && buttonGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
-				${buttonTabletPaddingStr !== 'px px px px' ? `padding: ${buttonTabletPaddingStr};` : ''}
-				${buttonTabletMarginStr !== 'px px px px' ? `margin: ${buttonTabletMarginStr};` : ''}
+				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
+				${buttonTabletMarginStr && buttonTabMargin?.top ? `margin: ${buttonTabletMarginStr};` : ''}
 				${buttonBorder ? `border: ${buttonBorder};` : ''}
 				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-				${buttonTabletBorderWidthStr !== 'px px px px' ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
-				${buttonTabletBorderRadiusStr !== 'px px px px' ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
+				${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
+				${buttonTabletBorderRadiusStr && buttonTabBorderRadiusWidth?.top ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
 				${buttonWidth.Tablet && buttonWidthUnits.Tablet ? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
@@ -1224,10 +1224,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonGlobalZIndex.Mobile ? `z-index: ${buttonGlobalZIndex.Mobile};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper {
-				${globalMobilePadding !== 'px px px px' ? `padding: ${globalMobilePadding};` : ''}
-				${globalMobileMargin !== 'px px px px' ? `margin: ${globalMobileMargin};` : ''}
-				${globalMobileBorderWidth !== 'px px px px' ? `border-width: ${globalMobileBorderWidth};` : ''}
-				${globalMobileBorderRadiusWidth !== 'px px px px' ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+				${globalMobilePadding && buttonGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
+				${globalMobileMargin && buttonGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
+				${globalMobileBorderWidth && buttonGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+				${globalMobileBorderRadiusWidth && buttonGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover {
 				${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
@@ -1248,12 +1248,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
-				${buttonMobilePaddingStr !== 'px px px px' ? `padding: ${buttonMobilePaddingStr};` : ''}
-				${buttonMobileMarginStr !== 'px px px px' ? `margin: ${buttonMobileMarginStr};` : ''}
+				${buttonMobilePaddingStr && buttonMobilePadding?.top ? `padding: ${buttonMobilePaddingStr};` : ''}
+				${buttonMobileMarginStr && buttonMobileMargin?.top ? `margin: ${buttonMobileMarginStr};` : ''}
 				${buttonBorder ? `border: ${buttonBorder};` : ''}
 				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-				${buttonMobileBorderWidthStr !== 'px px px px' ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
-				${buttonMobileBorderRadiusStr !== 'px px px px' ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
+				${buttonMobileBorderWidthStr && buttonMobileBorderWidth?.top ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
+				${buttonMobileBorderRadiusStr && buttonMobileBorderRadiusWidth?.top ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
 				${buttonWidth.Mobile && buttonWidthUnits.Mobile ? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};` : ''}
 				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Mobile && buttonFontSizeUnits.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
 				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Mobile && buttonLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
