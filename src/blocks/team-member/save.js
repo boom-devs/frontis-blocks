@@ -1,5 +1,5 @@
-import {RichText, useBlockProps} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
+import {RichText, useBlockProps} from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
@@ -45,9 +45,8 @@ export default function save({ attributes }) {
 
 	return (
 		<>
-			
 			<div {...blockProps}>
-			<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID}>
+				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID}>
 					<div className={`fb-team-member-item`}>
 						<div className={`fb-team-member-image-wrapper`}>
 							<div className={`fb-team-member-image`}>
