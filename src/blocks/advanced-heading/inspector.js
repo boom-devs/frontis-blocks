@@ -1477,7 +1477,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [headingFontFamily, subHeadingFontFamily]);
 
-
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb-advanced-heading-main-wrapper {
             ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
@@ -1493,11 +1492,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         .${blockId} .fb-advanced-wrapper {
             ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
-            ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-            ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
+            ${globalDesktopPadding && headingGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
+            ${globalDesktopMargin && headingGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''}
             ${headingGlobalBorder ? `border: ${headingGlobalBorder};` : ''}
-            ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-            ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${globalDesktopBorderWidth && headingGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth && headingGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
             ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
@@ -1676,10 +1675,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingGlobalZIndex.Tablet ? `z-index: ${headingGlobalZIndex.Tablet};` : ''}
             }
             .${blockId} .fb-advanced-wrapper {
-                ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-                ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-                ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                ${globalTabletPadding && headingGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
+                ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
+                ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
 
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -1831,10 +1830,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingGlobalZIndex.Mobile ? `z-index: ${headingGlobalZIndex.Mobile};` : ''}
             }
             .${blockId} .fb-advanced-wrapper {
-                ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-                ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-                ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                ${globalMobilePadding && headingGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
+                ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
+                ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
