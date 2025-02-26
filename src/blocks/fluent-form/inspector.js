@@ -77,6 +77,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelLetterSpacingUnits,
         fluentFormLabelLineHeightUnits,
 
+        fluntFromLabelMarginUnits,
+        fluntFromLabelMarginDesktop,
+        fluntFromLabelMarginTablet,
+        fluntFromLabelMarginMobile,
+        fluntFromLabelMarginLink,
+
         fluentFormInputBgColor,
         fluentFormInputColor,
         fluentFormInputFocusColor,
@@ -420,6 +426,83 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+    /** Start  Label Margin */
+    const handleLabelMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( fluntFromLabelMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        fluntFromLabelMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        fluntFromLabelMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        fluntFromLabelMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {fluntFromLabelMarginDesktop: {...fluntFromLabelMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {fluntFromLabelMarginTablet: {...fluntFromLabelMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {fluntFromLabelMarginMobile: {...fluntFromLabelMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleLabelMarginCombineBtn = () => {
+        setAttributes( {fluntFromLabelMarginLink: !fluntFromLabelMarginLink} );
+    }
+
+    const handleLabelMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            fluntFromLabelMarginUnits: {
+                ...fluntFromLabelMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end  Label Margin */ 
+
+
+    /** Default Label Margin for desktop (using desktop_margin) */  
+    const fluntFromLabelMarginDesktopWidth    = `${fluntFromLabelMarginDesktop.top}${fluntFromLabelMarginUnits.Desktop} ${fluntFromLabelMarginDesktop.right}${fluntFromLabelMarginUnits.Desktop} ${fluntFromLabelMarginDesktop.bottom}${fluntFromLabelMarginUnits.Desktop} ${fluntFromLabelMarginDesktop.left}${fluntFromLabelMarginUnits.Desktop}`;
+    const fluntFromLabelMarginTabletWidth     = `${fluntFromLabelMarginTablet.top}${fluntFromLabelMarginUnits.Tablet} ${fluntFromLabelMarginTablet.right}${fluntFromLabelMarginUnits.Tablet} ${fluntFromLabelMarginTablet.bottom}${fluntFromLabelMarginUnits.Tablet} ${fluntFromLabelMarginTablet.left}${fluntFromLabelMarginUnits.Tablet}`;
+    const fluntFromLabelMarginMobileWidth     = `${fluntFromLabelMarginMobile.top}${fluntFromLabelMarginUnits.Mobile} ${fluntFromLabelMarginMobile.right}${fluntFromLabelMarginUnits.Mobile} ${fluntFromLabelMarginMobile.bottom}${fluntFromLabelMarginUnits.Mobile} ${fluntFromLabelMarginMobile.left}${fluntFromLabelMarginUnits.Mobile}`;
+    /** End Label Margin */ 
 
     /** Start  padding */
     const handlePaddingUnitChange = ( event, position ) => {
@@ -2435,6 +2518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormLabelGlobalTypoSwitcher.textDecoration === false && fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
             ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Desktop && fluentFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormLabelLetterSpacing.Desktop}${fluentFormLabelLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Desktop && fluentFormLabelLineHeightUnits.Desktop ? `line-height: ${fluentFormLabelLineHeight.Desktop}${fluentFormLabelLineHeightUnits.Desktop};` : ''}
+            ${fluntFromLabelMarginDesktopWidth ? `margin: ${fluntFromLabelMarginDesktopWidth};` : ""}
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
@@ -2752,6 +2836,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
+                ${fluntFromLabelMarginTabletWidth ? `margin: ${fluntFromLabelMarginTabletWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
@@ -3000,6 +3085,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Mobile && fluentFormLabelFontSizeUnits.Mobile ? `font-size: ${fluentFormLabelFontSize.Mobile}${fluentFormLabelFontSizeUnits.Mobile};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Mobile && fluentFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormLabelLetterSpacing.Mobile}${fluentFormLabelLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Mobile && fluentFormLabelLineHeightUnits.Mobile ? `line-height: ${fluentFormLabelLineHeight.Mobile}${fluentFormLabelLineHeightUnits.Mobile};` : ''}
+                ${fluntFromLabelMarginMobileWidth ? `margin: ${fluntFromLabelMarginMobileWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
@@ -3181,6 +3267,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelLineHeight,
         fluentFormLabelLetterSpacingUnits,
         fluentFormLabelLineHeightUnits,
+
+        fluntFromLabelMarginUnits,
+        fluntFromLabelMarginDesktop,
+        fluntFromLabelMarginTablet,
+        fluntFromLabelMarginMobile,
+        fluntFromLabelMarginLink,
+        fluntFromLabelMarginDesktopWidth,
+        fluntFromLabelMarginTabletWidth,
+        fluntFromLabelMarginMobileWidth,
 
         fluentFormInputBgColor,
         fluentFormInputColor,
@@ -3769,6 +3864,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChangeLineHeightUnit={(value) => setAttributes({ fluentFormLabelLineHeightUnits: value })}
 
                                                 deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleLabelMarginUnitsHandler} 
+                                                spacingUnits={fluntFromLabelMarginUnits}
+                                                spacingDesktop={fluntFromLabelMarginDesktop}
+                                                spacingTablet={fluntFromLabelMarginTablet}
+                                                spacingMobile={fluntFromLabelMarginMobile}
+                                                handleSpacingUnitHandler={handleLabelMarginUnitChange}
+                                                spacingCombineBtn={fluntFromLabelMarginLink}
+                                                spacingCombineBtnHandler={handleLabelMarginCombineBtn} 
                                                 setAttributes={setAttributes}
                                             />
                                         </PanelBody>

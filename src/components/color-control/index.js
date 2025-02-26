@@ -11,13 +11,11 @@ const FB_ColorControl = ({
     setGlobalColor,
 }) => {
 
-    const themeColors = useSelect((select) => {
-		return select("core/editor").getEditorSettings().colors;
-	}, []);
+    // const themeColors = useSelect((select) => {
+	// 	return select("core/editor").getEditorSettings().colors;
+	// }, []);
 
     const defaultColors = [
-        { color: '#F72585' },
-        { color: '#7209B7' },
         { color: '#3A0CA3' },
         { color: '#4361EE' },
         { color: '#4CC9F0' },
@@ -27,41 +25,30 @@ const FB_ColorControl = ({
 
     useEffect(() => {
         // Retrieve colors from local storage
-        const storedColors = localStorage.getItem('fb_global_colors');
-        const storedCustomColors = localStorage.getItem('fb_custom_colors');
+        const storedColors = JSON.parse(localStorage.getItem('fb_global_colors')) || [];
+        const storedCustomColors = JSON.parse(localStorage.getItem('fb_custom_colors')) || [];
 
         let combinedColors = [];
 
-        if (storedColors) {
-            try {
-                const parsedColors = JSON.parse(storedColors);
-                if (Array.isArray(parsedColors)) {
-                    combinedColors = [...parsedColors];
-                } else {
-                    console.warn('Global colors is not an array:', parsedColors);
+        // Function to extract name & slug and push into combinedColors
+        const extractColors = (colorArray) => {
+            colorArray.forEach(({ name, color, slug }) => {
+                if (name && color && slug) {
+                    combinedColors.push({ name, color: `var(--wp--frontis--color--${slug})`, value: color });
                 }
-            } catch (error) {
-                console.error('Error parsing global colors:', error);
-            }
-        }
+            });
+        };
 
-        if (storedCustomColors) {
-            try {
-                const parsedCustomColors = JSON.parse(storedCustomColors);
-                if (Array.isArray(parsedCustomColors)) {
-                    combinedColors = [...combinedColors, ...parsedCustomColors];
-                } else {
-                    console.warn('Custom colors is not an array:', parsedCustomColors);
-                }
-            } catch (error) {
-                console.error('Error parsing custom colors:', error);
-            }
-        }
+        // Extract colors from both stored arrays
+        extractColors(storedColors);
+        extractColors(storedCustomColors);
+
         setGlobalColors(combinedColors);
+
     }, []);
-    const storedData = localStorage.getItem("fb_global_colors");
-    const customTypoData = storedData ? JSON.parse(storedData) : {};
-    console.log(customTypoData)
+    
+    const matchedObject = globalColors.find(item => item.color === globalColor);
+
 
     return (
         <div className="fb-setting-color-container">
@@ -82,7 +69,7 @@ const FB_ColorControl = ({
                         >
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 <span className="fb-setting-color-hex">
-                                    {globalColor || ''}
+                                    {matchedObject !== undefined ? matchedObject.value : globalColor || ''}
                                 </span>
                                 <div
                                     className="fb-setting-color-display"
