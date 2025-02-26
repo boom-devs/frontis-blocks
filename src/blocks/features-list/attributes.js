@@ -746,6 +746,49 @@ const attributes = {
         type: 'string',
         default: ""
     },
+
+    /** Start Margin */
+    FeatureTitleMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	FeatureTitleMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '5',
+			left: '0',
+			right: '0',
+		},
+	},
+	FeatureTitleMarginTablet: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '5',
+			left: '0',
+			right: '0',
+		},
+	},
+	FeatureTitleMarginMobile: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '5',
+			left: '0',
+			right: '0',
+		},
+	},
+	FeatureTitleMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
     /** End Title */
 
     /** Start Description */
@@ -851,6 +894,48 @@ const attributes = {
         type: 'string',
         default: ""
     },
+
+    /** Start Margin */
+    FeatureDescMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    FeatureDescMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    FeatureDescMarginTablet: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    FeatureDescMarginMobile: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    FeatureDescMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Margin */
     /** End Description */
 
 
