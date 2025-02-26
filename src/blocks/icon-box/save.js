@@ -1,7 +1,7 @@
-import { useBlockProps, RichText } from "@wordpress/block-editor";
-import { Card } from "@wordpress/components";
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import { __ } from "@wordpress/i18n";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+
 export default function save({ attributes }) {
 	const {
 		blockID,
@@ -86,14 +86,11 @@ export default function save({ attributes }) {
 												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												className="fb-icon-btn-wrapper"
 											>
-												
-
-
-													<RichText.Content
-														value={icon_Box_Button_Text}
-														tagName={"span"}
-														className="fb-icon-button"
-													/>
+												<RichText.Content
+													value={icon_Box_Button_Text}
+													tagName={"span"}
+													className="fb-icon-button"
+												/>
 												
 												{buttonIconSwitcher && (
 													<div className="fb-btn-icon-wrapper">
@@ -148,14 +145,11 @@ export default function save({ attributes }) {
 												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												className="fb-icon-btn-wrapper"
 											>
-												
-
-
-													<RichText.Content
-														value={icon_Box_Button_Text}
-														tagName={"span"}
-														className="fb-icon-button"
-													/>
+												<RichText.Content
+													value={icon_Box_Button_Text}
+													tagName={"span"}
+													className="fb-icon-button"
+												/>
 												
 												{buttonIconSwitcher && (
 													<div className="fb-btn-icon-wrapper">
