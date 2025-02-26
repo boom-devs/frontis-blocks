@@ -135,6 +135,48 @@ const attributes = {
     },
     /** End Label */
 
+    /** Start Label Margin */
+    fluntFromLabelMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    fluntFromLabelMarginDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    fluntFromLabelMarginTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    fluntFromLabelMarginMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    fluntFromLabelMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Label Margin */
+    
     /** Start Input & Textarea */
     fluentFormInputBgColor: {
         type: 'string',
