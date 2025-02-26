@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.7.2
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,14 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+= 1.0.5 - 26 Feb 2025 =
+- Fix dual button border radius issues
+- Fix feature-list padding issues 
+- Fix form label margin issues
+- Support Deprecated version 
+- Add global typography control
+- Add global color control
+
 = 1.0.4 - 24 Feb 2025 =
 - Fix advanced video issues
 
