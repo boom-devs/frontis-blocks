@@ -406,6 +406,50 @@ export const attributes = {
 		type : "boolean",
 		default: true
 	},
+	/** End Padding */
+	/** Start Margin */
+	contactFormMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	contactFormMarginDesktop: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	contactFormMarginTablet: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	contactFormMarginMobile: {
+		type: "object",
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	contactFormMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Border */
 	contactFormBorder: {
 		type: 'string',
 		default: "solid",
@@ -1140,9 +1184,9 @@ export const attributes = {
 	contactFormErrorFontSize: {
 		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '14',
+			Tablet: '14',
+			Mobile: '14'
 		}
 	},
 	contactFormErrorFontSizeUnits: {
