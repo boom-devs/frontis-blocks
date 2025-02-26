@@ -5,7 +5,6 @@ import TemplatesLibrary from "./templates"
 import './style.scss';
 
 document.addEventListener('DOMContentLoaded', function () {
-	console.log("Hey there i am here")
 	const buttonDiv = document.createElement('div')
 	buttonDiv.classList.add('fb-template-library-button-wrapper')
 	const root = createRoot(buttonDiv);

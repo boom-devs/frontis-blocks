@@ -1,25 +1,20 @@
-import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useEffect, useState } from '@wordpress/element';
+import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
 	const {
 		blockID,
-		deviceType,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
 		countDownLabelSecond,
-
 		targetDate,
 		showDays,
 		showHours,
 		showMinutes,
 		showSeconds,
-
 		countDownGlobalWraperID,
 		countDownGlobalWraperClass,
-
 		countDownDesktopSwitcher,
 		countDownTabletSwitcher,
 		countDownMobileSwitcher,
@@ -29,7 +24,6 @@ export default function save({ attributes }) {
 		className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
-	{/* Inspector Controls */}
 	return (
 		<>
 			<div {...blockProps} data-target-date={targetDate}>
@@ -68,9 +62,6 @@ export default function save({ attributes }) {
 					)}
 				</div>
 			</div>
-
-
-			
 		</>
 	);
 }
