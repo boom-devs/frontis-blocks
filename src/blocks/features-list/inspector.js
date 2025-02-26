@@ -141,6 +141,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureTitleColorSwitcher,
         FeatureTitleColor,
         FeatureTitleHoverColor,
+        FeatureTitleMarginUnits,
+        FeatureTitleMarginDesktop,
+        FeatureTitleMarginTablet,
+        FeatureTitleMarginMobile,
+        FeatureTitleMarginLink,
         /** End Title Style */
 
         /** Description Style */
@@ -162,6 +167,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureDescColorSwitcher,
         FeatureDescColor,
         FeatureDescHoverColor,
+        FeatureDescMarginUnits,
+        FeatureDescMarginDesktop,
+        FeatureDescMarginTablet,
+        FeatureDescMarginMobile,
+        FeatureDescMarginLink,
         /** End Description Style */
 
         /** Single Item */
@@ -1504,6 +1514,152 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [FeatureItems, blockID]);
 
 
+    /** Start Feature Title Margin */
+	const handleFeatureTitleMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( FeatureTitleMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						FeatureTitleMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						FeatureTitleMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						FeatureTitleMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {FeatureTitleMarginDesktop: {...FeatureTitleMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {FeatureTitleMarginTablet: {...FeatureTitleMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {FeatureTitleMarginMobile: {...FeatureTitleMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureTitleMarginCombineBtn = () => {
+		setAttributes( {FeatureTitleMarginLink: !FeatureTitleMarginLink} );
+	}
+
+	const handleFeatureTitleMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			FeatureTitleMarginUnits: {
+				...FeatureTitleMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const featureTitleDesktopMargin = `${FeatureTitleMarginDesktop.top}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.right}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.bottom}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.left}${FeatureTitleMarginUnits.Desktop}`;
+	const featureTitleTabletMargin = `${FeatureTitleMarginTablet.top}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.right}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.bottom}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.left}${FeatureTitleMarginUnits.Tablet}`;
+	const featureTitleMobileMargin = `${FeatureTitleMarginMobile.top}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.right}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.bottom}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.left}${FeatureTitleMarginUnits.Mobile}`;
+	/** End Feature Title Margin */
+
+
+        /** Start Feature Description Margin */
+	const handleFeatureDescMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( FeatureDescMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						FeatureDescMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						FeatureDescMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						FeatureDescMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {FeatureDescMarginDesktop: {...FeatureDescMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {FeatureDescMarginTablet: {...FeatureDescMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {FeatureDescMarginMobile: {...FeatureDescMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleFeatureDescMarginCombineBtn = () => {
+		setAttributes( {FeatureDescMarginLink: !FeatureDescMarginLink} );
+	}
+
+	const handleFeatureDescMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			FeatureDescMarginUnits: {
+				...FeatureDescMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const featureDescDesktopMargin = `${FeatureDescMarginDesktop.top}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.right}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.bottom}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.left}${FeatureDescMarginUnits.Desktop}`;
+	const featureDescTabletMargin = `${FeatureDescMarginTablet.top}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.right}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.bottom}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.left}${FeatureDescMarginUnits.Tablet}`;
+	const featureDescMobileMargin = `${FeatureDescMarginMobile.top}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.right}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.bottom}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.left}${FeatureDescMarginUnits.Mobile}`;
+	/** End Feature Description Margin */
 
 
     const allBlockStyle = useMemo(() => {
@@ -1644,8 +1800,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Desktop && FeatureTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureTitleLetterSpacing.Desktop}${FeatureTitleLetterSpacingUnits.Desktop};` : ''}
                 ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Desktop && FeatureTitleLineHeightUnits.Desktop ? `line-height: ${FeatureTitleLineHeight.Desktop}${FeatureTitleLineHeightUnits.Desktop};` : ''}
                 ${FeatureTitleColor ? `color: ${FeatureTitleColor};` : ''}
+                ${featureTitleDesktopMargin ? `margin: ${featureTitleDesktopMargin};` : ''}
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-title:hover {
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag}:hover {
                 ${FeatureTitleHoverColor ? `color: ${FeatureTitleHoverColor};` : ''}
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
@@ -1667,6 +1824,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Desktop && FeatureDescLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureDescLetterSpacing.Desktop}${FeatureDescLetterSpacingUnits.Desktop};` : ''}
                 ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Desktop && FeatureDescLineHeightUnits.Desktop ? `line-height: ${FeatureDescLineHeight.Desktop}${FeatureDescLineHeightUnits.Desktop};` : ''}
                 ${FeatureDescColor ? `color: ${FeatureDescColor};` : ''}
+                ${featureDescDesktopMargin ? `margin: ${featureDescDesktopMargin};` : ''}
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text:hover {
                 ${FeatureDescHoverColor ? `color: ${FeatureDescHoverColor};` : ''}
@@ -1737,11 +1895,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${FeatureTitleGlobalTypoSwitcher.fontSize === false && FeatureTitleFontSize.Tablet && FeatureTitleFontSizeUnits.Tablet ? `font-size: ${FeatureTitleFontSize.Tablet}${FeatureTitleFontSizeUnits.Tablet};` : ''}
                     ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Tablet && FeatureTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureTitleLetterSpacing.Tablet}${FeatureTitleLetterSpacingUnits.Tablet};` : ''}
                     ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Tablet && FeatureTitleLineHeightUnits.Tablet ? `line-height: ${FeatureTitleLineHeight.Tablet}${FeatureTitleLineHeightUnits.Tablet};` : ''}
+                    ${featureTitleTabletMargin ? `margin: ${featureTitleTabletMargin};` : ''}
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
                     ${FeatureDescGlobalTypoSwitcher.fontSize === false && FeatureDescFontSize.Tablet && FeatureDescFontSizeUnits.Tablet ? `font-size: ${FeatureDescFontSize.Tablet}${FeatureDescFontSizeUnits.Tablet};` : ''}
                     ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Tablet && FeatureDescLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureDescLetterSpacing.Tablet}${FeatureDescLetterSpacingUnits.Tablet};` : ''}
                     ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Tablet && FeatureDescLineHeightUnits.Tablet ? `line-height: ${FeatureDescLineHeight.Tablet}${FeatureDescLineHeightUnits.Tablet};` : ''}
+                    ${featureDescTabletMargin ? `margin: ${featureDescTabletMargin};` : ''}
                 }
 
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
@@ -1807,11 +1967,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${FeatureTitleGlobalTypoSwitcher.fontSize === false && FeatureTitleFontSize.Mobile && FeatureTitleFontSizeUnits.Mobile ? `font-size: ${FeatureTitleFontSize.Mobile}${FeatureTitleFontSizeUnits.Mobile};` : ''}
                     ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Mobile && FeatureTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureTitleLetterSpacing.Mobile}${FeatureTitleLetterSpacingUnits.Mobile};` : ''}
                     ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Mobile && FeatureTitleLineHeightUnits.Mobile ? `line-height: ${FeatureTitleLineHeight.Mobile}${FeatureTitleLineHeightUnits.Mobile};` : ''}
+                    ${featureTitleMobileMargin ? `margin: ${featureTitleMobileMargin};` : ''}
                 }
+
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
                     ${FeatureDescGlobalTypoSwitcher.fontSize === false && FeatureDescFontSize.Mobile && FeatureDescFontSizeUnits.Mobile ? `font-size: ${FeatureDescFontSize.Mobile}${FeatureDescFontSizeUnits.Mobile};` : ''} 
                     ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Mobile && FeatureDescLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureDescLetterSpacing.Mobile}${FeatureDescLetterSpacingUnits.Mobile};` : ''}
                     ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Mobile && FeatureDescLineHeightUnits.Mobile ? `line-height: ${FeatureDescLineHeight.Mobile}${FeatureDescLineHeightUnits.Mobile};` : ''}
+                    ${featureDescMobileMargin ? `margin: ${featureDescMobileMargin};` : ''}
                 }
 
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
@@ -2105,6 +2268,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         featuresListVRTopOffsetUnits,
         featuresListVRBottomOffset,
         featuresListVRBottomOffsetUnits,
+
+
+
+        FeatureTitleMarginUnits,
+        FeatureTitleMarginDesktop,
+        FeatureTitleMarginTablet,
+        FeatureTitleMarginMobile,
+        FeatureTitleMarginLink,
+        featureTitleDesktopMargin,
+        featureTitleTabletMargin,
+        featureTitleMobileMargin,
+
+        FeatureDescMarginUnits,
+        FeatureDescMarginDesktop,
+        FeatureDescMarginTablet,
+        FeatureDescMarginMobile,
+        FeatureDescMarginLink,
+        featureDescDesktopMargin,
+        featureDescTabletMargin,
+        featureDescMobileMargin,
     ]);
 
     const customCss = getCustomCss(featuresListGlobalWraperCustomCSS, `.${blockID}`);
@@ -2615,6 +2798,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setGlobalColor={(value) => setAttributes({ FeatureTitleHoverColor: value })}
                                                 />
                                             )}
+
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFeatureTitleMarginUnitsHandler}
+                                                spacingUnits={FeatureTitleMarginUnits}
+                                                spacingDesktop={FeatureTitleMarginDesktop}
+                                                spacingTablet={FeatureTitleMarginTablet}
+                                                spacingMobile={FeatureTitleMarginMobile}
+                                                handleSpacingUnitHandler={handleFeatureTitleMarginUnitChange} 
+                                                spacingCombineBtn={FeatureTitleMarginLink}
+                                                spacingCombineBtnHandler={handleFeatureTitleMarginCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
                                         </PanelBody>
                                         <PanelBody
                                             title={__("Description", "frontis-blocks")}
@@ -2693,6 +2890,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     setGlobalColor={(value) => setAttributes({ FeatureDescHoverColor: value })}
                                                 />
                                             )}
+
+                                            <FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleFeatureDescMarginUnitsHandler}
+                                                spacingUnits={FeatureDescMarginUnits}
+                                                spacingDesktop={FeatureDescMarginDesktop}
+                                                spacingTablet={FeatureDescMarginTablet}
+                                                spacingMobile={FeatureDescMarginMobile}
+                                                handleSpacingUnitHandler={handleFeatureDescMarginUnitChange} 
+                                                spacingCombineBtn={FeatureDescMarginLink}
+                                                spacingCombineBtnHandler={handleFeatureDescMarginCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
 
                                         </PanelBody>
 
