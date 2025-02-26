@@ -359,9 +359,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const headingDesktopPadding = `${HeadingDesktopPadding.top}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.right}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.bottom}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.left}${HeadingPaddingUnits.Desktop}`;
-	const headingTabletPadding = `${HeadingTabPadding.top}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.right}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.bottom}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.left}${HeadingPaddingUnits.Tablet}`;
-	const headingMobilePadding = `${HeadingMobilePadding.top}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.right}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.bottom}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.left}${HeadingPaddingUnits.Mobile}`;
+	const headingDesktopPaddingValue = `${HeadingDesktopPadding.top}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.right}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.bottom}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.left}${HeadingPaddingUnits.Desktop}`;
+	const headingTabletPaddingValue = `${HeadingTabPadding.top}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.right}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.bottom}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.left}${HeadingPaddingUnits.Tablet}`;
+	const headingMobilePaddingValue = `${HeadingMobilePadding.top}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.right}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.bottom}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.left}${HeadingPaddingUnits.Mobile}`;
 
 	// Heading Margin
 	const handleHeadingMarginUnitChange = (event, position) => {
@@ -438,9 +438,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const headingDesktopMargin = `${HeadingDesktopMargin.top}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.right}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.bottom}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.left}${HeadingMarginUnits.Desktop}`;
-	const headingTabletMargin = `${HeadingTabMargin.top}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.right}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.bottom}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.left}${HeadingMarginUnits.Tablet}`;
-	const headingMobileMargin = `${HeadingMobileMargin.top}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.right}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.bottom}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.left}${HeadingMarginUnits.Mobile}`;
+	const headingDesktopMarginValue = `${HeadingDesktopMargin.top}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.right}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.bottom}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.left}${HeadingMarginUnits.Desktop}`;
+	const headingTabletMarginValue = `${HeadingTabMargin.top}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.right}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.bottom}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.left}${HeadingMarginUnits.Tablet}`;
+	const headingMobileMarginValue = `${HeadingMobileMargin.top}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.right}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.bottom}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.left}${HeadingMarginUnits.Mobile}`;
 	
 	/** Start Image Border */
 	const handleImageBorderUnitChange = (event, position) => {
@@ -954,7 +954,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
-			padding: ${globalDeskPadding};
+			padding: ${globalDeskPadding};	
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
 			border-width: ${globalDeskBorder};
@@ -989,8 +989,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
 			${!autoHeightSwitch && mediaHeight.Desktop ? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};` : `height: auto;`}
 			${imageBorder ? `border: ${imageBorder};` : ''}
-			${imageDesktopBorder !== 'px px px px' ? `border-width: ${imageDesktopBorder};` : ''}
-            ${imageDesktopBorderRadius !== 'px px px px' ? `border-radius: ${imageDesktopBorderRadius};` : ''}
+			${imageDesktopBorder && imageBorderDesktop.top ? `border-width: ${imageDesktopBorder};` : ''}
+            ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
 		}
@@ -1047,8 +1047,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
 			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
 			
-			${headingDesktopPadding !== 'px px px px' ? `padding: ${headingDesktopPadding};` : ""}
-			${headingDesktopMargin !== 'px px px px' ? `margin: ${headingDesktopMargin};` : ''}
+			${headingDesktopPaddingValue && HeadingDesktopPadding.top ? `padding: ${headingDesktopPaddingValue};` : ""}
+			${headingDesktopMarginValue && HeadingDesktopMargin.top ? `margin: ${headingDesktopMarginValue};` : ''}
 			border: ${HeadingBorder};
 			${HeadingBorderColor ? `border-color: ${HeadingBorderColor};` : ''}
 			transition: all .3s ease-in-out;
@@ -1068,10 +1068,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper {
-			${globalTabPadding !== 'px px px px' ? `padding: ${globalTabPadding};` : ''}
-			${globalTabMargin !== 'px px px px' ? `margin: ${globalTabMargin};` : ''}
-			${globalTabBorder !== 'px px px px' ? `border-width: ${globalTabBorder};` : ''}
-			${globalTabBorderRadius !== 'px px px px' ? `border-radius: ${globalTabBorderRadius} !important;` : ''}
+			${globalTabPadding && globalPaddingTablet.top ? `padding: ${globalTabPadding};` : ''}
+			${globalTabMargin && globalMarginTablet.top ? `margin: ${globalTabMargin};` : ''}
+			${globalTabBorder && globalBorderTablet.top ? `border-width: ${globalTabBorder};` : ''}
+			${globalTabBorderRadius && globalBorderRadiusTablet.top ? `border-radius: ${globalTabBorderRadius} !important;` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageTabletBorder ? `border-width: ${imageTabletBorder};` : ''}
@@ -1085,8 +1085,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
 			${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
 			${!autoHeightSwitch && mediaHeight.Tablet ? `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet};` : `height: auto;`}
-			${headingTabletPadding ? `padding: ${headingTabletPadding};` : ''}
-			${headingTabletMargin ? `margin: ${headingTabletMargin};` : ''}
+			${headingTabletPaddingValue && HeadingTabPadding.top ? `padding: ${headingTabletPaddingValue};` : ''}
+			${headingTabletMarginValue && HeadingTabMargin.top ? `margin: ${headingTabletMarginValue};` : ''}
 		}
 		}
 		@media all and (max-width: 767px) {
@@ -1100,14 +1100,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		.${blockID} .fb-advanced-image-wrapper {
 			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
-			${globalMobPadding !== 'px px px px' ? `padding: ${globalMobPadding};` : ''}
-			${globalMobMargin !== 'px px px px' ? `margin: ${globalMobMargin};` : ''}
-			${globalMobBorder !== 'px px px px' ? `border-width: ${globalMobBorder};` : ''}
-			${globalMobBorderRadius !== 'px px px px' ? `border-radius: ${globalMobBorderRadius} !important;` : ''}
+			${globalMobPadding && globalPaddingMobile.top ? `padding: ${globalMobPadding};` : ''}
+			${globalMobMargin && globalMarginMobile.top ? `margin: ${globalMobMargin};` : ''}
+			${globalMobBorder && globalBorderMobile.top ? `border-width: ${globalMobBorder};` : ''}
+			${globalMobBorderRadius && globalBorderRadiusMobile.top ? `border-radius: ${globalMobBorderRadius} !important;` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
-			${imageMobileBorder !== 'px px px px' ? `border-width: ${imageMobileBorder};` : ''}
-            ${imageMobileBorderRadius !== 'px px px px' ? `border-radius: ${imageMobileBorderRadius};` : ''}
+			${imageMobileBorder && imageBorderMobile.top ? `border-width: ${imageMobileBorder};` : ''}
+            ${imageMobileBorderRadius && imageBorderRadiusMobile.top ? `border-radius: ${imageMobileBorderRadius};` : ''}
 			${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
 			${!autoHeightSwitch && mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : `height: auto;`}
 		}
@@ -1118,8 +1118,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
 			${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
 			${!autoHeightSwitch && mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : `height: auto;`}
-			${headingMobilePadding !== 'px px px px' ? `padding: ${headingMobilePadding};` : ''}
-			${headingMobileMargin !== 'px px px px' ? `margin: ${headingMobileMargin};` : ''}
+			${headingMobilePaddingValue && HeadingMobilePadding.top ? `padding: ${headingMobilePaddingValue};` : ''}
+			${headingMobileMarginValue && HeadingMobileMargin.top ? `margin: ${headingMobileMarginValue};` : ''}
 		}
 		}
 	`,
@@ -1205,12 +1205,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			headingLineHeight,
 			headingLineHeightUnits,
 			HeadingBorder,
-			headingDesktopPadding,
-			headingTabletPadding,
-			headingMobilePadding,
-			headingDesktopMargin,
-			headingTabletMargin,
-			headingMobileMargin,
+			HeadingDesktopPadding,
+			HeadingTabPadding,
+			HeadingMobilePadding,
+			HeadingDesktopMargin,
+			HeadingTabMargin,
+			HeadingMobileMargin,
 
 			// Position
 			advancedImagePositionType,

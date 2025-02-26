@@ -262,8 +262,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 		
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			${accordionItemPaddingDesktopWidth && accordionItemDesktopPadding.top ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth && accordionItemDesktopMargin.top ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			transition: all 0.3s ease-in-out;
 		  }
 	  
@@ -300,8 +300,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Tablet ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-			  ${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			  ${accordionItemPaddingTabletWidth && accordionItemTabPadding.top ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+			  ${accordionItemMarginTabletWidth && accordionItemTabMargin.top ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
 		  }
 	  
@@ -310,8 +310,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Mobile ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-			  ${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			  ${accordionItemPaddingMobileWidth && accordionItemMobilePadding.top ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+			  ${accordionItemMarginMobileWidth && accordionItemMobileMargin.top ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
 		  }
 		`,
