@@ -262,8 +262,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 		
 		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+			${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
 			transition: all 0.3s ease-in-out;
 		  }
 	  
@@ -300,8 +300,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Tablet ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-			  ${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+			  ${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+			  ${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
 		  }
 	  
@@ -310,8 +310,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Mobile ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-			  ${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+			  ${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+			  ${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
 		  }
 		`,
@@ -374,8 +374,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             transition: all 0.3s ease-in-out;
 		}
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            ${accordionItemPaddingDesktopWidth !== undefined ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== undefined ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+            ${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+			${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
             transition: all 0.3s ease-in-out;
 		}
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
@@ -410,8 +410,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Tablet ? `z-index: ${accordionItemZIndex.Tablet};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingTabletWidth !== undefined ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-				${accordionItemMarginTabletWidth !== undefined ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+				${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+				${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
 			}
 		}
 
@@ -420,8 +420,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${accordionItemZIndex.Mobile ? `z-index: ${accordionItemZIndex.Mobile};` : ''}
             }
 			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingMobileWidth !== undefined ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-				${accordionItemMarginMobileWidth !== undefined ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+				${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+				${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
 			}
 		}
 		`, [
