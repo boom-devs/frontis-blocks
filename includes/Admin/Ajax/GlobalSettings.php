@@ -428,6 +428,7 @@ class GlobalSettings extends AjaxBase
     public function import_full_site()
     {
         try {
+            error_log('AJAX Data Received: ' . print_r($_POST, true));
             // Security check
             $nonce = $_POST['security'] ?? '';
             if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
@@ -449,8 +450,6 @@ class GlobalSettings extends AjaxBase
             if (!empty($config)) {
                 $colors = $config['colors'] ?? [];
                 $typography = $config['typography'] ?? [];
-
-                error_log('Imported typography data: ' . print_r($typography, true));
 
                 // Update colors
                 update_option('global_site_colors', $colors);
@@ -566,8 +565,7 @@ class GlobalSettings extends AjaxBase
 
     private function generate_typography_css($typography)
     {
-        error_log('Typography data: ' . print_r($typography, true));
-        if (empty($typography)) {
+        if (empty($typography) || !is_array($typography)) {
             return '';
         }
 
@@ -577,20 +575,24 @@ class GlobalSettings extends AjaxBase
         // First define all typography variables in root
         foreach ($elements as $element) {
             $option_name = "fb_typography_{$element}";
-            $settings = get_option($option_name);
-            error_log("Option {$option_name} value: " . print_r($settings, true));
-            if (empty($settings)) {
-                continue;
+
+            // Check if typography settings exist in the input array
+            $settings = $typography[$element] ?? get_option($option_name);
+
+            // Ensure settings are in array format
+            if (is_string($settings)) {
+                $settings = json_decode($settings, true);
             }
 
-            $settings = json_decode($settings, true);
-            if (empty($settings)) {
+            error_log("Processed {$element} typography: " . print_r($settings, true));
+
+            if (empty($settings) || !is_array($settings)) {
                 continue;
             }
 
             // Define variables for each property
-            if (!empty($settings['fontSize']['desktop'])) {
-                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['desktop']}{$settings['fontSizeUnit']};";
+            if (!empty($settings['fontSize']['Desktop'])) {
+                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['Desktop']}{$settings['fontSizeUnit']['Desktop']};";
             }
             if (!empty($settings['fontFamily'])) {
                 $css .= "\n  --fb-{$element}-font-family: {$settings['fontFamily']};";
@@ -607,23 +609,17 @@ class GlobalSettings extends AjaxBase
             if (!empty($settings['textDecoration'])) {
                 $css .= "\n  --fb-{$element}-text-decoration: {$settings['textDecoration']};";
             }
-            if (!empty($settings['letterSpacing']['desktop'])) {
-                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['desktop']}{$settings['letterSpacingUnit']};";
+            if (!empty($settings['letterSpacing']['Desktop'])) {
+                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['Desktop']}{$settings['letterSpacingUnit']['Desktop']};";
             }
-            if (!empty($settings['lineHeight']['desktop'])) {
-                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['desktop']}{$settings['lineHeightUnit']};";
+            if (!empty($settings['lineHeight']['Desktop'])) {
+                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['Desktop']}{$settings['lineHeightUnit']['Desktop']};";
             }
         }
         $css .= "\n}\n\n";
 
-        // Then use the variables in selectors
+        // Define CSS selectors and apply typography variables
         foreach ($elements as $element) {
-            $settings = get_option("fb_typography_{$element}");
-            if (empty($settings)) {
-                continue;
-            }
-
-            // Define selector based on element type
             $selector = match ($element) {
                 'text' => 'body p, body span',
                 'link' => 'a',
@@ -632,8 +628,6 @@ class GlobalSettings extends AjaxBase
             };
 
             $css .= "{$selector} {\n";
-
-            // Use the CSS variables
             $css .= "  font-size: var(--fb-{$element}-font-size);\n";
             $css .= "  font-family: var(--fb-{$element}-font-family);\n";
             $css .= "  font-weight: var(--fb-{$element}-font-weight);\n";
@@ -642,58 +636,38 @@ class GlobalSettings extends AjaxBase
             $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
             $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
             $css .= "  line-height: var(--fb-{$element}-line-height);\n";
-
             $css .= "}\n\n";
         }
 
-        // Add responsive styles if needed
-        foreach ($elements as $element) {
-            $settings = get_option("fb_typography_{$element}");
-            if (empty($settings)) {
-                continue;
+        // Handle responsive styles (Tablet and Mobile)
+        foreach (['Tablet' => '768px', 'Mobile' => '480px'] as $device => $breakpoint) {
+            $css .= "@media (max-width: {$breakpoint}) {\n";
+            $css .= "  :root {\n";
+
+            foreach ($elements as $element) {
+                $settings = $typography[$element] ?? get_option("fb_typography_{$element}");
+
+                if (is_string($settings)) {
+                    $settings = json_decode($settings, true);
+                }
+
+                if (empty($settings) || !is_array($settings)) {
+                    continue;
+                }
+
+                if (!empty($settings['fontSize'][$device])) {
+                    $css .= "    --fb-{$element}-font-size: {$settings['fontSize'][$device]}{$settings['fontSizeUnit'][$device]};\n";
+                }
+                if (!empty($settings['letterSpacing'][$device])) {
+                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing'][$device]}{$settings['letterSpacingUnit'][$device]};\n";
+                }
+                if (!empty($settings['lineHeight'][$device])) {
+                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight'][$device]}{$settings['lineHeightUnit'][$device]};\n";
+                }
             }
 
-            $settings = json_decode($settings, true);
-            if (empty($settings)) {
-                continue;
-            }
-
-            $selector = match ($element) {
-                'text' => 'body p, body span',
-                'link' => 'a',
-                'button' => 'button, .button',
-                default => $element,
-            };
-
-            // Tablet styles
-            if (!empty($settings['fontSize']['tablet'])) {
-                $css .= "@media (max-width: 768px) {\n";
-                $css .= "  :root {\n";
-                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
-                if (!empty($settings['letterSpacing']['tablet'])) {
-                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
-                }
-                if (!empty($settings['lineHeight']['tablet'])) {
-                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
-                }
-                $css .= "  }\n";
-                $css .= "}\n\n";
-            }
-
-            // Mobile styles
-            if (!empty($settings['fontSize']['mobile'])) {
-                $css .= "@media (max-width: 480px) {\n";
-                $css .= "  :root {\n";
-                $css .= "    --fb-{$element}-font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
-                if (!empty($settings['letterSpacing']['mobile'])) {
-                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
-                }
-                if (!empty($settings['lineHeight']['mobile'])) {
-                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
-                }
-                $css .= "  }\n";
-                $css .= "}\n";
-            }
+            $css .= "  }\n";
+            $css .= "}\n\n";
         }
 
         return $css;
