@@ -114,6 +114,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormPaddingMobile,
 		contactFormPaddingLink,
 
+		contactFormMarginUnits,
+		contactFormMarginDesktop,
+		contactFormMarginTablet,
+		contactFormMarginMobile,
+		contactFormMarginLink,
+
 		contactFormBorder,
 		contactFormBorderColorSwitcher,
 		contactFormBorderColor,
@@ -430,6 +436,96 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const contactFormTabletPadding = `${contactFormPaddingTablet.top}${contactFormPaddingUnits.Tablet} ${contactFormPaddingTablet.right}${contactFormPaddingUnits.Tablet} ${contactFormPaddingTablet.bottom}${contactFormPaddingUnits.Tablet} ${contactFormPaddingTablet.left}${contactFormPaddingUnits.Tablet}`;
 	const contactFormMobilePadding = `${contactFormPaddingMobile.top}${contactFormPaddingUnits.Mobile} ${contactFormPaddingMobile.right}${contactFormPaddingUnits.Mobile} ${contactFormPaddingMobile.bottom}${contactFormPaddingUnits.Mobile} ${contactFormPaddingMobile.left}${contactFormPaddingUnits.Mobile}`;
 	/** End Padding */
+
+	/** Start  margin */
+	const handleMarginUnitChange = (event, position) => { 
+		const value = event.target.value;
+		if (contactFormMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						contactFormMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						contactFormMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						contactFormMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						contactFormMarginDesktop: {
+							...contactFormMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						contactFormMarginTablet: {
+							...contactFormMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						contactFormMarginMobile: {
+							...contactFormMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleMarginCombineBtn = () => {
+		setAttributes({ contactFormMarginLink: !contactFormMarginLink });
+	};
+
+	const handleMarginUnitsHandler = (unit) => {
+		setAttributes({
+			contactFormMarginUnits: {
+				...contactFormMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** end  margin */
+
+	/** Default margin for desktop (using desktop_margin) */
+	const contactFormDesktopMargin = `${contactFormMarginDesktop.top}${contactFormMarginUnits.Desktop} ${contactFormMarginDesktop.right}${contactFormMarginUnits.Desktop} ${contactFormMarginDesktop.bottom}${contactFormMarginUnits.Desktop} ${contactFormMarginDesktop.left}${contactFormMarginUnits.Desktop}`;
+	const contactFormTabletMargin = `${contactFormMarginTablet.top}${contactFormMarginUnits.Tablet} ${contactFormMarginTablet.right}${contactFormMarginUnits.Tablet} ${contactFormMarginTablet.bottom}${contactFormMarginUnits.Tablet} ${contactFormMarginTablet.left}${contactFormMarginUnits.Tablet}`;
+	const contactFormMobileMargin = `${contactFormMarginMobile.top}${contactFormMarginUnits.Mobile} ${contactFormMarginMobile.right}${contactFormMarginUnits.Mobile} ${contactFormMarginMobile.bottom}${contactFormMarginUnits.Mobile} ${contactFormMarginMobile.left}${contactFormMarginUnits.Mobile}`;
+	/** End Margin */
 
 	/** Start  border */
 	const handleBorderUnitChange = (event, position) => {
@@ -1976,6 +2072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormInputWidthSize.Desktop != "" ? `width: ${contactFormInputWidthSize.Desktop}${contactFormInputWidthSizeUnits.Desktop};` : ""}
             ${contactFormInputHeightSize.Desktop != "" ? `height: ${contactFormInputHeightSize.Desktop}${contactFormInputHeightSizeUnits.Desktop};` : ""}
             ${contactFormDesktopPadding != "" ? `padding: ${contactFormDesktopPadding};` : ""}
+            ${contactFormDesktopMargin != "" ? `margin: ${contactFormDesktopMargin};` : ""}
             ${contactFormBorder ? `border: ${contactFormBorder};` : ""}
             ${contactFormBorderDesktopWidth != "" ? `border-width: ${contactFormBorderDesktopWidth};` : ""}
             ${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
@@ -2195,6 +2292,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormInputWidthSize.Tablet != "" ? `width: ${contactFormInputWidthSize.Tablet}${contactFormInputWidthSizeUnits.Tablet};` : ""}
 				${contactFormInputHeightSize.Tablet != "" ? `height: ${contactFormInputHeightSize.Tablet}${contactFormInputHeightSizeUnits.Tablet};` : ""}
 				${contactFormTabletPadding != "" ? `padding: ${contactFormTabletPadding};` : ""}
+				${contactFormTabletMargin != "" ? `margin: ${contactFormTabletMargin};` : ""}
 				${contactFormBorderTabletWidth != "" ? `border-width: ${contactFormBorderTabletWidth};` : ""}
 				${contactFormBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormBorderRadiusTabletWidth};` : ""}
 				transition: all .3s ease-in-out;
@@ -2326,6 +2424,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormInputWidthSize.Mobile != "" ? `width: ${contactFormInputWidthSize.Mobile}${contactFormInputWidthSizeUnits.Mobile};` : ""}
 				${contactFormInputHeightSize.Mobile != "" ? `height: ${contactFormInputHeightSize.Mobile}${contactFormInputHeightSizeUnits.Mobile};` : ""}
 				${contactFormMobilePadding != "" ? `padding: ${contactFormMobilePadding};` : ""}
+				${contactFormMobileMargin != "" ? `margin: ${contactFormMobileMargin};` : ""}
 				${contactFormBorderMobileWidth != "" ? `border-width: ${contactFormBorderMobileWidth};` : ""}
 				${contactFormBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormBorderRadiusMobileWidth};` : ""}
 				transition: all .3s ease-in-out;
@@ -2456,6 +2555,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormPaddingTablet,
 		contactFormPaddingMobile,
 		contactFormPaddingLink,
+
+		contactFormMarginUnits,
+		contactFormMarginDesktop,
+		contactFormMarginTablet,
+		contactFormMarginMobile,
+		contactFormMarginLink,
 
 		contactFormBorder,
 		contactFormBorderColorSwitcher,
@@ -2632,6 +2737,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         contactFormDesktopPadding,
         contactFormTabletPadding,
         contactFormMobilePadding,
+
+        contactFormDesktopMargin,
+        contactFormTabletMargin,
+        contactFormMobileMargin,
 
         contactFormBorderDesktopWidth,
         contactFormBorderTabletWidth,
@@ -3021,6 +3130,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 handleSpacingUnitHandler={handlePaddingUnitChange}
                                                 spacingCombineBtn={contactFormPaddingLink}
                                                 spacingCombineBtnHandler={handlePaddingCombineBtn}
+                                                setAttributes={setAttributes}
+                                            />
+
+											<FB_Spacing 
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleMarginUnitsHandler}
+                                                spacingUnits={contactFormMarginUnits}
+                                                spacingDesktop={contactFormMarginDesktop}
+                                                spacingTablet={contactFormMarginTablet}
+                                                spacingMobile={contactFormMarginMobile}
+                                                handleSpacingUnitHandler={handleMarginUnitChange}
+                                                spacingCombineBtn={contactFormMarginLink}
+                                                spacingCombineBtnHandler={handleMarginCombineBtn}
                                                 setAttributes={setAttributes}
                                             />
 

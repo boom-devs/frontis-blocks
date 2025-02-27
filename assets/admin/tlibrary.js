@@ -1133,7 +1133,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("Hey there i am here");
   var buttonDiv = document.createElement('div');
   buttonDiv.classList.add('fb-template-library-button-wrapper');
   var root = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createRoot)(buttonDiv);

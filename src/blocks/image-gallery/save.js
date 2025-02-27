@@ -1,7 +1,6 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import './style.scss'; // Ensure you have styles for the front end if needed
-import { useEffect, useState } from '@wordpress/element';
+import './style.scss';
 
 export default function Save({ attributes }) {
 
