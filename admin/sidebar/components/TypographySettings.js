@@ -1000,7 +1000,11 @@ const TypographySettings = (props) => {
 
 	useEffect(() => {
 		if(isMount) {
-			editPost({ isDirty: true });
+			if(!!wp.data.select('core/edit-site')) {
+				editPost({ isDirty: true });
+			} else {
+				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+			}
 		}
 	}, [isMount]);
 

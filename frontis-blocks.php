@@ -29,10 +29,8 @@ define( 'FB_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-
 function wm_frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
 }
 
 wm_frontis_blocks();
-
