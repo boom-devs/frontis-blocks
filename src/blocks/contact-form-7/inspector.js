@@ -1986,8 +1986,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {
-            ${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
-            ${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
+            ${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''}
+            ${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''}
 			${contactFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${contactFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
@@ -2020,7 +2020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
-            ${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
+            ${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''}
 
 			${contactFormLabelGlobalTypoSwitcher.fontFamily === true && contactFormLabelGlobalTypographyData.fontFamily ? `font-family: ${contactFormLabelGlobalTypographyData.fontFamily};` : ''}
 			${contactFormLabelGlobalTypoSwitcher.fontSize === true && contactFormLabelGlobalTypographyData.fontSize ? `font-size: ${contactFormLabelGlobalTypographyData.fontSize};` : ''}
@@ -2031,7 +2031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormLabelGlobalTypoSwitcher.letterSpacing === true && contactFormLabelGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormLabelGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormLabelGlobalTypoSwitcher.lineHeight === true && contactFormLabelGlobalTypographyData.lineHeight ? `line-height: ${contactFormLabelGlobalTypographyData.lineHeight};` : ''}
 				
-			${contactFormLabelGlobalTypoSwitcher.fontFamily === false &&contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
+			${contactFormLabelGlobalTypoSwitcher.fontFamily === false &&contactFormLabelFontFamily && contactFormLabelFontFamily !=='Default' ? `font-family: ${contactFormLabelFontFamily};` : ""}
             ${contactFormLabelGlobalTypoSwitcher.fontSize === false &&contactFormLabelFontSize.Desktop != "" ? `font-size: ${contactFormLabelFontSize.Desktop}${contactFormLabelFontSizeUnits.Desktop};` : ''}
             ${contactFormLabelGlobalTypoSwitcher.fontWeight === false &&contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
             ${contactFormLabelGlobalTypoSwitcher.fontStyle === false &&contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
@@ -2041,7 +2041,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormLabelGlobalTypoSwitcher.lineHeight === false &&contactFormLabelLineHeight.Desktop && contactFormLabelLineHeightUnits.Desktop ? `line-height: ${contactFormLabelLineHeight.Desktop}${contactFormLabelLineHeightUnits.Desktop};` : ''}
         }
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
-            ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+            ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''}
         }
 
 
@@ -2060,7 +2060,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormInputGlobalTypoSwitcher.letterSpacing === true && contactFormInputGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormInputGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormInputGlobalTypoSwitcher.lineHeight === true && contactFormInputGlobalTypographyData.lineHeight ? `line-height: ${contactFormInputGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormInputGlobalTypoSwitcher.fontFamily === false && contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.fontFamily === false && contactFormInputFontFamily && contactFormInputFontFamily !== 'Default' ? `font-family: ${contactFormInputFontFamily};` : ""}
             ${contactFormInputGlobalTypoSwitcher.fontSize === false && contactFormInputFontSize.Desktop != "" ? `font-size: ${contactFormInputFontSize.Desktop}${contactFormInputFontSizeUnits.Desktop};` : ''}
             ${contactFormInputGlobalTypoSwitcher.fontWeight === false && contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
             ${contactFormInputGlobalTypoSwitcher.fontStyle === false && contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
@@ -2144,7 +2144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormSubmitGlobalTypoSwitcher.letterSpacing === true && contactFormSubmitGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSubmitGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormSubmitGlobalTypoSwitcher.lineHeight === true && contactFormSubmitGlobalTypographyData.lineHeight ? `line-height: ${contactFormSubmitGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormSubmitGlobalTypoSwitcher.fontFamily === false && contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.fontFamily === false && contactFormSubmitFontFamily && contactFormSubmitFontFamily !== 'Default' ? `font-family: ${contactFormSubmitFontFamily};` : ""}
             ${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Desktop && contactFormSubmitFontSizeUnits.Desktop ? `font-size: ${contactFormSubmitFontSize.Desktop}${contactFormSubmitFontSizeUnits.Desktop};` : ''} 
             ${contactFormSubmitGlobalTypoSwitcher.fontWeight === false && contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
             ${contactFormSubmitGlobalTypoSwitcher.fontStyle === false && contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
@@ -2186,7 +2186,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormErrorGlobalTypoSwitcher.letterSpacing === true && contactFormErrorGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormErrorGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormErrorGlobalTypoSwitcher.lineHeight === true && contactFormErrorGlobalTypographyData.lineHeight ? `line-height: ${contactFormErrorGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormErrorGlobalTypoSwitcher.fontFamily === false && contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.fontFamily === false && contactFormErrorFontFamily && contactFormErrorFontFamily !== 'Default' ? `font-family: ${contactFormErrorFontFamily};` : ""}
             ${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Desktop && contactFormErrorFontSizeUnits.Desktop ? `font-size: ${contactFormErrorFontSize.Desktop}${contactFormErrorFontSizeUnits.Desktop};` : ''} 
             ${contactFormErrorGlobalTypoSwitcher.fontWeight === false && contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
             ${contactFormErrorGlobalTypoSwitcher.fontStyle === false && contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
@@ -2211,7 +2211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormSuccessGlobalTypoSwitcher.letterSpacing === true && contactFormSuccessGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSuccessGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormSuccessGlobalTypoSwitcher.lineHeight === true && contactFormSuccessGlobalTypographyData.lineHeight ? `line-height: ${contactFormSuccessGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormSuccessGlobalTypoSwitcher.fontFamily === false && contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.fontFamily === false && contactFormSuccessFontFamily && contactFormSuccessFontFamily !== 'Default' ? `font-family: ${contactFormSuccessFontFamily};` : ""}
             ${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Desktop && contactFormSuccessFontSizeUnits.Desktop ? `font-size: ${contactFormSuccessFontSize.Desktop}${contactFormSuccessFontSizeUnits.Desktop};` : ''} 
             ${contactFormSuccessGlobalTypoSwitcher.fontWeight === false && contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
             ${contactFormSuccessGlobalTypoSwitcher.fontStyle === false && contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}

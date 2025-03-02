@@ -617,28 +617,28 @@ const attributes = {
 	pricingHeaderBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingHeaderBorderRadiusLink : {
@@ -812,28 +812,28 @@ const attributes = {
 	priceIconBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceIconBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceIconBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceIconBorderRadiusLink : {
@@ -1269,28 +1269,28 @@ const attributes = {
 	priceDesktopPadding: {
 		type: "object", 
 		default: {
-			top: 32,
-			bottom: 42,
-			left: 0,
-			right: 0,
+			top: '32',
+			bottom: '42',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceTabletPadding: {
 		type: "object", 
 		default: {
-			top: 32,
-			bottom: 42,
-			left: 0,
-			right: 0,
+			top: '32',
+			bottom: '42',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceMobilePadding: {
 		type: "object", 
 		default: {
-			top: 32,
-			bottom: 42,
-			left: 0,
-			right: 0,
+			top: '32',
+			bottom: '42',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricePaddingLink: {
@@ -1704,28 +1704,28 @@ const attributes = {
 	priceFeatureItemDesktopMargin: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemTabMargin: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemMobileMargin: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemMarginLink: {
@@ -1811,28 +1811,28 @@ const attributes = {
 	priceFeatureItemDesktopBorderRadius: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemTabBorderRadius: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemMobileBorderRadius: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceFeatureItemBorderRadiusLink: {
@@ -2052,9 +2052,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-
-
-
 	priceButtonPaddingUnits: {
 		type: 'object',
 		default: {
@@ -2158,28 +2155,28 @@ const attributes = {
 	priceButtonDesktopBorderWidth: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonTabBorderWidth: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonMobileBorderWidth: {
 		type: "object", 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
 		},
 	},
 	priceButtonBorderLink: {
@@ -2255,7 +2252,6 @@ const attributes = {
 		}
 	},
 	/** End price Button Icon */
-
 
 	/** Start Ribbon Color Settings */
 	priceRibbonColorSwitcher: {
@@ -2449,28 +2445,28 @@ const attributes = {
 	priceGlobalMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalMarginTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalMarginMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceGlobalMarginLink : {
@@ -2889,28 +2885,28 @@ const attributes = {
 	priceAfterTextBorderDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceAfterTextBorderTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceAfterTextBorderMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceAfterTextBorderLink : {

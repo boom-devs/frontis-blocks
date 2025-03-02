@@ -1110,4 +1110,5 @@ export const FONT_FAMILYS = [
     { label: __("Zeyada", "frontis-blocks"), value: "Zeyada" },
     { label: __("Zhi Mang Xing", "frontis-blocks"), value: "Zhi Mang Xing" },
     { label: __("Zilla Slab Highlight", "frontis-blocks"), value: "Zilla Slab Highlight" },
+    { label: __("Radio Canada Big", "frontis-blocks"), value: "Radio Canada Big" },
 ];
