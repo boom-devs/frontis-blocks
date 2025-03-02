@@ -2634,7 +2634,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		    ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
                 background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
             `: `
-                    background: ${pricingTopSectionNormalClassicColor}; 
+				${pricingTopSectionNormalClassicColor ? `background: ${pricingTopSectionNormalClassicColor};` : ''}
             `}
 			${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 			${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
@@ -2647,7 +2647,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		    ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
                 background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
             `: `
-                    background: ${pricingTopSectionHoverClassicColor}; 
+				${pricingTopSectionHoverClassicColor ? `background: ${pricingTopSectionHoverClassicColor};` : ''}
             `}
 			${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
 		}
@@ -2683,7 +2683,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceGlobalNormalBackgroundType === 'gradient' ? `  
                 background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
             `: `
-                    background: ${priceGlobalNormalClassicColor}; 
+				${priceGlobalNormalClassicColor ? `background: ${priceGlobalNormalClassicColor};` : ''}
             `}
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
@@ -2699,7 +2699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceGlobalHoverBackgroundType === 'gradient' ? `  
                 background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
             `: `
-                    background: ${priceGlobalHoverClassicColor}; 
+				${priceGlobalHoverClassicColor ? `background: ${priceGlobalHoverClassicColor};` : ''}
             `}
 			${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
 			${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
@@ -2731,7 +2731,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
 		}
 		.${blockId} .fb-pricing-ribbon-icon:hover {
-			background-color: ${priceIconBgHoverColor};
+			${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
 			${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
 		}
 		.${blockId} .fb-pricing-ribbon-icon svg {
@@ -2741,7 +2741,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: fill 0.3s ease;
 		}
 		.${blockId} .fb-pricing-ribbon-icon:hover svg {
-			fill: ${priceIconHoverColor};
+			${priceIconHoverColor ? `fill: ${priceIconHoverColor};` : ''}
 		}
 
 		.${blockId}	.fb-pricing-price-wrapper {
@@ -2922,7 +2922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextNormalBackgroundType === 'gradient' ? `  
 				background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
 			`: `
-				background: ${priceAfterTextNormalClassicColor};
+				${priceAfterTextNormalClassicColor ? `background: ${priceAfterTextNormalClassicColor};` : ''}
 			`}
 
 			${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
@@ -2938,7 +2938,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextHoverBackgroundType === 'gradient' ? `  
 				background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
 			`: `
-				background: ${priceAfterTextHoverClassicColor};
+				${priceAfterTextHoverClassicColor ? `background: ${priceAfterTextHoverClassicColor};` : ''}
 			`}
 
 			${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
@@ -3002,7 +3002,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: fill 0.3s ease;
 		}
 		.${blockId} .fb-pricing-feature-icon-inner:hover svg {
-			fill: ${priceFeatureIconHoverColor};
+			${priceFeatureIconHoverColor ? `fill: ${priceFeatureIconHoverColor};` : ''}
 		}
 
 		.${blockId} .fb-pricing-feature-text {
@@ -3067,7 +3067,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceButtonNormalBackgroundType === 'gradient' ? `  
 				background: ${priceButtonNormalCustomGradientSwitcher && priceButtonNormalCustomGradientInputValue ? priceButtonNormalCustomGradientInputValue : priceButtonNormalGradientColor};
 			`: `
-				background: ${priceButtonNormalClassicColor}; 
+				${priceButtonNormalClassicColor ? `background: ${priceButtonNormalClassicColor};` : ''}
 			`}
             transition: all .3s ease-in-out;
 		}
@@ -3077,7 +3077,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceButtonHoverBackgroundType === 'gradient' ? `  
 				background: ${priceButtonHoverCustomGradientSwitcher && priceButtonHoverCustomGradientInputValue ? priceButtonHoverCustomGradientInputValue : priceButtonHoverGradientColor};
 			`: `
-				background: ${priceButtonHoverClassicColor}; 
+				${priceButtonHoverClassicColor ? `background: ${priceButtonHoverClassicColor};` : ''}
 			`}
 		}
 		.${blockId} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
@@ -3094,7 +3094,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: fill 0.3s ease;
 		}
 		.${blockId} .fb-pricing-button-icon:hover svg {
-			fill: ${priceButtonIconHoverColor};
+			${priceButtonIconHoverColor ? `fill: ${priceButtonIconHoverColor};` : ''}
 		}
 
 		@media only screen and (max-width: 1024px) {
@@ -3110,7 +3110,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
 				`: `
-						background: ${pricingTopSectionNormalClassicColor}; 
+					${pricingTopSectionNormalClassicColor ? `background: ${pricingTopSectionNormalClassicColor};` : ''}
 				`}
 				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
@@ -3123,7 +3123,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
 				`: `
-						background: ${pricingTopSectionHoverClassicColor}; 
+					${pricingTopSectionHoverClassicColor ? `background: ${pricingTopSectionHoverClassicColor};` : ''}
 				`}
 				${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
 			}
@@ -3140,7 +3140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalNormalBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
 				`: `
-						background: ${priceGlobalNormalClassicColor}; 
+					${priceGlobalNormalClassicColor ? `background: ${priceGlobalNormalClassicColor};` : ''}
 				`}
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
@@ -3156,7 +3156,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalHoverBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
 				`: `
-						background: ${priceGlobalHoverClassicColor}; 
+					${priceGlobalHoverClassicColor ? `background: ${priceGlobalHoverClassicColor};` : ''}
 				`}
 				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
 				${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
@@ -3225,7 +3225,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-ribbon-icon:hover {
-				background-color: ${priceIconBgHoverColor};
+				${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
 				${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
 			}
 			.${blockId} .fb-pricing-ribbon-icon svg {
@@ -3269,7 +3269,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
 				`: `
-						background: ${pricingTopSectionNormalClassicColor}; 
+					${pricingTopSectionNormalClassicColor ? `background: ${pricingTopSectionNormalClassicColor};` : ''}
 				`}
 				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
@@ -3282,7 +3282,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
 					background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
 				`: `
-						background: ${pricingTopSectionHoverClassicColor}; 
+					${pricingTopSectionHoverClassicColor ? `background: ${pricingTopSectionHoverClassicColor};` : ''}
 				`}
 				${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
 			}
@@ -3302,7 +3302,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalNormalBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
 				`: `
-						background: ${priceGlobalNormalClassicColor}; 
+					${priceGlobalNormalClassicColor ? `background: ${priceGlobalNormalClassicColor};` : ''}
 				`}
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
@@ -3318,7 +3318,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalHoverBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
 				`: `
-						background: ${priceGlobalHoverClassicColor}; 
+					${priceGlobalHoverClassicColor ? `background: ${priceGlobalHoverClassicColor};` : ''}
 				`}
 				${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
 				${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
@@ -3387,7 +3387,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             	transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-pricing-ribbon-icon:hover {
-				background-color: ${priceIconBgHoverColor};
+				${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
 				${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
 			}
 			.${blockId} .fb-pricing-ribbon-icon svg {
