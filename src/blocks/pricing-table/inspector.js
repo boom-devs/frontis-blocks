@@ -2638,7 +2638,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `}
 			${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 			${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
-			${pricingTopSectionBorderDesktopWidth ? `border-width: ${pricingTopSectionBorderDesktopWidth};` : ''}
+			${pricingTopSectionBorderDesktopWidth && pricingTopSectionBorderDesktop.top ? `border-width: ${pricingTopSectionBorderDesktopWidth};` : ''}
 			${pricingTopSectionBorderRadiusDesktopWidth ? `border-radius: ${pricingTopSectionBorderRadiusDesktopWidth};` : ''}
 			${pricingTopSectionDesktopPaddingWidth ? `padding: ${pricingTopSectionDesktopPaddingWidth};` : ''}
             transition: all .3s ease-in-out;
@@ -2664,7 +2664,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTopSectionTextGlobalTypoSwitcher.letterSpacing === true && pricingTopSectionTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${pricingTopSectionTextGlobalTypographyData.letterSpacing};` : ''}
 			${pricingTopSectionTextGlobalTypoSwitcher.lineHeight === true && pricingTopSectionTextGlobalTypographyData.lineHeight ? `line-height: ${pricingTopSectionTextGlobalTypographyData.lineHeight};` : ''}
 
-			${pricingTopSectionTextGlobalTypoSwitcher.fontFamily === false && pricingTopSectionTextFontFamily ? `font-family: ${pricingTopSectionTextFontFamily};` : ""}
+			${pricingTopSectionTextGlobalTypoSwitcher.fontFamily === false && pricingTopSectionTextFontFamily && pricingTopSectionTextFontFamily !== 'Default' ? `font-family: ${pricingTopSectionTextFontFamily};` : ""}
 			${pricingTopSectionTextGlobalTypoSwitcher.fontSize === false && pricingTopSectionTextFontSize.Desktop ? `font-size: ${pricingTopSectionTextFontSize.Desktop}${pricingTopSectionTextFontSizeUnits.Desktop};` : ""}
 			${pricingTopSectionTextGlobalTypoSwitcher.fontWeight === false && pricingTopSectionTextFontWeight ? `font-weight: ${pricingTopSectionTextFontWeight};` : ""}
 			${pricingTopSectionTextGlobalTypoSwitcher.fontStyle === false && pricingTopSectionTextFontStyle ? `font-style: ${pricingTopSectionTextFontStyle};` : ""}
@@ -2688,7 +2688,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''}
 			${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-			${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
+			${globalDesktopBorderWidth && priceGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
 			${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 			${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
@@ -2708,7 +2708,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
 			${headerDesktopPadding ? `padding: ${headerDesktopPadding};` : ''}
 			${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
-			${headerDesktopBorderWidth ? `border-width: ${headerDesktopBorderWidth};` : ''}
+			${headerDesktopBorderWidth && pricingHeaderBorderDesktop.top ? `border-width: ${headerDesktopBorderWidth};` : ''}
 			${headerDesktopBorderRadiusWidth ? `border-radius: ${headerDesktopBorderRadiusWidth};` : ''}
 			${pricingHeaderBorderColor ? `border-color: ${pricingHeaderBorderColor};` : ''}
             transition: all .3s ease-in-out;
@@ -2725,7 +2725,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceIconBgSize.Desktop && priceIconBgSizeUnits.Desktop ? `height: ${priceIconBgSize.Desktop}${priceIconBgSizeUnits.Desktop};` : ''}
 			${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
 			${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-			${priceIconDesktopBorderWidthValue ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
+			${priceIconDesktopBorderWidthValue && priceIconBorderDesktop.top ? `border-width: ${priceIconDesktopBorderWidthValue};` : ''}
 			${priceIconDesktopBorderRadiusWidthValue ? `border-radius: ${priceIconDesktopBorderRadiusWidthValue};` : ''}
 			${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
             transition: all .3s ease-in-out;
@@ -2761,7 +2761,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${normalPricingGlobalTypoSwitcher.letterSpacing === true && normalPricingGlobalTypographyData.letterSpacing ? `letter-spacing: ${normalPricingGlobalTypographyData.letterSpacing};` : ''}
 			${normalPricingGlobalTypoSwitcher.lineHeight === true && normalPricingGlobalTypographyData.lineHeight ? `line-height: ${normalPricingGlobalTypographyData.lineHeight};` : ''}
 
-			${normalPricingGlobalTypoSwitcher.fontFamily === false && normalPricingFontFamily ? `font-family: ${normalPricingFontFamily};` : ""}
+			${normalPricingGlobalTypoSwitcher.fontFamily === false && normalPricingFontFamily && normalPricingFontFamily !== 'Default' ? `font-family: ${normalPricingFontFamily};` : ""}
 			${normalPricingGlobalTypoSwitcher.fontSize === false && normalPricingFontSize.Desktop ? `font-size: ${normalPricingFontSize.Desktop}${normalPricingFontSizeUnits.Desktop};` : ""}
 			${normalPricingGlobalTypoSwitcher.fontWeight === false && normalPricingFontWeight ? `font-weight: ${normalPricingFontWeight};` : ""}
 			${normalPricingGlobalTypoSwitcher.fontStyle === false && normalPricingFontStyle ? `font-style: ${normalPricingFontStyle};` : ""}
@@ -2786,7 +2786,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${salePricingGlobalTypoSwitcher.letterSpacing === true && salePricingGlobalTypographyData.letterSpacing ? `letter-spacing: ${salePricingGlobalTypographyData.letterSpacing};` : ''}
 			${salePricingGlobalTypoSwitcher.lineHeight === true && salePricingGlobalTypographyData.lineHeight ? `line-height: ${salePricingGlobalTypographyData.lineHeight};` : ''}
 
-			${salePricingGlobalTypoSwitcher.fontFamily === false && salePricingFontFamily ? `font-family: ${salePricingFontFamily};` : ""}
+			${salePricingGlobalTypoSwitcher.fontFamily === false && salePricingFontFamily && salePricingFontFamily !== 'Default' ? `font-family: ${salePricingFontFamily};` : ""}
 			${salePricingGlobalTypoSwitcher.fontSize === false && salePricingFontSize.Desktop ? `font-size: ${salePricingFontSize.Desktop}${salePricingFontSizeUnits.Desktop};` : ""}
 			${salePricingGlobalTypoSwitcher.fontWeight === false && salePricingFontWeight ? `font-weight: ${salePricingFontWeight};` : ""}
 			${salePricingGlobalTypoSwitcher.fontStyle === false && salePricingFontStyle ? `font-style: ${salePricingFontStyle};` : ""}
@@ -2811,7 +2811,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceCurrencyGlobalTypoSwitcher.letterSpacing === true && priceCurrencyGlobalTypographyData.letterSpacing ? `letter-spacing: ${priceCurrencyGlobalTypographyData.letterSpacing};` : ''}
 			${priceCurrencyGlobalTypoSwitcher.lineHeight === true && priceCurrencyGlobalTypographyData.lineHeight ? `line-height: ${priceCurrencyGlobalTypographyData.lineHeight};` : ''}
 
-			${priceCurrencyGlobalTypoSwitcher.fontFamily === false && priceCurrencyFontFamily ? `font-family: ${priceCurrencyFontFamily};` : ""}
+			${priceCurrencyGlobalTypoSwitcher.fontFamily === false && priceCurrencyFontFamily && priceCurrencyFontFamily !== 'Default' ? `font-family: ${priceCurrencyFontFamily};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.fontSize === false && priceCurrencyFontSize.Desktop ? `font-size: ${priceCurrencyFontSize.Desktop}${priceCurrencyFontSizeUnits.Desktop};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.fontWeight === false && priceCurrencyFontWeight ? `font-weight: ${priceCurrencyFontWeight};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.fontStyle === false && priceCurrencyFontStyle ? `font-style: ${priceCurrencyFontStyle};` : ""}
@@ -2836,7 +2836,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricePeriodGlobalTypoSwitcher.letterSpacing === true && pricePeriodGlobalTypographyData.letterSpacing ? `letter-spacing: ${pricePeriodGlobalTypographyData.letterSpacing};` : ''}
 			${pricePeriodGlobalTypoSwitcher.lineHeight === true && pricePeriodGlobalTypographyData.lineHeight ? `line-height: ${pricePeriodGlobalTypographyData.lineHeight};` : ''}
 
-			${pricePeriodGlobalTypoSwitcher.fontFamily === false && pricePeriodFontFamily ? `font-family: ${pricePeriodFontFamily};` : ""}
+			${pricePeriodGlobalTypoSwitcher.fontFamily === false && pricePeriodFontFamily && pricePeriodFontFamily !== 'Default' ? `font-family: ${pricePeriodFontFamily};` : ""}
 			${pricePeriodGlobalTypoSwitcher.fontSize === false && pricePeriodFontSize.Desktop ? `font-size: ${pricePeriodFontSize.Desktop}${pricePeriodFontSizeUnits.Desktop};` : ""}
 			${pricePeriodGlobalTypoSwitcher.fontWeight === false && pricePeriodFontWeight ? `font-weight: ${pricePeriodFontWeight};` : ""}
 			${pricePeriodGlobalTypoSwitcher.fontStyle === false && pricePeriodFontStyle ? `font-style: ${pricePeriodFontStyle};` : ""}
@@ -2861,7 +2861,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTitleGlobalTypoSwitcher.letterSpacing === true && pricingTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${pricingTitleGlobalTypographyData.letterSpacing};` : ''}
 			${pricingTitleGlobalTypoSwitcher.lineHeight === true && pricingTitleGlobalTypographyData.lineHeight ? `line-height: ${pricingTitleGlobalTypographyData.lineHeight};` : ''}
 
-			${pricingTitleGlobalTypoSwitcher.fontFamily === false && pricingTitleFontFamily ? `font-family: ${pricingTitleFontFamily};` : ''}
+			${pricingTitleGlobalTypoSwitcher.fontFamily === false && pricingTitleFontFamily && pricingTitleFontFamily !== 'Default' ? `font-family: ${pricingTitleFontFamily};` : ''}
 			${pricingTitleGlobalTypoSwitcher.fontSize === false && pricingTitleFontSize.Desktop ? `font-size: ${pricingTitleFontSize.Desktop}${pricingTitleFontSizeUnits.Desktop};` : ''}
 			${pricingTitleGlobalTypoSwitcher.fontWeight === false && pricingTitleFontWeight ? `font-weight: ${pricingTitleFontWeight};` : ''}
 			${pricingTitleGlobalTypoSwitcher.fontStyle === false && pricingTitleFontStyle ? `font-style: ${pricingTitleFontStyle};` : ''}
@@ -2885,7 +2885,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingSubtitleGlobalTypoSwitcher.letterSpacing === true && pricingSubtitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${pricingSubtitleGlobalTypographyData.letterSpacing};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.lineHeight === true && pricingSubtitleGlobalTypographyData.lineHeight ? `line-height: ${pricingSubtitleGlobalTypographyData.lineHeight};` : ''}
 
-			${pricingSubtitleGlobalTypoSwitcher.fontFamily === false && pricingSubtitleFontFamily ? `font-family: ${pricingSubtitleFontFamily};` : ''}
+			${pricingSubtitleGlobalTypoSwitcher.fontFamily === false && pricingSubtitleFontFamily && pricingSubtitleFontFamily !== 'Default' ? `font-family: ${pricingSubtitleFontFamily};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.fontSize === false && pricingSubtitleFontSize.Desktop ? `font-size: ${pricingSubtitleFontSize.Desktop}${pricingSubtitleFontSizeUnits.Desktop};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.fontWeight === false && pricingSubtitleFontWeight ? `font-weight: ${pricingSubtitleFontWeight};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.fontStyle === false && pricingSubtitleFontStyle ? `font-style: ${pricingSubtitleFontStyle};` : ''}
@@ -2908,7 +2908,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextGlobalTypoSwitcher.letterSpacing === true && priceAfterTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${priceAfterTextGlobalTypographyData.letterSpacing};` : ''}
 			${priceAfterTextGlobalTypoSwitcher.lineHeight === true && priceAfterTextGlobalTypographyData.lineHeight ? `line-height: ${priceAfterTextGlobalTypographyData.lineHeight};` : ''}
 			
-			${priceAfterTextGlobalTypoSwitcher.fontFamily === false && priceAfterTextFontFamily ? `font-family: ${priceAfterTextFontFamily};` : ''}
+			${priceAfterTextGlobalTypoSwitcher.fontFamily === false && priceAfterTextFontFamily && priceAfterTextFontFamily !== 'Default' ? `font-family: ${priceAfterTextFontFamily};` : ''}
 			${priceAfterTextGlobalTypoSwitcher.fontSize === false && priceAfterTextFontSize.Desktop && priceAfterTextFontSizeUnits.Desktop ? `font-size: ${priceAfterTextFontSize.Desktop}${priceAfterTextFontSizeUnits.Desktop};` : ''}
 			${priceAfterTextGlobalTypoSwitcher.fontWeight === false && priceAfterTextFontWeight ? `font-weight: ${priceAfterTextFontWeight};` : ''}
 			${priceAfterTextGlobalTypoSwitcher.fontStyle === false && priceAfterTextFontStyle ? `font-style: ${priceAfterTextFontStyle};` : ''}
@@ -2981,7 +2981,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceFeatureAfterTextGlobalTypoSwitcher.letterSpacing === true && priceFeatureAfterTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${priceFeatureAfterTextGlobalTypographyData.letterSpacing};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.lineHeight === true && priceFeatureAfterTextGlobalTypographyData.lineHeight ? `line-height: ${priceFeatureAfterTextGlobalTypographyData.lineHeight};` : ''}
 
-			${priceFeatureAfterTextGlobalTypoSwitcher.fontFamily === false && priceFeatureAfterTextFontFamily ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
+			${priceFeatureAfterTextGlobalTypoSwitcher.fontFamily === false && priceFeatureAfterTextFontFamily && priceFeatureAfterTextFontFamily !== 'Default' ? `font-family: ${priceFeatureAfterTextFontFamily};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.fontSize === false && priceFeatureAfterTextFontSize.Desktop ? `font-size: ${priceFeatureAfterTextFontSize.Desktop}${priceFeatureAfterTextFontSizeUnits.Desktop};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.fontWeight === false && priceFeatureAfterTextFontWeight ? `font-weight: ${priceFeatureAfterTextFontWeight};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.fontStyle === false && priceFeatureAfterTextFontStyle ? `font-style: ${priceFeatureAfterTextFontStyle};` : ''}
@@ -3017,7 +3017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingfeatureTitleGlobalTypoSwitcher.letterSpacing === true && pricingfeatureTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${pricingfeatureTitleGlobalTypographyData.letterSpacing};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.lineHeight === true && pricingfeatureTitleGlobalTypographyData.lineHeight ? `line-height: ${pricingfeatureTitleGlobalTypographyData.lineHeight};` : ''}
 
-			${pricingfeatureTitleGlobalTypoSwitcher.fontFamily === false && pricingfeatureTitleFontFamily ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
+			${pricingfeatureTitleGlobalTypoSwitcher.fontFamily === false && pricingfeatureTitleFontFamily && pricingfeatureTitleFontFamily !== 'Default' ? `font-family: ${pricingfeatureTitleFontFamily};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.fontSize === false && pricingfeatureTitleFontSize.Desktop ? `font-size: ${pricingfeatureTitleFontSize.Desktop}${pricingfeatureTitleFontSizeUnits.Desktop};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.fontWeight === false && pricingfeatureTitleFontWeight ? `font-weight: ${pricingfeatureTitleFontWeight};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.fontStyle === false && pricingfeatureTitleFontStyle ? `font-style: ${pricingfeatureTitleFontStyle};` : ''}
@@ -3047,7 +3047,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceButtonGlobalTypoSwitcher.letterSpacing === true && priceButtonGlobalTypographyData.letterSpacing ? `letter-spacing: ${priceButtonGlobalTypographyData.letterSpacing};` : ''}
 			${priceButtonGlobalTypoSwitcher.lineHeight === true && priceButtonGlobalTypographyData.lineHeight ? `line-height: ${priceButtonGlobalTypographyData.lineHeight};` : ''}
 
-			${priceButtonGlobalTypoSwitcher.fontFamily === false && priceButtonFontFamily ? `font-family: ${priceButtonFontFamily};` : ''}
+			${priceButtonGlobalTypoSwitcher.fontFamily === false && priceButtonFontFamily && priceButtonFontFamily !== 'Default' ? `font-family: ${priceButtonFontFamily};` : ''}
 			${priceButtonGlobalTypoSwitcher.fontSize === false && priceButtonFontSize.Desktop ? `font-size: ${priceButtonFontSize.Desktop}${priceButtonFontSizeUnits.Desktop};` : ''}
 			${priceButtonGlobalTypoSwitcher.fontWeight === false && priceButtonFontWeight ? `font-weight: ${priceButtonFontWeight};` : ''}
 			${priceButtonGlobalTypoSwitcher.fontStyle === false && priceButtonFontStyle ? `font-style: ${priceButtonFontStyle};` : ''}
@@ -3061,7 +3061,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceButtonDesktopMarginValue ? `margin: ${priceButtonDesktopMarginValue};` : ''}
 			${priceButtonBorder ? `border: ${priceButtonBorder};` : ''}
 			${priceButtonBorderColor ? `border-color: ${priceButtonBorderColor};` : ''}
-			${priceButtonDesktopBorderWidthValue ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
+			${priceButtonDesktopBorderWidthValue && priceButtonDesktopBorderWidth.top ? `border-width: ${priceButtonDesktopBorderWidthValue};` : ''}
 			${priceButtonDesktopBorderRadiusWidthValue ? `border-radius: ${priceButtonDesktopBorderRadiusWidthValue};` : ''}
 
 			${priceButtonNormalBackgroundType === 'gradient' ? `  
@@ -3114,7 +3114,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`}
 				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
-				${pricingTopSectionBorderTabletWidth ? `border-width: ${pricingTopSectionBorderTabletWidth};` : ''}
+				${pricingTopSectionBorderTabletWidth && pricingTopSectionBorderTablet.top ? `border-width: ${pricingTopSectionBorderTabletWidth};` : ''}
 				${pricingTopSectionBorderRadiusTabletWidth ? `border-radius: ${pricingTopSectionBorderRadiusTabletWidth};` : ''}
 				${pricingTopSectionTabletPaddingWidth ? `padding: ${pricingTopSectionTabletPaddingWidth};` : ''}
             	transition: all .3s ease-in-out;
@@ -3145,7 +3145,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
 				${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
 				${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-				${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
+				${globalTabletBorderWidth && priceGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
@@ -3208,7 +3208,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockId} .fb-pricing-header {
 				${headerTabletPadding ? `padding: ${headerTabletPadding};` : ''}
-				${headerTabletBorderWidth ? `border-width: ${headerTabletBorderWidth};` : ''}
+				${headerTabletBorderWidth && pricingHeaderBorderTablet.top ? `border-width: ${headerTabletBorderWidth};` : ''}
 				${headerTabletBorderRadiusWidth ? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
 			}
 			.${blockId} .fb-pricing-ribbon-icon {
@@ -3219,7 +3219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceIconBgSize.Tablet && priceIconBgSizeUnits.Tablet ? `height: ${priceIconBgSize.Tablet}${priceIconBgSizeUnits.Tablet};` : ''}
 				${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
 				${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-				${priceIconTabletBorderWidthValue ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
+				${priceIconTabletBorderWidthValue && priceIconBorderTablet.top ? `border-width: ${priceIconTabletBorderWidthValue};` : ''}
 				${priceIconTabletBorderRadiusWidthValue ? `border-radius: ${priceIconTabletBorderRadiusWidthValue};` : ''} 
 				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
             	transition: all .3s ease-in-out;
@@ -3240,7 +3240,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceButtonGlobalTypoSwitcher.lineHeight === false && priceButtonLineHeight.Tablet ? `line-height: ${priceButtonLineHeight.Tablet}${priceButtonLineHeightUnits.Tablet};` : ''}
 				${priceButtonTabletPaddingValue ? `padding: ${priceButtonTabletPaddingValue};` : ''}
 				${priceButtonTabletMarginValue ? `margin: ${priceButtonTabletMarginValue};` : ''}
-				${priceButtonTabletBorderWidthValue ? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
+				${priceButtonTabletBorderWidthValue && priceButtonTabBorderWidth.top? `border-width: ${priceButtonTabletBorderWidthValue};` : ''}
 				${priceButtonTabletBorderRadiusWidthValue ? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
 			}
 
@@ -3273,7 +3273,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`}
 				${pricingTopSectionBorder ? `border: ${pricingTopSectionBorder};` : ''}
 				${pricingTopSectionBorderColor ? `border-color: ${pricingTopSectionBorderColor};` : ''}
-				${pricingTopSectionBorderMobileWidth ? `border-width: ${pricingTopSectionBorderMobileWidth};` : ''}
+				${pricingTopSectionBorderMobileWidth && pricingTopSectionBorderMobile.top ? `border-width: ${pricingTopSectionBorderMobileWidth};` : ''}
 				${pricingTopSectionBorderRadiusMobileWidth ? `border-radius: ${pricingTopSectionBorderRadiusMobileWidth};` : ''}
 				${pricingTopSectionMobilePaddingWidth ? `padding: ${pricingTopSectionMobilePaddingWidth};` : ''}
             	transition: all .3s ease-in-out;
@@ -3307,7 +3307,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
 				${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
 				${priceGlobalBorder ? `border: ${priceGlobalBorder};` : ''}
-				${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
+				${globalMobileBorderWidth && priceGlobalBorderMobile.top? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 				${priceGlobalBorderColor ? `border-color: ${priceGlobalBorderColor};` : ''}
 				${priceGlobalBoxShadowCssValue ? `box-shadow: ${priceGlobalBoxShadowCssValue};` : ''}
@@ -3325,7 +3325,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.${blockId} .fb-pricing-header {
 				${headerMobilePadding ? `padding: ${headerMobilePadding};` : ''}
-				${headerMobileBorderWidth ? `border-width: ${headerMobileBorderWidth};` : ''}
+				${headerMobileBorderWidth && pricingHeaderBorderMobile.top ? `border-width: ${headerMobileBorderWidth};` : ''}
 				${headerMobileBorderRadiusWidth ? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
 			}
 			.${blockId}	.fb-pricing-price-wrapper {
@@ -3381,7 +3381,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceIconBgSize.Mobile && priceIconBgSizeUnits.Mobile ? `height: ${priceIconBgSize.Mobile}${priceIconBgSizeUnits.Mobile};` : ''}
 				${priceIconBgColor ? `background-color: ${priceIconBgColor};` : ''}
 				${priceIconBorder ? `border: ${priceIconBorder};` : ''}
-				${priceIconMobileBorderWidthValue ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
+				${priceIconMobileBorderWidthValue && priceIconBorderMobile.top ? `border-width: ${priceIconMobileBorderWidthValue};` : ''}
 				${priceIconMobileBorderRadiusWidthValue ? `border-radius: ${priceIconMobileBorderRadiusWidthValue};` : ''} 
 				${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
             	transition: all .3s ease-in-out;
@@ -3402,7 +3402,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceButtonGlobalTypoSwitcher.lineHeight === false && priceButtonLineHeight.Mobile ? `line-height: ${priceButtonLineHeight.Mobile}${priceButtonLineHeightUnits.Mobile};` : ''}
 				${priceButtonMobilePaddingValue ? `padding: ${priceButtonMobilePaddingValue};` : ''}
 				${priceButtonMobileMarginValue ? `margin: ${priceButtonMobileMarginValue};` : ''}
-				${priceButtonMobileBorderWidthValue ? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
+				${priceButtonMobileBorderWidthValue && priceButtonMobileBorderWidth.top? `border-width: ${priceButtonMobileBorderWidthValue};` : ''}
 				${priceButtonMobileBorderRadiusWidthValue ? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
 			}
 
