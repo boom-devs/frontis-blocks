@@ -265,9 +265,11 @@ const attributes = {
     },
     socialIconBgGlobalColor : {
         type: "string",
+        default: ""
     },
     socialIconBgGlobalHoverColor: {
         type: 'string',
+        default: ""
     },
     socialIconBorder: {
         type: 'string',
@@ -504,10 +506,12 @@ const attributes = {
         default: "normal"
     },
     socialTitleColor : {
-        type: "string"
+        type: "string",
+        default: ""
     },
     socialTitleHoverColor: {
         type: 'string',
+        default: ""
     },
 
     socialTitlePaddingUnits: {
