@@ -39,7 +39,7 @@ const attributes = {
 	},
 	autoplay: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
     autoplaySpeed: {
         type: 'number',
