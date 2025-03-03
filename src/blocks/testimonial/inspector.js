@@ -293,8 +293,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRBottomOffsetUnits,
     } = attributes;
 
-    console.log(TestimonialGlobalBgHoverClassicColor);
-
     const deviceType= useDeviceType();
 
     useEffect(() => {
