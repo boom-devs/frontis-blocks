@@ -31,6 +31,7 @@ class GenerateGlobalColors {
 	}
 
 	public static function generate_root_colors($color_data) {
+
 		$global_colors = ":root {\n";
     
 		// Process base colors

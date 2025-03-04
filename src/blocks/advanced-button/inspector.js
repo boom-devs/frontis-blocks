@@ -1106,7 +1106,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
-			${buttonColor ? `color: ${buttonColor};` : ''}
+			${buttonColor ? `color: ${buttonColor};` : ''}  
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
 			${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}

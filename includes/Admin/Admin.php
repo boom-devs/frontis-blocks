@@ -67,6 +67,9 @@ class Admin {
     		}
 		}
 
+        // var_dump($theme_colors);
+        // die();
+
 		$blocks = BlockList::get_instance()->get_blocks();
 		$localizeArray = array(
 			'blocks' => $blocks,

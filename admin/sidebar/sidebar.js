@@ -74,12 +74,6 @@ let defaultsColors = [
 		"color": '#808080',
 		"slug": 'gray-color',
 	},
-
-	{
-		"name": __("Gray Color2", "frontis-blocks"),
-		"color": '#808080',
-		"slug": 'gray-color2',
-	}
 ];
 
 const gradientDefaults = [
