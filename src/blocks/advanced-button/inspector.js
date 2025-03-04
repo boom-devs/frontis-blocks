@@ -1314,7 +1314,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonLetterSpacingUnits,
 		buttonLineHeight,
 		buttonLineHeightUnits,
-		buttonDesktopPaddingStr,
+
 		buttonDesktopMarginStr,
 		buttonBorder,
 		buttonDesktopBorderWidthStr,
@@ -1335,8 +1335,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconBgColor,
 		buttonIconBorder,
 		buttonIconBorderColor,
-		buttonIconBorderDesktopWidth,
-		buttonIconBorderRadiusDesktopWidth,
+
+
 		buttonIconBgHoverColor,
 		buttonIconBorderHoverColor,
 		buttonIconSize,
@@ -1346,24 +1346,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		globalTabletMargin,
 		globalTabletBorderWidth,
 		globalTabletBorderRadiusWidth,
-		buttonTabletPaddingStr,
 		buttonTabletMarginStr,
 		buttonTabletBorderWidthStr,
 		buttonTabletBorderRadiusStr,
-		buttonIconBorderTabletWidth,
-		buttonIconBorderRadiusTabletWidth,
 		globalMobilePadding,
 		globalMobileMargin,
 		globalMobileBorderWidth,
 		globalMobileBorderRadiusWidth,
-		buttonMobilePaddingStr,
+
 		buttonMobileMarginStr,
 		buttonMobileBorderWidthStr,
 		buttonMobileBorderRadiusStr,
-		buttonIconBorderMobileWidth,
-		buttonIconBorderRadiusMobileWidth,
 		buttonTargetUrl,
 		buttonColorSwitcher,
+		buttonColor,
 		buttonHoverColor,
 		buttonBgColorSwitcher,
 		buttonBgHoverColor,
@@ -1415,6 +1411,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		advancedBtnVRTopOffsetUnits,
 		advancedBtnVRBottomOffset,
 		advancedBtnVRBottomOffsetUnits,
+
+		/** convert formate */
+		buttonIconBorderDesktopWidth,
+		buttonIconBorderTabletWidth,
+		buttonIconBorderMobileWidth,
+
+		buttonIconBorderRadiusDesktopWidth,
+		buttonIconBorderRadiusTabletWidth,
+		buttonIconBorderRadiusMobileWidth,
+
+		buttonDesktopPaddingStr,
+		buttonTabletPaddingStr,
+		buttonMobilePaddingStr,
+		
 	]);
 
 
