@@ -969,20 +969,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterPositionType === 'default' ? `position: relative;` : ''}
         ${counterPositionType !== 'default' && counterPositionType !== 'relative' ? `width: 100%;` : ''}
         ${counterPositionType !== 'default' ? `position: ${counterPositionType};` : ''}
-        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Desktop !== undefined ? `left: ${counterHZLeftOffset.Desktop}${counterHZLeftOffsetUnits.Desktop};` : ''}
-        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Desktop !== undefined ? `right: ${counterHZRightOffset.Desktop}${counterHZRightOffsetUnits.Desktop};` : ''}
-        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Desktop !== undefined ? `top: ${counterVRTopOffset.Desktop}${counterVRTopOffsetUnits.Desktop};` : ''}
-        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Desktop !== undefined ? `bottom: ${counterVRBottomOffset.Desktop}${counterVRBottomOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Desktop ? `left: ${counterHZLeftOffset.Desktop}${counterHZLeftOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Desktop ? `right: ${counterHZRightOffset.Desktop}${counterHZRightOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Desktop ? `top: ${counterVRTopOffset.Desktop}${counterVRTopOffsetUnits.Desktop};` : ''}
+        ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Desktop ? `bottom: ${counterVRBottomOffset.Desktop}${counterVRBottomOffsetUnits.Desktop};` : ''}
         ${counterGlobalZIndex.Desktop ? `z-index: ${counterGlobalZIndex.Desktop};` : ''}
         ${counterOverflow !== 'default' ? `overflow: ${counterOverflow};` : ''}
     }
     .fb-counter-wrapper.${blockID}{
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
-        ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ""}
-        ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ""}
+        ${globalDesktopPadding && counterGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
+        ${globalDesktopMargin && counterGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
         ${counterGlobalBorderColor ? `border: ${counterGlobalBorderColor};` : "" } 
-        ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ""}
-        ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
+        ${globalDesktopBorderWidth && counterGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
+        ${globalDesktopBorderRadiusWidth && counterGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
         ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
     }
     .fb-counter-wrapper.${blockID}:hover{
@@ -991,27 +991,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item {
         ${counterItemBgColor ? `background: ${counterItemBgColor};` : ''}
-        ${counterItemSize[deviceType] ? `width: ${counterItemSize[deviceType]}${counterItemSizeUnits[deviceType]};` : ''}
-        ${counterItemSize[deviceType] ? `height: ${counterItemSize[deviceType]}${counterItemSizeUnits[deviceType]};` : ''}
+        ${counterItemSize.Desktop ? `width: ${counterItemSize.Desktop}${counterItemSizeUnits.Desktop};` : ''}
+        ${counterItemSize.Desktop ? `height: ${counterItemSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
         ${counterItemBorder ? `border: ${counterItemBorder};` : ''}
-        ${counterItemDesktopBorder ? `border-width: ${counterItemDesktopBorder};` : ''}
+        ${counterItemDesktopBorder && counterItemBorderTypeDesktop.top ? `border-width: ${counterItemDesktopBorder};` : ''}
         ${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
-        ${counterItemDesktopBorderRadius ? `border-radius: ${counterItemDesktopBorderRadius};` : ''}
+        ${counterItemDesktopBorderRadius && counterItemBorderRadiusDesktop.top ? `border-radius: ${counterItemDesktopBorderRadius};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover{
         ${counterItemBgHoverColor ? `background: ${counterItemBgHoverColor};` : ''}
         ${counterItemBorderHoverColor ? `border-color: ${counterItemBorderHoverColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
-        ${counterIconSize[deviceType] ? `width: ${counterIconSize[deviceType]}${counterIconSizeUnits[deviceType]};` : ''}
+        ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
         ${counterIconColor ? `fill: ${counterIconColor};` : ''}
-        ${counterIconDesktopMargin ? `margin: ${counterIconDesktopMargin};` : ''}
+        ${counterIconDesktopMargin && counterIconMarginDesktop.top ? `margin: ${counterIconDesktopMargin};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover svg{
         ${counterIconHoverColor ? `fill: ${counterIconHoverColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
-        ${counterNumberDesktopMargin ? `margin: ${counterNumberDesktopMargin};` : ''}
+        ${counterNumberDesktopMargin && counterNumberMarginDesktop.top ? `margin: ${counterNumberDesktopMargin};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-prefix,
@@ -1027,7 +1027,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterNumberGlobalTypoSwitcher.letterSpacing === true && counterNumberGlobalTypographyData.letterSpacing ? `letter-spacing: ${counterNumberGlobalTypographyData.letterSpacing};` : ''}
         ${counterNumberGlobalTypoSwitcher.lineHeight === true && counterNumberGlobalTypographyData.lineHeight ? `line-height: ${counterNumberGlobalTypographyData.lineHeight};` : ''}
 
-        ${counterNumberGlobalTypoSwitcher.fontFamily === false && counterNumberFontFamily ? `font-family: ${counterNumberFontFamily};` : ''}
+        ${counterNumberGlobalTypoSwitcher.fontFamily === false && counterNumberFontFamily && counterNumberFontFamily !== 'Default' ? `font-family: ${counterNumberFontFamily};` : ''}
         ${counterNumberGlobalTypoSwitcher.fontSize === false && counterNumberFontSize.Desktop ? `font-size: ${counterNumberFontSize.Desktop}${counterNumberFontSizeUnits.Desktop};` : ''}
         ${counterNumberGlobalTypoSwitcher.fontWeight === false && counterNumberFontWeight ? `font-weight: ${counterNumberFontWeight};` : ''}
         ${counterNumberGlobalTypoSwitcher.fontStyle === false && counterNumberFontStyle ? `font-style: ${counterNumberFontStyle};` : ''}
@@ -1053,7 +1053,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === true && counterNumberTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${counterNumberTitleGlobalTypographyData.letterSpacing};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.lineHeight === true && counterNumberTitleGlobalTypographyData.lineHeight ? `line-height: ${counterNumberTitleGlobalTypographyData.lineHeight};` : ''}
 
-        ${counterNumberTitleGlobalTypoSwitcher.fontFamily === false && counterNumberTitleFontFamily ? `font-family: ${counterNumberTitleFontFamily};` : ''}
+        ${counterNumberTitleGlobalTypoSwitcher.fontFamily === false && counterNumberTitleFontFamily && counterNumberTitleFontFamily !== 'Default' ? `font-family: ${counterNumberTitleFontFamily};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.fontSize === false && counterNumberTitleFontSize.Desktop ? `font-size: ${counterNumberTitleFontSize.Desktop}${counterNumberTitleFontSizeUnits.Desktop};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.fontWeight === false && counterNumberTitleFontWeight ? `font-weight: ${counterNumberTitleFontWeight};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.fontStyle === false && counterNumberTitleFontStyle ? `font-style: ${counterNumberTitleFontStyle};` : ''}
@@ -1061,37 +1061,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterNumberTitleGlobalTypoSwitcher.textDecoration === false && counterNumberTitleTextDecoration ? `text-decoration: ${counterNumberTitleTextDecoration};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.letterSpacing === false && counterNumberTitleLetterSpacing.Desktop ? `letter-spacing: ${counterNumberTitleLetterSpacing.Desktop}${counterNumberTitleLetterSpacingUnits.Desktop};` : ''}
         ${counterNumberTitleGlobalTypoSwitcher.lineHeight === false && counterNumberTitleLineHeight.Desktop ? `line-height: ${counterNumberTitleLineHeight.Desktop}${counterNumberTitleLineHeightUnits.Desktop};` : ''}
-        ${counterNumberTitleDesktopMargin ? `margin: ${counterNumberTitleDesktopMargin};` : ''}
+        ${counterNumberTitleDesktopMargin && counterNumberTitleMarginDesktop.top ? `margin: ${counterNumberTitleDesktopMargin};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-title{
         ${counterNumberTitleFontHoverColor ? `color: ${counterNumberTitleFontHoverColor};` : ''}
     }
     @media only screen and (max-width: 1024px) {
         .fb-counter-main-wrapper.${blockID}{
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Tablet !== undefined ? `left: ${counterHZLeftOffset.Tablet}${counterHZLeftOffsetUnits.Tablet};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Tablet !== undefined ? `right: ${counterHZRightOffset.Tablet}${counterHZRightOffsetUnits.Tablet};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Tablet !== undefined ? `top: ${counterVRTopOffset.Tablet}${counterVRTopOffsetUnits.Tablet};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Tablet !== undefined ? `bottom: ${counterVRBottomOffset.Tablet}${counterVRBottomOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Tablet ? `left: ${counterHZLeftOffset.Tablet}${counterHZLeftOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Tablet ? `right: ${counterHZRightOffset.Tablet}${counterHZRightOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Tablet ? `top: ${counterVRTopOffset.Tablet}${counterVRTopOffsetUnits.Tablet};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Tablet ? `bottom: ${counterVRBottomOffset.Tablet}${counterVRBottomOffsetUnits.Tablet};` : ''}
             ${counterGlobalZIndex.Tablet ? `z-index: ${counterGlobalZIndex.Tablet};` : ''}        
         }
         .fb-counter-wrapper.${blockID}{
-            ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ""}
-            ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ""}
-            ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ""}
-            ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+            ${globalTabletPadding && counterGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ""}
+            ${globalTabletMargin && counterGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""}
+            ${globalTabletBorderWidth && counterGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
+            ${globalTabletBorderRadiusWidth && counterGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item {
-            ${counterItemTabletBorder ? `border-width: ${counterItemTabletBorder};` : ''}
-            ${counterItemTabletBorderRadius ? `border-radius: ${counterItemTabletBorderRadius};` : ''}
+            ${counterItemTabletBorder && counterItemBorderTypeTablet.top ? `border-width: ${counterItemTabletBorder};` : ''}
+            ${counterItemTabletBorderRadius && counterItemBorderRadiusTablet.top ? `border-radius: ${counterItemTabletBorderRadius};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
-            ${counterIconTabletMargin ? `margin: ${counterIconTabletMargin};` : ''}
+            ${counterIconTabletMargin && counterIconMarginTablet.top ? `margin: ${counterIconTabletMargin};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
-            ${counterNumberTabletMargin ? `margin: ${counterNumberTabletMargin};` : ''}
+            ${counterNumberTabletMargin && counterNumberMarginTablet.top ? `margin: ${counterNumberTabletMargin};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
-            ${counterNumberTitleTabletMargin ? `margin: ${counterNumberTitleTabletMargin};` : ''}
+            ${counterNumberTitleTabletMargin && counterNumberTitleMarginTablet.top ? `margin: ${counterNumberTitleTabletMargin};` : ''}
         }
 
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
@@ -1110,30 +1110,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     @media only screen and (max-width: 767px) {
         .fb-counter-main-wrapper.${blockID}{
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Mobile !== undefined ? `left: ${counterHZLeftOffset.Mobile}${counterHZLeftOffsetUnits.Mobile};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Mobile !== undefined ? `right: ${counterHZRightOffset.Mobile}${counterHZRightOffsetUnits.Mobile};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Mobile !== undefined ? `top: ${counterVRTopOffset.Mobile}${counterVRTopOffsetUnits.Mobile};` : ''}
-            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Mobile !== undefined ? `bottom: ${counterVRBottomOffset.Mobile}${counterVRBottomOffsetUnits.Mobile};` : ''} 
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'left' && counterHZLeftOffset.Mobile ? `left: ${counterHZLeftOffset.Mobile}${counterHZLeftOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterHZOrientationType === 'right' && counterHZRightOffset.Mobile ? `right: ${counterHZRightOffset.Mobile}${counterHZRightOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'top' && counterVRTopOffset.Mobile ? `top: ${counterVRTopOffset.Mobile}${counterVRTopOffsetUnits.Mobile};` : ''}
+            ${counterPositionType !== 'default' && counterPositionType !== 'relative' && counterVROrientationType === 'bottom' && counterVRBottomOffset.Mobile ? `bottom: ${counterVRBottomOffset.Mobile}${counterVRBottomOffsetUnits.Mobile};` : ''} 
             ${counterGlobalZIndex.Mobile ? `z-index: ${counterGlobalZIndex.Mobile};` : ''}
         }
         .fb-counter-wrapper.${blockID}{
-            ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ""}
-            ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ""}
-            ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ""}
-            ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+            ${globalMobilePadding && counterGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ""}
+            ${globalMobileMargin && counterGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""}
+            ${globalMobileBorderWidth && counterGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
+            ${globalMobileBorderRadiusWidth && counterGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item {
-            ${counterItemMobileBorder ? `border-width: ${counterItemMobileBorder};` : ''}
-            ${counterItemMobileBorderRadius ? `border-radius: ${counterItemMobileBorderRadius};` : ''}
+            ${counterItemMobileBorder && counterItemBorderTypeMobile.top ? `border-width: ${counterItemMobileBorder};` : ''}
+            ${counterItemMobileBorderRadius && counterItemBorderRadiusMobile.top ? `border-radius: ${counterItemMobileBorderRadius};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
-            ${counterIconMobileMargin ? `margin: ${counterIconMobileMargin};` : ''}
+            ${counterIconMobileMargin && counterIconMarginMobile.top ? `margin: ${counterIconMobileMargin};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
-            ${counterNumberMobileMargin ? `margin: ${counterNumberMobileMargin};` : ''}
+            ${counterNumberMobileMargin && counterNumberMarginMobile.top ? `margin: ${counterNumberMobileMargin};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-title {
-            ${counterNumberTitleMobileMargin ? `margin: ${counterNumberTitleMobileMargin};` : ''}
+            ${counterNumberTitleMobileMargin && counterNumberTitleMarginMobile.top ? `margin: ${counterNumberTitleMobileMargin};` : ''}
         }
 
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number,
