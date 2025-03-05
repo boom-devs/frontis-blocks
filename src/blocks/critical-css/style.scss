@@ -1,0 +1,138 @@
+.fb-pricing-wrapper {
+	transition: ease-in-out all 0.3s;
+
+}
+
+
+.fb-pricing-ribbon-wrapper {
+	position: relative;
+	width: 100%;
+  
+	.fb-pricing-ribbon {
+	  position: absolute;
+	  top: 30px;
+	  width: 180px;
+	  padding: 10px;
+	  font-size: 14px;
+	  text-align: center;
+	  font-weight: bold;
+	  transform: rotate(-45deg);
+	  z-index: 1;
+  
+	  &.fb-pricing-ribbon-left {
+		left: -50px;
+		transform: rotate(-45deg);
+	  }
+  
+	  &.fb-pricing-ribbon-right {
+		right: -50px;
+		transform: rotate(45deg);
+	  }
+  
+	  span {
+		display: block;
+		line-height: 1;
+	  }
+	}
+}
+  
+
+.fb-pricing-ribbon-icon-wrapper {
+	.fb-pricing-ribbon-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+}
+.fb-pricing-price-wrapper {
+	.fb-pricing-price-inner-wrapper {
+		.fb-pricing-normal-price {
+			&.line-through {
+				text-decoration: line-through;
+				padding-right: 8px;
+			}
+		}
+	}
+}
+
+.fb-pricing-title-wrapper {
+	display: block;
+	&.fb-pricing-title-left {
+		text-align: left;
+	}
+	&.fb-pricing-title-center {
+		text-align: center;
+	}
+	&.fb-pricing-title-right {
+		text-align: right;
+	}
+	.fb-pricing-title {
+		margin: 0;
+	}
+	.fb-pricing-subtitle {
+		margin: 0;
+	}
+}
+
+.fb-pricing-content {
+	.fb-pricing-features-wrapper {
+	  
+	  .fb-pricing-features-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		
+		.fb-pricing-feature-item {
+			display: flex;
+			align-items: center;
+		  
+		  .fb-pricing-feature-icon {
+			margin-right: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
+			.fb-pricing-feature-icon-inner {
+			  display: flex;
+			}
+		  }
+		}
+	  }
+	}
+	.fb-pricing-feature-after-text-wrapper {
+		.fb-pricing-feature-after-text {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
+
+.fb-pricing-footer-wrapper {
+	
+	.fb-pricing-button-wrapper {
+		display: flex;
+		align-items: center;
+	  .fb-pricing-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		transition: background-color 0.3s ease;
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+  
+		.fb-pricing-button-icon {
+		  display: flex;
+		  align-items: center;
+		}
+	  }
+	}
+}
+  
+  
+
+
+
