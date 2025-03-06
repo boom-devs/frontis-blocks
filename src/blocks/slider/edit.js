@@ -61,8 +61,6 @@ const Edit = (props) => {
 		displayDots,
         autoplay,
         autoplaySpeed,
-        slidePerView,
-        spaceBetween,
         loop,
         allowTouchMove,
         pauseOnHover,
@@ -94,7 +92,7 @@ const Edit = (props) => {
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
 	const blockProps = useBlockProps( {
-		className: `fb-block-${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
 	} );
 
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
@@ -108,6 +106,7 @@ const Edit = (props) => {
 
 
     const getSliderTemplate = useMemo(() => [
+        ['frontis-blocks/slider-item'],
         ['frontis-blocks/slider-item'],
         ['frontis-blocks/slider-item'],
     ], [slideItem, slideContent]);
@@ -210,8 +209,7 @@ const Edit = (props) => {
 
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
-        slidesPerView: slidePerView,
-        spaceBetween: spaceBetween,
+        slidesPerView: 1,
         autoplay: autoplay ? {
             delay: autoplaySpeed,
             disableOnInteraction: false,
@@ -239,8 +237,6 @@ const Edit = (props) => {
             });
         },
     }), [
-        slidePerView,
-        spaceBetween,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
@@ -255,8 +251,7 @@ const Edit = (props) => {
     useEffect(() => {
         if (swiperInstance) {
             // Update general settings
-            swiperInstance.params.slidesPerView = slidePerView;
-            swiperInstance.params.spaceBetween = spaceBetween;
+            swiperInstance.params.slidesPerView = 1;
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
             swiperInstance.params.allowTouchMove = allowTouchMove;
@@ -299,8 +294,6 @@ const Edit = (props) => {
         }
     }, [
         swiperInstance,
-        slidePerView,
-        spaceBetween,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
