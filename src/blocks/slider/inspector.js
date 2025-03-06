@@ -59,8 +59,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsWidthUnits,
         sliderArrowsHeight,
         sliderArrowsHeightUnits,
-        sliderArrowsLineHeight,
-        sliderArrowsLineHeightUnits,
 
         /** Border Settings */
         sliderArrowsBorder,
@@ -96,6 +94,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
+
+        sliderDotsMarginUnits,
+        sliderDotsMarginDesktop,
+        sliderDotsMarginTablet,
+        sliderDotsMarginMobile,
+        sliderDotsMarginLink,
+
         sliderDotsPosition,
         sliderDotsPositionUnits,
 
@@ -370,6 +375,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const sliderArrowsBorderRadiusDesktopWidth = `${sliderArrowsBorderRadiusDesktop.top}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.right}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.bottom}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.left}${sliderArrowsBorderRadiusUnits.Desktop}`;
     const sliderArrowsBorderRadiusTabletWidth = `${sliderArrowsBorderRadiusTablet.top}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.right}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.bottom}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.left}${sliderArrowsBorderRadiusUnits.Tablet}`;
     const sliderArrowsBorderRadiusMobileWidth = `${sliderArrowsBorderRadiusMobile.top}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.right}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.bottom}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.left}${sliderArrowsBorderRadiusUnits.Mobile}`;
+
+    /** Start Dots Margin */
+    const handleDotsMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderDotsMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderDotsMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderDotsMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderDotsMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderDotsMarginDesktop: {...sliderDotsMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderDotsMarginTablet: {...sliderDotsMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderDotsMarginMobile: {...sliderDotsMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleDotsMarginCombineBtn = () => {
+        setAttributes( {sliderDotsMarginLink: !sliderDotsMarginLink} );
+    }
+
+    const handleDotsMarginUnitsHandler = (unit) => { 
+        setAttributes( {
+            sliderDotsMarginUnits: {
+                ...sliderDotsMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const sliderDotsMarginDesktopWidth = `${sliderDotsMarginDesktop.top}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.right}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.bottom}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.left}${sliderDotsMarginUnits.Desktop}`;
+    const sliderDotsMarginTabletWidth = `${sliderDotsMarginTablet.top}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.right}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.bottom}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.left}${sliderDotsMarginUnits.Tablet}`;
+    const sliderDotsMarginMobileWidth = `${sliderDotsMarginMobile.top}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.right}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.bottom}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.left}${sliderDotsMarginUnits.Mobile}`;
+    /** End Dots Margin */
 
     /** Start Normal Dots border */
     const handleNormalDotsBorderUnitChange = ( event, position ) => {
@@ -1009,7 +1086,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
             ${sliderArrowsWidth.Desktop ? `width: ${sliderArrowsWidth.Desktop}${sliderArrowsWidthUnits.Desktop};` : ''}
             ${sliderArrowsHeight.Desktop ? `height: ${sliderArrowsHeight.Desktop}${sliderArrowsHeightUnits.Desktop};` : ''}
-            ${sliderArrowsLineHeight.Desktop ? `line-height: ${sliderArrowsLineHeight.Desktop}${sliderArrowsLineHeightUnits.Desktop};` : ''}
             ${sliderArrowsPosition.Desktop ? `top: ${sliderArrowsPosition.Desktop}${sliderArrowsPositionUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
@@ -1034,7 +1110,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .swiper-pagination {
-            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop};` : ''}
+            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop} !important;` : ''}
+            ${sliderDotsMarginDesktopWidth && sliderDotsMarginDesktop.top ? `margin: ${sliderDotsMarginDesktopWidth};` : ''}
         }
 
         .${blockId} .swiper-pagination-bullet {
@@ -1076,7 +1153,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsBorderRadiusTabletWidth && sliderArrowsBorderRadiusTablet.top ? `border-radius: ${sliderArrowsBorderRadiusTabletWidth};` : ''}
                 ${sliderArrowsWidth.Tablet ? `width: ${sliderArrowsWidth.Tablet}${sliderArrowsWidthUnits.Tablet};` : ''}
                 ${sliderArrowsHeight.Tablet ? `height: ${sliderArrowsHeight.Tablet}${sliderArrowsHeightUnits.Tablet};` : ''}
-                ${sliderArrowsLineHeight.Tablet ? `line-height: ${sliderArrowsLineHeight.Tablet}${sliderArrowsLineHeightUnits.Tablet};` : ''}
                 ${sliderArrowsPosition.Tablet ? `top: ${sliderArrowsPosition.Tablet}${sliderArrowsPositionUnits.Tablet};` : ''}
             }
 
@@ -1093,7 +1169,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet};` : ''}
+                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet} !important;` : ''}
+                ${sliderDotsMarginTabletWidth && sliderDotsMarginTablet.top ? `margin: ${sliderDotsMarginTabletWidth};` : ''}
             }
 
             .${blockId} .swiper-pagination-bullet {
@@ -1129,7 +1206,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsBorderRadiusMobileWidth && sliderArrowsBorderRadiusMobile.top ? `border-radius: ${sliderArrowsBorderRadiusMobileWidth};` : ''}
                 ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
                 ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
-                ${sliderArrowsLineHeight.Mobile ? `line-height: ${sliderArrowsLineHeight.Mobile}${sliderArrowsLineHeightUnits.Mobile};` : ''}
                 ${sliderArrowsPosition.Mobile ? `top: ${sliderArrowsPosition.Mobile}${sliderArrowsPositionUnits.Mobile};` : ''}
             }
 
@@ -1146,7 +1222,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile};` : ''}
+                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile} !important;` : ''}
+                ${sliderDotsMarginMobileWidth && sliderDotsMarginMobile.top ? `margin: ${sliderDotsMarginMobileWidth};` : ''}
             }
 
             .${blockId} .swiper-pagination-bullet {
@@ -1247,8 +1324,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsWidthUnits,
         sliderArrowsHeight,
         sliderArrowsHeightUnits,
-        sliderArrowsLineHeight,
-        sliderArrowsLineHeightUnits,
 
         /** Border Settings */
         sliderArrowsBorder,
@@ -1290,7 +1365,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
-        /** Dots Style */
+        sliderDotsMarginUnits,
+        sliderDotsMarginDesktop,
+        sliderDotsMarginTablet,
+        sliderDotsMarginMobile,
+        sliderDotsMarginLink,
+        sliderDotsMarginDesktopWidth,
+        sliderDotsMarginTabletWidth,
+        sliderDotsMarginMobileWidth,
+
         sliderDotsPosition,
         sliderDotsPositionUnits,
 
@@ -1539,7 +1622,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_Range
-                                                min={1}
+                                                min={0}
                                                 max={100}
                                                 label={__("Icon Size", "frontis-blocks")}
                                                 rangeValue={sliderArrowsSize}
@@ -1552,8 +1635,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"16"}
                                             />
                                             <FB_Range
-                                                min={1}
-                                                max={200}
+                                                min={0}
+                                                max={100}
                                                 label={__("Width", "frontis-blocks")}
                                                 rangeValue={sliderArrowsWidth}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsWidth: value })}
@@ -1565,8 +1648,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"46"}
                                             />
                                             <FB_Range
-                                                min={1}
-                                                max={200}
+                                                min={0}
+                                                max={100}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={sliderArrowsHeight}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsHeight: value })}
@@ -1576,25 +1659,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
                                                 resetFallbackValue={"46"}
-                                            />    
-                                            <FB_Range
-                                                min={1}
-                                                max={200}
-                                                label={__("Line Height", "frontis-blocks")}
-                                                rangeValue={sliderArrowsLineHeight}
-                                                onChangeHandler={(value) => setAttributes({ sliderArrowsLineHeight: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ sliderArrowsLineHeightUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsLineHeightUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={"46"}
                                             />
 
                                             <FB_Range
-                                                min={1}
+                                                min={0}
                                                 max={100}
-                                                label={__("Top", "frontis-blocks")}
+                                                label={__("Position", "frontis-blocks")}
                                                 rangeValue={sliderArrowsPosition}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsPosition: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
@@ -1715,10 +1785,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             )}                                  
                                         </PanelBody>
                                         <PanelBody title={__("Pagination Style", "frontis-blocks")} initialOpen={false}>
+
                                             <FB_Range
-                                                min={1}
-                                                max={500}
-                                                label={__("Bottom", "frontis-blocks")}
+                                                min={0}
+                                                max={100}
+                                                label={__("Position", "frontis-blocks")}
                                                 rangeValue={sliderDotsPosition}
                                                 onChangeHandler={(value) => setAttributes({ sliderDotsPosition: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ sliderDotsPositionUnits: value })}
@@ -1726,210 +1797,229 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={sliderDotsPositionUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={"20"}
+                                                resetFallbackValue={"0"}
+                                            />
+                                            <FB_Spacing
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleDotsMarginUnitsHandler}
+                                                spacingUnits={sliderDotsMarginUnits}
+                                                spacingDesktop={sliderDotsMarginDesktop}
+                                                spacingTablet={sliderDotsMarginTablet}
+                                                spacingMobile={sliderDotsMarginMobile}
+                                                handleSpacingUnitHandler={handleDotsMarginUnitChange}
+                                                spacingCombineBtn={sliderDotsMarginLink}
+                                                spacingCombineBtnHandler={handleDotsMarginCombineBtn}
+                                                setAttributes={setAttributes}
                                             />
 
-                                            <div className="fb-setting-switcher-container">
-                                                <BaseControl
-                                                    label={__("Color", "frontis-blocks")}
-                                                    className="fb-setting-switcher-panel-wrapper"
-                                                >
-                                                    <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                                        {NORMAL_ACTIVE.map((item, key) => (
-                                                            <Button
-                                                        key={key}
-                                                                onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
-                                                                className={`fb-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
-                                                            >
-                                                                {item.label}
-                                                            </Button>
-                                                        ))}
-                                                    </ButtonGroup>
-                                                </BaseControl>
-                                            </div>
-                                            {sliderDotsSwitcher === 'normal' && (
+                                            {paginationType === 'bullets' && (
                                                 <>
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Width", "frontis-blocks")}
-                                                        rangeValue={sliderNormalDotsWidth}
-                                                        onChangeHandler={(value) => setAttributes({ sliderNormalDotsWidth: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={sliderNormalDotsWidthUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={"8"}
-                                                    />
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Height", "frontis-blocks")}
-                                                        rangeValue={sliderNormalDotsHeight}
-                                                        onChangeHandler={(value) => setAttributes({ sliderNormalDotsHeight: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={sliderNormalDotsHeightUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={"8"}
-                                                    />
-                                                    <FB_ColorControl
-                                                        label={__("Color", "frontis-blocks")}
-                                                        globalColor={sliderNormalDotsBgColor} 
-                                                        setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
-                                                    />
-                                                    <SelectControl
-                                                        label={__("Border Style", "frontis-blocks")}
-                                                        value={sliderNormalDotsBorder} 
-                                                        options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
-                                                    />
+                                                    <div className="fb-setting-switcher-container">
+                                                        <BaseControl
+                                                            label={__("Color", "frontis-blocks")}
+                                                            className="fb-setting-switcher-panel-wrapper"
+                                                        >
+                                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                                {NORMAL_ACTIVE.map((item, key) => (
+                                                                    <Button
+                                                                key={key}
+                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
+                                                                        className={`fb-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                                                    >
+                                                                        {item.label}
+                                                                    </Button>
+                                                                ))}
+                                                            </ButtonGroup>
+                                                        </BaseControl>
+                                                    </div>
+                                                    {sliderDotsSwitcher === 'normal' && (
+                                                        <>
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "frontis-blocks")}
+                                                                rangeValue={sliderNormalDotsWidth}
+                                                                onChangeHandler={(value) => setAttributes({ sliderNormalDotsWidth: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsWidthUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "frontis-blocks")}
+                                                                rangeValue={sliderNormalDotsHeight}
+                                                                onChangeHandler={(value) => setAttributes({ sliderNormalDotsHeight: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsHeightUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_ColorControl
+                                                                label={__("Color", "frontis-blocks")}
+                                                                globalColor={sliderNormalDotsBgColor} 
+                                                                setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                                            />
+                                                            <SelectControl
+                                                                label={__("Border Style", "frontis-blocks")}
+                                                                value={sliderNormalDotsBorder} 
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                                            />
 
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={sliderNormalDotsBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
-                                                    />
+                                                            <FB_SwitcherControl
+                                                                label={__("Border Color", "frontis-blocks")}
+                                                                globalSwitcher={sliderNormalDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
+                                                            />
 
-                                                    {sliderNormalDotsBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={sliderNormalDotsBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
-                                                        />
+                                                            {sliderNormalDotsBorderColorSwitcher === 'normal' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Normal Color", "frontis-blocks")}
+                                                                    globalColor={sliderNormalDotsBorderColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderArrowsBorderColorSwitcher === 'hover' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Hover Color", "frontis-blocks")}
+                                                                    globalColor={sliderNormalDotsBorderHoverColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <FB_Spacing
+                                                                label={__("Border", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleNormalDotsBorderUnitsHandler}
+                                                                spacingUnits={sliderNormalDotsBorderUnits}
+                                                                spacingDesktop={sliderNormalDotsBorderDesktop}
+                                                                spacingTablet={sliderNormalDotsBorderTablet}
+                                                                spacingMobile={sliderNormalDotsBorderMobile}
+                                                                handleSpacingUnitHandler={handleNormalDotsBorderUnitChange}
+                                                                spacingCombineBtn={sliderNormalDotsBorderLink}
+                                                                spacingCombineBtnHandler={handleNormalDotsBorderCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+
+                                                            <FB_Spacing
+                                                                label={__("Border Radius", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleNormalDotsBorderRadiusUnitsHandler}
+                                                                spacingUnits={sliderNormalDotsBorderRadiusUnits}
+                                                                spacingDesktop={sliderNormalDotsBorderRadiusDesktop}
+                                                                spacingTablet={sliderNormalDotsBorderRadiusTablet}
+                                                                spacingMobile={sliderNormalDotsBorderRadiusMobile}
+                                                                handleSpacingUnitHandler={handleNormalDotsBorderRadiusUnitChange}
+                                                                spacingCombineBtn={sliderNormalDotsBorderRadiusLink}
+                                                                spacingCombineBtnHandler={handleNormalDotsBorderRadiusCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+                                                        </>
                                                     )}
 
-                                                    {sliderArrowsBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={sliderNormalDotsBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
-                                                        />
+                                                    {sliderDotsSwitcher === 'active' && (
+                                                        <>
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "frontis-blocks")}
+                                                                rangeValue={sliderActiveDotsWidth}
+                                                                onChangeHandler={(value) => setAttributes({ sliderActiveDotsWidth: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsWidthUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "frontis-blocks")}
+                                                                rangeValue={sliderActiveDotsHeight}
+                                                                onChangeHandler={(value) => setAttributes({ sliderActiveDotsHeight: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsHeightUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_ColorControl
+                                                                label={__("Color", "frontis-blocks")}
+                                                                globalColor={sliderActiveDotsBgColor} 
+                                                                setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
+                                                            />
+                                                            <SelectControl
+                                                                label={__("Border Style", "frontis-blocks")}
+                                                                value={sliderActiveDotsBorder} 
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                                            />
+
+                                                            <FB_SwitcherControl
+                                                                label={__("Border Color", "frontis-blocks")}
+                                                                globalSwitcher={sliderActiveDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
+                                                            />
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'normal' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Normal Color", "frontis-blocks")}
+                                                                    globalColor={sliderActiveDotsBorderColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'hover' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Hover Color", "frontis-blocks")}
+                                                                    globalColor={sliderActiveDotsBorderHoverColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <FB_Spacing
+                                                                label={__("Border", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleActiveDotsBorderUnitsHandler}
+                                                                spacingUnits={sliderActiveDotsBorderUnits}
+                                                                spacingDesktop={sliderActiveDotsBorderDesktop}
+                                                                spacingTablet={sliderActiveDotsBorderTablet}
+                                                                spacingMobile={sliderActiveDotsBorderMobile}
+                                                                handleSpacingUnitHandler={handleActiveDotsBorderUnitChange}
+                                                                spacingCombineBtn={sliderActiveDotsBorderLink}
+                                                                spacingCombineBtnHandler={handleActiveDotsBorderCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+
+                                                            <FB_Spacing
+                                                                label={__("Border Radius", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleActiveDotsBorderRadiusUnitsHandler}
+                                                                spacingUnits={sliderActiveDotsBorderRadiusUnits}
+                                                                spacingDesktop={sliderActiveDotsBorderRadiusDesktop}
+                                                                spacingTablet={sliderActiveDotsBorderRadiusTablet}
+                                                                spacingMobile={sliderActiveDotsBorderRadiusMobile}
+                                                                handleSpacingUnitHandler={handleActiveDotsBorderRadiusUnitChange}
+                                                                spacingCombineBtn={sliderActiveDotsBorderRadiusLink}
+                                                                spacingCombineBtnHandler={handleActiveDotsBorderRadiusCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+                                                        </>
                                                     )}
 
-                                                    <FB_Spacing
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleNormalDotsBorderUnitsHandler}
-                                                        spacingUnits={sliderNormalDotsBorderUnits}
-                                                        spacingDesktop={sliderNormalDotsBorderDesktop}
-                                                        spacingTablet={sliderNormalDotsBorderTablet}
-                                                        spacingMobile={sliderNormalDotsBorderMobile}
-                                                        handleSpacingUnitHandler={handleNormalDotsBorderUnitChange}
-                                                        spacingCombineBtn={sliderNormalDotsBorderLink}
-                                                        spacingCombineBtnHandler={handleNormalDotsBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_Spacing
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleNormalDotsBorderRadiusUnitsHandler}
-                                                        spacingUnits={sliderNormalDotsBorderRadiusUnits}
-                                                        spacingDesktop={sliderNormalDotsBorderRadiusDesktop}
-                                                        spacingTablet={sliderNormalDotsBorderRadiusTablet}
-                                                        spacingMobile={sliderNormalDotsBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleNormalDotsBorderRadiusUnitChange}
-                                                        spacingCombineBtn={sliderNormalDotsBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleNormalDotsBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
                                                 </>
                                             )}
 
-                                            {sliderDotsSwitcher === 'active' && (
-                                                <>
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Width", "frontis-blocks")}
-                                                        rangeValue={sliderActiveDotsWidth}
-                                                        onChangeHandler={(value) => setAttributes({ sliderActiveDotsWidth: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={sliderActiveDotsWidthUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={"8"}
-                                                    />
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Height", "frontis-blocks")}
-                                                        rangeValue={sliderActiveDotsHeight}
-                                                        onChangeHandler={(value) => setAttributes({ sliderActiveDotsHeight: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
-                                                        deviceType={deviceType}
-                                                        units={sliderActiveDotsHeightUnits}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={"8"}
-                                                    />
-                                                    <FB_ColorControl
-                                                        label={__("Color", "frontis-blocks")}
-                                                        globalColor={sliderActiveDotsBgColor} 
-                                                        setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
-                                                    />
-                                                    <SelectControl
-                                                        label={__("Border Style", "frontis-blocks")}
-                                                        value={sliderActiveDotsBorder} 
-                                                        options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
-                                                    />
-
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={sliderActiveDotsBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
-                                                    />
-
-                                                    {sliderActiveDotsBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={sliderActiveDotsBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {sliderActiveDotsBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={sliderActiveDotsBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
-                                                        />
-                                                    )}
-
-                                                    <FB_Spacing
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleActiveDotsBorderUnitsHandler}
-                                                        spacingUnits={sliderActiveDotsBorderUnits}
-                                                        spacingDesktop={sliderActiveDotsBorderDesktop}
-                                                        spacingTablet={sliderActiveDotsBorderTablet}
-                                                        spacingMobile={sliderActiveDotsBorderMobile}
-                                                        handleSpacingUnitHandler={handleActiveDotsBorderUnitChange}
-                                                        spacingCombineBtn={sliderActiveDotsBorderLink}
-                                                        spacingCombineBtnHandler={handleActiveDotsBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_Spacing
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleActiveDotsBorderRadiusUnitsHandler}
-                                                        spacingUnits={sliderActiveDotsBorderRadiusUnits}
-                                                        spacingDesktop={sliderActiveDotsBorderRadiusDesktop}
-                                                        spacingTablet={sliderActiveDotsBorderRadiusTablet}
-                                                        spacingMobile={sliderActiveDotsBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleActiveDotsBorderRadiusUnitChange}
-                                                        spacingCombineBtn={sliderActiveDotsBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleActiveDotsBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                </>
-                                            )}
                                         </PanelBody>
                                     </>
                                 )}

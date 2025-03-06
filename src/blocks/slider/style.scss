@@ -48,6 +48,7 @@
 	}
 
 	.swiper-pagination {
+		bottom: 0 !important;
 		&.swiper-pagination-bullets {
 			max-width: 100%;
 		}
