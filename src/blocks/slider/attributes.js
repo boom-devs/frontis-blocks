@@ -85,6 +85,10 @@ const attributes = {
 		type: 'boolean',
 		default: true,
 	},
+	paginationType: {
+        type: "string",
+        default: "bullets"
+    },
 
 	/** Start Arrows Style */
 	sliderArrowsSize: {
@@ -369,14 +373,282 @@ const attributes = {
 			Mobile: 'px',
 		},
 	},
-	sliderDotsBgColor: {
+
+	sliderDotsSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	sliderNormalDotsBgColor: {
 		type: 'string',
 		default: '#333333',
 	},
-	sliderDotsBgActiveColor: {
+	sliderActiveDotsBgColor: {
 		type: 'string',
-		default: '#333333',
+		default: '',
 	},
+	sliderNormalDotsWidth: {
+		type: 'object',
+		default: {
+			Desktop: '8',
+			Tablet: '8',
+			Mobile: '8',
+		},
+	},
+	sliderNormalDotsWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	sliderNormalDotsHeight: {
+		type: 'object',
+		default: {
+			Desktop: '8',
+			Tablet: '8',
+			Mobile: '8',
+		},
+	},
+	sliderNormalDotsHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+
+	/** Start Border */
+	sliderNormalDotsBorder: { 
+		type: 'string',
+		default: "none",
+	},
+	sliderNormalDotsBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	sliderNormalDotsBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	sliderNormalDotsBorderHoverColor: {
+		type: 'string',
+	},
+	sliderNormalDotsBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderNormalDotsBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNormalDotsBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNormalDotsBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderNormalDotsBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	sliderNormalDotsBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderNormalDotsBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	sliderNormalDotsBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	sliderNormalDotsBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	sliderNormalDotsBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+
+	sliderActiveDotsWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderActiveDotsWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	sliderActiveDotsHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderActiveDotsHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+
+	/** Start Border */
+	sliderActiveDotsBorder: { 
+		type: 'string',
+		default: "none",
+	},
+	sliderActiveDotsBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	sliderActiveDotsBorderColor: {
+		type: 'string',
+		default: ""
+	},
+	sliderActiveDotsBorderHoverColor: {
+		type: 'string',
+	},
+	sliderActiveDotsBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderActiveDotsBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	sliderActiveDotsBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderActiveDotsBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderActiveDotsBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+
+
 	/** End Dots Style */
 
     /** Start Global Setting */

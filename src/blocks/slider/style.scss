@@ -58,3 +58,7 @@
 		border-style: none;
 	}
 }
+
+:where(.wp-site-blocks *:focus) {
+    outline-width: 0 !important;
+}
