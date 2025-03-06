@@ -167,22 +167,6 @@ const attributes = {
 			Mobile: 'px',
 		},
 	},
-	sliderArrowsLineHeight: {
-		type: 'object',
-		default: {
-			Desktop: '46',
-			Tablet: '46',
-			Mobile: '46',
-		},
-	},
-	sliderArrowsLineHeightUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		},
-	},
 
 	/** Start Border */
 	sliderArrowsBorder: { 
@@ -356,21 +340,60 @@ const attributes = {
 	/** End Arrows Style */
 
 	/** Start Dots Style */
+	sliderDotsMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	sliderDotsMarginDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderDotsMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderDotsMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	sliderDotsMarginLink : {
+		type : "boolean",
+		default: true
+	},
 
 	sliderDotsPosition: {
 		type: 'object',
 		default: {
-			Desktop: '20',
-			Tablet: '20',
-			Mobile: '20',
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
 		},
 	},
 	sliderDotsPositionUnits: {
 		type: 'object',
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
 		},
 	},
 
