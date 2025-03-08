@@ -146,11 +146,11 @@ const generateCSSVariables = (data, deviceType) => {
             if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
                 fontFamilies.add(fontFamily);
 
-                let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+                let iframe = document.querySelector("iframe.fb-preview-frame");
 
                 // If not found, try the editor-canvas iframe
                 if (!iframe) {
-                    iframe = document.querySelector('iframe[name="editor-canvas"]');
+                    iframe = document.querySelector('iframe[name="fb-preview-frame"]');
                 }
 
                 const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
@@ -412,21 +412,21 @@ const generateCSSVariables = (data, deviceType) => {
         `;
     }
 
-    let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+    let iframe = document.querySelector("iframe.fb-preview-frame");
     let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
     let styleTag = iframeDocument.getElementById("global-typo");
 
     if(fileName === 'post.php') {
 
         if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
+            iframe = document.querySelector('iframe[name="fb-preview-frame"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
 
             console.log("iframeDocument")
             console.log(iframeDocument)
         } else {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
+            iframe = document.querySelector('iframe[name="fb-preview-frame"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
         }

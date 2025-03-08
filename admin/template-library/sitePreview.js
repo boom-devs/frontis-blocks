@@ -19,7 +19,7 @@ const SitePreview = () => {
             )}
             <iframe
                 src={previewUrl}
-                className="fb-preview-frame edit-site-visual-editor__editor-canvas"
+                className="fb-preview-frame"
                 title="Site Preview"
                 onLoad={() => setIsLoading(false)}
                 scrolling="yes"

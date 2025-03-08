@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+    "name": "frontis/off-canvas-menu",
+    "title": "Off Canvas Menu",
+    "category": "frontis-blocks",
+    "description": "Create off canvas menus with customizable layouts and styles.",
+    "textdomain": "frontis-blocks",
+    "supports": {
+        "html": false
+    },
+    "example": {
+        "attributes": {
+            "preview": true
+        }
+    },
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
