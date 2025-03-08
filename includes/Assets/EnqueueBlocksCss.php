@@ -13,8 +13,8 @@ class EnqueueBlocksCss {
 
 		$css_file_name = $block_id . '.css';
 		$css_file = $css_dir . $css_file_name;
+		
 		file_put_contents($css_file, $css_content);
-
 		$page_name = Helper::get_page_name();
 		self::combined_css_files($page_name);
 	}

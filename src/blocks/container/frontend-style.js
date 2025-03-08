@@ -240,11 +240,6 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
         customWidthUnits,
 	} = attributes;
 
-
-
-    console.log("attributes")
-    console.log(attributes)
-
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
 	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { 'hasPseudo': true, 'forStyleSheet': true } );
 
@@ -528,10 +523,10 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
 		'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
 		'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
-        containerDesktopMarginTopValue,
-        containerDesktopMarginBottomValue,
-        containerDesktopMarginLeftValue,
-        containerDesktopMarginRightValue,
+        ...containerDesktopMarginTopValue,
+        ...containerDesktopMarginBottomValue,
+        ...containerDesktopMarginLeftValue,
+        ...containerDesktopMarginRightValue,
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -752,10 +747,10 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
 			'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
 			'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
-			'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop']),
-			'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop']),
-			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop']),
-			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop']),
+			...containerDesktopMarginTopValue,
+			...containerDesktopMarginBottomValue,
+			...containerDesktopMarginLeftValue,
+			...containerDesktopMarginRightValue,
 			'box-shadow':
 				generateCSSUnit( boxShadowHOffset, 'px' ) +
 				' ' +
