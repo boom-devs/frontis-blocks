@@ -126,35 +126,72 @@ const Edit = (props) => {
 	);
 
 
-    const setSwiperNavigationPagination = ( swiperInst ) => {
-		if ( swiperInst?.params?.navigation ) {
-			swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
-			swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
+    // const setSwiperNavigationPagination = ( swiperInst ) => {
+	// 	if ( swiperInst?.params?.navigation ) {
+	// 		swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+	// 		swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
 
-			// Re-init navigation
-			swiperInst.navigation.destroy();
-			swiperInst.navigation.init();
-			swiperInst.navigation.update();
-		}
+	// 		// Re-init navigation
+	// 		swiperInst.navigation.destroy();
+	// 		swiperInst.navigation.init();
+	// 		swiperInst.navigation.update();
+	// 	}
 
-		if ( swiperInst?.params?.pagination ) {
-			swiperInst.params.pagination.el = sliderPaginationRef.current;
-			swiperInst.params.pagination.clickable = true;
+	// 	if ( swiperInst?.params?.pagination ) {
+	// 		swiperInst.params.pagination.el = sliderPaginationRef.current;
+	// 		swiperInst.params.pagination.clickable = true;
 
-			if (paginationType === 'bullets') {
-				swiperInst.params.pagination.type = 'bullets';
-			} else if (paginationType === 'fraction') {
-				swiperInst.params.pagination.type = 'fraction';
-			} else if (paginationType === 'progressbar') {
-				swiperInst.params.pagination.type = 'progressbar';
-			}
+	// 		if (paginationType === 'bullets') {
+	// 			swiperInst.params.pagination.type = 'bullets';
+	// 		} else if (paginationType === 'fraction') {
+	// 			swiperInst.params.pagination.type = 'fraction';
+	// 		} else if (paginationType === 'progressbar') {
+	// 			swiperInst.params.pagination.type = 'progressbar';
+	// 		}
 
-			// Re-init pagination
-			swiperInst.pagination.init();
-			swiperInst.pagination.render();
-			swiperInst.pagination.update();
-		}
-	};
+	// 		// Re-init pagination
+    //         // swiperInst.pagination.destroy();
+	// 		swiperInst.pagination.init();
+	// 		swiperInst.pagination.render();
+	// 		swiperInst.pagination.update();
+	// 	}
+	// };
+
+
+    const setSwiperNavigationPagination = (swiperInst) => {
+        if (swiperInst?.params?.navigation) {
+            swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+            swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
+    
+            // Re-init navigation
+            swiperInst.navigation.destroy();
+            swiperInst.navigation.init();
+            swiperInst.navigation.update();
+        }
+    
+        if (swiperInst?.params?.pagination) {
+            // First, completely destroy the pagination
+            swiperInst.pagination.destroy();
+            
+            // Reset pagination container
+            if (sliderPaginationRef.current) {
+                // Clear existing content and classes
+                sliderPaginationRef.current.innerHTML = '';
+                // Reset to base class
+                sliderPaginationRef.current.className = 'swiper-pagination';
+            }
+            
+            // Set new pagination parameters
+            swiperInst.params.pagination.el = sliderPaginationRef.current;
+            swiperInst.params.pagination.clickable = true;
+            swiperInst.params.pagination.type = paginationType;
+            
+            // Create and initialize pagination
+            swiperInst.pagination.init();
+            swiperInst.pagination.render();
+            swiperInst.pagination.update();
+        }
+    };
 
     // Get effect-specific settings
     const getEffectSettings = () => {
@@ -363,7 +400,7 @@ const Edit = (props) => {
 		if ( swiperInstance ) {
 			setSwiperNavigationPagination( swiperInstance );
 		}
-	}, [ displayArrows, displayDots ] );
+	}, [ displayArrows, displayDots, paginationType ] );
 
     useEffect( () => {
 		if ( swiperInstance && swiperInstance.slides ) {

@@ -90,7 +90,3 @@ export const PAGINATION_TYPE = [
 	{ value: 'fraction', label: __('Fraction', 'frontis-blocks') },
 	{ value: 'progressbar', label: __('Progress Bar', 'frontis-blocks') }
 ];
-export const NORMAL_ACTIVE = [
-	{ label: __('Normal', 'frontis-blocks'), value: 'normal' },
-	{ label: __('Active', 'frontis-blocks'), value: 'active' },
-];
