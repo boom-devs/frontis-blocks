@@ -318,6 +318,10 @@ const Inspector = (props) => {
         });
     };
 
+
+	console.log("containerMarginLink");
+	console.log(containerMarginLink);
+
 	const containerMarginUnitsHandler = (unit) => {
         setAttributes({
             containerMarginUnits: {
@@ -590,6 +594,7 @@ const Inspector = (props) => {
 										title={__("Background", "frontis-blocks")}
 										initialOpen={true}
 									>
+									{/* background color control */}
 									<FB_BackgroundColorControl
 										label={__("", "frontis-blocks")}
 										bgColorSwitcher={containerBgColorSwitcher}
@@ -733,8 +738,8 @@ const Inspector = (props) => {
 													spacingTablet={containerTabletPadding}
 													spacingMobile={containerMobilePadding}
 													handleSpacingUnitHandler={containerPaddingUnitsChange}
-													spacingCombineBtn={containerPaddingLinkBtn}
-													spacingCombineBtnHandler={headingMarginLinkBtn}
+													spacingCombineBtn={containerPaddingLink}
+													spacingCombineBtnHandler={containerPaddingLinkBtn}
 													setAttributes={setAttributes}
 												/>
 											</PanelBody>
