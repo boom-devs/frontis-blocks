@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
-import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl } from '@wordpress/components';
+import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
@@ -21,6 +21,8 @@ import {
     BORDER_STYLES,
     EFFECT_OPTIONS,
     OVERFLOW_OP,
+    PAGINATION_TYPE,
+    NORMAL_ACTIVE,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -40,6 +42,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         effect,
         displayArrows,
         displayDots,
+        paginationType,
 
         /** Slider Arrows Style */
         sliderArrowsSize,
@@ -56,8 +59,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsWidthUnits,
         sliderArrowsHeight,
         sliderArrowsHeightUnits,
-        sliderArrowsLineHeight,
-        sliderArrowsLineHeightUnits,
 
         /** Border Settings */
         sliderArrowsBorder,
@@ -93,10 +94,62 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
+
+        sliderDotsMarginUnits,
+        sliderDotsMarginDesktop,
+        sliderDotsMarginTablet,
+        sliderDotsMarginMobile,
+        sliderDotsMarginLink,
+
         sliderDotsPosition,
         sliderDotsPositionUnits,
-        sliderDotsBgColor,
-        sliderDotsBgActiveColor,
+
+        sliderDotsSwitcher,
+        sliderNormalDotsBgColor,
+        sliderNormalDotsWidth,
+        sliderNormalDotsWidthUnits,
+        sliderNormalDotsHeight,
+        sliderNormalDotsHeightUnits,
+
+        sliderNormalDotsBorder,
+        sliderNormalDotsBorderColorSwitcher,
+        sliderNormalDotsBorderColor,
+        sliderNormalDotsBorderHoverColor,
+
+        sliderNormalDotsBorderUnits,
+        sliderNormalDotsBorderDesktop,
+        sliderNormalDotsBorderTablet,
+        sliderNormalDotsBorderMobile,
+        sliderNormalDotsBorderLink,
+
+        sliderNormalDotsBorderRadiusUnits,
+        sliderNormalDotsBorderRadiusDesktop,
+        sliderNormalDotsBorderRadiusTablet,
+        sliderNormalDotsBorderRadiusMobile,
+        sliderNormalDotsBorderRadiusLink,
+
+        sliderActiveDotsBgColor,
+        sliderActiveDotsWidth,
+        sliderActiveDotsWidthUnits,
+        sliderActiveDotsHeight,
+        sliderActiveDotsHeightUnits,
+
+        sliderActiveDotsBorder,
+        sliderActiveDotsBorderColorSwitcher,
+        sliderActiveDotsBorderColor,
+        sliderActiveDotsBorderHoverColor,
+
+        sliderActiveDotsBorderUnits,
+        sliderActiveDotsBorderDesktop,
+        sliderActiveDotsBorderTablet,
+        sliderActiveDotsBorderMobile,
+        sliderActiveDotsBorderLink,
+
+        sliderActiveDotsBorderRadiusUnits,
+        sliderActiveDotsBorderRadiusDesktop,
+        sliderActiveDotsBorderRadiusTablet,
+        sliderActiveDotsBorderRadiusMobile,
+        sliderActiveDotsBorderRadiusLink,
 
         /** Global Settings */
         sliderGlobalZIndex,
@@ -322,6 +375,369 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const sliderArrowsBorderRadiusDesktopWidth = `${sliderArrowsBorderRadiusDesktop.top}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.right}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.bottom}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.left}${sliderArrowsBorderRadiusUnits.Desktop}`;
     const sliderArrowsBorderRadiusTabletWidth = `${sliderArrowsBorderRadiusTablet.top}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.right}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.bottom}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.left}${sliderArrowsBorderRadiusUnits.Tablet}`;
     const sliderArrowsBorderRadiusMobileWidth = `${sliderArrowsBorderRadiusMobile.top}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.right}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.bottom}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.left}${sliderArrowsBorderRadiusUnits.Mobile}`;
+
+    /** Start Dots Margin */
+    const handleDotsMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderDotsMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderDotsMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderDotsMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderDotsMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderDotsMarginDesktop: {...sliderDotsMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderDotsMarginTablet: {...sliderDotsMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderDotsMarginMobile: {...sliderDotsMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleDotsMarginCombineBtn = () => {
+        setAttributes( {sliderDotsMarginLink: !sliderDotsMarginLink} );
+    }
+
+    const handleDotsMarginUnitsHandler = (unit) => { 
+        setAttributes( {
+            sliderDotsMarginUnits: {
+                ...sliderDotsMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const sliderDotsMarginDesktopWidth = `${sliderDotsMarginDesktop.top}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.right}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.bottom}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.left}${sliderDotsMarginUnits.Desktop}`;
+    const sliderDotsMarginTabletWidth = `${sliderDotsMarginTablet.top}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.right}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.bottom}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.left}${sliderDotsMarginUnits.Tablet}`;
+    const sliderDotsMarginMobileWidth = `${sliderDotsMarginMobile.top}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.right}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.bottom}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.left}${sliderDotsMarginUnits.Mobile}`;
+    /** End Dots Margin */
+
+    /** Start Normal Dots border */
+    const handleNormalDotsBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderNormalDotsBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderNormalDotsBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderNormalDotsBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderNormalDotsBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderNormalDotsBorderDesktop: {...sliderNormalDotsBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderNormalDotsBorderTablet: {...sliderNormalDotsBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderNormalDotsBorderMobile: {...sliderNormalDotsBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleNormalDotsBorderCombineBtn = () => {
+        setAttributes( {sliderNormalDotsBorderLink: !sliderNormalDotsBorderLink} );
+    }
+
+    const handleNormalDotsBorderUnitsHandler = (unit) => { 
+        setAttributes( {
+            sliderNormalDotsBorderUnits: {
+                ...sliderNormalDotsBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const sliderNormalDotsBorderDesktopWidth = `${sliderNormalDotsBorderDesktop.top}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.right}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.bottom}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.left}${sliderNormalDotsBorderUnits.Desktop}`;
+    const sliderNormalDotsBorderTabletWidth = `${sliderNormalDotsBorderTablet.top}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.right}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.bottom}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.left}${sliderNormalDotsBorderUnits.Tablet}`;
+    const sliderNormalDotsBorderMobileWidth = `${sliderNormalDotsBorderMobile.top}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.right}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.bottom}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.left}${sliderNormalDotsBorderUnits.Mobile}`;
+    /** End Border */
+
+    /** Start Normal Dots border radius*/
+    const handleNormalDotsBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderNormalDotsBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderNormalDotsBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderNormalDotsBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderNormalDotsBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderNormalDotsBorderRadiusDesktop: {...sliderNormalDotsBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderNormalDotsBorderRadiusTablet: {...sliderNormalDotsBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderNormalDotsBorderRadiusMobile: {...sliderNormalDotsBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleNormalDotsBorderRadiusCombineBtn = () => {
+        setAttributes( {sliderNormalDotsBorderRadiusLink: !sliderNormalDotsBorderRadiusLink} );
+    }
+
+    const handleNormalDotsBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            sliderNormalDotsBorderRadiusUnits: {
+                ...sliderNormalDotsBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Normal Dots border radius */
+
+    const sliderNormalDotsBorderRadiusDesktopWidth = `${sliderNormalDotsBorderRadiusDesktop.top}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.right}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.bottom}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.left}${sliderNormalDotsBorderRadiusUnits.Desktop}`;
+    const sliderNormalDotsBorderRadiusTabletWidth = `${sliderNormalDotsBorderRadiusTablet.top}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.right}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.bottom}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.left}${sliderNormalDotsBorderRadiusUnits.Tablet}`;
+    const sliderNormalDotsBorderRadiusMobileWidth = `${sliderNormalDotsBorderRadiusMobile.top}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.right}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.bottom}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.left}${sliderNormalDotsBorderRadiusUnits.Mobile}`;
+
+
+    /** Start Active Dots border */
+    const handleActiveDotsBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderActiveDotsBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderActiveDotsBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderActiveDotsBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderActiveDotsBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderActiveDotsBorderDesktop: {...sliderActiveDotsBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderActiveDotsBorderTablet: {...sliderActiveDotsBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderActiveDotsBorderMobile: {...sliderActiveDotsBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleActiveDotsBorderCombineBtn = () => {
+        setAttributes( {sliderActiveDotsBorderLink: !sliderActiveDotsBorderLink} );
+    }
+
+    const handleActiveDotsBorderUnitsHandler = (unit) => {  
+        setAttributes( {
+            sliderActiveDotsBorderUnits: {
+                ...sliderActiveDotsBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const sliderActiveDotsBorderDesktopWidth = `${sliderActiveDotsBorderDesktop.top}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.right}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.bottom}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.left}${sliderActiveDotsBorderUnits.Desktop}`;
+    const sliderActiveDotsBorderTabletWidth = `${sliderActiveDotsBorderTablet.top}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.right}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.bottom}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.left}${sliderActiveDotsBorderUnits.Tablet}`;
+    const sliderActiveDotsBorderMobileWidth = `${sliderActiveDotsBorderMobile.top}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.right}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.bottom}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.left}${sliderActiveDotsBorderUnits.Mobile}`;
+    /** End Border */
+
+    /** Start Active Dots border radius*/
+    const handleActiveDotsBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( sliderActiveDotsBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        sliderActiveDotsBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        sliderActiveDotsBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        sliderActiveDotsBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {sliderActiveDotsBorderRadiusDesktop: {...sliderActiveDotsBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {sliderActiveDotsBorderRadiusTablet: {...sliderActiveDotsBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {sliderActiveDotsBorderRadiusMobile: {...sliderActiveDotsBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleActiveDotsBorderRadiusCombineBtn = () => {
+        setAttributes( {sliderActiveDotsBorderRadiusLink: !sliderActiveDotsBorderRadiusLink} );
+    }
+
+    const handleActiveDotsBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            sliderActiveDotsBorderRadiusUnits: {
+                ...sliderActiveDotsBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Active Dots border radius */
+
+    const sliderActiveDotsBorderRadiusDesktopWidth = `${sliderActiveDotsBorderRadiusDesktop.top}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.right}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.bottom}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.left}${sliderActiveDotsBorderRadiusUnits.Desktop}`;
+    const sliderActiveDotsBorderRadiusTabletWidth = `${sliderActiveDotsBorderRadiusTablet.top}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.right}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.bottom}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.left}${sliderActiveDotsBorderRadiusUnits.Tablet}`;
+    const sliderActiveDotsBorderRadiusMobileWidth = `${sliderActiveDotsBorderRadiusMobile.top}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.right}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.bottom}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.left}${sliderActiveDotsBorderRadiusUnits.Mobile}`;
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -670,7 +1086,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
             ${sliderArrowsWidth.Desktop ? `width: ${sliderArrowsWidth.Desktop}${sliderArrowsWidthUnits.Desktop};` : ''}
             ${sliderArrowsHeight.Desktop ? `height: ${sliderArrowsHeight.Desktop}${sliderArrowsHeightUnits.Desktop};` : ''}
-            ${sliderArrowsLineHeight.Desktop ? `line-height: ${sliderArrowsLineHeight.Desktop}${sliderArrowsLineHeightUnits.Desktop};` : ''}
             ${sliderArrowsPosition.Desktop ? `top: ${sliderArrowsPosition.Desktop}${sliderArrowsPositionUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
@@ -695,15 +1110,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .swiper-pagination {
-            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop};` : ''}
+            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop} !important;` : ''}
+            ${sliderDotsMarginDesktopWidth && sliderDotsMarginDesktop.top ? `margin: ${sliderDotsMarginDesktopWidth};` : ''}
         }
 
         .${blockId} .swiper-pagination-bullet {
-            ${sliderDotsBgColor ? `background-color: ${sliderDotsBgColor};` : ''}
+            ${sliderNormalDotsBgColor ? `background-color: ${sliderNormalDotsBgColor};` : ''}
+            ${sliderNormalDotsBorder ? `border: ${sliderNormalDotsBorder};` : ''}
+            ${sliderNormalDotsBorderDesktopWidth && sliderNormalDotsBorderDesktop.top ? `border-width: ${sliderNormalDotsBorderDesktopWidth};` : ''}
+            ${sliderNormalDotsBorderRadiusDesktopWidth && sliderNormalDotsBorderRadiusDesktop.top ? `border-radius: ${sliderNormalDotsBorderRadiusDesktopWidth};` : ''}
+            ${sliderNormalDotsBorderColor ? `border-color: ${sliderNormalDotsBorderColor};` : ''}
+            ${sliderNormalDotsWidth.Desktop ? `width: ${sliderNormalDotsWidth.Desktop}${sliderNormalDotsWidthUnits.Desktop};` : ''}
+            ${sliderNormalDotsHeight.Desktop ? `height: ${sliderNormalDotsHeight.Desktop}${sliderNormalDotsHeightUnits.Desktop};` : ''}
         }
 
         .${blockId} .swiper-pagination-bullet-active {
-            ${sliderDotsBgActiveColor ? `background-color: ${sliderDotsBgActiveColor};` : ''}
+            ${sliderActiveDotsBgColor ? `background-color: ${sliderActiveDotsBgColor};` : ''}
+            ${sliderActiveDotsBorder ? `border: ${sliderActiveDotsBorder};` : ''}
+            ${sliderActiveDotsBorderDesktopWidth && sliderActiveDotsBorderDesktop.top ? `border-width: ${sliderActiveDotsBorderDesktopWidth};` : ''}
+            ${sliderActiveDotsBorderRadiusDesktopWidth && sliderActiveDotsBorderRadiusDesktop.top ? `border-radius: ${sliderActiveDotsBorderRadiusDesktopWidth};` : ''}
+            ${sliderActiveDotsBorderColor ? `border-color: ${sliderActiveDotsBorderColor};` : ''}
+            ${sliderActiveDotsWidth.Desktop ? `width: ${sliderActiveDotsWidth.Desktop}${sliderActiveDotsWidthUnits.Desktop};` : ''}
+            ${sliderActiveDotsHeight.Desktop ? `height: ${sliderActiveDotsHeight.Desktop}${sliderActiveDotsHeightUnits.Desktop};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
@@ -725,7 +1153,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsBorderRadiusTabletWidth && sliderArrowsBorderRadiusTablet.top ? `border-radius: ${sliderArrowsBorderRadiusTabletWidth};` : ''}
                 ${sliderArrowsWidth.Tablet ? `width: ${sliderArrowsWidth.Tablet}${sliderArrowsWidthUnits.Tablet};` : ''}
                 ${sliderArrowsHeight.Tablet ? `height: ${sliderArrowsHeight.Tablet}${sliderArrowsHeightUnits.Tablet};` : ''}
-                ${sliderArrowsLineHeight.Tablet ? `line-height: ${sliderArrowsLineHeight.Tablet}${sliderArrowsLineHeightUnits.Tablet};` : ''}
                 ${sliderArrowsPosition.Tablet ? `top: ${sliderArrowsPosition.Tablet}${sliderArrowsPositionUnits.Tablet};` : ''}
             }
 
@@ -742,7 +1169,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet};` : ''}
+                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet} !important;` : ''}
+                ${sliderDotsMarginTabletWidth && sliderDotsMarginTablet.top ? `margin: ${sliderDotsMarginTabletWidth};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet {
+                ${sliderNormalDotsBorderTabletWidth && sliderNormalDotsBorderTablet.top ? `border-width: ${sliderNormalDotsBorderTabletWidth};` : ''}
+                ${sliderNormalDotsBorderRadiusTabletWidth && sliderNormalDotsBorderRadiusTablet.top ? `border-radius: ${sliderNormalDotsBorderRadiusTabletWidth};` : ''}
+                ${sliderNormalDotsWidth.Tablet ? `width: ${sliderNormalDotsWidth.Tablet}${sliderNormalDotsWidthUnits.Tablet};` : ''}
+                ${sliderNormalDotsHeight.Tablet ? `height: ${sliderNormalDotsHeight.Tablet}${sliderNormalDotsHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet-active {
+                ${sliderActiveDotsBorderTabletWidth && sliderActiveDotsBorderTablet.top ? `border-width: ${sliderActiveDotsBorderTabletWidth};` : ''}
+                ${sliderActiveDotsBorderRadiusTabletWidth && sliderActiveDotsBorderRadiusTablet.top ? `border-radius: ${sliderActiveDotsBorderRadiusTabletWidth};` : ''}
+                ${sliderActiveDotsWidth.Tablet ? `width: ${sliderActiveDotsWidth.Tablet}${sliderActiveDotsWidthUnits.Tablet};` : ''}
+                ${sliderActiveDotsHeight.Tablet ? `height: ${sliderActiveDotsHeight.Tablet}${sliderActiveDotsHeightUnits.Tablet};` : ''}
             }
         }
             
@@ -764,7 +1206,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsBorderRadiusMobileWidth && sliderArrowsBorderRadiusMobile.top ? `border-radius: ${sliderArrowsBorderRadiusMobileWidth};` : ''}
                 ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
                 ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
-                ${sliderArrowsLineHeight.Mobile ? `line-height: ${sliderArrowsLineHeight.Mobile}${sliderArrowsLineHeightUnits.Mobile};` : ''}
                 ${sliderArrowsPosition.Mobile ? `top: ${sliderArrowsPosition.Mobile}${sliderArrowsPositionUnits.Mobile};` : ''}
             }
 
@@ -781,7 +1222,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile};` : ''}
+                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile} !important;` : ''}
+                ${sliderDotsMarginMobileWidth && sliderDotsMarginMobile.top ? `margin: ${sliderDotsMarginMobileWidth};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet {
+                ${sliderNormalDotsBorderMobileWidth && sliderNormalDotsBorderMobile.top ? `border-width: ${sliderNormalDotsBorderMobileWidth};` : ''}
+                ${sliderNormalDotsBorderRadiusMobileWidth && sliderNormalDotsBorderRadiusMobile.top ? `border-radius: ${sliderNormalDotsBorderRadiusMobileWidth};` : ''}
+                ${sliderNormalDotsWidth.Mobile ? `width: ${sliderNormalDotsWidth.Mobile}${sliderNormalDotsWidthUnits.Mobile};` : ''}
+                ${sliderNormalDotsHeight.Mobile ? `height: ${sliderNormalDotsHeight.Mobile}${sliderNormalDotsHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .swiper-pagination-bullet-active {
+                ${sliderActiveDotsBorderMobileWidth && sliderActiveDotsBorderMobile.top ? `border-width: ${sliderActiveDotsBorderMobileWidth};` : ''}
+                ${sliderActiveDotsBorderRadiusMobileWidth && sliderActiveDotsBorderRadiusMobile.top ? `border-radius: ${sliderActiveDotsBorderRadiusMobileWidth};` : ''}
+                ${sliderActiveDotsWidth.Mobile ? `width: ${sliderActiveDotsWidth.Mobile}${sliderActiveDotsWidthUnits.Mobile};` : ''}
+                ${sliderActiveDotsHeight.Mobile ? `height: ${sliderActiveDotsHeight.Mobile}${sliderActiveDotsHeightUnits.Mobile};` : ''}
             }
         }
             
@@ -868,8 +1324,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsWidthUnits,
         sliderArrowsHeight,
         sliderArrowsHeightUnits,
-        sliderArrowsLineHeight,
-        sliderArrowsLineHeightUnits,
 
         /** Border Settings */
         sliderArrowsBorder,
@@ -911,10 +1365,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
+        sliderDotsMarginUnits,
+        sliderDotsMarginDesktop,
+        sliderDotsMarginTablet,
+        sliderDotsMarginMobile,
+        sliderDotsMarginLink,
+        sliderDotsMarginDesktopWidth,
+        sliderDotsMarginTabletWidth,
+        sliderDotsMarginMobileWidth,
+
         sliderDotsPosition,
         sliderDotsPositionUnits,
-        sliderDotsBgColor,
-        sliderDotsBgActiveColor,
+
+        sliderDotsSwitcher,
+        sliderNormalDotsBgColor,
+        sliderNormalDotsWidth,
+        sliderNormalDotsWidthUnits,
+        sliderNormalDotsHeight,
+        sliderNormalDotsHeightUnits,
+
+        sliderNormalDotsBorder,
+        sliderNormalDotsBorderColorSwitcher,
+        sliderNormalDotsBorderColor,
+        sliderNormalDotsBorderHoverColor,
+
+        sliderNormalDotsBorderUnits,
+        sliderNormalDotsBorderDesktop,
+        sliderNormalDotsBorderTablet,
+        sliderNormalDotsBorderMobile,
+        sliderNormalDotsBorderLink,
+        sliderNormalDotsBorderDesktopWidth,
+        sliderNormalDotsBorderTabletWidth,
+        sliderNormalDotsBorderMobileWidth,
+
+        sliderNormalDotsBorderRadiusUnits,
+        sliderNormalDotsBorderRadiusDesktop,
+        sliderNormalDotsBorderRadiusTablet,
+        sliderNormalDotsBorderRadiusMobile,
+        sliderNormalDotsBorderRadiusLink,
+        sliderNormalDotsBorderRadiusDesktopWidth,
+        sliderNormalDotsBorderRadiusTabletWidth,
+        sliderNormalDotsBorderRadiusMobileWidth,
+
+        sliderActiveDotsBgColor,
+        sliderActiveDotsWidth,
+        sliderActiveDotsWidthUnits,
+        sliderActiveDotsHeight,
+        sliderActiveDotsHeightUnits,
+
+        sliderActiveDotsBorder,
+        sliderActiveDotsBorderColorSwitcher,
+        sliderActiveDotsBorderColor,
+        sliderActiveDotsBorderHoverColor,
+
+        sliderActiveDotsBorderUnits,
+        sliderActiveDotsBorderDesktop,
+        sliderActiveDotsBorderTablet,
+        sliderActiveDotsBorderMobile,
+        sliderActiveDotsBorderLink,
+        sliderActiveDotsBorderDesktopWidth,
+        sliderActiveDotsBorderTabletWidth,
+        sliderActiveDotsBorderMobileWidth,
+
+        sliderActiveDotsBorderRadiusUnits,
+        sliderActiveDotsBorderRadiusDesktop,
+        sliderActiveDotsBorderRadiusTablet,
+        sliderActiveDotsBorderRadiusMobile,
+        sliderActiveDotsBorderRadiusLink,
+        sliderActiveDotsBorderRadiusDesktopWidth,
+        sliderActiveDotsBorderRadiusTabletWidth,
+        sliderActiveDotsBorderRadiusMobileWidth,
 
         // Position
         sliderPositionType,
@@ -1031,17 +1551,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             onChange={(value) => setAttributes({ effect: value })}
                                         />
                                     </PanelBody>
-                                    <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
+                                    <PanelBody title={__("Navigation & Pagination", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
-                                            label={ __( 'Arrows', 'frontis-blocks' ) }
+                                            label={ __( 'Navigation', 'frontis-blocks' ) }
                                             checked={ displayArrows }
                                             onChange={(value) => setAttributes({ displayArrows: value })}
                                         />
                                         <ToggleControl
-                                            label={ __( 'Dots', 'frontis-blocks' ) }
+                                            label={ __( 'Pagination', 'frontis-blocks' ) }
                                             checked={ displayDots }
                                             onChange={(value) => setAttributes({ displayDots: value })}
                                         />
+                                        {displayDots && (
+                                            <SelectControl
+                                                label={__('Pagination Type', 'frontis-blocks')}
+                                                value={paginationType}
+                                                options={PAGINATION_TYPE}
+                                                onChange={(value) => setAttributes({ paginationType: value })}
+                                            />
+                                        )}
                                     </PanelBody>
                                     </>
                                     
@@ -1049,7 +1577,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody title={__("Arrows Style", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Navigation Style", "frontis-blocks")} initialOpen={true}>
                                             <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
                                                 globalSwitcher={sliderArrowsColorSwitcher}
@@ -1094,9 +1622,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
                                             <FB_Range
-                                                min={1}
+                                                min={0}
                                                 max={100}
-                                                label={__("Size", "frontis-blocks")}
+                                                label={__("Icon Size", "frontis-blocks")}
                                                 rangeValue={sliderArrowsSize}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsSize: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ sliderArrowsSizeUnits: value })}
@@ -1107,8 +1635,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"16"}
                                             />
                                             <FB_Range
-                                                min={1}
-                                                max={200}
+                                                min={0}
+                                                max={100}
                                                 label={__("Width", "frontis-blocks")}
                                                 rangeValue={sliderArrowsWidth}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsWidth: value })}
@@ -1120,8 +1648,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"46"}
                                             />
                                             <FB_Range
-                                                min={1}
-                                                max={200}
+                                                min={0}
+                                                max={100}
                                                 label={__("Height", "frontis-blocks")}
                                                 rangeValue={sliderArrowsHeight}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsHeight: value })}
@@ -1131,25 +1659,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
                                                 resetFallbackValue={"46"}
-                                            />    
-                                            <FB_Range
-                                                min={1}
-                                                max={200}
-                                                label={__("Line Height", "frontis-blocks")}
-                                                rangeValue={sliderArrowsLineHeight}
-                                                onChangeHandler={(value) => setAttributes({ sliderArrowsLineHeight: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ sliderArrowsLineHeightUnits: value })}
-                                                deviceType={deviceType}
-                                                units={sliderArrowsLineHeightUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={"46"}
                                             />
 
                                             <FB_Range
-                                                min={1}
+                                                min={0}
                                                 max={100}
-                                                label={__("Top", "frontis-blocks")}
+                                                label={__("Position", "frontis-blocks")}
                                                 rangeValue={sliderArrowsPosition}
                                                 onChangeHandler={(value) => setAttributes({ sliderArrowsPosition: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
@@ -1269,11 +1784,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}                                  
                                         </PanelBody>
-                                        <PanelBody title={__("Dots Style", "frontis-blocks")} initialOpen={false}>
+                                        <PanelBody title={__("Pagination Style", "frontis-blocks")} initialOpen={false}>
+
                                             <FB_Range
-                                                min={1}
-                                                max={500}
-                                                label={__("Bottom", "frontis-blocks")}
+                                                min={0}
+                                                max={100}
+                                                label={__("Position", "frontis-blocks")}
                                                 rangeValue={sliderDotsPosition}
                                                 onChangeHandler={(value) => setAttributes({ sliderDotsPosition: value })}
                                                 rangeUnitHandler={(value) => setAttributes({ sliderDotsPositionUnits: value })}
@@ -1281,18 +1797,229 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={sliderDotsPositionUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={"20"}
+                                                resetFallbackValue={"0"}
                                             />
-                                            <FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={sliderDotsBgColor}
-                                                setGlobalColor={(value) => setAttributes({ sliderDotsBgColor: value })}
+                                            <FB_Spacing
+                                                label={__("Margin", "frontis-blocks")}
+                                                deviceType={deviceType}
+                                                spacingUnitsHandler={handleDotsMarginUnitsHandler}
+                                                spacingUnits={sliderDotsMarginUnits}
+                                                spacingDesktop={sliderDotsMarginDesktop}
+                                                spacingTablet={sliderDotsMarginTablet}
+                                                spacingMobile={sliderDotsMarginMobile}
+                                                handleSpacingUnitHandler={handleDotsMarginUnitChange}
+                                                spacingCombineBtn={sliderDotsMarginLink}
+                                                spacingCombineBtnHandler={handleDotsMarginCombineBtn}
+                                                setAttributes={setAttributes}
                                             />
-                                            <FB_ColorControl
-                                                label={__("Active Color", "frontis-blocks")}
-                                                globalColor={sliderDotsBgActiveColor}
-                                                setGlobalColor={(value) => setAttributes({ sliderDotsBgActiveColor: value })}
-                                            />
+
+                                            {paginationType === 'bullets' && (
+                                                <>
+                                                    <div className="fb-setting-switcher-container">
+                                                        <BaseControl
+                                                            label={__("Color", "frontis-blocks")}
+                                                            className="fb-setting-switcher-panel-wrapper"
+                                                        >
+                                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                                {NORMAL_ACTIVE.map((item, key) => (
+                                                                    <Button
+                                                                key={key}
+                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
+                                                                        className={`fb-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
+                                                                    >
+                                                                        {item.label}
+                                                                    </Button>
+                                                                ))}
+                                                            </ButtonGroup>
+                                                        </BaseControl>
+                                                    </div>
+                                                    {sliderDotsSwitcher === 'normal' && (
+                                                        <>
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "frontis-blocks")}
+                                                                rangeValue={sliderNormalDotsWidth}
+                                                                onChangeHandler={(value) => setAttributes({ sliderNormalDotsWidth: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsWidthUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "frontis-blocks")}
+                                                                rangeValue={sliderNormalDotsHeight}
+                                                                onChangeHandler={(value) => setAttributes({ sliderNormalDotsHeight: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderNormalDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderNormalDotsHeightUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_ColorControl
+                                                                label={__("Color", "frontis-blocks")}
+                                                                globalColor={sliderNormalDotsBgColor} 
+                                                                setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                                            />
+                                                            <SelectControl
+                                                                label={__("Border Style", "frontis-blocks")}
+                                                                value={sliderNormalDotsBorder} 
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
+                                                            />
+
+                                                            <FB_SwitcherControl
+                                                                label={__("Border Color", "frontis-blocks")}
+                                                                globalSwitcher={sliderNormalDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderNormalDotsBorderColorSwitcher: value })}
+                                                            />
+
+                                                            {sliderNormalDotsBorderColorSwitcher === 'normal' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Normal Color", "frontis-blocks")}
+                                                                    globalColor={sliderNormalDotsBorderColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderArrowsBorderColorSwitcher === 'hover' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Hover Color", "frontis-blocks")}
+                                                                    globalColor={sliderNormalDotsBorderHoverColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <FB_Spacing
+                                                                label={__("Border", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleNormalDotsBorderUnitsHandler}
+                                                                spacingUnits={sliderNormalDotsBorderUnits}
+                                                                spacingDesktop={sliderNormalDotsBorderDesktop}
+                                                                spacingTablet={sliderNormalDotsBorderTablet}
+                                                                spacingMobile={sliderNormalDotsBorderMobile}
+                                                                handleSpacingUnitHandler={handleNormalDotsBorderUnitChange}
+                                                                spacingCombineBtn={sliderNormalDotsBorderLink}
+                                                                spacingCombineBtnHandler={handleNormalDotsBorderCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+
+                                                            <FB_Spacing
+                                                                label={__("Border Radius", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleNormalDotsBorderRadiusUnitsHandler}
+                                                                spacingUnits={sliderNormalDotsBorderRadiusUnits}
+                                                                spacingDesktop={sliderNormalDotsBorderRadiusDesktop}
+                                                                spacingTablet={sliderNormalDotsBorderRadiusTablet}
+                                                                spacingMobile={sliderNormalDotsBorderRadiusMobile}
+                                                                handleSpacingUnitHandler={handleNormalDotsBorderRadiusUnitChange}
+                                                                spacingCombineBtn={sliderNormalDotsBorderRadiusLink}
+                                                                spacingCombineBtnHandler={handleNormalDotsBorderRadiusCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+                                                        </>
+                                                    )}
+
+                                                    {sliderDotsSwitcher === 'active' && (
+                                                        <>
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Width", "frontis-blocks")}
+                                                                rangeValue={sliderActiveDotsWidth}
+                                                                onChangeHandler={(value) => setAttributes({ sliderActiveDotsWidth: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsWidthUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsWidthUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={100}
+                                                                label={__("Height", "frontis-blocks")}
+                                                                rangeValue={sliderActiveDotsHeight}
+                                                                onChangeHandler={(value) => setAttributes({ sliderActiveDotsHeight: value })}
+                                                                rangeUnitHandler={(value) => setAttributes({ sliderActiveDotsHeightUnits: value })}
+                                                                deviceType={deviceType}
+                                                                units={sliderActiveDotsHeightUnits}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={1}
+                                                                resetFallbackValue={"8"}
+                                                            />
+                                                            <FB_ColorControl
+                                                                label={__("Color", "frontis-blocks")}
+                                                                globalColor={sliderActiveDotsBgColor} 
+                                                                setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
+                                                            />
+                                                            <SelectControl
+                                                                label={__("Border Style", "frontis-blocks")}
+                                                                value={sliderActiveDotsBorder} 
+                                                                options={BORDER_STYLES}
+                                                                onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
+                                                            />
+
+                                                            <FB_SwitcherControl
+                                                                label={__("Border Color", "frontis-blocks")}
+                                                                globalSwitcher={sliderActiveDotsBorderColorSwitcher}
+                                                                setGlobalSwitcher={(value) => setAttributes({ sliderActiveDotsBorderColorSwitcher: value })}
+                                                            />
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'normal' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Normal Color", "frontis-blocks")}
+                                                                    globalColor={sliderActiveDotsBorderColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
+                                                                />
+                                                            )}
+
+                                                            {sliderActiveDotsBorderColorSwitcher === 'hover' && (
+                                                                <FB_ColorControl
+                                                                    label={__("Hover Color", "frontis-blocks")}
+                                                                    globalColor={sliderActiveDotsBorderHoverColor}
+                                                                    setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
+                                                                />
+                                                            )}
+
+                                                            <FB_Spacing
+                                                                label={__("Border", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleActiveDotsBorderUnitsHandler}
+                                                                spacingUnits={sliderActiveDotsBorderUnits}
+                                                                spacingDesktop={sliderActiveDotsBorderDesktop}
+                                                                spacingTablet={sliderActiveDotsBorderTablet}
+                                                                spacingMobile={sliderActiveDotsBorderMobile}
+                                                                handleSpacingUnitHandler={handleActiveDotsBorderUnitChange}
+                                                                spacingCombineBtn={sliderActiveDotsBorderLink}
+                                                                spacingCombineBtnHandler={handleActiveDotsBorderCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+
+                                                            <FB_Spacing
+                                                                label={__("Border Radius", "frontis-blocks")}
+                                                                deviceType={deviceType}
+                                                                spacingUnitsHandler={handleActiveDotsBorderRadiusUnitsHandler}
+                                                                spacingUnits={sliderActiveDotsBorderRadiusUnits}
+                                                                spacingDesktop={sliderActiveDotsBorderRadiusDesktop}
+                                                                spacingTablet={sliderActiveDotsBorderRadiusTablet}
+                                                                spacingMobile={sliderActiveDotsBorderRadiusMobile}
+                                                                handleSpacingUnitHandler={handleActiveDotsBorderRadiusUnitChange}
+                                                                spacingCombineBtn={sliderActiveDotsBorderRadiusLink}
+                                                                spacingCombineBtnHandler={handleActiveDotsBorderRadiusCombineBtn}
+                                                                setAttributes={setAttributes}
+                                                            />
+                                                        </>
+                                                    )}
+
+                                                </>
+                                            )}
+
                                         </PanelBody>
                                     </>
                                 )}

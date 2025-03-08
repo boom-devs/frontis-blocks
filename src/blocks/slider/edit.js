@@ -68,6 +68,7 @@ const Edit = (props) => {
         reverseDirection,
         enableMouseWheel,
         effect,
+        paginationType,
 
         sliderGlobalWraperClass,
 
@@ -139,6 +140,14 @@ const Edit = (props) => {
 		if ( swiperInst?.params?.pagination ) {
 			swiperInst.params.pagination.el = sliderPaginationRef.current;
 			swiperInst.params.pagination.clickable = true;
+
+			if (paginationType === 'bullets') {
+				swiperInst.params.pagination.type = 'bullets';
+			} else if (paginationType === 'fraction') {
+				swiperInst.params.pagination.type = 'fraction';
+			} else if (paginationType === 'progressbar') {
+				swiperInst.params.pagination.type = 'progressbar';
+			}
 
 			// Re-init pagination
 			swiperInst.pagination.init();
@@ -439,6 +448,7 @@ const Edit = (props) => {
                             ? {
                                     el: '#block-' + clientId + ' .swiper-pagination',
                                     clickable: true,
+                                    type: paginationType,
                             }
                             : false
                     }
