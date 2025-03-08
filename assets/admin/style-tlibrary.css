@@ -14,7 +14,7 @@
   color: #fff !important;
 }
 .fb-template-library-button-wrapper button:hover svg {
-  path-fill: #fff;
+  path-fill: #ffffff;
 }
 
 body .components-modal__frame {
@@ -371,6 +371,65 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-main-content {
   flex: 6;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-element {
+  margin-bottom: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .components-navigator-button {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-start;
+  width: 100%;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper .fb-tab-icon svg {
+  fill: none !important;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper .fb-tab-title {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #1e1e1e;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper:hover .fb-tab-title,
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper:hover .fb-tab-icon path {
+  color: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper {
+  display: flex;
+  gap: 8px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #0B0C0E;
+  text-transform: capitalize;
+  margin-top: 9px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner p {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #0B0C0E;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper svg {
+  fill: none !important;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper svg:hover path {
+  stroke: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-font-sizes-presets .font-size-presettes-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-footer {
   padding: 15px 20px;

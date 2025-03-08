@@ -292,14 +292,14 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
   var cssVariables = ":root {\n        ".concat(colors.map(function (color) {
     return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.color, ";");
   }).join('\n    '), "\n    }");
-  var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+  var iframe = document.querySelector("iframe.fb-preview-frame");
   var iframeDocument = ((_iframe = iframe) === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || ((_iframe2 = iframe) === null || _iframe2 === void 0 || (_iframe2 = _iframe2.contentWindow) === null || _iframe2 === void 0 ? void 0 : _iframe2.document) || document;
   var styleTag = iframeDocument.getElementById("global-colors");
   var path = window.location.pathname;
   var fileName = path.substring(path.lastIndexOf('/') + 1);
   if (fileName === 'post.php') {
     var _iframe3, _iframe4;
-    iframe = document.querySelector('iframe[name="editor-canvas"]');
+    iframe = document.querySelector('iframe[name="fb-preview-frame"]');
     iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
     styleTag = iframeDocument.getElementById("global-colors");
   }
@@ -470,11 +470,11 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
       if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
         var _iframe2, _iframe3;
         fontFamilies.add(fontFamily);
-        var _iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+        var _iframe = document.querySelector("iframe.fb-preview-frame");
 
         // If not found, try the editor-canvas iframe
         if (!_iframe) {
-          _iframe = document.querySelector('iframe[name="editor-canvas"]');
+          _iframe = document.querySelector('iframe[name="fb-preview-frame"]');
         }
         var _iframeDocument = ((_iframe2 = _iframe) === null || _iframe2 === void 0 ? void 0 : _iframe2.contentDocument) || ((_iframe3 = _iframe) === null || _iframe3 === void 0 || (_iframe3 = _iframe3.contentWindow) === null || _iframe3 === void 0 ? void 0 : _iframe3.document) || document;
 
@@ -581,20 +581,20 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
     allCombinedStyles = "\n            body .wp-site-blocks h1,\n            body .wp-site-blocks h2,\n            body .wp-site-blocks h3,\n            body .wp-site-blocks h4,\n            body .wp-site-blocks h5,\n            body .wp-site-blocks h6 {\n                ".concat(combinedHeadingStyles, "\n            }\n        ");
     styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .wp-site-blocks p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .wp-site-blocks a, body .wp-site-blocks p a {\n                ").concat(linkStyles, "\n            }\n\n            body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n                ").concat(buttonStyles, "\n            }\n\n            body .wp-site-blocks figcaption {\n                ").concat(captionStyles, "\n            }\n            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
   }
-  var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+  var iframe = document.querySelector("iframe.fb-preview-frame");
   var iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
   var styleTag = iframeDocument.getElementById("global-typo");
   if (fileName === 'post.php') {
     if (deviceType !== 'Desktop') {
       var _iframe6, _iframe7;
-      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframe = document.querySelector('iframe[name="fb-preview-frame"]');
       iframeDocument = ((_iframe6 = iframe) === null || _iframe6 === void 0 ? void 0 : _iframe6.contentDocument) || ((_iframe7 = iframe) === null || _iframe7 === void 0 || (_iframe7 = _iframe7.contentWindow) === null || _iframe7 === void 0 ? void 0 : _iframe7.document) || document;
       styleTag = iframeDocument.getElementById("global-typo");
       console.log("iframeDocument");
       console.log(iframeDocument);
     } else {
       var _iframe8, _iframe9;
-      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframe = document.querySelector('iframe[name="fb-preview-frame"]');
       iframeDocument = ((_iframe8 = iframe) === null || _iframe8 === void 0 ? void 0 : _iframe8.contentDocument) || ((_iframe9 = iframe) === null || _iframe9 === void 0 || (_iframe9 = _iframe9.contentWindow) === null || _iframe9 === void 0 ? void 0 : _iframe9.document) || document;
       styleTag = iframeDocument.getElementById("global-typo");
     }
@@ -7269,7 +7269,101 @@ var SiteImportModal = function SiteImportModal(_ref) {
     className: "fb-fsi-modal-content-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-sidebar-content"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorProvider, {
+    initialPath: "/"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
+    path: "/"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-blocks-tabs"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-tab-element"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
+    path: "/typography"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-tab-wrapper"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-tab-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24",
+    "class": "edit-site-global-styles-icon-with-current-color",
+    "aria-hidden": "true",
+    focusable: "false"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "currentcolor",
+    d: "M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1.8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"
+  }))), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tab-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Typography", "frontis-blocks"))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-tab-element"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
+    path: "/colors"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-tab-wrapper"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-tab-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    "class": "edit-site-global-styles-icon-with-current-color",
+    "aria-hidden": "true",
+    focusable: "false"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "currentcolor",
+    d: "M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"
+  }))), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tab-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Colors", "frontis-blocks"))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
+    path: "/typography"
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
+    path: "/",
+    className: "back-button"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "17",
+    viewBox: "0 0 16 17",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
+    stroke: "#404655",
+    "stroke-width": "1.2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner"
+  }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_sidebar_components_TypographySettings__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    typography: typography,
+    customTypography: customTypography,
+    isAfterSave: isAfterSave
+  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
+    path: "/colors"
+  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner-wrapper"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
+    path: "/",
+    className: "back-button"
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "17",
+    viewBox: "0 0 16 17",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
+    stroke: "#404655",
+    "stroke-width": "1.2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner"
+  }, /*#__PURE__*/React.createElement("h3", null, "Color"), /*#__PURE__*/React.createElement("p", null, "Available texts, links, Button, Headings global colors"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
     onSelect: function onSelect(tabName) {
@@ -7355,11 +7449,7 @@ var SiteImportModal = function SiteImportModal(_ref) {
       strokeLinecap: "round",
       strokeLinejoin: "round"
     })))))));
-  }), /*#__PURE__*/React.createElement(_sidebar_components_TypographySettings__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    typography: typography,
-    customTypography: customTypography,
-    isAfterSave: isAfterSave
-  })), /*#__PURE__*/React.createElement("div", {
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-main-content"
   }, /*#__PURE__*/React.createElement(_sitePreview__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/React.createElement("div", {
     className: "fb-fsi-modal-footer"
@@ -7447,7 +7537,7 @@ var SitePreview = function SitePreview() {
     className: "fb-loader-spinner"
   }), /*#__PURE__*/React.createElement("span", null, "Loading preview...")), /*#__PURE__*/React.createElement("iframe", {
     src: previewUrl,
-    className: "fb-preview-frame edit-site-visual-editor__editor-canvas",
+    className: "fb-preview-frame",
     title: "Site Preview",
     onLoad: function onLoad() {
       return setIsLoading(false);
@@ -12342,9 +12432,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			}
 /******/ 			var notFulfilled = Infinity;
 /******/ 			for (var i = 0; i < deferred.length; i++) {
-/******/ 				var chunkIds = deferred[i][0];
-/******/ 				var fn = deferred[i][1];
-/******/ 				var priority = deferred[i][2];
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
 /******/ 				var fulfilled = true;
 /******/ 				for (var j = 0; j < chunkIds.length; j++) {
 /******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
@@ -12430,9 +12518,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var chunkIds = data[0];
-/******/ 			var moreModules = data[1];
-/******/ 			var runtime = data[2];
+/******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add "moreModules" to the modules object,
 /******/ 			// then flag all "chunkIds" as loaded and fire callback
 /******/ 			var moduleId, chunkId, i = 0;
@@ -12455,7 +12541,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patter
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunkfrontis_blocks"] = self["webpackChunkfrontis_blocks"] || [];
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkfrontis_blocks"] = globalThis["webpackChunkfrontis_blocks"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
