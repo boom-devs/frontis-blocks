@@ -78,11 +78,9 @@ export const BORDER_STYLES = [
 export const EFFECT_OPTIONS = [
 	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
 	{ value: 'fade', label: __('Fade', 'frontis-blocks') },
-	{ value: 'cube', label: __('Cube', 'frontis-blocks') },
 	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
 	{ value: 'flip', label: __('Flip', 'frontis-blocks') },
 	{ value: 'creative', label: __('Creative', 'frontis-blocks') },
-	{ value: 'cards', label: __('Cards', 'frontis-blocks') }
 ];
 
 export const PAGINATION_TYPE = [
