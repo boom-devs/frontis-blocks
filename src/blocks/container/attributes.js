@@ -23,6 +23,9 @@ const attributes = {
 	p_block_id: {
 		type: 'string',
 	},
+	blockStyle: {
+		type: 'string',
+	},
 	containerType: {
 		type: 'string',
 		default: 'full-width'
@@ -376,12 +379,6 @@ const attributes = {
 	/** End Background */
 
 
-
-
-
-
-
-
 	backgroundType: {
 		type: 'string',
 		default: 'none',
@@ -510,7 +507,7 @@ const attributes = {
 		type: 'string',
 		default: 'outset',
 	},
-	
+
 	/** Start Padding */
 	containerPaddingUnits: {
 		type: 'object',
@@ -523,28 +520,28 @@ const attributes = {
 	containerDesktopPadding: {
 		type: "object", 
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",	
-			right: "0",
+			top: "10",
+			bottom: "10",
+			left: "10",	
+			right: "10",
 		}
 	},
 	containerTabletPadding: {
 		type: "object", 
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",	
-			right: "0",
+			top: "10",
+			bottom: "10",
+			left: "10",	
+			right: "10",
 		}
 	},
 	containerMobilePadding: {	
 		type: "object", 
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",	
-			right: "0",
+			top: "10",
+			bottom: "10",
+			left: "10",	
+			right: "10",
 		}
 	},
 	containerPaddingLink : {
@@ -563,7 +560,7 @@ const attributes = {
     containerDesktopMargin: {
         type: "object", 
         default: {
-            top: "0",
+			top: "0",
             bottom: "0",
             left: "0",
             right: "0",
@@ -584,7 +581,7 @@ const attributes = {
             top: "0",
             bottom: "0",
             left: "0",
-            right: "0",
+			right: "0",
         },
     },
 	containerMarginLink : {

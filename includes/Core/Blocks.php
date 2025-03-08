@@ -23,7 +23,7 @@ class Blocks
 		add_action('init', [$this, 'register_blocks']);
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
-		add_action('enqueue_block_assets', [$this, 'combined_frontis_blocks_assets']);
+		// add_action('enqueue_block_assets', [$this, 'combined_frontis_blocks_assets']);
 	}
 
 	public function register_blocks()
