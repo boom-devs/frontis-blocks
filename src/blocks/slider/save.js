@@ -24,7 +24,7 @@ export default function save( props ) {
 	return (
 		<div
 			key={ blockId }
-			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
 			data-block-id={ blockId }
 		>
 			<div className="fb-slides fb-swiper">
