@@ -3,7 +3,9 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
 import FB_SwitcherControl from '@Components/switcher-control';
+import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
 import FB_ColorControl from '@Components/color-control';
+import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
@@ -22,7 +24,6 @@ import {
     EFFECT_OPTIONS,
     OVERFLOW_OP,
     PAGINATION_TYPE,
-    NORMAL_ACTIVE,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -150,6 +151,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderActiveDotsBorderRadiusTablet,
         sliderActiveDotsBorderRadiusMobile,
         sliderActiveDotsBorderRadiusLink,
+
+        sliderFractionColorSwitcher,
+        sliderFractionColor,
+        sliderFractionHoverColor,
+
+        sliderFractionGlobalTypographyData,
+        sliderFractionGlobalTypoSwitcher,
+        sliderFractionGlobalTypoType,
+
+        sliderFractionFontFamily,
+        sliderFractionFontSize,
+        sliderFractionFontSizeUnits,
+        sliderFractionFontWeight,
+        sliderFractionFontStyle,
+        sliderFractionTextTransform,
+        sliderFractionTextDecoration,
+        sliderFractionLetterSpacing,
+        sliderFractionLetterSpacingUnits,
+        sliderFractionLineHeight,
+        sliderFractionLineHeightUnits,
+
+        sliderProgressbarBGColorSwitcher,
+        sliderProgressbarBGColor,
+        sliderProgressbarBGActiveColor,
+        sliderProgressbarHeight,
+        sliderProgressbarHeightUnits,
 
         /** Global Settings */
         sliderGlobalZIndex,
@@ -1134,6 +1161,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderActiveDotsHeight.Desktop ? `height: ${sliderActiveDotsHeight.Desktop}${sliderActiveDotsHeightUnits.Desktop};` : ''}
         }
 
+        .${blockId} .swiper-pagination-fraction {
+            ${sliderFractionGlobalTypoSwitcher.fontFamily === true && sliderFractionGlobalTypographyData.fontFamily ? `font-family: ${sliderFractionGlobalTypographyData.fontFamily};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontSize === true && sliderFractionGlobalTypographyData.fontSize ? `font-size: ${sliderFractionGlobalTypographyData.fontSize};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontWeight === true && sliderFractionGlobalTypographyData.fontWeight ? `font-weight: ${sliderFractionGlobalTypographyData.fontWeight};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontStyle === true && sliderFractionGlobalTypographyData.fontStyle ? `font-style: ${sliderFractionGlobalTypographyData.fontStyle};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.textTransform === true && sliderFractionGlobalTypographyData.textTransform ? `text-transform: ${sliderFractionGlobalTypographyData.textTransform};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.textDecoration === true && sliderFractionGlobalTypographyData.textDecoration ? `text-decoration: ${sliderFractionGlobalTypographyData.textDecoration};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.letterSpacing === true && sliderFractionGlobalTypographyData.letterSpacing ? `letter-spacing: ${sliderFractionGlobalTypographyData.letterSpacing};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.lineHeight === true && sliderFractionGlobalTypographyData.lineHeight ? `line-height: ${sliderFractionGlobalTypographyData.lineHeight};` : ''}
+                
+            ${sliderFractionGlobalTypoSwitcher.fontFamily === false && sliderFractionFontFamily && sliderFractionFontFamily !== 'Default' ? `font-family: ${sliderFractionFontFamily};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Desktop && sliderFractionFontSizeUnits.Desktop ? `font-size: ${sliderFractionFontSize.Desktop}${sliderFractionFontSizeUnits.Desktop};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontWeight === false && sliderFractionFontWeight ? `font-weight: ${sliderFractionFontWeight};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.fontStyle === false && sliderFractionFontStyle ? `font-style: ${sliderFractionFontStyle};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.textTransform === false && sliderFractionTextTransform ? `text-transform: ${sliderFractionTextTransform};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.textDecoration === false && sliderFractionTextDecoration ? `text-decoration: ${sliderFractionTextDecoration};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Desktop && sliderFractionLetterSpacingUnits.Desktop ? `letter-spacing: ${sliderFractionLetterSpacing.Desktop}${sliderFractionLetterSpacingUnits.Desktop};` : ''}
+            ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Desktop && sliderFractionLineHeightUnits.Desktop ? `line-height: ${sliderFractionLineHeight.Desktop}${sliderFractionLineHeightUnits.Desktop};` : ''}
+            ${sliderFractionColor ? `color: ${sliderFractionColor};` : ''}
+        }
+        .${blockId} .swiper-pagination-fraction:hover {
+            ${sliderFractionHoverColor ? `color: ${sliderFractionHoverColor};` : ''}
+        }
+
+        .${blockId} .swiper-pagination-progressbar {
+            ${sliderProgressbarBGColor ? `background-color: ${sliderProgressbarBGColor};` : ''}
+            ${sliderProgressbarHeight.Desktop ? `height: ${sliderProgressbarHeight.Desktop}${sliderProgressbarHeightUnits.Desktop};` : ''}
+        }
+        .${blockId} .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+            ${sliderProgressbarBGActiveColor ? `background-color: ${sliderProgressbarBGActiveColor};` : ''}
+        }
+
         @media only screen and (max-width: 1024px) {
             .${ blockId }.fb-slider-container{
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Tablet !== undefined ? `left: ${sliderHZLeftOffset.Tablet}${sliderHZLeftOffsetUnits.Tablet};` : ''}
@@ -1185,6 +1244,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderActiveDotsBorderRadiusTabletWidth && sliderActiveDotsBorderRadiusTablet.top ? `border-radius: ${sliderActiveDotsBorderRadiusTabletWidth};` : ''}
                 ${sliderActiveDotsWidth.Tablet ? `width: ${sliderActiveDotsWidth.Tablet}${sliderActiveDotsWidthUnits.Tablet};` : ''}
                 ${sliderActiveDotsHeight.Tablet ? `height: ${sliderActiveDotsHeight.Tablet}${sliderActiveDotsHeightUnits.Tablet};` : ''}
+            }
+            .${blockId} .swiper-pagination-fraction {
+                ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Tablet && sliderFractionFontSizeUnits.Tablet ? `font-size: ${sliderFractionFontSize.Tablet}${sliderFractionFontSizeUnits.Tablet};` : ''}
+                ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Tablet && sliderFractionLetterSpacingUnits.Tablet ? `letter-spacing: ${sliderFractionLetterSpacing.Tablet}${sliderFractionLetterSpacingUnits.Tablet};` : ''}
+                ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Tablet && sliderFractionLineHeightUnits.Tablet ? `line-height: ${sliderFractionLineHeight.Tablet}${sliderFractionLineHeightUnits.Tablet};` : ''}
+            }
+            .${blockId} .swiper-pagination-progressbar {
+                ${sliderProgressbarHeight.Tablet ? `height: ${sliderProgressbarHeight.Tablet}${sliderProgressbarHeightUnits.Tablet};` : ''}
             }
         }
             
@@ -1238,6 +1305,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderActiveDotsBorderRadiusMobileWidth && sliderActiveDotsBorderRadiusMobile.top ? `border-radius: ${sliderActiveDotsBorderRadiusMobileWidth};` : ''}
                 ${sliderActiveDotsWidth.Mobile ? `width: ${sliderActiveDotsWidth.Mobile}${sliderActiveDotsWidthUnits.Mobile};` : ''}
                 ${sliderActiveDotsHeight.Mobile ? `height: ${sliderActiveDotsHeight.Mobile}${sliderActiveDotsHeightUnits.Mobile};` : ''}
+            }
+            .${blockId} .swiper-pagination-fraction {
+                ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Mobile && sliderFractionFontSizeUnits.Mobile ? `font-size: ${sliderFractionFontSize.Mobile}${sliderFractionFontSizeUnits.Mobile};` : ''}
+                ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Mobile && sliderFractionLetterSpacingUnits.Mobile ? `letter-spacing: ${sliderFractionLetterSpacing.Mobile}${sliderFractionLetterSpacingUnits.Mobile};` : ''}
+                ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Mobile && sliderFractionLineHeightUnits.Mobile ? `line-height: ${sliderFractionLineHeight.Mobile}${sliderFractionLineHeightUnits.Mobile};` : ''}
+            }
+            .${blockId} .swiper-pagination-progressbar {
+                ${sliderProgressbarHeight.Mobile ? `height: ${sliderProgressbarHeight.Mobile}${sliderProgressbarHeightUnits.Mobile};` : ''}
             }
         }
             
@@ -1435,6 +1510,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderActiveDotsBorderRadiusDesktopWidth,
         sliderActiveDotsBorderRadiusTabletWidth,
         sliderActiveDotsBorderRadiusMobileWidth,
+
+        sliderFractionColorSwitcher,
+        sliderFractionColor,
+        sliderFractionHoverColor,
+
+        sliderFractionGlobalTypographyData,
+        sliderFractionGlobalTypoSwitcher,
+        sliderFractionGlobalTypoType,
+
+        sliderFractionFontFamily,
+        sliderFractionFontSize,
+        sliderFractionFontSizeUnits,
+        sliderFractionFontWeight,
+        sliderFractionFontStyle,
+        sliderFractionTextTransform,
+        sliderFractionTextDecoration,
+        sliderFractionLetterSpacing,
+        sliderFractionLetterSpacingUnits,
+        sliderFractionLineHeight,
+        sliderFractionLineHeightUnits,
+
+        sliderProgressbarBGColorSwitcher,
+        sliderProgressbarBGColor,
+        sliderProgressbarBGActiveColor,
+        sliderProgressbarHeight,
+        sliderProgressbarHeightUnits,
 
         // Position
         sliderPositionType,
@@ -1815,24 +1916,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             {paginationType === 'bullets' && (
                                                 <>
-                                                    <div className="fb-setting-switcher-container">
-                                                        <BaseControl
-                                                            label={__("Color", "frontis-blocks")}
-                                                            className="fb-setting-switcher-panel-wrapper"
-                                                        >
-                                                            <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                                                {NORMAL_ACTIVE.map((item, key) => (
-                                                                    <Button
-                                                                key={key}
-                                                                        onClick={() => setAttributes({ sliderDotsSwitcher: item.value })} 
-                                                                        className={`fb-setting-switcher-panel-btn-switcher ${sliderDotsSwitcher === item.value ? 'active' : ''}`}
-                                                                    >
-                                                                        {item.label}
-                                                                    </Button>
-                                                                ))}
-                                                            </ButtonGroup>
-                                                        </BaseControl>
-                                                    </div>
+                                                    <FB_NormalActiveSwitcherControl
+                                                        label={__("Pagination Style", "frontis-blocks")}
+                                                        globalSwitcher={sliderDotsSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ sliderDotsSwitcher: value })}
+                                                    />
+
                                                     {sliderDotsSwitcher === 'normal' && (
                                                         <>
                                                             <FB_Range
@@ -2017,6 +2106,121 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         </>
                                                     )}
 
+                                                </>
+                                            )}
+
+                                            {paginationType === 'fraction' && (
+                                                <>
+                                                    <FB_SwitcherControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalSwitcher={sliderFractionColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ sliderFractionColorSwitcher: value })}
+                                                    />
+
+                                                    {sliderFractionColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={sliderFractionColor}
+                                                            setGlobalColor={(value) => setAttributes({ sliderFractionColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {sliderFractionColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={sliderFractionHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ sliderFractionHoverColor: value })}
+                                                        />
+                                                    )}
+
+
+                                                    <FB_TypographyControl
+                                                        globalTypoControlActive={true}
+                                                        globalTypoSwitcher={sliderFractionGlobalTypoSwitcher}
+                                                        storeGlobalTypographyData={(value) => setAttributes({ sliderFractionGlobalTypographyData: value })}
+
+                                                        globalTypoType={sliderFractionGlobalTypoType}
+                                                        onChangeGlobalTypoType={(value) => {
+                                                            setAttributes({ 
+                                                                sliderFractionGlobalTypoType: value, 
+                                                                sliderFractionGlobalTypoSwitcher: value === 'default' ? {...sliderFractionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...sliderFractionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                            })
+                                                        }}
+
+                                                        fontFamily={sliderFractionFontFamily}
+                                                        onChangeFontFamily={(value) => setAttributes({ sliderFractionFontFamily: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                                                        fontSize={sliderFractionFontSize}
+                                                        onChangeFontSize={(value) => setAttributes({ sliderFractionFontSize: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, fontSize: value && false} })}
+
+                                                        fontSizeUnits={sliderFractionFontSizeUnits}
+                                                        onChangeFontSizeUnit={(value) => setAttributes({ sliderFractionFontSizeUnits: value })}
+
+                                                        fontWeight={sliderFractionFontWeight}
+                                                        onChangeFontWeight={(value) => setAttributes({ sliderFractionFontWeight: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                                                        fontStyle={sliderFractionFontStyle}
+                                                        onChangeFontStyle={(value) => setAttributes({ sliderFractionFontStyle: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                                                        textTransform={sliderFractionTextTransform}
+                                                        onChangeTextTransform={(value) => setAttributes({ sliderFractionTextTransform: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, textTransform: value && false} })}
+
+                                                        textDecoration={sliderFractionTextDecoration}
+                                                        onChangeTextDecoration={(value) => setAttributes({ sliderFractionTextDecoration: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                                                        letterSpacing={sliderFractionLetterSpacing}
+                                                        onChangeLetterSpacing={(value) => setAttributes({ sliderFractionLetterSpacing: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                                                        letterSpacingUnits={sliderFractionLetterSpacingUnits}
+                                                        onChangeLetterSpacingUnit={(value) => setAttributes({ sliderFractionLetterSpacingUnits: value })}
+
+                                                        lineHeight={sliderFractionLineHeight}
+                                                        onChangeLineHeight={(value) => setAttributes({ sliderFractionLineHeight: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                                                        lineHeightUnits={sliderFractionLineHeightUnits}
+                                                        onChangeLineHeightUnit={(value) => setAttributes({ sliderFractionLineHeightUnits: value })}
+
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                </>
+                                            )}
+
+                                            {paginationType === 'progressbar' && (
+                                                <>
+                                                    <FB_NormalActiveSwitcherControl
+                                                        label={__("Pagination Style", "frontis-blocks")}
+                                                        globalSwitcher={sliderProgressbarBGColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ sliderProgressbarBGColorSwitcher: value })}
+                                                    />
+                                                    {sliderProgressbarBGColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={sliderProgressbarBGColor}
+                                                            setGlobalColor={(value) => setAttributes({ sliderProgressbarBGColor: value })}
+                                                        />
+                                                    )}
+                                                    {sliderProgressbarBGColorSwitcher === 'active' && (
+                                                        <FB_ColorControl
+                                                            label={__("Active Color", "frontis-blocks")}
+                                                            globalColor={sliderProgressbarBGActiveColor}
+                                                            setGlobalColor={(value) => setAttributes({ sliderProgressbarBGActiveColor: value })}
+                                                        />
+                                                    )}
+
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={100}
+                                                        label={__("Height", "frontis-blocks")}
+                                                        rangeValue={sliderProgressbarHeight}
+                                                        onChangeHandler={(value) => setAttributes({ sliderProgressbarHeight: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ sliderProgressbarHeightUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={sliderProgressbarHeightUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={"4"}
+                                                    />
                                                 </>
                                             )}
 
