@@ -39,6 +39,21 @@ const Inspector = (props) => {
 			minHeight,
 			minHeightUnits,
 			containerWrap,
+			columnGap,
+			rowGap,
+			columnGapUnits,
+			rowGapUnits,
+			containerZIndex,
+			containerPaddingUnits,
+			containerDesktopPadding,
+			containerTabletPadding,
+			containerMobilePadding,
+			containerPaddingLink,
+			containerMarginUnits,	
+			containerDesktopMargin,
+			containerTabletMargin,
+			containerMobileMargin,
+			containerMarginLink,
 
 			contentWidth,
 			innerContentWidth,
@@ -151,6 +166,166 @@ const Inspector = (props) => {
 	const containerCustomContentWidthFnUnitsFn = (units) => {
 		setAttributes({containerCustomWidthUnits: units});
 	}
+
+	const columnGapFn = (width) => {
+		setAttributes({columnGap: width});
+	}
+
+	const columnGapUnitsFn = (units) => {
+		setAttributes({columnGapUnits: units});
+	}
+
+	const rowGapFn = (width) => {
+		setAttributes({rowGap: width});
+	}
+
+	const rowGapUnitsFn = (units) => {
+		setAttributes({rowGapUnits: units});
+	}
+
+	const containerZindexFn = (value) => {
+		setAttributes({containerZIndex: value});
+	}
+
+	/** Start Heading Padding */
+    const containerPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (containerPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        containerDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        containerTabletPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        containerMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ containerDesktopPadding: { ...containerDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ containerTabletPadding: { ...containerTabletPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ containerMobilePadding: { ...containerMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const containerPaddingLinkBtn = () => {
+        setAttributes({
+            containerPaddingLink: !containerPaddingLink
+        });
+    };
+
+	const containerPaddingUnitsHandler = (unit) => {
+		setAttributes({
+            containerPaddingUnits: {
+                ...containerPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+	}
+
+	/** Start container margin */
+    const containerMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (containerMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        containerDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        containerTabletMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        containerMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ containerDesktopMargin: { ...containerDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ containerTabletMargin: { ...containerTabletMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ containerMobileMargin: { ...containerMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const containerMarginLinkBtn = () => {
+        setAttributes({
+            containerMarginLink: !containerMarginLink
+        });
+    };
+
+	const containerMarginUnitsHandler = (unit) => {
+        setAttributes({
+            containerMarginUnits: {
+                ...containerMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
 
 	return (
 		<>
@@ -332,7 +507,7 @@ const Inspector = (props) => {
 												title={__("Flex Properties", "frontis-blocks")}
 												initialOpen={true}
 											>
-												<BaseControl
+												{/* <BaseControl
 													label={__("Direction", "frontis-block")}
 													id="fb-setting-alignment"
 													className="fb-advanced-alignment"
@@ -378,7 +553,7 @@ const Inspector = (props) => {
 															</Button>
 														))}
 													</ButtonGroup>
-												</BaseControl>
+												</BaseControl> */}
 												<BaseControl
 													label={__("Wrap", "frontis-block")}
 													id="fb-setting-alignment"
@@ -473,89 +648,93 @@ const Inspector = (props) => {
 										setHoverBackgroundImageSize={(value) => setAttributes({ containerBgHoverBackgroundImageSize: value })}
 									/>
 									</PanelBody>
-									<PanelBody
-										title={__("Container Gap", "frontis-blocks")}
-										initialOpen={true}
-									>
-										<FB_Range
-											min={1}
-											max={2000}
-											label={__("Gap", "frontis-blocks")}
-											rangeValue={fullWidthContentBoxedWidth}
-											onChangeHandler={fullWidthContentBoxedWidthFn}
-											rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-											deviceType={deviceType}
-											units={fullWidthContentBoxedWidthUnits}
-											rangeStep={1}
-											resetFallbackValue={1200}
-											units_types_arr={[
-												{label: 'px', value: 'px'},
-												{label: '%', value: '%'},
-												{label: 'vw', value: 'vw'},
-											]}
-										/>
-									</PanelBody>
+									{isBlockRootParent &&
+										<PanelBody
+											title={__("Container Gap", "frontis-blocks")}
+											initialOpen={true}
+										>
+											<FB_Range
+												min={0}
+												max={200}
+												label={__("Column", "frontis-blocks")}
+												rangeValue={columnGap}
+												onChangeHandler={columnGapFn}
+												rangeUnitHandler={columnGapUnitsFn}
+												deviceType={deviceType}
+												units={columnGapUnits}
+												rangeStep={1}
+												resetFallbackValue={''}
+												units_types_arr={[
+													{label: 'px', value: 'px'},
+													{label: '%', value: '%'},
+													{label: 'em', value: 'em'},
+												]}
+											/>
+
+											<FB_Range
+												min={0}
+												max={200}
+												label={__("Row", "frontis-blocks")}
+												rangeValue={rowGap}
+												onChangeHandler={rowGapFn}
+												rangeUnitHandler={rowGapUnitsFn}
+												deviceType={deviceType}
+												units={rowGapUnits}
+												rangeStep={1}
+												resetFallbackValue={''}
+												units_types_arr={[
+													{label: 'px', value: 'px'},
+													{label: '%', value: '%'},
+													{label: 'em', value: 'em'},
+												]}
+											/>
+										</PanelBody>
+									}
 								</>
 							)}
 							{tab.name === "advanced" && (
 								<>
 									<div className="fb-setting-advanced-tab-wrapper">
 										<div className="fb-setting-inner-wrapper">
-											<PanelBody
-												title={__("Z Index", "frontis-blocks")}
-												initialOpen={true}
-												className="fb-setting-z-index-header"
-											>
-												<RangeControl
-													value={''}
-													onChange={(value) =>
-														setAttributes({})
-													}
-													min={1}
-													max={10000}
-													step={1}
-													allowReset
-													resetFallbackValue={100}
-												/>
-											</PanelBody>
+											<FB_Range
+												min={0}
+												max={99999}
+												label={__("Z Index", "frontis-blocks")}
+												rangeValue={containerZIndex}
+												onChangeHandler={containerZindexFn}
+												deviceType={deviceType}
+												rangeStep={1}
+												resetFallbackValue={''}
+												isRangeUnit={false}
+											/>
 											<PanelBody
 												title={__("Padding and Margin", "frontis-blocks")}
 												initialOpen={false}
 											>
 												<FB_Spacing
-													label={__("Padding", "frontis-blocks")}
+													label={__("Margin", "frontis-blocks")}
 													deviceType={deviceType}
-													spacingUnitsHandler={
-														''
-													}
-													spacingUnits={''}
-													spacingDesktop={''}
-													spacingTablet={''}
-													spacingMobile={''}
-													handleSpacingUnitHandler={
-														''
-													}
-													spacingCombineBtn={''}
-													spacingCombineBtnHandler={
-														''
-													}
+													spacingUnitsHandler={containerMarginUnitsHandler}
+													spacingUnits={containerMarginUnits}
+													spacingDesktop={containerDesktopMargin}
+													spacingTablet={containerTabletMargin}
+													spacingMobile={containerMobileMargin}
+													handleSpacingUnitHandler={containerMarginUnitsChange}
+													spacingCombineBtn={containerMarginLink}
+													spacingCombineBtnHandler={containerMarginLinkBtn}
 													setAttributes={setAttributes}
 												/>
 												<FB_Spacing
-													label={__("Margin", "frontis-blocks")}
+													label={__("Padding", "frontis-blocks")}
 													deviceType={deviceType}
-													spacingUnitsHandler={''}
-													spacingUnits={''}
-													spacingDesktop={''}
-													spacingTablet={''}
-													spacingMobile={''}
-													handleSpacingUnitHandler={
-														''
-													}
-													spacingCombineBtn={''}
-													spacingCombineBtnHandler={
-														''
-													}
+													spacingUnitsHandler={containerPaddingUnitsHandler}
+													spacingUnits={containerPaddingUnits}
+													spacingDesktop={containerDesktopPadding}
+													spacingTablet={containerTabletPadding}
+													spacingMobile={containerMobilePadding}
+													handleSpacingUnitHandler={containerPaddingUnitsChange}
+													spacingCombineBtn={containerPaddingLinkBtn}
+													spacingCombineBtnHandler={headingMarginLinkBtn}
 													setAttributes={setAttributes}
 												/>
 											</PanelBody>
