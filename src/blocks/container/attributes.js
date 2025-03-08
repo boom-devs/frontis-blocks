@@ -80,6 +80,51 @@ const attributes = {
 			Mobile: '%',
 		}
 	},
+	rowGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+
+	rowGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'	
+		}
+	},
+
+	columnGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	
+	columnGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'	
+		}
+	},
+
+	containerZIndex: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+
 	resetFallBackCustomWidth: {
 		type: 'object',
 		default: {
@@ -465,163 +510,90 @@ const attributes = {
 		type: 'string',
 		default: 'outset',
 	},
-
-	topPaddingDesktop: {
-		type: 'number',
-		default: 10,
+	
+	/** Start Padding */
+	containerPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
 	},
-	bottomPaddingDesktop: {
-		type: 'number',
-		default: 10,
+	containerDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",	
+			right: "0",
+		}
 	},
-	leftPaddingDesktop: {
-		type: 'number',
-		default: 10,
+	containerTabletPadding: {
+		type: "object", 
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",	
+			right: "0",
+		}
 	},
-	rightPaddingDesktop: {
-		type: 'number',
-		default: 10,
+	containerMobilePadding: {	
+		type: "object", 
+		default: {
+			top: "0",
+			bottom: "0",
+			left: "0",	
+			right: "0",
+		}
 	},
-	topPaddingTablet: {
-		type: 'number',
-	},
-	bottomPaddingTablet: {
-		type: 'number',
-	},
-	leftPaddingTablet: {
-		type: 'number',
-	},
-	rightPaddingTablet: {
-		type: 'number',
-	},
-	topPaddingMobile: {
-		type: 'number',
-	},
-	bottomPaddingMobile: {
-		type: 'number',
-	},
-	leftPaddingMobile: {
-		type: 'number',
-	},
-	rightPaddingMobile: {
-		type: 'number',
-	},
-	paddingType: {
-		type: 'string',
-		default: 'px',
-	},
-	paddingTypeTablet: {
-		type: 'string',
-		default: 'px',
-	},
-	paddingTypeMobile: {
-		type: 'string',
-		default: 'px',
-	},
-	paddingLink: {
-		type: 'boolean',
-		default: true,
-	},
-
-	topMarginDesktop: {
-		type: 'number',
-	},
-	bottomMarginDesktop: {
-		type: 'number',
-	},
-	leftMarginDesktop: {
-		type: 'number',
-	},
-	rightMarginDesktop: {
-		type: 'number',
-	},
-	topMarginTablet: {
-		type: 'number',
-	},
-	bottomMarginTablet: {
-		type: 'number',
-	},
-	leftMarginTablet: {
-		type: 'number',
-	},
-	rightMarginTablet: {
-		type: 'number',
-	},
-	topMarginMobile: {
-		type: 'number',
-	},
-	bottomMarginMobile: {
-		type: 'number',
-	},
-	leftMarginMobile: {
-		type: 'number',
-	},
-	rightMarginMobile: {
-		type: 'number',
-	},
-	marginType: {
-		type: 'string',
-		default: 'px',
-	},
-	marginTypeTablet: {
-		type: 'string',
-		default: 'px',
-	},
-	marginTypeMobile: {
-		type: 'string',
-		default: 'px',
-	},
-	marginLink: {
-		type: 'boolean',
-		default: true,
-	},
+	containerPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+	/** Start Margin */
+	containerMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    containerDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    containerTabletMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    containerMobileMargin: {
+        type: "object", 
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+	containerMarginLink : {
+        type : "boolean",
+        default: true
+    },
 	variationSelected: {
 		type: 'boolean',
 		default: false,
-	},
-	rowGapDesktop: {
-		type: 'number',
-		default: 0,
-	},
-	rowGapTablet: {
-		type: 'number',
-	},
-	rowGapMobile: {
-		type: 'number',
-	},
-	rowGapType: {
-		type: 'string',
-		default: 'px',
-	},
-	rowGapTypeTablet: {
-		type: 'string',
-		default: 'px',
-	},
-	rowGapTypeMobile: {
-		type: 'string',
-		default: 'px',
-	},
-	columnGapDesktop: {
-		type: 'number',
-		default: 0,
-	},
-	columnGapTablet: {
-		type: 'number',
-	},
-	columnGapMobile: {
-		type: 'number',
-	},
-	columnGapType: {
-		type: 'string',
-		default: 'px',
-	},
-	columnGapTypeTablet: {
-		type: 'string',
-		default: 'px',
-	},
-	columnGapTypeMobile: {
-		type: 'string',
-		default: 'px',
 	},
 	isPreview: {
 		type: 'boolean',

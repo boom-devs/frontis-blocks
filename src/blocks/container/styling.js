@@ -221,7 +221,22 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerType,
 		containerCustomWidth,
 		containerCustomWidthUnits,
-		containerWrap
+		containerWrap,
+		containerTypeFull,
+		columnGap,
+		rowGap,
+		columnGapUnits,
+		rowGapUnits,
+		containerPaddingUnits,
+		containerDesktopPadding,
+		containerTabletPadding,
+		containerMobilePadding,
+		containerPaddingLink,
+		containerMarginUnits,	
+		containerDesktopMargin,
+		containerTabletMargin,
+		containerMobileMargin,
+		containerMarginLink,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -236,8 +251,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	);
 	const widthDesktopFallback = getFallbackNumber( customWidth[deviceType], 'customWidth', blockName );
 
-	const rowGapDesktopFallback = getFallbackNumber( rowGapDesktop, 'rowGapDesktop', blockName );
-	const columnGapDesktopFallback = getFallbackNumber( columnGapDesktop, 'columnGapDesktop', blockName );
+	const rowGapDesktopFallback = getFallbackNumber( rowGap[deviceType], 'rowGapDesktop', blockName );
+	const columnGapDesktopFallback = getFallbackNumber( columnGap[deviceType], 'columnGapDesktop', blockName );
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
 	const borderCSSTablet = generateBorderCSS( attributes, 'container', 'tablet' );
@@ -534,8 +549,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'justify-content': justifyContentDesktop,
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
-			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapType ),
-			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapType ),
+			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits[deviceType] ),
+			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits[deviceType] ),
 			...selectors[ containerFlexSelector ],
 		};
 		selectors[ '.block-editor-block-list__block' ] = {
@@ -566,7 +581,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Check containerType is ( full-width, boxed, custom )
 	// let containerWidthType = containerType === 'full-width' ?
-	if ( containerType === 'full-width' ) {
+
+	if ( (containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom' ) {
 		widthSelectorsDesktop[
 			`.block-editor-block-list__block.wp-block-frontis-blocks-container${ gbsWidthSelector } > .frontis-blocks-container-inner-blocks-wrap`
 			] = {
@@ -596,7 +612,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
-
 	}
 
 	const tablet_selectors = {
