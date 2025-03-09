@@ -394,6 +394,19 @@ class BlockList
                 'complete'  => 'true',
                 'child'     => 'false',
             ],
+            'off-canvas-menu' => [
+                'slug'      => 'off-canvas-menu',
+                'title'     => 'Off Canvas Menu',
+                'package'   => 'free',
+                'category'  => 'navigation',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/off-canvas-hamburger.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+                'child'     => 'false',
+            ],
 
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
