@@ -1,19 +1,35 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
+	"apiVersion": 2,
 	"name": "frontis-blocks/off-canvas-menu",
-	"version": "1.0.0",
-	"title": "Off Canvas Menu",
+	"title": "Off-Canvas Menu",
 	"category": "frontis-blocks",
-	"description": "A customizable off canvas menu with various styling options.",
-	"example": {},
-    "supports": {
-        "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
-    },
+	"icon": "menu-alt",
+	"description": "Add an off-canvas menu with a toggleable hamburger icon",
 	"textdomain": "frontis-blocks",
+	"attributes": {
+		"blockID": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedTemplate": {
+			"type": "string",
+			"default": ""
+		},
+		"menuPosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"iconStyle": {
+			"type": "string",
+			"default": "hamburger"
+		}
+	},
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

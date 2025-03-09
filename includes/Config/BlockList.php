@@ -388,7 +388,7 @@ class BlockList
                 'category'  => 'navigation',
                 'badge'     => 'free',
                 'status'    => 'true',
-                'icon'      => FB_PLUGIN_URL . 'assets/icons/slider.svg',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/off-canvas-hamburger.svg',
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
