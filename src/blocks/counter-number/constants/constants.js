@@ -57,7 +57,14 @@ export const subheading_POSITION = [
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 ];
 
+export const separatorType = [
+	{ label: __("Comma", "frontis-block"), value: "comma" },
+	{ label: __("Dot", "frontis-block"), value: "dot" },
+	{ label: __("Space", "frontis-block"), value: "space" },
+];
+
 export const mediaType = [
+	{ label: __("None", "frontis-block"), value: "none" },
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
 ];
