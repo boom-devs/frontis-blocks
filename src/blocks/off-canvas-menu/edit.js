@@ -20,11 +20,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-	// Get pattern content if a pattern is selected - using the same approach as in inspector.js
 	const patternData = useSelect(select => {
 		if (!selectedTemplate) return null;
 
-		// Check if the patterns API is available and use core store like in inspector.js
 		if (select('core')) {
 			const patterns = select('core').getBlockPatterns() || [];
 			return patterns.find(pattern => pattern.name === selectedTemplate);
@@ -35,10 +33,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// Update innerBlocks when pattern changes
 	useEffect(() => {
 		if (patternData && patternData.content) {
-			// If we have pattern content, we can use it directly
 			const parsedBlocks = parse(patternData.content);
 			if (parsedBlocks && parsedBlocks.length > 0) {
-				// Use the block editor's dispatch to replace inner blocks
 				const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);
 				replaceInnerBlocks(clientId, parsedBlocks, false);
 			}
@@ -75,7 +71,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	};
 
-	// Generate the position-specific class
 	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
 
 	const blockProps = useBlockProps({
