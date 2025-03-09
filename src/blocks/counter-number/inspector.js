@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP} from "./constants/constants";
+import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP, separatorType} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -40,21 +40,30 @@ import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_BackgroundImageControl from '../../components/background-image-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
-		counterNumber,
+		counterNumberStart,
+		counterNumberEnd,
+		counterDuration,
 		counterPrefix,
+        counterPrefixSwitch,
 		counterSuffix,
+        counterSuffixSwitch,
 		counterTitle,
+        counterTitleSwitch,
 		showThousandsSeparator,
+		showThousandsSeparatorType,
 		icon,
 		mediaSwitcher,
+		counterMediaId,
 		counterMediaUrl,
-
+		counterMediaAlt,
+        
 		counterItemSize,
 		counterItemSizeUnits,
 
@@ -212,51 +221,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [blockID, clientId, setAttributes]);
 
-
-	// Set up Intersection Observer and animation in the editor
-	useEffect(() => {
-		if (observerRef.current) observerRef.current.disconnect();
-
-		observerRef.current = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					animateCounter();
-				}
-			});
-		});
-
-		if (counterRef.current) {
-			observerRef.current.observe(counterRef.current);
-		}
-
-		return () => {
-			if (observerRef.current) observerRef.current.disconnect();
-		};
-	}, [counterNumber, showThousandsSeparator]);
-
-	const animateCounter = () => {
-		let start = 0;
-		const end = counterNumber;
-		const duration = 2000; // Animation duration in milliseconds
-		let startTime = null;
-
-		const step = (timestamp) => {
-			if (!startTime) startTime = timestamp;
-			const progress = Math.min((timestamp - startTime) / duration, 1);
-			const current = Math.floor(progress * (end - start) + start);
-
-			counterRef.current.textContent = showThousandsSeparator
-				? current.toLocaleString()
-				: current;
-
-			if (progress < 1) {
-				window.requestAnimationFrame(step);
-			}
-		};
-
-		window.requestAnimationFrame(step);
-
-	};
 
 
 	// Icon media remove handler
@@ -1269,116 +1233,98 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === 'general' && (
 									<>
 									<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
-										<RangeControl
-											label={__('Counter Number', 'frontis-blocks')}
-											value={counterNumber}
-											onChange={(value) => setAttributes({ counterNumber: value })}
-											min={0}
-											max={10000}
-										/>
-										<TextControl
-											label={__('Counter Title', 'frontis-blocks')}
-											value={counterTitle}
-											onChange={(value) => setAttributes({ counterTitle: value })}
-										/>
-										<TextControl
-											label={__('Counter Prefix', 'frontis-blocks')}
-											value={counterPrefix}
-											onChange={(value) => setAttributes({ counterPrefix: value })}
-										/>
-										<TextControl
-											label={__('Counter Suffix', 'frontis-blocks')}
-											value={counterSuffix}
-											onChange={(value) => setAttributes({ counterSuffix: value })}
-										/>
-										<ToggleControl
-											label={__('Show Thousands Separator', 'frontis-blocks')}
-											checked={showThousandsSeparator}
-											onChange={(value) => setAttributes({ showThousandsSeparator: value })}
-										/>
-
-										<BaseControl className="fb-sub-heading-position">
+                                        <BaseControl className="fb-sub-heading-position">
 											<SelectControl
-												label={__("Counter Icon: Media Type", "frontis-block")}
+												label={__("Counter Icon", "frontis-block")}
 												value={mediaSwitcher}
 												options={mediaType}
 												onChange={(value) => setAttributes({mediaSwitcher: value})}
 											/>
 										</BaseControl>
 
+                                        {mediaSwitcher === 'image' && (<FB_BackgroundImageControl
+                                            globalBackgroundImageUrl={counterMediaUrl}
+                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ counterMediaUrl: value })}
+                                            globalBackgroundImageAlt={counterMediaAlt}
+                                            setGlobalBackgroundImageAlt={(value) => setAttributes({ counterMediaAlt: value })}
+                                            globalBackgroundImageID={counterMediaId}
+                                            setGlobalBackgroundImageID={(value) => setAttributes({ counterMediaId: value })}
+                                        />)}
 
-										<div className='fb-image-upload-field-wrapper'>
-											{mediaSwitcher === 'image' && attributes.counterMediaUrl && (
-												<BaseControl>
-													<MediaUploadCheck>
-														<MediaUpload
-															onSelect={(media) => {
-																setAttributes({
-																	counterMediaId: media['id'],
-																	counterMediaUrl: media['url'],
-																	counterMediaWidth: media['width'],
-																	counterMediaHeight: media['height']
-																});
-															}}
-															type="image"
-															value={attributes.counterMediaId}
-															render={({open}) => {
-																return (
-																	<Button
-																		className={attributes.counterMediaId == 0 ? 'editor-post-featured-image__toggle' : 'editor-post-featured-image__preview'}
-																		onClick={open}
-																	>
-																		{attributes.counterMediaId == 0 && __('Select Icon Image', 'frontis-blocks')}
-																		{attributes.counterMediaId != 0 &&
-																			<ResponsiveWrapper
-																				naturalWidth={attributes.counterMediaWidth}
-																				naturalHeight={attributes.counterMediaHeight}>
-																				<img
-																					src={attributes.counterMediaUrl}/>
-																			</ResponsiveWrapper>
-																		}
-																	</Button>
-																);
-															}}
-														/>
-													</MediaUploadCheck>
-													{attributes.counterMediaId != 0 &&
-														<HStack className='editor-post-featured-image__actions'>
-															<Button
-																className='editor-post-featured-image__action'
-																onClick={() => removeCounterMedia()}>{__('Remove', 'frontis-block')}</Button>
-															<MediaUploadCheck>
-																<MediaUpload
-																	title={__('Replace image', 'frontis-block')}
-																	value={attributes.counterMediaId}
-																	onSelect={(media) => {
-																		setAttributes({
-																			counterMediaId: media['id'],
-																			counterMediaUrl: media['url'],
-																			counterMediaWidth: media['width'],
-																			counterMediaHeight: media['height']
-																		});
-																	}}
-																	type="image"
-																	render={({open}) => (
-																		<Button
-																			className='editor-post-featured-image__action'
-																			onClick={open}>{__('Replace', 'frontis-block')}</Button>
-																	)}
-																/>
-															</MediaUploadCheck>
-														</HStack>
-													}
-												</BaseControl>
-											)}
-
-											{mediaSwitcher === 'icon' && (
-												<BaseControl>
-													<FBIconPicker value={icon} setIconHandler={iconHandler}/>
-												</BaseControl>
-											)}
-										</div>
+                                        {mediaSwitcher === 'icon' && (
+                                            <BaseControl>
+                                                <FBIconPicker value={icon} setIconHandler={iconHandler}/>
+                                            </BaseControl>
+                                        )}
 									</PanelBody>
+
+                                    <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={true}>
+                                        <RangeControl
+											label={__('Starting Number', 'frontis-blocks')}
+											value={counterNumberStart}
+											onChange={(value) => setAttributes({ counterNumberStart: value })}
+											min={0}
+											max={100000}
+										/>
+
+										<RangeControl
+											label={__('End Number', 'frontis-blocks')}
+											value={counterNumberEnd}
+											onChange={(value) => setAttributes({ counterNumberEnd: value })}
+											min={0}
+											max={100000}
+										/>
+
+										<RangeControl
+											label={__('Duration', 'frontis-blocks')}
+											value={counterDuration}
+											onChange={(value) => setAttributes({ counterDuration: value })}
+											min={0}
+											max={10000}
+										/>
+
+                                        <ToggleControl
+											label={__('Counter Prefix', 'frontis-blocks')}
+											checked={counterPrefixSwitch}
+											onChange={(value) => setAttributes({ counterPrefixSwitch: value })}
+										/>
+										{counterPrefixSwitch === true && <TextControl
+											value={counterPrefix}
+											onChange={(value) => setAttributes({ counterPrefix: value })}
+										/>}
+
+										<ToggleControl
+											label={__('Counter Suffix', 'frontis-blocks')}
+											checked={counterSuffixSwitch}
+											onChange={(value) => setAttributes({ counterSuffixSwitch: value })}
+										/>
+										{counterSuffixSwitch === true && <TextControl
+											value={counterSuffix}
+											onChange={(value) => setAttributes({ counterSuffix: value })}
+										/>}
+
+                                        <ToggleControl
+											label={__('Counter Title', 'frontis-blocks')}
+											checked={counterTitleSwitch}
+											onChange={(value) => setAttributes({ counterTitleSwitch: value })}
+										/>
+										{counterTitleSwitch === true && <TextControl
+											value={counterTitle}
+											onChange={(value) => setAttributes({ counterTitle: value })}
+										/>}
+
+										<ToggleControl
+											label={__('Show Thousands Separator', 'frontis-blocks')}
+											checked={showThousandsSeparator}
+											onChange={(value) => setAttributes({ showThousandsSeparator: value })}
+										/>
+                                        {showThousandsSeparator === true && <SelectControl
+											label={__('Separator Type', 'frontis-blocks')}
+											options={separatorType}
+											value={showThousandsSeparatorType}
+											onChange={(value) => setAttributes({ showThousandsSeparatorType: value })}
+										/>}
+                                    </PanelBody>
 									</>
 								)}
 
@@ -1401,7 +1347,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 units={counterItemSizeUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
-                                                resetFallbackValue={25}
+                                                resetFallbackValue={''}
                                             />
 
                                             <FB_SwitcherControl

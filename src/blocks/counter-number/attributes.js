@@ -14,9 +14,17 @@ const attributes = {
 	},
 	mediaSwitcher : {
 		type: "string",
-		default: "icon"
+		default: "none"
+	},
+	counterMediaId: {
+		type: 'number',
+		default: 0
 	},
 	counterMediaUrl: {
+		type: 'string',
+		default: ''
+	},
+	counterMediaAlt: {
 		type: 'string',
 		default: ''
 	},
@@ -24,26 +32,51 @@ const attributes = {
 		type: 'string',
 		default: 'star',
 	},
-    counterNumber: {
+    counterNumberStart: {
         type: "number",
-        default: 100
+        default: 0
     },
+	counterNumberEnd: {
+		type: "number",
+		default: 1000
+	},
+	counterDuration: {
+		type: "number",
+		default: 2000
+	},
 	counterPrefix: {
 		type: "string",
 		default: "+"
+	},
+	counterPrefixSwitch: {
+		type: "boolean",
+		default: true
 	},
 	counterSuffix: {
 		type: "string",
 		default: "M"
 	},
+	counterSuffixSwitch: {
+		type: "boolean",
+		default: true
+	},
     counterTitle: {
         type: "string",
         default: "Happy Clients"
     },
+	counterTitleSwitch: {
+		type: "boolean",
+		default: true
+	},
     showThousandsSeparator: {
         type: "boolean",
         default: true
     },
+	showThousandsSeparatorType: {
+		type: "string",
+		default: "comma"
+	},
+
 	// Icon Size
 	counterIconSize: {
 		type: 'object',
