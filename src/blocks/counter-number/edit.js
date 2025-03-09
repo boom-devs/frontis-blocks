@@ -12,11 +12,17 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		counterNumber,
+		counterNumberStart,
+		counterNumberEnd,
+		counterDuration,
 		counterPrefix,
+		counterPrefixSwitch,
 		counterSuffix,
+		counterSuffixSwitch,
 		counterTitle,
+		counterTitleSwitch,
 		showThousandsSeparator,
+		showThousandsSeparatorType,
 		icon,
 		mediaSwitcher,
 		counterGlobalWraperID,
@@ -58,31 +64,50 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		return () => {
 			if (observerRef.current) observerRef.current.disconnect();
 		};
-	}, [counterNumber, showThousandsSeparator]);
+	}, [counterNumberStart, counterNumberEnd, counterDuration, showThousandsSeparator, showThousandsSeparatorType]);
+
 
 	const animateCounter = () => {
-		let start = 0;
-		const end = counterNumber;
-		const duration = 2000; // Animation duration in milliseconds
+		const start = counterNumberStart;
+		const end = counterNumberEnd;
+		const duration = counterDuration;
 		let startTime = null;
-
+	
 		const step = (timestamp) => {
 			if (!startTime) startTime = timestamp;
 			const progress = Math.min((timestamp - startTime) / duration, 1);
 			const current = Math.floor(progress * (end - start) + start);
-
-			counterRef.current.textContent = showThousandsSeparator
-				? current.toLocaleString()
-				: current;
-
+	
+			let formattedNumber = current.toString();
+	
+			if (showThousandsSeparator) {
+				switch (showThousandsSeparatorType) {
+					case 'comma':
+						formattedNumber = current.toLocaleString('en-US');
+						break;
+					case 'dot':
+						formattedNumber = current.toLocaleString('de-DE');
+						break;
+					case 'space':
+						formattedNumber = current.toLocaleString('fr-FR');
+						break;
+					default:
+						formattedNumber = current.toLocaleString();
+				}
+			}
+	
+			if (counterRef.current) {
+				counterRef.current.textContent = formattedNumber;
+			}
+	
 			if (progress < 1) {
 				window.requestAnimationFrame(step);
 			}
 		};
-
+	
 		window.requestAnimationFrame(step);
-
 	};
+	
 
 
 	// Icon media remove handler
@@ -111,27 +136,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 					<div className="fb-counter-item">
-						<div className={`fb-counter-icon-wrapper`}>
+						{mediaSwitcher !== 'none' && <div className={`fb-counter-icon-wrapper`}>
 							{mediaSwitcher === 'image' && attributes.counterMediaUrl && (
 								<img src={attributes.counterMediaUrl}/>
 							)}
 							{mediaSwitcher === 'icon' && (
 								<div className="fb-counter-icon">{renderSVG(icon)}</div>
 							)}
-						</div>
+						</div>}
 						<div className={`fb-counter-number-wrapper`}>
-							<span className={`fb-counter-number-prefix`}>{counterPrefix}</span>
+							{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
 							 <span ref={counterRef} className="fb-counter-number">
 								{showThousandsSeparator
 									? Number(0).toLocaleString()
 									: 0
 								}
                         	</span>
-							<span className={`fb-counter-number-suffix`}>{counterSuffix}</span>
+							{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
 						</div>
-						<span className="fb-counter-title">
-                            {counterTitle}
-                        </span>
+						{counterTitleSwitch === true && <span className="fb-counter-title">{counterTitle}</span>}
 					</div>
 				</div>
 			</div>
