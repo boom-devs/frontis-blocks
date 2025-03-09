@@ -116,6 +116,13 @@ final class Plugin
 		// Enqueue generated CSS files
 		$page_name = Helper::get_page_name();
 
+		if($page_name === NULL) {
+			global $pagenow;
+			if($pagenow === 'index.php') {
+				$page_name = 'home';
+			}
+		}
+
 		// Get file system path instead of URL for file_exists check
 		$upload_dir = wp_upload_dir();
 		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/frontis-blocks.css';
