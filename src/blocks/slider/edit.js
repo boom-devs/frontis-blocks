@@ -33,11 +33,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/mousewheel';
 import 'swiper/css/effect-fade';
-import 'swiper/css/effect-cube';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/effect-flip';
 import 'swiper/css/effect-creative';
-import 'swiper/css/effect-cards';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/slider-item'];
 
@@ -87,8 +85,6 @@ const Edit = (props) => {
 
     const [swiperInstance, setSwiperInstance] = useState(null);
 	const { selectBlock } = useDispatch( blockEditorStore );
-    // const { replaceInnerBlocks } = wp.data.dispatch('core/block-editor');
-    // const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
 
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
@@ -104,7 +100,6 @@ const Edit = (props) => {
 			hasChildren: 0 !== select( 'core/block-editor' )?.getBlocks( clientId ).length,
 		};
 	}, [] );
-
 
     const getSliderTemplate = useMemo(() => [
         ['frontis-blocks/slider-item'],
@@ -125,36 +120,44 @@ const Edit = (props) => {
 		}
 	);
 
+    const setSwiperNavigationPagination = (swiperInst) => {
+        if (swiperInst?.params?.navigation) {
+            swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
+            swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
 
-    const setSwiperNavigationPagination = ( swiperInst ) => {
-		if ( swiperInst?.params?.navigation ) {
-			swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
-			swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
-
-			// Re-init navigation
-			swiperInst.navigation.destroy();
-			swiperInst.navigation.init();
-			swiperInst.navigation.update();
-		}
-
-		if ( swiperInst?.params?.pagination ) {
-			swiperInst.params.pagination.el = sliderPaginationRef.current;
-			swiperInst.params.pagination.clickable = true;
-
-			if (paginationType === 'bullets') {
-				swiperInst.params.pagination.type = 'bullets';
-			} else if (paginationType === 'fraction') {
-				swiperInst.params.pagination.type = 'fraction';
-			} else if (paginationType === 'progressbar') {
-				swiperInst.params.pagination.type = 'progressbar';
-			}
-
-			// Re-init pagination
-			swiperInst.pagination.init();
-			swiperInst.pagination.render();
-			swiperInst.pagination.update();
-		}
-	};
+            // Remove default Swiper text when rendering in editor
+            if (sliderNavPrevRef.current) sliderNavPrevRef.current.innerHTML = "";
+            if (sliderNavNextRef.current) sliderNavNextRef.current.innerHTML = "";
+    
+            // Re-init navigation
+            swiperInst.navigation.destroy();
+            swiperInst.navigation.init();
+            swiperInst.navigation.update();
+        }
+    
+        if (swiperInst?.params?.pagination) {
+            // First, completely destroy the pagination
+            swiperInst.pagination.destroy();
+            
+            // Reset pagination container
+            if (sliderPaginationRef.current) {
+                // Clear existing content and classes
+                sliderPaginationRef.current.innerHTML = '';
+                // Reset to base class
+                sliderPaginationRef.current.className = 'swiper-pagination';
+            }
+            
+            // Set new pagination parameters
+            swiperInst.params.pagination.el = sliderPaginationRef.current;
+            swiperInst.params.pagination.clickable = true;
+            swiperInst.params.pagination.type = paginationType;
+            
+            // Create and initialize pagination
+            swiperInst.pagination.init();
+            swiperInst.pagination.render();
+            swiperInst.pagination.update();
+        }
+    };
 
     // Get effect-specific settings
     const getEffectSettings = () => {
@@ -163,15 +166,6 @@ const Edit = (props) => {
                 return {
                     fadeEffect: {
                         crossFade: true
-                    }
-                };
-            case 'cube':
-                return {
-                    cubeEffect: {
-                        shadow: true,
-                        slideShadows: true,
-                        shadowOffset: 20,
-                        shadowScale: 0.94
                     }
                 };
             case 'coverflow':
@@ -200,13 +194,6 @@ const Edit = (props) => {
                         next: {
                             translate: ['100%', 0, 0],
                         },
-                    }
-                };
-            case 'cards':
-                return {
-                    cardsEffect: {
-                        perSlideOffset: 8,
-                        perSlideRotate: 2
                     }
                 };
             default:
@@ -363,7 +350,7 @@ const Edit = (props) => {
 		if ( swiperInstance ) {
 			setSwiperNavigationPagination( swiperInstance );
 		}
-	}, [ displayArrows, displayDots ] );
+	}, [ displayArrows, displayDots, paginationType ] );
 
     useEffect( () => {
 		if ( swiperInstance && swiperInstance.slides ) {
