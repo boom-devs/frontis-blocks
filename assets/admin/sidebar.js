@@ -2014,9 +2014,17 @@ var TypographySettings = function TypographySettings(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      editPost({
-        isDirty: true
-      });
+      if (!!wp.data.select('core/edit-site')) {
+        editPost({
+          isDirty: true
+        });
+      } else {
+        wp.data.dispatch('core/editor').editPost({
+          meta: {
+            _dummy: new Date().getTime()
+          }
+        });
+      }
     }
   }, [isMount]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
@@ -2737,10 +2745,6 @@ var defaultsColors = [{
   "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
   "color": '#808080',
   "slug": 'gray-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color2", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color2'
 }];
 var gradientDefaults = [{
   "color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
@@ -3707,9 +3711,17 @@ function FrontisBlocksSidebar(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     if (fbGlobalSettingsLoading) {
-      editPost({
-        isDirty: true
-      });
+      if (!!wp.data.select('core/edit-site')) {
+        editPost({
+          isDirty: true
+        });
+      } else {
+        wp.data.dispatch('core/editor').editPost({
+          meta: {
+            _dummy: new Date().getTime()
+          }
+        });
+      }
     }
   }, [fbGlobalSettingsLoading]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {

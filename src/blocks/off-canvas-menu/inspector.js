@@ -1,150 +1,145 @@
-import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { 
-    PanelBody, 
-    SelectControl, 
-    ToggleControl,
-    TabPanel
-} from '@wordpress/components';
+import { __ } from "@wordpress/i18n";
+import apiFetch from '@wordpress/api-fetch';
+import { useState, useEffect, useMemo } from "@wordpress/element";
+import "./editor.scss";
+import { useDeviceType } from "@Config/displayType";
+import { InspectorControls } from "@wordpress/block-editor";
 
-export default function Inspector({ attributes, setAttributes }) {
-    const {
-        layout,
-        preset,
-        verticalPreset,
-        navAlign,
-        dropdownOpenOnClick,
-        showDropdownIcon,
-        navBtnType,
-        flexWrap,
-        navVerticalAlign,
-        hamburgerMenu,
-        hamburgerCloseIconAlign,
+import {
+	SelectControl,
+	PanelBody,
+	TabPanel,
+} from "@wordpress/components";
 
-        advancedNavigationDesktopSwitcher,
-		advancedNavigationTabletSwitcher,
-		advancedNavigationMobileSwitcher,
-    } = attributes;
 
-    const generalTab = (
-        <PanelBody>
-            <SelectControl
-                label={__('Layout', 'frontis-blocks')}
-                value={layout}
-                options={[
-                    { label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
-                    { label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
-                ]}
-                onChange={(value) => setAttributes({ layout: value })}
-            />
-            {/* <SelectControl
-                label={__('Preset', 'frontis-blocks')}
-                value={layout === 'is-horizontal' ? preset : verticalPreset}
-                options={[
-                    { label: __('Preset 1', 'frontis-blocks'), value: 'preset-1' },
-                    { label: __('Preset 2', 'frontis-blocks'), value: 'preset-2' },
-                    { label: __('Preset 3', 'frontis-blocks'), value: 'preset-3' },
-                ]}
-                onChange={(value) => setAttributes({ [layout === 'is-horizontal' ? 'preset' : 'verticalPreset']: value })}
-            /> */}
-            <SelectControl
-                label={__('Alignment', 'frontis-blocks')}
-                value={layout === 'is-horizontal' ? navAlign : navVerticalAlign}
-                options={[
-                    { label: __('Left', 'frontis-blocks'), value: 'items-justified-left' },
-                    { label: __('Center', 'frontis-blocks'), value: 'items-justified-center' },
-                    { label: __('Right', 'frontis-blocks'), value: 'items-justified-right' },
-                ]}
-                onChange={(value) => setAttributes({ [layout === 'is-horizontal' ? 'navAlign' : 'navVerticalAlign']: value })}
-            />
-        </PanelBody>
-    );
+export default function Inspector({ attributes, setAttributes, clientId }) {
+	const {
+		blockID,
+		selectedPatternContent
+	} = attributes;
 
-    const styleTab = (
-        <PanelBody>
-            <ToggleControl
-                label={__('Open dropdown on click', 'frontis-blocks')}
-                checked={dropdownOpenOnClick}
-                onChange={(value) => setAttributes({ dropdownOpenOnClick: value })}
-            />
-            <ToggleControl
-                label={__('Show dropdown icon', 'frontis-blocks')}
-                checked={showDropdownIcon}
-                onChange={(value) => setAttributes({ showDropdownIcon: value })}
-            />
-            <ToggleControl
-                label={__('Use icon for navigation button', 'frontis-blocks')}
-                checked={navBtnType}
-                onChange={(value) => setAttributes({ navBtnType: value })}
-            />
-            <ToggleControl
-                label={__('Enable flex wrap', 'frontis-blocks')}
-                checked={flexWrap}
-                onChange={(value) => setAttributes({ flexWrap: value })}
-            />
-        </PanelBody>
-    );
+	const deviceType = useDeviceType();
 
-    const advancedTab = (
-        <PanelBody>
-            <SelectControl
-                label={__('Hamburger menu', 'frontis-blocks')}
-                value={hamburgerMenu}
-                options={[
-                    { label: __('Mobile', 'frontis-blocks'), value: 'mobile' },
-                    { label: __('Tablet', 'frontis-blocks'), value: 'tablet' },
-                    { label: __('Desktop', 'frontis-blocks'), value: 'desktop' },
-                ]}
-                onChange={(value) => setAttributes({ hamburgerMenu: value })}
-            />
-            <SelectControl
-                label={__('Hamburger close icon alignment', 'frontis-blocks')}
-                value={hamburgerCloseIconAlign}
-                options={[
-                    { label: __('Left', 'frontis-blocks'), value: 'close-icon-left' },
-                    { label: __('Right', 'frontis-blocks'), value: 'close-icon-right' },
-                ]}
-                onChange={(value) => setAttributes({ hamburgerCloseIconAlign: value })}
-            />
-        </PanelBody>
-    );
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-off-canvas-menu-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
-    return (
-        <InspectorControls>
-            <TabPanel
-                className="frontis-advanced-navigation-inspector-tabs"
-                activeClass="active-tab"
-                tabs={[
-                    {
-                        name: 'general',
-                        title: __('General', 'frontis-blocks'),
-                        className: 'frontis-tab general-tab',
-                    },
-                    {
-                        name: 'style',
-                        title: __('Style', 'frontis-blocks'),
-                        className: 'frontis-tab style-tab',
-                    },
-                    {
-                        name: 'advanced',
-                        title: __('Advanced', 'frontis-blocks'),
-                        className: 'frontis-tab advanced-tab',
-                    },
-                ]}
-            >
-                {(tab) => {
-                    switch (tab.name) {
-                        case 'general':
-                            return generalTab;
-                        case 'style':
-                            return styleTab;
-                        case 'advanced':
-                            return advancedTab;
-                        default:
-                            return null;
-                    }
-                }}
-            </TabPanel>
-        </InspectorControls>
-    );
+	// Inside your component:
+	const [patterns, setPatterns] = useState([]);
+
+	// Fetch patterns when component mounts
+	useEffect(() => {
+		fetchPatterns();
+	}, []);
+
+	// Function to fetch patterns
+	const fetchPatterns = async () => {
+		try {
+			// First attempt to use the WP REST API endpoint we created
+			const fetchedPatterns = await apiFetch({ path: '/wp/v2/block-patterns' });
+
+			// Transform patterns for the SelectControl
+			const patternOptions = fetchedPatterns.map(pattern => ({
+				label: pattern.title.rendered,
+				value: pattern.slug
+			}));
+
+			setPatterns(patternOptions);
+		} catch (error) {
+			console.error('Error fetching patterns:', error);
+
+			// If API fails, try to get patterns directly from the registry
+			if (wp.blocks && wp.blocks.getBlockPatterns) {
+				const registryPatterns = wp.blocks.getBlockPatterns();
+				const patternOptions = registryPatterns.map(pattern => ({
+					label: pattern.title,
+					value: pattern.name
+				}));
+				setPatterns(patternOptions);
+			}
+		}
+	};
+
+	return (
+		<>
+			<style>
+
+			</style>
+
+			<InspectorControls key="controls">
+				<div className="fb-inspector-control">
+					<TabPanel
+						className="fb-parent-tab-panel"
+						activeClass="active-tab"
+						tabs={[
+							{
+								name: "general",
+								title: "General",
+								className: "fb-tab general",
+							},
+							{
+								name: "styles",
+								title: "Style",
+								className: "fb-tab styles",
+							},
+							{
+								name: "advanced",
+								title: "Advanced",
+								className: "fb-tab advanced",
+							},
+						]}
+					>
+						{(tab) => (
+							<div className={"fb-tab-controls" + tab.name}>
+								{tab.name === "general" && (
+									<>
+										<div className="fb-off-canvas-menu-container">
+											{/* Connector */}
+											<div className="fb-off-canvas-menu-connenctor-wrapper">
+												<PanelBody
+													title={__("All Patterns", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<SelectControl
+														label={__("Patterns to show when menu appears", "frontis-blocks")}
+														options={patterns}
+														onChange={(selectedSlug) => {
+															const selectedPattern = patterns.find((p) => p.value === selectedSlug);
+
+															// Store pattern content in attributes
+															if (selectedPattern) {
+																setAttributes({
+																	selectedPatternContent: selectedPattern.content,
+																});
+															}
+														}}
+													/>
+												</PanelBody>
+											</div>
+										</div>
+									</>
+								)}
+
+								{tab.name === "styles" && (
+									<>
+									</>
+								)}
+								{tab.name === "advanced" && (
+									<>
+										<div className="fb-setting-advanced-tab-wrapper">
+
+										</div>
+									</>
+								)}
+							</div>
+						)}
+					</TabPanel>
+				</div>
+			</InspectorControls>
+		</>
+	);
 }

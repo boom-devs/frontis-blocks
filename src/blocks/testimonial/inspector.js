@@ -1634,11 +1634,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialOverflow !== 'default' ? `overflow: ${TestimonialOverflow};` : ''}
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
-            ${globalDesktopPadding ? `padding: ${globalDesktopPadding};` : ''}
-            ${globalDesktopMargin ? `margin: ${globalDesktopMargin};` : ''} 
+            ${globalDesktopPadding && TestimonialGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ''}
+            ${globalDesktopMargin && TestimonialGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ''} 
             ${TestimonialGlobalBorder ? `border: ${TestimonialGlobalBorder};` : ''} 
-            ${globalDesktopBorderWidth ? `border-width: ${globalDesktopBorderWidth};` : ''}
-            ${globalDesktopBorderRadiusWidth ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${globalDesktopBorderWidth && TestimonialGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth && TestimonialGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
             ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
             ${TestimonialGlobalBgNormalBackgroundType === 'gradient' ? `  
@@ -1661,7 +1661,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         : TestimonialGlobalBgHoverGradientColor || TestimonialGlobalBgHoverClassicColor
                 };
             ` : `
-                background: ${TestimonialGlobalBgHoverClassicColor};
+                ${TestimonialGlobalBgHoverClassicColor ? `background: ${TestimonialGlobalBgHoverClassicColor};` : ''}
             `} 
             ${TestimonialGlobalBorderHoverColor ? `border-color: ${TestimonialGlobalBorderHoverColor};` : ''}
             ${TestimonialGlobalBoxShadowHoverCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowHoverCssValue};` : ''}
@@ -1670,8 +1670,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID} .fb-testimonial-image img {
             ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
             ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
-            border-radius: ${testimonialImageDesktopBorderRadiusWidth};
-            ${testimonialImageDesktopMargin ? `margin: ${testimonialImageDesktopMargin};` : ''}
+            ${testimonialImageDesktopBorderRadiusWidth && TestimonialImageDesktopRadiusWidth.top ? `border-radius: ${testimonialImageDesktopBorderRadiusWidth};` : ''}
+            ${testimonialImageDesktopMargin && TestimonialImageMarginDesktop.top ? `margin: ${testimonialImageDesktopMargin};` : ''}
             ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
             ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Desktop && TestimonialImageTopPositionUnits.Desktop ? `${TestimonialImageTopPosition.Desktop}${TestimonialImageTopPositionUnits.Desktop}` : '0'};` : ''}
             ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Desktop && TestimonialImageLeftPositionUnits.Desktop ? `${TestimonialImageLeftPosition.Desktop}${TestimonialImageLeftPositionUnits.Desktop}` : '0'};` : ''}
@@ -1680,7 +1680,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
             ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Desktop && TestimonialQuoteIconTopPositionUnits.Desktop ? `${TestimonialQuoteIconTopPosition.Desktop}${TestimonialQuoteIconTopPositionUnits.Desktop}` : '0'};` : ''}
             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Desktop && TestimonialQuoteIconLeftPositionUnits.Desktop ? `${TestimonialQuoteIconLeftPosition.Desktop}${TestimonialQuoteIconLeftPositionUnits.Desktop}` : '0'};` : ''}
-            ${testimonialQuoteIconDesktopMargin ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
+            ${testimonialQuoteIconDesktopMargin && TestimonialQuoteIconMarginDesktop.top? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-quote-icon svg {
             ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
@@ -1709,7 +1709,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
             ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
             ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
-            ${testimonialTitleDesktopMargin ? `margin: ${testimonialTitleDesktopMargin};` : ''}
+            ${testimonialTitleDesktopMargin && TestimonialTitleMarginDesktop.top ? `margin: ${testimonialTitleDesktopMargin};` : ''}
             
         }
         .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
@@ -1734,7 +1734,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
             ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
             ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
-            ${testimonialDescDesktopMargin ? `margin: ${testimonialDescDesktopMargin};` : ''}
+            ${testimonialDescDesktopMargin && TestimonialDescMarginDesktop.top ? `margin: ${testimonialDescDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
             ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
@@ -1760,7 +1760,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Desktop ? `line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};` : ''}
             
             ${TestimonialAuthorColor ? `color: ${TestimonialAuthorColor};` : ''}
-            ${testimonialAuthorDesktopMargin ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
+            ${testimonialAuthorDesktopMargin && TestimonialAuthorMarginDesktop.top ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
             ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
@@ -1786,14 +1786,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Desktop ? `line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};` : ''}
             
             ${TestimonialDesignationColor ? `color: ${TestimonialDesignationColor};` : ''}
-            ${testimonialDesignationDesktopMargin ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
+            ${testimonialDesignationDesktopMargin && TestimonialDesignationMarginDesktop.top ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
             ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
         }
 
         .${blockID} .fb-testimonial-rating {
-            ${testimonialRatingIconDesktopMargin ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
+            ${testimonialRatingIconDesktopMargin && TestimonialRatingIconMarginDesktop.top ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
             
         }
 
@@ -1830,26 +1830,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialGlobalZIndex.Tablet ? `z-index: ${TestimonialGlobalZIndex.Tablet};` : ''}
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                ${globalTabletPadding ? `padding: ${globalTabletPadding};` : ''}
-                ${globalTabletMargin ? `margin: ${globalTabletMargin};` : ''}
-                ${globalTabletBorderWidth ? `border-width: ${globalTabletBorderWidth};` : ''}
-                ${globalTabletBorderRadiusWidth ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                ${globalTabletPadding && TestimonialGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ''}
+                ${globalTabletMargin && TestimonialGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ''}
+                ${globalTabletBorderWidth && TestimonialGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                ${globalTabletBorderRadiusWidth && TestimonialGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon {
                 ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
-                ${testimonialQuoteIconTabletMargin ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
+                ${testimonialQuoteIconTabletMargin && TestimonialQuoteIconMarginTablet.top ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
             }
 
             .${blockID} .fb-testimonial-rating {
-                ${testimonialRatingIconTabletMargin ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
+                ${testimonialRatingIconTabletMargin && TestimonialRatingIconMarginTablet.top ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-image img {
                 ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
                 ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
-                border-radius: ${testimonialImageTabletBorderRadiusWidth};
-                ${testimonialImageTabletMargin ? `margin: ${testimonialImageTabletMargin};` : ''}
+                ${testimonialImageTabletBorderRadiusWidth && TestimonialImageTabRadiusWidth.top ? `border-radius: ${testimonialImageTabletBorderRadiusWidth};` : ''}
+                ${testimonialImageTabletMargin && TestimonialImageMarginTablet.top ? `margin: ${testimonialImageTabletMargin};` : ''}
                 ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
                 ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Tablet && TestimonialImageTopPositionUnits.Tablet ? `${TestimonialImageTopPosition.Tablet}${TestimonialImageTopPositionUnits.Tablet}` : '0'};` : ''}
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Tablet && TestimonialImageLeftPositionUnits.Tablet ? `${TestimonialImageLeftPosition.Tablet}${TestimonialImageLeftPositionUnits.Tablet}` : '0'};` : ''}
@@ -1858,27 +1858,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
-                ${testimonialTitleTabletMargin ? `margin: ${testimonialTitleTabletMargin};` : ''}
+                ${testimonialTitleTabletMargin && TestimonialTitleMarginTablet.top ? `margin: ${testimonialTitleTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                 ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
-                ${testimonialDescTabletMargin ? `margin: ${testimonialDescTabletMargin};` : ''}
+                ${testimonialDescTabletMargin && TestimonialDescMarginTablet.top ? `margin: ${testimonialDescTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user {
                 ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Tablet ? `font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Tablet ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Tablet ? `line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};` : ''}
                 
-                ${testimonialAuthorTabletMargin ? `margin: ${testimonialAuthorTabletMargin};` : ''}
+                ${testimonialAuthorTabletMargin && TestimonialAuthorMarginTablet.top ? `margin: ${testimonialAuthorTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                 ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Tablet ? `font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Tablet ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Tablet ? `line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};` : ''}
                 
-                ${testimonialDesignationTabletMargin ? `margin: ${testimonialDesignationTabletMargin};` : ''}
+                ${testimonialDesignationTabletMargin && TestimonialDesignationMarginTablet.top ? `margin: ${testimonialDesignationTabletMargin};` : ''}
             }
         }
         @media only screen and (max-width: 767px) {
@@ -1890,26 +1890,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialGlobalZIndex.Mobile ? `z-index: ${TestimonialGlobalZIndex.Mobile};` : ''}
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                ${globalMobilePadding ? `padding: ${globalMobilePadding};` : ''}
-                ${globalMobileMargin ? `margin: ${globalMobileMargin};` : ''}
-                ${globalMobileBorderWidth ? `border-width: ${globalMobileBorderWidth};` : ''}
-                ${globalMobileBorderRadiusWidth ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                ${globalMobilePadding && TestimonialGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ''}
+                ${globalMobileMargin && TestimonialGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ''}
+                ${globalMobileBorderWidth && TestimonialGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && TestimonialGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
             .${blockID} .fb-testimonial-rating {
-                ${testimonialRatingIconMobileMargin ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
+                ${testimonialRatingIconMobileMargin && TestimonialRatingIconMarginMobile.top ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon {
                 ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
-                ${testimonialQuoteIconMobileMargin ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
+                ${testimonialQuoteIconMobileMargin && TestimonialQuoteIconMarginMobile.top ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
             }
 
             .${blockID} .fb-testimonial-image img {
                 ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
                 ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
-                border-radius: ${testimonialImageMobileBorderRadiusWidth};
-                ${testimonialImageMobileMargin ? `margin: ${testimonialImageMobileMargin};` : ''}
+                ${testimonialImageMobileBorderRadiusWidth && TestimonialImageMobileRadiusWidth.top ? `border-radius: ${testimonialImageMobileBorderRadiusWidth};` : ''}
+                ${testimonialImageMobileMargin && TestimonialImageMarginMobile.top ? `margin: ${testimonialImageMobileMargin};` : ''}
                 ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
                 ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Mobile && TestimonialImageTopPositionUnits.Mobile ? `${TestimonialImageTopPosition.Mobile}${TestimonialImageTopPositionUnits.Mobile}` : '0'};` : ''}
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Mobile && TestimonialImageLeftPositionUnits.Mobile ? `${TestimonialImageLeftPosition.Mobile}${TestimonialImageLeftPositionUnits.Mobile}` : '0'};` : ''}
@@ -1918,28 +1918,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
-                ${testimonialTitleMobileMargin ? `margin: ${testimonialTitleMobileMargin};` : ''}
+                ${testimonialTitleMobileMargin && TestimonialTitleMarginMobile.top ? `margin: ${testimonialTitleMobileMargin};` : ''}
 
             }
             .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
                 ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
-                ${testimonialDescMobileMargin ? `margin: ${testimonialDescMobileMargin};` : ''}
+                ${testimonialDescMobileMargin && TestimonialDescMarginMobile.top ? `margin: ${testimonialDescMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user {
                 ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Mobile ? `font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Mobile ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Mobile ? `line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};` : ''}
                 
-                ${testimonialAuthorMobileMargin ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
+                ${testimonialAuthorMobileMargin && TestimonialAuthorMarginMobile.top ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
             }
             .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
                 ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Mobile ? `font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Mobile ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Mobile ? `line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};` : ''}
                 
-                ${testimonialDesignationMobileMargin ? `margin: ${testimonialDesignationMobileMargin};` : ''}
+                ${testimonialDesignationMobileMargin && TestimonialDesignationMarginMobile.top ? `margin: ${testimonialDesignationMobileMargin};` : ''}
             }  
         }
 

@@ -1969,16 +1969,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormPositionType === 'default' ? `position: relative;` : ''}
 			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' ? `width: 100%;` : ''}
 			${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
-			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Desktop !== undefined ? `left: ${contactFormHZLeftOffset.Desktop}${contactFormHZLeftOffsetUnits.Desktop};` : ''}
-			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Desktop !== undefined ? `right: ${contactFormHZRightOffset.Desktop}${contactFormHZRightOffsetUnits.Desktop};` : ''}
-			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Desktop !== undefined ? `top: ${contactFormVRTopOffset.Desktop}${contactFormVRTopOffsetUnits.Desktop};` : ''}
-			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Desktop !== undefined ? `bottom: ${contactFormVRBottomOffset.Desktop}${contactFormVRBottomOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Desktop ? `left: ${contactFormHZLeftOffset.Desktop}${contactFormHZLeftOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Desktop ? `right: ${contactFormHZRightOffset.Desktop}${contactFormHZRightOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Desktop ? `top: ${contactFormVRTopOffset.Desktop}${contactFormVRTopOffsetUnits.Desktop};` : ''}
+			${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Desktop ? `bottom: ${contactFormVRBottomOffset.Desktop}${contactFormVRBottomOffsetUnits.Desktop};` : ''}
             ${contactFormGlobalBgColor ? `background-color: ${contactFormGlobalBgColor};` : ''};
-            ${DesktopPadding != "" ? `padding: ${DesktopPadding};` : ""}
-            ${DesktopMargin != "" ? `margin: ${DesktopMargin};` : ""}
+            ${DesktopPadding && contactFormGlobalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ""}
+            ${DesktopMargin && contactFormGlobalMarginDesktop.top ? `margin: ${DesktopMargin};` : ""}
             ${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
-            ${BorderDesktopWidth != "" ? `border-width: ${BorderDesktopWidth};` : ""}
-            ${BorderRadiusDesktopWidth != "" ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ""}
+            ${BorderDesktopWidth && contactFormGlobalBorderDesktop.top ? `border-width: ${BorderDesktopWidth};` : ""}
+            ${BorderRadiusDesktopWidth && contactFormGlobalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ""}
             ${contactFormGlobalBorderColor ? `border-color: ${contactFormGlobalBorderColor};` : ''};
 			${contactFormGlobalBoxShadowCssValue ? `box-shadow: ${contactFormGlobalBoxShadowCssValue};` : ''} 
 			${contactFormGlobalZIndex.Desktop ? `z-index: ${contactFormGlobalZIndex.Desktop};` : ''}
@@ -1986,8 +1986,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-contact-form-wrapper:hover {
-            ${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''};
-            ${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''};
+            ${contactFormGlobalBgHoverColor ? `background-color: ${contactFormGlobalBgHoverColor};` : ''}
+            ${contactFormGlobalBorderHoverColor ? `border-color: ${contactFormGlobalBorderHoverColor};` : ''}
 			${contactFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${contactFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
@@ -2020,7 +2020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label {
-            ${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''};
+            ${contactFormLabelColor ? `color: ${contactFormLabelColor};` : ''}
 
 			${contactFormLabelGlobalTypoSwitcher.fontFamily === true && contactFormLabelGlobalTypographyData.fontFamily ? `font-family: ${contactFormLabelGlobalTypographyData.fontFamily};` : ''}
 			${contactFormLabelGlobalTypoSwitcher.fontSize === true && contactFormLabelGlobalTypographyData.fontSize ? `font-size: ${contactFormLabelGlobalTypographyData.fontSize};` : ''}
@@ -2031,7 +2031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormLabelGlobalTypoSwitcher.letterSpacing === true && contactFormLabelGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormLabelGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormLabelGlobalTypoSwitcher.lineHeight === true && contactFormLabelGlobalTypographyData.lineHeight ? `line-height: ${contactFormLabelGlobalTypographyData.lineHeight};` : ''}
 				
-			${contactFormLabelGlobalTypoSwitcher.fontFamily === false &&contactFormLabelFontFamily ? `font-family: ${contactFormLabelFontFamily};` : ""}
+			${contactFormLabelGlobalTypoSwitcher.fontFamily === false &&contactFormLabelFontFamily && contactFormLabelFontFamily !=='Default' ? `font-family: ${contactFormLabelFontFamily};` : ""}
             ${contactFormLabelGlobalTypoSwitcher.fontSize === false &&contactFormLabelFontSize.Desktop != "" ? `font-size: ${contactFormLabelFontSize.Desktop}${contactFormLabelFontSizeUnits.Desktop};` : ''}
             ${contactFormLabelGlobalTypoSwitcher.fontWeight === false &&contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
             ${contactFormLabelGlobalTypoSwitcher.fontStyle === false &&contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
@@ -2041,7 +2041,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormLabelGlobalTypoSwitcher.lineHeight === false &&contactFormLabelLineHeight.Desktop && contactFormLabelLineHeightUnits.Desktop ? `line-height: ${contactFormLabelLineHeight.Desktop}${contactFormLabelLineHeightUnits.Desktop};` : ''}
         }
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
-            ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''};
+            ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''}
         }
 
 
@@ -2060,7 +2060,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormInputGlobalTypoSwitcher.letterSpacing === true && contactFormInputGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormInputGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormInputGlobalTypoSwitcher.lineHeight === true && contactFormInputGlobalTypographyData.lineHeight ? `line-height: ${contactFormInputGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormInputGlobalTypoSwitcher.fontFamily === false && contactFormInputFontFamily ? `font-family: ${contactFormInputFontFamily};` : ""}
+            ${contactFormInputGlobalTypoSwitcher.fontFamily === false && contactFormInputFontFamily && contactFormInputFontFamily !== 'Default' ? `font-family: ${contactFormInputFontFamily};` : ""}
             ${contactFormInputGlobalTypoSwitcher.fontSize === false && contactFormInputFontSize.Desktop != "" ? `font-size: ${contactFormInputFontSize.Desktop}${contactFormInputFontSizeUnits.Desktop};` : ''}
             ${contactFormInputGlobalTypoSwitcher.fontWeight === false && contactFormInputFontWeight ? `font-weight: ${contactFormInputFontWeight};` : ""}
             ${contactFormInputGlobalTypoSwitcher.fontStyle === false && contactFormInputFontStyle ? `font-style: ${contactFormInputFontStyle};` : ""}
@@ -2071,12 +2071,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormTextIndentSize.Desktop != "" ? `text-indent: ${contactFormTextIndentSize.Desktop}${contactFormTextIndentSizeUnits.Desktop};` : ""}
             ${contactFormInputWidthSize.Desktop != "" ? `width: ${contactFormInputWidthSize.Desktop}${contactFormInputWidthSizeUnits.Desktop};` : ""}
             ${contactFormInputHeightSize.Desktop != "" ? `height: ${contactFormInputHeightSize.Desktop}${contactFormInputHeightSizeUnits.Desktop};` : ""}
-            ${contactFormDesktopPadding != "" ? `padding: ${contactFormDesktopPadding};` : ""}
-            ${contactFormDesktopMargin != "" ? `margin: ${contactFormDesktopMargin};` : ""}
+            ${contactFormDesktopPadding && contactFormPaddingDesktop.top ? `padding: ${contactFormDesktopPadding};` : ""}
+            ${contactFormDesktopMargin && contactFormMarginDesktop.top ? `margin: ${contactFormDesktopMargin};` : ""}
             ${contactFormBorder ? `border: ${contactFormBorder};` : ""}
-            ${contactFormBorderDesktopWidth != "" ? `border-width: ${contactFormBorderDesktopWidth};` : ""}
+            ${contactFormBorderDesktopWidth && contactFormBorderDesktop.top ? `border-width: ${contactFormBorderDesktopWidth};` : ""}
             ${contactFormBorderColor ? `border-color: ${contactFormBorderColor};` : ""}
-            ${contactFormBorderRadiusDesktopWidth != "" ? `border-radius: ${contactFormBorderRadiusDesktopWidth};` : ""}
+            ${contactFormBorderRadiusDesktopWidth && contactFormBorderRadiusDesktop.top ? `border-radius: ${contactFormBorderRadiusDesktopWidth};` : ""}
             transition: all .3s ease-in-out;
         }
 
@@ -2084,8 +2084,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID}.fb-contact-form-wrapper textarea:focus, 
         .${blockID}.fb-contact-form-wrapper select:focus {
             ${contactFormFocusBorder ? `border: ${contactFormFocusBorder};` : ""}
-            ${contactFormFocusBorderDesktopWidth != "" ? `border-width: ${contactFormFocusBorderDesktopWidth};` : ""}
-            ${contactFormFocusBorderRadiusDesktopWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusDesktopWidth};` : ""}
+            ${contactFormFocusBorderDesktopWidth && contactFormFocusBorderDesktop.top ? `border-width: ${contactFormFocusBorderDesktopWidth};` : ""}
+            ${contactFormFocusBorderRadiusDesktopWidth && contactFormFocusBorderRadiusDesktop.top ? `border-radius: ${contactFormFocusBorderRadiusDesktopWidth};` : ""}
             ${contactFormInputFocusColor ? `border-color: ${contactFormInputFocusColor};` : ""}
             box-shadow: none;
 			outline: none;
@@ -2144,7 +2144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormSubmitGlobalTypoSwitcher.letterSpacing === true && contactFormSubmitGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSubmitGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormSubmitGlobalTypoSwitcher.lineHeight === true && contactFormSubmitGlobalTypographyData.lineHeight ? `line-height: ${contactFormSubmitGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormSubmitGlobalTypoSwitcher.fontFamily === false && contactFormSubmitFontFamily ? `font-family: ${contactFormSubmitFontFamily};` : ""}
+            ${contactFormSubmitGlobalTypoSwitcher.fontFamily === false && contactFormSubmitFontFamily && contactFormSubmitFontFamily !== 'Default' ? `font-family: ${contactFormSubmitFontFamily};` : ""}
             ${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Desktop && contactFormSubmitFontSizeUnits.Desktop ? `font-size: ${contactFormSubmitFontSize.Desktop}${contactFormSubmitFontSizeUnits.Desktop};` : ''} 
             ${contactFormSubmitGlobalTypoSwitcher.fontWeight === false && contactFormSubmitFontWeight ? `font-weight: ${contactFormSubmitFontWeight};` : ""}
             ${contactFormSubmitGlobalTypoSwitcher.fontStyle === false && contactFormSubmitFontStyle ? `font-style: ${contactFormSubmitFontStyle};` : ""}
@@ -2152,13 +2152,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormSubmitGlobalTypoSwitcher.textDecoration === false && contactFormSubmitTextDecoration ? `text-decoration: ${contactFormSubmitTextDecoration};` : ""}
             ${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Desktop && contactFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSubmitLetterSpacing.Desktop}${contactFormSubmitLetterSpacingUnits.Desktop};` : ''}
             ${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Desktop && contactFormSubmitLineHeightUnits.Desktop ? `line-height: ${contactFormSubmitLineHeight.Desktop}${contactFormSubmitLineHeightUnits.Desktop};` : ''} 
-            ${contactFormSubmitDesktopPadding ? `padding: ${contactFormSubmitDesktopPadding};` : ""}
-            ${contactFormSubmitDesktopMargin ? `margin: ${contactFormSubmitDesktopMargin};` : ""}
+            ${contactFormSubmitDesktopPadding && contactFormSubmitPaddingDesktop.top ? `padding: ${contactFormSubmitDesktopPadding};` : ""}
+            ${contactFormSubmitDesktopMargin && contactFormSubmitMarginDesktop.top ? `margin: ${contactFormSubmitDesktopMargin};` : ""}
 
             ${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
-            ${contactFormSubmitDesktopBorderWidth ? `border-width: ${contactFormSubmitDesktopBorderWidth};` : ""}
+            ${contactFormSubmitDesktopBorderWidth && contactFormSubmitBorderDesktop.top ? `border-width: ${contactFormSubmitDesktopBorderWidth};` : ""}
             ${contactFormSubmitBorderColor ? `border-color: ${contactFormSubmitBorderColor};` : ""}
-            ${contactFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${contactFormSubmitDesktopBorderRadiusWidth};` : ""}
+            ${contactFormSubmitDesktopBorderRadiusWidth && contactFormSubmitBorderRadiusDesktop.top ? `border-radius: ${contactFormSubmitDesktopBorderRadiusWidth};` : ""}
 			cursor: pointer;
         }
         .${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit:hover {
@@ -2186,7 +2186,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormErrorGlobalTypoSwitcher.letterSpacing === true && contactFormErrorGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormErrorGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormErrorGlobalTypoSwitcher.lineHeight === true && contactFormErrorGlobalTypographyData.lineHeight ? `line-height: ${contactFormErrorGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormErrorGlobalTypoSwitcher.fontFamily === false && contactFormErrorFontFamily ? `font-family: ${contactFormErrorFontFamily};` : ""}
+            ${contactFormErrorGlobalTypoSwitcher.fontFamily === false && contactFormErrorFontFamily && contactFormErrorFontFamily !== 'Default' ? `font-family: ${contactFormErrorFontFamily};` : ""}
             ${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Desktop && contactFormErrorFontSizeUnits.Desktop ? `font-size: ${contactFormErrorFontSize.Desktop}${contactFormErrorFontSizeUnits.Desktop};` : ''} 
             ${contactFormErrorGlobalTypoSwitcher.fontWeight === false && contactFormErrorFontWeight ? `font-weight: ${contactFormErrorFontWeight};` : ""}
             ${contactFormErrorGlobalTypoSwitcher.fontStyle === false && contactFormErrorFontStyle ? `font-style: ${contactFormErrorFontStyle};` : ""}
@@ -2194,8 +2194,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormErrorGlobalTypoSwitcher.textDecoration === false && contactFormErrorTextDecoration ? `text-decoration: ${contactFormErrorTextDecoration};` : ""}
             ${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Desktop && contactFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormErrorLetterSpacing.Desktop}${contactFormErrorLetterSpacingUnits.Desktop};` : ''}
             ${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Desktop && contactFormErrorLineHeightUnits.Desktop ? `line-height: ${contactFormErrorLineHeight.Desktop}${contactFormErrorLineHeightUnits.Desktop};` : ''} 
-            ${contactFormErrorDesktopPadding ? `padding: ${contactFormErrorDesktopPadding};` : ""}
-            ${contactFormErrorDesktopMargin ? `margin: ${contactFormErrorDesktopMargin};` : ""}
+            ${contactFormErrorDesktopPadding && contactFormErrorPaddingDesktop.top ? `padding: ${contactFormErrorDesktopPadding};` : ""}
+            ${contactFormErrorDesktopMargin && contactFormErrorMarginDesktop.top ? `margin: ${contactFormErrorDesktopMargin};` : ""}
 			margin-top: 4px;
         }
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
@@ -2211,7 +2211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormSuccessGlobalTypoSwitcher.letterSpacing === true && contactFormSuccessGlobalTypographyData.letterSpacing ? `letter-spacing: ${contactFormSuccessGlobalTypographyData.letterSpacing};` : ''}
 			${contactFormSuccessGlobalTypoSwitcher.lineHeight === true && contactFormSuccessGlobalTypographyData.lineHeight ? `line-height: ${contactFormSuccessGlobalTypographyData.lineHeight};` : ''}
 				
-            ${contactFormSuccessGlobalTypoSwitcher.fontFamily === false && contactFormSuccessFontFamily ? `font-family: ${contactFormSuccessFontFamily};` : ""}
+            ${contactFormSuccessGlobalTypoSwitcher.fontFamily === false && contactFormSuccessFontFamily && contactFormSuccessFontFamily !== 'Default' ? `font-family: ${contactFormSuccessFontFamily};` : ""}
             ${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Desktop && contactFormSuccessFontSizeUnits.Desktop ? `font-size: ${contactFormSuccessFontSize.Desktop}${contactFormSuccessFontSizeUnits.Desktop};` : ''} 
             ${contactFormSuccessGlobalTypoSwitcher.fontWeight === false && contactFormSuccessFontWeight ? `font-weight: ${contactFormSuccessFontWeight};` : ""}
             ${contactFormSuccessGlobalTypoSwitcher.fontStyle === false && contactFormSuccessFontStyle ? `font-style: ${contactFormSuccessFontStyle};` : ""}
@@ -2220,9 +2220,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Desktop && contactFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${contactFormSuccessLetterSpacing.Desktop}${contactFormSuccessLetterSpacingUnits.Desktop};` : ''}
             ${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Desktop && contactFormSuccessLineHeightUnits.Desktop ? `line-height: ${contactFormSuccessLineHeight.Desktop}${contactFormSuccessLineHeightUnits.Desktop};` : ''}
             ${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
-            ${contactFormSuccessDesktopBorderWidth ? `border-width: ${contactFormSuccessDesktopBorderWidth};` : ""}
+            ${contactFormSuccessDesktopBorderWidth && contactFormSuccessBorderDesktop.top ? `border-width: ${contactFormSuccessDesktopBorderWidth};` : ""}
             ${contactFormSuccessBorderColor ? `border-color: ${contactFormSuccessBorderColor};` : ""}
-            ${contactFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${contactFormSuccessDesktopBorderRadiusWidth};` : ""}
+            ${contactFormSuccessDesktopBorderRadiusWidth && contactFormSuccessBorderRadiusDesktop.top ? `border-radius: ${contactFormSuccessDesktopBorderRadiusWidth};` : ""}
 			padding: 10px 15px;
 		}
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
@@ -2233,17 +2233,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockID}.fb-contact-form-wrapper {
 				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Tablet !== undefined ? `left: ${contactFormHZLeftOffset.Tablet}${contactFormHZLeftOffsetUnits.Tablet};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Tablet !== undefined ? `right: ${contactFormHZRightOffset.Tablet}${contactFormHZRightOffsetUnits.Tablet};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Tablet !== undefined ? `top: ${contactFormVRTopOffset.Tablet}${contactFormVRTopOffsetUnits.Tablet};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Tablet !== undefined ? `bottom: ${contactFormVRBottomOffset.Tablet}${contactFormVRBottomOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Tablet ? `left: ${contactFormHZLeftOffset.Tablet}${contactFormHZLeftOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Tablet ? `right: ${contactFormHZRightOffset.Tablet}${contactFormHZRightOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Tablet ? `top: ${contactFormVRTopOffset.Tablet}${contactFormVRTopOffsetUnits.Tablet};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Tablet ? `bottom: ${contactFormVRBottomOffset.Tablet}${contactFormVRBottomOffsetUnits.Tablet};` : ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
-				${TabletPadding != "" ? `padding: ${TabletPadding};` : ""}
-				${TabletMargin != "" ? `margin: ${TabletMargin};` : ""}
-				${BorderTabletWidth != "" ? `border-width: ${BorderTabletWidth};` : ""}
-				${BorderRadiusTabletWidth != "" ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ""}
+				${TabletPadding && contactFormGlobalPaddingTablet.top ? `padding: ${TabletPadding};` : ""}
+				${TabletMargin && contactFormGlobalMarginTablet.top ? `margin: ${TabletMargin};` : ""}
+				${BorderTabletWidth && contactFormGlobalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ""}
+				${BorderRadiusTabletWidth && contactFormGlobalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ""}
 				transition: all .3s ease-in-out;
 			}
 
@@ -2291,10 +2291,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormTextIndentSize.Tablet != "" ? `text-indent: ${contactFormTextIndentSize.Tablet}${contactFormTextIndentSizeUnits.Tablet};` : ""}
 				${contactFormInputWidthSize.Tablet != "" ? `width: ${contactFormInputWidthSize.Tablet}${contactFormInputWidthSizeUnits.Tablet};` : ""}
 				${contactFormInputHeightSize.Tablet != "" ? `height: ${contactFormInputHeightSize.Tablet}${contactFormInputHeightSizeUnits.Tablet};` : ""}
-				${contactFormTabletPadding != "" ? `padding: ${contactFormTabletPadding};` : ""}
-				${contactFormTabletMargin != "" ? `margin: ${contactFormTabletMargin};` : ""}
-				${contactFormBorderTabletWidth != "" ? `border-width: ${contactFormBorderTabletWidth};` : ""}
-				${contactFormBorderRadiusTabletWidth != "" ? `border-radius: ${contactFormBorderRadiusTabletWidth};` : ""}
+				${contactFormTabletPadding && contactFormPaddingTablet.top ? `padding: ${contactFormTabletPadding};` : ""}
+				${contactFormTabletMargin && contactFormMarginTablet.top ? `margin: ${contactFormTabletMargin};` : ""}
+				${contactFormBorderTabletWidth && contactFormBorderTablet.top ? `border-width: ${contactFormBorderTabletWidth};` : ""}
+				${contactFormBorderRadiusTabletWidth && contactFormBorderRadiusTablet.top ? `border-radius: ${contactFormBorderRadiusTabletWidth};` : ""}
 				transition: all .3s ease-in-out;
 			}
 
@@ -2324,12 +2324,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Tablet && contactFormSubmitFontSizeUnits.Tablet ? `font-size: ${contactFormSubmitFontSize.Tablet}${contactFormSubmitFontSizeUnits.Tablet};` : ''} 
 				${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Tablet && contactFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSubmitLetterSpacing.Tablet}${contactFormSubmitLetterSpacingUnits.Tablet};` : ''}
 				${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Tablet && contactFormSubmitLineHeightUnits.Tablet ? `line-height: ${contactFormSubmitLineHeight.Tablet}${contactFormSubmitLineHeightUnits.Tablet};` : ''} 
-				${contactFormSubmitTabletPadding ? `padding: ${contactFormSubmitTabletPadding};` : ""}
-				${contactFormSubmitTabletMargin ? `margin: ${contactFormSubmitTabletMargin};` : ""}
+				${contactFormSubmitTabletPadding && contactFormSubmitPaddingTablet.top ? `padding: ${contactFormSubmitTabletPadding};` : ""}
+				${contactFormSubmitTabletMargin && contactFormSubmitMarginTablet.top ? `margin: ${contactFormSubmitTabletMargin};` : ""}
 
 				${contactFormSubmitBorder ? `border: ${contactFormSubmitBorder};` : ""}
-				${contactFormSubmitTabletBorderWidth ? `border-width: ${contactFormSubmitTabletBorderWidth};` : ""}
-				${contactFormSubmitTabletBorderRadiusWidth ? `border-radius: ${contactFormSubmitTabletBorderRadiusWidth};` : ""}
+				${contactFormSubmitTabletBorderWidth && contactFormSubmitBorderTablet.top ? `border-width: ${contactFormSubmitTabletBorderWidth};` : ""}
+				${contactFormSubmitTabletBorderRadiusWidth && contactFormSubmitBorderRadiusTablet.top ? `border-radius: ${contactFormSubmitTabletBorderRadiusWidth};` : ""}
 				cursor: pointer;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
@@ -2343,8 +2343,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Tablet && contactFormErrorFontSizeUnits.Tablet ? `font-size: ${contactFormErrorFontSize.Tablet}${contactFormErrorFontSizeUnits.Tablet};` : ''} 
 				${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Tablet && contactFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormErrorLetterSpacing.Tablet}${contactFormErrorLetterSpacingUnits.Tablet};` : ''}
 				${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Tablet && contactFormErrorLineHeightUnits.Tablet ? `line-height: ${contactFormErrorLineHeight.Tablet}${contactFormErrorLineHeightUnits.Tablet};` : ''} 
-				${contactFormErrorTabletPadding ? `padding: ${contactFormErrorTabletPadding};` : ""}
-				${contactFormErrorTabletMargin ? `margin: ${contactFormErrorTabletMargin};` : ""}
+				${contactFormErrorTabletPadding && contactFormErrorPaddingTablet.top ? `padding: ${contactFormErrorTabletPadding};` : ""}
+				${contactFormErrorTabletMargin && contactFormErrorMarginTablet.top ? `margin: ${contactFormErrorTabletMargin};` : ""}
 				margin-top: 4px;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
@@ -2352,8 +2352,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Tablet && contactFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${contactFormSuccessLetterSpacing.Tablet}${contactFormSuccessLetterSpacingUnits.Tablet};` : ''}
 				${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Tablet && contactFormSuccessLineHeightUnits.Tablet ? `line-height: ${contactFormSuccessLineHeight.Tablet}${contactFormSuccessLineHeightUnits.Tablet};` : ''}
 				${contactFormSuccessBorder ? `border: ${contactFormSuccessBorder};` : ""}
-				${contactFormSuccessTabletBorderWidth ? `border-width: ${contactFormSuccessTabletBorderWidth};` : ""}
-				${contactFormSuccessTabletBorderRadiusWidth ? `border-radius: ${contactFormSuccessTabletBorderRadiusWidth};` : ""}
+				${contactFormSuccessTabletBorderWidth && contactFormSuccessBorderTablet.top ? `border-width: ${contactFormSuccessTabletBorderWidth};` : ""}
+				${contactFormSuccessTabletBorderRadiusWidth && contactFormSuccessBorderRadiusTablet.top ? `border-radius: ${contactFormSuccessTabletBorderRadiusWidth};` : ""}
 				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 				padding: 10px 15px;
 			}
@@ -2364,18 +2364,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockID}.fb-contact-form-wrapper {
 				${contactFormGlobalZIndex.Tablet ? `z-index: ${contactFormGlobalZIndex.Tablet};` : ''}
 				${contactFormPositionType !== 'default' ? `position: ${contactFormPositionType};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Mobile !== undefined ? `left: ${contactFormHZLeftOffset.Mobile}${contactFormHZLeftOffsetUnits.Mobile};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Mobile !== undefined ? `right: ${contactFormHZRightOffset.Mobile}${contactFormHZRightOffsetUnits.Mobile};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Mobile !== undefined ? `top: ${contactFormVRTopOffset.Mobile}${contactFormVRTopOffsetUnits.Mobile};` : ''}
-				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Mobile !== undefined ? `bottom: ${contactFormVRBottomOffset.Mobile}${contactFormVRBottomOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'left' && contactFormHZLeftOffset.Mobile ? `left: ${contactFormHZLeftOffset.Mobile}${contactFormHZLeftOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormHZOrientationType === 'right' && contactFormHZRightOffset.Mobile ? `right: ${contactFormHZRightOffset.Mobile}${contactFormHZRightOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'top' && contactFormVRTopOffset.Mobile ? `top: ${contactFormVRTopOffset.Mobile}${contactFormVRTopOffsetUnits.Mobile};` : ''}
+				${contactFormPositionType !== 'default' && contactFormPositionType !== 'relative' && contactFormVROrientationType === 'bottom' && contactFormVRBottomOffset.Mobile ? `bottom: ${contactFormVRBottomOffset.Mobile}${contactFormVRBottomOffsetUnits.Mobile};` : ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper {
-				${MobilePadding != "" ? `padding: ${MobilePadding};` : ""} 
-				${MobileMargin != "" ? `margin: ${MobileMargin};` : ""}
-				${contactFormGlobalBorder != "" ? `border: ${contactFormGlobalBorder};` : ""}
-				${BorderMobileWidth != "" ? `border-width: ${BorderMobileWidth};` : ""}
-				${BorderRadiusMobileWidth != "" ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""}
+				${MobilePadding && contactFormGlobalPaddingMobile.top ? `padding: ${MobilePadding};` : ""} 
+				${MobileMargin && contactFormGlobalMarginMobile.top ? `margin: ${MobileMargin};` : ""}
+				${contactFormGlobalBorder ? `border: ${contactFormGlobalBorder};` : ""}
+				${BorderMobileWidth && contactFormGlobalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ""}
+				${BorderRadiusMobileWidth && contactFormGlobalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""}
 				transition: all .3s ease-in-out;
 			}
 
@@ -2423,18 +2423,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormTextIndentSize.Mobile != "" ? `text-indent: ${contactFormTextIndentSize.Mobile}${contactFormTextIndentSizeUnits.Mobile};` : ""}
 				${contactFormInputWidthSize.Mobile != "" ? `width: ${contactFormInputWidthSize.Mobile}${contactFormInputWidthSizeUnits.Mobile};` : ""}
 				${contactFormInputHeightSize.Mobile != "" ? `height: ${contactFormInputHeightSize.Mobile}${contactFormInputHeightSizeUnits.Mobile};` : ""}
-				${contactFormMobilePadding != "" ? `padding: ${contactFormMobilePadding};` : ""}
-				${contactFormMobileMargin != "" ? `margin: ${contactFormMobileMargin};` : ""}
-				${contactFormBorderMobileWidth != "" ? `border-width: ${contactFormBorderMobileWidth};` : ""}
-				${contactFormBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormBorderRadiusMobileWidth};` : ""}
+				${contactFormMobilePadding && contactFormPaddingMobile.top ? `padding: ${contactFormMobilePadding};` : ""}
+				${contactFormMobileMargin && contactFormMarginMobile.top ? `margin: ${contactFormMobileMargin};` : ""}
+				${contactFormBorderMobileWidth && contactFormBorderMobile.top ? `border-width: ${contactFormBorderMobileWidth};` : ""}
+				${contactFormBorderRadiusMobileWidth && contactFormBorderRadiusMobile.top ? `border-radius: ${contactFormBorderRadiusMobileWidth};` : ""}
 				transition: all .3s ease-in-out;
 			}
 
 			.${blockID}.fb-contact-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
 			.${blockID}.fb-contact-form-wrapper textarea:focus, 
 			.${blockID}.fb-contact-form-wrapper select:focus {
-				${contactFormFocusBorderMobileWidth != "" ? `border-width: ${contactFormFocusBorderMobileWidth};` : ""}
-				${contactFormFocusBorderRadiusMobileWidth != "" ? `border-radius: ${contactFormFocusBorderRadiusMobileWidth};` : ""}
+				${contactFormFocusBorderMobileWidth && contactFormFocusBorderMobile.top ? `border-width: ${contactFormFocusBorderMobileWidth};` : ""}
+				${contactFormFocusBorderRadiusMobileWidth && contactFormFocusBorderRadiusMobile.top ? `border-radius: ${contactFormFocusBorderRadiusMobileWidth};` : ""}
 				box-shadow: none;
 				outline: none;
 			}
@@ -2459,11 +2459,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormSubmitGlobalTypoSwitcher.fontSize === false && contactFormSubmitFontSize.Mobile && contactFormSubmitFontSizeUnits.Mobile ? `font-size: ${contactFormSubmitFontSize.Mobile}${contactFormSubmitFontSizeUnits.Mobile};` : ''} 
 				${contactFormSubmitGlobalTypoSwitcher.letterSpacing === false && contactFormSubmitLetterSpacing.Mobile && contactFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSubmitLetterSpacing.Mobile}${contactFormSubmitLetterSpacingUnits.Mobile};` : ''}
 				${contactFormSubmitGlobalTypoSwitcher.lineHeight === false && contactFormSubmitLineHeight.Mobile && contactFormSubmitLineHeightUnits.Mobile ? `line-height: ${contactFormSubmitLineHeight.Mobile}${contactFormSubmitLineHeightUnits.Mobile};` : ''} 
-				${contactFormSubmitMobilePadding ? `padding: ${contactFormSubmitMobilePadding};` : ""}
-				${contactFormSubmitMobileMargin ? `margin: ${contactFormSubmitMobileMargin};` : ""}
+				${contactFormSubmitMobilePadding && contactFormSubmitPaddingMobile.top ? `padding: ${contactFormSubmitMobilePadding};` : ""}
+				${contactFormSubmitMobileMargin && contactFormSubmitMarginMobile.top ? `margin: ${contactFormSubmitMobileMargin};` : ""}
 
-				${contactFormSubmitMobileBorderWidth ? `border-width: ${contactFormSubmitMobileBorderWidth};` : ""}
-				${contactFormSubmitMobileBorderRadiusWidth ? `border-radius: ${contactFormSubmitMobileBorderRadiusWidth};` : ""}
+				${contactFormSubmitMobileBorderWidth && contactFormSubmitBorderMobile.top ? `border-width: ${contactFormSubmitMobileBorderWidth};` : ""}
+				${contactFormSubmitMobileBorderRadiusWidth && contactFormSubmitBorderRadiusMobile.top ? `border-radius: ${contactFormSubmitMobileBorderRadiusWidth};` : ""}
 				cursor: pointer;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
@@ -2477,16 +2477,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${contactFormErrorGlobalTypoSwitcher.fontSize === false && contactFormErrorFontSize.Mobile && contactFormErrorFontSizeUnits.Mobile ? `font-size: ${contactFormErrorFontSize.Mobile}${contactFormErrorFontSizeUnits.Mobile};` : ''} 
 				${contactFormErrorGlobalTypoSwitcher.letterSpacing === false && contactFormErrorLetterSpacing.Mobile && contactFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormErrorLetterSpacing.Mobile}${contactFormErrorLetterSpacingUnits.Mobile};` : ''}
 				${contactFormErrorGlobalTypoSwitcher.lineHeight === false && contactFormErrorLineHeight.Mobile && contactFormErrorLineHeightUnits.Mobile ? `line-height: ${contactFormErrorLineHeight.Mobile}${contactFormErrorLineHeightUnits.Mobile};` : ''} 
-				${contactFormErrorMobilePadding ? `padding: ${contactFormErrorMobilePadding};` : ""}
-				${contactFormErrorMobileMargin ? `margin: ${contactFormErrorMobileMargin};` : ""}
+				${contactFormErrorMobilePadding && contactFormErrorPaddingMobile.top ? `padding: ${contactFormErrorMobilePadding};` : ""}
+				${contactFormErrorMobileMargin && contactFormErrorMarginMobile.top ? `margin: ${contactFormErrorMobileMargin};` : ""}
 				margin-top: 4px;
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-response-output {
 				${contactFormSuccessGlobalTypoSwitcher.fontSize === false && contactFormSuccessFontSize.Mobile && contactFormSuccessFontSizeUnits.Mobile ? `font-size: ${contactFormSuccessFontSize.Mobile}${contactFormSuccessFontSizeUnits.Mobile};` : ''} 
 				${contactFormSuccessGlobalTypoSwitcher.letterSpacing === false && contactFormSuccessLetterSpacing.Mobile && contactFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${contactFormSuccessLetterSpacing.Mobile}${contactFormSuccessLetterSpacingUnits.Mobile};` : ''}
 				${contactFormSuccessGlobalTypoSwitcher.lineHeight === false && contactFormSuccessLineHeight.Mobile && contactFormSuccessLineHeightUnits.Mobile ? `line-height: ${contactFormSuccessLineHeight.Mobile}${contactFormSuccessLineHeightUnits.Mobile};` : ''}
-				${contactFormSuccessMobileBorderWidth ? `border-width: ${contactFormSuccessMobileBorderWidth};` : ""}
-				${contactFormSuccessMobileBorderRadiusWidth ? `border-radius: ${contactFormSuccessMobileBorderRadiusWidth};` : ""}
+				${contactFormSuccessMobileBorderWidth && contactFormSuccessBorderMobile.top ? `border-width: ${contactFormSuccessMobileBorderWidth};` : ""}
+				${contactFormSuccessMobileBorderRadiusWidth && contactFormSuccessBorderRadiusMobile.top ? `border-radius: ${contactFormSuccessMobileBorderRadiusWidth};` : ""}
 				box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 				padding: 10px 15px;
 			}

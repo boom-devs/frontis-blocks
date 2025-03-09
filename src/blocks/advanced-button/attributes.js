@@ -134,7 +134,8 @@ const attributes = {
         default: "normal"
     },
     buttonColor: {
-        type: "string"
+        type: "string",
+        default: "#ffffff"
     },
     buttonHoverColor: {
         type: 'string',

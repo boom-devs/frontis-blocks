@@ -1,101 +1,71 @@
-import { __ } from "@wordpress/i18n";
+import { __ } from '@wordpress/i18n';
+import { useRef } from "@wordpress/element";
 import {
-    useBlockProps,
-    InnerBlocks,
-} from "@wordpress/block-editor";
-import { useEffect } from "@wordpress/element";
-import { useSelect, useDispatch } from "@wordpress/data";
-import classnames from "classnames";
+	useBlockProps,
+	RichText,
+	BlockControls,
+	AlignmentToolbar,
+} from '@wordpress/block-editor';
 
+/**
+ * Internal dependencies
+ */
 import Inspector from "./inspector";
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, className, clientId, isSelected }) {
-    const {
-        blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
-        dropdownOpenOnClick,
-        navBtnType,
-        showDropdownIcon,
-        flexWrap,
-        navVerticalAlign,
-        hamburgerMenu,
-        hamburgerCloseIconAlign,
-        classHook,
-    } = attributes;
+export default function Edit({ attributes, setAttributes, clientId }) {
+	const {
+		blockID,
+		DeviceType,
+		ButtonAlignment,
 
-    const { updateBlockAttributes } = useDispatch("core/block-editor");
+		dualBtnDesktopSwitcher,
+		dualBtnTabletSwitcher,
+		dualBtnMobileSwitcher,
+	} = attributes;
 
-    const innerBlocks = useSelect(
-        (select) => select("core/block-editor").getBlocks(clientId),
-        [clientId]
-    );
+	const blockProps = useBlockProps({
+		className: `fb-off-canvas-menu-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
 
-    useEffect(() => {
-        if (!blockId) {
-            setAttributes({ blockId: clientId });
-        }
-    }, []);
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
-    useEffect(() => {
-        if (innerBlocks.length > 0) {
-            innerBlocks.forEach((block) => {
-                updateBlockAttributes(block.clientId, {
-                    className: `${layout} ${layout === "is-horizontal" ? navAlign : navVerticalAlign} ${flexWrap ? "no-wrap" : ""}`,
-                    openSubmenusOnClick: dropdownOpenOnClick,
-                    showSubmenuIcon: showDropdownIcon,
-                    hasIcon: navBtnType,
-                    overlayMenu: hamburgerMenu,
-                });
-            });
-        }
-    }, [layout, navAlign, flexWrap, navVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
+	// Prevent link navigation in the editor and focus on text
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
 
-    const blockProps = useBlockProps({
-        className: classnames(className, `frontis-guten-block-main-parent-wrapper`),
-    });
+	return (
+		<>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
+			<BlockControls>
+				<AlignmentToolbar
+					value={ButtonAlignment}
+					onChange={(value) => setAttributes({ ButtonAlignment: value })}
+					controls={['start', 'center', 'end', 'start']}
+				/>
+			</BlockControls>
 
-    return (
-        <>
-            {isSelected && (
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                />
-            )}
-            <div {...blockProps}>
-                <div className={`fb-parent-wrapper frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
-                    <div
-                        className={`${blockId} frontis-advanced-navigation-wrapper ${layout} ${layoutPreset} ${
-                            layout === "is-horizontal" ? navAlign : navVerticalAlign
-                        } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                            navBtnType ? "responsive-icon" : "responsive-text"
-                        } ${hamburgerCloseIconAlign}`}
-                    >
-                        <div className="frontis-nav-contents">
-                            <InnerBlocks
-                                templateLock={false}
-                                template={[
-                                    [
-                                        "core/navigation",
-                                        { className: `${layout} ${navAlign}` },
-                                    ],
-                                ]}
-                                allowedBlocks={["core/navigation"]}
-                                renderAppender={
-                                    innerBlocks.length < 1
-                                        ? InnerBlocks.ButtonBlockAppender
-                                        : false
-                                }
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+			<div {...blockProps}>
+				<div className='fb-off-canvas-menu-wrapper'
+					style={{
+						justifyContent: ButtonAlignment,
+
+					}}
+				>
+					<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"></path></svg>
+				</div>
+			</div>
+		</>
+	);
 }
