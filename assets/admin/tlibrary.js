@@ -4740,9 +4740,17 @@ var TypographySettings = function TypographySettings(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      editPost({
-        isDirty: true
-      });
+      if (!!wp.data.select('core/edit-site')) {
+        editPost({
+          isDirty: true
+        });
+      } else {
+        wp.data.dispatch('core/editor').editPost({
+          meta: {
+            _dummy: new Date().getTime()
+          }
+        });
+      }
     }
   }, [isMount]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {

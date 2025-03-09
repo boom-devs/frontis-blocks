@@ -209,7 +209,7 @@ const attributes = {
         default: "quote-left",
     },
 
-    accordionItemZIndex : {
+    accordionItemZIndex: {
         type: "object",
         default: {
             Desktop: '',

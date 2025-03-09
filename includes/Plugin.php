@@ -21,7 +21,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.5';
+	const VERSION = '1.0.7';
 
 	/**
 	 * Plugin slug
@@ -214,7 +214,59 @@ final class Plugin
      */
     public function set_activation_redirect() {
         add_option('frontis_blocks_do_activation_redirect', true);
+		$this->insert_fb_global_colors();
     }
+
+	/**
+	 * Insert fb global colors when plugin is activated
+	 */
+	public function insert_fb_global_colors() {
+		$option_name = 'fb_global_colors';
+	
+		// Get theme colors from wp_get_global_settings()
+		$theme_colors = [];
+		$theme_json = wp_get_global_settings();
+	
+		if ($theme_json && isset($theme_json['color']) && isset($theme_json['color']['palette'])) {
+			$theme_json = $theme_json['color']['palette'];
+	
+			if (isset($theme_json['theme'])) {
+				$theme_colors = $theme_json['theme'];
+			}
+		}
+	
+		// Slug Mapping
+		$slug_mapping = [
+			"Base"       => ["name" => "Primary Color", "slug" => "primary-color"],
+			"Contrast"   => ["name" => "Secondary Color", "slug" => "secondary-color"],
+			"Accent 1"   => ["name" => "Tertiary Color", "slug" => "tertiary-color"],
+			"Accent 2"   => ["name" => "Accent Color", "slug" => "accent-color"],
+			"Accent 3"   => ["name" => "Text Color", "slug" => "text-color"],
+			"Accent 4"   => ["name" => "Link Color", "slug" => "link-color"],
+			"Accent 5"   => ["name" => "Link Hover Color", "slug" => "link-hover-color"],
+			"Accent 6"   => ["name" => "White Color", "slug" => "white-color"]
+		];
+	
+		// Modify theme colors
+		$modified_colors = [];
+		foreach ($theme_colors as $color) {
+			$name = $color["name"];
+			if (isset($slug_mapping[$name])) {
+				$modified_colors[] = [
+					"name"  => $slug_mapping[$name]["name"],
+					"color" => $color["color"],
+					"slug"  => $slug_mapping[$name]["slug"]
+				];
+			}
+		}
+	
+		// Insert or update option in database
+		if (get_option($option_name) === false) {
+			add_option($option_name, $modified_colors);
+		} else {
+			update_option($option_name, $modified_colors);
+		}
+	}
 
     /**
      * Handle redirect to settings page after activation

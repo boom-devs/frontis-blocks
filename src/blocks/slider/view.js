@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 clickable: true,
             },
             autoplay: {
+                autoplay: false,
                 delay: 3000,
                 disableOnInteraction: false,
             },

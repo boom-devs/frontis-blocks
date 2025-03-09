@@ -197,7 +197,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
 
-
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-progress-bar-main-wrapper {
@@ -224,7 +223,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressGlobalTypoSwitcher.letterSpacing === true && progressGlobalTypographyData.letterSpacing ? `letter-spacing: ${progressGlobalTypographyData.letterSpacing};` : ''}
             ${progressGlobalTypoSwitcher.lineHeight === true && progressGlobalTypographyData.lineHeight ? `line-height: ${progressGlobalTypographyData.lineHeight};` : ''}
 
-            ${progressGlobalTypoSwitcher.fontFamily === false && progressFontFamily ? `font-family: ${progressFontFamily};` : ''}
+            ${progressGlobalTypoSwitcher.fontFamily === false && progressFontFamily && progressFontFamily !== 'Default' ? `font-family: ${progressFontFamily};` : ''}
             ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
             ${progressGlobalTypoSwitcher.fontWeight === false && progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
             ${progressGlobalTypoSwitcher.fontStyle === false && progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
@@ -238,7 +237,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
             background-color: ${progressBgColor};
-            border-radius: ${progressDesktopBorderRadiusWidth};
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             position: relative;
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
@@ -247,7 +246,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
             height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
             background-color: ${progressColor};
-            border-radius: ${progressDesktopBorderRadiusWidth};
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             transition: width 0.5s ease-in-out;
             width: ${progressNumber}%;
         }
@@ -268,7 +267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockID} .progress-bar-text-inSide-wrapper {
             background-color: ${progressBgColor};
-            border-radius: ${progressDesktopBorderRadiusWidth};
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
             overflow: hidden;
         }
@@ -277,7 +276,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
             background-color: ${progressColor};
-            border-radius: ${progressDesktopBorderRadiusWidth};
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             transition: width 0.5s ease-in-out;
             width: ${progressNumber}%;
         }
@@ -286,7 +285,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: ease-in-out .5s;
         }
         .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
-            border-radius: ${progressDesktopBorderRadiusWidth};
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             color: ${progressTextColor};
             font-size: 14px;
         }
@@ -308,7 +307,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
             .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                border-radius: ${progressTabletBorderRadiusWidth} !important;                     
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
             }
 
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
@@ -332,7 +331,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
             .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                border-radius: ${progressMobileBorderRadiusWidth} !important;                      
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
             }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
                 ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}

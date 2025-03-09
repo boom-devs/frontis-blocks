@@ -1,17 +1,19 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import Edit from './edit';
-import save from './save';
-import attributes from './attributes';
-import metadata from './block.json';
-import FB_Block_Icons from "@Config/fb-blocks-icons";
-import './style.scss';
+import { registerBlockType } from "@wordpress/blocks";
+import { __ } from "@wordpress/i18n";
+import Edit from "./edit";
+import Save from "./save";
+import "./style.scss";
 
-
-registerBlockType(metadata.name, {
-    ...metadata,
-    icon: FB_Block_Icons.advanced_navigation,
-    attributes,
-    edit: Edit,
-    save,
+registerBlockType("frontis-blocks/off-canvas-menu", {
+  title: __("Off-Canvas Menu", "frontis-blocks"),
+  description: __("Add an off-canvas menu with your selected pattern content.", "frontis-blocks"),
+  category: "layout",
+  icon: "menu-alt",
+  supports: {
+    html: false,
+    align: ["wide", "full"],
+  },
+  example: {},
+  edit: Edit,
+  save: Save,
 });

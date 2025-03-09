@@ -2437,13 +2437,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-fluent-form-wrapper {
-            ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
-            padding: ${DesktopPadding};
-            margin: ${DesktopMargin};
-            border: ${fluentFormGlobalBorder};
-            border-width: ${BorderDesktopWidth};
-            border-radius: ${BorderRadiusDesktopWidth} !important;
-            ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+            ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''}
+            ${DesktopPadding && fluentFormGlobalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ''}
+            ${DesktopMargin && fluentFormGlobalMarginDesktop.top ? `margin: ${DesktopMargin};` : ''} 
+            ${fluentFormGlobalBorder ? `border: ${fluentFormGlobalBorder};` : ''}
+            ${BorderDesktopWidth && fluentFormGlobalBorderDesktop.top ? `border-width: ${BorderDesktopWidth};` : ''}
+            ${BorderRadiusDesktopWidth && fluentFormGlobalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ''}
+            ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''}
             ${fluentFormPositionType === 'default' ? `position: relative;` : ''}
             ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' ? `width: 100%;` : ''}
             ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
@@ -2457,8 +2457,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper:hover {
-            ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
-            ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+            ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''}
+            ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''}
             ${fluentFormGlobalBoxShadowHoverCssValue ? `box-shadow: ${fluentFormGlobalBoxShadowHoverCssValue};` : ''} 
         }
 
@@ -2510,7 +2510,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === true && fluentFormLabelGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormLabelGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormLabelGlobalTypoSwitcher.lineHeight === true && fluentFormLabelGlobalTypographyData.lineHeight ? `line-height: ${fluentFormLabelGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormLabelGlobalTypoSwitcher.fontFamily === false && fluentFormLabelFontFamily ? `font-family: ${fluentFormLabelFontFamily};` : ""}
+            ${fluentFormLabelGlobalTypoSwitcher.fontFamily === false && fluentFormLabelFontFamily && fluentFormLabelFontFamily !== 'Default' ? `font-family: ${fluentFormLabelFontFamily};` : ""}
             ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Desktop && fluentFormLabelFontSizeUnits.Desktop ? `font-size: ${fluentFormLabelFontSize.Desktop}${fluentFormLabelFontSizeUnits.Desktop};` : ''}
             ${fluentFormLabelGlobalTypoSwitcher.fontWeight === false && fluentFormLabelFontWeight ? `font-weight: ${fluentFormLabelFontWeight};` : ""}
             ${fluentFormLabelGlobalTypoSwitcher.fontStyle === false && fluentFormLabelFontStyle ? `font-style: ${fluentFormLabelFontStyle};` : ""}
@@ -2518,7 +2518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormLabelGlobalTypoSwitcher.textDecoration === false && fluentFormLabelTextDecoration ? `text-decoration: ${fluentFormLabelTextDecoration};` : ""}
             ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Desktop && fluentFormLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormLabelLetterSpacing.Desktop}${fluentFormLabelLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Desktop && fluentFormLabelLineHeightUnits.Desktop ? `line-height: ${fluentFormLabelLineHeight.Desktop}${fluentFormLabelLineHeightUnits.Desktop};` : ''}
-            ${fluntFromLabelMarginDesktopWidth ? `margin: ${fluntFromLabelMarginDesktopWidth};` : ""}
+            ${fluntFromLabelMarginDesktopWidth && fluntFromLabelMarginDesktop.top? `margin: ${fluntFromLabelMarginDesktopWidth};` : ""}
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-group label:hover {
@@ -2540,7 +2540,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormInputGlobalTypoSwitcher.letterSpacing === true && fluentFormInputGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormInputGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormInputGlobalTypoSwitcher.lineHeight === true && fluentFormInputGlobalTypographyData.lineHeight ? `line-height: ${fluentFormInputGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormInputGlobalTypoSwitcher.fontFamily === false && fluentFormInputFontFamily ? `font-family: ${fluentFormInputFontFamily};` : ""}
+            ${fluentFormInputGlobalTypoSwitcher.fontFamily === false && fluentFormInputFontFamily && fluentFormInputFontFamily !== 'Default' ? `font-family: ${fluentFormInputFontFamily};` : ""}
             ${fluentFormInputGlobalTypoSwitcher.fontSize === false && fluentFormInputFontSize.Desktop && fluentFormInputFontSizeUnits.Desktop ? `font-size: ${fluentFormInputFontSize.Desktop}${fluentFormInputFontSizeUnits.Desktop};` : ''}
             ${fluentFormInputGlobalTypoSwitcher.fontWeight === false && fluentFormInputFontWeight ? `font-weight: ${fluentFormInputFontWeight};` : ""}
             ${fluentFormInputGlobalTypoSwitcher.fontStyle === false && fluentFormInputFontStyle ? `font-style: ${fluentFormInputFontStyle};` : ""}
@@ -2551,19 +2551,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Desktop}${fluentFormTextIndentSizeUnits.Desktop};` : ""}
             ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Desktop}${fluentFormInputWidthSizeUnits.Desktop};` : ""}
             ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Desktop}${fluentFormInputHeightSizeUnits.Desktop};` : ""}
-            ${fluentFormDesktopPadding ? `padding: ${fluentFormDesktopPadding};` : ""}
+            ${fluentFormDesktopPadding && fluentFormPaddingDesktop.top? `padding: ${fluentFormDesktopPadding};` : ""}
             ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
-            ${fluentFormBorderDesktopWidth ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
+            ${fluentFormBorderDesktopWidth && fluentFormBorderDesktop.top ? `border-width: ${fluentFormBorderDesktopWidth};` : ""}
             ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
-            ${fluentFormBorderRadiusDesktopWidth ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
+            ${fluentFormBorderRadiusDesktopWidth && fluentFormBorderRadiusDesktop.top ? `border-radius: ${fluentFormBorderRadiusDesktopWidth};` : ""}
             transition: all .3s ease-in-out;
         }
         .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
         .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
         .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
             ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
-            ${fluentFormFocusBorderDesktopWidth ? `border-width: ${fluentFormFocusBorderDesktopWidth};` : ""}
-            ${fluentFormFocusBorderRadiusDesktopWidth ? `border-radius: ${fluentFormFocusBorderRadiusDesktopWidth};` : ""}
+            ${fluentFormFocusBorderDesktopWidth && fluentFormFocusBorderDesktop.top ? `border-width: ${fluentFormFocusBorderDesktopWidth};` : ""}
+            ${fluentFormFocusBorderRadiusDesktopWidth && fluentFormFocusBorderRadiusDesktop.top ? `border-radius: ${fluentFormFocusBorderRadiusDesktopWidth};` : ""}
             ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
             box-shadow: none;
         }
@@ -2593,23 +2593,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="checkbox"]{
-            width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-            height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            ${fluentFormRadioFontSize.Desktop && fluentFormRadioFontSizeUnits.Desktop ? `width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};` : ''}
+            ${fluentFormRadioFontSize.Desktop && fluentFormRadioFontSizeUnits.Desktop ? `height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};` : ''}
             ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
             ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-            ${fluentFormCheckBoxBorderRadiusDesktopWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
+            ${fluentFormCheckBoxBorderRadiusDesktopWidth && fluentFormCheckBoxBorderRadiusDesktop.top? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
             position: relative;
             appearance: none;
             transition: all .3s ease-in-out;   
         } 
         .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
-            width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
-            height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};
+            ${fluentFormRadioFontSize.Desktop && fluentFormRadioFontSizeUnits.Desktop ? `width: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};` : ''}
+            ${fluentFormRadioFontSize.Desktop && fluentFormRadioFontSizeUnits.Desktop ? `height: ${fluentFormRadioFontSize.Desktop}${fluentFormRadioFontSizeUnits.Desktop};` : ''}
             ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
             ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
-            ${fluentFormRadioBorderRadiusDesktopWidth ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
+            ${fluentFormRadioBorderRadiusDesktopWidth && fluentFormRadioBorderRadiusDesktop.top ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
             position: relative;
             appearance: none;
             transition: all .3s ease-in-out;   
@@ -2637,7 +2637,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === true && fluentFormSectionBreakTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSectionBreakTitleGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === true && fluentFormSectionBreakTitleGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSectionBreakTitleGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakTitleFontFamily ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
+            ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakTitleFontFamily && fluentFormSectionBreakTitleFontFamily !== 'Default' ? `font-family: ${fluentFormSectionBreakTitleFontFamily};` : ""}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Desktop && fluentFormSectionBreakTitleFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakTitleFontSize.Desktop}${fluentFormSectionBreakTitleFontSizeUnits.Desktop};` : ''}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontWeight === false && fluentFormSectionBreakTitleFontWeight ? `font-weight: ${fluentFormSectionBreakTitleFontWeight};` : ""}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontStyle === false && fluentFormSectionBreakTitleFontStyle ? `font-style: ${fluentFormSectionBreakTitleFontStyle};` : ""}
@@ -2645,8 +2645,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.textDecoration === false && fluentFormSectionBreakTitleTextDecoration ? `text-decoration: ${fluentFormSectionBreakTitleTextDecoration};` : ""}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Desktop && fluentFormSectionBreakTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Desktop}${fluentFormSectionBreakTitleLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Desktop && fluentFormSectionBreakTitleLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Desktop}${fluentFormSectionBreakTitleLineHeightUnits.Desktop};` : ''}
-            ${fluentFormSectionBreakTitleDesktopPadding ? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
-            ${fluentFormSectionBreakTitleDesktopMargin ? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
+            ${fluentFormSectionBreakTitleDesktopPadding && fluentFormSectionBreakTitlePaddingDesktop.top? `padding: ${fluentFormSectionBreakTitleDesktopPadding};` : ""}
+            ${fluentFormSectionBreakTitleDesktopMargin && fluentFormSectionBreakTitleMarginDesktop.top? `margin: ${fluentFormSectionBreakTitleDesktopMargin};` : ""}
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
             ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
@@ -2663,7 +2663,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === true && fluentFormSectionBreakDescGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSectionBreakDescGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === true && fluentFormSectionBreakDescGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSectionBreakDescGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakDescFontFamily ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
+            ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontFamily === false && fluentFormSectionBreakDescFontFamily && fluentFormSectionBreakDescFontFamily !== 'Default' ? `font-family: ${fluentFormSectionBreakDescFontFamily};` : ""}
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Desktop && fluentFormSectionBreakDescFontSizeUnits.Desktop ? `font-size: ${fluentFormSectionBreakDescFontSize.Desktop}${fluentFormSectionBreakDescFontSizeUnits.Desktop};` : ''} 
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontWeight === false && fluentFormSectionBreakDescFontWeight ? `font-weight: ${fluentFormSectionBreakDescFontWeight};` : ""}
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontStyle === false && fluentFormSectionBreakDescFontStyle ? `font-style: ${fluentFormSectionBreakDescFontStyle};` : ""}
@@ -2671,8 +2671,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.textDecoration === false && fluentFormSectionBreakDescTextDecoration ? `text-decoration: ${fluentFormSectionBreakDescTextDecoration};` : ""}
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Desktop && fluentFormSectionBreakDescLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Desktop}${fluentFormSectionBreakDescLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Desktop && fluentFormSectionBreakDescLineHeightUnits.Desktop ? `line-height: ${fluentFormSectionBreakDescLineHeight.Desktop}${fluentFormSectionBreakDescLineHeightUnits.Desktop};` : ''}
-            ${fluentFormSectionBreakDescDesktopPadding ? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
-            ${fluentFormSectionBreakDescDesktopMargin ? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
+            ${fluentFormSectionBreakDescDesktopPadding && fluentFormSectionBreakDescPaddingDesktop.top? `padding: ${fluentFormSectionBreakDescDesktopPadding};` : ""}
+            ${fluentFormSectionBreakDescDesktopMargin && fluentFormSectionBreakDescMarginDesktop.top? `margin: ${fluentFormSectionBreakDescDesktopMargin};` : ""}
         }
         .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-section_break_desk:hover {
             ${fluentFormSectionBreakDescHoverColor ? `color: ${fluentFormSectionBreakDescHoverColor};` : ""}
@@ -2691,7 +2691,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === true && fluentFormHtmlGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormHtmlGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === true && fluentFormHtmlGlobalTypographyData.lineHeight ? `line-height: ${fluentFormHtmlGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormHtmlGlobalTypoSwitcher.fontFamily === false && fluentFormHtmlFontFamily ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
+            ${fluentFormHtmlGlobalTypoSwitcher.fontFamily === false && fluentFormHtmlFontFamily && fluentFormHtmlFontFamily !== 'Default' ? `font-family: ${fluentFormHtmlFontFamily};` : ""}
             ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Desktop && fluentFormHtmlFontSizeUnits.Desktop ? `font-size: ${fluentFormHtmlFontSize.Desktop}${fluentFormHtmlFontSizeUnits.Desktop};` : ''} 
             ${fluentFormHtmlGlobalTypoSwitcher.fontWeight === false && fluentFormHtmlFontWeight ? `font-weight: ${fluentFormHtmlFontWeight};` : ""}
             ${fluentFormHtmlGlobalTypoSwitcher.fontStyle === false && fluentFormHtmlFontStyle ? `font-style: ${fluentFormHtmlFontStyle};` : ""}
@@ -2699,8 +2699,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormHtmlGlobalTypoSwitcher.textDecoration === false && fluentFormHtmlTextDecoration ? `text-decoration: ${fluentFormHtmlTextDecoration};` : ""}
             ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Desktop && fluentFormHtmlLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Desktop}${fluentFormHtmlLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Desktop && fluentFormHtmlLineHeightUnits.Desktop ? `line-height: ${fluentFormHtmlLineHeight.Desktop}${fluentFormHtmlLineHeightUnits.Desktop};` : ''} 
-            ${fluentFormHtmlDesktopPadding ? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
-            ${fluentFormHtmlDesktopMargin ? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
+            ${fluentFormHtmlDesktopPadding && fluentFormHtmlPaddingDesktop.top? `padding: ${fluentFormHtmlDesktopPadding};` : ""}
+            ${fluentFormHtmlDesktopMargin && fluentFormHtmlMarginDesktop.top? `margin: ${fluentFormHtmlDesktopMargin};` : ""}
         }
         .${blockID}.fb-fluent-form-wrapper .ff-custom_html > *:hover {
             ${fluentFormHtmlHoverColor ? `color: ${fluentFormHtmlHoverColor};` : ""}
@@ -2723,7 +2723,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === true && fluentFormSubmitGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSubmitGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === true && fluentFormSubmitGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSubmitGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormSubmitGlobalTypoSwitcher.fontFamily === false && fluentFormSubmitFontFamily ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
+            ${fluentFormSubmitGlobalTypoSwitcher.fontFamily === false && fluentFormSubmitFontFamily && fluentFormSubmitFontFamily !== 'Default' ? `font-family: ${fluentFormSubmitFontFamily};` : ""}
             ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Desktop && fluentFormSubmitFontSizeUnits.Desktop ? `font-size: ${fluentFormSubmitFontSize.Desktop}${fluentFormSubmitFontSizeUnits.Desktop};` : ''} 
             ${fluentFormSubmitGlobalTypoSwitcher.fontWeight === false && fluentFormSubmitFontWeight ? `font-weight: ${fluentFormSubmitFontWeight};` : ""}
             ${fluentFormSubmitGlobalTypoSwitcher.fontStyle === false && fluentFormSubmitFontStyle ? `font-style: ${fluentFormSubmitFontStyle};` : ""}
@@ -2731,13 +2731,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSubmitGlobalTypoSwitcher.textDecoration === false && fluentFormSubmitTextDecoration ? `text-decoration: ${fluentFormSubmitTextDecoration};` : ""}
             ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Desktop && fluentFormSubmitLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Desktop}${fluentFormSubmitLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Desktop && fluentFormSubmitLineHeightUnits.Desktop ? `line-height: ${fluentFormSubmitLineHeight.Desktop}${fluentFormSubmitLineHeightUnits.Desktop};` : ''} 
-            ${fluentFormSubmitDesktopPadding ? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
-            ${fluentFormSubmitDesktopMargin ? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
+            ${fluentFormSubmitDesktopPadding && fluentFormSubmitPaddingDesktop.top? `padding: ${fluentFormSubmitDesktopPadding};` : ""}
+            ${fluentFormSubmitDesktopMargin && fluentFormSubmitMarginDesktop.top? `margin: ${fluentFormSubmitDesktopMargin};` : ""}
 
             ${fluentFormSubmitBorder ? `border: ${fluentFormSubmitBorder};` : ""}
-            ${fluentFormSubmitDesktopBorderWidth ? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
+            ${fluentFormSubmitDesktopBorderWidth && fluentFormSubmitBorderDesktop.top? `border-width: ${fluentFormSubmitDesktopBorderWidth};` : ""}
             ${fluentFormSubmitBorderColor ? `border-color: ${fluentFormSubmitBorderColor};` : ""}
-            ${fluentFormSubmitDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
+            ${fluentFormSubmitDesktopBorderRadiusWidth && fluentFormSubmitBorderRadiusDesktop.top? `border-radius: ${fluentFormSubmitDesktopBorderRadiusWidth};` : ""}
         }
         .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit:hover {
             ${fluentFormSubmitHoverColor ? `color: ${fluentFormSubmitHoverColor};` : ""}
@@ -2764,7 +2764,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === true && fluentFormSuccessGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormSuccessGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === true && fluentFormSuccessGlobalTypographyData.lineHeight ? `line-height: ${fluentFormSuccessGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormSuccessGlobalTypoSwitcher.fontFamily === false && fluentFormSuccessFontFamily ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
+            ${fluentFormSuccessGlobalTypoSwitcher.fontFamily === false && fluentFormSuccessFontFamily && fluentFormSuccessFontFamily !== 'Default' ? `font-family: ${fluentFormSuccessFontFamily};` : ""}
             ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Desktop && fluentFormSuccessFontSizeUnits.Desktop ? `font-size: ${fluentFormSuccessFontSize.Desktop}${fluentFormSuccessFontSizeUnits.Desktop};` : ''} 
             ${fluentFormSuccessGlobalTypoSwitcher.fontWeight === false && fluentFormSuccessFontWeight ? `font-weight: ${fluentFormSuccessFontWeight};` : ""}
             ${fluentFormSuccessGlobalTypoSwitcher.fontStyle === false && fluentFormSuccessFontStyle ? `font-style: ${fluentFormSuccessFontStyle};` : ""}
@@ -2773,9 +2773,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Desktop && fluentFormSuccessLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Desktop}${fluentFormSuccessLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Desktop && fluentFormSuccessLineHeightUnits.Desktop ? `line-height: ${fluentFormSuccessLineHeight.Desktop}${fluentFormSuccessLineHeightUnits.Desktop};` : ''}
             ${fluentFormSuccessBorder ? `border: ${fluentFormSuccessBorder};` : ""}
-            ${fluentFormSuccessDesktopBorderWidth ? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
+            ${fluentFormSuccessDesktopBorderWidth && fluentFormSuccessBorderDesktop.top? `border-width: ${fluentFormSuccessDesktopBorderWidth};` : ""}
             ${fluentFormSuccessBorderColor ? `border-color: ${fluentFormSuccessBorderColor};` : ""}
-            ${fluentFormSuccessDesktopBorderRadiusWidth ? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
+            ${fluentFormSuccessDesktopBorderRadiusWidth && fluentFormSuccessBorderRadiusDesktop.top? `border-radius: ${fluentFormSuccessDesktopBorderRadiusWidth};` : ""}
         }
         .${blockID}.fb-fluent-form-wrapper .ff-message-success:hover {
             ${fluentFormSuccessBorderHoverColor ? `border-color: ${fluentFormSuccessBorderHoverColor};` : ""}
@@ -2793,7 +2793,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === true && fluentFormErrorGlobalTypographyData.letterSpacing ? `letter-spacing: ${fluentFormErrorGlobalTypographyData.letterSpacing};` : ''}
             ${fluentFormErrorGlobalTypoSwitcher.lineHeight === true && fluentFormErrorGlobalTypographyData.lineHeight ? `line-height: ${fluentFormErrorGlobalTypographyData.lineHeight};` : ''}
 
-            ${fluentFormErrorGlobalTypoSwitcher.fontFamily === false && fluentFormErrorFontFamily ? `font-family: ${fluentFormErrorFontFamily};` : ""}
+            ${fluentFormErrorGlobalTypoSwitcher.fontFamily === false && fluentFormErrorFontFamily && fluentFormErrorFontFamily !== 'Default' ? `font-family: ${fluentFormErrorFontFamily};` : ""}
             ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Desktop && fluentFormErrorFontSizeUnits.Desktop ? `font-size: ${fluentFormErrorFontSize.Desktop}${fluentFormErrorFontSizeUnits.Desktop};` : ''} 
             ${fluentFormErrorGlobalTypoSwitcher.fontWeight === false && fluentFormErrorFontWeight ? `font-weight: ${fluentFormErrorFontWeight};` : ""}
             ${fluentFormErrorGlobalTypoSwitcher.fontStyle === false && fluentFormErrorFontStyle ? `font-style: ${fluentFormErrorFontStyle};` : ""}
@@ -2801,20 +2801,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormErrorGlobalTypoSwitcher.textDecoration === false && fluentFormErrorTextDecoration ? `text-decoration: ${fluentFormErrorTextDecoration};` : ""}
             ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Desktop && fluentFormErrorLetterSpacingUnits.Desktop ? `letter-spacing: ${fluentFormErrorLetterSpacing.Desktop}${fluentFormErrorLetterSpacingUnits.Desktop};` : ''}
             ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Desktop && fluentFormErrorLineHeightUnits.Desktop ? `line-height: ${fluentFormErrorLineHeight.Desktop}${fluentFormErrorLineHeightUnits.Desktop};` : ''} 
-            ${fluentFormErrorDesktopPadding ? `padding: ${fluentFormErrorDesktopPadding};` : ""}
-            ${fluentFormErrorDesktopMargin ? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
+            ${fluentFormErrorDesktopPadding && fluentFormErrorPaddingDesktop.top? `padding: ${fluentFormErrorDesktopPadding};` : ""}
+            ${fluentFormErrorDesktopMargin && fluentFormErrorMarginDesktop.top? `margin: ${fluentFormErrorDesktopMargin};` : ""} 
         }     
 
         @media only screen and (max-width: 1024px) {
 
             .${blockID}.fb-fluent-form-wrapper {
-                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
-                padding: ${TabletPadding}; 
-                margin: ${TabletMargin};
+                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''}
+                ${TabletPadding && fluentFormGlobalPaddingTablet.top ? `padding: ${TabletPadding};` : ''}
+                ${TabletMargin && fluentFormGlobalMarginTablet.top ? `margin: ${TabletMargin};` : ''}
                 border: ${fluentFormGlobalBorder};
-                border-width: ${BorderTabletWidth};
-                border-radius: ${BorderRadiusTabletWidth} !important;
-                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${BorderTabletWidth && fluentFormGlobalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ''}
+                ${BorderRadiusTabletWidth && fluentFormGlobalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ''}
+                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''}
                 ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
                 ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Tablet !== undefined ? `left: ${fluentFormHZLeftOffset.Tablet}${fluentFormHZLeftOffsetUnits.Tablet};` : ''}
                 ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Tablet !== undefined ? `right: ${fluentFormHZRightOffset.Tablet}${fluentFormHZRightOffsetUnits.Tablet};` : ''}
@@ -2825,8 +2825,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
-                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
-                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''}
+                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''}
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group {
@@ -2836,7 +2836,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Tablet && fluentFormLabelFontSizeUnits.Tablet ? `font-size: ${fluentFormLabelFontSize.Tablet}${fluentFormLabelFontSizeUnits.Tablet};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Tablet && fluentFormLabelLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormLabelLetterSpacing.Tablet}${fluentFormLabelLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Tablet && fluentFormLabelLineHeightUnits.Tablet ? `line-height: ${fluentFormLabelLineHeight.Tablet}${fluentFormLabelLineHeightUnits.Tablet};` : ''}
-                ${fluntFromLabelMarginTabletWidth ? `margin: ${fluntFromLabelMarginTabletWidth};` : ""}
+                ${fluntFromLabelMarginTabletWidth && fluntFromLabelMarginTablet.top? `margin: ${fluntFromLabelMarginTabletWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
@@ -2848,19 +2848,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Tablet}${fluentFormTextIndentSizeUnits.Tablet};` : ""}
                 ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Tablet}${fluentFormInputWidthSizeUnits.Tablet};` : ""}
                 ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Tablet}${fluentFormInputHeightSizeUnits.Tablet};` : ""}
-                ${fluentFormTabletPadding ? `padding: ${fluentFormTabletPadding};` : ""}
+                ${fluentFormTabletPadding && fluentFormPaddingTablet.top? `padding: ${fluentFormTabletPadding};` : ""}
                 ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
-                ${fluentFormBorderTabletWidth ? `border-width: ${fluentFormBorderTabletWidth};` : ""}
+                ${fluentFormBorderTabletWidth && fluentFormBorderTablet.top? `border-width: ${fluentFormBorderTabletWidth};` : ""}
                 ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
-                ${fluentFormBorderRadiusTabletWidth ? `border-radius: ${fluentFormBorderRadiusTabletWidth};` : ""}
+                ${fluentFormBorderRadiusTabletWidth && fluentFormBorderRadiusTablet.top ? `border-radius: ${fluentFormBorderRadiusTabletWidth};` : ""}
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
                 ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
-                ${fluentFormFocusBorderTabletWidth ? `border-width: ${fluentFormFocusBorderTabletWidth};` : ""}
-                ${fluentFormFocusBorderRadiusTabletWidth ? `border-radius: ${fluentFormFocusBorderRadiusTabletWidth};` : ""}
+                ${fluentFormFocusBorderTabletWidth && fluentFormFocusBorderTablet.top ? `border-width: ${fluentFormFocusBorderTabletWidth};` : ""}
+                ${fluentFormFocusBorderRadiusTabletWidth && fluentFormFocusBorderRadiusTablet.top ? `border-radius: ${fluentFormFocusBorderRadiusTabletWidth};` : ""}
                 ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
                 box-shadow: none;
             }
@@ -2895,7 +2895,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
                 ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
-                ${fluentFormCheckBoxBorderRadiusTabletWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusTabletWidth};` : ""}
+                ${fluentFormCheckBoxBorderRadiusTabletWidth && fluentFormCheckBoxBorderRadiusTablet.top? `border-radius: ${fluentFormCheckBoxBorderRadiusTabletWidth};` : ""}
                 position: relative;
                 appearance: none;
                 transition: all .3s ease-in-out;   
@@ -2906,7 +2906,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
                 ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
-                ${fluentFormRadioBorderRadiusTabletWidth ? `border-radius: ${fluentFormRadioBorderRadiusTabletWidth};` : ""}
+                ${fluentFormRadioBorderRadiusTabletWidth && fluentFormRadioBorderRadiusTablet.top? `border-radius: ${fluentFormRadioBorderRadiusTabletWidth};` : ""}
                 position: relative;
                 appearance: none;
                 transition: all .3s ease-in-out;   
@@ -2926,8 +2926,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Tablet && fluentFormSectionBreakTitleFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakTitleFontSize.Tablet}${fluentFormSectionBreakTitleFontSizeUnits.Tablet};` : ''}
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Tablet && fluentFormSectionBreakTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Tablet}${fluentFormSectionBreakTitleLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Tablet && fluentFormSectionBreakTitleLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Tablet}${fluentFormSectionBreakTitleLineHeightUnits.Tablet};` : ''}
-                ${fluentFormSectionBreakTitleTabletPadding ? `padding: ${fluentFormSectionBreakTitleTabletPadding};` : ""}
-                ${fluentFormSectionBreakTitleTabletMargin ? `margin: ${fluentFormSectionBreakTitleTabletMargin};` : ""}
+                ${fluentFormSectionBreakTitleTabletPadding && fluentFormSectionBreakTitlePaddingTablet.top? `padding: ${fluentFormSectionBreakTitleTabletPadding};` : ""}
+                ${fluentFormSectionBreakTitleTabletMargin && fluentFormSectionBreakTitleMarginTablet.top? `margin: ${fluentFormSectionBreakTitleTabletMargin};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
                 ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
@@ -2936,16 +2936,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Tablet && fluentFormSectionBreakDescFontSizeUnits.Tablet ? `font-size: ${fluentFormSectionBreakDescFontSize.Tablet}${fluentFormSectionBreakDescFontSizeUnits.Tablet};` : ''} 
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Tablet && fluentFormSectionBreakDescLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Tablet}${fluentFormSectionBreakDescLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Tablet && fluentFormSectionBreakDescLineHeightUnits.Tablet ? `line-height: ${fluentFormSectionBreakDescLineHeight.Tablet}${fluentFormSectionBreakDescLineHeightUnits.Tablet};` : ''}
-                ${fluentFormSectionBreakDescTabletPadding ? `padding: ${fluentFormSectionBreakDescTabletPadding};` : ""}
-                ${fluentFormSectionBreakDescTabletMargin ? `margin: ${fluentFormSectionBreakDescTabletMargin};` : ""}
+                ${fluentFormSectionBreakDescTabletPadding && fluentFormSectionBreakDescPaddingTablet.top? `padding: ${fluentFormSectionBreakDescTabletPadding};` : ""}
+                ${fluentFormSectionBreakDescTabletMargin && fluentFormSectionBreakDescMarginTablet.top? `margin: ${fluentFormSectionBreakDescTabletMargin};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
                 ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Tablet && fluentFormHtmlFontSizeUnits.Tablet ? `font-size: ${fluentFormHtmlFontSize.Tablet}${fluentFormHtmlFontSizeUnits.Tablet};` : ''} 
                 ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Tablet && fluentFormHtmlLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Tablet}${fluentFormHtmlLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Tablet && fluentFormHtmlLineHeightUnits.Tablet ? `line-height: ${fluentFormHtmlLineHeight.Tablet}${fluentFormHtmlLineHeightUnits.Tablet};` : ''} 
-                ${fluentFormHtmlTabletPadding ? `padding: ${fluentFormHtmlTabletPadding};` : ""}
-                ${fluentFormHtmlTabletMargin ? `margin: ${fluentFormHtmlTabletMargin};` : ""}
+                ${fluentFormHtmlTabletPadding && fluentFormHtmlPaddingTablet.top? `padding: ${fluentFormHtmlTabletPadding};` : ""}
+                ${fluentFormHtmlTabletMargin && fluentFormHtmlMarginTablet.top? `margin: ${fluentFormHtmlTabletMargin};` : ""}
             }
             
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
@@ -2956,11 +2956,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Tablet && fluentFormSubmitFontSizeUnits.Tablet ? `font-size: ${fluentFormSubmitFontSize.Tablet}${fluentFormSubmitFontSizeUnits.Tablet};` : ''} 
                 ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Tablet && fluentFormSubmitLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Tablet}${fluentFormSubmitLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Tablet && fluentFormSubmitLineHeightUnits.Tablet ? `line-height: ${fluentFormSubmitLineHeight.Tablet}${fluentFormSubmitLineHeightUnits.Tablet};` : ''} 
-                ${fluentFormSubmitTabletPadding ? `padding: ${fluentFormSubmitTabletPadding};` : ""}
-                ${fluentFormSubmitTabletMargin ? `margin: ${fluentFormSubmitTabletMargin};` : ""}
+                ${fluentFormSubmitTabletPadding && fluentFormSubmitPaddingTablet.top? `padding: ${fluentFormSubmitTabletPadding};` : ""}
+                ${fluentFormSubmitTabletMargin && fluentFormSubmitMarginTablet.top? `margin: ${fluentFormSubmitTabletMargin};` : ""}
 
-                ${fluentFormSubmitTabletBorderWidth ? `border-width: ${fluentFormSubmitTabletBorderWidth};` : ""}
-                ${fluentFormSubmitTabletBorderRadiusWidth ? `border-radius: ${fluentFormSubmitTabletBorderRadiusWidth};` : ""}
+                ${fluentFormSubmitTabletBorderWidth && fluentFormSubmitBorderTablet.top? `border-width: ${fluentFormSubmitTabletBorderWidth};` : ""}
+                ${fluentFormSubmitTabletBorderRadiusWidth && fluentFormSubmitBorderRadiusTablet.top? `border-radius: ${fluentFormSubmitTabletBorderRadiusWidth};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
                 ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -2973,16 +2973,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Tablet && fluentFormSuccessFontSizeUnits.Tablet ? `font-size: ${fluentFormSuccessFontSize.Tablet}${fluentFormSuccessFontSizeUnits.Tablet};` : ''} 
                 ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Tablet && fluentFormSuccessLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Tablet}${fluentFormSuccessLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Tablet && fluentFormSuccessLineHeightUnits.Tablet ? `line-height: ${fluentFormSuccessLineHeight.Tablet}${fluentFormSuccessLineHeightUnits.Tablet};` : ''}
-                ${fluentFormSuccessTabletBorderWidth ? `border-width: ${fluentFormSuccessTabletBorderWidth};` : ""}
-                ${fluentFormSuccessTabletBorderRadiusWidth ? `border-radius: ${fluentFormSuccessTabletBorderRadiusWidth};` : ""}
+                ${fluentFormSuccessTabletBorderWidth && fluentFormSuccessBorderTablet.top? `border-width: ${fluentFormSuccessTabletBorderWidth};` : ""}
+                ${fluentFormSuccessTabletBorderRadiusWidth && fluentFormSuccessBorderRadiusTablet.top? `border-radius: ${fluentFormSuccessTabletBorderRadiusWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .error.text-danger {
                 ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Tablet && fluentFormErrorFontSizeUnits.Tablet ? `font-size: ${fluentFormErrorFontSize.Tablet}${fluentFormErrorFontSizeUnits.Tablet};` : ''} 
                 ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Tablet && fluentFormErrorLetterSpacingUnits.Tablet ? `letter-spacing: ${fluentFormErrorLetterSpacing.Tablet}${fluentFormErrorLetterSpacingUnits.Tablet};` : ''}
                 ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Tablet && fluentFormErrorLineHeightUnits.Tablet ? `line-height: ${fluentFormErrorLineHeight.Tablet}${fluentFormErrorLineHeightUnits.Tablet};` : ''} 
-                ${fluentFormErrorTabletPadding ? `padding: ${fluentFormErrorTabletPadding};` : ""}
-                ${fluentFormErrorTabletMargin ? `margin: ${fluentFormErrorTabletMargin};` : ""} 
+                ${fluentFormErrorTabletPadding && fluentFormErrorPaddingTablet.top? `padding: ${fluentFormErrorTabletPadding};` : ""}
+                ${fluentFormErrorTabletMargin && fluentFormErrorMarginTablet.top? `margin: ${fluentFormErrorTabletMargin};` : ""} 
             }
 
             .fluentform * {
@@ -3023,7 +3023,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 background-clip: padding-box;
                 background-image: none;
                 border-radius: 7px;
-                border-radius: ;
                 line-height: 1;
                 margin-bottom: 0;
                 max-width: 100%;
@@ -3057,13 +3056,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 767px) {
 
             .${blockID}.fb-fluent-form-wrapper {
-                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''};
-                padding: ${MobilePadding};  
-                margin: ${MobileMargin};
+                ${fluentFormGlobalBgColor !== undefined ? `background-color: ${fluentFormGlobalBgColor};` : ''}
+                ${MobilePadding && fluentFormGlobalPaddingMobile.top ? `padding: ${MobilePadding};` : ''}
+                ${MobileMargin && fluentFormGlobalMarginMobile.top ? `margin: ${MobileMargin};` : ''}
                 border: ${fluentFormGlobalBorder};
-                border-width: ${BorderMobileWidth};
-                border-radius: ${BorderRadiusMobileWidth} !important;
-                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''};
+                ${BorderMobileWidth && fluentFormGlobalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ''}
+                ${BorderRadiusMobileWidth && fluentFormGlobalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ''}
+                ${fluentFormGlobalBorderColor !== undefined ? `border-color: ${fluentFormGlobalBorderColor};` : ''}
                 ${fluentFormPositionType !== 'default' ? `position: ${fluentFormPositionType};` : ''}
                 ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'left' && fluentFormHZLeftOffset.Mobile !== undefined ? `left: ${fluentFormHZLeftOffset.Mobile}${fluentFormHZLeftOffsetUnits.Mobile};` : ''}
                 ${fluentFormPositionType !== 'default' && fluentFormPositionType !== 'relative' && fluentFormHZOrientationType === 'right' && fluentFormHZRightOffset.Mobile !== undefined ? `right: ${fluentFormHZRightOffset.Mobile}${fluentFormHZRightOffsetUnits.Mobile};` : ''}
@@ -3074,8 +3073,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper:hover {
-                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''};
-                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''};
+                ${fluentFormGlobalBgHoverColor !== undefined ? `background-color: ${fluentFormGlobalBgHoverColor};` : ''}
+                ${fluentFormGlobalBorderHoverColor !== undefined ? `border-color: ${fluentFormGlobalBorderHoverColor};` : ''}
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group {
@@ -3085,7 +3084,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormLabelGlobalTypoSwitcher.fontSize === false && fluentFormLabelFontSize.Mobile && fluentFormLabelFontSizeUnits.Mobile ? `font-size: ${fluentFormLabelFontSize.Mobile}${fluentFormLabelFontSizeUnits.Mobile};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.letterSpacing === false && fluentFormLabelLetterSpacing.Mobile && fluentFormLabelLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormLabelLetterSpacing.Mobile}${fluentFormLabelLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormLabelGlobalTypoSwitcher.lineHeight === false && fluentFormLabelLineHeight.Mobile && fluentFormLabelLineHeightUnits.Mobile ? `line-height: ${fluentFormLabelLineHeight.Mobile}${fluentFormLabelLineHeightUnits.Mobile};` : ''}
-                ${fluntFromLabelMarginMobileWidth ? `margin: ${fluntFromLabelMarginMobileWidth};` : ""}
+                ${fluntFromLabelMarginMobileWidth && fluntFromLabelMarginMobile.top? `margin: ${fluntFromLabelMarginMobileWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper input:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
@@ -3097,20 +3096,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormTextIndentSize ? `text-indent: ${fluentFormTextIndentSize.Mobile}${fluentFormTextIndentSizeUnits.Mobile};` : ""}
                 ${fluentFormInputWidthSize ? `width: ${fluentFormInputWidthSize.Mobile}${fluentFormInputWidthSizeUnits.Mobile};` : ""}
                 ${fluentFormInputHeightSize ? `height: ${fluentFormInputHeightSize.Mobile}${fluentFormInputHeightSizeUnits.Mobile};` : ""}
-                ${fluentFormMobilePadding ? `padding: ${fluentFormMobilePadding};` : ""} 
+                ${fluentFormMobilePadding && fluentFormPaddingMobile.top? `padding: ${fluentFormMobilePadding};` : ""} 
                 ${fluentFormBorder ? `border: ${fluentFormBorder};` : ""}
-                ${fluentFormBorderMobileWidth ? `border-width: ${fluentFormBorderMobileWidth};` : ""}
+                ${fluentFormBorderMobileWidth && fluentFormBorderMobile.top? `border-width: ${fluentFormBorderMobileWidth};` : ""}
                 ${fluentFormBorderColor ? `border-color: ${fluentFormBorderColor};` : ""}
-                ${fluentFormBorderRadiusMobileWidth ? `border-radius: ${fluentFormBorderRadiusMobileWidth};` : ""}
+                ${fluentFormBorderRadiusMobileWidth && fluentFormBorderRadiusMobile.top ? `border-radius: ${fluentFormBorderRadiusMobileWidth};` : ""}
                 transition: all .3s ease-in-out;
             }
             .${blockID}.fb-fluent-form-wrapper input:focus:not([type=radio]):not([type=checkbox]):not([type=submit]):not([type=button]):not([type=image]):not([type=file]), 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea:focus, 
             .${blockID}.fb-fluent-form-wrapper .ff-el-group select:focus {
                 ${fluentFormFocusBorder ? `border: ${fluentFormFocusBorder};` : ""}
-                ${fluentFormFocusBorderMobileWidth ? `border-width: ${fluentFormFocusBorderMobileWidth};` : ""}
+                ${fluentFormFocusBorderMobileWidth && fluentFormFocusBorderMobile.top ? `border-width: ${fluentFormFocusBorderMobileWidth};` : ""}
                 ${fluentFormInputFocusColor ? `border-color: ${fluentFormInputFocusColor};` : ""}
-                ${fluentFormFocusBorderRadiusMobileWidth ? `border-radius: ${fluentFormFocusBorderRadiusMobileWidth};` : ""}
+                ${fluentFormFocusBorderRadiusMobileWidth && fluentFormFocusBorderRadiusMobile.top ? `border-radius: ${fluentFormFocusBorderRadiusMobileWidth};` : ""}
                 box-shadow: none;
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-group textarea {
@@ -3144,7 +3143,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
                 ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
-                ${fluentFormCheckBoxBorderRadiusMobileWidth ? `border-radius: ${fluentFormCheckBoxBorderRadiusMobileWidth};` : ""}
+                ${fluentFormCheckBoxBorderRadiusMobileWidth && fluentFormCheckBoxBorderRadiusMobile.top? `border-radius: ${fluentFormCheckBoxBorderRadiusMobileWidth};` : ""}
                 position: relative;
                 appearance: none;
                 transition: all .3s ease-in-out;   
@@ -3155,7 +3154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioColor ? `background: ${fluentFormRadioColor};` : ""}
                 ${fluentFormRadioBorderColor ? `border-color: ${fluentFormRadioBorderColor};` : ""}
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
-                ${fluentFormRadioBorderRadiusMobileWidth ? `border-radius: ${fluentFormRadioBorderRadiusMobileWidth};` : ""}
+                ${fluentFormRadioBorderRadiusMobileWidth && fluentFormRadioBorderRadiusMobile.top? `border-radius: ${fluentFormRadioBorderRadiusMobileWidth};` : ""}
                 position: relative;
                 appearance: none;
                 transition: all .3s ease-in-out;   
@@ -3169,14 +3168,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break,
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break hr {
-                text-align: ${fluentFormSectionBreakAlignment};
+                ${fluentFormSectionBreakAlignment ? `text-align: ${fluentFormSectionBreakAlignment};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title {
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakTitleFontSize.Mobile && fluentFormSectionBreakTitleFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakTitleFontSize.Mobile}${fluentFormSectionBreakTitleFontSizeUnits.Mobile};` : ''}
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakTitleLetterSpacing.Mobile && fluentFormSectionBreakTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakTitleLetterSpacing.Mobile}${fluentFormSectionBreakTitleLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormSectionBreakTitleGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakTitleLineHeight.Mobile && fluentFormSectionBreakTitleLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakTitleLineHeight.Mobile}${fluentFormSectionBreakTitleLineHeightUnits.Mobile};` : ''}
-                ${fluentFormSectionBreakTitleMobilePadding ? `padding: ${fluentFormSectionBreakTitleMobilePadding};` : ""}
-                ${fluentFormSectionBreakTitleMobileMargin ? `margin: ${fluentFormSectionBreakTitleMobileMargin};` : ""}
+                ${fluentFormSectionBreakTitleMobilePadding && fluentFormSectionBreakTitlePaddingMobile.top? `padding: ${fluentFormSectionBreakTitleMobilePadding};` : ""}
+                ${fluentFormSectionBreakTitleMobileMargin && fluentFormSectionBreakTitleMarginMobile.top? `margin: ${fluentFormSectionBreakTitleMobileMargin};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff-el-section-break .ff-el-section-title:hover {
                 ${fluentFormSectionBreakTitleHoverColor ? `color: ${fluentFormSectionBreakTitleHoverColor};` : ""}
@@ -3185,16 +3184,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.fontSize === false && fluentFormSectionBreakDescFontSize.Mobile && fluentFormSectionBreakDescFontSizeUnits.Mobile ? `font-size: ${fluentFormSectionBreakDescFontSize.Mobile}${fluentFormSectionBreakDescFontSizeUnits.Mobile};` : ''} 
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.letterSpacing === false && fluentFormSectionBreakDescLetterSpacing.Mobile && fluentFormSectionBreakDescLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSectionBreakDescLetterSpacing.Mobile}${fluentFormSectionBreakDescLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormSectionBreakDescGlobalTypoSwitcher.lineHeight === false && fluentFormSectionBreakDescLineHeight.Mobile && fluentFormSectionBreakDescLineHeightUnits.Mobile ? `line-height: ${fluentFormSectionBreakDescLineHeight.Mobile}${fluentFormSectionBreakDescLineHeightUnits.Mobile};` : ''}
-                ${fluentFormSectionBreakDescMobilePadding ? `padding: ${fluentFormSectionBreakDescMobilePadding};` : ""}
-                ${fluentFormSectionBreakDescMobileMargin ? `margin: ${fluentFormSectionBreakDescMobileMargin};` : ""}
+                ${fluentFormSectionBreakDescMobilePadding && fluentFormSectionBreakDescPaddingMobile.top? `padding: ${fluentFormSectionBreakDescMobilePadding};` : ""}
+                ${fluentFormSectionBreakDescMobileMargin && fluentFormSectionBreakDescMarginMobile.top? `margin: ${fluentFormSectionBreakDescMobileMargin};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .ff-custom_html > * {
                 ${fluentFormHtmlGlobalTypoSwitcher.fontSize === false && fluentFormHtmlFontSize.Mobile && fluentFormHtmlFontSizeUnits.Mobile ? `font-size: ${fluentFormHtmlFontSize.Mobile}${fluentFormHtmlFontSizeUnits.Mobile};` : ''} 
                 ${fluentFormHtmlGlobalTypoSwitcher.letterSpacing === false && fluentFormHtmlLetterSpacing.Mobile && fluentFormHtmlLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormHtmlLetterSpacing.Mobile}${fluentFormHtmlLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormHtmlGlobalTypoSwitcher.lineHeight === false && fluentFormHtmlLineHeight.Mobile && fluentFormHtmlLineHeightUnits.Mobile ? `line-height: ${fluentFormHtmlLineHeight.Mobile}${fluentFormHtmlLineHeightUnits.Mobile};` : ''} 
-                ${fluentFormHtmlMobilePadding ? `padding: ${fluentFormHtmlMobilePadding};` : ""}
-                ${fluentFormHtmlMobileMargin ? `margin: ${fluentFormHtmlMobileMargin};` : ""}
+                ${fluentFormHtmlMobilePadding && fluentFormHtmlPaddingMobile.top? `padding: ${fluentFormHtmlMobilePadding};` : ""}
+                ${fluentFormHtmlMobileMargin && fluentFormHtmlMarginMobile.top? `margin: ${fluentFormHtmlMobileMargin};` : ""}
             }
             
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper {
@@ -3205,11 +3204,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSubmitGlobalTypoSwitcher.fontSize === false && fluentFormSubmitFontSize.Mobile && fluentFormSubmitFontSizeUnits.Mobile ? `font-size: ${fluentFormSubmitFontSize.Mobile}${fluentFormSubmitFontSizeUnits.Mobile};` : ''} 
                 ${fluentFormSubmitGlobalTypoSwitcher.letterSpacing === false && fluentFormSubmitLetterSpacing.Mobile && fluentFormSubmitLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSubmitLetterSpacing.Mobile}${fluentFormSubmitLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormSubmitGlobalTypoSwitcher.lineHeight === false && fluentFormSubmitLineHeight.Mobile && fluentFormSubmitLineHeightUnits.Mobile ? `line-height: ${fluentFormSubmitLineHeight.Mobile}${fluentFormSubmitLineHeightUnits.Mobile};` : ''} 
-                ${fluentFormSubmitMobilePadding ? `padding: ${fluentFormSubmitMobilePadding};` : ""}
-                ${fluentFormSubmitMobileMargin ? `margin: ${fluentFormSubmitMobileMargin};` : ""}
+                ${fluentFormSubmitMobilePadding && fluentFormSubmitPaddingMobile.top? `padding: ${fluentFormSubmitMobilePadding};` : ""}
+                ${fluentFormSubmitMobileMargin && fluentFormSubmitMarginMobile.top? `margin: ${fluentFormSubmitMobileMargin};` : ""}
 
-                ${fluentFormSubmitMobileBorderWidth ? `border-width: ${fluentFormSubmitMobileBorderWidth};` : ""}
-                ${fluentFormSubmitMobileBorderRadiusWidth ? `border-radius: ${fluentFormSubmitMobileBorderRadiusWidth};` : ""}
+                ${fluentFormSubmitMobileBorderWidth && fluentFormSubmitBorderMobile.top? `border-width: ${fluentFormSubmitMobileBorderWidth};` : ""}
+                ${fluentFormSubmitMobileBorderRadiusWidth && fluentFormSubmitBorderRadiusMobile.top? `border-radius: ${fluentFormSubmitMobileBorderRadiusWidth};` : ""}
             }
             .${blockID}.fb-fluent-form-wrapper .ff_submit_btn_wrapper .ff-btn-submit {
                 ${fluentFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
@@ -3222,16 +3221,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormSuccessGlobalTypoSwitcher.fontSize === false && fluentFormSuccessFontSize.Mobile && fluentFormSuccessFontSizeUnits.Mobile ? `font-size: ${fluentFormSuccessFontSize.Mobile}${fluentFormSuccessFontSizeUnits.Mobile};` : ''} 
                 ${fluentFormSuccessGlobalTypoSwitcher.letterSpacing === false && fluentFormSuccessLetterSpacing.Mobile && fluentFormSuccessLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormSuccessLetterSpacing.Mobile}${fluentFormSuccessLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormSuccessGlobalTypoSwitcher.lineHeight === false && fluentFormSuccessLineHeight.Mobile && fluentFormSuccessLineHeightUnits.Mobile ? `line-height: ${fluentFormSuccessLineHeight.Mobile}${fluentFormSuccessLineHeightUnits.Mobile};` : ''}
-                ${fluentFormSuccessMobileBorderWidth ? `border-width: ${fluentFormSuccessMobileBorderWidth};` : ""}
-                ${fluentFormSuccessMobileBorderRadiusWidth ? `border-radius: ${fluentFormSuccessMobileBorderRadiusWidth};` : ""}
+                ${fluentFormSuccessMobileBorderWidth && fluentFormSuccessBorderMobile.top? `border-width: ${fluentFormSuccessMobileBorderWidth};` : ""}
+                ${fluentFormSuccessMobileBorderRadiusWidth && fluentFormSuccessBorderRadiusMobile.top? `border-radius: ${fluentFormSuccessMobileBorderRadiusWidth};` : ""}
             }
 
             .${blockID}.fb-fluent-form-wrapper .error.text-danger {
                 ${fluentFormErrorGlobalTypoSwitcher.fontSize === false && fluentFormErrorFontSize.Mobile && fluentFormErrorFontSizeUnits.Mobile ? `font-size: ${fluentFormErrorFontSize.Mobile}${fluentFormErrorFontSizeUnits.Mobile};` : ''} 
                 ${fluentFormErrorGlobalTypoSwitcher.letterSpacing === false && fluentFormErrorLetterSpacing.Mobile && fluentFormErrorLetterSpacingUnits.Mobile ? `letter-spacing: ${fluentFormErrorLetterSpacing.Mobile}${fluentFormErrorLetterSpacingUnits.Mobile};` : ''}
                 ${fluentFormErrorGlobalTypoSwitcher.lineHeight === false && fluentFormErrorLineHeight.Mobile && fluentFormErrorLineHeightUnits.Mobile ? `line-height: ${fluentFormErrorLineHeight.Mobile}${fluentFormErrorLineHeightUnits.Mobile};` : ''} 
-                ${fluentFormErrorMobilePadding ? `padding: ${fluentFormErrorMobilePadding};` : ""}
-                ${fluentFormErrorMobileMargin ? `margin: ${fluentFormErrorMobileMargin};` : ""} 
+                ${fluentFormErrorMobilePadding && fluentFormErrorPaddingMobile.top? `padding: ${fluentFormErrorMobilePadding};` : ""}
+                ${fluentFormErrorMobileMargin && fluentFormErrorMarginMobile.top? `margin: ${fluentFormErrorMobileMargin};` : ""} 
             } 
             .frm-fluent-form .ff-t-container {
                 display: block;

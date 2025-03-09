@@ -1,41 +1,40 @@
-import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-import classnames from 'classnames';
+import { useBlockProps } from "@wordpress/block-editor";
+import { useState } from "react";
 
 export default function save({ attributes }) {
-    const {
-        blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
-        showDropdownIcon,
-        navBtnType,
-        navVerticalAlign,
-        hamburgerCloseIconAlign,
-        classHook,
-    } = attributes;
+	const { blockID, selectedPatternContent } = attributes;
+	const blockProps = useBlockProps.save({
+		className: `fb-off-canvas-menu-main-wrapper ${blockID}`,
+	});
 
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
+	return (
+		<>
+			<div {...blockProps}>
+				{/* SVG Icon to open menu */}
+				<div className="fb-menu-icon" onClick={() => toggleMenu()}>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+						<path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z" />
+					</svg>
+				</div>
 
-    const blockProps = useBlockProps.save({
-        className: classnames(`frontis-advanced-navigation-wrapper`),
-    });
+				{/* Off-Canvas Menu */}
+				<div id="fb-off-canvas-menu" className="fb-off-canvas-menu">
+					<button className="close-btn" onClick={() => toggleMenu()}>×</button>
+					<div dangerouslySetInnerHTML={{ __html: selectedPatternContent }} />
+				</div>
+			</div>
 
-    return (
-        <div {...blockProps}>
-            <div className={`fb-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
-                <div
-                    className={`${blockId} frontis-advanced-navigation-inner ${layout} ${layoutPreset} ${
-                        layout === "is-horizontal" ? navAlign : navVerticalAlign
-                    } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                        navBtnType ? "responsive-icon" : "responsive-text"
-                    } ${hamburgerCloseIconAlign}`}
-                >
-                    <div className="frontis-nav-contents">
-                        <InnerBlocks.Content />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+			{/* JS Logic */}
+			<script
+				dangerouslySetInnerHTML={{
+					__html: `
+						function toggleMenu() {
+							const menu = document.getElementById('fb-off-canvas-menu');
+							menu.classList.toggle('open');
+						}
+					`,
+				}}
+			/>
+		</>
+	);
 }

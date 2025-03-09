@@ -74,12 +74,6 @@ let defaultsColors = [
 		"color": '#808080',
 		"slug": 'gray-color',
 	},
-
-	{
-		"name": __("Gray Color2", "frontis-blocks"),
-		"color": '#808080',
-		"slug": 'gray-color2',
-	}
 ];
 
 const gradientDefaults = [
@@ -918,7 +912,12 @@ function FrontisBlocksSidebar(props) {
 
 	useEffect(() => {
 		if(fbGlobalSettingsLoading) {
-			editPost({ isDirty: true });
+			if(!!wp.data.select('core/edit-site')) {
+				editPost({ isDirty: true });
+			} else {
+				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+			}
+			
 		}
 	}, [fbGlobalSettingsLoading]);
 
