@@ -20,12 +20,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		directionDesktop,
 		directionTablet,
 		directionMobile,
-		alignItemsDesktop,
-		alignItemsTablet,
-		alignItemsMobile,
-		justifyContentDesktop,
-		justifyContentTablet,
-		justifyContentMobile,
 		alignContentDesktop,
 		alignContentTablet,
 		alignContentMobile,
@@ -222,12 +216,13 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerDesktopPadding,
 		containerTabletPadding,
 		containerMobilePadding,
-		containerPaddingLink,
 		containerMarginUnits,	
 		containerDesktopMargin,
 		containerTabletMargin,
 		containerMobileMargin,
-		containerMarginLink,
+		containerDirection,
+		containerJustify,
+		containerAlignItems,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -242,8 +237,13 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	);
 	const widthDesktopFallback = getFallbackNumber( customWidth[deviceType], 'customWidth', blockName );
 
-	const rowGapDesktopFallback = getFallbackNumber( rowGap[deviceType], 'rowGapDesktop', blockName );
-	const columnGapDesktopFallback = getFallbackNumber( columnGap[deviceType], 'columnGapDesktop', blockName );
+	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'], 'rowGapDesktop', blockName );
+	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'], 'columnGapDesktop', blockName );
+	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'], 'rowGapTablet', blockName );
+	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'], 'columnGapTablet', blockName );
+	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'], 'rowGapMobile', blockName );
+	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'], 'columnGapMobile', blockName );
+
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
 	const borderCSSTablet = generateBorderCSS( attributes, 'container', 'tablet' );
@@ -515,10 +515,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	let containerFlexSelector =
 		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	// if ( ! isBlockRootParent || 'alignfull' !== contentWidth || 'alignwide' !== innerContentWidth ) {
-	// 	containerFlexSelector =
-	// 		'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	// }
+	if ( ! isBlockRootParent) {
+		containerFlexSelector =
+			'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
+	}
 
 	const gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
 	const widthSelectorsDesktop = {};
@@ -535,19 +535,19 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	if( ! isLayoutGrid ){
 		selectors[ containerFlexSelector ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
-			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits[deviceType] ),
-			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits[deviceType] ),
+			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits['Desktop'] ),
+			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
 		selectors[ '.block-editor-block-list__block' ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
 			...selectors[ '.block-editor-block-list__block' ],
@@ -607,20 +607,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	const tablet_selectors = {
 		[ containerFlexSelector ]: {
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
-			'row-gap': generateCSSUnit( rowGapTablet, rowGapTypeTablet ),
-			'column-gap': generateCSSUnit( columnGapTablet, columnGapTypeTablet ),
+			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapUnits['Tablet'] ),
+			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
 		},
@@ -639,20 +639,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-inline-end': '0px',
 		},
 		[ containerFlexSelector ]: {
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
-			'row-gap': generateCSSUnit( rowGapMobile, rowGapTypeMobile ),
-			'column-gap': generateCSSUnit( columnGapMobile, columnGapTypeMobile ),
+			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapUnits['Mobile'] ),
+			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
 		},

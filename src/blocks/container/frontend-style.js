@@ -12,20 +12,10 @@ import backgroundCss from './backgroundCss';
 
 function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = false ) {
 	const blockName = name.replace( 'frotins-blocks/', '' );
-	const previewType = deviceType.toLowerCase();
 	let {
-		widthTablet,
-		widthMobile,
-		widthType,
 		directionDesktop,
 		directionTablet,
 		directionMobile,
-		alignItemsDesktop,
-		alignItemsTablet,
-		alignItemsMobile,
-		justifyContentDesktop,
-		justifyContentTablet,
-		justifyContentMobile,
 		alignContentDesktop,
 		alignContentTablet,
 		alignContentMobile,
@@ -63,9 +53,6 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		bottomPaddingMobile,
 		leftPaddingMobile,
 		rightPaddingMobile,
-		paddingType,
-		paddingTypeTablet,
-		paddingTypeMobile,
 		topMarginDesktop,
 		bottomMarginDesktop,
 		leftMarginDesktop,
@@ -78,23 +65,17 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		bottomMarginMobile,
 		leftMarginMobile,
 		rightMarginMobile,
-		marginType,
-		marginTypeTablet,
-		marginTypeMobile,
-		rowGapDesktop,
 		rowGapTablet,
 		rowGapMobile,
 		rowGapType,
 		rowGapTypeTablet,
 		rowGapTypeMobile,
-		columnGapDesktop,
 		columnGapTablet,
 		columnGapMobile,
 		columnGapType,
 		columnGapTypeTablet,
 		columnGapTypeMobile,
 		contentWidth,
-		innerContentWidth,
 		bottomColor,
 		bottomHeight,
 		bottomHeightTablet,
@@ -116,16 +97,10 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		textColor,
 		linkColor,
 		linkHoverColor,
-		innerContentCustomWidthTablet,
-		innerContentCustomWidthMobile,
-		innerContentCustomWidthTypeMobile,
-		innerContentCustomWidthTypeTablet,
 
 		overflow,
 		isBlockRootParent,
 
-		widthTypeTablet,
-		widthTypeMobile,
 		gradientColor1,
 		gradientColor2,
 		gradientLocation1,
@@ -231,13 +206,14 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		containerDesktopPadding,
 		containerTabletPadding,
 		containerMobilePadding,
-		containerPaddingLink,
 		containerMarginUnits,	
 		containerDesktopMargin,
 		containerTabletMargin,
 		containerMobileMargin,
-		containerMarginLink,
         customWidthUnits,
+		containerAlignItems,
+		containerDirection,
+		containerJustify,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -246,10 +222,23 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 	const isLayoutGrid = 'grid' === layout;
 
 	const innerContentCustomWidthDesktopFallback = getFallbackNumber(
-		fullWidthContentBoxedWidth[deviceType],
+		fullWidthContentBoxedWidth['Desktop'],
 		'innerContentCustomWidthDesktop',
 		blockName
 	);
+
+	const innerContentCustomWidthTabletFallback = getFallbackNumber(
+		fullWidthContentBoxedWidth['Tablet'],
+		'innerContentCustomWidthTablet',
+		blockName
+	);
+
+	const innerContentCustomWidthMobileFallback = getFallbackNumber(
+		fullWidthContentBoxedWidth['Mobile'],
+		'innerContentCustomWidthMobile',
+		blockName
+	);
+
 	const widthDesktopFallback = getFallbackNumber( customWidth['Desktop'], 'customWidth', blockName );
 	const widthTabletFallback = getFallbackNumber( customWidth['Tablet'], 'customWidth', blockName );
 	const widthMobileFallback = getFallbackNumber( customWidth['Mobile'], 'customWidth', blockName );
@@ -568,9 +557,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 
 	if( ! isLayoutGrid ){
 		selectors[ containerFlexSelector ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
 			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits['Desktop'] ),
@@ -578,9 +567,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			...selectors[ containerFlexSelector ],
 		};
 		selectors[ '.block-editor-block-list__block' ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
 			...selectors[ '.block-editor-block-list__block' ],
@@ -615,7 +604,7 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		};
 
 		widthSelectorsTablet[`${isBlockRootParent && '#block-'+clientId} .frontis-blocks-container-inner-blocks-wrap`] = {
-			'--inner-content-custom-width' : `min(${ containerFullWidth },${ innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback }${ fullWidthContentBoxedWidthUnits['Tablet'] })`,
+			'--inner-content-custom-width' : `min(${ containerFullWidth },${ innerContentCustomWidthTabletFallback || innerContentCustomWidthTabletFallback }${ fullWidthContentBoxedWidthUnits['Tablet'] })`,
 			'max-width' : 'var(--inner-content-custom-width)',
 			'width' :'100%',
 			'margin-left': 'auto',
@@ -626,7 +615,7 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			`${isBlockRootParent && '#block-'+clientId} .frontis-blocks-container-inner-blocks-wrap`
 			] = {
 			'--inner-content-custom-width': `min(${ containerFullWidth },${
-				innerContentCustomWidthMobile || innerContentCustomWidthTablet || innerContentCustomWidthDesktopFallback
+				innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback
 			}${ fullWidthContentBoxedWidthUnits['Mobile'] })`,
 			'max-width': 'var(--inner-content-custom-width)',
 			'width': '100%',
@@ -637,9 +626,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 
 	const tablet_selectors = {
 		[ containerFlexSelector ]: {
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
 			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapUnits['Tablet'] ),
@@ -648,9 +637,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
 		},
@@ -669,9 +658,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			'margin-inline-end': '0px',
 		},
 		[ containerFlexSelector ]: {
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
 			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapUnits['Mobile'] ),
@@ -680,9 +669,9 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
 		},

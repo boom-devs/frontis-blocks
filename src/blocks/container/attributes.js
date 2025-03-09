@@ -206,6 +206,24 @@ const attributes = {
 		}
 	},
 
+	containerDirection: {
+		type: 'object',
+		default: {
+			Desktop: 'row',
+			Tablet: 'row',
+			Mobile: 'row',
+		}
+	},
+
+	containerJustify: {
+		type: 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: 'center',
+			Mobile: 'center',
+		}
+	},
+
 	directionDesktop: {
 		type: 'string',
 		default: 'column',
@@ -216,16 +234,15 @@ const attributes = {
 	directionMobile: {
 		type: 'string',
 	},
-	alignItemsDesktop: {
-		type: 'string',
-		default: 'center',
+	containerAlignItems:{
+		type: 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: 'center',
+			Mobile: 'center',
+		}
 	},
-	alignItemsTablet: {
-		type: 'string',
-	},
-	alignItemsMobile: {
-		type: 'string',
-	},
+	
 	justifyContentDesktop: {
 		type: 'string',
 		default: 'center',
