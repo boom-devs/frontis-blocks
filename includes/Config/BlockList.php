@@ -393,6 +393,18 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
             ],
+            'loop-builder' => [
+                'slug'      => 'loop-builder',
+                'title'     => 'Loop Builder',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/off-canvas-hamburger.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+            ],
 
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
