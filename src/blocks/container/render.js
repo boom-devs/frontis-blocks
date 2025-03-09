@@ -58,6 +58,9 @@ const Render = ( props ) => {
 			containerBgHoverBackgroundImageAttachment,
 			containerBgHoverBackgroundImageRepeat,
 			containerBgHoverBackgroundImageSize,
+
+			// From fb
+			containerType
 			
 	} = attributes;
 
@@ -73,7 +76,7 @@ const Render = ( props ) => {
 	const Tag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
 	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
-	const isRootContainerClass = isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : '';
+	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {

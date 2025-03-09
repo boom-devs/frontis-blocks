@@ -23,7 +23,8 @@ class Blocks
 		add_action('init', [$this, 'register_blocks']);
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
-		add_action('enqueue_block_assets', [$this, 'combined_frontis_blocks_assets']);
+		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
+		add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
 	}
 
 	public function register_blocks()
@@ -164,10 +165,32 @@ class Blocks
 			$block_content = $this->add_block_id($block_content, $parsed_block);
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
 		}
-
-		GenerateFrontendCss::get_instance()->generate_css($block_content, $parsed_block);
-
 		return $block_content;
+	}
+
+	public function get_blocks_on_save($post_id, $post, $update) {
+		if ($update) {
+			Helper::get_current_page_name($post_id);
+			$post_content = $post->post_content;
+			$page_name = $post->post_name;
+			new EnqueueBlocksCss($page_name);
+
+			$blocks = parse_blocks($post_content);
+			$this->process_blocks_recursively($blocks);
+		}
+	}
+	
+	private function process_blocks_recursively($blocks) {
+		foreach ($blocks as $block) {
+			GenerateFrontendCss::get_instance()->render_generated_css($block, $block, $block['attrs']);
+			if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+				$this->process_blocks_recursively($block['innerBlocks']);
+			}
+		}
+	}
+
+	public function remove_css_files($meta_id, $object_id, $meta_key, $meta_value) {
+		Helper::remove_css_files();
 	}
 
 	private function add_wrapper_class($block_content, $parsed_block)
