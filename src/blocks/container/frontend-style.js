@@ -254,8 +254,12 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 	const widthTabletFallback = getFallbackNumber( customWidth['Tablet'], 'customWidth', blockName );
 	const widthMobileFallback = getFallbackNumber( customWidth['Mobile'], 'customWidth', blockName );
 
-	const rowGapDesktopFallback = getFallbackNumber( rowGap[deviceType], 'rowGapDesktop', blockName );
-	const columnGapDesktopFallback = getFallbackNumber( columnGap[deviceType], 'columnGapDesktop', blockName );
+	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'], 'rowGapDesktop', blockName );
+	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'], 'columnGapDesktop', blockName );
+	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'], 'rowGapTablet', blockName );
+	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'], 'columnGapTablet', blockName );
+	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'], 'rowGapMobile', blockName );
+	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'], 'columnGapMobile', blockName );
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
 	const borderCSSTablet = generateBorderCSS( attributes, 'container', 'tablet' );
@@ -302,8 +306,6 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 	const innerRightMarginTablet = rightMarginTablet;
 	const innerLeftMarginMobile = leftMarginMobile;
 	const innerRightMarginMobile = rightMarginMobile;
-
-    console.log(containerCustomWidthUnits)
 
 	if( 'alignfull' === contentWidth || 'alignwide' === contentWidth ){
 		leftMarginDesktop = rightMarginDesktop = leftMarginTablet = rightMarginTablet = leftMarginMobile = rightMarginMobile  = '';
@@ -550,13 +552,8 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 	boxShadowColorHover = boxShadowColorHover ? boxShadowColorHover : '';
 
 	let containerFlexSelector =
-		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	if ( ! isBlockRootParent || 'alignfull' !== contentWidth || 'alignwide' !== innerContentWidth ) {
-		containerFlexSelector =
-			'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	}
+		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap';
 
-	const gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
 	const widthSelectorsDesktop = {};
 	const widthSelectorsTablet = {};
 	const widthSelectorsMobile = {};
@@ -576,8 +573,8 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			'justify-content': justifyContentDesktop,
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
-			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits[deviceType] ),
-			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits[deviceType] ),
+			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits['Desktop'] ),
+			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
 		selectors[ '.block-editor-block-list__block' ] = {
@@ -638,10 +635,6 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		};
 	}
 
-
-    console.log("widthSelectorsDesktop")
-    console.log(widthSelectorsDesktop);
-
 	const tablet_selectors = {
 		[ containerFlexSelector ]: {
 			'flex-direction': directionTablet,
@@ -649,8 +642,8 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			'justify-content': justifyContentTablet,
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
-			'row-gap': generateCSSUnit( rowGapTablet, rowGapTypeTablet ),
-			'column-gap': generateCSSUnit( columnGapTablet, columnGapTypeTablet ),
+			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapUnits['Tablet'] ),
+			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		},
 		'.block-editor-block-list__block': {
@@ -681,8 +674,8 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 			'justify-content': justifyContentMobile,
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
-			'row-gap': generateCSSUnit( rowGapMobile, rowGapTypeMobile ),
-			'column-gap': generateCSSUnit( columnGapMobile, columnGapTypeMobile ),
+			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapUnits['Mobile'] ),
+			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		},
 		'.block-editor-block-list__block': {
@@ -869,11 +862,6 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 				boxShadowPositionCSSHover;
 		}
 	}
-
-
-
-    console.log("containerCustomWidth containerCustomWidth")
-    console.log(containerCustomWidth);
 
 	if ( 'custom' === containerType ) {
 		selectors[ '.block-editor-block-list__block' ][ 'max-width' ] = generateCSSUnit(
@@ -1084,36 +1072,27 @@ function frontEndStyle( attributes, clientId, name, deviceType, gbsSelector = fa
 		widthSelectorsMobile[ '#block-' + clientId ] = gridChildrenCSSMobile;
 	}
 
-
-
 	const base_selector = gbsSelector ? gbsSelector : ` #block-${ clientId }`;
 
 	let styling_css = generateCSS( selectors, base_selector );
 
 	styling_css += generateCSS( widthSelectorsDesktop, ' ' );
+    styling_css += generateCSS(
+        tablet_selectors,
+        `${ base_selector }`,
+        true,
+        'tablet'
+    );
 
-	if( 'tablet' === previewType || 'mobile' === previewType || gbsSelector ) {
-		styling_css += generateCSS(
-			tablet_selectors,
-			`${ base_selector }`,
-			true,
-			'tablet'
-		);
+    styling_css += generateCSS( widthSelectorsTablet, ' ', true, 'tablet' );
+    styling_css += generateCSS(
+        mobile_selectors,
+        `${ base_selector }`,
+        true,
+        'mobile'
+    );
 
-		styling_css += generateCSS( widthSelectorsTablet, ' ', true, 'tablet' );
-
-		if( 'mobile' === previewType || gbsSelector ){
-			styling_css += generateCSS(
-				mobile_selectors,
-				`${ base_selector }`,
-				true,
-				'mobile'
-			);
-
-			styling_css += generateCSS( widthSelectorsMobile, ' ', true, 'mobile' );
-
-		}
-	}
+    styling_css += generateCSS( widthSelectorsMobile, ' ', true, 'mobile' );
 
 	return styling_css;
 }
