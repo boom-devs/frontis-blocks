@@ -2126,6 +2126,31 @@
   fill: #555E72;
 }
 
+.fb-image-control-wrapper .fb-setting-device-label-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.fb-image-control-setting-wrapper .fb-image-control-setting-item-position .fb-setting-device-label-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.fb-image-control-setting-wrapper .fb-image-control-setting-item {
+  margin: 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-image-control-setting-wrapper .fb-image-control-setting-item .components-base-control {
+  width: 45%;
+}
+.fb-image-control-setting-wrapper .fb-image-control-setting-item .fb-setting-device-label-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
 .fb-unit-wrapper {
   display: flex;
   align-items: center;
