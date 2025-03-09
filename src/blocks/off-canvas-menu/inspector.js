@@ -1,75 +1,89 @@
-import { __ } from "@wordpress/i18n";
-import apiFetch from '@wordpress/api-fetch';
-import { useState, useEffect, useMemo } from "@wordpress/element";
-import "./editor.scss";
-import { useDeviceType } from "@Config/displayType";
-import { InspectorControls } from "@wordpress/block-editor";
-
+import { __ } from '@wordpress/i18n';
 import {
-	SelectControl,
+	useBlockProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import {
 	PanelBody,
 	TabPanel,
-} from "@wordpress/components";
-
+	SelectControl,
+} from '@wordpress/components';
+import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
+import {
+	BORDER_STYLES,
+	LAYOUT_ALIGNMENT,
+	LAYOUT_TYPE,
+	OVERFLOW_OP,
+	PRESETS,
+} from "./constants/constants";
+import { useDeviceType } from "@Config/displayType";
+import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		selectedPatternContent
+		selectedTemplate,
+		menuPosition,
+		iconStyle,
 	} = attributes;
 
 	const deviceType = useDeviceType();
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-off-canvas-menu-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	// Inside your component:
 	const [patterns, setPatterns] = useState([]);
 
-	// Fetch patterns when component mounts
-	useEffect(() => {
-		fetchPatterns();
+	// Use useSelect to fetch block patterns directly from the core data
+	const patternData = useSelect(select => {
+		// Check if the patterns API is available
+		if (select('core')) {
+			return select('core').getBlockPatterns() || [];
+		}
+		return [];
 	}, []);
 
-	// Function to fetch patterns
-	const fetchPatterns = async () => {
-		try {
-			// First attempt to use the WP REST API endpoint we created
-			const fetchedPatterns = await apiFetch({ path: '/wp/v2/block-patterns' });
-
-			// Transform patterns for the SelectControl
-			const patternOptions = fetchedPatterns.map(pattern => ({
-				label: pattern.title.rendered,
-				value: pattern.slug
-			}));
-
+	// Transform patterns for SelectControl whenever patternData changes
+	useEffect(() => {
+		if (patternData && patternData.length > 0) {
+			const patternOptions = [
+				{ value: '', label: __('Select a pattern', 'frontis-blocks') },
+				...patternData.map(pattern => ({
+					value: pattern.name,
+					label: pattern.title
+				}))
+			];
 			setPatterns(patternOptions);
-		} catch (error) {
-			console.error('Error fetching patterns:', error);
-
-			// If API fails, try to get patterns directly from the registry
-			if (wp.blocks && wp.blocks.getBlockPatterns) {
-				const registryPatterns = wp.blocks.getBlockPatterns();
-				const patternOptions = registryPatterns.map(pattern => ({
-					label: pattern.title,
-					value: pattern.name
-				}));
-				setPatterns(patternOptions);
-			}
 		}
-	};
+	}, [patternData]);
+
+	// Generate unique block ID if not set
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string' && !blockID) {
+			setAttributes({
+				blockID: "off-canvas-menu-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId, blockID, setAttributes]);
+
+	// Position options for the menu
+	const positionOptions = [
+		{ value: 'left', label: __('Left', 'frontis-blocks') },
+		{ value: 'right', label: __('Right', 'frontis-blocks') },
+		{ value: 'top', label: __('Top', 'frontis-blocks') },
+		{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
+	];
+
+	// Icon style options
+	const iconOptions = [
+		{ value: 'hamburger', label: __('Hamburger', 'frontis-blocks') },
+		{ value: 'dots', label: __('Three Dots', 'frontis-blocks') },
+		{ value: 'plus', label: __('Plus Sign', 'frontis-blocks') },
+	];
 
 	return (
 		<>
 			<style>
-
 			</style>
-
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
@@ -89,50 +103,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							{
 								name: "advanced",
 								title: "Advanced",
-								className: "fb-tab advanced",
+								className: "fb-tab advance",
 							},
 						]}
 					>
 						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === "general" && (
+							<div className={"fb-tab-controls " + tab.name}>
+								{tab.name === 'general' && (
 									<>
-										<div className="fb-off-canvas-menu-container">
-											{/* Connector */}
-											<div className="fb-off-canvas-menu-connenctor-wrapper">
-												<PanelBody
-													title={__("All Patterns", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<SelectControl
-														label={__("Patterns to show when menu appears", "frontis-blocks")}
-														options={patterns}
-														onChange={(selectedSlug) => {
-															const selectedPattern = patterns.find((p) => p.value === selectedSlug);
+										<PanelBody title={__("Menu Content", "frontis-blocks")} initialOpen={true}>
+											<SelectControl
+												label={__("Select Pattern", "frontis-blocks")}
+												value={selectedTemplate}
+												options={patterns}
+												onChange={(value) => setAttributes({ selectedTemplate: value })}
+												help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
+											/>
 
-															// Store pattern content in attributes
-															if (selectedPattern) {
-																setAttributes({
-																	selectedPatternContent: selectedPattern.content,
-																});
-															}
-														}}
-													/>
-												</PanelBody>
-											</div>
-										</div>
+											<SelectControl
+												label={__("Menu Position", "frontis-blocks")}
+												value={menuPosition || 'left'}
+												options={positionOptions}
+												onChange={(value) => setAttributes({ menuPosition: value })}
+											/>
+
+											<SelectControl
+												label={__("Icon Style", "frontis-blocks")}
+												value={iconStyle || 'hamburger'}
+												options={iconOptions}
+												onChange={(value) => setAttributes({ iconStyle: value })}
+											/>
+										</PanelBody>
 									</>
 								)}
-
 								{tab.name === "styles" && (
 									<>
+										<PanelBody title={__("Menu Styling", "frontis-blocks")} initialOpen={true}>
+											{/* Add styling controls here for the menu */}
+										</PanelBody>
+
+										<PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
+											{/* Add styling controls here for the icon */}
+										</PanelBody>
 									</>
 								)}
 								{tab.name === "advanced" && (
 									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-
-										</div>
+										<PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+											{/* Add advanced settings here */}
+										</PanelBody>
 									</>
 								)}
 							</div>

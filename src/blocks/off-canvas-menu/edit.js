@@ -1,71 +1,146 @@
 import { __ } from '@wordpress/i18n';
-import { useRef } from "@wordpress/element";
 import {
 	useBlockProps,
-	RichText,
-	BlockControls,
-	AlignmentToolbar,
+	useInnerBlocksProps,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
-
-/**
- * Internal dependencies
- */
-import Inspector from "./inspector";
-import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import { useState, useEffect } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { parse } from '@wordpress/blocks';
+import Inspector from './inspector';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		DeviceType,
-		ButtonAlignment,
-
-		dualBtnDesktopSwitcher,
-		dualBtnTabletSwitcher,
-		dualBtnMobileSwitcher,
+		selectedTemplate,
+		menuPosition = 'left',
+		iconStyle = 'hamburger',
 	} = attributes;
 
-	const blockProps = useBlockProps({
-		className: `fb-off-canvas-menu-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
-	});
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-	/**
-	* Manages tab button settings and switches to block settings on click
-	*/
-	const panelRef = useRef(null);
-	SwitchToBlockSettings(panelRef);
+	// Get pattern content if a pattern is selected - using the same approach as in inspector.js
+	const patternData = useSelect(select => {
+		if (!selectedTemplate) return null;
 
-	// Prevent link navigation in the editor and focus on text
-	const handleButtonClick = (event) => {
-		event.preventDefault();
+		// Check if the patterns API is available and use core store like in inspector.js
+		if (select('core')) {
+			const patterns = select('core').getBlockPatterns() || [];
+			return patterns.find(pattern => pattern.name === selectedTemplate);
+		}
+		return null;
+	}, [selectedTemplate]);
+
+	// Update innerBlocks when pattern changes
+	useEffect(() => {
+		if (patternData && patternData.content) {
+			// If we have pattern content, we can use it directly
+			const parsedBlocks = parse(patternData.content);
+			if (parsedBlocks && parsedBlocks.length > 0) {
+				// Use the block editor's dispatch to replace inner blocks
+				const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);
+				replaceInnerBlocks(clientId, parsedBlocks, false);
+			}
+		}
+	}, [patternData, clientId]);
+
+	// Get the appropriate icon based on iconStyle
+	const getIcon = () => {
+		switch (iconStyle) {
+			case 'dots':
+				return (
+					<div className="fb-menu-icon fb-dots-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				);
+			case 'plus':
+				return (
+					<div className="fb-menu-icon fb-plus-icon">
+						<span></span>
+						<span></span>
+					</div>
+				);
+			case 'hamburger':
+			default:
+				return (
+					<div className="fb-menu-icon fb-hamburger-icon">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				);
+		}
 	};
 
+	// Generate the position-specific class
+	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
+
+	const blockProps = useBlockProps({
+		className: `fb-off-canvas-menu-block ${blockID}`,
+	});
+
+	const innerBlocksProps = useInnerBlocksProps(
+        {
+            className: 'fb-off-canvas-content',
+        },
+        {
+            templateLock: false,
+        }
+    );
+
 	return (
-		<>
+		<div {...blockProps}>
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
 
-			<BlockControls>
-				<AlignmentToolbar
-					value={ButtonAlignment}
-					onChange={(value) => setAttributes({ ButtonAlignment: value })}
-					controls={['start', 'center', 'end', 'start']}
-				/>
-			</BlockControls>
-
-			<div {...blockProps}>
-				<div className='fb-off-canvas-menu-wrapper'
-					style={{
-						justifyContent: ButtonAlignment,
-
-					}}
-				>
-					<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"></path></svg>
-				</div>
+			{/* Hamburger Icon Button */}
+			<div
+				className="fb-menu-toggle-btn"
+				onClick={() => setIsMenuOpen(!isMenuOpen)}
+				role="button"
+				tabIndex="0"
+				onKeyDown={(e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						setIsMenuOpen(!isMenuOpen);
+					}
+				}}
+			>
+				{getIcon()}
 			</div>
-		</>
+
+			{/* Off-Canvas Menu Container */}
+			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
+				<div className="fb-off-canvas-header">
+					<button
+						className="fb-close-menu"
+						onClick={() => setIsMenuOpen(false)}
+					>
+						×
+					</button>
+				</div>
+
+				{selectedTemplate ? (
+					<div {...innerBlocksProps} />
+				) : (
+					<div className="fb-pattern-placeholder">
+						<p>{__('Select a pattern from the sidebar to display here', 'frontis-blocks')}</p>
+					</div>
+				)}
+			</div>
+
+			{/* Overlay */}
+			{isMenuOpen && (
+				<div
+					className="fb-menu-overlay"
+					onClick={() => setIsMenuOpen(false)}
+				></div>
+			)}
+		</div>
 	);
 }
