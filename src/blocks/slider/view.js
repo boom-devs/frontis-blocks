@@ -47,4 +47,3 @@
     // If needed, expose re-initialization function
     window.reinitSliders = initSliders;
 })();
-
