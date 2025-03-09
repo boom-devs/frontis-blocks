@@ -26,7 +26,7 @@ define( 'FB_PLUGIN_FILE', __FILE__ );
  * @since 1.0.0
  * @package Frontis_Blocks
  */
-
+// Include block registration functions
 require_once __DIR__ . '/vendor/autoload.php';
 
 function wm_frontis_blocks(){
