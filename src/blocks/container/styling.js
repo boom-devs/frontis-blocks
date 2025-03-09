@@ -63,9 +63,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		bottomPaddingMobile,
 		leftPaddingMobile,
 		rightPaddingMobile,
-		paddingType,
-		paddingTypeTablet,
-		paddingTypeMobile,
 		topMarginDesktop,
 		bottomMarginDesktop,
 		leftMarginDesktop,
@@ -78,23 +75,17 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		bottomMarginMobile,
 		leftMarginMobile,
 		rightMarginMobile,
-		marginType,
-		marginTypeTablet,
-		marginTypeMobile,
-		rowGapDesktop,
 		rowGapTablet,
 		rowGapMobile,
 		rowGapType,
 		rowGapTypeTablet,
 		rowGapTypeMobile,
-		columnGapDesktop,
 		columnGapTablet,
 		columnGapMobile,
 		columnGapType,
 		columnGapTypeTablet,
 		columnGapTypeMobile,
 		contentWidth,
-		innerContentWidth,
 		bottomColor,
 		bottomHeight,
 		bottomHeightTablet,
@@ -524,10 +515,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	let containerFlexSelector =
 		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	if ( ! isBlockRootParent || 'alignfull' !== contentWidth || 'alignwide' !== innerContentWidth ) {
-		containerFlexSelector =
-			'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	}
+	// if ( ! isBlockRootParent || 'alignfull' !== contentWidth || 'alignwide' !== innerContentWidth ) {
+	// 	containerFlexSelector =
+	// 		'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
+	// }
 
 	const gbsWidthSelector = gbsSelector ? gbsSelector : `#block-${ clientId }`;
 	const widthSelectorsDesktop = {};

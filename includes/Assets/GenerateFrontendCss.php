@@ -20,10 +20,16 @@ class GenerateFrontendCss {
 		}
 	}
 
-	public static function generate_css($block_content, $block) {
-		self::render_generated_css($block_content, $block, $block['attrs']);
-		return $block_content;
-	}
+	// public function get_blocks_on_save($post_id, $post, $update) {
+	// 	// when post is saved or update then get the blocks
+	// 	if($update) {
+	// 		$post_content = $post->post_content;
+	// 		$blocks = parse_blocks($post_content);
+	// 		foreach($blocks as $block) {
+	// 			self::render_generated_css($block, $block, $block['attrs']);
+	// 		}
+	// 	}
+	// }
 }
 
 

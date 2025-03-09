@@ -1,5 +1,5 @@
-import {__} from "@wordpress/i18n";
-import {InspectorControls} from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
@@ -17,10 +17,11 @@ import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
 import FB_Color from "@Components/color";
 import FB_BackgroundColorControl from "@Components/background-color-control";
-import {useDeviceType} from "@Config/displayType";
+import FB_ResponsiveControl from '@Components/responsive-control';
+import { useDeviceType } from "@Config/displayType";
 
 const Inspector = (props) => {
-	let deviceType= useDeviceType();
+	let deviceType = useDeviceType();
 	const {
 		isSelected,
 		attributes,
@@ -49,7 +50,7 @@ const Inspector = (props) => {
 			containerTabletPadding,
 			containerMobilePadding,
 			containerPaddingLink,
-			containerMarginUnits,	
+			containerMarginUnits,
 			containerDesktopMargin,
 			containerTabletMargin,
 			containerMobileMargin,
@@ -128,29 +129,29 @@ const Inspector = (props) => {
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
-		setAttributes({fullWidthContentBoxedWidth: width});
+		setAttributes({ fullWidthContentBoxedWidth: width });
 	}
 
 	const fullWidthContentBoxedWidthUnitsFn = (units) => {
-		setAttributes({fullWidthContentBoxedWidthUnits: units});
+		setAttributes({ fullWidthContentBoxedWidthUnits: units });
 	}
 
 	// Handle min height
 	const minHeightFn = (height) => {
-		setAttributes({minHeight: height});
+		setAttributes({ minHeight: height });
 	}
 
 	const minHeightUnitsFn = (units) => {
-		setAttributes({minHeightUnits: units});
+		setAttributes({ minHeightUnits: units });
 	}
 
 	// Handle custom width each row
 	const customContentWidthFn = (width) => {
-		setAttributes({customWidth: width});
+		setAttributes({ customWidth: width });
 	}
 
 	const customContentWidthFnUnitsFn = (units) => {
-		setAttributes({customWidthUnits: units});
+		setAttributes({ customWidthUnits: units });
 	}
 
 	// Handling responsive
@@ -160,180 +161,176 @@ const Inspector = (props) => {
 
 	// Container type custom width
 	const containerCustomContentWidthFn = (width) => {
-		setAttributes({containerCustomWidth: width});
+		setAttributes({ containerCustomWidth: width });
 	}
 
 	const containerCustomContentWidthFnUnitsFn = (units) => {
-		setAttributes({containerCustomWidthUnits: units});
+		setAttributes({ containerCustomWidthUnits: units });
 	}
 
 	const columnGapFn = (width) => {
-		setAttributes({columnGap: width});
+		setAttributes({ columnGap: width });
 	}
 
 	const columnGapUnitsFn = (units) => {
-		setAttributes({columnGapUnits: units});
+		setAttributes({ columnGapUnits: units });
 	}
 
 	const rowGapFn = (width) => {
-		setAttributes({rowGap: width});
+		setAttributes({ rowGap: width });
 	}
 
 	const rowGapUnitsFn = (units) => {
-		setAttributes({rowGapUnits: units});
+		setAttributes({ rowGapUnits: units });
 	}
 
 	const containerZindexFn = (value) => {
-		setAttributes({containerZIndex: value});
+		setAttributes({ containerZIndex: value });
 	}
 
 	/** Start Heading Padding */
-    const containerPaddingUnitsChange = (event, position) => {
-        const value = event.target.value;
-        if (containerPaddingLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        containerDesktopPadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        containerTabletPadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        containerMobilePadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ containerDesktopPadding: { ...containerDesktopPadding, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ containerTabletPadding: { ...containerTabletPadding, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ containerMobilePadding: { ...containerMobilePadding, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+	const containerPaddingUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (containerPaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						containerDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						containerTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						containerMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ containerDesktopPadding: { ...containerDesktopPadding, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ containerTabletPadding: { ...containerTabletPadding, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ containerMobilePadding: { ...containerMobilePadding, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-    const containerPaddingLinkBtn = () => {
-        setAttributes({
-            containerPaddingLink: !containerPaddingLink
-        });
-    };
+	const containerPaddingLinkBtn = () => {
+		setAttributes({
+			containerPaddingLink: !containerPaddingLink
+		});
+	};
 
 	const containerPaddingUnitsHandler = (unit) => {
 		setAttributes({
-            containerPaddingUnits: {
-                ...containerPaddingUnits,
-                [deviceType]: unit
-            }
-        });
+			containerPaddingUnits: {
+				...containerPaddingUnits,
+				[deviceType]: unit
+			}
+		});
 	}
 
 	/** Start container margin */
-    const containerMarginUnitsChange = (event, position) => {
-        const value = event.target.value;
-        if (containerMarginLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        containerDesktopMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        containerTabletMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        containerMobileMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ containerDesktopMargin: { ...containerDesktopMargin, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ containerTabletMargin: { ...containerTabletMargin, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ containerMobileMargin: { ...containerMobileMargin, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+	const containerMarginUnitsChange = (event, position) => {
+		const value = event.target.value;
+		if (containerMarginLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						containerDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						containerTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						containerMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ containerDesktopMargin: { ...containerDesktopMargin, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ containerTabletMargin: { ...containerTabletMargin, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ containerMobileMargin: { ...containerMobileMargin, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+	};
 
-    const containerMarginLinkBtn = () => {
-        setAttributes({
-            containerMarginLink: !containerMarginLink
-        });
-    };
-
-
-	console.log("containerMarginLink");
-	console.log(containerMarginLink);
+	const containerMarginLinkBtn = () => {
+		setAttributes({
+			containerMarginLink: !containerMarginLink
+		});
+	};
 
 	const containerMarginUnitsHandler = (unit) => {
-        setAttributes({
-            containerMarginUnits: {
-                ...containerMarginUnits,
-                [deviceType]: unit
-            }
-        });
-    };
+		setAttributes({
+			containerMarginUnits: {
+				...containerMarginUnits,
+				[deviceType]: unit
+			}
+		});
+	};
 
 	return (
 		<>
-		{/* <style>
+			{/* <style>
 		{`
 			#${p_block_id} {
 				${containerBgNormalBackgroundType === 'gradient' ? `  
@@ -344,174 +341,174 @@ const Inspector = (props) => {
 			}
 		`}
 		</style> */}
-		<InspectorControls key="controls">
-			<div className="fb-inspector-control">
-				<TabPanel
-					className="fb-parent-tab-panel"
-					activeClass="active-tab"
-					tabs={[
-						{
-							name: "general",
-							title: "General",
-							className: "fb-tab general",
-						},
-						{
-							name: "styles",
-							title: "Style",
-							className: "fb-tab styles",
-						},
-						{
-							name: "advanced",
-							title: "Advanced",
-							className: "fb-tab advanced",
-						},
-					]}
-				>
-					{(tab) => (
-						<div className={"fb-tab-controls" + tab.name}>
-							{tab.name === 'general' && (
-								<>
-									<div className="fb-advanced-button-wrapper">
-										<PanelBody
-											title={__("Container Type", "frontis-blocks")}
-											initialOpen={true}
-										>
-											{isBlockRootParent &&
-												<BaseControl
-													label={__("Container Width", "frontis-blocks")}
-													id="fb-setting-text-alignment"
-													className="fb-setting-text-alignment"
-												>
-													<ButtonGroup
-														className="fb-setting-text-alignment-group-btn"
-													>
-														{CONTAINER_TYPE.map((item, key) => (
-															<Button
-																key={key}
-																onClick={() => setAttributes({ containerType: item.value })}
-																className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
-															>
-																{item.label}
-															</Button>
-														))}
-													</ButtonGroup>
-												</BaseControl>
-											}
-
-											{/* Container width is custom */}
-											{(isBlockRootParent && containerType === 'custom') &&
-												<>
-													<FB_Range
-														min={1}
-														max={containerCustomWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-														label={__("Custom Width", "frontis-blocks")}
-														rangeValue={containerCustomWidth}
-														onChangeHandler={containerCustomContentWidthFn}
-														rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
-														deviceType={deviceType}
-														units={containerCustomWidthUnits}
-														rangeStep={1}
-														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
-														units_types_arr={[
-															{ label: 'px', value: 'px' },
-															{ label: '%', value: '%' },
-															{ label: 'vw', value: 'vw' },
-														]}
-													/>
-												</>
-											}
-
-											{ (containerType === 'full-width' && isBlockRootParent) && (
-												<>
+			<InspectorControls key="controls">
+				<div className="fb-inspector-control">
+					<TabPanel
+						className="fb-parent-tab-panel"
+						activeClass="active-tab"
+						tabs={[
+							{
+								name: "general",
+								title: "General",
+								className: "fb-tab general",
+							},
+							{
+								name: "styles",
+								title: "Style",
+								className: "fb-tab styles",
+							},
+							{
+								name: "advanced",
+								title: "Advanced",
+								className: "fb-tab advanced",
+							},
+						]}
+					>
+						{(tab) => (
+							<div className={"fb-tab-controls" + tab.name}>
+								{tab.name === 'general' && (
+									<>
+										<div className="fb-advanced-button-wrapper">
+											<PanelBody
+												title={__("Container Type", "frontis-blocks")}
+												initialOpen={true}
+											>
+												{isBlockRootParent &&
 													<BaseControl
-														label={__("Content Width", "frontis-blocks")}
+														label={__("Container Width", "frontis-blocks")}
 														id="fb-setting-text-alignment"
 														className="fb-setting-text-alignment"
 													>
 														<ButtonGroup
 															className="fb-setting-text-alignment-group-btn"
 														>
-															{CONTAINER_TYPE_FULL.map((item, key) => (
+															{CONTAINER_TYPE.map((item, key) => (
 																<Button
 																	key={key}
-																	onClick={() => setAttributes({ containerTypeFull: item.value })}
-																	className={`fb-setting-text-alignment-single-btn ${containerTypeFull === item.value ? 'active' : ''}`}
+																	onClick={() => setAttributes({ containerType: item.value })}
+																	className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
 																>
 																	{item.label}
 																</Button>
 															))}
 														</ButtonGroup>
-														<div style={{marginTop: '10px'}}></div>
-														{containerTypeFull !== 'full-width' &&
-															<FB_Range
-																min={1}
-																max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-																label={__("Content Box Width", "frontis-blocks")}
-																rangeValue={fullWidthContentBoxedWidth}
-																onChangeHandler={fullWidthContentBoxedWidthFn}
-																rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-																deviceType={deviceType}
-																units={fullWidthContentBoxedWidthUnits}
-																rangeStep={1}
-																resetFallbackValue={resetFallBackCustomWidth[deviceType]}
-																units_types_arr={[
-																	{ label: 'px', value: 'px' },
-																	{ label: '%', value: '%' },
-																	{ label: 'vw', value: 'vw' },
-																]}
-															/>
-														}
 													</BaseControl>
-												</>
-											)}
+												}
 
-											{!isBlockRootParent &&
-												<>
-													<FB_Range
-														min={1}
-														max={customWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-														label={__("Custom Width", "frontis-blocks")}
-														rangeValue={customWidth}
-														onChangeHandler={customContentWidthFn}
-														rangeUnitHandler={customContentWidthFnUnitsFn}
-														deviceType={deviceType}
-														units={customWidthUnits}
-														rangeStep={1}
-														resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
-														units_types_arr={[
-															{ label: 'px', value: 'px' },
-															{ label: '%', value: '%' },
-															{ label: 'vw', value: 'vw' },
-														]}
-													/>
-												</>
-											}
+												{/* Container width is custom */}
+												{(isBlockRootParent && containerType === 'custom') &&
+													<>
+														<FB_Range
+															min={1}
+															max={containerCustomWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+															label={__("Custom Width", "frontis-blocks")}
+															rangeValue={containerCustomWidth}
+															onChangeHandler={containerCustomContentWidthFn}
+															rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
+															deviceType={deviceType}
+															units={containerCustomWidthUnits}
+															rangeStep={1}
+															resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+															units_types_arr={[
+																{ label: 'px', value: 'px' },
+																{ label: '%', value: '%' },
+																{ label: 'vw', value: 'vw' },
+															]}
+														/>
+													</>
+												}
 
-											<FB_Range
-												min={1}
-												max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
-												label={__("Minimum Height", "frontis-blocks")}
-												rangeValue={minHeight}
-												onChangeHandler={minHeightFn}
-												rangeUnitHandler={minHeightUnitsFn}
-												deviceType={deviceType}
-												units={minHeightUnits}
-												rangeStep={1}
-												resetFallbackValue={''}
-												units_types_arr={[
-													{ label: 'px', value: 'px' },
-													{ label: 'vh', value: 'vh' },
-												]}
-											/>
-										</PanelBody>
-									</div>
-									{isBlockRootParent &&
-										<div className="fb-flex-properties-wrapper">
-											<PanelBody
-												title={__("Flex Properties", "frontis-blocks")}
-												initialOpen={true}
-											>
-												{/* <BaseControl
+												{(containerType === 'full-width' && isBlockRootParent) && (
+													<>
+														<BaseControl
+															label={__("Content Width", "frontis-blocks")}
+															id="fb-setting-text-alignment"
+															className="fb-setting-text-alignment"
+														>
+															<ButtonGroup
+																className="fb-setting-text-alignment-group-btn"
+															>
+																{CONTAINER_TYPE_FULL.map((item, key) => (
+																	<Button
+																		key={key}
+																		onClick={() => setAttributes({ containerTypeFull: item.value })}
+																		className={`fb-setting-text-alignment-single-btn ${containerTypeFull === item.value ? 'active' : ''}`}
+																	>
+																		{item.label}
+																	</Button>
+																))}
+															</ButtonGroup>
+															<div style={{ marginTop: '10px' }}></div>
+															{containerTypeFull !== 'full-width' &&
+																<FB_Range
+																	min={1}
+																	max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+																	label={__("Content Box Width", "frontis-blocks")}
+																	rangeValue={fullWidthContentBoxedWidth}
+																	onChangeHandler={fullWidthContentBoxedWidthFn}
+																	rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+																	deviceType={deviceType}
+																	units={fullWidthContentBoxedWidthUnits}
+																	rangeStep={1}
+																	resetFallbackValue={resetFallBackCustomWidth[deviceType]}
+																	units_types_arr={[
+																		{ label: 'px', value: 'px' },
+																		{ label: '%', value: '%' },
+																		{ label: 'vw', value: 'vw' },
+																	]}
+																/>
+															}
+														</BaseControl>
+													</>
+												)}
+
+												{!isBlockRootParent &&
+													<>
+														<FB_Range
+															min={1}
+															max={customWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+															label={__("Custom Width", "frontis-blocks")}
+															rangeValue={customWidth}
+															onChangeHandler={customContentWidthFn}
+															rangeUnitHandler={customContentWidthFnUnitsFn}
+															deviceType={deviceType}
+															units={customWidthUnits}
+															rangeStep={1}
+															resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+															units_types_arr={[
+																{ label: 'px', value: 'px' },
+																{ label: '%', value: '%' },
+																{ label: 'vw', value: 'vw' },
+															]}
+														/>
+													</>
+												}
+
+												<FB_Range
+													min={1}
+													max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
+													label={__("Minimum Height", "frontis-blocks")}
+													rangeValue={minHeight}
+													onChangeHandler={minHeightFn}
+													rangeUnitHandler={minHeightUnitsFn}
+													deviceType={deviceType}
+													units={minHeightUnits}
+													rangeStep={1}
+													resetFallbackValue={''}
+													units_types_arr={[
+														{ label: 'px', value: 'px' },
+														{ label: 'vh', value: 'vh' },
+													]}
+												/>
+											</PanelBody>
+										</div>
+										{isBlockRootParent &&
+											<div className="fb-flex-properties-wrapper">
+												<PanelBody
+													title={__("Flex Properties", "frontis-blocks")}
+													initialOpen={true}
+												>
+													{/* <BaseControl
 													label={__("Direction", "frontis-block")}
 													id="fb-setting-alignment"
 													className="fb-advanced-alignment"
@@ -559,10 +556,14 @@ const Inspector = (props) => {
 													</ButtonGroup>
 												</BaseControl> */}
 												<BaseControl
-													label={__("Wrap", "frontis-block")}
 													id="fb-setting-alignment"
 													className="fb-advanced-alignment"
 												>
+													<FB_ResponsiveControl
+														labelText={__('Wrap', 'frontis-blocks')}
+														device={deviceType}
+													/>
+													<br />
 													<ButtonGroup className="fb-advanced-alignment-group-btn">
 														{WRAP.map((item, key) => (
 															<Button
@@ -582,392 +583,417 @@ const Inspector = (props) => {
 														))}
 													</ButtonGroup>
 												</BaseControl>
-											</PanelBody>
-										</div>
-									}
-								</>
-							)}
+													{/* <div id="fb-setting-alignment"
+														className="fb-advanced-alignment">
+														<FB_ResponsiveControl
+															labelText={__('Wrap', 'frontis-blocks')}
+															device={deviceType}
+														/>
+														<ButtonGroup className="fb-advanced-alignment-group-btn">
+															{WRAP.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			containerWrap: {
+																				...containerWrap, // Spread the existing values
+																				[deviceType]: item.value, // Update the specific device type
+																			},
+																		})
+																	}
+																	className={`fb-advanced-alignment-single-btn ${containerWrap[deviceType] === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</div> */}
+												</PanelBody>
+											</div>
+										}
+									</>
+								)}
 
-							{tab.name === "styles" && (
-								<>
-									<PanelBody
-										title={__("Background", "frontis-blocks")}
-										initialOpen={true}
-									>
-									{/* background color control */}
-									<FB_BackgroundColorControl
-										label={__("", "frontis-blocks")}
-										bgColorSwitcher={containerBgColorSwitcher}
-										setBgColorSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
-
-										normalBackgroundType={containerBgNormalBackgroundType}
-										setNormalBackgroundType={(value) => setAttributes({ containerBgNormalBackgroundType: value })}
-										normalClassicColor={containerBgNormalClassicColor}
-										setNormalClassicColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
-										normalGradientColor={containerBgNormalGradientColor}
-										setNormalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
-										normalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
-										setNormalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
-										normalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
-										setNormalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
-
-										normalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
-										setNormalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
-										normalBackgroundImageAlt={containerBgNormalBackgroundImageAlt}
-										setNormalBackgroundImageAlt={(value) => setAttributes({ containerBgNormalBackgroundImageAlt: value })}
-										normalBackgroundImageID={containerBgNormalBackgroundImageID}
-										setNormalBackgroundImageID={(value) => setAttributes({ containerBgNormalBackgroundImageID: value })}
-										normalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
-										setNormalBackgroundImagePosition={(value) => setAttributes({ containerBgNormalBackgroundImagePosition: value })}
-										normalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
-										setNormalBackgroundImageAttachment={(value) => setAttributes({ containerBgNormalBackgroundImageAttachment: value })}
-										normalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
-										setNormalBackgroundImageRepeat={(value) => setAttributes({ containerBgNormalBackgroundImageRepeat: value })}
-										normalBackgroundImageSize={containerBgNormalBackgroundImageSize}
-										setNormalBackgroundImageSize={(value) => setAttributes({ containerBgNormalBackgroundImageSize: value })}
-
-										hoverBackgroundType={containerBgHoverBackgroundType}
-										setHoverBackgroundType={(value) => setAttributes({ containerBgHoverBackgroundType: value })}
-										hoverClassicColor={containerBgHoverClassicColor}
-										setHoverClassicColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
-										hoverGradientColor={containerBgHoverGradientColor}
-										setHoverGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
-										hoverCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
-										setHoverCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
-										hoverCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
-										setHoverCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
-
-										hoverBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
-										setHoverBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
-										hoverBackgroundImageAlt={containerBgHoverBackgroundImageAlt}
-										setHoverBackgroundImageAlt={(value) => setAttributes({ containerBgHoverBackgroundImageAlt: value })}
-										hoverBackgroundImageID={containerBgHoverBackgroundImageID}
-										setHoverBackgroundImageID={(value) => setAttributes({ containerBgHoverBackgroundImageID: value })}
-										hoverBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
-										setHoverBackgroundImagePosition={(value) => setAttributes({ containerBgHoverBackgroundImagePosition: value })}
-										hoverBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment}
-										setHoverBackgroundImageAttachment={(value) => setAttributes({ containerBgHoverBackgroundImageAttachment: value })}
-										hoverBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
-										setHoverBackgroundImageRepeat={(value) => setAttributes({ containerBgHoverBackgroundImageRepeat: value })}
-										hoverBackgroundImageSize={containerBgHoverBackgroundImageSize}
-										setHoverBackgroundImageSize={(value) => setAttributes({ containerBgHoverBackgroundImageSize: value })}
-									/>
-									</PanelBody>
-									{isBlockRootParent &&
+								{tab.name === "styles" && (
+									<>
 										<PanelBody
-											title={__("Container Gap", "frontis-blocks")}
+											title={__("Background", "frontis-blocks")}
 											initialOpen={true}
 										>
-											<FB_Range
-												min={0}
-												max={200}
-												label={__("Column", "frontis-blocks")}
-												rangeValue={columnGap}
-												onChangeHandler={columnGapFn}
-												rangeUnitHandler={columnGapUnitsFn}
-												deviceType={deviceType}
-												units={columnGapUnits}
-												rangeStep={1}
-												resetFallbackValue={''}
-												units_types_arr={[
-													{label: 'px', value: 'px'},
-													{label: '%', value: '%'},
-													{label: 'em', value: 'em'},
-												]}
-											/>
+											{/* background color control */}
+											<FB_BackgroundColorControl
+												label={__("", "frontis-blocks")}
+												bgColorSwitcher={containerBgColorSwitcher}
+												setBgColorSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
 
-											<FB_Range
-												min={0}
-												max={200}
-												label={__("Row", "frontis-blocks")}
-												rangeValue={rowGap}
-												onChangeHandler={rowGapFn}
-												rangeUnitHandler={rowGapUnitsFn}
-												deviceType={deviceType}
-												units={rowGapUnits}
-												rangeStep={1}
-												resetFallbackValue={''}
-												units_types_arr={[
-													{label: 'px', value: 'px'},
-													{label: '%', value: '%'},
-													{label: 'em', value: 'em'},
-												]}
+												normalBackgroundType={containerBgNormalBackgroundType}
+												setNormalBackgroundType={(value) => setAttributes({ containerBgNormalBackgroundType: value })}
+												normalClassicColor={containerBgNormalClassicColor}
+												setNormalClassicColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
+												normalGradientColor={containerBgNormalGradientColor}
+												setNormalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
+												normalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
+												setNormalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
+												normalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
+												setNormalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
+
+												normalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
+												setNormalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
+												normalBackgroundImageAlt={containerBgNormalBackgroundImageAlt}
+												setNormalBackgroundImageAlt={(value) => setAttributes({ containerBgNormalBackgroundImageAlt: value })}
+												normalBackgroundImageID={containerBgNormalBackgroundImageID}
+												setNormalBackgroundImageID={(value) => setAttributes({ containerBgNormalBackgroundImageID: value })}
+												normalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
+												setNormalBackgroundImagePosition={(value) => setAttributes({ containerBgNormalBackgroundImagePosition: value })}
+												normalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
+												setNormalBackgroundImageAttachment={(value) => setAttributes({ containerBgNormalBackgroundImageAttachment: value })}
+												normalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
+												setNormalBackgroundImageRepeat={(value) => setAttributes({ containerBgNormalBackgroundImageRepeat: value })}
+												normalBackgroundImageSize={containerBgNormalBackgroundImageSize}
+												setNormalBackgroundImageSize={(value) => setAttributes({ containerBgNormalBackgroundImageSize: value })}
+
+												hoverBackgroundType={containerBgHoverBackgroundType}
+												setHoverBackgroundType={(value) => setAttributes({ containerBgHoverBackgroundType: value })}
+												hoverClassicColor={containerBgHoverClassicColor}
+												setHoverClassicColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
+												hoverGradientColor={containerBgHoverGradientColor}
+												setHoverGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
+												hoverCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
+												setHoverCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
+												hoverCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
+												setHoverCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
+
+												hoverBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
+												setHoverBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
+												hoverBackgroundImageAlt={containerBgHoverBackgroundImageAlt}
+												setHoverBackgroundImageAlt={(value) => setAttributes({ containerBgHoverBackgroundImageAlt: value })}
+												hoverBackgroundImageID={containerBgHoverBackgroundImageID}
+												setHoverBackgroundImageID={(value) => setAttributes({ containerBgHoverBackgroundImageID: value })}
+												hoverBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
+												setHoverBackgroundImagePosition={(value) => setAttributes({ containerBgHoverBackgroundImagePosition: value })}
+												hoverBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment}
+												setHoverBackgroundImageAttachment={(value) => setAttributes({ containerBgHoverBackgroundImageAttachment: value })}
+												hoverBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
+												setHoverBackgroundImageRepeat={(value) => setAttributes({ containerBgHoverBackgroundImageRepeat: value })}
+												hoverBackgroundImageSize={containerBgHoverBackgroundImageSize}
+												setHoverBackgroundImageSize={(value) => setAttributes({ containerBgHoverBackgroundImageSize: value })}
 											/>
 										</PanelBody>
-									}
-								</>
-							)}
-							{tab.name === "advanced" && (
-								<>
-									<div className="fb-setting-advanced-tab-wrapper">
-										<div className="fb-setting-inner-wrapper">
-											<FB_Range
-												min={0}
-												max={99999}
-												label={__("Z Index", "frontis-blocks")}
-												rangeValue={containerZIndex}
-												onChangeHandler={containerZindexFn}
-												deviceType={deviceType}
-												rangeStep={1}
-												resetFallbackValue={''}
-												isRangeUnit={false}
-											/>
+										{isBlockRootParent &&
 											<PanelBody
-												title={__("Padding and Margin", "frontis-blocks")}
-												initialOpen={false}
+												title={__("Container Gap", "frontis-blocks")}
+												initialOpen={true}
 											>
-												<FB_Spacing
-													label={__("Margin", "frontis-blocks")}
+												<FB_Range
+													min={0}
+													max={200}
+													label={__("Column", "frontis-blocks")}
+													rangeValue={columnGap}
+													onChangeHandler={columnGapFn}
+													rangeUnitHandler={columnGapUnitsFn}
 													deviceType={deviceType}
-													spacingUnitsHandler={containerMarginUnitsHandler}
-													spacingUnits={containerMarginUnits}
-													spacingDesktop={containerDesktopMargin}
-													spacingTablet={containerTabletMargin}
-													spacingMobile={containerMobileMargin}
-													handleSpacingUnitHandler={containerMarginUnitsChange}
-													spacingCombineBtn={containerMarginLink}
-													spacingCombineBtnHandler={containerMarginLinkBtn}
-													setAttributes={setAttributes}
+													units={columnGapUnits}
+													rangeStep={1}
+													resetFallbackValue={''}
+													units_types_arr={[
+														{ label: 'px', value: 'px' },
+														{ label: '%', value: '%' },
+														{ label: 'em', value: 'em' },
+													]}
 												/>
-												<FB_Spacing
-													label={__("Padding", "frontis-blocks")}
+
+												<FB_Range
+													min={0}
+													max={200}
+													label={__("Row", "frontis-blocks")}
+													rangeValue={rowGap}
+													onChangeHandler={rowGapFn}
+													rangeUnitHandler={rowGapUnitsFn}
 													deviceType={deviceType}
-													spacingUnitsHandler={containerPaddingUnitsHandler}
-													spacingUnits={containerPaddingUnits}
-													spacingDesktop={containerDesktopPadding}
-													spacingTablet={containerTabletPadding}
-													spacingMobile={containerMobilePadding}
-													handleSpacingUnitHandler={containerPaddingUnitsChange}
-													spacingCombineBtn={containerPaddingLink}
-													spacingCombineBtnHandler={containerPaddingLinkBtn}
-													setAttributes={setAttributes}
+													units={rowGapUnits}
+													rangeStep={1}
+													resetFallbackValue={''}
+													units_types_arr={[
+														{ label: 'px', value: 'px' },
+														{ label: '%', value: '%' },
+														{ label: 'em', value: 'em' },
+													]}
 												/>
 											</PanelBody>
-
-											<PanelBody title="Background" initialOpen={false}>
-												<FB_BackgroundColorControl
-													bgColorSwitcher={''}
-													setBgColorSwitcher={(value) =>
-														setAttributes({  })
-													}
-													normalBackgroundType={''}
-													setNormalBackgroundType={(value) =>
-														setAttributes({  })
-													}
-													normalClassicColor={''}
-													setNormalClassicColor={(value) =>
-														setAttributes({  })
-													}
-													normalGradientColor={''}
-													setNormalGradientColor={(value) =>
-														setAttributes({  })
-													}
-													normalCustomGradientSwitcher={
-														''
-													}
-													setNormalCustomGradientSwitcher={(value) =>
-														setAttributes({
-
-														})
-													}
-													normalCustomGradientInputValue={
-														''
-													}
-													setNormalCustomGradientInputValue={(value) =>
-														setAttributes({
-
-														})
-													}
-													normalBackgroundImageUrl={''}
-													setNormalBackgroundImageUrl={(value) =>
-														setAttributes({  })
-													}
-													normalBackgroundImageAlt={''}
-													setNormalBackgroundImageAlt={(value) =>
-														setAttributes({  })
-													}
-													normalBackgroundImageID={''}
-													setNormalBackgroundImageID={(value) =>
-														setAttributes({  })
-													}
-													normalBackgroundImagePosition={
-														''
-													}
-													setNormalBackgroundImagePosition={(value) =>
-														setAttributes({
-
-														})
-													}
-													normalBackgroundImageAttachment={
-														''
-													}
-													setNormalBackgroundImageAttachment={(value) =>
-														setAttributes({
-
-														})
-													}
-													normalBackgroundImageRepeat={
-														''
-													}
-													setNormalBackgroundImageRepeat={(value) =>
-														setAttributes({
-
-														})
-													}
-													normalBackgroundImageSize={''}
-													setNormalBackgroundImageSize={(value) =>
-														setAttributes({  })
-													}
-													hoverBackgroundType={''}
-													setHoverBackgroundType={(value) =>
-														setAttributes({  })
-													}
-													hoverClassicColor={''}
-													setHoverClassicColor={(value) =>
-														setAttributes({  })
-													}
-													hoverGradientColor={''}
-													setHoverGradientColor={(value) =>
-														setAttributes({  })
-													}
-													hoverCustomGradientSwitcher={
-														''
-													}
-													setHoverCustomGradientSwitcher={(value) =>
-														setAttributes({
-
-														})
-													}
-													hoverCustomGradientInputValue={
-														''
-													}
-													setHoverCustomGradientInputValue={(value) =>
-														setAttributes({
-
-														})
-													}
-													hoverBackgroundImageUrl={''}
-													setHoverBackgroundImageUrl={(value) =>
-														setAttributes({  })
-													}
-													hoverBackgroundImageAlt={''}
-													setHoverBackgroundImageAlt={(value) =>
-														setAttributes({  })
-													}
-													hoverBackgroundImageID={''}
-													setHoverBackgroundImageID={(value) =>
-														setAttributes({  })
-													}
-													hoverBackgroundImagePosition={
-														''
-													}
-													setHoverBackgroundImagePosition={(value) =>
-														setAttributes({
-
-														})
-													}
-													hoverBackgroundImageAttachment={
-														''
-													}
-													setHoverBackgroundImageAttachment={(value) =>
-														setAttributes({
-
-														})
-													}
-													hoverBackgroundImageRepeat={
-														''
-													}
-													setHoverBackgroundImageRepeat={(value) =>
-														setAttributes({
-
-														})
-													}
-													hoverBackgroundImageSize={''}
-													setHoverBackgroundImageSize={(value) =>
-														setAttributes({  })
-													}
-												/>
-											</PanelBody>
-											<PanelBody
-												title={__("Border and Shadow", "frontis-blocks")}
-												initialOpen={false}
-											>
-												<SelectControl
-													label={__("Border Style", "frontis-blocks")}
-													value={''}
-													options={''}
-													onChange={(value) =>
-														setAttributes({ })
-													}
-												/>
-
-												<FB_Color
-													label={__("Border Color", "frontis-blocks")}
-													globalColorSwitcher={''}
-													globalColor={''}
-													globalHoverColor={''}
-													handleColorSwitcherChange={
-														''
-													}
-													handleGlobalColorChange={
-														''
-													}
-													handleGlobalHoverColorChange={
-														''
-													}
-												/>
-
-												<FB_Spacing
-													label={__("Border", "frontis-blocks")}
+										}
+									</>
+								)}
+								{tab.name === "advanced" && (
+									<>
+										<div className="fb-setting-advanced-tab-wrapper">
+											<div className="fb-setting-inner-wrapper">
+												<FB_Range
+													min={0}
+													max={99999}
+													label={__("Z Index", "frontis-blocks")}
+													rangeValue={containerZIndex}
+													onChangeHandler={containerZindexFn}
 													deviceType={deviceType}
-													spacingUnitsHandler={''}
-													spacingUnits={''}
-													spacingDesktop={''}
-													spacingTablet={''}
-													spacingMobile={''}
-													handleSpacingUnitHandler={
-														''
-													}
-													spacingCombineBtn={''}
-													spacingCombineBtnHandler={
-														''
-													}
-													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={''}
+													isRangeUnit={false}
 												/>
+												<PanelBody
+													title={__("Padding and Margin", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={containerMarginUnitsHandler}
+														spacingUnits={containerMarginUnits}
+														spacingDesktop={containerDesktopMargin}
+														spacingTablet={containerTabletMargin}
+														spacingMobile={containerMobileMargin}
+														handleSpacingUnitHandler={containerMarginUnitsChange}
+														spacingCombineBtn={containerMarginLink}
+														spacingCombineBtnHandler={containerMarginLinkBtn}
+														setAttributes={setAttributes}
+													/>
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={containerPaddingUnitsHandler}
+														spacingUnits={containerPaddingUnits}
+														spacingDesktop={containerDesktopPadding}
+														spacingTablet={containerTabletPadding}
+														spacingMobile={containerMobilePadding}
+														handleSpacingUnitHandler={containerPaddingUnitsChange}
+														spacingCombineBtn={containerPaddingLink}
+														spacingCombineBtnHandler={containerPaddingLinkBtn}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
 
-												<FB_Spacing
-													label={__("Border Radius", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={
-														''
-													}
-													spacingUnits={''}
-													spacingDesktop={''}
-													spacingTablet={''}
-													spacingMobile={''}
-													handleSpacingUnitHandler={
-														''
-													}
-													spacingCombineBtn={''}
-													spacingCombineBtnHandler={
-														''
-													}
-													setAttributes={setAttributes}
-												/>
-												<FB_BoxShadowControl
-													onBoxShadowChange={(value) =>
-														setAttributes({  })
-													}
-													initialShadowValue={''}
-													onBoxShadowStyleChange={(value) =>
-														setAttributes({
+												<PanelBody title="Background" initialOpen={false}>
+													<FB_BackgroundColorControl
+														bgColorSwitcher={''}
+														setBgColorSwitcher={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundType={''}
+														setNormalBackgroundType={(value) =>
+															setAttributes({})
+														}
+														normalClassicColor={''}
+														setNormalClassicColor={(value) =>
+															setAttributes({})
+														}
+														normalGradientColor={''}
+														setNormalGradientColor={(value) =>
+															setAttributes({})
+														}
+														normalCustomGradientSwitcher={
+															''
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
 
-														})
-													}
-												/>
-											</PanelBody>
+															})
+														}
+														normalCustomGradientInputValue={
+															''
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
 
-											<PanelBody
+															})
+														}
+														normalBackgroundImageUrl={''}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImageAlt={''}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImageID={''}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImagePosition={
+															''
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageAttachment={
+															''
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageRepeat={
+															''
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageSize={''}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundType={''}
+														setHoverBackgroundType={(value) =>
+															setAttributes({})
+														}
+														hoverClassicColor={''}
+														setHoverClassicColor={(value) =>
+															setAttributes({})
+														}
+														hoverGradientColor={''}
+														setHoverGradientColor={(value) =>
+															setAttributes({})
+														}
+														hoverCustomGradientSwitcher={
+															''
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverCustomGradientInputValue={
+															''
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageUrl={''}
+														setHoverBackgroundImageUrl={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImageAlt={''}
+														setHoverBackgroundImageAlt={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImageID={''}
+														setHoverBackgroundImageID={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImagePosition={
+															''
+														}
+														setHoverBackgroundImagePosition={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageAttachment={
+															''
+														}
+														setHoverBackgroundImageAttachment={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageRepeat={
+															''
+														}
+														setHoverBackgroundImageRepeat={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageSize={''}
+														setHoverBackgroundImageSize={(value) =>
+															setAttributes({})
+														}
+													/>
+												</PanelBody>
+												<PanelBody
+													title={__("Border and Shadow", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<SelectControl
+														label={__("Border Style", "frontis-blocks")}
+														value={''}
+														options={''}
+														onChange={(value) =>
+															setAttributes({})
+														}
+													/>
+
+													<FB_Color
+														label={__("Border Color", "frontis-blocks")}
+														globalColorSwitcher={''}
+														globalColor={''}
+														globalHoverColor={''}
+														handleColorSwitcherChange={
+															''
+														}
+														handleGlobalColorChange={
+															''
+														}
+														handleGlobalHoverColorChange={
+															''
+														}
+													/>
+
+													<FB_Spacing
+														label={__("Border", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={''}
+														spacingUnits={''}
+														spacingDesktop={''}
+														spacingTablet={''}
+														spacingMobile={''}
+														handleSpacingUnitHandler={
+															''
+														}
+														spacingCombineBtn={''}
+														spacingCombineBtnHandler={
+															''
+														}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															''
+														}
+														spacingUnits={''}
+														spacingDesktop={''}
+														spacingTablet={''}
+														spacingMobile={''}
+														handleSpacingUnitHandler={
+															''
+														}
+														spacingCombineBtn={''}
+														spacingCombineBtnHandler={
+															''
+														}
+														setAttributes={setAttributes}
+													/>
+													<FB_BoxShadowControl
+														onBoxShadowChange={(value) =>
+															setAttributes({})
+														}
+														initialShadowValue={''}
+														onBoxShadowStyleChange={(value) =>
+															setAttributes({
+
+															})
+														}
+													/>
+												</PanelBody>
+
+												<PanelBody
 													title={__("Responsive Control", "frontis-blocks")}
 													initialOpen={false}
 													className="fb-setting-responsive-control-wrapper"
@@ -990,16 +1016,16 @@ const Inspector = (props) => {
 														checked={containerMobileSwitcher}
 														onChange={(value) => setAttributes({ containerMobileSwitcher: value })}
 													/>
-											</PanelBody>
+												</PanelBody>
+											</div>
 										</div>
-									</div>
-								</>
-							)}
-						</div>
-					)}
-				</TabPanel>
-			</div>
-		</InspectorControls>
+									</>
+								)}
+							</div>
+						)}
+					</TabPanel>
+				</div>
+			</InspectorControls>
 		</>
 	);
 };
