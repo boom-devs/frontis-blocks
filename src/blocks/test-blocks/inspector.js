@@ -57,10 +57,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const testBlocksStyle = useMemo(
 		() => `
 		  .fb-test-blocks-wrapper {
-			background-image: url(${testImageUrl});
-			${testImagePosition && testImagePosition.Desktop 
-				? `background-position: ${testImagePosition.Desktop.x * 100}% ${testImagePosition.Desktop.y * 100}%` 
-				: "background-position: 50% 50%"}
+			background-image: url(${testImageUrl.Desktop});
+			background-position: ${
+			  testImagePosition && testImagePosition.Desktop 
+				? `${testImagePosition.Desktop.x * 100}% ${testImagePosition.Desktop.y * 100}%` 
+				: "50% 50%"
+			};
 			${testImageAttachment.Desktop && `background-attachment: ${testImageAttachment.Desktop};`}
 			${testImageRepeat.Desktop && `background-repeat: ${testImageRepeat.Desktop};`}
 			${testImageSize.Desktop && `background-size: ${testImageSize.Desktop};`}
@@ -68,9 +70,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	  
 		  @media (max-width: 1024px) {
 			.fb-test-blocks-wrapper {
-			${testImagePosition && testImagePosition.Tablet 
-				? `background-position: ${testImagePosition.Tablet.x * 100}% ${testImagePosition.Tablet.y * 100}%` 
-				: "background-position: 50% 50%"}
+				background-image: url(${testImageUrl.Tablet});
+			background-position: ${
+				testImagePosition && testImagePosition.Tablet 
+				  ? `${testImagePosition.Tablet.x * 100}% ${testImagePosition.Tablet.y * 100}%` 
+				  : "50% 50%"
+			  };
 			${testImageAttachment.Tablet && `background-attachment: ${testImageAttachment.Tablet};`}
 			${testImageRepeat.Tablet && `background-repeat: ${testImageRepeat.Tablet};`}
 			${testImageSize.Tablet && `background-size: ${testImageSize.Tablet};`}
@@ -79,16 +84,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	  
 		  @media (max-width: 768px) {
 			.fb-test-blocks-wrapper {
-			${testImagePosition && testImagePosition.Mobile 
-				? `background-position: ${testImagePosition.Mobile.x * 100}% ${testImagePosition.Mobile.y * 100}%` 
-				: "background-position: 50% 50%"}
-			${testImageAttachment.Mobile && `background-attachment: ${testImageAttachment.Mobile};`}
-			${testImageRepeat.Mobile && `background-repeat: ${testImageRepeat.Mobile};`}
-			${testImageSize.Mobile && `background-size: ${testImageSize.Mobile};`}
+			background-image: url(${testImageUrl.Mobile});
+			  background-position: ${
+				testImagePosition && testImagePosition.Mobile 
+				  ? `${testImagePosition.Mobile.x * 100}% ${testImagePosition.Mobile.y * 100}%` 
+				  : "50% 50%"
+			  };
+			  ${testImageAttachment.Mobile && `background-attachment: ${testImageAttachment.Mobile};`}
+			  ${testImageRepeat.Mobile && `background-repeat: ${testImageRepeat.Mobile};`}
+			  ${testImageSize.Mobile && `background-size: ${testImageSize.Mobile};`}
 		  }
 		`,
 		[testImageUrl, testImageSize, testImagePosition, testImageRepeat, testImageAttachment]
 	);
+
+	console.log(testImageAttachment.Desktop);
+	console.log(testImageAttachment.Tablet);
+	console.log(testImageAttachment.Mobile);
 
 	useEffect(() => {
 		setAttributes({

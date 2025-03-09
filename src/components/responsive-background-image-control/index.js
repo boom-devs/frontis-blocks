@@ -11,11 +11,11 @@ import './editor.lazy.scss';
 const FB_ResponsiveBackgroundImageControl = ({
     label = '',
     deviceType,
-    globalBackgroundImageUrl,
+    globalBackgroundImageUrl = '',
     setGlobalBackgroundImageUrl,
-    globalBackgroundImageAlt,
+    globalBackgroundImageAlt = '',
     setGlobalBackgroundImageAlt,
-    globalBackgroundImageID,
+    globalBackgroundImageID = '',
     setGlobalBackgroundImageID,
     globalBackgroundImagePosition = '',
     setGlobalBackgroundImagePosition,
@@ -83,6 +83,20 @@ const FB_ResponsiveBackgroundImageControl = ({
         });
     }
 
+    const handleImageUrlChange = (newValue) => {
+        setGlobalBackgroundImageUrl({
+            ...globalBackgroundImageUrl,
+            [deviceType]: newValue
+        });
+
+        setAttributes({
+            globalBackgroundImageUrl: {
+                ...globalBackgroundImageUrl,
+                ...newValue
+            }
+        });
+    };
+
     return (
 
         <BaseControl
@@ -92,12 +106,12 @@ const FB_ResponsiveBackgroundImageControl = ({
                 labelText={__("Image", "frontis-blocks")}
                 device={deviceType}
             />
-            {globalBackgroundImageUrl ? ( 
-                <div className="fb-image-control" style={{backgroundImage: `url(${globalBackgroundImageUrl})`}}> 
+            {globalBackgroundImageUrl[deviceType] ? ( 
+                <div className="fb-image-control" style={{backgroundImage: `url(${globalBackgroundImageUrl[deviceType]})`}}> 
                     <button
                         className='fb-image-delete'
                         onClick={() => {
-                            setGlobalBackgroundImageUrl(null);
+                            handleImageUrlChange(null);
                             setGlobalBackgroundImageAlt(null);
                             setGlobalBackgroundImageID(null);
                         }}
@@ -117,7 +131,7 @@ const FB_ResponsiveBackgroundImageControl = ({
 
                             mediaUploader.on('select', function() {
                                 const attachment = mediaUploader.state().get('selection').first().toJSON();
-                                setGlobalBackgroundImageUrl(attachment.url);
+                                handleImageUrlChange(attachment.url);
                                 setGlobalBackgroundImageAlt(attachment.alt);
                                 setGlobalBackgroundImageID(attachment.id);
                             });
@@ -143,7 +157,7 @@ const FB_ResponsiveBackgroundImageControl = ({
 
                         mediaUploader.on('select', function() {
                             const attachment = mediaUploader.state().get('selection').first().toJSON();
-                            setGlobalBackgroundImageUrl(attachment.url);
+                            handleImageUrlChange(attachment.url);
                             setGlobalBackgroundImageAlt(attachment.alt);
                             setGlobalBackgroundImageID(attachment.id);
                         });
@@ -155,7 +169,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                     Upload
                 </button>
             )}
-            {globalBackgroundImageUrl && (
+            {globalBackgroundImageUrl[deviceType] && (
                 <div className="fb-image-control-setting-wrapper">
                     <BaseControl>
 
@@ -165,7 +179,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                                 device={deviceType}
                             />
                             <FocalPointPicker
-                                url={globalBackgroundImageUrl}
+                                url={globalBackgroundImageUrl[deviceType]}
                                 value={globalBackgroundImagePosition[deviceType]}
                                 onChange={handleFocalPointChange}
                             />
@@ -181,7 +195,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                                 value={globalBackgroundImageAttachment[deviceType]}
                                 options={(
                                     [
-                                        {label: __("Default", "frontis-blocks"), value: "scroll"},
+                                        {label: __("Default", "frontis-blocks"), value: ""},
                                         {label: __("Scroll", "frontis-blocks"), value: "scroll"},
                                         {label: __("Fixed", "frontis-blocks"), value: "fixed"},
                                     ]
@@ -200,7 +214,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                                 value={globalBackgroundImageRepeat[deviceType]}
                                 options={(
                                     [
-                                        {label: __("Default", "frontis-blocks"), value: "no-repeat"},
+                                        {label: __("Default", "frontis-blocks"), value: ""},
                                         {label: __("Repeat", "frontis-blocks"), value: "repeat"},
                                         {label: __("Repeat X", "frontis-blocks"), value: "repeat-x"},
                                         {label: __("Repeat Y", "frontis-blocks"), value: "repeat-y"},
@@ -221,7 +235,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                                 value={globalBackgroundImageSize[deviceType]}
                                 options={(
                                     [
-                                        {label: __("Default", "frontis-blocks"), value: "cover"},
+                                        {label: __("Default", "frontis-blocks"), value: ""},
                                         {label: __("Auto", "frontis-blocks"), value: "auto"},
                                         {label: __("Cover", "frontis-blocks"), value: "cover"},
                                         {label: __("Contain", "frontis-blocks"), value: "contain"},
