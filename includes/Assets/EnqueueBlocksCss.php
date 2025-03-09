@@ -4,6 +4,16 @@ namespace FrontisBlocks\Assets;
 use FrontisBlocks\Utils\Helper;
 
 class EnqueueBlocksCss {
+	public static $page_name;
+
+	public function __construct($page_name) {
+		self::$page_name = $page_name;
+	}
+
+	public function get_page_name($post_id) {
+		self::$page_name = Helper::get_current_page_name($post_id);
+	}
+
 	public static function enqueue_block_asset($css_content, $block_name, $block_id) {
 		$upload_dir = wp_upload_dir();
 		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
@@ -13,7 +23,9 @@ class EnqueueBlocksCss {
 
 		$css_file_name = $block_id . '.css';
 		$css_file = $css_dir . $css_file_name;
+		
 		file_put_contents($css_file, $css_content);
+		self::combined_css_files(self::$page_name);
 	}
 
 	/**
@@ -43,30 +55,7 @@ class EnqueueBlocksCss {
 
 			$new_css_content = implode("\n", $css_contents);
 
-			// Check if the new CSS is different from the existing file
-			if (file_exists($combined_css_file_path)) {
-				$existing_css_content = file_get_contents($combined_css_file_path);
-				if (md5($existing_css_content) === md5($new_css_content)) {
-					if (!Helper::is_gutenberg_editor()) {
-						$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-						wp_enqueue_style('frontis-block-styles', $css_url, [], FB_VERSION);
-					}
-					return false;
-				}
-			}
-
 			file_put_contents($combined_css_file_path, $new_css_content);
-
-			// Cleanup old files
-			foreach ($css_files as $file) {
-				unlink($file);
-			}
-
-			// Enqueue the CSS
-			if (!Helper::is_gutenberg_editor()) {
-				$css_url = trailingslashit($upload_dir['baseurl']) . 'frontis-blocks/' . $page_name . '/' . $combined_css_file_name;
-				wp_enqueue_style('frontis-block-styles', $css_url, [], FB_VERSION);
-			}
 		}
 	}
 }

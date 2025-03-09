@@ -110,8 +110,6 @@ const FB_Range = ({
 		}
 	});
 	
-
-
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
