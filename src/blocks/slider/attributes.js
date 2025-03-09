@@ -670,6 +670,142 @@ const attributes = {
 		type : "boolean",
 		default: true
 	},
+	/** End Border Radius */
+
+	/** Start Fraction */
+	sliderFractionColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	sliderFractionColor: {
+		type: 'string',
+		default: '',
+	},
+	sliderFractionHoverColor: {
+		type: 'string',
+	},
+
+	sliderFractionGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    sliderFractionGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    sliderFractionGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+
+	sliderFractionFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    sliderFractionFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	sliderFractionFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    sliderFractionFontWeight : {
+        type: "string",
+        default: ""
+    },
+    sliderFractionFontStyle : {
+        type: "string",
+        default: ""
+    },
+    sliderFractionTextTransform : {
+        type: "string",
+        default: ""
+    },
+    sliderFractionTextDecoration : {
+        type: "string",
+        default: ""
+    },
+    sliderFractionLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderFractionLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    sliderFractionLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderFractionLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Fraction */
+
+	/** Start Progressbar */
+	sliderProgressbarBGColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	sliderProgressbarBGColor: {
+		type: 'string',
+		default: '',
+	},
+	sliderProgressbarBGActiveColor: {
+		type: 'string',
+	},
+	sliderProgressbarHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderProgressbarHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	/** End Progressbar */
 
 
 	/** End Dots Style */

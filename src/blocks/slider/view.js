@@ -1,30 +1,50 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Select all slider containers
-    const sliders = document.querySelectorAll('.fb-slider-container');
+(function () {
+    function initSliders() {
+        // Select all slider containers
+        document.querySelectorAll('.fb-slider-container').forEach(function (sliderContainer) {
+            const blockId = sliderContainer.dataset.blockId;
+            if (!blockId) return;
 
-    sliders.forEach(sliderContainer => {
-        // Get the unique blockId from the data attribute
-        const blockId = sliderContainer.dataset.blockId;
+            const swiperSettings = sliderContainer.dataset.swiperSettings;
+            if (!swiperSettings) return;
 
-        // Define slider options dynamically based on blockId
-        const sliderOptions = {
-            navigation: {
-                nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
-                prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
-            },
-            pagination: {
-                el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
-                clickable: true,
-            },
-            autoplay: {
-                autoplay: false,
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            loop: true,
-        };
+            const sliderOptions = JSON.parse(swiperSettings);
 
-        // Initialize Swiper for the current slider
-        new Swiper(`.fb-slider-container[data-block-id="${blockId}"] .fb-swiper`, sliderOptions);
-    });
-});
+            // Initialize Swiper for the current slider
+            new Swiper(sliderContainer.querySelector('.fb-swiper'), sliderOptions);
+        });
+    }
+
+    var setupDone = false;
+
+    function setupInitialization() {
+        if (setupDone) return;
+        setupDone = true;
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initSliders, 100);
+        } else {
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(initSliders, 100);
+            });
+        }
+
+        if (typeof window !== 'undefined') {
+            var lastUrl = window.location.href;
+            var urlObserver = new MutationObserver(function () {
+                if (lastUrl !== window.location.href) {
+                    lastUrl = window.location.href;
+                    setTimeout(initSliders, 300);
+                }
+            });
+
+            urlObserver.observe(document.body, { childList: true, subtree: true });
+        }
+    }
+
+    setupInitialization();
+
+    // If needed, expose re-initialization function
+    window.reinitSliders = initSliders;
+})();
+
