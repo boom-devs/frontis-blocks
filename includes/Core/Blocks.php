@@ -25,7 +25,6 @@ class Blocks
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
 		add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
-		// add_action('enqueue_block_assets', [$this, 'combined_frontis_blocks_assets']);
 	}
 
 	public function register_blocks()
@@ -188,9 +187,6 @@ class Blocks
 				$this->process_blocks_recursively($block['innerBlocks']);
 			}
 		}
-
-		// Perform cleanup after all blocks are processed
-		// Helper::remove_css_files();
 	}
 
 	public function remove_css_files($meta_id, $object_id, $meta_key, $meta_value) {
