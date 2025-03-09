@@ -8,16 +8,28 @@ const attributes = {
         default: ""
     },
     testImageUrl: { 
-        type: "string",
-        default: ""
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     testImageAlt: {
-        type: "string",
-        default: ""
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     testImageID: {
-        type: "string",
-        default: ""
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
     },
     testImagePosition: {
         type: 'object',
