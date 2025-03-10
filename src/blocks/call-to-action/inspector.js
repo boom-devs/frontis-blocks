@@ -2032,7 +2032,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${infoButtonHoverBorderColor ? `border-color: ${infoButtonHoverBorderColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-				${ buttonTwoBgColor !== undefined ? `background-color: ${buttonTwoBgColor};` : "" }
+				${ buttonTwoBgColor ? `background-color: ${buttonTwoBgColor};` : "" }
 				${buttonTwoDesktopPadding && btnTwoDesktopPadding.top ? `padding: ${buttonTwoDesktopPadding};` : ''}
 				${btnTwoDesktopMarginWidth && btnTwoDesktopMargin.top ? `margin: ${btnTwoDesktopMarginWidth};` : ''}
 				${btnTwoBorder ? `border: ${btnTwoBorder};` : ""}
@@ -2073,7 +2073,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 				${btnIconSize.Desktop && btnIconSizeUnits.Desktop ? `width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};` : ""}
 				${btnIconColor ? `fill: ${btnIconColor};` : "" }
-				${btnIconRotate.Desktop ? `transform: rotate(${btnIconRotate.Desktop});` : ""}
+				${btnIconRotate.Desktop ? `transform: rotate(${btnIconRotate.Desktop}deg);` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper:hover .fb-btn-icon-wrapper svg {
 				${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : "" }
@@ -2081,7 +2081,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 				${btnTwoIconSize.Desktop && btnTwoIconSizeUnits.Desktop ? `width: ${btnTwoIconSize.Desktop}${btnTwoIconSizeUnits.Desktop};` : ""}
 				${btnTwoIconColor ? `fill: ${btnTwoIconColor};` : "" }
-				${btnTwoIconRotate.Desktop ? `transform: rotate(${btnTwoIconRotate.Desktop});` : ""}
+				${btnTwoIconRotate.Desktop ? `transform: rotate(${btnTwoIconRotate.Desktop}deg);` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper:hover .fb-btn-icon-wrapper svg {
 				${btnTwoIconHoverColor ? `fill: ${btnTwoIconHoverColor};` : "" }
@@ -2143,11 +2143,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 					${btnIconSize.Tablet && btnIconSizeUnits.Tablet ? `width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};` : ""}
-					${btnIconRotate.Tablet ? `transform: rotate(${btnIconRotate.Tablet});` : ""}
+					${btnIconRotate.Tablet ? `transform: rotate(${btnIconRotate.Tablet}deg);` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 					${btnTwoIconSize.Tablet && btnTwoIconSizeUnits.Tablet ? `width: ${btnTwoIconSize.Tablet}${btnTwoIconSizeUnits.Tablet};` : ""}
-					${btnTwoIconRotate.Tablet ? `transform: rotate(${btnTwoIconRotate.Tablet});` : ""}
+					${btnTwoIconRotate.Tablet ? `transform: rotate(${btnTwoIconRotate.Tablet}deg);` : ""}
 				}
 			}
 			@media only screen and (max-width: 767px) {
@@ -2205,11 +2205,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 					${btnIconSize.Mobile && btnIconSizeUnits.Mobile ? `width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};` : ""}
-					${btnIconRotate.Mobile ? `transform: rotate(${btnIconRotate.Mobile});` : ""}
+					${btnIconRotate.Mobile ? `transform: rotate(${btnIconRotate.Mobile}deg);` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 					${btnTwoIconSize.Mobile && btnTwoIconSizeUnits.Mobile ? `width: ${btnTwoIconSize.Mobile}${btnTwoIconSizeUnits.Mobile};` : ""}
-					${btnTwoIconRotate.Mobile ? `transform: rotate(${btnTwoIconRotate.Mobile});` : ""}
+					${btnTwoIconRotate.Mobile ? `transform: rotate(${btnTwoIconRotate.Mobile}deg);` : ""}
 				}
 			}
 		`,

@@ -70,4 +70,33 @@
         }
     }
 }
+.fb-image-control-wrapper {
+    .fb-setting-device-label-wrapper {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+}
+.fb-image-control-setting-wrapper {
+    .fb-image-control-setting-item-position {
+        .fb-setting-device-label-wrapper {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    }
+    .fb-image-control-setting-item {
+        margin: 25px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .components-base-control {
+            width: 45%;
+        }
+        .fb-setting-device-label-wrapper {
+            display: inline-flex;
+            align-items: center;
+        }
+    }
+}
 

@@ -2189,10 +2189,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownPositionType === 'default' ? `position: relative;` : ''}
 				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' ? `width: 100%;` : ''}
 				${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
-				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Desktop !== undefined ? `left: ${countDownHZLeftOffset.Desktop}${countDownHZLeftOffsetUnits.Desktop};` : ''}
-				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Desktop !== undefined ? `right: ${countDownHZRightOffset.Desktop}${countDownHZRightOffsetUnits.Desktop};` : ''}
-				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop !== undefined ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
-				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop !== undefined ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Desktop ? `left: ${countDownHZLeftOffset.Desktop}${countDownHZLeftOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Desktop ? `right: ${countDownHZRightOffset.Desktop}${countDownHZRightOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Desktop ? `top: ${countDownVRTopOffset.Desktop}${countDownVRTopOffsetUnits.Desktop};` : ''}
+				${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Desktop ? `bottom: ${countDownVRBottomOffset.Desktop}${countDownVRBottomOffsetUnits.Desktop};` : ''}
         		${countDownZIndex.Desktop ? `z-index: ${countDownZIndex.Desktop};` : ''}
 				${countDownOverflow !== 'default' ? `overflow: ${countDownOverflow};` : ''}
 			}
@@ -2204,8 +2204,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownItemGap.Desktop ? `gap: ${countDownItemGap.Desktop}${countDownItemGapUnits.Desktop};` : ''}
 				${countDownLayoutAlignment ? `justify-content: ${countDownLayoutAlignment};` : ''}
 				${countDownItemWrapperBorder ? `border: ${countDownItemWrapperBorder};` : ''}
-				${countDownItemWrapperBorderTypeGetDesktop ? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};` : ''}
-				${countDownItemWrapperBorderRadiusGetDesktop ? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};` : ''}
+				${countDownItemWrapperBorderTypeGetDesktop && countDownItemWrapperBorderTypeDesktop.top ? `border-width: ${countDownItemWrapperBorderTypeGetDesktop};` : ''}
+				${countDownItemWrapperBorderRadiusGetDesktop && countDownItemWrapperBorderRadiusDesktop.top ? `border-radius: ${countDownItemWrapperBorderRadiusGetDesktop};` : ''}
 				${countDownItemWrapperBorderColor ? `border-color: ${countDownItemWrapperBorderColor};` : ''}
 				
 				${globalBackgroundType === "gradient" 
@@ -2222,10 +2222,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							${globalBackgroundImageRepeat ? `background-repeat: ${globalBackgroundImageRepeat};` : "" }
 							${globalBackgroundImageSize ? `background-size: ${globalBackgroundImageSize};` : "" } 
 						`
-						: `background: ${globalClassicColor};`)
+						: globalClassicColor ? `background: ${globalClassicColor};` : '')
 				}
-				${countDownItemWrapperPaddingGetDesktop ? `padding: ${countDownItemWrapperPaddingGetDesktop};` : ''}
-				${countDownItemWrapperMarginGetDesktop ? `margin: ${countDownItemWrapperMarginGetDesktop};` : ''}
+				${countDownItemWrapperPaddingGetDesktop && countDownItemWrapperPaddingDesktop.top ? `padding: ${countDownItemWrapperPaddingGetDesktop};` : ''}
+				${countDownItemWrapperMarginGetDesktop && countDownItemWrapperMarginDesktop.top ? `margin: ${countDownItemWrapperMarginGetDesktop};` : ''}
 				transition: all .3s ease-in-out;
 			}
 	
@@ -2244,7 +2244,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
 							${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } 
 						`
-						: `background: ${hoverClassicColor};`)
+						: hoverClassicColor ? `background: ${hoverClassicColor};` : '')
 				}
 				transition: all .3s ease-in-out;
 			}
@@ -2253,9 +2253,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${countDownItemSize.Desktop ? `width: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
 				${countDownItemSizeHeight === true && countDownItemSize.Desktop ? `height: ${countDownItemSize.Desktop}${countDownItemSizeUnits.Desktop};` : ''}
 				${countDownItemBorder ? `border-style: ${countDownItemBorder};` : ''}
-				${countDownItemBorderTypeGetDesktop ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
+				${countDownItemBorderTypeGetDesktop && countDownItemBorderTypeDesktop.top ? `border-width: ${countDownItemBorderTypeGetDesktop};` : ''}
 				${countDownItemBorderColor ? `border-color: ${countDownItemBorderColor};` : ''}
-				${countDownItemBorderRadiusGetDesktop ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
+				${countDownItemBorderRadiusGetDesktop && countDownItemBorderRadiusDesktop.top ? `border-radius: ${countDownItemBorderRadiusGetDesktop};` : ''}
 				transition: all .3s ease-in-out;
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item:hover {
@@ -2334,10 +2334,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${digitGlobalTypoSwitcher.letterSpacing === false && digitLetterSpacing.Desktop ? `letter-spacing: ${digitLetterSpacing.Desktop}${digitLetterSpacingUnits.Desktop};` : ""}
 				${digitGlobalTypoSwitcher.lineHeight === false && digitLineHeight.Desktop ? `line-height: ${digitLineHeight.Desktop}${digitLineHeightUnits.Desktop};` : ""}
 				${countDownDigitBorder ? `border-style: ${countDownDigitBorder};` : ''}
-				${countDownDigitMarginGetDesktop ? `margin: ${countDownDigitMarginGetDesktop};` : ''}
-				${countDownDigitBorderTypeGetDesktop ? `border-width: ${countDownDigitBorderTypeGetDesktop};` : ''}
+				${countDownDigitMarginGetDesktop && countDownDigitMarginDesktop.top ? `margin: ${countDownDigitMarginGetDesktop};` : ''}
+				${countDownDigitBorderTypeGetDesktop && countDownDigitBorderTypeDesktop.top ? `border-width: ${countDownDigitBorderTypeGetDesktop};` : ''}
 				${countDownDigitBorderColor ? `border-color: ${countDownDigitBorderColor};` : ''}
-				${countDownDigitBorderRadiusGetDesktop ? `border-radius: ${countDownDigitBorderRadiusGetDesktop};` : ''}
+				${countDownDigitBorderRadiusGetDesktop && countDownDigitBorderRadiusDesktop.top ? `border-radius: ${countDownDigitBorderRadiusGetDesktop};` : ''}
 				${countDownDigitWidth.Desktop ? `width: ${countDownDigitWidth.Desktop}${countDownDigitWidthUnits.Desktop};` : ''}
 				${countDownDigitHeight.Desktop ? `height: ${countDownDigitHeight.Desktop}${countDownDigitHeightUnits.Desktop};` : ''}
 				transition: all .3s ease-in-out;
@@ -2368,7 +2368,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${labelGlobalTypoSwitcher.letterSpacing === true && labelGlobalTypographyData.letterSpacing ? `letter-spacing: ${labelGlobalTypographyData.letterSpacing};` : ''}
 				${labelGlobalTypoSwitcher.lineHeight === true && labelGlobalTypographyData.lineHeight ? `line-height: ${labelGlobalTypographyData.lineHeight};` : ''}
 
-				${labelGlobalTypoSwitcher.fontFamily === false && labelFontFamily ? `font-family: ${labelFontFamily};` : ""}
+				${labelGlobalTypoSwitcher.fontFamily === false && labelFontFamily && labelFontFamily !== 'Default' ? `font-family: ${labelFontFamily};` : ""}
 				${labelGlobalTypoSwitcher.fontSize === false && labelFontSize.Desktop ? `font-size: ${labelFontSize.Desktop}${labelFontSizeUnits.Desktop};` : ""}
 				${labelGlobalTypoSwitcher.fontWeight === false && labelFontWeight ? `font-weight: ${labelFontWeight};` : ""}
 				${labelGlobalTypoSwitcher.fontStyle === false && labelFontStyle ? `font-style: ${labelFontStyle};` : ""}
@@ -2377,10 +2377,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${labelGlobalTypoSwitcher.letterSpacing === false && labelLetterSpacing.Desktop ? `letter-spacing: ${labelLetterSpacing.Desktop}${labelLetterSpacingUnits.Desktop};` : ""}
 				${labelGlobalTypoSwitcher.lineHeight === false && labelLineHeight.Desktop ? `line-height: ${labelLineHeight.Desktop}${labelLineHeightUnits.Desktop};` : ""}
 				${countDownLabelBorder ? `border-style: ${countDownLabelBorder};` : ''}
-				${countDownLabelBorderTypeGetDesktop ? `border-width: ${countDownLabelBorderTypeGetDesktop};` : ''}
+				${countDownLabelBorderTypeGetDesktop && countDownLabelBorderTypeDesktop.top ? `border-width: ${countDownLabelBorderTypeGetDesktop};` : ''}
 				${countDownLabelBorderColor ? `border-color: ${countDownLabelBorderColor};` : ''}
-				${countDownLabelBorderRadiusGetDesktop ? `border-radius: ${countDownLabelBorderRadiusGetDesktop};` : ''}
-				${countDownLabelMarginGetDesktop ? `margin: ${countDownLabelMarginGetDesktop};` : ''}
+				${countDownLabelBorderRadiusGetDesktop && countDownLabelBorderRadiusDesktop.top ? `border-radius: ${countDownLabelBorderRadiusGetDesktop};` : ''}
+				${countDownLabelMarginGetDesktop && countDownLabelMarginDesktop.top ? `margin: ${countDownLabelMarginGetDesktop};` : ''}
 				${countDownLabelWidth.Desktop ? `width: ${countDownLabelWidth.Desktop}${countDownLabelWidthUnits.Desktop};` : ''}
 				${countDownLabelHeight.Desktop ? `height: ${countDownLabelHeight.Desktop}${countDownLabelHeightUnits.Desktop};` : ''}
 				transition: all .3s ease-in-out;
@@ -2425,25 +2425,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			@media only screen and (max-width: 1024px) {
 				.fb-count-down-main-wrapper.${blockID} {
 					${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
-					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Tablet !== undefined ? `left: ${countDownHZLeftOffset.Tablet}${countDownHZLeftOffsetUnits.Tablet};` : ''}
-					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet !== undefined ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
-					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Tablet !== undefined ? `top: ${countDownVRTopOffset.Tablet}${countDownVRTopOffsetUnits.Tablet};` : ''}
-					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Tablet !== undefined ? `bottom: ${countDownVRBottomOffset.Tablet}${countDownVRBottomOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Tablet ? `left: ${countDownHZLeftOffset.Tablet}${countDownHZLeftOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Tablet ? `right: ${countDownHZRightOffset.Tablet}${countDownHZRightOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Tablet ? `top: ${countDownVRTopOffset.Tablet}${countDownVRTopOffsetUnits.Tablet};` : ''}
+					${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Tablet ? `bottom: ${countDownVRBottomOffset.Tablet}${countDownVRBottomOffsetUnits.Tablet};` : ''}
 					${countDownZIndex.Tablet ? `z-index: ${countDownZIndex.Tablet};` : ''}
 				}
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Tablet}, 1fr);` : ''}
 					${countDownItemGap.Tablet ? `gap: ${countDownItemGap.Tablet}${countDownItemGapUnits.Tablet};` : ""}
-					${countDownItemWrapperBorderTypeGetTablet ? `border-width: ${countDownItemWrapperBorderTypeGetTablet};` : ""}
-					${countDownItemWrapperBorderRadiusGetTablet ? `border-radius: ${countDownItemWrapperBorderRadiusGetTablet};` : ""}
-					${countDownItemWrapperPaddingGetTablet ? `padding: ${countDownItemWrapperPaddingGetTablet};` : ""}
-					${countDownItemWrapperMarginGetTablet ? `margin: ${countDownItemWrapperMarginGetTablet};` : ""}
+					${countDownItemWrapperBorderTypeGetTablet && countDownItemWrapperBorderTypeTablet.top ? `border-width: ${countDownItemWrapperBorderTypeGetTablet};` : ""}
+					${countDownItemWrapperBorderRadiusGetTablet && countDownItemWrapperBorderRadiusTablet.top ? `border-radius: ${countDownItemWrapperBorderRadiusGetTablet};` : ""}
+					${countDownItemWrapperPaddingGetTablet && countDownItemWrapperPaddingTablet.top ? `padding: ${countDownItemWrapperPaddingGetTablet};` : ""}
+					${countDownItemWrapperMarginGetTablet && countDownItemWrapperMarginTablet.top ? `margin: ${countDownItemWrapperMarginGetTablet};` : ""}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 					${countDownItemSize.Tablet ? `width: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ""}
 					${countDownItemSizeHeight === true && countDownItemSize.Tablet ? `height: ${countDownItemSize.Tablet}${countDownItemSizeUnits.Tablet};` : ""}
-					${countDownItemBorderTypeGetTablet ? `border-width: ${countDownItemBorderTypeGetTablet};` : ""}
-					${countDownItemBorderRadiusGetTablet ? `border-radius: ${countDownItemBorderRadiusGetTablet};` : ""}
+					${countDownItemBorderTypeGetTablet && countDownItemBorderTypeTablet.top ? `border-width: ${countDownItemBorderTypeGetTablet};` : ""}
+					${countDownItemBorderRadiusGetTablet && countDownItemBorderRadiusTablet.top ? `border-radius: ${countDownItemBorderRadiusGetTablet};` : ""}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 					${
@@ -2462,9 +2462,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${digitGlobalTypoSwitcher.fontSize === false && digitFontSize.Tablet ? `font-size: ${digitFontSize.Tablet}${digitFontSizeUnits.Tablet};` : ""}
 					${digitGlobalTypoSwitcher.letterSpacing === false && digitLetterSpacing.Tablet ? `letter-spacing: ${digitLetterSpacing.Tablet}${digitLetterSpacingUnits.Tablet};` : ""}
 					${digitGlobalTypoSwitcher.lineHeight === false && digitLineHeight.Tablet ? `line-height: ${digitLineHeight.Tablet}${digitLineHeightUnits.Tablet};` : ""}
-					${countDownDigitMarginGetTablet ? `margin: ${countDownDigitMarginGetTablet};` : ''}
-					${countDownDigitBorderTypeGetTablet ? `border-width: ${countDownDigitBorderTypeGetTablet};` : ''}
-					${countDownDigitBorderRadiusGetTablet ? `border-radius: ${countDownDigitBorderRadiusGetTablet};` : ''}
+					${countDownDigitMarginGetTablet && countDownDigitMarginTablet.top ? `margin: ${countDownDigitMarginGetTablet};` : ''}
+					${countDownDigitBorderTypeGetTablet && countDownDigitBorderTypeTablet.top ? `border-width: ${countDownDigitBorderTypeGetTablet};` : ''}
+					${countDownDigitBorderRadiusGetTablet && countDownDigitBorderRadiusTablet.top ? `border-radius: ${countDownDigitBorderRadiusGetTablet};` : ''}
 					${countDownDigitWidth.Tablet ? `width: ${countDownDigitWidth.Tablet}${countDownDigitWidthUnits.Tablet};` : ''}
 					${countDownDigitHeight.Tablet ? `height: ${countDownDigitHeight.Tablet}${countDownDigitHeightUnits.Tablet};` : ''}
 				}
@@ -2472,9 +2472,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${labelGlobalTypoSwitcher.fontSize === false && labelFontSize.Tablet ? `font-size: ${labelFontSize.Tablet}${labelFontSizeUnits.Tablet};` : ""}
 					${labelGlobalTypoSwitcher.letterSpacing === false && labelLetterSpacing.Tablet ? `letter-spacing: ${labelLetterSpacing.Tablet}${labelLetterSpacingUnits.Tablet};` : ""}
 					${labelGlobalTypoSwitcher.lineHeight === false && labelLineHeight.Tablet ? `line-height: ${labelLineHeight.Tablet}${labelLineHeightUnits.Tablet};` : ""}
-					${countDownLabelBorderTypeGetTablet ? `border-width: ${countDownLabelBorderTypeGetTablet};` : ''}
-					${countDownLabelBorderRadiusGetTablet ? `border-radius: ${countDownLabelBorderRadiusGetTablet};` : ''}
-					${countDownLabelMarginGetTablet ? `margin: ${countDownLabelMarginGetTablet};` : ''}
+					${countDownLabelBorderTypeGetTablet && countDownLabelBorderTypeTablet.top ? `border-width: ${countDownLabelBorderTypeGetTablet};` : ''}
+					${countDownLabelBorderRadiusGetTablet && countDownLabelBorderRadiusTablet.top ? `border-radius: ${countDownLabelBorderRadiusGetTablet};` : ''}
+					${countDownLabelMarginGetTablet && countDownLabelMarginTablet.top ? `margin: ${countDownLabelMarginGetTablet};` : ''}
 					${countDownLabelWidth.Tablet ? `width: ${countDownLabelWidth.Tablet}${countDownLabelWidthUnits.Tablet};` : ''}
 					${countDownLabelHeight.Tablet ? `height: ${countDownLabelHeight.Tablet}${countDownLabelHeightUnits.Tablet};` : ''}
 				}
@@ -2483,25 +2483,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			@media only screen and (max-width: 767px) {
 					.fb-count-down-main-wrapper.${blockID} {
 						${countDownPositionType !== 'default' ? `position: ${countDownPositionType};` : ''}
-						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Mobile !== undefined ? `left: ${countDownHZLeftOffset.Mobile}${countDownHZLeftOffsetUnits.Mobile};` : ''}
-						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile !== undefined ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}
-						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Mobile !== undefined ? `top: ${countDownVRTopOffset.Mobile}${countDownVRTopOffsetUnits.Mobile};` : ''}
-						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Mobile !== undefined ? `bottom: ${countDownVRBottomOffset.Mobile}${countDownVRBottomOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'left' && countDownHZLeftOffset.Mobile ? `left: ${countDownHZLeftOffset.Mobile}${countDownHZLeftOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownHZOrientationType === 'right' && countDownHZRightOffset.Mobile ? `right: ${countDownHZRightOffset.Mobile}${countDownHZRightOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'top' && countDownVRTopOffset.Mobile ? `top: ${countDownVRTopOffset.Mobile}${countDownVRTopOffsetUnits.Mobile};` : ''}
+						${countDownPositionType !== 'default' && countDownPositionType !== 'relative' && countDownVROrientationType === 'bottom' && countDownVRBottomOffset.Mobile ? `bottom: ${countDownVRBottomOffset.Mobile}${countDownVRBottomOffsetUnits.Mobile};` : ''}
 						${countDownZIndex.Mobile ? `z-index: ${countDownZIndex.Mobile};` : ''}
 					}
 				.fb-count-down-wrapper.${blockID} {
 					${countDownLayoutType === 'grid' ? `grid-template-columns: repeat(${countDownGrid.Mobile}, 1fr);` : ''}
 					${countDownItemGap.Mobile ? `gap: ${countDownItemGap.Mobile}${countDownItemGapUnits.Mobile};` : ""}
-					${countDownItemWrapperBorderTypeGetMobile ? `border-width: ${countDownItemWrapperBorderTypeGetMobile};` : ""}
-					${countDownItemWrapperBorderRadiusGetMobile ? `border-radius: ${countDownItemWrapperBorderRadiusGetMobile};` : ""}
-					${countDownItemWrapperPaddingGetMobile ? `padding: ${countDownItemWrapperPaddingGetMobile};` : ""}
-					${countDownItemWrapperMarginGetMobile ? `margin: ${countDownItemWrapperMarginGetMobile};` : ""}
+					${countDownItemWrapperBorderTypeGetMobile && countDownItemWrapperBorderTypeMobile.top ? `border-width: ${countDownItemWrapperBorderTypeGetMobile};` : ""}
+					${countDownItemWrapperBorderRadiusGetMobile && countDownItemWrapperBorderRadiusMobile.top ? `border-radius: ${countDownItemWrapperBorderRadiusGetMobile};` : ""}
+					${countDownItemWrapperPaddingGetMobile && countDownItemWrapperPaddingMobile.top ? `padding: ${countDownItemWrapperPaddingGetMobile};` : ""}
+					${countDownItemWrapperMarginGetMobile && countDownItemWrapperMarginMobile.top ? `margin: ${countDownItemWrapperMarginGetMobile};` : ""}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item {
 					${countDownItemSize.Mobile ? `width: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ""}
 					${countDownItemSizeHeight === true && countDownItemSize.Mobile ? `height: ${countDownItemSize.Mobile}${countDownItemSizeUnits.Mobile};` : ""}
-					${countDownItemBorderTypeGetMobile ? `border-width: ${countDownItemBorderTypeGetMobile};` : ""}
-					${countDownItemBorderRadiusGetMobile ? `border-radius: ${countDownItemBorderRadiusGetMobile};` : ""}
+					${countDownItemBorderTypeGetMobile && countDownItemBorderTypeMobile.top ? `border-width: ${countDownItemBorderTypeGetMobile};` : ""}
+					${countDownItemBorderRadiusGetMobile && countDownItemBorderRadiusMobile.top ? `border-radius: ${countDownItemBorderRadiusGetMobile};` : ""}
 				}
 				.fb-count-down-wrapper.${blockID} .fb-count-down-item:before {
 					${
@@ -2520,9 +2520,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${digitGlobalTypoSwitcher.fontSize === false && digitFontSize.Mobile ? `font-size: ${digitFontSize.Mobile}${digitFontSizeUnits.Mobile};` : ""}
 					${digitGlobalTypoSwitcher.letterSpacing === false && digitLetterSpacing.Mobile ? `letter-spacing: ${digitLetterSpacing.Mobile}${digitLetterSpacingUnits.Mobile};` : ""}
 					${digitGlobalTypoSwitcher.lineHeight === false && digitLineHeight.Mobile ? `line-height: ${digitLineHeight.Mobile}${digitLineHeightUnits.Mobile};` : ""}
-					${countDownDigitMarginGetMobile ? `margin: ${countDownDigitMarginGetMobile};` : ''}
-					${countDownDigitBorderTypeGetMobile ? `border-width: ${countDownDigitBorderTypeGetMobile};` : ''}
-					${countDownDigitBorderRadiusGetMobile ? `border-radius: ${countDownDigitBorderRadiusGetMobile};` : ''}
+					${countDownDigitMarginGetMobile && countDownDigitMarginMobile.top ? `margin: ${countDownDigitMarginGetMobile};` : ''}
+					${countDownDigitBorderTypeGetMobile && countDownDigitBorderTypeMobile.top ? `border-width: ${countDownDigitBorderTypeGetMobile};` : ''}
+					${countDownDigitBorderRadiusGetMobile && countDownDigitBorderRadiusMobile.top ? `border-radius: ${countDownDigitBorderRadiusGetMobile};` : ''}
 					${countDownDigitWidth.Mobile ? `width: ${countDownDigitWidth.Mobile}${countDownDigitWidthUnits.Mobile};` : ''}
 					${countDownDigitHeight.Mobile ? `height: ${countDownDigitHeight.Mobile}${countDownDigitHeightUnits.Mobile};` : ''}
 				}
@@ -2530,9 +2530,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${labelGlobalTypoSwitcher.fontSize === false && labelFontSize.Mobile ? `font-size: ${labelFontSize.Mobile}${labelFontSizeUnits.Mobile};` : ""}
 					${labelGlobalTypoSwitcher.letterSpacing === false && labelLetterSpacing.Mobile ? `letter-spacing: ${labelLetterSpacing.Mobile}${labelLetterSpacingUnits.Mobile};` : ""}
 					${labelGlobalTypoSwitcher.lineHeight === false && labelLineHeight.Mobile ? `line-height: ${labelLineHeight.Mobile}${labelLineHeightUnits.Mobile};` : ""}
-					${countDownLabelBorderTypeGetMobile ? `border-width: ${countDownLabelBorderTypeGetMobile};` : ''}
-					${countDownLabelBorderRadiusGetMobile ? `border-radius: ${countDownLabelBorderRadiusGetMobile};` : ''}
-					${countDownLabelMarginGetMobile ? `margin: ${countDownLabelMarginGetMobile};` : ''}
+					${countDownLabelBorderTypeGetMobile && countDownLabelBorderTypeMobile.top ? `border-width: ${countDownLabelBorderTypeGetMobile};` : ''}
+					${countDownLabelBorderRadiusGetMobile && countDownLabelBorderRadiusMobile.top ? `border-radius: ${countDownLabelBorderRadiusGetMobile};` : ''}
+					${countDownLabelMarginGetMobile && countDownLabelMarginMobile.top ? `margin: ${countDownLabelMarginGetMobile};` : ''}
 					${countDownLabelWidth.Mobile ? `width: ${countDownLabelWidth.Mobile}${countDownLabelWidthUnits.Mobile};` : ''}
 					${countDownLabelHeight.Mobile ? `height: ${countDownLabelHeight.Mobile}${countDownLabelHeightUnits.Mobile};` : ''}
 				}
