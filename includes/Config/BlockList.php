@@ -381,6 +381,19 @@ class BlockList
                 'complete'  => 'true',
                 'child'     => 'true',
             ],
+            'test-blocks' => [
+                'slug'      => 'test-blocks',
+                'title'     => 'Test Blocks',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/test-blocks.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+                'child'     => 'false',
+            ],
             'off-canvas-menu' => [
                 'slug'      => 'off-canvas-menu',
                 'title'     => 'Off Canvas Menu',
@@ -392,6 +405,7 @@ class BlockList
                 'doc'       => 'https://wpmessiah.com/',
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
+                'child'     => 'false',
             ],
             'loop-builder' => [
                 'slug'      => 'loop-builder',

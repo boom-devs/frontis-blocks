@@ -183,11 +183,11 @@ class Helper
         $upload_dir = wp_upload_dir();
         $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
         $css_files = glob($css_dir . '*.css');
-        // foreach($css_files as $file) {
-        //     if(basename($file) !== 'frontis-blocks.css') {
-        //         unlink($file);
-        //     }
-        // }
+        foreach($css_files as $file) {
+            if(basename($file) !== 'frontis-blocks.css') {
+                unlink($file);
+            }
+        }
     }
 
     public static function get_current_page_name($post_id = null) {
