@@ -25,86 +25,96 @@ $border_color: #dddddd;
         padding: 2px;
         position: relative;
         width: 100%;
-        .fb-image-delete {
-            margin: 0 8px !important;
-            padding: 0 !important;
-            position: absolute;
-            right: 0;
-
-            align-items: center;
-            background: none;
-            border: 0;
-            border-radius: 2px;
-            cursor: pointer;
-            display: inline-flex;
-            font-family: inherit;
-            font-weight: 400;
-            height: 36px;
-            text-decoration: none;
-            transition: box-shadow .1s linear;
-
-            svg {
-                fill: none;
-                filter: drop-shadow(1px 1px 3px rgb(100, 100, 100));
-            }
-        }
-        .fb-image-replace-btn {
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-            background: hsla(0, 0%, 95%, .749);
-            border-radius: 0 0 6px 6px;
-            bottom: 0;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            left: 0;
-            position: absolute;
-            transition: .3s;
-            width: 100%;
-            color: #000;
-            font-size: 13px;
-
-            align-items: center;
-            border: 0;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 400;
-            height: 36px;
-            margin: 0;
-            padding: 6px 12px;
-            text-decoration: none;
-            svg {
-                fill: none;
-            }
-        }
     }
     .fb-image-upload-btn {
-        background-color: #f2f2f2;
+        width: 100%;
+        padding: 0;
+        background-color: #f0f0f0;
         background-image: url(transparent-bg-demo.png);
-        border: 1px solid #e9e8eb;
+        border: 1px dashed #ccc;
         border-radius: 6px;
         height: 130px;
-        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 8px;
         justify-content: center;
         align-items: center;
-        padding: 0;
         cursor: pointer;
         font-weight: 400;
         margin: 0;
         text-decoration: none;
-        transition: box-shadow .1s linear;
+        transition: all 0.2s;
+
+        svg {
+            margin-bottom: 8px;
+            fill: #555;
+        }
+
+        &:hover {
+            background-color: #e8e8e8;
+        }
     }
 }
 
-.fb-image-control-setting-wrapper {
-    .fb-image-label {
-        label {
-            font-size: 13px !important;
-            text-transform: capitalize !important;
-            margin-bottom: 8px !important;
+.fb-image-control-integrated {
+    display: flex;
+    flex-direction: column;
+
+    .fb-image-focal-point-wrapper {
+        position: relative;
+
+        /* Target WordPress's FocalPointPicker */
+        .components-focal-point-picker-wrapper {
+            width: 100%;
+        }
+        .components-flex {
+            &.focal-point-picker__controls {
+                padding-bottom: 3px;
+            }
+        }
+        .components-base-control {
+            &:where(:not(:last-child)) {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .fb-image-overlay-buttons {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.2s;
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            &:hover {
+                background: rgba(255, 255, 255, 1);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            &.fb-image-replace-btn {
+                width: auto;
+                border-radius: 16px;
+                padding: 0 12px;
+            }
         }
     }
 }
