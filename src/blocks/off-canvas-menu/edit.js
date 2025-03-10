@@ -20,24 +20,56 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+	
+
 	const patternData = useSelect(select => {
 		if (!selectedTemplate) return null;
-
-		if (select('core')) {
-			const patterns = select('core').getBlockPatterns() || [];
-			return patterns.find(pattern => pattern.name === selectedTemplate);
+	
+		// Check if it's a user pattern (starts with 'user-')
+		if (selectedTemplate.startsWith('user-')) {
+			const id = parseInt(selectedTemplate.replace('user-', ''), 10);
+			
+			if (select('core')) {
+				// Get user patterns from wp_block post type
+				const userPatterns = select('core').getEntityRecords('postType', 'wp_block') || [];
+				const userPattern = userPatterns.find(p => p.id === id);
+				
+				// For user patterns, content is in content.raw
+				if (userPattern && userPattern.content && userPattern.content.raw) {
+					return {
+						content: userPattern.content.raw
+					};
+				}
+			}
+		} else {
+			// It's a core pattern
+			if (select('core')) {
+				const patterns = select('core').getBlockPatterns() || [];
+				return patterns.find(pattern => pattern.name === selectedTemplate);
+			}
 		}
+		
 		return null;
 	}, [selectedTemplate]);
 
 	// Update innerBlocks when pattern changes
+
 	useEffect(() => {
+		console.log("Selected template:", selectedTemplate);
+		console.log("Pattern data:", patternData);
+		
 		if (patternData && patternData.content) {
 			const parsedBlocks = parse(patternData.content);
+			console.log("Parsed blocks:", parsedBlocks);
+			
 			if (parsedBlocks && parsedBlocks.length > 0) {
 				const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);
 				replaceInnerBlocks(clientId, parsedBlocks, false);
+			} else {
+				console.warn("No blocks parsed from pattern content");
 			}
+		} else {
+			console.warn("No content found in pattern data");
 		}
 	}, [patternData, clientId]);
 
