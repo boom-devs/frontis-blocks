@@ -80,6 +80,12 @@ export default function save( props ) {
 		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined
 	};
 
+	let test = 'fb-hide-on-mobile';
+	let responsiveClass = '';
+	if(test){
+		responsiveClass = 'fb-hide-on-mobile';
+	}
+
 	return (
 		<>
 			<CustomTag
@@ -87,7 +93,7 @@ export default function save( props ) {
 				 className={ classnames(
 					blockProps.className,
 					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
-					isBlockRootParent ? `${ contentWidth } frontis-blocks-is-root-container` : ''
+					isBlockRootParent && `${ contentWidth } frontis-blocks-is-root-container ${ responsiveClass }`
 				) }
 			>
 				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
