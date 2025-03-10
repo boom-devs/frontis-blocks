@@ -604,6 +604,11 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	let containerFlexSelector =
 		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap';
 
+	// if ( ! isBlockRootParent) {
+	// 	containerFlexSelector =
+	// 		'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
+	// }
+
 	const widthSelectorsDesktop = {};
 	const widthSelectorsTablet = {};
 	const widthSelectorsMobile = {};
@@ -638,17 +643,17 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	}
 
-	widthSelectorsDesktop[`.frontis-blocks-is-root-container > .frontis-blocks-container-inner-blocks-wrap > .frontis-blocks-block-${clientId}`] = {
+	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
 	};
 
-	widthSelectorsTablet[`.frontis-blocks-is-root-container .frontis-blocks-container-inner-blocks-wrap > .frontis-blocks-block-${clientId} `] = {
+	widthSelectorsTablet[`.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthTabletFallback, customWidthUnits['Tablet']),
 		'width': '100%',
 	};
 
-	widthSelectorsMobile[`.frontis-blocks-is-root-container .frontis-blocks-container-inner-blocks-wrap > .frontis-blocks-block-${clientId} `] = {
+	widthSelectorsMobile[`.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthMobileFallback, customWidthUnits['Mobile']),
 		'width': '100%',
 	};
@@ -773,6 +778,27 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		mobile_selectors[containerFlexSelector] = { ...gridStylesMobile, ...gridCssObject(attributes, 'Mobile') };
 	}
 
+	let desktopContainerPadding = {
+		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	}
+
+	let tabletContainerPadding = {
+		'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+		'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	}
+
+	let mobileContainerPadding = {
+		'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+		'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	}
+
 	if ('video' === backgroundType) {
 		selectors[' .frontis-blocks-container__video-wrap'] = {
 			...videoBackgroundCSS,
@@ -846,15 +872,15 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		}
 	} else {
 		selectors['.wp-block-frontis-blocks-container'] = containerCSS;
+		selectors['.wp-block-frontis-blocks-container'] = {
+			...desktopContainerPadding
+		};
 		selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']),
 			'margin-right': generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']),
 		}
 		tablet_selectors['.wp-block-frontis-blocks-container'] = {
-			'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
-			'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
-			'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
-			'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+			...tabletContainerPadding,
 			...containerTabletMarginCSS,
 			'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
 			...borderCSSTablet,
@@ -866,10 +892,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'margin-right': generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']),
 		}
 		mobile_selectors['.wp-block-frontis-blocks-container'] = {
-			'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
-			'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
-			'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
-			'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+			...mobileContainerPadding,
 			...containerMobileMarginCSS,
 			'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
 			...borderCSSMobile,
