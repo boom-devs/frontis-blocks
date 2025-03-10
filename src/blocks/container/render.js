@@ -78,9 +78,17 @@ const Render = ( props ) => {
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
+
+	let test = 'fb-hide-on-mobile';
+	let responsiveClass = '';
+	if(test){
+		responsiveClass = 'fb-hide-on-mobile';
+	}
+
+
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
+		className: `${responsiveClass} frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
