@@ -214,6 +214,32 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerAlignItems,
 		containerDirection,
 		containerJustify,
+
+
+		/** Normal Bg */
+		containerBgColorSwitcher,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
+		containerBgNormalGradientColor,
+		containerBgNormalCustomGradientSwitcher,
+		containerBgNormalCustomGradientInputValue,
+		containerBgNormalBackgroundImageUrl,
+		containerBgNormalBackgroundImagePosition,
+		containerBgNormalBackgroundImageAttachment,
+		containerBgNormalBackgroundImageRepeat,
+		containerBgNormalBackgroundImageSize,
+
+		/** Hover Bg */
+		containerBgHoverBackgroundType,
+		containerBgHoverClassicColor,
+		containerBgHoverGradientColor,
+		containerBgHoverCustomGradientSwitcher,
+		containerBgHoverCustomGradientInputValue,
+		containerBgHoverBackgroundImageUrl,
+		containerBgHoverBackgroundImagePosition,
+		containerBgHoverBackgroundImageAttachment,
+		containerBgHoverBackgroundImageRepeat,
+		containerBgHoverBackgroundImageSize,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -564,6 +590,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...containerBackgroundCSSDesktop,
 		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
+
+		'background': containerBgNormalBackgroundType === 'gradient' ? 
+		(containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue 
+			? containerBgNormalCustomGradientInputValue 
+			: containerBgNormalGradientColor || containerBgNormalClassicColor) 
+		: containerBgNormalClassicColor,
 	};
 
 	boxShadowBlurHover = isNaN(boxShadowBlurHover) ? '' : boxShadowBlurHover;
