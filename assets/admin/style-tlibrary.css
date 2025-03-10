@@ -14,7 +14,7 @@
   color: #fff !important;
 }
 .fb-template-library-button-wrapper button:hover svg {
-  path-fill: #fff;
+  path-fill: #ffffff;
 }
 
 body .components-modal__frame {
@@ -261,9 +261,6 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-sidebar-content .fb-global-color-section .fb-color-circle:hover {
-  transform: scale(1.1);
-}
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-sidebar-content .fb-global-color-section .fb-color-item .fb-color-tooltip {
   position: absolute;
   top: -30px;
@@ -375,12 +372,210 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-fsi-modal-main-content {
   flex: 6;
 }
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-element {
+  margin-bottom: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .components-navigator-button {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: flex-start;
+  width: 100%;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper .fb-tab-icon svg {
+  fill: none !important;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper .fb-tab-title {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #1e1e1e;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper:hover .fb-tab-title,
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper:hover .fb-tab-icon path {
+  color: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper {
+  display: flex;
+  gap: 8px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #0B0C0E;
+  text-transform: capitalize;
+  margin-top: 9px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner p {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #0B0C0E;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper svg {
+  fill: none !important;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper svg:hover path {
+  stroke: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-font-sizes-presets .font-size-presettes-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-footer {
   padding: 15px 20px;
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tabs {
+  padding-left: 16px;
+  border-top: 1px solid rgb(221, 221, 221);
+  border-left: 1px solid rgb(221, 221, 221);
+  border-right: 1px solid rgb(221, 221, 221);
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tabs button {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  border-bottom: 2px solid transparent;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tabs button:first-child {
+  padding-left: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-flex.components-h-stack {
+  padding-top: 16px;
+  padding-left: 12px;
+  padding-right: 3px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-flex.components-h-stack button svg {
+  fill: #555E72;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item {
+  border-left: 0;
+  border-right: 0;
+  margin-top: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button {
+  border-right: 0;
+  border-left: 0;
+  padding: 0 12px;
+  height: 48px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button .components-flex-item {
+  color: #404655;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-flex.components-h-stack {
+  padding-top: 0;
+  padding-left: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .add-custom-color {
+  text-align: center;
+  padding: 14px 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn {
+  padding: 12px 14px;
+  background: #4B9DEF;
+  height: 44px;
+  border-radius: 6px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+  color: #FFFFFF;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  gap: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn span {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content {
+  padding-top: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-setting-label-text {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase !important;
+  font-family: "Work Sans", sans-serif;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings {
+  padding: 0;
+  margin-top: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
+  outline: none;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input {
+  background: #F7F7F7;
+  height: unset;
+  padding: 6px 12px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input:focus {
+  outline: none;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__backdrop {
+  border: none;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper span:nth-child(2) {
+  height: 2px;
+  background: #C3C8D2;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper span:nth-child(3) {
+  height: 2px;
+  background: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-range-control__wrapper .components-range-control__thumb-wrapper span {
+  background-color: #399CFF;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-range-control__number .components-input-control__container {
+  border: 1px solid #399CFF;
+  border-radius: 6px;
+  margin-left: 10px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .fb-setting-spacing-label-container {
+  margin: 14px 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
+  margin: 10px 0;
+  font-weight: 500;
+  font-family: "Work Sans", sans-serif;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .components-base-control {
+  width: auto;
+  margin-left: 0;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap {
+  margin: 0 auto;
+  margin-top: 12px;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content:empty {
+  display: none;
+}
+.fb-fsi-modal-overlay .fb-fsi-modal .font_preview_box {
+  align-items: center;
+  background: #E1E3E8;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  min-height: 100px;
+  overflow: hidden;
 }
 
 .fb-fsi-modal-main-content {

@@ -116,6 +116,10 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	counterIconSizeRatio: {
+		type: 'boolean',
+		default: true,
+	},
 
 	// Icon Color
 	counterIconColorSwitcher: {
@@ -536,28 +540,28 @@ const attributes = {
 	counterItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '500',
-			bottom: '500',
-			left: '500',
-			right: '500',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderRadiusLink : {

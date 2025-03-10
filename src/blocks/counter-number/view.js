@@ -115,17 +115,17 @@
         const counters = document.querySelectorAll('.fb-counter-number');
 
         counters.forEach(function(counter) {
-            if (counter.dataset.animated === "true") return; // যদি আগেই animate হয়ে থাকে, তাহলে বাদ যাবে
+            if (counter.dataset.animated === "true") return;
 
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         animateCounter(counter);
-                        counter.dataset.animated = "true"; // একবার animate হলে mark করে দেওয়া হচ্ছে
-                        observer.disconnect(); // Animation হওয়ার পর observer বন্ধ করে দিচ্ছি
+                        counter.dataset.animated = "true";
+                        observer.disconnect();  
                     }
                 });
-            }, { threshold: 0.5 }); // 50% element viewport এ আসলে trigger হবে
+            }, { threshold: 0.5 });
 
             observer.observe(counter);
         });
@@ -137,9 +137,6 @@
         var duration = parseInt(counterElement.getAttribute('counter-duration'), 10) || 2000;
         var separatorEnabled = counterElement.getAttribute('separator-switch') === 'true';
         var separatorType = counterElement.getAttribute('separator-type') || 'comma';
-
-        var suffixElement = counterElement.nextElementSibling;
-        var suffix = (suffixElement && suffixElement.classList.contains('fb-counter-number-suffix')) ? suffixElement.textContent : '';
 
         var startTime = null;
 
@@ -165,7 +162,7 @@
                 }
             }
 
-            counterElement.textContent = formattedNumber + suffix;
+            counterElement.textContent = formattedNumber; // Suffix সরিয়ে দেওয়া হয়েছে
 
             if (progress < 1) {
                 window.requestAnimationFrame(step);
@@ -206,4 +203,5 @@
 
     window.reinitCounterAnimation = initCounterAnimation;
 })();
+
 

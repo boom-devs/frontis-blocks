@@ -109,6 +109,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterIconHoverColor,
 		counterIconSize,
 		counterIconSizeUnits,
+		counterIconSizeRatio,
 
         //Counter Number attributes
 		counterNumberFontColorSwitcher,
@@ -951,14 +952,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
         ${globalDesktopPadding && counterGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
         ${globalDesktopMargin && counterGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
-        ${counterGlobalBorderColor ? `border: ${counterGlobalBorderColor};` : "" } 
+        ${counterGlobalBorder ? `border-style: ${counterGlobalBorder};` : ""}
+        ${counterGlobalBorderColor ? `border-color: ${counterGlobalBorderColor};` : "" } 
         ${globalDesktopBorderWidth && counterGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
         ${globalDesktopBorderRadiusWidth && counterGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
         ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
     }
     .fb-counter-wrapper.${blockID}:hover{
         ${counterGlobalBgHoverColor ? `background: ${counterGlobalBgHoverColor};` : ''}
-        ${counterGlobalBorderHoverColor ? `border: ${counterGlobalBorderHoverColor};` : "" }
+        ${counterGlobalBorderHoverColor ? `border-color: ${counterGlobalBorderHoverColor};` : "" }
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item {
         display: flex;
@@ -983,15 +985,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterItemBorderHoverColor ? `border-color: ${counterItemBorderHoverColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
+        display: flex;
         ${counterIconDesktopMargin && counterIconMarginDesktop.top ? `margin: ${counterIconDesktopMargin};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
         ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
-        ${counterIconSize.Desktop ? `height: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+        ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterMediaImagedisplay && counterMediaImagedisplay !== 'none' ? `object-fit: ${counterMediaImagedisplay};` : ''}
+    }
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon {
+        display: flex;
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
         ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+        ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterIconColor ? `fill: ${counterIconColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover svg{
@@ -1087,7 +1094,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
             ${counterIconSize.Tablet ? `width: ${counterIconSize.Tablet}${counterIconSizeUnits.Tablet};` : ''}
-            ${counterIconSize.Tablet ? `height: ${counterIconSize.Tablet}${counterIconSizeUnits.Tablet};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
             ${counterIconSize.Tablet ? `width: ${counterIconSize.Tablet}${counterIconSizeUnits.Tablet};` : ''}
@@ -1137,7 +1143,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
             ${counterIconSize.Mobile ? `width: ${counterIconSize.Mobile}${counterIconSizeUnits.Mobile};` : ''}
-            ${counterIconSize.Mobile ? `height: ${counterIconSize.Mobile}${counterIconSizeUnits.Mobile};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
             ${counterIconSize.Mobile ? `width: ${counterIconSize.Mobile}${counterIconSizeUnits.Mobile};` : ''}
@@ -1182,6 +1187,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         titlePosition,
         counterIconSize,
         counterIconSizeUnits,
+        counterIconSizeRatio,
         counterIconColor,
         counterIconHoverColor,
         counterNumberFontColor,
@@ -1240,6 +1246,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRTopOffsetUnits,
         counterVRBottomOffset,
         counterVRBottomOffsetUnits,
+
+        counterIconMarginMobile,
+        counterIconMarginTablet,
+        counterIconMarginDesktop,
+        counterIconMarginUnits,
+
+        counterNumberMarginDesktop,
+        counterNumberMarginTablet,
+        counterNumberMarginMobile,
+        counterNumberMarginUnits,
+
+        counterNumberTitleMarginDesktop,
+        counterNumberTitleMarginTablet,
+        counterNumberTitleMarginMobile,
+        counterNumberTitleMarginUnits,
     ]);
  
     const customCss = getCustomCss(counterGlobalWraperCustomCSS, `.${blockID}`);
@@ -1285,7 +1306,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === 'general' && (
 									<>
-									<PanelBody title={__("Media", "frontis-blocks")} initialOpen={true}>
+									<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
                                         <BaseControl className="fb-sub-heading-position">
 											<SelectControl
 												label={__("Counter Icon", "frontis-block")}
@@ -1415,7 +1436,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_Range
                                                 min={1}
-                                                max={800}
+                                                max={counterItemSizeUnits.Desktop === '%' ? 100 : 800}
                                                 label={__("Item Size", "frontis-blocks")}
                                                 rangeValue={counterItemSize}
                                                 onChangeHandler={counterItemSizeHandler}
@@ -1514,7 +1535,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										</PanelBody>
 
-										<PanelBody
+										{mediaSwitcher !== 'none' && <PanelBody
 											title={__("Icon", "frontis-blocks")}
 											initialOpen={false}
 										>
@@ -1554,6 +1575,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"25"}
                                             />
 
+                                            <ToggleControl
+                                                label={__("Icon Square Ratio", "frontis-blocks")}
+                                                checked={counterIconSizeRatio}
+                                                onChange={(value) => setAttributes({ counterIconSizeRatio: value })}
+                                            />
+
                                             <FB_Spacing
                                                 label={ 'Margin' }
                                                 deviceType={deviceType}
@@ -1567,7 +1594,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={counterIconMarginCombineBtnHandler} 
                                                 setAttributes={setAttributes}
                                             />
-										</PanelBody>
+										</PanelBody>}
 
 										<PanelBody
 											title={__("Counter Number", "frontis-blocks")}
@@ -1659,7 +1686,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             />
 										</PanelBody>
 
-										<PanelBody
+										{counterTitleSwitch && <PanelBody
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
@@ -1755,7 +1782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={counterNumberTitleMarginCombineBtnHandler} 
                                                 setAttributes={setAttributes}
                                             />
-										</PanelBody>
+										</PanelBody>}
 									</>
 								)}
                                 {tab.name === "advanced" && (
