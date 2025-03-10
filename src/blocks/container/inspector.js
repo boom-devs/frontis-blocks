@@ -18,6 +18,7 @@ import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_ResponsiveControl from '@Components/responsive-control';
+import FB_VisibilityControl from '@Components/visibility-control';
 import { useDeviceType } from "@Config/displayType";
 
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
@@ -941,29 +942,21 @@ const Inspector = (props) => {
 												</PanelBody>
 
 												<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<ToggleControl
-														label={__("Hide on Desktop", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={containerDesktopSwitcher}
-														onChange={(value) => setAttributes({ containerDesktopSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Tablet", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={containerTabletSwitcher}
-														onChange={(value) => setAttributes({ containerTabletSwitcher: value })}
-													/>
-													<ToggleControl
-														label={__("Hide on Mobile", "frontis-blocks")}
-														className="fb-setting-responsive-control"
-														checked={containerMobileSwitcher}
-														onChange={(value) => setAttributes({ containerMobileSwitcher: value })}
-													/>
-												</PanelBody>
+                                                    title={__("Responsive Control", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                    className="fb-setting-responsive-control-wrapper"
+                                                >
+                                                    <FB_VisibilityControl
+                                                        desktopValue={containerDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ containerDesktopSwitcher: value })}
+
+                                                        tabletValue={containerTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ containerTabletSwitcher: value })}
+
+                                                        mobileValue={containerMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ containerMobileSwitcher: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
 									</>
