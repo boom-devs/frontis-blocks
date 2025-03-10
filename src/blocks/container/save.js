@@ -110,7 +110,7 @@ export default function save( props ) {
 				{ topDividerHtml }
 				{ bottomDividerHtml }
 				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
-				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
+				{ isBlockRootParent ? (
 					<div className={`frontis-blocks-container-inner-blocks-wrap`}>
 						<InnerBlocks.Content />
 					</div>
