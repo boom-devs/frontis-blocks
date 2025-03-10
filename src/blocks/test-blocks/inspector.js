@@ -35,13 +35,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		blockId,
 		blockStyle,
 		testImageUrl,
-		testImageAlt,
-		testImageID,
+		// testImageAlt,
+		// testImageID,
 		testImagePosition,
 		testImageAttachment,
 		testImageRepeat,
 		testImageSize,
-    } = attributes;    
+    } = attributes;
     
 	const deviceType= useDeviceType();
 	
@@ -98,10 +98,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		[testImageUrl, testImageSize, testImagePosition, testImageRepeat, testImageAttachment]
 	);
 
-	console.log(testImageAttachment.Desktop);
-	console.log(testImageAttachment.Tablet);
-	console.log(testImageAttachment.Mobile);
-
 	useEffect(() => {
 		setAttributes({
 			blockStyle: `${testBlocksStyle}`.replace(/\s+/g, " ").trim(),
@@ -150,10 +146,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 											deviceType={deviceType}
 											globalBackgroundImageUrl={testImageUrl}
 											setGlobalBackgroundImageUrl={(value) => setAttributes({ testImageUrl: value })}
-											globalBackgroundImageAlt={testImageAlt}
-											setGlobalBackgroundImageAlt={(value) => setAttributes({ testImageAlt: value })}
-											globalBackgroundImageID={testImageID}
-											setGlobalBackgroundImageID={(value) => setAttributes({ testImageID: value })}
 											globalBackgroundImagePosition={testImagePosition}
 											setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ testImagePosition: newPosition })}
 											globalBackgroundImageAttachment={testImageAttachment}
