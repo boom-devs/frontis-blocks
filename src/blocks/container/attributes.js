@@ -1227,6 +1227,87 @@ const attributes = {
         type: "boolean",
         default: false,
     },
+
+	containerOverflow: {
+        type: 'string',
+        default: "default",
+    },
+	containerPositionType: {
+        type: "string",
+        default: "default"
+    },
+    containerHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    containerVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    containerHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    containerHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    containerVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    containerVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 };
 
 export default attributes;

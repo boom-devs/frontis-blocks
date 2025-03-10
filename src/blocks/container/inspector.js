@@ -25,6 +25,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
+import FB_PositionControl from '@Components/position-control';
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -93,6 +94,20 @@ const Inspector = (props) => {
 			containerDirection,
 			containerJustify,
 			containerAlignItems,
+
+			// Position
+			containerOverflow,
+			containerPositionType,
+			containerHZOrientationType,
+			containerVROrientationType,
+			containerHZLeftOffset,
+			containerHZLeftOffsetUnits,
+			containerHZRightOffset,
+			containerHZRightOffsetUnits,
+			containerVRTopOffset,
+			containerVRTopOffsetUnits,
+			containerVRBottomOffset,
+			containerVRBottomOffsetUnits,
 		},
 
 		setAttributes
@@ -140,6 +155,14 @@ const Inspector = (props) => {
         { label: __('Classic', 'frontis-blocks'), value: 'classic' },
         { label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
     ];
+
+	const OVERFLOW_OP = [
+		{ label: __('Default', 'frontis-blocks'), value: 'default' },
+		{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
+		{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+		{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+		{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
+	];
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -720,7 +743,11 @@ const Inspector = (props) => {
 									<>
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
-												{/* <FB_Range
+												<PanelBody
+													title={__("Padding and Margin", "frontis-blocks")}
+													initialOpen={false}
+												>
+												<FB_Range
 													min={0}
 													max={99999}
 													label={__("Z Index", "frontis-blocks")}
@@ -730,7 +757,50 @@ const Inspector = (props) => {
 													rangeStep={1}
 													resetFallbackValue={''}
 													isRangeUnit={false}
-												/> */}
+												/>
+
+												<SelectControl
+													label={__("Overflow", "frontis-blocks")}
+													value={containerOverflow}
+													options={OVERFLOW_OP}
+													onChange={(value) => setAttributes({ containerOverflow: value })}
+                                                />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={containerPositionType}
+                                                        setPositionType={(value) => setAttributes({ containerPositionType: value })}
+                                                                                                        
+                                                        HZOrientationType={containerHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ containerHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={containerVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ containerVROrientationType: value })
+                                                        }
+                                                                                                            
+                                                        HZLeftOffset={containerHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ containerHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={containerHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ containerHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={containerHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ containerHZRightOffset: value })}
+                                                        HZRightOffsetUnits={containerHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ containerHZRightOffsetUnits: value })}
+                                                                                                        
+                                                        VRTopOffset={containerVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ containerVRTopOffset: value })}
+                                                        VRTopOffsetUnits={containerVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ containerVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={containerVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ containerVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={containerVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ containerVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+												</PanelBody>
 												<PanelBody
 													title={__("Padding and Margin", "frontis-blocks")}
 													initialOpen={false}
