@@ -15,22 +15,7 @@ const attributes = {
             Mobile: ""
         }
     },
-    // testImageAlt: {
-    //     type: "object",
-    //     default: {
-    //         Desktop: "",
-    //         Tablet: "",
-    //         Mobile: ""
-    //     }
-    // },
-    // testImageID: {
-    //     type: "object",
-    //     default: {
-    //         Desktop: "",
-    //         Tablet: "",
-    //         Mobile: ""
-    //     }
-    // },
+
     testImagePosition: {
         type: 'object',
         default: {
@@ -63,9 +48,5 @@ const attributes = {
             Mobile: ''
         }
     },
-    overlayType: {
-        type: 'string',
-        default: 'color'
-    }
 }
 export default attributes;
