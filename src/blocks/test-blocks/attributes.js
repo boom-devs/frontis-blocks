@@ -63,5 +63,9 @@ const attributes = {
             Mobile: ''
         }
     },
+    overlayType: {
+        type: 'string',
+        default: 'color'
+    }
 }
 export default attributes;

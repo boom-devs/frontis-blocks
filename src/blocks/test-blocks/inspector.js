@@ -41,6 +41,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		testImageAttachment,
 		testImageRepeat,
 		testImageSize,
+		overlayType,
     } = attributes;
     
 	const deviceType= useDeviceType();
@@ -154,6 +155,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 											setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ testImageRepeat: newRepeat })}
 											globalBackgroundImageSize={testImageSize}
 											setGlobalBackgroundImageSize={(newSize) => setAttributes({ testImageSize: newSize })}
+											overlayType={overlayType}
+											setOverlayType={(newOverlayType) => setAttributes({ overlayType: newOverlayType })}
 											setAttributes={setAttributes}
 										/>
                                     </>
