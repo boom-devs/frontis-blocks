@@ -6,11 +6,17 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const {
 		blockID,
-		counterNumber,
+		counterNumberStart,
+		counterNumberEnd,
+		counterDuration,
 		counterTitle,
+		counterTitleSwitch,
 		counterPrefix,
+		counterPrefixSwitch,
 		counterSuffix,
+		counterSuffixSwitch,
 		showThousandsSeparator,
+		showThousandsSeparatorType,
 		icon,
 		mediaSwitcher,
 		counterMediaUrl,
@@ -29,8 +35,8 @@ export default function save({ attributes }) {
 
 	// Prepare the formatted counter number for the frontend
 	const formattedCounterNumber = showThousandsSeparator
-		? Number(counterNumber || 0).toLocaleString()
-		: counterNumber || 0;
+		? Number(counterNumberEnd || 0).toLocaleString()
+		: counterNumberEnd || 0;
 
 
 	return (
@@ -47,17 +53,19 @@ export default function save({ attributes }) {
 						)}
 					</div>
 					<div className={`fb-counter-number-wrapper`}>
-						<span className={`fb-counter-number-prefix`}>{counterPrefix}</span>
+						{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
 						<span
 							className="fb-counter-number"
-							aria-label={counterNumber} // Store the final number in the aria-label for animation
+							counter-start={counterNumberStart}
+							counter-end={counterNumberEnd}
+							counter-duration={counterDuration}
+							separator-switch={showThousandsSeparator === true ? 'true' : 'false'}
+							separator-type={showThousandsSeparatorType}
 						>
                         0 {/* Initial value for animation */}</span>
-						<span className={`fb-counter-number-suffix`}>{counterSuffix}</span>
+						{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
 					</div>
-					<span className="fb-counter-title">
-                            {counterTitle}
-                        </span>
+					{counterTitleSwitch === true && <span className="fb-counter-title">{counterTitle}</span>}
 				</div>
 			</div>
 		</div>

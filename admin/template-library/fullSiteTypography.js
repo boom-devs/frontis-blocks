@@ -37,7 +37,7 @@ const TypographyPanel = () => {
       ],
       deviceType: 'desktop'
     },
-    Link: { 
+    Link: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -63,8 +63,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    Button: { 
+    },
+    Button: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -90,8 +90,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H1: { 
+    },
+    H1: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -117,8 +117,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H2: { 
+    },
+    H2: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -144,8 +144,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H3: { 
+    },
+    H3: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -171,8 +171,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H4: { 
+    },
+    H4: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -198,8 +198,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H5: { 
+    },
+    H5: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -225,8 +225,8 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     },
-    H6: { 
+    },
+    H6: {
       fontFamily: '',
       fontSize: '',
       fontSizeUnit: 'px',
@@ -252,7 +252,7 @@ const TypographyPanel = () => {
         { label: 'em', value: 'em' }
       ],
       deviceType: 'desktop'
-     }
+    }
   });
 
   const handleSectionClick = (section) => {
@@ -265,9 +265,9 @@ const TypographyPanel = () => {
         const response = await wp.apiFetch({
           path: '/wp/v2/settings',
         });
-  
+
         const iframe = document.querySelector('iframe.fb-preview-frame');
-  
+
         ['Text', 'Link', 'Button', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].forEach((elementType) => {
           const savedSettings = response[`fb_typography_${elementType.toLowerCase()}`];
           if (savedSettings) {
@@ -280,9 +280,9 @@ const TypographyPanel = () => {
         console.error('Error loading typography settings:', error);
       }
     };
-  
+
     loadSavedSettings();
-  }, []);  
+  }, []);
 
   const generateTypographyCSS = (element, styles) => {
     return `
@@ -301,9 +301,9 @@ const TypographyPanel = () => {
 
   const applyTypographyStyles = (elementType, styles) => {
     let selector;
-    
+
     // Define selectors for different element types
-    switch(elementType) {
+    switch (elementType) {
       case 'Text':
         selector = 'body';
         break;
@@ -334,9 +334,9 @@ const TypographyPanel = () => {
       default:
         selector = elementType;
     }
-  
+
     const css = generateTypographyCSS(selector, styles);
-    
+
     // Create or update style element
     let styleElement = document.getElementById(`fb-typography-${elementType}`);
     if (!styleElement) {
@@ -361,23 +361,23 @@ const TypographyPanel = () => {
 
   const handleTypographyChange = (property, value) => {
     if (!activeTypographyItem) return;
-  
+
     const updatedStyles = {
       ...typographyStates[activeTypographyItem],
       [property]: value,
     };
-  
+
     setTypographyStates((prev) => ({
       ...prev,
       [activeTypographyItem]: updatedStyles,
     }));
-  
+
     const iframe = document.querySelector('iframe.fb-preview-frame');
     injectTypographyStylesIntoIframe(iframe, activeTypographyItem, updatedStyles);
-  
+
     saveTypographySettings(activeTypographyItem, updatedStyles);
   };
-  
+
 
   const saveTypographySettings = async (elementType, settings) => {
     try {
@@ -388,7 +388,7 @@ const TypographyPanel = () => {
           [`fb_typography_${elementType.toLowerCase()}`]: JSON.stringify(settings)
         }
       });
-      
+
       // Trigger style regeneration
       await wp.apiFetch({
         path: '/wp/v2/settings',
@@ -397,7 +397,7 @@ const TypographyPanel = () => {
           fb_global_styles: true // This will trigger regeneration of styles
         }
       });
-      
+
       console.log('Typography settings saved:', response);
     } catch (error) {
       console.error('Error saving typography settings:', error);
@@ -406,9 +406,9 @@ const TypographyPanel = () => {
 
   const injectTypographyStylesIntoIframe = (iframe, elementType, styles) => {
     if (!iframe || !iframe.contentDocument) return;
-  
+
     const iframeDocument = iframe.contentDocument;
-  
+
     // Map element type to CSS selectors
     const selectorMap = {
       Text: 'body',
@@ -422,12 +422,12 @@ const TypographyPanel = () => {
       H6: 'h6',
     };
     const selector = selectorMap[elementType] || elementType;
-  
+
     // Helper function to extract value based on device type
     const getDeviceValue = (obj, unit = '') => {
       return obj && obj[styles.deviceType] ? `${obj[styles.deviceType]}${unit}` : '';
     };
-  
+
     // Generate CSS
     const css = `
       ${selector} {
@@ -441,21 +441,20 @@ const TypographyPanel = () => {
         ${styles.lineHeight ? `line-height: ${getDeviceValue(styles.lineHeight, styles.lineHeightUnit)};` : ''}
       }
     `;
-  
+
     // Inject or update the style element inside the iframe
     let styleElement = iframeDocument.getElementById(`fb-typography-${elementType}`);
-  
+
     if (!styleElement) {
       styleElement = iframeDocument.createElement('style');
       styleElement.id = `fb-typography-${elementType}`;
       iframeDocument.head.appendChild(styleElement);
     }
-  
+
     styleElement.textContent = css;
   };
-  
 
-  
+
   const headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
 
   return (

@@ -36,5 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+function toggleMenu() {
+    const menu = document.getElementById('fb-off-canvas-menu');
+    menu.classList.toggle('open');
+}
+
 
 

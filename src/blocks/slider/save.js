@@ -9,9 +9,19 @@ export default function save( props ) {
         blockId,
         slideContent,
         slideItem,
-        transitionSpeed,
+		transitionSpeed,
         displayArrows,
 		displayDots,
+        autoplay,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
+        effect,
+        paginationType,
 		sliderGlobalWraperClass,
 
 		sliderDesktopSwitcher,
@@ -21,11 +31,56 @@ export default function save( props ) {
 
 	const blockProps = useBlockProps.save();
 
+	    // Configure Swiper settings for frontend rendering
+		const swiperSettings = JSON.stringify({
+			effect: effect,
+			loop: loop,
+			autoplay: autoplay ? {
+				delay: autoplaySpeed,
+				pauseOnMouseEnter: pauseOnHover,
+				disableOnInteraction: false,
+				stopOnLastSlide: stopOnLastSlide,
+				reverseDirection: reverseDirection,
+			} : false,
+			speed: transitionSpeed,
+			allowTouchMove: allowTouchMove,
+			mousewheel: enableMouseWheel,
+
+			// Add navigation if enabled
+			...(displayArrows && {
+				navigation: {
+					nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
+					prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
+				},
+			}),
+
+			// Add pagination if enabled
+			...(displayDots && {
+				pagination: {
+					el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
+					clickable: true,
+					type: paginationType || 'bullets',
+				},
+			}),
+			
+			// Creative effect settings if needed
+			...(effect === 'creative' && {
+				creativeEffect: {
+					prev: { shadow: true, translate: [0, 0, -400] },
+					next: { translate: ['100%', 0, 0] },
+				},
+			}),
+			
+		});
+
+
+
 	return (
 		<div
 			key={ blockId }
-			className={ classnames( blockProps.className, `fb-block-${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
 			data-block-id={ blockId }
+			data-swiper-settings={ swiperSettings }
 		>
 			<div className="fb-slides fb-swiper">
 				<div className="swiper-wrapper">
