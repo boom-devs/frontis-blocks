@@ -1,163 +1,64 @@
-// Editor styles
 .fb-loop-builder-block {
+    border: 1px dashed #ddd;
     padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
     
-    .fb-loop-builder-header {
-      margin-bottom: 20px;
-      
-      h3 {
-        margin: 0 0 5px;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      
-      p {
-        margin: 0;
-        color: #666;
-        font-size: 14px;
-      }
-    }
-    
-    .fb-loop-grid {
-      display: grid;
-      grid-gap: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .fb-loop-card {
-      background-color: #fff;
-      border-radius: 5px;
-      overflow: hidden;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      
-      &:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-      
-      .fb-loop-card-image {
-        img {
-          display: block;
-          width: 100%;
-          height: auto;
-        }
-      }
-      
-      .fb-loop-card-title {
-        margin: 0 0 10px;
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 1.2;
-      }
-      
-      .fb-loop-card-meta {
-        font-size: 14px;
-        color: #666;
-        margin-bottom: 10px;
-      }
-      
-      .fb-loop-card-excerpt {
-        margin-bottom: 15px;
-        line-height: 1.5;
-      }
-      
-      .fb-loop-card-button {
-        display: inline-block;
-        cursor: pointer;
-        text-decoration: none;
-        transition: background-color 0.2s;
-        
-        &:hover {
-          opacity: 0.9;
-        }
-      }
-    }
-    
-    .fb-loop-loading {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 5px;
-      
-      p {
-        margin-top: 10px;
-        color: #666;
-      }
-    }
-    
-    .fb-loop-no-posts {
-      padding: 40px 20px;
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 5px;
-      
-      p {
-        font-size: 16px;
-        color: #666;
-      }
-    }
-    
-    .fb-loop-pagination {
-      margin-top: 30px;
-      text-align: center;
-      
-      button {
-        margin: 0 5px;
-        cursor: pointer;
-        
-        &.active {
-          font-weight: bold;
-        }
-      }
-    }
-  }
-  
-  // Inspector tab styles
-  .fb-inspector-control {
-    .fb-parent-tab-panel {
-      .components-tab-panel__tabs {
+    .fb-loop-preview-header,
+    .fb-loop-template-header {
         display: flex;
-        border-bottom: 1px solid #e2e4e7;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
         
-        .fb-tab {
-          flex: 1;
-          justify-content: center;
-          border: none;
-          padding: 8px;
-          margin-bottom: -1px;
-          font-size: 13px;
-          font-weight: 500;
-          
-          &.active-tab {
-            border-bottom: 2px solid #007cba;
-          }
+        h4 {
+            margin: 0;
         }
-      }
     }
-  }
-  
-  // Responsive controls
-  .fb-responsive-control {
-    margin-bottom: 16px;
     
-    .components-button-group {
-      display: flex;
-      margin-bottom: 8px;
-      
-      .components-button {
-        flex: 1;
-        justify-content: center;
-        height: 30px;
+    .fb-loop-preview {
+        display: grid;
         
-        svg {
-          width: 16px;
-          height: 16px;
+        .fb-loop-item {
+            border: 1px solid #eee;
+            padding: 15px;
+            background: #fff;
+            
+            .fb-loop-featured-image {
+                margin-bottom: 10px;
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                }
+            }
+            
+            .fb-loop-title {
+                margin-top: 0;
+                margin-bottom: 10px;
+            }
+            
+            .fb-loop-excerpt {
+                margin-bottom: 10px;
+            }
+            
+            .fb-loop-read-more {
+                display: inline-block;
+                color: #0073aa;
+                text-decoration: none;
+            }
+            
+            .fb-template-placeholder {
+                padding: 30px;
+                background: #f9f9f9;
+                text-align: center;
+                color: #888;
+            }
         }
-      }
     }
-  }
+    
+    .fb-loop-template-editor {
+        background: #f9f9f9;
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+    }
+}

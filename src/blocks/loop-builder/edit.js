@@ -1,360 +1,217 @@
 import { __ } from '@wordpress/i18n';
 import {
-  useBlockProps,
-  useInnerBlocksProps,
-  store as blockEditorStore,
+    useBlockProps,
+    useInnerBlocksProps,
+    store as blockEditorStore,
+    InnerBlocks,
 } from '@wordpress/block-editor';
 import { useState, useEffect } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { parse } from '@wordpress/blocks';
-import { Spinner } from '@wordpress/components';
-import { decodeEntities } from '@wordpress/html-entities';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
+import { 
+    Placeholder, 
+    Spinner, 
+    Button,
+    Notice 
+} from '@wordpress/components';
 import Inspector from './inspector';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-  const {
-    blockID,
-    templateType,
-    postTypes,
-    itemsPerPage,
-    columns,
-    gap,
-    sortBy,
-    taxonomyFilter,
-    filterTerms,
-    showPagination,
-    cardElements,
-    imageSize,
-    excerptLength,
-    metaElements,
-    buttonText,
-    cardStyle,
-    titleStyle,
-    imageStyle,
-    buttonStyle
-  } = attributes;
-
-  // Generate and set a unique ID for the block if not already set
-  useEffect(() => {
-    if (!blockID) {
-      setAttributes({ blockID: `fb-loop-builder-${clientId.slice(0, 8)}` });
-    }
-  }, [blockID, clientId, setAttributes]);
-
-  // State for posts and loading
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch posts based on query parameters
-  const posts = useSelect((select) => {
-    const { getEntityRecords } = select('core');
+    const {
+        blockID,
+        postType = 'post',
+        postsPerPage = 3,
+        order = 'desc',
+        orderBy = 'date',
+        includedCategories = [],
+        includedTags = [],
+        offset = 0,
+        showFeaturedImage = true,
+        showTitle = true,
+        showExcerpt = true,
+        excerptLength = 100,
+        showReadMore = true,
+        readMoreText = 'Read More',
+        columns = 3,
+        gap = 20
+    } = attributes;
     
-    // Build query parameters
-    const query = {
-      per_page: itemsPerPage,
-      _embed: true,
-    };
+    const [isEditing, setIsEditing] = useState(false);
     
-    // Add sorting
-    if (sortBy) {
-      if (sortBy === 'date_desc') {
-        query.order = 'desc';
-        query.orderby = 'date';
-      } else if (sortBy === 'date_asc') {
-        query.order = 'asc';
-        query.orderby = 'date';
-      } else if (sortBy === 'title_asc') {
-        query.order = 'asc';
-        query.orderby = 'title';
-      } else if (sortBy === 'title_desc') {
-        query.order = 'desc';
-        query.orderby = 'title';
-      } else if (sortBy === 'random') {
-        query.orderby = 'rand';
-      }
-    }
+    // Generate a unique ID for the block if it doesn't exist
+    useEffect(() => {
+        if (!blockID) {
+            setAttributes({ blockID: 'fb-loop-' + clientId.substr(0, 8) });
+        }
+    }, [blockID, clientId, setAttributes]);
     
-    // Add taxonomy filtering
-    if (taxonomyFilter && filterTerms && filterTerms.length > 0) {
-      query[taxonomyFilter] = filterTerms.join(',');
-    }
-    
-    return getEntityRecords('postType', postTypes, query);
-  }, [postTypes, itemsPerPage, sortBy, taxonomyFilter, filterTerms]);
-
-  // Update loading state when posts are fetched
-  useEffect(() => {
-    if (posts !== null) {
-      setIsLoading(false);
-    }
-  }, [posts]);
-
-  // Function to get excerpt with specific length
-  const getExcerpt = (post) => {
-    if (!post.excerpt?.rendered) {
-      return '';
-    }
-    
-    // Remove HTML tags
-    const excerptText = post.excerpt.rendered.replace(/<\/?[^>]+(>|$)/g, '');
-    
-    // Trim to specified length
-    if (excerptLength && excerptText.length > excerptLength) {
-      return excerptText.substring(0, excerptLength) + '...';
-    }
-    
-    return excerptText;
-  };
-
-  // Function to get formatted date
-  const getFormattedDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
-  };
-
-  // Function to get author name
-  const getAuthorName = (post) => {
-    if (post._embedded && post._embedded.author && post._embedded.author[0]) {
-      return post._embedded.author[0].name;
-    }
-    return '';
-  };
-
-  // Function to get categories
-  const getCategories = (post) => {
-    if (post._embedded && post._embedded['wp:term']) {
-      const categories = post._embedded['wp:term'][0] || [];
-      return categories.map(cat => cat.name).join(', ');
-    }
-    return '';
-  };
-
-  // Function to get comments count
-  const getCommentsCount = (post) => {
-    return post.comments_count || 0;
-  };
-
-  // Function to get featured image URL
-  const getFeaturedImage = (post) => {
-    if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
-      // Try to get the requested size
-      const media = post._embedded['wp:featuredmedia'][0];
-      
-      if (media.media_details && media.media_details.sizes) {
-        // If requested size exists, use it
-        if (media.media_details.sizes[imageSize]) {
-          return media.media_details.sizes[imageSize].source_url;
+    // Fetch posts based on query parameters
+    const { posts, isLoading } = useSelect((select) => {
+        if (!postType) return { posts: [], isLoading: false };
+        
+        const { getEntityRecords, isResolving } = select(coreStore);
+        
+        const query = {
+            per_page: postsPerPage,
+            order,
+            orderby: orderBy,
+            offset,
+        };
+        
+        if (includedCategories && includedCategories.length > 0) {
+            query.categories = includedCategories;
         }
         
-        // Otherwise use full size
-        if (media.media_details.sizes.full) {
-          return media.media_details.sizes.full.source_url;
+        if (includedTags && includedTags.length > 0) {
+            query.tags = includedTags;
         }
-      }
-      
-      // Fallback to media source URL
-      return media.source_url;
-    }
+        
+        return {
+            posts: getEntityRecords('postType', postType, query) || [],
+            isLoading: isResolving('getEntityRecords', ['postType', postType, query]),
+        };
+    }, [postType, postsPerPage, order, orderBy, offset, includedCategories, includedTags]);
     
-    // Return placeholder if no featured image
-    return 'https://via.placeholder.com/800x600?text=No+Image';
-  };
-
-  // Generate CSS for different template types
-  const getGridStyles = () => {
-    const containerStyles = {
-      display: templateType === 'list' ? 'block' : 'grid',
-      gridTemplateColumns: templateType !== 'list' ? `repeat(${columns.desktop}, 1fr)` : 'initial',
-      gap: `${gap.desktop}px`,
+    const { hasInnerBlocks } = useSelect(
+        (select) => {
+            const { getBlocks } = select(blockEditorStore);
+            const blocks = getBlocks(clientId);
+            return {
+                hasInnerBlocks: blocks.length > 0,
+            };
+        },
+        [clientId]
+    );
+    
+    const blockProps = useBlockProps({
+        className: `fb-loop-builder-block ${blockID}`,
+    });
+    
+    const innerBlocksProps = useInnerBlocksProps(
+        { className: 'fb-loop-builder-template' },
+        {
+            renderAppender: hasInnerBlocks
+                ? undefined
+                : InnerBlocks.ButtonBlockAppender,
+            templateLock: false,
+        }
+    );
+    
+    // Generate CSS for the grid layout
+    const gridStyle = {
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gap: `${gap}px`,
     };
     
-    return containerStyles;
-  };
-  
-  // Function to render a single card
-  const renderCard = (post) => {
-    if (!post) return null;
-    
-    // Generate card style
-    const cardCSS = {
-      backgroundColor: cardStyle.backgroundColor,
-      borderRadius: `${cardStyle.borderRadius}px`,
-      padding: `${cardStyle.padding}px`,
-      boxShadow: cardStyle.boxShadow ? '0 4px 8px rgba(0, 0, 0, 0.1)' : 'none',
-      overflow: 'hidden',
-    };
-    
-    // Generate title style
-    const titleCSS = {
-      color: titleStyle.color,
-      fontSize: `${titleStyle.fontSize.desktop}px`,
-      marginBottom: `${titleStyle.marginBottom}px`,
-      lineHeight: 1.2,
-    };
-    
-    // Generate image style
-    const imageCSS = {
-      borderRadius: `${imageStyle.borderRadius}px`,
-      marginBottom: `${imageStyle.marginBottom}px`,
-      width: '100%',
-      height: 'auto',
-    };
-    
-    // Generate button style
-    const buttonCSS = {
-      backgroundColor: buttonStyle.backgroundColor,
-      color: buttonStyle.textColor,
-      borderRadius: `${buttonStyle.borderRadius}px`,
-      padding: `${buttonStyle.padding.vertical}px ${buttonStyle.padding.horizontal}px`,
-      display: 'inline-block',
-      textDecoration: 'none',
-      cursor: 'pointer',
-      border: 'none',
-      marginTop: '15px',
+    // Function to truncate excerpt
+    const truncateExcerpt = (text, length) => {
+        if (!text) return '';
+        if (text.length <= length) return text;
+        return text.substr(0, length) + '...';
     };
     
     return (
-      <div className="fb-loop-card" style={cardCSS} key={post.id}>
-        {cardElements.image && (
-          <div className="fb-loop-card-image">
-            <img 
-              src={getFeaturedImage(post)} 
-              alt={decodeEntities(post.title.rendered)}
-              style={imageCSS}
+        <div {...blockProps}>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
             />
-          </div>
-        )}
-        
-        {cardElements.title && (
-          <h3 className="fb-loop-card-title" style={titleCSS}>
-            {decodeEntities(post.title.rendered)}
-          </h3>
-        )}
-        
-        {cardElements.meta && (
-          <div className="fb-loop-card-meta" style={{ marginBottom: '10px', fontSize: '14px', color: '#666' }}>
-            {metaElements.author && getAuthorName(post) && (
-              <span className="fb-loop-card-author">
-                {__("By", "frontis-blocks")} {getAuthorName(post)}
-              </span>
+            
+            {!postType && (
+                <Placeholder
+                    icon="database"
+                    label={__("Loop Builder", "frontis-blocks")}
+                    instructions={__("Select a post type to start building your loop", "frontis-blocks")}
+                >
+                    <Notice status="warning" isDismissible={false}>
+                        {__("Please select a post type in the block settings panel", "frontis-blocks")}
+                    </Notice>
+                </Placeholder>
             )}
             
-            {metaElements.date && (
-              <span className="fb-loop-card-date">
-                {metaElements.author ? ' • ' : ''}{getFormattedDate(post.date)}
-              </span>
+            {postType && isLoading && (
+                <Placeholder
+                    icon="update"
+                    label={__("Loading posts...", "frontis-blocks")}
+                >
+                    <Spinner />
+                </Placeholder>
             )}
             
-            {metaElements.comments && (
-              <span className="fb-loop-card-comments">
-                {(metaElements.author || metaElements.date) ? ' • ' : ''}
-                {getCommentsCount(post)} {getCommentsCount(post) === 1 ? __("Comment", "frontis-blocks") : __("Comments", "frontis-blocks")}
-              </span>
+            {postType && !isLoading && posts.length === 0 && (
+                <Placeholder
+                    icon="warning"
+                    label={__("No posts found", "frontis-blocks")}
+                    instructions={__("Try changing your query settings or select a different post type", "frontis-blocks")}
+                />
             )}
             
-            {metaElements.categories && getCategories(post) && (
-              <div className="fb-loop-card-categories" style={{ marginTop: '5px' }}>
-                {getCategories(post)}
-              </div>
+            {postType && !isLoading && posts.length > 0 && (
+                <>
+                    {isEditing ? (
+                        <div className="fb-loop-template-editor">
+                            <div className="fb-loop-template-header">
+                                <h4>{__("Edit Loop Template", "frontis-blocks")}</h4>
+                                <Button
+                                    variant="primary"
+                                    onClick={() => setIsEditing(false)}
+                                >
+                                    {__("Done", "frontis-blocks")}
+                                </Button>
+                            </div>
+                            <div {...innerBlocksProps} />
+                        </div>
+                    ) : (
+                        <>
+                            <div className="fb-loop-preview-header">
+                                <h4>{__("Loop Preview", "frontis-blocks")}</h4>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setIsEditing(true)}
+                                >
+                                    {__("Edit Template", "frontis-blocks")}
+                                </Button>
+                            </div>
+                            <div className="fb-loop-preview" style={gridStyle}>
+                                {posts.map((post, index) => (
+                                    <div key={post.id} className="fb-loop-item">
+                                        {hasInnerBlocks ? (
+                                            <div className="fb-template-preview">
+                                                {/* Placeholder for custom template */}
+                                                <div className="fb-template-placeholder">
+                                                    {__("Your Template", "frontis-blocks")}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                {showFeaturedImage && post.featured_media > 0 && (
+                                                    <div className="fb-loop-featured-image">
+                                                        <img src={post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '#'} alt={post.title.rendered} />
+                                                    </div>
+                                                )}
+                                                {showTitle && (
+                                                    <h3 className="fb-loop-title">{post.title.rendered}</h3>
+                                                )}
+                                                {showExcerpt && (
+                                                    <div className="fb-loop-excerpt">
+                                                        {truncateExcerpt(post.excerpt.rendered, excerptLength)}
+                                                    </div>
+                                                )}
+                                                {showReadMore && (
+                                                    <a href="#" className="fb-loop-read-more">{readMoreText}</a>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </>
             )}
-          </div>
-        )}
-        
-        {cardElements.excerpt && (
-          <div className="fb-loop-card-excerpt" style={{ marginBottom: '10px' }}>
-            {getExcerpt(post)}
-          </div>
-        )}
-        
-        {cardElements.button && (
-          <button className="fb-loop-card-button" style={buttonCSS}>
-            {buttonText}
-          </button>
-        )}
-      </div>
+        </div>
     );
-  };
-
-  // Function to render the post grid
-  const renderPostGrid = () => {
-    if (isLoading) {
-      return (
-        <div className="fb-loop-loading">
-          <Spinner />
-          <p>{__("Loading posts...", "frontis-blocks")}</p>
-        </div>
-      );
-    }
-    
-    if (!posts || posts.length === 0) {
-      return (
-        <div className="fb-loop-no-posts">
-          <p>{__("No posts found. Try adjusting your query settings.", "frontis-blocks")}</p>
-        </div>
-      );
-    }
-    
-    return (
-      <div className="fb-loop-grid" style={getGridStyles()}>
-        {posts.map(post => renderCard(post))}
-      </div>
-    );
-  };
-
-  // Render pagination
-  const renderPagination = () => {
-    if (showPagination === 'none') {
-      return null;
-    }
-    
-    if (showPagination === 'numbers') {
-      return (
-        <div className="fb-loop-pagination" style={{ marginTop: '30px', textAlign: 'center' }}>
-          <button className="fb-pagination-prev" disabled style={{ padding: '8px 12px', margin: '0 5px' }}>
-            {__("Previous", "frontis-blocks")}
-          </button>
-          <button className="fb-pagination-number active" style={{ padding: '8px 12px', margin: '0 5px', backgroundColor: '#0066CC', color: 'white', border: 'none' }}>1</button>
-          <button className="fb-pagination-number" disabled style={{ padding: '8px 12px', margin: '0 5px' }}>2</button>
-          <button className="fb-pagination-next" disabled style={{ padding: '8px 12px', margin: '0 5px' }}>
-            {__("Next", "frontis-blocks")}
-          </button>
-        </div>
-      );
-    }
-    
-    if (showPagination === 'load_more') {
-      return (
-        <div className="fb-loop-pagination" style={{ marginTop: '30px', textAlign: 'center' }}>
-          <button className="fb-pagination-load-more" disabled style={{ padding: '10px 20px', backgroundColor: '#0066CC', color: 'white', border: 'none', borderRadius: '4px' }}>
-            {__("Load More", "frontis-blocks")}
-          </button>
-        </div>
-      );
-    }
-    
-    return null;
-  };
-
-  const blockProps = useBlockProps({
-    className: `fb-loop-builder-block ${blockID}`,
-  });
-
-  return (
-    <div {...blockProps}>
-      <Inspector
-        attributes={attributes}
-        setAttributes={setAttributes}
-        clientId={clientId}
-      />
-      <div className='fb-loop-builder-wrapper'>
-        <div className="fb-loop-builder-header" style={{ marginBottom: '20px' }}>
-          <h3>{__("Loop Builder", "frontis-blocks")}</h3>
-          <p>{__("Displaying", "frontis-blocks")} {itemsPerPage} {postTypes} {__("in", "frontis-blocks")} {templateType} {__("layout", "frontis-blocks")}</p>
-        </div>
-        
-        {renderPostGrid()}
-        {renderPagination()}
-      </div>
-    </div>
-  );
 }
