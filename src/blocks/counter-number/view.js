@@ -115,14 +115,17 @@
         const counters = document.querySelectorAll('.fb-counter-number');
 
         counters.forEach(function(counter) {
+            if (counter.dataset.animated === "true") return;
+
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         animateCounter(counter);
-                        observer.disconnect(); // Stop observing after animation starts
+                        counter.dataset.animated = "true";
+                        observer.disconnect();  
                     }
                 });
-            });
+            }, { threshold: 0.5 });
 
             observer.observe(counter);
         });
@@ -134,9 +137,6 @@
         var duration = parseInt(counterElement.getAttribute('counter-duration'), 10) || 2000;
         var separatorEnabled = counterElement.getAttribute('separator-switch') === 'true';
         var separatorType = counterElement.getAttribute('separator-type') || 'comma';
-
-        var suffixElement = counterElement.nextElementSibling;
-        var suffix = (suffixElement && suffixElement.classList.contains('fb-counter-number-suffix')) ? suffixElement.textContent : '';
 
         var startTime = null;
 
@@ -162,7 +162,7 @@
                 }
             }
 
-            counterElement.textContent = formattedNumber + suffix;
+            counterElement.textContent = formattedNumber; // Suffix সরিয়ে দেওয়া হয়েছে
 
             if (progress < 1) {
                 window.requestAnimationFrame(step);
@@ -203,3 +203,5 @@
 
     window.reinitCounterAnimation = initCounterAnimation;
 })();
+
+
