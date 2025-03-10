@@ -13,163 +13,83 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
-// Template Types
-export const T_TYPES = [
-    { label: 'Grid', value: 'grid' },
-    { label: 'List', value: 'list' },
-    { label: 'Carousel', value: 'carousel' },
-    { label: 'Masonry', value: 'masonry' },
-];
 
-// Post Types
-export const P_TYPES = [
-    { label: 'Posts', value: 'post' },
-    { label: 'Pages', value: 'page' },
-    { label: 'Products', value: 'product' },
-    { label: 'Custom Post Type', value: 'custom' },
-];
-
-// Sorting Options
-export const SORT_OPTIONS = [
-    { label: 'Date (Newest to Oldest)', value: 'date_desc' },
-    { label: 'Date (Oldest to Newest)', value: 'date_asc' },
-    { label: 'Title (A-Z)', value: 'title_asc' },
-    { label: 'Title (Z-A)', value: 'title_desc' },
-    { label: 'Random', value: 'random' },
-];
-
-// Pagination Types
-export const PAGINATION_TYPES = [
-    { label: 'None', value: 'none' },
-    { label: 'Numbers', value: 'numbers' },
-    { label: 'Load More Button', value: 'load_more' },
-    { label: 'Infinite Scroll', value: 'infinite' },
-];
-
-// Column Count Defaults
-export const DEFAULT_COLUMNS = {
-    desktop: 3,
-    tablet: 2,
-    mobile: 1
-};
-
-// Card Elements
-export const CARD_ELEMENTS = [
-    { label: 'Featured Image', value: 'image', default: true },
-    { label: 'Title', value: 'title', default: true },
-    { label: 'Excerpt', value: 'excerpt', default: true },
-    { label: 'Meta Information', value: 'meta', default: false },
-    { label: 'Read More Button', value: 'button', default: false },
-];
-
-export const OVERFLOW_OP = [
-    { label: __('Default', 'frontis-blocks'), value: 'default' },
-    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
-    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
-    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
-    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
-];
-
-export const SELECT_SEPARATOR_TYPE = [
-    { label: "Colon", value: "colon" },
-    { label: "Line", value: "line" },
-    { label: "Slash", value: "slash" },
-    { label: "Custom", value: "custom" },
-];
 export const UNIT_TYPES = [
-    { label: "px", value: "px" },
-    { label: "em", value: "em" },
-];
-
-export const LAYOUT_TYPE = [
-    { label: "Flex", value: "flex" },
-    { label: "Grid", value: "grid" },
-];
-
-export const separator_UNIT_TYPES = [
-    { label: "px", value: "px" },
-    { label: "%", value: "%" },
-    { label: "em", value: "em" },
-];
-
-export const LAYOUT_ALIGNMENT = [
-    { label: __("Left", "frontis-block"), value: "start" },
-    { label: __("Center", "frontis-block"), value: "center" },
-    { label: __("Right", "frontis-block"), value: "end" },
-    { label: __("Between", "frontis-block"), value: "space-between" },
+	{ label: "px", value: "px" },
+	{ label: "em", value: "em" },
 ];
 
 export const NORMAL_HOVER = [
-    { label: "Normal", value: "normal" },
-    { label: "Hover", value: "hover" },
+	{ label: "Normal", value: "normal" },
+	{ label: "Hover", value: "hover" },
 ];
 
 export const SELECT_TYPE = [
-    { label: "Front", value: "front" },
-    { label: "Back", value: "back" },
+	{ label: "Front", value: "front" },
+	{ label: "Back", value: "back" },
 ];
 
 export const separator_TYPE = [
-    { label: __("Line", "frontis-block"), value: "line" },
-    { label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Line", "frontis-block"), value: "line" },
+	{ label: __("Icon", "frontis-block"), value: "icon" },
 ];
 
 export const separator_POSITION = [
-    { label: __("Top", "frontis-block"), value: "top" },
-    { label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 ];
 
 export const subheading_POSITION = [
-    { label: __("Top", "frontis-block"), value: "top" },
-    { label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 ];
 
 export const mediaType = [
-    { label: __("Icon", "frontis-block"), value: "icon" },
-    { label: __("Image", "frontis-block"), value: "image" },
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
 ];
 export const iconType = [
-    { label: __("Icon", "frontis-block"), value: "icon" },
-    { label: __("Image", "frontis-block"), value: "image" },
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
 ];
 
 export const TEXT_ALIGN = [
-    { label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
-    { label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
-    { label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-    { label: __(<Dashicon icon={"menu"} />), value: "justify" }
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
-    { label: __("H1", "frontis-block"), value: "h1" },
-    { label: __("H2", "frontis-block"), value: "h2" },
-    { label: __("H3", "frontis-block"), value: "h3" },
-    { label: __("H4", "frontis-block"), value: "h4" },
-    { label: __("H5", "frontis-block"), value: "h5" },
-    { label: __("H6", "frontis-block"), value: "h6" },
-    { label: __("P", "frontis-block"), value: "p" },
-    { label: __("Div", "frontis-block"), value: "span" },
+	{ label: __("H1", "frontis-block"), value: "h1" },
+	{ label: __("H2", "frontis-block"), value: "h2" },
+	{ label: __("H3", "frontis-block"), value: "h3" },
+	{ label: __("H4", "frontis-block"), value: "h4" },
+	{ label: __("H5", "frontis-block"), value: "h5" },
+	{ label: __("H6", "frontis-block"), value: "h6" },
+	{ label: __("P", "frontis-block"), value: "p" },
+	{ label: __("Div", "frontis-block"), value: "span" },
 ];
 
 export const SEPERATOR_STYLES = [
-    { label: __("Solid", "frontis-block"), value: "solid" },
-    { label: __("Dashed", "frontis-block"), value: "dashed" },
-    { label: __("Dotted", "frontis-block"), value: "dotted" },
-    { label: __("Double", "frontis-block"), value: "double" },
-    { label: __("Groove", "frontis-block"), value: "groove" },
-    { label: __("Outset", "frontis-block"), value: "outset" },
-    { label: __("Ridge", "frontis-block"), value: "ridge" },
+	{ label: __("Solid", "frontis-block"), value: "solid" },
+	{ label: __("Dashed", "frontis-block"), value: "dashed" },
+	{ label: __("Dotted", "frontis-block"), value: "dotted" },
+	{ label: __("Double", "frontis-block"), value: "double" },
+	{ label: __("Groove", "frontis-block"), value: "groove" },
+	{ label: __("Outset", "frontis-block"), value: "outset" },
+	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
 
 export const BORDER_STYLES = [
-    { label: __("None", "frontis-block"), value: "none" },
-    { label: __("Solid", "frontis-block"), value: "solid" },
-    { label: __("Dashed", "frontis-block"), value: "dashed" },
-    { label: __("Dotted", "frontis-block"), value: "dotted" },
-    { label: __("Double", "frontis-block"), value: "double" },
-    { label: __("Groove", "frontis-block"), value: "groove" },
-    { label: __("Outset", "frontis-block"), value: "outset" },
-    { label: __("Ridge", "frontis-block"), value: "ridge" },
+	{ label: __("None", "frontis-block"), value: "none" },
+	{ label: __("Solid", "frontis-block"), value: "solid" },
+	{ label: __("Dashed", "frontis-block"), value: "dashed" },
+	{ label: __("Dotted", "frontis-block"), value: "dotted" },
+	{ label: __("Double", "frontis-block"), value: "double" },
+	{ label: __("Groove", "frontis-block"), value: "groove" },
+	{ label: __("Outset", "frontis-block"), value: "outset" },
+	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
 
 export const FONT_FAMILYS = [

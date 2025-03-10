@@ -1,647 +1,313 @@
 import { __ } from '@wordpress/i18n';
 import {
-  useBlockProps,
-  InspectorControls,
+    useBlockProps,
+    InspectorControls,
 } from '@wordpress/block-editor';
 import {
-  PanelBody,
-  TabPanel,
-  SelectControl,
-  RangeControl,
-  ToggleControl,
-  TextControl,
-  ColorPicker,
-  BaseControl,
-  Button,
-  ButtonGroup,
+    PanelBody,
+    TabPanel,
+    SelectControl,
+    RangeControl,
+    ToggleControl,
+    TextControl,
+    Placeholder,
+    Spinner
 } from '@wordpress/components';
-import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import { store as coreStore } from '@wordpress/core-data';
 import {
-  T_TYPES,
-  P_TYPES,
-  SORT_OPTIONS,
-  PAGINATION_TYPES,
-  DEFAULT_COLUMNS,
-  CARD_ELEMENTS
+    BORDER_STYLES,
+    LAYOUT_ALIGNMENT,
+    LAYOUT_TYPE,
+    OVERFLOW_OP,
+    PRESETS,
 } from "./constants/constants";
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-  const {
-    blockID,
-    templateType,
-    postTypes,
-    itemsPerPage,
-    columns,
-    gap,
-    sortBy,
-    taxonomyFilter,
-    filterTerms,
-    showPagination,
-    cardElements,
-    imageSize,
-    excerptLength,
-    metaElements,
-    buttonText,
-    cardStyle,
-    titleStyle,
-    imageStyle,
-    buttonStyle
-  } = attributes;
-
-  const deviceType = useDeviceType();
-  
-  // Get available taxonomies based on selected post type
-  const taxonomies = useSelect((select) => {
-    const { getTaxonomies } = select('core');
-    const allTaxonomies = getTaxonomies({ per_page: -1 }) || [];
-    return allTaxonomies.filter(tax => 
-      tax.types.includes(postTypes) && tax.visibility?.show_ui
-    );
-  }, [postTypes]);
-  
-  // Get available terms for selected taxonomy
-  const terms = useSelect((select) => {
-    if (!taxonomyFilter) return [];
-    const { getEntityRecords } = select('core');
-    return getEntityRecords('taxonomy', taxonomyFilter, { per_page: -1 }) || [];
-  }, [taxonomyFilter]);
-  
-  // Get available image sizes
-  const imageSizes = useSelect((select) => {
-    const { getSettings } = select('core/block-editor');
-    const settings = getSettings();
-    return settings?.imageSizes || [];
-  }, []);
-  
-  // Handle template type change
-  const handleTemplateTypeChange = (value) => {
-    setAttributes({ templateType: value });
+    const {
+        blockID,
+        postType,
+        postsPerPage,
+        order,
+        orderBy,
+        includedCategories,
+        includedTags,
+        offset,
+        showFeaturedImage,
+        showTitle,
+        showExcerpt,
+        excerptLength,
+        showReadMore,
+        readMoreText,
+        columns,
+        gap
+    } = attributes;
     
-    // Set default columns based on template type
-    if (value === 'list') {
-      setAttributes({ 
-        columns: {
-          desktop: 1,
-          tablet: 1,
-          mobile: 1
-        }
-      });
-    }
-  };
-  
-  // Handle post type change
-  const handlePostTypeChange = (value) => {
-    setAttributes({ 
-      postTypes: value,
-      taxonomyFilter: '',
-      filterTerms: []
-    });
-  };
-  
-  // Handle card element toggle
-  const handleCardElementToggle = (element) => {
-    setAttributes({
-      cardElements: {
-        ...cardElements,
-        [element]: !cardElements[element]
-      }
-    });
-  };
-  
-  // Handle meta element toggle
-  const handleMetaElementToggle = (element) => {
-    setAttributes({
-      metaElements: {
-        ...metaElements,
-        [element]: !metaElements[element]
-      }
-    });
-  };
-
-  return (
-    <>
-      <style>
-        {`.${blockID} {
-            /* Dynamic CSS will be added here */
-          }`}
-      </style>
-      <InspectorControls key="controls">
-        <div className="fb-inspector-control">
-          <TabPanel
-            className="fb-parent-tab-panel"
-            activeClass="active-tab"
-            tabs={[
-              {
-                name: "general",
-                title: "General",
-                className: "fb-tab general",
-              },
-              {
-                name: "styles",
-                title: "Style",
-                className: "fb-tab styles",
-              },
-              {
-                name: "advanced",
-                title: "Advanced",
-                className: "fb-tab advance",
-              },
-            ]}
-          >
-            {(tab) => (
-              <div className={"fb-tab-controls " + tab.name}>
-                {tab.name === 'general' && (
-                  <>
-                    <PanelBody title={__("Template", "frontis-blocks")} initialOpen={true}>
-                      <SelectControl
-                        label={__("Template Type", "frontis-blocks")}
-                        value={templateType}
-                        options={T_TYPES}
-                        onChange={handleTemplateTypeChange}
-                      />
-                      
-                      <RangeControl
-                        label={__("Items per page", "frontis-blocks")}
-                        value={itemsPerPage}
-                        onChange={(value) => setAttributes({ itemsPerPage: value })}
-                        min={1}
-                        max={50}
-                        allowReset
-                        resetFallbackValue={6}
-                      />
-                      
-                      <SelectControl
-                        label={__("Pagination", "frontis-blocks")}
-                        value={showPagination}
-                        options={PAGINATION_TYPES}
-                        onChange={(value) => setAttributes({ showPagination: value })}
-                      />
-                    </PanelBody>
-                    
-                    <PanelBody title={__("Card Elements", "frontis-blocks")} initialOpen={false}>
-                      {CARD_ELEMENTS.map(element => (
-                        <ToggleControl
-                          key={element.value}
-                          label={element.label}
-                          checked={cardElements[element.value]}
-                          onChange={() => handleCardElementToggle(element.value)}
-                        />
-                      ))}
-                      
-                      {cardElements.image && (
-                        <SelectControl
-                          label={__("Image Size", "frontis-blocks")}
-                          value={imageSize}
-                          options={imageSizes.map(size => ({ 
-                            label: size.name, 
-                            value: size.slug 
-                          }))}
-                          onChange={(value) => setAttributes({ imageSize: value })}
-                        />
-                      )}
-                      
-                      {cardElements.excerpt && (
-                        <RangeControl
-                          label={__("Excerpt Length", "frontis-blocks")}
-                          value={excerptLength}
-                          onChange={(value) => setAttributes({ excerptLength: value })}
-                          min={5}
-                          max={100}
-                          allowReset
-                          resetFallbackValue={25}
-                        />
-                      )}
-                      
-                      {cardElements.meta && (
-                        <PanelBody title={__("Meta Information", "frontis-blocks")} initialOpen={false}>
-                          <ToggleControl
-                            label={__("Show Author", "frontis-blocks")}
-                            checked={metaElements.author}
-                            onChange={() => handleMetaElementToggle('author')}
-                          />
-                          <ToggleControl
-                            label={__("Show Date", "frontis-blocks")}
-                            checked={metaElements.date}
-                            onChange={() => handleMetaElementToggle('date')}
-                          />
-                          <ToggleControl
-                            label={__("Show Comments", "frontis-blocks")}
-                            checked={metaElements.comments}
-                            onChange={() => handleMetaElementToggle('comments')}
-                          />
-                          <ToggleControl
-                            label={__("Show Categories", "frontis-blocks")}
-                            checked={metaElements.categories}
-                            onChange={() => handleMetaElementToggle('categories')}
-                          />
-                        </PanelBody>
-                      )}
-                      
-                      {cardElements.button && (
-                        <TextControl
-                          label={__("Button Text", "frontis-blocks")}
-                          value={buttonText}
-                          onChange={(value) => setAttributes({ buttonText: value })}
-                        />
-                      )}
-                    </PanelBody>
-					<PanelBody title={__("Query Settings", "frontis-blocks")} initialOpen={true}>
-                      <SelectControl
-                        label={__("Post Type", "frontis-blocks")}
-                        value={postTypes}
-                        options={P_TYPES}
-                        onChange={handlePostTypeChange}
-                      />
-                      
-                      <SelectControl
-                        label={__("Sort By", "frontis-blocks")}
-                        value={sortBy}
-                        options={SORT_OPTIONS}
-                        onChange={(value) => setAttributes({ sortBy: value })}
-                      />
-                      
-                      {taxonomies?.length > 0 && (
-                        <>
-                          <SelectControl
-                            label={__("Filter By Taxonomy", "frontis-blocks")}
-                            value={taxonomyFilter}
-                            options={[
-                              { label: __("None", "frontis-blocks"), value: "" },
-                              ...taxonomies.map(tax => ({ 
-                                label: tax.name, 
-                                value: tax.slug 
-                              }))
-                            ]}
-                            onChange={(value) => setAttributes({ 
-                              taxonomyFilter: value,
-                              filterTerms: []
-                            })}
-                          />
-                          
-                          {taxonomyFilter && terms?.length > 0 && (
-                            <SelectControl
-                              label={__("Select Terms", "frontis-blocks")}
-                              value={filterTerms}
-                              multiple
-                              options={terms.map(term => ({ 
-                                label: term.name, 
-                                value: term.id.toString() 
-                              }))}
-                              onChange={(value) => setAttributes({ filterTerms: value })}
-                            />
-                          )}
-                        </>
-                      )}
-                    </PanelBody>
-					<PanelBody title={__("Grid Layout", "frontis-blocks")} initialOpen={true}>
-                      {templateType !== 'list' && (
-                        <>
-                          <BaseControl label={__("Columns", "frontis-blocks")}>
-                            <ButtonGroup>
-                              <Button 
-                                isPrimary={deviceType === 'desktop'} 
-                                isSecondary={deviceType !== 'desktop'}
-                                onClick={() => {}}>
-                                {__("Desktop", "frontis-blocks")}
-                              </Button>
-                              <Button 
-                                isPrimary={deviceType === 'tablet'} 
-                                isSecondary={deviceType !== 'tablet'}
-                                onClick={() => {}}>
-                                {__("Tablet", "frontis-blocks")}
-                              </Button>
-                              <Button 
-                                isPrimary={deviceType === 'mobile'} 
-                                isSecondary={deviceType !== 'mobile'}
-                                onClick={() => {}}>
-                                {__("Mobile", "frontis-blocks")}
-                              </Button>
-                            </ButtonGroup>
-                            
-                            <RangeControl
-                              value={columns[deviceType]}
-                              onChange={(value) => setAttributes({ 
-                                columns: {
-                                  ...columns,
-                                  [deviceType]: value
-                                }
-                              })}
-                              min={1}
-                              max={deviceType === 'desktop' ? 6 : (deviceType === 'tablet' ? 4 : 2)}
-                              allowReset
-                              resetFallbackValue={DEFAULT_COLUMNS[deviceType]}
-                            />
-                          </BaseControl>
-                        </>
-                      )}
-                      
-                      <BaseControl label={__("Gap", "frontis-blocks")}>
-                        <ButtonGroup>
-                          <Button 
-                            isPrimary={deviceType === 'desktop'} 
-                            isSecondary={deviceType !== 'desktop'}
-                            onClick={() => {}}>
-                            {__("Desktop", "frontis-blocks")}
-                          </Button>
-                          <Button 
-                            isPrimary={deviceType === 'tablet'} 
-                            isSecondary={deviceType !== 'tablet'}
-                            onClick={() => {}}>
-                            {__("Tablet", "frontis-blocks")}
-                          </Button>
-                          <Button 
-                            isPrimary={deviceType === 'mobile'} 
-                            isSecondary={deviceType !== 'mobile'}
-                            onClick={() => {}}>
-                            {__("Mobile", "frontis-blocks")}
-                          </Button>
-                        </ButtonGroup>
-                        
-                        <RangeControl
-                          value={gap[deviceType]}
-                          onChange={(value) => setAttributes({ 
-                            gap: {
-                              ...gap,
-                              [deviceType]: value
-                            }
-                          })}
-                          min={0}
-                          max={100}
-                          allowReset
-                          resetFallbackValue={20}
-                        />
-                      </BaseControl>
-                    </PanelBody>
-                  </>
-                )}
-                
-                {tab.name === "styles" && (
-                  <>
-                    <PanelBody title={__("Card Styling", "frontis-blocks")} initialOpen={true}>
-                      <BaseControl label={__("Background Color", "frontis-blocks")}>
-                        <ColorPicker
-                          color={cardStyle.backgroundColor}
-                          onChange={(color) => setAttributes({
-                            cardStyle: {
-                              ...cardStyle,
-                              backgroundColor: color
-                            }
-                          })}
-                          disableAlpha
-                        />
-                      </BaseControl>
-                      
-                      <RangeControl
-                        label={__("Border Radius", "frontis-blocks")}
-                        value={cardStyle.borderRadius}
-                        onChange={(value) => setAttributes({
-                          cardStyle: {
-                            ...cardStyle,
-                            borderRadius: value
-                          }
-                        })}
-                        min={0}
-                        max={50}
-                        allowReset
-                        resetFallbackValue={5}
-                      />
-                      
-                      <RangeControl
-                        label={__("Padding", "frontis-blocks")}
-                        value={cardStyle.padding}
-                        onChange={(value) => setAttributes({
-                          cardStyle: {
-                            ...cardStyle,
-                            padding: value
-                          }
-                        })}
-                        min={0}
-                        max={50}
-                        allowReset
-                        resetFallbackValue={20}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        checked={cardStyle.boxShadow}
-                        onChange={(value) => setAttributes({
-                          cardStyle: {
-                            ...cardStyle,
-                            boxShadow: value
-                          }
-                        })}
-                      />
-                    </PanelBody>
-                    
-                    {cardElements.title && (
-                      <PanelBody title={__("Title Styling", "frontis-blocks")} initialOpen={false}>
-                        <BaseControl label={__("Color", "frontis-blocks")}>
-                          <ColorPicker
-                            color={titleStyle.color}
-                            onChange={(color) => setAttributes({
-                              titleStyle: {
-                                ...titleStyle,
-                                color: color
-                              }
-                            })}
-                            disableAlpha
-                          />
-                        </BaseControl>
-                        
-                        <BaseControl label={__("Font Size", "frontis-blocks")}>
-                          <ButtonGroup>
-                            <Button 
-                              isPrimary={deviceType === 'desktop'} 
-                              isSecondary={deviceType !== 'desktop'}
-                              onClick={() => {}}>
-                              {__("Desktop", "frontis-blocks")}
-                            </Button>
-                            <Button 
-                              isPrimary={deviceType === 'tablet'} 
-                              isSecondary={deviceType !== 'tablet'}
-                              onClick={() => {}}>
-                              {__("Tablet", "frontis-blocks")}
-                            </Button>
-                            <Button 
-                              isPrimary={deviceType === 'mobile'} 
-                              isSecondary={deviceType !== 'mobile'}
-                              onClick={() => {}}>
-                              {__("Mobile", "frontis-blocks")}
-                            </Button>
-                          </ButtonGroup>
-                          
-                          <RangeControl
-                            value={titleStyle.fontSize[deviceType]}
-                            onChange={(value) => setAttributes({
-                              titleStyle: {
-                                ...titleStyle,
-                                fontSize: {
-                                  ...titleStyle.fontSize,
-                                  [deviceType]: value
-                                }
-                              }
-                            })}
-                            min={10}
-                            max={50}
-                            allowReset
-                            resetFallbackValue={deviceType === 'desktop' ? 20 : (deviceType === 'tablet' ? 18 : 16)}
-                          />
-                        </BaseControl>
-                        
-                        <RangeControl
-                          label={__("Margin Bottom", "frontis-blocks")}
-                          value={titleStyle.marginBottom}
-                          onChange={(value) => setAttributes({
-                            titleStyle: {
-                              ...titleStyle,
-                              marginBottom: value
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={10}
-                        />
-                      </PanelBody>
-                    )}
-                    
-                    {cardElements.image && (
-                      <PanelBody title={__("Image Styling", "frontis-blocks")} initialOpen={false}>
-                        <RangeControl
-                          label={__("Border Radius", "frontis-blocks")}
-                          value={imageStyle.borderRadius}
-                          onChange={(value) => setAttributes({
-                            imageStyle: {
-                              ...imageStyle,
-                              borderRadius: value
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={5}
-                        />
-                        
-                        <RangeControl
-                          label={__("Margin Bottom", "frontis-blocks")}
-                          value={imageStyle.marginBottom}
-                          onChange={(value) => setAttributes({
-                            imageStyle: {
-                              ...imageStyle,
-                              marginBottom: value
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={15}
-                        />
-                      </PanelBody>
-                    )}
-                    
-                    {cardElements.button && (
-                      <PanelBody title={__("Button Styling", "frontis-blocks")} initialOpen={false}>
-                        <BaseControl label={__("Background Color", "frontis-blocks")}>
-                          <ColorPicker
-                            color={buttonStyle.backgroundColor}
-                            onChange={(color) => setAttributes({
-                              buttonStyle: {
-                                ...buttonStyle,
-                                backgroundColor: color
-                              }
-                            })}
-                            disableAlpha
-                          />
-                        </BaseControl>
-                        
-                        <BaseControl label={__("Text Color", "frontis-blocks")}>
-                          <ColorPicker
-                            color={buttonStyle.textColor}
-                            onChange={(color) => setAttributes({
-                              buttonStyle: {
-                                ...buttonStyle,
-                                textColor: color
-                              }
-                            })}
-                            disableAlpha
-                          />
-                        </BaseControl>
-                        
-                        <RangeControl
-                          label={__("Border Radius", "frontis-blocks")}
-                          value={buttonStyle.borderRadius}
-                          onChange={(value) => setAttributes({
-                            buttonStyle: {
-                              ...buttonStyle,
-                              borderRadius: value
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={4}
-                        />
-                        
-                        <RangeControl
-                          label={__("Vertical Padding", "frontis-blocks")}
-                          value={buttonStyle.padding.vertical}
-                          onChange={(value) => setAttributes({
-                            buttonStyle: {
-                              ...buttonStyle,
-                              padding: {
-                                ...buttonStyle.padding,
-                                vertical: value
-                              }
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={8}
-                        />
-                        
-                        <RangeControl
-                          label={__("Horizontal Padding", "frontis-blocks")}
-                          value={buttonStyle.padding.horizontal}
-                          onChange={(value) => setAttributes({
-                            buttonStyle: {
-                              ...buttonStyle,
-                              padding: {
-                                ...buttonStyle.padding,
-                                horizontal: value
-                              }
-                            }
-                          })}
-                          min={0}
-                          max={50}
-                          allowReset
-                          resetFallbackValue={16}
-                        />
-                      </PanelBody>
-                    )}
-                  </>
-                )}
-                
-                {tab.name === "advanced" && (
-                  <>
-                    <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
-                      <TextControl
-                        label={__("Block ID", "frontis-blocks")}
-                        value={blockID}
-                        onChange={(value) => setAttributes({ blockID: value })}
-                        help={__("Add a custom CSS ID to this block", "frontis-blocks")}
-                      />
-                    </PanelBody>
-                  </>
-                )}
-              </div>
-            )}
-          </TabPanel>
-        </div>
-      </InspectorControls>
-    </>
-  );
+    // Fetch all available post types
+    const { postTypes } = useSelect((select) => {
+        const { getPostTypes } = select(coreStore);
+        const filteredPostTypes = getPostTypes({ per_page: -1 })?.filter(
+            ({ viewable }) => viewable
+        ) || [];
+        
+        return {
+            postTypes: filteredPostTypes,
+        };
+    }, []);
+    
+    // Get post type options for the select control
+    const postTypeOptions = postTypes?.map(({ slug, labels }) => ({
+        label: labels.singular_name,
+        value: slug,
+    })) || [];
+    
+    // Get categories for the selected post type
+    const { categories } = useSelect((select) => {
+        if (postType !== 'post') return { categories: [] };
+        
+        const { getEntityRecords } = select(coreStore);
+        return {
+            categories: getEntityRecords('taxonomy', 'category', { per_page: -1 }) || [],
+        };
+    }, [postType]);
+    
+    // Get tags for the selected post type
+    const { tags } = useSelect((select) => {
+        if (postType !== 'post') return { tags: [] };
+        
+        const { getEntityRecords } = select(coreStore);
+        return {
+            tags: getEntityRecords('taxonomy', 'post_tag', { per_page: -1 }) || [],
+        };
+    }, [postType]);
+    
+    // Category options for select
+    const categoryOptions = categories?.map(({ id, name }) => ({
+        label: name,
+        value: id,
+    })) || [];
+    
+    // Tag options for select
+    const tagOptions = tags?.map(({ id, name }) => ({
+        label: name,
+        value: id,
+    })) || [];
+    
+    return (
+        <>
+            <style>
+            </style>
+            <InspectorControls key="controls">
+                <div className="fb-inspector-control">
+                    <TabPanel
+                        className="fb-parent-tab-panel"
+                        activeClass="active-tab"
+                        tabs={[
+                            {
+                                name: "general",
+                                title: "General",
+                                className: "fb-tab general",
+                            },
+                            {
+                                name: "query",
+                                title: "Query",
+                                className: "fb-tab query",
+                            },
+                            {
+                                name: "layout",
+                                title: "Layout",
+                                className: "fb-tab layout",
+                            },
+                            {
+                                name: "styles",
+                                title: "Style",
+                                className: "fb-tab styles",
+                            },
+                            {
+                                name: "advanced",
+                                title: "Advanced",
+                                className: "fb-tab advance",
+                            },
+                        ]}
+                    >
+                        {(tab) => (
+                            <div className={"fb-tab-controls " + tab.name}>
+                                {tab.name === 'general' && (
+                                    <>
+                                        <PanelBody title={__("Loop Content Settings", "frontis-blocks")} initialOpen={true}>
+                                            <SelectControl
+                                                label={__("Post Type", "frontis-blocks")}
+                                                value={postType}
+                                                options={[
+                                                    { label: __("Select Post Type", "frontis-blocks"), value: "" },
+                                                    ...postTypeOptions
+                                                ]}
+                                                onChange={(value) => setAttributes({ postType: value })}
+                                            />
+                                            
+                                            <RangeControl
+                                                label={__("Posts Per Page", "frontis-blocks")}
+                                                value={postsPerPage}
+                                                onChange={(value) => setAttributes({ postsPerPage: value })}
+                                                min={1}
+                                                max={100}
+                                            />
+                                            
+                                            <ToggleControl
+                                                label={__("Show Featured Image", "frontis-blocks")}
+                                                checked={showFeaturedImage}
+                                                onChange={(value) => setAttributes({ showFeaturedImage: value })}
+                                            />
+                                            
+                                            <ToggleControl
+                                                label={__("Show Title", "frontis-blocks")}
+                                                checked={showTitle}
+                                                onChange={(value) => setAttributes({ showTitle: value })}
+                                            />
+                                            
+                                            <ToggleControl
+                                                label={__("Show Excerpt", "frontis-blocks")}
+                                                checked={showExcerpt}
+                                                onChange={(value) => setAttributes({ showExcerpt: value })}
+                                            />
+                                            
+                                            {showExcerpt && (
+                                                <RangeControl
+                                                    label={__("Excerpt Length", "frontis-blocks")}
+                                                    value={excerptLength}
+                                                    onChange={(value) => setAttributes({ excerptLength: value })}
+                                                    min={10}
+                                                    max={300}
+                                                />
+                                            )}
+                                            
+                                            <ToggleControl
+                                                label={__("Show Read More", "frontis-blocks")}
+                                                checked={showReadMore}
+                                                onChange={(value) => setAttributes({ showReadMore: value })}
+                                            />
+                                            
+                                            {showReadMore && (
+                                                <TextControl
+                                                    label={__("Read More Text", "frontis-blocks")}
+                                                    value={readMoreText}
+                                                    onChange={(value) => setAttributes({ readMoreText: value })}
+                                                />
+                                            )}
+                                        </PanelBody>
+                                    </>
+                                )}
+                                
+                                {tab.name === "query" && (
+                                    <>
+                                        <PanelBody title={__("Query Settings", "frontis-blocks")} initialOpen={true}>
+                                            <SelectControl
+                                                label={__("Order By", "frontis-blocks")}
+                                                value={orderBy}
+                                                options={[
+                                                    { label: __("Date", "frontis-blocks"), value: "date" },
+                                                    { label: __("Title", "frontis-blocks"), value: "title" },
+                                                    { label: __("Author", "frontis-blocks"), value: "author" },
+                                                    { label: __("ID", "frontis-blocks"), value: "id" },
+                                                    { label: __("Comment Count", "frontis-blocks"), value: "comment_count" },
+                                                    { label: __("Random", "frontis-blocks"), value: "rand" },
+                                                ]}
+                                                onChange={(value) => setAttributes({ orderBy: value })}
+                                            />
+                                            
+                                            <SelectControl
+                                                label={__("Order", "frontis-blocks")}
+                                                value={order}
+                                                options={[
+                                                    { label: __("Descending", "frontis-blocks"), value: "desc" },
+                                                    { label: __("Ascending", "frontis-blocks"), value: "asc" },
+                                                ]}
+                                                onChange={(value) => setAttributes({ order: value })}
+                                            />
+                                            
+                                            <RangeControl
+                                                label={__("Offset", "frontis-blocks")}
+                                                value={offset}
+                                                onChange={(value) => setAttributes({ offset: value })}
+                                                min={0}
+                                                max={100}
+                                            />
+                                            
+                                            {postType === 'post' && (
+                                                <>
+                                                    <SelectControl
+                                                        label={__("Categories", "frontis-blocks")}
+                                                        value={includedCategories}
+                                                        options={[
+                                                            { label: __("All Categories", "frontis-blocks"), value: "" },
+                                                            ...categoryOptions
+                                                        ]}
+                                                        onChange={(value) => setAttributes({ includedCategories: value })}
+                                                        multiple
+                                                    />
+                                                    
+                                                    <SelectControl
+                                                        label={__("Tags", "frontis-blocks")}
+                                                        value={includedTags}
+                                                        options={[
+                                                            { label: __("All Tags", "frontis-blocks"), value: "" },
+                                                            ...tagOptions
+                                                        ]}
+                                                        onChange={(value) => setAttributes({ includedTags: value })}
+                                                        multiple
+                                                    />
+                                                </>
+                                            )}
+                                        </PanelBody>
+                                    </>
+                                )}
+                                
+                                {tab.name === "layout" && (
+                                    <>
+                                        <PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
+                                            <RangeControl
+                                                label={__("Columns", "frontis-blocks")}
+                                                value={columns}
+                                                onChange={(value) => setAttributes({ columns: value })}
+                                                min={1}
+                                                max={6}
+                                            />
+                                            
+                                            <RangeControl
+                                                label={__("Gap", "frontis-blocks")}
+                                                value={gap}
+                                                onChange={(value) => setAttributes({ gap: value })}
+                                                min={0}
+                                                max={100}
+                                                help={__("Gap between items in pixels", "frontis-blocks")}
+                                            />
+                                        </PanelBody>
+                                    </>
+                                )}
+                                
+                                {tab.name === "styles" && (
+                                    <>
+                                        <PanelBody title={__("Item Styling", "frontis-blocks")} initialOpen={true}>
+                                            {/* Add styling controls here */}
+                                        </PanelBody>
+                                    </>
+                                )}
+                                
+                                {tab.name === "advanced" && (
+                                    <>
+                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+                                            {/* Add advanced settings here */}
+                                        </PanelBody>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </TabPanel>
+                </div>
+            </InspectorControls>
+        </>
+    );
 }

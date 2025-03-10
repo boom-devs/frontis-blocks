@@ -1,65 +1,55 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
     const {
         blockID,
-        templateType,
-        postTypes,
-        itemsPerPage,
-        columns,
-        gap,
-        sortBy,
-        taxonomyFilter,
-        filterTerms,
-        showPagination,
-        cardElements,
-        imageSize,
+        postType,
+        postsPerPage,
+        order,
+        orderBy,
+        includedCategories,
+        includedTags,
+        offset,
+        showFeaturedImage,
+        showTitle,
+        showExcerpt,
         excerptLength,
-        metaElements,
-        buttonText,
-        cardStyle,
-        titleStyle,
-        imageStyle,
-        buttonStyle
+        showReadMore,
+        readMoreText,
+        columns,
+        gap
     } = attributes;
     
     const blockProps = useBlockProps.save({
         className: `fb-loop-builder-block ${blockID}`,
     });
     
-    // We'll save attributes as data attributes to be used by the frontend script
+    const innerBlocksProps = useInnerBlocksProps.save({
+        className: 'fb-loop-builder-template',
+    });
+    
+    // We'll save the attributes as data attributes for the server-side rendering
     return (
         <div 
             {...blockProps}
-            data-post-type={postTypes}
-            data-template-type={templateType}
-            data-items-per-page={itemsPerPage}
-            data-columns-desktop={columns.desktop}
-            data-columns-tablet={columns.tablet}
-            data-columns-mobile={columns.mobile}
-            data-gap-desktop={gap.desktop}
-            data-gap-tablet={gap.tablet}
-            data-gap-mobile={gap.mobile}
-            data-sort-by={sortBy}
-            data-taxonomy-filter={taxonomyFilter}
-            data-filter-terms={filterTerms ? filterTerms.join(',') : ''}
-            data-show-pagination={showPagination}
-            data-card-elements={JSON.stringify(cardElements)}
-            data-image-size={imageSize}
+            data-post-type={postType}
+            data-posts-per-page={postsPerPage}
+            data-order={order}
+            data-order-by={orderBy}
+            data-offset={offset}
+            data-show-featured-image={showFeaturedImage ? 'true' : 'false'}
+            data-show-title={showTitle ? 'true' : 'false'}
+            data-show-excerpt={showExcerpt ? 'true' : 'false'}
             data-excerpt-length={excerptLength}
-            data-meta-elements={JSON.stringify(metaElements)}
-            data-button-text={buttonText}
-            data-card-style={JSON.stringify(cardStyle)}
-            data-title-style={JSON.stringify(titleStyle)}
-            data-image-style={JSON.stringify(imageStyle)}
-            data-button-style={JSON.stringify(buttonStyle)}
+            data-show-read-more={showReadMore ? 'true' : 'false'}
+            data-read-more-text={readMoreText}
+            data-columns={columns}
+            data-gap={gap}
+            data-categories={includedCategories ? includedCategories.join(',') : ''}
+            data-tags={includedTags ? includedTags.join(',') : ''}
         >
-            <div className="fb-loop-builder-wrapper">
-                {/* Content will be dynamically populated with JavaScript */}
-                <div className="fb-loop-builder-content"></div>
-                <div className="fb-loop-builder-pagination"></div>
-            </div>
+            <div {...innerBlocksProps} />
         </div>
     );
 }
