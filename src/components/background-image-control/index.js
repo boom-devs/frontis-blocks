@@ -22,7 +22,6 @@ const FB_BackgroundImageControl = ({
     setGlobalBackgroundImageRepeat,
     globalBackgroundImageSize = '',
     setGlobalBackgroundImageSize,
-
 }) => {
 
 

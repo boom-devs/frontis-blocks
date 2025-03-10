@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import {useRef} from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -10,6 +10,7 @@ export default function save({ attributes }) {
 		counterNumberEnd,
 		counterDuration,
 		counterTitle,
+		counterTitleTag,
 		counterTitleSwitch,
 		counterPrefix,
 		counterPrefixSwitch,
@@ -52,20 +53,28 @@ export default function save({ attributes }) {
 							<div className="fb-counter-icon">{renderSVG(icon)}</div>
 						)}
 					</div>
-					<div className={`fb-counter-number-wrapper`}>
-						{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
-						<span
-							className="fb-counter-number"
-							counter-start={counterNumberStart}
-							counter-end={counterNumberEnd}
-							counter-duration={counterDuration}
-							separator-switch={showThousandsSeparator === true ? 'true' : 'false'}
-							separator-type={showThousandsSeparatorType}
-						>
-                        0 {/* Initial value for animation */}</span>
-						{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
+					<div className={`fb-counter-content-wrapper`}>
+						<div className={`fb-counter-number-wrapper`}>
+							{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
+							<span
+								className="fb-counter-number"
+								counter-start={counterNumberStart}
+								counter-end={counterNumberEnd}
+								counter-duration={counterDuration}
+								separator-switch={showThousandsSeparator === true ? 'true' : 'false'}
+								separator-type={showThousandsSeparatorType}
+							>
+							0 {/* Initial value for animation */}</span>
+							{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
+						</div>
+						{counterTitleSwitch === true && 
+							<RichText.Content
+								tagName={counterTitleTag}
+								value={counterTitle}
+								className="fb-counter-title"
+							/>
+						}
 					</div>
-					{counterTitleSwitch === true && <span className="fb-counter-title">{counterTitle}</span>}
 				</div>
 			</div>
 		</div>
