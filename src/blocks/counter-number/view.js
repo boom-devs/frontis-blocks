@@ -115,14 +115,17 @@
         const counters = document.querySelectorAll('.fb-counter-number');
 
         counters.forEach(function(counter) {
+            if (counter.dataset.animated === "true") return; // যদি আগেই animate হয়ে থাকে, তাহলে বাদ যাবে
+
             var observer = new IntersectionObserver(function(entries) {
                 entries.forEach(function(entry) {
                     if (entry.isIntersecting) {
                         animateCounter(counter);
-                        observer.disconnect(); // Stop observing after animation starts
+                        counter.dataset.animated = "true"; // একবার animate হলে mark করে দেওয়া হচ্ছে
+                        observer.disconnect(); // Animation হওয়ার পর observer বন্ধ করে দিচ্ছি
                     }
                 });
-            });
+            }, { threshold: 0.5 }); // 50% element viewport এ আসলে trigger হবে
 
             observer.observe(counter);
         });
@@ -203,3 +206,4 @@
 
     window.reinitCounterAnimation = initCounterAnimation;
 })();
+

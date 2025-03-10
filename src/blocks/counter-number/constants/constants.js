@@ -97,6 +97,33 @@ export const HEADING = [
 	{ label: __("Div", "frontis-block"), value: "span" },
 ];
 
+export const TITLE_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const ICON_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const CARD_WRAP_HZ_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
+export const CARD_WRAP_VR_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+];
+
 export const SEPERATOR_STYLES = [
 	{ label: __("Solid", "frontis-block"), value: "solid" },
 	{ label: __("Dashed", "frontis-block"), value: "dashed" },
