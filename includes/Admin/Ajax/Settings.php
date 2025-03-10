@@ -5,6 +5,7 @@ namespace FrontisBlocks\Admin\Ajax;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Core\FbDatabase;
+use FrontisBlocks\Core\Blocks;
 
 /**
  * Settings
@@ -138,12 +139,32 @@ class Settings extends AjaxBase {
         if (is_dir($upload_directory)) {
             // Attempt to delete the folder
             if ($this->delete_folder($upload_directory)) {
+                $this->get_all_pages_post_ids_with_content();
                 wp_send_json_success(['message' => 'Files regenerated successfully']);
             } else {
                 wp_send_json_error(['message' => 'Failed to regenerate files'], 500);
             }
         } else {
             wp_send_json_error(['message' => 'Folder does not exist'], 404);
+        }
+    }
+
+
+    // Get all pages, posts, custom post, etc post ids and get post content
+    public function get_all_pages_post_ids_with_content() {
+        global $wpdb;
+
+        // Query to get all post IDs
+        $query = "SELECT ID, post_content, post_name 
+          FROM {$wpdb->posts} 
+          WHERE post_status = 'publish' 
+          AND post_name != 'wp-global-styles-frontis-theme' 
+          ORDER BY post_date DESC";
+        $results = $wpdb->get_results($query);
+
+        foreach ($results as $post) {
+            $blocks_instance = Blocks::get_instance();
+            $result = $blocks_instance->get_blocks_on_save($post->ID, $post, true);
         }
     }
 
