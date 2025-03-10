@@ -1,0 +1,19 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "frontis-blocks/loop-builder",
+    "version": "1.0.0",
+    "title": "Loop Builder",
+    "category": "frontis-blocks",
+    "icon": "grid-view",
+    "description": "Create custom post loops with full design control",
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "textdomain": "frontis-blocks",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.scss",
+    "style": "file:./style.scss",
+	"render": "file:./render.php"
+}
