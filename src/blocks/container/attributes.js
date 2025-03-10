@@ -314,34 +314,47 @@ const attributes = {
 		default: "",
 	},
 	/** Bg Normal Image */
-	containerBgNormalBackgroundImageUrl: {
-		type: "string",
-		default: "",
-	},
-	containerBgNormalBackgroundImageAlt: {
-		type: "string",
-		default: "",
-	},
-	containerBgNormalBackgroundImageID: {
-		type: "number",
-		default: "",
-	},
-	containerBgNormalBackgroundImagePosition: {
-		type: "string",
-		default: "",
-	},
-	containerBgNormalBackgroundImageAttachment: {
-		type: "string",
-		default: "",
-	},
-	containerBgNormalBackgroundImageRepeat: {
-		type: "string",
-		default: "",
-	},
-	containerBgNormalBackgroundImageSize: {
-		type: "string",
-		default: "",
-	},
+	containerBgNormalBackgroundImageUrl: { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    containerBgNormalBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    containerBgNormalBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerBgNormalBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerBgNormalBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
 
 	/**Bg Hover */
 	containerBgHoverBackgroundType: {
@@ -366,32 +379,44 @@ const attributes = {
 	},
 	/** Hover Image */
 	containerBgHoverBackgroundImageUrl: {
-		type: "string",
-		default: "",
-	},
-	containerBgHoverBackgroundImageAlt: {
-		type: "string",
-		default: "",
-	},
-	containerBgHoverBackgroundImageID: {
-		type: "number",
-		default: 0,
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
 	containerBgHoverBackgroundImagePosition: {
-		type: "string",
-		default: "",
+		type: "object",
+		default: {
+			Desktop: { x: 0.5, y: 0.5 },
+			Tablet: { x: 0.5, y: 0.5 },
+			Mobile: { x: 0.5, y: 0.5 }
+		}
 	},
 	containerBgHoverBackgroundImageAttachment: {
-		type: "string",
-		default: "",
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
 	containerBgHoverBackgroundImageRepeat: {
-		type: "string",
-		default: "",
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
 	containerBgHoverBackgroundImageSize: {
-		type: "string",
-		default: "",
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
 	/** End Background */
 
