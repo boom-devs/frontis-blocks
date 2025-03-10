@@ -418,9 +418,7 @@
 	.is-root-container {
 		&.has-global-padding {
 			padding-right: clamp(1.5rem, 5vw, 2rem);
-			padding-left: clamp(1.5rem, 5vw, 2rem);;
-			margin-left: 10px;
-			margin-right: 10px
+			padding-left: clamp(1.5rem, 5vw, 2rem);
 		}
 	}
 }
