@@ -81,7 +81,7 @@ export default function save( props ) {
 	const blockProps = {
 		...useBlockProps.save(),
 		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined,
-		className: `${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `fb-container-main-wrapper ${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
 	};
 
 	return (
