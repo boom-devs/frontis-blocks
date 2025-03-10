@@ -14,11 +14,15 @@ const attributes = {
 	},
 	mediaSwitcher : {
 		type: "string",
-		default: "none"
+		default: "icon"
 	},
 	counterMediaId: {
 		type: 'number',
 		default: 0
+	},
+	counterMediaImagedisplay: {
+		type: 'string',
+		default: 'none'
 	},
 	counterMediaUrl: {
 		type: 'string',
@@ -32,6 +36,20 @@ const attributes = {
 		type: 'string',
 		default: 'star',
 	},
+	iconPosition: {
+		type: 'string',
+		default: 'top',
+	},
+	counterCardAlignment: {
+		type: 'string',
+		default: 'center',
+	},
+	titlePosition: {
+		type: 'string',
+		default: 'bottom',
+	},
+	
+
     counterNumberStart: {
         type: "number",
         default: 0
@@ -64,6 +82,10 @@ const attributes = {
         type: "string",
         default: "Happy Clients"
     },
+	counterTitleTag: {
+		type: "string",
+		default: "span"
+	},
 	counterTitleSwitch: {
 		type: "boolean",
 		default: true
@@ -121,28 +143,28 @@ const attributes = {
 	counterIconMarginDesktop: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterIconMarginTablet: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterIconMarginMobile: {
 		type: "object",
 		default: {
-			top: 0,
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterIconMarginLink : {
@@ -185,7 +207,7 @@ const attributes = {
 	},
 	counterNumberFontFamily: {
 		type: 'string',
-		default: 'inherit'
+		default: ''
 	},
 	counterNumberFontSize: {
 		type: 'object',
@@ -406,28 +428,28 @@ const attributes = {
 	counterNumberTitleMarginDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterNumberTitleMarginTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterNumberTitleMarginMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterNumberTitleMarginLink : {
@@ -474,28 +496,28 @@ const attributes = {
 	counterItemBorderTypeDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderTypeTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderTypeMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterItemBorderTypeLink : {
@@ -514,28 +536,28 @@ const attributes = {
 	counterItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	counterItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	counterItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 500,
-			bottom: 500,
-			left: 500,
-			right: 500,
+			top: '500',
+			bottom: '500',
+			left: '500',
+			right: '500',
 		},
 	},
 	counterItemBorderRadiusLink : {
@@ -558,6 +580,10 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
+	},
+	counterItemRatio: {
+		type: 'boolean',
+		default: false,
 	},
 
 	/** Start Global Setting */
@@ -585,28 +611,28 @@ const attributes = {
 	counterGlobalPaddingDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalPaddingTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalPaddingMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalPaddingLink : {
@@ -627,28 +653,28 @@ const attributes = {
 	counterGlobalMarginDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalMarginTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalMarginMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalMarginLink : {
@@ -697,28 +723,28 @@ const attributes = {
 	counterGlobalBorderDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderLink : {
@@ -739,28 +765,28 @@ const attributes = {
 	counterGlobalBorderRadiusDesktop: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderRadiusTablet: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderRadiusMobile: {
 		type: "object", 
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	counterGlobalBorderRadiusLink : {

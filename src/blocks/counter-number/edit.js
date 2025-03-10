@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import {
+	RichText,
 	useBlockProps,
 } from '@wordpress/block-editor';
 
@@ -20,6 +21,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterSuffix,
 		counterSuffixSwitch,
 		counterTitle,
+		counterTitleTag,
 		counterTitleSwitch,
 		showThousandsSeparator,
 		showThousandsSeparatorType,
@@ -64,10 +66,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		return () => {
 			if (observerRef.current) observerRef.current.disconnect();
 		};
-	}, [counterNumberStart, counterNumberEnd, counterDuration, showThousandsSeparator, showThousandsSeparatorType]);
+	}, []);
 
+	let hasCounted = false;
 
 	const animateCounter = () => {
+		if (hasCounted) return;
+    	hasCounted = true;
+
 		const start = counterNumberStart;
 		const end = counterNumberEnd;
 		const duration = counterDuration;
@@ -107,6 +113,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	
 		window.requestAnimationFrame(step);
 	};
+
+	// **Intersection Observer Setup**
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting && !hasCounted) { 
+				animateCounter();
+				observer.disconnect(); // Ekbar count howar por observer remove kore dibo
+			}
+		});
+	}, { threshold: 0.5 }); // 50% element viewport e asle trigger hobe
+
+	if (counterRef.current) {
+		observer.observe(counterRef.current);
+	}
 	
 
 
@@ -144,17 +164,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className="fb-counter-icon">{renderSVG(icon)}</div>
 							)}
 						</div>}
-						<div className={`fb-counter-number-wrapper`}>
-							{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
-							 <span ref={counterRef} className="fb-counter-number">
-								{showThousandsSeparator
-									? Number(0).toLocaleString()
-									: 0
-								}
-                        	</span>
-							{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
+						<div className={`fb-counter-content-wrapper`}>
+							<div className={`fb-counter-number-wrapper`}>
+								{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}
+								<span ref={counterRef} className="fb-counter-number">
+									{showThousandsSeparator
+										? Number(0).toLocaleString()
+										: 0
+									}
+								</span>
+								{counterSuffixSwitch === true && <span className={`fb-counter-number-suffix`}>{counterSuffix}</span>}
+							</div>
+							{counterTitleSwitch === true && 
+								<RichText
+									tagName={counterTitleTag}
+									value={counterTitle}
+									onChange={(value) => setAttributes({ counterTitle: value })}
+									placeholder={__('Counter Title...', 'frontis-blocks')}
+									className="fb-counter-title"
+								/>
+							}
 						</div>
-						{counterTitleSwitch === true && <span className="fb-counter-title">{counterTitle}</span>}
 					</div>
 				</div>
 			</div>
