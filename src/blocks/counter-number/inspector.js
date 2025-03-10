@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP, separatorType} from "./constants/constants";
+import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -35,6 +35,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import {useDeviceType} from "@Config/displayType";
+import FB_ImageControl from '@Components/image-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
@@ -56,16 +57,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterSuffixSwitch,
 		counterTitle,
         counterTitleSwitch,
+		counterTitleTag,
 		showThousandsSeparator,
 		showThousandsSeparatorType,
 		icon,
+		iconPosition,
+		titlePosition,
+		counterCardAlignment,
 		mediaSwitcher,
 		counterMediaId,
 		counterMediaUrl,
 		counterMediaAlt,
+		counterMediaImagedisplay,
         
 		counterItemSize,
 		counterItemSizeUnits,
+        counterItemRatio,
 
 		// Item Border Type
 		counterItemBorder,
@@ -102,6 +109,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		counterIconHoverColor,
 		counterIconSize,
 		counterIconSizeUnits,
+		counterIconSizeRatio,
 
         //Counter Number attributes
 		counterNumberFontColorSwitcher,
@@ -944,19 +952,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterGlobalBgColor ? `background: ${counterGlobalBgColor};` : ''}
         ${globalDesktopPadding && counterGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
         ${globalDesktopMargin && counterGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
-        ${counterGlobalBorderColor ? `border: ${counterGlobalBorderColor};` : "" } 
+        ${counterGlobalBorder ? `border-style: ${counterGlobalBorder};` : ""}
+        ${counterGlobalBorderColor ? `border-color: ${counterGlobalBorderColor};` : "" } 
         ${globalDesktopBorderWidth && counterGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
         ${globalDesktopBorderRadiusWidth && counterGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
         ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
     }
     .fb-counter-wrapper.${blockID}:hover{
         ${counterGlobalBgHoverColor ? `background: ${counterGlobalBgHoverColor};` : ''}
-        ${counterGlobalBorderHoverColor ? `border: ${counterGlobalBorderHoverColor};` : "" }
+        ${counterGlobalBorderHoverColor ? `border-color: ${counterGlobalBorderHoverColor};` : "" }
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item {
+        display: flex;
+        ${iconPosition === 'top' ? `flex-direction: column;` : ''}
+        ${iconPosition === 'right' ? `flex-direction: row-reverse; align-items: center;` : ''}
+        ${iconPosition === 'bottom' ? `flex-direction: column-reverse;` : ''}
+        ${iconPosition === 'left' ? `flex-direction: row; align-items: center;` : ''}
+
+        ${iconPosition !== 'top' && iconPosition !== 'bottom' && counterCardAlignment ? `justify-content: ${counterCardAlignment};` : ''}
+        ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment ? `align-items: ${counterCardAlignment};` : ''}
+
         ${counterItemBgColor ? `background: ${counterItemBgColor};` : ''}
         ${counterItemSize.Desktop ? `width: ${counterItemSize.Desktop}${counterItemSizeUnits.Desktop};` : ''}
-        ${counterItemSize.Desktop ? `height: ${counterItemSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+        ${counterItemRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterItemBorder ? `border: ${counterItemBorder};` : ''}
         ${counterItemDesktopBorder && counterItemBorderTypeDesktop.top ? `border-width: ${counterItemDesktopBorder};` : ''}
         ${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
@@ -966,13 +984,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterItemBgHoverColor ? `background: ${counterItemBgHoverColor};` : ''}
         ${counterItemBorderHoverColor ? `border-color: ${counterItemBorderHoverColor};` : ''}
     }
-    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
-        ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
-        ${counterIconColor ? `fill: ${counterIconColor};` : ''}
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
+        display: flex;
         ${counterIconDesktopMargin && counterIconMarginDesktop.top ? `margin: ${counterIconDesktopMargin};` : ''}
+    }
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
+        ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+        ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
+        ${counterMediaImagedisplay && counterMediaImagedisplay !== 'none' ? `object-fit: ${counterMediaImagedisplay};` : ''}
+    }
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon {
+        display: flex;
+    }
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
+        ${counterIconSize.Desktop ? `width: ${counterIconSize.Desktop}${counterIconSizeUnits.Desktop};` : ''}
+        ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
+        ${counterIconColor ? `fill: ${counterIconColor};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover svg{
         ${counterIconHoverColor ? `fill: ${counterIconHoverColor};` : ''}
+    }
+
+    .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-content-wrapper {
+        display: flex;
+        ${titlePosition === 'top' ? `flex-direction: column-reverse;` : ''}
+        ${titlePosition === 'right' ? `flex-direction: row; align-items: center;` : ''}
+        ${titlePosition === 'bottom' ? `flex-direction: column;` : ''}
+        ${titlePosition === 'left' ? `flex-direction: row-reverse; align-items: center;` : ''}
+
+        ${iconPosition !== 'top' && iconPosition !== 'bottom' ? `text-align: left;` : ''}
+        ${iconPosition !== 'left' && iconPosition !== 'right' ? `text-align: ${counterCardAlignment};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
         ${counterNumberDesktopMargin && counterNumberMarginDesktop.top ? `margin: ${counterNumberDesktopMargin};` : ''}
@@ -1048,8 +1089,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${counterItemTabletBorder && counterItemBorderTypeTablet.top ? `border-width: ${counterItemTabletBorder};` : ''}
             ${counterItemTabletBorderRadius && counterItemBorderRadiusTablet.top ? `border-radius: ${counterItemTabletBorderRadius};` : ''}
         }
-        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
             ${counterIconTabletMargin && counterIconMarginTablet.top ? `margin: ${counterIconTabletMargin};` : ''}
+        }
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
+            ${counterIconSize.Tablet ? `width: ${counterIconSize.Tablet}${counterIconSizeUnits.Tablet};` : ''}
+        }
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
+            ${counterIconSize.Tablet ? `width: ${counterIconSize.Tablet}${counterIconSizeUnits.Tablet};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
             ${counterNumberTabletMargin && counterNumberMarginTablet.top ? `margin: ${counterNumberTabletMargin};` : ''}
@@ -1090,8 +1137,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${counterItemMobileBorder && counterItemBorderTypeMobile.top ? `border-width: ${counterItemMobileBorder};` : ''}
             ${counterItemMobileBorderRadius && counterItemBorderRadiusMobile.top ? `border-radius: ${counterItemMobileBorderRadius};` : ''}
         }
-        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon svg {
+
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
             ${counterIconMobileMargin && counterIconMarginMobile.top ? `margin: ${counterIconMobileMargin};` : ''}
+        }
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper img {
+            ${counterIconSize.Mobile ? `width: ${counterIconSize.Mobile}${counterIconSizeUnits.Mobile};` : ''}
+        }
+        .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper .fb-counter-icon svg {
+            ${counterIconSize.Mobile ? `width: ${counterIconSize.Mobile}${counterIconSizeUnits.Mobile};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-number-wrapper {
             ${counterNumberMobileMargin && counterNumberMarginMobile.top ? `margin: ${counterNumberMobileMargin};` : ''}
@@ -1119,6 +1173,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterItemBgColor,
         counterItemSize,
         counterItemSizeUnits,
+        counterItemRatio,
         counterItemBorder,
         counterItemBorderColor,
         counterItemDesktopBorder,
@@ -1127,8 +1182,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterItemDesktopBorderRadius,
         counterItemTabletBorderRadius,
         counterItemMobileBorderRadius,
+        iconPosition,
+        counterCardAlignment,
+        titlePosition,
         counterIconSize,
         counterIconSizeUnits,
+        counterIconSizeRatio,
         counterIconColor,
         counterIconHoverColor,
         counterNumberFontColor,
@@ -1187,6 +1246,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterVRTopOffsetUnits,
         counterVRBottomOffset,
         counterVRBottomOffsetUnits,
+
+        counterIconMarginMobile,
+        counterIconMarginTablet,
+        counterIconMarginDesktop,
+        counterIconMarginUnits,
+
+        counterNumberMarginDesktop,
+        counterNumberMarginTablet,
+        counterNumberMarginMobile,
+        counterNumberMarginUnits,
+
+        counterNumberTitleMarginDesktop,
+        counterNumberTitleMarginTablet,
+        counterNumberTitleMarginMobile,
+        counterNumberTitleMarginUnits,
     ]);
  
     const customCss = getCustomCss(counterGlobalWraperCustomCSS, `.${blockID}`);
@@ -1232,7 +1306,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === 'general' && (
 									<>
-									<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+									<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
                                         <BaseControl className="fb-sub-heading-position">
 											<SelectControl
 												label={__("Counter Icon", "frontis-block")}
@@ -1242,14 +1316,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</BaseControl>
 
-                                        {mediaSwitcher === 'image' && (<FB_BackgroundImageControl
-                                            globalBackgroundImageUrl={counterMediaUrl}
-                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ counterMediaUrl: value })}
-                                            globalBackgroundImageAlt={counterMediaAlt}
-                                            setGlobalBackgroundImageAlt={(value) => setAttributes({ counterMediaAlt: value })}
-                                            globalBackgroundImageID={counterMediaId}
-                                            setGlobalBackgroundImageID={(value) => setAttributes({ counterMediaId: value })}
-                                        />)}
+                                        {mediaSwitcher === 'image' && (<FB_ImageControl
+											globalImageUrl={counterMediaUrl}
+											setglobalImageUrl={(value) => setAttributes({ counterMediaUrl: value })}
+											globalImageAlt={counterMediaAlt}
+											setglobalImageAlt={(value) => setAttributes({ counterMediaAlt: value })}
+											globalImageID={counterMediaId}
+											setglobalImageID={(value) => setAttributes({ counterMediaId: value })}
+											globalImageSize={counterMediaImagedisplay}
+											setglobalImageSize={(value) => setAttributes({ counterMediaImagedisplay: value })}
+										/>)}
 
                                         {mediaSwitcher === 'icon' && (
                                             <BaseControl>
@@ -1258,7 +1334,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         )}
 									</PanelBody>
 
-                                    <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={true}>
+                                    <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={false}>
                                         <RangeControl
 											label={__('Starting Number', 'frontis-blocks')}
 											value={counterNumberStart}
@@ -1303,16 +1379,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											onChange={(value) => setAttributes({ counterSuffix: value })}
 										/>}
 
-                                        <ToggleControl
-											label={__('Counter Title', 'frontis-blocks')}
-											checked={counterTitleSwitch}
-											onChange={(value) => setAttributes({ counterTitleSwitch: value })}
-										/>
-										{counterTitleSwitch === true && <TextControl
-											value={counterTitle}
-											onChange={(value) => setAttributes({ counterTitle: value })}
-										/>}
-
 										<ToggleControl
 											label={__('Show Thousands Separator', 'frontis-blocks')}
 											checked={showThousandsSeparator}
@@ -1325,6 +1391,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											onChange={(value) => setAttributes({ showThousandsSeparatorType: value })}
 										/>}
                                     </PanelBody>
+
+                                    <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+                                        <ToggleControl
+											label={__('Counter Title', 'frontis-blocks')}
+											checked={counterTitleSwitch}
+											onChange={(value) => setAttributes({ counterTitleSwitch: value })}
+										/>
+										{counterTitleSwitch === true && <TextControl
+                                            label={__("Title Text", "frontis-blocks")}
+											value={counterTitle}
+											onChange={(value) => setAttributes({ counterTitle: value })}
+										/>}
+
+                                        {counterTitleSwitch === true && (<FB_HtmlTagControl
+                                            label={__("Title Tag", "frontis-blocks")}
+                                            globalHtmlTag={counterTitleTag}
+                                            setGlobalHtmlTag={(value) => setAttributes({ counterTitleTag: value })}
+                                        />)}
+                                    </PanelBody>
 									</>
 								)}
 
@@ -1335,10 +1420,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											title={__("Item", "frontis-blocks")}
 											initialOpen={false}
 										>
-											
+											<SelectControl
+                                                label={__("Icon Position", "frontis-blocks")}
+                                                value={iconPosition}
+                                                options={ICON_POSITION}
+                                                onChange={(value) => setAttributes({ iconPosition: value })}
+                                            />
+
+											<SelectControl
+												label={__("Card Alignment", "frontis-blocks")}
+												value={counterCardAlignment}
+												options={iconPosition !== 'top' && iconPosition !== 'bottom' ? CARD_WRAP_HZ_ALIGNMENT : CARD_WRAP_VR_ALIGNMENT}
+												onChange={(value) => setAttributes({ counterCardAlignment: value })}
+											/>
+
                                             <FB_Range
                                                 min={1}
-                                                max={300}
+                                                max={counterItemSizeUnits.Desktop === '%' ? 100 : 800}
                                                 label={__("Item Size", "frontis-blocks")}
                                                 rangeValue={counterItemSize}
                                                 onChangeHandler={counterItemSizeHandler}
@@ -1348,6 +1446,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
                                                 resetFallbackValue={''}
+                                            />
+
+                                            <ToggleControl
+                                                label={__('Square Ratio', 'frontis-blocks')}
+                                                checked={counterItemRatio}
+                                                onChange={(value) => setAttributes({ counterItemRatio: value })}
                                             />
 
                                             <FB_SwitcherControl
@@ -1431,7 +1535,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 										</PanelBody>
 
-										<PanelBody
+										{mediaSwitcher !== 'none' && <PanelBody
 											title={__("Icon", "frontis-blocks")}
 											initialOpen={false}
 										>
@@ -1471,6 +1575,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={"25"}
                                             />
 
+                                            <ToggleControl
+                                                label={__("Icon Square Ratio", "frontis-blocks")}
+                                                checked={counterIconSizeRatio}
+                                                onChange={(value) => setAttributes({ counterIconSizeRatio: value })}
+                                            />
+
                                             <FB_Spacing
                                                 label={ 'Margin' }
                                                 deviceType={deviceType}
@@ -1484,7 +1594,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={counterIconMarginCombineBtnHandler} 
                                                 setAttributes={setAttributes}
                                             />
-										</PanelBody>
+										</PanelBody>}
+
 										<PanelBody
 											title={__("Counter Number", "frontis-blocks")}
 											initialOpen={false}
@@ -1574,11 +1685,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
 										</PanelBody>
-										<PanelBody
+
+										{counterTitleSwitch && <PanelBody
 											title={__("Counter Title", "frontis-blocks")}
 											initialOpen={false}
 										>
-											
+											<SelectControl
+                                                label={__("Title Position", "frontis-blocks")}
+                                                value={titlePosition}
+                                                options={TITLE_POSITION}
+                                                onChange={(value) => setAttributes({ titlePosition: value })}
+                                            />
+
                                             <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
                                                 globalSwitcher={counterNumberTitleFontColorSwitcher}
@@ -1664,7 +1782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 spacingCombineBtnHandler={counterNumberTitleMarginCombineBtnHandler} 
                                                 setAttributes={setAttributes}
                                             />
-										</PanelBody>
+										</PanelBody>}
 									</>
 								)}
                                 {tab.name === "advanced" && (
