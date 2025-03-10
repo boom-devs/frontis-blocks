@@ -37,6 +37,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const counterRef = useRef(null);
 	const observerRef = useRef(null);
+	const hasCounted = useRef(false);
 
 	useEffect(() => {
 		if (!blockID) {
@@ -48,86 +49,72 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	// Set up Intersection Observer and animation in the editor
-	useEffect(() => {
-		if (observerRef.current) observerRef.current.disconnect();
-
-		observerRef.current = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					animateCounter();
-				}
-			});
-		});
-
-		if (counterRef.current) {
-			observerRef.current.observe(counterRef.current);
-		}
-
-		return () => {
-			if (observerRef.current) observerRef.current.disconnect();
-		};
-	}, []);
-
-	let hasCounted = false;
-
 	const animateCounter = () => {
-		if (hasCounted) return;
-    	hasCounted = true;
-
+		if (hasCounted.current) return;
+		hasCounted.current = true;
+	
 		const start = counterNumberStart;
 		const end = counterNumberEnd;
 		const duration = counterDuration;
 		let startTime = null;
 	
 		const step = (timestamp) => {
-			if (!startTime) startTime = timestamp;
-			const progress = Math.min((timestamp - startTime) / duration, 1);
-			const current = Math.floor(progress * (end - start) + start);
+		  if (!startTime) startTime = timestamp;
+		  const progress = Math.min((timestamp - startTime) / duration, 1);
+		  const current = Math.floor(progress * (end - start) + start);
 	
-			let formattedNumber = current.toString();
+		  let formattedNumber = current.toString();
 	
-			if (showThousandsSeparator) {
-				switch (showThousandsSeparatorType) {
-					case 'comma':
-						formattedNumber = current.toLocaleString('en-US');
-						break;
-					case 'dot':
-						formattedNumber = current.toLocaleString('de-DE');
-						break;
-					case 'space':
-						formattedNumber = current.toLocaleString('fr-FR');
-						break;
-					default:
-						formattedNumber = current.toLocaleString();
-				}
+		  if (showThousandsSeparator) {
+			switch (showThousandsSeparatorType) {
+			  case "comma":
+				formattedNumber = current.toLocaleString("en-US");
+				break;
+			  case "dot":
+				formattedNumber = current.toLocaleString("de-DE");
+				break;
+			  case "space":
+				formattedNumber = current.toLocaleString("fr-FR");
+				break;
+			  default:
+				formattedNumber = current.toLocaleString();
 			}
+		  }
 	
-			if (counterRef.current) {
-				counterRef.current.textContent = formattedNumber;
-			}
+		  if (counterRef.current) {
+			counterRef.current.textContent = formattedNumber;
+		  }
 	
-			if (progress < 1) {
-				window.requestAnimationFrame(step);
-			}
+		  if (progress < 1) {
+			window.requestAnimationFrame(step);
+		  }
 		};
 	
 		window.requestAnimationFrame(step);
-	};
-
-	// **Intersection Observer Setup**
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting && !hasCounted) { 
-				animateCounter();
-				observer.disconnect(); // Ekbar count howar por observer remove kore dibo
-			}
-		});
-	}, { threshold: 0.5 }); // 50% element viewport e asle trigger hobe
-
-	if (counterRef.current) {
-		observer.observe(counterRef.current);
-	}
+	  };
 	
+	  useEffect(() => {
+		hasCounted.current = false;
+	
+		if (observerRef.current) observerRef.current.disconnect();
+	
+		observerRef.current = new IntersectionObserver((entries) => {
+		  entries.forEach((entry) => {
+			if (entry.isIntersecting && !hasCounted.current) {
+			  animateCounter();
+			}
+		  });
+		});
+	
+		if (counterRef.current) {
+		  observerRef.current.observe(counterRef.current);
+		}
+	
+		return () => {
+		  if (observerRef.current) observerRef.current.disconnect();
+		};
+	  }, [counterNumberStart, counterNumberEnd, counterDuration, showThousandsSeparator, showThousandsSeparatorType]); 	
+
 
 
 	// Icon media remove handler

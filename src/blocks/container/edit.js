@@ -6,6 +6,7 @@ import './editor.scss';
 import DynamicCSSLoader from "@Components/dynamic-css-loader/dynamic-css-loader";
 import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
+import frontEndStyle from "@Blocks/container/frontend-style";
 import {useDeviceType} from "@Config/displayType";
 
 const Edit = (props) => {
@@ -29,6 +30,7 @@ const Edit = (props) => {
 		clientId,
 		setAttributes,
 		name,
+		blockStyle,
 		context,
 		hasDynamicContent,
 	} = props;
@@ -138,6 +140,16 @@ const Edit = (props) => {
 	}, [ hasDynamicContent, context?.postId ] );
 
 	const blockStyling = useMemo( () => styling( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+	const blockFrontEndStyle = useMemo( () => frontEndStyle( attributes, clientId, name, deviceType ), [ attributes, deviceType ] );
+
+    // const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
+
+    useEffect(() => {
+        setAttributes({blockStyle: `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [blockFrontEndStyle] );
+
+
+	console.log( blockFrontEndStyle );
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		const block = select('core/block-editor').getBlock(clientId);

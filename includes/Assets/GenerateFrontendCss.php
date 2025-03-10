@@ -9,22 +9,27 @@ class GenerateFrontendCss {
 
 	public static function render_generated_css($block_content, $block, $block_attributes) {
 
-		$blocks_list = BlockList::get_instance()->get_blocks();
-
-		if (!empty($blocks_list)) {
-			foreach ($blocks_list as $single_block) {
+		if($block && $block['blockName']) {
+			if (str_contains($block['blockName'], 'frontis-blocks')) {
+				$single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
 				$css_file_path = plugin_dir_path(__DIR__) . 'Assets/' . $single_block['slug'] . '/frontend.css.php';
-			 	if ('frontis-blocks/'.$single_block['slug']  === $block['blockName'] && file_exists($css_file_path)) {
+				if(file_exists($css_file_path)) {
 					include $css_file_path;
 				}
 			}
 		}
 	}
 
-	public static function generate_css($block_content, $block) {
-		self::render_generated_css($block_content, $block, $block['attrs']);
-		return $block_content;
-	}
+	// public function get_blocks_on_save($post_id, $post, $update) {
+	// 	// when post is saved or update then get the blocks
+	// 	if($update) {
+	// 		$post_content = $post->post_content;
+	// 		$blocks = parse_blocks($post_content);
+	// 		foreach($blocks as $block) {
+	// 			self::render_generated_css($block, $block, $block['attrs']);
+	// 		}
+	// 	}
+	// }
 }
 
 

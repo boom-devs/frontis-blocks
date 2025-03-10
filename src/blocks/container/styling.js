@@ -20,12 +20,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		directionDesktop,
 		directionTablet,
 		directionMobile,
-		alignItemsDesktop,
-		alignItemsTablet,
-		alignItemsMobile,
-		justifyContentDesktop,
-		justifyContentTablet,
-		justifyContentMobile,
 		alignContentDesktop,
 		alignContentTablet,
 		alignContentMobile,
@@ -63,9 +57,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		bottomPaddingMobile,
 		leftPaddingMobile,
 		rightPaddingMobile,
-		paddingType,
-		paddingTypeTablet,
-		paddingTypeMobile,
 		topMarginDesktop,
 		bottomMarginDesktop,
 		leftMarginDesktop,
@@ -78,23 +69,17 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		bottomMarginMobile,
 		leftMarginMobile,
 		rightMarginMobile,
-		marginType,
-		marginTypeTablet,
-		marginTypeMobile,
-		rowGapDesktop,
 		rowGapTablet,
 		rowGapMobile,
 		rowGapType,
 		rowGapTypeTablet,
 		rowGapTypeMobile,
-		columnGapDesktop,
 		columnGapTablet,
 		columnGapMobile,
 		columnGapType,
 		columnGapTypeTablet,
 		columnGapTypeMobile,
 		contentWidth,
-		innerContentWidth,
 		bottomColor,
 		bottomHeight,
 		bottomHeightTablet,
@@ -221,7 +206,23 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerType,
 		containerCustomWidth,
 		containerCustomWidthUnits,
-		containerWrap
+		containerWrap,
+		containerTypeFull,
+		columnGap,
+		rowGap,
+		columnGapUnits,
+		rowGapUnits,
+		containerPaddingUnits,
+		containerDesktopPadding,
+		containerTabletPadding,
+		containerMobilePadding,
+		containerMarginUnits,	
+		containerDesktopMargin,
+		containerTabletMargin,
+		containerMobileMargin,
+		containerDirection,
+		containerJustify,
+		containerAlignItems,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -236,8 +237,13 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	);
 	const widthDesktopFallback = getFallbackNumber( customWidth[deviceType], 'customWidth', blockName );
 
-	const rowGapDesktopFallback = getFallbackNumber( rowGapDesktop, 'rowGapDesktop', blockName );
-	const columnGapDesktopFallback = getFallbackNumber( columnGapDesktop, 'columnGapDesktop', blockName );
+	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'], 'rowGapDesktop', blockName );
+	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'], 'columnGapDesktop', blockName );
+	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'], 'rowGapTablet', blockName );
+	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'], 'columnGapTablet', blockName );
+	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'], 'rowGapMobile', blockName );
+	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'], 'columnGapMobile', blockName );
+
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
 	const borderCSSTablet = generateBorderCSS( attributes, 'container', 'tablet' );
@@ -477,14 +483,14 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	const containerCSS = {
-		'padding-top': generateCSSUnit( topPaddingDesktop, paddingType ),
-		'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
-		'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
-		'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
-		'margin-top': generateCSSUnit( topMarginDesktop, marginType, true ),
-		'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType, true ),
-		'margin-left': generateCSSUnit( leftMarginDesktop, marginType, true ),
-		'margin-right': generateCSSUnit( rightMarginDesktop, marginType, true ),
+		'padding-top': generateCSSUnit( containerDesktopPadding.top, containerPaddingUnits['Desktop'] ),
+		'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
+		'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
+		'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
+		'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
+		'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
+		'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
+		'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -509,7 +515,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	let containerFlexSelector =
 		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout';
-	if ( ! isBlockRootParent || 'alignfull' !== contentWidth || 'alignwide' !== innerContentWidth ) {
+	if ( ! isBlockRootParent) {
 		containerFlexSelector =
 			'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
 	}
@@ -529,19 +535,19 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	if( ! isLayoutGrid ){
 		selectors[ containerFlexSelector ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
-			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapType ),
-			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapType ),
+			'row-gap': generateCSSUnit( rowGapDesktopFallback, rowGapUnits['Desktop'] ),
+			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
 		selectors[ '.block-editor-block-list__block' ] = {
-			'flex-direction': directionDesktop,
-			'align-items': alignItemsDesktop,
-			'justify-content': justifyContentDesktop,
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
 			...selectors[ '.block-editor-block-list__block' ],
@@ -566,7 +572,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Check containerType is ( full-width, boxed, custom )
 	// let containerWidthType = containerType === 'full-width' ?
-	if ( containerType === 'full-width' ) {
+
+	if ( (containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom' ) {
 		widthSelectorsDesktop[
 			`.block-editor-block-list__block.wp-block-frontis-blocks-container${ gbsWidthSelector } > .frontis-blocks-container-inner-blocks-wrap`
 			] = {
@@ -596,25 +603,24 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
-
 	}
 
 	const tablet_selectors = {
 		[ containerFlexSelector ]: {
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
-			'row-gap': generateCSSUnit( rowGapTablet, rowGapTypeTablet ),
-			'column-gap': generateCSSUnit( columnGapTablet, columnGapTypeTablet ),
+			'row-gap': generateCSSUnit( rowGapTabletFallback, rowGapUnits['Tablet'] ),
+			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
-			'flex-direction': directionTablet,
-			'align-items': alignItemsTablet,
-			'justify-content': justifyContentTablet,
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
 		},
@@ -633,20 +639,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-inline-end': '0px',
 		},
 		[ containerFlexSelector ]: {
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
-			'row-gap': generateCSSUnit( rowGapMobile, rowGapTypeMobile ),
-			'column-gap': generateCSSUnit( columnGapMobile, columnGapTypeMobile ),
+			'row-gap': generateCSSUnit( rowGapMobileFallback, rowGapUnits['Mobile'] ),
+			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		},
 		'.block-editor-block-list__block': {
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
-			'flex-direction': directionMobile,
-			'align-items': alignItemsMobile,
-			'justify-content': justifyContentMobile,
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
 		},
@@ -700,15 +706,14 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSMobile,
 		};
 		selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( topPaddingDesktop, paddingType ),
-			'padding-bottom': generateCSSUnit( bottomPaddingDesktop, paddingType ),
-			'padding-left': generateCSSUnit( leftPaddingDesktop, paddingType ),
-			'padding-right': generateCSSUnit( rightPaddingDesktop, paddingType ),
-			'margin-top': generateCSSUnit( topMarginDesktop, marginType, true ),
-			'margin-bottom': generateCSSUnit( bottomMarginDesktop, marginType, true ),
-			// For avoiding the margin collapse issue between themes style and our style we are adding !important.
-			'margin-left': generateCSSUnit( leftMarginDesktop, marginType, true ),
-			'margin-right': generateCSSUnit( rightMarginDesktop, marginType, true ),
+			'padding-top': generateCSSUnit( containerDesktopPadding.top, containerPaddingUnits['Desktop'] ),
+			'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
+			'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
+			'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
+			'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
+			'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
+			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
+			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
 			'box-shadow':
 				generateCSSUnit( boxShadowHOffset, 'px' ) +
 				' ' +
@@ -725,25 +730,21 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'overflow': overflow,
 		};
 		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
-			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
-			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
-			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
-			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet, true ),
-			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet, true ),
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet, true ),
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet, true ),
+			'padding-top': generateCSSUnit( containerTabletPadding.top, containerPaddingUnits['Tablet'] ),
+			'padding-bottom': generateCSSUnit( containerTabletPadding.bottom, containerPaddingUnits['Tablet'] ),
+			'padding-left': generateCSSUnit( containerTabletPadding.left, containerPaddingUnits['Tablet'] ),
+			'padding-right': generateCSSUnit( containerTabletPadding.right, containerPaddingUnits['Tablet'] ),
+			'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
+			'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		};
 		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
-			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
-			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
-			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
-			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile, true ),
-			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile, true ),
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile, true ),
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile, true ),
+			'padding-top': generateCSSUnit( containerMobilePadding.top, containerPaddingUnits['Mobile'] ),
+			'padding-bottom': generateCSSUnit( containerMobilePadding.bottom, containerPaddingUnits['Mobile'] ),
+			'padding-left': generateCSSUnit( containerMobilePadding.left, containerPaddingUnits['Mobile'] ),
+			'padding-right': generateCSSUnit( containerMobilePadding.right, containerPaddingUnits['Mobile'] ),
+			'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
+			'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		};
 		selectors[ '.wp-block-frontis-blocks-container:hover .frontis-blocks-container__video-wrap' ] = {
@@ -770,44 +771,44 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	} else {
 		selectors[ '.wp-block-frontis-blocks-container' ] = containerCSS;
 		selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
-			'margin-left': generateCSSUnit( innerLeftMarginDesktop, marginType ) + ' !important',
-			'margin-right': generateCSSUnit( innerRightMarginDesktop, marginType ) + ' !important',
+			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'] ) + ' !important',
+			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'] ) + ' !important',
 		}
 		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( topPaddingTablet, paddingTypeTablet ),
-			'padding-bottom': generateCSSUnit( bottomPaddingTablet, paddingTypeTablet ),
-			'padding-left': generateCSSUnit( leftPaddingTablet, paddingTypeTablet ),
-			'padding-right': generateCSSUnit( rightPaddingTablet, paddingTypeTablet ),
-			'margin-top': generateCSSUnit( topMarginTablet, marginTypeTablet, true ),
-			'margin-bottom': generateCSSUnit( bottomMarginTablet, marginTypeTablet, true ),
-			'margin-left': generateCSSUnit( leftMarginTablet, marginTypeTablet, true ),
-			'margin-right': generateCSSUnit( rightMarginTablet, marginTypeTablet, true ),
+			'padding-top': generateCSSUnit( containerTabletPadding.top, containerPaddingUnits['Tablet'] ),
+			'padding-bottom': generateCSSUnit( containerTabletPadding.bottom, containerPaddingUnits['Tablet'] ),
+			'padding-left': generateCSSUnit( containerTabletPadding.left, containerPaddingUnits['Tablet'] ),
+			'padding-right': generateCSSUnit( containerTabletPadding.right, containerPaddingUnits['Tablet'] ),
+			'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
+			'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
+			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'], true ),
+			'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'], true ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'], true ),
 			...borderCSSTablet,
 			...containerBackgroundCSSTablet,
 			'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 		};
 		tablet_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
-			'margin-left': generateCSSUnit( innerLeftMarginTablet, marginTypeTablet ) + ' !important',
-			'margin-right': generateCSSUnit( innerRightMarginTablet, marginTypeTablet ) + ' !important',
+			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'] ) + ' !important',
+			'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'] ) + ' !important',
 		}
 		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( topPaddingMobile, paddingTypeMobile ),
-			'padding-bottom': generateCSSUnit( bottomPaddingMobile, paddingTypeMobile ),
-			'padding-left': generateCSSUnit( leftPaddingMobile, paddingTypeMobile ),
-			'padding-right': generateCSSUnit( rightPaddingMobile, paddingTypeMobile ),
-			'margin-top': generateCSSUnit( topMarginMobile, marginTypeMobile, true ),
-			'margin-bottom': generateCSSUnit( bottomMarginMobile, marginTypeMobile, true ),
-			'margin-left': generateCSSUnit( leftMarginMobile, marginTypeMobile, true ),
-			'margin-right': generateCSSUnit( rightMarginMobile, marginTypeMobile, true ),
+			'padding-top': generateCSSUnit( containerMobilePadding.top, containerPaddingUnits['Mobile'] ),
+			'padding-bottom': generateCSSUnit( containerMobilePadding.bottom, containerPaddingUnits['Mobile'] ),
+			'padding-left': generateCSSUnit( containerMobilePadding.left, containerPaddingUnits['Mobile'] ),
+			'padding-right': generateCSSUnit( containerMobilePadding.right, containerPaddingUnits['Mobile'] ),
+			'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
+			'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
+			'margin-left': generateCSSUnit( containerMobileMargin.left, containerMarginUnits['Mobile'], true ),
+			'margin-right': generateCSSUnit( containerMobileMargin.right, containerMarginUnits['Mobile'], true ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 			...borderCSSMobile,
 			...containerBackgroundCSSMobile,
 			'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
 		};
 		mobile_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
-			'margin-left': generateCSSUnit( innerLeftMarginMobile, marginTypeMobile ) + ' !important',
-			'margin-right': generateCSSUnit( innerRightMarginMobile, marginTypeMobile ) + ' !important',
+			'margin-left': generateCSSUnit( containerMobileMargin.left, containerMarginUnits['Mobile'] ) + ' !important',
+			'margin-right': generateCSSUnit( containerMobileMargin.right, containerMarginUnits['Mobile'] ) + ' !important',
 		}
 		selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			'border-color': containerBorderHColor,

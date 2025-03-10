@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from 'react-spinners'; 
 import SiteImportModal from "./fullsiteimport";
+import FrontisBlocksSidebarFullSite from "../full-site-import/sidebar";
 
 const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
