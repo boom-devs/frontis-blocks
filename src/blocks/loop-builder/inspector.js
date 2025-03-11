@@ -1,313 +1,318 @@
 import { __ } from '@wordpress/i18n';
 import {
-    useBlockProps,
-    InspectorControls,
+	useBlockProps,
+	InspectorControls,
 } from '@wordpress/block-editor';
 import {
-    PanelBody,
-    TabPanel,
-    SelectControl,
-    RangeControl,
-    ToggleControl,
-    TextControl,
-    Placeholder,
-    Spinner
+	PanelBody,
+	TabPanel,
+	SelectControl,
+	RangeControl,
+	ToggleControl,
+	TextControl,
+	BaseControl,
+	CheckboxControl,
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import {
-    BORDER_STYLES,
-    LAYOUT_ALIGNMENT,
-    LAYOUT_TYPE,
-    OVERFLOW_OP,
-    PRESETS,
+	BORDER_STYLES,
+	LAYOUT_ALIGNMENT,
+	LAYOUT_TYPE,
+	OVERFLOW_OP,
+	PRESETS,
 } from "./constants/constants";
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const {
-        blockID,
-        postType,
-        postsPerPage,
-        order,
-        orderBy,
-        includedCategories,
-        includedTags,
-        offset,
-        showFeaturedImage,
-        showTitle,
-        showExcerpt,
-        excerptLength,
-        showReadMore,
-        readMoreText,
-        columns,
-        gap
-    } = attributes;
-    
-    // Fetch all available post types
-    const { postTypes } = useSelect((select) => {
-        const { getPostTypes } = select(coreStore);
-        const filteredPostTypes = getPostTypes({ per_page: -1 })?.filter(
-            ({ viewable }) => viewable
-        ) || [];
-        
-        return {
-            postTypes: filteredPostTypes,
-        };
-    }, []);
-    
-    // Get post type options for the select control
-    const postTypeOptions = postTypes?.map(({ slug, labels }) => ({
-        label: labels.singular_name,
-        value: slug,
-    })) || [];
-    
-    // Get categories for the selected post type
-    const { categories } = useSelect((select) => {
-        if (postType !== 'post') return { categories: [] };
-        
-        const { getEntityRecords } = select(coreStore);
-        return {
-            categories: getEntityRecords('taxonomy', 'category', { per_page: -1 }) || [],
-        };
-    }, [postType]);
-    
-    // Get tags for the selected post type
-    const { tags } = useSelect((select) => {
-        if (postType !== 'post') return { tags: [] };
-        
-        const { getEntityRecords } = select(coreStore);
-        return {
-            tags: getEntityRecords('taxonomy', 'post_tag', { per_page: -1 }) || [],
-        };
-    }, [postType]);
-    
-    // Category options for select
-    const categoryOptions = categories?.map(({ id, name }) => ({
-        label: name,
-        value: id,
-    })) || [];
-    
-    // Tag options for select
-    const tagOptions = tags?.map(({ id, name }) => ({
-        label: name,
-        value: id,
-    })) || [];
-    
-    return (
-        <>
-            <style>
-            </style>
-            <InspectorControls key="controls">
-                <div className="fb-inspector-control">
-                    <TabPanel
-                        className="fb-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            {
-                                name: "general",
-                                title: "General",
-                                className: "fb-tab general",
-                            },
-                            {
-                                name: "query",
-                                title: "Query",
-                                className: "fb-tab query",
-                            },
-                            {
-                                name: "layout",
-                                title: "Layout",
-                                className: "fb-tab layout",
-                            },
-                            {
-                                name: "styles",
-                                title: "Style",
-                                className: "fb-tab styles",
-                            },
-                            {
-                                name: "advanced",
-                                title: "Advanced",
-                                className: "fb-tab advance",
-                            },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={"fb-tab-controls " + tab.name}>
-                                {tab.name === 'general' && (
-                                    <>
-                                        <PanelBody title={__("Loop Content Settings", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Post Type", "frontis-blocks")}
-                                                value={postType}
-                                                options={[
-                                                    { label: __("Select Post Type", "frontis-blocks"), value: "" },
-                                                    ...postTypeOptions
-                                                ]}
-                                                onChange={(value) => setAttributes({ postType: value })}
-                                            />
-                                            
-                                            <RangeControl
-                                                label={__("Posts Per Page", "frontis-blocks")}
-                                                value={postsPerPage}
-                                                onChange={(value) => setAttributes({ postsPerPage: value })}
-                                                min={1}
-                                                max={100}
-                                            />
-                                            
-                                            <ToggleControl
-                                                label={__("Show Featured Image", "frontis-blocks")}
-                                                checked={showFeaturedImage}
-                                                onChange={(value) => setAttributes({ showFeaturedImage: value })}
-                                            />
-                                            
-                                            <ToggleControl
-                                                label={__("Show Title", "frontis-blocks")}
-                                                checked={showTitle}
-                                                onChange={(value) => setAttributes({ showTitle: value })}
-                                            />
-                                            
-                                            <ToggleControl
-                                                label={__("Show Excerpt", "frontis-blocks")}
-                                                checked={showExcerpt}
-                                                onChange={(value) => setAttributes({ showExcerpt: value })}
-                                            />
-                                            
-                                            {showExcerpt && (
-                                                <RangeControl
-                                                    label={__("Excerpt Length", "frontis-blocks")}
-                                                    value={excerptLength}
-                                                    onChange={(value) => setAttributes({ excerptLength: value })}
-                                                    min={10}
-                                                    max={300}
-                                                />
-                                            )}
-                                            
-                                            <ToggleControl
-                                                label={__("Show Read More", "frontis-blocks")}
-                                                checked={showReadMore}
-                                                onChange={(value) => setAttributes({ showReadMore: value })}
-                                            />
-                                            
-                                            {showReadMore && (
-                                                <TextControl
-                                                    label={__("Read More Text", "frontis-blocks")}
-                                                    value={readMoreText}
-                                                    onChange={(value) => setAttributes({ readMoreText: value })}
-                                                />
-                                            )}
-                                        </PanelBody>
-                                    </>
-                                )}
-                                
-                                {tab.name === "query" && (
-                                    <>
-                                        <PanelBody title={__("Query Settings", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Order By", "frontis-blocks")}
-                                                value={orderBy}
-                                                options={[
-                                                    { label: __("Date", "frontis-blocks"), value: "date" },
-                                                    { label: __("Title", "frontis-blocks"), value: "title" },
-                                                    { label: __("Author", "frontis-blocks"), value: "author" },
-                                                    { label: __("ID", "frontis-blocks"), value: "id" },
-                                                    { label: __("Comment Count", "frontis-blocks"), value: "comment_count" },
-                                                    { label: __("Random", "frontis-blocks"), value: "rand" },
-                                                ]}
-                                                onChange={(value) => setAttributes({ orderBy: value })}
-                                            />
-                                            
-                                            <SelectControl
-                                                label={__("Order", "frontis-blocks")}
-                                                value={order}
-                                                options={[
-                                                    { label: __("Descending", "frontis-blocks"), value: "desc" },
-                                                    { label: __("Ascending", "frontis-blocks"), value: "asc" },
-                                                ]}
-                                                onChange={(value) => setAttributes({ order: value })}
-                                            />
-                                            
-                                            <RangeControl
-                                                label={__("Offset", "frontis-blocks")}
-                                                value={offset}
-                                                onChange={(value) => setAttributes({ offset: value })}
-                                                min={0}
-                                                max={100}
-                                            />
-                                            
-                                            {postType === 'post' && (
-                                                <>
-                                                    <SelectControl
-                                                        label={__("Categories", "frontis-blocks")}
-                                                        value={includedCategories}
-                                                        options={[
-                                                            { label: __("All Categories", "frontis-blocks"), value: "" },
-                                                            ...categoryOptions
-                                                        ]}
-                                                        onChange={(value) => setAttributes({ includedCategories: value })}
-                                                        multiple
-                                                    />
-                                                    
-                                                    <SelectControl
-                                                        label={__("Tags", "frontis-blocks")}
-                                                        value={includedTags}
-                                                        options={[
-                                                            { label: __("All Tags", "frontis-blocks"), value: "" },
-                                                            ...tagOptions
-                                                        ]}
-                                                        onChange={(value) => setAttributes({ includedTags: value })}
-                                                        multiple
-                                                    />
-                                                </>
-                                            )}
-                                        </PanelBody>
-                                    </>
-                                )}
-                                
-                                {tab.name === "layout" && (
-                                    <>
-                                        <PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
-                                            <RangeControl
-                                                label={__("Columns", "frontis-blocks")}
-                                                value={columns}
-                                                onChange={(value) => setAttributes({ columns: value })}
-                                                min={1}
-                                                max={6}
-                                            />
-                                            
-                                            <RangeControl
-                                                label={__("Gap", "frontis-blocks")}
-                                                value={gap}
-                                                onChange={(value) => setAttributes({ gap: value })}
-                                                min={0}
-                                                max={100}
-                                                help={__("Gap between items in pixels", "frontis-blocks")}
-                                            />
-                                        </PanelBody>
-                                    </>
-                                )}
-                                
-                                {tab.name === "styles" && (
-                                    <>
-                                        <PanelBody title={__("Item Styling", "frontis-blocks")} initialOpen={true}>
-                                            {/* Add styling controls here */}
-                                        </PanelBody>
-                                    </>
-                                )}
-                                
-                                {tab.name === "advanced" && (
-                                    <>
-                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
-                                            {/* Add advanced settings here */}
-                                        </PanelBody>
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
-        </>
-    );
+	const {
+		blockID,
+		postType,
+		postsPerPage,
+		order,
+		orderBy,
+		includedCategories,
+		includedTags,
+		offset,
+		showFeaturedImage,
+		showTitle,
+		showExcerpt,
+		excerptLength,
+		showReadMore,
+		readMoreText,
+		columns,
+		gap
+	} = attributes;
+
+	// Get all registered post types
+	const { postTypes } = useSelect((select) => {
+		const { getPostTypes } = select(coreStore);
+		return {
+			postTypes: getPostTypes({ per_page: -1 }) || [],
+		};
+	}, []);
+
+	// Get categories for the selected post type
+	const { categories, tags } = useSelect((select) => {
+		const { getEntityRecords } = select(coreStore);
+		
+		// Get categories
+		const categoryTaxonomy = postType === 'post' ? 'category' : `${postType}_category`;
+		const fetchedCategories = getEntityRecords('taxonomy', categoryTaxonomy, { per_page: -1 }) || [];
+		
+		// Get tags
+		const tagTaxonomy = postType === 'post' ? 'post_tag' : `${postType}_tag`;
+		const fetchedTags = getEntityRecords('taxonomy', tagTaxonomy, { per_page: -1 }) || [];
+		
+		return {
+			categories: fetchedCategories,
+			tags: fetchedTags,
+		};
+	}, [postType]);
+
+	// Convert post types to options format
+	const postTypeOptions = useMemo(() => {
+		return (postTypes || [])
+			.filter(type => type.viewable)
+			.map(type => ({
+				label: type.labels.singular_name,
+				value: type.slug,
+			}));
+	}, [postTypes]);
+
+	// Convert categories to options format
+	const categoryOptions = useMemo(() => {
+		return (categories || []).map(category => ({
+			label: category.name,
+			value: category.id,
+		}));
+	}, [categories]);
+
+	// Convert tags to options format
+	const tagOptions = useMemo(() => {
+		return (tags || []).map(tag => ({
+			label: tag.name,
+			value: tag.id,
+		}));
+	}, [tags]);
+
+	// Handle category selection changes
+	const onCategoryChange = (categoryId, isChecked) => {
+		const newCategories = isChecked 
+			? [...(includedCategories || []), categoryId]
+			: (includedCategories || []).filter(id => id !== categoryId);
+		
+		setAttributes({ includedCategories: newCategories });
+	};
+
+	// Handle tag selection changes
+	const onTagChange = (tagId, isChecked) => {
+		const newTags = isChecked 
+			? [...(includedTags || []), tagId]
+			: (includedTags || []).filter(id => id !== tagId);
+		
+		setAttributes({ includedTags: newTags });
+	};
+
+	return (
+		<>
+			<style>
+			</style>
+			<InspectorControls key="controls">
+				<div className="fb-inspector-control">
+					<TabPanel
+						className="fb-parent-tab-panel"
+						activeClass="active-tab"
+						tabs={[
+							{
+								name: "general",
+								title: "General",
+								className: "fb-tab general",
+							},
+							{
+								name: "styles",
+								title: "Style",
+								className: "fb-tab styles",
+							},
+							{
+								name: "advanced",
+								title: "Advanced",
+								className: "fb-tab advance",
+							},
+						]}
+					>
+						{(tab) => (
+							<div className={"fb-tab-controls " + tab.name}>
+								{tab.name === 'general' && (
+									<>
+										<PanelBody title={__("Query Settings", "frontis-blocks")} initialOpen={true}>
+											<SelectControl
+												label={__("Post Type", "frontis-blocks")}
+												value={postType || 'post'}
+												options={postTypeOptions}
+												onChange={(value) => setAttributes({ postType: value })}
+											/>
+											
+											<RangeControl
+												label={__("Posts Per Page", "frontis-blocks")}
+												value={postsPerPage || 6}
+												onChange={(value) => setAttributes({ postsPerPage: value })}
+												min={1}
+												max={50}
+											/>
+											
+											<SelectControl
+												label={__("Order", "frontis-blocks")}
+												value={order || 'desc'}
+												options={[
+													{ label: __("Descending", "frontis-blocks"), value: 'desc' },
+													{ label: __("Ascending", "frontis-blocks"), value: 'asc' },
+												]}
+												onChange={(value) => setAttributes({ order: value })}
+											/>
+											
+											<SelectControl
+												label={__("Order By", "frontis-blocks")}
+												value={orderBy || 'date'}
+												options={[
+													{ label: __("Date", "frontis-blocks"), value: 'date' },
+													{ label: __("Title", "frontis-blocks"), value: 'title' },
+													{ label: __("Modified", "frontis-blocks"), value: 'modified' },
+													{ label: __("Menu Order", "frontis-blocks"), value: 'menu_order' },
+													{ label: __("Random", "frontis-blocks"), value: 'rand' },
+												]}
+												onChange={(value) => setAttributes({ orderBy: value })}
+											/>
+											
+											<RangeControl
+												label={__("Offset", "frontis-blocks")}
+												value={offset || 0}
+												onChange={(value) => setAttributes({ offset: value })}
+												min={0}
+												max={100}
+												help={__("Skip this number of posts", "frontis-blocks")}
+											/>
+										</PanelBody>
+										
+										<PanelBody title={__("Taxonomies", "frontis-blocks")} initialOpen={false}>
+											{categoryOptions.length > 0 && (
+												<BaseControl
+													label={__("Categories", "frontis-blocks")}
+													className="fb-taxonomy-control"
+												>
+													{categoryOptions.map((category) => (
+														<CheckboxControl
+															key={category.value}
+															label={category.label}
+															checked={includedCategories?.includes(category.value)}
+															onChange={(isChecked) => onCategoryChange(category.value, isChecked)}
+														/>
+													))}
+												</BaseControl>
+											)}
+											
+											{tagOptions.length > 0 && (
+												<BaseControl
+													label={__("Tags", "frontis-blocks")}
+													className="fb-taxonomy-control"
+												>
+													{tagOptions.map((tag) => (
+														<CheckboxControl
+															key={tag.value}
+															label={tag.label}
+															checked={includedTags?.includes(tag.value)}
+															onChange={(isChecked) => onTagChange(tag.value, isChecked)}
+														/>
+													))}
+												</BaseControl>
+											)}
+										</PanelBody>
+										
+										<PanelBody title={__("Display Settings", "frontis-blocks")} initialOpen={false}>
+											<ToggleControl
+												label={__("Show Featured Image", "frontis-blocks")}
+												checked={showFeaturedImage}
+												onChange={(value) => setAttributes({ showFeaturedImage: value })}
+											/>
+											
+											<ToggleControl
+												label={__("Show Title", "frontis-blocks")}
+												checked={showTitle}
+												onChange={(value) => setAttributes({ showTitle: value })}
+											/>
+											
+											<ToggleControl
+												label={__("Show Excerpt", "frontis-blocks")}
+												checked={showExcerpt}
+												onChange={(value) => setAttributes({ showExcerpt: value })}
+											/>
+											
+											{showExcerpt && (
+												<RangeControl
+													label={__("Excerpt Length", "frontis-blocks")}
+													value={excerptLength || 25}
+													onChange={(value) => setAttributes({ excerptLength: value })}
+													min={10}
+													max={100}
+												/>
+											)}
+											
+											<ToggleControl
+												label={__("Show Read More", "frontis-blocks")}
+												checked={showReadMore}
+												onChange={(value) => setAttributes({ showReadMore: value })}
+											/>
+											
+											{showReadMore && (
+												<TextControl
+													label={__("Read More Text", "frontis-blocks")}
+													value={readMoreText || __("Read More", "frontis-blocks")}
+													onChange={(value) => setAttributes({ readMoreText: value })}
+												/>
+											)}
+										</PanelBody>
+									</>
+								)}
+								{tab.name === "styles" && (
+									<>
+										<PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
+											<RangeControl
+												label={__("Columns", "frontis-blocks")}
+												value={columns || 3}
+												onChange={(value) => setAttributes({ columns: value })}
+												min={1}
+												max={6}
+											/>
+											
+											<RangeControl
+												label={__("Gap", "frontis-blocks")}
+												value={gap || 20}
+												onChange={(value) => setAttributes({ gap: value })}
+												min={0}
+												max={50}
+											/>
+										</PanelBody>
+									</>
+								)}
+								{tab.name === "advanced" && (
+									<>
+										<PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+											<TextControl
+												label={__("Block ID", "frontis-blocks")}
+												value={blockID}
+												onChange={(value) => setAttributes({ blockID: value })}
+												help={__("Add a unique identifier for this block", "frontis-blocks")}
+											/>
+										</PanelBody>
+									</>
+								)}
+							</div>
+						)}
+					</TabPanel>
+				</div>
+			</InspectorControls>
+		</>
+	);
 }
