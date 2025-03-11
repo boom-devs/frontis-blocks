@@ -916,8 +916,8 @@ const Inspector = (props) => {
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
+													title={__("Advanced", "frontis-blocks")}
+													initialOpen={true}
 												>
 												<FB_Range
 													min={0}

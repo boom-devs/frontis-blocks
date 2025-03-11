@@ -223,6 +223,21 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerDirection,
 		containerJustify,
 		containerAlignItems,
+
+		// Position
+		containerZIndex,
+		containerOverflow,
+		containerPositionType,
+		containerHZOrientationType,
+		containerVROrientationType,
+		containerHZLeftOffset,
+		containerHZLeftOffsetUnits,
+		containerHZRightOffset,
+		containerHZRightOffsetUnits,
+		containerVRTopOffset,
+		containerVRTopOffsetUnits,
+		containerVRBottomOffset,
+		containerVRBottomOffsetUnits,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -555,8 +570,32 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'min-height': generateCSSUnit( minHeight['Desktop'], minHeightUnits['Desktop'] ),
 		...borderCSS,
 		...containerBackgroundCSSDesktop,
-		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
+
+		// Position related properties
+		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
+		'width': containerPositionType !== 'default' && containerPositionType !== 'relative' ? '100%' : undefined,
+		
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+			   containerHZOrientationType === 'left' && containerHZLeftOffset.Desktop ? 
+			   generateCSSUnit(containerHZLeftOffset.Desktop, containerHZLeftOffsetUnits.Desktop) : undefined,
+		
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'right' && containerHZRightOffset.Desktop ? 
+				generateCSSUnit(containerHZRightOffset.Desktop, containerHZRightOffsetUnits.Desktop) : undefined,
+		
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+			  containerVROrientationType === 'top' && containerVRTopOffset.Desktop ? 
+			  generateCSSUnit(containerVRTopOffset.Desktop, containerVRTopOffsetUnits.Desktop) : undefined,
+		
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				 containerVROrientationType === 'bottom' && containerVRBottomOffset.Desktop ? 
+				 generateCSSUnit(containerVRBottomOffset.Desktop, containerVRBottomOffsetUnits.Desktop) : undefined,
+		
+		'z-index': containerZIndex.Desktop ? containerZIndex.Desktop : undefined,
+		'overflow': containerOverflow !== 'default' ? containerOverflow : undefined,
 	};
 
 	boxShadowBlurHover = isNaN( boxShadowBlurHover ) ? '' : boxShadowBlurHover;
@@ -833,6 +872,26 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSTablet,
 			...containerBackgroundCSSTablet,
 			'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
+
+			// Horizontal positioning
+			'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Tablet ? 
+				generateCSSUnit(containerHZLeftOffset.Tablet, containerHZLeftOffsetUnits.Tablet) : undefined,
+			
+			'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerHZOrientationType === 'right' && containerHZRightOffset.Tablet ? 
+					generateCSSUnit(containerHZRightOffset.Tablet, containerHZRightOffsetUnits.Tablet) : undefined,
+			
+			// Vertical positioning
+			'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerVROrientationType === 'top' && containerVRTopOffset.Tablet ? 
+				generateCSSUnit(containerVRTopOffset.Tablet, containerVRTopOffsetUnits.Tablet) : undefined,
+			
+			'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Tablet ? 
+					generateCSSUnit(containerVRBottomOffset.Tablet, containerVRBottomOffsetUnits.Tablet) : undefined,
+			
+			'z-index': containerZIndex.Tablet ? containerZIndex.Tablet : undefined,
 		};
 		tablet_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'] ) + ' !important',
@@ -848,6 +907,26 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSMobile,
 			...containerBackgroundCSSMobile,
 			'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
+
+			// Horizontal positioning
+			'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Mobile ? 
+				generateCSSUnit(containerHZLeftOffset.Mobile, containerHZLeftOffsetUnits.Mobile) : undefined,
+			
+			'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerHZOrientationType === 'right' && containerHZRightOffset.Mobile ? 
+					generateCSSUnit(containerHZRightOffset.Mobile, containerHZRightOffsetUnits.Mobile) : undefined,
+			
+			// Vertical positioning
+			'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerVROrientationType === 'top' && containerVRTopOffset.Mobile ? 
+				generateCSSUnit(containerVRTopOffset.Mobile, containerVRTopOffsetUnits.Mobile) : undefined,
+			
+			'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Mobile ? 
+					generateCSSUnit(containerVRBottomOffset.Mobile, containerVRBottomOffsetUnits.Mobile) : undefined,
+			
+			'z-index': containerZIndex.Mobile ? containerZIndex.Mobile : undefined,
 		};
 		mobile_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit( containerMobileMargin.left, containerMarginUnits['Mobile'] ) + ' !important',
