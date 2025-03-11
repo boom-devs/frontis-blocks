@@ -60,11 +60,8 @@ const Render = ( props ) => {
 			containerBgHoverBackgroundImageSize,
 
 			// From fb
-			containerType,
+			containerType
 			
-			containerDesktopSwitcher,
-			containerTabletSwitcher,
-			containerMobileSwitcher,
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
@@ -81,9 +78,17 @@ const Render = ( props ) => {
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
+
+	let test = 'fb-hide-on-mobile';
+	let responsiveClass = '';
+	if(test){
+		responsiveClass = 'fb-hide-on-mobile';
+	}
+
+
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } fb-container-main-wrapper ${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `${responsiveClass} frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
 
