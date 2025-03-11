@@ -149,8 +149,6 @@ const Edit = (props) => {
     }, [blockFrontEndStyle] );
 
 
-	console.log( blockFrontEndStyle );
-
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		const block = select('core/block-editor').getBlock(clientId);
 		if (block) {

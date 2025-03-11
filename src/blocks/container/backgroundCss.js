@@ -109,35 +109,30 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 		globalBlockStyleId,
 
 
+		/** Normal Bg from FB Container */
+		containerBgColorSwitcher,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
+		containerBgNormalGradientColor,
+		containerBgNormalCustomGradientSwitcher,
+		containerBgNormalCustomGradientInputValue,
+		containerBgNormalBackgroundImageUrl,
+		containerBgNormalBackgroundImagePosition,
+		containerBgNormalBackgroundImageAttachment,
+		containerBgNormalBackgroundImageRepeat,
+		containerBgNormalBackgroundImageSize,
 
-					/** Normal Bg */
-					containerBgColorSwitcher,
-					containerBgNormalBackgroundType,
-					containerBgNormalClassicColor,
-					containerBgNormalGradientColor,
-					containerBgNormalCustomGradientSwitcher,
-					containerBgNormalCustomGradientInputValue,
-					containerBgNormalBackgroundImageUrl,
-					containerBgNormalBackgroundImageAlt,
-					containerBgNormalBackgroundImageID,
-					containerBgNormalBackgroundImagePosition,
-					containerBgNormalBackgroundImageAttachment,
-					containerBgNormalBackgroundImageRepeat,
-					containerBgNormalBackgroundImageSize,
-		
-					/** Hover Bg */
-					containerBgHoverBackgroundType,
-					containerBgHoverClassicColor,
-					containerBgHoverGradientColor,
-					containerBgHoverCustomGradientSwitcher,
-					containerBgHoverCustomGradientInputValue,
-					containerBgHoverBackgroundImageUrl,
-					containerBgHoverBackgroundImageAlt,
-					containerBgHoverBackgroundImageID,
-					containerBgHoverBackgroundImagePosition,
-					containerBgHoverBackgroundImageAttachment,
-					containerBgHoverBackgroundImageRepeat,
-					containerBgHoverBackgroundImageSize,
+		/** Hover Bg from FB Container */
+		containerBgHoverBackgroundType,
+		containerBgHoverClassicColor,
+		containerBgHoverGradientColor,
+		containerBgHoverCustomGradientSwitcher,
+		containerBgHoverCustomGradientInputValue,
+		containerBgHoverBackgroundImageUrl,
+		containerBgHoverBackgroundImagePosition,
+		containerBgHoverBackgroundImageAttachment,
+		containerBgHoverBackgroundImageRepeat,
+		containerBgHoverBackgroundImageSize,
 	} = attributes;
 
 	const backgroundAttributesDesktop = {
