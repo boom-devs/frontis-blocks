@@ -25,7 +25,7 @@ export default function save( props ) {
 		topInvert,
 		bottomInvert,
 		linkTarget,
-		containerType
+		containerType,
 		containerDesktopSwitcher,
 		containerTabletSwitcher,
 		containerMobileSwitcher
@@ -82,18 +82,24 @@ export default function save( props ) {
 	const blockProps = {
 		...useBlockProps.save(),
 		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined,
-		className: `fb-container-main-wrapper ${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
 	};
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
+	let test = 'fb-hide-on-mobile';
+	let responsiveClass = '';
+	if(test){
+		responsiveClass = 'fb-hide-on-mobile';
+	}
+
 	return (
 		<>
 			<CustomTag
-				 { ...blockProps }
-				 className={ classnames(
+				{ ...blockProps }
+				className={ classnames(
 					blockProps.className,
 					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
+					responsiveClass,
 					isRootContainerClass
 				) }
 			>
@@ -111,7 +117,7 @@ export default function save( props ) {
 				{ topDividerHtml }
 				{ bottomDividerHtml }
 				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
-				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
+				{ isBlockRootParent ? (
 					<div className={`frontis-blocks-container-inner-blocks-wrap`}>
 						<InnerBlocks.Content />
 					</div>

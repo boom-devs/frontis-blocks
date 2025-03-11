@@ -127,7 +127,7 @@ const Render = ( props ) => {
 					</div>
 				) }
 
-				{ isBlockRootParent && 'full-width' === containerType && 'boxed' === containerType ? (
+				{ isBlockRootParent ? (
 					<div className="frontis-blocks-container-inner-blocks-wrap">
 						<InnerBlocks { ...innerBlocksParams } />
 					</div>
