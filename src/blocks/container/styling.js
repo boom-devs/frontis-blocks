@@ -218,6 +218,35 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerBgHoverBackgroundImageRepeat,
 		containerBgHoverBackgroundImageSize,
 
+		/** Overlay for fb container */
+		containerBgOverlaySwitcher,
+		containerBgOverlayOpacity,
+
+		/** Normal Bg Overlay for fb container */
+		containerBgOverlayColorSwitcher,
+		containerBgOverlayNormalBackgroundType,
+		containerBgOverlayNormalClassicColor,
+		containerBgOverlayNormalGradientColor,
+		containerBgOverlayNormalCustomGradientSwitcher,
+		containerBgOverlayNormalCustomGradientInputValue,
+		containerBgOverlayNormalBackgroundImageUrl,
+		containerBgOverlayNormalBackgroundImagePosition,
+		containerBgOverlayNormalBackgroundImageAttachment,
+		containerBgOverlayNormalBackgroundImageRepeat,
+		containerBgOverlayNormalBackgroundImageSize,
+
+		/** Hover Bg overaly for fb container */
+		containerBgOverlayHoverBackgroundType,
+		containerBgOverlayHoverClassicColor,
+		containerBgOverlayHoverGradientColor,
+		containerBgOverlayHoverCustomGradientSwitcher,
+		containerBgOverlayHoverCustomGradientInputValue,
+		containerBgOverlayHoverBackgroundImageUrl,
+		containerBgOverlayHoverBackgroundImagePosition,
+		containerBgOverlayHoverBackgroundImageAttachment,
+		containerBgOverlayHoverBackgroundImageRepeat,
+		containerBgOverlayHoverBackgroundImageSize,
+
 
 
 	} = attributes;
@@ -368,7 +397,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	// Function to get background styles based on device type for FB Container
-	const getBackgroundStyles = (device) => {
+	const getBackgroundNormalStyles = (device) => {
 		const bgType = containerBgNormalBackgroundType;
 		const bgColor = containerBgNormalClassicColor;
 		const bgGradient = containerBgNormalGradientColor;
@@ -380,6 +409,122 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		const bgAttachment = containerBgNormalBackgroundImageAttachment?.[device];
 		const bgRepeat = containerBgNormalBackgroundImageRepeat?.[device];
 		const bgSize = containerBgNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	// Function to get background styles based on device type for FB Container
+	const getBackgroundHoverStyles = (device) => {
+		const bgType = containerBgHoverBackgroundType;
+		const bgColor = containerBgHoverClassicColor;
+		const bgGradient = containerBgHoverGradientColor;
+		const customGradient = containerBgHoverCustomGradientInputValue;
+		const customGradientEnabled = containerBgHoverCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgHoverBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgHoverBackgroundImageRepeat?.[device];
+		const bgSize = containerBgHoverBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+
+
+	// Function to get background overlay styles based on device type for FB Container
+	const getBackgroundOverlayNormalStyles = (device) => {
+		const bgType = containerBgOverlayNormalBackgroundType;
+		const bgColor = containerBgOverlayNormalClassicColor;
+		const bgGradient = containerBgOverlayNormalGradientColor;
+		const customGradient = containerBgOverlayNormalCustomGradientInputValue;
+		const customGradientEnabled = containerBgOverlayNormalCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgOverlayNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgOverlayNormalBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgOverlayNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgOverlayNormalBackgroundImageRepeat?.[device];
+		const bgSize = containerBgOverlayNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	// Function to get background overlay hover styles based on device type for FB Container
+	const getBackgroundOverlayHoverStyles = (device) => {
+		const bgType = containerBgOverlayHoverBackgroundType;
+		const bgColor = containerBgOverlayHoverClassicColor;
+		const bgGradient = containerBgOverlayHoverGradientColor;
+		const customGradient = containerBgOverlayHoverCustomGradientInputValue;
+		const customGradientEnabled = containerBgOverlayHoverCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgOverlayHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgOverlayHoverBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgOverlayHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgOverlayHoverBackgroundImageRepeat?.[device];
+		const bgSize = containerBgOverlayHoverBackgroundImageSize?.[device];
 
 		if (bgType === 'gradient') {
 			return {
@@ -432,7 +577,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
 
-		...getBackgroundStyles( 'Desktop' ),
+		...getBackgroundNormalStyles( 'Desktop' ),
 
 	};
 
@@ -463,8 +608,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'overflow': overflow,
 		'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 
-		...getBackgroundStyles( 'Tablet' ),
-
+		...getBackgroundNormalStyles( 'Tablet' ),
 	};
 
 	// Get container styles for mobile for FB Container
@@ -494,8 +638,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'overflow': overflow,
 		'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
 
-		...getBackgroundStyles( 'Mobile' ),
-
+		...getBackgroundNormalStyles( 'Mobile' ),
 	};
 
 	boxShadowColorHover = boxShadowColorHover ? boxShadowColorHover : '';
@@ -742,21 +885,56 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'] ) + ' !important',
 		}
+		selectors[ '.wp-block-frontis-blocks-container:after' ] = {
+			'content': '""',
+			'position': 'absolute',
+			'top': '0',
+			'left': '0',
+			'right': '0',
+			'bottom': '0',
+			'width': '100%',
+			'height': '100%',
+			'opacity': containerBgOverlayOpacity['Desktop'],
+			...getBackgroundOverlayNormalStyles('Desktop'),
+		};
+		selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
+			...getBackgroundHoverStyles('Desktop'),
+		};
 
+		selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
+			...getBackgroundOverlayHoverStyles('Desktop'),
+		};
+		
 		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesTablet;
 		tablet_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'] ) + ' !important',
 		}
+		tablet_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
+			'opacity': containerBgOverlayOpacity['Tablet'],
+			...getBackgroundOverlayNormalStyles('Tablet'),
+		};
+		tablet_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
+			...getBackgroundHoverStyles('Tablet'),
+		};
+		tablet_selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
+			...getBackgroundOverlayHoverStyles('Tablet'),
+		};
 		
 		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesMobile;
 		mobile_selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit( containerMobileMargin.left, containerMarginUnits['Mobile'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerMobileMargin.right, containerMarginUnits['Mobile'] ) + ' !important',
 		}
-		selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
-			'border-color': containerBorderHColor,
-			'box-shadow': '',
+		mobile_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
+			...getBackgroundHoverStyles('Mobile'),
+		};
+		mobile_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
+			'opacity': containerBgOverlayOpacity['Mobile'],
+			...getBackgroundOverlayNormalStyles('Mobile'),
+		};
+		mobile_selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
+			...getBackgroundOverlayHoverStyles('Mobile'),
 		};
 	}
 
@@ -775,56 +953,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			containerCustomWidth['Mobile'],
 			containerCustomWidthUnits['Mobile']
 		);
-	}
-
-	// Add the Overlay CSS if needed.
-	if ( overlayType && 'none' !== overlayType && Object.keys( getContainerBGStyle ).length ) {
-		const desktopBorderWidth = {
-			'top': containerBorderTopWidth || 0,
-			'right': containerBorderRightWidth || 0,
-			'bottom': containerBorderBottomWidth || 0,
-			'left': containerBorderLeftWidth || 0,
-		};
-		const tabletBorderWidth = {
-			'top': containerBorderTopWidthTablet || desktopBorderWidth.top,
-			'right': containerBorderRightWidthTablet || desktopBorderWidth.right,
-			'bottom': containerBorderBottomWidthTablet || desktopBorderWidth.bottom,
-			'left': containerBorderLeftWidthTablet || desktopBorderWidth.left,
-		};
-		const mobileBorderWidth = {
-			'top': containerBorderTopWidthMobile || tabletBorderWidth.top,
-			'right': containerBorderRightWidthMobile || tabletBorderWidth.right,
-			'bottom': containerBorderBottomWidthMobile || tabletBorderWidth.bottom,
-			'left': containerBorderLeftWidthMobile || tabletBorderWidth.left,
-		}
-		selectors[ '.wp-block-frontis-blocks-container::before' ] = {
-			'content': '""',
-			'top': `-${ generateCSSUnit( desktopBorderWidth.top, 'px' ) }`,
-			'left': `-${ generateCSSUnit( desktopBorderWidth.left, 'px' ) }`,
-			'width': `calc(100% + ${ generateCSSUnit( desktopBorderWidth.left, 'px' ) } + ${ generateCSSUnit( desktopBorderWidth.right, 'px' ) })`,
-			'height': `calc(100% + ${ generateCSSUnit( desktopBorderWidth.top, 'px' ) } + ${ generateCSSUnit( desktopBorderWidth.bottom, 'px' ) })`,
-			...borderCSS,
-			...getContainerBGStyle,
-		};
-		selectors[ '.wp-block-frontis-blocks-container:hover::before' ] = {
-			'border-color': containerBorderHColor,
-		};
-		tablet_selectors[ '.wp-block-frontis-blocks-container::before' ] = {
-			'top': `-${ generateCSSUnit( tabletBorderWidth.top, 'px' ) }`,
-			'left': `-${ generateCSSUnit( tabletBorderWidth.left, 'px' ) }`,
-			// In the Editor Responsive, 100% seems to take the required witdh and height including offset...
-			'width': '100%',
-			'height': '100%',
-			...borderCSSTablet,
-		};
-		mobile_selectors[ '.wp-block-frontis-blocks-container::before' ] = {
-			'top': `-${ generateCSSUnit( mobileBorderWidth.top, 'px' ) }`,
-			'left': `-${ generateCSSUnit( mobileBorderWidth.left, 'px' ) }`,
-			// In the Editor Responsive, 100% seems to take the required witdh and height including offset...
-			'width': '100%',
-			'height': '100%',
-			...borderCSSMobile,
-		};
 	}
 
 	const autoWidth = { 'width': 'auto' };

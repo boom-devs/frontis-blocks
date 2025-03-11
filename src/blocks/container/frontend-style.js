@@ -567,6 +567,44 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
 	}
 
+	// Function to get background styles based on device type for FB Container
+	const getBackgroundStyles = (device) => {
+		const bgType = containerBgNormalBackgroundType;
+		const bgColor = containerBgNormalClassicColor;
+		const bgGradient = containerBgNormalGradientColor;
+		const customGradient = containerBgNormalCustomGradientInputValue;
+		const customGradientEnabled = containerBgNormalCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgNormalBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgNormalBackgroundImageRepeat?.[device];
+		const bgSize = containerBgNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
 	const containerCSS = {
 		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
 		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
@@ -587,15 +625,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
 		...borderCSS,
-		...containerBackgroundCSSDesktop,
 		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
-
-		'background': containerBgNormalBackgroundType === 'gradient' ? 
-		(containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue 
-			? containerBgNormalCustomGradientInputValue 
-			: containerBgNormalGradientColor || containerBgNormalClassicColor) 
-		: containerBgNormalClassicColor,
 	};
 
 	boxShadowBlurHover = isNaN(boxShadowBlurHover) ? '' : boxShadowBlurHover;
@@ -873,7 +904,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	} else {
 		selectors['.wp-block-frontis-blocks-container'] = containerCSS;
 		selectors['.wp-block-frontis-blocks-container'] = {
-			...desktopContainerPadding
+			...desktopContainerPadding,
+			...getBackgroundStyles('Desktop'),
 		};
 		selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']),
