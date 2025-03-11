@@ -1,67 +1,170 @@
 .fb-loop-builder-block {
-    .fb-loop-builder-grid {
-        display: grid;
-
-        .fb-loop-item {
-            margin-bottom: 30px;
-
-            .fb-loop-item-image {
-                margin-bottom: 15px;
-
-                img {
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                }
+    .fb-loop-content {
+        &.layout-flex {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+            
+            .fb-loop-builder-inner {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
             }
-
-            .fb-loop-item-title {
-                margin-top: 0;
-                margin-bottom: 10px;
-
-                a {
-                    text-decoration: none;
-
-                    &:hover {
-                        text-decoration: underline;
+            
+            .wp-block-post-template {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                
+                > li {
+                    padding: 0 15px;
+                    margin-bottom: 30px;
+                    box-sizing: border-box;
+                    
+                    // Default 3 columns
+                    width: 33.333%;
+                    
+                    @media (max-width: 768px) {
+                        width: 50%;
+                    }
+                    
+                    @media (max-width: 576px) {
+                        width: 100%;
+                    }
+                    
+                    .wp-block-post-featured-image img {
+                        width: 100%;
+                        height: auto;
+                    }
+                    
+                    .wp-block-post-title {
+                        margin-top: 15px;
+                        margin-bottom: 10px;
+                        font-size: 1.5em;
+                        
+                        a {
+                            text-decoration: none;
+                        }
+                    }
+                    
+                    .wp-block-post-excerpt {
+                        margin-bottom: 15px;
                     }
                 }
             }
-
-            .fb-loop-item-excerpt {
-                margin-bottom: 15px;
-                color: #555;
+            
+            // Column adjustments
+            &.columns-1 .wp-block-post-template > li {
+                width: 100%;
             }
-
-            .fb-loop-item-readmore {
-                margin-top: 15px;
-
-                a {
-                    display: inline-block;
-                    background-color: #0073aa;
-                    color: white;
-                    padding: 8px 12px;
-                    text-decoration: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-
-                    &:hover {
-                        background-color: #005f8b;
+            
+            &.columns-2 .wp-block-post-template > li {
+                width: 50%;
+                
+                @media (max-width: 576px) {
+                    width: 100%;
+                }
+            }
+            
+            &.columns-4 .wp-block-post-template > li {
+                width: 25%;
+                
+                @media (max-width: 992px) {
+                    width: 50%;
+                }
+                
+                @media (max-width: 576px) {
+                    width: 100%;
+                }
+            }
+            
+            &.columns-5 .wp-block-post-template > li,
+            &.columns-6 .wp-block-post-template > li {
+                width: 20%;
+                
+                @media (max-width: 1200px) {
+                    width: 33.333%;
+                }
+                
+                @media (max-width: 992px) {
+                    width: 50%;
+                }
+                
+                @media (max-width: 576px) {
+                    width: 100%;
+                }
+            }
+        }
+        
+        &.layout-list {
+            .wp-block-post-template {
+                display: block;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                
+                > li {
+                    margin-bottom: 30px;
+                    padding-bottom: 30px;
+                    border-bottom: 1px solid #eee;
+                    
+                    &:last-child {
+                        border-bottom: none;
+                    }
+                    
+                    .wp-block-post-featured-image {
+                        margin-bottom: 15px;
                     }
                 }
             }
         }
     }
-}
-
-@media (max-width: 768px) {
-    .fb-loop-builder-block .fb-loop-builder-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
+    
+    // Pagination
+    .wp-block-query-pagination {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        
+        > * {
+            margin: 0 5px;
+            
+            &.wp-block-query-pagination-numbers {
+                display: flex;
+            }
+        }
+        
+        a {
+            text-decoration: none;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            
+            &:hover {
+                background-color: #f8f9fa;
+            }
+        }
+        
+        .wp-block-query-pagination-previous,
+        .wp-block-query-pagination-next {
+            font-weight: bold;
+        }
+        
+        .current {
+            padding: 8px 12px;
+            background-color: #007cba;
+            color: white;
+            border: 1px solid #007cba;
+        }
     }
-}
-
-@media (max-width: 480px) {
-    .fb-loop-builder-block .fb-loop-builder-grid {
-        grid-template-columns: 1fr !important;
+    
+    // No results
+    .fb-loop-no-results {
+        padding: 40px;
+        text-align: center;
+        background-color: #f8f9fa;
+        border: 1px solid #eee;
     }
 }
