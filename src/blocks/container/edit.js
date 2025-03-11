@@ -148,9 +148,6 @@ const Edit = (props) => {
         setAttributes({blockStyle: `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim()});
     }, [blockFrontEndStyle] );
 
-
-	console.log( blockFrontEndStyle );
-
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		const block = select('core/block-editor').getBlock(clientId);
 		if (block) {
