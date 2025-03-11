@@ -26,6 +26,9 @@ export default function save( props ) {
 		bottomInvert,
 		linkTarget,
 		containerType
+		containerDesktopSwitcher,
+		containerTabletSwitcher,
+		containerMobileSwitcher
 	} = props.attributes;
 
 	const topDividerHtml = 'none' !== topType && (
@@ -78,7 +81,8 @@ export default function save( props ) {
 
 	const blockProps = {
 		...useBlockProps.save(),
-		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined
+		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined,
+		className: `fb-container-main-wrapper ${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
 	};
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
