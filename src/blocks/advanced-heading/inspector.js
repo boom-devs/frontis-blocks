@@ -2182,7 +2182,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         </Popover>
                                                         )}
                                                     </div>
-                                                    </div>
+                                                </div>
                                             </PanelBody>
                                         </div>
                                         {subHeadingSwitcher && (
