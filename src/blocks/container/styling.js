@@ -773,7 +773,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeight['Desktop'], minHeightUnits['Desktop'] ),
 		...borderCSS,
-		...containerBackgroundCSSDesktop,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
 
 		// Position related properties
