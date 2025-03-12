@@ -76,21 +76,22 @@ const Render = ( props ) => {
 	const Tag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
 	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
+	
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
-
-
-	let test = 'fb-hide-on-mobile';
-	let responsiveClass = '';
-	if(test){
-		responsiveClass = 'fb-hide-on-mobile';
-	}
-
 
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `${responsiveClass} frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
+		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
 		style: getContainerBGStyle,
 	} );
+
+
+	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
+		modifBlockProps.className = modifBlockProps.className
+		  .split(' ')
+		  .filter(className => className !== 'alignfull')
+		  .join(' ');
+	}
 
 	const innerBlocksParams = {
 		__experimentalMoverDirection: { moverDirection },
@@ -126,7 +127,7 @@ const Render = ( props ) => {
 					</div>
 				) }
 
-				{ isBlockRootParent && 'alignfull' === contentWidth && 'alignwide' === innerContentWidth ? (
+				{ isBlockRootParent ? (
 					<div className="frontis-blocks-container-inner-blocks-wrap">
 						<InnerBlocks { ...innerBlocksParams } />
 					</div>

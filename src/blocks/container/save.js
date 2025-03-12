@@ -25,9 +25,10 @@ export default function save( props ) {
 		topInvert,
 		bottomInvert,
 		linkTarget,
+		containerType,
 		containerDesktopSwitcher,
 		containerTabletSwitcher,
-		containerMobileSwitcher,
+		containerMobileSwitcher
 	} = props.attributes;
 
 	const topDividerHtml = 'none' !== topType && (
@@ -81,8 +82,9 @@ export default function save( props ) {
 	const blockProps = {
 		...useBlockProps.save(),
 		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined,
-		className: `fb-container-main-wrapper ${containerDesktopSwitcher && 'fb-desktop-responsive'} ${containerTabletSwitcher && 'fb-tablet-responsive'} ${containerMobileSwitcher && 'fb-mobile-responsive'}`,
 	};
+
+	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
 	let test = 'fb-hide-on-mobile';
 	let responsiveClass = '';
@@ -93,11 +95,12 @@ export default function save( props ) {
 	return (
 		<>
 			<CustomTag
-				 { ...blockProps }
-				 className={ classnames(
+				{ ...blockProps }
+				className={ classnames(
 					blockProps.className,
 					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
-					isBlockRootParent && `${ contentWidth } frontis-blocks-is-root-container ${ responsiveClass }`
+					responsiveClass,
+					isRootContainerClass
 				) }
 			>
 				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
