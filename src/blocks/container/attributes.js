@@ -1454,6 +1454,122 @@ const attributes = {
             Mobile: 'px',
         }
     },
+
+	containerBorder: {
+        type: 'string',
+        default: "none",
+    },
+    containerBorderColor: {
+        type: 'string',
+    },
+    containerBorderHoverColor: {
+        type: 'string',
+    },
+    containerBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    
+    containerBorderUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    containerDesktopBorderWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerTabBorderWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerMobileBorderWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    containerBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    containerDesktopBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerTabBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerMobileBorderRadiusWidth: {
+        type: "object", 
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    containerBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+	containerGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    containerGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    containerGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    containerGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    containerGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
 };
 
 export default attributes;
