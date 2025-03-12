@@ -109,31 +109,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		gradientAngle,
 		selectGradient,
 
-		customPosition,
-		xPositionDesktop,
-		xPositionTablet,
-		xPositionMobile,
-		xPositionType,
-		xPositionTypeTablet,
-		xPositionTypeMobile,
-		yPositionDesktop,
-		yPositionTablet,
-		yPositionMobile,
-		yPositionType,
-		yPositionTypeTablet,
-		yPositionTypeMobile,
-		backgroundCustomSizeTablet,
-		backgroundCustomSizeMobile,
-		backgroundSizeTablet,
-		backgroundSizeMobile,
-		backgroundRepeatTablet,
-		backgroundRepeatMobile,
-		backgroundAttachmentTablet,
-		backgroundAttachmentMobile,
-		backgroundPositionTablet,
-		backgroundPositionMobile,
-		backgroundImageTablet,
-		backgroundImageMobile,
 		// Extracted Border Width Attributes.
 		containerBorderTopWidth,
 		containerBorderRightWidth,
@@ -274,6 +249,36 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerBgHoverBackgroundImageAttachment,
 		containerBgHoverBackgroundImageRepeat,
 		containerBgHoverBackgroundImageSize,
+
+		/** Overlay for fb container */
+		containerBgOverlaySwitcher,
+		containerBgOverlayOpacity,
+
+		/** Normal Bg Overlay for fb container */
+		containerBgOverlayColorSwitcher,
+		containerBgOverlayNormalBackgroundType,
+		containerBgOverlayNormalClassicColor,
+		containerBgOverlayNormalGradientColor,
+		containerBgOverlayNormalCustomGradientSwitcher,
+		containerBgOverlayNormalCustomGradientInputValue,
+		containerBgOverlayNormalBackgroundImageUrl,
+		containerBgOverlayNormalBackgroundImagePosition,
+		containerBgOverlayNormalBackgroundImageAttachment,
+		containerBgOverlayNormalBackgroundImageRepeat,
+		containerBgOverlayNormalBackgroundImageSize,
+
+		/** Hover Bg overaly for fb container */
+		containerBgOverlayHoverBackgroundType,
+		containerBgOverlayHoverClassicColor,
+		containerBgOverlayHoverGradientColor,
+		containerBgOverlayHoverCustomGradientSwitcher,
+		containerBgOverlayHoverCustomGradientInputValue,
+		containerBgOverlayHoverBackgroundImageUrl,
+		containerBgOverlayHoverBackgroundImagePosition,
+		containerBgOverlayHoverBackgroundImageAttachment,
+		containerBgOverlayHoverBackgroundImageRepeat,
+		containerBgOverlayHoverBackgroundImageSize,
+
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -443,223 +448,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	if ('outset' === boxShadowPositionHover) {
 		boxShadowPositionCSSHover = '';
 	}
-
-	// For Global Block Styles.
-	let containerBackgroundCSSMobile = {};
-	let containerBackgroundCSSTablet = {};
-	let containerBackgroundCSSDesktop = {};
-	if (gbsSelector) {
-		const backgroundAttributesDesktop = {
-			'backgroundType': backgroundType,
-			'backgroundImage': backgroundImageDesktop,
-			'backgroundColor': backgroundColor,
-			'gradientValue': gradientValue,
-			'gradientColor1': gradientColor1,
-			'gradientColor2': gradientColor2,
-			'gradientLocation1': gradientLocation1,
-			'gradientLocation2': gradientLocation2,
-			'gradientType': gradientType,
-			'gradientAngle': gradientAngle,
-			'selectGradient': selectGradient,
-			'backgroundRepeat': backgroundRepeatDesktop,
-			'backgroundPosition': backgroundPositionDesktop,
-			'backgroundSize': backgroundSizeDesktop,
-			'backgroundAttachment': backgroundAttachmentDesktop,
-			'backgroundCustomSize': backgroundCustomSizeDesktop,
-			'backgroundCustomSizeType': backgroundCustomSizeType,
-			'backgroundImageColor': backgroundImageColor,
-			'overlayType': overlayType,
-			'backgroundVideo': backgroundVideo,
-			'backgroundVideoColor': backgroundVideoColor,
-			'customPosition': customPosition,
-			'xPosition': xPositionDesktop,
-			'xPositionType': xPositionType,
-			'yPosition': yPositionDesktop,
-			'yPositionType': yPositionType,
-			'globalBlockStyleId': globalBlockStyleId,
-		};
-
-		containerBackgroundCSSDesktop = generateBackgroundCSS(backgroundAttributesDesktop, { 'blockName': 'container' });
-
-		const backgroundAttributesTablet = {
-			'backgroundType': backgroundType,
-			'backgroundImage': backgroundImageTablet,
-			'backgroundColor': backgroundColor,
-			'gradientValue': gradientValue,
-			'gradientColor1': gradientColor1,
-			'gradientColor2': gradientColor2,
-			'gradientLocation1': gradientLocation1,
-			'gradientLocation2': gradientLocation2,
-			'gradientType': gradientType,
-			'gradientAngle': gradientAngle,
-			'selectGradient': selectGradient,
-			'backgroundRepeat': backgroundRepeatTablet,
-			'backgroundPosition': backgroundPositionTablet,
-			'backgroundSize': backgroundSizeTablet,
-			'backgroundAttachment': backgroundAttachmentTablet,
-			'backgroundCustomSize': backgroundCustomSizeTablet,
-			'backgroundCustomSizeType': backgroundCustomSizeType,
-			'backgroundImageColor': backgroundImageColor,
-			'overlayType': overlayType,
-			'backgroundVideo': backgroundVideo,
-			'backgroundVideoColor': backgroundVideoColor,
-			'customPosition': customPosition,
-			'xPosition': xPositionTablet,
-			'xPositionType': xPositionTypeTablet,
-			'yPosition': yPositionTablet,
-			'yPositionType': yPositionTypeTablet,
-			'globalBlockStyleId': globalBlockStyleId,
-		};
-
-		containerBackgroundCSSTablet = generateBackgroundCSS(backgroundAttributesTablet, { 'blockName': 'container' });
-
-		const backgroundAttributesMobile = {
-			'backgroundType': backgroundType,
-			'backgroundImage': backgroundImageMobile,
-			'backgroundColor': backgroundColor,
-			'gradientValue': gradientValue,
-			'gradientColor1': gradientColor1,
-			'gradientColor2': gradientColor2,
-			'gradientLocation1': gradientLocation1,
-			'gradientLocation2': gradientLocation2,
-			'gradientType': gradientType,
-			'gradientAngle': gradientAngle,
-			'selectGradient': selectGradient,
-			'backgroundRepeat': backgroundRepeatMobile,
-			'backgroundPosition': backgroundPositionMobile,
-			'backgroundSize': backgroundSizeMobile,
-			'backgroundAttachment': backgroundAttachmentMobile,
-			'backgroundCustomSize': backgroundCustomSizeMobile,
-			'backgroundCustomSizeType': backgroundCustomSizeType,
-			'backgroundImageColor': backgroundImageColor,
-			'overlayType': overlayType,
-			'backgroundVideo': backgroundVideo,
-			'backgroundVideoColor': backgroundVideoColor,
-			'customPosition': customPosition,
-			'xPosition': xPositionMobile,
-			'xPositionType': xPositionTypeMobile,
-			'yPosition': yPositionMobile,
-			'yPositionType': yPositionTypeMobile,
-			'globalBlockStyleId': globalBlockStyleId,
-		};
-
-		containerBackgroundCSSMobile = generateBackgroundCSS(backgroundAttributesMobile, { 'blockName': 'container' });
-
-	}
-  
-	// check margin value not 0
-	// Check margin values and add only if they are not zero
-	// let containerMarginCSS = {};
-
-	// if (parseInt(containerDesktopMargin.top) !== 0) {
-	// 	containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
-	// }
-
-	// if (parseInt(containerDesktopMargin.bottom) !== 0) {
-	// 	containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
-	// }
-
-	// if (parseInt(containerDesktopMargin.left) !== 0) {
-	// 	containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
-	// }
-
-	// if (parseInt(containerDesktopMargin.right) !== 0) {
-	// 	containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
-	// }
-
-	// let containerTabletMarginCSS = {};
-	// if (parseInt(containerTabletMargin.top) !== 0) {
-	// 	containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
-	// }
-
-	// if (parseInt(containerTabletMargin.bottom) !== 0) {
-	// 	containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
-	// }
-
-	// if (parseInt(containerTabletMargin.left) !== 0) {
-	// 	containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
-	// }
-
-	// if (parseInt(containerTabletMargin.right) !== 0) {
-	// 	containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
-	// }
-
-	// let containerMobileMarginCSS = {};
-	// if (parseInt(containerMobileMargin.top) !== 0) {
-	// 	containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
-	// }
-
-	// if (parseInt(containerMobileMargin.bottom) !== 0) {
-	// 	containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
-	// }
-
-	// if (parseInt(containerMobileMargin.left) !== 0) {
-	// 	containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
-	// }
-
-	// if (parseInt(containerMobileMargin.right) !== 0) {
-	// 	containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
-	// }
-
-	// Function to get background styles based on device type for FB Container
-	const getBackgroundStyles = (device) => {
-		const bgType = containerBgNormalBackgroundType;
-		const bgColor = containerBgNormalClassicColor;
-		const bgGradient = containerBgNormalGradientColor;
-		const customGradient = containerBgNormalCustomGradientInputValue;
-		const customGradientEnabled = containerBgNormalCustomGradientSwitcher;
-
-		const bgImageUrl = containerBgNormalBackgroundImageUrl?.[device];
-		const bgImagePosition = containerBgNormalBackgroundImagePosition?.[device];
-		const bgAttachment = containerBgNormalBackgroundImageAttachment?.[device];
-		const bgRepeat = containerBgNormalBackgroundImageRepeat?.[device];
-		const bgSize = containerBgNormalBackgroundImageSize?.[device];
-
-		if (bgType === 'gradient') {
-			return {
-				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
-			};
-		}
-
-		let styles = { background: bgColor };
-
-		if (bgType !== 'gradient' && bgImageUrl) {
-			styles = {
-				...styles,
-				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
-					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
-					: "50% 50%",
-				'background-attachment': bgAttachment || undefined,
-				'background-repeat': bgRepeat || undefined,
-				'background-size': bgSize || undefined,
-			};
-		}
-
-		return styles;
-	};
-
-	const containerCSS = {
-		'box-shadow':
-			generateCSSUnit(boxShadowHOffset, 'px') +
-			' ' +
-			generateCSSUnit(boxShadowVOffset, 'px') +
-			' ' +
-			generateCSSUnit(boxShadowBlur, 'px') +
-			' ' +
-			generateCSSUnit(boxShadowSpread, 'px') +
-			' ' +
-			boxShadowColor +
-			' ' +
-			boxShadowPositionCSS,
-		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
-		...borderCSS,
-		'overflow': overflow,
-		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
-	};
-
-	boxShadowBlurHover = isNaN(boxShadowBlurHover) ? '' : boxShadowBlurHover;
-	boxShadowColorHover = boxShadowColorHover ? boxShadowColorHover : '';
 
 	let containerFlexSelector =
 		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap';
@@ -870,12 +658,167 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.bottom, containerBorderRadiusUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.left, containerBorderRadiusUnits.Mobile)}`;
 	}
+
+	// Function to get background styles based on device type for FB Container
+	const getBackgroundNormalStyles = (device) => {
+		const bgType = containerBgNormalBackgroundType;
+		const bgColor = containerBgNormalClassicColor;
+		const bgGradient = containerBgNormalGradientColor;
+		const customGradient = containerBgNormalCustomGradientInputValue;
+		const customGradientEnabled = containerBgNormalCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgNormalBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgNormalBackgroundImageRepeat?.[device];
+		const bgSize = containerBgNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	// Function to get background styles based on device type for FB Container
+	const getBackgroundHoverStyles = (device) => {
+		const bgType = containerBgHoverBackgroundType;
+		const bgColor = containerBgHoverClassicColor;
+		const bgGradient = containerBgHoverGradientColor;
+		const customGradient = containerBgHoverCustomGradientInputValue;
+		const customGradientEnabled = containerBgHoverCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgHoverBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgHoverBackgroundImageRepeat?.[device];
+		const bgSize = containerBgHoverBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+
+
+	// Function to get background overlay styles based on device type for FB Container
+	const getBackgroundOverlayNormalStyles = (device) => {
+		const bgType = containerBgOverlayNormalBackgroundType;
+		const bgColor = containerBgOverlayNormalClassicColor;
+		const bgGradient = containerBgOverlayNormalGradientColor;
+		const customGradient = containerBgOverlayNormalCustomGradientInputValue;
+		const customGradientEnabled = containerBgOverlayNormalCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgOverlayNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgOverlayNormalBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgOverlayNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgOverlayNormalBackgroundImageRepeat?.[device];
+		const bgSize = containerBgOverlayNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	// Function to get background overlay hover styles based on device type for FB Container
+	const getBackgroundOverlayHoverStyles = (device) => {
+		const bgType = containerBgOverlayHoverBackgroundType;
+		const bgColor = containerBgOverlayHoverClassicColor;
+		const bgGradient = containerBgOverlayHoverGradientColor;
+		const customGradient = containerBgOverlayHoverCustomGradientInputValue;
+		const customGradientEnabled = containerBgOverlayHoverCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgOverlayHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgOverlayHoverBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgOverlayHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgOverlayHoverBackgroundImageRepeat?.[device];
+		const bgSize = containerBgOverlayHoverBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
   
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
 		...desktopContainerPadding,
 		...containerMarginCSS,
+		...getBackgroundNormalStyles( 'Desktop' ),
 
 		// Position related properties
 		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
@@ -911,11 +854,31 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined
 	};
 
+	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover`] = {
+		...getBackgroundHoverStyles('Desktop'),
+	};
+	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:after`] = {
+		'content': '""',
+		'position': 'absolute',
+		'top': '0',
+		'left': '0',
+		'right': '0',
+		'bottom': '0',
+		'width': '100%',
+		'height': '100%',
+		'opacity': containerBgOverlayOpacity['Desktop'],
+		...getBackgroundOverlayNormalStyles('Desktop'),
+	};
+	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover:after`] = {
+		...getBackgroundOverlayHoverStyles('Desktop'),
+	};
+
 	widthSelectorsTablet[`.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthTabletFallback, customWidthUnits['Tablet']),
 		'width': '100%',
 		...tabletContainerPadding,
 		...containerTabletMarginCSS,
+		...getBackgroundNormalStyles( 'Tablet' ),
 		
 		// Horizontal positioning
 		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
@@ -941,12 +904,24 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...containerBorderTabletWidthCSS,
 		...containerBorderRadiusTabletWidthCSS,
 	};
+	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:hover`] = {
+		...getBackgroundHoverStyles('Tablet'),
+	};
+	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:after`] = {
+		'opacity': containerBgOverlayOpacity['Tablet'],
+		...getBackgroundOverlayNormalStyles('Tablet'),
+	};
+	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:hover:after`] = {
+		...getBackgroundOverlayHoverStyles('Tablet'),
+	};
+
 
 	widthSelectorsMobile[`.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthMobileFallback, customWidthUnits['Mobile']),
 		'width': '100%',
 		...mobileContainerPadding,
 		...containerMobileMarginCSS,
+		...getBackgroundNormalStyles( 'Mobile' ),
 
 		// Horizontal positioning
 		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
@@ -971,7 +946,19 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		// Border style
 		...containerBorderMobileWidthCSS,
 		...containerBorderRadiusMobileWidthCSS,
+		
 	};
+	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:hover`] = {
+		...getBackgroundHoverStyles('Mobile'),
+	};
+	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:after`] = {
+		'opacity': containerBgOverlayOpacity['Mobile'],
+		...getBackgroundOverlayNormalStyles('Mobile'),
+	};
+	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:hover:after`] = {
+		...getBackgroundOverlayHoverStyles('Mobile'),
+	};
+
 
 	if ((containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom') {
 		widthSelectorsDesktop[
@@ -1142,29 +1129,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'border-color': containerBorderHColor,
 			'box-shadow': '',
 		};
-		if ('' !== boxShadowColorHover || '' !== boxShadowBlurHover) {
-			const boxShadowBlurHoverCSSUnit =
-				'' === boxShadowBlurHover ? '' : generateCSSUnit(boxShadowBlurHover, 'px');
 
-			selectors['.wp-block-frontis-blocks-container:hover .frontis-blocks-container__video-wrap']['box-shadow'] =
-				generateCSSUnit(boxShadowHOffsetHover, 'px') +
-				' ' +
-				generateCSSUnit(boxShadowVOffsetHover, 'px') +
-				' ' +
-				boxShadowBlurHoverCSSUnit +
-				' ' +
-				generateCSSUnit(boxShadowSpreadHover, 'px') +
-				' ' +
-				boxShadowColorHover +
-				' ' +
-				boxShadowPositionCSSHover;
-		}
+		
 	} else {
-		selectors[`.frontis-blocks-block-${clientId}`] = containerCSS;
-		selectors['.wp-block-frontis-blocks-container'] = {
-			...desktopContainerPadding,
-			...getBackgroundStyles('Desktop'),
-		};
+		// selectors[`.frontis-blocks-block-${clientId}`] = containerCSS;
 		selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']),
 			'margin-right': generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']),
@@ -1172,7 +1140,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		tablet_selectors[`.frontis-blocks-block-${clientId}`] = {
 			'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
 			...borderCSSTablet,
-			...containerBackgroundCSSTablet,
 			'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 		};
 		tablet_selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
@@ -1182,7 +1149,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		mobile_selectors[`.frontis-blocks-block-${clientId}`] = {
 			'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
 			...borderCSSMobile,
-			...containerBackgroundCSSMobile,
 			'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
 		};
 		mobile_selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
@@ -1196,23 +1162,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
   			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined
 		};
-		if ('' !== boxShadowColorHover || '' !== boxShadowBlurHover) {
-			const boxShadowBlurHoverCSSUnit =
-				'' === boxShadowBlurHover ? '' : generateCSSUnit(boxShadowBlurHover, 'px');
-
-			selectors['.wp-block-frontis-blocks-container:hover']['box-shadow'] =
-				generateCSSUnit(boxShadowHOffsetHover, 'px') +
-				' ' +
-				generateCSSUnit(boxShadowVOffsetHover, 'px') +
-				' ' +
-				boxShadowBlurHoverCSSUnit +
-				' ' +
-				generateCSSUnit(boxShadowSpreadHover, 'px') +
-				' ' +
-				boxShadowColorHover +
-				' ' +
-				boxShadowPositionCSSHover;
-		}
 	}
 
 	if ('custom' === containerType) {
