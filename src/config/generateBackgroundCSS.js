@@ -45,6 +45,33 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 		yPositionOverlayType,
 		blendMode,
 		globalBlockStyleId,
+
+		/** Normal Bg from FB Container */
+		containerBgColorSwitcher,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
+		containerBgNormalGradientColor,
+		containerBgNormalCustomGradientSwitcher,
+		containerBgNormalCustomGradientInputValue,
+		containerBgNormalBackgroundImageUrl,
+		containerBgNormalBackgroundImagePosition,
+		containerBgNormalBackgroundImageAttachment,
+		containerBgNormalBackgroundImageRepeat,
+		containerBgNormalBackgroundImageSize,
+
+		/** Hover Bg from FB Container */
+		containerBgHoverBackgroundType,
+		containerBgHoverClassicColor,
+		containerBgHoverGradientColor,
+		containerBgHoverCustomGradientSwitcher,
+		containerBgHoverCustomGradientInputValue,
+		containerBgHoverBackgroundImageUrl,
+		containerBgHoverBackgroundImagePosition,
+		containerBgHoverBackgroundImageAttachment,
+		containerBgHoverBackgroundImageRepeat,
+		containerBgHoverBackgroundImageSize,
+
+
 	} = backgroundAttributes;
 
 	const bgCSS = {};

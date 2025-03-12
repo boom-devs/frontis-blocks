@@ -214,6 +214,32 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerAlignItems,
 		containerDirection,
 		containerJustify,
+
+
+		/** Normal Bg */
+		containerBgColorSwitcher,
+		containerBgNormalBackgroundType,
+		containerBgNormalClassicColor,
+		containerBgNormalGradientColor,
+		containerBgNormalCustomGradientSwitcher,
+		containerBgNormalCustomGradientInputValue,
+		containerBgNormalBackgroundImageUrl,
+		containerBgNormalBackgroundImagePosition,
+		containerBgNormalBackgroundImageAttachment,
+		containerBgNormalBackgroundImageRepeat,
+		containerBgNormalBackgroundImageSize,
+
+		/** Hover Bg */
+		containerBgHoverBackgroundType,
+		containerBgHoverClassicColor,
+		containerBgHoverGradientColor,
+		containerBgHoverCustomGradientSwitcher,
+		containerBgHoverCustomGradientInputValue,
+		containerBgHoverBackgroundImageUrl,
+		containerBgHoverBackgroundImagePosition,
+		containerBgHoverBackgroundImageAttachment,
+		containerBgHoverBackgroundImageRepeat,
+		containerBgHoverBackgroundImageSize,
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -486,6 +512,98 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerBackgroundCSSMobile = generateBackgroundCSS(backgroundAttributesMobile, { 'blockName': 'container' });
 
 	}
+  
+	// check margin value not 0
+	// Check margin values and add only if they are not zero
+	let containerMarginCSS = {};
+
+	if (parseInt(containerDesktopMargin.top) !== 0) {
+		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.bottom) !== 0) {
+		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.left) !== 0) {
+		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.right) !== 0) {
+		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
+	}
+
+	let containerTabletMarginCSS = {};
+	if (parseInt(containerTabletMargin.top) !== 0) {
+		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.bottom) !== 0) {
+		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.left) !== 0) {
+		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.right) !== 0) {
+		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
+	}
+
+	let containerMobileMarginCSS = {};
+	if (parseInt(containerMobileMargin.top) !== 0) {
+		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.bottom) !== 0) {
+		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.left) !== 0) {
+		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.right) !== 0) {
+		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
+	}
+
+	// Function to get background styles based on device type for FB Container
+	const getBackgroundStyles = (device) => {
+		const bgType = containerBgNormalBackgroundType;
+		const bgColor = containerBgNormalClassicColor;
+		const bgGradient = containerBgNormalGradientColor;
+		const customGradient = containerBgNormalCustomGradientInputValue;
+		const customGradientEnabled = containerBgNormalCustomGradientSwitcher;
+
+		const bgImageUrl = containerBgNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = containerBgNormalBackgroundImagePosition?.[device];
+		const bgAttachment = containerBgNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = containerBgNormalBackgroundImageRepeat?.[device];
+		const bgSize = containerBgNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
 
 	const containerCSS = {
 		'box-shadow':
@@ -502,7 +620,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
 		...borderCSS,
-		...containerBackgroundCSSDesktop,
 		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
 	};
@@ -573,60 +690,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
 	}
 
-	// check margin value not 0
-	// Check margin values and add only if they are not zero
-	let containerMarginCSS = {};
-
-	if (parseInt(containerDesktopMargin.top) !== 0) {
-		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.bottom) !== 0) {
-		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.left) !== 0) {
-		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.right) !== 0) {
-		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
-	}
-
-	let containerTabletMarginCSS = {};
-	if (parseInt(containerTabletMargin.top) !== 0) {
-		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.bottom) !== 0) {
-		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.left) !== 0) {
-		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.right) !== 0) {
-		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
-	}
-
-	let containerMobileMarginCSS = {};
-	if (parseInt(containerMobileMargin.top) !== 0) {
-		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.bottom) !== 0) {
-		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.left) !== 0) {
-		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.right) !== 0) {
-		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
-	}
-
+	
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
@@ -837,6 +901,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		}
 	} else {
 		selectors[`.frontis-blocks-block-${clientId}`] = containerCSS;
+		selectors['.wp-block-frontis-blocks-container'] = {
+			...desktopContainerPadding,
+			...getBackgroundStyles('Desktop'),
+		};
 		selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']),
 			'margin-right': generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']),
