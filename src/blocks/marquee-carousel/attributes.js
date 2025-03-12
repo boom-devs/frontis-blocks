@@ -10,26 +10,20 @@ const attributes = {
     sliderItems: {
         type: "array",
         default: [
-            { 
+            {
                 id: 'item-1',
                 subTitle: 'Sub Title',
                 title: 'Slider Item 1',
-
             },
-            { 
+            {
                 id: 'item-2',
-
                 subTitle: 'Sub Title',
                 title: 'Slider Item 2',
-
             },
-            { 
+            {
                 id: 'item-3',
-
-
                 subTitle: 'Sub Title',
                 title: 'Slider Item 3',
-
             },
         ],
         items: {
@@ -47,13 +41,25 @@ const attributes = {
                     type: "string",
                     default: "Slider Item"
                 },
-                
             }
         }
     },
-    sliderType: {
-        type: "string",
-        default: "slider"
+    // Marquee specific settings
+    marqueeSpeed: {
+        type: 'number',
+        default: 5000,
+    },
+    marqueeDirection: {
+        type: 'string',
+        default: 'left',
+    },
+    slidesPerView: {
+        type: 'number',
+        default: 'auto',
+    },
+    spaceBetween: {
+        type: 'number',
+        default: 30,
     },
     carouselPerColumn: {
         type: 'number',
@@ -63,30 +69,38 @@ const attributes = {
         type: 'number',
         default: 20,
     },
-	speed: {
-		type: 'number',
+    speed: {
+        type: 'number',
         default: 800,
-	},
-	autoplay: {
-		type: 'boolean',
-		default: false,
-	},
+    },
+    autoplay: {
+        type: 'boolean',
+        default: false,
+    },
     autoplayDelay: {
         type: 'number',
         default: 1000,
     },
-	infiniteLoop: {
-		type: 'boolean',
-		default: true,
-	},
+    infiniteLoop: {
+        type: 'boolean',
+        default: true,
+    },
     allowTouchMove: {
-		type: 'boolean',
-		default: true,
-	},
+        type: 'boolean',
+        default: true,
+    },
     pauseOnHover: {
         "type": "boolean",
         "default": false
     },
+    showNavigation: {
+		type: 'boolean',
+		default: true,
+	},
+	showPagination: {
+		type: 'boolean',
+		default: true,
+	},
     
 };
 
