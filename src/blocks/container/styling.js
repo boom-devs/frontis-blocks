@@ -550,66 +550,16 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		return styles;
 	};
 
-	let containerMarginCSS = {};
-
-	if (parseInt(containerDesktopMargin.top) !== 0) {
-		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.bottom) !== 0) {
-		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.left) !== 0) {
-		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
-	}
-
-	if (parseInt(containerDesktopMargin.right) !== 0) {
-		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
-	}
-
-	let containerTabletMarginCSS = {};
-	if (parseInt(containerTabletMargin.top) !== 0) {
-		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.bottom) !== 0) {
-		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.left) !== 0) {
-		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
-	}
-
-	if (parseInt(containerTabletMargin.right) !== 0) {
-		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
-	}
-
-	let containerMobileMarginCSS = {};
-	if (parseInt(containerMobileMargin.top) !== 0) {
-		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.bottom) !== 0) {
-		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.left) !== 0) {
-		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
-	}
-
-	if (parseInt(containerMobileMargin.right) !== 0) {
-		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
-	}
-
-	const containerCSS = {
 	// Get container styles for desktop for FB Container
 	const getContainerStylesDesktop  = {
 		'padding-top': generateCSSUnit( containerDesktopPadding.top, containerPaddingUnits['Desktop'] ),
 		'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
 		'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
 		'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
-		...containerMarginCSS,
+		'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
+		'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
+		'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
+		'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -935,16 +885,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'] ) + ' !important',
 		}
-		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( containerTabletPadding.top, containerPaddingUnits['Tablet'] ),
-			'padding-bottom': generateCSSUnit( containerTabletPadding.bottom, containerPaddingUnits['Tablet'] ),
-			'padding-left': generateCSSUnit( containerTabletPadding.left, containerPaddingUnits['Tablet'] ),
-			'padding-right': generateCSSUnit( containerTabletPadding.right, containerPaddingUnits['Tablet'] ),
-			...containerTabletMarginCSS,
-			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'], true ),
-			...borderCSSTablet,
-			...containerBackgroundCSSTablet,
-			'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 		selectors[ '.wp-block-frontis-blocks-container:after' ] = {
 			'content': '""',
 			'position': 'absolute',
@@ -970,16 +910,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'] ) + ' !important',
 		}
-		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( containerMobilePadding.top, containerPaddingUnits['Mobile'] ),
-			'padding-bottom': generateCSSUnit( containerMobilePadding.bottom, containerPaddingUnits['Mobile'] ),
-			'padding-left': generateCSSUnit( containerMobilePadding.left, containerPaddingUnits['Mobile'] ),
-			'padding-right': generateCSSUnit( containerMobilePadding.right, containerPaddingUnits['Mobile'] ),
-			...containerMobileMarginCSS,
-			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
-			...borderCSSMobile,
-			...containerBackgroundCSSMobile,
-			'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
 		tablet_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
 			'opacity': containerBgOverlayOpacity['Tablet'],
 			...getBackgroundOverlayNormalStyles('Tablet'),
