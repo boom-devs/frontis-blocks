@@ -63,7 +63,7 @@ const Inspector = (props) => {
 			containerMobileMargin,
 			containerMarginLink,
 
-			/** Normal Bg */
+			/** Normal Bg for fb container */
 			containerBgColorSwitcher,
 			containerBgNormalBackgroundType,
 			containerBgNormalClassicColor,
@@ -76,7 +76,7 @@ const Inspector = (props) => {
 			containerBgNormalBackgroundImageRepeat,
 			containerBgNormalBackgroundImageSize,
 
-			/** Hover Bg */
+			/** Hover Bg for fb container */
 			containerBgHoverBackgroundType,
 			containerBgHoverClassicColor,
 			containerBgHoverGradientColor,
@@ -87,6 +87,35 @@ const Inspector = (props) => {
 			containerBgHoverBackgroundImageAttachment,
 			containerBgHoverBackgroundImageRepeat,
 			containerBgHoverBackgroundImageSize,
+
+			/** Overlay for fb container */
+			containerBgOverlaySwitcher,
+			containerBgOverlayOpacity,
+
+			/** Normal Bg Overlay for fb container */
+			containerBgOverlayColorSwitcher,
+			containerBgOverlayNormalBackgroundType,
+			containerBgOverlayNormalClassicColor,
+			containerBgOverlayNormalGradientColor,
+			containerBgOverlayNormalCustomGradientSwitcher,
+			containerBgOverlayNormalCustomGradientInputValue,
+			containerBgOverlayNormalBackgroundImageUrl,
+			containerBgOverlayNormalBackgroundImagePosition,
+			containerBgOverlayNormalBackgroundImageAttachment,
+			containerBgOverlayNormalBackgroundImageRepeat,
+			containerBgOverlayNormalBackgroundImageSize,
+
+			/** Hover Bg overaly for fb container */
+			containerBgOverlayHoverBackgroundType,
+			containerBgOverlayHoverClassicColor,
+			containerBgOverlayHoverGradientColor,
+			containerBgOverlayHoverCustomGradientSwitcher,
+			containerBgOverlayHoverCustomGradientInputValue,
+			containerBgOverlayHoverBackgroundImageUrl,
+			containerBgOverlayHoverBackgroundImagePosition,
+			containerBgOverlayHoverBackgroundImageAttachment,
+			containerBgOverlayHoverBackgroundImageRepeat,
+			containerBgOverlayHoverBackgroundImageSize,
 
 			containerDesktopSwitcher,
 			containerTabletSwitcher,
@@ -539,15 +568,18 @@ const Inspector = (props) => {
     }
 
 
-
 	return (
 		<>
 			{/* <style>
 		{`
-			#${p_block_id} {
+			.editor-styles-wrapper #${p_block_id}.wp-block-frontis-blocks-container {
 				${containerBgNormalBackgroundType === 'gradient' ? `  
-					background: ${containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue ? containerBgNormalCustomGradientInputValue : containerBgNormalGradientColor};
-				`: `
+						background: ${
+							containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue 
+								? containerBgNormalCustomGradientInputValue 
+								: containerBgNormalGradientColor || containerBgNormalClassicColor
+					};
+				` : `
 					background: ${containerBgNormalClassicColor};
 				`}
 			}
@@ -865,183 +897,6 @@ const Inspector = (props) => {
 
 								{tab.name === "styles" && (
 									<>
-										<PanelBody
-											title={__("Background", "frontis-blocks")}
-											initialOpen={true}
-										>
-											<FB_SwitcherControl
-												label={__("Background Type", "frontis-blocks")}
-												globalSwitcher={containerBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
-            								/>
-
-											{containerBgColorSwitcher === 'normal' && (
-												<BaseControl
-													className="fb-setting-background-color-setting-wrapper"
-													label={__("Normal Background Type", "frontis-blocks")}
-												>
-													<Dropdown
-														className="fb-setting-background-color-setting-icon-dropdown"
-														contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-background-color-setting-icon-btn"
-															>
-																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																	<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																	<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																</svg>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-background-color-popup-wrapper">
-																<BaseControl
-																	className="fb-setting-background-color-popup-inner-wrapper"
-																>
-																	<ButtonGroup className="fb-setting-background-color-panel-btn">
-																		{BACKGROUND_TYPES.map((item) => (
-																			<Button
-																				key={item.value}
-																				onClick={() => setAttributes({ containerBgNormalBackgroundType: item.value })}
-																				className={`fb-setting-background-color-panel-btn-switcher ${containerBgNormalBackgroundType === item.value ? 'active' : ''}`}
-																			>
-																				{item.label}
-																			</Button>
-																		))}
-																	</ButtonGroup>
-																</BaseControl>
-
-																{containerBgNormalBackgroundType === 'classic' && (
-
-																	<>
-																		<FB_ColorControl
-																			label={__("Color", "frontis-blocks")}
-																			globalColor={containerBgNormalClassicColor} 
-																			setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
-																		/>
-
-																		<FB_ResponsiveBackgroundImageControl
-																			deviceType={deviceType}
-																			globalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
-																			setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
-																			globalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
-																			setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgNormalBackgroundImagePosition: newPosition })}
-																			globalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
-																			setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
-																			globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
-																			setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
-																			globalBackgroundImageSize={containerBgNormalBackgroundImageSize}
-																			setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
-																			setAttributes={setAttributes}
-																		/>
-																				
-																	</>
-																)}
-
-																{containerBgNormalBackgroundType === 'gradient' && (
-																	<FB_GradientColorControl
-																		globalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
-																		setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
-																		globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
-																		setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
-																		globalGradientColor={containerBgNormalGradientColor}
-																		setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
-																	/>
-																)}
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-											{containerBgColorSwitcher === 'hover' && (
-												<BaseControl
-													className="fb-setting-background-color-setting-wrapper"
-													label={__("Hover Background Type", "frontis-blocks")} 
-												>
-													<Dropdown
-														className="fb-setting-background-color-setting-icon-dropdown"
-														contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-														popoverProps={{ placement: 'bottom-start' }}
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																variant="primary"
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																className="fb-setting-background-color-setting-icon-btn"
-															>
-																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																	<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																	<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																</svg>
-															</Button>
-														)}
-														renderContent={() => (
-															<div className="fb-setting-background-color-popup-wrapper">
-																<BaseControl
-																	className="fb-setting-background-color-popup-inner-wrapper"
-																>
-																	<ButtonGroup className="fb-setting-background-color-panel-btn">
-																		{BACKGROUND_TYPES.map((item) => (
-																			<Button
-																				key={item.value}
-																				onClick={() => setAttributes({ containerBgHoverBackgroundType: item.value })}
-																				className={`fb-setting-background-color-panel-btn-switcher ${containerBgHoverBackgroundType === item.value ? 'active' : ''}`}
-																			>
-																				{item.label}
-																			</Button>
-																		))}
-																	</ButtonGroup>
-																</BaseControl>
-
-																{containerBgHoverBackgroundType === 'classic' && (
-
-																	<>
-																		<FB_ColorControl
-																			label={__("Color", "frontis-blocks")}
-																			globalColor={containerBgHoverClassicColor} 
-																			setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
-																		/>
-
-																		<FB_ResponsiveBackgroundImageControl
-																			deviceType={deviceType}
-																			globalBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
-																			setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
-																			globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
-																			setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
-																			globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
-																			setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
-																			globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
-																			setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
-																			globalBackgroundImageSize={containerBgNormalBackgroundImageSize}
-																			setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
-																			setAttributes={setAttributes}
-																		/>
-																				
-																	</>
-																)}
-
-																{containerBgHoverBackgroundType === 'gradient' && (
-																	<FB_GradientColorControl
-																		globalCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
-																		setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
-																		globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
-																		setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
-																		globalGradientColor={containerBgHoverGradientColor}
-																		setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
-																	/>
-																)}
-															</div>
-														)}
-													/>
-												</BaseControl>
-											)}
-
-										</PanelBody>
 										{isBlockRootParent &&
 											<PanelBody
 												title={__("Container Gap", "frontis-blocks")}
@@ -1421,6 +1276,378 @@ const Inspector = (props) => {
                                                             }
                                                         />
                                                     )}
+												<PanelBody
+													title={__("Background", "frontis-blocks")}
+													initialOpen={true}
+												>
+													<FB_SwitcherControl
+														label={__("Background Type", "frontis-blocks")}
+														globalSwitcher={containerBgColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
+													/>
+
+													{containerBgColorSwitcher === 'normal' && (
+														<BaseControl
+															className="fb-setting-background-color-setting-wrapper"
+															label={__("Normal Background Type", "frontis-blocks")}
+														>
+															<Dropdown
+																className="fb-setting-background-color-setting-icon-dropdown"
+																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: 'bottom-start' }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		className="fb-setting-background-color-setting-icon-btn"
+																	>
+																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																		</svg>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-background-color-popup-wrapper">
+																		<BaseControl
+																			className="fb-setting-background-color-popup-inner-wrapper"
+																		>
+																			<ButtonGroup className="fb-setting-background-color-panel-btn">
+																				{BACKGROUND_TYPES.map((item) => (
+																					<Button
+																						key={item.value}
+																						onClick={() => setAttributes({ containerBgNormalBackgroundType: item.value })}
+																						className={`fb-setting-background-color-panel-btn-switcher ${containerBgNormalBackgroundType === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</BaseControl>
+
+																		{containerBgNormalBackgroundType === 'classic' && (
+
+																			<>
+																				<FB_ColorControl
+																					label={__("Color", "frontis-blocks")}
+																					globalColor={containerBgNormalClassicColor} 
+																					setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
+																				/>
+
+																				<FB_ResponsiveBackgroundImageControl
+																					deviceType={deviceType}
+																					globalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
+																					setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
+																					globalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
+																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgNormalBackgroundImagePosition: newPosition })}
+																					globalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
+																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
+																					globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
+																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
+																					globalBackgroundImageSize={containerBgNormalBackgroundImageSize} 
+																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
+																					setAttributes={setAttributes}
+																				/>
+																						
+																			</>
+																		)}
+
+																		{containerBgNormalBackgroundType === 'gradient' && (
+																			<FB_GradientColorControl
+																				globalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
+																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
+																				globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
+																				setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
+																				globalGradientColor={containerBgNormalGradientColor}
+																				setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
+																			/>
+																		)}
+																	</div>
+																)}
+															/>
+														</BaseControl>
+														
+													)}
+
+													{containerBgColorSwitcher === 'hover' && (
+														<BaseControl
+															className="fb-setting-background-color-setting-wrapper"
+															label={__("Hover Background Type", "frontis-blocks")} 
+														>
+															<Dropdown
+																className="fb-setting-background-color-setting-icon-dropdown"
+																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: 'bottom-start' }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		className="fb-setting-background-color-setting-icon-btn"
+																	>
+																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																		</svg>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-background-color-popup-wrapper">
+																		<BaseControl
+																			className="fb-setting-background-color-popup-inner-wrapper"
+																		>
+																			<ButtonGroup className="fb-setting-background-color-panel-btn">
+																				{BACKGROUND_TYPES.map((item) => (
+																					<Button
+																						key={item.value}
+																						onClick={() => setAttributes({ containerBgHoverBackgroundType: item.value })}
+																						className={`fb-setting-background-color-panel-btn-switcher ${containerBgHoverBackgroundType === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</BaseControl>
+
+																		{containerBgHoverBackgroundType === 'classic' && (
+
+																			<>
+																				<FB_ColorControl
+																					label={__("Color", "frontis-blocks")}
+																					globalColor={containerBgHoverClassicColor} 
+																					setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
+																				/>
+
+																				<FB_ResponsiveBackgroundImageControl
+																					deviceType={deviceType}
+																					globalBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
+																					setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
+																					globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
+																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
+																					globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
+																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
+																					globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
+																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
+																					globalBackgroundImageSize={containerBgHoverBackgroundImageSize}
+																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgHoverBackgroundImageSize: newSize })}
+																					setAttributes={setAttributes}
+																				/>
+																						
+																			</>
+																		)}
+
+																		{containerBgHoverBackgroundType === 'gradient' && (
+																			<FB_GradientColorControl
+																				globalCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
+																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
+																				globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
+																				setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
+																				globalGradientColor={containerBgHoverGradientColor}
+																				setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
+																			/>
+																		)}
+																	</div>
+																)}
+															/>
+														</BaseControl>
+													)}
+
+													<ToggleControl
+														label={__("Enable Overlay", "frontis-blocks")}
+														checked={containerBgOverlaySwitcher}
+														onChange={(value) => setAttributes({ containerBgOverlaySwitcher: value })}
+													/>
+
+													{containerBgOverlaySwitcher && (
+														<>
+															<FB_Range
+																min={0}
+																max={1}
+																label={__("Overlay Opacity", "frontis-blocks")}
+																rangeValue={containerBgOverlayOpacity}
+																onChangeHandler={(value) => setAttributes({ containerBgOverlayOpacity: value === 0 ? undefined : value })}
+																deviceType={deviceType}
+																setAttributes={setAttributes}
+																rangeStep={0.1}
+																resetFallbackValue={""}
+																isRangeUnit={false}
+															/>
+
+															<FB_SwitcherControl
+																label={__("Overlay Type", "frontis-blocks")}
+																globalSwitcher={containerBgOverlayColorSwitcher}
+																setGlobalSwitcher={(value) => setAttributes({ containerBgOverlayColorSwitcher: value })}
+															/>
+
+															{containerBgOverlayColorSwitcher === 'normal' && (
+																<BaseControl
+																	className="fb-setting-background-color-setting-wrapper"
+																	label={__("Normal Overlay Type", "frontis-blocks")}
+																>
+																	<Dropdown
+																		className="fb-setting-background-color-setting-icon-dropdown"
+																		contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																		popoverProps={{ placement: 'bottom-start' }}
+																		renderToggle={({ isOpen, onToggle }) => (
+																			<Button
+																				variant="primary"
+																				onClick={onToggle}
+																				aria-expanded={isOpen}
+																				className="fb-setting-background-color-setting-icon-btn"
+																			>
+																				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																					<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																					<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																				</svg>
+																			</Button>
+																		)}
+																		renderContent={() => (
+																			<div className="fb-setting-background-color-popup-wrapper">
+																				<BaseControl
+																					className="fb-setting-background-color-popup-inner-wrapper"
+																				>
+																					<ButtonGroup className="fb-setting-background-color-panel-btn">
+																						{BACKGROUND_TYPES.map((item) => (
+																							<Button
+																								key={item.value}
+																								onClick={() => setAttributes({ containerBgOverlayNormalBackgroundType: item.value })}
+																								className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayNormalBackgroundType === item.value ? 'active' : ''}`}
+																							>
+																								{item.label}
+																							</Button>
+																						))}
+																					</ButtonGroup>
+																				</BaseControl>
+
+																				{containerBgOverlayNormalBackgroundType === 'classic' && (
+
+																					<>
+																						<FB_ColorControl
+																							label={__("Color", "frontis-blocks")}
+																							globalColor={containerBgOverlayNormalClassicColor} 
+																							setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })} 
+																						/>
+
+																						<FB_ResponsiveBackgroundImageControl
+																							deviceType={deviceType}
+																							globalBackgroundImageUrl={containerBgOverlayNormalBackgroundImageUrl}
+																							setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayNormalBackgroundImageUrl: value })}
+																							globalBackgroundImagePosition={containerBgOverlayNormalBackgroundImagePosition}
+																							setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayNormalBackgroundImagePosition: newPosition })}
+																							globalBackgroundImageAttachment={containerBgOverlayNormalBackgroundImageAttachment}
+																							setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayNormalBackgroundImageAttachment: newAttachment })}
+																							globalBackgroundImageRepeat={containerBgOverlayNormalBackgroundImageRepeat}
+																							setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayNormalBackgroundImageRepeat: newRepeat })}
+																							globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize} 
+																							setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayNormalBackgroundImageSize: newSize })}
+																							setAttributes={setAttributes}
+																						/>
+																								
+																					</>
+																				)}
+
+																				{containerBgOverlayNormalBackgroundType === 'gradient' && ( 
+																					<FB_GradientColorControl
+																						globalCustomGradientSwitcher={containerBgOverlayNormalCustomGradientSwitcher}
+																						setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayNormalCustomGradientSwitcher: value })}
+																						globalCustomGradientInputValue={containerBgOverlayNormalCustomGradientInputValue}
+																						setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayNormalCustomGradientInputValue: value })}
+																						globalGradientColor={containerBgOverlayNormalGradientColor}
+																						setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value })}
+																					/>
+																				)}
+																			</div>
+																		)}
+																	/>
+																</BaseControl>
+																
+															)}
+
+															{containerBgOverlayColorSwitcher === 'hover' && (
+																<BaseControl
+																	className="fb-setting-background-color-setting-wrapper"
+																	label={__("Hover Overlay Type", "frontis-blocks")} 
+																>
+																	<Dropdown
+																		className="fb-setting-background-color-setting-icon-dropdown"
+																		contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																		popoverProps={{ placement: 'bottom-start' }}
+																		renderToggle={({ isOpen, onToggle }) => (
+																			<Button
+																				variant="primary"
+																				onClick={onToggle}
+																				aria-expanded={isOpen}
+																				className="fb-setting-background-color-setting-icon-btn"
+																			>
+																				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																					<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																					<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																				</svg>
+																			</Button>
+																		)}
+																		renderContent={() => (
+																			<div className="fb-setting-background-color-popup-wrapper">
+																				<BaseControl
+																					className="fb-setting-background-color-popup-inner-wrapper"
+																				>
+																					<ButtonGroup className="fb-setting-background-color-panel-btn">
+																						{BACKGROUND_TYPES.map((item) => (
+																							<Button
+																								key={item.value}
+																								onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })} 
+																								className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayHoverBackgroundType === item.value ? 'active' : ''}`}
+																							>
+																								{item.label}
+																							</Button>
+																						))}
+																					</ButtonGroup>
+																				</BaseControl>
+
+																				{containerBgOverlayHoverBackgroundType === 'classic' && (
+
+																					<>
+																						<FB_ColorControl
+																							label={__("Color", "frontis-blocks")}
+																							globalColor={containerBgOverlayHoverClassicColor} 
+																							setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })} 
+																						/>
+
+																						<FB_ResponsiveBackgroundImageControl
+																							deviceType={deviceType}
+																							globalBackgroundImageUrl={containerBgOverlayHoverBackgroundImageUrl}
+																							setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayHoverBackgroundImageUrl: value })}
+																							globalBackgroundImagePosition={containerBgOverlayHoverBackgroundImagePosition}
+																							setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayHoverBackgroundImagePosition: newPosition })}
+																							globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment} 
+																							setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayHoverBackgroundImageAttachment: newAttachment })}
+																							globalBackgroundImageRepeat={containerBgOverlayHoverBackgroundImageRepeat}
+																							setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayHoverBackgroundImageRepeat: newRepeat })}
+																							globalBackgroundImageSize={containerBgOverlayHoverBackgroundImageSize}
+																							setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayHoverBackgroundImageSize: newSize })}
+																							setAttributes={setAttributes}
+																						/>
+																								
+																					</>
+																				)}
+
+																				{containerBgOverlayHoverBackgroundType === 'gradient' && (
+																					<FB_GradientColorControl
+																						globalCustomGradientSwitcher={containerBgOverlayHoverCustomGradientSwitcher}
+																						setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayHoverCustomGradientSwitcher: value })}
+																						globalCustomGradientInputValue={containerBgOverlayHoverCustomGradientInputValue}
+																						setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayHoverCustomGradientInputValue: value })}
+																						globalGradientColor={containerBgOverlayHoverGradientColor}
+																						setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value })}
+																					/>
+																				)}
+																			</div>
+																		)}
+																	/>
+																</BaseControl>
+															)}
+														</>
+													)}
 												</PanelBody>
 
 												<PanelBody
