@@ -1927,7 +1927,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 												{buttonIconRotateSwitcher === 'normal' && (
 													<FB_Range 
-														min={0}
+														min={-360}
 														max={360}
 														label={__("Icon Rotation", "frontis-blocks")}
 														rangeValue={buttonIconRotate}
@@ -1943,7 +1943,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 												{buttonIconRotateSwitcher === 'hover' && (
 													<FB_Range
-														min={0}
+														min={-360}
 														max={360}
 														label={__("Icon Rotation", "frontis-blocks")}
 														rangeValue={buttonIconRotateHover}
