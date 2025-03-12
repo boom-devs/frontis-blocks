@@ -288,7 +288,7 @@ const attributes = {
 	},
 
 
-	/** Start Background */
+	/** Start Background Normal for fb container */
 	containerBgColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -313,7 +313,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	/** Bg Normal Image */
+	/** Bg Normal Image for fb container */
 	containerBgNormalBackgroundImageUrl: { 
         type: "object",
         default: {
@@ -356,7 +356,7 @@ const attributes = {
     },
 
 
-	/**Bg Hover */
+	/**Bg Hover for fb container */
 	containerBgHoverBackgroundType: {
 		type: "string",
 		default: "classic",
@@ -377,7 +377,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	/** Hover Image */
+	/** Hover Image for fb container */
 	containerBgHoverBackgroundImageUrl: {
 		type: "object",
 		default: {
@@ -418,137 +418,283 @@ const attributes = {
 			Mobile: ""
 		}
 	},
-	/** End Background */
+	/** End Background for fb container */
 
-
-	backgroundType: {
-		type: 'string',
-		default: 'none',
+	/** Start Overlay for fb container */
+	containerBgOverlaySwitcher: {
+		type: "boolean",
+		default: false,
 	},
-	backgroundImageDesktop: {
-		type: 'object',
-	},
-	backgroundImageTablet: {
-		type: 'object',
-	},
-	backgroundImageMobile: {
-		type: 'object',
-	},
-	backgroundPositionDesktop: {
-		type: 'object',
+	containerBgOverlayOpacity: {
+		type: "object",
 		default: {
-			x: 0.5,
-			y: 0.5,
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		}
 	},
-	backgroundPositionTablet: {
-		type: 'object',
+
+	containerBgOverlayColorSwitcher: {
+		type: "string",
+		default: "normal",
 	},
-	backgroundPositionMobile: {
-		type: 'object',
+	containerBgOverlayNormalBackgroundType: { 
+		type: "string",
+		default: "classic",
 	},
-	backgroundSizeDesktop: {
-		type: 'string',
-		default: 'cover',
+	containerBgOverlayNormalClassicColor: {
+		type: "string",
+		default: "",
 	},
-	backgroundSizeTablet: {
-		type: 'string',
+	containerBgOverlayNormalGradientColor: {
+		type: "string",
+		default: null,
 	},
-	backgroundSizeMobile: {
-		type: 'string',
+	containerBgOverlayNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
 	},
-	backgroundRepeatDesktop: {
-		type: 'string',
-		default: 'no-repeat',
+	containerBgOverlayNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
-	backgroundRepeatTablet: {
-		type: 'string',
+	/** Bg Normal Image for fb container */
+	containerBgOverlayNormalBackgroundImageUrl: { 
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    containerBgOverlayNormalBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    containerBgOverlayNormalBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerBgOverlayNormalBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    containerBgOverlayNormalBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
+
+	/**Bg Hover for fb container */
+	containerBgOverlayHoverBackgroundType: {
+		type: "string",
+		default: "classic",
 	},
-	backgroundRepeatMobile: {
-		type: 'string',
+	containerBgOverlayHoverClassicColor: {
+		type: "string",
+		default: "",
 	},
-	backgroundAttachmentDesktop: {
-		type: 'string',
-		default: 'scroll',
+	containerBgOverlayHoverGradientColor: {
+		type: "string",
+		default: null,
 	},
-	backgroundAttachmentTablet: {
-		type: 'string',
+	containerBgOverlayHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
 	},
-	backgroundAttachmentMobile: {
-		type: 'string',
+	containerBgOverlayHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
-	backgroundColor: {
-		type: 'string',
+	/** Hover Image for fb container */
+	containerBgOverlayHoverBackgroundImageUrl: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	backgroundOpacity: {
-		type: 'number',
+	containerBgOverlayHoverBackgroundImagePosition: {
+		type: "object",
+		default: {
+			Desktop: { x: 0.5, y: 0.5 },
+			Tablet: { x: 0.5, y: 0.5 },
+			Mobile: { x: 0.5, y: 0.5 }
+		}
 	},
-	backgroundImageColor: {
-		type: 'string',
-		default: '#FFFFFF75',
+	containerBgOverlayHoverBackgroundImageAttachment: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	gradientValue: {
-		type: 'string',
-		default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
+	containerBgOverlayHoverBackgroundImageRepeat: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	borderStyle: {
-		type: 'string',
+	containerBgOverlayHoverBackgroundImageSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
 	},
-	borderWidth: {
-		type: 'number',
-	},
-	borderRadius: {
-		type: 'number',
-	},
-	borderColor: {
-		type: 'string',
-	},
-	borderHoverColor: {
-		type: 'string',
-	},
-	boxShadowColor: {
-		type: 'string',
-		default: '#00000070',
-	},
-	boxShadowHOffset: {
-		type: 'number',
-		default: 0,
-	},
-	boxShadowVOffset: {
-		type: 'number',
-		default: 0,
-	},
-	boxShadowBlur: {
-		type: 'number',
-	},
-	boxShadowSpread: {
-		type: 'number',
-	},
-	boxShadowPosition: {
-		type: 'string',
-		default: 'outset',
-	},
-	boxShadowColorHover: {
-		type: 'string',
-	},
-	boxShadowHOffsetHover: {
-		type: 'number',
-		default: 0,
-	},
-	boxShadowVOffsetHover: {
-		type: 'number',
-		default: 0,
-	},
-	boxShadowBlurHover: {
-		type: 'number',
-	},
-	boxShadowSpreadHover: {
-		type: 'number',
-	},
-	boxShadowPositionHover: {
-		type: 'string',
-		default: 'outset',
-	},
+
+	/** End Overlay for fb container */
+
+
+	// backgroundType: {
+	// 	type: 'string',
+	// 	default: 'none',
+	// },
+	// backgroundImageDesktop: {
+	// 	type: 'object',
+	// },
+	// backgroundImageTablet: {
+	// 	type: 'object',
+	// },
+	// backgroundImageMobile: {
+	// 	type: 'object',
+	// },
+	// backgroundPositionDesktop: {
+	// 	type: 'object',
+	// 	default: {
+	// 		x: 0.5,
+	// 		y: 0.5,
+	// 	}
+	// },
+	// backgroundPositionTablet: {
+	// 	type: 'object',
+	// },
+	// backgroundPositionMobile: {
+	// 	type: 'object',
+	// },
+	// backgroundSizeDesktop: {
+	// 	type: 'string',
+	// 	default: 'cover',
+	// },
+	// backgroundSizeTablet: {
+	// 	type: 'string',
+	// },
+	// backgroundSizeMobile: {
+	// 	type: 'string',
+	// },
+	// backgroundRepeatDesktop: {
+	// 	type: 'string',
+	// 	default: 'no-repeat',
+	// },
+	// backgroundRepeatTablet: {
+	// 	type: 'string',
+	// },
+	// backgroundRepeatMobile: {
+	// 	type: 'string',
+	// },
+	// backgroundAttachmentDesktop: {
+	// 	type: 'string',
+	// 	default: 'scroll',
+	// },
+	// backgroundAttachmentTablet: {
+	// 	type: 'string',
+	// },
+	// backgroundAttachmentMobile: {
+	// 	type: 'string',
+	// },
+	// backgroundColor: {
+	// 	type: 'string',
+	// },
+	// backgroundOpacity: {
+	// 	type: 'number',
+	// },
+	// backgroundImageColor: {
+	// 	type: 'string',
+	// 	default: '#FFFFFF75',
+	// },
+	// gradientValue: {
+	// 	type: 'string',
+	// 	default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
+	// },
+	// borderStyle: {
+	// 	type: 'string',
+	// },
+	// borderWidth: {
+	// 	type: 'number',
+	// },
+	// borderRadius: {
+	// 	type: 'number',
+	// },
+	// borderColor: {
+	// 	type: 'string',
+	// },
+	// borderHoverColor: {
+	// 	type: 'string',
+	// },
+	// boxShadowColor: {
+	// 	type: 'string',
+	// 	default: '#00000070',
+	// },
+	// boxShadowHOffset: {
+	// 	type: 'number',
+	// 	default: 0,
+	// },
+	// boxShadowVOffset: {
+	// 	type: 'number',
+	// 	default: 0,
+	// },
+	// boxShadowBlur: {
+	// 	type: 'number',
+	// },
+	// boxShadowSpread: {
+	// 	type: 'number',
+	// },
+	// boxShadowPosition: {
+	// 	type: 'string',
+	// 	default: 'outset',
+	// },
+	// boxShadowColorHover: {
+	// 	type: 'string',
+	// },
+	// boxShadowHOffsetHover: {
+	// 	type: 'number',
+	// 	default: 0,
+	// },
+	// boxShadowVOffsetHover: {
+	// 	type: 'number',
+	// 	default: 0,
+	// },
+	// boxShadowBlurHover: {
+	// 	type: 'number',
+	// },
+	// boxShadowSpreadHover: {
+	// 	type: 'number',
+	// },
+	// boxShadowPositionHover: {
+	// 	type: 'string',
+	// 	default: 'outset',
+	// },
 
 	/** Start Padding */
 	containerPaddingUnits: {
