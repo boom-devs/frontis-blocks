@@ -13,6 +13,10 @@ const attributes = {
         type : "string",
         default: "Advanced Heading"
     },
+    dynamicContent: {
+        type: 'string',
+        default: '',
+      },
     headingTag: {
         type : "string",
         default: "h2" 

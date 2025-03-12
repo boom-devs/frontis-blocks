@@ -24,6 +24,9 @@ import {
     MediaUploadCheck,
     Placeholder,
     PanelRow,
+    Popover, 
+    MenuGroup, 
+    MenuItem
 } from '@wordpress/components';
 
 /**
@@ -44,6 +47,7 @@ import {
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
@@ -68,6 +72,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         blockId,
         // deviceType,
         headingText,
+        dynamicContent,
         headingTag,
         headingAlignment,
 
@@ -354,6 +359,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, []);
 
+    const [isPopoverVisible, setIsPopoverVisible] = useState(false);
+
+    // Get dynamic content preview for editing
+    const dynamicValue = useSelect((select) => {
+        if (!dynamicContent) return '';
+        
+        const postType = select('core/editor').getCurrentPostType();
+        const postId = select('core/editor').getCurrentPostId();
+        const post = select('core').getEditedEntityRecord('postType', postType, postId);
+        
+        switch (dynamicContent) {
+        case 'post_title':
+            return post.title;
+        case 'post_date':
+            return new Date(post.date).toLocaleDateString();
+        // Add other cases for terms, author, etc.
+        default:
+            return '';
+        }
+    }, [dynamicContent]);
 
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
@@ -2098,12 +2123,66 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
                                                 />
 
-                                                <TextareaControl
-                                                    label={__("Heading Text", "frontis-blocks")}
-                                                    value={headingText}
-                                                    onChange={(value) => setAttributes({ headingText: value })}
-                                                    className="fb-advanced-text"
-                                                />
+                                                <div className="advanced-heading-block">
+                                                    <div className="heading-input-wrapper">
+                                                        <TextareaControl
+                                                        label={__("Heading Text", "frontis-blocks")}
+                                                        value={dynamicContent ? `[Dynamic: ${dynamicContent}]` : headingText}
+                                                        onChange={(value) => {
+                                                            if (!dynamicContent) {
+                                                            setAttributes({ headingText: value });
+                                                            }
+                                                        }}
+                                                        disabled={!!dynamicContent}
+                                                        className="fb-advanced-text"
+                                                        />
+                                                        
+                                                        <Button
+                                                        icon="database"
+                                                        onClick={() => setIsPopoverVisible(true)}
+                                                        label="Insert dynamic content"
+                                                        />
+                                                        
+                                                        {isPopoverVisible && (
+                                                        <Popover
+                                                            onClose={() => setIsPopoverVisible(false)}
+                                                            position="bottom center"
+                                                        >
+                                                            <MenuGroup label="Dynamic Content">
+                                                            <MenuItem
+                                                                onClick={() => {
+                                                                setAttributes({ dynamicContent: 'post_title' });
+                                                                setIsPopoverVisible(false);
+                                                                }}
+                                                            >
+                                                                Post Title
+                                                            </MenuItem>
+                                                            <MenuItem
+                                                                onClick={() => {
+                                                                setAttributes({ dynamicContent: 'post_date' });
+                                                                setIsPopoverVisible(false);
+                                                                }}
+                                                            >
+                                                                Post Date
+                                                            </MenuItem>
+                                                            {/* Add more menu items for other dynamic content types */}
+                                                            </MenuGroup>
+                                                            {dynamicContent && (
+                                                            <MenuGroup>
+                                                                <MenuItem
+                                                                onClick={() => {
+                                                                    setAttributes({ dynamicContent: '' });
+                                                                    setIsPopoverVisible(false);
+                                                                }}
+                                                                >
+                                                                Reset to Static Text
+                                                                </MenuItem>
+                                                            </MenuGroup>
+                                                            )}
+                                                        </Popover>
+                                                        )}
+                                                    </div>
+                                                    </div>
                                             </PanelBody>
                                         </div>
                                         {subHeadingSwitcher && (
