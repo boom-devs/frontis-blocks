@@ -1275,7 +1275,9 @@ const Inspector = (props) => {
                                                                 })
                                                             }
                                                         />
-                                                    )}
+													)}
+												</PanelBody>
+
 												<PanelBody
 													title={__("Background", "frontis-blocks")}
 													initialOpen={true}
