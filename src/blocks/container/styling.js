@@ -1132,3 +1132,4 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 }
 
 export default styling;
+
