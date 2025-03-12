@@ -214,7 +214,41 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerAlignItems,
 		containerDirection,
 		containerJustify,
+		// Position
+		containerZIndex,
+		containerOverflow,
+		containerPositionType,
+		containerHZOrientationType,
+		containerVROrientationType,
+		containerHZLeftOffset,
+		containerHZLeftOffsetUnits,
+		containerHZRightOffset,
+		containerHZRightOffsetUnits,
+		containerVRTopOffset,
+		containerVRTopOffsetUnits,
+		containerVRBottomOffset,
+		containerVRBottomOffsetUnits,
 
+		containerBorder,
+		containerBorderColor,
+		containerBorderHoverColor,
+		containerBorderColorSwitcher,
+		containerBorderUnits,
+		containerDesktopBorderWidth,
+		containerTabBorderWidth,
+		containerMobileBorderWidth,
+		containerBorderLink,
+		containerBorderRadiusUnits,
+		containerDesktopBorderRadiusWidth,
+		containerTabBorderRadiusWidth,
+		containerMobileBorderRadiusWidth,
+		containerBorderRadiusLink,
+
+		containerGlobalBoxShadowSwitcher,
+		containerGlobalBoxShadowValues,
+		containerGlobalBoxShadowCssValue,
+		containerGlobalHoverBoxShadowValues,
+		containerGlobalHoverBoxShadowCssValue,
 
 		/** Normal Bg */
 		containerBgColorSwitcher,
@@ -689,13 +723,192 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
 	}
+	// check margin value not 0
+	// Check margin values and add only if they are not zero
+	let containerMarginCSS = {};
 
-	
+	if (parseInt(containerDesktopMargin.top) !== 0) {
+		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.bottom) !== 0) {
+		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.left) !== 0) {
+		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.right) !== 0) {
+		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
+	}
+
+	let containerTabletMarginCSS = {};
+	if (parseInt(containerTabletMargin.top) !== 0) {
+		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.bottom) !== 0) {
+		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.left) !== 0) {
+		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.right) !== 0) {
+		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
+	}
+
+	let containerMobileMarginCSS = {};
+	if (parseInt(containerMobileMargin.top) !== 0) {
+		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.bottom) !== 0) {
+		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.left) !== 0) {
+		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.right) !== 0) {
+		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
+	}
+
+	// Initialize empty objects for border widths
+	let containerBorderDesktopWidthCSS = {};
+	let containerBorderTabletWidthCSS = {};
+	let containerBorderMobileWidthCSS = {};
+
+	// Initialize empty objects for border radius
+	let containerBorderRadiusDesktopWidthCSS = {};
+	let containerBorderRadiusTabletWidthCSS = {};
+	let containerBorderRadiusMobileWidthCSS = {};
+
+	// Handle Desktop Border Width - only set values if they are not 0
+	if (containerDesktopBorderWidth && (
+		parseInt(containerDesktopBorderWidth.top) !== 0 || 
+		parseInt(containerDesktopBorderWidth.right) !== 0 || 
+		parseInt(containerDesktopBorderWidth.bottom) !== 0 || 
+		parseInt(containerDesktopBorderWidth.left) !== 0)) {
+		
+		containerBorderDesktopWidthCSS['border-width'] = 
+			`${generateCSSUnit(containerDesktopBorderWidth.top, containerBorderUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderWidth.left, containerBorderUnits.Desktop)}`;
+	}
+
+	// Handle Tablet Border Width
+	if (containerTabBorderWidth && (
+		parseInt(containerTabBorderWidth.top) !== 0 || 
+		parseInt(containerTabBorderWidth.right) !== 0 || 
+		parseInt(containerTabBorderWidth.bottom) !== 0 || 
+		parseInt(containerTabBorderWidth.left) !== 0)) {
+		
+		containerBorderTabletWidthCSS['border-width'] = 
+			`${generateCSSUnit(containerTabBorderWidth.top, containerBorderUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderWidth.left, containerBorderUnits.Tablet)}`;
+	}
+
+	// Handle Mobile Border Width
+	if (containerMobileBorderWidth && (
+		parseInt(containerMobileBorderWidth.top) !== 0 || 
+		parseInt(containerMobileBorderWidth.right) !== 0 || 
+		parseInt(containerMobileBorderWidth.bottom) !== 0 || 
+		parseInt(containerMobileBorderWidth.left) !== 0)) {
+		
+		containerBorderMobileWidthCSS['border-width'] = 
+			`${generateCSSUnit(containerMobileBorderWidth.top, containerBorderUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderWidth.left, containerBorderUnits.Mobile)}`;
+	}
+
+	// Handle Desktop Border Radius - only set values if they are not 0
+	if (containerDesktopBorderRadiusWidth && (
+		parseInt(containerDesktopBorderRadiusWidth.top) !== 0 || 
+		parseInt(containerDesktopBorderRadiusWidth.right) !== 0 || 
+		parseInt(containerDesktopBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerDesktopBorderRadiusWidth.left) !== 0)) {
+		
+		containerBorderRadiusDesktopWidthCSS['border-radius'] = 
+			`${generateCSSUnit(containerDesktopBorderRadiusWidth.top, containerBorderRadiusUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderRadiusWidth.right, containerBorderRadiusUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderRadiusWidth.bottom, containerBorderRadiusUnits.Desktop)} ` +
+			`${generateCSSUnit(containerDesktopBorderRadiusWidth.left, containerBorderRadiusUnits.Desktop)}`;
+	}
+
+	// Handle Tablet Border Radius
+	if (containerTabBorderRadiusWidth && (
+		parseInt(containerTabBorderRadiusWidth.top) !== 0 || 
+		parseInt(containerTabBorderRadiusWidth.right) !== 0 || 
+		parseInt(containerTabBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerTabBorderRadiusWidth.left) !== 0)) {
+		
+		containerBorderRadiusTabletWidthCSS['border-radius'] = 
+			`${generateCSSUnit(containerTabBorderRadiusWidth.top, containerBorderRadiusUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderRadiusWidth.right, containerBorderRadiusUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderRadiusWidth.bottom, containerBorderRadiusUnits.Tablet)} ` +
+			`${generateCSSUnit(containerTabBorderRadiusWidth.left, containerBorderRadiusUnits.Tablet)}`;
+	}
+
+	// Handle Mobile Border Radius
+	if (containerMobileBorderRadiusWidth && (
+		parseInt(containerMobileBorderRadiusWidth.top) !== 0 || 
+		parseInt(containerMobileBorderRadiusWidth.right) !== 0 || 
+		parseInt(containerMobileBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerMobileBorderRadiusWidth.left) !== 0)) {
+		
+		containerBorderRadiusMobileWidthCSS['border-radius'] = 
+			`${generateCSSUnit(containerMobileBorderRadiusWidth.top, containerBorderRadiusUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderRadiusWidth.right, containerBorderRadiusUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderRadiusWidth.bottom, containerBorderRadiusUnits.Mobile)} ` +
+			`${generateCSSUnit(containerMobileBorderRadiusWidth.left, containerBorderRadiusUnits.Mobile)}`;
+	}
+  
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
 		...desktopContainerPadding,
 		...containerMarginCSS,
+
+		// Position related properties
+		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
+				
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Desktop ? 
+				generateCSSUnit(containerHZLeftOffset.Desktop, containerHZLeftOffsetUnits.Desktop) : undefined,
+				
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'right' && containerHZRightOffset.Desktop ? 
+				generateCSSUnit(containerHZRightOffset.Desktop, containerHZRightOffsetUnits.Desktop) : undefined,
+				
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerVROrientationType === 'top' && containerVRTopOffset.Desktop ? 
+				generateCSSUnit(containerVRTopOffset.Desktop, containerVRTopOffsetUnits.Desktop) : undefined,
+				
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Desktop ? 
+					generateCSSUnit(containerVRBottomOffset.Desktop, containerVRBottomOffsetUnits.Desktop) : undefined,
+				
+		'z-index': containerZIndex.Desktop ? containerZIndex.Desktop : undefined,
+		'overflow': containerOverflow !== 'default' ? containerOverflow : undefined,
+
+		// Border style
+		'border-style': containerBorder !== 'none' ? containerBorder : undefined,
+		'border-color': containerBorderColor ? containerBorderColor : undefined,
+		...containerBorderDesktopWidthCSS,
+		...containerBorderRadiusDesktopWidthCSS,
+
+		// Box shadow
+		'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined
 	};
 
 	widthSelectorsTablet[`.frontis-blocks-block-${clientId} `] = {
@@ -704,6 +917,29 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...tabletContainerPadding,
 		...containerTabletMarginCSS,
 		
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Tablet ? 
+				generateCSSUnit(containerHZLeftOffset.Tablet, containerHZLeftOffsetUnits.Tablet) : undefined,
+				
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'right' && containerHZRightOffset.Tablet ? 
+				generateCSSUnit(containerHZRightOffset.Tablet, containerHZRightOffsetUnits.Tablet) : undefined,
+				
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerVROrientationType === 'top' && containerVRTopOffset.Tablet ? 
+				generateCSSUnit(containerVRTopOffset.Tablet, containerVRTopOffsetUnits.Tablet) : undefined,
+				
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Tablet ? 
+					generateCSSUnit(containerVRBottomOffset.Tablet, containerVRBottomOffsetUnits.Tablet) : undefined,
+				
+		'z-index': containerZIndex.Tablet ? containerZIndex.Tablet : undefined,
+
+		// Border style
+		...containerBorderTabletWidthCSS,
+		...containerBorderRadiusTabletWidthCSS,
 	};
 
 	widthSelectorsMobile[`.frontis-blocks-block-${clientId} `] = {
@@ -711,6 +947,30 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'width': '100%',
 		...mobileContainerPadding,
 		...containerMobileMarginCSS,
+
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Mobile ? 
+				generateCSSUnit(containerHZLeftOffset.Mobile, containerHZLeftOffsetUnits.Mobile) : undefined,
+				
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerHZOrientationType === 'right' && containerHZRightOffset.Mobile ? 
+				generateCSSUnit(containerHZRightOffset.Mobile, containerHZRightOffsetUnits.Mobile) : undefined,
+				
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+				containerVROrientationType === 'top' && containerVRTopOffset.Mobile ? 
+				generateCSSUnit(containerVRTopOffset.Mobile, containerVRTopOffsetUnits.Mobile) : undefined,
+				
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Mobile ? 
+					generateCSSUnit(containerVRBottomOffset.Mobile, containerVRBottomOffsetUnits.Mobile) : undefined,
+				
+		'z-index': containerZIndex.Mobile ? containerZIndex.Mobile : undefined,
+
+		// Border style
+		...containerBorderMobileWidthCSS,
+		...containerBorderRadiusMobileWidthCSS,
 	};
 
 	if ((containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom') {
@@ -932,6 +1192,9 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		selectors['.wp-block-frontis-blocks-container:hover'] = {
 			'border-color': containerBorderHColor,
 			'box-shadow': '',
+
+			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
+  			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined
 		};
 		if ('' !== boxShadowColorHover || '' !== boxShadowBlurHover) {
 			const boxShadowBlurHoverCSSUnit =
