@@ -137,6 +137,27 @@ const Inspector = (props) => {
 			containerVRTopOffsetUnits,
 			containerVRBottomOffset,
 			containerVRBottomOffsetUnits,
+
+			containerBorder,
+			containerBorderColor,
+			containerBorderHoverColor,
+			containerBorderColorSwitcher,
+			containerBorderUnits,
+			containerDesktopBorderWidth,
+			containerTabBorderWidth,
+			containerMobileBorderWidth,
+			containerBorderLink,
+			containerBorderRadiusUnits,
+			containerDesktopBorderRadiusWidth,
+			containerTabBorderRadiusWidth,
+			containerMobileBorderRadiusWidth,
+			containerBorderRadiusLink,
+
+			containerGlobalBoxShadowSwitcher,
+			containerGlobalBoxShadowValues,
+			containerGlobalBoxShadowCssValue,
+			containerGlobalHoverBoxShadowValues,
+			containerGlobalHoverBoxShadowCssValue,
 		},
 
 		setAttributes
@@ -151,6 +172,17 @@ const Inspector = (props) => {
 	const CONTAINER_TYPE_FULL = [
 		{ label: __('Boxed', 'frontis-blocks'), value: "boxed" },
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
+	];
+
+	const BORDER_STYLES = [
+		{ label: __("None", "frontis-blocks"), value: "none" },
+		{ label: __("Solid", "frontis-blocks"), value: "solid" },
+		{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
+		{ label: __("Dotted", "frontis-blocks"), value: "dotted" },
+		{ label: __("Double", "frontis-blocks"), value: "double" },
+		{ label: __("Groove", "frontis-blocks"), value: "groove" },
+		{ label: __("Outset", "frontis-blocks"), value: "outset" },
+		{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 	];
 
 	const DIRECTION = [
@@ -393,6 +425,147 @@ const Inspector = (props) => {
 			}
 		});
 	};
+
+
+	// container BorderWidth Function
+    const handleContainerBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( containerBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        containerDesktopBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        containerTabBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        containerMobileBorderWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {containerDesktopBorderWidth: {...containerDesktopBorderWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {containerTabBorderWidth: {...containerTabBorderWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {containerMobileBorderWidth: {...containerMobileBorderWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleContainerBorderCombineBtn = () => {
+        setAttributes( {containerBorderLink: !containerBorderLink} );
+    }
+
+    const handleContainerBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            containerBorderUnits: {
+                ...containerBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    
+
+    // container BorderRadiusWidth Function
+    const handleContainerBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( containerBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        containerDesktopBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        containerTabBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        containerMobileBorderRadiusWidth: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {containerDesktopBorderRadiusWidth: {...containerDesktopBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {containerTabBorderRadiusWidth: {...containerTabBorderRadiusWidth, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {containerMobileBorderRadiusWidth: {...containerMobileBorderRadiusWidth, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleContainerBorderRadiusCombineBtn = () => {
+        setAttributes( {containerBorderRadiusLink: !containerBorderRadiusLink} );
+    }
+
+    const handleContainerBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            containerBorderRadiusUnits: {
+                ...containerBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
 
 
 	return (
@@ -862,6 +1035,247 @@ const Inspector = (props) => {
 													/>
 												</PanelBody>
 
+												<PanelBody title="Background" initialOpen={false}>
+													<FB_BackgroundColorControl
+														bgColorSwitcher={''}
+														setBgColorSwitcher={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundType={''}
+														setNormalBackgroundType={(value) =>
+															setAttributes({})
+														}
+														normalClassicColor={''}
+														setNormalClassicColor={(value) =>
+															setAttributes({})
+														}
+														normalGradientColor={''}
+														setNormalGradientColor={(value) =>
+															setAttributes({})
+														}
+														normalCustomGradientSwitcher={
+															''
+														}
+														setNormalCustomGradientSwitcher={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalCustomGradientInputValue={
+															''
+														}
+														setNormalCustomGradientInputValue={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageUrl={''}
+														setNormalBackgroundImageUrl={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImageAlt={''}
+														setNormalBackgroundImageAlt={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImageID={''}
+														setNormalBackgroundImageID={(value) =>
+															setAttributes({})
+														}
+														normalBackgroundImagePosition={
+															''
+														}
+														setNormalBackgroundImagePosition={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageAttachment={
+															''
+														}
+														setNormalBackgroundImageAttachment={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageRepeat={
+															''
+														}
+														setNormalBackgroundImageRepeat={(value) =>
+															setAttributes({
+
+															})
+														}
+														normalBackgroundImageSize={''}
+														setNormalBackgroundImageSize={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundType={''}
+														setHoverBackgroundType={(value) =>
+															setAttributes({})
+														}
+														hoverClassicColor={''}
+														setHoverClassicColor={(value) =>
+															setAttributes({})
+														}
+														hoverGradientColor={''}
+														setHoverGradientColor={(value) =>
+															setAttributes({})
+														}
+														hoverCustomGradientSwitcher={
+															''
+														}
+														setHoverCustomGradientSwitcher={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverCustomGradientInputValue={
+															''
+														}
+														setHoverCustomGradientInputValue={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageUrl={''}
+														setHoverBackgroundImageUrl={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImageAlt={''}
+														setHoverBackgroundImageAlt={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImageID={''}
+														setHoverBackgroundImageID={(value) =>
+															setAttributes({})
+														}
+														hoverBackgroundImagePosition={
+															''
+														}
+														setHoverBackgroundImagePosition={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageAttachment={
+															''
+														}
+														setHoverBackgroundImageAttachment={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageRepeat={
+															''
+														}
+														setHoverBackgroundImageRepeat={(value) =>
+															setAttributes({
+
+															})
+														}
+														hoverBackgroundImageSize={''}
+														setHoverBackgroundImageSize={(value) =>
+															setAttributes({})
+														}
+													/>
+												</PanelBody>
+
+												<PanelBody
+													title={__("Border and Shadow", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<SelectControl
+                                                        label={__("Border Style", "frontis-blocks")}
+                                                        value={containerBorder}
+                                                        options={BORDER_STYLES}
+                                                        onChange={(value) => setAttributes({ containerBorder: value })}
+                                                    />
+        
+                                                    <FB_SwitcherControl
+                                                        label={__("Border Color", "frontis-blocks")}
+                                                        globalSwitcher={containerBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ containerBorderColorSwitcher: value })}
+                                                    />
+                                                    
+                                                    {containerBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={containerBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
+                                                        />
+                                                    )}
+                                                    
+                                                    {containerBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={containerBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ containerBorderHoverColor: value })}
+                                                        />
+                                                    )}
+        
+                                                    <FB_Spacing
+                                                        label={__("Border", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleContainerBorderUnitsHandler}
+                                                        spacingUnits={containerBorderUnits}
+                                                        spacingDesktop={containerDesktopBorderWidth}
+                                                        spacingTablet={containerTabBorderWidth}
+                                                        spacingMobile={containerMobileBorderWidth}
+                                                        handleSpacingUnitHandler={handleContainerBorderUnitChange}
+                                                        spacingCombineBtn={containerBorderLink}
+                                                        spacingCombineBtnHandler={handleContainerBorderCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+        
+                                                    <FB_Spacing 
+                                                        label={__("Border Radius", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleContainerBorderRadiusUnitsHandler}
+                                                        spacingUnits={containerBorderRadiusUnits}
+                                                        spacingDesktop={containerDesktopBorderRadiusWidth}
+                                                        spacingTablet={containerTabBorderRadiusWidth}
+                                                        spacingMobile={containerMobileBorderRadiusWidth}
+                                                        handleSpacingUnitHandler={handleContainerBorderRadiusUnitChange}
+                                                        spacingCombineBtn={containerBorderRadiusLink}
+                                                        spacingCombineBtnHandler={handleContainerBorderRadiusCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={containerGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ containerGlobalBoxShadowSwitcher: value })}
+                                                    />
+                                                    
+                                                    {containerGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ containerGlobalBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={containerGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    containerGlobalBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                    
+                                                    {containerGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) =>
+                                                                setAttributes({ containerGlobalHoverBoxShadowValues: value })
+                                                            }
+                                                            initialShadowValue={containerGlobalHoverBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) =>
+                                                                setAttributes({
+                                                                    containerGlobalHoverBoxShadowCssValue: value,
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
 												<PanelBody
 													title={__("Background", "frontis-blocks")}
 													initialOpen={true}
@@ -1234,7 +1648,6 @@ const Inspector = (props) => {
 															)}
 														</>
 													)}
-
 												</PanelBody>
 
 												<PanelBody
