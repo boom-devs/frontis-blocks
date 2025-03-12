@@ -1186,3 +1186,4 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 }
 
 export default frontEndStyle;
+
