@@ -676,17 +676,89 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.left, containerBorderRadiusUnits.Mobile)}`;
 	}
 
+	// Handle Desktop Padding
+	let desktopContainerPadding = {
+		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	}
+
+	// Handle Tablet Padding
+	let tabletContainerPadding = {
+		'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+		'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	}
+
+	// Handle Mobile Padding 
+	let mobileContainerPadding = {
+		'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+		'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	}
+
+	/**start margin */
+	let containerMarginCSS = {};
+
+	if (parseInt(containerDesktopMargin.top) !== 0) {
+		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.bottom) !== 0) {
+		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.left) !== 0) {
+		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
+	}
+
+	if (parseInt(containerDesktopMargin.right) !== 0) {
+		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
+	}
+
+	let containerTabletMarginCSS = {};
+	if (parseInt(containerTabletMargin.top) !== 0) {
+		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.bottom) !== 0) {
+		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.left) !== 0) {
+		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
+	}
+
+	if (parseInt(containerTabletMargin.right) !== 0) {
+		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
+	}
+
+	let containerMobileMarginCSS = {};
+	if (parseInt(containerMobileMargin.top) !== 0) {
+		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.bottom) !== 0) {
+		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.left) !== 0) {
+		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
+	}
+
+	if (parseInt(containerMobileMargin.right) !== 0) {
+		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
+	}
+	/**end margin */
+
 	
 	// Get container styles for desktop for FB Container
 	const getContainerStylesDesktop  = {
-		'padding-top': generateCSSUnit( containerDesktopPadding.top, containerPaddingUnits['Desktop'] ),
-		'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
-		'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
-		'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
-		'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
-		'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
-		'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
-		'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
+		...desktopContainerPadding,
+		...containerMarginCSS,
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -746,14 +818,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Get container styles for tablet for FB Container
 	const getContainerStylesTablet = { 
-		'padding-top': generateCSSUnit( containerTabletPadding.top, containerPaddingUnits['Tablet'] ),
-		'padding-bottom': generateCSSUnit( containerTabletPadding.bottom, containerPaddingUnits['Tablet'] ),
-		'padding-left': generateCSSUnit( containerTabletPadding.left, containerPaddingUnits['Tablet'] ),
-		'padding-right': generateCSSUnit( containerTabletPadding.right, containerPaddingUnits['Tablet'] ),
-		'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
-		'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
-		'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'], true ),
-		'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'], true ),
+		...tabletContainerPadding,
+		...containerTabletMarginCSS,
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
@@ -798,14 +864,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Get container styles for mobile for FB Container
 	const getContainerStylesMobile = { 
-		'padding-top': generateCSSUnit( containerMobilePadding.top, containerPaddingUnits['Mobile'] ),
-		'padding-bottom': generateCSSUnit( containerMobilePadding.bottom, containerPaddingUnits['Mobile'] ),
-		'padding-left': generateCSSUnit( containerMobilePadding.left, containerPaddingUnits['Mobile'] ),
-		'padding-right': generateCSSUnit( containerMobilePadding.right, containerPaddingUnits['Mobile'] ),
-		'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
-		'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
-		'margin-left': generateCSSUnit( containerMobileMargin.left, containerMarginUnits['Mobile'], true ),
-		'margin-right': generateCSSUnit( containerMobileMargin.right, containerMarginUnits['Mobile'], true ),
+		...mobileContainerPadding,
+		...containerMobileMarginCSS,
 		'box-shadow':
 			generateCSSUnit( boxShadowHOffset, 'px' ) +
 			' ' +
