@@ -85,11 +85,16 @@ export default function save( props ) {
 	};
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
-
-	let test = 'fb-hide-on-mobile';
+	
 	let responsiveClass = '';
-	if(test){
-		responsiveClass = 'fb-hide-on-mobile';
+	if(containerDesktopSwitcher){
+		responsiveClass = 'fb-desktop-responsive';
+	}
+	if(containerTabletSwitcher){
+		responsiveClass = 'fb-tablet-responsive';
+	}
+	if(containerMobileSwitcher){
+		responsiveClass = 'fb-mobile-responsive';
 	}
 
 	return (
