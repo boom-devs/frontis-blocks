@@ -6,24 +6,6 @@
 	"icon": "menu-alt",
 	"description": "Add an off-canvas opener with a toggleable hamburger icon",
 	"textdomain": "frontis-blocks",
-	"attributes": {
-		"blockID": {
-			"type": "string",
-			"default": ""
-		},
-		"selectedTemplate": {
-			"type": "string",
-			"default": ""
-		},
-		"menuPosition": {
-			"type": "string",
-			"default": "left"
-		},
-		"iconStyle": {
-			"type": "string",
-			"default": "hamburger"
-		}
-	},
 	"supports": {
 		"html": false,
 		"anchor": true

@@ -302,6 +302,7 @@ const FB_Block_Icons = {
 			})
 		)
 	),
+	
 	features_list: fb(
 		'svg',
 		{ 
