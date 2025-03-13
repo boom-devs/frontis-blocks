@@ -746,7 +746,7 @@ const Inspector = (props) => {
 												/>
 											</PanelBody>
 										</div>
-										{isBlockRootParent &&
+										{/* {isBlockRootParent && */}
 											<div className="fb-flex-properties-wrapper">
 												<PanelBody
 													title={__("Flex Properties", "frontis-blocks")}
@@ -891,7 +891,7 @@ const Inspector = (props) => {
 													</div> */}
 												</PanelBody>
 											</div>
-										}
+										{/* } */}
 									</>
 								)}
 
