@@ -152,6 +152,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconRotateSwitcher,
 		buttonIconRotate,
 		buttonIconRotateHover,
+		buttonImageRotateSwitcher,
+		buttonImageRotate,
+		buttonImageRotateHover,
 
 
         /** Start Global Setting */
@@ -1142,6 +1145,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};` : ''}
 			${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Desktop}${buttonIconImageHeightUnits.Desktop};` : ''}
 			${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
+			transform: rotate(${buttonImageRotate.Desktop}deg);
+			transition: all .3s ease-in-out;
+		}
+		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+			transform: rotate(${buttonImageRotateHover.Desktop}deg);
 		}
 
 		@media only screen and (max-width: 1024px) {
@@ -1211,6 +1219,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};` : ''}
 				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};` : ''}
 				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
+				transform: rotate(${buttonImageRotate.Tablet}deg);
+				transition: all .3s ease-in-out;
+			}
+			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				transform: rotate(${buttonImageRotateHover.Tablet}deg);
 			}
 		}
 
@@ -1278,6 +1291,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconImageWidth.Mobile ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
 				${buttonIconImageHeight.Mobile ? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};` : ''}
 				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
+				transform: rotate(${buttonImageRotate.Mobile}deg);
+				transition: all .3s ease-in-out;
+			}
+			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
+				transform: rotate(${buttonImageRotateHover.Mobile}deg);
 			}
 		}
 	`, [
@@ -1386,6 +1404,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconRotateSwitcher,
 		buttonIconRotate,
 		buttonIconRotateHover,
+
+		buttonImageRotateSwitcher,
+		buttonImageRotate,
+		buttonImageRotateHover,
 
 		buttonIconImageUrl,
 		buttonIconImageAlt,
@@ -1918,7 +1940,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													resetFallbackValue={''}
 												/>
 
-
 												<FB_SwitcherControl
 													label={__("Icon Rotation", "frontis-blocks")}
 													globalSwitcher={buttonIconRotateSwitcher}
@@ -2010,6 +2031,44 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													rangeStep={1}
 													resetFallbackValue={''}
 												/>
+
+
+												<FB_SwitcherControl
+													label={__("Image Rotation", "frontis-blocks")}
+													globalSwitcher={buttonImageRotateSwitcher}
+													setGlobalSwitcher={(value) => setAttributes({ buttonImageRotateSwitcher: value })}
+												/>
+
+												{buttonImageRotateSwitcher === 'normal' && ( 
+													<FB_Range 
+														min={-360}
+														max={360}
+														label={__("Image Rotation", "frontis-blocks")}
+														rangeValue={buttonImageRotate}
+														onChangeHandler={(value) => setAttributes({ buttonImageRotate: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+
+													/>
+												)}
+
+												{buttonImageRotateSwitcher === 'hover' && (
+													<FB_Range
+														min={-360}
+														max={360}
+														label={__("Image Rotation", "frontis-blocks")}
+														rangeValue={buttonImageRotateHover}
+														onChangeHandler={(value) => setAttributes({ buttonImageRotateHover: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
+													/>
+												)}
 											</PanelBody>
 										)}
                                     </>
