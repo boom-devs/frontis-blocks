@@ -1,58 +1,196 @@
 <?php
-
 // Extract attributes with fallbacks
 $block_id = isset($attributes['blockId']) ? $attributes['blockId'] : '';
-$heading_text = isset($attributes['headingText']) ? $attributes['headingText'] : 'Default Heading';
-$dynamic_content = isset($attributes['dynamicContent']) ? $attributes['dynamicContent'] : '';
+$heading_text = isset($attributes['headingText']) ? $attributes['headingText'] : 'Advanced Heading';
 $heading_tag = isset($attributes['headingTag']) ? $attributes['headingTag'] : 'h2';
-$active_line_switcher = isset($attributes['activeLineSwitcher']) ? $attributes['activeLineSwitcher'] : false;
 $heading_alignment = isset($attributes['headingAlignment']) ? $attributes['headingAlignment'] : '';
+$sub_heading_switcher = isset($attributes['subHeadingSwitcher']) ? $attributes['subHeadingSwitcher'] : false;
+$sub_heading_text = isset($attributes['subHeadingText']) ? $attributes['subHeadingText'] : 'Advanced Sub Heading';
+$sub_heading_tag = isset($attributes['subHeadingTag']) ? $attributes['subHeadingTag'] : 'p';
+$sub_heading_position = isset($attributes['subHeadingPosition']) ? $attributes['subHeadingPosition'] : 'bottom';
+$active_line_switcher = isset($attributes['activeLineSwitcher']) ? $attributes['activeLineSwitcher'] : false;
+$heading_icon_switcher = isset($attributes['headingIconSwitcher']) ? $attributes['headingIconSwitcher'] : false;
+$heading_icon = isset($attributes['headingIcon']) ? $attributes['headingIcon'] : 'bookmark';
+$heading_icon_align = isset($attributes['headingIconAlign']) ? $attributes['headingIconAlign'] : 'icon';
+$show_separator_switcher = isset($attributes['showSeparatorSwitcher']) ? $attributes['showSeparatorSwitcher'] : false;
+$separator = isset($attributes['separator']) ? $attributes['separator'] : '';
+$separator_position = isset($attributes['separatorPosition']) ? $attributes['separatorPosition'] : 'bottom';
+$separator_color = isset($attributes['separatorColor']) ? $attributes['separatorColor'] : '#000000';
+$dynamic_content = isset($attributes['dynamicContent']) ? $attributes['dynamicContent'] : '';
+$heading_global_wraper_id = isset($attributes['headingGlobalWraperID']) ? $attributes['headingGlobalWraperID'] : '';
+$heading_global_wraper_class = isset($attributes['headingGlobalWraperClass']) ? $attributes['headingGlobalWraperClass'] : '';
 
-// Debug information (optional - you can remove in production)
-$debug = "<!-- Dynamic content type: {$dynamic_content} -->";
+$advanced_heading_desktop_switcher = isset($attributes['advancedHeadingDesktopSwitcher']) ? $attributes['advancedHeadingDesktopSwitcher'] : false;
+$advanced_heading_tablet_switcher = isset($attributes['advancedHeadingTabletSwitcher']) ? $attributes['advancedHeadingTabletSwitcher'] : false;
+$advanced_heading_mobile_switcher = isset($attributes['advancedHeadingMobileSwitcher']) ? $attributes['advancedHeadingMobileSwitcher'] : false;
 
-// Process dynamic content if enabled
-if ($dynamic_content) {
-    // Check if we're inside a Query Loop
+// Handle dynamic content
+$dynamic_value = '';
+if (!empty($dynamic_content)) {
+    // If we're in a query loop context
     if (isset($block->context['postId'])) {
         $post_id = $block->context['postId'];
-        $debug .= "<!-- Inside Query Loop, Post ID: {$post_id} -->";
 
         switch ($dynamic_content) {
             case 'post_title':
-                $heading_text = get_the_title($post_id);
+                $dynamic_value = get_the_title($post_id);
                 break;
             case 'post_date':
-                $heading_text = get_the_date('', $post_id);
+                $dynamic_value = get_the_date('', $post_id);
                 break;
+            default:
+                $dynamic_value = '';
         }
     } else {
-        $post_id = get_the_ID();
-        $debug .= "<!-- Regular context, Post ID: {$post_id} -->";
+        // Regular context (not in a query loop)
+        global $post;
 
         switch ($dynamic_content) {
             case 'post_title':
-                $heading_text = get_the_title($post_id);
+                $dynamic_value = get_the_title();
                 break;
             case 'post_date':
-                $heading_text = get_the_date('', $post_id);
+                $dynamic_value = get_the_date();
                 break;
+            default:
+                $dynamic_value = '';
         }
     }
 }
 
-// Set up alignment style if provided
-$style_attr = '';
-if (!empty($heading_alignment)) {
-    $style_attr = ' style="text-align:' . esc_attr($heading_alignment) . ';"';
+// Determine the heading content (dynamic or static)
+$heading_content = !empty($dynamic_value) ? $dynamic_value : $heading_text;
+
+// Get responsive classes
+$responsive_classes = [];
+if ($advanced_heading_desktop_switcher) {
+    $responsive_classes[] = 'fb-desktop-responsive';
+}
+if ($advanced_heading_tablet_switcher) {
+    $responsive_classes[] = 'fb-tablet-responsive';
+}
+if ($advanced_heading_mobile_switcher) {
+    $responsive_classes[] = 'fb-mobile-responsive';
 }
 
-// Build the HTML with minimal wrappers
-$active_line_class = $active_line_switcher ? 'active-line' : '';
-$html = $debug;
-$html .= '<div ' . get_block_wrapper_attributes(['class' => "frontis-advanced-heading {$block_id}"]) . '>';
-$html .= "<{$heading_tag} class='fb-advanced-heading {$active_line_class}'{$style_attr}>" . wp_kses_post($heading_text) . "</{$heading_tag}>";
-$html .= '</div>';
+$classes = array_merge(['frontis-block', 'fb-advanced-heading-main-wrapper', $block_id], $responsive_classes);
+$wrapper_attributes = get_block_wrapper_attributes(['class' => implode(' ', $classes)]);
 
-// Output the final HTML
-echo $html;
+// Helper function for rendering SVG icons (inline definition)
+$render_icon_svg = function($icon) {
+    if (empty($icon)) {
+        return '';
+    }
+    
+    // Assuming icon has 'svg' property with the SVG string
+    if (isset($icon['svg'])) {
+        return $icon['svg'];
+    }
+    
+    return '';
+};
+
+// Start building the HTML output
+$output = '<div ' . $wrapper_attributes . '>';
+$output .= '<div class="fb-parent-wrapper fb-advanced-wrapper ' . esc_attr($heading_global_wraper_class) . '" id="' . esc_attr($heading_global_wraper_id) . '" style="text-align: ' . esc_attr($heading_alignment) . ';">';
+
+
+// For the icon rendering part, replace the current code with this
+if ($heading_icon_switcher && $heading_icon_align === 'icon') {
+    $output .= '<div class="fb-advanced-icon-wrapper" style="justify-content: ' . esc_attr($heading_alignment) . ';">';
+    $output .= '<div class="fb-advanced-icon">';
+    
+    // Check if heading_icon is a string (icon identifier)
+    if (is_string($heading_icon)) {
+        // Get the SVG HTML for this icon from WordPress database or a predefined array
+        $icon_svg = fb_get_icon_svg($heading_icon);
+        if ($icon_svg) {
+            $output .= $icon_svg;
+        } else {
+            // Fallback - display a generic icon or nothing
+            $output .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path></svg>';
+        }
+    }
+    // If it's an object with direct SVG data
+    elseif (is_array($heading_icon) && isset($heading_icon['svg'])) {
+        $output .= $heading_icon['svg'];
+    }
+    
+    $output .= '</div>';
+    $output .= '</div>';
+}
+
+/**
+ * Get SVG markup for a specific icon
+ *
+ * @param string $icon_name The icon identifier
+ * @return string|null SVG markup or null if not found
+ */
+if ( function_exists( 'fb_get_icon_svg' ) ) {
+    function fb_get_icon_svg($icon_name) {
+        // This could be expanded to fetch from a database or option
+        $icons = [
+            'bookmark' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>',
+            'star' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>',
+            'heart' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>',
+            'align-center' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4 2H14V0H4V2ZM0 7H18V5H0V7ZM4 12H14V10H4V12Z" /></svg>',
+            'align-left' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M10 2H0V0H10V2ZM18 7H0V5H18V7ZM10 12H0V10H10V12Z" /></svg>',
+            'align-right' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M8 2H18V0H8V2ZM0 7H18V5H0V7ZM8 12H18V10H8V12Z" /></svg>',
+            'align-justify' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H18V2H0V0ZM0 5.00001H18V7.00001H0V5.00001ZM0 10H18V12H0V10Z" /></svg>',
+            // Add more icons as needed
+        ];
+        
+        return isset($icons[$icon_name]) ? $icons[$icon_name] : null;
+    }
+}
+
+if ($show_separator_switcher && $separator_position === 'top') {
+    $output .= '<div class="fb-advanced-title-separator">';
+    if ($separator === 'zigzag') {
+        $output .= '<div class="fb-advanced-title-separator-zigzag">';
+        $output .= '<svg class="fb-advanced-title-separator-zigzag-svg" width="322" height="7" viewBox="0 0 322 7" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke: ' . esc_attr($separator_color) . ';">';
+        $output .= '<path d="M0.349609 5.71094L5.34961 0.710938L10.3496 5.71094L15.3496 0.710938L20.3496 5.71094L25.3496 0.710938L30.3496 5.71094L35.3496 0.710938L40.3496 5.71094L45.3496 0.710938L50.3496 5.71094L55.3496 0.710938L60.3496 5.71094L65.3496 0.710938L70.3496 5.71094L75.3496 0.710938L80.3496 5.71094L85.3496 0.710938L90.3496 5.71094L95.3496 0.710938L100.35 5.71094L105.35 0.710938L110.35 5.71094L115.35 0.710938L120.35 5.71094L125.35 0.710938L130.35 5.71094L135.35 0.710938L140.35 5.71094L145.35 0.710938L150.35 5.71094L155.35 0.710938L160.35 5.71094L165.35 0.710938L170.35 5.71094L175.35 0.710938L180.35 5.71094L185.35 0.710938L190.35 5.71094L195.35 0.710938L200.35 5.71094L205.35 0.710938L210.35 5.71094L215.35 0.710938L220.35 5.71094L225.35 0.710938L230.35 5.71094L235.35 0.710938L240.35 5.71094L245.35 0.710938L250.35 5.71094L255.35 0.710938L260.35 5.71094L265.35 0.710938L270.35 5.71094L275.35 0.710938L280.35 5.71094L285.35 0.710938L290.35 5.71094L295.35 0.710938L300.35 5.71094L305.35 0.710938L310.35 5.71094L315.35 0.710938L320.35 5.71094" stroke-width="2" stroke-miterlimit="10" />';
+        $output .= '</svg>';
+        $output .= '</div>';
+    }
+    $output .= '</div>';
+}
+
+// Add sub-heading if enabled and positioned at top
+if ($sub_heading_switcher && $sub_heading_position === 'top') {
+    $output .= '<div class="fb-advanced-sub-heading-wrapper">';
+    $output .= '<' . esc_attr($sub_heading_tag) . ' class="fb-advanced-sub-heading">' . wp_kses_post($sub_heading_text) . '</' . esc_attr($sub_heading_tag) . '>';
+    $output .= '</div>';
+}
+
+// Add main heading
+$heading_class = 'fb-advanced-heading' . ($active_line_switcher ? ' active-line' : '');
+$output .= '<div class="fb-advanced-heading-wrapper">';
+$output .= '<' . esc_attr($heading_tag) . ' class="' . esc_attr($heading_class) . '">' . wp_kses_post($heading_content) . '</' . esc_attr($heading_tag) . '>';
+$output .= '</div>';
+
+// Add sub-heading if enabled and positioned at bottom
+if ($sub_heading_switcher && $sub_heading_position === 'bottom') {
+    $output .= '<div class="fb-advanced-sub-heading-wrapper">';
+    $output .= '<' . esc_attr($sub_heading_tag) . ' class="fb-advanced-sub-heading">' . wp_kses_post($sub_heading_text) . '</' . esc_attr($sub_heading_tag) . '>';
+    $output .= '</div>';
+}
+
+// Add bottom separator if enabled
+if ($show_separator_switcher && $separator_position === 'bottom') {
+    $output .= '<div class="fb-advanced-title-separator">';
+    if ($separator === 'zigzag') {
+        $output .= '<div class="fb-advanced-title-separator-zigzag">';
+        $output .= '<svg class="fb-advanced-title-separator-zigzag-svg" width="322" height="7" viewBox="0 0 322 7" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke: ' . esc_attr($separator_color) . ';">';
+        $output .= '<path d="M0.349609 5.71094L5.34961 0.710938L10.3496 5.71094L15.3496 0.710938L20.3496 5.71094L25.3496 0.710938L30.3496 5.71094L35.3496 0.710938L40.3496 5.71094L45.3496 0.710938L50.3496 5.71094L55.3496 0.710938L60.3496 5.71094L65.3496 0.710938L70.3496 5.71094L75.3496 0.710938L80.3496 5.71094L85.3496 0.710938L90.3496 5.71094L95.3496 0.710938L100.35 5.71094L105.35 0.710938L110.35 5.71094L115.35 0.710938L120.35 5.71094L125.35 0.710938L130.35 5.71094L135.35 0.710938L140.35 5.71094L145.35 0.710938L150.35 5.71094L155.35 0.710938L160.35 5.71094L165.35 0.710938L170.35 5.71094L175.35 0.710938L180.35 5.71094L185.35 0.710938L190.35 5.71094L195.35 0.710938L200.35 5.71094L205.35 0.710938L210.35 5.71094L215.35 0.710938L220.35 5.71094L225.35 0.710938L230.35 5.71094L235.35 0.710938L240.35 5.71094L245.35 0.710938L250.35 5.71094L255.35 0.710938L260.35 5.71094L265.35 0.710938L270.35 5.71094L275.35 0.710938L280.35 5.71094L285.35 0.710938L290.35 5.71094L295.35 0.710938L300.35 5.71094L305.35 0.710938L310.35 5.71094L315.35 0.710938L320.35 5.71094" stroke-width="2" stroke-miterlimit="10" />';
+        $output .= '</svg>';
+        $output .= '</div>';
+    }
+    $output .= '</div>';
+}
+
+$output .= '</div>';
+$output .= '</div>';
+
+// Echo the final output
+echo $output;
