@@ -138,6 +138,9 @@ final class Plugin
 	{
 		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), FB_VERSION, true);
 		wp_enqueue_style('fb-responsive-control', FB_PLUGIN_URL . 'assets/css/fbe-common.css', [], FB_VERSION);
+
+		wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
+		wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 	}
 
 	/**

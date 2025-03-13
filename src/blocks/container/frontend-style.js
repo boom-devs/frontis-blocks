@@ -812,6 +812,42 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 		return styles;
 	};
+
+
+	// Start Handle overlay styles.
+	const overlayStyles = (device) => ({
+		'content': '""',
+		'position': 'absolute',
+		'top': '0',
+		'left': '0',
+		'right': '0',
+		'bottom': '0',
+		'width': '100%',
+		'height': '100%',
+		'opacity': containerBgOverlayOpacity[device],
+		...getBackgroundOverlayNormalStyles(device),
+	});
+
+	const overlayHoverStyles = (device) => ({
+		...getBackgroundOverlayHoverStyles(device),
+	});
+	let containerBgOverlayDesktop = {};
+	let containerBgOverlayTablet = {};
+	let containerBgOverlayMobile = {};
+	let containerBgOverlayDesktopHover = {};
+	let containerBgOverlayTabletHover = {};
+	let containerBgOverlayMobileHover = {};
+
+	if (containerBgOverlaySwitcher) {
+		containerBgOverlayDesktop = overlayStyles('Desktop');
+		containerBgOverlayTablet = overlayStyles('Tablet');
+		containerBgOverlayMobile = overlayStyles('Mobile');
+		containerBgOverlayDesktopHover = overlayHoverStyles('Desktop');
+		containerBgOverlayTabletHover = overlayHoverStyles('Tablet');
+		containerBgOverlayMobileHover = overlayHoverStyles('Mobile');
+	}
+	// End Handle overlay styles.
+
   
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
@@ -858,19 +894,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...getBackgroundHoverStyles('Desktop'),
 	};
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:after`] = {
-		'content': '""',
-		'position': 'absolute',
-		'top': '0',
-		'left': '0',
-		'right': '0',
-		'bottom': '0',
-		'width': '100%',
-		'height': '100%',
-		'opacity': containerBgOverlayOpacity['Desktop'],
-		...getBackgroundOverlayNormalStyles('Desktop'),
+		...containerBgOverlayDesktop,
 	};
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover:after`] = {
-		...getBackgroundOverlayHoverStyles('Desktop'),
+		...containerBgOverlayDesktopHover,
 	};
 
 	widthSelectorsTablet[`.frontis-blocks-block-${clientId} `] = {
@@ -908,11 +935,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...getBackgroundHoverStyles('Tablet'),
 	};
 	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:after`] = {
-		'opacity': containerBgOverlayOpacity['Tablet'],
-		...getBackgroundOverlayNormalStyles('Tablet'),
+		...containerBgOverlayTablet,
 	};
 	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:hover:after`] = {
-		...getBackgroundOverlayHoverStyles('Tablet'),
+		...containerBgOverlayTabletHover,
 	};
 
 
@@ -952,11 +978,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...getBackgroundHoverStyles('Mobile'),
 	};
 	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:after`] = {
-		'opacity': containerBgOverlayOpacity['Mobile'],
-		...getBackgroundOverlayNormalStyles('Mobile'),
+		...containerBgOverlayMobile,
 	};
 	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:hover:after`] = {
-		...getBackgroundOverlayHoverStyles('Mobile'),
+		...containerBgOverlayMobileHover,
 	};
 
 

@@ -11,9 +11,41 @@
         "html": false,
         "align": ["wide", "full"]
     },
+    "attributes": {
+        "blockID": {
+            "type": "string"
+        },
+        "query": {
+            "type": "object",
+            "default": {
+                "perPage": 6,
+                "pages": 0,
+                "offset": 0,
+                "postType": "post",
+                "order": "desc",
+                "orderBy": "date",
+                "author": "",
+                "search": "",
+                "exclude": [],
+                "sticky": "",
+                "inherit": false
+            }
+        },
+        "displayLayout": {
+            "type": "object",
+            "default": {
+                "type": "flex",
+                "columns": 3
+            }
+        },
+        "namespace": {
+            "type": "string",
+            "default": "frontis-blocks/custom-loop"
+        }
+    },
     "textdomain": "frontis-blocks",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./editor.scss",
     "style": "file:./style.scss",
-	"render": "file:./render.php"
+    "render": "file:./render.php"
 }

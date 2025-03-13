@@ -418,8 +418,7 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
                 'child'     => 'false',
-            ],
-
+            ]
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
 	}
