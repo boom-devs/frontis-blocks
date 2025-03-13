@@ -14,6 +14,6 @@ registerBlockType( metadata.name, {
 	attributes,
 	icon: FB_Block_Icons.dual_button,
 	edit: Edit,
-	save,
+	save
 } );
 
