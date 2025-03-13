@@ -17,18 +17,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         sliderItems,
-        marqueeSpeed,
-        marqueeDirection,
-        spaceBetween,
-        speed,
-        autoplay,
-        autoplayDelay,
+
         infiniteLoop,
         allowTouchMove,
         pauseOnHover,
-        blockStyle,
+        autoplay,
+        autoplayDelay,
+        speed,
         showNavigation,
         showPagination,
+
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -87,11 +85,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }
     }, [
         infiniteLoop,
+        allowTouchMove,
+        pauseOnHover,
         autoplay,
         autoplayDelay,
-        pauseOnHover,
         speed,
-        allowTouchMove,
         showNavigation,
         showPagination,
     ]);
@@ -126,10 +124,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </ToolbarGroup>
             </BlockControls>
         );
-    };
-
-    const handleButtonClick = (event) => {
-        event.preventDefault();
     };
 
     // Add this function inside the Edit component
@@ -188,7 +182,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         ))}
                     </div>
-                    {showPagination && <div className="fb-marquee-carousel-pagination"></div>}
+                    {showPagination && <div className="fb-marquee-carousel swiper-pagination"></div>}
                     {showNavigation && 
                         <>
                             <div className="fb-marquee-carousel swiper-button-next" aria-label="Next slide"></div>
