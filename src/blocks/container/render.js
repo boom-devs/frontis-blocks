@@ -25,11 +25,6 @@ const Render = ( props ) => {
 		isBlockRootParent,
 		contentWidth,
 		innerContentWidth,
-
-
-
-
-		
 			/** Normal Bg */
 			containerBgColorSwitcher,
 			containerBgNormalBackgroundType,
@@ -61,7 +56,6 @@ const Render = ( props ) => {
 
 			// From fb
 			containerType
-			
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
