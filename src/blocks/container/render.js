@@ -25,11 +25,6 @@ const Render = ( props ) => {
 		isBlockRootParent,
 		contentWidth,
 		innerContentWidth,
-
-
-
-
-		
 			/** Normal Bg */
 			containerBgColorSwitcher,
 			containerBgNormalBackgroundType,
