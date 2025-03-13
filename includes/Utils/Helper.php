@@ -410,21 +410,5 @@ class Helper
      * @param string $url The URL string that might contain placeholders
      * @return string The processed URL
      */
-    public function fb_process_dynamic_url($url, $block = null)
-    {
-        // Check if URL is our placeholder
-        if ($url === '{{post_permalink}}') {
-            // If we have block context with postId, use that post's permalink
-            if ($block && isset($block->context['postId'])) {
-                return get_permalink($block->context['postId']);
-            }
-            // Otherwise use current post URL
-            else {
-                return get_permalink();
-            }
-        }
-
-        // Return original URL if no placeholder
-        return $url;
-    }
+    
 }

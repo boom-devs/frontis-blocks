@@ -22,23 +22,15 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         blockId,
         sliderItems,
         blockStyle,
-        sliderType,
         
-        // Marquee specific settings
-        marqueeSpeed,
-        marqueeDirection,
-        slidesPerView,
-        spaceBetween,
-        
-        // Other settings
-        carouselPerColumn,
-        carouselPerColumnGap,
-        speed,
-        autoplay,
-        autoplayDelay,
         infiniteLoop,
         allowTouchMove,
         pauseOnHover,
+        autoplay,
+        autoplayDelay,
+        speed,
+        showNavigation,
+        showPagination,
         
         /** Global Settings */
         sliderGlobalZIndex,
@@ -151,94 +143,63 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                                 </Button>
                                             </div>
                                         </PanelBody>
-                                        <PanelBody title={__("General Settings", "frontis-blocks")} initialOpen={false}>
-                                            <SelectControl
-                                                label={__("Slider Type", "frontis-blocks")}
-                                                value={sliderType}
-                                                options={[
-                                                    { label: __("Standard Slider", "frontis-blocks"), value: SLIDER_TYPE.SLIDER },
-                                                    { label: __("Marquee Carousel", "frontis-blocks"), value: SLIDER_TYPE.MARQUEE }
-                                                ]}
-                                                onChange={(value) => setAttributes({ sliderType: value })}
-                                            />
-                                            {sliderType === SLIDER_TYPE.MARQUEE && (
-                                                <>
-                                                    <RangeControl
-                                                        label={__("Marquee Speed", "frontis-blocks")}
-                                                        value={marqueeSpeed}
-                                                        onChange={(value) => setAttributes({ marqueeSpeed: value })}
-                                                        min={1000}
-                                                        max={20000}
-                                                        step={500}
-                                                        help={__("Lower values mean faster movement", "frontis-blocks")}
-                                                    />
-                                                    
-                                                    <SelectControl
-                                                        label={__("Marquee Direction", "frontis-blocks")}
-                                                        value={marqueeDirection}
-                                                        options={[
-                                                            { label: __("Left to Right", "frontis-blocks"), value: "right" },
-                                                            { label: __("Right to Left", "frontis-blocks"), value: "left" }
-                                                        ]}
-                                                        onChange={(value) => setAttributes({ marqueeDirection: value })}
-                                                    />
-                                                    
-                                                    <ToggleControl
-                                                        label={__("Pause on Hover", "frontis-blocks")}
-                                                        checked={pauseOnHover}
-                                                        onChange={(value) => setAttributes({ pauseOnHover: value })}
-                                                    />
-                                                </>
-                                            )}
-                                            <RangeControl
-                                                label={__("Space Between Items", "frontis-blocks")}
-                                                value={spaceBetween}
-                                                onChange={(value) => setAttributes({ spaceBetween: value })}
-                                                min={0}
-                                                max={100}
+                                        <PanelBody 
+                                            title={__("General Settings", "frontis-blocks")} 
+                                            initialOpen={false}
+                                        >
+                                            <ToggleControl
+                                                label={__("Infinite Loop", "frontis-blocks")}
+                                                checked={infiniteLoop}
+                                                onChange={(value) => setAttributes({ infiniteLoop: value })}
                                             />
 
-{sliderType === SLIDER_TYPE.SLIDER && (
-                                                <>
-                                                    <ToggleControl
-                                                        label={__("Enable Autoplay", "frontis-blocks")}
-                                                        checked={autoplay}
-                                                        onChange={(value) => setAttributes({ autoplay: value })}
-                                                    />
-                                                    
-                                                    {autoplay && (
-                                                        <RangeControl
-                                                            label={__("Autoplay Delay (ms)", "frontis-blocks")}
-                                                            value={autoplayDelay}
-                                                            onChange={(value) => setAttributes({ autoplayDelay: value })}
-                                                            min={500}
-                                                            max={10000}
-                                                            step={100}
-                                                        />
-                                                    )}
-                                                    
-                                                    <ToggleControl
-                                                        label={__("Infinite Loop", "frontis-blocks")}
-                                                        checked={infiniteLoop}
-                                                        onChange={(value) => setAttributes({ infiniteLoop: value })}
-                                                        />
-                                                        
-                                                        <ToggleControl
-                                                            label={__("Allow Touch Move", "frontis-blocks")}
-                                                            checked={allowTouchMove}
-                                                            onChange={(value) => setAttributes({ allowTouchMove: value })}
-                                                        />
-                                                        
-                                                        <RangeControl
-                                                            label={__("Transition Speed (ms)", "frontis-blocks")}
-                                                            value={speed}
-                                                            onChange={(value) => setAttributes({ speed: value })}
-                                                            min={100}
-                                                            max={5000}
-                                                            step={100}
-                                                        />
-                                                    </>
-                                                )}
+                                            <ToggleControl
+                                                label={__("Allow Touch Move", "frontis-blocks")}
+                                                checked={allowTouchMove}
+                                                onChange={(value) => setAttributes({ allowTouchMove: value })}
+                                            />
+
+                                            <ToggleControl
+                                                label={__("Pause on Hover", "frontis-blocks")}
+                                                checked={pauseOnHover}
+                                                onChange={(value) => setAttributes({ pauseOnHover: value })}
+                                            />
+
+                                            <ToggleControl
+                                                label={__("Enable Autoplay", "frontis-blocks")}
+                                                checked={autoplay}
+                                                onChange={(value) => setAttributes({ autoplay: value })}
+                                            />
+
+                                            <RangeControl
+                                                label={__("Autoplay Delay (ms)", "frontis-blocks")}
+                                                value={autoplayDelay}
+                                                onChange={(value) => setAttributes({ autoplayDelay: value })}
+                                                min={500}
+                                                max={10000}
+                                                step={100}
+                                            />
+
+                                            <RangeControl
+                                                label={__("Transition Speed (ms)", "frontis-blocks")}
+                                                value={speed}
+                                                onChange={(value) => setAttributes({ speed: value })}
+                                                min={100}
+                                                max={5000}
+                                                step={100}
+                                            />
+
+                                            <ToggleControl
+                                                label={__("Show Navigation", "frontis-blocks")}
+                                                checked={showNavigation}
+                                                onChange={(value) => setAttributes({ showNavigation: value })}
+                                            />
+
+                                            <ToggleControl
+                                                label={__("Show Pagination", "frontis-blocks")}
+                                                checked={showPagination}
+                                                onChange={(value) => setAttributes({ showPagination: value })}
+                                            />
                                             
                                         </PanelBody>
                                     </>
