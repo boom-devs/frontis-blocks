@@ -567,6 +567,8 @@ const Inspector = (props) => {
         })
     }
 
+	console.log(attributes);
+
 
 	return (
 		<>
