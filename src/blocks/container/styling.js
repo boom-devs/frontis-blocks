@@ -792,7 +792,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		// Box shadow
 		'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined,
-		'overflow': overflow,
 		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
 
 		...getBackgroundNormalStyles( 'Desktop' ),
@@ -817,7 +816,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		...borderCSS,
-		'overflow': overflow,
 		'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 
 		...getBackgroundNormalStyles( 'Tablet' ),
@@ -863,7 +861,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		...borderCSS,
-		'overflow': overflow,
 		'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
 
 		...getBackgroundNormalStyles( 'Mobile' ),
