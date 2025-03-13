@@ -55,7 +55,12 @@ const Render = ( props ) => {
 			containerBgHoverBackgroundImageSize,
 
 			// From fb
-			containerType
+			containerType,
+			
+			containerDesktopSwitcher,
+			containerTabletSwitcher,
+			containerMobileSwitcher,
+
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
@@ -73,9 +78,20 @@ const Render = ( props ) => {
 	
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
 
+	let responsiveClass = '';
+	if(containerDesktopSwitcher){
+		responsiveClass = 'fb-desktop-responsive';
+	}
+	if(containerTabletSwitcher){
+		responsiveClass = 'fb-tablet-responsive';
+	}
+	if(containerMobileSwitcher){
+		responsiveClass = 'fb-mobile-responsive';
+	}
+
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass }`,
+		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } ${responsiveClass}`,
 		style: getContainerBGStyle,
 	} );
 
