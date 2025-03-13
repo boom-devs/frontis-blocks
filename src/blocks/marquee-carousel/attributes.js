@@ -64,11 +64,11 @@ const attributes = {
     },
     showNavigation: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	showPagination: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
     
 };
