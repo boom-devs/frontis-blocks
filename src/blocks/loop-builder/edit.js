@@ -15,7 +15,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		displayLayout = { type: 'flex', columns: 3 },
 	} = attributes;
 
-	// Generate a unique ID for the block if not set
 	useEffect(() => {
 		if (!blockID) {
 			setAttributes({ blockID: `fb-loop-builder-${clientId.slice(0, 8)}` });
@@ -27,9 +26,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-loop-builder-block ${blockID || ''}`,
 	});
 
-	// Setup inner blocks props for the template
+	// Create layout class based on display type
+	const layoutClass = displayLayout.type === 'flex' ? 'fb-grid-layout' :
+		displayLayout.type === 'list' ? 'fb-list-layout' :
+			displayLayout.type === 'slider' ? 'fb-slider-layout' : '';
+
+	// Setup inner blocks props for the template with layout settings
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'fb-loop-builder-inner' },
+		{
+			className: `fb-loop-builder-inner ${layoutClass}`,
+			style: displayLayout.type === 'flex' ?
+				{ '--grid-columns': displayLayout.columns || 3 } : {}
+		},
 		{
 			allowedBlocks: ['core/post-template', 'core/query-pagination', 'core/query-no-results'],
 			template: [
@@ -56,6 +64,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		[clientId]
 	);
 
+	// Add this function at the top of your edit.js file
+	function useSliderEffect(clientId, isSliderLayout) {
+		useEffect(() => {
+			if (!isSliderLayout) return;
+
+			// Find the slider container
+			const sliderContainer = document.querySelector(`#block-${clientId} .fb-slider-layout`);
+			if (!sliderContainer) return;
+
+			// Simple slider navigation - you might want to replace this with a more robust solution
+			const handleWheel = (e) => {
+				e.preventDefault();
+				sliderContainer.scrollLeft += e.deltaY;
+			};
+
+			sliderContainer.addEventListener('wheel', handleWheel, { passive: false });
+
+			return () => {
+				sliderContainer.removeEventListener('wheel', handleWheel);
+			};
+		}, [clientId, isSliderLayout]);
+	}
+
+	// Then in your Edit component, add:
+	const isSliderLayout = displayLayout.type === 'slider';
+	useSliderEffect(clientId, isSliderLayout);
+
 	return (
 		<div {...blockProps}>
 			<Inspector
@@ -63,7 +98,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			
+
 			<div className={`fb-loop-content layout-${displayLayout.type}`}>
 				{hasInnerBlocks ? (
 					<div {...innerBlocksProps} />

@@ -100,3 +100,55 @@
       }
   }
 }
+
+// Grid Layout
+.fb-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
+    gap: 20px;
+    
+    .wp-block-post {
+        margin: 0;
+    }
+}
+
+// List Layout
+.fb-list-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    .wp-block-post {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+// Slider Layout
+.fb-slider-layout {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding-bottom: 20px;
+    
+    .wp-block-post {
+        flex: 0 0 calc(100% / var(--grid-columns, 3) - 20px);
+        scroll-snap-align: start;
+        margin: 0;
+    }
+}
+
+// Make sure post template has proper styling
+.wp-block-post-template {
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    &.is-flex-container {
+        display: inherit;
+        flex-wrap: inherit;
+        gap: inherit;
+    }
+}

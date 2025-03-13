@@ -34,7 +34,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const { getPostTypes, getTaxonomies } = select(coreStore);
 		const filteredPostTypes = getPostTypes({ per_page: -1 }) || [];
 		const filteredTaxonomies = getTaxonomies({ per_page: -1 }) || [];
-		
+
 		return {
 			postTypes: filteredPostTypes.filter(
 				(postType) => postType.viewable
@@ -54,7 +54,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	// Get taxonomy options based on selected post type
 	const taxonomyOptions = useMemo(() => {
 		if (!taxonomies) return [];
-		
+
 		const options = [];
 		taxonomies.forEach((taxonomy) => {
 			const postTypes = taxonomy.types || [];
@@ -72,6 +72,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const layoutOptions = [
 		{ label: __('Grid', 'frontis-blocks'), value: 'flex' },
 		{ label: __('List', 'frontis-blocks'), value: 'list' },
+		{ label: __('Slider', 'frontis-blocks'), value: 'slider' }
 	];
 
 	// Order by options
@@ -98,14 +99,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	// Update display layout
+
 	const updateDisplayLayout = (newValue) => {
+		// Update the core/query block's displayLayout attribute
 		setAttributes({
 			displayLayout: {
 				...displayLayout,
 				...newValue,
 			},
 		});
+
+		if (newValue.type === 'slider') {
+			// You might want to add additional slider-specific settings here
+		}
 	};
 
 	return (
@@ -171,7 +177,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => updateQuery({ inherit: value })}
 											/>
 										</PanelBody>
-										
+
 										{taxonomyOptions.length > 0 && (
 											<PanelBody title={__("Taxonomy Filters", "frontis-blocks")} initialOpen={false}>
 												{taxonomyOptions.map((taxonomy) => (
@@ -193,7 +199,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												options={layoutOptions}
 												onChange={(value) => updateDisplayLayout({ type: value })}
 											/>
-											
+
 											{displayLayout.type === 'flex' && (
 												<RangeControl
 													label={__("Columns", "frontis-blocks")}
