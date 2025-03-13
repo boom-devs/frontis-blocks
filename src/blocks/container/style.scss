@@ -113,6 +113,7 @@ body .wp-block-frontis-blocks-container > *:not( .wp-block-frontis-blocks-contai
 	min-width: unset !important;
 	width: 100%;
 	position: relative;
+	z-index: 999;
 }
 
 body .ast-container .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .wp-block-frontis-blocks-container,

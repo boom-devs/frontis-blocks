@@ -1076,6 +1076,42 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		mobile_selectors[ containerFlexSelector ] = { ...gridStylesMobile, ...gridCssObject( attributes, 'Mobile' ) };
 	}
 
+
+	// Start Handle overlay styles.
+	const overlayStyles = (device) => ({
+		'content': '""',
+		'position': 'absolute',
+		'top': '0',
+		'left': '0',
+		'right': '0',
+		'bottom': '0',
+		'width': '100%',
+		'height': '100%',
+		'opacity': containerBgOverlayOpacity[device],
+		...getBackgroundOverlayNormalStyles(device),
+	});
+
+	const overlayHoverStyles = (device) => ({
+		...getBackgroundOverlayHoverStyles(device),
+	});
+	let containerBgOverlayDesktop = {};
+	let containerBgOverlayTablet = {};
+	let containerBgOverlayMobile = {};
+	let containerBgOverlayDesktopHover = {};
+	let containerBgOverlayTabletHover = {};
+	let containerBgOverlayMobileHover = {};
+
+	if (containerBgOverlaySwitcher) {
+		containerBgOverlayDesktop = overlayStyles('Desktop');
+		containerBgOverlayTablet = overlayStyles('Tablet');
+		containerBgOverlayMobile = overlayStyles('Mobile');
+		containerBgOverlayDesktopHover = overlayHoverStyles('Desktop');
+		containerBgOverlayTabletHover = overlayHoverStyles('Tablet');
+		containerBgOverlayMobileHover = overlayHoverStyles('Mobile');
+	}
+	// End Handle overlay styles.
+	
+
 	if ( 'video' === backgroundType ) {
 		selectors[ ' .frontis-blocks-container__video-wrap' ] = {
 			...videoBackgroundCSS,
@@ -1139,24 +1175,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'] ) + ' !important',
 		}
-		selectors[ '.wp-block-frontis-blocks-container:after' ] = {
-			'content': '""',
-			'position': 'absolute',
-			'top': '0',
-			'left': '0',
-			'right': '0',
-			'bottom': '0',
-			'width': '100%',
-			'height': '100%',
-			'opacity': containerBgOverlayOpacity['Desktop'],
-			...getBackgroundOverlayNormalStyles('Desktop'),
-		};
+
 		selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Desktop'),
-		};
-
-		selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
-			...getBackgroundOverlayHoverStyles('Desktop'),
 		};
 		
 		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesTablet;
@@ -1164,15 +1185,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'margin-left': generateCSSUnit( containerTabletMargin.left, containerMarginUnits['Tablet'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerTabletMargin.right, containerMarginUnits['Tablet'] ) + ' !important',
 		}
-		tablet_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
-			'opacity': containerBgOverlayOpacity['Tablet'],
-			...getBackgroundOverlayNormalStyles('Tablet'),
-		};
 		tablet_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Tablet'),
-		};
-		tablet_selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
-			...getBackgroundOverlayHoverStyles('Tablet'),
 		};
 		
 		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesMobile;
@@ -1183,13 +1197,30 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		mobile_selectors[ '.wp-block-frontis-blocks-container:hover' ] = {
 			...getBackgroundHoverStyles('Mobile'),
 		};
+
+		selectors[ '.wp-block-frontis-blocks-container:after' ] = {
+			...containerBgOverlayDesktop,
+		};
+
+		selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
+			...containerBgOverlayDesktopHover,
+		};
+
+		tablet_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
+			...containerBgOverlayTablet,
+		};
+
+		tablet_selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
+			...containerBgOverlayTabletHover,
+		};
+
 		mobile_selectors[ '.wp-block-frontis-blocks-container:after' ] = {
-			'opacity': containerBgOverlayOpacity['Mobile'],
-			...getBackgroundOverlayNormalStyles('Mobile'),
+			...containerBgOverlayMobile,
 		};
 		mobile_selectors[ '.wp-block-frontis-blocks-container:hover:after' ] = {
-			...getBackgroundOverlayHoverStyles('Mobile'),
+			...containerBgOverlayMobileHover,
 		};
+
 	}
 
 	if ( 'custom' === containerType ) {

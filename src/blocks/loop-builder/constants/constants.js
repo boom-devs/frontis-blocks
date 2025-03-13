@@ -13,6 +13,31 @@ export const separator_LINE_SIZE = "separatorLineSize";
 export const separator_ICON_SIZE = "separatorIconSize";
 export const separator_WIDTH = "separatorWidth";
 
+export const LAYOUT_TYPE = [
+	{ label: "Masonry", value: "masonry" },
+	{ label: "Grid", value: "grid" },
+	{ label: "List", value: "list" },
+];
+
+export const LAYOUT_ALIGNMENT = [
+	{ label: "Left", value: "left" },
+	{ label: "Center", value: "center" },
+	{ label: "Right", value: "right" },
+];
+
+export const OVERFLOW_OP = [
+	{ label: "Hidden", value: "hidden" },
+	{ label: "Visible", value: "visible" },
+	{ label: "Scroll", value: "scroll" },
+	{ label: "Auto", value: "auto" },
+];
+
+export const PRESETS = [
+	{ label: "Preset 1", value: "preset-1" },
+	{ label: "Preset 2", value: "preset-2" },
+	{ label: "Preset 3", value: "preset-3" },
+	{ label: "Custom", value: "custom" },
+];
 
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },

@@ -62,48 +62,49 @@ class Helper
         return in_array($pagenow, ['post.php', 'post-new.php', 'site-editor.php', 'widgets.php']);
     }
 
-	/**
-	 * Get size information for all currently-registered image sizes.
-	 *
-	 * @global $_wp_additional_image_sizes
-	 * @uses   get_intermediate_image_sizes()
-	 * @link   https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
-	 * @since  1.9.0
-	 * @return array $sizes Data for all currently-registered image sizes.
-	 */
-    public static function get_image_sizes() {
+    /**
+     * Get size information for all currently-registered image sizes.
+     *
+     * @global $_wp_additional_image_sizes
+     * @uses   get_intermediate_image_sizes()
+     * @link   https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
+     * @since  1.9.0
+     * @return array $sizes Data for all currently-registered image sizes.
+     */
+    public static function get_image_sizes()
+    {
 
         global $_wp_additional_image_sizes;
 
         // Define essential sizes
-        $essential_sizes = array( 'full', 'thumbnail', 'medium', 'medium_large', 'large' );
+        $essential_sizes = array('full', 'thumbnail', 'medium', 'medium_large', 'large');
 
-        $sizes       = get_intermediate_image_sizes();
+        $sizes = get_intermediate_image_sizes();
         $image_sizes = array();
 
         // Add the 'Full' size option
         $image_sizes[] = array(
             'value' => 'full',
-            'label' => esc_html__( 'Full', 'frontis-blocks' ),
+            'label' => esc_html__('Full', 'frontis-blocks'),
         );
 
-        foreach ( $sizes as $size ) {
+        foreach ($sizes as $size) {
             // Include only essential sizes
-            if ( in_array( $size, $essential_sizes, true ) ) {
+            if (in_array($size, $essential_sizes, true)) {
                 $image_sizes[] = array(
                     'value' => $size,
-                    'label' => ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
+                    'label' => ucwords(trim(str_replace(array('-', '_'), array(' ', ' '), $size))),
                 );
-            } elseif ( isset( $_wp_additional_image_sizes[ $size ] ) ) {
+            } elseif (isset($_wp_additional_image_sizes[$size])) {
                 // Include additional sizes if they are essential
-                if ( in_array( $size, $essential_sizes, true ) ) {
+                if (in_array($size, $essential_sizes, true)) {
                     $image_sizes[] = array(
                         'value' => $size,
                         'label' => sprintf(
                             '%1$s (%2$sx%3$s)',
-                            ucwords( trim( str_replace( array( '-', '_' ), array( ' ', ' ' ), $size ) ) ),
-                            $_wp_additional_image_sizes[ $size ]['width'],
-                            $_wp_additional_image_sizes[ $size ]['height']
+                            ucwords(trim(str_replace(array('-', '_'), array(' ', ' '), $size))),
+                            $_wp_additional_image_sizes[$size]['width'],
+                            $_wp_additional_image_sizes[$size]['height']
                         ),
                     );
                 }
@@ -111,60 +112,63 @@ class Helper
         }
 
         // Apply the filter for additional customization
-        $image_sizes = apply_filters( 'fb_post_featured_image_sizes', $image_sizes );
+        $image_sizes = apply_filters('fb_post_featured_image_sizes', $image_sizes);
 
         return $image_sizes;
     }
 
-	/**
-	 * Get all taxonomies.
-	 *
-	 * @since 1.11.0
-	 * @access public
-	 */
-	public static function get_related_taxonomy() {
+    /**
+     * Get all taxonomies.
+     *
+     * @since 1.11.0
+     * @access public
+     */
+    public static function get_related_taxonomy()
+    {
 
-		$post_types = self::get_post_types();
 
-		$return_array = array();
+        $post_types = self::get_post_types();
 
-		foreach ( $post_types as $key => $value ) {
-			$post_type = $value['value'];
+        $return_array = array();
 
-			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
-			$data       = array();
+        foreach ($post_types as $key => $value) {
+            $post_type = $value['value'];
 
-			foreach ( $taxonomies as $tax_slug => $tax ) {
-				if ( ! $tax->public || ! $tax->show_ui || ! $tax->show_in_rest ) {
-					continue;
-				}
+            $taxonomies = get_object_taxonomies($post_type, 'objects');
+            $data = array();
 
-				$data[ $tax_slug ] = $tax;
+            foreach ($taxonomies as $tax_slug => $tax) {
+                if (!$tax->public || !$tax->show_ui || !$tax->show_in_rest) {
+                    continue;
+                }
 
-				$terms = get_terms( $tax_slug );
+                $data[$tax_slug] = $tax;
 
-				$related_tax = array();
+                $terms = get_terms($tax_slug);
 
-				if ( ! empty( $terms ) ) {
-					foreach ( $terms as $t_index => $t_obj ) {
-						$related_tax[] = array(
-							'id'    => $t_obj->term_id,
-							'name'  => $t_obj->name,
-							'child' => get_term_children( $t_obj->term_id, $tax_slug ),
-						);
-					}
-					$return_array[ $post_type ]['terms'][ $tax_slug ] = $related_tax;
-				}
-			}
+                $related_tax = array();
 
-			$return_array[ $post_type ]['taxonomy'] = $data;
+                if (!empty($terms)) {
+                    foreach ($terms as $t_index => $t_obj) {
+                        $related_tax[] = array(
+                            'id' => $t_obj->term_id,
+                            'name' => $t_obj->name,
+                            'child' => get_term_children($t_obj->term_id, $tax_slug),
+                        );
+                    }
+                    $return_array[$post_type]['terms'][$tax_slug] = $related_tax;
+                }
+            }
 
-		}
+            $return_array[$post_type]['taxonomy'] = $data;
 
-		return apply_filters( 'fb_post_loop_taxonomies', $return_array );
-	}
+        }
 
-    public static function get_all_authors_with_posts() {
+        return apply_filters('fb_post_loop_taxonomies', $return_array);
+    }
+
+    public static function get_all_authors_with_posts()
+    {
         $args = array(
             'has_published_posts' => true,
             'fields' => 'all_with_meta',
@@ -172,26 +176,29 @@ class Helper
         return get_users($args);
     }
 
-    public static function get_page_name() {
+    public static function get_page_name()
+    {
         global $wp_query;
-        if($wp_query->queried_object) {
-        	return $wp_query->queried_object->post_name;
+        if ($wp_query->queried_object) {
+            return $wp_query->queried_object->post_name;
         }
     }
 
-    public static function remove_css_files() {
+    public static function remove_css_files()
+    {
         $upload_dir = wp_upload_dir();
         $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
         $css_files = glob($css_dir . '*.css');
-        foreach($css_files as $file) {
-            if(basename($file) !== 'frontis-blocks.css') {
+        foreach ($css_files as $file) {
+            if (basename($file) !== 'frontis-blocks.css') {
                 unlink($file);
             }
         }
     }
 
-    public static function get_current_page_name($post_id = null) {
-        if($post_id) {
+    public static function get_current_page_name($post_id = null)
+    {
+        if ($post_id) {
             $post = get_post($post_id);
             return $post->post_name;
         } else {
@@ -199,10 +206,11 @@ class Helper
         }
     }
 
-    public static function get_post_types() {
+    public static function get_post_types()
+    {
         $post_types = get_post_types(
             array(
-                'public'       => true,
+                'public' => true,
                 'show_in_rest' => true,
             ),
             'objects'
@@ -210,9 +218,9 @@ class Helper
 
         $options = array();
 
-        foreach ( $post_types as $post_type ) {
+        foreach ($post_types as $post_type) {
 
-            if ( 'attachment' === $post_type->name ) {
+            if ('attachment' === $post_type->name) {
                 continue;
             }
 
@@ -222,7 +230,7 @@ class Helper
             );
         }
 
-        return apply_filters( 'fb_loop_post_types', $options );
+        return apply_filters('fb_loop_post_types', $options);
     }
 
     /**
@@ -249,42 +257,42 @@ class Helper
     public static function get_responsive_breakpoints()
     {
         return [
-            'mobile'  => 767,
-            'tablet'  => 1024,
+            'mobile' => 767,
+            'tablet' => 1024,
             'desktop' => 1200,
         ];
     }
 
     /**
-	 * Get installed WordPress Plugin List
-	 *
-	 * @return array
-	 */
-	public static function get_plugins()
-	{
-		if ( ! function_exists( 'get_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		}
-		return get_plugins();
-	}
+     * Get installed WordPress Plugin List
+     *
+     * @return array
+     */
+    public static function get_plugins()
+    {
+        if (!function_exists('get_plugins')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        return get_plugins();
+    }
 
-	 /**
-	 * Get Active Plugins List
-	 */
-	public static function get_active_plugin_list()
-	{
-		$active_plugins = get_option( 'active_plugins' );
-		if ( is_multisite() ) {
-			$all = wp_get_active_network_plugins();
-			if ( $all ) {
-				$active_plugins = array_merge( $active_plugins, array_map( function ( $each ) {
-					$arr = explode( '/', $each );
-					return $arr[ count( $arr ) - 2 ] . DIRECTORY_SEPARATOR . end( $arr );
-				}, $all ) );
-			}
-		}
-		return $active_plugins;
-	}
+    /**
+     * Get Active Plugins List
+     */
+    public static function get_active_plugin_list()
+    {
+        $active_plugins = get_option('active_plugins');
+        if (is_multisite()) {
+            $all = wp_get_active_network_plugins();
+            if ($all) {
+                $active_plugins = array_merge($active_plugins, array_map(function ($each) {
+                    $arr = explode('/', $each);
+                    return $arr[count($arr) - 2] . DIRECTORY_SEPARATOR . end($arr);
+                }, $all));
+            }
+        }
+        return $active_plugins;
+    }
 
     /**
      * Parse block content for specific data
@@ -310,26 +318,27 @@ class Helper
         return in_array($plugin_path, (array) get_option('active_plugins', []), true) || self::is_plugin_active_for_network($plugin_path);
     }
 
-	public static function generate_css($styles, $container_css) {
-		// Generate CSS for the block ID
-		$css = array_map(
-			function ($selector, $styles) {
-				$filtered_styles = implode("; ", array_map(
-					fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
-					array_keys($styles),
-					$styles
-				));
+    public static function generate_css($styles, $container_css)
+    {
+        // Generate CSS for the block ID
+        $css = array_map(
+            function ($selector, $styles) {
+                $filtered_styles = implode("; ", array_map(
+                    fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
+                    array_keys($styles),
+                    $styles
+                ));
 
-				// Return CSS if styles are valid
-				return $filtered_styles ? "#$selector { $filtered_styles; }" : "";
-			},
-			array_keys($container_css),
-			$container_css
-		);
+                // Return CSS if styles are valid
+                return $filtered_styles ? "#$selector { $filtered_styles; }" : "";
+            },
+            array_keys($container_css),
+            $container_css
+        );
 
-		// Filter out empty styles and combine
-		return implode("\n", array_filter($css));
-	}
+        // Filter out empty styles and combine
+        return implode("\n", array_filter($css));
+    }
 
     /**
      * Check if a plugin is active for the entire network
@@ -351,46 +360,71 @@ class Helper
         return false;
     }
 
-	public static function load_google_font( $fonts )
-	{
-		if ( is_array( $fonts ) && ! empty( $fonts ) ) {
-			$gfonts      = '';
-			$gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
-			foreach ( $fonts as $font ) {
-				$gfonts .= str_replace( ' ', '+', trim( $font ) ) . $gfonts_attr . '|';
-			}
+    public static function load_google_font($fonts)
+    {
+        if (is_array($fonts) && !empty($fonts)) {
+            $gfonts = '';
+            $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+            foreach ($fonts as $font) {
+                $gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
+            }
 
-			if ( ! empty( $gfonts ) ) {
-				$query_args = [
-					'family' => $gfonts
-				];
-				wp_register_style(
-					'frontis-blocks-fonts',
-					add_query_arg( $query_args, '//fonts.googleapis.com/css' ),
-					[  ],
-					FB_VERSION
-				);
+            if (!empty($gfonts)) {
+                $query_args = [
+                    'family' => $gfonts
+                ];
+                wp_register_style(
+                    'frontis-blocks-fonts',
+                    add_query_arg($query_args, '//fonts.googleapis.com/css'),
+                    [],
+                    FB_VERSION
+                );
 
-				wp_enqueue_style( 'frontis-blocks-fonts' );
-			}
+                wp_enqueue_style('frontis-blocks-fonts');
+            }
 
-			// Reset.
-			$gfonts = '';
-		}
-	}
+            // Reset.
+            $gfonts = '';
+        }
+    }
 
 
-    public static function get_blocks_inside_template($block_name) {
+    public static function get_blocks_inside_template($block_name)
+    {
         global $wpdb;
         $template_post = get_posts([
-            'post_type' => $wpdb->prefix.'template',
+            'post_type' => $wpdb->prefix . 'template',
             'numberposts' => 1,
         ]);
-        
+
         if (!empty($template_post)) {
             $template_content = $template_post[0]->post_content;
-           return strpos($template_content, $block_name) !== false;
+            return strpos($template_content, $block_name) !== false;
         }
         return false;
+    }
+
+    /**
+     * Processes a URL string and replaces dynamic placeholders based on block context
+     * 
+     * @param string $url The URL string that might contain placeholders
+     * @return string The processed URL
+     */
+    public function fb_process_dynamic_url($url, $block = null)
+    {
+        // Check if URL is our placeholder
+        if ($url === '{{post_permalink}}') {
+            // If we have block context with postId, use that post's permalink
+            if ($block && isset($block->context['postId'])) {
+                return get_permalink($block->context['postId']);
+            }
+            // Otherwise use current post URL
+            else {
+                return get_permalink();
+            }
+        }
+
+        // Return original URL if no placeholder
+        return $url;
     }
 }

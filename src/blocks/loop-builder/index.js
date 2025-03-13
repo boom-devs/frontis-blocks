@@ -1,84 +1,105 @@
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockVariation } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import Edit from './edit';
-import Save from './save';
+import { createHigherOrderComponent } from '@wordpress/compose';
 import metadata from './block.json';
+import Inspector from './inspector';
 
-registerBlockType(metadata.name, {
-    title: __('Loop Builder', 'frontis-blocks'),
-    description: __('Create custom post loops with full design control', 'frontis-blocks'),
-    category: 'frontis-blocks',
-    icon: 'grid-view',
-    supports: {
-        html: false,
-        align: ['wide', 'full'],
-    },
-    attributes: {
-        blockID: {
-            type: 'string',
-            default: '',
-        },
-        postType: {
-            type: 'string',
-            default: 'post',
-        },
-        postsPerPage: {
-            type: 'number',
-            default: 3,
-        },
-        order: {
-            type: 'string',
-            default: 'desc',
-        },
-        orderBy: {
-            type: 'string',
-            default: 'date',
-        },
-        includedCategories: {
-            type: 'array',
-            default: [],
-        },
-        includedTags: {
-            type: 'array',
-            default: [],
-        },
-        offset: {
-            type: 'number',
-            default: 0,
-        },
-        showFeaturedImage: {
-            type: 'boolean',
-            default: true,
-        },
-        showTitle: {
-            type: 'boolean',
-            default: true,
-        },
-        showExcerpt: {
-            type: 'boolean',
-            default: true,
-        },
-        excerptLength: {
-            type: 'number',
-            default: 100,
-        },
-        showReadMore: {
-            type: 'boolean',
-            default: true,
-        },
-        readMoreText: {
-            type: 'string',
-            default: __('Read More', 'frontis-blocks'),
-        },
-        columns: {
-            type: 'number',
-            default: 3,
-        },
-        gap: {
-            type: 'number',
-            default: 20,
-        },
-    },
-    edit: Edit,
-    save: Save,
+
+const VARIATION_NAMESPACE = 'frontis-blocks/custom-loop';
+
+registerBlockVariation('core/query', {
+	name: VARIATION_NAMESPACE,
+	title: __('Loop Builder', 'frontis-blocks'),
+	description: __('Display posts with custom layout options', 'frontis-blocks'),
+	category: 'frontis-blocks',
+	isActive: ({ namespace, query }) => {
+		return (
+			namespace === VARIATION_NAMESPACE &&
+			query.postType === 'post'
+		);
+	},
+	icon: 'grid-view',
+	attributes: {
+		namespace: VARIATION_NAMESPACE,
+		query: {
+			perPage: 6,
+			pages: 0,
+			offset: 0,
+			postType: 'post',
+			order: 'desc',
+			orderBy: 'date',
+			author: '',
+			search: '',
+			exclude: [],
+			sticky: '',
+			inherit: false,
+		},
+		displayLayout: {
+			type: 'flex',
+			columns: 3
+		}
+	},
+	innerBlocks: [
+		[
+			'core/post-template',
+			{},
+			[
+				['core/post-featured-image'],
+				['frontis-blocks/advanced-heading'],
+				['core/post-excerpt', { moreText: 'Read More' }]
+			],
+		],
+		['core/query-no-results', {}, [['core/paragraph', { content: 'No posts found.' }]]],
+	],
+	scope: ['inserter'],
+	allowedControls: ['inherit', 'order', 'taxQuery', 'search'],
 });
+
+// Add filter to customize the Query Loop when your variation is active
+wp.hooks.addFilter(
+	'editor.BlockEdit',
+	'frontis-blocks/with-loop-builder-controls',
+	createHigherOrderComponent((BlockEdit) => {
+		return (props) => {
+			// Only apply to Query Loop block with your namespace
+			if (props.name === 'core/query' && props.attributes.namespace === VARIATION_NAMESPACE) {
+				return (
+					<>
+						<BlockEdit {...props} />
+						<Inspector
+							attributes={props.attributes}
+							setAttributes={props.setAttributes}
+							clientId={props.clientId}
+						/>
+					</>
+				);
+			}
+			return <BlockEdit {...props} />;
+		};
+	}, 'withLoopBuilderControls')
+);
+
+// Add filter to specify the category for your Query variation
+wp.hooks.addFilter(
+	'blocks.registerBlockType',
+	'frontis-blocks/set-block-category',
+	(settings, name) => {
+		if (name === 'core/query' && settings.variations) {
+			const updatedVariations = settings.variations.map(variation => {
+				if (variation.name === VARIATION_NAMESPACE) {
+					return {
+						...variation,
+						category: 'frontis-blocks'
+					};
+				}
+				return variation;
+			});
+
+			return {
+				...settings,
+				variations: updatedVariations
+			};
+		}
+		return settings;
+	}
+);
