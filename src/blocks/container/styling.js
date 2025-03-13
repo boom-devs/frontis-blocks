@@ -114,20 +114,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		gradientAngle,
 		selectGradient,
 		// Extracted Border Width Attributes.
-		containerBorderTopWidth,
-		containerBorderRightWidth,
-		containerBorderBottomWidth,
-		containerBorderLeftWidth,
-		containerBorderTopWidthTablet,
-		containerBorderRightWidthTablet,
-		containerBorderBottomWidthTablet,
-		containerBorderLeftWidthTablet,
-		containerBorderTopWidthMobile,
-		containerBorderRightWidthMobile,
-		containerBorderBottomWidthMobile,
-		containerBorderLeftWidthMobile,
 		backgroundVideoFallbackImage,
-		globalBlockStyleId,
 		childrenWidthDesktop,
 		childrenWidthTablet,
 		childrenWidthMobile,
@@ -210,8 +197,6 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		containerBorder,
 		containerBorderColor,
-		containerBorderHoverColor,
-		containerBorderColorSwitcher,
 		containerBorderUnits,
 		containerDesktopBorderWidth,
 		containerTabBorderWidth,
@@ -221,11 +206,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerTabBorderRadiusWidth,
 		containerMobileBorderRadiusWidth,
 
-		containerGlobalBoxShadowSwitcher,
-		containerGlobalBoxShadowValues,
 		containerGlobalBoxShadowCssValue,
-		containerGlobalHoverBoxShadowValues,
-		containerGlobalHoverBoxShadowCssValue,
 		/** Normal Bg */
 		containerBgColorSwitcher,
 		containerBgNormalBackgroundType,
@@ -280,6 +261,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerBgOverlayHoverBackgroundImageRepeat,
 		containerBgOverlayHoverBackgroundImageSize,
 
+		customWidthUnits,
 
 	} = attributes;
 
@@ -293,7 +275,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'innerContentCustomWidthDesktop',
 		blockName
 	);
-	const widthDesktopFallback = getFallbackNumber( customWidth[deviceType], 'customWidth', blockName );
+	const widthDesktopFallback = getFallbackNumber( customWidth['Desktop'], 'customWidth', blockName );
+	const widthTabletFallback = getFallbackNumber( customWidth['Tablet'], 'customWidth', blockName );
+	const widthMobileFallback = getFallbackNumber( customWidth['Mobile'], 'customWidth', blockName );	
 
 	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'], 'rowGapDesktop', blockName );
 	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'], 'columnGapDesktop', blockName );
@@ -953,17 +937,17 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	widthSelectorsDesktop[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ] = {
-		'max-width': generateCSSUnit( widthDesktopFallback, widthType ),
+		'max-width': generateCSSUnit( widthDesktopFallback, customWidthUnits['Desktop'] ),
 		'width': '100%',
 	};
 
 	widthSelectorsTablet[ `.is-root-container > .block-editor-block-list__block .frontis-blocks-editor-preview-mode-tablet.block-editor-block-list__block${ gbsWidthSelector } ` ] = {
-		'max-width': generateCSSUnit( widthTablet, widthTypeTablet ),
+		'max-width': generateCSSUnit( widthTabletFallback, customWidthUnits['Tablet'] ),
 		'width': '100%',
 	};
 
 	widthSelectorsMobile[ `.is-root-container > .block-editor-block-list__block .frontis-blocks-editor-preview-mode-mobile.block-editor-block-list__block${ gbsWidthSelector } ` ] = {
-		'max-width': generateCSSUnit( widthMobile, widthTypeMobile ),
+		'max-width': generateCSSUnit( widthMobileFallback, customWidthUnits['Mobile'] ),
 		'width': '100%',
 	};
 

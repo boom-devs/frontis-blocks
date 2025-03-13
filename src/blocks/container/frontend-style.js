@@ -893,6 +893,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Desktop'),
 	};
+	
 	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:after`] = {
 		...containerBgOverlayDesktop,
 	};
@@ -987,7 +988,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	if ((containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom') {
 		widthSelectorsDesktop[
-			`${isBlockRootParent && '#block-' + clientId} .frontis-blocks-container-inner-blocks-wrap`
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${containerFullWidth},${innerContentCustomWidthDesktopFallback}${fullWidthContentBoxedWidthUnits['Desktop']})`,
 			'max-width': 'var(--inner-content-custom-width)',
@@ -996,7 +997,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'margin-right': 'auto',
 		};
 
-		widthSelectorsTablet[`${isBlockRootParent && '#block-' + clientId} .frontis-blocks-container-inner-blocks-wrap`] = {
+		widthSelectorsTablet[`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`] = {
 			'--inner-content-custom-width': `min(${containerFullWidth},${innerContentCustomWidthTabletFallback || innerContentCustomWidthTabletFallback}${fullWidthContentBoxedWidthUnits['Tablet']})`,
 			'max-width': 'var(--inner-content-custom-width)',
 			'width': '100%',
@@ -1005,7 +1006,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		};
 
 		widthSelectorsMobile[
-			`${isBlockRootParent && '#block-' + clientId} .frontis-blocks-container-inner-blocks-wrap`
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
 		] = {
 			'--inner-content-custom-width': `min(${containerFullWidth},${innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback
 				}${fullWidthContentBoxedWidthUnits['Mobile']})`,
