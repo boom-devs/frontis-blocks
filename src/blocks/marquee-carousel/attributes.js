@@ -12,17 +12,14 @@ const attributes = {
         default: [
             {
                 id: 'item-1',
-                subTitle: 'Sub Title',
                 title: 'Slider Item 1',
             },
             {
                 id: 'item-2',
-                subTitle: 'Sub Title',
                 title: 'Slider Item 2',
             },
             {
                 id: 'item-3',
-                subTitle: 'Sub Title',
                 title: 'Slider Item 3',
             },
         ],
@@ -32,10 +29,6 @@ const attributes = {
                 id: {
                     type: "string",
                     default: ""
-                },
-                subTitle: {
-                    type: "string",
-                    default: "Sub Title"
                 },
                 title: {
                     type: "string",
