@@ -29,7 +29,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `guten-slider-container ${blockId}`,
+        className: `fb-marquee-carousel-container ${blockId}`,
     });
 
     /**
@@ -45,27 +45,49 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         const swiperOptions = {
 
             // Common settings
-            slidesPerView: 4,
-            spaceBetween: 30,
-            loop: infiniteLoop,
-            effect: 'slide',
-            autoplay: autoplay ? {
-                delay: autoplayDelay,
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-            } : false,
-            speed: speed,
-            allowTouchMove: allowTouchMove,
+            // slidesPerView: 4,
+            // spaceBetween: 30,
+            // loop: infiniteLoop,
+            // effect: 'slide',
+            // autoplay: autoplay ? {
+            //     delay: autoplayDelay,
+            //     pauseOnMouseEnter: pauseOnHover,
+            //     disableOnInteraction: false,
+            // } : false,
+            // speed: speed,
+            // allowTouchMove: allowTouchMove,
 
-            navigation: showNavigation ? {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            } : false,
 
-            pagination: showPagination ? {
-                el: '.swiper-pagination',
-                clickable: true,
-            } : false,
+           // Marquee style settings
+           spaceBetween: 0,
+           centeredSlides: true,
+           speed: 2000,
+           autoplay: {
+             delay: 1,
+           },
+           loop: true,
+           slidesPerView:'auto',
+           allowTouchMove: false,
+           disableOnInteraction: true,
+           // Make sure slides have proper CSS width applied
+           on: {
+            init: function() {
+                // Apply proper width to slides to ensure multiple are visible
+                const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
+                slides.forEach(slide => {
+                    slide.style.width = '300px'; // Set a fixed width or use percentage
+                });
+                },
+            },
+            // navigation: showNavigation ? {
+            //     nextEl: '.swiper-button-next',
+            //     prevEl: '.swiper-button-prev',
+            // } : false,
+
+            // pagination: showPagination ? {
+            //     el: '.swiper-pagination',
+            //     clickable: true,
+            // } : false,
         };
     
         // If the Swiper is already initialized and the new options are the same as the previous options, do nothing.
@@ -149,7 +171,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             {renderSliderToolbarControls()}
 
             <div {...blockProps}>
-                <div className="swiper" ref={swiperRef}>
+                <div className="swiper swiper-container" ref={swiperRef}>
                     <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                         {sliderItems.map((item, index) => (
                             <div key={item.id} className={`swiper-slide`}>
