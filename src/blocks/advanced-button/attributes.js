@@ -529,6 +529,28 @@ const attributes = {
             Mobile: "",
         }
     },
+
+    buttonImageRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    buttonImageRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonImageRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+
     /** End Icon Styles */
 
 	/** Start Global Setting */

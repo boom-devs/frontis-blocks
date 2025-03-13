@@ -106,7 +106,7 @@ final class Plugin
 				wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
 			}
 		}
-		if (has_block('frontis-blocks/slider')) {
+		if (has_block('frontis-blocks/slider') || has_block('frontis-blocks/marquee-carousel')) {
 			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
 			wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 		}

@@ -1,80 +1,59 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor';
-import { SLIDER_TYPE } from "./constants/constants";
 
 export default function Save({ attributes }) {
     const {
         blockId,
         sliderItems,
-        sliderType,
-        marqueeSpeed,
-        marqueeDirection,
-        spaceBetween,
-        speed,
-        autoplay,
-        autoplayDelay,
         infiniteLoop,
         allowTouchMove,
         pauseOnHover,
+        autoplay,
+        autoplayDelay,
+        speed,
+        showNavigation,
+        showPagination,
         blockStyle,
     } = attributes;
 
     // Prepare Swiper settings based on slider type
     const getSwiperSettings = () => {
-        let settings = {
-            spaceBetween: spaceBetween,
+        const swiperOptions = {
+            // Common settings
             loop: infiniteLoop,
-            speed: speed
+            effect: 'slide',
+            autoplay: autoplay ? {
+                delay: autoplayDelay,
+                pauseOnMouseEnter: pauseOnHover,
+                disableOnInteraction: false,
+            } : false,
+            speed: speed,
+            allowTouchMove: allowTouchMove,
+
+            navigation: showNavigation ? {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            } : false,
+
+            pagination: showPagination ? {
+                el: '.swiper-pagination',
+                clickable: true,
+            } : false,
         };
 
-        if (sliderType === SLIDER_TYPE.MARQUEE) {
-            settings = {
-                ...settings,
-                slidesPerView: 'auto',
-                speed: marqueeSpeed,
-                autoplay: {
-                    delay: 0,
-                    disableOnInteraction: false,
-                },
-                allowTouchMove: false,
-                loop: true
-            };
-
-            // Set direction based on marqueeDirection
-            if (marqueeDirection === 'right') {
-                settings.autoplay.reverseDirection = true;
-            }
-        } else {
-            // Regular slider settings
-            settings = {
-                ...settings,
-                slidesPerView: 1,
-                allowTouchMove: allowTouchMove
-            };
-
-            if (autoplay) {
-                settings.autoplay = {
-                    delay: autoplayDelay,
-                    disableOnInteraction: true
-                };
-            }
-        }
-
-        return JSON.stringify(settings);
+        return JSON.stringify(swiperOptions);
     };
 
     const blockProps = useBlockProps.save({
-        className: `fb-marquee-carousel-container ${blockId} ${blockStyle} slider-type-${sliderType}`,
-        'data-slider-type': sliderType,
+        className: `fb-marquee-carousel-container ${blockId}`,
         'data-swiper-settings': getSwiperSettings(),
-        'data-pause-on-hover': pauseOnHover
     });
 
     return (
         <div {...blockProps}>
             <div className="swiper">
-                <div className={`swiper-wrapper fb-marquee-carousel-wrapper ${sliderType === SLIDER_TYPE.MARQUEE ? 'marquee-effect' : ''}`}>
+                <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${sliderType === SLIDER_TYPE.MARQUEE ? 'marquee-slide' : ''}`}>
+                        <div key={item.id} className={`swiper-slide`}>
                             <div className={`${blockId} fb-marquee-carousel-content-wrapper ${item.id}`}>
                                 <div className="fb-marquee-carousel-content-inner-wrapper">
                                     <div className="fb-marquee-carousel-list-item">
@@ -104,6 +83,13 @@ export default function Save({ attributes }) {
                         </div>
                     ))}
                 </div>
+                {showPagination && <div className="fb-marquee-carousel swiper-pagination"></div>}
+                {showNavigation && 
+                    <>
+                        <div className="fb-marquee-carousel swiper-button-next" aria-label="Next slide"></div>
+                        <div className="fb-marquee-carousel swiper-button-prev" aria-label="Previous slide"></div>
+                    </>
+                }
             </div>
         </div>
     );

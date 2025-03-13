@@ -44,38 +44,14 @@ const attributes = {
             }
         }
     },
-    // Marquee specific settings
-    marqueeSpeed: {
-        type: 'number',
-        default: 5000,
-    },
-    marqueeDirection: {
-        type: 'string',
-        default: 'left',
-    },
-    slidesPerView: {
-        type: 'number',
-        default: 'auto',
-    },
-    spaceBetween: {
-        type: 'number',
-        default: 30,
-    },
-    carouselPerColumn: {
-        type: 'number',
-        default: 2,
-    },
-    carouselPerColumnGap: {
-        type: 'number',
-        default: 20,
-    },
+
     speed: {
         type: 'number',
         default: 800,
     },
     autoplay: {
         type: 'boolean',
-        default: true,
+        default: false,
     },
     autoplayDelay: {
         type: 'number',
