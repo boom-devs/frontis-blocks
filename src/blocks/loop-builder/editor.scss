@@ -1,64 +1,102 @@
 .fb-loop-builder-block {
-    border: 1px dashed #ddd;
-    padding: 20px;
-    
-    .fb-loop-preview-header,
-    .fb-loop-template-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-        
-        h4 {
-            margin: 0;
-        }
-    }
-    
-    .fb-loop-preview {
-        display: grid;
-        
-        .fb-loop-item {
-            border: 1px solid #eee;
-            padding: 15px;
-            background: #fff;
-            
-            .fb-loop-featured-image {
-                margin-bottom: 10px;
-                
-                img {
-                    width: 100%;
-                    height: auto;
-                    display: block;
-                }
-            }
-            
-            .fb-loop-title {
-                margin-top: 0;
-                margin-bottom: 10px;
-            }
-            
-            .fb-loop-excerpt {
-                margin-bottom: 10px;
-            }
-            
-            .fb-loop-read-more {
-                display: inline-block;
-                color: #0073aa;
-                text-decoration: none;
-            }
-            
-            .fb-template-placeholder {
-                padding: 30px;
-                background: #f9f9f9;
-                text-align: center;
-                color: #888;
-            }
-        }
-    }
-    
-    .fb-loop-template-editor {
-        background: #f9f9f9;
-        padding: 20px;
-        border: 1px solid #e0e0e0;
-    }
+  margin-bottom: 2em;
+  
+  .fb-loop-content {
+      &.layout-flex {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 -15px;
+          
+          .block-editor-inner-blocks {
+              width: 100%;
+          }
+          
+          .wp-block-post-template {
+              display: flex;
+              flex-wrap: wrap;
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              
+              > li {
+                  padding: 0 15px;
+                  margin-bottom: 30px;
+                  
+                  // Default column settings
+                  width: calc(33.333% - 30px);
+                  
+                  // Adjust for different column counts
+                  .columns-1 & {
+                      width: calc(100% - 30px);
+                  }
+                  
+                  .columns-2 & {
+                      width: calc(50% - 30px);
+                  }
+                  
+                  .columns-3 & {
+                      width: calc(33.333% - 30px);
+                  }
+                  
+                  .columns-4 & {
+                      width: calc(25% - 30px);
+                  }
+                  
+                  .columns-5 & {
+                      width: calc(20% - 30px);
+                  }
+                  
+                  .columns-6 & {
+                      width: calc(16.666% - 30px);
+                  }
+              }
+          }
+      }
+      
+      &.layout-list {
+          .wp-block-post-template {
+              display: block;
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              
+              > li {
+                  margin-bottom: 30px;
+                  padding-bottom: 30px;
+                  border-bottom: 1px solid #eee;
+                  
+                  &:last-child {
+                      border-bottom: none;
+                  }
+              }
+          }
+      }
+  }
+  
+  .fb-loop-builder-placeholder {
+      padding: 40px;
+      text-align: center;
+      background-color: #f8f9fa;
+      border: 1px dashed #ccc;
+  }
+  
+  .fb-inspector-control {
+      .fb-parent-tab-panel {
+          .components-tab-panel__tabs {
+              display: flex;
+              border-bottom: 1px solid #e0e0e0;
+              
+              .components-tab-panel__tabs-item {
+                  flex: 1;
+                  justify-content: center;
+                  font-weight: 500;
+                  padding: 8px 12px;
+                  
+                  &.active-tab {
+                      border-bottom: 2px solid #007cba;
+                  }
+              }
+          }
+      }
+  }
 }
