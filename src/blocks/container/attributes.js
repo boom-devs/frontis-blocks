@@ -57,9 +57,9 @@ const attributes = {
 	customWidth: {
 		type: 'object',
 		default: {
-			Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+			Desktop: '100',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerCustomWidth: {
