@@ -143,14 +143,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{/* Off-Canvas Menu Container */}
 			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
-				<div className="fb-off-canvas-header">
-					<button
-						className="fb-close-menu"
-						onClick={() => setIsMenuOpen(false)}
-					>
-						×
-					</button>
-				</div>
 
 				{selectedTemplate ? (
 					<div {...innerBlocksProps} />
