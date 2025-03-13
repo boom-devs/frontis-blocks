@@ -11,7 +11,6 @@ import {
 } from '@wordpress/components';
 import { useEffect, useRef } from '@wordpress/element';
 import Inspector from './inspector';
-import { SLIDER_TYPE } from "./constants/constants";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -46,6 +45,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         const swiperOptions = {
 
             // Common settings
+            slidesPerView: 4,
+            spaceBetween: 30,
             loop: infiniteLoop,
             effect: 'slide',
             autoplay: autoplay ? {
@@ -97,7 +98,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
-            subTitle: 'Enter your subtitle here',
             title: `Slider Item ${sliderItems.length + 1}`,
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
@@ -157,18 +157,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     <div className="fb-marquee-carousel-content-inner-wrapper">
                                         <div className="fb-marquee-carousel-list-item">
                                             <div className="fb-marquee-carousel-list-content">
-                                                <div className="fb-marquee-carousel-subtitle-wrapper">
-                                                    <RichText
-                                                        tagName="span"
-                                                        className="fb-marquee-carousel-subtitle"
-                                                        value={item.subTitle}
-                                                        onChange={(value) => updateItem(index, 'subTitle', value)}
-                                                        placeholder="Enter subtitle"
-                                                    />
-                                                </div>
                                                 <div className="fb-marquee-carousel-title-wrapper">
                                                     <RichText
-                                                        tagName="h3"
+                                                        tagName="p"
                                                         className="fb-marquee-carousel-title"
                                                         value={item.title}
                                                         onChange={(value) => updateItem(index, 'title', value)}
