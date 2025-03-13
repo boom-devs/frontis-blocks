@@ -46,6 +46,5 @@
     "textdomain": "frontis-blocks",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./editor.scss",
-    "style": "file:./style.scss",
-    "render": "file:./render.php"
+    "style": "file:./style.scss"
 }
