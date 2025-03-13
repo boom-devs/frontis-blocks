@@ -2,26 +2,72 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps
 } from '@wordpress/block-editor';
+import Inspector from "./inspector";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
-		blockID
+		blockId,
+		offCanvasIconAlign,
+        offCanvasIcon,
+		/** Start button Icon Image */
+		offCanvasIconImageUrl,
+		offCanvasIconImageAlt,
+		offCanvasIconImageID,
+		offCanvasIconImageWidth,
+		offCanvasIconImageWidthUnits,
+		offCanvasIconImageHeight,
+		offCanvasIconImageHeightUnits,
+		offCanvasIconImagedisplay,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-off-canvas-menu-block ${blockID}`,
+		className: `fb-off-canvas-closer-block ${blockId}`,
 	});
 
 	return (
-		<div {...blockProps}>
-			<button className="fb-close-menu">
-				<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<line x1="13.7071" y1="12.2929" x2="38.4558" y2="37.0416" stroke="black" stroke-width="2" />
-					<line x1="12.2929" y1="37.2929" x2="37.0416" y2="12.5442" stroke="black" stroke-width="2" />
-				</svg>
-			</button>
-		</div>
+		<>
+		    <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
+			<div {...blockProps}>
+				<button className="fb-off-canvas-closer">
+
+					{ offCanvasIconAlign === 'icon-text' && (
+						<div className={`fb-off-canvas-closer-icon-wrapper`}>
+							<div className="fb-off-canvas-closer-icon">{renderSVG(offCanvasIcon)}</div>
+						</div>
+					)}
+
+					{offCanvasIconAlign === 'image' && offCanvasIconImageUrl && (
+						<div className={`fb-off-canvas-closer-icon-wrapper`}>
+							<div className="fb-off-canvas-closer-icon-image">
+								{offCanvasIconImageUrl ? (
+									<img src={offCanvasIconImageUrl} alt={offCanvasIconImageAlt} />
+								) : (
+									<MediaPlaceholder
+										onSelect={(media) =>
+											setAttributes({
+												offCanvasIconImageID: media.id,
+												offCanvasIconImageUrl: media.url,
+												offCanvasIconImageAlt: media.alt,
+											})
+										}
+										allowedTypes={['image']}
+										multiple={false}
+										labels={{ title: 'Add Image' }}
+									/>
+								)}
+							</div>
+						</div>
+					)}
+				</button>
+			</div>
+		
+		</>
 	);
 }
