@@ -188,6 +188,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         ))}
                     </div>
+                    {showPagination && <div className="fb-marquee-carousel-pagination"></div>}
+                    {showNavigation && 
+                        <>
+                            <div className="fb-marquee-carousel swiper-button-next" aria-label="Next slide"></div>
+                            <div className="fb-marquee-carousel swiper-button-prev" aria-label="Previous slide"></div>
+                        </>
+                    }
                 </div>
             </div>
         </>

@@ -75,7 +75,7 @@ const attributes = {
     },
     autoplay: {
         type: 'boolean',
-        default: false,
+        default: true,
     },
     autoplayDelay: {
         type: 'number',
