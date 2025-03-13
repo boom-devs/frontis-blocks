@@ -27,9 +27,22 @@
     outline-width: 0 !important;
 }
 
-
-
-
+  .swiper-wrapper{
+    -webkit-transition-timing-function:linear!important;    transition-timing-function:linear!important; 
+    position: relative;
+  }
+//   .swiper-slide {
+//     text-align: center;
+//     font-size: 33px;
+//     background: #fff;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: auto;
+//     position: relative;
+//     overflow: hidden;
+//     padding: 0 50px;
+//   }
 
 
 
