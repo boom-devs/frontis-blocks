@@ -46,8 +46,6 @@ const generateBackgroundCSS = ( backgroundAttributes, pseudoElementOverlay = {} 
 		blendMode,
 		globalBlockStyleId,
 
-
-
 		/** Normal Bg from FB Container */
 		containerBgColorSwitcher,
 		containerBgNormalBackgroundType,
