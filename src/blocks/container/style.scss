@@ -111,7 +111,7 @@ body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks
 body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap,
 body .wp-block-frontis-blocks-container > *:not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-column ):not( .wp-block-frontis-blocks-container ):not( .wp-block-frontis-blocks-section ):not( .frontis-blocks-container__shape ):not( .frontis-blocks-container__video-wrap ):not( .wp-block-spectra-pro-register ):not( .wp-block-spectra-pro-login ):not( .frontis-blocks-slider-container ):not( .spectra-container-link-overlay ):not(.spectra-image-gallery__control-lightbox):not(.wp-block-frontis-blocks-lottie):not(.frontis-blocks-faq__outer-wrap) {
 	min-width: unset !important;
-	width: 100%;
+	// width: 100%;
 	position: relative;
 	z-index: 1;
 }
@@ -214,6 +214,6 @@ body .ast-container .wp-block-frontis-blocks-container > .frontis-blocks-contain
 	justify-content: center;
 }
 
-.frontis-blocks-container-inner-blocks-wrap > .wp-block-frontis-blocks-container {
-    flex-direction: column;
-}
+// .frontis-blocks-container-inner-blocks-wrap > .wp-block-frontis-blocks-container {
+//     flex-direction: column;
+// }
