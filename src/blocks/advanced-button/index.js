@@ -17,6 +17,6 @@ registerBlockType( metadata.name, {
 	icon: FB_Block_Icons.advanced_button,
 	edit: Edit,
 	save,
-	// deprecated,
+	deprecated,
 } );
 	
