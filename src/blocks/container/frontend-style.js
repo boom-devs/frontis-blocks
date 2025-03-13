@@ -454,7 +454,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// if ( ! isBlockRootParent) {
 	// 	containerFlexSelector =
-	// 		'.wp-block-frontis-blocks-container > .block-editor-inner-blocks > .block-editor-block-list__layout';
+	// 		'.wp-block-frontis-blocks-container';
 	// }
 
 	const widthSelectorsDesktop = {};
@@ -489,6 +489,30 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			...selectors['.block-editor-block-list__block'],
 		};
 
+		widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+			'flex-direction': containerDirection['Desktop'],
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
+			'flex-wrap': containerWrap['Desktop'],
+			'align-content': alignContentDesktop,
+			...widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+		};
+		widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
+			'flex-wrap': containerWrap['Tablet'],
+			'align-content': alignContentTablet,
+			...widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+		};
+		widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
+			'flex-wrap': containerWrap['Mobile'],
+			'align-content': alignContentMobile,
+			...widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+		};
 	}
 
 	let desktopContainerPadding = {

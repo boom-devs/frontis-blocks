@@ -903,7 +903,7 @@ const Inspector = (props) => {
 
 								{tab.name === "styles" && (
 									<>
-										{isBlockRootParent &&
+										{/* {isBlockRootParent && */}
 											<PanelBody
 												title={__("Container Gap", "frontis-blocks")}
 												initialOpen={true}
@@ -944,7 +944,7 @@ const Inspector = (props) => {
 													]}
 												/>
 											</PanelBody>
-										}
+										{/* } */}
 									</>
 								)}
 								{tab.name === "advanced" && (
