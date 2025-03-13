@@ -3,11 +3,11 @@ import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
     const {
-        blockId,
+        blockID,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-off-canvas-closer-block ${blockId}`,
+        className: `fb-off-canvas-menu-block ${blockID}`,
     });
     
     return (
