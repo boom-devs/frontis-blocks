@@ -1,10 +1,10 @@
 {
 	"apiVersion": 2,
-	"name": "frontis-blocks/off-canvas-menu",
-	"title": "Off-Canvas Menu",
+	"name": "frontis-blocks/off-canvas-closer",
+	"title": "Off-Canvas Closer",
 	"category": "frontis-blocks",
 	"icon": "menu-alt",
-	"description": "Add an off-canvas menu with a toggleable hamburger icon",
+	"description": "Add an off-canvas closer with a toggleable hamburger icon",
 	"textdomain": "frontis-blocks",
 	"attributes": {
 		"blockID": {
