@@ -1,3 +1,8 @@
+let defaultImageUrl = '';
+if (typeof FrontisBlocksData !== 'undefined') {
+    defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+}
+
 const attributes = {
     blockId: {
         type: "string",
@@ -12,15 +17,24 @@ const attributes = {
         default: [
             {
                 id: 'item-1',
-                title: 'Slider Item 1',
+                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageAlt: '',
+                marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
             {
                 id: 'item-2',
-                title: 'Slider Item 2',
+                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageAlt: '',
+                marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
             {
                 id: 'item-3',
-                title: 'Slider Item 3',
+                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageAlt: '',
+                marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
         ],
         items: {
@@ -30,9 +44,21 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                title: {
+                marqueeCarouselImageUrl: {
                     type: "string",
-                    default: "Slider Item"
+                    default: defaultImageUrl
+                },
+                marqueeCarouselImageAlt: {
+                    type: "string",
+                    default: ""
+                },
+                marqueeCarouselImageID: {
+                    type: "number",
+                    default: ""
+                },
+                marqueeCarouselTitle    : {
+                    type: "string",
+                    default: "Carousel Title"
                 },
             }
         }
