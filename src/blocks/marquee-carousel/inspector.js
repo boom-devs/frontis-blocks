@@ -17,7 +17,7 @@ import SortableItem from './sortableItem';
 import { SLIDER_TYPE } from "./constants/constants";
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId, onAddItem}) {
+export default function Inspector({ attributes, setAttributes, clientId}) {
     const { 
         blockId,
         sliderItems,
@@ -44,6 +44,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         }
     }, [clientId]);
 
+    let defaultImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
+
     const [sliderItemList, setSliderItemList] = useState(sliderItems);
 
     const handleDragEnd = (event) => {
@@ -57,27 +62,29 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
         }
     };
 
+
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${sliderItems.length + 1}`,
+            marqueeCarouselImageUrl: defaultImageUrl,
+            marqueeCarouselImageAlt: '',
+            marqueeCarouselImageID: '',
+        };
+        setAttributes({ sliderItems: [...sliderItems, newItem] });
+        setSliderItemList([...sliderItemList, newItem]);
+    };
+
     const handleChangeItem = (id, key, value) => {
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
-                if (key === 'normalBackgroundImageID') {
+                if (key === 'marqueeCarouselImageID') { 
                     // Get the full image data from WordPress media library
                     const image = wp.media.attachment(value).toJSON();
                     return {
                         ...item,
                         [key]: value,
-                        'normalBackgroundImageUrl': image.url,
-                        'normalBackgroundImageAlt': image.alt || ''
-                    };
-                }
-                if (key === 'hoverBackgroundImageID') {
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        [key]: value,
-                        'hoverBackgroundImageUrl': image.url,
-                        'hoverBackgroundImageAlt': image.alt || ''
+                        'marqueeCarouselImageUrl': image.url,
+                        'marqueeCarouselImageAlt': image.alt || ''
                     };
                 }
                 return { ...item, [key]: value };
@@ -138,7 +145,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onAddIt
                                                         </ul>
                                                     </SortableContext>
                                                 </DndContext>
-                                                <Button isPrimary onClick={onAddItem}>
+                                                <Button isPrimary onClick={handleAddItem}>
                                                     {__("Add Slide", "frontis-blocks")}
                                                 </Button>
                                             </div>
