@@ -941,12 +941,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'width': '100%',
 	};
 
-	widthSelectorsTablet[ `.is-root-container > .block-editor-block-list__block .frontis-blocks-editor-preview-mode-tablet.block-editor-block-list__block${ gbsWidthSelector } ` ] = {
+	widthSelectorsTablet[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ] = {
 		'max-width': generateCSSUnit( widthTabletFallback, customWidthUnits['Tablet'] ),
 		'width': '100%',
 	};
 
-	widthSelectorsMobile[ `.is-root-container > .block-editor-block-list__block .frontis-blocks-editor-preview-mode-mobile.block-editor-block-list__block${ gbsWidthSelector } ` ] = {
+	widthSelectorsMobile[ `.is-root-container > .block-editor-block-list__block .block-editor-block-list__block${ gbsWidthSelector } ` ] = {
 		'max-width': generateCSSUnit( widthMobileFallback, customWidthUnits['Mobile'] ),
 		'width': '100%',
 	};
