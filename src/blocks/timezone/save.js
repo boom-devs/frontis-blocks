@@ -2,73 +2,41 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-    const {
-        blockID,
-        menuPosition = 'left',
-        iconStyle = 'hamburger',
-    } = attributes;
-    
-    // Get the appropriate icon based on iconStyle
-    const getIcon = () => {
-        switch (iconStyle) {
-            case 'dots':
-                return (
-                    <div className="fb-menu-icon fb-dots-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-            case 'plus':
-                return (
-                    <div className="fb-menu-icon fb-plus-icon">
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-            case 'hamburger':
-            default:
-                return (
-                    <div className="fb-menu-icon fb-hamburger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-        }
-    };
-    
-    // Generate the position-specific class
-    const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
-    
+    const { blockID, location, officeHours, startTime, title, officeStatus } = attributes;
+
     const blockProps = useBlockProps.save({
-        className: `fb-off-canvas-menu-block ${blockID}`,
+        className: `fb-timezone-block ${blockID}`,
     });
     
-    const innerBlocksProps = useInnerBlocksProps.save({
-        className: 'fb-off-canvas-content',
-    });
+    // We'll add data attributes to the container that our frontend JS can use
+    const dataAttributes = {
+        'data-location': location || 'Dhaka, Bangladesh',
+        'data-office-hours': officeHours || '8',
+        'data-start-time': startTime || '9:00',
+        'data-title': title || '',
+        'data-office-status': officeStatus ? 'true' : 'false'
+    };
     
     return (
         <div {...blockProps}>
-            {/* Hamburger Icon Button */}
-            <div 
-                className="fb-menu-toggle-btn"
-                role="button"
-                tabIndex="0"
-                aria-expanded="false"
-                aria-label={__('Toggle menu', 'frontis-blocks')}
-            >
-                {getIcon()}
+            <div className="fb-timezone-container" {...dataAttributes}>
+                <div className="fb-timezone-header">
+                    <div className="fb-timezone-time">
+                        {/* This will be populated by frontend JS */}
+                        <span className="fb-timezone-time-display"></span>
+                        <span className="fb-timezone-timezone"></span>
+                    </div>
+                    <div className={`fb-timezone-status ${officeStatus ? 'open' : 'close'}`}>
+                        <span className="fb-timezone-status-badge">
+                            {officeStatus ? 
+                                <span><div className="circle pulse open"></div> Open</span> : 
+                                <span><div className="circle pulse close"></div> Close</span>
+                            }
+                        </span>
+                        <span className="fb-timezone-status-icon"></span>
+                    </div>
+                </div>
             </div>
-            
-            {/* Off-Canvas Menu Container */}
-            <div className={`fb-off-canvas-menu ${menuPositionClass}`}>
-                <div {...innerBlocksProps} />
-            </div>
-            
-            {/* Overlay */}
-            <div className="fb-menu-overlay"></div>
         </div>
     );
 }
