@@ -20,18 +20,21 @@ const attributes = {
                 marqueeCarouselImageUrl: defaultImageUrl,
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
             {
                 id: 'item-2',
                 marqueeCarouselImageUrl: defaultImageUrl,
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
             {
                 id: 'item-3',
                 marqueeCarouselImageUrl: defaultImageUrl,
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
+                marqueeCarouselTitle: 'Carousel Title',
             },
         ],
         items: {
@@ -52,6 +55,10 @@ const attributes = {
                 marqueeCarouselImageID: {
                     type: "number",
                     default: ""
+                },
+                marqueeCarouselTitle    : {
+                    type: "string",
+                    default: "Carousel Title"
                 },
             }
         }

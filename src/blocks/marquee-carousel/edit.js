@@ -56,7 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 // Apply proper width to slides to ensure multiple are visible
                     const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
                     slides.forEach(slide => {
-                        slide.style.width = '150px'; 
+                        slide.style.width = 'fit-content'; 
                     });
                 },
             },
@@ -98,6 +98,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
     ]);
 
+    const updateItem = (index, field, value) => {
+        const newItems = sliderItems.map((item, i) => {
+            if (i === index) {
+                return { ...item, [field]: value };
+            }
+            return item;
+        });
+        setAttributes({ sliderItems: newItems });
+    };
+
     return (
         <>
             <Inspector
@@ -111,9 +121,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                         {sliderItems.map((item, index) => (
                             <div key={item.id} className={`swiper-slide ${blockId}`}>
-                                <div className="fb-marquee-carousel-image-wrapper">
-                                    <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
-                                </div>
+                                {item.marqueeCarouselImageUrl && (
+                                    <div className="fb-marquee-carousel-image-wrapper">
+                                        <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
+                                    </div>
+                                )}
+                                {item.marqueeCarouselTitle && (
+                                    <div className="fb-marquee-carousel-title-wrapper">
+                                        <RichText
+                                            className="fb-marquee-carousel-title"
+                                            tagName="p"
+                                            value={item.marqueeCarouselTitle}
+                                            onChange={(value) => updateItem(index, 'marqueeCarouselTitle', value)}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>

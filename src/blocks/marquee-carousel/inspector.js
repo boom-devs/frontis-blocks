@@ -69,6 +69,7 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
             marqueeCarouselImageUrl: defaultImageUrl,
             marqueeCarouselImageAlt: '',
             marqueeCarouselImageID: '',
+            marqueeCarouselTitle: 'Carousel Title',
         };
         setAttributes({ sliderItems: [...sliderItems, newItem] });
         setSliderItemList([...sliderItemList, newItem]);
@@ -84,7 +85,7 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                         ...item,
                         [key]: value,
                         'marqueeCarouselImageUrl': image.url,
-                        'marqueeCarouselImageAlt': image.alt || ''
+                        'marqueeCarouselImageAlt': image.alt || '',
                     };
                 }
                 return { ...item, [key]: value };

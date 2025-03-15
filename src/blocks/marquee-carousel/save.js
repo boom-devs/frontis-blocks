@@ -49,9 +49,20 @@ export default function Save({ attributes }) {
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${blockId}`}>
+                            {item.marqueeCarouselImageUrl && (
                                 <div className="fb-marquee-carousel-image-wrapper">
                                     <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
                                 </div>
+                            )}
+                            {item.marqueeCarouselTitle && (
+                                <div className="fb-marquee-carousel-title-wrapper">
+                                    <RichText.Content
+                                        className="fb-marquee-carousel-title"
+                                        tagName="p"
+                                        value={item.marqueeCarouselTitle}
+                                    />
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>

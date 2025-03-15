@@ -58,6 +58,11 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         setglobalImageID={(value) => handleChangeItem(item.id, 'marqueeCarouselImageID', value)}
                         isImageSize = {false}
                     />
+                    <TextControl
+                        label={__("Title", "gutenslider-blocks")}
+                        value={item.marqueeCarouselTitle}
+                        onChange={(value) => handleChangeItem(item.id, 'marqueeCarouselTitle', value)}
+                    />
                 </BaseControl>
                 </div>
             )}
