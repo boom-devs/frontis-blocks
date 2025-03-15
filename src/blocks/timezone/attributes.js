@@ -3,9 +3,13 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	blockStyle: {
+		type: 'string',
+		default: ''
+	},
 	location: {
 		type: 'string',
-		default: 'Dhaka'
+		default: 'Dhaka, Bangladesh'
 	},
 	officeHours: {
 		type: 'number',
@@ -18,6 +22,10 @@ const attributes = {
 	title: {
 		type: 'string',
 		default: 'Office Status'
+	},
+	officeStatus: {
+		type: 'boolean',
+		default: true
 	},
 	timezones: {
 		type: 'array',

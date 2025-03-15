@@ -7,7 +7,7 @@ import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { blockID, location, officeHours, startTime, title } = attributes;
+	const { blockID, location, officeHours, startTime, title, officeStatus } = attributes;
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	const blockProps = useBlockProps({
@@ -47,7 +47,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		// Use the location from attributes if available, otherwise default
 		const displayLocation = attributes.location || 'Dhaka, Bangladesh';
 
-		const time = `${hours}:${minutes}:${seconds} ${ampm}`;
+		const time = `${hours}:${minutes} ${ampm}`;
 		return `${displayLocation} • ${time}`;
 	}
 
@@ -87,8 +87,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			const hoursLeft = Math.floor(minutesLeft / 60);
 			const remainingMinutes = minutesLeft % 60;
 
+			setAttributes({ officeStatus: true });
+
 			return `Will be finished in ${hoursLeft}:${remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes} Hrs`;
 		} else {
+			setAttributes({ officeStatus: false });
 			return `Office is closed. Opens at ${startHour}:${startMinute < 10 ? '0' + startMinute : startMinute}`;
 		}
 	}
@@ -106,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className="fb-timezone-time">
 						{getCurrentTime()} <span className="fb-timezone-timezone">{getTimezone()}</span>
 					</div>
-					<div className="fb-timezone-status">{getOfficeStatus()}</div>
+					<div className={`fb-timezone-status ${officeStatus ? 'open' : 'close'}`}><span className="fb-timezone-status-badge">{officeStatus ? <span > <div className="circle pulse open"></div> Open</span> : <span> <div className="circle pulse close"></div>Close</span>}</span> <span className="fb-timezone-status-icon">{getOfficeStatus()}</span></div>
 				</div>
 			</div>
 		</div>
