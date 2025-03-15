@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         init: function () {
                             const slides = sliderContainer.querySelectorAll('.swiper-slide');
                             slides.forEach(slide => {
-                                slide.style.width = '150px';
+                                slide.style.width = 'fit-content';
                             });
                         }
                     };
