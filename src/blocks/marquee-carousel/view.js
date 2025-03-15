@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initializeSliders = () => {
-        // Select all slider containers
         const sliders = document.querySelectorAll('.fb-marquee-carousel-container');
         
         sliders.forEach((sliderContainer) => {
             try {
-                // Get the Swiper settings from the data attribute
                 const swiperSettings = sliderContainer.dataset.swiperSettings;
                 
                 if (swiperSettings) {
                     const settings = JSON.parse(swiperSettings);
                     
-                    // Initialize Swiper with parsed settings
+                    settings.on = {
+                        init: function () {
+                            const slides = sliderContainer.querySelectorAll('.swiper-slide');
+                            slides.forEach(slide => {
+                                slide.style.width = '150px';
+                            });
+                        }
+                    };
+
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
                 }
             } catch (error) {
@@ -20,10 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Initialize sliders on page load
     initializeSliders();
 
-    // Re-initialize sliders when new blocks are added (useful for dynamic content)
     if (window.wp && window.wp.hooks) {
         window.wp.hooks.addAction('blocks.blockRendered', 'frontis-marquee-carousel', () => {
             initializeSliders();
