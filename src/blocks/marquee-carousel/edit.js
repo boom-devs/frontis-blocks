@@ -4,11 +4,6 @@ import {
     useBlockProps,
     BlockControls,
 } from '@wordpress/block-editor';
-import {
-    Toolbar,
-    ToolbarGroup,
-    ToolbarButton
-} from '@wordpress/components';
 import { useEffect, useRef } from '@wordpress/element';
 import Inspector from './inspector';
 
@@ -29,7 +24,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `guten-slider-container ${blockId}`,
+        className: `fb-marquee-carousel-container ${blockId}`,
     });
 
     /**
@@ -44,19 +39,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     
         const swiperOptions = {
 
-            // Common settings
-            slidesPerView: 4,
-            spaceBetween: 30,
-            loop: infiniteLoop,
-            effect: 'slide',
-            autoplay: autoplay ? {
-                delay: autoplayDelay,
-                pauseOnMouseEnter: pauseOnHover,
-                disableOnInteraction: false,
-            } : false,
-            speed: speed,
-            allowTouchMove: allowTouchMove,
-
+           // Marquee style settings
+           spaceBetween: 0,
+           centeredSlides: true,
+           speed: 2000,
+           autoplay: {
+             delay: 1,
+           },
+           loop: true,
+           slidesPerView:'auto',
+           allowTouchMove: false,
+           disableOnInteraction: true,
+           // Make sure slides have proper CSS width applied
+           on: {
+                init: function() {
+                // Apply proper width to slides to ensure multiple are visible
+                    const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
+                    slides.forEach(slide => {
+                        slide.style.width = 'fit-content'; 
+                    });
+                },
+            },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -95,38 +98,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
     ]);
 
-    const handleAddItem = () => {
-        const newItem = {
-            id: `item-${sliderItems.length + 1}`,
-            title: `Slider Item ${sliderItems.length + 1}`,
-        };
-        setAttributes({ sliderItems: [...sliderItems, newItem] });
-
-        // Ensure Swiper updates with new slides
-        setTimeout(() => {
-            if (swiperRef.current && swiperRef.current.swiper) {
-                swiperRef.current.swiper.update(); 
-                swiperRef.current.swiper.pagination.update();
-                swiperRef.current.swiper.navigation.update();
-            }
-        }, 100);
-    };
-
-    const renderSliderToolbarControls = () => {
-        return (
-            <BlockControls>
-                <ToolbarGroup>
-                    <ToolbarButton
-                        icon="plus"
-                        label={ __( 'Add New Slide', 'gutenslider-blocks' ) }
-                        onClick={handleAddItem}
-                    />
-                </ToolbarGroup>
-            </BlockControls>
-        );
-    };
-
-    // Add this function inside the Edit component
     const updateItem = (index, field, value) => {
         const newItems = sliderItems.map((item, i) => {
             if (i === index) {
@@ -143,33 +114,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 attributes={attributes}
                 setAttributes={setAttributes}
                 clientId={clientId}
-                onAddItem={handleAddItem}
             />
 
-            {renderSliderToolbarControls()}
-
             <div {...blockProps}>
-                <div className="swiper" ref={swiperRef}>
+                <div className="swiper swiper-container" ref={swiperRef}>
                     <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                         {sliderItems.map((item, index) => (
-                            <div key={item.id} className={`swiper-slide`}>
-                                <div className={`${blockId} fb-marquee-carousel-content-wrapper ${item.id}`}>
-                                    <div className="fb-marquee-carousel-content-inner-wrapper">
-                                        <div className="fb-marquee-carousel-list-item">
-                                            <div className="fb-marquee-carousel-list-content">
-                                                <div className="fb-marquee-carousel-title-wrapper">
-                                                    <RichText
-                                                        tagName="p"
-                                                        className="fb-marquee-carousel-title"
-                                                        value={item.title}
-                                                        onChange={(value) => updateItem(index, 'title', value)}
-                                                        placeholder="Enter title"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div key={item.id} className={`swiper-slide ${blockId}`}>
+                                {item.marqueeCarouselImageUrl && (
+                                    <div className="fb-marquee-carousel-image-wrapper">
+                                        <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
                                     </div>
-                                </div>
+                                )}
+                                {item.marqueeCarouselTitle && (
+                                    <div className="fb-marquee-carousel-title-wrapper">
+                                        <RichText
+                                            className="fb-marquee-carousel-title"
+                                            tagName="p"
+                                            value={item.marqueeCarouselTitle}
+                                            onChange={(value) => updateItem(index, 'marqueeCarouselTitle', value)}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>
