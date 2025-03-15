@@ -1,154 +1,122 @@
+/* Base styles for the loop builder */
 .fb-loop-builder-block {
-  margin-bottom: 2em;
-  
-  .fb-loop-content {
-      &.layout-flex {
-          display: flex;
-          flex-wrap: wrap;
-          margin: 0 -15px;
-          
-          .block-editor-inner-blocks {
-              width: 100%;
-          }
-          
-          .wp-block-post-template {
-              display: flex;
-              flex-wrap: wrap;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              
-              > li {
-                  padding: 0 15px;
-                  margin-bottom: 30px;
-                  
-                  // Default column settings
-                  width: calc(33.333% - 30px);
-                  
-                  // Adjust for different column counts
-                  .columns-1 & {
-                      width: calc(100% - 30px);
-                  }
-                  
-                  .columns-2 & {
-                      width: calc(50% - 30px);
-                  }
-                  
-                  .columns-3 & {
-                      width: calc(33.333% - 30px);
-                  }
-                  
-                  .columns-4 & {
-                      width: calc(25% - 30px);
-                  }
-                  
-                  .columns-5 & {
-                      width: calc(20% - 30px);
-                  }
-                  
-                  .columns-6 & {
-                      width: calc(16.666% - 30px);
-                  }
-              }
-          }
-      }
-      
-      &.layout-list {
-          .wp-block-post-template {
-              display: block;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              
-              > li {
-                  margin-bottom: 30px;
-                  padding-bottom: 30px;
-                  border-bottom: 1px solid #eee;
-                  
-                  &:last-child {
-                      border-bottom: none;
-                  }
-              }
-          }
-      }
-  }
-  
-  .fb-loop-builder-placeholder {
-      padding: 40px;
-      text-align: center;
-      background-color: #f8f9fa;
-      border: 1px dashed #ccc;
-  }
-  
-  .fb-inspector-control {
-      .fb-parent-tab-panel {
-          .components-tab-panel__tabs {
-              display: flex;
-              border-bottom: 1px solid #e0e0e0;
-              
-              .components-tab-panel__tabs-item {
-                  flex: 1;
-                  justify-content: center;
-                  font-weight: 500;
-                  padding: 8px 12px;
-                  
-                  &.active-tab {
-                      border-bottom: 2px solid #007cba;
-                  }
-              }
-          }
-      }
-  }
-}
-
-// Grid Layout
-.fb-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(var(--grid-columns, 3), 1fr);
-    gap: 20px;
+    --grid-columns: 3;
+    margin-bottom: 20px;
     
-    .wp-block-post {
-        margin: 0;
+    /* Grid Layout */
+    .fb-grid-layout {
+        display: grid !important;
+        grid-template-columns: repeat(var(--grid-columns, 3), 1fr) !important;
+        gap: 20px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        
+        &.is-flex-container {
+            flex-wrap: unset !important;
+        }
+        
+        .wp-block-post {
+            margin: 0 !important;
+            width: 100% !important;
+        }
     }
-}
-
-// List Layout
-.fb-list-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     
-    .wp-block-post {
-        margin: 0;
+    /* List Layout */
+    .fb-list-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        
+        &.is-flex-container {
+            flex-wrap: unset !important;
+        }
+        
+        .wp-block-post {
+            margin: 0 !important;
+            width: 100% !important;
+            
+            /* Optional: Style posts as list items */
+            display: flex;
+            flex-direction: column;
+            
+            @media (min-width: 768px) {
+                flex-direction: row;
+                align-items: flex-start;
+                
+                .wp-block-post-featured-image {
+                    flex: 0 0 30%;
+                    margin-right: 20px;
+                }
+                
+                .wp-block-post-title,
+                .wp-block-post-excerpt {
+                    flex: 1;
+                }
+            }
+        }
+    }
+    
+    /* Slider Layout */
+    .fb-slider-layout {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 20px !important;
+        margin: 0 !important;
+        padding: 0 0 20px 0 !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+        
+        &::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        &.is-flex-container {
+            flex-wrap: nowrap !important;
+        }
+        
+        .wp-block-post {
+            flex: 0 0 calc(100% / var(--grid-columns, 3) - 20px) !important;
+            scroll-snap-align: start !important;
+            margin: 0 !important;
+            min-width: 280px !important;
+        }
+    }
+    
+    /* Slider Navigation */
+    .fb-slider-nav {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+        
+        button {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            
+            &:hover {
+                background-color: #e0e0e0;
+            }
+        }
     }
 }
 
-// Slider Layout
-.fb-slider-layout {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 20px;
-    padding-bottom: 20px;
-    
-    .wp-block-post {
-        flex: 0 0 calc(100% / var(--grid-columns, 3) - 20px);
-        scroll-snap-align: start;
-        margin: 0;
-    }
-}
-
-// Make sure post template has proper styling
-.wp-block-post-template {
-    margin: 0 !important;
-    padding: 0 !important;
-    
-    &.is-flex-container {
-        display: inherit;
-        flex-wrap: inherit;
-        gap: inherit;
+/* Fix for WordPress default post template styles */
+.wp-block-post-template.is-flex-container {
+    &.fb-grid-layout,
+    &.fb-list-layout,
+    &.fb-slider-layout {
+        gap: 20px !important;
     }
 }

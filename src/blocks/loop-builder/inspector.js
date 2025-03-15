@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
+	InnerBlocks
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -100,23 +101,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 
+	// Update display layout
 	const updateDisplayLayout = (newValue) => {
-		// Update the core/query block's displayLayout attribute
+		console.log('Updating display layout:', newValue);
 		setAttributes({
 			displayLayout: {
 				...displayLayout,
 				...newValue,
 			},
 		});
-
-		if (newValue.type === 'slider') {
-			// You might want to add additional slider-specific settings here
-		}
 	};
 
 	return (
 		<>
 			<style>
+
 			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
@@ -188,11 +187,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												))}
 											</PanelBody>
 										)}
-									</>
-								)}
-								{tab.name === "styles" && (
-									<>
-										<PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
+
+										<PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={false}>
 											<SelectControl
 												label={__("Layout Type", "frontis-blocks")}
 												value={displayLayout.type}
@@ -210,6 +206,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												/>
 											)}
 										</PanelBody>
+									</>
+								)}
+								{tab.name === "styles" && (
+									<>
+
 									</>
 								)}
 								{tab.name === "advanced" && (
