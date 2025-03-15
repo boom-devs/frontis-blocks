@@ -56,8 +56,23 @@ registerBlockVariation('core/query', {
     allowedControls: ['inherit', 'order', 'taxQuery', 'search'],
 });
 
+// Object to store Swiper instances
+const swiperInstances = {};
+
+// Function to destroy Swiper instance
+const destroySwiperInstance = (clientId) => {
+    if (swiperInstances[clientId]) {
+        console.log('Destroying Swiper instance for', clientId);
+        swiperInstances[clientId].destroy(true, true);
+        delete swiperInstances[clientId];
+    }
+};
+
 // Function to initialize Swiper
-const initializeSwiper = (clientId) => {
+const initializeSwiper = (clientId, columns = 3) => {
+    // Destroy existing instance if it exists
+    destroySwiperInstance(clientId);
+    
     // Wait for DOM to be ready
     setTimeout(() => {
         // Find the post template element in the editor
@@ -67,12 +82,21 @@ const initializeSwiper = (clientId) => {
         const postTemplateElement = blockElement.querySelector('.wp-block-post-template');
         if (!postTemplateElement) return;
         
-        // Check if Swiper is already initialized
-        if (postTemplateElement.classList.contains('swiper-initialized')) return;
+        // Check if post template has the slider class
+        if (!postTemplateElement.classList.contains('fb-slider-layout')) {
+            return;
+        }
         
         // Check if Swiper is available
         if (window.Swiper) {
             console.log('Initializing Swiper for', clientId);
+            
+            // Remove previous Swiper container if it exists
+            const existingSwiper = postTemplateElement.closest('.swiper');
+            if (existingSwiper) {
+                existingSwiper.parentNode.insertBefore(postTemplateElement, existingSwiper);
+                existingSwiper.remove();
+            }
             
             // Add necessary Swiper classes
             postTemplateElement.classList.add('swiper-wrapper');
@@ -108,8 +132,8 @@ const initializeSwiper = (clientId) => {
             swiperContainer.appendChild(pagination);
             
             // Initialize Swiper
-            new window.Swiper(swiperContainer, {
-                slidesPerView: 3,
+            const swiper = new window.Swiper(swiperContainer, {
+                slidesPerView: columns > 0 ? Math.min(columns, 3) : 3,
                 spaceBetween: 20,
                 navigation: {
                     nextEl: '.swiper-button-next',
@@ -120,6 +144,9 @@ const initializeSwiper = (clientId) => {
                     clickable: true,
                 }
             });
+            
+            // Store the instance
+            swiperInstances[clientId] = swiper;
         } else {
             console.error('Swiper is not available');
         }
@@ -139,9 +166,17 @@ addFilter(
                 // Initialize Swiper if layout type is slider
                 useEffect(() => {
                     if (attributes.displayLayout?.type === 'slider') {
-                        initializeSwiper(clientId);
+                        initializeSwiper(clientId, attributes.displayLayout.columns);
+                    } else {
+                        // Clean up Swiper if layout type changes from slider
+                        destroySwiperInstance(clientId);
                     }
-                }, [attributes.displayLayout?.type, clientId]);
+                    
+                    // Clean up on unmount
+                    return () => {
+                        destroySwiperInstance(clientId);
+                    };
+                }, [attributes.displayLayout?.type, attributes.displayLayout?.columns, clientId]);
                 
                 return (
                     <>
