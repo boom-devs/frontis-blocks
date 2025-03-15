@@ -19,7 +19,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		officeHours,
 		startTime,
 		timezones,
-		title
+		title,
+		officeStatus
 	} = attributes;
 
 
@@ -43,6 +44,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	  }, []);
 
 	  const allBlockStyle = useMemo(() => `
+	  	.fb-timezone-container {
+			display: inline-block;
+		}
 		.fb-timezone-container .fb-timezone-time {
 			width: auto;
 			background: #000000;
@@ -53,12 +57,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			font-size: 14px;
 			font-weight: 500;
 			font-family: 'Radio Canada Big';
+			width: 260px;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			gap: 2px;
 		}
 		.fb-timezone-container .fb-timezone-time .fb-timezone-timezone {
 			color: #717680;
 		}
-	  `, [attributes]);
-	
+		.fb-timezone-container .fb-timezone-header {
+			display: flex;
+			width: fit-content;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+		.fb-timezone-status {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 14px;
+			font-weight: 500;
+			color: #12B76A;
+			border-radius: 24px;
+			padding-right: 12px;
+			overflow: hidden;
+			font-family: 'Radio Canada Big';
+		}
+		.fb-timezone-status .fb-timezone-status-badge {
+			height: 100%;
+			align-items: center;
+			display: flex;
+			padding: 3px 12px;
+			border-radius: 24px;
+			text-transform: uppercase;
+		}
+
+		.fb-timezone-status .fb-timezone-status-badge > span {
+			display: flex;
+			align-items: center;
+			gap: 4px;
+		}
+		.fb-timezone-status.open {
+			border: 1px solid #12B76A;
+		}
+		.fb-timezone-status.close {
+			border: 1px solid #D92D20;
+		}
+		.fb-timezone-status.open .fb-timezone-status-badge {
+			background-color: #D1FADF;
+		}
+		.fb-timezone-status.close .fb-timezone-status-badge {
+			background-color: #FEE4E2;
+		}
+
+		.fb-timezone-status.close {
+			color: #D92D20;
+		}
+		
+	  `);
+
+
+	  useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`});
+    }, [allBlockStyle] );
+
+	//   #F04438
 	return (
 		<>
 			<style>
