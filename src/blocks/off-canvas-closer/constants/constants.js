@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { Dashicon } from '@wordpress/components';
 
 export const ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
 	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 ];
