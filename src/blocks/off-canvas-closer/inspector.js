@@ -29,6 +29,8 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
+
 
 		offCanvasIconAlign,
         offCanvasIcon,
@@ -419,7 +421,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	`, [
 		blockId,
-
+		blockStyle,
 		offCanvasIconAlign,
         offCanvasIcon,
 		/** Start button Icon Image */
@@ -493,6 +495,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		offCanvasIconZIndex,
 		
 	]);
+
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle]);
 
 
 	const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
@@ -753,7 +759,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										{(offCanvasIconAlign === 'image') &&(
 											<PanelBody
 												title={__("Image Styles", "frontis-blocks")}
-												initialOpen={false}
+												initialOpen={true}
 											>
 												<FB_Range
 													min={1}

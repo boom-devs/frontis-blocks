@@ -3,10 +3,14 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+    blockStyle: {
+        type: 'string',
+        default: '',
+    },
 	/** Icon Settings */
 	offCanvasIconAlign: {
 		type: "string",
-		default: "icon-text",
+		default: "none",
 	},
 	offCanvasIcon: {
 		type: 'string',
@@ -66,9 +70,9 @@ const attributes = {
     offCanvasIconSize: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '50',
+            Tablet: '50',
+            Mobile: '30'
         }
     },
     offCanvasIconSizeUnits: {
@@ -85,7 +89,7 @@ const attributes = {
     },
     offCanvasIconColor: {
         type: "string",
-        default: "#fff"
+        default: "#000"
     },
     offCanvasIconHoverColor: {
         type: 'string',
@@ -98,7 +102,7 @@ const attributes = {
     },
     offCanvasIconBgColor : {
         type: "string",
-        default: "#399CFF"
+        default: ""
     },
     offCanvasIconBgHoverColor: {
         type: 'string',
@@ -117,28 +121,28 @@ const attributes = {
     offCanvasIconPaddingDesktop: {
         type: "object", 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconPaddingTablet: {
         type: "object", 
         default: {
-            top: '15', 
-            bottom: '15',
-            left: '20',
-            right: '20',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconPaddingMobile: {
         type: "object", 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconPaddingLink : {
@@ -211,28 +215,28 @@ const attributes = {
     offCanvasIconBorderRadiusDesktop: {
         type: "object", 
         default: {
-            top: '10',
-            bottom: '10',
-            left: '10',
-            right: '10',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconBorderRadiusTablet: {
         type: "object", 
         default: {
-            top: '10', 
-            bottom: '10',
-            left: '10',
-            right: '10',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconBorderRadiusMobile: {
         type: "object", 
         default: {
-            top: '10',
-            bottom: '10',
-            left: '10',
-            right: '10',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     offCanvasIconBorderRadiusLink : {
