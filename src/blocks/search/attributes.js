@@ -6,6 +6,10 @@ const attributes = {
 	blockStyle: {
 		type: 'string',
 		default: ''
+	},
+	searchActive: {
+		type: 'boolean',
+		default: false
 	}
 };
 
