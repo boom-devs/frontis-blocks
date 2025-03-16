@@ -22,6 +22,7 @@
         font-size: 18px;
         font-weight: 400;
         color: #000;
+        cursor: pointer;
     }
 
     .fb-search-block-wrapper-inner-input-field {
@@ -33,6 +34,14 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
+
+        form {
+            height: 100%;
+
+            .wp-block-search__inside-wrapper {
+                height: 100%;
+            }
+        }
 
         input {
             height: 100%;
@@ -46,7 +55,7 @@
 
         // With transition
         &.active {
-            width: 100%;
+            width: 1080px;
             opacity: 1;
             visibility: visible;
         }

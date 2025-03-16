@@ -33,7 +33,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				</div>
 
 				<div className={`fb-search-block-wrapper-inner-input-field ${searchActive ? 'active' : ''}`}>
-					<input type="text" placeholder="Search" />
+					<form role="search" method="get" action={frontisBlocksAdmin.home_url} >
+						<div class="wp-block-search__inside-wrapper ">
+							<input class="wp-block-search__input" placeholder='Search...' id="wp-block-search__input-2" type="search" name="s" required="" />
+						</div>
+					</form>
 				</div>
 			</div>
 
