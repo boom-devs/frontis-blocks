@@ -21,6 +21,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-off-canvas-closer-block ${blockId}`,
 	});
 
+
+	const closeMenu = () => {
+		const menu = document.querySelector('.fb-off-canvas-menu');
+		menu.classList.remove('open');
+		overlay.classList.remove('active');
+		document.body.classList.remove('fb-menu-open');
+		toggleBtn.setAttribute('aria-expanded', 'false');
+	}
+
 	return (
 		<>
 		    <Inspector
@@ -32,6 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<button 
 					className="fb-off-canvas-closer"
 					aria-label={__('Close menu', 'frontis-blocks')}
+					onClick={() => closeMenu()}
 				>
 					{offCanvasIconAlign === 'icon-text' && offCanvasIcon ? (
 						<div className={`fb-off-canvas-closer-icon-wrapper`}>
