@@ -5,6 +5,9 @@ export default function Save({ attributes }) {
         blockId,
         sliderItems,
 
+        slideWidth,
+        slideWidthUnits,
+
         autoplay,
         autoplayDirection,
         speed,
@@ -29,6 +32,7 @@ export default function Save({ attributes }) {
            slidesPerView:'auto',
            allowTouchMove: false,
            disableOnInteraction: true,
+
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -40,8 +44,10 @@ export default function Save({ attributes }) {
             } : false,
     });
 
+    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+
     return (
-        <div {...blockProps} data-swiper-settings={swiperSettings}>
+        <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth}>
             <div className="swiper">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
