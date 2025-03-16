@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { 
@@ -17,17 +17,13 @@ import SortableItem from './sortableItem';
 import { SLIDER_TYPE } from "./constants/constants";
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId}) {
+export default function Inspector({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem }) {
     const { 
         blockId,
         sliderItems,
         blockStyle,
         
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
-        autoplay,
-        autoplayDelay,
+        autoplayDirection,
         speed,
         showNavigation,
         showPagination,
@@ -44,75 +40,40 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
         }
     }, [clientId]);
 
-    let defaultImageUrl = '';
-    if (typeof FrontisBlocksData !== 'undefined') {
-        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
-    }
-
-    const [sliderItemList, setSliderItemList] = useState(sliderItems);
-
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (active && over && active.id !== over.id) {
-            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
-            const newIndex = sliderItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
-            setAttributes({ sliderItems: updatedItems });
-            setSliderItemList(updatedItems);
-        }
-    };
 
 
-    const handleAddItem = () => {
-        const newItem = {
-            id: `item-${sliderItems.length + 1}`,
-            marqueeCarouselImageUrl: defaultImageUrl,
-            marqueeCarouselImageAlt: '',
-            marqueeCarouselImageID: '',
-            marqueeCarouselTitle: 'Carousel Title',
-        };
-        setAttributes({ sliderItems: [...sliderItems, newItem] });
-        setSliderItemList([...sliderItemList, newItem]);
-    };
+    /** Start Slider Item Color Style */
+    // const sliderItemCStyle = useMemo(() => { 
+    //     let style = '';
+    //     sliderItems.forEach(item => {
+    //         if (item.showContentSwitcher) {
+    //             style += 'display: block; ';
+    //             style += '.fb-marquee-carousel-hover-text-wrapper { display: none; position: absolute; top: 0; left: 0; width: 100%; transition: opacity 0.3s ease-in-out; } ';
+    //             style += '.fb-marquee-carousel-text-wrapper { transition: opacity 0.3s ease-in-out; } ';
+    //             style += '.fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-text-wrapper { opacity: 0; } ';
+    //             style += '.fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-hover-text-wrapper { display: block; opacity: 1; } ';
+    //         } else {
+    //             style += 'display: none; ';
+    //         }
+    //     });
+    //     return style;
+    // }, [sliderItems, blockId]);
 
-    const handleChangeItem = (id, key, value) => {
-        const updatedItems = sliderItemList.map(item => {
-            if (item.id === id) {
-                if (key === 'marqueeCarouselImageID') { 
-                    // Get the full image data from WordPress media library
-                    const image = wp.media.attachment(value).toJSON();
-                    return {
-                        ...item,
-                        [key]: value,
-                        'marqueeCarouselImageUrl': image.url,
-                        'marqueeCarouselImageAlt': image.alt || '',
-                    };
-                }
-                return { ...item, [key]: value };
-            }
-            return item;
-        });
-        
-        setSliderItemList(updatedItems);
-        setAttributes({ sliderItems: updatedItems });
-    };
 
-    const handleDeleteItem = (id) => {
-        const updatedItems = sliderItemList.filter(item => item.id !== id);
-        setAttributes({ sliderItems: updatedItems });
-        setSliderItemList(updatedItems);
-    };
+    
+    // useEffect(() => {
+    //     setAttributes({blockStyle: `${sliderItemCStyle}`.replace(/\s+/g, ' ').trim()});  
+    // }, [sliderItemCStyle]);
 
-    //Sync sliderItemList with attributes.sliderItems
-    useEffect(() => {
-        setAttributes({ sliderItems: sliderItemList });
-    }, [sliderItemList, setAttributes]);
-
+    // const editorStyle = `${sliderItemCStyle}`.replace(/\s+/g, ' ').trim();
 
 
     return (
 
         <>
+            {/* <style>
+            	{editorStyle}
+            </style> */}
             <InspectorControls>
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -140,6 +101,7 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                                                                     item={item}
                                                                     handleChangeItem={handleChangeItem}
                                                                     handleDeleteItem={handleDeleteItem}
+                                                                    handleDuplicateItem={handleDuplicateItem}
                                                                     index={index}
                                                                 />
                                                             ))}
@@ -155,39 +117,6 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                                             title={__("General Settings", "frontis-blocks")} 
                                             initialOpen={false}
                                         >
-                                            <ToggleControl
-                                                label={__("Infinite Loop", "frontis-blocks")}
-                                                checked={infiniteLoop}
-                                                onChange={(value) => setAttributes({ infiniteLoop: value })}
-                                            />
-
-                                            <ToggleControl
-                                                label={__("Allow Touch Move", "frontis-blocks")}
-                                                checked={allowTouchMove}
-                                                onChange={(value) => setAttributes({ allowTouchMove: value })}
-                                            />
-
-                                            <ToggleControl
-                                                label={__("Pause on Hover", "frontis-blocks")}
-                                                checked={pauseOnHover}
-                                                onChange={(value) => setAttributes({ pauseOnHover: value })}
-                                            />
-
-                                            <ToggleControl
-                                                label={__("Enable Autoplay", "frontis-blocks")}
-                                                checked={autoplay}
-                                                onChange={(value) => setAttributes({ autoplay: value })}
-                                            />
-
-                                            <RangeControl
-                                                label={__("Autoplay Delay (ms)", "frontis-blocks")}
-                                                value={autoplayDelay}
-                                                onChange={(value) => setAttributes({ autoplayDelay: value })}
-                                                min={500}
-                                                max={10000}
-                                                step={100}
-                                            />
-
                                             <RangeControl
                                                 label={__("Transition Speed (ms)", "frontis-blocks")}
                                                 value={speed}
@@ -195,18 +124,6 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                                                 min={100}
                                                 max={5000}
                                                 step={100}
-                                            />
-
-                                            <ToggleControl
-                                                label={__("Show Navigation", "frontis-blocks")}
-                                                checked={showNavigation}
-                                                onChange={(value) => setAttributes({ showNavigation: value })}
-                                            />
-
-                                            <ToggleControl
-                                                label={__("Show Pagination", "frontis-blocks")}
-                                                checked={showPagination}
-                                                onChange={(value) => setAttributes({ showPagination: value })}
                                             />
                                             
                                         </PanelBody>
@@ -216,16 +133,7 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Carousel Styles", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Block Style", "frontis-blocks")}
-                                                value={blockStyle}
-                                                options={[
-                                                    { label: __("Default", "frontis-blocks"), value: "" },
-                                                    { label: __("Style 1", "frontis-blocks"), value: "style-1" },
-                                                    { label: __("Style 2", "frontis-blocks"), value: "style-2" },
-                                                ]}
-                                                onChange={(value) => setAttributes({ blockStyle: value })}
-                                            />
+
                                         </PanelBody>
                                     </>
                                 )}

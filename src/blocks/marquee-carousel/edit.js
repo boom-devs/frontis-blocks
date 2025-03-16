@@ -4,7 +4,9 @@ import {
     useBlockProps,
     BlockControls,
 } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { useState, useEffect, useRef } from '@wordpress/element';
+import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -12,11 +14,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         blockId,
         sliderItems,
 
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
         autoplay,
-        autoplayDelay,
+        autoplayDirection,
         speed,
         showNavigation,
         showPagination,
@@ -26,6 +25,75 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `fb-marquee-carousel-container ${blockId}`,
     });
+
+    const [sliderItemList, setSliderItemList] = useState(sliderItems);
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = sliderItems.findIndex(item => item.id === active.id);
+            const newIndex = sliderItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(sliderItems, oldIndex, newIndex);
+            setAttributes({ sliderItems: updatedItems });
+            setSliderItemList(updatedItems);
+        }
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = sliderItems.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${sliderItems.length + 1}` };
+            setAttributes({ sliderItems: [...sliderItems, newItem] });
+            setSliderItemList([...sliderItemList, newItem]);
+        }
+    };
+
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${sliderItems.length + 1}`,
+            marqueeCarouselImageUrl: '',
+            marqueeCarouselImageAlt: '',
+            marqueeCarouselImageID: '',
+            showContentSwitcher: true,
+            marqueeCarouselText: 'Carousel Text',
+            marqueeCarouseHoverText: '',
+        };
+        setAttributes({ sliderItems: [...sliderItems, newItem] });
+        setSliderItemList([...sliderItemList, newItem]);
+    };
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = sliderItemList.map(item => {
+            if (item.id === id) {
+                if (key === 'marqueeCarouselImageID') { 
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'marqueeCarouselImageUrl': image.url, 
+                        'marqueeCarouselImageAlt': image.alt || '',
+                    };
+                }
+                return { ...item, [key]: value };
+            }
+            return item;
+        });
+        
+        setSliderItemList(updatedItems);
+        setAttributes({ sliderItems: updatedItems });
+    };
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = sliderItemList.filter(item => item.id !== id);
+        setAttributes({ sliderItems: updatedItems });
+        setSliderItemList(updatedItems);
+    };
+
+    //Sync sliderItemList with attributes.sliderItems
+    useEffect(() => {
+        setAttributes({ sliderItems: sliderItemList });
+    }, [sliderItemList, setAttributes]);
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -42,7 +110,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            // Marquee style settings
            spaceBetween: 0,
            centeredSlides: true,
-           speed: 2000,
+           speed: speed,
            autoplay: {
              delay: 1,
            },
@@ -88,15 +156,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             console.error('Swiper initialization error:', error);
         }
     }, [
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
         autoplay,
-        autoplayDelay,
+        autoplayDirection,
         speed,
         showNavigation,
         showPagination,
     ]);
+
+
+    const renderSliderToolbarControls = () => {
+        return (
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon="plus"
+                        label={ __( 'Add New Slide', 'frontis-blocks' ) } 
+                        onClick={handleAddItem}
+                    />
+                    <ToolbarButton
+                        icon="admin-page"
+                        label={ __( 'Duplicate Slide', 'frontis-blocks' ) } 
+                        onClick={() => handleDuplicateItem(sliderItems[sliderItems.length - 1].id)}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+        );
+    };
 
     const updateItem = (index, field, value) => {
         const newItems = sliderItems.map((item, i) => {
@@ -114,7 +199,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 attributes={attributes}
                 setAttributes={setAttributes}
                 clientId={clientId}
+                handleDragEnd={handleDragEnd}
+                handleAddItem={handleAddItem}
+                handleChangeItem={handleChangeItem}
+                handleDeleteItem={handleDeleteItem}
+                handleDuplicateItem={handleDuplicateItem}
             />
+
+            {renderSliderToolbarControls()}
 
             <div {...blockProps}>
                 <div className="swiper swiper-container" ref={swiperRef}>
@@ -126,15 +218,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
                                     </div>
                                 )}
-                                {item.marqueeCarouselTitle && (
-                                    <div className="fb-marquee-carousel-title-wrapper">
-                                        <RichText
-                                            className="fb-marquee-carousel-title"
-                                            tagName="p"
-                                            value={item.marqueeCarouselTitle}
-                                            onChange={(value) => updateItem(index, 'marqueeCarouselTitle', value)}
-                                        />
-                                    </div>
+                                {item.showContentSwitcher && (
+                                    <>
+                                        <div className="fb-marquee-carousel-content-wrapper">
+                                            <div className="fb-marquee-carousel-content">
+                                                {item.marqueeCarouselText && (
+                                                    <RichText
+                                                        className="fb-marquee-carousel-text"
+                                                        tagName="div"
+                                                        value={item.marqueeCarouselText}
+                                                        onChange={(value) => updateItem(index, 'marqueeCarouselText', value)}
+                                                    />
+                                                )}
+                                                {item.marqueeCarouseHoverText && (
+                                                    <RichText
+                                                        className="fb-marquee-carousel-hover-text"
+                                                        tagName="div"
+                                                        value={item.marqueeCarouseHoverText}
+                                                        onChange={(value) => updateItem(index, 'marqueeCarouseHoverText', value)}
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </>
                                 )}
                             </div>
                         ))}

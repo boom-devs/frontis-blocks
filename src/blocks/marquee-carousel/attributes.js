@@ -1,8 +1,3 @@
-let defaultImageUrl = '';
-if (typeof FrontisBlocksData !== 'undefined') {
-    defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
-}
-
 const attributes = {
     blockId: {
         type: "string",
@@ -17,24 +12,30 @@ const attributes = {
         default: [
             {
                 id: 'item-1',
-                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageUrl:'',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                marqueeCarouselTitle: 'Carousel Title',
+                showContentSwitcher: true,
+                marqueeCarouselText: 'Carousel Text',
+                marqueeCarouseHoverText: '',
             },
             {
                 id: 'item-2',
-                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageUrl:'',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                marqueeCarouselTitle: 'Carousel Title',
+                showContentSwitcher: true,
+                marqueeCarouselText: 'Carousel Text',
+                marqueeCarouseHoverText: '',
             },
             {
                 id: 'item-3',
-                marqueeCarouselImageUrl: defaultImageUrl,
+                marqueeCarouselImageUrl: '',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                marqueeCarouselTitle: 'Carousel Title',
+                showContentSwitcher: true,
+                marqueeCarouselText: 'Carousel Text',
+                marqueeCarouseHoverText: '',
             },
         ],
         items: {
@@ -46,7 +47,7 @@ const attributes = {
                 },
                 marqueeCarouselImageUrl: {
                     type: "string",
-                    default: defaultImageUrl
+                    default: ''
                 },
                 marqueeCarouselImageAlt: {
                     type: "string",
@@ -56,9 +57,17 @@ const attributes = {
                     type: "number",
                     default: ""
                 },
-                marqueeCarouselTitle    : {
+                showContentSwitcher: {
+                    type: "boolean",
+                    default: true
+                },
+                marqueeCarouselText    : {
                     type: "string",
-                    default: "Carousel Title"
+                    default: "Carousel Text"
+                },
+                marqueeCarouseHoverText: {
+                    type: "string",
+                    default: ""
                 },
             }
         }
@@ -66,27 +75,15 @@ const attributes = {
 
     speed: {
         type: 'number',
-        default: 800,
+        default: 1500,
     },
     autoplay: {
         type: 'boolean',
         default: false,
     },
-    autoplayDelay: {
-        type: 'number',
-        default: 1000,
-    },
-    infiniteLoop: {
-        type: 'boolean',
-        default: true,
-    },
-    allowTouchMove: {
-        type: 'boolean',
-        default: true,
-    },
-    pauseOnHover: {
-        "type": "boolean",
-        "default": false
+    autoplayDirection: {
+        type: 'string',
+        default: false,
     },
     showNavigation: {
 		type: 'boolean',

@@ -36,3 +36,51 @@
         object-position: 50% 50%;
     }
   }
+
+
+
+
+
+
+
+
+  .fb-marquee-carousel-content {
+    position: relative;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  
+  .fb-marquee-carousel-text,
+  .fb-marquee-carousel-hover-text {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .fb-marquee-carousel-text,
+  .fb-marquee-carousel-hover-text {
+    transform: translateY(0%);
+  }
+  
+  .fb-marquee-carousel-hover-text {
+    position: absolute;
+  }
+  
+  .fb-marquee-carousel-content .fb-marquee-carousel-hover-text {
+    bottom: -100%;
+  }
+  
+  
+  .fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-content .fb-marquee-carousel-hover-text,
+  .fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-content .fb-marquee-carousel-text {
+    transform: translateY(-100%);
+  }
+  
+  
+  
+  
+  
+  // .fb-marquee-carousel-content-wrapper-wrapper {
+  //   padding: 8px 16px;
+  //   border: solid 1px;
+  //   background: transparent;
+  // }
+  
