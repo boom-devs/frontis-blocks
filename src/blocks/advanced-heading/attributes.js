@@ -160,6 +160,9 @@ const attributes = {
     headingBgColorHover: {
         type: 'string',
     },
+    /** End Heading Style */
+
+    /** Start Heading Border */
     headingBorder: {
         type: 'string',
         default: "none",
@@ -252,7 +255,9 @@ const attributes = {
         type : "boolean",
         default: true
     },
+    /** End Heading Border */
 
+    /** Start Heading Box Shadow */
     headingBoxShadowValues: {
         type: 'array',
         default: [],
@@ -1367,5 +1372,175 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    /** End Advanced Heading Position */
+
+    /** Start Before After */
+    headingBeforeAfterSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    headingBeforeAfterWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingBeforeAfterWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+
+    headingBeforeAfterHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingBeforeAfterHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+
+    headingBeforeAfterMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    headingBeforeAfterDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterTabletMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterMobileMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterMarginLink : {
+        type : "boolean",
+        default: true
+    },
+
+    headingBeforeAfterBorder: {
+        type: 'string',
+        default: "none",
+    },
+    headingBeforeAfterBorderColor: {
+        type: 'string',
+        default: "",
+    },
+    headingBeforeAfterBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBeforeAfterDesktopBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterTabletBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterMobileBorder: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    headingBeforeAfterBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBeforeAfterDesktopBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterTabletBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterMobileBorderRadius: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    headingBeforeAfterBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    /** End Before After */
 }
 export default attributes;
