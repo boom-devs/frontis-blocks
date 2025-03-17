@@ -232,6 +232,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    slideTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     slideTextFontFamily: {
         type: "string",
         default: "Default",

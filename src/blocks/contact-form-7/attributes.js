@@ -79,6 +79,10 @@ export const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	contactFormLabelGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	contactFormLabelFontFamily: {
 		type: "string",
 		default: "Default",
@@ -181,6 +185,10 @@ export const attributes = {
 	contactFormInputGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	contactFormInputGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	contactFormInputFontFamily: {
 		type: "string",
@@ -722,6 +730,10 @@ export const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	contactFormSubmitGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	contactFormSubmitFontFamily: {
 		type: "string",
 		default: "Default",
@@ -990,6 +1002,10 @@ export const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	contactFormSuccessGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	contactFormSuccessFontFamily: {
 		type: "string",
 		default: "Default",
@@ -1176,6 +1192,10 @@ export const attributes = {
 	contactFormErrorGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	contactFormErrorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	contactFormErrorFontFamily: {
 		type: "string",

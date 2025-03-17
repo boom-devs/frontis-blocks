@@ -433,6 +433,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    socialTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     socialTitleFontFamily: {
         type: "string",
         default: "Default",
