@@ -57,6 +57,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         slideTextGlobalTypoSwitcher,
         slideTextGlobalTypographyData,
         slideTextGlobalTypoType,
+        slideTextGlobalTypoOption,
         slideTextFontFamily,
         slideTextFontSize,
         slideTextFontSizeUnits,
@@ -1002,6 +1003,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                         slideTextGlobalTypoSwitcher: value === 'default' ? {...slideTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...slideTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={slideTextGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ slideTextGlobalTypoOption: value })}
+
 												fontFamily={slideTextFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ slideTextFontFamily: value, slideTextGlobalTypoSwitcher: {...slideTextGlobalTypoSwitcher, fontFamily: value && false} })}
 

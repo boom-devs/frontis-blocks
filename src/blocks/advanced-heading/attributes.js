@@ -43,6 +43,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    headingGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
+    },
     headingFontFamily: {
         type: "string",
         default: "Default",
@@ -386,7 +390,11 @@ const attributes = {
     subHeadingGlobalTypoType: {
         type: "string",
         default: 'default',
-    }, 
+    },
+    subHeadingGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
+    },
     subHeadingFontFamily: {
         type: "string",
         default: "Default",

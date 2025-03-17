@@ -582,12 +582,14 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		parseInt(containerDesktopBorderWidth.right) !== 0 || 
 		parseInt(containerDesktopBorderWidth.bottom) !== 0 || 
 		parseInt(containerDesktopBorderWidth.left) !== 0)) {
-		
+	
 		containerBorderDesktopWidthCSS['border-width'] = 
 			`${generateCSSUnit(containerDesktopBorderWidth.top, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.left, containerBorderUnits.Desktop)}`;
+	} else {
+		containerBorderDesktopWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Tablet Border Width
@@ -602,6 +604,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.left, containerBorderUnits.Tablet)}`;
+	} else {
+		containerBorderTabletWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Mobile Border Width
@@ -616,6 +620,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.left, containerBorderUnits.Mobile)}`;
+	} else {
+		containerBorderMobileWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Desktop Border Radius - only set values if they are not 0
