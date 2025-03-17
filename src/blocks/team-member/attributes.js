@@ -2065,6 +2065,44 @@ const attributes = {
 	},
 
 
+
+	teamMemberEmailSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	teamMemberEmail: {
+		type: "string",
+		default: "test@test.com",
+	},
+	teamMemberEmailLink: {
+		type: "string",
+		default: "",
+	},
+	teamMemberEmailMediaSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	teamMemberEmailIconSwitcher: {
+		type: "string",
+		default: "icon",
+	},
+	teamMemberEmailIcon: {
+		type: "string",
+		default: "",
+	},
+		teamMemberEmailImageUrl: {
+			type: "string",
+			default: "",
+		},
+	teamMemberEmailImageAlt: {
+		type: "string",
+		default: "",
+	},
+	teamMemberEmailImageID: {
+		type: "string",
+		default: "",
+	},
+	
 	teamMemberDescSwitcher: {
 		type: "boolean",
 		default: false,

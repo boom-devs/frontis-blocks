@@ -24,6 +24,16 @@ export const separator_UNIT_TYPES = [
 	{ label: "em", value: "em" },
 ];
 
+export const EMAIL_ICON_SWITCHER = [
+    { label: __('Icon', 'frontis-blocks'), value: 'icon' },
+    { label: __('Image', 'frontis-blocks'), value: 'image' },
+];
+
+export const EMAIL_ICON_POSITION = [
+    { label: __('Left', 'frontis-blocks'), value: 'left' },
+    { label: __('Right', 'frontis-blocks'), value: 'right' },
+];
+
 export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },
