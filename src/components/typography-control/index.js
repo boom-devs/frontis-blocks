@@ -31,6 +31,8 @@ const FB_TypographyControl = ({
     globalTypoSwitcher = {'fontFamily': 'false', 'fontSize': 'false', 'fontWeight': 'false', 'fontStyle': 'false', 'textTransform': 'false', 'textDecoration': 'false', 'letterSpacing': 'false', 'lineHeight': 'false' },
     globalTypoType = 'default',
     onChangeGlobalTypoType,
+    globalTypoOption = {label: 'Default', value: 'default'},
+    onChangeGlobalTypoOption,
 
     fontFamily,
 	onChangeFontFamily,
@@ -70,8 +72,6 @@ const FB_TypographyControl = ({
         FONT_FAMILYS.find(option => option.value === fontFamily)
     );
 
-    const [selectedGlobalTypoOption, setSelectedGlobalTypoOption] = useState();
-
     useEffect(() => {
 		if (fontFamily !== 'Default') {
 			loadGoogleFont(fontFamily);
@@ -89,7 +89,7 @@ const FB_TypographyControl = ({
     };
 
     const handleGlobalTypoTypeChange = (selectedOption) => {
-        setSelectedGlobalTypoOption(selectedOption);
+        onChangeGlobalTypoOption(selectedOption);
         const newGlobalTypoType = selectedOption?.value || 'default';
         onChangeGlobalTypoType(newGlobalTypoType);
     };
@@ -219,7 +219,7 @@ const FB_TypographyControl = ({
                             {globalTypoControlActive === true && <BaseControl label={__("Presets", "frontis-blocks")}>
                                 <Select2 
                                     options={GB_TYPO}
-                                    value={selectedGlobalTypoOption}
+                                    value={globalTypoOption}
                                     onChange={handleGlobalTypoTypeChange}
                                     className="fb-select2-control"
                                 />

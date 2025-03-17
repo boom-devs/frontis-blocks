@@ -758,6 +758,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	teamMemberDesignationGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	teamMemberDesignationFontFamily: {
         type: "string",
         default: "Default",
@@ -1156,6 +1160,10 @@ const attributes = {
 	teamMemberNameGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	teamMemberNameGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberNameFontFamily: {
         type: "string",
@@ -2082,6 +2090,10 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	teamMemberEmailIconPosition : {
+		type: "string",
+		default: "left",
+	},
 	teamMemberEmailIconSwitcher: {
 		type: "string",
 		default: "icon",
@@ -2090,10 +2102,10 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-		teamMemberEmailImageUrl: {
-			type: "string",
-			default: "",
-		},
+	teamMemberEmailImageUrl: {
+		type: "string",
+		default: "",
+	},
 	teamMemberEmailImageAlt: {
 		type: "string",
 		default: "",
@@ -2144,6 +2156,10 @@ const attributes = {
 	teamMemberDescGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	teamMemberDescGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberDescFontFamily: {
 		type: "string",
