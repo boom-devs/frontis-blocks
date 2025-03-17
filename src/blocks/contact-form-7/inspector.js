@@ -65,6 +65,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormLabelGlobalTypoSwitcher,
 		contactFormLabelGlobalTypographyData,
 		contactFormLabelGlobalTypoType,
+		contactFormLabelGlobalTypoOption,
 		contactFormLabelFontFamily,
 		contactFormLabelFontSize,
 		contactFormLabelFontSizeUnits,
@@ -83,6 +84,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormInputGlobalTypoSwitcher,
 		contactFormInputGlobalTypographyData,
 		contactFormInputGlobalTypoType,
+		contactFormInputGlobalTypoOption,
 		contactFormInputFontFamily,
 		contactFormInputFontSize,
 		contactFormInputFontSizeUnits,
@@ -164,6 +166,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSubmitGlobalTypoSwitcher,
 		contactFormSubmitGlobalTypographyData,
 		contactFormSubmitGlobalTypoType,
+		contactFormSubmitGlobalTypoOption,
 		contactFormSubmitFontFamily,
 		contactFormSubmitFontSize,
 		contactFormSubmitFontSizeUnits,
@@ -205,6 +208,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormSuccessGlobalTypoSwitcher,
 		contactFormSuccessGlobalTypographyData,
 		contactFormSuccessGlobalTypoType,
+		contactFormSuccessGlobalTypoOption,
 		contactFormSuccessFontFamily,
 		contactFormSuccessFontSize,
 		contactFormSuccessFontSizeUnits,
@@ -235,6 +239,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormErrorGlobalTypoSwitcher,
 		contactFormErrorGlobalTypographyData,
 		contactFormErrorGlobalTypoType,
+		contactFormErrorGlobalTypoOption,
 		contactFormErrorFontFamily,
 		contactFormErrorFontSize,
 		contactFormErrorFontSizeUnits,
@@ -2939,6 +2944,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={contactFormLabelGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormLabelGlobalTypoOption: value })}
+
 												fontFamily={contactFormLabelFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3003,6 +3011,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														contactFormInputGlobalTypoSwitcher: value === 'default' ? {...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={contactFormInputGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormInputGlobalTypoOption: value })}
 
 												fontFamily={contactFormInputFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -3297,6 +3308,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={contactFormSubmitGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSubmitGlobalTypoOption: value })}
+
 												fontFamily={contactFormSubmitFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3478,6 +3492,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												})
 											}}
 
+											globalTypoOption={contactFormSuccessGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSuccessGlobalTypoOption: value })}
+
 											fontFamily={contactFormSuccessFontFamily}
 											onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3598,6 +3615,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													contactFormErrorGlobalTypoSwitcher: value === 'default' ? {...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 												})
 											}}
+
+											globalTypoOption={contactFormErrorGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ contactFormErrorGlobalTypoOption: value })}
 
 											fontFamily={contactFormErrorFontFamily}
 											onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}

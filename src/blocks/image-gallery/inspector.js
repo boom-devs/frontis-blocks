@@ -87,6 +87,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         GalleryButtonGlobalTypoSwitcher,
         GalleryButtonGlobalTypographyData,
         GalleryButtonGlobalTypoType,
+        GalleryButtonGlobalTypoOption,
         GalleryButtonFontFamily,
         GalleryButtonFontSize,
         GalleryButtonFontSizeUnits,
@@ -3045,6 +3046,9 @@ const editorStyle = `${fbGalleryStyle} ${customCss}`.replace(/\s+/g, ' ').trim()
                                                             GalleryButtonGlobalTypoSwitcher: value === 'default' ? {...GalleryButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...GalleryButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                         })
                                                     }}
+
+                                                    globalTypoOption={GalleryButtonGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ GalleryButtonGlobalTypoOption: value })}
 
                                                     fontFamily={GalleryButtonFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ GalleryButtonFontFamily: value, GalleryButtonGlobalTypoSwitcher: {...GalleryButtonGlobalTypoSwitcher, fontFamily: value && false} })}

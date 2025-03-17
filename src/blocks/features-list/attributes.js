@@ -665,6 +665,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    FeatureTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     FeatureTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -813,6 +817,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    FeatureDescGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     FeatureDescFontFamily: {
         type: "string",
         default: "Default",

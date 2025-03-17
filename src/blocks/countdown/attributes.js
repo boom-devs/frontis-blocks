@@ -616,6 +616,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	digitGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	digitFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -729,6 +733,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	labelGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	labelFontFamily: {
 		type: 'string',
 		default: 'inherit'
@@ -841,6 +849,10 @@ const attributes = {
 	countDownSeparatorGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	countDownSeparatorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	countDownSeparatorFontFamily: {
 		type: 'string',

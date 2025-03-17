@@ -69,6 +69,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressGlobalTypoSwitcher,
         progressGlobalTypographyData,
         progressGlobalTypoType,
+        progressGlobalTypoOption,
         progressFontFamily,
         progressFontSize,
         progressFontSizeUnits,
@@ -529,6 +530,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         progressGlobalTypoSwitcher: value === 'default' ? {...progressGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={progressGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ progressGlobalTypoOption: value })}
 
                                                 fontFamily={progressFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontFamily: value && false} })}
