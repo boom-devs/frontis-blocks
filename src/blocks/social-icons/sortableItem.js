@@ -8,7 +8,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
     
@@ -33,6 +33,14 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon="move" label={__("Sort", "frontis-blocks")} aria-label={__("Move item", "frontis-blocks")} />
+                </span>
+                <span className="sortable-duplicate">
+                    <Button 
+                        icon="admin-page" 
+                        label={__("Duplicate", "frontis-blocks")} 
+                        aria-label={__("Duplicate item", "frontis-blocks")}
+                        onClick={() => handleDuplicateItem(item.id)}
+                    />
                 </span>
 
                 <span className="sortable-delete">
