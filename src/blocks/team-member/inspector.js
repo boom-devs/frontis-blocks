@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
@@ -160,7 +160,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationMarginMobile,
 		teamMemberDesignationMarginLink,
 
-		// Team Desc Typography
+		// Team Email Typography
+		teamMemberEmailSwitcher,
+		teamMemberEmail,
+		teamMemberEmailLink,
+		teamMemberEmailMediaSwitcher,
+		teamMemberEmailIconSwitcher,
+		teamMemberEmailIcon,
+		teamMemberEmailImageUrl,
+		teamMemberEmailImageAlt,
+		teamMemberEmailImageID,
+
+		// Team Desc
 		teamMemberDescSwitcher,
 		teamMemberDesc,
 		teamMemberDescColorSwitcher,
@@ -3366,6 +3377,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												value={teamMemberDesignation}
 												onChange={(value) => setAttributes({ teamMemberDesignation: value })}
 											/>
+
+											<ToggleControl
+												label={__("Email Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberEmailSwitcher}
+												onChange={(value) => setAttributes({ teamMemberEmailSwitcher: value })}
+											/>
+
+											<TextControl
+												label={__('Email Text', 'frontis-blocks')}
+												value={teamMemberEmail}
+												onChange={(value) => setAttributes({ teamMemberEmail: value })}
+											/>
+											<TextControl
+												label={__('Email Link', 'frontis-blocks')}
+												value={teamMemberEmailLink}
+												onChange={(value) => setAttributes({ teamMemberEmailLink: value })}
+											/>
+
+											<ToggleControl
+												label={__("Email Icon Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberEmailMediaSwitcher}
+												onChange={(value) => setAttributes({ teamMemberEmailMediaSwitcher: value })}
+											/>
+
+											{teamMemberEmailMediaSwitcher && (<>
+												<SelectControl
+													label={__("Email Icon Position", "frontis-blocks")}
+													value={teamMemberEmailIconPosition}
+													options={EMAIL_ICON_POSITION}
+													onChange={(value) => setAttributes({ teamMemberEmailIconPosition: value })}
+												/>
+
+												<div className="fb-setting-switcher-container">
+                                                    <BaseControl
+                                                        className="fb-setting-switcher-panel-wrapper"
+                                                    >
+                                                        <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                            {EMAIL_ICON_SWITCHER.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ teamMemberEmailIconSwitcher: item.value })} 
+                                                                    className={`fb-setting-switcher-panel-btn-switcher ${teamMemberEmailIconSwitcher === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </BaseControl>
+                                                </div>
+                                                { teamMemberEmailIconSwitcher === 'icon' &&
+                                                    <FBIconPicker
+                                                        value={teamMemberEmailIcon} 
+                                                        setIconHandler={(value) => setAttributes({ teamMemberEmailIcon: value })} 
+                                                    />
+                                                }
+                                                { teamMemberEmailIconSwitcher === 'image' &&
+													<FB_ImageControl
+														globalImageUrl={teamMemberEmailImageUrl}
+														setglobalImageUrl={(value) => setAttributes({ teamMemberEmailImageUrl: value })}
+														globalImageAlt={teamMemberEmailImageAlt}
+														setglobalImageAlt={(value) => setAttributes({ teamMemberEmailImageAlt: value })}
+														globalImageID={teamMemberEmailImageID}
+														setglobalImageID={(value) => setAttributes({ teamMemberEmailImageID: value })}
+													/>
+                                                }
+											</>)}
 
 											<ToggleControl
 												label={__("Description Switcher", "frontis-blocks")}
