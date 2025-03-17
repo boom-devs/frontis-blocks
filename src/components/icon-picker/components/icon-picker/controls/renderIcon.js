@@ -7,7 +7,10 @@
 
 import parseSVG from './parseIcon';
 const { ajaxUrl, nonce } = window.FrontisBlocksData;
-const url = 'https://svg-icons.boomdevs.com/';
+
+// Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api 
+
+const url = '/wp-json/wp/v2/frontis-blocks/icons';
 const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
 
 // Function to check if data exists in localStorage
@@ -27,6 +30,8 @@ const fetchFromApi = () => {
 		},
 	})
 		.then(response => {
+
+			console.log(response);
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}

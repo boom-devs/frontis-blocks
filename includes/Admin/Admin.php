@@ -245,6 +245,14 @@ class Admin {
 			},
 		]);
 
+        register_rest_route('wp/v2/frontis-blocks', '/icons', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_icons'],
+            'permission_callback' => function () {
+                return true;
+            },
+        ]);
+
         $post_type = Helper::get_post_types();
 
 		foreach ( $post_type as $key => $value ) {
@@ -313,6 +321,12 @@ class Admin {
 				)
 			);
 		}
+    }
+
+    public function get_icons() {
+        // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
+        $data = include FB_PLUGIN_PATH . 'assets/fontawesome/icons.php';
+        return $data;
     }
 
     public function get_post_author_info($object, $field_name, $request) {

@@ -90,6 +90,9 @@ $render_icon_svg = function($icon) {
     return '';
 };
 
+
+var_dump($heading_icon);
+
 // Start building the HTML output
 $output = '<div ' . $wrapper_attributes . '>';
 $output .= '<div class="fb-parent-wrapper fb-advanced-wrapper ' . esc_attr($heading_global_wraper_class) . '" id="' . esc_attr($heading_global_wraper_id) . '" style="text-align: ' . esc_attr($heading_alignment) . ';">';
@@ -103,13 +106,13 @@ if ($heading_icon_switcher && $heading_icon_align === 'icon') {
     // Check if heading_icon is a string (icon identifier)
     if (is_string($heading_icon)) {
         // Get the SVG HTML for this icon from WordPress database or a predefined array
-        $icon_svg = fb_get_icon_svg($heading_icon);
-        if ($icon_svg) {
-            $output .= $icon_svg;
-        } else {
-            // Fallback - display a generic icon or nothing
-            $output .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path></svg>';
-        }
+        // $icon_svg = fb_get_icon_svg($heading_icon);
+        // if ($icon_svg) {
+        //     $output .= $icon_svg;
+        // } else {
+        //     // Fallback - display a generic icon or nothing
+        //     $output .= '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path></svg>';
+        // }
     }
     // If it's an object with direct SVG data
     elseif (is_array($heading_icon) && isset($heading_icon['svg'])) {
@@ -118,30 +121,6 @@ if ($heading_icon_switcher && $heading_icon_align === 'icon') {
     
     $output .= '</div>';
     $output .= '</div>';
-}
-
-/**
- * Get SVG markup for a specific icon
- *
- * @param string $icon_name The icon identifier
- * @return string|null SVG markup or null if not found
- */
-if ( function_exists( 'fb_get_icon_svg' ) ) {
-    function fb_get_icon_svg($icon_name) {
-        // This could be expanded to fetch from a database or option
-        $icons = [
-            'bookmark' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"></path></svg>',
-            'star' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>',
-            'heart' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>',
-            'align-center' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4 2H14V0H4V2ZM0 7H18V5H0V7ZM4 12H14V10H4V12Z" /></svg>',
-            'align-left' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M10 2H0V0H10V2ZM18 7H0V5H18V7ZM10 12H0V10H10V12Z" /></svg>',
-            'align-right' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M8 2H18V0H8V2ZM0 7H18V5H0V7ZM8 12H18V10H8V12Z" /></svg>',
-            'align-justify' => '<svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H18V2H0V0ZM0 5.00001H18V7.00001H0V5.00001ZM0 10H18V12H0V10Z" /></svg>',
-            // Add more icons as needed
-        ];
-        
-        return isset($icons[$icon_name]) ? $icons[$icon_name] : null;
-    }
 }
 
 if ($show_separator_switcher && $separator_position === 'top') {
