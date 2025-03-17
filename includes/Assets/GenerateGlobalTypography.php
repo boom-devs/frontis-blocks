@@ -13,11 +13,6 @@ class GenerateGlobalTypography {
      */
     public static function generate_global_typography() {
         self::enqueue_fonts();
-
-        $global_typography = get_option('fb_globaltypo');
-        if($global_typography) {
-            add_action('wp_enqueue_scripts', [__CLASS__, 'enqueue_google_fonts']);
-        }
     }
 
     /**
@@ -300,6 +295,8 @@ class GenerateGlobalTypography {
                 $css_file_name = 'frontis-global-typography.css';
                 $css_file = $css_dir . $css_file_name;
                 file_put_contents($css_file, $styles);
+                
+                self::enqueue_google_fonts();
             }
         }
     }
@@ -310,7 +307,7 @@ class GenerateGlobalTypography {
     public static function enqueue_google_fonts() {
         $font_families = [];
         $global_typography = get_option('fb_globaltypo');
-        
+
         // Extract all unique font families
         foreach ($global_typography as $selector => $properties) {
             if (isset($properties['fontFamily'])) {
@@ -328,8 +325,24 @@ class GenerateGlobalTypography {
                 return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
             }, $font_families));
     
+            $font_css = file_get_contents($font_url);
             // Enqueue the Google Fonts
-            wp_enqueue_style('fb-google-fonts', $font_url, array(), null);
+
+            if($font_css) {
+                // Upload the font CSS to the uploads directory
+                $upload_dir = wp_upload_dir();
+                $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+
+                // Ensure the target directory exists
+                if (!file_exists($css_dir)) {   
+                    wp_mkdir_p($css_dir);
+                }
+
+                $css_file_name = 'frontis-google-fonts.css';
+                $css_file = $css_dir . $css_file_name;
+                file_put_contents($css_file, $font_css);
+
+            }
         }
     }
 }
