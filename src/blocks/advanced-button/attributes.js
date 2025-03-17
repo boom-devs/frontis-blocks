@@ -947,5 +947,67 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    buttonTransformSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    buttonTransformNormalProportions: {
+        type: "boolean",
+        default: false,
+    },
+    buttonTransformNormalScale: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    buttonTransformNormalScaleX: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    buttonTransformNormalScaleY: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    buttonTransformHoverProportions: {
+        type: "boolean",
+        default: false,
+    },
+    buttonTransformHoverScale: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    buttonTransformHoverScaleX: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    buttonTransformHoverScaleY: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    
 }
 export default attributes;
