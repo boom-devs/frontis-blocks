@@ -495,6 +495,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
+			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
 			...widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 		widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
@@ -503,6 +505,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
+			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
 			...widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 		widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
@@ -511,6 +515,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
+			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
 			...widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 	}
