@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
@@ -40,6 +40,8 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FBIconPicker from '../../components/icon-picker/index.js';
+import FB_ImageControl from '@Components/image-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -111,6 +113,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberNameGlobalTypoSwitcher,
 		teamMemberNameGlobalTypographyData,
 		teamMemberNameGlobalTypoType,
+		teamMemberNameGlobalTypoOption,
 		teamMemberNameFontFamily,
         teamMemberNameFontSize,
         teamMemberNameFontSizeUnits,
@@ -141,6 +144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationGlobalTypoSwitcher,
 		teamMemberDesignationGlobalTypographyData,
 		teamMemberDesignationGlobalTypoType,
+		teamMemberDesignationGlobalTypoOption,
 		teamMemberDesignationFontFamily,
         teamMemberDesignationFontSize,
         teamMemberDesignationFontSizeUnits,
@@ -165,6 +169,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberEmail,
 		teamMemberEmailLink,
 		teamMemberEmailMediaSwitcher,
+		teamMemberEmailIconPosition ,
 		teamMemberEmailIconSwitcher,
 		teamMemberEmailIcon,
 		teamMemberEmailImageUrl,
@@ -181,6 +186,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDescGlobalTypoSwitcher,
 		teamMemberDescGlobalTypographyData,
 		teamMemberDescGlobalTypoType,
+		teamMemberDescGlobalTypoOption,
 		teamMemberDescFontFamily,
         teamMemberDescFontSize,
         teamMemberDescFontSizeUnits,
@@ -445,6 +451,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
 	} = attributes;
+
+	console.log(teamMemberNameGlobalTypoType);
 
 	const deviceType= useDeviceType();
 
@@ -3385,6 +3393,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChange={(value) => setAttributes({ teamMemberEmailSwitcher: value })}
 											/>
 
+											{teamMemberEmailSwitcher && (<>
 											<TextControl
 												label={__('Email Text', 'frontis-blocks')}
 												value={teamMemberEmail}
@@ -3444,6 +3453,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setglobalImageID={(value) => setAttributes({ teamMemberEmailImageID: value })}
 													/>
                                                 }
+											</>)}
 											</>)}
 
 											<ToggleControl
@@ -3963,6 +3973,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={teamMemberNameGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberNameGlobalTypoOption: value })}
+
 												fontFamily={teamMemberNameFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberNameFontFamily: value, teamMemberNameGlobalTypoSwitcher: {...teamMemberNameGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4055,6 +4068,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={teamMemberDesignationGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberDesignationGlobalTypoOption: value })}
+
 												fontFamily={teamMemberDesignationFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberDesignationFontFamily: value, teamMemberDesignationGlobalTypoSwitcher: {...teamMemberDesignationGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4146,6 +4162,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														teamMemberDescGlobalTypoSwitcher: value === 'default' ? {...teamMemberDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...teamMemberDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={teamMemberDescGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberDescGlobalTypoOption: value })}
 
 												fontFamily={teamMemberDescFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberDescFontFamily: value, teamMemberDescGlobalTypoSwitcher: {...teamMemberDescGlobalTypoSwitcher, fontFamily: value && false} })}
