@@ -333,24 +333,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ socialItems: [...socialItems, newItem] });
 	};
 
-	useEffect(() => {
-		if (socialItems.length > 4) {
-			const updatedItems = socialItems.map((item, index) => {
-				if (index >= 4) {
-					const presetColors = getPresetColors(socialIconsPresetStyle);
-					return {
-						...item,
-						socialIconColor: presetColors.socialIconColor || item.socialIconColor,
-						socialIconHoverColor: presetColors.socialIconHoverColor || item.socialIconHoverColor,
-						socialIconBgColor: presetColors.socialIconBgColor || item.socialIconBgColor,
-						socialIconHoverBgColor: presetColors.socialIconHoverBgColor || item.socialIconHoverBgColor,
-					};
-				}
-				return item;
-			});
-			setAttributes({ socialItems: updatedItems });
-		}
-	}, [socialIconsPresetStyle]);
+	// useEffect(() => {
+	// 	if (socialItems.length > 4) {
+	// 		const updatedItems = socialItems.map((item, index) => {
+	// 			if (index >= 4) {
+	// 				const presetColors = getPresetColors(socialIconsPresetStyle);
+	// 				return {
+	// 					...item,
+	// 					socialIconColor: presetColors.socialIconColor || item.socialIconColor,
+	// 					socialIconHoverColor: presetColors.socialIconHoverColor || item.socialIconHoverColor,
+	// 					socialIconBgColor: presetColors.socialIconBgColor || item.socialIconBgColor,
+	// 					socialIconHoverBgColor: presetColors.socialIconHoverBgColor || item.socialIconHoverBgColor,
+	// 				};
+	// 			}
+	// 			return item;
+	// 		});
+	// 		setAttributes({ socialItems: updatedItems });
+	// 	}
+	// }, [socialIconsPresetStyle]);
 
     const handleChangeItem = (id, key, value) => {
         const updatedItems = socialItems.map(item => 
@@ -362,6 +362,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleDeleteItem = (id) => {
         const updatedItems = socialItems.filter(item => item.id !== id);
         setAttributes({ socialItems: updatedItems });
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = socialItems.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${socialItems.length + 1}` };
+            setAttributes({ socialItems: [...socialItems, newItem] });
+        }
     };
 
     /** Start Icon border */
@@ -2792,6 +2800,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                         item={item}
                                                                         handleChangeItem={handleChangeItem}
                                                                         handleDeleteItem={handleDeleteItem}
+																		handleDuplicateItem={handleDuplicateItem}
                                                                         index={index}
                                                                     />
                                                                 ))}
