@@ -12290,6 +12290,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Zilla Slab Highlight", "frontis-blocks"),
   value: "Zilla Slab Highlight"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Radio Canada Big", "frontis-blocks"),
+  value: "Radio Canada Big"
 }];
 
 /***/ }),
