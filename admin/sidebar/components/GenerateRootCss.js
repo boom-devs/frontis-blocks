@@ -35,9 +35,11 @@ const generateCSSVariables = (data, deviceType) => {
     let heading6Styles = '';
 
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
-
-
     const arrayKeys = Object.keys(data);
+
+
+    console.log("data");
+    console.log(data);
 
     // Loop through the data to generate CSS for each tag
     arrayKeys.forEach((key) => {
@@ -46,8 +48,13 @@ const generateCSSVariables = (data, deviceType) => {
         // Apply global properties (fontFamily, fontWeight, etc.)
         ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach((prop) => {
             const value = getValue(data[key], prop);
+            let typoValue = data[key][prop];
+
             if (value !== null) {
-                rootStyles += `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: ${value};\n`;
+
+                if(typoValue) {
+                    rootStyles += `${typoValue.variable}: ${value};\n`;
+                }
 
                 if (key === 'body') {
                     paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
@@ -96,7 +103,8 @@ const generateCSSVariables = (data, deviceType) => {
             const mobileUnit = getUnit(data[key], prop, 'Mobile');
 
             if (desktopValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 desktopStyles += `${cssVar}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
 
                 if (key === 'body') {
@@ -133,12 +141,16 @@ const generateCSSVariables = (data, deviceType) => {
                     heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
             }
+
             if (tabletValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 tabletStyles += `${cssVar}: ${createValueWithUnit(tabletValue, tabletUnit)};\n`;
             }
+
             if (mobileValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 mobileStyles += `${cssVar}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
             }
         });
