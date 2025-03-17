@@ -64,37 +64,37 @@ class GenerateGlobalTypography {
                     
                     switch($key) {
                         case 'body':
-                            $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
+                            $paragraphStyles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'link':
-                            $linkStyles .= "{$cssProperty}: {$styleValue};\n";
+                            $linkStyles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'button':
-                            $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
+                            $buttonStyles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'captions':
-                            $captionStyles .= "{$cssProperty}: {$styleValue};\n";
+                            $captionStyles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'all':
-                            $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
+                            $combinedHeadingStyles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h1':
-                            $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading1Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h2':
-                            $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading2Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h3':
-                            $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading3Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h4':
-                            $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading4Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h5':
-                            $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading5Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                         case 'h6':
-                            $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
+                            $heading6Styles .= "{$cssProperty}: {$styleValue} !important;\n";
                             break;
                     }
                 }
@@ -118,7 +118,7 @@ class GenerateGlobalTypography {
                                 $paragraphStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'link':
-                                $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
+                                $linkStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'button':
                                 $buttonStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
@@ -127,25 +127,25 @@ class GenerateGlobalTypography {
                                 $captionStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'all':
-                                $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
+                                $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h1':
-                                $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading1Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h2':
-                                $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading2Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h3':
-                                $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading3Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h4':
-                                $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading4Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h5':
-                                $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading5Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                             case 'h6':
-                                $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
+                                $heading6Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
                                 break;
                         }
                     }
@@ -225,14 +225,15 @@ class GenerateGlobalTypography {
             " : "") . "
 
             " . ($paragraphStyles !== '' ? "
-            body p {
+            body p, :root :where(p) {
                 {$paragraphStyles}
             }
             " : "") . "
 
             " . ($linkStyles !== '' ? "
             body a,
-            body p a {
+            body p a,
+            :root :where(a) {
                 {$linkStyles}
             }
             " : "") . "
