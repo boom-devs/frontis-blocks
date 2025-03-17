@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sliders.forEach((sliderContainer) => {
             try {
                 const swiperSettings = sliderContainer.dataset.swiperSettings;
-                
+                const slideWidth = sliderContainer.dataset.slideWidth;
                 if (swiperSettings) {
                     const settings = JSON.parse(swiperSettings);
                     
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         init: function () {
                             const slides = sliderContainer.querySelectorAll('.swiper-slide');
                             slides.forEach(slide => {
-                                slide.style.width = 'fit-content';
+                                slide.style.width = slideWidth;
                             });
                         }
                     };

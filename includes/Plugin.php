@@ -93,7 +93,6 @@ final class Plugin
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
         add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
-
 	}
 
 	public function enqueue_scripts()

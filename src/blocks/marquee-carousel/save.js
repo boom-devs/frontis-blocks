@@ -5,11 +5,11 @@ export default function Save({ attributes }) {
         blockId,
         sliderItems,
 
-        infiniteLoop,
-        allowTouchMove,
-        pauseOnHover,
+        slideWidth,
+        slideWidthUnits,
+
         autoplay,
-        autoplayDelay,
+        autoplayDirection,
         speed,
         showNavigation,
         showPagination,
@@ -24,7 +24,7 @@ export default function Save({ attributes }) {
            // Marquee style settings
            spaceBetween: 0,
            centeredSlides: true,
-           speed: 2000,
+           speed: speed,
            autoplay: {
              delay: 1,
            },
@@ -32,6 +32,7 @@ export default function Save({ attributes }) {
            slidesPerView:'auto',
            allowTouchMove: false,
            disableOnInteraction: true,
+
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -43,8 +44,10 @@ export default function Save({ attributes }) {
             } : false,
     });
 
+    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+
     return (
-        <div {...blockProps} data-swiper-settings={swiperSettings}>
+        <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth}>
             <div className="swiper">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
@@ -54,15 +57,28 @@ export default function Save({ attributes }) {
                                     <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
                                 </div>
                             )}
-                            {item.marqueeCarouselTitle && (
-                                <div className="fb-marquee-carousel-title-wrapper">
-                                    <RichText.Content
-                                        className="fb-marquee-carousel-title"
-                                        tagName="p"
-                                        value={item.marqueeCarouselTitle}
-                                    />
-                                </div>
-                            )}
+                                {item.showContentSwitcher && (
+                                    <>
+                                        <div className="fb-marquee-carousel-content-wrapper">
+                                            <div className="fb-marquee-carousel-content">
+                                                {item.marqueeCarouselText && (
+                                                    <RichText.Content
+                                                        className="fb-marquee-carousel-text"
+                                                        tagName="div"
+                                                        value={item.marqueeCarouselText}
+                                                    />
+                                                )}
+                                                {item.marqueeCarouseHoverText && (
+                                                    <RichText.Content
+                                                        className="fb-marquee-carousel-hover-text"
+                                                        tagName="div"
+                                                        value={item.marqueeCarouseHoverText}
+                                                    />
+                                                )}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                         </div>
                     ))}
                 </div>

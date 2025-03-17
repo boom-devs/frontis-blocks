@@ -8,12 +8,13 @@ import {
     Dropdown,
     Dashicon, 
     TextControl,
+    ToggleControl,
     TextareaControl, 
 } from '@wordpress/components';
 
 import FB_ImageControl from '@Components/image-control';
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, index }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
 
@@ -28,16 +29,24 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Social Item ${index + 1}`, "gutenslider-blocks" )}
+                    {item.title || __( `Marquee Item ${index + 1}`, "frontis-blocks" )} 
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
-                    <Button icon="move" label={__("Sort", "gutenslider-blocks")} aria-label={__("Move item", "gutenslider-blocks")} />
+                    <Button icon="move" label={__("Sort", "frontis-blocks")} aria-label={__("Move item", "frontis-blocks")} />
+                </span>
+                <span className="sortable-duplicate">
+                    <Button 
+                        icon="admin-page" 
+                        label={__("Duplicate", "frontis-blocks")} 
+                        aria-label={__("Duplicate item", "frontis-blocks")}
+                        onClick={() => handleDuplicateItem(item.id)} 
+                    />
                 </span>
                 <span className="sortable-delete">
                     <Button 
                         icon="trash" 
-                        label={__("Delete", "gutenslider-blocks")} 
-                        aria-label={__("Delete item", "gutenslider-blocks")}
+                        label={__("Delete", "frontis-blocks")} 
+                        aria-label={__("Delete item", "frontis-blocks")}
                         onClick={() => handleDeleteItem(item.id)} 
                     />
                 </span>
@@ -58,11 +67,25 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         setglobalImageID={(value) => handleChangeItem(item.id, 'marqueeCarouselImageID', value)}
                         isImageSize = {false}
                     />
-                    <TextControl
-                        label={__("Title", "gutenslider-blocks")}
-                        value={item.marqueeCarouselTitle}
-                        onChange={(value) => handleChangeItem(item.id, 'marqueeCarouselTitle', value)}
+                    <ToggleControl
+                        label={__("Show Content", "frontis-blocks")}
+                        checked={item.showContentSwitcher}
+                        onChange={(value) => handleChangeItem(item.id, 'showContentSwitcher', value)}
                     />
+                    {item.showContentSwitcher && (
+                        <>
+                            <TextControl
+                                label={__("Text", "frontis-blocks")}
+                                value={item.marqueeCarouselText}
+                                onChange={(value) => handleChangeItem(item.id, 'marqueeCarouselText', value)}
+                            />
+                            <TextControl
+                                label={__("Hover Text", "frontis-blocks")}
+                                value={item.marqueeCarouseHoverText}
+                                onChange={(value) => handleChangeItem(item.id, 'marqueeCarouseHoverText', value)}
+                            />
+                        </>
+                    )}
                 </BaseControl>
                 </div>
             )}
