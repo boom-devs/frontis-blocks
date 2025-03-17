@@ -372,6 +372,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    TestimonialTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     TestimonialTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -515,6 +519,10 @@ const attributes = {
     TestimonialDescGlobalTypoType: {
         type: "string",
         default: 'default',
+    },
+    TestimonialDescGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
     },
     TestimonialDescFontFamily: {
         type: "string",
@@ -660,6 +668,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    TestimonialAuthorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     TestimonialAuthorFontFamily: {
         type: "string",
         default: "Default",
@@ -805,6 +817,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    TestimonialDesignationGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     TestimonialDesignationFontFamily: {
         type: "string",
         default: "Default",

@@ -128,6 +128,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		SubHeadingGlobalTypoSwitcher,
 		SubHeadingGlobalTypographyData,
 		SubHeadingGlobalTypoType,
+		SubHeadingGlobalTypoOption,
 		SubHeadingTextDecoration,
 		SubHeadingTextTransform,
 		SubHeadingFontStyle,
@@ -152,6 +153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
+		buttonGlobalTypoOption,
 		buttonFontFamily,
 		buttonFontSize,
 		buttonFontSizeUnits,
@@ -265,6 +267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonTwoGlobalTypoSwitcher,
 		buttonTwoGlobalTypographyData,
 		buttonTwoGlobalTypoType,
+		buttonTwoGlobalTypoOption,
 		buttonTwoFontFamily,
 		buttonTwoFontSize,
 		buttonTwoFontSizeUnits,
@@ -2863,6 +2866,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														})
 													}}
 
+													globalTypoOption={SubHeadingGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ SubHeadingGlobalTypoOption: value })}
+
 													fontFamily={SubHeadingFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ SubHeadingFontFamily: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -2970,6 +2976,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 														})
 													}}
+
+													globalTypoOption={buttonGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 													fontFamily={buttonFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -3202,6 +3211,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															buttonTwoGlobalTypoSwitcher: value === 'default' ? {...buttonTwoGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonTwoGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 														})
 													}}
+
+													globalTypoOption={buttonTwoGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ buttonTwoGlobalTypoOption: value })}
 
 													fontFamily={buttonTwoFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ buttonTwoFontFamily: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontFamily: value && false} })}

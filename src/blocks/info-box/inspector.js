@@ -75,6 +75,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingGlobalTypoSwitcher,
 		headingGlobalTypographyData,
 		headingGlobalTypoType,
+		headingGlobalTypoOption,
 		headingFontFamily,
 		headingFontSize,
 		headingFontSizeUnits,
@@ -133,6 +134,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		subHeadingGlobalTypoSwitcher,
 		subHeadingGlobalTypographyData,
 		subHeadingGlobalTypoType,
+		subHeadingGlobalTypoOption,
 		subHeadingFontFamily,
 		subHeadingFontSize,
 		subHeadingFontSizeUnits,
@@ -172,6 +174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
+		buttonGlobalTypoOption,
 		buttonFontFamily,
 		buttonFontSize,
 		buttonFontSizeUnits,
@@ -3381,6 +3384,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={headingGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
+
 												fontFamily={headingFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3556,6 +3562,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														})
 													}}
 
+													globalTypoOption={subHeadingGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ subHeadingGlobalTypoOption: value })}
+
 													fontFamily={subHeadingFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3668,6 +3677,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 														})
 													}}
+
+													globalTypoOption={buttonGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 													fontFamily={buttonFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}

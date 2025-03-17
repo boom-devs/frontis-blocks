@@ -594,6 +594,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	postTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	postTitleFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -743,6 +747,10 @@ const attributes = {
 	postDescriptionGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	postDescriptionGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	postDescriptionFontFamily: {
 		type: "string",
@@ -897,6 +905,10 @@ const attributes = {
 	postCategoryGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	postCategoryGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	postCategoryFontFamily: {
 		type: "string",
@@ -1209,6 +1221,10 @@ const attributes = {
 	postTagGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	postTagGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	postTagFontFamily: {
 		type: "string",
@@ -1701,6 +1717,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	postAuthorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	postAuthorFontFamily: {
 		type: "string",
 		default: "inherit",
@@ -1831,6 +1851,10 @@ const attributes = {
 	postDateGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	postDateGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	postDateFontFamily: {
 		type: "string",
@@ -2400,6 +2424,10 @@ const attributes = {
 	loadMoreTextGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	loadMoreTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	loadMoreTextFontFamily: { 
 		type: "string",

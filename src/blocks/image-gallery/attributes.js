@@ -369,6 +369,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    GalleryButtonGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     GalleryButtonFontFamily: {
         type: "string",
         default: "Default",
