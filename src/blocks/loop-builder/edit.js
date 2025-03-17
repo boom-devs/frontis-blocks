@@ -13,6 +13,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         displayLayout = { type: 'flex', columns: 3 },
+        featuredImageSwitcher
     } = attributes;
 
     // Generate a unique ID for the block if not set
@@ -104,6 +105,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setTimeout(initializeLayout, 300);
     }, [displayLayout, clientId]);
 
+    
+    
     return (
         <div {...blockProps}>
             <Inspector

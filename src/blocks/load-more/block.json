@@ -1,0 +1,17 @@
+{
+	"apiVersion": 2,
+	"name": "frontis-blocks/load-more",
+	"title": "Load More",
+	"category": "frontis-blocks",
+	"icon": "menu-alt",
+	"description": "Add load more button",
+	"textdomain": "frontis-blocks",
+	"supports": {
+		"html": false,
+		"anchor": true
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

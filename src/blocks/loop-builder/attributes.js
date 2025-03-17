@@ -59,6 +59,10 @@ const attributes = {
 		type: "string",
 		default: "bullets"
 	},
+	featuredImageSwitcher: {
+		type: "boolean",
+		default: false
+	},
 
 };
 

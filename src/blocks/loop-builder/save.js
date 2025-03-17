@@ -5,6 +5,7 @@ export default function save({ attributes }) {
     const {
         blockID,
         displayLayout = { type: 'flex', columns: 3 },
+        featuredImageSwitcher
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -22,6 +23,7 @@ export default function save({ attributes }) {
         className: innerBlocksClass,
     });
 
+    
     // For slider layout, wrap inner blocks in swiper container
     if (displayLayout.type === 'slider') {
         return (
@@ -38,11 +40,15 @@ export default function save({ attributes }) {
         );
     }
 
+    
+  
+
     // Default layout
     return (
         <div {...blockProps}>
-            <div className={`fb-loop-content layout-${displayLayout.type}`}>
+            <div className={`fb-loop-content layout-${displayLayout.type} ${featuredImageSwitcher ? 'has-featured-hover' : ''}`} data-featured-hover={featuredImageSwitcher}>
                 <div {...innerBlocksProps} />
+                <FeaturedImageOnHover/>
             </div>
         </div>
     );

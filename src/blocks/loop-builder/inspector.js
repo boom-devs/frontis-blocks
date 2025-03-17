@@ -41,7 +41,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		effect,
 		displayArrows,
 		displayDots,
-		paginationType
+		paginationType,
+		featuredImageSwitcher
 	} = attributes;
 
 	// Get available post types
@@ -169,6 +170,107 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
+	
+	const applyFeaturedImageHover = () => {
+		if (!featuredImageSwitcher) return;
+		
+		console.log('Applying featured image hover effect');
+		
+		// Add the CSS for the hover effect
+		const styleId = `featured-image-hover-style-${blockID}`;
+		let styleEl = document.getElementById(styleId);
+		
+		if (!styleEl) {
+			styleEl = document.createElement('style');
+			styleEl.id = styleId;
+			document.head.appendChild(styleEl);
+		}
+		
+		styleEl.innerHTML = `
+			.wp-block-post {
+				position: relative !important;
+			}
+			
+			.featured-image-overlay {
+				position: absolute !important;
+				top: 0 !important;
+				width: 300px !important;
+				height: 400px !important;
+				border-radius: 24px !important;
+				background-size: cover !important;
+				background-position: center !important;
+				opacity: 0 !important;
+				transition: opacity 0.3s ease !important;
+				z-index: 99 !important;
+				pointer-events: none !important;
+				right: 25% !important;
+			}
+			
+			.wp-block-post:hover .featured-image-overlay {
+				opacity: 1 !important;
+			}
+		`;
+		
+		// Find post items and add overlay elements
+		setTimeout(() => {
+			const postItems = document.querySelectorAll('.wp-block-post.has-post-thumbnail');
+			console.log('Adding overlays to', postItems.length, 'posts');
+			
+			postItems.forEach(item => {
+				// Check if overlay already exists
+				if (item.querySelector('.featured-image-overlay')) return;
+				
+				// Get post ID from class
+				const classes = item.className.split(' ');
+				const postIdClass = classes.find(c => c.match(/^post-\d+$/));
+				if (!postIdClass) return;
+				
+				const postId = postIdClass.replace('post-', '');
+				console.log('Processing post ID:', postId);
+				
+				// Create overlay element
+				const overlay = document.createElement('div');
+				overlay.className = 'featured-image-overlay';
+				
+				// Get the featured image URL
+				wp.apiFetch({ path: `/wp/v2/media?parent=${postId}` })
+					.then(media => {
+						if (media && media.length > 0) {
+							console.log('Found media for post', postId, media[0].source_url);
+							overlay.style.backgroundImage = `url(${media[0].source_url})`;
+						} else {
+							// Try alternative method to get featured image
+							wp.apiFetch({ path: `/wp/v2/posts/${postId}?_embed` })
+								.then(post => {
+									if (post._embedded && 
+										post._embedded['wp:featuredmedia'] && 
+										post._embedded['wp:featuredmedia'][0].source_url) {
+										
+										console.log('Found featured image via _embed:', 
+											post._embedded['wp:featuredmedia'][0].source_url);
+										
+										overlay.style.backgroundImage = `url(${post._embedded['wp:featuredmedia'][0].source_url})`;
+									} else {
+										console.log('No featured image found for post', postId);
+									}
+								});
+						}
+						
+						// Add overlay to post item
+						item.appendChild(overlay);
+					})
+					.catch(error => {
+						console.error('Error fetching media:', error);
+					});
+			});
+		}, 100);
+	};
+
+	
+	useEffect(() => {
+		applyFeaturedImageHover();
+	}, [featuredImageSwitcher]);
+
 	return (
 		<>
 			<style>
@@ -264,7 +366,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											)}
 										</PanelBody>
 
-										<PanelBody title={__("Slider Options", "frontis-blocks")} initialOpen>
+										<PanelBody title={__("Slider Settings", "frontis-blocks")} initialOpen={false}>
 											<ToggleControl
 												label={__('Enable Loop', 'frontis-blocks')}
 												checked={loop}
@@ -330,7 +432,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								)}
 								{tab.name === "styles" && (
 									<>
-
+										<PanelBody title={__("Featured Image", "frontis-blocks")} initialOpen={true}>
+											<ToggleControl
+												label={__("Show featured Image on hover", "frontis-blocks")}
+												checked={featuredImageSwitcher}
+												onChange={(value) =>
+													setAttributes({ featuredImageSwitcher: value })
+												}
+											/>
+										</PanelBody>
 									</>
 								)}
 								{tab.name === "advanced" && (

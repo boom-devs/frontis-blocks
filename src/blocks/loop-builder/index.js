@@ -38,7 +38,11 @@ registerBlockVariation('core/query', {
         displayLayout: {
             type: 'flex',
             columns: 3
-        }
+        },
+        featuredImageSwitcher: {
+            type: 'boolean',
+            default: false
+        },
     },
     innerBlocks: [
         [
