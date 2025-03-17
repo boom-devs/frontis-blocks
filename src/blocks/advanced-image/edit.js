@@ -54,6 +54,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         advancedImageMobileSwitcher,
 	} = attributes;
 
+	const imageSourceOptions = [
+		{ value: 'upload', label: __('Upload Image', 'frontis-blocks') },
+		{ value: 'featured', label: __('Featured Image', 'frontis-blocks') },
+		{ value: 'acf', label: __('ACF Field', 'frontis-blocks') }
+	];
 	const blockProps = useBlockProps({
         className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
     });

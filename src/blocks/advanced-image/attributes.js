@@ -906,19 +906,19 @@ const attributes = {
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: 80,
-            bottom: 80,
-            left: 0,
-            right: 0,
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: 60,
-            bottom: 60,
-            left: 0,
-            right: 0,
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
         },
     },
     globalPaddingLink : {

@@ -72,7 +72,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <PanelBody title={__("Load More Settings", "frontis-blocks")} initialOpen={true}>
                       {!parentQueryLoop && (
                         <Notice status="warning" isDismissible={false}>
-                          {__('This block must be placed inside a Query Loop block to work properly.', 'frontis-blocks')}
+                          {__('This block must be placed inside a Post Loop to work properly.', 'frontis-blocks')}
                         </Notice>
                       )}
                       <ToggleControl

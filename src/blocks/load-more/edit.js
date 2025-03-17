@@ -21,7 +21,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }
   }, [blockID, clientId]);
 
-  // Find parent Query Loop block if exists
   const parentQueryLoop = useSelect((select) => {
     const { getBlockParentsByBlockName, getBlockAttributes } = select('core/block-editor');
     const parentQueryLoopIds = getBlockParentsByBlockName(clientId, 'core/query');
@@ -60,7 +59,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </div>
       ) : (
         <div className="notice-message">
-          {__('Please place this block inside a Query Loop block.', 'frontis-blocks')}
+          {__('Please place this block inside a Post loop.', 'frontis-blocks')}
         </div>
       )}
     </div>

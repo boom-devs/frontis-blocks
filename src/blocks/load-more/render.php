@@ -122,7 +122,6 @@ function fb_load_more_store_query_info() {
         queryLoops.forEach(function(queryLoop) {
             const queryId = queryLoop.getAttribute('data-query-id');
             if (queryId) {
-                // Store the query ID in the HTML for later use
                 queryLoop.setAttribute('data-query-id', queryId);
             }
         });
