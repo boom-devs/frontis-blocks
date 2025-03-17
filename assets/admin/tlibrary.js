@@ -3064,16 +3064,18 @@ function FrontisBlocksSidebarFullSite(props) {
                       setFontfamilies(localStorageData);
                     case 66:
                       if (!(key === 'fb_globaltypo')) {
-                        _context.next = 75;
+                        _context.next = 77;
                         break;
                       }
+                      console.log("fb_globaltypo");
+                      console.log(localStorageData);
                       if (!(localStorageData.length < 1)) {
-                        _context.next = 74;
+                        _context.next = 76;
                         break;
                       }
-                      _context.next = 70;
+                      _context.next = 72;
                       return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
-                    case 70:
+                    case 72:
                       _res7 = _context.sent;
                       if (_res7.success) {
                         setTimeout(function () {
@@ -3081,13 +3083,13 @@ function FrontisBlocksSidebarFullSite(props) {
                         }, 1000);
                         localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
                       }
-                      _context.next = 75;
+                      _context.next = 77;
                       break;
-                    case 74:
+                    case 76:
                       setTimeout(function () {
                         (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(localStorageData, deviceType);
                       }, 1000);
-                    case 75:
+                    case 77:
                     case "end":
                       return _context.stop();
                   }
@@ -3631,8 +3633,10 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
 
+  var arrayKeys = Object.keys(data);
+
   // Loop through the data to generate CSS for each tag
-  ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach(function (key) {
+  arrayKeys.forEach(function (key) {
     if (!data[key]) return;
 
     // Apply global properties (fontFamily, fontWeight, etc.)
