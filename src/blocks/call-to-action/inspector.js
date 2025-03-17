@@ -68,6 +68,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		headingGlobalTypoSwitcher,
 		headingGlobalTypographyData,
 		headingGlobalTypoType,
+		headingGlobalTypoOption,
 		headingFontFamily,
 		headingFontSize,
 		headingFontSizeUnits,
@@ -2690,6 +2691,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={headingGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
 												fontFamily={headingFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
