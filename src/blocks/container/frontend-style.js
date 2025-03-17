@@ -617,6 +617,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.left, containerBorderUnits.Desktop)}`;
+	} else {
+		containerBorderDesktopWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Tablet Border Width
@@ -631,6 +633,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.left, containerBorderUnits.Tablet)}`;
+	} else {
+		containerBorderTabletWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Mobile Border Width
@@ -645,6 +649,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.left, containerBorderUnits.Mobile)}`;
+	} else {
+		containerBorderMobileWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Desktop Border Radius - only set values if they are not 0

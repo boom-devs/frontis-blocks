@@ -329,6 +329,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	headingGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     headingFontFamily: {
         type: "string",
         default: "Default",
