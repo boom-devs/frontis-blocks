@@ -873,7 +873,12 @@ const TypographySettings = (props) => {
 				...globalTypography[item],
 				'letterSpacing': {
 					variable: `--fb-global-${item}--font-letter-spacing`,
-					value: value
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
 				}
 			}
 		});
@@ -923,7 +928,12 @@ const TypographySettings = (props) => {
 				...globalTypography[item],
 				'lineHeight': {
 					variable: `--fb-global-${item}--font-line-height`,
-					value: value
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
 				}
 			}
 		});
@@ -946,7 +956,7 @@ const TypographySettings = (props) => {
 			...globalTypography,
 			[item]: {
 				...globalTypography[item],
-				'Lineheight': {
+				'lineHeight': {
 					...globalTypography[item]['lineHeight'],
 					unit: value
 				}
@@ -1024,7 +1034,10 @@ const TypographySettings = (props) => {
 				setGlobalTypography(globalTypoData)
 			}
 		}, 1000);
-	}, [deviceType])
+	}, [deviceType]);
+
+	console.log("globalTypography");
+	console.log(globalTypography);
 
 	return (
 		<>
