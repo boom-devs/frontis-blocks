@@ -1,191 +1,82 @@
-/* File: blocks/load-more/style.scss */
-.boomdevs-load-more-block {
-    --primary-color: #00010B;
-    --secondary-color: #f7f7f7;
-    --spacing: 2rem;
-    
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--spacing);
-}
+// Frontend styles for the Load More block
 
-.load-more-posts {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
-}
-
-.load-more-item {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: var(--secondary-color);
-    border-radius: 8px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.fb-load-more-block {
+    margin: 30px 0;
     
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    @media (min-width: 768px) {
-        flex-direction: row;
-        align-items: center;
-        
-        &.left {
-            .load-more-item-image {
-                order: 1;
-            }
-            .load-more-item-content {
-                order: 2;
-            }
-        }
-        
-        &.right {
-            .load-more-item-image {
-                order: 2;
-            }
-            .load-more-item-content {
-                order: 1;
-            }
-        }
-    }
-}
-
-.load-more-item-image {
-    flex: 0 0 300px;
-    max-width: 100%;
-    height: auto;
-    
-    img {
-        width: 100%;
-        height: auto;
-        border-radius: 6px;
-        object-fit: cover;
-    }
-    
-    @media (min-width: 768px) {
-        flex: 0 0 40%;
-    }
-}
-
-.load-more-item-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    
-    h3 {
-        margin: 0;
-        font-size: 1.5rem;
-        
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            
-            &:hover {
-                color: #333;
-            }
-        }
-    }
-    
-    p {
-        margin: 0;
-        color: #666;
-        line-height: 1.6;
-    }
-}
-
-.load-more-item-cats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    
-    span {
-        padding: 0.25rem 0.75rem;
-        background: #eee;
-        border-radius: 30px;
-        font-size: 0.85rem;
-        color: #555;
-    }
-}
-
-.load-more-item-btn {
-    margin-top: auto;
-    
-    a {
-        display: flex;
+    .load-more {
+      text-align: center;
+      margin-top: 30px;
+      
+      .load-more-button {
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: transparent;
-        transition: background 0.3s ease;
-        
-        &:hover {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        
-        svg {
-            width: 24px;
-            height: 24px;
-        }
-    }
-}
-
-.load-more-button {
-    display: flex;
-    justify-content: center;
-    margin-top: var(--spacing);
-    
-    .load-more-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 0.75rem 1.5rem;
-        background-color: #fff;
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
-        border-radius: 30px;
-        text-decoration: none;
+        padding: 12px 24px;
+        font-size: 16px;
         font-weight: 500;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        text-decoration: none;
+        color: #000;
+        background-color: transparent;
+        border: 1px solid #000;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
         
         &:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            
-            svg path {
-                stroke: #fff;
-            }
-        }
-        
-        &.loading {
-            opacity: 0.7;
-            pointer-events: none;
+          background-color: rgba(0, 0, 0, 0.05);
         }
         
         svg {
+          margin-left: 10px;
+          width: 24px;
+          height: 24px;
+          transition: transform 0.3s ease;
+        }
+        
+        &:hover svg {
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+  
+  // Animation for the loading state
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .fb-load-more-block {
+    .load-more-button {
+      svg.animation {
+        animation: rotating 2s linear infinite;
+      }
+    }
+  }
+  
+  // Make sure the block aligns properly with Query Loop blocks
+  .wp-block-query + .fb-load-more-block,
+  .wp-block-query .fb-load-more-block {
+    margin-top: 0;
+  }
+  
+  // Responsive styles
+  @media (max-width: 767px) {
+    .fb-load-more-block {
+      .load-more {
+        .load-more-button {
+          padding: 10px 18px;
+          font-size: 14px;
+          
+          svg {
             width: 20px;
             height: 20px;
-            transition: transform 0.3s ease;
-            
-            &.rotating {
-                animation: rotate 1.5s linear infinite;
-            }
+          }
         }
+      }
     }
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
+  }

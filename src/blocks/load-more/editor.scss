@@ -1,187 +1,100 @@
-.fb-off-canvas-menu-block {
-    position: relative;
-    
-    // Hamburger icon styling
-    .fb-menu-toggle-btn {
-        cursor: pointer;
-        display: inline-block;
-        padding: 10px;
-        
-        .fb-hamburger-icon {
-            width: 30px;
-            height: 20px;
-            position: relative;
-            
-            span {
-                display: block;
-                position: absolute;
-                height: 3px;
-                width: 100%;
-                background: #333;
-                border-radius: 3px;
-                opacity: 1;
-                left: 0;
-                transform: rotate(0deg);
-                transition: .25s ease-in-out;
-                
-                &:nth-child(1) {
-                    top: 0px;
-                }
-                
-                &:nth-child(2) {
-                    top: 8px;
-                }
-                
-                &:nth-child(3) {
-                    top: 16px;
-                }
-            }
-        }
-        
-        .fb-dots-icon {
-            width: 30px;
-            height: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            
-            span {
-                width: 5px;
-                height: 5px;
-                background: #333;
-                border-radius: 50%;
-            }
-        }
-        
-        .fb-plus-icon {
-            width: 30px;
-            height: 30px;
-            position: relative;
-            
-            span {
-                display: block;
-                position: absolute;
-                background: #333;
-                border-radius: 3px;
-                
-                &:nth-child(1) {
-                    width: 100%;
-                    height: 3px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                }
-                
-                &:nth-child(2) {
-                    width: 3px;
-                    height: 100%;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-            }
-        }
-    }
-    
-    // Off-canvas menu styling
-    .fb-off-canvas-menu {
-        position: fixed;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        z-index: 999;
-        width: 80%;
-        height: auto;
-        top: 80px;
-        transition: transform 0.3s ease;
-        overflow-y: auto;
-        
-        &.fb-off-canvas-menu-left {
-            left: 0;
-            transform: translateX(-100%);
-        }
-        
-        &.fb-off-canvas-menu-right {
-            right: 0;
-            transform: translateX(100%);
-        }
-        
-        &.fb-off-canvas-menu-top {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: auto;
-            transform: translateY(-100%);
-        }
-        
-        &.fb-off-canvas-menu-bottom {
-            top: auto;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: auto;
-            transform: translateY(100%);
-        }
-        
-        &.open {
-            transform: translateX(0) translateY(0);
-        }
-    }
-    
-    .fb-off-canvas-header {
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px;
-        border-bottom: 1px solid #eee;
-        
-        .fb-close-menu {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 5px;
-            line-height: 1;
-        }
-    }
-    
-    .fb-off-canvas-content {
-        padding: 20px;
-    }
-    
-    .fb-pattern-placeholder {
-        padding: 30px;
-        background-color: #f7f7f7;
-        border: 1px dashed #ccc;
-        text-align: center;
-    }
-    
-    // Overlay styling
-    .fb-menu-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 998;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease;
-        
-        &.active {
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-}
+// Editor-specific styles for the Load More block
 
-// Editor-specific styling
-.block-editor-block-list__block .fb-off-canvas-menu-block {
-    .fb-off-canvas-menu {
-        position: absolute;
-        max-height: 400px;
-        z-index: 90;
+.fb-load-more-block {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.02);
+    
+    .notice-message {
+      padding: 15px;
+      margin: 0;
+      background-color: #f8d7da;
+      color: #721c24;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
     }
     
-    .fb-menu-overlay {
-        position: absolute;
+    .load-more-wrapper {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
     }
-}
+    
+    .load-more {
+      text-align: center;
+      margin-top: 20px;
+      
+      .load-more-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        color: #000;
+        background-color: transparent;
+        border: 1px solid #000;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        svg {
+          margin-left: 10px;
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    
+    // Styles for the Block Controls Panel tabs
+    .fb-parent-tab-panel {
+      .components-tab-panel__tabs {
+        display: flex;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+        
+        .components-tab-panel__tabs-item {
+          padding: 8px 16px;
+          margin-right: 8px;
+          border-radius: 4px 4px 0 0;
+          cursor: pointer;
+          border: 1px solid transparent;
+          border-bottom: none;
+          
+          &.active-tab {
+            background-color: #f5f5f5;
+            border-color: #e0e0e0;
+          }
+          
+          &:focus {
+            box-shadow: none;
+            outline: none;
+          }
+        }
+      }
+    }
+    
+    // Loading spinner animation
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+  }
+  
+  // Inspector control styles
+  .fb-inspector-control {
+    .components-panel__body {
+      .components-base-control {
+        margin-bottom: 16px;
+      }
+    }
+  }

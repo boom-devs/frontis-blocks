@@ -28,7 +28,6 @@ define( 'FB_PLUGIN_FILE', __FILE__ );
  */
 // Include block registration functions
 require_once __DIR__ . '/vendor/autoload.php';
-
 function wm_frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
 }

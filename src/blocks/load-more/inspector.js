@@ -6,46 +6,32 @@ import {
 import {
   PanelBody,
   TabPanel,
-  SelectControl,
-  RangeControl,
+  __experimentalNumberControl as NumberControl,
   ToggleControl,
-  __experimentalNumberControl as NumberControl
+  Notice
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
   const {
     blockID,
-    postType,
-    postsPerPage,
     loadMoreCount,
-    orderBy,
-    order,
     showLoadMoreButton,
-    showFeaturedImage,
-    showTitle,
-    showContent,
-    showCategories,
-    alternateLayout
   } = attributes;
 
-  // Get all available post types
-  const postTypes = useSelect((select) => {
-    const { getPostTypes } = select(coreStore);
-    const filteredPostTypes = getPostTypes({ per_page: -1 })?.filter(
-      (type) => type.viewable
-    );
-    return filteredPostTypes;
-  }, []);
-
-  // Create options for post type dropdown
-  const postTypeOptions = postTypes?.map((type) => ({
-    label: type.labels.singular_name,
-    value: type.slug,
-  })) || [{ label: 'Post', value: 'post' }];
+  // Find parent Query Loop block if exists
+  const parentQueryLoop = useSelect((select) => {
+    const { getBlockParentsByBlockName, getBlockAttributes } = select('core/block-editor');
+    const parentQueryLoopIds = getBlockParentsByBlockName(clientId, 'core/query');
+    
+    if (parentQueryLoopIds && parentQueryLoopIds.length > 0) {
+      const parentId = parentQueryLoopIds[0];
+      return getBlockAttributes(parentId);
+    }
+    return null;
+  }, [clientId]);
 
   // Generate a unique ID for the block if not already set
   useEffect(() => {
@@ -68,10 +54,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 className: "fb-tab general",
               },
               {
-                name: "styles",
-                title: "Style",
-                className: "fb-tab styles",
-              },
+								name: "styles",
+								title: "Style",
+								className: "fb-tab styles",
+							},
               {
                 name: "advanced",
                 title: "Advanced",
@@ -83,22 +69,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
               <div className={"fb-tab-controls " + tab.name}>
                 {tab.name === 'general' && (
                   <>
-                    <PanelBody title={__("Post Settings", "frontis-blocks")} initialOpen={true}>
-                      <SelectControl
-                        label={__("Post Type", "frontis-blocks")}
-                        value={postType}
-                        options={postTypeOptions}
-                        onChange={(value) => setAttributes({ postType: value })}
+                    <PanelBody title={__("Load More Settings", "frontis-blocks")} initialOpen={true}>
+                      {!parentQueryLoop && (
+                        <Notice status="warning" isDismissible={false}>
+                          {__('This block must be placed inside a Query Loop block to work properly.', 'frontis-blocks')}
+                        </Notice>
+                      )}
+                      <ToggleControl
+                        label={__("Show Load More Button", "frontis-blocks")}
+                        checked={showLoadMoreButton}
+                        onChange={() => setAttributes({ showLoadMoreButton: !showLoadMoreButton })}
                       />
-                      
-                      <NumberControl
-                        label={__("Posts Per Page", "frontis-blocks")}
-                        value={postsPerPage}
-                        onChange={(value) => setAttributes({ postsPerPage: parseInt(value) })}
-                        min={1}
-                        max={20}
-                      />
-                      
                       <NumberControl
                         label={__("Load More Count", "frontis-blocks")}
                         value={loadMoreCount}
@@ -106,70 +87,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         min={1}
                         max={20}
                         help={__("Number of posts to load with each 'Load More' click", "frontis-blocks")}
-                      />
-                      
-                      <SelectControl
-                        label={__("Order By", "frontis-blocks")}
-                        value={orderBy}
-                        options={[
-                          { label: __("Date", "frontis-blocks"), value: "date" },
-                          { label: __("Title", "frontis-blocks"), value: "title" },
-                          { label: __("Menu Order", "frontis-blocks"), value: "menu_order" },
-                          { label: __("Random", "frontis-blocks"), value: "rand" },
-                        ]}
-                        onChange={(value) => setAttributes({ orderBy: value })}
-                      />
-                      
-                      <SelectControl
-                        label={__("Order", "frontis-blocks")}
-                        value={order}
-                        options={[
-                          { label: __("Ascending", "frontis-blocks"), value: "ASC" },
-                          { label: __("Descending", "frontis-blocks"), value: "DESC" },
-                        ]}
-                        onChange={(value) => setAttributes({ order: value })}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Show Load More Button", "frontis-blocks")}
-                        checked={showLoadMoreButton}
-                        onChange={() => setAttributes({ showLoadMoreButton: !showLoadMoreButton })}
-                      />
-                    </PanelBody>
-                  </>
-                )}
-                {tab.name === "styles" && (
-                  <>
-                    <PanelBody title={__("Display Settings", "frontis-blocks")} initialOpen={true}>
-                      <ToggleControl
-                        label={__("Show Featured Image", "frontis-blocks")}
-                        checked={showFeaturedImage}
-                        onChange={() => setAttributes({ showFeaturedImage: !showFeaturedImage })}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Show Title", "frontis-blocks")}
-                        checked={showTitle}
-                        onChange={() => setAttributes({ showTitle: !showTitle })}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Show Content", "frontis-blocks")}
-                        checked={showContent}
-                        onChange={() => setAttributes({ showContent: !showContent })}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Show Categories", "frontis-blocks")}
-                        checked={showCategories}
-                        onChange={() => setAttributes({ showCategories: !showCategories })}
-                      />
-                      
-                      <ToggleControl
-                        label={__("Alternate Layout (Left/Right)", "frontis-blocks")}
-                        checked={alternateLayout}
-                        onChange={() => setAttributes({ alternateLayout: !alternateLayout })}
-                        help={__("Toggle to alternate item layout between left and right", "frontis-blocks")}
                       />
                     </PanelBody>
                   </>
