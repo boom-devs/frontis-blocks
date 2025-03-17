@@ -171,9 +171,9 @@ function FrontisBlocksSidebar(props) {
 		body: {
 			fontFamily: 'Default',
 			lineHeight: {
-				Desktop: 'Default',
-				Tablet: 'Default',
-				Mobile: 'Default'
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
 			},
 			lineHeightUnits: {
 				Desktop: 'px',
@@ -197,7 +197,7 @@ function FrontisBlocksSidebar(props) {
 			letterSpacing: {
 				Desktop: '',
 				Tablet: '',
-				Mobile: '',
+				Mobile: ''
 			},
 			letterSpacingUnit: {
 				Desktop: 'px',
@@ -208,9 +208,9 @@ function FrontisBlocksSidebar(props) {
 		link: {
 			fontFamily: 'Default',
 			lineHeight: {
-				Desktop: 'Default',
-				Tablet: 'Default',
-				Mobile: 'Default'
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
 			},
 			lineHeightUnits: {
 				Desktop: 'px',
@@ -234,7 +234,7 @@ function FrontisBlocksSidebar(props) {
 			letterSpacing: {
 				Desktop: '',
 				Tablet: '',
-				Mobile: '',
+				Mobile: ''
 			},
 			letterSpacingUnit: {
 				Desktop: 'px',
@@ -245,9 +245,9 @@ function FrontisBlocksSidebar(props) {
 		button: {
 			fontFamily: 'Default',
 			lineHeight: {
-				Desktop: 'Default',
-				Tablet: 'Default',
-				Mobile: 'Default'
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
 			},
 			lineHeightUnits: {
 				Desktop: 'px',
@@ -269,9 +269,9 @@ function FrontisBlocksSidebar(props) {
 			textTransform: 'Default',
 			textDecoration: 'Default',
 			letterSpacing: {
-				Desktop: '',
-				Tablet: '',
-				Mobile: '',
+				Desktop: 'Default',
+				Tablet: 'Default',
+				Mobile: 'Default',
 			},
 			letterSpacingUnit: {
 				Desktop: 'px',
@@ -282,9 +282,9 @@ function FrontisBlocksSidebar(props) {
 		captions: {
 			fontFamily: 'Default',
 			lineHeight: {
-				Desktop: 'Default',
-				Tablet: 'Default',
-				Mobile: 'Default'
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
 			},
 			lineHeightUnits: {
 				Desktop: 'px',
@@ -320,9 +320,9 @@ function FrontisBlocksSidebar(props) {
 			all: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -357,9 +357,9 @@ function FrontisBlocksSidebar(props) {
 			h1: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -394,9 +394,9 @@ function FrontisBlocksSidebar(props) {
 			h2: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -420,7 +420,7 @@ function FrontisBlocksSidebar(props) {
 				letterSpacing: {
 					Desktop: '',
 					Tablet: '',
-					Mobile: '',
+					Mobile: ''
 				},
 				letterSpacingUnit: {
 					Desktop: 'px',
@@ -431,9 +431,9 @@ function FrontisBlocksSidebar(props) {
 			h3: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -457,7 +457,7 @@ function FrontisBlocksSidebar(props) {
 				letterSpacing: {
 					Desktop: '',
 					Tablet: '',
-					Mobile: '',
+					Mobile: ''
 				},
 				letterSpacingUnit: {
 					Desktop: 'px',
@@ -468,9 +468,9 @@ function FrontisBlocksSidebar(props) {
 			h4: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -505,9 +505,9 @@ function FrontisBlocksSidebar(props) {
 			h5: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
@@ -542,9 +542,9 @@ function FrontisBlocksSidebar(props) {
 			h6: {
 				fontFamily: 'Default',
 				lineHeight: {
-					Desktop: 'Default',
-					Tablet: 'Default',
-					Mobile: 'Default'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 				lineHeightUnits: {
 					Desktop: 'px',
