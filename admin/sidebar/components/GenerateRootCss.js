@@ -108,7 +108,7 @@ const generateCSSVariables = (data, deviceType) => {
                 desktopStyles += `${cssVar}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
 
                 if (key === 'body') {
-                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar}) !important;\n`;
+                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
                 if (key === 'link') {
                     linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
