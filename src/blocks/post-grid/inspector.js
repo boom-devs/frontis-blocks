@@ -150,6 +150,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postTitleGlobalTypoSwitcher,
         postTitleGlobalTypographyData,
         postTitleGlobalTypoType,
+        postTitleGlobalTypoOption,
         postTitleFontFamily,
         postTitleFontSize,
         postTitleFontSizeUnits,
@@ -178,6 +179,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDescriptionGlobalTypoSwitcher,
         postDescriptionGlobalTypographyData,
         postDescriptionGlobalTypoType,
+        postDescriptionGlobalTypoOption,
         postDescriptionFontFamily,
         postDescriptionFontSize,
         postDescriptionFontSizeUnits,
@@ -208,6 +210,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postCategoryGlobalTypoSwitcher,
         postCategoryGlobalTypographyData,
         postCategoryGlobalTypoType,
+        postCategoryGlobalTypoOption,
         postCategoryFontFamily,
         postCategoryFontSize,
         postCategoryFontSizeUnits,
@@ -264,6 +267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postTagGlobalTypoSwitcher,
         postTagGlobalTypographyData,
         postTagGlobalTypoType,
+        postTagGlobalTypoOption,
         postTagFontFamily,
         postTagFontSize,
         postTagFontSizeUnits,
@@ -350,6 +354,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postAuthorGlobalTypoSwitcher,
         postAuthorGlobalTypographyData,
         postAuthorGlobalTypoType,
+        postAuthorGlobalTypoOption,
         postAuthorFontFamily,
         postAuthorFontSize,
         postAuthorFontSizeUnits,
@@ -378,6 +383,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postDateGlobalTypoSwitcher,
         postDateGlobalTypographyData,
         postDateGlobalTypoType,
+        postDateGlobalTypoOption,
         postDateFontFamily,
         postDateFontSize,
         postDateFontSizeUnits,
@@ -490,6 +496,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadMoreTextGlobalTypoSwitcher,
         loadMoreTextGlobalTypographyData,
         loadMoreTextGlobalTypoType,
+        loadMoreTextGlobalTypoOption,
         loadMoreTextFontFamily,
         loadMoreTextFontSize,
         loadMoreTextFontSizeUnits,
@@ -4918,6 +4925,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+                                                globalTypoOption={postTitleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ postTitleGlobalTypoOption: value })}
+
                                                 fontFamily={postTitleFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ postTitleFontFamily: value, postTitleGlobalTypoSwitcher: {...postTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5014,6 +5024,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         postDescriptionGlobalTypoSwitcher: value === 'default' ? {...postDescriptionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postDescriptionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={postDescriptionGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ postDescriptionGlobalTypoOption: value })}
 
                                                 fontFamily={postDescriptionFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ postDescriptionFontFamily: value, postDescriptionGlobalTypoSwitcher: {...postDescriptionGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5116,6 +5129,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     postCategoryGlobalTypoSwitcher: value === 'default' ? {...postCategoryGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postCategoryGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                 })
                                             }}
+
+                                            globalTypoOption={postCategoryGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ postCategoryGlobalTypoOption: value })}
 
                                             fontFamily={postCategoryFontFamily}
                                             onChangeFontFamily={(value) => setAttributes({ postCategoryFontFamily: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5316,6 +5332,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     postTagGlobalTypoSwitcher: value === 'default' ? {...postTagGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postTagGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                 })
                                             }}
+
+                                            globalTypoOption={postTagGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ postTagGlobalTypoOption: value })}
 
                                             fontFamily={postTagFontFamily}
                                             onChangeFontFamily={(value) => setAttributes({ postTagFontFamily: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5616,6 +5635,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+                                                globalTypoOption={postAuthorGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ postAuthorGlobalTypoOption: value })}
+
                                                 fontFamily={postAuthorFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ postAuthorFontFamily: value, postAuthorGlobalTypoSwitcher: {...postAuthorGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5733,6 +5755,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         })
                                                     }}
 
+                                                    globalTypoOption={postDateGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ postDateGlobalTypoOption: value })}
+
                                                     fontFamily={postDateFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ postDateFontFamily: value, postDateGlobalTypoSwitcher: {...postDateGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5809,6 +5834,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             loadMoreTextGlobalTypoSwitcher: value === 'default' ? {...loadMoreTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...loadMoreTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                         })
                                                     }}
+
+                                                    globalTypoOption={loadMoreTextGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ loadMoreTextGlobalTypoOption: value })}
 
                                                     fontFamily={loadMoreTextFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ loadMoreTextFontFamily: value, loadMoreTextGlobalTypoSwitcher: {...loadMoreTextGlobalTypoSwitcher, fontFamily: value && false} })}

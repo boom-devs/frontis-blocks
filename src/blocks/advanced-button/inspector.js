@@ -70,6 +70,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
+		buttonGlobalTypoOption,
 		buttonFontFamily,
 		buttonFontSize,
 		buttonFontSizeUnits,
@@ -1702,6 +1703,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={buttonGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 												fontFamily={buttonFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}

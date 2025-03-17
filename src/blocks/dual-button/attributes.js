@@ -71,6 +71,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	ButtonGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	ButtonFontFamily: {
 		type: "string",
 		default: "Default",
@@ -369,6 +373,10 @@ const attributes = {
 	connectorGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	connectorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	connectorFontFamily: {
 		type: "string",

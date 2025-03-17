@@ -706,6 +706,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+	sliderFractionGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 
 	sliderFractionFontFamily: {
         type: "string",

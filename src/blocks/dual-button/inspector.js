@@ -62,6 +62,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ButtonGlobalTypoSwitcher,
 		ButtonGlobalTypographyData,
 		ButtonGlobalTypoType,
+		ButtonGlobalTypoOption,
 		ButtonFontFamily,
 		ButtonFontSize,
 		ButtonFontSizeUnits,
@@ -186,6 +187,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		connectorGlobalTypoSwitcher,
 		connectorGlobalTypographyData,
 		connectorGlobalTypoType,
+		connectorGlobalTypoOption,
 		connectorFontFamily,
 		connectorFontSize,
 		connectorFontSizeUnits,
@@ -2784,6 +2786,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={ButtonGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ ButtonGlobalTypoOption: value })}
+
 												fontFamily={ButtonFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3118,6 +3123,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														connectorGlobalTypoSwitcher: value === 'default' ? {...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={connectorGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ connectorGlobalTypoOption: value })}
 
 												fontFamily={connectorFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontFamily: value && false} })}
