@@ -820,7 +820,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
         var cssVar = "".concat(typoValue.variable);
         desktopStyles += "".concat(cssVar, ": ").concat(createValueWithUnit(desktopValue, desktopUnit), ";\n");
         if (key === 'body') {
-          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ") !important;\n");
+          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
         }
         if (key === 'link') {
           linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
