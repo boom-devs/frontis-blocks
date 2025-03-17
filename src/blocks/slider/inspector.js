@@ -159,6 +159,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderFractionGlobalTypographyData,
         sliderFractionGlobalTypoSwitcher,
         sliderFractionGlobalTypoType,
+        sliderFractionGlobalTypoOption,
 
         sliderFractionFontFamily,
         sliderFractionFontSize,
@@ -2146,6 +2147,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                 sliderFractionGlobalTypoSwitcher: value === 'default' ? {...sliderFractionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...sliderFractionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                             })
                                                         }}
+
+                                                        globalTypoOption={sliderFractionGlobalTypoOption}
+														onChangeGlobalTypoOption={(value) => setAttributes({ sliderFractionGlobalTypoOption: value })}
 
                                                         fontFamily={sliderFractionFontFamily}
                                                         onChangeFontFamily={(value) => setAttributes({ sliderFractionFontFamily: value, sliderFractionGlobalTypoSwitcher: {...sliderFractionGlobalTypoSwitcher, fontFamily: value && false} })}

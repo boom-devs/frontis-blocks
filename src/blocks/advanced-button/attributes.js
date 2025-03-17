@@ -61,6 +61,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    buttonGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
+    },
     buttonFontFamily: {
         type: "string",
         default: "Default",

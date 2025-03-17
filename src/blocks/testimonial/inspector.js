@@ -120,6 +120,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialTitleGlobalTypoSwitcher,
         TestimonialTitleGlobalTypographyData,
         TestimonialTitleGlobalTypoType,
+        TestimonialTitleGlobalTypoOption,
         TestimonialTitleFontFamily,
         TestimonialTitleFontSize,
         TestimonialTitleFontSizeUnits,
@@ -143,6 +144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDescGlobalTypoSwitcher,
         TestimonialDescGlobalTypographyData,
         TestimonialDescGlobalTypoType,
+        TestimonialDescGlobalTypoOption,
         TestimonialDescFontFamily,
         TestimonialDescFontSize,
         TestimonialDescFontSizeUnits,
@@ -166,6 +168,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialAuthorGlobalTypoSwitcher,
         TestimonialAuthorGlobalTypographyData,
         TestimonialAuthorGlobalTypoType,
+        TestimonialAuthorGlobalTypoOption,
         TestimonialAuthorFontFamily,
         TestimonialAuthorFontSize,
         TestimonialAuthorFontSizeUnits,
@@ -190,6 +193,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDesignationGlobalTypoSwitcher,
         TestimonialDesignationGlobalTypographyData,
         TestimonialDesignationGlobalTypoType,
+        TestimonialDesignationGlobalTypoOption,
         TestimonialDesignationFontFamily,
         TestimonialDesignationFontSize,
         TestimonialDesignationFontSizeUnits,
@@ -2611,6 +2615,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         })
                                                     }}
 
+                                                    globalTypoOption={TestimonialTitleGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialTitleGlobalTypoOption: value })}
+
                                                     fontFamily={TestimonialTitleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -2705,6 +2712,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         TestimonialDescGlobalTypoSwitcher: value === 'default' ? {...TestimonialDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={TestimonialDescGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDescGlobalTypoOption: value })}
 
                                                 fontFamily={TestimonialDescFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -2887,6 +2897,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         })
                                                     }}
 
+                                                    globalTypoOption={TestimonialAuthorGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialAuthorGlobalTypoOption: value })}
+
                                                     fontFamily={TestimonialAuthorFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -2981,6 +2994,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             TestimonialDesignationGlobalTypoSwitcher: value === 'default' ? {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                         })
                                                     }}
+
+                                                    globalTypoOption={TestimonialDesignationGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDesignationGlobalTypoOption: value })}
 
                                                     fontFamily={TestimonialDesignationFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: value && false} })}

@@ -135,6 +135,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    progressGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     progressFontFamily: {
         type: "string",
         default: "Default",
