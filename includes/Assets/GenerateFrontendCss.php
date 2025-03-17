@@ -16,20 +16,15 @@ class GenerateFrontendCss {
 				if(file_exists($css_file_path)) {
 					include $css_file_path;
 				}
+			} else {
+				$single_block['slug'] = preg_replace('/^.*?\//', '', $block['blockName']);
+				$css_file_path = plugin_dir_path(__DIR__) . 'Assets/others/frontend.css.php';
+				if(file_exists($css_file_path)) {
+					include $css_file_path;
+				}
 			}
 		}
 	}
-
-	// public function get_blocks_on_save($post_id, $post, $update) {
-	// 	// when post is saved or update then get the blocks
-	// 	if($update) {
-	// 		$post_content = $post->post_content;
-	// 		$blocks = parse_blocks($post_content);
-	// 		foreach($blocks as $block) {
-	// 			self::render_generated_css($block, $block, $block['attrs']);
-	// 		}
-	// 	}
-	// }
 }
 
 

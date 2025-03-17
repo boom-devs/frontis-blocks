@@ -23,9 +23,6 @@ class Admin {
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
-
-		GenerateGlobalTypography::generate_global_typography();
-		GenerateGlobalColors::generate_global_colors();
     }
 
     public function add_menu_page(){
