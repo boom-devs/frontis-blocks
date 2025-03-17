@@ -83,7 +83,7 @@ export default function save({ attributes }) {
                         />
                     </div>
 
-                    {subHeadingSwitcher && subHeadingPosition === 'bottom' && ( 
+                    {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
                         <div className="fb-advanced-sub-heading-wrapper">
                             <RichText.Content
                                 tagName={subHeadingTag}
