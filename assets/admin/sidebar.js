@@ -756,8 +756,10 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
 
+  var arrayKeys = Object.keys(data);
+
   // Loop through the data to generate CSS for each tag
-  ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach(function (key) {
+  arrayKeys.forEach(function (key) {
     if (!data[key]) return;
 
     // Apply global properties (fontFamily, fontWeight, etc.)
