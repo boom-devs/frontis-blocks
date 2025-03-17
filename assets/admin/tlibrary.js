@@ -3632,8 +3632,9 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading5Styles = '';
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
-
   var arrayKeys = Object.keys(data);
+  console.log("data");
+  console.log(data);
 
   // Loop through the data to generate CSS for each tag
   arrayKeys.forEach(function (key) {
@@ -3642,8 +3643,11 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
     // Apply global properties (fontFamily, fontWeight, etc.)
     ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach(function (prop) {
       var value = getValue(data[key], prop);
+      var typoValue = data[key][prop];
       if (value !== null) {
-        rootStyles += "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": ").concat(value, ";\n");
+        if (typoValue) {
+          rootStyles += "".concat(typoValue.variable, ": ").concat(value, ";\n");
+        }
         if (key === 'body') {
           paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
         }
@@ -3689,7 +3693,8 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
       var tabletUnit = getUnit(data[key], prop, 'Tablet');
       var mobileUnit = getUnit(data[key], prop, 'Mobile');
       if (desktopValue !== null) {
-        var cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        var typoValue = data[key][prop];
+        var cssVar = "".concat(typoValue.variable);
         desktopStyles += "".concat(cssVar, ": ").concat(createValueWithUnit(desktopValue, desktopUnit), ";\n");
         if (key === 'body') {
           paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ") !important;\n");
@@ -3726,11 +3731,13 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
         }
       }
       if (tabletValue !== null) {
-        var _cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        var _typoValue = data[key][prop];
+        var _cssVar = "".concat(_typoValue.variable);
         tabletStyles += "".concat(_cssVar, ": ").concat(createValueWithUnit(tabletValue, tabletUnit), ";\n");
       }
       if (mobileValue !== null) {
-        var _cssVar2 = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
+        var _typoValue2 = data[key][prop];
+        var _cssVar2 = "".concat(_typoValue2.variable);
         mobileStyles += "".concat(_cssVar2, ": ").concat(createValueWithUnit(mobileValue, mobileUnit), ";\n");
       }
     });
@@ -3968,7 +3975,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     value: fontFamily,
     onChange: handleFontFamilyChange
   }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
+    min: -200,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
     rangeValue: fontSize,
@@ -4005,7 +4012,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, letterSpacingUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
+    min: -100,
     max: 100,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
     rangeValue: letterSpacing,
@@ -4016,7 +4023,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     rangeStep: 1,
     resetFallbackValue: ''
   }), lineHeightUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
+    min: -200,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
     rangeValue: lineHeight,
@@ -4629,7 +4636,12 @@ var TypographySettings = function TypographySettings(props) {
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'letterSpacing': {
         variable: "--fb-global-".concat(item, "--font-letter-spacing"),
-        value: value
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
       }
     }))));
     setIsMount(true);
@@ -4658,7 +4670,12 @@ var TypographySettings = function TypographySettings(props) {
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'lineHeight': {
         variable: "--fb-global-".concat(item, "--font-line-height"),
-        value: value
+        value: value,
+        unit: {
+          'Desktop': 'px',
+          'Tablet': 'px',
+          'Mobile': 'px'
+        }
       }
     }))));
     setIsMount(true);
@@ -4671,7 +4688,7 @@ var TypographySettings = function TypographySettings(props) {
       })));
     });
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'Lineheight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
+      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
         unit: value
       })
     }))));
@@ -4785,6 +4802,8 @@ var TypographySettings = function TypographySettings(props) {
       }
     }, 1000);
   }, [deviceType]);
+  console.log("globalTypography");
+  console.log(globalTypography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
