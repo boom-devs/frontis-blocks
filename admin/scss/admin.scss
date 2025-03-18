@@ -191,7 +191,13 @@
 }
 
 .interface-interface-skeletonbody  {
-  .interface-interface-skeletoncontent { 
+  &.interface-interface-skeletoncontent { 
+    overflow-x: hidden;
+  }
+}
+
+.interface-navigable-region{
+  &.interface-interface-skeleton__content {
     overflow-x: hidden;
   }
 }
