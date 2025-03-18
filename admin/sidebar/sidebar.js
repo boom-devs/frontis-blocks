@@ -1257,5 +1257,5 @@ function FrontisBlocksSidebar(props) {
 		</>
 	);
 };
-
+// Export the component
 export default FrontisBlocksSidebar;
