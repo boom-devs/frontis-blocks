@@ -131,6 +131,24 @@ final class Plugin
 		if(file_exists($css_file_system_path)) {
 			wp_enqueue_style('frontis-blocks-' . $page_name, $css_file_url, [], FB_VERSION);
 		}
+
+		// Header css
+		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/header/frontis-blocks.css';
+		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/header/frontis-blocks.css';
+
+		// Check if the file exists on the server file system
+		if(file_exists($css_file_system_path)) {
+			wp_enqueue_style('frontis-blocks-header', $css_file_url, [], FB_VERSION);
+		}
+
+		// Footer css
+		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/footer/frontis-blocks.css';
+		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/frontis-blocks.css';
+
+		// Check if the file exists on the server file system
+		if(file_exists($css_file_system_path)) {
+			wp_enqueue_style('frontis-blocks-footer', $css_file_url, [], FB_VERSION);
+		}
 	}
 
 	public function enqueue_editor_scripts()
