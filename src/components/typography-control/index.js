@@ -304,7 +304,7 @@ const FB_TypographyControl = ({
                                 className={globalTypoSwitcher.letterSpacing === true && 'fb-global-typo-active'}
                             >
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Letter Spacing", "frontis-blocks")}
                                 rangeValue={letterSpacing}
