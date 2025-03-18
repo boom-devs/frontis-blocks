@@ -690,10 +690,17 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
   var path = window.location.pathname;
   var fileName = path.substring(path.lastIndexOf('/') + 1);
   if (fileName === 'post.php') {
-    var _iframe3, _iframe4;
-    iframe = document.querySelector('iframe[name="editor-canvas"]');
-    iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
-    styleTag = iframeDocument.getElementById("global-colors");
+    if (deviceType !== 'Desktop') {
+      var _iframe3, _iframe4;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
+      styleTag = iframeDocument.getElementById("global-colors");
+    } else {
+      var _iframe5, _iframe6;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe5 = iframe) === null || _iframe5 === void 0 ? void 0 : _iframe5.contentDocument) || ((_iframe6 = iframe) === null || _iframe6 === void 0 || (_iframe6 = _iframe6.contentWindow) === null || _iframe6 === void 0 ? void 0 : _iframe6.document) || document;
+      styleTag = iframeDocument.getElementById("global-colors");
+    }
   }
   if (!styleTag) {
     styleTag = iframeDocument.createElement("style");
@@ -756,8 +763,6 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
   var arrayKeys = Object.keys(data);
-  console.log("data");
-  console.log(data);
 
   // Loop through the data to generate CSS for each tag
   arrayKeys.forEach(function (key) {
@@ -3456,7 +3461,7 @@ function FrontisBlocksSidebar(props) {
                       setCustomTypography(localStorageData);
                     case 56:
                       if (!(key === 'fb_fontfamilies')) {
-                        _context.next = 66;
+                        _context.next = 65;
                         break;
                       }
                       if (!(localStorageData.length < 1)) {
@@ -3470,27 +3475,31 @@ function FrontisBlocksSidebar(props) {
                       if (!_res6.success) {
                         setFontfamilies([]);
                       } else {
-                        setFontfamilies(_res6.data);
-                        getAllFontFamilies(_res6.data);
-                        localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
+                        setTimeout(function () {
+                          setFontfamilies(_res6.data);
+                          getAllFontFamilies(_res6.data);
+                          localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
+                        }, 1000);
                       }
-                      _context.next = 66;
+                      _context.next = 65;
                       break;
                     case 64:
-                      getAllFontFamilies(localStorageData);
-                      setFontfamilies(localStorageData);
-                    case 66:
+                      setTimeout(function () {
+                        getAllFontFamilies(localStorageData);
+                        setFontfamilies(localStorageData);
+                      }, 1000);
+                    case 65:
                       if (!(key === 'fb_globaltypo')) {
-                        _context.next = 75;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
                         _context.next = 74;
                         break;
                       }
-                      _context.next = 70;
+                      if (!(localStorageData.length < 1)) {
+                        _context.next = 73;
+                        break;
+                      }
+                      _context.next = 69;
                       return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
-                    case 70:
+                    case 69:
                       _res7 = _context.sent;
                       if (_res7.success) {
                         setTimeout(function () {
@@ -3498,13 +3507,13 @@ function FrontisBlocksSidebar(props) {
                         }, 1000);
                         localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
                       }
-                      _context.next = 75;
+                      _context.next = 74;
                       break;
-                    case 74:
+                    case 73:
                       setTimeout(function () {
                         (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(localStorageData, deviceType);
                       }, 1000);
-                    case 75:
+                    case 74:
                     case "end":
                       return _context.stop();
                   }
@@ -3539,7 +3548,9 @@ function FrontisBlocksSidebar(props) {
       };
     }();
     handleUpdateState();
-  }, []);
+    console.log("deviceType");
+    console.log(deviceType);
+  }, [deviceType]);
   var colorPanelArray = function colorPanelArray(colors, setColor) {
     var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
     if (_typeof(colors) !== "object") {
@@ -3584,7 +3595,7 @@ function FrontisBlocksSidebar(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     setTimeout(function () {
       var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-      (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors);
+      (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
     }, 1000);
   }, [globalColors, customColors, customGradientColors, gradientColors]);
 
