@@ -118,6 +118,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberGlobalTypoSwitcher,
         counterNumberGlobalTypographyData,
         counterNumberGlobalTypoType,
+        counterNumberGlobalTypoOption,
 		counterNumberFontFamily,
 		counterNumberFontSize,
 		counterNumberFontSizeUnits,
@@ -140,6 +141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberTitleGlobalTypoSwitcher,
         counterNumberTitleGlobalTypographyData,
         counterNumberTitleGlobalTypoType,
+        counterNumberTitleGlobalTypoOption,
 		counterNumberTitleFontFamily,
 		counterNumberTitleFontSize,
 		counterNumberTitleFontSizeUnits,
@@ -1635,6 +1637,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+												globalTypoOption={counterNumberGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberGlobalTypoOption: value })}
+
                                                 fontFamily={counterNumberFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -1731,6 +1736,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         counterNumberTitleGlobalTypoSwitcher: value === 'default' ? {...counterNumberTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+												globalTypoOption={counterNumberTitleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberTitleGlobalTypoOption: value })}
 
                                                 fontFamily={counterNumberTitleFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontFamily: value && false} })}
