@@ -62,37 +62,37 @@ class GenerateGlobalTypography {
                         
                         switch($key) {
                             case 'body':
-                                $paragraphStyles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'link':
-                                $linkStyles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $linkStyles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'button':
-                                $buttonStyles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'captions':
-                                $captionStyles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $captionStyles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'all':
-                                $combinedHeadingStyles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h1':
-                                $heading1Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h2':
-                                $heading2Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h3':
-                                $heading3Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h4':
-                                $heading4Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h5':
-                                $heading5Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                             case 'h6':
-                                $heading6Styles .= "{$cssProperty}: {$styleValue} !important;\n";
+                                $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
                                 break;
                         }
                     }
@@ -114,37 +114,37 @@ class GenerateGlobalTypography {
                             
                             switch($key) {
                                 case 'body':
-                                    $paragraphStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $paragraphStyles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'link':
-                                    $linkStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'button':
-                                    $buttonStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $buttonStyles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'captions':
-                                    $captionStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $captionStyles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'all':
-                                    $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h1':
-                                    $heading1Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h2':
-                                    $heading2Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h3':
-                                    $heading3Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h4':
-                                    $heading4Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h5':
-                                    $heading5Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                                 case 'h6':
-                                    $heading6Styles .= "{$cssProperty}: var({$cssVar}) !important;\n";
+                                    $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
                                     break;
                             }
                         }
