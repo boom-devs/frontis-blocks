@@ -44,6 +44,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
+
+		teamMemberBadgeSwitcher,
+		teamMemberBadge,
+		teamMemberBadgePosition,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -92,10 +96,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</div>}
 									</>
 								}
+								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'image' &&
+									<div className="fb-team-member-badge-wrapper">
+										<RichText
+											tagName={'span'}
+											value={teamMemberBadge}
+											className="fb-team-member-badge"
+										/>
+									</div>
+								}
 							</div>
 						</div>
 						<div className="fb-team-member-content-wrapper">
 							<div className={`fb-team-member-content`}>
+								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'content' &&
+									<div className="fb-team-member-badge-wrapper">
+										<RichText
+											tagName={'span'}
+											value={teamMemberBadge}
+											className="fb-team-member-badge"
+										/>
+									</div>
+								}
 								<RichText
 									tagName={teamMemberNameHeadingTag}
 									value={teamMemberName}
