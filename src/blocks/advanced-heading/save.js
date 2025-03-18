@@ -22,6 +22,8 @@ export default function save({ attributes }) {
         headingGlobalWraperID,
         headingGlobalWraperClass,
 
+        headingBeforeAfterSwitcher,
+
         advancedHeadingDesktopSwitcher,
         advancedHeadingTabletSwitcher,
         advancedHeadingMobileSwitcher,
@@ -29,7 +31,7 @@ export default function save({ attributes }) {
 
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
     });
 
 
