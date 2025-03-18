@@ -3287,6 +3287,20 @@ function FrontisBlocksSidebar(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     fontfamilies = _useState18[0],
     setFontfamilies = _useState18[1];
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    colorModalOpen = _useState20[0],
+    setColorModalOpen = _useState20[1];
+  var openColorModal = function openColorModal() {
+    return setColorModalOpen(true);
+  };
+  var closeColorModal = function closeColorModal() {
+    return setColorModalOpen(false);
+  };
+  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(''),
+    _useState22 = _slicedToArray(_useState21, 2),
+    colorName = _useState22[0],
+    setColorName = _useState22[1];
 
   // Extract all font families into a single string
   var getAllFontFamilies = function getAllFontFamilies(fontsObject) {
@@ -3304,253 +3318,254 @@ function FrontisBlocksSidebar(props) {
     var regenerateFonts = fontFamilies.join(",");
     (0,_helper__WEBPACK_IMPORTED_MODULE_10__.loadGoogleFont)(regenerateFonts);
   };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies', 'fb_globaltypo'];
-    var handleUpdateState = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _loop, _i, _localStorageKeys;
-        return _regeneratorRuntime().wrap(function _callee$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
-                var key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
-                return _regeneratorRuntime().wrap(function _loop$(_context) {
-                  while (1) switch (_context.prev = _context.next) {
-                    case 0:
-                      key = _localStorageKeys[_i];
-                      localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
-                      if (!(key === 'fb_global_colors')) {
-                        _context.next = 11;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 10;
-                        break;
-                      }
-                      _context.next = 6;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
-                    case 6:
-                      res = _context.sent;
-                      if (!res.success) {
-                        setGlobalColors(defaultsColors);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
-                      } else {
-                        setGlobalColors(res.data);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
-                      }
+  var handleUpdateState = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var localStorageKeys, _loop, _i, _localStorageKeys;
+      return _regeneratorRuntime().wrap(function _callee$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies', 'fb_globaltypo'];
+            _context2.prev = 1;
+            _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+              var key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
+              return _regeneratorRuntime().wrap(function _loop$(_context) {
+                while (1) switch (_context.prev = _context.next) {
+                  case 0:
+                    key = _localStorageKeys[_i];
+                    localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
+                    if (!(key === 'fb_global_colors')) {
                       _context.next = 11;
                       break;
-                    case 10:
-                      setGlobalColors(localStorageData);
-                    case 11:
-                      if (!(key === 'fb_custom_colors')) {
-                        _context.next = 20;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 19;
-                        break;
-                      }
-                      _context.next = 15;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
-                    case 15:
-                      _res = _context.sent;
-                      if (!_res.success) {
-                        setCustomColors([]);
-                      } else {
-                        setCustomColors(_res.data);
-                        localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 10;
+                      break;
+                    }
+                    _context.next = 6;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
+                  case 6:
+                    res = _context.sent;
+                    if (!res.success) {
+                      setGlobalColors(defaultsColors);
+                      localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+                    } else {
+                      setGlobalColors(res.data);
+                      localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+                    }
+                    _context.next = 11;
+                    break;
+                  case 10:
+                    setGlobalColors(localStorageData);
+                  case 11:
+                    if (!(key === 'fb_custom_colors')) {
                       _context.next = 20;
                       break;
-                    case 19:
-                      setCustomColors(localStorageData);
-                    case 20:
-                      if (!(key === 'fb_gradient_colors')) {
-                        _context.next = 29;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 28;
-                        break;
-                      }
-                      _context.next = 24;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
-                    case 24:
-                      _res2 = _context.sent;
-                      if (!_res2.success) {
-                        setGradientColors(gradientDefaults);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
-                      } else {
-                        setGradientColors(_res2.data);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 19;
+                      break;
+                    }
+                    _context.next = 15;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
+                  case 15:
+                    _res = _context.sent;
+                    if (!_res.success) {
+                      setCustomColors([]);
+                    } else {
+                      setCustomColors(_res.data);
+                      localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
+                    }
+                    _context.next = 20;
+                    break;
+                  case 19:
+                    setCustomColors(localStorageData);
+                  case 20:
+                    if (!(key === 'fb_gradient_colors')) {
                       _context.next = 29;
                       break;
-                    case 28:
-                      setGradientColors(localStorageData);
-                    case 29:
-                      if (!(key === 'fb_custom_gradient_colors')) {
-                        _context.next = 38;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 37;
-                        break;
-                      }
-                      _context.next = 33;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
-                    case 33:
-                      _res3 = _context.sent;
-                      if (!_res3.success) {
-                        setCustomGradientColors([]);
-                      } else {
-                        setCustomGradientColors(_res3.data);
-                        localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 28;
+                      break;
+                    }
+                    _context.next = 24;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
+                  case 24:
+                    _res2 = _context.sent;
+                    if (!_res2.success) {
+                      setGradientColors(gradientDefaults);
+                      localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
+                    } else {
+                      setGradientColors(_res2.data);
+                      localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
+                    }
+                    _context.next = 29;
+                    break;
+                  case 28:
+                    setGradientColors(localStorageData);
+                  case 29:
+                    if (!(key === 'fb_custom_gradient_colors')) {
                       _context.next = 38;
                       break;
-                    case 37:
-                      setCustomGradientColors(localStorageData);
-                    case 38:
-                      if (!(key === 'fb_typography')) {
-                        _context.next = 47;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 46;
-                        break;
-                      }
-                      _context.next = 42;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
-                    case 42:
-                      _res4 = _context.sent;
-                      if (!_res4.success) {
-                        localStorage.setItem('fb_typography', JSON.stringify(typography));
-                      } else {
-                        setTypography(_res4.data);
-                        localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 37;
+                      break;
+                    }
+                    _context.next = 33;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
+                  case 33:
+                    _res3 = _context.sent;
+                    if (!_res3.success) {
+                      setCustomGradientColors([]);
+                    } else {
+                      setCustomGradientColors(_res3.data);
+                      localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
+                    }
+                    _context.next = 38;
+                    break;
+                  case 37:
+                    setCustomGradientColors(localStorageData);
+                  case 38:
+                    if (!(key === 'fb_typography')) {
                       _context.next = 47;
                       break;
-                    case 46:
-                      setTypography(localStorageData);
-                    case 47:
-                      if (!(key === 'fb_custom_typography')) {
-                        _context.next = 56;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 55;
-                        break;
-                      }
-                      _context.next = 51;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
-                    case 51:
-                      _res5 = _context.sent;
-                      if (!_res5.success) {
-                        setCustomTypography([]);
-                      } else {
-                        setCustomTypography(_res5.data);
-                        localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 46;
+                      break;
+                    }
+                    _context.next = 42;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
+                  case 42:
+                    _res4 = _context.sent;
+                    if (!_res4.success) {
+                      localStorage.setItem('fb_typography', JSON.stringify(typography));
+                    } else {
+                      setTypography(_res4.data);
+                      localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
+                    }
+                    _context.next = 47;
+                    break;
+                  case 46:
+                    setTypography(localStorageData);
+                  case 47:
+                    if (!(key === 'fb_custom_typography')) {
                       _context.next = 56;
                       break;
-                    case 55:
-                      setCustomTypography(localStorageData);
-                    case 56:
-                      if (!(key === 'fb_fontfamilies')) {
-                        _context.next = 65;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 64;
-                        break;
-                      }
-                      _context.next = 60;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
-                    case 60:
-                      _res6 = _context.sent;
-                      if (!_res6.success) {
-                        setFontfamilies([]);
-                      } else {
-                        setTimeout(function () {
-                          setFontfamilies(_res6.data);
-                          getAllFontFamilies(_res6.data);
-                          localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
-                        }, 1000);
-                      }
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 55;
+                      break;
+                    }
+                    _context.next = 51;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
+                  case 51:
+                    _res5 = _context.sent;
+                    if (!_res5.success) {
+                      setCustomTypography([]);
+                    } else {
+                      setCustomTypography(_res5.data);
+                      localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
+                    }
+                    _context.next = 56;
+                    break;
+                  case 55:
+                    setCustomTypography(localStorageData);
+                  case 56:
+                    if (!(key === 'fb_fontfamilies')) {
                       _context.next = 65;
                       break;
-                    case 64:
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 64;
+                      break;
+                    }
+                    _context.next = 60;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
+                  case 60:
+                    _res6 = _context.sent;
+                    if (!_res6.success) {
+                      setFontfamilies([]);
+                    } else {
                       setTimeout(function () {
-                        getAllFontFamilies(localStorageData);
-                        setFontfamilies(localStorageData);
+                        setFontfamilies(_res6.data);
+                        getAllFontFamilies(_res6.data);
+                        localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
                       }, 1000);
-                    case 65:
-                      if (!(key === 'fb_globaltypo')) {
-                        _context.next = 74;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 73;
-                        break;
-                      }
-                      _context.next = 69;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
-                    case 69:
-                      _res7 = _context.sent;
-                      if (_res7.success) {
-                        setTimeout(function () {
-                          (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(_res7.data, deviceType);
-                        }, 1000);
-                        localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
-                      }
+                    }
+                    _context.next = 65;
+                    break;
+                  case 64:
+                    setTimeout(function () {
+                      getAllFontFamilies(localStorageData);
+                      setFontfamilies(localStorageData);
+                    }, 1000);
+                  case 65:
+                    if (!(key === 'fb_globaltypo')) {
                       _context.next = 74;
                       break;
-                    case 73:
+                    }
+                    if (!(localStorageData.length < 1)) {
+                      _context.next = 73;
+                      break;
+                    }
+                    _context.next = 69;
+                    return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
+                  case 69:
+                    _res7 = _context.sent;
+                    if (_res7.success) {
                       setTimeout(function () {
-                        (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(localStorageData, deviceType);
+                        (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(_res7.data, deviceType);
                       }, 1000);
-                    case 74:
-                    case "end":
-                      return _context.stop();
-                  }
-                }, _loop);
-              });
-              _i = 0, _localStorageKeys = localStorageKeys;
-            case 3:
-              if (!(_i < _localStorageKeys.length)) {
-                _context2.next = 8;
-                break;
-              }
-              return _context2.delegateYield(_loop(), "t0", 5);
-            case 5:
-              _i++;
-              _context2.next = 3;
+                      localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
+                    }
+                    _context.next = 74;
+                    break;
+                  case 73:
+                    setTimeout(function () {
+                      (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(localStorageData, deviceType);
+                    }, 1000);
+                  case 74:
+                  case "end":
+                    return _context.stop();
+                }
+              }, _loop);
+            });
+            _i = 0, _localStorageKeys = localStorageKeys;
+          case 4:
+            if (!(_i < _localStorageKeys.length)) {
+              _context2.next = 9;
               break;
-            case 8:
-              _context2.next = 13;
-              break;
-            case 10:
-              _context2.prev = 10;
-              _context2.t1 = _context2["catch"](0);
-              console.error("Error fetching global colors:", _context2.t1);
-            case 13:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee, null, [[0, 10]]);
-      }));
-      return function handleUpdateState() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+            }
+            return _context2.delegateYield(_loop(), "t0", 6);
+          case 6:
+            _i++;
+            _context2.next = 4;
+            break;
+          case 9:
+            _context2.next = 14;
+            break;
+          case 11:
+            _context2.prev = 11;
+            _context2.t1 = _context2["catch"](1);
+            console.error("Error fetching global colors:", _context2.t1);
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee, null, [[1, 11]]);
+    }));
+    return function handleUpdateState() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     handleUpdateState();
-    console.log("deviceType");
-    console.log(deviceType);
   }, [deviceType]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    handleUpdateState();
+  }, []);
   var colorPanelArray = function colorPanelArray(colors, setColor) {
     var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
     if (_typeof(colors) !== "object") {
@@ -3623,17 +3638,7 @@ function FrontisBlocksSidebar(props) {
 
   // New custom color function
   var setNewCustomColorFn = function setNewCustomColorFn() {
-    setCustomColors(function () {
-      // Determine a unique index
-      var index = customColors.length + 1;
-
-      // Add the new color
-      return [].concat(_toConsumableArray(customColors), [{
-        color: '#000000',
-        name: "Custom Color ".concat(index),
-        slug: "custom-color-".concat(index)
-      }]);
-    });
+    setColorModalOpen(true);
     setFbGlobalSettingsLoading(true);
   };
 
@@ -3756,6 +3761,22 @@ function FrontisBlocksSidebar(props) {
       }
     }
   }, [fbGlobalSettingsLoading]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    if (!colorModalOpen) {
+      setCustomColors(function () {
+        // Determine a unique index
+        var index = customColors.length + 1;
+
+        // Add the new color
+        return [].concat(_toConsumableArray(customColors), [{
+          color: '#000000',
+          name: colorName !== '' ? colorName : "Custom Color ".concat(index),
+          slug: colorName !== '' ? colorName.replace(/\s+/g, '-').toLowerCase() : "custom-color-".concat(index)
+        }]);
+      });
+      setColorName('');
+    }
+  }, [colorModalOpen]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "fb_plugin_sidebar"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
@@ -3886,7 +3907,23 @@ function FrontisBlocksSidebar(props) {
       customColors: customColors,
       setCustomColor: setCustomColor,
       setCustomColors: setCustomColors
-    }), /*#__PURE__*/React.createElement("div", {
+    }), colorModalOpen && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Modal, {
+      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Color name", "frontis-blocks"),
+      onRequestClose: closeColorModal
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+      __nextHasNoMarginBottom: true,
+      __next40pxDefaultSize: true,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Name", "frontis-blocks"),
+      value: colorName,
+      onChange: function onChange(value) {
+        return setColorName(value);
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+      className: "fb-custom-color-btn",
+      onClick: function onClick() {
+        return closeColorModal();
+      }
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Save", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
       className: "add-custom-color-btn",
@@ -3949,6 +3986,7 @@ function FrontisBlocksSidebar(props) {
   }))))))));
 }
 ;
+// Export the component
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FrontisBlocksSidebar);
 
 /***/ }),
