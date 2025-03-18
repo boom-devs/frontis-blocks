@@ -1422,6 +1422,22 @@ const attributes = {
         }
     },
 
+    headingBeforeAfterGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingBeforeAfterGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
     headingBeforeAfterMarginUnits: {
 		type: 'object',
 		default: {
