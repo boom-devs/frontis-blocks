@@ -29,6 +29,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
+import FB_ScaleControl from '@Components/scale-control';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -167,6 +168,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         advancedVideoVRBottomOffsetUnits,
 
         advancedVideoCustomCSS,
+
+		//Transform
+		advancedVideoTransformSwitcher,
+		advancedVideoTransformNormalProportions,
+		advancedVideoTransformNormalScale,
+		advancedVideoTransformNormalScaleX,
+		advancedVideoTransformNormalScaleY,
+
+		advancedVideoTransformHoverProportions,
+		advancedVideoTransformHoverScale,
+		advancedVideoTransformHoverScaleX,
+		advancedVideoTransformHoverScaleY,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -878,12 +892,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${BorderRadiusDesktopWidth && videoGlobalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ''}
             ${videoGlobalBorderColor ? `border-color: ${videoGlobalBorderColor};` : ''}
             ${videoGlobalBoxShadowCssValue ? `box-shadow: ${videoGlobalBoxShadowCssValue};` : ''}
-            transition: all .3s ease-in-out;
+
+            ${advancedVideoTransformNormalProportions 
+				? (advancedVideoTransformNormalScale?.Desktop 
+					? `transform: scale(${advancedVideoTransformNormalScale.Desktop});` 
+					: ''
+				) 
+				: (
+					(advancedVideoTransformNormalScaleX?.Desktop || advancedVideoTransformNormalScaleY?.Desktop) 
+					? `transform: ${advancedVideoTransformNormalScaleX?.Desktop ? `scaleX(${advancedVideoTransformNormalScaleX.Desktop}) ` : ''}${advancedVideoTransformNormalScaleY?.Desktop ? `scaleY(${advancedVideoTransformNormalScaleY.Desktop})` : ''};` 
+					: ''
+				)
+			}			
+			transition: all .3s ease-in-out;
+			position: relative;
         }
         .${blockID} .fb-advanced-video-wrapper:hover {
             ${videoGlobalBgHoverColor ? `background-color: ${videoGlobalBgHoverColor};` : ''}
             ${videoGlobalBorderHoverColor ? `border-color: ${videoGlobalBorderHoverColor};` : ''}
             ${videoGlobalBoxShadowHoverCssValue ? `box-shadow: ${videoGlobalBoxShadowHoverCssValue};` : ''}
+
+            ${advancedVideoTransformHoverProportions 
+				? (advancedVideoTransformHoverScale?.Desktop 
+					? `transform: scale(${advancedVideoTransformHoverScale.Desktop});` 
+					: ''
+				) 
+				: (
+					(advancedVideoTransformHoverScaleX?.Desktop || advancedVideoTransformHoverScaleY?.Desktop) 
+					? `transform: ${advancedVideoTransformHoverScaleX?.Desktop ? `scaleX(${advancedVideoTransformHoverScaleX.Desktop}) ` : ''}${advancedVideoTransformHoverScaleY?.Desktop ? `scaleY(${advancedVideoTransformHoverScaleY.Desktop})` : ''};` 
+					: ''
+				)
+			}
         }
 
         .${blockID} .fb-player-wrapper {
@@ -960,6 +999,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TabletMargin && videoGlobalMarginTablet.top ? `margin: ${TabletMargin};` : ''}
                 ${BorderTabletWidth && videoGlobalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ''}
                 ${BorderRadiusTabletWidth && videoGlobalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ''}
+				${advancedVideoTransformNormalProportions 
+						? (advancedVideoTransformNormalScale?.Tablet 
+							? `transform: scale(${advancedVideoTransformNormalScale.Tablet});` 
+							: ''
+					) 
+					: (
+						(advancedVideoTransformNormalScaleX?.Tablet || advancedVideoTransformNormalScaleY?.Tablet) 
+						? `transform: ${advancedVideoTransformNormalScaleX?.Tablet ? `scaleX(${advancedVideoTransformNormalScaleX.Tablet}) ` : ''}${advancedVideoTransformNormalScaleY?.Tablet ? `scaleY(${advancedVideoTransformNormalScaleY.Tablet})` : ''};` 
+						: ''
+					)
+				}
+            }
+
+            .${blockID} .fb-advanced-video-wrapper:hover {
+                ${advancedVideoTransformHoverProportions 
+                    ? (advancedVideoTransformHoverScale?.Tablet 
+                        ? `transform: scale(${advancedVideoTransformHoverScale.Tablet});` 
+                        : ''
+                    ) 
+                    : (
+                        (advancedVideoTransformHoverScaleX?.Tablet || advancedVideoTransformHoverScaleY?.Tablet) 
+                        ? `transform: ${advancedVideoTransformHoverScaleX?.Tablet ? `scaleX(${advancedVideoTransformHoverScaleX.Tablet}) ` : ''}${advancedVideoTransformHoverScaleY?.Tablet ? `scaleY(${advancedVideoTransformHoverScaleY.Tablet})` : ''};` 
+                        : ''
+                    )
+                }
             }
 
             .${blockID} .fb-player-wrapper {
@@ -1026,6 +1090,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${MobileMargin && videoGlobalMarginMobile.top ? `margin: ${MobileMargin};` : ''}
                 ${BorderMobileWidth && videoGlobalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ''}
                 ${BorderRadiusMobileWidth && videoGlobalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ''}
+
+                ${advancedVideoTransformNormalProportions 
+						? (advancedVideoTransformNormalScale?.Mobile 
+							? `transform: scale(${advancedVideoTransformNormalScale.Mobile});` 
+							: ''
+					) 
+					: (
+						(advancedVideoTransformNormalScaleX?.Mobile || advancedVideoTransformNormalScaleY?.Mobile) 
+						? `transform: ${advancedVideoTransformNormalScaleX?.Mobile ? `scaleX(${advancedVideoTransformNormalScaleX.Mobile}) ` : ''}${advancedVideoTransformNormalScaleY?.Mobile ? `scaleY(${advancedVideoTransformNormalScaleY.Mobile})` : ''};` 
+						: ''
+					)
+				}
+            }
+
+            .${blockID} .fb-advanced-video-wrapper:hover {
+                ${advancedVideoTransformHoverProportions 
+                    ? (advancedVideoTransformHoverScale?.Mobile 
+                        ? `transform: scale(${advancedVideoTransformHoverScale.Mobile});` 
+                        : ''
+                    ) 
+                    : (
+                        (advancedVideoTransformHoverScaleX?.Mobile || advancedVideoTransformHoverScaleY?.Mobile) 
+                        ? `transform: ${advancedVideoTransformHoverScaleX?.Mobile ? `scaleX(${advancedVideoTransformHoverScaleX.Mobile}) ` : ''}${advancedVideoTransformHoverScaleY?.Mobile ? `scaleY(${advancedVideoTransformHoverScaleY.Mobile})` : ''};` 
+                        : ''
+                    )
+                }
             }
 
             .${blockID} .fb-player-wrapper {
@@ -1228,6 +1318,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         advancedVideoVRTopOffsetUnits,
         advancedVideoVRBottomOffset,
         advancedVideoVRBottomOffsetUnits,
+
+        advancedVideoTransformSwitcher,
+		advancedVideoTransformNormalProportions,
+		advancedVideoTransformNormalScale,
+		advancedVideoTransformNormalScaleX,
+		advancedVideoTransformNormalScaleY,
+
+		advancedVideoTransformHoverProportions,
+		advancedVideoTransformHoverScale,
+		advancedVideoTransformHoverScaleX,
+		advancedVideoTransformHoverScaleY,
     ]);
 
 
@@ -1781,6 +1882,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         mobileValue={advancedVideoMobileSwitcher}
                                                         setMobileValue={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
                                                     />
+												</PanelBody>
+
+                                                <PanelBody
+													title={__("Transform", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-transform-control-wrapper"
+												>
+													<FB_SwitcherControl
+                                                        label={__("Transform Style", "frontis-blocks")}
+                                                        globalSwitcher={advancedVideoTransformSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ advancedVideoTransformSwitcher: value })}
+                                                    />
+
+													{advancedVideoTransformSwitcher === 'normal' && (
+														<FB_ScaleControl
+															proportions={advancedVideoTransformNormalProportions}
+															setProportions={(value) => setAttributes({ advancedVideoTransformNormalProportions: value })}
+															scale={advancedVideoTransformNormalScale}
+															setScale={(value) => setAttributes({ advancedVideoTransformNormalScale: value })}
+															scaleX={advancedVideoTransformNormalScaleX}
+															setScaleX={(value) => setAttributes({ advancedVideoTransformNormalScaleX: value })}
+															scaleY={advancedVideoTransformNormalScaleY}	
+															setScaleY={(value) => setAttributes({ advancedVideoTransformNormalScaleY: value })}
+															deviceType={deviceType}
+															setAttributes={setAttributes}
+														/>
+													)}
+
+													{advancedVideoTransformSwitcher === 'hover' && (
+														<FB_ScaleControl
+															proportions={advancedVideoTransformHoverProportions}
+															setProportions={(value) => setAttributes({ advancedVideoTransformHoverProportions: value })}
+															scale={advancedVideoTransformHoverScale}
+															setScale={(value) => setAttributes({ advancedVideoTransformHoverScale: value })}
+															scaleX={advancedVideoTransformHoverScaleX}
+															setScaleX={(value) => setAttributes({ advancedVideoTransformHoverScaleX: value })}
+															scaleY={advancedVideoTransformHoverScaleY}	
+															setScaleY={(value) => setAttributes({ advancedVideoTransformHoverScaleY: value })}
+															deviceType={deviceType}
+															setAttributes={setAttributes}
+														/>
+													)}
 												</PanelBody>
                                                 <PanelBody
                                                     title={__("Custom CSS", "frontis-blocks")}
