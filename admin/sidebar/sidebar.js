@@ -715,13 +715,17 @@ function FrontisBlocksSidebar(props) {
 							if (!res.success) {
 								setFontfamilies([]);
 							} else {
-								setFontfamilies(res.data);
-								getAllFontFamilies(res.data)
-								localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
+								setTimeout(() => {
+									setFontfamilies(res.data);
+									getAllFontFamilies(res.data)
+									localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
+								}, 1000);
 							}
 						} else {
-							getAllFontFamilies(localStorageData)
-							setFontfamilies(localStorageData);
+							setTimeout(() => {
+								getAllFontFamilies(localStorageData)
+								setFontfamilies(localStorageData);
+							}, 1000);
 						}
 					}
 
@@ -751,7 +755,10 @@ function FrontisBlocksSidebar(props) {
 
 		handleUpdateState();
 
-	}, []);
+		console.log("deviceType");
+		console.log(deviceType);
+
+	}, [deviceType]);
 
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
@@ -798,7 +805,7 @@ function FrontisBlocksSidebar(props) {
 	useEffect(() => {
 		setTimeout(() => {
 			const mergedColors = [...customColors, ...globalColors, ...customGradientColors, ...gradientColors];
-			generateColorsVariables(mergedColors);
+			generateColorsVariables(mergedColors, deviceType);
 		}, 1000)
 	}, [globalColors, customColors, customGradientColors, gradientColors])
 
