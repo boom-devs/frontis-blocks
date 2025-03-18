@@ -43,6 +43,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         headingGlobalWraperID,
         headingGlobalWraperClass,
 
+        headingBeforeAfterSwitcher,
+
         advancedHeadingDesktopSwitcher,
         advancedHeadingTabletSwitcher,
         advancedHeadingMobileSwitcher,
@@ -51,7 +53,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
     });
 
 

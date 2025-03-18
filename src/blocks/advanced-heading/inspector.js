@@ -340,11 +340,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingBeforeAfterWidthUnits,
         headingBeforeAfterHeight,
         headingBeforeAfterHeightUnits,
-        headingBeforeAfterMarginUnits,
-        headingBeforeAfterDesktopMargin,
-        headingBeforeAfterTabletMargin,
-        headingBeforeAfterMobileMargin,
-        headingBeforeAfterMarginLink,
+
+        headingBeforeAfterGap,
+        headingBeforeAfterGapUnits,
+
         headingBeforeAfterBorder,
         headingBeforeAfterBorderColor,
         headingBeforeAfterBorderUnits,
@@ -777,90 +776,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingTabletBorderRadiusWidth = `${headingTabBorderRadius.top}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.right}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.bottom}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.left}${headingBorderRadiusUnits.Tablet}`;
     const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius.top}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.right}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.bottom}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.left}${headingBorderRadiusUnits.Mobile}`;
     /** End Heading Border Radius */
-
-
-
-
-
-
-
-
-
-    /** Start Before After Margin */
-    const headingBeforeAfterMarginUnitsChange = (event, position) => {
-        const value = event.target.value;
-        if (headingBeforeAfterMarginLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({
-                        headingBeforeAfterDesktopMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Tablet':
-                    setAttributes({
-                        headingBeforeAfterTabletMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                case 'Mobile':
-                    setAttributes({
-                        headingBeforeAfterMobileMargin: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ headingBeforeAfterDesktopMargin: { ...headingBeforeAfterDesktopMargin, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ headingBeforeAfterTabletMargin: { ...headingBeforeAfterTabletMargin, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ headingBeforeAfterMobileMargin: { ...headingBeforeAfterMobileMargin, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    const headingBeforeAfterMarginLinkBtn = () => {
-        setAttributes({
-            headingBeforeAfterMarginLink: !headingBeforeAfterMarginLink
-        });
-    };
-
-    const headingBeforeAfterMarginUnitsHandler = (unit) => {
-        setAttributes({
-            headingBeforeAfterMarginUnits: {
-                ...headingBeforeAfterMarginUnits,
-                [deviceType]: unit
-            }
-        });
-    };
-
-    /** Default margin for Heading */
-    const headingBeforeAfterDesktopMarginWidth = `${headingBeforeAfterDesktopMargin.top}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.right}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.bottom}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.left}${headingBeforeAfterMarginUnits.Desktop}`;
-    const headingBeforeAfterTabletMarginWidth = `${headingBeforeAfterTabletMargin.top}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.right}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.bottom}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.left}${headingBeforeAfterMarginUnits.Tablet}`;
-    const headingBeforeAfterMobileMarginWidth = `${headingBeforeAfterMobileMargin.top}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.right}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.bottom}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.left}${headingBeforeAfterMarginUnits.Mobile}`;
-    /** End Heading Margin */
 
     /** Start Heading Border Radius */
     const headingBeforeAfterBorderUnitsChange = (event, position) => {
@@ -1859,13 +1774,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             display: flex;
             align-items: center;
             justify-content: center;
+            ${headingBeforeAfterGap.Desktop ? `gap: ${headingBeforeAfterGap.Desktop}${headingBeforeAfterGapUnits.Desktop};` : ''}
         }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
             content: '';
             ${headingBeforeAfterWidth.Desktop ? `width: ${headingBeforeAfterWidth.Desktop}${headingBeforeAfterWidthUnits.Desktop};` : 'flex-grow: 1;'}
             ${headingBeforeAfterHeight.Desktop ? `height: ${headingBeforeAfterHeight.Desktop}${headingBeforeAfterHeightUnits.Desktop};` : ''}
-            ${headingBeforeAfterDesktopMarginWidth && headingBeforeAfterDesktopMargin.top ? `margin: ${headingBeforeAfterDesktopMarginWidth};` : ''}
             ${headingBeforeAfterBorder ? `border: ${headingBeforeAfterBorder};` : ''}
             ${headingBeforeAfterDesktopBorderWidth && headingBeforeAfterDesktopBorder.top ? `border-width: ${headingBeforeAfterDesktopBorderWidth};` : ''}
             ${headingBeforeAfterDesktopBorderRadiusWidth && headingBeforeAfterDesktopBorderRadius.top ? `border-radius: ${headingBeforeAfterDesktopBorderRadiusWidth};` : ''}
@@ -2014,11 +1929,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
+                ${headingBeforeAfterGap.Tablet ? `gap: ${headingBeforeAfterGap.Tablet}${headingBeforeAfterGapUnits.Tablet};` : ''}
+            }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
                 ${headingBeforeAfterWidth.Tablet ? `width: ${headingBeforeAfterWidth.Tablet}${headingBeforeAfterWidthUnits.Tablet};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Tablet ? `height: ${headingBeforeAfterHeight.Tablet}${headingBeforeAfterHeightUnits.Tablet};` : ''}
-                ${headingBeforeAfterTabletMarginWidth && headingBeforeAfterTabletMargin.top ? `margin: ${headingBeforeAfterTabletMarginWidth};` : ''}
                 ${headingBeforeAfterTabletBorderWidth && headingBeforeAfterTabletBorder.top ? `border-width: ${headingBeforeAfterTabletBorderWidth};` : ''}
                 ${headingBeforeAfterTabletBorderRadiusWidth && headingBeforeAfterTabletBorderRadius.top ? `border-radius: ${headingBeforeAfterTabletBorderRadiusWidth};` : ''}
             }
@@ -2120,11 +2037,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
+                .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
+                    ${headingBeforeAfterGap.Mobile ? `gap: ${headingBeforeAfterGap.Mobile}${headingBeforeAfterGapUnits.Mobile};` : ''}
+                }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
                 ${headingBeforeAfterWidth.Mobile ? `width: ${headingBeforeAfterWidth.Mobile}${headingBeforeAfterWidthUnits.Mobile};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Mobile ? `height: ${headingBeforeAfterHeight.Mobile}${headingBeforeAfterHeightUnits.Mobile};` : ''}
-                ${headingBeforeAfterMobileMarginWidth && headingBeforeAfterMobileMargin.top ? `margin: ${headingBeforeAfterMobileMarginWidth};` : ''}
                 ${headingBeforeAfterMobileBorderWidth && headingBeforeAfterMobileBorder.top ? `border-width: ${headingBeforeAfterMobileBorderWidth};` : ''}
                 ${headingBeforeAfterMobileBorderRadiusWidth && headingBeforeAfterMobileBorderRadius.top ? `border-radius: ${headingBeforeAfterMobileBorderRadiusWidth};` : ''}
             }
@@ -2346,14 +2265,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBeforeAfterHeight,
     headingBeforeAfterHeightUnits,
 
-    headingBeforeAfterMarginUnits,
-    headingBeforeAfterDesktopMargin,
-    headingBeforeAfterTabletMargin,
-    headingBeforeAfterMobileMargin,
-    headingBeforeAfterMarginLink,
-    headingBeforeAfterDesktopMarginWidth,
-    headingBeforeAfterTabletMarginWidth,
-    headingBeforeAfterMobileMarginWidth,
+    headingBeforeAfterGap,
+    headingBeforeAfterGapUnits,
 
     headingBeforeAfterBorder,
     headingBeforeAfterBorderColor,
@@ -3069,21 +2982,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         rangeStep={1}
                                                         resetFallbackValue={""}
                                                     />
-                                                    <FB_Spacing
-                                                        label={__("Margin", "frontis-blocks")}
+
+                                                    <FB_Range
+                                                        min={1}
+                                                        max={100}
+                                                        label={__("Gap", "frontis-blocks")}
+                                                        rangeValue={headingBeforeAfterGap}
+                                                        onChangeHandler={(value) => setAttributes({ headingBeforeAfterGap: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ headingBeforeAfterGapUnits: value })}
                                                         deviceType={deviceType}
-                                                        spacingUnitsHandler={headingBeforeAfterMarginUnitsHandler}
-                                                        spacingUnits={headingBeforeAfterMarginUnits}
-                                                        spacingDesktop={headingBeforeAfterDesktopMargin}
-                                                        spacingTablet={headingBeforeAfterTabletMargin}
-                                                        spacingMobile={headingBeforeAfterMobileMargin}
-                                                        handleSpacingUnitHandler={headingBeforeAfterMarginUnitsChange}
-                                                        spacingCombineBtn={headingBeforeAfterMarginLink}
-                                                        spacingCombineBtnHandler={headingBeforeAfterMarginLinkBtn}
+                                                        units={headingBeforeAfterGapUnits}
                                                         setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
                                                     />
-
-
+                                                    
                                                     <SelectControl
                                                         label={__("Border Style", "frontis-blocks")}
                                                         value={headingBeforeAfterBorder}
