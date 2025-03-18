@@ -71,6 +71,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		countDownSeparatorGlobalTypoSwitcher,
 		countDownSeparatorGlobalTypographyData,
 		countDownSeparatorGlobalTypoType,
+		countDownSeparatorGlobalTypoOption,
 		countDownSeparatorFontFamily,
 		countDownSeparatorFontSize,
 		countDownSeparatorFontSizeUnits,
@@ -140,6 +141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		digitGlobalTypoSwitcher,
 		digitGlobalTypographyData,
 		digitGlobalTypoType,
+		digitGlobalTypoOption,
 		digitFontFamily,
 		digitFontSize,
 		digitFontSizeUnits,
@@ -162,6 +164,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		labelGlobalTypoSwitcher,
 		labelGlobalTypographyData,
 		labelGlobalTypoType,
+		labelGlobalTypoOption,
 		labelFontFamily,
 		labelFontSize,
 		labelFontSizeUnits,
@@ -3115,6 +3118,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={digitGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ digitGlobalTypoOption: value })}
+
 												fontFamily={digitFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ digitFontFamily: value, digitGlobalTypoSwitcher: {...digitGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3421,6 +3427,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={labelGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ labelGlobalTypoOption: value })}
+
 												fontFamily={labelFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ labelFontFamily: value, labelGlobalTypoSwitcher: {...labelGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3606,6 +3615,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														countDownSeparatorGlobalTypoSwitcher: value === 'default' ? {...countDownSeparatorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...countDownSeparatorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={countDownSeparatorGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ countDownSeparatorGlobalTypoOption: value })}
 
 												fontFamily={countDownSeparatorFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ countDownSeparatorFontFamily: value, countDownSeparatorGlobalTypoSwitcher: {...countDownSeparatorGlobalTypoSwitcher, fontFamily: value && false} })}

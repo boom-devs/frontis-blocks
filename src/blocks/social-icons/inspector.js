@@ -90,6 +90,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialTitleGlobalTypoSwitcher,
 		socialTitleGlobalTypographyData,
 		socialTitleGlobalTypoType,
+		socialTitleGlobalTypoOption,
         socialTitleFontFamily,
         socialTitleFontSize,
         socialTitleFontSizeUnits,
@@ -2968,6 +2969,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																socialTitleGlobalTypoSwitcher: value === 'default' ? {...socialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...socialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 															})
 														}}
+
+														globalTypoOption={socialTitleGlobalTypoOption}
+														onChangeGlobalTypoOption={(value) => setAttributes({ socialTitleGlobalTypoOption: value })}
 
 														fontFamily={socialTitleFontFamily}
 														onChangeFontFamily={(value) => setAttributes({ socialTitleFontFamily: value, socialTitleGlobalTypoSwitcher: {...socialTitleGlobalTypoSwitcher, fontFamily: value && false} })}
