@@ -1769,9 +1769,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb-advanced-heading-main-wrapper {
-            ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
+            ${advancedHeadingPositionType === 'default' ? `position: relative !important;` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' ? `width: 100%;` : ''}
-            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
+            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType} !important;` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Desktop ? `left: ${advancedHeadingHZLeftOffset.Desktop}${advancedHeadingHZLeftOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Desktop ? `right: ${advancedHeadingHZRightOffset.Desktop}${advancedHeadingHZRightOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Desktop ? `top: ${advancedHeadingVRTopOffset.Desktop}${advancedHeadingVRTopOffsetUnits.Desktop};` : ''}
