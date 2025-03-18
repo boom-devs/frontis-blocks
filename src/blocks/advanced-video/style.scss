@@ -30,4 +30,17 @@
 
 .fb-advanced-video-main-wrapper {
     width: 100%;
+    &:focus-visible {
+        outline: none;
+    }
+    .fb-parent-wrapper {
+        &:focus-visible {
+            outline: none;
+        }
+        .fb-advanced-video-wrapper {
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
 }
