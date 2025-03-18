@@ -47,6 +47,9 @@
     z-index: 1;
 }
 
+.fb-advanced-heading-before-after {
+    width: 100%;
+}
 .fb-advanced-wrapper[style*="text-align: left"] .fb-advanced-heading.active-line::before {
     left: 0;
 }
