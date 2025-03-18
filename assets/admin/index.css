@@ -3306,4 +3306,8 @@
   display: none;
 }
 
+.interface-interface-skeletonbody .interface-interface-skeletoncontent {
+  overflow-x: hidden;
+}
+
 /*# sourceMappingURL=index.css.map*/
