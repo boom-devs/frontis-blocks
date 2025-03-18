@@ -1350,6 +1350,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											value={counterNumberEnd}
 											onChange={(value) => setAttributes({ counterNumberEnd: value })}
 											min={0}
+                                            step={0.1}
 											max={100000}
 										/>
 
