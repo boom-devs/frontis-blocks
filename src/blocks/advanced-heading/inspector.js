@@ -64,6 +64,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 import './editor.scss';
 
@@ -362,6 +363,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     } = attributes;
 
     const deviceType= useDeviceType();
+
+
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -1704,6 +1707,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${globalDesktopBorderRadiusWidth && headingGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
             ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
+
+            ${headingAlignment.Desktop ? `text-align: ${headingAlignment.Desktop};` : ''}
             transition: all .3s ease-in-out;
             position: relative;
         }
@@ -1835,6 +1840,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
         }
 
+        .${blockId} .fb-advanced-icon-wrapper {
+            ${headingAlignment.Desktop ? `justify-content: ${headingAlignment.Desktop};` : ''}   
+        }
+
         .${blockId} .fb-advanced-icon {
             ${headingIconBgSize.Desktop ? `width: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
             ${headingIconBgSize.Desktop ? `height: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
@@ -1904,6 +1913,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                ${headingAlignment.Tablet ? `text-align: ${headingAlignment.Tablet};` : ''}
             }
 
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -1961,6 +1971,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${subHeadingTextStroke.Tablet ? `text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};` : ''}
                 ` : ''}
             }
+
+            .${blockId} .fb-advanced-icon-wrapper {
+                ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}   
+            }
+
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Tablet ? `width: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
                 ${headingIconBgSize.Tablet ? `height: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
@@ -2049,6 +2064,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
             ` : ''}
 
+            .${blockId} .fb-advanced-icon-wrapper {
+                ${headingAlignment.Mobile ? `justify-content: ${headingAlignment.Mobile};` : ''}   
+            }
+
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Mobile ? `width: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
                 ${headingIconBgSize.Mobile ? `height: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
@@ -2086,7 +2105,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                ${headingAlignment.Mobile ? `text-align: ${headingAlignment.Mobile};` : ''}
             }
+
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
                 ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
@@ -2366,10 +2387,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
                                                 </BaseControl>
 
-                                                <FB_AlignmentControl
-                                                    label={__("Alignment", "frontis-blocks")}
+                                                <FB_ResponsiveAlignmentControl
                                                     globalAlignment={headingAlignment}
                                                     setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
+                                                    deviceType={deviceType}
+                                                    setAttributes={setAttributes}
                                                 />
                                             </PanelBody>
                                             <PanelBody
