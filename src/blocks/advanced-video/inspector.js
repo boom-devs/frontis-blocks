@@ -54,6 +54,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         previewImageRepeat,
         previewImageSize,
 
+        videoPlayIconSwitcher,
         videoPlayIcon,
         videoPlayIconSize,
         videoPlayIconSizeUnits,
@@ -1185,6 +1186,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         previewImageAttachment,
         previewImageRepeat,
         previewImageSize,
+        videoPlayIconSwitcher,
         videoPlayIcon,
         videoPlayIconSize,
         videoPlayIconSizeUnits,
@@ -1433,7 +1435,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalBackgroundImageSize={previewImageSize}
                                                     setGlobalBackgroundImageSize={(value) => setAttributes({ previewImageSize: value })}
                                                 />
-                                                {previewImageUrl && (
+
+                                                <ToggleControl
+                                                    label={__("Play Icon", "frontis-blocks")}
+                                                    checked={videoPlayIconSwitcher}
+                                                    onChange={(value) => setAttributes({ videoPlayIconSwitcher: value })}
+                                                />
+
+                                                {previewImageUrl && videoPlayIconSwitcher && (
                                                     <FBIconPicker value={videoPlayIcon} setIconHandler={(value) => setAttributes({ videoPlayIcon: value })} />
                                                 )}
                                                 </>
