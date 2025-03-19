@@ -5,10 +5,16 @@ const attributes = {
         type: "string",
         default: ""
     },
+    
     headingAlignment: {
-        type: "string",
-        default: "left",
+        type: "object",
+        default: {
+            Desktop: "left",
+            Tablet: "left",
+            Mobile: "left",
+        },
     },
+
     headingText: {
         type : "string",
         default: "Advanced Heading"

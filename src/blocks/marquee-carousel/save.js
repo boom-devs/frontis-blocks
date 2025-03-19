@@ -10,6 +10,7 @@ export default function Save({ attributes }) {
 
         autoplay,
         autoplayDirection,
+        reverseDirection,
         speed,
         showNavigation,
         showPagination,
@@ -27,11 +28,12 @@ export default function Save({ attributes }) {
            speed: speed,
            autoplay: {
              delay: 1,
+             reverseDirection: reverseDirection,
+             disableOnInteraction: true,
            },
            loop: true,
            slidesPerView:'auto',
            allowTouchMove: false,
-           disableOnInteraction: true,
 
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
