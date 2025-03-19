@@ -2388,6 +2388,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 </BaseControl>
 
                                                 <FB_ResponsiveAlignmentControl
+                                                    label={__("Alignment", "frontis-blocks")}
                                                     globalAlignment={headingAlignment}
                                                     setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
                                                     deviceType={deviceType}
