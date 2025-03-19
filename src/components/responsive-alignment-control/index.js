@@ -5,7 +5,7 @@ import FB_ResponsiveControl from '@Components/responsive-control';
 import { Dashicon } from '@wordpress/components';
 
 const FB_ResponsiveAlignmentControl = ({ 
-	label="Alignment",
+	label='',
 	globalAlignment,
 	setGlobalAlignment,
 	deviceType,
@@ -34,10 +34,10 @@ const FB_ResponsiveAlignmentControl = ({
 
 	return (
 		<BaseControl
-			className="fb-setting-text-alignment"
+			className="fb-image-control-wrapper"
 		>
 			<FB_ResponsiveControl
-                labelText={label}
+				labelText={label}
                 device={deviceType}
             />
 			<ButtonGroup className="fb-setting-text-alignment-group-btn fb-btn-group-icon-only">
