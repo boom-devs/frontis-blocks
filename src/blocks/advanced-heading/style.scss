@@ -8,24 +8,6 @@
     }
 }
 
-// .fb-advanced-heading-wrapper {
-//     display: block;
-//     .fb-advanced-heading {
-//         // display: inline-block;
-//     }
-// }
-// .fb-advanced-sub-heading-wrapper {
-//     display: block;
-//     .fb-advanced-sub-heading {
-//         display: inline-block;
-//     }
-// }
-// .fb-advanced-title-separator {
-//     display: inline-block;
-// }
-
-
-
 .fb-advanced-heading.active-line::after {
     content: "";
     position: absolute;
