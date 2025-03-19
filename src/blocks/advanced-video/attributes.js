@@ -78,6 +78,10 @@ const attributes = {
         default: ""
     },
     /** End Image Settings */
+    videoPlayIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
     videoPlayIcon: {
 		type: 'string',
 		default: 'play',
