@@ -32,6 +32,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         
         autoplayDirection,
         speed,
+        reverseDirection,
         showNavigation,
         showPagination,
 
@@ -115,6 +116,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         sliderGlobalBoxShadowCssValue,
         sliderGlobalBoxShadowHoverValues,
         sliderGlobalBoxShadowHoverCssValue,
+
+        sliderOverlaySwitcher,
+        sliderOverlayStartColor,
+        sliderOverlayEndColor,
+        sliderOverlayWidth,
+        sliderOverlayWidthUnits,
         
     } = attributes;
 
@@ -670,7 +677,34 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
         }
 
+        ${sliderOverlaySwitcher ? `
+        .${blockId}.fb-marquee-carousel-container::before {
+            left: 0;
+            background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+        }
+
+        .${blockId}.fb-marquee-carousel-container::after {
+            right: 0;
+            background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+        }
+        ` : ''}
+
+        .${blockId} .swiper-wrapper { 
+            -webkit-transition-timing-function:linear!important;    transition-timing-function:linear!important; 
+            position: relative;
+            user-select: none;
+        }
+
         .${blockId} .swiper-slide {
+            box-sizing: border-box;
+            transition-timing-function: cubic-bezier(.76,.09,.215,1);
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
             ${slideDesktopPaddingWidth && slideDesktopPadding.top ? `padding: ${slideDesktopPaddingWidth};` : ''}
             ${slideDesktopMarginWidth && slideDesktopMargin.top ? `margin: ${slideDesktopMarginWidth};` : ''} 
         }
@@ -717,6 +751,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 ${globalTabletBorderRadiusWidth && sliderGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
 
+            ${sliderOverlaySwitcher ? `
+            .${blockId}.fb-marquee-carousel-container::before {
+                width: ${sliderOverlayWidth.Tablet}${sliderOverlayWidthUnits.Tablet};
+            }
+
+            .${blockId}.fb-marquee-carousel-container::after {
+                width: ${sliderOverlayWidth.Tablet}${sliderOverlayWidthUnits.Tablet};
+            }
+            ` : ''}
+
 
             .${blockId} .swiper-slide {
                 ${slideTabletPaddingWidth && slideTabletPadding.top ? `padding: ${slideTabletPaddingWidth};` : ''}
@@ -742,6 +786,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 ${globalMobileBorderWidth && sliderGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && sliderGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
+
+            ${sliderOverlaySwitcher ? `
+            .${blockId}.fb-marquee-carousel-container::before {
+                width: ${sliderOverlayWidth.Mobile}${sliderOverlayWidthUnits.Mobile};
+            }
+
+            .${blockId}.fb-marquee-carousel-container::after {
+                width: ${sliderOverlayWidth.Mobile}${sliderOverlayWidthUnits.Mobile};
+            }
+            ` : ''}
+
             .${blockId} .swiper-slide {
                 ${slideMobilePaddingWidth && slideMobilePadding.top ? `padding: ${slideMobilePaddingWidth};` : ''}
                 ${slideMobileMarginWidth && slideMobileMargin.top ? `margin: ${slideMobileMarginWidth};` : ''} 
@@ -858,6 +913,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         sliderGlobalBoxShadowHoverValues,
         sliderGlobalBoxShadowHoverCssValue,
 
+        sliderOverlaySwitcher,
+        sliderOverlayStartColor,
+        sliderOverlayEndColor,
+        sliderOverlayWidth,
+        sliderOverlayWidthUnits,
+
+
     ]);
 
 
@@ -926,7 +988,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                 max={5000}
                                                 step={100}
                                             />
+                                            <ToggleControl
+                                                label={__("Reverse Direction", "frontis-blocks")}
+                                                checked={reverseDirection}
+                                                onChange={(value) => setAttributes({ reverseDirection: value })}
+                                            />
                                             
+
                                         </PanelBody>
                                     </>
                                 )}
@@ -1065,6 +1133,41 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                 />
                                             )}
 
+                                        </PanelBody>
+
+                                        <PanelBody title="Overlay" initialOpen={false}>
+                                            <ToggleControl
+                                                label={__("Overlay", "frontis-blocks")}
+                                                checked={sliderOverlaySwitcher}
+                                                onChange={(value) => setAttributes({ sliderOverlaySwitcher: value })}
+                                            />
+                                            {sliderOverlaySwitcher && (
+                                                <>
+                                                    <FB_ColorControl
+                                                        label={__("Start Color", "frontis-blocks")}
+                                                        globalColor={sliderOverlayStartColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderOverlayStartColor: value })}
+                                                    />
+                                                    <FB_ColorControl 
+                                                        label={__("End Color", "frontis-blocks")}
+                                                        globalColor={sliderOverlayEndColor}
+                                                        setGlobalColor={(value) => setAttributes({ sliderOverlayEndColor: value })}
+                                                    />
+                                                    <FB_Range
+                                                        min={1}
+                                                        max={500}
+                                                        label={__("Width", "frontis-blocks")}
+                                                        rangeValue={sliderOverlayWidth}
+                                                        onChangeHandler={(value) => setAttributes({ sliderOverlayWidth: value })}
+                                                        rangeUnitHandler={(value) => setAttributes({ sliderOverlayWidthUnits: value })}
+                                                        deviceType={deviceType}
+                                                        units={sliderOverlayWidthUnits}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={"100"}
+                                                    />
+                                                </>
+                                            )}
                                         </PanelBody>
                                     </>
                                 )}
