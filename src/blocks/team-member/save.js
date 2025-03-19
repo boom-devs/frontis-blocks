@@ -36,6 +36,10 @@ export default function save({ attributes }) {
 
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
+
+		teamMemberBadgeSwitcher,
+		teamMemberBadgePosition,
+		teamMemberBadge,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -48,7 +52,25 @@ export default function save({ attributes }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID}>
 					<div className={`fb-team-member-item`}>
+						{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'content' &&
+							<div className="fb-team-member-badge-wrapper">
+								<RichText
+									tagName={'span'}
+									value={teamMemberBadge}
+									className="fb-team-member-badge"
+								/>
+							</div>
+						}
 						<div className={`fb-team-member-image-wrapper`}>
+								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'image' &&
+									<div className="fb-team-member-badge-wrapper">
+										<RichText
+											tagName={'span'}
+											value={teamMemberBadge}
+											className="fb-team-member-badge"
+										/>
+									</div>
+								}
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
