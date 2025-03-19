@@ -22,6 +22,8 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import {useDeviceType} from "@Config/displayType";
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem }) {
@@ -122,6 +124,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         sliderOverlayEndColor,
         sliderOverlayWidth,
         sliderOverlayWidthUnits,
+
+        marqueeCarouselCustomCSS,
         
     } = attributes;
 
@@ -922,13 +926,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
     ]);
 
-
+    const customCss = getCustomCss(marqueeCarouselCustomCSS, `.${blockId}`);
     
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});  
-    }, [allBlockStyle]);
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});  
+    }, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     return (
@@ -1331,6 +1335,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                     onBoxShadowStyleChange={(value) => setAttributes({ sliderGlobalBoxShadowHoverCssValue: value })}
                                                 />
                                             )}
+                                        </PanelBody>
+
+                                        <PanelBody
+                                            title={__("Custom CSS", "frontis-blocks")}
+                                            initialOpen={false}
+                                        >
+                                            <FB_CustomCSSEditor  
+                                                value={marqueeCarouselCustomCSS}
+                                                onChangeValue={(value) => setAttributes({ marqueeCarouselCustomCSS: value })}
+                                            />
                                         </PanelBody>
                                     </>
                                 )}

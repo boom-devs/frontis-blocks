@@ -610,6 +610,12 @@ const attributes = {
         },
     },
     /** End Overlay */
+
+
+    marqueeCarouselCustomCSS : {
+        type: "string",
+        default: "",
+    },
     
 };
 
