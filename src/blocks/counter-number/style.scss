@@ -1,6 +1,5 @@
 .fb-counter-wrapper {
 	display: flex;
-	justify-content: center;
 	gap: 50px;
 
 	.fb-counter-item {
@@ -9,35 +8,9 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-
-		//.fb-counter-icon-wrapper {
-		//	.fb-counter-icon {
-		//		width: 60px;
-		//		height: 60px;
-		//		display: flex;
-		//		aligns-item: center;
-		//	}
-		//}
 		.fb-counter-number-wrapper {
 			display: flex;
 			align-items: center;
-
-			//.fb-counter-number,
-			//.fb-counter-number-prefix,
-			//.fb-counter-number-suffix {
-			//	font-size: 60px;
-			//	font-weight: 500;
-			//	line-height: 68px;
-			//	color: #0D173B;
-			//}
 		}
-
-
-		//.fb-counter-title {
-		//	font-size: 18px;
-		//	font-weight: 400;
-		//	line-height: 28px;
-		//	color: #0D173B;
-		//}
 	}
 }

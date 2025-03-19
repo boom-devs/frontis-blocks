@@ -10,6 +10,7 @@ export default function Save({ attributes }) {
 
         autoplay,
         autoplayDirection,
+        reverseDirection,
         speed,
         showNavigation,
         showPagination,
@@ -26,12 +27,13 @@ export default function Save({ attributes }) {
            centeredSlides: true,
            speed: speed,
            autoplay: {
-             delay: 1,
+             delay: 0,
+             reverseDirection: reverseDirection,
+             disableOnInteraction: true,
            },
            loop: true,
            slidesPerView:'auto',
            allowTouchMove: false,
-           disableOnInteraction: true,
 
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
@@ -48,7 +50,7 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth}>
-            <div className="swiper">
+            <div className="swiper swiper-container">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
                         <div key={item.id} className={`swiper-slide ${blockId}`}>
