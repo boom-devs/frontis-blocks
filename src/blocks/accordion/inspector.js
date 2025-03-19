@@ -1220,6 +1220,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
                 display: flex;
                 align-items: center;
+                cursor: pointer;
                 ${titleSpacing?.Desktop ? `gap: ${titleSpacing.Desktop}${titleSpacingUnits.Desktop};` : ''}
                 ${accordionItemsPaddingDesktopWidth && accordionItemsDesktopPadding.top ? `padding: ${accordionItemsPaddingDesktopWidth};` : ''}
                 ${accordionItemsBorder ? `border-style: ${accordionItemsBorder};` : ''}

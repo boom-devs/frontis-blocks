@@ -227,58 +227,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationMarginLink,
 
 		// Team Email Typography
-		teamMemberEmailSwitcher,
-		teamMemberEmail,
-		teamMemberEmailLink,
-		teamMemberEmailMediaSwitcher,
-		teamMemberEmailIconPosition ,
-		teamMemberEmailIconSwitcher,
+		// teamMemberEmailSwitcher,
+		// teamMemberEmail,
+		// teamMemberEmailLink,
+		// teamMemberEmailMediaSwitcher,
+		// teamMemberEmailIconPosition ,
+		// teamMemberEmailIconSwitcher,
 
-		teamMemberEmailIcon,
-		teamMemberEmailIconColorSwitcher,
-		teamMemberEmailIconColor,
-		teamMemberEmailIconHoverColor,
-		teamMemberEmailIconSpacingUnits,
-		teamMemberEmailIconSpacing,
-		teamMemberEmailIconSizeUnits,
-		teamMemberEmailIconSize,
+		// teamMemberEmailIcon,
+		// teamMemberEmailIconColorSwitcher,
+		// teamMemberEmailIconColor,
+		// teamMemberEmailIconHoverColor,
+		// teamMemberEmailIconSpacingUnits,
+		// teamMemberEmailIconSpacing,
+		// teamMemberEmailIconSizeUnits,
+		// teamMemberEmailIconSize,
 
-		teamMemberEmailImageUrl,
-		teamMemberEmailImageAlt,
-		teamMemberEmailImageID,
+		// teamMemberEmailImageUrl,
+		// teamMemberEmailImageAlt,
+		// teamMemberEmailImageID,
 
-		teamMemberEmailColorSwitcher,
-		teamMemberEmailColor,
-		teamMemberEmailHoverColor,
+		// teamMemberEmailColorSwitcher,
+		// teamMemberEmailColor,
+		// teamMemberEmailHoverColor,
 
-		teamMemberEmailTypographyData,
-		teamMemberEmailTypoSwitcher,
-		teamMemberEmailTypoType,
-		teamMemberEmailTypoOption,
-		teamMemberEmailFontFamily,
-		teamMemberEmailFontSize,
-		teamMemberEmailFontSizeUnits,
-		teamMemberEmailFontWeight,
-		teamMemberEmailFontStyle,
-		teamMemberEmailTextTransform,
-		teamMemberEmailTextDecoration,
-		teamMemberEmailLetterSpacing,
-		teamMemberEmailLetterSpacingUnits,
-		teamMemberEmailLineHeight,
-		teamMemberEmailLineHeightUnits,
-		teamMemberEmailLoadGoogleFonts,
+		// teamMemberEmailTypographyData,
+		// teamMemberEmailTypoSwitcher,
+		// teamMemberEmailTypoType,
+		// teamMemberEmailTypoOption,
+		// teamMemberEmailFontFamily,
+		// teamMemberEmailFontSize,
+		// teamMemberEmailFontSizeUnits,
+		// teamMemberEmailFontWeight,
+		// teamMemberEmailFontStyle,
+		// teamMemberEmailTextTransform,
+		// teamMemberEmailTextDecoration,
+		// teamMemberEmailLetterSpacing,
+		// teamMemberEmailLetterSpacingUnits,
+		// teamMemberEmailLineHeight,
+		// teamMemberEmailLineHeightUnits,
+		// teamMemberEmailLoadGoogleFonts,
 
-		teamMemberEmailMarginUnits,
-		teamMemberEmailMarginDesktop,
-		teamMemberEmailMarginTablet,
-		teamMemberEmailMarginMobile,
-		teamMemberEmailMarginLink,
+		// teamMemberEmailMarginUnits,
+		// teamMemberEmailMarginDesktop,
+		// teamMemberEmailMarginTablet,
+		// teamMemberEmailMarginMobile,
+		// teamMemberEmailMarginLink,
 
-		teamMemberEmailPaddingUnits,
-		teamMemberEmailPaddingDesktop,
-		teamMemberEmailPaddingTablet,
-		teamMemberEmailPaddingMobile,
-		teamMemberEmailPaddingLink,
+		// teamMemberEmailPaddingUnits,
+		// teamMemberEmailPaddingDesktop,
+		// teamMemberEmailPaddingTablet,
+		// teamMemberEmailPaddingMobile,
+		// teamMemberEmailPaddingLink,
 
 		
 
@@ -576,10 +576,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		loadGoogleFont(teamMemberDesignationFontFamily);
 		loadGoogleFont(teamMemberNameFontFamily);
 		loadGoogleFont(teamMemberDescFontFamily);
+		loadGoogleFont(teamMemberBadgeFontFamily);
 	}, [
 		teamMemberDesignationFontFamily, 
 		teamMemberNameFontFamily, 
-		teamMemberDescFontFamily]);
+		teamMemberDescFontFamily,
+		teamMemberBadgeFontFamily
+	]);
 	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
@@ -2709,151 +2712,151 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const teamMemberBadgeBorderRadiusMobileWidth = `${teamMemberBadgeBorderRadiusMobile.top}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.right}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.bottom}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.left}${teamMemberBadgeBorderRadiusUnits.Mobile}`;
 
 
-	// Email Margin
-	const handleEmailMarginUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( teamMemberEmailMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						teamMemberEmailMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						teamMemberEmailMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						teamMemberEmailMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {teamMemberEmailMarginDesktop: {...teamMemberEmailMarginDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {teamMemberEmailMarginTablet: {...teamMemberEmailMarginTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {teamMemberEmailMarginMobile: {...teamMemberEmailMarginMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+	// // Email Margin
+	// const handleEmailMarginUnitChange = ( event, position ) => {
+	// 	const value = event.target.value;
+	// 	if ( teamMemberEmailMarginLink ) {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginDesktop: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginTablet: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginMobile: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	} else {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {teamMemberEmailMarginDesktop: {...teamMemberEmailMarginDesktop, [position]: value}} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {teamMemberEmailMarginTablet: {...teamMemberEmailMarginTablet, [position]: value}} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {teamMemberEmailMarginMobile: {...teamMemberEmailMarginMobile, [position]: value}} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	}
 
-	}
+	// }
 
-	const handleEmailMarginCombineBtn = () => {
-		setAttributes( {teamMemberEmailMarginLink: !teamMemberEmailMarginLink} );
-	}
+	// const handleEmailMarginCombineBtn = () => {
+	// 	setAttributes( {teamMemberEmailMarginLink: !teamMemberEmailMarginLink} );
+	// }
 
-	const handleEmailMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			teamMemberEmailMarginUnits: {
-				...teamMemberEmailMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+	// const handleEmailMarginUnitsHandler = (unit) => {
+	// 	setAttributes( {
+	// 		teamMemberEmailMarginUnits: {
+	// 			...teamMemberEmailMarginUnits,
+	// 			[deviceType]: unit
+	// 		}
+	// 	})
+	// }
 
-	const teamMemberEmailMarginDesktopWidth = `${teamMemberEmailMarginDesktop.top}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.right}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.bottom}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.left}${teamMemberEmailMarginUnits.Desktop}`;
-	const teamMemberEmailMarginTabletWidth = `${teamMemberEmailMarginTablet.top}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.right}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.bottom}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.left}${teamMemberEmailMarginUnits.Tablet}`;
-	const teamMemberEmailMarginMobileWidth = `${teamMemberEmailMarginMobile.top}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.right}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.bottom}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.left}${teamMemberEmailMarginUnits.Mobile}`;
+	// const teamMemberEmailMarginDesktopWidth = `${teamMemberEmailMarginDesktop.top}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.right}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.bottom}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.left}${teamMemberEmailMarginUnits.Desktop}`;
+	// const teamMemberEmailMarginTabletWidth = `${teamMemberEmailMarginTablet.top}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.right}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.bottom}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.left}${teamMemberEmailMarginUnits.Tablet}`;
+	// const teamMemberEmailMarginMobileWidth = `${teamMemberEmailMarginMobile.top}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.right}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.bottom}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.left}${teamMemberEmailMarginUnits.Mobile}`;
 	
-	// Email Padding
-	const handleEmailPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( teamMemberEmailPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						teamMemberEmailPaddingDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						teamMemberEmailPaddingTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						teamMemberEmailPaddingMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {teamMemberEmailPaddingDesktop: {...teamMemberEmailPaddingDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {teamMemberEmailPaddingTablet: {...teamMemberEmailPaddingTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {teamMemberEmailPaddingMobile: {...teamMemberEmailPaddingMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+	// // Email Padding
+	// const handleEmailPaddingUnitChange = ( event, position ) => {
+	// 	const value = event.target.value;
+	// 	if ( teamMemberEmailPaddingLink ) {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingDesktop: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingTablet: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingMobile: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	} else {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {teamMemberEmailPaddingDesktop: {...teamMemberEmailPaddingDesktop, [position]: value}} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {teamMemberEmailPaddingTablet: {...teamMemberEmailPaddingTablet, [position]: value}} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {teamMemberEmailPaddingMobile: {...teamMemberEmailPaddingMobile, [position]: value}} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	}
 
-	}
+	// }
 
-	const handleEmailPaddingCombineBtn = () => {
-		setAttributes( {teamMemberEmailPaddingLink: !teamMemberEmailPaddingLink} );
-	}
+	// const handleEmailPaddingCombineBtn = () => {
+	// 	setAttributes( {teamMemberEmailPaddingLink: !teamMemberEmailPaddingLink} );
+	// }
 
-	const handleEmailPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			teamMemberEmailPaddingUnits: {
-				...teamMemberEmailPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+	// const handleEmailPaddingUnitsHandler = (unit) => {
+	// 	setAttributes( {
+	// 		teamMemberEmailPaddingUnits: {
+	// 			...teamMemberEmailPaddingUnits,
+	// 			[deviceType]: unit
+	// 		}
+	// 	})
+	// }
 
-	const teamMemberEmailPaddingDesktopWidth = `${teamMemberEmailPaddingDesktop.top}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.right}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.bottom}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.left}${teamMemberEmailPaddingUnits.Desktop}`;
-	const teamMemberEmailPaddingTabletWidth = `${teamMemberEmailPaddingTablet.top}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.right}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.bottom}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.left}${teamMemberEmailPaddingUnits.Tablet}`;
-	const teamMemberEmailPaddingMobileWidth = `${teamMemberEmailPaddingMobile.top}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.right}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.bottom}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.left}${teamMemberEmailPaddingUnits.Mobile}`;
+	// const teamMemberEmailPaddingDesktopWidth = `${teamMemberEmailPaddingDesktop.top}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.right}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.bottom}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.left}${teamMemberEmailPaddingUnits.Desktop}`;
+	// const teamMemberEmailPaddingTabletWidth = `${teamMemberEmailPaddingTablet.top}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.right}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.bottom}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.left}${teamMemberEmailPaddingUnits.Tablet}`;
+	// const teamMemberEmailPaddingMobileWidth = `${teamMemberEmailPaddingMobile.top}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.right}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.bottom}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.left}${teamMemberEmailPaddingUnits.Mobile}`;
 	
 
 	
@@ -2920,6 +2923,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
+				position: relative;
 				display: flex;
 				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentPosition !== 'image' ? 'width: 100%;' : ''}
 				${teamMemberImageWidthUnits.Desktop === '%' ? 'width: 100%;' : ''}
@@ -3060,6 +3064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageBGHoverColor ? `background: ${teamMemberImageBGHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name {
 				${teamMemberNameGlobalTypoSwitcher.fontFamily === true && teamMemberNameGlobalTypographyData.fontFamily ? `font-family: ${teamMemberNameGlobalTypographyData.fontFamily};` : ''}
 				${teamMemberNameGlobalTypoSwitcher.fontSize === true && teamMemberNameGlobalTypographyData.fontSize ? `font-size: ${teamMemberNameGlobalTypographyData.fontSize};` : ''}
@@ -3279,6 +3284,82 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 
+			${teamMemberBadgeSwitcher === true ? `
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge-wrapper {
+					display: flex;
+					position: absolute;
+					${teamMemberBadgeAlignment === 'top_left' ? 'top: 0; left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'top_center' ? 'top: 0; left: 50%; transform: translateX(-50%);' : ''}
+					${teamMemberBadgeAlignment === 'top_right' ? 'top: 0; right: 0;' : ''}
+					${teamMemberBadgeAlignment === 'center_left' ? 'top: 50%; transform: translateY(-50%); left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'center_center' ? 'top: 50%; left: 50%; transform: translate(-50%, -50%);' : ''}
+					${teamMemberBadgeAlignment === 'center_right' ? 'top: 50%; transform: translateY(-50%); right: 0;' : ''}
+					${teamMemberBadgeAlignment === 'bottom_left' ? 'bottom: 0; left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'bottom_center' ? 'bottom: 0; left: 50%; transform: translateX(-50%);' : ''}
+					${teamMemberBadgeAlignment === 'bottom_right' ? 'bottom: 0; right: 0;' : ''}
+					z-index: 5;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+					${teamMemberBadgeTypoSwitcher.fontFamily === true && teamMemberBadgeTypographyData.fontFamily ? `font-family: ${teamMemberBadgeTypographyData.fontFamily};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontSize === true && teamMemberBadgeTypographyData.fontSize ? `font-size: ${teamMemberBadgeTypographyData.fontSize};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontWeight === true && teamMemberBadgeTypographyData.fontWeight ? `font-weight: ${teamMemberBadgeTypographyData.fontWeight};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontStyle === true && teamMemberBadgeTypographyData.fontStyle ? `font-style: ${teamMemberBadgeTypographyData.fontStyle};` : ''}
+					${teamMemberBadgeTypoSwitcher.textTransform === true && teamMemberBadgeTypographyData.textTransform ? `text-transform: ${teamMemberBadgeTypographyData.textTransform};` : ''}
+					${teamMemberBadgeTypoSwitcher.textDecoration === true && teamMemberBadgeTypographyData.textDecoration ? `text-decoration: ${teamMemberBadgeTypographyData.textDecoration};` : ''}
+					${teamMemberBadgeTypoSwitcher.letterSpacing === true && teamMemberBadgeTypographyData.letterSpacing ? `letter-spacing: ${teamMemberBadgeTypographyData.letterSpacing};` : ''}
+					${teamMemberBadgeTypoSwitcher.lineHeight === true && teamMemberBadgeTypographyData.lineHeight ? `line-height: ${teamMemberBadgeTypographyData.lineHeight};` : ''}
+					
+					${teamMemberBadgeTypoSwitcher.fontFamily === false && teamMemberBadgeFontFamily && teamMemberBadgeFontFamily !== 'Default' ? `font-family: ${teamMemberBadgeFontFamily};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Desktop ? `font-size: ${teamMemberBadgeFontSize.Desktop}${teamMemberBadgeFontSizeUnits.Desktop};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontWeight === false && teamMemberBadgeFontWeight ? `font-weight: ${teamMemberBadgeFontWeight};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontStyle === false && teamMemberBadgeFontStyle ? `font-style: ${teamMemberBadgeFontStyle};` : ''}
+					${teamMemberBadgeTypoSwitcher.textTransform === false && teamMemberBadgeTextTransform ? `text-transform: ${teamMemberBadgeTextTransform};` : ''}
+					${teamMemberBadgeTypoSwitcher.textDecoration === false && teamMemberBadgeTextDecoration ? `text-decoration: ${teamMemberBadgeTextDecoration};` : ''}
+					${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Desktop ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Desktop}${teamMemberBadgeLetterSpacingUnits.Desktop};` : ''}
+					${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Desktop ? `line-height: ${teamMemberBadgeLineHeight.Desktop}${teamMemberBadgeLineHeightUnits.Desktop};` : ''}
+					
+					${teamMemberBadgeColor ? `color: ${teamMemberBadgeColor};` : ''}
+					${teamMemberBadgeBgColor ? `background-color: ${teamMemberBadgeBgColor};` : ''}
+					${teamMemberBadgeBorder ? `border-style: ${teamMemberBadgeBorder};` : ''}
+					${teamMemberBadgeBorderColor ? `border-color: ${teamMemberBadgeBorderColor};` : ''}
+					${teamMemberBadgeBorderDesktopWidth && teamMemberBadgeBorderDesktop.top ? `border-width: ${teamMemberBadgeBorderDesktopWidth};` : ''}
+					${teamMemberBadgeBorderRadiusDesktopWidth && teamMemberBadgeBorderRadiusDesktop.top ? `border-radius: ${teamMemberBadgeBorderRadiusDesktopWidth};` : ''}
+					${teamMemberBadgeMarginDesktopWidth && teamMemberBadgeMarginDesktop.top ? `margin: ${teamMemberBadgeMarginDesktopWidth};` : ''}
+					${teamMemberBadgePaddingDesktopWidth && teamMemberBadgePaddingDesktop.top ? `padding: ${teamMemberBadgePaddingDesktopWidth};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-badge {
+					${teamMemberBadgeHoverColor ? `color: ${teamMemberBadgeHoverColor};` : ''}
+					${teamMemberBadgeBgHoverColor ? `background-color: ${teamMemberBadgeBgHoverColor};` : ''}
+					${teamMemberBadgeBorderHoverColor ? `border-color: ${teamMemberBadgeBorderHoverColor};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+
+				@media only screen and (max-width: 1024px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+						${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Tablet ? `font-size: ${teamMemberBadgeFontSize.Tablet}${teamMemberBadgeFontSizeUnits.Tablet};` : ''}
+						${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Tablet ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Tablet}${teamMemberBadgeLetterSpacingUnits.Tablet};` : ''}
+						${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Tablet ? `line-height: ${teamMemberBadgeLineHeight.Tablet}${teamMemberBadgeLineHeightUnits.Tablet};` : ''}
+						
+						${teamMemberBadgeBorderTabletWidth && teamMemberBadgeBorderTablet.top ? `border-width: ${teamMemberBadgeBorderTabletWidth};` : ''}
+						${teamMemberBadgeBorderRadiusTabletWidth && teamMemberBadgeBorderRadiusTablet.top ? `border-radius: ${teamMemberBadgeBorderRadiusTabletWidth};` : ''}
+						${teamMemberBadgeMarginTabletWidth && teamMemberBadgeMarginTablet.top ? `margin: ${teamMemberBadgeMarginTabletWidth};` : ''}
+						${teamMemberBadgePaddingTabletWidth && teamMemberBadgePaddingTablet.top ? `padding: ${teamMemberBadgePaddingTabletWidth};` : ''}
+					}
+				}
+				@media only screen and (max-width: 767px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+						${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Mobile ? `font-size: ${teamMemberBadgeFontSize.Mobile}${teamMemberBadgeFontSizeUnits.Mobile};` : ''}
+						${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Mobile ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Mobile}${teamMemberBadgeLetterSpacingUnits.Mobile};` : ''}
+						${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Mobile ? `line-height: ${teamMemberBadgeLineHeight.Mobile}${teamMemberBadgeLineHeightUnits.Mobile};` : ''}
+						
+						${teamMemberBadgeBorderMobileWidth && teamMemberBadgeBorderMobile.top ? `border-width: ${teamMemberBadgeBorderMobileWidth};` : ''}
+						${teamMemberBadgeBorderRadiusMobileWidth && teamMemberBadgeBorderRadiusMobile.top ? `border-radius: ${teamMemberBadgeBorderRadiusMobileWidth};` : ''}
+						${teamMemberBadgeMarginMobileWidth && teamMemberBadgeMarginMobile.top ? `margin: ${teamMemberBadgeMarginMobileWidth};` : ''}
+						${teamMemberBadgePaddingMobileWidth && teamMemberBadgePaddingMobile.top ? `padding: ${teamMemberBadgePaddingMobileWidth};` : ''}
+					}
+				}
+			` : ''}
 			${socialIconBtnSwitcher === true ? `
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
 					display: flex;
@@ -3820,6 +3901,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberVRTopOffsetUnits,
 			teamMemberVRBottomOffset,
 			teamMemberVRBottomOffsetUnits,
+
+			// badge
+			teamMemberBadgeAlignment,
+			teamMemberBadgeColor,
+			teamMemberBadgeBgColor,
+			teamMemberBadgeHoverColor,
+			teamMemberBadgeBgColor,
+			teamMemberBadgeBgHoverColor,
+			teamMemberBadgeBorderColor,
+			teamMemberBadgeBorderHoverColor,
+			teamMemberBadgeBorderDesktop,
+			teamMemberBadgeBorderTablet,
+			teamMemberBadgeBorderMobile,
+			teamMemberBadgeBorderRadiusDesktop,
+			teamMemberBadgeBorderRadiusTablet,
+			teamMemberBadgeBorderRadiusMobile,
+			teamMemberBadgePaddingDesktop,
+			teamMemberBadgePaddingTablet,
+			teamMemberBadgePaddingMobile,
+			teamMemberBadgeMarginDesktop,
+			teamMemberBadgeMarginTablet,
+			teamMemberBadgeMarginMobile,
+			teamMemberBadgeTypoSwitcher,
+			teamMemberBadgeTypographyData,
+			teamMemberBadgeTypoType,
+			teamMemberBadgeFontFamily,
+			teamMemberBadgeFontSize,
+			teamMemberBadgeFontSizeUnits,
+			teamMemberBadgeFontWeight,
+			teamMemberBadgeFontStyle,
+			teamMemberBadgeTextTransform,
+			teamMemberBadgeTextDecoration,
+			teamMemberBadgeLetterSpacing,
+			teamMemberBadgeLetterSpacingUnits,
+			teamMemberBadgeLineHeight,
+			teamMemberBadgeLineHeightUnits,
+
 		]
 	);
 	
@@ -3961,7 +4079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 
-										<PanelBody title={__("Email", "frontis-blocks")} initialOpen={false}>
+										{/* <PanelBody title={__("Email", "frontis-blocks")} initialOpen={false}>
 											<ToggleControl
 												label={__("Email Switcher", "frontis-blocks")}
 												className="fb-setting-responsive-control"
@@ -4031,7 +4149,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 }
 											</>)}
 											</>)}
-										</PanelBody>
+										</PanelBody> */}
+
 										<PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
 											<ToggleControl
 												label={__("Description Switcher", "frontis-blocks")}
@@ -4675,8 +4794,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												letterSpacingUnits={teamMemberBadgeLetterSpacingUnits}
 												onChangeLetterSpacingUnit={(value) => setAttributes({ teamMemberBadgeLetterSpacingUnits: value })}
 
-												lineHeight={teamMemberNameLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ teamMemberNameLineHeight: value, teamMemberNameGlobalTypoSwitcher: {...teamMemberNameGlobalTypoSwitcher, lineHeight: value && false} })}
+												lineHeight={teamMemberBadgeLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ teamMemberBadgeLineHeight: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, lineHeight: value && false} })}
 
 												lineHeightUnits={teamMemberBadgeLineHeightUnits}
 												onChangeLineHeightUnit={(value) => setAttributes({ teamMemberBadgeLineHeightUnits: value })}
@@ -4910,7 +5029,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 
-										{teamMemberEmailSwitcher && <PanelBody
+										{/* {teamMemberEmailSwitcher && <PanelBody
 											title={__("Email", "frontis-blocks")}
 											initialOpen={false}
 											className="fb-setting-gallery-button-wrapper"
@@ -5067,7 +5186,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												spacingCombineBtnHandler={handleEmailPaddingCombineBtn}
 												setAttributes={setAttributes}
 											/>
-										</PanelBody>}
+										</PanelBody>} */}
 
 										{ teamMemberDescSwitcher && <PanelBody
 											title={__("Description", "frontis-blocks")}
