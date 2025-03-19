@@ -1051,6 +1051,28 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'margin-left': 'auto',
 			'margin-right': 'auto',
 		};
+	} else {
+		widthSelectorsDesktop[
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
+		] = {
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto',
+		};
+
+		widthSelectorsTablet[`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`] = {
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto'
+		};
+
+		widthSelectorsMobile[
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
+		] = {
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto',
+		};
 	}
 
 	const tablet_selectors = {
