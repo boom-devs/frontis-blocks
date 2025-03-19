@@ -52,25 +52,29 @@ export default function save({ attributes }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID}>
 					<div className={`fb-team-member-item`}>
-						{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'content' &&
-							<div className="fb-team-member-badge-wrapper">
-								<RichText
-									tagName={'span'}
-									value={teamMemberBadge}
-									className="fb-team-member-badge"
-								/>
-							</div>
-						}
+						{teamMemberBadgeSwitcher === true && <>
+							{teamMemberBadgePosition === 'content' &&
+								<div className="fb-team-member-badge-wrapper">
+									<RichText.Content
+										tagName={'span'}
+										value={teamMemberBadge}
+										className="fb-team-member-badge"
+									/>
+								</div>
+							}
+						</>}
 						<div className={`fb-team-member-image-wrapper`}>
-								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'image' &&
+							{teamMemberBadgeSwitcher === true && <>
+								{teamMemberBadgePosition === 'image' &&
 									<div className="fb-team-member-badge-wrapper">
-										<RichText
+										<RichText.Content
 											tagName={'span'}
 											value={teamMemberBadge}
 											className="fb-team-member-badge"
 										/>
 									</div>
 								}
+							</>}
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (

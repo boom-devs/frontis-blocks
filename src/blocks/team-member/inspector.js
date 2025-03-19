@@ -3903,6 +3903,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberVRBottomOffsetUnits,
 
 			// badge
+			teamMemberBadgeSwitcher,
+			teamMemberBadgePosition,
 			teamMemberBadgeAlignment,
 			teamMemberBadgeColor,
 			teamMemberBadgeBgColor,
