@@ -6,7 +6,6 @@ export default function save({ attributes }) {
         blockId,
         headingText, 
         headingTag,
-        headingAlignment,
         subHeadingSwitcher,
         showSeparatorSwitcher,
         subHeadingText,
@@ -38,10 +37,10 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} >
 
                     {headingIconAlign === 'icon' && headingIconSwitcher && (
-                        <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
+                        <div className="fb-advanced-icon-wrapper">
                             <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
                         </div>
                     )}
