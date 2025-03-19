@@ -1116,7 +1116,326 @@ const attributes = {
 		default: true
 	},
 
-    teamMemberName: {
+	// Badge
+	teamMemberBadgeSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	teamMemberBadge: {
+		type: "string",
+		default: "New"
+	},
+	teamMemberBadgePosition: {
+		type: "string",
+		default: "image"
+	},
+	teamMemberBadgeAlignment: {
+		type: "string",
+		default: "center center"
+	},
+
+	teamMemberBadgeColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	teamMemberBadgeColor: {
+		type: "string",
+		default: ""
+	},
+	teamMemberBadgeHoverColor: {
+		type: "string",
+		default: ""
+	},
+
+	teamMemberBadgeBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	teamMemberBadgeBgColor: {
+		type: "string",
+		default: ""
+	},
+	teamMemberBadgeBgHoverColor: {
+		type: "string",
+		default: ""
+	},
+
+	teamMemberBadgeBorder: {
+		type: "string",
+		default: "none"
+	},
+	teamMemberBadgeBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	teamMemberBadgeBorderColor: {
+		type: "string",
+		default: ""
+	},
+	teamMemberBadgeBorderHoverColor: {
+		type: "string",
+		default: ""
+	},
+
+
+	teamMemberBadgeTypographyData: {
+		type: "object",
+		default: {}
+	},
+	teamMemberBadgeTypoSwitcher: {
+		type: "object",
+		default: {	
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,	
+			lineHeight: false,
+		},
+	},
+	teamMemberBadgeTypoType: {
+		type: "string",
+		default: 'default',
+	},	
+	teamMemberBadgeTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	teamMemberBadgeFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	teamMemberBadgeFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',	
+			Mobile: '',
+		}
+	},
+	teamMemberBadgeFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberBadgeFontWeight: {
+		type: "string",
+		default: "",	
+	},
+	teamMemberBadgeFontStyle: {
+		type: "string",
+		default: "",
+	},
+	teamMemberBadgeTextTransform: {	
+		type: "string",
+		default: "",
+	},
+	teamMemberBadgeTextDecoration: {
+		type: "string",
+		default: "",
+	},	
+	teamMemberBadgeLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	teamMemberBadgeLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberBadgeLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},	
+	teamMemberBadgeLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	teamMemberBadgeLoadGoogleFonts: {
+		type: 'boolean',
+		default: false,
+	},
+
+	// Margin
+	teamMemberBadgeMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberBadgeMarginDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeMarginTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeMarginMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeMarginLink: {
+		type: "boolean",
+		default: true
+	},
+	teamMemberBadgePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},	
+	teamMemberBadgePaddingDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgePaddingTablet: {
+		type: "object",
+		default: {	
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberBadgePaddingMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',	
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgePaddingLink: {
+		type: "boolean",
+		default: true
+	},	
+	teamMemberBadgeBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	teamMemberBadgeBorderDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeBorderTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeBorderMobile: {	
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberBadgeBorderLink: {
+		type: "boolean",
+		default: true
+	},	
+	teamMemberBadgeBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'	
+		}
+	},
+	teamMemberBadgeBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '0',	
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberBadgeBorderRadiusTablet: {
+		type: "object",	
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberBadgeBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',	
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberBadgeBorderRadiusLink: {
+		type: "boolean",
+		default: true	
+	},
+
+	// Name
+	teamMemberName: {
 		type: "string",
 		default: "David John"
 	},
@@ -2114,7 +2433,244 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
+	teamMemberEmailIconColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	teamMemberEmailIconColor: {
+		type: "string",
+		default: "#000",
+	},	
+	teamMemberEmailIconHoverColor: {
+		type: "string",
+		default: "#000",
+	},
+	teamMemberEmailIconSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	teamMemberEmailIconSpacing: {
+		type: "object",
+		default: {
+			Desktop: '8',
+			Tablet: '8',
+			Mobile: '8',
+		},
+	},
+	teamMemberEmailIconSize: {
+		type: "object",
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16',
+		},
+	},
+	teamMemberEmailIconSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+
+	teamMemberEmailColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	teamMemberEmailColor: {
+		type: "string",
+		default: "",
+	},
+	teamMemberEmailHoverColor: {
+		type: "string",
+		default: "",
+	},
 	
+	teamMemberEmailTypographyData: {
+		type: "object",
+		default: {},
+	},
+	teamMemberEmailTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},		
+	teamMemberEmailTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	teamMemberEmailTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},	
+	teamMemberEmailFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	teamMemberEmailFontSize: {
+		type: "object",
+		default: {
+			Desktop: '',	
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	teamMemberEmailFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	teamMemberEmailFontWeight: {
+		type: "string",
+		default: "",	
+	},
+	teamMemberEmailFontStyle: {
+		type: "string",
+		default: "",
+	},	
+	teamMemberEmailTextTransform: {
+		type: "string",
+		default: "",
+	},
+	teamMemberEmailTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	teamMemberEmailLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},	
+	teamMemberEmailLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	teamMemberEmailLineHeight: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	teamMemberEmailLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	teamMemberEmailLoadGoogleFonts: {
+		type: "boolean",
+		default: false,
+	},
+
+	teamMemberEmailMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},	
+	teamMemberEmailMarginDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberEmailMarginTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberEmailMarginMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberEmailMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	teamMemberEmailPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},	
+	teamMemberEmailPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',	
+			left: '0',
+			right: '0',
+		},
+	},
+	teamMemberEmailPaddingTablet: {
+		type: "object",
+		default: {	
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberEmailPaddingMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',	
+			left: '0',
+			right: '0',
+		},
+	},	
+	teamMemberEmailPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	
+
+	// Description
 	teamMemberDescSwitcher: {
 		type: "boolean",
 		default: false,
