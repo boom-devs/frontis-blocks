@@ -71,7 +71,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID} ref={panelRef}>
 					<div className={`fb-team-member-item`}>
+						{teamMemberBadgeSwitcher === true && <>
+							{teamMemberBadgePosition === 'content' &&
+								<div className="fb-team-member-badge-wrapper">
+									<RichText
+										tagName={'span'}
+										value={teamMemberBadge}
+										className="fb-team-member-badge"
+									/>
+								</div>
+							}
+						</>}
 						<div className={`fb-team-member-image-wrapper`}>
+							{teamMemberBadgeSwitcher === true && <>
+								{teamMemberBadgePosition === 'image' &&
+									<div className="fb-team-member-badge-wrapper">
+										<RichText
+											tagName={'span'}
+											value={teamMemberBadge}
+											className="fb-team-member-badge"
+										/>
+									</div>
+								}
+							</>}
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
@@ -96,28 +118,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</div>}
 									</>
 								}
-								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'image' &&
-									<div className="fb-team-member-badge-wrapper">
-										<RichText
-											tagName={'span'}
-											value={teamMemberBadge}
-											className="fb-team-member-badge"
-										/>
-									</div>
-								}
 							</div>
 						</div>
 						<div className="fb-team-member-content-wrapper">
 							<div className={`fb-team-member-content`}>
-								{teamMemberBadgeSwitcher && teamMemberBadgePosition === 'content' &&
-									<div className="fb-team-member-badge-wrapper">
-										<RichText
-											tagName={'span'}
-											value={teamMemberBadge}
-											className="fb-team-member-badge"
-										/>
-									</div>
-								}
 								<RichText
 									tagName={teamMemberNameHeadingTag}
 									value={teamMemberName}
