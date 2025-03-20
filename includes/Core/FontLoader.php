@@ -33,7 +33,7 @@ class FontLoader
 	 */
 	public function __construct()
 	{
-		add_filter( 'render_block', [ $this, 'get_fonts_on_render_block' ], 10, 2 );
+		// add_filter( 'render_block', [ $this, 'get_fonts_on_render_block' ], 10, 2 );
 		add_action( 'wp_footer', [ $this, 'fonts_loader' ], 15 );
 		// add_action( 'enqueue_block_assets', [ $this, 'fonts_loader' ], 10 );
 	}

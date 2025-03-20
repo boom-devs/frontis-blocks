@@ -9,8 +9,7 @@ use FrontisBlocks\Forms\FluentForms;
 use FrontisBlocks\Forms\ContactForms7;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Assets\EnqueueBlocksCss;
-use FrontisBlocks\Assets\GenerateGlobalTypography;
-use FrontisBlocks\Assets\GenerateGlobalColors;
+use FrontisBlocks\Assets\GenerateRootCss;
 
 defined('ABSPATH') || exit;
 
@@ -26,7 +25,7 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
+		add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
 	}
 
 	public function register_blocks()
@@ -172,14 +171,13 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update) {
 		if ($update) {
-
-			GenerateGlobalTypography::generate_global_typography();
-			GenerateGlobalColors::generate_global_colors();
+			GenerateRootCss::generate_global_root_css();
 
 			Helper::get_current_page_name($post_id);
 			$post_content = $post->post_content;
 			$page_name = $post->post_name;
 			new EnqueueBlocksCss($page_name);
+			
 
 			$blocks = parse_blocks($post_content);
 			$this->process_blocks_recursively($blocks);
