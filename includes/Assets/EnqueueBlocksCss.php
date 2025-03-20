@@ -14,6 +14,19 @@ class EnqueueBlocksCss {
 		self::$page_name = Helper::get_current_page_name($post_id);
 	}
 
+	public static function create_css_file($css_content, $block_slug) {
+		$upload_dir = wp_upload_dir();
+		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+		if (!file_exists($css_dir)) {
+			wp_mkdir_p($css_dir);
+		}
+
+		$css_file_name = $block_slug . '.css';
+		$css_file = $css_dir . $css_file_name;
+		
+		file_put_contents($css_file, $css_content);
+	}
+
 	public static function enqueue_block_asset($css_content, $block_name, $block_id) {
 		$upload_dir = wp_upload_dir();
 		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
