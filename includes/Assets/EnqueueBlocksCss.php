@@ -59,10 +59,15 @@ class EnqueueBlocksCss {
 
 		// Combine and minify CSS files
 		$css_files = glob($css_dir . '*.css');
+
 		if (!empty($css_files)) {
 			$css_contents = [];
 
 			foreach ($css_files as $file) {
+				if(str_contains($file, 'frontis-global-colors.css') || str_contains($file, 'frontis-global-typography.css') || str_contains($file, 'frontis-google-fonts.css')) {
+					continue;
+				}
+
 				$css_contents[] = file_get_contents($file);
 			}
 
