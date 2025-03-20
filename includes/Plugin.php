@@ -129,7 +129,8 @@ final class Plugin
 
 		// Check if the file exists on the server file system
 		if(file_exists($css_file_system_path)) {
-			wp_enqueue_style('frontis-blocks-' . $page_name, $css_file_url, [], FB_VERSION);
+			$version = filemtime($css_file_system_path);
+			wp_enqueue_style('frontis-blocks-' . $page_name, $css_file_url, [], $version);
 		}
 
 		// Header css
