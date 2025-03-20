@@ -152,6 +152,34 @@ final class Plugin
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-footer', $css_file_url, [], $version);
 		}
+
+
+		$font_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-google-fonts.css';
+		$font_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-google-fonts.css';
+
+		// Check if the file exists on the server file system
+		if(file_exists($font_css_file_system_path)) {
+			$version = filemtime($font_css_file_system_path);
+			wp_enqueue_style('frontis-google-fonts', $font_css_file_url, [], $version);
+		}
+
+		$global_typography_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-global-typography.css';
+		$global_typography_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-global-typography.css';
+
+		// Check if the file exists on the server file system
+		if(file_exists($global_typography_css_file_system_path)) {
+			$version = filemtime($global_typography_css_file_system_path);
+			wp_enqueue_style('frontis-global-typography', $global_typography_css_file_url, [], $version);
+		}
+
+		$global_colors_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-global-colors.css';
+		$global_colors_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-global-colors.css';
+
+		// Check if the file exists on the server file system
+		if(file_exists($global_colors_css_file_system_path)) {
+			$version = filemtime($global_colors_css_file_system_path);
+			wp_enqueue_style('frontis-global-colors', $global_colors_css_file_url, [], $version);
+		}
 	}
 
 	public function enqueue_editor_scripts()
