@@ -126,10 +126,10 @@ final class Plugin
 		$upload_dir = wp_upload_dir();
 		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/frontis-blocks.css';
 		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/frontis-blocks.css';
+		$version = filemtime($css_file_system_path);
 
 		// Check if the file exists on the server file system
 		if(file_exists($css_file_system_path)) {
-			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-' . $page_name, $css_file_url, [], $version);
 		}
 
@@ -139,7 +139,7 @@ final class Plugin
 
 		// Check if the file exists on the server file system
 		if(file_exists($css_file_system_path)) {
-			wp_enqueue_style('frontis-blocks-header', $css_file_url, [], FB_VERSION);
+			wp_enqueue_style('frontis-blocks-header', $css_file_url, [], $version);
 		}
 
 		// Footer css
@@ -148,7 +148,7 @@ final class Plugin
 
 		// Check if the file exists on the server file system
 		if(file_exists($css_file_system_path)) {
-			wp_enqueue_style('frontis-blocks-footer', $css_file_url, [], FB_VERSION);
+			wp_enqueue_style('frontis-blocks-footer', $css_file_url, [], $version);
 		}
 	}
 
