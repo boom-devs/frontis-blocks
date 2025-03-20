@@ -1411,6 +1411,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+            display: none;
             position: absolute;
 			visibility: hidden;
             opacity: 0;
@@ -1419,6 +1420,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+            display: block;
 			position: static;
 			visibility: visible;
             opacity: 1;

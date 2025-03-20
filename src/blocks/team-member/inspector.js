@@ -3288,6 +3288,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge-wrapper {
 					display: flex;
 					position: absolute;
+					width: max-content;
 					${teamMemberBadgeAlignment === 'top_left' ? 'top: 0; left: 0;' : ''}
 					${teamMemberBadgeAlignment === 'top_center' ? 'top: 0; left: 50%; transform: translateX(-50%);' : ''}
 					${teamMemberBadgeAlignment === 'top_right' ? 'top: 0; right: 0;' : ''}

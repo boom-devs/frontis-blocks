@@ -77,6 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									<RichText
 										tagName={'span'}
 										value={teamMemberBadge}
+										onChange={(value) => setAttributes({teamMemberBadge: value})}
 										className="fb-team-member-badge"
 									/>
 								</div>
@@ -89,6 +90,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<RichText
 											tagName={'span'}
 											value={teamMemberBadge}
+											onChange={(value) => setAttributes({teamMemberBadge: value})}
 											className="fb-team-member-badge"
 										/>
 									</div>
