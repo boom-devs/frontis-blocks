@@ -177,6 +177,7 @@ class Blocks
 			$post_content = $post->post_content;
 			$page_name = $post->post_name;
 			new EnqueueBlocksCss($page_name);
+			
 
 			$blocks = parse_blocks($post_content);
 			$this->process_blocks_recursively($blocks);
