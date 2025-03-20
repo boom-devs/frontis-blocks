@@ -1884,6 +1884,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}`
                 : ''}
         }
+        .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator:hover {
+            ${separatorHoverColor ? `border-top-color: ${separatorHoverColor};` : ''}
+        }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
             ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
             ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
@@ -2221,6 +2224,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     separatorHeight,
     separatorHeightUnits,
     separatorColor,
+    separatorHoverColor,
     separatorPosition,
     separatorSpacing,
     separatorSpacingUnits,
