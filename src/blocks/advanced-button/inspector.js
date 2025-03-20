@@ -1058,10 +1058,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 	const allBlockStyle = useMemo(() => `
-		.${blockId} .fb-advanced-button-wrapper {
+		.${blockId}.fb-advanced-button-main-wrapper {
 			${advancedBtnPositionType === 'default' ? `position: relative;` : ''}
-			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' ? `width: 100%;` : ''}
-			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType} !important;` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Desktop ? `left: ${advancedBtnHZLeftOffset.Desktop}${advancedBtnHZLeftOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Desktop ? `right: ${advancedBtnHZRightOffset.Desktop}${advancedBtnHZRightOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Desktop ? `top: ${advancedBtnVRTopOffset.Desktop}${advancedBtnVRTopOffsetUnits.Desktop};` : ''}
@@ -1193,8 +1192,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.${blockId} .fb-advanced-button-wrapper {
-				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			.${blockId}.fb-advanced-button-main-wrapper {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Tablet ? `left: ${advancedBtnHZLeftOffset.Tablet}${advancedBtnHZLeftOffsetUnits.Tablet};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Tablet ? `right: ${advancedBtnHZRightOffset.Tablet}${advancedBtnHZRightOffsetUnits.Tablet};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Tablet ? `top: ${advancedBtnVRTopOffset.Tablet}${advancedBtnVRTopOffsetUnits.Tablet};` : ''}
@@ -1292,8 +1290,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.${blockId} .fb-advanced-button-wrapper {
-				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			.${blockId}.fb-advanced-button-main-wrapper {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Mobile ? `left: ${advancedBtnHZLeftOffset.Mobile}${advancedBtnHZLeftOffsetUnits.Mobile};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Mobile ? `right: ${advancedBtnHZRightOffset.Mobile}${advancedBtnHZRightOffsetUnits.Mobile};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Mobile ? `top: ${advancedBtnVRTopOffset.Mobile}${advancedBtnVRTopOffsetUnits.Mobile};` : ''}
