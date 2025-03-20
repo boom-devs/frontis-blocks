@@ -36,12 +36,9 @@ class GenerateFrontendCss {
 	}
 
 	public static function combined_blocks_frontend_css($block_slug) {
-		// Get block style-index.css file from build folder by block slug
 		$css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $block_slug . '/style-index.css';
-		
 		self::generate_minified_css($css_file_path, $block_slug);
 	}
-
 
 	public static function generate_minified_css($css_file_path, $block_slug) {
 		$css_content = file_get_contents($css_file_path);
