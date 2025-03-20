@@ -5,14 +5,101 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 
-class GenerateGlobalTypography {
+class GenerateRootCss {
     use Singleton;
+
+    public static function generate_root_colors($color_data) {
+
+		$global_colors = "";
+    
+        // Process base colors
+        if (!empty($color_data[0])) {
+            $global_colors .= "/* Base Colors */\n";
+            foreach ($color_data[0] as $color) {
+                $var_name = "--wp--frontis--color--" . $color['slug'];
+                $global_colors .= "{$var_name}: {$color['color']};\n";
+            }
+        }
+
+        // Process custom colors
+        if (!empty($color_data[1])) {
+            $global_colors .= "\n/* Custom Colors */\n";
+            foreach ($color_data[1] as $color) {
+                $original_var = $color['slug'];
+                $prefixed_var = "--wp--frontis--color--" . $original_var;
+                $global_colors .= "{$prefixed_var}: {$color['color']};\n";
+            }
+        }
+
+        // Process gradient colors
+        if (!empty($color_data[2])) {
+            $global_colors .= "\n/* Gradient Colors */\n";
+            foreach ($color_data[2] as $color) {
+                $original_var = $color['slug'];
+                $prefixed_var = "--wp--frontis--color--" . $original_var;
+                $global_colors .= "{$prefixed_var}: {$color['color']};\n";
+            }
+        }
+
+        // Process custom gradient colors
+        if (!empty($color_data[3])) {
+            $global_colors .= "\n/* Custom Gradient Colors */\n";
+            foreach ($color_data[3] as $color) {
+                $original_var = $color['slug'];
+                $prefixed_var = "--wp--frontis--color--" . $original_var;
+                $global_colors .= "{$prefixed_var}: {$color['color']};\n";
+            }
+        }
+
+        return $global_colors;
+	}
     
     /**
-     * Generate global typography settings
+     * Generate global root css
      */
-    public static function generate_global_typography() {
-        self::enqueue_fonts();
+    public static function generate_global_root_css() {
+
+        // Global Colors
+        $global_colors = get_option('fb_global_colors');
+		$global_custom_colors = get_option('fb_custom_colors');
+		$global_gradient_colors = get_option('fb_gradient_colors');
+		$global_custom_gradient_colors = get_option('fb_custom_gradient_colors');
+
+		$merged_colors = array_filter([
+			'global_colors' => $global_colors,
+			'global_custom_colors' => $global_custom_colors,
+			'global_gradient_colors' => $global_gradient_colors,
+			'global_custom_gradient_colors' => $global_custom_gradient_colors
+		], function ($value) {
+			return !empty($value);
+		});
+
+		// Optional: Reset array keys if necessary
+        $root_colors = '';
+		$merged_colors = array_values($merged_colors);
+		if($merged_colors){
+			$root_colors = self::generate_root_colors($merged_colors);
+		}
+
+        // Global Typography
+        $global_typography = get_option('fb_globaltypo');
+        
+        if($global_typography) {
+            $styles = self::processData($global_typography, $root_colors);
+            if($styles) {
+                $upload_dir = wp_upload_dir();
+                $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+
+                // Ensure the target directory exists
+                if (!file_exists($css_dir)) {
+                    wp_mkdir_p($css_dir);
+                }
+
+                $css_file_name = 'header.css';
+                $css_file = $css_dir . $css_file_name;
+                file_put_contents($css_file, $styles);
+            }
+        }
     }
 
     /**
@@ -25,7 +112,7 @@ class GenerateGlobalTypography {
     /**
      * Process data and generate CSS
      */
-    public static function processData($data) {
+    public static function processData($data, $root_colors) {
         // Initialize style variables
         $rootStyles = '';
         $desktopStyles = '';
@@ -206,6 +293,7 @@ class GenerateGlobalTypography {
             :root {
                 {$rootStyles}
                 {$desktopStyles}
+                {$root_colors}
             }
             " : "") . "
             
@@ -272,33 +360,6 @@ class GenerateGlobalTypography {
         ";
         
         return $finalCSS;
-    }
-
-    /**
-     * Enqueue font styles
-     */
-    public static function enqueue_fonts() {
-        $global_typography = get_option('fb_globaltypo');
-        
-        if($global_typography) {
-            $styles = self::processData($global_typography);
-
-            if($styles) {
-                $upload_dir = wp_upload_dir();
-                $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-
-                // Ensure the target directory exists
-                if (!file_exists($css_dir)) {
-                    wp_mkdir_p($css_dir);
-                }
-
-                $css_file_name = 'frontis-global-typography.css';
-                $css_file = $css_dir . $css_file_name;
-                file_put_contents($css_file, $styles);
-                
-                self::enqueue_google_fonts();
-            }
-        }
     }
 
     /**
