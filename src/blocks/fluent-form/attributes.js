@@ -66,6 +66,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+	fluentFormLabelGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormLabelFontFamily: {
         type: "string",
         default: "Default",
@@ -210,6 +214,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+	fluentFormInputGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormInputFontFamily: {
         type: "string",
         default: "Default",
@@ -789,6 +797,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormSectionBreakTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormSectionBreakTitleFontFamily: {
         type: "string",
         default: "Default",
@@ -969,6 +981,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormSectionBreakDescGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormSectionBreakDescFontFamily: {
         type: "string",
         default: "Default",
@@ -1152,6 +1168,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormHtmlGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormHtmlFontFamily: {
         type: "string",
         default: "Default",
@@ -1383,6 +1403,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormSubmitGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormSubmitFontFamily: {
         type: "string",
         default: "Default",
@@ -1650,6 +1674,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormSuccessGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormSuccessFontFamily: {
         type: "string",
         default: "Default",
@@ -1836,6 +1864,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    fluentFormErrorGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     fluentFormErrorFontFamily: {
         type: "string",
         default: "Default",

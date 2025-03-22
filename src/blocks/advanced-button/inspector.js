@@ -49,6 +49,8 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_ScaleControl from '@Components/scale-control';
+
 
 
 import './editor.scss';
@@ -68,6 +70,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
+		buttonGlobalTypoOption,
 		buttonFontFamily,
 		buttonFontSize,
 		buttonFontSizeUnits,
@@ -232,6 +235,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		advancedBtnVRTopOffsetUnits,
 		advancedBtnVRBottomOffset,
 		advancedBtnVRBottomOffsetUnits,
+
+		//Transform
+		buttonTransformSwitcher,
+		buttonTransformNormalProportions,
+		buttonTransformNormalScale,
+		buttonTransformNormalScaleX,
+		buttonTransformNormalScaleY,
+
+		buttonTransformHoverProportions,
+		buttonTransformHoverScale,
+		buttonTransformHoverScaleX,
+		buttonTransformHoverScaleY,
+
     } = attributes;    
     
 	const deviceType= useDeviceType();
@@ -1042,10 +1058,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 
 	const allBlockStyle = useMemo(() => `
-		.${blockId} .fb-advanced-button-wrapper {
+		.${blockId}.fb-advanced-button-main-wrapper {
 			${advancedBtnPositionType === 'default' ? `position: relative;` : ''}
-			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' ? `width: 100%;` : ''}
-			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType} !important;` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Desktop ? `left: ${advancedBtnHZLeftOffset.Desktop}${advancedBtnHZLeftOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Desktop ? `right: ${advancedBtnHZRightOffset.Desktop}${advancedBtnHZRightOffsetUnits.Desktop};` : ''}
 			${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Desktop ? `top: ${advancedBtnVRTopOffset.Desktop}${advancedBtnVRTopOffsetUnits.Desktop};` : ''}
@@ -1062,6 +1077,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${globalDesktopBorderRadiusWidth && buttonGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 			${buttonGlobalBorderColor ? `border-color: ${buttonGlobalBorderColor};` : ''}
 			${buttonGlobalBoxShadowCssValue ? `box-shadow: ${buttonGlobalBoxShadowCssValue};` : ''}
+
+			${buttonTransformNormalProportions 
+				? (buttonTransformNormalScale?.Desktop 
+					? `transform: scale(${buttonTransformNormalScale.Desktop});` 
+					: ''
+				) 
+				: (
+					(buttonTransformNormalScaleX?.Desktop || buttonTransformNormalScaleY?.Desktop) 
+					? `transform: ${buttonTransformNormalScaleX?.Desktop ? `scaleX(${buttonTransformNormalScaleX.Desktop}) ` : ''}${buttonTransformNormalScaleY?.Desktop ? `scaleY(${buttonTransformNormalScaleY.Desktop})` : ''};` 
+					: ''
+				)
+			}			
 			transition: all .3s ease-in-out;
 			position: relative;
 		}
@@ -1069,6 +1096,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 			${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 			${buttonGlobalBoxShadowHoverCssValue ? `box-shadow: ${buttonGlobalBoxShadowHoverCssValue};` : ''}
+
+			${buttonTransformHoverProportions 
+				? (buttonTransformHoverScale?.Desktop 
+					? `transform: scale(${buttonTransformHoverScale.Desktop});` 
+					: ''
+				) 
+				: (
+					(buttonTransformHoverScaleX?.Desktop || buttonTransformHoverScaleY?.Desktop) 
+					? `transform: ${buttonTransformHoverScaleX?.Desktop ? `scaleX(${buttonTransformHoverScaleX.Desktop}) ` : ''}${buttonTransformHoverScaleY?.Desktop ? `scaleY(${buttonTransformHoverScaleY.Desktop})` : ''};` 
+					: ''
+				)
+			}
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 			${buttonGlobalTypoSwitcher.fontFamily === true && buttonGlobalTypographyData.fontFamily ? `font-family: ${buttonGlobalTypographyData.fontFamily};` : ''}
@@ -1153,8 +1192,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.${blockId} .fb-advanced-button-wrapper {
-				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			.${blockId}.fb-advanced-button-main-wrapper {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Tablet ? `left: ${advancedBtnHZLeftOffset.Tablet}${advancedBtnHZLeftOffsetUnits.Tablet};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Tablet ? `right: ${advancedBtnHZRightOffset.Tablet}${advancedBtnHZRightOffsetUnits.Tablet};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Tablet ? `top: ${advancedBtnVRTopOffset.Tablet}${advancedBtnVRTopOffsetUnits.Tablet};` : ''}
@@ -1166,6 +1204,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${globalTabletMargin && buttonGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
 				${globalTabletBorderWidth && buttonGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth && buttonGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+
+				${buttonTransformNormalProportions 
+						? (buttonTransformNormalScale?.Tablet 
+							? `transform: scale(${buttonTransformNormalScale.Tablet});` 
+							: ''
+					) 
+					: (
+						(buttonTransformNormalScaleX?.Tablet || buttonTransformNormalScaleY?.Tablet) 
+						? `transform: ${buttonTransformNormalScaleX?.Tablet ? `scaleX(${buttonTransformNormalScaleX.Tablet}) ` : ''}${buttonTransformNormalScaleY?.Tablet ? `scaleY(${buttonTransformNormalScaleY.Tablet})` : ''};` 
+						: ''
+					)
+				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
@@ -1193,6 +1243,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper:hover {
 				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+
+				${buttonTransformHoverProportions 
+					? (buttonTransformHoverScale?.Tablet 
+						? `transform: scale(${buttonTransformHoverScale.Tablet});` 
+						: ''
+					) 
+					: (
+						(buttonTransformHoverScaleX?.Tablet || buttonTransformHoverScaleY?.Tablet) 
+						? `transform: ${buttonTransformHoverScaleX?.Tablet ? `scaleX(${buttonTransformHoverScaleX.Tablet}) ` : ''}${buttonTransformHoverScaleY?.Tablet ? `scaleY(${buttonTransformHoverScaleY.Tablet})` : ''};` 
+						: ''
+					)
+				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
@@ -1228,8 +1290,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.${blockId} .fb-advanced-button-wrapper {
-				${advancedBtnPositionType !== 'default' ? `position: ${advancedBtnPositionType};` : ''}
+			.${blockId}.fb-advanced-button-main-wrapper {
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'left' && advancedBtnHZLeftOffset.Mobile ? `left: ${advancedBtnHZLeftOffset.Mobile}${advancedBtnHZLeftOffsetUnits.Mobile};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnHZOrientationType === 'right' && advancedBtnHZRightOffset.Mobile ? `right: ${advancedBtnHZRightOffset.Mobile}${advancedBtnHZRightOffsetUnits.Mobile};` : ''}
 				${advancedBtnPositionType !== 'default' && advancedBtnPositionType !== 'relative' && advancedBtnVROrientationType === 'top' && advancedBtnVRTopOffset.Mobile ? `top: ${advancedBtnVRTopOffset.Mobile}${advancedBtnVRTopOffsetUnits.Mobile};` : ''}
@@ -1241,6 +1302,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${globalMobileMargin && buttonGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
 				${globalMobileBorderWidth && buttonGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth && buttonGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+
+				${buttonTransformNormalProportions 
+						? (buttonTransformNormalScale?.Mobile 
+							? `transform: scale(${buttonTransformNormalScale.Mobile});` 
+							: ''
+					) 
+					: (
+						(buttonTransformNormalScaleX?.Mobile || buttonTransformNormalScaleY?.Mobile) 
+						? `transform: ${buttonTransformNormalScaleX?.Mobile ? `scaleX(${buttonTransformNormalScaleX.Mobile}) ` : ''}${buttonTransformNormalScaleY?.Mobile ? `scaleY(${buttonTransformNormalScaleY.Mobile})` : ''};` 
+						: ''
+					)
+				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover {
 				${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ''}
@@ -1256,6 +1329,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper:hover {
 				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
 				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
+
+				${buttonTransformHoverProportions 
+					? (buttonTransformHoverScale?.Mobile 
+						? `transform: scale(${buttonTransformHoverScale.Mobile});` 
+						: ''
+					) 
+					: (
+						(buttonTransformHoverScaleX?.Mobile || buttonTransformHoverScaleY?.Mobile) 
+						? `transform: ${buttonTransformHoverScaleX?.Mobile ? `scaleX(${buttonTransformHoverScaleX.Mobile}) ` : ''}${buttonTransformHoverScaleY?.Mobile ? `scaleY(${buttonTransformHoverScaleY.Mobile})` : ''};` 
+						: ''
+					)
+				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
@@ -1446,6 +1531,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonDesktopPaddingStr,
 		buttonTabletPaddingStr,
 		buttonMobilePaddingStr,
+
+		buttonTransformSwitcher,
+		buttonTransformNormalProportions,
+		buttonTransformNormalScale,
+		buttonTransformNormalScaleX,
+		buttonTransformNormalScaleY,
+
+		buttonTransformHoverProportions,
+		buttonTransformHoverScale,
+		buttonTransformHoverScaleX,
+		buttonTransformHoverScaleY,
 		
 	]);
 
@@ -1604,6 +1700,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 														buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={buttonGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 												fontFamily={buttonFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -2311,6 +2410,47 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         mobileValue={advancedBtnMobileSwitcher}
                                                         setMobileValue={(value) => setAttributes({ advancedBtnMobileSwitcher: value })}
                                                     />
+												</PanelBody>
+												<PanelBody
+													title={__("Transform", "frontis-blocks")}
+													initialOpen={false}
+													className="fb-setting-transform-control-wrapper"
+												>
+													<FB_SwitcherControl
+                                                        label={__("Transform Style", "frontis-blocks")}
+                                                        globalSwitcher={buttonTransformSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ buttonTransformSwitcher: value })}
+                                                    />
+
+													{buttonTransformSwitcher === 'normal' && (
+														<FB_ScaleControl
+															proportions={buttonTransformNormalProportions}
+															setProportions={(value) => setAttributes({ buttonTransformNormalProportions: value })}
+															scale={buttonTransformNormalScale}
+															setScale={(value) => setAttributes({ buttonTransformNormalScale: value })}
+															scaleX={buttonTransformNormalScaleX}
+															setScaleX={(value) => setAttributes({ buttonTransformNormalScaleX: value })}
+															scaleY={buttonTransformNormalScaleY}	
+															setScaleY={(value) => setAttributes({ buttonTransformNormalScaleY: value })}
+															deviceType={deviceType}
+															setAttributes={setAttributes}
+														/>
+													)}
+
+													{buttonTransformSwitcher === 'hover' && (
+														<FB_ScaleControl
+															proportions={buttonTransformHoverProportions}
+															setProportions={(value) => setAttributes({ buttonTransformHoverProportions: value })}
+															scale={buttonTransformHoverScale}
+															setScale={(value) => setAttributes({ buttonTransformHoverScale: value })}
+															scaleX={buttonTransformHoverScaleX}
+															setScaleX={(value) => setAttributes({ buttonTransformHoverScaleX: value })}
+															scaleY={buttonTransformHoverScaleY}	
+															setScaleY={(value) => setAttributes({ buttonTransformHoverScaleY: value })}
+															deviceType={deviceType}
+															setAttributes={setAttributes}
+														/>
+													)}
 												</PanelBody>
 												<PanelBody
 													title={__("Custom CSS", "frontis-blocks")}

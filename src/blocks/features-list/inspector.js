@@ -126,6 +126,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureTitleGlobalTypoSwitcher,
         FeatureTitleGlobalTypographyData,
         FeatureTitleGlobalTypoType,
+        FeatureTitleGlobalTypoOption,
         FeatureTitleFontFamily,
         FeatureTitleFontSize,
         FeatureTitleFontSizeUnits,
@@ -152,6 +153,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureDescGlobalTypoSwitcher,
         FeatureDescGlobalTypographyData,
         FeatureDescGlobalTypoType,
+        FeatureDescGlobalTypoOption,
         FeatureDescFontFamily,
         FeatureDescFontSize,
         FeatureDescFontSizeUnits,
@@ -2746,6 +2748,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+                                                globalTypoOption={FeatureTitleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ FeatureTitleGlobalTypoOption: value })}
+
                                                 fontFamily={FeatureTitleFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ FeatureTitleFontFamily: value, FeatureTitleGlobalTypoSwitcher: {...FeatureTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -2837,6 +2842,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         FeatureDescGlobalTypoSwitcher: value === 'default' ? {...FeatureDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...FeatureDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={FeatureDescGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ FeatureDescGlobalTypoOption: value })}
 
                                                 fontFamily={FeatureDescFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ FeatureDescFontFamily: value, FeatureDescGlobalTypoSwitcher: {...FeatureDescGlobalTypoSwitcher, fontFamily: value && false} })}

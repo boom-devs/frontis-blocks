@@ -57,18 +57,24 @@ export default function Save({ attributes }) {
                                         </div>
                                     )}
                                     
-                                    <div className="fb-feature-list-content">
-                                        <RichText.Content
-                                            tagName={FeatureTag}
-                                            className="fb-feature-list-title"
-                                            value={item.Title}
-                                        />
-                                        <RichText.Content
-                                            tagName="p"
-                                            className="fb-feature-list-text"
-                                            value={item.Description}
-                                        />
-                                    </div>
+                                    { (item.Title || item.Description) && (
+                                        <div className="fb-feature-list-content">
+                                            {item.Title && (
+                                                <RichText.Content
+                                                    tagName={FeatureTag}
+                                                    className="fb-feature-list-title"
+                                                    value={item.Title}
+                                                />
+                                            )}
+                                            {item.Description && (
+                                                <RichText.Content
+                                                    tagName="p"
+                                                    className="fb-feature-list-text"
+                                                    value={item.Description}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>

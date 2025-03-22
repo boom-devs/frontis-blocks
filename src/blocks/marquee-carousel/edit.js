@@ -14,8 +14,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         blockId,
         sliderItems,
 
+        slideWidth,
+        slideWidthUnits,
+
         autoplay,
         autoplayDirection,
+        reverseDirection,
         speed,
         showNavigation,
         showPagination,
@@ -112,19 +116,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            centeredSlides: true,
            speed: speed,
            autoplay: {
-             delay: 1,
+             delay: 0,
+             reverseDirection: reverseDirection,
+             disableOnInteraction: true,
            },
            loop: true,
            slidesPerView:'auto',
            allowTouchMove: false,
-           disableOnInteraction: true,
            // Make sure slides have proper CSS width applied
            on: {
                 init: function() {
                 // Apply proper width to slides to ensure multiple are visible
                     const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
                     slides.forEach(slide => {
-                        slide.style.width = 'fit-content'; 
+                        slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content'; 
                     });
                 },
             },
@@ -158,9 +163,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [
         autoplay,
         autoplayDirection,
+        reverseDirection,
         speed,
         showNavigation,
         showPagination,
+        slideWidth,
+        slideWidthUnits,
     ]);
 
 

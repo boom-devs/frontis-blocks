@@ -9,6 +9,7 @@ use FrontisBlocks\Forms\FluentForms;
 use FrontisBlocks\Forms\ContactForms7;
 use FrontisBlocks\Assets\GenerateFrontendCss;
 use FrontisBlocks\Assets\EnqueueBlocksCss;
+use FrontisBlocks\Assets\GenerateRootCss;
 
 defined('ABSPATH') || exit;
 
@@ -170,10 +171,13 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update) {
 		if ($update) {
+			GenerateRootCss::generate_global_root_css();
+
 			Helper::get_current_page_name($post_id);
 			$post_content = $post->post_content;
 			$page_name = $post->post_name;
 			new EnqueueBlocksCss($page_name);
+			
 
 			$blocks = parse_blocks($post_content);
 			$this->process_blocks_recursively($blocks);

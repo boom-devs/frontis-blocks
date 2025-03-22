@@ -65,6 +65,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormLabelGlobalTypoSwitcher,
         fluentFormLabelGlobalTypographyData,
         fluentFormLabelGlobalTypoType,
+        fluentFormLabelGlobalTypoOption,
         fluentFormLabelFontFamily,
         fluentFormLabelFontSize,
         fluentFormLabelFontSizeUnits,
@@ -89,6 +90,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormInputGlobalTypoSwitcher,
         fluentFormInputGlobalTypographyData,
         fluentFormInputGlobalTypoType,
+        fluentFormInputGlobalTypoOption,
         fluentFormInputFontFamily,
         fluentFormInputFontSize,
         fluentFormInputFontSizeUnits,
@@ -174,6 +176,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakTitleGlobalTypoSwitcher,
         fluentFormSectionBreakTitleGlobalTypographyData,
         fluentFormSectionBreakTitleGlobalTypoType,
+        fluentFormSectionBreakTitleGlobalTypoOption,
         fluentFormSectionBreakTitleFontFamily,
         fluentFormSectionBreakTitleFontSize,
         fluentFormSectionBreakTitleFontSizeUnits,
@@ -202,6 +205,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSectionBreakDescGlobalTypoSwitcher,
         fluentFormSectionBreakDescGlobalTypographyData,
         fluentFormSectionBreakDescGlobalTypoType,
+        fluentFormSectionBreakDescGlobalTypoOption,
         fluentFormSectionBreakDescFontFamily,
         fluentFormSectionBreakDescFontSize,
         fluentFormSectionBreakDescFontSizeUnits,
@@ -231,6 +235,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormHtmlGlobalTypoSwitcher,
         fluentFormHtmlGlobalTypographyData,
         fluentFormHtmlGlobalTypoType,
+        fluentFormHtmlGlobalTypoOption,
         fluentFormHtmlFontFamily,
         fluentFormHtmlFontSize,
         fluentFormHtmlFontSizeUnits,
@@ -268,6 +273,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSubmitGlobalTypoSwitcher,
         fluentFormSubmitGlobalTypographyData,
         fluentFormSubmitGlobalTypoType,
+        fluentFormSubmitGlobalTypoOption,
         fluentFormSubmitFontFamily,
         fluentFormSubmitFontSize,
         fluentFormSubmitFontSizeUnits,
@@ -309,6 +315,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormSuccessGlobalTypoSwitcher,
         fluentFormSuccessGlobalTypographyData,
         fluentFormSuccessGlobalTypoType,
+        fluentFormSuccessGlobalTypoOption,
         fluentFormSuccessFontFamily,
         fluentFormSuccessFontSize,
         fluentFormSuccessFontSizeUnits,
@@ -339,6 +346,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fluentFormErrorGlobalTypoSwitcher,
         fluentFormErrorGlobalTypographyData,
         fluentFormErrorGlobalTypoType,
+        fluentFormErrorGlobalTypoOption,
         fluentFormErrorFontFamily,
         fluentFormErrorFontSize,
         fluentFormErrorFontSizeUnits,
@@ -3829,6 +3837,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+                                                globalTypoOption={fluentFormLabelGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormLabelGlobalTypoOption: value })}
+
                                                 fontFamily={fluentFormLabelFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ fluentFormLabelFontFamily: value, fluentFormLabelGlobalTypoSwitcher: {...fluentFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3907,6 +3918,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         fluentFormInputGlobalTypoSwitcher: value === 'default' ? {...fluentFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={fluentFormInputGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormInputGlobalTypoOption: value })}
 
                                                 fontFamily={fluentFormInputFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ fluentFormInputFontFamily: value, fluentFormInputGlobalTypoSwitcher: {...fluentFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -4258,6 +4272,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         })
                                                     }}
 
+                                                    globalTypoOption={fluentFormSectionBreakTitleGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormSectionBreakTitleGlobalTypoOption: value })}
+
                                                     fontFamily={fluentFormSectionBreakTitleFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakTitleFontFamily: value, fluentFormSectionBreakTitleGlobalTypoSwitcher: {...fluentFormSectionBreakTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4357,6 +4374,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             fluentFormSectionBreakDescGlobalTypoSwitcher: value === 'default' ? {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                         })
                                                     }}
+
+                                                    globalTypoOption={fluentFormSectionBreakDescGlobalTypoOption}
+													onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormSectionBreakDescGlobalTypoOption: value })}
 
                                                     fontFamily={fluentFormSectionBreakDescFontFamily}
                                                     onChangeFontFamily={(value) => setAttributes({ fluentFormSectionBreakDescFontFamily: value, fluentFormSectionBreakDescGlobalTypoSwitcher: {...fluentFormSectionBreakDescGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -4468,6 +4488,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         fluentFormHtmlGlobalTypoSwitcher: value === 'default' ? {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={fluentFormHtmlGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormHtmlGlobalTypoOption: value })}
 
                                                 fontFamily={fluentFormHtmlFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ fluentFormHtmlFontFamily: value, fluentFormHtmlGlobalTypoSwitcher: {...fluentFormHtmlGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -4591,6 +4614,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         fluentFormSubmitGlobalTypoSwitcher: value === 'default' ? {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={fluentFormSubmitGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormSubmitGlobalTypoOption: value })}
 
                                                 fontFamily={fluentFormSubmitFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ fluentFormSubmitFontFamily: value, fluentFormSubmitGlobalTypoSwitcher: {...fluentFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -4773,6 +4799,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 })
                                             }}
 
+                                            globalTypoOption={fluentFormSuccessGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormSuccessGlobalTypoOption: value })}
+
                                             fontFamily={fluentFormSuccessFontFamily}
                                             onChangeFontFamily={(value) => setAttributes({ fluentFormSuccessFontFamily: value, fluentFormSuccessGlobalTypoSwitcher: {...fluentFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4893,6 +4922,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     fluentFormErrorGlobalTypoSwitcher: value === 'default' ? {...fluentFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...fluentFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                 })
                                             }}
+
+                                            globalTypoOption={fluentFormErrorGlobalTypoOption}
+											onChangeGlobalTypoOption={(value) => setAttributes({ fluentFormErrorGlobalTypoOption: value })}
 
                                             fontFamily={fluentFormErrorFontFamily}
                                             onChangeFontFamily={(value) => setAttributes({ fluentFormErrorFontFamily: value, fluentFormErrorGlobalTypoSwitcher: {...fluentFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}

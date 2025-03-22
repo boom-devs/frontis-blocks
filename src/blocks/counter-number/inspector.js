@@ -42,11 +42,13 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_BackgroundImageControl from '../../components/background-image-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+        counterAlignment,
 		// deviceType,
 		counterNumberStart,
 		counterNumberEnd,
@@ -118,6 +120,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberGlobalTypoSwitcher,
         counterNumberGlobalTypographyData,
         counterNumberGlobalTypoType,
+        counterNumberGlobalTypoOption,
 		counterNumberFontFamily,
 		counterNumberFontSize,
 		counterNumberFontSizeUnits,
@@ -140,6 +143,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterNumberTitleGlobalTypoSwitcher,
         counterNumberTitleGlobalTypographyData,
         counterNumberTitleGlobalTypoType,
+        counterNumberTitleGlobalTypoOption,
 		counterNumberTitleFontFamily,
 		counterNumberTitleFontSize,
 		counterNumberTitleFontSizeUnits,
@@ -957,6 +961,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${globalDesktopBorderWidth && counterGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
         ${globalDesktopBorderRadiusWidth && counterGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
         ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
+        ${counterAlignment.Desktop ? `justify-content: ${counterAlignment.Desktop};` : ""}
     }
     .fb-counter-wrapper.${blockID}:hover{
         ${counterGlobalBgHoverColor ? `background: ${counterGlobalBgHoverColor};` : ''}
@@ -1084,6 +1089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalTabletMargin && counterGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""}
             ${globalTabletBorderWidth && counterGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
             ${globalTabletBorderRadiusWidth && counterGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+            ${counterAlignment.Tablet ? `justify-content: ${counterAlignment.Tablet};` : ""}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item {
             ${counterItemTabletBorder && counterItemBorderTypeTablet.top ? `border-width: ${counterItemTabletBorder};` : ''}
@@ -1132,6 +1138,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalMobileMargin && counterGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""}
             ${globalMobileBorderWidth && counterGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
             ${globalMobileBorderRadiusWidth && counterGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+            ${counterAlignment.Mobile ? `justify-content: ${counterAlignment.Mobile};` : ""}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item {
             ${counterItemMobileBorder && counterItemBorderTypeMobile.top ? `border-width: ${counterItemMobileBorder};` : ''}
@@ -1170,6 +1177,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     `, [
         blockID,
         deviceType,
+        counterAlignment,
         counterItemBgColor,
         counterItemSize,
         counterItemSizeUnits,
@@ -1306,35 +1314,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === 'general' && (
 									<>
-									<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
-                                        <BaseControl className="fb-sub-heading-position">
-											<SelectControl
-												label={__("Counter Icon", "frontis-block")}
-												value={mediaSwitcher}
-												options={mediaType}
-												onChange={(value) => setAttributes({mediaSwitcher: value})}
-											/>
-										</BaseControl>
+                                    <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={true}>
 
-                                        {mediaSwitcher === 'image' && (<FB_ImageControl
-											globalImageUrl={counterMediaUrl}
-											setglobalImageUrl={(value) => setAttributes({ counterMediaUrl: value })}
-											globalImageAlt={counterMediaAlt}
-											setglobalImageAlt={(value) => setAttributes({ counterMediaAlt: value })}
-											globalImageID={counterMediaId}
-											setglobalImageID={(value) => setAttributes({ counterMediaId: value })}
-											globalImageSize={counterMediaImagedisplay}
-											setglobalImageSize={(value) => setAttributes({ counterMediaImagedisplay: value })}
-										/>)}
-
-                                        {mediaSwitcher === 'icon' && (
-                                            <BaseControl>
-                                                <FBIconPicker value={icon} setIconHandler={iconHandler}/>
-                                            </BaseControl>
-                                        )}
-									</PanelBody>
-
-                                    <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={false}>
+                                        <FB_ResponsiveAlignmentControl
+                                            label={__("Alignment", "frontis-blocks")}
+                                            globalAlignment={counterAlignment}
+                                            setGlobalAlignment={(value) => setAttributes({ counterAlignment: value })}
+                                            deviceType={deviceType}
+                                            setAttributes={setAttributes}
+                                        />
                                         <RangeControl
 											label={__('Starting Number', 'frontis-blocks')}
 											value={counterNumberStart}
@@ -1348,6 +1336,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											value={counterNumberEnd}
 											onChange={(value) => setAttributes({ counterNumberEnd: value })}
 											min={0}
+                                            step={0.1}
 											max={100000}
 										/>
 
@@ -1391,6 +1380,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											onChange={(value) => setAttributes({ showThousandsSeparatorType: value })}
 										/>}
                                     </PanelBody>
+									<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+                                        <BaseControl className="fb-sub-heading-position">
+											<SelectControl
+												label={__("Counter Icon", "frontis-block")}
+												value={mediaSwitcher}
+												options={mediaType}
+												onChange={(value) => setAttributes({mediaSwitcher: value})}
+											/>
+										</BaseControl>
+
+                                        {mediaSwitcher === 'image' && (<FB_ImageControl
+											globalImageUrl={counterMediaUrl}
+											setglobalImageUrl={(value) => setAttributes({ counterMediaUrl: value })}
+											globalImageAlt={counterMediaAlt}
+											setglobalImageAlt={(value) => setAttributes({ counterMediaAlt: value })}
+											globalImageID={counterMediaId}
+											setglobalImageID={(value) => setAttributes({ counterMediaId: value })}
+											globalImageSize={counterMediaImagedisplay}
+											setglobalImageSize={(value) => setAttributes({ counterMediaImagedisplay: value })}
+										/>)}
+
+                                        {mediaSwitcher === 'icon' && (
+                                            <BaseControl>
+                                                <FBIconPicker value={icon} setIconHandler={iconHandler}/>
+                                            </BaseControl>
+                                        )}
+									</PanelBody>
 
                                     <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
@@ -1635,6 +1651,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     })
                                                 }}
 
+												globalTypoOption={counterNumberGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberGlobalTypoOption: value })}
+
                                                 fontFamily={counterNumberFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -1731,6 +1750,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         counterNumberTitleGlobalTypoSwitcher: value === 'default' ? {...counterNumberTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+												globalTypoOption={counterNumberTitleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberTitleGlobalTypoOption: value })}
 
                                                 fontFamily={counterNumberTitleFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontFamily: value && false} })}

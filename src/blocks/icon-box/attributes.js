@@ -243,6 +243,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    headingGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 
     headingFontFamily: {
         type: "string",
@@ -535,6 +539,10 @@ const attributes = {
         type: "string",
         default: 'defalut',
     },
+    subHeadingGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
     subHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -1080,6 +1088,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+	buttonGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	buttonFontFamily: {
 		type: "string",
 		default: "Default",
