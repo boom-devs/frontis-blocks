@@ -998,7 +998,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                 onChange={(value) => setAttributes({ reverseDirection: value })}
                                             />
                                             
-
+                                            
                                         </PanelBody>
                                     </>
                                 )}

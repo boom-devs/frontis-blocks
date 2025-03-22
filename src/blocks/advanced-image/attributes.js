@@ -1181,5 +1181,10 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	advancedImageLazyLoadSwitcher: {
+		type: "boolean",
+		default: false,
+	},
 }
 export default attributes;

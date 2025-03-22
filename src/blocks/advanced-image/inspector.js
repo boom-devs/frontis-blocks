@@ -244,6 +244,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedImageVRTopOffsetUnits,
 		advancedImageVRBottomOffset,
 		advancedImageVRBottomOffsetUnits,
+
+		advancedImageLazyLoadSwitcher,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -1463,6 +1465,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes({ imageHover: value })
 													}
 													__nextHasNoMarginBottom
+												/>
+
+												<ToggleControl
+													label={__("Lazy Load", "frontis-block")}
+													checked={advancedImageLazyLoadSwitcher}
+													onChange={(value) => {
+														setAttributes({ advancedImageLazyLoadSwitcher: value });
+													}}
 												/>
 											</PanelBody>
 										</div>

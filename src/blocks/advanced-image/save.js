@@ -23,6 +23,7 @@ export default function save({ attributes }) {
 		advancedImageDesktopSwitcher,
         advancedImageTabletSwitcher,
         advancedImageMobileSwitcher,
+		advancedImageLazyLoadSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -34,23 +35,32 @@ export default function save({ attributes }) {
 		<>
 			
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
+				<div className={`fb-parent-wrapper fb-advanced-image-wrapper data-lazy-load-${advancedImageLazyLoadSwitcher ? 'true' : 'false'} ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
 					<div
 						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
 						<div className="fb-advanced-image-inner">
-							{imageUrl ? (
-								linkSwitch ? (
-									<a
-										href={linkUrl}
-										target={linkTargetUrl ? '_blank' : undefined}
-										rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
-									>
-										<img src={imageUrl} alt={imageAlt}/>
-									</a>
+						{imageUrl ? (
+							linkSwitch ? (
+							<a
+								href={linkUrl}
+								target={linkTargetUrl ? '_blank' : undefined}
+								rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
+							>
+								{advancedImageLazyLoadSwitcher ? (
+								<img data-src={imageUrl} alt={imageAlt} />
 								) : (
-									<img src={imageUrl} alt={imageAlt}/>
-								)
-							) : null}
+								<img src={imageUrl} alt={imageAlt} />
+								)}
+							</a>
+							) : (
+							// When linkSwitch is false
+							advancedImageLazyLoadSwitcher ? (
+								<img data-src={imageUrl} alt={imageAlt} />
+							) : (
+								<img src={imageUrl} alt={imageAlt} />
+							)
+							)
+						) : null}
 						</div>
 						{displayTitle && titleText && (
 							<div className="fb-advanced-image-title">
