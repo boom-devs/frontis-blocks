@@ -71,32 +71,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         </div>
                                     )}
                                     
-                                    <div className="fb-feature-list-content">
-                                        <RichText
-                                            tagName={FeatureTag}
-                                            className="fb-feature-list-title"
-                                            value={item.Title}
-                                            onChange={(value) => {
-                                                const updatedItems = FeatureItems.map(i =>
-                                                    i.id === item.id ? { ...i, Title: value } : i
-                                                );
-                                                setAttributes({ FeatureItems: updatedItems });
-                                            }}
-                                            placeholder={__('Feature Title', 'frontis-blocks')}
-                                        />
-                                        <RichText
-                                            tagName="p"
-                                            className="fb-feature-list-text"
-                                            value={item.Description}
-                                            onChange={(value) => {
-                                                const updatedItems = FeatureItems.map(i =>
-                                                    i.id === item.id ? { ...i, Description: value } : i
-                                                );
-                                                setAttributes({ FeatureItems: updatedItems });
-                                            }}
-                                            placeholder={__('Feature Description', 'frontis-blocks')}
-                                        />
-                                    </div>
+                                    { (item.Title || item.Description) && (
+                                        <div className="fb-feature-list-content">
+                                            {item.Title && (
+                                                <RichText
+                                                    tagName={FeatureTag}
+                                                    className="fb-feature-list-title"
+                                                    value={item.Title}
+                                                    onChange={(value) => {
+                                                        const updatedItems = FeatureItems.map(i =>
+                                                            i.id === item.id ? { ...i, Title: value } : i
+                                                        );
+                                                        setAttributes({ FeatureItems: updatedItems });
+                                                    }}
+                                                    placeholder={__('Feature Title', 'frontis-blocks')}
+                                                />
+                                            )}
+                                            {item.Description && (
+                                                <RichText
+                                                    tagName="p"
+                                                    className="fb-feature-list-text"
+                                                    value={item.Description}
+                                                    onChange={(value) => {
+                                                        const updatedItems = FeatureItems.map(i =>
+                                                            i.id === item.id ? { ...i, Description: value } : i
+                                                        );
+                                                        setAttributes({ FeatureItems: updatedItems });
+                                                    }}
+                                                    placeholder={__('Feature Description', 'frontis-blocks')}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ul>

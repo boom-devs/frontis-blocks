@@ -3,6 +3,16 @@ const attributes = {
         type: "string",
         default: ""
     },
+
+	counterAlignment: {
+        type: "object",
+        default: {
+            Desktop: "center",
+            Tablet: "center",
+            Mobile: "center",
+        },
+    },
+
 	blockStyle: {
         type: "string",
         default: "",
@@ -209,6 +219,10 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
+	counterNumberGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
 	counterNumberFontFamily: {
 		type: 'string',
 		default: ''
@@ -351,6 +365,10 @@ const attributes = {
 	counterNumberTitleGlobalTypoType: {
 		type: "string",
 		default: 'default',
+	},
+	counterNumberTitleGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
 	},
 	counterNumberTitleFontFamily: {
 		type: 'string',

@@ -99,7 +99,7 @@ const FB_SidebarTypography = ({
 			/>
 			{heading !== 'all' &&
 				<FB_Range
-					min={1}
+					min={-200}
 					max={200}
 					label={__("Font Size", "frontis-blocks")}
 					rangeValue={fontSize}
@@ -143,7 +143,7 @@ const FB_SidebarTypography = ({
 			<div className='fb_global_typo_wrap'>
 				{letterSpacingUnits &&
 					<FB_Range
-						min={1}
+						min={-100}
 						max={100}
 						label={__("Letter Spacing", "frontis-blocks")}
 						rangeValue={letterSpacing}
@@ -157,7 +157,7 @@ const FB_SidebarTypography = ({
 				}
 				{lineHeightUnits &&
 					<FB_Range
-						min={1}
+						min={-200}
 						max={200}
 						label={__("Line Height", "frontis-blocks")}
 						rangeValue={lineHeight}

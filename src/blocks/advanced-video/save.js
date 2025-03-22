@@ -11,6 +11,7 @@ export default function save({ attributes }) {
         showControlsSwitcher,
         imageOverlaySwitcher,
         previewImageUrl,
+        videoPlayIconSwitcher,
         videoPlayIcon,
 
         videoGlobalWraperID,
@@ -31,7 +32,7 @@ export default function save({ attributes }) {
                 <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} id={videoGlobalWraperID}>
                     <div className={`fb-advanced-video-wrapper`}>
                         <div className="fb-player-wrapper">
-                            {imageOverlaySwitcher && (
+                            {imageOverlaySwitcher && videoPlayIconSwitcher && (
                                 <span className="fb-play-icon" style={{ display: 'block' }}>{renderSVG(videoPlayIcon)}</span>
                             )}
                             <div 

@@ -495,6 +495,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Desktop'],
 			'flex-wrap': containerWrap['Desktop'],
 			'align-content': alignContentDesktop,
+			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
 			...widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 		widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
@@ -503,6 +505,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Tablet'],
 			'flex-wrap': containerWrap['Tablet'],
 			'align-content': alignContentTablet,
+			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
 			...widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 		widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
@@ -511,6 +515,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'justify-content': containerJustify['Mobile'],
 			'flex-wrap': containerWrap['Mobile'],
 			'align-content': alignContentMobile,
+			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
 			...widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
 		};
 	}
@@ -611,6 +617,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.left, containerBorderUnits.Desktop)}`;
+	} else {
+		containerBorderDesktopWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Tablet Border Width
@@ -625,6 +633,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.left, containerBorderUnits.Tablet)}`;
+	} else {
+		containerBorderTabletWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Mobile Border Width
@@ -639,6 +649,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.left, containerBorderUnits.Mobile)}`;
+	} else {
+		containerBorderMobileWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Desktop Border Radius - only set values if they are not 0
@@ -1035,6 +1047,28 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'--inner-content-custom-width': `min(${containerFullWidth},${innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback || innerContentCustomWidthMobileFallback
 				}${fullWidthContentBoxedWidthUnits['Mobile']})`,
 			'max-width': 'var(--inner-content-custom-width)',
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto',
+		};
+	} else {
+		widthSelectorsDesktop[
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
+		] = {
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto',
+		};
+
+		widthSelectorsTablet[`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`] = {
+			'width': '100%',
+			'margin-left': 'auto',
+			'margin-right': 'auto'
+		};
+
+		widthSelectorsMobile[
+			`${isBlockRootParent && '#block-' + clientId}.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap`
+		] = {
 			'width': '100%',
 			'margin-left': 'auto',
 			'margin-right': 'auto',

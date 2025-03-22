@@ -268,6 +268,10 @@ const attributes = {
         type: "string",
         default: 'default',
     },
+    titleGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
+    },
     titleFontFamily: {
         type: "string",
         default: "",

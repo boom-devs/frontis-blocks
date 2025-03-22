@@ -360,6 +360,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		}
 
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+			display: none;
 			margin: 0;
 			padding: 0;
             height: 0;
@@ -368,6 +369,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			transition: all 0.3s ease-in-out;
 		}
 		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+            display: block;
             height: auto;
 			position: static;
 			visibility: visible;

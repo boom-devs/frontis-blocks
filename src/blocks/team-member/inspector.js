@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
@@ -40,6 +40,8 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FBIconPicker from '../../components/icon-picker/index.js';
+import FB_ImageControl from '@Components/image-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -100,6 +102,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberContentPosition,
 		teamMemberCardAlignment,
 
+		// Badge
+		teamMemberBadgeSwitcher,
+		teamMemberBadge,
+		teamMemberBadgePosition,
+		teamMemberBadgeAlignment,
+
+		teamMemberBadgeColorSwitcher,
+		teamMemberBadgeColor,
+		teamMemberBadgeHoverColor,
+		teamMemberBadgeBgColorSwitcher,
+		teamMemberBadgeBgColor,
+		teamMemberBadgeBgHoverColor,
+
+		teamMemberBadgeTypographyData,
+		teamMemberBadgeTypoSwitcher,
+		teamMemberBadgeTypoType,
+		teamMemberBadgeTypoOption,
+		teamMemberBadgeFontFamily,
+		teamMemberBadgeFontSize,
+		teamMemberBadgeFontSizeUnits,
+		teamMemberBadgeFontWeight,
+		teamMemberBadgeFontStyle,
+		teamMemberBadgeTextTransform,
+		teamMemberBadgeTextDecoration,
+		teamMemberBadgeLetterSpacing,
+		teamMemberBadgeLetterSpacingUnits,
+		teamMemberBadgeLineHeight,
+		teamMemberBadgeLineHeightUnits,
+		teamMemberBadgeLoadGoogleFonts,
+
+		teamMemberBadgeMarginUnits,
+		teamMemberBadgeMarginDesktop,
+		teamMemberBadgeMarginTablet,
+		teamMemberBadgeMarginMobile,
+		teamMemberBadgeMarginLink,
+
+		teamMemberBadgePaddingUnits,
+		teamMemberBadgePaddingDesktop,
+		teamMemberBadgePaddingTablet,
+		teamMemberBadgePaddingMobile,
+		teamMemberBadgePaddingLink,
+
+		teamMemberBadgeBorder,
+		teamMemberBadgeBorderColorSwitcher,
+		teamMemberBadgeBorderColor,
+		teamMemberBadgeBorderHoverColor,
+
+		teamMemberBadgeBorderUnits,
+		teamMemberBadgeBorderDesktop,
+		teamMemberBadgeBorderTablet,
+		teamMemberBadgeBorderMobile,
+		teamMemberBadgeBorderLink,
+
+		teamMemberBadgeBorderRadiusUnits,
+		teamMemberBadgeBorderRadiusDesktop,
+		teamMemberBadgeBorderRadiusTablet,
+		teamMemberBadgeBorderRadiusMobile,
+		teamMemberBadgeBorderRadiusLink,		
+		
+
+
+
 		// Team Name
 		teamMemberName,
 		teamMemberNameHeadingTag,
@@ -111,6 +175,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberNameGlobalTypoSwitcher,
 		teamMemberNameGlobalTypographyData,
 		teamMemberNameGlobalTypoType,
+		teamMemberNameGlobalTypoOption,
 		teamMemberNameFontFamily,
         teamMemberNameFontSize,
         teamMemberNameFontSizeUnits,
@@ -141,6 +206,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationGlobalTypoSwitcher,
 		teamMemberDesignationGlobalTypographyData,
 		teamMemberDesignationGlobalTypoType,
+		teamMemberDesignationGlobalTypoOption,
 		teamMemberDesignationFontFamily,
         teamMemberDesignationFontSize,
         teamMemberDesignationFontSizeUnits,
@@ -160,7 +226,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDesignationMarginMobile,
 		teamMemberDesignationMarginLink,
 
-		// Team Desc Typography
+		// Team Email Typography
+		// teamMemberEmailSwitcher,
+		// teamMemberEmail,
+		// teamMemberEmailLink,
+		// teamMemberEmailMediaSwitcher,
+		// teamMemberEmailIconPosition ,
+		// teamMemberEmailIconSwitcher,
+
+		// teamMemberEmailIcon,
+		// teamMemberEmailIconColorSwitcher,
+		// teamMemberEmailIconColor,
+		// teamMemberEmailIconHoverColor,
+		// teamMemberEmailIconSpacingUnits,
+		// teamMemberEmailIconSpacing,
+		// teamMemberEmailIconSizeUnits,
+		// teamMemberEmailIconSize,
+
+		// teamMemberEmailImageUrl,
+		// teamMemberEmailImageAlt,
+		// teamMemberEmailImageID,
+
+		// teamMemberEmailColorSwitcher,
+		// teamMemberEmailColor,
+		// teamMemberEmailHoverColor,
+
+		// teamMemberEmailTypographyData,
+		// teamMemberEmailTypoSwitcher,
+		// teamMemberEmailTypoType,
+		// teamMemberEmailTypoOption,
+		// teamMemberEmailFontFamily,
+		// teamMemberEmailFontSize,
+		// teamMemberEmailFontSizeUnits,
+		// teamMemberEmailFontWeight,
+		// teamMemberEmailFontStyle,
+		// teamMemberEmailTextTransform,
+		// teamMemberEmailTextDecoration,
+		// teamMemberEmailLetterSpacing,
+		// teamMemberEmailLetterSpacingUnits,
+		// teamMemberEmailLineHeight,
+		// teamMemberEmailLineHeightUnits,
+		// teamMemberEmailLoadGoogleFonts,
+
+		// teamMemberEmailMarginUnits,
+		// teamMemberEmailMarginDesktop,
+		// teamMemberEmailMarginTablet,
+		// teamMemberEmailMarginMobile,
+		// teamMemberEmailMarginLink,
+
+		// teamMemberEmailPaddingUnits,
+		// teamMemberEmailPaddingDesktop,
+		// teamMemberEmailPaddingTablet,
+		// teamMemberEmailPaddingMobile,
+		// teamMemberEmailPaddingLink,
+
+		
+
+		// Team Desc
 		teamMemberDescSwitcher,
 		teamMemberDesc,
 		teamMemberDescColorSwitcher,
@@ -170,6 +292,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberDescGlobalTypoSwitcher,
 		teamMemberDescGlobalTypographyData,
 		teamMemberDescGlobalTypoType,
+		teamMemberDescGlobalTypoOption,
 		teamMemberDescFontFamily,
         teamMemberDescFontSize,
         teamMemberDescFontSizeUnits,
@@ -435,6 +558,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberGlobalWraperClass,
 	} = attributes;
 
+	console.log(teamMemberNameGlobalTypoType);
+
 	const deviceType= useDeviceType();
 
 	// Set blockID if it doesn't exist
@@ -451,10 +576,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		loadGoogleFont(teamMemberDesignationFontFamily);
 		loadGoogleFont(teamMemberNameFontFamily);
 		loadGoogleFont(teamMemberDescFontFamily);
+		loadGoogleFont(teamMemberBadgeFontFamily);
 	}, [
 		teamMemberDesignationFontFamily, 
 		teamMemberNameFontFamily, 
-		teamMemberDescFontFamily]);
+		teamMemberDescFontFamily,
+		teamMemberBadgeFontFamily
+	]);
 	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
@@ -2289,7 +2417,447 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const socialProfileSeparatorMarginDesktopWidth = `${socialProfileSeparatorMarginDesktop.top}${socialProfileSeparatorMarginUnits.Desktop} ${socialProfileSeparatorMarginDesktop.right}${socialProfileSeparatorMarginUnits.Desktop} ${socialProfileSeparatorMarginDesktop.bottom}${socialProfileSeparatorMarginUnits.Desktop} ${socialProfileSeparatorMarginDesktop.left}${socialProfileSeparatorMarginUnits.Desktop}`;
 	const socialProfileSeparatorMarginTabWidth = `${socialProfileSeparatorMarginTab.top}${socialProfileSeparatorMarginUnits.Tablet} ${socialProfileSeparatorMarginTab.right}${socialProfileSeparatorMarginUnits.Tablet} ${socialProfileSeparatorMarginTab.bottom}${socialProfileSeparatorMarginUnits.Tablet} ${socialProfileSeparatorMarginTab.left}${socialProfileSeparatorMarginUnits.Tablet}`;
 	const socialProfileSeparatorMarginMobileWidth = `${socialProfileSeparatorMarginMobile.top}${socialProfileSeparatorMarginUnits.Mobile} ${socialProfileSeparatorMarginMobile.right}${socialProfileSeparatorMarginUnits.Mobile} ${socialProfileSeparatorMarginMobile.bottom}${socialProfileSeparatorMarginUnits.Mobile} ${socialProfileSeparatorMarginMobile.left}${socialProfileSeparatorMarginUnits.Mobile}`;
+	
+	
+	// Badge Margin
+	const handleBadgeMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberBadgeMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberBadgeMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberBadgeMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberBadgeMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberBadgeMarginDesktop: {...teamMemberBadgeMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberBadgeMarginTablet: {...teamMemberBadgeMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberBadgeMarginMobile: {...teamMemberBadgeMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
+	}
+
+	const handleBadgeMarginCombineBtn = () => {
+		setAttributes( {teamMemberBadgeMarginLink: !teamMemberBadgeMarginLink} );
+	}
+
+	const handleBadgeMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberBadgeMarginUnits: {
+				...teamMemberBadgeMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const teamMemberBadgeMarginDesktopWidth = `${teamMemberBadgeMarginDesktop.top}${teamMemberBadgeMarginUnits.Desktop} ${teamMemberBadgeMarginDesktop.right}${teamMemberBadgeMarginUnits.Desktop} ${teamMemberBadgeMarginDesktop.bottom}${teamMemberBadgeMarginUnits.Desktop} ${teamMemberBadgeMarginDesktop.left}${teamMemberBadgeMarginUnits.Desktop}`;
+	const teamMemberBadgeMarginTabletWidth = `${teamMemberBadgeMarginTablet.top}${teamMemberBadgeMarginUnits.Tablet} ${teamMemberBadgeMarginTablet.right}${teamMemberBadgeMarginUnits.Tablet} ${teamMemberBadgeMarginTablet.bottom}${teamMemberBadgeMarginUnits.Tablet} ${teamMemberBadgeMarginTablet.left}${teamMemberBadgeMarginUnits.Tablet}`;
+	const teamMemberBadgeMarginMobileWidth = `${teamMemberBadgeMarginMobile.top}${teamMemberBadgeMarginUnits.Mobile} ${teamMemberBadgeMarginMobile.right}${teamMemberBadgeMarginUnits.Mobile} ${teamMemberBadgeMarginMobile.bottom}${teamMemberBadgeMarginUnits.Mobile} ${teamMemberBadgeMarginMobile.left}${teamMemberBadgeMarginUnits.Mobile}`;
+	
+	// Badge padding
+	const handleBadgePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberBadgePaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberBadgePaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberBadgePaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberBadgePaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberBadgePaddingDesktop: {...teamMemberBadgePaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberBadgePaddingTablet: {...teamMemberBadgePaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberBadgePaddingMobile: {...teamMemberBadgePaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleBadgePaddingCombineBtn = () => {
+		setAttributes( {teamMemberBadgePaddingLink: !teamMemberBadgePaddingLink} );
+	}
+
+	const handleBadgePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberBadgePaddingUnits: {
+				...teamMemberBadgePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const teamMemberBadgePaddingDesktopWidth = `${teamMemberBadgePaddingDesktop.top}${teamMemberBadgePaddingUnits.Desktop} ${teamMemberBadgePaddingDesktop.right}${teamMemberBadgePaddingUnits.Desktop} ${teamMemberBadgePaddingDesktop.bottom}${teamMemberBadgePaddingUnits.Desktop} ${teamMemberBadgePaddingDesktop.left}${teamMemberBadgePaddingUnits.Desktop}`;
+	const teamMemberBadgePaddingTabletWidth = `${teamMemberBadgePaddingTablet.top}${teamMemberBadgePaddingUnits.Tablet} ${teamMemberBadgePaddingTablet.right}${teamMemberBadgePaddingUnits.Tablet} ${teamMemberBadgePaddingTablet.bottom}${teamMemberBadgePaddingUnits.Tablet} ${teamMemberBadgePaddingTablet.left}${teamMemberBadgePaddingUnits.Tablet}`;
+	const teamMemberBadgePaddingMobileWidth = `${teamMemberBadgePaddingMobile.top}${teamMemberBadgePaddingUnits.Mobile} ${teamMemberBadgePaddingMobile.right}${teamMemberBadgePaddingUnits.Mobile} ${teamMemberBadgePaddingMobile.bottom}${teamMemberBadgePaddingUnits.Mobile} ${teamMemberBadgePaddingMobile.left}${teamMemberBadgePaddingUnits.Mobile}`;
+	
+	// Badge Border
+	const handleBadgeBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberBadgeBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberBadgeBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberBadgeBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberBadgeBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberBadgeBorderDesktop: {...teamMemberBadgeBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberBadgeBorderTablet: {...teamMemberBadgeBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberBadgeBorderMobile: {...teamMemberBadgeBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleBadgeBorderCombineBtn = () => {
+		setAttributes( {teamMemberBadgeBorderLink: !teamMemberBadgeBorderLink} );
+	}
+
+	const handleBadgeBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberBadgeBorderUnits: {
+				...teamMemberBadgeBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const teamMemberBadgeBorderDesktopWidth = `${teamMemberBadgeBorderDesktop.top}${teamMemberBadgeBorderUnits.Desktop} ${teamMemberBadgeBorderDesktop.right}${teamMemberBadgeBorderUnits.Desktop} ${teamMemberBadgeBorderDesktop.bottom}${teamMemberBadgeBorderUnits.Desktop} ${teamMemberBadgeBorderDesktop.left}${teamMemberBadgeBorderUnits.Desktop}`;
+	const teamMemberBadgeBorderTabletWidth = `${teamMemberBadgeBorderTablet.top}${teamMemberBadgeBorderUnits.Tablet} ${teamMemberBadgeBorderTablet.right}${teamMemberBadgeBorderUnits.Tablet} ${teamMemberBadgeBorderTablet.bottom}${teamMemberBadgeBorderUnits.Tablet} ${teamMemberBadgeBorderTablet.left}${teamMemberBadgeBorderUnits.Tablet}`;
+	const teamMemberBadgeBorderMobileWidth = `${teamMemberBadgeBorderMobile.top}${teamMemberBadgeBorderUnits.Mobile} ${teamMemberBadgeBorderMobile.right}${teamMemberBadgeBorderUnits.Mobile} ${teamMemberBadgeBorderMobile.bottom}${teamMemberBadgeBorderUnits.Mobile} ${teamMemberBadgeBorderMobile.left}${teamMemberBadgeBorderUnits.Mobile}`;
+	
+	// Badge Border Radius
+	const handleBadgeBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( teamMemberBadgeBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						teamMemberBadgeBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						teamMemberBadgeBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						teamMemberBadgeBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {teamMemberBadgeBorderRadiusDesktop: {...teamMemberBadgeBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {teamMemberBadgeBorderRadiusTablet: {...teamMemberBadgeBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {teamMemberBadgeBorderRadiusMobile: {...teamMemberBadgeBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleBadgeBorderRadiusCombineBtn = () => {
+		setAttributes( {teamMemberBadgeBorderRadiusLink: !teamMemberBadgeBorderRadiusLink} );
+	}
+
+	const handleBadgeBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			teamMemberBadgeBorderUnits: {
+				...teamMemberBadgeBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const teamMemberBadgeBorderRadiusDesktopWidth = `${teamMemberBadgeBorderRadiusDesktop.top}${teamMemberBadgeBorderRadiusUnits.Desktop} ${teamMemberBadgeBorderRadiusDesktop.right}${teamMemberBadgeBorderRadiusUnits.Desktop} ${teamMemberBadgeBorderRadiusDesktop.bottom}${teamMemberBadgeBorderRadiusUnits.Desktop} ${teamMemberBadgeBorderRadiusDesktop.left}${teamMemberBadgeBorderRadiusUnits.Desktop}`;
+	const teamMemberBadgeBorderRadiusTabletWidth = `${teamMemberBadgeBorderRadiusTablet.top}${teamMemberBadgeBorderRadiusUnits.Tablet} ${teamMemberBadgeBorderRadiusTablet.right}${teamMemberBadgeBorderRadiusUnits.Tablet} ${teamMemberBadgeBorderRadiusTablet.bottom}${teamMemberBadgeBorderRadiusUnits.Tablet} ${teamMemberBadgeBorderRadiusTablet.left}${teamMemberBadgeBorderRadiusUnits.Tablet}`;
+	const teamMemberBadgeBorderRadiusMobileWidth = `${teamMemberBadgeBorderRadiusMobile.top}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.right}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.bottom}${teamMemberBadgeBorderRadiusUnits.Mobile} ${teamMemberBadgeBorderRadiusMobile.left}${teamMemberBadgeBorderRadiusUnits.Mobile}`;
+
+
+	// // Email Margin
+	// const handleEmailMarginUnitChange = ( event, position ) => {
+	// 	const value = event.target.value;
+	// 	if ( teamMemberEmailMarginLink ) {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginDesktop: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginTablet: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {
+	// 					teamMemberEmailMarginMobile: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	} else {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {teamMemberEmailMarginDesktop: {...teamMemberEmailMarginDesktop, [position]: value}} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {teamMemberEmailMarginTablet: {...teamMemberEmailMarginTablet, [position]: value}} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {teamMemberEmailMarginMobile: {...teamMemberEmailMarginMobile, [position]: value}} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	}
+
+	// }
+
+	// const handleEmailMarginCombineBtn = () => {
+	// 	setAttributes( {teamMemberEmailMarginLink: !teamMemberEmailMarginLink} );
+	// }
+
+	// const handleEmailMarginUnitsHandler = (unit) => {
+	// 	setAttributes( {
+	// 		teamMemberEmailMarginUnits: {
+	// 			...teamMemberEmailMarginUnits,
+	// 			[deviceType]: unit
+	// 		}
+	// 	})
+	// }
+
+	// const teamMemberEmailMarginDesktopWidth = `${teamMemberEmailMarginDesktop.top}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.right}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.bottom}${teamMemberEmailMarginUnits.Desktop} ${teamMemberEmailMarginDesktop.left}${teamMemberEmailMarginUnits.Desktop}`;
+	// const teamMemberEmailMarginTabletWidth = `${teamMemberEmailMarginTablet.top}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.right}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.bottom}${teamMemberEmailMarginUnits.Tablet} ${teamMemberEmailMarginTablet.left}${teamMemberEmailMarginUnits.Tablet}`;
+	// const teamMemberEmailMarginMobileWidth = `${teamMemberEmailMarginMobile.top}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.right}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.bottom}${teamMemberEmailMarginUnits.Mobile} ${teamMemberEmailMarginMobile.left}${teamMemberEmailMarginUnits.Mobile}`;
+	
+	// // Email Padding
+	// const handleEmailPaddingUnitChange = ( event, position ) => {
+	// 	const value = event.target.value;
+	// 	if ( teamMemberEmailPaddingLink ) {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingDesktop: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingTablet: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {
+	// 					teamMemberEmailPaddingMobile: {
+	// 						top: value,
+	// 						right: value,
+	// 						bottom: value,
+	// 						left: value
+	// 					}
+	// 				} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	} else {
+	// 		switch ( deviceType ) {
+	// 			case 'Desktop':
+	// 				setAttributes( {teamMemberEmailPaddingDesktop: {...teamMemberEmailPaddingDesktop, [position]: value}} );
+	// 				break;
+	// 			case 'Tablet':
+	// 				setAttributes( {teamMemberEmailPaddingTablet: {...teamMemberEmailPaddingTablet, [position]: value}} );
+	// 				break;
+	// 			case 'Mobile':
+	// 				setAttributes( {teamMemberEmailPaddingMobile: {...teamMemberEmailPaddingMobile, [position]: value}} );
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
+	// 	}
+
+	// }
+
+	// const handleEmailPaddingCombineBtn = () => {
+	// 	setAttributes( {teamMemberEmailPaddingLink: !teamMemberEmailPaddingLink} );
+	// }
+
+	// const handleEmailPaddingUnitsHandler = (unit) => {
+	// 	setAttributes( {
+	// 		teamMemberEmailPaddingUnits: {
+	// 			...teamMemberEmailPaddingUnits,
+	// 			[deviceType]: unit
+	// 		}
+	// 	})
+	// }
+
+	// const teamMemberEmailPaddingDesktopWidth = `${teamMemberEmailPaddingDesktop.top}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.right}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.bottom}${teamMemberEmailPaddingUnits.Desktop} ${teamMemberEmailPaddingDesktop.left}${teamMemberEmailPaddingUnits.Desktop}`;
+	// const teamMemberEmailPaddingTabletWidth = `${teamMemberEmailPaddingTablet.top}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.right}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.bottom}${teamMemberEmailPaddingUnits.Tablet} ${teamMemberEmailPaddingTablet.left}${teamMemberEmailPaddingUnits.Tablet}`;
+	// const teamMemberEmailPaddingMobileWidth = `${teamMemberEmailPaddingMobile.top}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.right}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.bottom}${teamMemberEmailPaddingUnits.Mobile} ${teamMemberEmailPaddingMobile.left}${teamMemberEmailPaddingUnits.Mobile}`;
+	
 
 	
 	const fbTeamMemberStyle = useMemo(
@@ -2355,6 +2923,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
+				position: relative;
 				display: flex;
 				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentPosition !== 'image' ? 'width: 100%;' : ''}
 				${teamMemberImageWidthUnits.Desktop === '%' ? 'width: 100%;' : ''}
@@ -2495,6 +3064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageBGHoverColor ? `background: ${teamMemberImageBGHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
+
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name {
 				${teamMemberNameGlobalTypoSwitcher.fontFamily === true && teamMemberNameGlobalTypographyData.fontFamily ? `font-family: ${teamMemberNameGlobalTypographyData.fontFamily};` : ''}
 				${teamMemberNameGlobalTypoSwitcher.fontSize === true && teamMemberNameGlobalTypographyData.fontSize ? `font-size: ${teamMemberNameGlobalTypographyData.fontSize};` : ''}
@@ -2714,6 +3284,83 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 
+			${teamMemberBadgeSwitcher === true ? `
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge-wrapper {
+					display: flex;
+					position: absolute;
+					width: max-content;
+					${teamMemberBadgeAlignment === 'top_left' ? 'top: 0; left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'top_center' ? 'top: 0; left: 50%; transform: translateX(-50%);' : ''}
+					${teamMemberBadgeAlignment === 'top_right' ? 'top: 0; right: 0;' : ''}
+					${teamMemberBadgeAlignment === 'center_left' ? 'top: 50%; transform: translateY(-50%); left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'center_center' ? 'top: 50%; left: 50%; transform: translate(-50%, -50%);' : ''}
+					${teamMemberBadgeAlignment === 'center_right' ? 'top: 50%; transform: translateY(-50%); right: 0;' : ''}
+					${teamMemberBadgeAlignment === 'bottom_left' ? 'bottom: 0; left: 0;' : ''}
+					${teamMemberBadgeAlignment === 'bottom_center' ? 'bottom: 0; left: 50%; transform: translateX(-50%);' : ''}
+					${teamMemberBadgeAlignment === 'bottom_right' ? 'bottom: 0; right: 0;' : ''}
+					z-index: 5;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+					${teamMemberBadgeTypoSwitcher.fontFamily === true && teamMemberBadgeTypographyData.fontFamily ? `font-family: ${teamMemberBadgeTypographyData.fontFamily};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontSize === true && teamMemberBadgeTypographyData.fontSize ? `font-size: ${teamMemberBadgeTypographyData.fontSize};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontWeight === true && teamMemberBadgeTypographyData.fontWeight ? `font-weight: ${teamMemberBadgeTypographyData.fontWeight};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontStyle === true && teamMemberBadgeTypographyData.fontStyle ? `font-style: ${teamMemberBadgeTypographyData.fontStyle};` : ''}
+					${teamMemberBadgeTypoSwitcher.textTransform === true && teamMemberBadgeTypographyData.textTransform ? `text-transform: ${teamMemberBadgeTypographyData.textTransform};` : ''}
+					${teamMemberBadgeTypoSwitcher.textDecoration === true && teamMemberBadgeTypographyData.textDecoration ? `text-decoration: ${teamMemberBadgeTypographyData.textDecoration};` : ''}
+					${teamMemberBadgeTypoSwitcher.letterSpacing === true && teamMemberBadgeTypographyData.letterSpacing ? `letter-spacing: ${teamMemberBadgeTypographyData.letterSpacing};` : ''}
+					${teamMemberBadgeTypoSwitcher.lineHeight === true && teamMemberBadgeTypographyData.lineHeight ? `line-height: ${teamMemberBadgeTypographyData.lineHeight};` : ''}
+					
+					${teamMemberBadgeTypoSwitcher.fontFamily === false && teamMemberBadgeFontFamily && teamMemberBadgeFontFamily !== 'Default' ? `font-family: ${teamMemberBadgeFontFamily};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Desktop ? `font-size: ${teamMemberBadgeFontSize.Desktop}${teamMemberBadgeFontSizeUnits.Desktop};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontWeight === false && teamMemberBadgeFontWeight ? `font-weight: ${teamMemberBadgeFontWeight};` : ''}
+					${teamMemberBadgeTypoSwitcher.fontStyle === false && teamMemberBadgeFontStyle ? `font-style: ${teamMemberBadgeFontStyle};` : ''}
+					${teamMemberBadgeTypoSwitcher.textTransform === false && teamMemberBadgeTextTransform ? `text-transform: ${teamMemberBadgeTextTransform};` : ''}
+					${teamMemberBadgeTypoSwitcher.textDecoration === false && teamMemberBadgeTextDecoration ? `text-decoration: ${teamMemberBadgeTextDecoration};` : ''}
+					${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Desktop ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Desktop}${teamMemberBadgeLetterSpacingUnits.Desktop};` : ''}
+					${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Desktop ? `line-height: ${teamMemberBadgeLineHeight.Desktop}${teamMemberBadgeLineHeightUnits.Desktop};` : ''}
+					
+					${teamMemberBadgeColor ? `color: ${teamMemberBadgeColor};` : ''}
+					${teamMemberBadgeBgColor ? `background-color: ${teamMemberBadgeBgColor};` : ''}
+					${teamMemberBadgeBorder ? `border-style: ${teamMemberBadgeBorder};` : ''}
+					${teamMemberBadgeBorderColor ? `border-color: ${teamMemberBadgeBorderColor};` : ''}
+					${teamMemberBadgeBorderDesktopWidth && teamMemberBadgeBorderDesktop.top ? `border-width: ${teamMemberBadgeBorderDesktopWidth};` : ''}
+					${teamMemberBadgeBorderRadiusDesktopWidth && teamMemberBadgeBorderRadiusDesktop.top ? `border-radius: ${teamMemberBadgeBorderRadiusDesktopWidth};` : ''}
+					${teamMemberBadgeMarginDesktopWidth && teamMemberBadgeMarginDesktop.top ? `margin: ${teamMemberBadgeMarginDesktopWidth};` : ''}
+					${teamMemberBadgePaddingDesktopWidth && teamMemberBadgePaddingDesktop.top ? `padding: ${teamMemberBadgePaddingDesktopWidth};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item:hover .fb-team-member-badge {
+					${teamMemberBadgeHoverColor ? `color: ${teamMemberBadgeHoverColor};` : ''}
+					${teamMemberBadgeBgHoverColor ? `background-color: ${teamMemberBadgeBgHoverColor};` : ''}
+					${teamMemberBadgeBorderHoverColor ? `border-color: ${teamMemberBadgeBorderHoverColor};` : ''}
+					transition: all 0.3s ease-in-out;
+				}
+
+				@media only screen and (max-width: 1024px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+						${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Tablet ? `font-size: ${teamMemberBadgeFontSize.Tablet}${teamMemberBadgeFontSizeUnits.Tablet};` : ''}
+						${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Tablet ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Tablet}${teamMemberBadgeLetterSpacingUnits.Tablet};` : ''}
+						${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Tablet ? `line-height: ${teamMemberBadgeLineHeight.Tablet}${teamMemberBadgeLineHeightUnits.Tablet};` : ''}
+						
+						${teamMemberBadgeBorderTabletWidth && teamMemberBadgeBorderTablet.top ? `border-width: ${teamMemberBadgeBorderTabletWidth};` : ''}
+						${teamMemberBadgeBorderRadiusTabletWidth && teamMemberBadgeBorderRadiusTablet.top ? `border-radius: ${teamMemberBadgeBorderRadiusTabletWidth};` : ''}
+						${teamMemberBadgeMarginTabletWidth && teamMemberBadgeMarginTablet.top ? `margin: ${teamMemberBadgeMarginTabletWidth};` : ''}
+						${teamMemberBadgePaddingTabletWidth && teamMemberBadgePaddingTablet.top ? `padding: ${teamMemberBadgePaddingTabletWidth};` : ''}
+					}
+				}
+				@media only screen and (max-width: 767px) {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-badge {
+						${teamMemberBadgeTypoSwitcher.fontSize === false && teamMemberBadgeFontSize?.Mobile ? `font-size: ${teamMemberBadgeFontSize.Mobile}${teamMemberBadgeFontSizeUnits.Mobile};` : ''}
+						${teamMemberBadgeTypoSwitcher.letterSpacing === false && teamMemberBadgeLetterSpacing?.Mobile ? `letter-spacing: ${teamMemberBadgeLetterSpacing.Mobile}${teamMemberBadgeLetterSpacingUnits.Mobile};` : ''}
+						${teamMemberBadgeTypoSwitcher.lineHeight === false && teamMemberBadgeLineHeight?.Mobile ? `line-height: ${teamMemberBadgeLineHeight.Mobile}${teamMemberBadgeLineHeightUnits.Mobile};` : ''}
+						
+						${teamMemberBadgeBorderMobileWidth && teamMemberBadgeBorderMobile.top ? `border-width: ${teamMemberBadgeBorderMobileWidth};` : ''}
+						${teamMemberBadgeBorderRadiusMobileWidth && teamMemberBadgeBorderRadiusMobile.top ? `border-radius: ${teamMemberBadgeBorderRadiusMobileWidth};` : ''}
+						${teamMemberBadgeMarginMobileWidth && teamMemberBadgeMarginMobile.top ? `margin: ${teamMemberBadgeMarginMobileWidth};` : ''}
+						${teamMemberBadgePaddingMobileWidth && teamMemberBadgePaddingMobile.top ? `padding: ${teamMemberBadgePaddingMobileWidth};` : ''}
+					}
+				}
+			` : ''}
 			${socialIconBtnSwitcher === true ? `
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
 					display: flex;
@@ -3255,6 +3902,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberVRTopOffsetUnits,
 			teamMemberVRBottomOffset,
 			teamMemberVRBottomOffsetUnits,
+
+			// badge
+			teamMemberBadgeSwitcher,
+			teamMemberBadgePosition,
+			teamMemberBadgeAlignment,
+			teamMemberBadgeColor,
+			teamMemberBadgeBgColor,
+			teamMemberBadgeHoverColor,
+			teamMemberBadgeBgColor,
+			teamMemberBadgeBgHoverColor,
+			teamMemberBadgeBorderColor,
+			teamMemberBadgeBorderHoverColor,
+			teamMemberBadgeBorderDesktop,
+			teamMemberBadgeBorderTablet,
+			teamMemberBadgeBorderMobile,
+			teamMemberBadgeBorderRadiusDesktop,
+			teamMemberBadgeBorderRadiusTablet,
+			teamMemberBadgeBorderRadiusMobile,
+			teamMemberBadgePaddingDesktop,
+			teamMemberBadgePaddingTablet,
+			teamMemberBadgePaddingMobile,
+			teamMemberBadgeMarginDesktop,
+			teamMemberBadgeMarginTablet,
+			teamMemberBadgeMarginMobile,
+			teamMemberBadgeTypoSwitcher,
+			teamMemberBadgeTypographyData,
+			teamMemberBadgeTypoType,
+			teamMemberBadgeFontFamily,
+			teamMemberBadgeFontSize,
+			teamMemberBadgeFontSizeUnits,
+			teamMemberBadgeFontWeight,
+			teamMemberBadgeFontStyle,
+			teamMemberBadgeTextTransform,
+			teamMemberBadgeTextDecoration,
+			teamMemberBadgeLetterSpacing,
+			teamMemberBadgeLetterSpacingUnits,
+			teamMemberBadgeLineHeight,
+			teamMemberBadgeLineHeightUnits,
+
 		]
 	);
 	
@@ -3305,22 +3991,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{tab.name === 'general' && (
 									<>
 										<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={true}>
-											<FB_BackgroundImageControl
-                                                globalBackgroundImageUrl={teamMemberImageUrl}
-                                                setGlobalBackgroundImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}
-                                                globalBackgroundImageAlt={teamMemberImageAlt}
-                                                setGlobalBackgroundImageAlt={(value) => setAttributes({ teamMemberImageAlt: value })}
-                                                globalBackgroundImageID={teamMemberImageID}
-                                                setGlobalBackgroundImageID={(value) => setAttributes({ teamMemberImageID: value })}
-                                                globalBackgroundImagePosition={teamMemberImagePosition}
-                                                setGlobalBackgroundImagePosition={(value) => setAttributes({ teamMemberImagePosition: value })}
-                                                globalBackgroundImageAttachment={teamMemberImageAttachment} 
-                                                setGlobalBackgroundImageAttachment={(value) => setAttributes({ teamMemberImageAttachment: value })}
-                                                globalBackgroundImageRepeat={teamMemberImageRepeat}
-                                                setGlobalBackgroundImageRepeat={(value) => setAttributes({ teamMemberImageRepeat: value })}
-                                                globalBackgroundImageSize={teamMemberImageSize}
-                                                setGlobalBackgroundImageSize={(value) => setAttributes({ teamMemberImageSize: value })}
-                                            />
+											<FB_ImageControl 
+												globalImageUrl={teamMemberImageUrl}
+												setglobalImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}
+												globalImageAlt={teamMemberImageAlt}
+												setglobalImageAlt={(value) => setAttributes({ teamMemberImageAlt: value })}
+												globalImageID={teamMemberImageID}
+												setglobalImageID={(value) => setAttributes({ teamMemberImageID: value })}
+												globalImageSize={teamMemberImageSize}
+												setglobalImageSize={(value) => setAttributes({ teamMemberImageSize: value })}
+											/>
 
 											<ToggleControl
 												label={__("Image Overlay", "frontis-blocks")}
@@ -3346,7 +4026,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChange={(value) => setAttributes({ teamMemberCardAlignment: value })}
 												/>
 											: ''}
+										</PanelBody>
 
+										<PanelBody title={__("Badge", "frontis-blocks")} initialOpen={false}>
+											<ToggleControl
+												label={__("Badge Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberBadgeSwitcher}
+												onChange={(value) => setAttributes({ teamMemberBadgeSwitcher: value })}
+											/>
+
+											{teamMemberBadgeSwitcher && (<>
+												<TextControl
+													label={__('Badge Text', 'frontis-blocks')}
+													value={teamMemberBadge}
+													onChange={(value) => setAttributes({ teamMemberBadge: value })}
+													placeholder={__('Badge', 'frontis-block')}
+												/>
+
+												<SelectControl
+													label={__("Badge Position", "frontis-blocks")}
+													value={teamMemberBadgePosition}
+													options={BADGE_POSITION}
+													onChange={(value) => setAttributes({ teamMemberBadgePosition: value })}
+												/>
+
+												<SelectControl
+													label={__("Badge Alignment", "frontis-blocks")}
+													value={teamMemberBadgeAlignment}
+													options={BADGE_ALIGNMENT}
+													onChange={(value) => setAttributes({ teamMemberBadgeAlignment: value })}
+												/>
+											</>)}
+										</PanelBody>
+
+										<PanelBody title={__("Name & Designation", "frontis-blocks")} initialOpen={false}>
 											<TextControl
 												tagName={teamMemberNameHeadingTag}
 												label={__('Name', 'frontis-blocks')}
@@ -3366,7 +4080,81 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												value={teamMemberDesignation}
 												onChange={(value) => setAttributes({ teamMemberDesignation: value })}
 											/>
+										</PanelBody>
 
+										{/* <PanelBody title={__("Email", "frontis-blocks")} initialOpen={false}>
+											<ToggleControl
+												label={__("Email Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberEmailSwitcher}
+												onChange={(value) => setAttributes({ teamMemberEmailSwitcher: value })}
+											/>
+
+											{teamMemberEmailSwitcher && (<>
+											<TextControl
+												label={__('Email Text', 'frontis-blocks')}
+												value={teamMemberEmail}
+												onChange={(value) => setAttributes({ teamMemberEmail: value })}
+											/>
+											<TextControl
+												label={__('Email Link', 'frontis-blocks')}
+												value={teamMemberEmailLink}
+												onChange={(value) => setAttributes({ teamMemberEmailLink: value })}
+											/>
+
+											<ToggleControl
+												label={__("Email Icon Switcher", "frontis-blocks")}
+												className="fb-setting-responsive-control"
+												checked={teamMemberEmailMediaSwitcher}
+												onChange={(value) => setAttributes({ teamMemberEmailMediaSwitcher: value })}
+											/>
+
+											{teamMemberEmailMediaSwitcher && (<>
+												<SelectControl
+													label={__("Email Icon Position", "frontis-blocks")}
+													value={teamMemberEmailIconPosition}
+													options={EMAIL_ICON_POSITION}
+													onChange={(value) => setAttributes({ teamMemberEmailIconPosition: value })}
+												/>
+
+												<div className="fb-setting-switcher-container">
+                                                    <BaseControl
+                                                        className="fb-setting-switcher-panel-wrapper"
+                                                    >
+                                                        <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                            {EMAIL_ICON_SWITCHER.map((item, key) => (
+                                                                <Button
+                                                                    key={key}
+                                                                    onClick={() => setAttributes({ teamMemberEmailIconSwitcher: item.value })} 
+                                                                    className={`fb-setting-switcher-panel-btn-switcher ${teamMemberEmailIconSwitcher === item.value ? 'active' : ''}`}
+                                                                >
+                                                                    {item.label}
+                                                                </Button>
+                                                            ))}
+                                                        </ButtonGroup>
+                                                    </BaseControl>
+                                                </div>
+                                                { teamMemberEmailIconSwitcher === 'icon' &&
+                                                    <FBIconPicker
+                                                        value={teamMemberEmailIcon} 
+                                                        setIconHandler={(value) => setAttributes({ teamMemberEmailIcon: value })} 
+                                                    />
+                                                }
+                                                { teamMemberEmailIconSwitcher === 'image' &&
+													<FB_ImageControl
+														globalImageUrl={teamMemberEmailImageUrl}
+														setglobalImageUrl={(value) => setAttributes({ teamMemberEmailImageUrl: value })}
+														globalImageAlt={teamMemberEmailImageAlt}
+														setglobalImageAlt={(value) => setAttributes({ teamMemberEmailImageAlt: value })}
+														globalImageID={teamMemberEmailImageID}
+														setglobalImageID={(value) => setAttributes({ teamMemberEmailImageID: value })}
+													/>
+                                                }
+											</>)}
+											</>)}
+										</PanelBody> */}
+
+										<PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
 											<ToggleControl
 												label={__("Description Switcher", "frontis-blocks")}
 												className="fb-setting-responsive-control"
@@ -3884,6 +4672,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
+												globalTypoOption={teamMemberNameGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberNameGlobalTypoOption: value })}
+
 												fontFamily={teamMemberNameFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberNameFontFamily: value, teamMemberNameGlobalTypoSwitcher: {...teamMemberNameGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -3958,6 +4749,194 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 
+										{teamMemberBadgeSwitcher && <PanelBody
+											title={__("Badge", "frontis-blocks")}
+											initialOpen={false}
+											className="fb-setting-gallery-button-wrapper"
+										>
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={teamMemberBadgeTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ teamMemberBadgeTypographyData: value })}
+
+												globalTypoType={teamMemberBadgeTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														teamMemberBadgeTypoType: value, 
+														teamMemberBadgeTypoSwitcher: value === 'default' ? {...teamMemberBadgeTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...teamMemberBadgeTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
+
+												globalTypoOption={teamMemberBadgeTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberBadgeTypoOption: value })}
+
+												fontFamily={teamMemberBadgeFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ teamMemberBadgeFontFamily: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, fontFamily: value && false} })}
+
+												fontSize={teamMemberBadgeFontSize}
+												onChangeFontSize={(value) => setAttributes({ teamMemberBadgeFontSize: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, fontSize: value && false} })}
+
+												fontSizeUnits={teamMemberBadgeFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ teamMemberBadgeFontSizeUnits: value })}
+
+												fontWeight={teamMemberBadgeFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ teamMemberBadgeFontWeight: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, fontWeight: value && false} })}
+
+												fontStyle={teamMemberBadgeFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ teamMemberBadgeFontStyle: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, fontStyle: value && false} })}
+
+												textTransform={teamMemberBadgeTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ teamMemberBadgeTextTransform: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, textTransform: value && false} })}
+
+												textDecoration={teamMemberBadgeTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ teamMemberBadgeTextDecoration: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, textDecoration: value && false} })}
+
+												letterSpacing={teamMemberBadgeLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ teamMemberBadgeLetterSpacing: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, letterSpacing: value && false} })}
+
+												letterSpacingUnits={teamMemberBadgeLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ teamMemberBadgeLetterSpacingUnits: value })}
+
+												lineHeight={teamMemberBadgeLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ teamMemberBadgeLineHeight: value, teamMemberBadgeTypoSwitcher: {...teamMemberBadgeTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={teamMemberBadgeLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ teamMemberBadgeLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberBadgeColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberBadgeColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberBadgeColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberBadgeColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberBadgeBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberBadgeBgColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberBadgeBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeBgColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberBadgeBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeBgHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeBgHoverColor: value })}
+                                                />
+                                            )}
+
+												<SelectControl
+													label={__("Border Style", "frontis-blocks")}
+													value={teamMemberBadgeBorder}
+													options={BORDER_STYLES}
+													onChange={(value) => setAttributes({ teamMemberBadgeBorder: value })}
+												/>
+
+											<FB_SwitcherControl
+                                                label={__("Border Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberBadgeBorderColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberBadgeBorderColorSwitcher: value })}
+                                            />
+
+											{teamMemberBadgeBorderColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeBorderColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeBorderColor: value })}
+                                                />
+                                            )}	
+
+											{teamMemberBadgeBorderColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberBadgeBorderHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberBadgeBorderHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_Spacing
+												label={__("Border Width", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleBadgeBorderUnitsHandler}
+												spacingUnits={teamMemberBadgeBorderUnits}
+												spacingDesktop={teamMemberBadgeBorderDesktop}
+												spacingTablet={teamMemberBadgeBorderTablet}
+												spacingMobile={teamMemberBadgeBorderMobile}
+												handleSpacingUnitHandler={handleBadgeBorderUnitChange}
+												spacingCombineBtn={teamMemberBadgeBorderLink}
+												spacingCombineBtnHandler={handleBadgeBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleBadgeBorderRadiusUnitsHandler}
+												spacingUnits={teamMemberBadgeBorderRadiusUnits}
+												spacingDesktop={teamMemberBadgeBorderRadiusDesktop}
+												spacingTablet={teamMemberBadgeBorderRadiusTablet}
+												spacingMobile={teamMemberBadgeBorderRadiusMobile}
+												handleSpacingUnitHandler={handleBadgeBorderRadiusUnitChange}
+												spacingCombineBtn={teamMemberBadgeBorderRadiusLink}
+												spacingCombineBtnHandler={handleBadgeBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleBadgeMarginUnitsHandler}
+												spacingUnits={teamMemberBadgeMarginUnits}
+												spacingDesktop={teamMemberBadgeMarginDesktop}
+												spacingTablet={teamMemberBadgeMarginTablet}
+												spacingMobile={teamMemberBadgeMarginMobile}
+												handleSpacingUnitHandler={handleBadgeMarginUnitChange}
+												spacingCombineBtn={teamMemberBadgeMarginLink}
+												spacingCombineBtnHandler={handleBadgeMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleBadgePaddingUnitsHandler}
+												spacingUnits={teamMemberBadgePaddingUnits}
+												spacingDesktop={teamMemberBadgePaddingDesktop}
+												spacingTablet={teamMemberBadgePaddingTablet}
+												spacingMobile={teamMemberBadgePaddingMobile}
+												handleSpacingUnitHandler={handleBadgePaddingUnitChange}
+												spacingCombineBtn={teamMemberBadgePaddingLink}
+												spacingCombineBtnHandler={handleBadgePaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>}
+
 										<PanelBody
 											title={__("Designation", "frontis-blocks")}
 											initialOpen={false}
@@ -3975,6 +4954,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														teamMemberDesignationGlobalTypoSwitcher: value === 'default' ? {...teamMemberDesignationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...teamMemberDesignationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={teamMemberDesignationGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberDesignationGlobalTypoOption: value })}
 
 												fontFamily={teamMemberDesignationFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberDesignationFontFamily: value, teamMemberDesignationGlobalTypoSwitcher: {...teamMemberDesignationGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -4050,6 +5032,165 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 										</PanelBody>
 
+										{/* {teamMemberEmailSwitcher && <PanelBody
+											title={__("Email", "frontis-blocks")}
+											initialOpen={false}
+											className="fb-setting-gallery-button-wrapper"
+										>
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={teamMemberEmailTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ teamMemberEmailTypographyData: value })}
+
+												globalTypoType={teamMemberEmailTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({ 
+														teamMemberEmailTypoType: value, 
+														teamMemberEmailTypoSwitcher: value === 'default' ? {...teamMemberEmailTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...teamMemberEmailTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													})
+												}}
+
+												globalTypoOption={teamMemberEmailTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberEmailTypoOption: value })}
+
+												fontFamily={teamMemberEmailFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ teamMemberEmailFontFamily: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, fontFamily: value && false} })}
+
+												fontSize={teamMemberEmailFontSize}
+												onChangeFontSize={(value) => setAttributes({ teamMemberEmailFontSize: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, fontSize: value && false} })}
+
+												fontSizeUnits={teamMemberEmailFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ teamMemberEmailFontSizeUnits: value })}
+
+												fontWeight={teamMemberEmailFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ teamMemberEmailFontWeight: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, fontWeight: value && false} })}
+
+												fontStyle={teamMemberEmailFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ teamMemberEmailFontStyle: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, fontStyle: value && false} })}
+
+												textTransform={teamMemberEmailTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ teamMemberEmailTextTransform: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, textTransform: value && false} })}
+
+												textDecoration={teamMemberEmailTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ teamMemberEmailTextDecoration: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, textDecoration: value && false} })}
+
+												letterSpacing={teamMemberEmailLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ teamMemberEmailLetterSpacing: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, letterSpacing: value && false} })}
+
+												letterSpacingUnits={teamMemberEmailLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ teamMemberEmailLetterSpacingUnits: value })}
+
+												lineHeight={teamMemberEmailLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ teamMemberEmailLineHeight: value, teamMemberEmailTypoSwitcher: {...teamMemberEmailTypoSwitcher, lineHeight: value && false} })}
+
+												lineHeightUnits={teamMemberEmailLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ teamMemberEmailLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberEmailColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberEmailColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberEmailColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberEmailColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberEmailColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberEmailColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberEmailHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberEmailHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_Range
+													min={1}
+													max={100}
+													label={__("Icon Size", "frontis-blocks")}
+													rangeValue={teamMemberEmailIconSize}
+													onChangeHandler={(value) => setAttributes({ teamMemberEmailIconSize: value })}
+													rangeUnitHandler={(value) => setAttributes({ teamMemberEmailIconSizeUnits: value })}
+													deviceType={deviceType}
+													units={teamMemberEmailIconSizeUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={'16'}
+												/>
+
+												<FB_Range
+													min={1}
+													max={100}
+													label={__("Icon Spacing", "frontis-blocks")}
+													rangeValue={teamMemberEmailIconSpacing}
+													onChangeHandler={(value) => setAttributes({ teamMemberEmailIconSpacing: value })}
+													rangeUnitHandler={(value) => setAttributes({ teamMemberEmailIconSpacingUnits: value })}
+													deviceType={deviceType}
+													units={teamMemberEmailIconSpacingUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={'8'}
+												/>
+
+											<FB_SwitcherControl
+                                                label={__("Icon Color", "frontis-blocks")}
+                                                globalSwitcher={teamMemberEmailIconColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ teamMemberEmailIconColorSwitcher: value })}
+                                            />
+                                                    
+                                            {teamMemberEmailIconColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={teamMemberEmailIconColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberEmailIconColor: value })}
+                                                />
+                                            )}
+                                                    
+                                            {teamMemberEmailIconColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={teamMemberEmailIconHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ teamMemberEmailIconHoverColor: value })}
+                                                />
+                                            )}
+
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleEmailMarginUnitsHandler}
+												spacingUnits={teamMemberEmailMarginUnits}
+												spacingDesktop={teamMemberEmailMarginDesktop}
+												spacingTablet={teamMemberEmailMarginTablet}
+												spacingMobile={teamMemberEmailMarginMobile}
+												handleSpacingUnitHandler={handleEmailMarginUnitChange}
+												spacingCombineBtn={teamMemberEmailMarginLink}
+												spacingCombineBtnHandler={handleEmailMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleEmailPaddingUnitsHandler}
+												spacingUnits={teamMemberEmailPaddingUnits}
+												spacingDesktop={teamMemberEmailPaddingDesktop}
+												spacingTablet={teamMemberEmailPaddingTablet}
+												spacingMobile={teamMemberEmailPaddingMobile}
+												handleSpacingUnitHandler={handleEmailPaddingUnitChange}
+												spacingCombineBtn={teamMemberEmailPaddingLink}
+												spacingCombineBtnHandler={handleEmailPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>} */}
+
 										{ teamMemberDescSwitcher && <PanelBody
 											title={__("Description", "frontis-blocks")}
 											initialOpen={false}
@@ -4067,6 +5208,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														teamMemberDescGlobalTypoSwitcher: value === 'default' ? {...teamMemberDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...teamMemberDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
+
+												globalTypoOption={teamMemberDescGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ teamMemberDescGlobalTypoOption: value })}
 
 												fontFamily={teamMemberDescFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ teamMemberDescFontFamily: value, teamMemberDescGlobalTypoSwitcher: {...teamMemberDescGlobalTypoSwitcher, fontFamily: value && false} })}

@@ -15,7 +15,5 @@
 	"textdomain": "frontis-blocks",
 	"usesContext": [ "postId", "postType", "queryId" ],
 	"editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css",
-    "style": "file:./style-index.css",
-    "render": "file:./render.php"
+    "editorStyle": "file:./index.css"
 }

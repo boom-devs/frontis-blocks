@@ -87,6 +87,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         titleGlobalTypoSwitcher,
         titleGlobalTypographyData,
         titleGlobalTypoType,
+        titleGlobalTypoOption,
         titleFontFamily,
         titleFontSize,
         titleFontSizeUnits,
@@ -1137,7 +1138,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         let styles = `
           .fb-accordion-main-wrapper.${blockID} {
             ${accordionPositionType === 'default' ? `position: relative;` : ''}
-            ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' ? `width: 100%;` : ''}
+            width: 100%;
             ${accordionPositionType !== 'default' ? `position: ${accordionPositionType};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'left' && accordionHZLeftOffset.Desktop ? `left: ${accordionHZLeftOffset.Desktop}${accordionHZLeftOffsetUnits.Desktop};` : ''}
             ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionHZOrientationType === 'right' && accordionHZRightOffset.Desktop ? `right: ${accordionHZRightOffset.Desktop}${accordionHZRightOffsetUnits.Desktop};` : ''}
@@ -1219,6 +1220,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
                 display: flex;
                 align-items: center;
+                cursor: pointer;
                 ${titleSpacing?.Desktop ? `gap: ${titleSpacing.Desktop}${titleSpacingUnits.Desktop};` : ''}
                 ${accordionItemsPaddingDesktopWidth && accordionItemsDesktopPadding.top ? `padding: ${accordionItemsPaddingDesktopWidth};` : ''}
                 ${accordionItemsBorder ? `border-style: ${accordionItemsBorder};` : ''}
@@ -1409,6 +1411,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon {
+            display: none;
             position: absolute;
 			visibility: hidden;
             opacity: 0;
@@ -1417,6 +1420,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
 		.fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper.active .fb-accordion-expanded-icon {
+            display: block;
 			position: static;
 			visibility: visible;
             opacity: 1;
@@ -2079,6 +2083,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         titleGlobalTypoSwitcher: value === 'default' ? {...titleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...titleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
+
+                                                globalTypoOption={titleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ titleGlobalTypoOption: value })}
 
                                                 fontFamily={titleFontFamily}
                                                 onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, fontFamily: value && false} })}

@@ -78,6 +78,10 @@ const attributes = {
         default: ""
     },
     /** End Image Settings */
+    videoPlayIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
     videoPlayIcon: {
 		type: 'string',
 		default: 'play',
@@ -686,6 +690,68 @@ const attributes = {
     advancedVideoCustomCSS : { 
         type: "string",
         default: "",
+    },
+
+
+    advancedVideoTransformSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    advancedVideoTransformNormalProportions: {
+        type: "boolean",
+        default: false,
+    },
+    advancedVideoTransformNormalScale: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    advancedVideoTransformNormalScaleX: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    advancedVideoTransformNormalScaleY: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    advancedVideoTransformHoverProportions: {
+        type: "boolean",
+        default: false,
+    },
+    advancedVideoTransformHoverScale: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    advancedVideoTransformHoverScaleX: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    advancedVideoTransformHoverScaleY: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
 };
 
