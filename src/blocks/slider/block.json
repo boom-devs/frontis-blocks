@@ -22,6 +22,7 @@
         "frontis-swiper-style"
     ],
     "style": [
+        "file:./style-index.css",
         "frontis-swiper-style"
     ],
     "viewScript": [

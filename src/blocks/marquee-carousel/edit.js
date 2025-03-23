@@ -19,7 +19,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         autoplay,
         autoplayDirection,
-        reverseDirection,
         speed,
         showNavigation,
         showPagination,
@@ -116,13 +115,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            centeredSlides: true,
            speed: speed,
            autoplay: {
-             delay: 0,
-             reverseDirection: reverseDirection,
-             disableOnInteraction: true,
+             delay: 1,
            },
            loop: true,
            slidesPerView:'auto',
            allowTouchMove: false,
+           disableOnInteraction: true,
            // Make sure slides have proper CSS width applied
            on: {
                 init: function() {
@@ -163,7 +161,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [
         autoplay,
         autoplayDirection,
-        reverseDirection,
         speed,
         showNavigation,
         showPagination,

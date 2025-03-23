@@ -1,0 +1,10 @@
+.fb-setting-visibility-container {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+.fb-setting-visibility-container .fb-setting-visibility-control {
+  margin-bottom: 16px;
+}
+.fb-setting-visibility-container .fb-setting-visibility-control:last-child {
+  margin-bottom: 0;
+}/*# sourceMappingURL=editor.lazy.css.map */

@@ -5,16 +5,10 @@ const attributes = {
         type: "string",
         default: ""
     },
-    
     headingAlignment: {
-        type: "object",
-        default: {
-            Desktop: "left",
-            Tablet: "left",
-            Mobile: "left",
-        },
+        type: "string",
+        default: "left",
     },
-
     headingText: {
         type : "string",
         default: "Advanced Heading"
@@ -1428,22 +1422,6 @@ const attributes = {
         }
     },
 
-    headingBeforeAfterGap: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    headingBeforeAfterGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
     headingBeforeAfterMarginUnits: {
 		type: 'object',
 		default: {

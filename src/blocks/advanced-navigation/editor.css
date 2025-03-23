@@ -1,0 +1,57 @@
+.wp-block-frontis-advanced-navigation {
+  margin-bottom: 1em;
+}
+.wp-block-frontis-advanced-navigation .frontis-advanced-navigation-inner {
+  position: relative;
+}
+.wp-block-frontis-advanced-navigation.layout-is-horizontal .wp-block-navigation__container {
+  flex-direction: row;
+}
+.wp-block-frontis-advanced-navigation.layout-is-horizontal.align-items-justified-left .wp-block-navigation__container {
+  justify-content: flex-start;
+}
+.wp-block-frontis-advanced-navigation.layout-is-horizontal.align-items-justified-center .wp-block-navigation__container {
+  justify-content: center;
+}
+.wp-block-frontis-advanced-navigation.layout-is-horizontal.align-items-justified-right .wp-block-navigation__container {
+  justify-content: flex-end;
+}
+.wp-block-frontis-advanced-navigation.layout-is-vertical .wp-block-navigation__container {
+  flex-direction: column;
+}
+.wp-block-frontis-advanced-navigation.layout-is-vertical.align-items-justified-left .wp-block-navigation__container {
+  align-items: flex-start;
+}
+.wp-block-frontis-advanced-navigation.layout-is-vertical.align-items-justified-center .wp-block-navigation__container {
+  align-items: center;
+}
+.wp-block-frontis-advanced-navigation.layout-is-vertical.align-items-justified-right .wp-block-navigation__container {
+  align-items: flex-end;
+}
+.wp-block-frontis-advanced-navigation.dropdown-click .wp-block-navigation-item__content {
+  cursor: pointer;
+}
+.wp-block-frontis-advanced-navigation.hide-dropdown-icon .wp-block-navigation__submenu-icon {
+  display: none;
+}
+.wp-block-frontis-advanced-navigation.nav-btn-icon .wp-block-navigation-item__content {
+  display: flex;
+  align-items: center;
+}
+.wp-block-frontis-advanced-navigation.flex-wrap .wp-block-navigation__container {
+  flex-wrap: wrap;
+}
+.wp-block-frontis-advanced-navigation.hamburger-mobile .wp-block-navigation__responsive-container-open, .wp-block-frontis-advanced-navigation.hamburger-tablet .wp-block-navigation__responsive-container-open, .wp-block-frontis-advanced-navigation.hamburger-desktop .wp-block-navigation__responsive-container-open {
+  display: block;
+}
+.wp-block-frontis-advanced-navigation.hamburger-mobile .wp-block-navigation__responsive-container:not(.is-menu-open), .wp-block-frontis-advanced-navigation.hamburger-tablet .wp-block-navigation__responsive-container:not(.is-menu-open), .wp-block-frontis-advanced-navigation.hamburger-desktop .wp-block-navigation__responsive-container:not(.is-menu-open) {
+  display: none;
+}
+.wp-block-frontis-advanced-navigation.hamburger-close-left .wp-block-navigation__responsive-container-close {
+  left: 0;
+  right: auto;
+}
+.wp-block-frontis-advanced-navigation.hamburger-close-right .wp-block-navigation__responsive-container-close {
+  right: 0;
+  left: auto;
+}/*# sourceMappingURL=editor.css.map */

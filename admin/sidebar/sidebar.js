@@ -3,8 +3,6 @@ import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
 import { useDispatch } from '@wordpress/data';
 import {
 	Button,
-	Modal,
-	TextControl,
 	TabPanel,
 	__experimentalNavigatorProvider as NavigatorProvider,
 	__experimentalNavigatorScreen as NavigatorScreen,
@@ -583,11 +581,6 @@ function FrontisBlocksSidebar(props) {
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontfamilies, setFontfamilies] = useState({});
 
-	const [ colorModalOpen, setColorModalOpen ] = useState( false );
-    const openColorModal = () => setColorModalOpen( true );
-    const closeColorModal = () => setColorModalOpen( false );
-	const [ colorName, setColorName ] = useState( '' );
-
 	// Extract all font families into a single string
 	const getAllFontFamilies = (fontsObject) => {
 		const fontFamilies = [];
@@ -607,7 +600,7 @@ function FrontisBlocksSidebar(props) {
 		loadGoogleFont(regenerateFonts);
 	};
 
-	const handleUpdateState = async () => {
+	useEffect(() => {
 		const localStorageKeys = [
 			'fb_global_colors',
 			'fb_custom_colors',
@@ -618,153 +611,146 @@ function FrontisBlocksSidebar(props) {
 			'fb_fontfamilies',
 			'fb_globaltypo'
 		];
-		
-		try {
-			for (const key of localStorageKeys) {
-				const localStorageData = getFbLocalStorage(key);
 
-				if (key === 'fb_global_colors') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_global_colors');
-						if (!res.success) {
-							setGlobalColors(defaultsColors);
-							localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+		const handleUpdateState = async () => {
+			try {
+				for (const key of localStorageKeys) {
+					const localStorageData = getFbLocalStorage(key);
+
+					if (key === 'fb_global_colors') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_global_colors');
+							if (!res.success) {
+								setGlobalColors(defaultsColors);
+								localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
+							} else {
+								setGlobalColors(res.data);
+								localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+							}
 						} else {
-							setGlobalColors(res.data);
-							localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
+							setGlobalColors(localStorageData);
 						}
-					} else {
-						setGlobalColors(localStorageData);
 					}
-				}
 
-				// Custom colors
-				if (key === 'fb_custom_colors') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_custom_colors');
-						if (!res.success) {
-							setCustomColors([]);
+					// Custom colors
+					if (key === 'fb_custom_colors') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_colors');
+							if (!res.success) {
+								setCustomColors([]);
+							} else {
+								setCustomColors(res.data);
+								localStorage.setItem('fb_custom_colors', JSON.stringify(res.data));
+							}
 						} else {
-							setCustomColors(res.data);
-							localStorage.setItem('fb_custom_colors', JSON.stringify(res.data));
+							setCustomColors(localStorageData);
 						}
-					} else {
-						setCustomColors(localStorageData);
 					}
-				}
 
-				// Gradient colors
-				if (key === 'fb_gradient_colors') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_gradient_colors');
-						if (!res.success) {
-							setGradientColors(gradientDefaults);
-							localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
+					// Gradient colors
+					if (key === 'fb_gradient_colors') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_gradient_colors');
+							if (!res.success) {
+								setGradientColors(gradientDefaults);
+								localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
+							} else {
+								setGradientColors(res.data);
+								localStorage.setItem('fb_gradient_colors', JSON.stringify(res.data));
+							}
 						} else {
-							setGradientColors(res.data);
-							localStorage.setItem('fb_gradient_colors', JSON.stringify(res.data));
+							setGradientColors(localStorageData);
 						}
-					} else {
-						setGradientColors(localStorageData);
 					}
-				}
 
-				// Custom Gradient colors
-				if (key === 'fb_custom_gradient_colors') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_custom_gradient_colors');
-						if (!res.success) {
-							setCustomGradientColors([]);
+					// Custom Gradient colors
+					if (key === 'fb_custom_gradient_colors') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_gradient_colors');
+							if (!res.success) {
+								setCustomGradientColors([]);
+							} else {
+								setCustomGradientColors(res.data);
+								localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(res.data));
+							}
 						} else {
-							setCustomGradientColors(res.data);
-							localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(res.data));
+							setCustomGradientColors(localStorageData);
 						}
-					} else {
-						setCustomGradientColors(localStorageData);
 					}
-				}
 
-				// Get global typography
-				if (key === 'fb_typography') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_typography');
-						if (!res.success) {
-							localStorage.setItem('fb_typography', JSON.stringify(typography));
+					// Get global typography
+					if (key === 'fb_typography') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_typography');
+							if (!res.success) {
+								localStorage.setItem('fb_typography', JSON.stringify(typography));
+							} else {
+								setTypography(res.data);
+								localStorage.setItem('fb_typography', JSON.stringify(res.data));
+							}
 						} else {
-							setTypography(res.data);
-							localStorage.setItem('fb_typography', JSON.stringify(res.data));
+							setTypography(localStorageData);
 						}
-					} else {
-						setTypography(localStorageData);
 					}
-				}
 
-				// Custom typography
-				if (key === 'fb_custom_typography') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_custom_typography');
-						if (!res.success) {
-							setCustomTypography([]);
+					// Custom typography
+					if (key === 'fb_custom_typography') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_custom_typography');
+							if (!res.success) {
+								setCustomTypography([]);
+							} else {
+								setCustomTypography(res.data);
+								localStorage.setItem('fb_custom_typography', JSON.stringify(res.data));
+							}
 						} else {
-							setCustomTypography(res.data);
-							localStorage.setItem('fb_custom_typography', JSON.stringify(res.data));
+							setCustomTypography(localStorageData);
 						}
-					} else {
-						setCustomTypography(localStorageData);
 					}
-				}
 
-				// Add fontfamilies
-				if (key === 'fb_fontfamilies') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_fontfamilies');
-						if (!res.success) {
-							setFontfamilies([]);
-						} else {
-							setTimeout(() => {
+					// Add fontfamilies
+					if (key === 'fb_fontfamilies') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_fontfamilies');
+							if (!res.success) {
+								setFontfamilies([]);
+							} else {
 								setFontfamilies(res.data);
 								getAllFontFamilies(res.data)
 								localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
-							}, 1000);
-						}
-					} else {
-						setTimeout(() => {
+							}
+						} else {
 							getAllFontFamilies(localStorageData)
 							setFontfamilies(localStorageData);
-						}, 1000);
-					}
-				}
-
-				// Add globaltypo
-				if (key === 'fb_globaltypo') {
-					if (localStorageData.length < 1) {
-						const res = await getGlobalStyle('fb_get_globaltypo');
-
-						if(res.success) {
-							setTimeout(() => {
-								generateCSSVariables(res.data, deviceType);
-							}, 1000);
-
-							localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
 						}
-					} else {
-						setTimeout(() => {
-							generateCSSVariables(localStorageData, deviceType);
-						}, 1000);
+					}
+
+					// Add globaltypo
+					if (key === 'fb_globaltypo') {
+						if (localStorageData.length < 1) {
+							const res = await getGlobalStyle('fb_get_globaltypo');
+
+							if(res.success) {
+								setTimeout(() => {
+									generateCSSVariables(res.data, deviceType);
+								}, 1000);
+
+								localStorage.setItem('fb_globaltypo', JSON.stringify(res.data));
+							}
+						} else {
+							setTimeout(() => {
+								generateCSSVariables(localStorageData, deviceType);
+							}, 1000);
+						}
 					}
 				}
+			} catch (error) {
+				console.error("Error fetching global colors:", error);
 			}
-		} catch (error) {
-			console.error("Error fetching global colors:", error);
 		}
-	}
 
-	useEffect(() => {
 		handleUpdateState();
-	}, [deviceType]);
 
-	useEffect(() => {
-		handleUpdateState();
 	}, []);
 
 	const colorPanelArray = (colors, setColor, defaults = []) => {
@@ -812,7 +798,7 @@ function FrontisBlocksSidebar(props) {
 	useEffect(() => {
 		setTimeout(() => {
 			const mergedColors = [...customColors, ...globalColors, ...customGradientColors, ...gradientColors];
-			generateColorsVariables(mergedColors, deviceType);
+			generateColorsVariables(mergedColors);
 		}, 1000)
 	}, [globalColors, customColors, customGradientColors, gradientColors])
 
@@ -841,8 +827,21 @@ function FrontisBlocksSidebar(props) {
 
 	// New custom color function
 	const setNewCustomColorFn = () => {
+		setCustomColors(() => {
+			// Determine a unique index
+			let index = customColors.length + 1;
 
-		setColorModalOpen(true);
+			// Add the new color
+			return [
+				...customColors,
+				{
+					color: '#000000',
+					name: `Custom Color ${index}`,
+					slug: `custom-color-${index}`,
+				}
+			];
+		});
+
 		setFbGlobalSettingsLoading(true);
 	}
 
@@ -921,27 +920,6 @@ function FrontisBlocksSidebar(props) {
 			
 		}
 	}, [fbGlobalSettingsLoading]);
-
-	useEffect(() => {
-		if( !colorModalOpen) {
-			setCustomColors(() => {
-			// Determine a unique index
-			let index = customColors.length + 1;
-
-			// Add the new color
-			return [
-				...customColors,
-				{
-					color: '#000000',
-					name: colorName !== '' ? colorName : `Custom Color ${index}`,
-					slug: colorName !== '' ? colorName.replace(/\s+/g, '-').toLowerCase() : `custom-color-${index}`,
-				}
-				];
-			});
-
-			setColorName('');
-		}
-	}, [colorModalOpen]);
 
 	return (
 		<>
@@ -1179,23 +1157,6 @@ function FrontisBlocksSidebar(props) {
 																setCustomColors={setCustomColors}
 															/>
 														)}
-
-														{ colorModalOpen && (
-															<Modal title={__("Add Color name", "frontis-blocks")} onRequestClose={ closeColorModal }>
-																<TextControl
-																	__nextHasNoMarginBottom
-																	__next40pxDefaultSize
-																	label={__("Color Name", "frontis-blocks")}
-																	value={ colorName }
-																	onChange={ ( value ) => setColorName( value ) }
-																/>
-																<Button
-																    className="fb-custom-color-btn" onClick={() => closeColorModal()}>
-																		{__("Save", "frontis-blocks")}
-																</Button>
-															</Modal>
-														) }
-
 														<div className="add-custom-color">
 															<Button
 																className="add-custom-color-btn"
@@ -1289,5 +1250,5 @@ function FrontisBlocksSidebar(props) {
 		</>
 	);
 };
-// Export the component
+
 export default FrontisBlocksSidebar;

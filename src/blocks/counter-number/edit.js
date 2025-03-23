@@ -61,7 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const step = (timestamp) => {
 		  if (!startTime) startTime = timestamp;
 		  const progress = Math.min((timestamp - startTime) / duration, 1);
-		  const current = progress * (end - start) + start; // Removed Math.floor to allow decimal values
+		  const current = Math.floor(progress * (end - start) + start);
 	
 		  let formattedNumber = current.toString();
 	

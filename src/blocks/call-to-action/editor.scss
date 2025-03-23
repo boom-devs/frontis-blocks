@@ -1,5 +1,16 @@
+//Call to action
 .fb-cta-content-wrapper{
 	position: relative;
+	.fb-cta-image-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		.fb-feature-list-item img {
+			width: 60px;
+			height: 60px;
+			border-radius: 50px;
+		}
+	}
 	.fb-cta-content-wrapper-inner{
 		gap: 20px;
 		.fb-icon-wrapper{
@@ -24,3 +35,5 @@
 		}
 	}
 }
+
+

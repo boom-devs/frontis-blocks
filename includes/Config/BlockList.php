@@ -457,6 +457,19 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
                 'child'     => 'false',
+            ],
+            'simple-navigation' => [
+                'slug'      => 'simple-navigation',
+                'title'     => 'Simple Navigation',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'free',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/marquee-carousel.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+                'child'     => 'false',
             ]
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);

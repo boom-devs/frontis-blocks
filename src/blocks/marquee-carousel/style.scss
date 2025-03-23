@@ -10,6 +10,19 @@
     outline-width: 0 !important;
 }
 
+  .swiper-wrapper{
+    -webkit-transition-timing-function:linear!important;    transition-timing-function:linear!important; 
+    position: relative;
+  }
+
+  .swiper-slide {
+    box-sizing: border-box;
+    transition-timing-function: cubic-bezier(.76,.09,.215,1);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
   .fb-marquee-carousel-image-wrapper {
     display: flex;
@@ -22,6 +35,13 @@
         object-position: 50% 50%;
     }
   }
+
+
+
+
+
+
+
 
   .fb-marquee-carousel-content {
     position: relative;
@@ -55,21 +75,11 @@
   
   
   
-// marquee carousel overlay
   
-  .fb-marquee-carousel-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.fb-marquee-carousel-container::before,
-.fb-marquee-carousel-container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
+  
+  // .fb-marquee-carousel-content-wrapper-wrapper {
+  //   padding: 8px 16px;
+  //   border: solid 1px;
+  //   background: transparent;
+  // }
   

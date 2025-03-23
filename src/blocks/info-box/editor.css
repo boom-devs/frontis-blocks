@@ -1,0 +1,15 @@
+.fb-info-box-wrapper-inner .fb-icon-wrapper {
+  line-height: 0;
+}
+.fb-info-box-wrapper-inner .fb-info-btn-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.fb-info-box-wrapper-inner .fb-info-btn-wrapper .fb-btn-icon-wrapper {
+  line-height: 0;
+}
+.fb-info-box-wrapper-inner .fb-info-media-wrapper {
+  display: flex;
+  align-items: center;
+}/*# sourceMappingURL=editor.css.map */

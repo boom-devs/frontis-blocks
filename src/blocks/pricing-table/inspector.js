@@ -107,7 +107,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTopSectionTextGlobalTypoSwitcher,
 		pricingTopSectionTextGlobalTypographyData,
 		pricingTopSectionTextGlobalTypoType,
-		pricingTopSectionTextGlobalTypoOption,
 		pricingTopSectionTextFontFamily,
 		pricingTopSectionTextFontSize,
 		pricingTopSectionTextFontSizeUnits,
@@ -242,7 +241,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		normalPricingGlobalTypoSwitcher,
 		normalPricingGlobalTypographyData,
 		normalPricingGlobalTypoType,
-		normalPricingGlobalTypoOption,
 		normalPricingFontFamily,
 		normalPricingFontSize,
 		normalPricingFontSizeUnits,
@@ -261,7 +259,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		salePricingGlobalTypoSwitcher,
 		salePricingGlobalTypographyData,
 		salePricingGlobalTypoType,
-		salePricingGlobalTypoOption,
 		salePricingFontFamily,
 		salePricingFontSize,
 		salePricingFontSizeUnits,
@@ -280,7 +277,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceCurrencyGlobalTypoSwitcher,
 		priceCurrencyGlobalTypographyData,
 		priceCurrencyGlobalTypoType,
-		priceCurrencyGlobalTypoOption,
 		priceCurrencyFontFamily,
 		priceCurrencyFontSize,
 		priceCurrencyFontSizeUnits,
@@ -299,7 +295,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricePeriodGlobalTypoSwitcher,
 		pricePeriodGlobalTypographyData,
 		pricePeriodGlobalTypoType,
-		pricePeriodGlobalTypoOption,
 		pricePeriodFontFamily,
 		pricePeriodFontSize,
 		pricePeriodFontSizeUnits,
@@ -330,7 +325,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTitleGlobalTypoSwitcher,
 		pricingTitleGlobalTypographyData,
 		pricingTitleGlobalTypoType,
-		pricingTitleGlobalTypoOption,
 		pricingTitleFontFamily,
 		pricingTitleFontSize,
 		pricingTitleFontSizeUnits,
@@ -349,7 +343,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingSubtitleGlobalTypoSwitcher,
 		pricingSubtitleGlobalTypographyData,
 		pricingSubtitleGlobalTypoType,
-		pricingSubtitleGlobalTypoOption,
 		pricingSubtitleFontFamily,
 		pricingSubtitleFontSize,
 		pricingSubtitleFontSizeUnits,
@@ -379,7 +372,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingfeatureTitleGlobalTypoSwitcher,
 		pricingfeatureTitleGlobalTypographyData,
 		pricingfeatureTitleGlobalTypoType,
-		pricingfeatureTitleGlobalTypoOption,
 		pricingfeatureTitleFontFamily,
 		pricingfeatureTitleFontSize,
 		pricingfeatureTitleFontSizeUnits,
@@ -447,7 +439,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceButtonGlobalTypoSwitcher,
 		priceButtonGlobalTypographyData,
 		priceButtonGlobalTypoType,
-		priceButtonGlobalTypoOption,
 		priceButtonFontFamily,
 		priceButtonFontSize,
 		priceButtonFontSizeUnits,
@@ -567,7 +558,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceAfterTextGlobalTypoSwitcher,
 		priceAfterTextGlobalTypographyData,
 		priceAfterTextGlobalTypoType,
-		priceAfterTextGlobalTypoOption,
 		priceAfterTextFontFamily,
 		priceAfterTextFontSize,
 		priceAfterTextFontSizeUnits,
@@ -623,7 +613,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextGlobalTypoSwitcher,
 		priceFeatureAfterTextGlobalTypographyData,
 		priceFeatureAfterTextGlobalTypoType,
-		priceFeatureAfterTextGlobalTypoOption,
 		priceFeatureAfterTextFontFamily,
 		priceFeatureAfterTextFontSize,
 		priceFeatureAfterTextFontSizeUnits,
@@ -4458,9 +4447,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														})
 													}}
 
-													globalTypoOption={pricingTopSectionTextGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ pricingTopSectionTextGlobalTypoOption: value })}
-
 													fontFamily={pricingTopSectionTextFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ pricingTopSectionTextFontFamily: value, pricingTopSectionTextGlobalTypoSwitcher: {...pricingTopSectionTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4873,9 +4859,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
-												globalTypoOption={pricingTitleGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ pricingTitleGlobalTypoOption: value })}
-
 												fontFamily={pricingTitleFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ pricingTitleFontFamily: value, pricingTitleGlobalTypoSwitcher: {...pricingTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -4959,9 +4942,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															pricingSubtitleGlobalTypoSwitcher: value === 'default' ? {...pricingSubtitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...pricingSubtitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 														})
 													}}
-
-													globalTypoOption={pricingSubtitleGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ pricingSubtitleGlobalTypoOption: value })}
 
 													fontFamily={pricingSubtitleFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ pricingSubtitleFontFamily: value, pricingSubtitleGlobalTypoSwitcher: {...pricingSubtitleGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5048,9 +5028,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
-												globalTypoOption={normalPricingGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ normalPricingGlobalTypoOption: value })}
-
 												fontFamily={normalPricingFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ normalPricingFontFamily: value, normalPricingGlobalTypoSwitcher: {...normalPricingGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5123,9 +5100,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														salePricingGlobalTypoSwitcher: value === 'default' ? {...salePricingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...salePricingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
-
-												globalTypoOption={salePricingGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ salePricingGlobalTypoOption: value })}
 
 												fontFamily={salePricingFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ salePricingFontFamily: value, salePricingGlobalTypoSwitcher: {...salePricingGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5200,9 +5174,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
-												globalTypoOption={priceCurrencyGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ priceCurrencyGlobalTypoOption: value })}
-
 												fontFamily={priceCurrencyFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ priceCurrencyFontFamily: value, priceCurrencyGlobalTypoSwitcher: {...priceCurrencyGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5275,9 +5246,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														pricePeriodGlobalTypoSwitcher: value === 'default' ? {...pricePeriodGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...pricePeriodGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
-
-												globalTypoOption={pricePeriodGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ pricePeriodGlobalTypoOption: value })}
 
 												fontFamily={pricePeriodFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ pricePeriodFontFamily: value, pricePeriodGlobalTypoSwitcher: {...pricePeriodGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5369,9 +5337,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														priceAfterTextGlobalTypoSwitcher: value === 'default' ? {...priceAfterTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...priceAfterTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 													})
 												}}
-
-												globalTypoOption={priceAfterTextGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ priceAfterTextGlobalTypoOption: value })}
 
 												fontFamily={priceAfterTextFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ priceAfterTextFontFamily: value, priceAfterTextGlobalTypoSwitcher: {...priceAfterTextGlobalTypoSwitcher, fontFamily: value && false} })}
@@ -5595,9 +5560,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
-												globalTypoOption={pricingfeatureTitleGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ pricingfeatureTitleGlobalTypoOption: value })}
-
 												fontFamily={pricingfeatureTitleFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ pricingfeatureTitleFontFamily: value, pricingfeatureTitleGlobalTypoSwitcher: {...pricingfeatureTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5780,9 +5742,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													})
 												}}
 
-												globalTypoOption={priceAfterTextGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ priceAfterTextGlobalTypoOption: value })}
-
 												fontFamily={priceFeatureAfterTextFontFamily}
 												onChangeFontFamily={(value) => setAttributes({ priceFeatureAfterTextFontFamily: value, priceFeatureAfterTextGlobalTypoSwitcher: {...priceFeatureAfterTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
@@ -5895,9 +5854,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															priceButtonGlobalTypoSwitcher: value === 'default' ? {...priceButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...priceButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 														})
 													}}
-
-													globalTypoOption={priceButtonGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ priceButtonGlobalTypoOption: value })}
 
 													fontFamily={priceButtonFontFamily}
 													onChangeFontFamily={(value) => setAttributes({ priceButtonFontFamily: value, priceButtonGlobalTypoSwitcher: {...priceButtonGlobalTypoSwitcher, fontFamily: value && false} })}

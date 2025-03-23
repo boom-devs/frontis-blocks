@@ -1570,10 +1570,6 @@ const attributes = {
         type: 'string',
         default: '',
     },
-	containerGlobalCustomCSS : { 
-		type: "string",
-		default: "",
-	},
 };
 
 export default attributes;

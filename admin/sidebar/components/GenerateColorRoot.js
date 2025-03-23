@@ -15,15 +15,9 @@ const generateColorsVariables = (colors, deviceType) => {
     const fileName = path.substring(path.lastIndexOf('/') + 1);
 
     if (fileName === 'post.php') {
-        if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-colors");
-        } else {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-colors");
-        }
+        iframe = document.querySelector('iframe[name="editor-canvas"]');
+        iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+        styleTag = iframeDocument.getElementById("global-colors");
     }
 
     if (!styleTag) {

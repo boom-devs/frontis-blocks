@@ -81,10 +81,6 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
-    reverseDirection: {
-        type: 'boolean',
-        default: false,
-    },
     autoplayDirection: {
         type: 'string',
         default: false,
@@ -578,44 +574,6 @@ const attributes = {
         default: '',
     },
     /** End Box Shadow */
-
-
-    /** Start Overlay */
-    sliderOverlaySwitcher: {
-        type: 'boolean',
-        default: true,
-    },
-    sliderOverlayStartColor: {
-        type: 'string',
-        default: '#FFFFFF',
-    },
-    sliderOverlayEndColor: {
-        type: 'string',
-        default: '#FFFFFF00',
-    },
-    sliderOverlayWidth: {
-        type: 'object',
-        default: {
-            Desktop: '100',
-            Tablet: '100',
-            Mobile: '100',
-        },
-    },
-    sliderOverlayWidthUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        },
-    },
-    /** End Overlay */
-
-
-    marqueeCarouselCustomCSS : {
-        type: "string",
-        default: "",
-    },
     
 };
 

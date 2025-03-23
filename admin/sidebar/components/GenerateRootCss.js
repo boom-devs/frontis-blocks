@@ -37,6 +37,10 @@ const generateCSSVariables = (data, deviceType) => {
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
     const arrayKeys = Object.keys(data);
 
+
+    console.log("data");
+    console.log(data);
+
     // Loop through the data to generate CSS for each tag
     arrayKeys.forEach((key) => {
         if (!data[key]) return;

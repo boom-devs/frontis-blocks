@@ -34,6 +34,12 @@ export default function save({ attributes }) {
         className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
+	// Prepare the formatted counter number for the frontend
+	const formattedCounterNumber = showThousandsSeparator
+		? Number(counterNumberEnd || 0).toLocaleString()
+		: counterNumberEnd || 0;
+
+
 	return (
 		<div {...blockProps}>
 			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>

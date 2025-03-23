@@ -1,0 +1,35 @@
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn {
+  fill: #3c434a;
+  border-radius: 0 6px 6px 0;
+  background-color: #F7F7F7;
+  padding: 6px;
+  border-left: 1px solid #ffffff;
+  height: auto;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:active:not(:disabled) {
+  background-color: #DBEBFC;
+  border-color: #ffffff;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:hover {
+  background-color: #DBEBFC !important;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:hover svg path {
+  fill: #4B9DEF;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn.global-active {
+  background-color: #DBEBFC;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn.global-active svg path {
+  fill: #4B9DEF;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn svg path {
+  fill: #555E72;
+}
+
+.fb-unit-wrapper .fb-reset-button {
+  padding: 0;
+}/*# sourceMappingURL=editor.lazy.css.map */

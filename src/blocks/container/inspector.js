@@ -26,7 +26,6 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_PositionControl from '@Components/position-control';
-import FB_CustomCSSEditor from '@Components/custom-css-editor';
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -159,8 +158,6 @@ const Inspector = (props) => {
 			containerGlobalBoxShadowCssValue,
 			containerGlobalHoverBoxShadowValues,
 			containerGlobalHoverBoxShadowCssValue,
-
-			containerGlobalCustomCSS,
 		},
 
 		setAttributes
@@ -570,9 +567,26 @@ const Inspector = (props) => {
         })
     }
 
+	console.log(attributes);
+
 
 	return (
 		<>
+			{/* <style>
+		{`
+			.editor-styles-wrapper #${p_block_id}.wp-block-frontis-blocks-container {
+				${containerBgNormalBackgroundType === 'gradient' ? `  
+						background: ${
+							containerBgNormalCustomGradientSwitcher && containerBgNormalCustomGradientInputValue 
+								? containerBgNormalCustomGradientInputValue 
+								: containerBgNormalGradientColor || containerBgNormalClassicColor
+					};
+				` : `
+					background: ${containerBgNormalClassicColor};
+				`}
+			}
+		`}
+		</style> */}
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
@@ -856,6 +870,31 @@ const Inspector = (props) => {
 															))}
 														</ButtonGroup>
 													</BaseControl>
+													{/* <div id="fb-setting-alignment"
+														className="fb-advanced-alignment">
+														<FB_ResponsiveControl
+															labelText={__('Wrap', 'frontis-blocks')}
+															device={deviceType}
+														/>
+														<ButtonGroup className="fb-advanced-alignment-group-btn">
+															{WRAP.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() =>
+																		setAttributes({
+																			containerWrap: {
+																				...containerWrap, // Spread the existing values
+																				[deviceType]: item.value, // Update the specific device type
+																			},
+																		})
+																	}
+																	className={`fb-advanced-alignment-single-btn ${containerWrap[deviceType] === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</div> */}
 												</PanelBody>
 											</div>
 										{/* } */}
@@ -1490,16 +1529,6 @@ const Inspector = (props) => {
                                                         setMobileValue={(value) => setAttributes({ containerMobileSwitcher: value })}
                                                     />
                                                 </PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor
-														value={containerGlobalCustomCSS}
-														onChangeValue={(value) => setAttributes({ containerGlobalCustomCSS: value })}
-													/>
-												</PanelBody>
 											</div>
 										</div>
 									</>

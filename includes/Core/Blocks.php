@@ -26,7 +26,7 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
+		add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
 	}
 
 	public function register_blocks()

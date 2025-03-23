@@ -157,35 +157,3 @@ button {
 .editor-post-featured-image__actions {
 	z-index: -1
 }
-
-
-.fb-team-member-main-wrapper {
-	position: relative;
-	overflow: hidden;
-}
-
-.fb-team-member-wrapper {
-	.fb-team-member-item {
-		position: relative;
-		overflow: hidden;
-
-		.fb-team-member-image-wrapper {
-			.fb-team-member-image-overlay {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: 1;
-			}
-
-			img {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-		}
-	}
-}

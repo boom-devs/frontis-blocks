@@ -14,7 +14,6 @@ import { useSelect } from "@wordpress/data";
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -44,8 +43,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         headingGlobalWraperID,
         headingGlobalWraperClass,
 
-        headingBeforeAfterSwitcher,
-
         advancedHeadingDesktopSwitcher,
         advancedHeadingTabletSwitcher,
         advancedHeadingMobileSwitcher,
@@ -54,10 +51,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
-    const deviceType = useDeviceType();
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -124,17 +120,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
             <BlockControls>
                 <AlignmentToolbar
-                    value={headingAlignment[deviceType]}
-                    onChange={(value) => setAttributes({ headingAlignment: { ...headingAlignment, [deviceType]: value } })}
-                    controls={['left', 'center', 'right']}
+                    value={headingAlignment}
+                    onChange={(value) => setAttributes({ headingAlignment: value })}
+                    controls={['left', 'center', 'right', 'justify']}
                 />
             </BlockControls>
 
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} ref={panelRef}>
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{ textAlign: headingAlignment }} ref={panelRef}>
 
                     {headingIconAlign === 'icon' && headingIconSwitcher && (
-                        <div className="fb-advanced-icon-wrapper">
+                        <div className="fb-advanced-icon-wrapper" style={{ justifyContent: headingAlignment }}>
                             <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
                         </div>
                     )}

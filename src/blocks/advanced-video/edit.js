@@ -18,7 +18,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showControlsSwitcher,
         imageOverlaySwitcher,
         previewImageUrl,
-        videoPlayIconSwitcher,
         videoPlayIcon,
 
         videoGlobalWraperID,
@@ -59,7 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     loop={loopSwitcher}
                                     controls={showControlsSwitcher}
                                     light={imageOverlaySwitcher ? previewImageUrl : null}
-									playIcon={videoPlayIconSwitcher ? renderSVG(videoPlayIcon) : null}
+                                    playIcon={renderSVG(videoPlayIcon)}
                                     onClickPreview={() => setAttributes({ autoPlaySwitcher: true })}
                                     width="100%"
                                     height="100%"

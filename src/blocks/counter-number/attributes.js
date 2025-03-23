@@ -3,16 +3,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-
-	counterAlignment: {
-        type: "object",
-        default: {
-            Desktop: "center",
-            Tablet: "center",
-            Mobile: "center",
-        },
-    },
-
 	blockStyle: {
         type: "string",
         default: "",

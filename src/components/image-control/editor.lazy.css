@@ -1,0 +1,95 @@
+.fb-image-control-wrapper .components-base-control__field {
+  display: block;
+  margin-bottom: 0;
+}
+.fb-image-control-wrapper .components-base-control__field .components-base-control__label {
+  font-size: 13px !important;
+  text-transform: capitalize !important;
+  margin-bottom: 8px !important;
+}
+.fb-image-control-wrapper .fb-image-control {
+  background-color: #ccc;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 6px;
+  height: 150px;
+  margin-bottom: 16px;
+  padding: 2px;
+  position: relative;
+  width: 100%;
+}
+.fb-image-control-wrapper .fb-image-control .fb-image-delete {
+  margin: 0 8px !important;
+  padding: 0 !important;
+  position: absolute;
+  right: 0;
+  align-items: center;
+  background: none;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-weight: 400;
+  height: 36px;
+  text-decoration: none;
+  transition: box-shadow 0.1s linear;
+}
+.fb-image-control-wrapper .fb-image-control .fb-image-delete svg {
+  fill: none;
+  filter: drop-shadow(1px 1px 3px rgb(100, 100, 100));
+}
+.fb-image-control-wrapper .fb-image-control .fb-image-replace-btn {
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  background: hsla(0, 0%, 95%, 0.749);
+  border-radius: 0 0 6px 6px;
+  bottom: 0;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  transition: 0.3s;
+  width: 100%;
+  color: #000;
+  font-size: 13px;
+  align-items: center;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 400;
+  height: 36px;
+  margin: 0;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+.fb-image-control-wrapper .fb-image-control .fb-image-replace-btn svg {
+  fill: none;
+}
+.fb-image-control-wrapper .fb-image-upload-btn {
+  background-color: #f2f2f2;
+  background-image: url(transparent-bg-demo.png);
+  border: 1px solid #e9e8eb;
+  border-radius: 6px;
+  height: 130px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 400;
+  margin: 0;
+  text-decoration: none;
+  transition: box-shadow 0.1s linear;
+}
+
+.fb-image-control-setting-wrapper .fb-image-label label {
+  font-size: 13px !important;
+  text-transform: capitalize !important;
+  margin-bottom: 8px !important;
+}/*# sourceMappingURL=editor.lazy.css.map */

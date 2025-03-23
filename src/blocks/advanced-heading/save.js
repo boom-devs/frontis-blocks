@@ -6,6 +6,7 @@ export default function save({ attributes }) {
         blockId,
         headingText, 
         headingTag,
+        headingAlignment,
         subHeadingSwitcher,
         showSeparatorSwitcher,
         subHeadingText,
@@ -21,8 +22,6 @@ export default function save({ attributes }) {
         headingGlobalWraperID,
         headingGlobalWraperClass,
 
-        headingBeforeAfterSwitcher,
-
         advancedHeadingDesktopSwitcher,
         advancedHeadingTabletSwitcher,
         advancedHeadingMobileSwitcher,
@@ -30,17 +29,17 @@ export default function save({ attributes }) {
 
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} >
+                <div className={`fb-parent-wrapper fb-advanced-wrapper ${headingGlobalWraperClass}`} id={headingGlobalWraperID} style={{textAlign: headingAlignment}}>
 
                     {headingIconAlign === 'icon' && headingIconSwitcher && (
-                        <div className="fb-advanced-icon-wrapper">
+                        <div className="fb-advanced-icon-wrapper" style={{justifyContent: headingAlignment}}>
                             <div className="fb-advanced-icon">{renderSVG(headingIcon)}</div>
                         </div>
                     )}

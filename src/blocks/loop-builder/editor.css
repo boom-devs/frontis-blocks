@@ -1,0 +1,74 @@
+.fb-loop-builder-block {
+  margin-bottom: 2em;
+}
+.fb-loop-builder-block .fb-loop-content.layout-flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+.fb-loop-builder-block .fb-loop-content.layout-flex .block-editor-inner-blocks {
+  width: 100%;
+}
+.fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  padding: 0 15px;
+  margin-bottom: 30px;
+  width: calc(33.333% - 30px);
+}
+.columns-1 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(100% - 30px);
+}
+.columns-2 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(50% - 30px);
+}
+.columns-3 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(33.333% - 30px);
+}
+.columns-4 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(25% - 30px);
+}
+.columns-5 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(20% - 30px);
+}
+.columns-6 .fb-loop-builder-block .fb-loop-content.layout-flex .wp-block-post-template > li {
+  width: calc(16.666% - 30px);
+}
+.fb-loop-builder-block .fb-loop-content.layout-list .wp-block-post-template {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fb-loop-builder-block .fb-loop-content.layout-list .wp-block-post-template > li {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+.fb-loop-builder-block .fb-loop-content.layout-list .wp-block-post-template > li:last-child {
+  border-bottom: none;
+}
+.fb-loop-builder-block .fb-loop-builder-placeholder {
+  padding: 40px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border: 1px dashed #ccc;
+}
+.fb-loop-builder-block .fb-inspector-control .fb-parent-tab-panel .components-tab-panel__tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+.fb-loop-builder-block .fb-inspector-control .fb-parent-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item {
+  flex: 1;
+  justify-content: center;
+  font-weight: 500;
+  padding: 8px 12px;
+}
+.fb-loop-builder-block .fb-inspector-control .fb-parent-tab-panel .components-tab-panel__tabs .components-tab-panel__tabs-item.active-tab {
+  border-bottom: 2px solid #007cba;
+}/*# sourceMappingURL=editor.css.map */

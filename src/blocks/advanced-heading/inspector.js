@@ -64,7 +64,6 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 import './editor.scss';
 
@@ -341,10 +340,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingBeforeAfterWidthUnits,
         headingBeforeAfterHeight,
         headingBeforeAfterHeightUnits,
-
-        headingBeforeAfterGap,
-        headingBeforeAfterGapUnits,
-
+        headingBeforeAfterMarginUnits,
+        headingBeforeAfterDesktopMargin,
+        headingBeforeAfterTabletMargin,
+        headingBeforeAfterMobileMargin,
+        headingBeforeAfterMarginLink,
         headingBeforeAfterBorder,
         headingBeforeAfterBorderColor,
         headingBeforeAfterBorderUnits,
@@ -363,8 +363,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     } = attributes;
 
     const deviceType= useDeviceType();
-
-
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -779,6 +777,90 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const headingTabletBorderRadiusWidth = `${headingTabBorderRadius.top}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.right}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.bottom}${headingBorderRadiusUnits.Tablet} ${headingTabBorderRadius.left}${headingBorderRadiusUnits.Tablet}`;
     const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius.top}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.right}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.bottom}${headingBorderRadiusUnits.Mobile} ${headingMobileBorderRadius.left}${headingBorderRadiusUnits.Mobile}`;
     /** End Heading Border Radius */
+
+
+
+
+
+
+
+
+
+    /** Start Before After Margin */
+    const headingBeforeAfterMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (headingBeforeAfterMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        headingBeforeAfterDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        headingBeforeAfterTabletMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        headingBeforeAfterMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ headingBeforeAfterDesktopMargin: { ...headingBeforeAfterDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ headingBeforeAfterTabletMargin: { ...headingBeforeAfterTabletMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ headingBeforeAfterMobileMargin: { ...headingBeforeAfterMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const headingBeforeAfterMarginLinkBtn = () => {
+        setAttributes({
+            headingBeforeAfterMarginLink: !headingBeforeAfterMarginLink
+        });
+    };
+
+    const headingBeforeAfterMarginUnitsHandler = (unit) => {
+        setAttributes({
+            headingBeforeAfterMarginUnits: {
+                ...headingBeforeAfterMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default margin for Heading */
+    const headingBeforeAfterDesktopMarginWidth = `${headingBeforeAfterDesktopMargin.top}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.right}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.bottom}${headingBeforeAfterMarginUnits.Desktop} ${headingBeforeAfterDesktopMargin.left}${headingBeforeAfterMarginUnits.Desktop}`;
+    const headingBeforeAfterTabletMarginWidth = `${headingBeforeAfterTabletMargin.top}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.right}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.bottom}${headingBeforeAfterMarginUnits.Tablet} ${headingBeforeAfterTabletMargin.left}${headingBeforeAfterMarginUnits.Tablet}`;
+    const headingBeforeAfterMobileMarginWidth = `${headingBeforeAfterMobileMargin.top}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.right}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.bottom}${headingBeforeAfterMarginUnits.Mobile} ${headingBeforeAfterMobileMargin.left}${headingBeforeAfterMarginUnits.Mobile}`;
+    /** End Heading Margin */
 
     /** Start Heading Border Radius */
     const headingBeforeAfterBorderUnitsChange = (event, position) => {
@@ -1687,9 +1769,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb-advanced-heading-main-wrapper {
-            ${advancedHeadingPositionType === 'default' ? `position: relative !important;` : ''}
+            ${advancedHeadingPositionType === 'default' ? `position: relative;` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' ? `width: 100%;` : ''}
-            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType} !important;` : ''}
+            ${advancedHeadingPositionType !== 'default' ? `position: ${advancedHeadingPositionType};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'left' && advancedHeadingHZLeftOffset.Desktop ? `left: ${advancedHeadingHZLeftOffset.Desktop}${advancedHeadingHZLeftOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingHZOrientationType === 'right' && advancedHeadingHZRightOffset.Desktop ? `right: ${advancedHeadingHZRightOffset.Desktop}${advancedHeadingHZRightOffsetUnits.Desktop};` : ''}
             ${advancedHeadingPositionType !== 'default' && advancedHeadingPositionType !== 'relative' && advancedHeadingVROrientationType === 'top' && advancedHeadingVRTopOffset.Desktop ? `top: ${advancedHeadingVRTopOffset.Desktop}${advancedHeadingVRTopOffsetUnits.Desktop};` : ''}
@@ -1707,8 +1789,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${globalDesktopBorderRadiusWidth && headingGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
             ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
-
-            ${headingAlignment.Desktop ? `text-align: ${headingAlignment.Desktop};` : ''}
             transition: all .3s ease-in-out;
             position: relative;
         }
@@ -1779,13 +1859,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             display: flex;
             align-items: center;
             justify-content: center;
-            ${headingBeforeAfterGap.Desktop ? `gap: ${headingBeforeAfterGap.Desktop}${headingBeforeAfterGapUnits.Desktop};` : ''}
         }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
             content: '';
             ${headingBeforeAfterWidth.Desktop ? `width: ${headingBeforeAfterWidth.Desktop}${headingBeforeAfterWidthUnits.Desktop};` : 'flex-grow: 1;'}
             ${headingBeforeAfterHeight.Desktop ? `height: ${headingBeforeAfterHeight.Desktop}${headingBeforeAfterHeightUnits.Desktop};` : ''}
+            ${headingBeforeAfterDesktopMarginWidth && headingBeforeAfterDesktopMargin.top ? `margin: ${headingBeforeAfterDesktopMarginWidth};` : ''}
             ${headingBeforeAfterBorder ? `border: ${headingBeforeAfterBorder};` : ''}
             ${headingBeforeAfterDesktopBorderWidth && headingBeforeAfterDesktopBorder.top ? `border-width: ${headingBeforeAfterDesktopBorderWidth};` : ''}
             ${headingBeforeAfterDesktopBorderRadiusWidth && headingBeforeAfterDesktopBorderRadius.top ? `border-radius: ${headingBeforeAfterDesktopBorderRadiusWidth};` : ''}
@@ -1840,10 +1920,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
         }
 
-        .${blockId} .fb-advanced-icon-wrapper {
-            ${headingAlignment.Desktop ? `justify-content: ${headingAlignment.Desktop};` : ''}   
-        }
-
         .${blockId} .fb-advanced-icon {
             ${headingIconBgSize.Desktop ? `width: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
             ${headingIconBgSize.Desktop ? `height: ${headingIconBgSize.Desktop}${headingIconBgSizeUnits.Desktop};` : ''}
@@ -1884,9 +1960,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}`
                 : ''}
         }
-        .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator:hover {
-            ${separatorHoverColor ? `border-top-color: ${separatorHoverColor};` : ''}
-        }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
             ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
             ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
@@ -1916,7 +1989,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-                ${headingAlignment.Tablet ? `text-align: ${headingAlignment.Tablet};` : ''}
             }
 
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -1942,13 +2014,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
-                ${headingBeforeAfterGap.Tablet ? `gap: ${headingBeforeAfterGap.Tablet}${headingBeforeAfterGapUnits.Tablet};` : ''}
-            }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
                 ${headingBeforeAfterWidth.Tablet ? `width: ${headingBeforeAfterWidth.Tablet}${headingBeforeAfterWidthUnits.Tablet};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Tablet ? `height: ${headingBeforeAfterHeight.Tablet}${headingBeforeAfterHeightUnits.Tablet};` : ''}
+                ${headingBeforeAfterTabletMarginWidth && headingBeforeAfterTabletMargin.top ? `margin: ${headingBeforeAfterTabletMarginWidth};` : ''}
                 ${headingBeforeAfterTabletBorderWidth && headingBeforeAfterTabletBorder.top ? `border-width: ${headingBeforeAfterTabletBorderWidth};` : ''}
                 ${headingBeforeAfterTabletBorderRadiusWidth && headingBeforeAfterTabletBorderRadius.top ? `border-radius: ${headingBeforeAfterTabletBorderRadiusWidth};` : ''}
             }
@@ -1974,11 +2044,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${subHeadingTextStroke.Tablet ? `text-stroke: ${subHeadingTextStroke.Tablet}px ${subHeadingTextStrokeHoverColor};` : ''}
                 ` : ''}
             }
-
-            .${blockId} .fb-advanced-icon-wrapper {
-                ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}   
-            }
-
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Tablet ? `width: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
                 ${headingIconBgSize.Tablet ? `height: ${headingIconBgSize.Tablet}${headingIconBgSizeUnits.Tablet};` : ''}
@@ -2055,21 +2120,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
-                .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
-                    ${headingBeforeAfterGap.Mobile ? `gap: ${headingBeforeAfterGap.Mobile}${headingBeforeAfterGapUnits.Mobile};` : ''}
-                }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
                 ${headingBeforeAfterWidth.Mobile ? `width: ${headingBeforeAfterWidth.Mobile}${headingBeforeAfterWidthUnits.Mobile};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Mobile ? `height: ${headingBeforeAfterHeight.Mobile}${headingBeforeAfterHeightUnits.Mobile};` : ''}
+                ${headingBeforeAfterMobileMarginWidth && headingBeforeAfterMobileMargin.top ? `margin: ${headingBeforeAfterMobileMarginWidth};` : ''}
                 ${headingBeforeAfterMobileBorderWidth && headingBeforeAfterMobileBorder.top ? `border-width: ${headingBeforeAfterMobileBorderWidth};` : ''}
                 ${headingBeforeAfterMobileBorderRadiusWidth && headingBeforeAfterMobileBorderRadius.top ? `border-radius: ${headingBeforeAfterMobileBorderRadiusWidth};` : ''}
             }
             ` : ''}
-
-            .${blockId} .fb-advanced-icon-wrapper {
-                ${headingAlignment.Mobile ? `justify-content: ${headingAlignment.Mobile};` : ''}   
-            }
 
             .${blockId} .fb-advanced-icon {
                 ${headingIconBgSize.Mobile ? `width: ${headingIconBgSize.Mobile}${headingIconBgSizeUnits.Mobile};` : ''}
@@ -2108,9 +2167,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-                ${headingAlignment.Mobile ? `text-align: ${headingAlignment.Mobile};` : ''}
             }
-
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
                 ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
@@ -2224,7 +2281,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     separatorHeight,
     separatorHeightUnits,
     separatorColor,
-    separatorHoverColor,
     separatorPosition,
     separatorSpacing,
     separatorSpacingUnits,
@@ -2290,8 +2346,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBeforeAfterHeight,
     headingBeforeAfterHeightUnits,
 
-    headingBeforeAfterGap,
-    headingBeforeAfterGapUnits,
+    headingBeforeAfterMarginUnits,
+    headingBeforeAfterDesktopMargin,
+    headingBeforeAfterTabletMargin,
+    headingBeforeAfterMobileMargin,
+    headingBeforeAfterMarginLink,
+    headingBeforeAfterDesktopMarginWidth,
+    headingBeforeAfterTabletMarginWidth,
+    headingBeforeAfterMobileMarginWidth,
 
     headingBeforeAfterBorder,
     headingBeforeAfterBorderColor,
@@ -2391,12 +2453,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     />
                                                 </BaseControl>
 
-                                                <FB_ResponsiveAlignmentControl
+                                                <FB_AlignmentControl
                                                     label={__("Alignment", "frontis-blocks")}
                                                     globalAlignment={headingAlignment}
                                                     setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
-                                                    deviceType={deviceType}
-                                                    setAttributes={setAttributes}
                                                 />
                                             </PanelBody>
                                             <PanelBody
@@ -3009,21 +3069,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         rangeStep={1}
                                                         resetFallbackValue={""}
                                                     />
-
-                                                    <FB_Range
-                                                        min={1}
-                                                        max={100}
-                                                        label={__("Gap", "frontis-blocks")}
-                                                        rangeValue={headingBeforeAfterGap}
-                                                        onChangeHandler={(value) => setAttributes({ headingBeforeAfterGap: value })}
-                                                        rangeUnitHandler={(value) => setAttributes({ headingBeforeAfterGapUnits: value })}
+                                                    <FB_Spacing
+                                                        label={__("Margin", "frontis-blocks")}
                                                         deviceType={deviceType}
-                                                        units={headingBeforeAfterGapUnits}
+                                                        spacingUnitsHandler={headingBeforeAfterMarginUnitsHandler}
+                                                        spacingUnits={headingBeforeAfterMarginUnits}
+                                                        spacingDesktop={headingBeforeAfterDesktopMargin}
+                                                        spacingTablet={headingBeforeAfterTabletMargin}
+                                                        spacingMobile={headingBeforeAfterMobileMargin}
+                                                        handleSpacingUnitHandler={headingBeforeAfterMarginUnitsChange}
+                                                        spacingCombineBtn={headingBeforeAfterMarginLink}
+                                                        spacingCombineBtnHandler={headingBeforeAfterMarginLinkBtn}
                                                         setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
                                                     />
-                                                    
+
+
                                                     <SelectControl
                                                         label={__("Border Style", "frontis-blocks")}
                                                         value={headingBeforeAfterBorder}

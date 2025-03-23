@@ -229,10 +229,6 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
-	pricingTopSectionTextGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
 	pricingTopSectionTextFontFamily: {
 		type: 'string',
 		default: "Default",
@@ -874,10 +870,6 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
-	normalPricingGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
 	normalPricingFontFamily: {
         type: "string",
         default: "Default",
@@ -979,10 +971,6 @@ const attributes = {
 	salePricingGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	salePricingGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	salePricingFontFamily: {
         type: "string",
@@ -1086,10 +1074,6 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
-	priceCurrencyGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
 	priceCurrencyFontFamily: {
 		type: 'string',
 		default: 'Default'
@@ -1191,10 +1175,6 @@ const attributes = {
 	pricePeriodGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	pricePeriodGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	pricePeriodFontFamily: {
 		type: "string",
@@ -1359,10 +1339,6 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
-	pricingTitleGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
 	pricingTitleFontFamily: {
 		type: "string",
 		default: "Default",
@@ -1464,10 +1440,6 @@ const attributes = {
 	pricingSubtitleGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	pricingSubtitleGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	pricingSubtitleFontFamily: {
 		type: "string",
@@ -1607,10 +1579,6 @@ const attributes = {
 	pricingfeatureTitleGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	pricingfeatureTitleGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	pricingfeatureTitleFontFamily: {
 		type: "string",
@@ -1958,10 +1926,6 @@ const attributes = {
 	priceButtonGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	priceButtonGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	priceButtonFontFamily: {
 		type: "string",
@@ -2713,10 +2677,6 @@ const attributes = {
 		type: "string",
 		default: 'default',
 	},
-	priceAfterTextGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
 	priceAfterTextFontFamily: {
 		type: "string",
 		default: "Default",
@@ -3028,10 +2988,6 @@ const attributes = {
 	priceFeatureAfterTextGlobalTypoType: {
 		type: "string",
 		default: 'default',
-	},
-	priceFeatureAfterTextGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
 	},
 	priceFeatureAfterTextFontFamily: {
 		type: "string",
