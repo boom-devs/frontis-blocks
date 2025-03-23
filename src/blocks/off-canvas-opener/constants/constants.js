@@ -28,6 +28,15 @@ export const OVERFLOW_OP = [
     { label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
+export const ANIMATION = [
+    { value: '', label: __('None', 'frontis-blocks') },
+    { value: 'fade', label: __('Fade', 'frontis-blocks') },
+    { value: 'slide', label: __('Slide', 'frontis-blocks') },
+    { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
+    { value: 'flip', label: __('Flip', 'frontis-blocks') },
+    { value: 'elastic', label: __('Elastic', 'frontis-blocks') },
+];
+
 export const SELECT_SEPARATOR_TYPE = [
 	{ label: "Colon", value: "colon" },
 	{ label: "Line", value: "line" },
