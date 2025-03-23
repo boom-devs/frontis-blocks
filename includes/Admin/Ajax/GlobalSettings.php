@@ -36,6 +36,7 @@ class GlobalSettings extends AjaxBase
             'update_custom_typography',
             'update_globaltypo',
             'update_fontfamilies',
+            'updated_global_asset',
             'get_global_colors',
             'get_gradient_colors',
             'get_custom_colors',
@@ -90,6 +91,13 @@ class GlobalSettings extends AjaxBase
     public function update_fontfamilies()
     {
         $this->handle_option_update('fontfamilies', 'array');
+    }
+
+    public function updated_global_asset()
+    {
+        $this->validate_nonce();
+        $this->validate_permissions();
+        update_option('fb_global_asset_updated', true);
     }
 
     public function get_global_colors()
