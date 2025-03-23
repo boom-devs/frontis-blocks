@@ -13,11 +13,7 @@ import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import {
-	BORDER_STYLES,
-	LAYOUT_ALIGNMENT,
-	LAYOUT_TYPE,
-	OVERFLOW_OP,
-	PRESETS,
+	ANIMATION
 } from "./constants/constants";
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
@@ -28,6 +24,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		selectedTemplate,
 		menuPosition,
 		iconStyle,
+		animation
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -196,6 +193,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												value={iconStyle || 'hamburger'}
 												options={iconOptions}
 												onChange={(value) => setAttributes({ iconStyle: value })}
+											/>
+											<SelectControl
+												label={__("Animation", "frontis-blocks")}
+												value={animation}
+												options={ANIMATION}
+												onChange={(value) => setAttributes({ animation: value })}
 											/>
 										</PanelBody>
 									</>
