@@ -34,4 +34,3 @@ function wm_frontis_blocks(){
 }
 
 wm_frontis_blocks();
-echo " hello";
