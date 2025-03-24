@@ -383,7 +383,6 @@ class AssetsGenerator {
         $this->generate_global_assets();
         $this->combine_static_assets();
         $this->generate_all_blocks_assets();
-
         $this->get_font_families();
     }
 
@@ -412,12 +411,14 @@ class AssetsGenerator {
             $block_attributes               = $block['attrs'];
             $blockStyle                     = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
 
-            $fonts        = $this->get_fonts_family( $block_attributes );
-            if(!empty($fonts)) {
+            $fonts        = Helper::get_fonts_family( $block_attributes );
 
-                foreach($fonts as $font) {
-                    if(!in_array($font, $this->block_fonts)) {
-                        $this->block_fonts[$font] = $font;
+            if(!empty($fonts)) {
+                foreach($fonts as $font => $weight) {
+                    if(array_key_exists($font, $this->block_fonts)) {
+                        $this->block_fonts[$font][] = $weight;
+                    } else {
+                        $this->block_fonts[$font][] = $weight;
                     }
                 }
             }
@@ -425,22 +426,6 @@ class AssetsGenerator {
             $this->css_content .= $blockStyle . "\n";
         }
     }
-
-    /**
-	 * Generate Font family from Attributes
-	 *
-	 * @since 4.0.0
-	 * @access public
-	 */
-	public function get_fonts_family( $attributes )
-	{
-		$keys             = preg_grep( '/^(\w+)FontFamily/i', array_keys( $attributes ), 0 );
-		$googleFontFamily = [  ];
-		foreach ( $keys as $key ) {
-			$googleFontFamily[ $attributes[ $key ] ] = $attributes[ $key ];
-		}
-		return $googleFontFamily;
-	}
 
     public function generate_all_blocks_assets() {
         $post_content = $this->post->post_content;
@@ -491,33 +476,41 @@ class AssetsGenerator {
     }
 
     public function get_font_families() {
-        $google_fonts = get_option('fb_fontfamilies');
 
-        if(!empty($google_fonts)) {
-            foreach ($google_fonts as $key => $value) {
-                // unique fonts family
-                if(is_array($value)) {
-                    foreach($value as $font) {
-                        if(!in_array($font, $this->gfonts)) {
-                            $this->gfonts[$font] = $font;
-                        }
-                    }
+        $custom_typography = get_option('fb_custom_typography');
+        $typography_data = get_option('fb_typography');
+
+        $custom_fonts = Helper::extract_font_families($custom_typography);
+        $typography_fonts = Helper::extract_font_families($typography_data);
+
+        $fonts_families = array_merge($custom_fonts, $typography_fonts);
+
+        if(!empty($fonts_families)) {
+            foreach ($fonts_families as $key => $values) {
+                $fonts_families[$key] = array_values(array_unique($values));
+            }
+        }
+
+        $fonts_families = array_merge($fonts_families, $this->block_fonts);
+
+        if (!empty($fonts_families)) {
+            $font_url = "https://fonts.googleapis.com/css?family=";
+            $font_parts = [];
+        
+            foreach ($fonts_families as $font => $weight) {
+
+                if($font === 'Default' || $font === 'default') {
+                    continue;
+                }
+
+                if (is_array($weight)) {
+                    $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $weight);
                 } else {
-                    if(!in_array($value, $this->gfonts)) {
-                        $this->gfonts[$value] = $value;
-                    }
+                    $font_parts[] = str_replace(' ', '+', $font) . ":{$weight}";
                 }
             }
-
-            if(!empty($this->block_fonts)) {
-                $this->gfonts = array_merge($this->gfonts, $this->block_fonts);
-            }
-
-            $font_url = "https://fonts.googleapis.com/css?family=";
-            $font_url .= implode("|", array_map(function($font) {
-                return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
-            }, $this->gfonts));
-
+        
+            $font_url .= implode("|", $font_parts);
             update_option('fb_google_fonts_url', $font_url);
         }
     }

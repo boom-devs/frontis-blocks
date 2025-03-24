@@ -409,6 +409,63 @@ class Helper
         }
     }
 
+        /**
+     * Generate Font family from Blocks Attributes
+     *
+     * @since 4.0.0
+     * @access public
+     */
+    public static function get_fonts_family( $attributes )
+	{
+        $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
+        $font_weight_keys = preg_grep('/^(\w+)FontWeight/i', array_keys($attributes), 0);
+
+        $font_data = [];
+
+        foreach ($font_family_keys as $key) {
+            $prefix = preg_replace('/FontFamily$/', '', $key); // Extract the prefix (e.g., 'heading', 'body')
+
+            // Find the corresponding font weight key
+            $weight_key = $prefix . 'FontWeight';
+            $font_family = $attributes[$key] ?? '';
+            $font_weight = $attributes[$weight_key] ?? '';
+
+            if (!empty($font_family) && !isset($font_data[$font_family])) {
+                $font_data[$font_family] = $font_weight;
+            }
+        }
+
+        return $font_data;
+	}
+
+    // Get font families from global settings
+    public static function extract_font_families($data) {
+        $fontFamilies = array();
+    
+        // Convert the array to a string representation
+        $dataString = var_export($data, true);
+        
+        // Pattern to match fontFamily and fontWeight pairs
+        $pattern = '/\'fontFamily\'\s*=>\s*\'([^\']*)\',(?:.*?)\'fontWeight\'\s*=>\s*\'([^\']*)\'/s';
+        
+        // Perform the regex matching
+        preg_match_all($pattern, $dataString, $matches, PREG_SET_ORDER);
+        
+        // Process matches
+        foreach ($matches as $match) {
+            $fontFamily = $match[1];
+            $fontWeight = $match[2];
+
+            if(array_key_exists($fontFamily, $fontFamilies)) {
+                $fontFamilies[$fontFamily][] = $fontWeight;
+            } else {
+                $fontFamilies[$fontFamily][] = $fontWeight;
+            }
+        }
+        
+        return $fontFamilies;
+    }
+
     public static function get_css_files($dir) {
 		$cssFiles = [];
 		$files = scandir($dir);
