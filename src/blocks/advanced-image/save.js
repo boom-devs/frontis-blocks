@@ -1,107 +1,3 @@
-// import { useBlockProps, RichText } from '@wordpress/block-editor';
-
-// export default function save({ attributes }) {
-// 	const {
-// 		blockID,
-// 		advancedImageUrl,
-// 		advancedImageAlt,
-// 		linkSwitch,
-// 		linkTargetUrl,
-// 		linkUrl,
-// 		imageCaption,
-// 		displayCaption,
-// 		imageStyle,
-// 		imageSize,
-// 		imageHover,
-// 		imageFit,
-// 		titleText,
-// 		titleTag,
-// 		displayTitle,
-// 		titlePosition,
-// 		advancedImageGlobalWraperID,
-// 		advancedImageGlobalWraperClass,
-// 		advancedImageDesktopSwitcher,
-//         advancedImageTabletSwitcher,
-//         advancedImageMobileSwitcher,
-// 		advancedImageLazyLoadSwitcher,
-
-// 		smartLazyLoadImageUrl,
-// 	} = attributes;
-
-// 	const blockProps = useBlockProps.save({
-//         className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
-//     });
-
-
-// 	return (
-// 		<>
-			
-// 			<div {...blockProps}>
-// 				<div className={`fb-parent-wrapper fb-advanced-image-wrapper data-lazy-load-${advancedImageLazyLoadSwitcher ? 'true' : 'false'} ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
-// 					<div className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
-// 						<div className="fb-advanced-image-inner">
-// 							{advancedImageUrl ? (
-// 								linkSwitch ? (
-// 									<a
-// 										href={linkUrl}
-// 										target={linkTargetUrl ? '_blank' : undefined}
-// 										rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
-// 									>
-// 										<img
-// 											data-src={advancedImageUrl}
-// 											src={smartLazyLoadImageUrl}
-// 											alt={advancedImageAlt}
-// 											onLoad={(e) => {
-// 												window.addEventListener('load', () => {
-// 													e.target.src = e.target.getAttribute('data-src');
-// 													e.target.removeAttribute('data-src');
-// 												});
-// 											}}
-// 										/>
-// 									</a>
-// 								) : (
-// 									<img
-// 										data-src={advancedImageUrl}
-// 										src={smartLazyLoadImageUrl}
-// 										alt={advancedImageAlt}
-// 										onLoad={(e) => {
-// 											window.addEventListener('load', () => {
-// 												e.target.src = e.target.getAttribute('data-src');
-// 												e.target.removeAttribute('data-src');
-// 											});
-// 										}}
-// 									/>
-// 								)
-// 							) : null}
-// 						</div>
-
-// 						{displayTitle && titleText && (
-// 							<div className="fb-advanced-image-title">
-// 								<div className="fb-advanced-image-title-inner">
-// 								<RichText.Content
-// 									tagName={titleTag}
-// 									value={titleText}
-// 									className="fb-advanced-title"
-// 								/>
-// 								</div>
-// 							</div>
-// 						)}
-// 						{displayCaption && imageCaption && (
-// 							<div className="fb-advanced-image-caption">
-// 								<RichText.Content
-// 									tagName="figcaption"
-// 									value={imageCaption}
-// 								/>
-// 							</div>
-// 						)}
-// 					</div>
-// 				</div>
-// 			</div>
-// 		</>
-// 	);
-// }
-
-
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
@@ -139,22 +35,48 @@ export default function save({ attributes }) {
         className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
-	// Updated script to handle both src and srcSet attributes
-	const lazyLoadScript = `
-        window.addEventListener('load', function() {
-            const lazyImages = document.querySelectorAll('img[data-src]');
-            lazyImages.forEach(function(img) {
-                img.src = img.getAttribute('data-src');
-                
-                // Also handle srcSet if available
-                if (img.hasAttribute('data-srcset')) {
-                    img.srcset = img.getAttribute('data-srcset');
-                    img.removeAttribute('data-srcset');
-                }
-                
-                img.removeAttribute('data-src');
+
+    // Enhanced lazy load script with IntersectionObserver for better performance
+    const lazyLoadScript = `
+    (function() {
+        // Modern browsers with IntersectionObserver
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                            img.removeAttribute('data-srcset');
+                        }
+                        observer.unobserve(img);
+                    }
+                });
             });
-        });
+            
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                observer.observe(img);
+            });
+        } else {
+            // Fallback for older browsers
+            window.addEventListener('load', function() {
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    if (img.dataset.srcset) {
+                        img.srcset = img.dataset.srcset;
+                        img.removeAttribute('data-srcset');
+                    }
+                });
+            });
+        }
+    })();
     `;
 
     // Function to render the image with proper attributes
@@ -167,6 +89,10 @@ export default function save({ attributes }) {
             src: (smartLazyLoadSwitcher && smartLazyLoadImageUrl) ? smartLazyLoadImageUrl : advancedImageUrl,
             alt: advancedImageAlt || '',
         };
+
+        if (advancedImageLazyLoadSwitcher) {
+            imgAttributes.loading = 'lazy';
+        }
         
         // Only add srcSet attributes if we have advancedImageSrcSet
         if (advancedImageSrcSet) {
@@ -200,7 +126,7 @@ export default function save({ attributes }) {
                     className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`}
                     id={advancedImageGlobalWraperID}
                 >
-                    <div className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
+                    <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${imageFit || ''} ${titlePosition || ''}`}>
                         <div className="fb-advanced-image-inner">
                             {advancedImageUrl ? AdvancedImageRender() : null}
                         </div>
@@ -227,7 +153,9 @@ export default function save({ attributes }) {
                     </div>
                 </div>
             </div>
-            <script dangerouslySetInnerHTML={{ __html: lazyLoadScript }} />
+            { smartLazyLoadSwitcher && (
+                <script dangerouslySetInnerHTML={{ __html: lazyLoadScript }} />
+            )}
         </>
     );
 }
