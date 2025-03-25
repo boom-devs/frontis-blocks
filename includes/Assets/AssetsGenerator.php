@@ -14,6 +14,7 @@ class AssetsGenerator {
     private $js_content = '';
     private $gfonts = [];
     private $block_fonts = [];
+    private $wp_template_css_content = '';
 
     public static function generate_root_css($color_data, $typography_data) {
         
@@ -381,14 +382,10 @@ class AssetsGenerator {
         $used_wp_template = get_post_meta($this->post_id, '_wp_page_template', true);
 
         if($used_wp_template) {
-            //wp-custom-template-testing-custom-template
-            $template_css = '';
-
             $upload_dir = wp_upload_dir();
-
             $wp_template_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-            
             $wp_tempalte_css_file = $wp_template_dir . '/'.$used_wp_template.'/'.$used_wp_template.'.css';
+
             if (file_exists($wp_tempalte_css_file)) {
                 $this->css_content .= file_get_contents($wp_tempalte_css_file) . "\n";
             }
@@ -402,12 +399,12 @@ class AssetsGenerator {
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
             $this->generate_global_assets();
             $this->combine_static_assets();
+            $this->get_template_css();
         }
 
         $this->generate_all_blocks_assets();
 
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
-            $this->get_template_css();
             $this->get_font_families();
         }
     }
@@ -415,21 +412,18 @@ class AssetsGenerator {
     public function generate_block_assets($block) {
         if (str_contains($block['blockName'], 'frontis-blocks')) {
             $single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
+            if(!in_array($block['blockName'], $this->used_blocks)) {
 
-            if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
-                if(!in_array($block['blockName'], $this->used_blocks)) {
+                // Css file
+                $block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
+                if(file_exists($block_static_css_file_path)) {
+                    $this->css_content .= file_get_contents($block_static_css_file_path) . "\n";
+                }
 
-                    // Css file
-                    $block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
-                    if(file_exists($block_static_css_file_path)) {
-                        $this->css_content .= file_get_contents($block_static_css_file_path) . "\n";
-                    }
-
-                    // Js file
-                    $block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
-                    if(file_exists($block_static_js_file_path)) {
-                        $this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
-                    }
+                // Js file
+                $block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
+                if(file_exists($block_static_js_file_path)) {
+                    $this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
                 }
             }
 
