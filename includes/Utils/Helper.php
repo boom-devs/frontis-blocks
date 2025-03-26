@@ -363,30 +363,143 @@ class Helper
     public static function load_google_font($fonts)
     {
         if (is_array($fonts) && !empty($fonts)) {
-            $gfonts = '';
-            $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
-            foreach ($fonts as $font) {
-                $gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
-            }
 
-            if (!empty($gfonts)) {
-                $query_args = [
-                    'family' => $gfonts
-                ];
-                wp_register_style(
-                    'frontis-blocks-fonts',
-                    add_query_arg($query_args, '//fonts.googleapis.com/css'),
-                    [],
-                    FB_VERSION
-                );
+            $font_url = "https://fonts.googleapis.com/css?family=";
+            $font_url .= implode("|", array_map(function($font) {
+                return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
+            }, $fonts));
 
-                wp_enqueue_style('frontis-blocks-fonts');
-            }
-
+            echo $font_url;
+            // $gfonts = '';
+            // $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
+            
+            // foreach ($fonts as $font) {
+            //     $gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
+            // }
+            
+            // $gfonts = rtrim($gfonts, '|');
+            
+            // if (!empty($gfonts)) {
+            //     $query_args = [
+            //         'family' => $gfonts,
+            //         'display' => 'swap'
+            //     ];
+                
+            //     wp_enqueue_style(
+            //         'frontis-blocks-preconnect',
+            //         'https://fonts.googleapis.com',
+            //         [],
+            //         null
+            //     );
+                
+            //     wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
+                
+            //     wp_register_style(
+            //         'frontis-blocks-fonts',
+            //         add_query_arg($query_args, 'https://fonts.googleapis.com/css2'),
+            //         [],
+            //         FB_VERSION
+            //     );
+                
+            //     wp_enqueue_style('frontis-blocks-fonts');
+            // }
+            
             // Reset.
             $gfonts = '';
         }
     }
+
+        /**
+     * Generate Font family from Blocks Attributes
+     *
+     * @since 4.0.0
+     * @access public
+     */
+    public static function get_fonts_family( $attributes )
+	{
+        $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
+        $font_weight_keys = preg_grep('/^(\w+)FontWeight/i', array_keys($attributes), 0);
+
+        $font_data = [];
+
+        foreach ($font_family_keys as $key) {
+            $prefix = preg_replace('/FontFamily$/', '', $key); // Extract the prefix (e.g., 'heading', 'body')
+
+            // Find the corresponding font weight key
+            $weight_key = $prefix . 'FontWeight';
+            $font_family = $attributes[$key] ?? '';
+            $font_weight = $attributes[$weight_key] ?? '';
+
+            if (!empty($font_family) && !isset($font_data[$font_family])) {
+                $font_data[$font_family] = $font_weight;
+            }
+        }
+
+        return $font_data;
+	}
+
+    // Get font families from global settings
+    public static function extract_font_families($data) {
+        $fontFamilies = array();
+    
+        // Convert the array to a string representation
+        $dataString = var_export($data, true);
+        
+        // Pattern to match fontFamily and fontWeight pairs
+        $pattern = '/\'fontFamily\'\s*=>\s*\'([^\']*)\',(?:.*?)\'fontWeight\'\s*=>\s*\'([^\']*)\'/s';
+        
+        // Perform the regex matching
+        preg_match_all($pattern, $dataString, $matches, PREG_SET_ORDER);
+        
+        // Process matches
+        foreach ($matches as $match) {
+            $fontFamily = $match[1];
+            $fontWeight = $match[2];
+
+            if(array_key_exists($fontFamily, $fontFamilies)) {
+                $fontFamilies[$fontFamily][] = $fontWeight;
+            } else {
+                $fontFamilies[$fontFamily][] = $fontWeight;
+            }
+        }
+        
+        return $fontFamilies;
+    }
+
+    public static function get_css_files($dir) {
+		$cssFiles = [];
+		$files = scandir($dir);
+		foreach ($files as $file) {
+			if ($file == '.' || $file == '..') continue;
+			
+			$path = $dir . '/' . $file;
+			if (is_dir($path)) {
+				// Recursively scan subdirectories
+				$cssFiles = array_merge($cssFiles, self::get_css_files($path));
+			} else if (pathinfo($path, PATHINFO_EXTENSION) == 'css') {
+				$cssFiles[] = $path;
+			}
+		}
+		
+		return $cssFiles;
+	}
+
+    public static function get_js_files($dir) {
+		$jsFiles = [];
+		$files = scandir($dir);
+		foreach ($files as $file) {
+			if ($file == '.' || $file == '..') continue;    
+			
+			$path = $dir . '/' . $file;
+			if (is_dir($path)) {
+				$jsFiles = array_merge($jsFiles, self::get_js_files($path));
+			} else if (pathinfo($path, PATHINFO_EXTENSION) == 'js') {
+				$jsFiles[] = $path;
+			}
+		}   
+
+		return $jsFiles;
+	}
 
 
     public static function get_blocks_inside_template($block_name)
@@ -404,11 +517,11 @@ class Helper
         return false;
     }
 
-    /**
-     * Processes a URL string and replaces dynamic placeholders based on block context
-     * 
-     * @param string $url The URL string that might contain placeholders
-     * @return string The processed URL
-     */
+    public static function create_value_with_unit($value, $unit) {
+        return $value . $unit;
+    }
     
 }
+
+
+https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap
