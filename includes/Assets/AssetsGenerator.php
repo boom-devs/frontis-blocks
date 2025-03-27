@@ -377,19 +377,48 @@ class AssetsGenerator {
 		}
     }
 
+    public function generate_wp_template_css($post_content) {
+        $blocks = parse_blocks($post_content);
+        $this->get_inner_blocks($blocks);
+    }
+
     public function get_template_css() {
 
-        $used_wp_template = get_post_meta($this->post_id, '_wp_page_template', true);
+        global $wpdb;
+        $query = $wpdb->prepare(
+            "SELECT 
+                ID,
+                post_type,
+                post_content 
+            FROM 
+                {$wpdb->posts} 
+            WHERE 
+                post_type IN ('wp_template_part', 'wp_template') 
+                AND post_status = 'publish' 
+            ORDER BY 
+                post_modified DESC"
+        );
 
-        if($used_wp_template) {
-            $upload_dir = wp_upload_dir();
-            $wp_template_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-            $wp_tempalte_css_file = $wp_template_dir . '/'.$used_wp_template.'/'.$used_wp_template.'.css';
+        // Execute the query
+        $template_contents = $wpdb->get_results($query);
 
-            if (file_exists($wp_tempalte_css_file)) {
-                $this->css_content .= file_get_contents($wp_tempalte_css_file) . "\n";
+        if ($template_contents) {
+            foreach ($template_contents as $template) {
+               $this->generate_wp_template_css($template->post_content);
             }
         }
+
+        // $used_wp_template = get_post_meta($this->post_id, '_wp_page_template', true);
+
+        // if($used_wp_template) {
+        //     $upload_dir = wp_upload_dir();
+        //     $wp_template_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+        //     $wp_tempalte_css_file = $wp_template_dir . '/'.$used_wp_template.'/'.$used_wp_template.'.css';
+
+        //     if (file_exists($wp_tempalte_css_file)) {
+        //         $this->css_content .= file_get_contents($wp_tempalte_css_file) . "\n";
+        //     }
+        // }
     }
 
     public function generate_page_assets($post_id, $post) {
@@ -400,11 +429,7 @@ class AssetsGenerator {
             $this->generate_global_assets();
             $this->combine_static_assets();
             $this->get_template_css();
-        }
-
-        $this->generate_all_blocks_assets();
-
-        if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
+            $this->generate_all_blocks_assets();
             $this->get_font_families();
         }
     }
@@ -481,11 +506,9 @@ class AssetsGenerator {
         }
         
         // Add global css
-        if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
-            $global_css_file = $global_css_dir . '/global/global.css';
-            if(file_exists($global_css_file)) {
-                $this->css_content .= file_get_contents($global_css_file) . "\n";
-            }
+        $global_css_file = $global_css_dir . '/global/global.css';
+        if(file_exists($global_css_file)) {
+            $this->css_content .= file_get_contents($global_css_file) . "\n";
         }
 
         // Css file

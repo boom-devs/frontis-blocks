@@ -162,7 +162,9 @@ class Blocks
 	}
 
 	public function get_blocks_on_save($post_id, $post, $update) {
-		AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+		if($update){
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+		}
 	}
 
 	private function add_wrapper_class($block_content, $parsed_block)
