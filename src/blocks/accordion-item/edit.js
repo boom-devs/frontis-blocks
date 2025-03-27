@@ -95,8 +95,6 @@ const Edit = (props) => {
         }
     };
 
-
-
     return (
         <>
             {isSelected && <Inspector {...props} />}

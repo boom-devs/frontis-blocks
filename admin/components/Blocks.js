@@ -4,7 +4,7 @@ import BlockCard from './BlockCard';
 import { toast } from 'react-toastify';
 import { All, Content, Creative } from '../icons';
 
-import '../../assets/css/switch.css';
+import '../../assets/css/backend/switch.css';
 
 // Add this mapping object after the imports
 const categoryIcons = {
