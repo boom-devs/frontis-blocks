@@ -989,7 +989,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                                 value={speed}
                                                 onChange={(value) => setAttributes({ speed: value })}
                                                 min={100}
-                                                max={10000}
+                                                max={20000}
                                                 step={100}
                                             />
                                             <ToggleControl
