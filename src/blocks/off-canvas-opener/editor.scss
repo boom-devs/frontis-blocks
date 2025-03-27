@@ -6,13 +6,11 @@
         cursor: pointer;
         display: inline-block;
         padding: 10px;
-
         // Common styles for all icon types
         .fb-menu-icon {
             position: relative;
             transition: transform 0.3s ease-in-out;
         }
-
         .fb-hamburger-icon {
             width: 30px;
             height: 20px;
@@ -52,24 +50,20 @@
                     top: 8px;
                     transform: rotate(45deg);
                 }
-
                 &:nth-child(2) {
                     opacity: 0;
                     width: 0;
                 }
-
                 &:nth-child(3) {
                     top: 8px;
                     transform: rotate(-45deg);
                 }
             }
         }
-
         .fb-dots-icon {
             width: 30px;
             height: 20px;
             position: relative;
-
             span {
                 display: block;
                 position: absolute;
@@ -133,7 +127,6 @@
                 background: #333;
                 border-radius: 3px;
                 transition: .25s ease-in-out;
-
                 &:nth-child(1) {
                     width: 100%;
                     height: 3px;
@@ -149,7 +142,6 @@
                 }
             }
         }
-
         // Animation for plus icon to X
         &.active .fb-plus-icon,
         .fb-plus-icon.active {
@@ -158,7 +150,6 @@
                     transform: rotate(45deg);
                     top: 13.5px; // Adjust based on height
                 }
-
                 &:nth-child(2) {
                     transform: rotate(45deg);
                     left: 13.5px; // Adjust based on width
