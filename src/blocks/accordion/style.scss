@@ -7,3 +7,14 @@
         }
     }
 }
+
+.fb-accordion-content-wrapper {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+.fb-accordion-content-wrapper.active {
+    overflow: visible;
+    transition: max-height 0.3s ease-in;
+}
