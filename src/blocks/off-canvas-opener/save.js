@@ -4,8 +4,8 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockID,
-        menuPosition = 'left',
-        iconStyle = 'hamburger',
+        menuPosition,
+        iconStyle,
         animation
     } = attributes;
     
@@ -65,7 +65,7 @@ export default function save({ attributes }) {
             </div>
             
             {/* Off-Canvas Menu Container */}
-            <div className={`fb-off-canvas-menu ${menuPositionClass} ${menuAnimationClass}`}>
+            <div className={`fb-off-canvas-menu ${menuPositionClass}`}>
                 <div {...innerBlocksProps} />
             </div>
             
