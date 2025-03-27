@@ -115,6 +115,4 @@ class AssetsGenerator {
     public function generate_asset($block_slug, $block_style) {
         echo 'Hello World';
     }
-
-    pu
 }
