@@ -6,31 +6,36 @@
             const closeBtn = menuBlock.querySelector('.wp-block-frontis-blocks-off-canvas-closer button');
             const overlay = menuBlock.querySelector('.fb-menu-overlay');
             const menu = menuBlock.querySelector('.fb-off-canvas-menu');
+
+            if (!closeBtn) return;
             
-            // Close menu when X button is clicked
-            closeBtn.addEventListener('click', function() {
-                menu.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.classList.remove('fb-menu-open');
+            function closeMenu() {
+                toggleBtn.classList.remove('active');
+                menuBlock.classList.remove('fb-menu-open');
                 toggleBtn.setAttribute('aria-expanded', 'false');
-            });
-            
-            // Close menu when overlay is clicked
-            overlay.addEventListener('click', function() {
-                menu.classList.remove('open');
-                overlay.classList.remove('active');
-                document.body.classList.remove('fb-menu-open');
-                toggleBtn.setAttribute('aria-expanded', 'false');
-            }); 
-            
-            // Handle keyboard escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && menu.classList.contains('open')) {
+                
+                const animationClass = Array.from(menu.classList).find(
+                    className => className.startsWith('fb-off-canvas-menu-')
+                );
+                
+                if (animationClass) {
+                    menu.classList.add('fb-animation-closing');
+                    
+                    setTimeout(() => {
+                        menu.classList.remove('open');
+                        menu.classList.remove('fb-animation-closing');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('fb-menu-open');
+                    }, 300); 
+                } else {
                     menu.classList.remove('open');
                     overlay.classList.remove('active');
                     document.body.classList.remove('fb-menu-open');
-                    toggleBtn.setAttribute('aria-expanded', 'false');
                 }
+            }
+            
+            closeBtn.addEventListener('click', function() {
+                closeMenu();
             });
         });
     });
