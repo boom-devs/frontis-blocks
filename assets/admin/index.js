@@ -3326,7 +3326,6 @@ var ThemeFontIcon = function ThemeFontIcon() {
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./admin/scss/admin.scss":
 /*!*******************************!*\
   !*** ./admin/scss/admin.scss ***!
@@ -3340,8 +3339,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-=======
->>>>>>> 65ae21f94b54a73e92d2ed3a8044425c815bae0d
 /***/ "./assets/css/backend/switch.css":
 /*!***************************************!*\
   !*** ./assets/css/backend/switch.css ***!
@@ -3355,7 +3352,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js ***!
@@ -3420,9 +3416,6 @@ function _defineProperty(e, r, t) {
 /***/ }),
 
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
-=======
-/***/ "./node_modules/react-toastify/dist/ReactToastify.css":
->>>>>>> 65ae21f94b54a73e92d2ed3a8044425c815bae0d
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
   \************************************************************/
