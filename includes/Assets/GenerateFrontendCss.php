@@ -25,6 +25,16 @@ class GenerateFrontendCss {
 			}
 		}
 	}
+
+	public static function combined_blocks_frontend_css($block_slug) {
+		$css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $block_slug . '/style-index.css';
+		self::generate_minified_css($css_file_path, $block_slug);
+	}
+
+	public static function generate_minified_css($css_file_path, $block_slug) {
+		$css_content = file_get_contents($css_file_path);
+		EnqueueBlocksCss::create_css_file($css_content, $block_slug);
+	}
 }
 
 

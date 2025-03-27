@@ -49,59 +49,6 @@ export default function save({ attributes }) {
                     </div>
                 </div>
             </div>
-
-            <script>
-                {`
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const container = document.getElementById('fb-player-option');
-                        const playIconSpan = document.querySelector('.fb-play-icon');
-                        if (container) {
-                            const url = container.getAttribute('data-url');
-                            const autoPlay = container.getAttribute('data-autoplay') === 'true';
-                            const muted = container.getAttribute('data-muted') === 'true';
-                            const loop = container.getAttribute('data-loop') === 'true';
-                            const controls = container.getAttribute('data-controls') === 'true';
-                            const previewImage = container.getAttribute('data-preview-image');
-                            const playIcon = container.getAttribute('data-play-icon');
-
-                            renderReactPlayer(container, { 
-                                url: url,
-                                playing: autoPlay,
-                                muted: muted,
-                                loop: loop,
-                                controls: controls,
-                                light: previewImage,
-                                onClickPreview: () => {
-                                    container.setAttribute('data-autoplay', 'true');
-                                    playIconSpan.style.display = 'none';
-                                    renderReactPlayer(container, { 
-                                        url: url,
-                                        playing: true,
-                                        muted: muted,
-                                        loop: loop,
-                                        controls: controls,
-                                        light: previewImage,
-                                        width: '100%',
-                                        height: '100%',
-                                        className: 'fb-react-player'
-                                    });
-                                },
-                                width: '100%',
-                                height: '100%',
-                                className: 'fb-react-player'
-                            });
-
-
-                            playIconSpan.addEventListener('click', () => {
-                                const previewElement = container.querySelector('.react-player__preview');
-                                if (previewElement) {
-                                    previewElement.click();
-                                }
-                            });
-                        }
-                    });
-                `}
-            </script>
         </>
     );
 }
