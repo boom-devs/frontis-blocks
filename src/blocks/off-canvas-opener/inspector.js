@@ -121,12 +121,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId, blockID, setAttributes]);
 
 	// Position options for the menu
-	const positionOptions = [
-		{ value: 'left', label: __('Left', 'frontis-blocks') },
-		{ value: 'right', label: __('Right', 'frontis-blocks') },
-		{ value: 'top', label: __('Top', 'frontis-blocks') },
-		{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
-	];
+	// const positionOptions = [
+	// 	{ value: 'default', label: __('Default', 'frontis-blocks') },
+	// 	{ value: 'left', label: __('Left', 'frontis-blocks') },
+	// 	{ value: 'right', label: __('Right', 'frontis-blocks') },
+	// 	{ value: 'top', label: __('Top', 'frontis-blocks') },
+	// 	{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
+	// ];
 
 	// Icon style options
 	const iconOptions = [
@@ -182,9 +183,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											<SelectControl
-												label={__("Menu Position", "frontis-blocks")}
-												value={menuPosition || 'left'}
-												options={positionOptions}
+												label={__("Animation", "frontis-blocks")}
+												value={menuPosition}
+												options={ANIMATION}
 												onChange={(value) => setAttributes({ menuPosition: value })}
 											/>
 
@@ -194,12 +195,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												options={iconOptions}
 												onChange={(value) => setAttributes({ iconStyle: value })}
 											/>
-											<SelectControl
+											{/* <SelectControl
 												label={__("Animation", "frontis-blocks")}
 												value={animation}
 												options={ANIMATION}
 												onChange={(value) => setAttributes({ animation: value })}
-											/>
+											/> */}
 										</PanelBody>
 									</>
 								)}

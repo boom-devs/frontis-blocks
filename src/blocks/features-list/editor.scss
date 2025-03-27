@@ -153,6 +153,8 @@ button {
 
         .fb-feature-list-icon-inner {
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: ease-in-out .5s;
 
             .fb-feature-list-icon {

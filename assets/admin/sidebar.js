@@ -3591,21 +3591,6 @@ function FrontisBlocksSidebar(props) {
     colors[index].color = color;
     setGlobalColors(_toConsumableArray(colors));
     setFbGlobalSettingsLoading(true);
-
-    // // Select the Save button and update its aria-disabled attribute
-    // const saveButton = document.querySelector(
-    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
-    // );
-
-    // if (saveButton) {
-    // 	// Set aria-disabled to false when color is updated
-    // 	saveButton.setAttribute('aria-disabled', 'false');
-
-    // 	// Add a click event listener to set aria-disabled back to true
-    // 	saveButton.addEventListener('click', () => {
-    // 		saveButton.setAttribute('aria-disabled', 'true');
-    // 	});
-    // }
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
     setTimeout(function () {

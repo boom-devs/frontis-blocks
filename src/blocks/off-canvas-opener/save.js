@@ -4,8 +4,8 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockID,
-        menuPosition = 'left',
-        iconStyle = 'hamburger',
+        menuPosition,
+        iconStyle,
         animation
     } = attributes;
     

@@ -14,8 +14,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		selectedTemplate,
-		menuPosition = 'left',
-		iconStyle = 'hamburger',
+		menuPosition,
+		iconStyle,
 		animation
 	} = attributes;
 
@@ -144,7 +144,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</div>
 
 			{/* Off-Canvas Menu Container */}
-			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''} ${menuAnimationClass}`}>
+			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
 				{selectedTemplate ? (
 					<div {...innerBlocksProps} />
 				) : (
