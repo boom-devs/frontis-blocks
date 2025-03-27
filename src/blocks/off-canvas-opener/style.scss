@@ -1,27 +1,3 @@
-.fb-count-down-wrapper {
-
-	.fb-count-down-item {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		position: relative;
-
-		&:last-child {
-			&:before {
-				display: none;
-			}
-		}
-	}
-
-	.fb-count-down-item:before{
-		position: absolute;
-		right: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-}
 .fb-off-canvas-menu-block {
     position: relative;
     
@@ -30,6 +6,12 @@
         cursor: pointer;
         display: inline-block;
         padding: 10px;
+        
+        // Common styles for all icon types
+        .fb-menu-icon {
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
         
         .fb-hamburger-icon {
             width: 30px;
@@ -62,19 +44,77 @@
             }
         }
         
+        // Animation for hamburger icon to X
+        &.active .fb-hamburger-icon, 
+        .fb-hamburger-icon.active {
+            span {
+                &:nth-child(1) {
+                    top: 8px;
+                    transform: rotate(45deg);
+                }
+                &:nth-child(2) {
+                    opacity: 0;
+                    width: 0;
+                }
+                &:nth-child(3) {
+                    top: 8px;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+        
         .fb-dots-icon {
             width: 30px;
             height: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
+            position: relative;
             
             span {
+                display: block;
+                position: absolute;
                 width: 5px;
                 height: 5px;
                 background: #333;
                 border-radius: 50%;
+                left: 12.5px; // Center the dots
+                transition: .25s ease-in-out;
+                
+                &:nth-child(1) {
+                    top: 0px;
+                }
+                
+                &:nth-child(2) {
+                    top: 8px;
+                }
+                
+                &:nth-child(3) {
+                    top: 16px;
+                }
+            }
+        }
+        
+        // Animation for dots icon to X
+        &.active .fb-dots-icon,
+        .fb-dots-icon.active {
+            span {
+                &:nth-child(1) {
+                    top: 8px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    border-radius: 3px;
+                    transform: rotate(45deg);
+                }
+                &:nth-child(2) {
+                    opacity: 0;
+                }
+                &:nth-child(3) {
+                    top: 8px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    border-radius: 3px;
+                    transform: rotate(-45deg);
+                }
             }
         }
         
@@ -88,6 +128,7 @@
                 position: absolute;
                 background: #333;
                 border-radius: 3px;
+                transition: .25s ease-in-out;
                 
                 &:nth-child(1) {
                     width: 100%;
@@ -104,6 +145,72 @@
                 }
             }
         }
+        
+        // Animation for plus icon to X
+        &.active .fb-plus-icon,
+        .fb-plus-icon.active {
+            span {
+                &:nth-child(1) {
+                    transform: rotate(45deg);
+                    top: 13.5px; // Adjust based on height
+                }
+                &:nth-child(2) {
+                    transform: rotate(45deg);
+                    left: 13.5px; // Adjust based on width
+                }
+            }
+        }
+    }
+    
+    // Add a class to the body to animate the menu icons
+    &.fb-menu-open {
+        .fb-hamburger-icon span {
+            &:nth-child(1) {
+                top: 8px;
+                transform: rotate(45deg);
+            }
+            &:nth-child(2) {
+                opacity: 0;
+                width: 0;
+            }
+            &:nth-child(3) {
+                top: 8px;
+                transform: rotate(-45deg);
+            }
+        }
+        
+        .fb-dots-icon span {
+            &:nth-child(1) {
+                top: 8px;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                border-radius: 3px;
+                transform: rotate(45deg);
+            }
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            &:nth-child(3) {
+                top: 8px;
+                left: 0;
+                width: 100%;
+                height: 3px;
+                border-radius: 3px;
+                transform: rotate(-45deg);
+            }
+        }
+        
+        .fb-plus-icon span {
+            &:nth-child(1) {
+                transform: rotate(45deg);
+                top: 13.5px;
+            }
+            &:nth-child(2) {
+                transform: rotate(45deg);
+                left: 13.5px;
+            }
+        }
     }
     
     // Off-canvas menu styling
@@ -114,10 +221,13 @@
         z-index: 999;
         width: 100%;
         height: auto;
-        top: 0px;
+        top: 40px;
         transition: transform 0.3s ease;
         overflow-y: auto;
-        
+        &.fb-off-canvas-menu-default{
+            left: unset;
+            transform: unsettransform;
+        }
         &.fb-off-canvas-menu-left {
             left: 0;
             transform: translateX(-100%);
@@ -145,6 +255,43 @@
             transform: translateY(100%);
         }
         
+        &.fb-off-canvas-menu-fade {
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: -1;
+            left: 0;
+            &.open {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+                z-index: 999;
+            }
+        }
+
+        &.fb-off-canvas-menu-zoom {
+            opacity: 0;
+            left: 0;
+            transform: scale(0.7);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: -1;
+            &.open {
+                opacity: 1;
+                transform: scale(1) translateX(0) translateY(0);
+                z-index: 999;
+            }
+        }
+
+        &.fb-off-canvas-menu-flip {
+            opacity: 0;
+            left: 0;
+            transform: perspective(1000px) rotateY(-90deg);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform-origin: left center;
+            &.open {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0deg);
+            }
+        }
+
         &.open {
             transform: translateX(0) translateY(0);
         }
@@ -170,6 +317,13 @@
         padding: 20px;
     }
     
+    .fb-pattern-placeholder {
+        padding: 30px;
+        background-color: #f7f7f7;
+        border: 1px dashed #ccc;
+        text-align: center;
+    }
+    
     // Overlay styling
     .fb-menu-overlay {
         position: fixed;
@@ -190,7 +344,20 @@
     }
 }
 
-// Body class when menu is open to prevent scrolling
+// For body class styling
 body.fb-menu-open {
     overflow: hidden;
+}
+
+// Editor-specific styling
+.block-editor-block-list__block .fb-off-canvas-menu-block {
+    .fb-off-canvas-menu {
+        position: absolute;
+        max-height: 400px;
+        z-index: 90;
+    }
+    
+    .fb-menu-overlay {
+        position: absolute;
+    }
 }
