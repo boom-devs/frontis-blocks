@@ -116,8 +116,8 @@ body .wp-block-frontis-blocks-container > *:not( .wp-block-frontis-blocks-contai
 	z-index: 1;
 }
 
-body .ast-container .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .wp-block-frontis-blocks-container,
-body .ast-container .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap {
+body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap > .wp-block-frontis-blocks-container,
+body .wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap {
 	> ul,
 	ol {
 		max-width: -webkit-fill-available;
@@ -125,15 +125,6 @@ body .ast-container .wp-block-frontis-blocks-container > .frontis-blocks-contain
 		margin-block-end: 0;
 		margin-left: 20px;
 	}
-}
-
-// For Astra theme boxed compatibility
-.ast-plain-container
-.editor-styles-wrapper
-.block-editor-block-list__layout.is-root-container
-.frontis-blocks-is-root-container.wp-block-frontis-blocks-container.alignwide {
-	margin-left: auto;
-	margin-right: auto;
 }
 
 // Shape Divider CSS Start.
