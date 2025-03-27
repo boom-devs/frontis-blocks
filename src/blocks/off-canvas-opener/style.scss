@@ -224,7 +224,10 @@
         top: 40px;
         transition: transform 0.3s ease;
         overflow-y: auto;
-        
+        &.fb-off-canvas-menu-default{
+            left: unset;
+            transform: unsettransform;
+        }
         &.fb-off-canvas-menu-left {
             left: 0;
             transform: translateX(-100%);
@@ -252,6 +255,43 @@
             transform: translateY(100%);
         }
         
+        &.fb-off-canvas-menu-fade {
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: -1;
+            left: 0;
+            &.open {
+                opacity: 1;
+                transform: translateX(0) translateY(0);
+                z-index: 999;
+            }
+        }
+
+        &.fb-off-canvas-menu-zoom {
+            opacity: 0;
+            left: 0;
+            transform: scale(0.7);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: -1;
+            &.open {
+                opacity: 1;
+                transform: scale(1) translateX(0) translateY(0);
+                z-index: 999;
+            }
+        }
+
+        &.fb-off-canvas-menu-flip {
+            opacity: 0;
+            left: 0;
+            transform: perspective(1000px) rotateY(-90deg);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform-origin: left center;
+            &.open {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0deg);
+            }
+        }
+
         &.open {
             transform: translateX(0) translateY(0);
         }

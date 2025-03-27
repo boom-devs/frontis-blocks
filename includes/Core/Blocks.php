@@ -7,10 +7,7 @@ use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Forms\FluentForms;
 use FrontisBlocks\Forms\ContactForms7;
-use FrontisBlocks\Assets\GenerateFrontendCss;
-use FrontisBlocks\Assets\EnqueueBlocksCss;
-use FrontisBlocks\Assets\GenerateGlobalTypography;
-use FrontisBlocks\Assets\GenerateGlobalColors;
+use FrontisBlocks\Assets\AssetsGenerator;
 
 defined('ABSPATH') || exit;
 
@@ -19,14 +16,14 @@ class Blocks
 	use Singleton;
 
 	private $registered_blocks = [];
-
+	private $gfonts = [];
 	public function __construct()
 	{
 		add_action('init', [$this, 'register_blocks']);
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action( 'updated_post_meta', [$this, 'remove_css_files'], 10, 4 );
+		// add_action('wp_footer', [$this, 'enqueue_google_fonts'], 15);
 	}
 
 	public function register_blocks()
@@ -35,7 +32,7 @@ class Blocks
 		$active_blocks = get_option('fb_active_blocks');
 
 		if (!empty($blocks_list)) {
-			foreach ($blocks_list as $block) {
+			foreach ($blocks_list as $block) {	
 				$slug = $block['slug'];
 				$complete = $block['complete'];
 				if (is_array($active_blocks) && !empty($active_blocks)) {
@@ -141,12 +138,6 @@ class Blocks
 		}
 	}
 
-	public function combined_frontis_blocks_assets()
-	{
-		$page_name = Helper::get_page_name();
-		EnqueueBlocksCss::combined_css_files($page_name);
-	}
-
 	public function register_block_categories($categories)
 	{
 		return array_merge(
@@ -171,32 +162,9 @@ class Blocks
 	}
 
 	public function get_blocks_on_save($post_id, $post, $update) {
-		if ($update) {
-
-			GenerateGlobalTypography::generate_global_typography();
-			GenerateGlobalColors::generate_global_colors();
-
-			Helper::get_current_page_name($post_id);
-			$post_content = $post->post_content;
-			$page_name = $post->post_name;
-			new EnqueueBlocksCss($page_name);
-
-			$blocks = parse_blocks($post_content);
-			$this->process_blocks_recursively($blocks);
+		if($update){
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
 		}
-	}
-	
-	private function process_blocks_recursively($blocks) {
-		foreach ($blocks as $block) {
-			GenerateFrontendCss::get_instance()->render_generated_css($block, $block, $block['attrs']);
-			if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
-				$this->process_blocks_recursively($block['innerBlocks']);
-			}
-		}
-	}
-
-	public function remove_css_files($meta_id, $object_id, $meta_key, $meta_value) {
-		Helper::remove_css_files();
 	}
 
 	private function add_wrapper_class($block_content, $parsed_block)
@@ -231,5 +199,22 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
+	}
+
+	public function enqueue_google_fonts() {
+		$google_fonts = get_option('fb_fontfamilies');
+
+        if(!empty($google_fonts)) {
+            foreach ($google_fonts as $key => $value) {
+                // unique fonts family 
+                if(!in_array($value, $this->gfonts)) {
+                    $this->gfonts[$value] = $value;
+                }
+            }
+        }
+
+		if(!empty($this->gfonts)) {
+            // Helper::load_google_font( $this->gfonts );
+        }
 	}
 }

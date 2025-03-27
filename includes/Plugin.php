@@ -98,97 +98,66 @@ final class Plugin
 	public function enqueue_scripts()
 	{
 
-		if (has_block('frontis-blocks/advanced-video')) {
-			wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
-		}else{
-			if(Helper::get_blocks_inside_template('frontis-blocks/advanced-video')){
-				wp_enqueue_script('frontis-advanced-video', FB_PLUGIN_URL . 'assets/js/react-player/react-player.standalone.min.js', [], FB_VERSION, true);;
-			}
-		}
-		if (has_block('frontis-blocks/slider') || has_block('frontis-blocks/marquee-carousel')) {
-			wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
-			wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
+		// Enqueue google fonts
+		$google_font_url = get_option('fb_google_fonts_url');
+
+		if ($google_font_url) {
+			wp_enqueue_style(
+				'frontis-blocks-preconnect',
+				'https://fonts.googleapis.com',
+				[],
+				null
+			);
+
+			wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
+			wp_enqueue_style(
+				'frontis-blocks-google-fonts',
+				$google_font_url,
+				[],
+				FB_VERSION
+			);
 		}
 
-		wp_enqueue_style('fb-responsive-control', FB_PLUGIN_URL . 'assets/css/fbf-common.css', [], FB_VERSION);
-
-		// Enqueue generated CSS files
 		$page_name = Helper::get_page_name();
 
 		if($page_name === NULL) {
 			global $pagenow;
+			
 			if($pagenow === 'index.php') {
 				$page_name = 'home';
 			}
 		}
 
-		// Get file system path instead of URL for file_exists check
 		$upload_dir = wp_upload_dir();
-		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/frontis-blocks.css';
-		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/frontis-blocks.css';
 
-		// Check if the file exists on the server file system
-		if(file_exists($css_file_system_path)) {
+		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
+		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
+
+		// Css file
+		$css_file_system_path = $frontend_dir . $page_name .'.css';
+		$css_file_url = $frontend_url . $page_name .'.css';
+
+		// Js file
+		$js_file_system_path = $frontend_dir . $page_name .'.js';
+		$js_file_url = $frontend_url . $page_name .'.js';
+
+		// Enqueue frontend css and js
+		if(file_exists($css_file_system_path)) {	
 			$version = filemtime($css_file_system_path);
-			wp_enqueue_style('frontis-blocks-' . $page_name, $css_file_url, [], $version);
+			wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
 		}
-
-		// Header css
-		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/header/frontis-blocks.css';
-		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/header/frontis-blocks.css';
-
-		// Check if the file exists on the server file system
-		if(file_exists($css_file_system_path)) {
-			$version = filemtime($css_file_system_path);
-			wp_enqueue_style('frontis-blocks-header', $css_file_url, [], $version);
-		}
-
-		// Footer css
-		$css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/footer/frontis-blocks.css';
-		$css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/frontis-blocks.css';
-
-		// Check if the file exists on the server file system
-		if(file_exists($css_file_system_path)) {
-			$version = filemtime($css_file_system_path);
-			wp_enqueue_style('frontis-blocks-footer', $css_file_url, [], $version);
-		}
-
-
-		$font_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-google-fonts.css';
-		$font_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-google-fonts.css';
-
-		// Check if the file exists on the server file system
-		if(file_exists($font_css_file_system_path)) {
-			$version = filemtime($font_css_file_system_path);
-			wp_enqueue_style('frontis-google-fonts', $font_css_file_url, [], $version);
-		}
-
-		$global_typography_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-global-typography.css';
-		$global_typography_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-global-typography.css';
-
-		// Check if the file exists on the server file system
-		if(file_exists($global_typography_css_file_system_path)) {
-			$version = filemtime($global_typography_css_file_system_path);
-			wp_enqueue_style('frontis-global-typography', $global_typography_css_file_url, [], $version);
-		}
-
-		$global_colors_css_file_system_path = $upload_dir['basedir'] . '/frontis-blocks/frontis-global-colors.css';
-		$global_colors_css_file_url = $upload_dir['baseurl'] . '/frontis-blocks/frontis-global-colors.css';
-
-		// Check if the file exists on the server file system
-		if(file_exists($global_colors_css_file_system_path)) {
-			$version = filemtime($global_colors_css_file_system_path);
-			wp_enqueue_style('frontis-global-colors', $global_colors_css_file_url, [], $version);
+		
+		if(file_exists($js_file_system_path)) {
+			$version = filemtime($js_file_system_path);
+			wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
 		}
 	}
 
 	public function enqueue_editor_scripts()
 	{
-		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/responsive-css.js', array('jquery'), FB_VERSION, true);
-		wp_enqueue_style('fb-responsive-control', FB_PLUGIN_URL . 'assets/css/fbe-common.css', [], FB_VERSION);
-
-		wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/swiper/swiper-bundle.min.css', [], FB_VERSION);
-		wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
+		wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/backend/responsive-css.js', [], FB_VERSION, true);
+		wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/backend/swiper/swiper-bundle.min.css', [], FB_VERSION);
+		wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/backend/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
 	}
 
 	/**
