@@ -520,6 +520,9 @@ class AssetsGenerator {
         $js_file_name = $page_name . '.js';
         $js_file = $css_dir . $js_file_name;
         file_put_contents($js_file, $this->js_content);
+
+        $this->css_content = '';
+        $this->js_content = '';
     }
 
     public function get_font_families() {
