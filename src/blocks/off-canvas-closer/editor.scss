@@ -185,37 +185,3 @@
         position: absolute;
     }
 }
-
-.fb-off-canvas-closer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background-color: transparent;
-
-    .fb-off-canvas-closer-icon,
-    .fb-off-canvas-closer-icon-image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-    }
-}
-.fb-off-canvas-closer-block {
-    button {
-        outline: none;
-        box-shadow: none;
-        padding: 0;
-        margin: 0;
-        &:focus {
-            outline: none;
-            box-shadow: none;
-        }
-    }
-}

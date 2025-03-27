@@ -14,14 +14,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		selectedTemplate,
-		menuPosition = 'left',
-		iconStyle = 'hamburger',
+		menuPosition,
+		iconStyle,
+		animation
 	} = attributes;
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-
 	
-
 	const patternData = useSelect(select => {
 		if (!selectedTemplate) return null;
 	
@@ -53,7 +52,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [selectedTemplate]);
 
 	// Update innerBlocks when pattern changes
-
 	useEffect(() => {
 		console.log("Selected template:", selectedTemplate);
 		console.log("Pattern data:", patternData);
@@ -104,9 +102,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	};
 
 	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
+	const menuOpenClass = isMenuOpen ? 'fb-menu-open' : '';
+	const menuAnimationClass = animation ? `fb-animation-${animation}` : '';
 
 	const blockProps = useBlockProps({
-		className: `fb-off-canvas-menu-block ${blockID}`,
+		className: `fb-off-canvas-menu-block ${blockID} ${menuOpenClass}`,
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -126,12 +126,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			{/* Hamburger Icon Button */}
+			{/* Toggle Button with animated icon */}
 			<div
-				className="fb-menu-toggle-btn"
+				className={`fb-menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
 				role="button"
 				tabIndex="0"
+				aria-expanded={isMenuOpen}
+				aria-label={isMenuOpen ? __('Close menu', 'frontis-blocks') : __('Open menu', 'frontis-blocks')}
 				onKeyDown={(e) => {
 					if (e.key === 'Enter' || e.key === ' ') {
 						setIsMenuOpen(!isMenuOpen);
@@ -143,7 +145,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{/* Off-Canvas Menu Container */}
 			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
-
 				{selectedTemplate ? (
 					<div {...innerBlocksProps} />
 				) : (
@@ -156,7 +157,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			{/* Overlay */}
 			{isMenuOpen && (
 				<div
-					className="fb-menu-overlay"
+					className={`fb-menu-overlay ${isMenuOpen ? 'active' : ''}`}
 					onClick={() => setIsMenuOpen(false)}
 				></div>
 			)}
