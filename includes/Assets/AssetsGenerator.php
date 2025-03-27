@@ -543,6 +543,7 @@ class AssetsGenerator {
 
         $fonts_families = array_merge($fonts_families, $this->block_fonts);
 
+
         if (!empty($fonts_families)) {
             $font_url = "https://fonts.googleapis.com/css?family=";
             $font_parts = [];
@@ -551,16 +552,19 @@ class AssetsGenerator {
                 if ($font === 'Default' || $font === 'default') {
                     continue;
                 }
-        
+            
                 if (!is_array($weights)) {
                     $weights = [$weights]; // Ensure it's an array
                 }
-        
+            
+                // Ensure 600 and 700 are included
+                $weights = array_unique(array_merge($weights, [600, 700]));
+            
                 $italic_weights = [];
                 foreach ($weights as $weight) {
                     $italic_weights[] = $weight . "i"; // Add italic version
                 }
-        
+            
                 $all_weights = array_merge($weights, $italic_weights);
                 $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
             }
