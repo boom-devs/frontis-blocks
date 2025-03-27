@@ -65,7 +65,7 @@ export default function save({ attributes }) {
             </div>
             
             {/* Off-Canvas Menu Container */}
-            <div className={`fb-off-canvas-menu ${menuPositionClass}`}>
+            <div className={`fb-off-canvas-menu ${menuPositionClass} ${menuAnimationClass}`}>
                 <div {...innerBlocksProps} />
             </div>
             
