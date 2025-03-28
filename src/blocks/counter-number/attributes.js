@@ -51,8 +51,12 @@ const attributes = {
 		default: 'top',
 	},
 	counterCardAlignment: {
-		type: 'string',
-		default: 'center',
+		type: 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: 'center',
+			Mobile: 'center',
+		},
 	},
 	titlePosition: {
 		type: 'string',

@@ -8,6 +8,8 @@ import {
 	SelectControl,
 } from '@wordpress/components';
 import Select2 from "react-select";
+import FB_Range from '@Components/range';
+import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
 import { useEffect, useMemo } from '@wordpress/element';
@@ -15,7 +17,13 @@ import { useEffect, useMemo } from '@wordpress/element';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		searchButtonWidth,
+		searchButtonWidthUnits,
+		searchButtonInputFieldWidth,
+		searchButtonInputFieldWidthUnits,
 	} = attributes;
+
+	const deviceType = useDeviceType();
 
 	const allBlockStyle = useMemo(() => ` `);
 
@@ -57,7 +65,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls " + tab.name}>
 								{tab.name === 'general' && (
 									<>
-										<PanelBody title={__("Select Location", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("General Settings", "frontis-blocks")} initialOpen={true}>
+											<FB_Range
+												min={1}
+												max={1000}
+												label={__("Button Width", "frontis-blocks")}
+												rangeValue={searchButtonWidth}
+												onChangeHandler={(value) => setAttributes({ searchButtonWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ searchButtonWidthUnits: value })}
+												deviceType={deviceType}
+												units={searchButtonWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_Range
+												min={1}
+												max={1000}
+												label={__("Search Field Width", "frontis-blocks")}
+												rangeValue={searchButtonInputFieldWidth}
+												onChangeHandler={(value) => setAttributes({ searchButtonInputFieldWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ searchButtonInputFieldWidthUnits: value })}
+												deviceType={deviceType}
+												units={searchButtonInputFieldWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
 										</PanelBody>
 									</>
 								)}

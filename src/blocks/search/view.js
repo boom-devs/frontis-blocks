@@ -6,9 +6,9 @@
 
         searchBlockButton.addEventListener('click', function() {
             const searchBlock = document.querySelector('.fb-search-block-wrapper-inner-input-field');
-            searchBlock.classList.toggle('active');
+            searchBlock.classList.add('active');
 
-            searchBlockOverlay.classList.toggle('active');
+            searchBlockOverlay.classList.add('active');
         });
 
         searchBlockOverlay.addEventListener('click', function() {

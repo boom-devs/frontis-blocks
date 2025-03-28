@@ -13,11 +13,7 @@ import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import {
-	BORDER_STYLES,
-	LAYOUT_ALIGNMENT,
-	LAYOUT_TYPE,
-	OVERFLOW_OP,
-	PRESETS,
+	ANIMATION
 } from "./constants/constants";
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
@@ -28,6 +24,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		selectedTemplate,
 		menuPosition,
 		iconStyle,
+		animation
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -68,7 +65,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label: pattern.title
 				}))
 			);
-			console.log('User patterns found:', patternData.allPatterns);
 		}
 
 		// Add user patterns if any were found
@@ -124,12 +120,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId, blockID, setAttributes]);
 
 	// Position options for the menu
-	const positionOptions = [
-		{ value: 'left', label: __('Left', 'frontis-blocks') },
-		{ value: 'right', label: __('Right', 'frontis-blocks') },
-		{ value: 'top', label: __('Top', 'frontis-blocks') },
-		{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
-	];
+	// const positionOptions = [
+	// 	{ value: 'default', label: __('Default', 'frontis-blocks') },
+	// 	{ value: 'left', label: __('Left', 'frontis-blocks') },
+	// 	{ value: 'right', label: __('Right', 'frontis-blocks') },
+	// 	{ value: 'top', label: __('Top', 'frontis-blocks') },
+	// 	{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
+	// ];
 
 	// Icon style options
 	const iconOptions = [
@@ -185,9 +182,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											<SelectControl
-												label={__("Menu Position", "frontis-blocks")}
-												value={menuPosition || 'left'}
-												options={positionOptions}
+												label={__("Animation", "frontis-blocks")}
+												value={menuPosition}
+												options={ANIMATION}
 												onChange={(value) => setAttributes({ menuPosition: value })}
 											/>
 
@@ -197,6 +194,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												options={iconOptions}
 												onChange={(value) => setAttributes({ iconStyle: value })}
 											/>
+											{/* <SelectControl
+												label={__("Animation", "frontis-blocks")}
+												value={animation}
+												options={ANIMATION}
+												onChange={(value) => setAttributes({ animation: value })}
+											/> */}
 										</PanelBody>
 									</>
 								)}
