@@ -15,8 +15,7 @@
     "admin:build": "wp-scripts build --webpack-src-dir=admin --output-path=assets/admin --config webpack.config.admin.js",
     "blocks": "wp-scripts build --config webpack.blocks.config.js",
     "blocks:start": "wp-scripts start --config webpack.blocks.config.js",
-    "zip": "node webpack.zip.js",
-"deploy": "git add . && git commit -m \"$npm_config_commit\" && git push origin $(git rev-parse --abbrev-ref HEAD)"
+    "zip": "node webpack.zip.js"
   },
   "keywords": [],
   "author": "",
