@@ -151,6 +151,10 @@ final class Plugin
 			$version = filemtime($js_file_system_path);
 			wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
 		}
+
+		wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', [
+			'site_url' => site_url()
+		]);
 	}
 
 	public function enqueue_editor_scripts()
