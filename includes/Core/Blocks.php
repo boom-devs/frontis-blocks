@@ -90,6 +90,7 @@ class Blocks
 				$localize_array['contact_form7_install_url'] = admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term');
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
+				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
 			}
 		}
 	}

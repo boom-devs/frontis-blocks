@@ -4,8 +4,9 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockID,
-        menuPosition = 'left',
-        iconStyle = 'hamburger',
+        menuPosition,
+        iconStyle,
+        animation
     } = attributes;
     
     // Get the appropriate icon based on iconStyle
@@ -40,6 +41,7 @@ export default function save({ attributes }) {
     
     // Generate the position-specific class
     const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
+    const menuAnimationClass = animation ? `fb-animation-${animation}` : '';
     
     const blockProps = useBlockProps.save({
         className: `fb-off-canvas-menu-block ${blockID}`,
@@ -63,7 +65,7 @@ export default function save({ attributes }) {
             </div>
             
             {/* Off-Canvas Menu Container */}
-            <div className={`fb-off-canvas-menu ${menuPositionClass}`}>
+            <div className={`fb-off-canvas-menu ${menuPositionClass} ${menuAnimationClass}`}>
                 <div {...innerBlocksProps} />
             </div>
             
