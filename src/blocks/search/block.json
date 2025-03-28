@@ -6,10 +6,12 @@
 	"icon": "search",
 	"description": "Add a search form",
 	"textdomain": "frontis-blocks",
-	"supports": {
-		"html": false,
-		"anchor": true
-	},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./view.js"
 }
