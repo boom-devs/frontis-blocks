@@ -22,12 +22,5 @@
 	"editorStyle": [
 		"file:./index.css",
 		"frontis-swiper-style"
-	],
-	"style": [
-		"frontis-swiper-style"
-	],
-	"viewScript": [
-		"file:./view.js",
-		"frontis-swiper-script"
 	]
 }
