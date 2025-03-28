@@ -334,6 +334,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${offCanvasIconZIndex.Desktop ? `z-index: ${offCanvasIconZIndex.Desktop};` : ''}
 		}
 		.${blockId} .fb-off-canvas-closer {
+			display: flex;
+			background-color: transparent;
+			padding: 0;
 			${offCanvasIconBgColor ? `background-color: ${offCanvasIconBgColor};` : ''}
 			${offCanvasIconPaddingDesktopWidth && offCanvasIconPaddingDesktop.top ? `padding: ${offCanvasIconPaddingDesktopWidth};` : ''}
 			${offCanvasIconBorder ? `border: ${offCanvasIconBorder};` : ''}

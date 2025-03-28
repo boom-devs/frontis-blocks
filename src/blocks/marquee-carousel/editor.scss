@@ -48,8 +48,8 @@
   }
   
   
-  .fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-content .fb-marquee-carousel-hover-text,
-  .fb-marquee-carousel-content-wrapper:hover .fb-marquee-carousel-content .fb-marquee-carousel-text {
+  .fb-marquee-carousel-item:hover .fb-marquee-carousel-content .fb-marquee-carousel-hover-text,
+  .fb-marquee-carousel-item:hover .fb-marquee-carousel-content .fb-marquee-carousel-text {
     transform: translateY(-100%);
   }
   
