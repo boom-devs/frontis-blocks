@@ -2,10 +2,10 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
-	const { blockID } = attributes;
+	const { blockId } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-search-block ${blockID}`,
+		className: `fb-search-block ${blockId}`,
 	});
 
 	return (
