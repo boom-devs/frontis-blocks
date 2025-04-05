@@ -65,7 +65,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label: pattern.title
 				}))
 			);
-			console.log('User patterns found:', patternData.allPatterns);
 		}
 
 		// Add user patterns if any were found
