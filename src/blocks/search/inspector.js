@@ -24,7 +24,10 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_ImageControl from '@Components/image-control';
+import FB_InputControl from '@Components/input-control';
 import FBIconPicker from "../../components/icon-picker";
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
 
@@ -154,7 +157,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		inputFieldPaddingLink,
 
 		searchIconZIndex,
-		
+		searchGlobalWraperID,
+		searchGlobalWraperClass,
+		searchCustomCSS,	
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -969,11 +974,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		searchIconZIndex,	
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle] );
+	const customCss = getCustomCss(searchCustomCSS, `.${blockId}`);
 
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
+
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1392,7 +1399,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											</PanelBody>
 										)}
 
-										<PanelBody title={__("Input Field", "frontis-blocks")} initialOpen={false}>
+										<PanelBody title={__("Search Field", "frontis-blocks")} initialOpen={false}>
 
 											<FB_TypographyControl
                                                 globalTypoControlActive={true}
@@ -1564,6 +1571,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+													<FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={searchGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ searchGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={searchGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ searchGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+												</PanelBody>
+												<PanelBody
+													title={__("Custom CSS", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_CustomCSSEditor  
+														value={searchCustomCSS}
+														onChangeValue={(value) => setAttributes({ searchCustomCSS: value })}
+													/>
 												</PanelBody>
 											</div>
 										</div>

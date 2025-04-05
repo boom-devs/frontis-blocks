@@ -711,6 +711,19 @@ const attributes = {
             Mobile: '',
         }
     },
+	searchGlobalWraperID : {  
+        type: "string",
+        default: ""
+    },
+
+    searchGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+	searchCustomCSS : { 
+        type: "string",
+        default: "",
+    },
 	
 };
 

@@ -9,6 +9,8 @@ export default function Save({ attributes }) {
 		searchIconAlign,
 		searchIconImageUrl,
 		searchIconImageAlt,
+		searchGlobalWraperID,
+		searchGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -17,7 +19,7 @@ export default function Save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			<div className="fb-search-container">
+			<div className={`fb-search-container ${searchGlobalWraperClass}`} id={searchGlobalWraperID}>
 				<div className="fb-search-button-wrapper">
 					<div className="fb-search-block-wrapper-inner-input-icon">
 						{searchIconAlign === 'icon-text' && searchIcon ? ( 
