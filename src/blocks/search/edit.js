@@ -15,6 +15,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		searchIconAlign,
 		searchIconImageUrl,
 		searchIconImageAlt,
+		searchGlobalWraperID,
+		searchGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -22,14 +24,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	return (
-		<div {...blockProps}>
+		<>
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-
-			<div className="fb-search-container">
+		<div {...blockProps}>
+			<div className={`fb-search-container ${searchGlobalWraperClass}`} id={searchGlobalWraperID}>
 				<div className="fb-search-button-wrapper" onClick={() => setAttributes({ searchActive: !searchActive })}>
 					<div className="fb-search-block-wrapper-inner-input-icon">
 						{searchIconAlign === 'icon-text' && searchIcon ? ( 
@@ -63,5 +65,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<div className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`} onClick={() => setAttributes({ searchActive: false })}></div>
 		</div>
+		</>
 	);
 }
