@@ -32,7 +32,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div className="fb-search-container">
 				<div className="fb-search-button-wrapper" onClick={() => setAttributes({ searchActive: !searchActive })}>
 					<div className="fb-search-block-wrapper-inner-input-icon">
-
 						{searchIconAlign === 'icon-text' && searchIcon ? ( 
 							<div className={`fb-search-icon-wrapper`}>
 								<div className="fb-search-icon">{renderSVG(searchIcon)}</div>
