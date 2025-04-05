@@ -44,6 +44,23 @@ const attributes = {
 		}
 	},
 
+	searchIconGap: {
+		type: 'object',
+		default: {
+			Desktop: '5',
+			Tablet: '5',
+			Mobile: '5'
+		}
+	},
+	searchIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
 	/** Start Typography */
 	buttonTextGlobalTypographyData: {
         type: "object",
@@ -139,6 +156,8 @@ const attributes = {
 		}
 	},
 	/** End Typography */
+
+	/** Start Button Text Color */
 	buttonTextColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -151,6 +170,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	/** End Button Text Color */	
 
 	/** Start Button Border */
 	buttonBorder: {
@@ -384,152 +404,6 @@ const attributes = {
 		default: ""
 	},
 
-	searchIconBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	searchIconBgColor : {
-		type: "string",
-		default: ""
-	},
-	searchIconBgHoverColor: {
-		type: 'string',
-		default: ""
-	},
-
-	searchIconPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	searchIconPaddingDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconPaddingTablet: {
-		type: "object", 
-		default: {
-			top: '', 
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconPaddingMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-
-
-	searchIconBorder: {
-		type: 'string',
-		default: "none",
-	},
-	searchIconBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	searchIconBorderColor: {
-		type: 'string',
-	},
-	searchIconBorderHoverColor: {
-		type: 'string',
-	},
-	searchIconBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	searchIconBorderDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderTablet: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderLink : {
-		type : "boolean",
-		default: true
-	},
-	searchIconBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	searchIconBorderRadiusDesktop: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderRadiusTablet: {
-		type: "object", 
-		default: {
-			top: '', 
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderRadiusMobile: {
-		type: "object", 
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	searchIconBorderRadiusLink : {
-		type : "boolean",
-		default: true
-	},
 	searchIconRotateSwitcher: {
 		type: 'string',
 		default: 'normal',
@@ -572,6 +446,271 @@ const attributes = {
 		}
 	},
 	/** End Icon Styles */
+
+	/** Start Typography */
+	inputFieldTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	inputFieldTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	inputFieldTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	inputFieldTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	inputFieldTextFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	inputFieldTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	inputFieldTextFontWeight : {
+		type: "string",
+		default: ""
+	},
+	inputFieldTextFontStyle : {
+		type: "string",
+		default: ""
+	},
+	inputFieldTextTransform : {
+		type: "string",
+		default: ""
+	},
+	inputFieldTextDecoration : {
+		type: "string",
+		default: ""
+	},
+	inputFieldTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	inputFieldTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Input Field Typography */
+
+	/** Start Input Field Text Color */
+	inputFieldTextColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	inputFieldTextColor: {
+		type: "string",
+		default: "",
+	},
+	inputFieldTextColorHover: {
+		type: "string",
+		default: "",
+	},
+	/** End Input Field Text Color */
+
+	/** Start Input Field Border */
+	inputFieldBorder: {
+		type: 'string',
+		default: "solid",
+	},
+	inputFieldBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	inputFieldBorderColor: {
+		type: 'string',
+		default: "#A4A7AE"
+	},
+	inputFieldBorderColorHover: {
+		type: 'string',
+		default: ""
+	},
+	inputFieldBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	inputFieldBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	inputFieldBorderTablet: {
+		type: "object", 
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	inputFieldBorderMobile: {
+		type: "object", 
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	inputFieldBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius */
+	inputFieldBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	inputFieldBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	inputFieldBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	inputFieldBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	inputFieldBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Input Field Border Radius */
+
+
+	/** Start Padding */
+	inputFieldPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	inputFieldPaddingDesktop: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	inputFieldPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	inputFieldPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	inputFieldPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Input Field Padding */
+
+
+
+	searchIconZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
+    },
 	
 };
 
