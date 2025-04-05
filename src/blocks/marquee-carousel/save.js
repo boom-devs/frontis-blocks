@@ -53,7 +53,7 @@ export default function Save({ attributes }) {
             <div className="swiper swiper-container">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${blockId}`}>
+                        <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}>
                             {item.marqueeCarouselImageUrl && (
                                 <div className="fb-marquee-carousel-image-wrapper">
                                     <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
