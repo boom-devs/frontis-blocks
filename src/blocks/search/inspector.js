@@ -784,6 +784,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
 			}
 		}
+			
 		@media only screen and (max-width: 767px) {
 			.${blockId}.fb-search-block{
 				${searchIconZIndex.Mobile ? `z-index: ${searchIconZIndex.Mobile};` : ''}
@@ -830,6 +831,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
 				${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
 			}
+		}
     `, [
 		blockId,
 		searchButtonWidth,
