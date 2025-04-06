@@ -356,6 +356,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transform: rotate(${offCanvasIconRotate.Desktop}deg);
 			transition: all .3s ease-in-out;
 		}
+		.${blockId} .fb-off-canvas-closer:hover .fb-off-canvas-closer-icon-wrapper svg {
+			${offCanvasIconHoverColor ? `fill: ${offCanvasIconHoverColor};` : ''}
+			transform: rotate(${offCanvasIconRotateHover.Desktop}deg);
+		}
 
 
 		.${blockId} .fb-off-canvas-closer .fb-off-canvas-closer-icon-wrapper .fb-off-canvas-closer-icon-image {
@@ -384,7 +388,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${offCanvasIconSize.Tablet && offCanvasIconSizeUnits.Tablet ? `height: ${offCanvasIconSize.Tablet}${offCanvasIconSizeUnits.Tablet};` : ''}
 				transform: rotate(${offCanvasIconRotate.Tablet}deg);
 			}
-
+			.${blockId} .fb-off-canvas-closer:hover .fb-off-canvas-closer-icon-wrapper svg {
+				transform: rotate(${offCanvasIconRotateHover.Tablet}deg);
+			}
 
 			.${blockId} .fb-off-canvas-closer .fb-off-canvas-closer-icon-wrapper .fb-off-canvas-closer-icon-image {
 				${offCanvasIconImageWidth ? `width: ${offCanvasIconImageWidth.Tablet}${offCanvasIconImageWidthUnits.Tablet};` : ''}
@@ -410,6 +416,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${offCanvasIconSize.Mobile && offCanvasIconSizeUnits.Mobile ? `width: ${offCanvasIconSize.Mobile}${offCanvasIconSizeUnits.Mobile};` : ''} 
 				${offCanvasIconSize.Mobile && offCanvasIconSizeUnits.Mobile ? `height: ${offCanvasIconSize.Mobile}${offCanvasIconSizeUnits.Mobile};` : ''}
 				transform: rotate(${offCanvasIconRotate.Mobile}deg);
+			}
+			.${blockId} .fb-off-canvas-closer:hover .fb-off-canvas-closer-icon-wrapper svg {
+				transform: rotate(${offCanvasIconRotateHover.Mobile}deg);
 			}
 
 
