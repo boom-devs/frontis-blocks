@@ -9,26 +9,14 @@ const attributes = {
             { id: 'facebook', enabled: true, label: 'Facebook' },
             { id: 'twitter', enabled: true, label: 'Twitter' },
             { id: 'linkedin', enabled: true, label: 'LinkedIn' },
+            { id: 'whatsapp', enabled: true, label: 'Whatsapp' },
             { id: 'pinterest', enabled: false, label: 'Pinterest' },
             { id: 'reddit', enabled: false, label: 'Reddit' },
-            { id: 'email', enabled: false, label: 'Email' }
         ]
     },
     iconSize: {
         type: 'number',
-        default: 24
-    },
-    iconSpacing: {
-        type: 'number',
-        default: 10
-    },
-    iconColor: {
-        type: 'string',
-        default: '#333333'
-    },
-    iconBgColor: {
-        type: 'string',
-        default: '#ffffff'
+        default: 20
     },
     displayStyle: {
         type: 'string',

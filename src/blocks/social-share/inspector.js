@@ -21,10 +21,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         shareNetworks,
-        iconSize,
-        iconSpacing,
-        iconColor,
-        iconBgColor,
         displayStyle,
         alignment
     } = attributes;
@@ -53,19 +49,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {`
-                    .${blockID} .social-share-icon {
-                        font-size: ${iconSize}px;
-                        margin-right: ${iconSpacing}px;
-                        color: ${iconColor};
-                        background-color: ${iconBgColor};
-                    }
-                    .${blockID} .social-share-container {
-                        text-align: ${alignment};
-                    }
-                `}
-            </style>
+            
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -132,33 +116,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
-                                            <RangeControl
-                                                label={__("Icon Size (px)")}
-                                                value={iconSize}
-                                                onChange={(value) => setAttributes({ iconSize: value })}
-                                                min={16}
-                                                max={64}
-                                            />
                                             
-                                            <RangeControl
-                                                label={__("Spacing Between Icons (px)")}
-                                                value={iconSpacing}
-                                                onChange={(value) => setAttributes({ iconSpacing: value })}
-                                                min={0}
-                                                max={50}
-                                            />
-                                            
-                                            <p>{__("Icon Color")}</p>
-                                            <ColorPalette
-                                                value={iconColor}
-                                                onChange={(color) => setAttributes({ iconColor: color })}
-                                            />
-                                            
-                                            <p>{__("Icon Background Color")}</p>
-                                            <ColorPalette
-                                                value={iconBgColor}
-                                                onChange={(color) => setAttributes({ iconBgColor: color })}
-                                            />
                                         </PanelBody>
                                     </>
                                 )}
