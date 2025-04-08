@@ -1,0 +1,143 @@
+.fb-table-of-contents-block {
+    position: relative;
+    border: 1px solid #D5D7DA;
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    background-color: #E9EAEB;
+    margin-bottom: 2em;
+    
+    .fb-toc-title {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 1.2em;
+        font-weight: 600;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+    }
+    
+    .fb-toc-collapse-toggle {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        cursor: pointer;
+        
+        .dashicons {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+    
+    .fb-toc-content {
+        overflow-y: auto;
+        
+        &.collapsed {
+            display: none;
+        }
+    }
+    
+    .fb-toc-list {
+        margin: 0;
+        padding-left: 20px;
+        
+        &.list-style-none {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        &.list-style-disc {
+            list-style-type: disc;
+        }
+        
+        &.list-style-circle {
+            list-style-type: circle;
+        }
+        
+        &.list-style-square {
+            list-style-type: square;
+        }
+        
+        &.list-style-decimal {
+            list-style-type: decimal;
+        }
+    }
+    
+    .fb-toc-empty {
+        font-style: italic;
+        color: #777;
+    }
+    
+    .fb-toc-mobile-toggle {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #2271b1;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 0 4px 4px 0;
+        z-index: 999;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        
+        .dashicons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-size: 18px;
+        }
+    }
+}
+
+// Only show mobile toggle in editor preview
+@media (max-width: 768px) {
+    .fb-table-of-contents-block.collapsible-mobile {
+        .fb-toc-mobile-toggle {
+            display: flex;
+        }
+        
+        .fb-toc-container.hidden-mobile {
+            display: none;
+        }
+    }
+}
+
+// Editor-specific styles for better visualization
+.editor-styles-wrapper {
+    .fb-table-of-contents-block {
+        &.sticky-desktop {
+            position: relative; // Don't actually make it sticky in the editor
+            
+            &::before {
+                content: "Desktop: Sticky";
+                position: absolute;
+                top: -22px;
+                left: 0;
+                background-color: #2271b1;
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+        }
+        
+        &.collapsible-mobile {
+            &::after {
+                content: "Mobile: Collapsible";
+                position: absolute;
+                top: -22px;
+                right: 0;
+                background-color: #d63638;
+                color: white;
+                font-size: 10px;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+        }
+    }
+}
