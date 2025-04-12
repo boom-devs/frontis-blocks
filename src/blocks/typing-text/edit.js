@@ -1,0 +1,123 @@
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useRef, useEffect } from '@wordpress/element';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import Inspector from "./inspector";
+import './editor.scss';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+export default function Edit({ attributes, setAttributes, clientId }) {
+    const { 
+        blockId,
+        typingTextItems,
+        typingTextPrefix,
+        typingTextPrefixTag,
+        typingTextCursorSwitch,
+        typingTextCursor,
+        typingTextSuffix,
+        typingTextSuffixTag,
+
+    } = attributes;
+
+    const blockProps = useBlockProps({
+        className: `fb-typing-text-main-wrapper ${blockId}`,
+    });
+
+    /**
+     * Manages tab button settings and switches to block settings on click
+     */
+    const panelRef = useRef(null);
+    SwitchToBlockSettings(panelRef);
+
+    // Ref for the dynamic typed text span
+    const typedTextRef = useRef(null);
+
+    useEffect(() => {
+        // যদি typingTextItems না থাকে বা খালি থাকে, তাহলে টাইপিং এফেক্ট চালু হবে না
+        if (!typingTextItems || typingTextItems.length === 0) {
+            return;
+        }
+
+        let currentItem = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let timeoutId;
+
+        function typeEffect() {
+            // Get the current text from typingTextItems
+            const currentText = typingTextItems[currentItem].typingTextTitle;
+            // Determine the substring to display
+            const displayText = currentText.substring(0, charIndex);
+            if (typedTextRef.current) {
+                typedTextRef.current.textContent = displayText;
+            }
+            // Typing phase
+            if (!isDeleting) {
+                if (charIndex < currentText.length) {
+                    charIndex++;
+                    timeoutId = setTimeout(typeEffect, 100);
+                } else {
+                    isDeleting = true;
+                    timeoutId = setTimeout(typeEffect, 1000); 
+                }
+            } else {
+                if (charIndex > 0) {
+                    charIndex--;
+                    timeoutId = setTimeout(typeEffect, 50); 
+                } else {
+                    isDeleting = false;
+                    currentItem = (currentItem + 1) % typingTextItems.length;
+                    timeoutId = setTimeout(typeEffect, 500);
+                }
+            }
+        }
+
+        typeEffect();
+        return () => clearTimeout(timeoutId);
+    }, [typingTextItems]);
+
+    return (
+        <>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
+            
+            <div {...blockProps}>
+                <div className={`fb-parent-wrapper`} ref={panelRef}>
+                    <div className="fb-typing-text-wrapper">
+                        {typingTextPrefix && (
+                            <RichText
+                                tagName={typingTextPrefixTag}
+                                className="fb-typing-text-prefix"
+                                value={typingTextPrefix}
+                                onChange={(value) => setAttributes({ typingTextPrefix: value })}
+                            />
+                        )}
+                        {typingTextItems && typingTextItems.length > 0 && (
+                            <span className="fb-typing-texts" ref={typedTextRef}></span>
+                        )}
+                        {typingTextCursorSwitch ? (
+                            typingTextCursor && (
+                                <span className="fb-typing-text-cursor">
+                                    {' '}{typingTextCursor}{' '}
+                                </span>
+                            )
+                        ) : (
+                            <span>{' '}</span>
+                        )}
+                        {typingTextSuffix && (
+                            <RichText
+                                tagName={typingTextSuffixTag}
+                                className="fb-typing-text-suffix"
+                                value={typingTextSuffix}
+                                onChange={(value) => setAttributes({ typingTextSuffix: value })}
+                            />
+                        )}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
