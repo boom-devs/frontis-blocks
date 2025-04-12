@@ -496,7 +496,20 @@ class BlockList
                 'demo'      => 'https://wpmessiah.com/',
                 'complete'  => 'true',
                 'child'     => 'false',
-            ]
+            ],
+            'typing-text' => [
+                'slug'      => 'typing-text',
+                'title'     => 'Typing Text',
+                'package'   => 'free',
+                'category'  => 'content',
+                'badge'     => 'Freemium',
+                'status'    => 'true',
+                'icon'      => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
+                'doc'       => 'https://wpmessiah.com/',
+                'demo'      => 'https://wpmessiah.com/',
+                'complete'  => 'true',
+                'child'     => 'false',
+            ],
         ];
 		$this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
 	}
