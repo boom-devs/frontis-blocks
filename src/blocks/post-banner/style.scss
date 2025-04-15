@@ -1,0 +1,85 @@
+.fb-post-banner-container {
+    color: #000000;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+    .fb-post-banner-content {
+        position: relative;
+        z-index: 2;
+        .fb-post-category {
+            text-align: center;
+
+            .fb-post-category-name {
+                color: #FDFDFD;
+                font-family: "Radio Canada Big";
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 16px;
+                letter-spacing: 1.33px;
+                text-transform: uppercase;
+                padding: 5px 12px;
+                background-color: #040DBF;
+                border-radius: 24px;
+            }
+        }
+
+        .fb-post-title {
+            padding: 20px 0 38px 0;
+            text-align: center;
+
+            .fb-post-title-name {
+                color: #000000;
+                font-family: var(--fb-global-h1--font-family);
+                font-size: var(--fb-global-h1--font-size);
+                font-weight: var(--fb-global-h1--font-weight);
+                letter-spacing: var(--fb-global-h1--font-letter-spacing);
+                line-height: var(--fb-global-h1--font-line-height);
+                margin: 0px 0px 0px 0px;
+                border: none;
+                transition: all .3s ease-in-out;
+            }
+        }
+
+        .fb-post-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+
+            .fb-post-author-avatar {
+                border-radius: 50%;
+            }
+
+            .fb-post-author-info,
+            .fb-post-author-meta {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .fb-post-category-name,
+            .fb-post-title h1,
+            .fb-post-author-name,
+            .fb-post-date {
+                color: #000;
+            }
+            .fb-post-author-seperator {
+                line-height: 0;
+            }
+        }
+    }
+}
+.fb-post-banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(245, 245, 245, 0.00) 0%, rgba(245, 245, 245, 0.90) 75%, #F5F5F5 95.17%);
+}
