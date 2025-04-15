@@ -1,0 +1,71 @@
+// Code block frontend styles
+.fb-code-block {
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    .code-container {
+        position: relative;
+        
+        &.with-line-numbers {
+            display: flex;
+            
+            .line-numbers-wrapper {
+                display: flex;
+                flex-direction: column;
+                padding: 15px 8px;
+                background-color: rgba(0, 0, 0, 0.05);
+                text-align: right;
+                user-select: none;
+                border-right: 1px solid rgba(0, 0, 0, 0.1);
+                min-width: 40px;
+                
+                .line-number {
+                    color: rgba(0, 0, 0, 0.4);
+                    font-size: 12px;
+                    line-height: 1.5;
+                    
+                    &::before {
+                        content: attr(data-line);
+                    }
+                }
+            }
+        }
+    }
+    
+    pre {
+        margin: 0;
+        padding: 15px;
+        overflow: auto;
+        flex: 1;
+    }
+    
+    code {
+        font-family: 'Courier New', Courier, monospace;
+        white-space: pre;
+        word-spacing: normal;
+        word-break: normal;
+        word-wrap: normal;
+        tab-size: 4;
+        hyphens: none;
+        display: block;
+    }
+    
+    // Token styles for syntax highlighting
+    .token {
+        &.comment { font-style: italic; }
+        &.keyword { font-weight: bold; }
+        &.string { }
+        &.number { }
+        &.function { }
+        &.tag { }
+        &.attribute { }
+        &.property { }
+        &.bracket { }
+        &.operator { }
+        &.variable { }
+        &.selector { }
+        &.value { }
+    }
+}
