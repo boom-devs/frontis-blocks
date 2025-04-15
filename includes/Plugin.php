@@ -93,40 +93,26 @@ final class Plugin
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
         add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
+		
+		add_action('wp_head', [$this, 'add_preconnect_to_head']);
+	}
+	
+	
+	function add_preconnect_to_head() {
+		// Enqueue google fonts
+		$google_font_url = get_option('fb_google_fonts_url');
+		if ($google_font_url) {
+    		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+    		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+    		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+		}
 	}
 
 	public function enqueue_scripts()
 	{
-
-		// Enqueue google fonts
-		$google_font_url = get_option('fb_google_fonts_url');
-
-		if ($google_font_url) {
-			wp_enqueue_style(
-				'frontis-blocks-preconnect',
-				'https://fonts.googleapis.com',
-				[],
-				null
-			);
-
-			wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
-			wp_enqueue_style(
-				'frontis-blocks-google-fonts',
-				$google_font_url,
-				[],
-				FB_VERSION
-			);
-		}
-
 		$page_name = Helper::get_page_name();
 
-		if($page_name === NULL) {
-			global $pagenow;
-			
-			if($pagenow === 'index.php') {
-				$page_name = 'home';
-			}
-		}
 
 		$upload_dir = wp_upload_dir();
 
