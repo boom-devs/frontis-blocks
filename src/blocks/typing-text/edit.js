@@ -1,14 +1,16 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { useRef, useEffect } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
+        typingTextAlignment,
         typingTextItems,
         typingTextPrefix,
         typingTextPrefixTag,
@@ -22,6 +24,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const blockProps = useBlockProps({
         className: `fb-typing-text-main-wrapper ${blockId}`,
     });
+
+    const deviceType = useDeviceType();
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -83,6 +87,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
+
+            <BlockControls>
+                <AlignmentToolbar
+                    value={typingTextAlignment[deviceType]}
+                    onChange={(value) => setAttributes({ typingTextAlignment: { ...typingTextAlignment, [deviceType]: value } })}
+                    controls={['left', 'center', 'right']}
+                />
+            </BlockControls>
             
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper`} ref={panelRef}>
