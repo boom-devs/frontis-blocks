@@ -480,5 +480,15 @@ const attributes = {
         default: true
     },
     /** End Typing Text Border */
+
+    /** Start Typing Text Global Z-Index */
+    typingTextGlobalZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
 }
 export default attributes;
