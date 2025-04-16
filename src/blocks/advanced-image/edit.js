@@ -10,6 +10,7 @@ import {
 	MediaUploadCheck,
 } from "@wordpress/block-editor";
 import { upload } from "@wordpress/icons";
+import { useEffect } from "@wordpress/element";
 
 /**
  * Internal dependencies
@@ -17,17 +18,20 @@ import { upload } from "@wordpress/icons";
 import Inspector from "./inspector";
 import "./editor.scss";
 import { Button, ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import generateSrcSet from "@Utils/generateSrcSet";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		image,
-		imageId,
 		imageLink,
-		imageAlt,
+		advancedImageUrl,
+		advancedImageId,
+		advancedImageAlt,
+		advancedImageDefaultWidth,
+		advancedImageDefaultHeight,
+		advancedImageSrcSet,
 		imageCaption,
 		imageWidth,
-		imageUrl,
 		imgRounded,
 		imgSquare,
 		imgCircle,
@@ -57,9 +61,47 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const blockProps = useBlockProps({
         className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
     });
+
+	useEffect(() => {
+		// Parse the srcset string to extract dimensions from the last item
+		if (advancedImageSrcSet) {
+		  const srcsetItems = advancedImageSrcSet.split(', ');
+		  const lastItem = srcsetItems[srcsetItems.length - 1];
+		  
+		  // Extract width and height from the last item
+		  const widthMatch = lastItem.match(/(\d+)w/);
+		  const heightMatch = lastItem.match(/(\d+)h/);
+		  
+		  if (widthMatch && heightMatch) {
+			const width = parseInt(widthMatch[1], 10);
+			const height = parseInt(heightMatch[1], 10);
+			
+			// Now you can set these as global variables or use them as needed
+			setAttributes({
+				advancedImageDefaultWidth: width,
+				advancedImageDefaultHeight: height,
+			});
+		  }
+		}
+	}, [advancedImageSrcSet]);
+
+	/**
+	 * Callback: Media Upload
+	 */
+		const onSelectImage = (media) => {
+			const newSrcSet = generateSrcSet(media.sizes);
+			setAttributes({
+				advancedImageUrl: media.url,
+				advancedImageId: media.id,
+				advancedImageAlt: media.alt || '',
+				advancedImageSrcSet: newSrcSet,
+			});
+		};
+
 	const handleImageClick = (e) => {
 		e.preventDefault();
 	};
+
 
 	return (
 		<>
@@ -67,31 +109,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
+				onSelectImage={onSelectImage}
 			/>
 			<BlockControls>
-				{imageUrl && (
+				{advancedImageUrl && (
 					<ToolbarGroup>
 						<ToolbarButton
 							onClick={() =>
 								setAttributes({
-									imageId: "",
-									imageUrl: "",
-									imageAlt: "",
+									advancedImageId: "",
+									advancedImageUrl: "",
+									advancedImageAlt: "",
+									advancedImageDefaultWidth: "",
+									advancedImageDefaultHeight: "",
+									advancedImageSrcSet: "",
 								})
 							}
 							icon="trash"
 						/>
 						<MediaUploadCheck>
 							<MediaUpload
-								onSelect={(media) =>
-									setAttributes({
-										imageId: media.id,
-										imageUrl: media.url,
-										imageAlt: media.alt,
-									})
-								}
+								onSelect={onSelectImage}
 								allowedTypes={["image"]}
-								value={imageId}
+								value={advancedImageId}
 								render={({ open }) => (
 									<ToolbarButton onClick={open} icon="edit" />
 								)}
@@ -104,12 +144,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
 					<div
-						className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition} ${
+						className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${imageFit || ''} ${titlePosition || ''} ${
 							showOverlay ? "overlay-simple" : ""
 						}`}
 					>
 						<div className="fb-advanced-image-inner">
-							{imageUrl ? (
+							{advancedImageUrl ? (
 								linkSwitch ? (
 									<a
 										href={linkUrl}
@@ -117,20 +157,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										rel={linkTargetUrl ? "noopener noreferrer" : undefined}
 										onClick={handleImageClick}
 									>
-										<img src={imageUrl} alt={imageAlt} />
+										<img
+											width={advancedImageDefaultWidth}
+											height={advancedImageDefaultHeight}
+											src={advancedImageUrl}
+											alt={advancedImageAlt}
+											srcSet={advancedImageSrcSet || undefined}
+										/>
 									</a>
 								) : (
-									<img src={imageUrl} alt={imageAlt} />
+									<img 
+										width={advancedImageDefaultWidth} 
+										height={advancedImageDefaultHeight} 
+										src={advancedImageUrl} 
+										alt={advancedImageAlt} 
+										srcset={advancedImageSrcSet || undefined}
+									/>
 								)
 							) : (
 								<MediaPlaceholder
-									onSelect={(media) =>
-										setAttributes({
-											imageId: media.id,
-											imageUrl: media.url,
-											imageAlt: media.alt,
-										})
-									}
+									onSelect={onSelectImage}
 									allowedTypes={["image"]}
 									multiple={false}
 									labels={{ title: "Add Image" }}
