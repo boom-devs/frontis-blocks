@@ -31,6 +31,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_ImageControl from '@Components/image-control';
 
 
 import { useEffect, useMemo, useState } from "@wordpress/element";
@@ -44,7 +45,7 @@ import {
 } from "./constants/constants";
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
 	const {
 		blockID,
 		// deviceType,
@@ -83,9 +84,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaSize,
 		mediaSizeUnits,
 		mediaHeightUnits,
-		imageUrl,
-		imageAlt,
-		imageId,
+		advancedImageUrl,
+		advancedImageAlt,
+		advancedImageId,
+		advancedImageDefaultWidth,
+		advancedImageDefaultHeight,
+		advancedImageSrcSet,
 		linkUrl,
 		linkTargetUrl,
 		imageHover,
@@ -244,6 +248,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		advancedImageVRTopOffsetUnits,
 		advancedImageVRBottomOffset,
 		advancedImageVRBottomOffsetUnits,
+
+		advancedImageLazyLoadSwitcher,
+		smartLazyLoadSwitcher,
+		smartLazyLoadImageUrl,
+		smartLazyLoadImageId,
+		smartLazyLoadImageAlt,
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -261,29 +271,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			loadGoogleFont(headingFontFamily);
 		}
 	}, [headingFontFamily]);
-
-	
-	/** Image **/
-	// if (typeof FrontisBlocksData !== 'undefined') {
-	// 	const imageMapping = {
-	// 		'irregular-blob': FrontisBlocksData.pluginUrl + 'assets/images/irregular-blob.svg',
-	// 		'abstract': FrontisBlocksData.pluginUrl + 'assets/images/abstract.svg',
-	// 		'container': FrontisBlocksData.pluginUrl + 'assets/images/container.svg',
-	// 		'triangle-blob': FrontisBlocksData.pluginUrl + 'assets/images/triangle-blob.svg',
-	// 		'overlaped-blob': FrontisBlocksData.pluginUrl + 'assets/images/overlaped-blob.svg',
-	// 		'seperate-blob': FrontisBlocksData.pluginUrl + 'assets/images/seperate-blob.svg',
-	// 		'pattern': FrontisBlocksData.pluginUrl + 'assets/images/pattern.svg',
-	// 	};
-	
-	// 	// Apply the URLs dynamically to each element
-	// 	Object.entries(imageMapping).forEach(([className, imageUrl]) => {
-	// 		const targetElements = document.querySelectorAll(`.fb-advanced-image.${className} .fb-advanced-image-inner`);
-	// 		targetElements.forEach(element => {
-	// 			element.style.maskImage = `url(${imageUrl})`;
-	// 			element.style.webkitMaskImage = `url(${imageUrl})`;
-	// 		});
-	// 	});
-	// }
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1280,15 +1267,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											label={__("Image", "frontis-blocks")}
 											className="fb-advanced-heading-bg-image"
                                             >
-                                                {imageUrl ? (
-                                                    <div className="fb-image-avatar-control" style={{backgroundImage: `url(${imageUrl})`}}>
+                                                {advancedImageUrl ? (
+                                                    <div className="fb-image-avatar-control" style={{backgroundImage: `url(${advancedImageUrl})`}}>
                                                         <button
                                                             className='fb-image-avatar-delete'
                                                             onClick={() => {
                                                                 setAttributes({
-                                                                    imageUrl: null,
-                                                                    imageAlt: null,
-                                                                    imageId: null,
+                                                                    advancedImageUrl: null,
+                                                                    advancedImageAlt: null,
+                                                                    advancedImageId: null,
+                                                                    advancedImageSrcSet: null,
                                                                 });
                                                             }}
                                                         >
@@ -1310,11 +1298,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                                 mediaUploader.on('select', function() {
                                                                     const attachment = mediaUploader.state().get('selection').first().toJSON();
-                                                                    setAttributes({
-                                                                        imageUrl: attachment.url,
-                                                                        imageAlt: attachment.alt,
-                                                                        imageId: attachment.id,
-                                                                    });
+                                                                    onSelectImage(attachment);
                                                                 });
 
                                                                 mediaUploader.open();
@@ -1341,11 +1325,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                             mediaUploader.on('select', function() {
                                                                 const attachment = mediaUploader.state().get('selection').first().toJSON();
-                                                                setAttributes({
-                                                                    imageUrl: attachment.url,
-                                                                    imageAlt: attachment.alt,
-                                                                    imageId: attachment.id,
-                                                                });
+                                                                onSelectImage(attachment);
                                                             });
 
                                                             mediaUploader.open();
@@ -1463,6 +1443,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes({ imageHover: value })
 													}
 													__nextHasNoMarginBottom
+												/>
+
+												<ToggleControl
+													label={__("Smart Lazy Load", "frontis-block")}
+													checked={smartLazyLoadSwitcher}
+													onChange={(value) => {
+														setAttributes({ smartLazyLoadSwitcher: value });
+													}}
+												/>
+												{smartLazyLoadSwitcher && (
+													<FB_ImageControl
+														label={__("Upload Lazy Load Image", "frontis-blocks")}
+														globalImageUrl={smartLazyLoadImageUrl}
+														setglobalImageUrl={(value) => setAttributes({ smartLazyLoadImageUrl: value })}
+														globalImageAlt={smartLazyLoadImageAlt}
+														setglobalImageAlt={(value) => setAttributes({ smartLazyLoadImageAlt: value })}
+														globalImageID={smartLazyLoadImageId}
+														setglobalImageID={(value) => setAttributes({ smartLazyLoadImageId: value })}
+														isImageSize={false}
+													/>
+												)}
+
+												<ToggleControl
+													label={__("Lazy Load", "frontis-block")}
+													checked={advancedImageLazyLoadSwitcher}
+													onChange={(value) => {
+														setAttributes({ advancedImageLazyLoadSwitcher: value });
+													}}
 												/>
 											</PanelBody>
 										</div>

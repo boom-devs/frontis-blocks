@@ -11,37 +11,36 @@ const attributes = {
         type: "string",
         default: "preset-1",
     },
-	imageId: {
-		"type": "number"
-	},
-	imageAlt: {
-		"type": "string",
-		"source": "attribute",
-		"selector": "img",
-		"attribute": "alt",
-		"default": ""
-	},
 	imageStyle: {
 		type: "string",
 		default: ""
 	},
-	image: {
-		type: "object",
-		default: {
-			id: "",
-			url: "",
-			alt: "",
-		},
-	},
-	imageUrl : {
+	/** Image URL and ID and alt */
+	advancedImageUrl : {
 		type: "string",
+		default: "",
 	},
-	imageAlter : {
+	advancedImageId: {
 		type: "string",
+		default: "",
 	},
-	imageID : {
+	advancedImageAlt: {
+		type: "string",
+		default: ""
+	},
+	advancedImageDefaultWidth: {
 		type: "number",
+		default: 0,
 	},
+	advancedImageDefaultHeight: {
+		type: "number",
+		default: 0,
+	},
+	advancedImageSrcSet: {
+		type: "string",
+		default: "",
+	},
+	/** Image Size */
 	mediaSize: {
 		type: 'object',
 		default: {
@@ -1181,5 +1180,26 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+	advancedImageLazyLoadSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	smartLazyLoadSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	smartLazyLoadImageUrl : {
+		type: "string",
+		default: "",
+	},
+	smartLazyLoadImageId: {
+		type: "string",
+		default: "",
+	},
+	smartLazyLoadImageAlt: {
+		type: "string",
+		default: ""
+	},
 }
 export default attributes;
