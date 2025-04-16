@@ -93,12 +93,11 @@ final class Plugin
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
         add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
-		
 		add_action('wp_head', [$this, 'add_preconnect_to_head']);
 	}
 	
-	
 	function add_preconnect_to_head() {
+
 		// Enqueue google fonts
 		$google_font_url = get_option('fb_google_fonts_url');
 		if ($google_font_url) {
@@ -112,9 +111,19 @@ final class Plugin
 	public function enqueue_scripts()
 	{
 		$page_name = Helper::get_page_name();
-
-
 		$upload_dir = wp_upload_dir();
+		
+		if(is_search()) {
+		    $page_name = 'search';
+		}
+		
+		if(is_archive()) {
+		    $page_name = 'archive';
+		}
+		
+		if(is_404()) {
+		    $page_name = '404';
+		}
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
