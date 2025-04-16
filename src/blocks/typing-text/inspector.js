@@ -43,6 +43,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 import './editor.scss';
 
@@ -50,6 +51,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
+        typingTextAlignment,
         typingTextPrefix,
         typingTextPrefixTag,
         typingTextItems,
@@ -512,6 +514,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-typing-text-wrapper {
+            ${typingTextAlignment.Desktop ? `text-align: ${typingTextAlignment.Desktop};` : ''}
             ${textDesktopPaddingWidth && textDesktopPadding?.top ? `padding: ${textDesktopPaddingWidth};` : ''}
             ${textDesktopMarginWidth && textDesktopMargin?.top ? `margin: ${textDesktopMarginWidth};` : ''}
             ${textBorder ? `border: ${textBorder};` : ''}
@@ -594,6 +597,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-typing-text-wrapper {
+                ${typingTextAlignment.Tablet ? `text-align: ${typingTextAlignment.Tablet};` : ''}
                 ${textTabletPaddingWidth && textTabletPadding?.top ? `padding: ${textTabletPaddingWidth};` : ''}
                 ${textTabletMarginWidth && textTabletMargin?.top ? `margin: ${textTabletMarginWidth};` : ''}
                 ${textTabletBorderWidth && textTabletBorder?.top ? `border-width: ${textTabletBorderWidth};` : ''}
@@ -622,6 +626,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-typing-text-wrapper {
+                ${typingTextAlignment.Mobile ? `text-align: ${typingTextAlignment.Mobile};` : ''}
                 ${textMobilePaddingWidth && textMobilePadding?.top ? `padding: ${textMobilePaddingWidth};` : ''}
                 ${textMobileMarginWidth && textMobileMargin?.top ? `margin: ${textMobileMarginWidth};` : ''}
                 ${textMobileBorderWidth && textMobileBorder?.top ? `border-width: ${textMobileBorderWidth};` : ''}
@@ -645,6 +650,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     blockId,
     deviceType,
     blockStyle,
+    typingTextAlignment,
     typingTextPrefix,
     typingTextPrefixTag,
     typingTextItems,
@@ -795,6 +801,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === 'general' && (
                                     <>
                                         <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+
+                                            <FB_ResponsiveAlignmentControl
+                                                label={__("Alignment", "frontis-blocks")}
+                                                globalAlignment={typingTextAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ typingTextAlignment: value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
 
 											<TextControl
 												label={__("Prefix Text", "frontis-blocks")}
