@@ -424,7 +424,18 @@ class AssetsGenerator {
     public function generate_page_assets($post_id, $post) {
         $this->post_id = $post_id;
         $this->post = $post;
-
+        
+        
+        $templates = array('template-blog', 'archive', 'search', '404');
+        
+        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search' || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') {
+            $this->generate_global_assets();
+            $this->combine_static_assets();
+            $this->get_template_css();
+            $this->generate_all_blocks_assets();
+            $this->get_font_families();
+        }
+        
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
             $this->generate_global_assets();
             $this->combine_static_assets();
@@ -544,32 +555,75 @@ class AssetsGenerator {
         $fonts_families = array_merge($fonts_families, $this->block_fonts);
 
 
+        // if (!empty($fonts_families)) {
+        //     $font_url = "https://fonts.googleapis.com/css?family=";
+        //     $font_parts = [];
+        
+        //     foreach ($fonts_families as $font => $weights) {
+        //         if ($font === 'Default' || $font === 'default') {
+        //             continue;
+        //         }
+            
+        //         if (!is_array($weights)) {
+        //             $weights = [$weights]; // Ensure it's an array
+        //         }
+            
+        //         // Ensure 600 and 700 are included
+        //         $weights = array_unique(array_merge($weights, [600, 700]));
+            
+        //         $italic_weights = [];
+        //         foreach ($weights as $weight) {
+        //             $italic_weights[] = $weight . "i"; // Add italic version
+        //         }
+            
+        //         $all_weights = array_merge($weights, $italic_weights);
+        //         $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
+        //     }
+
+        // https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap
+        // https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..700;1,400..700&family=Radio+Canada+Big:ital,wght@0,..inherit;1,..inherit&display=swap
+        
+        //     $font_url .= implode("|", $font_parts);
+        //     update_option('fb_google_fonts_url', $font_url);
+        // }
+
         if (!empty($fonts_families)) {
-            $font_url = "https://fonts.googleapis.com/css?family=";
+            $font_url = "https://fonts.googleapis.com/css2?";
             $font_parts = [];
         
             foreach ($fonts_families as $font => $weights) {
                 if ($font === 'Default' || $font === 'default') {
                     continue;
                 }
-            
+                
                 if (!is_array($weights)) {
                     $weights = [$weights]; // Ensure it's an array
                 }
-            
-                // Ensure 600 and 700 are included
-                $weights = array_unique(array_merge($weights, [600, 700]));
-            
-                $italic_weights = [];
-                foreach ($weights as $weight) {
-                    $italic_weights[] = $weight . "i"; // Add italic version
+                
+                // Check if "inherit" is in weights
+                if (in_array('inherit', $weights) || in_array('..inherit', $weights)) {
+                    // Replace "inherit" with standard weight range
+                    $font_parts[] = "family=" . str_replace(' ', '+', $font) . 
+                                   ":ital,wght@0,400..700;1,400..700";
+                } else {
+                    // Ensure 600 and 700 are included
+                    $weights = array_unique(array_merge($weights, [600, 700]));
+                    
+                    // Sort weights for proper range formation
+                    sort($weights);
+                    
+                    // Find min and max weights for range notation
+                    $min_weight = min($weights);
+                    $max_weight = max($weights);
+                    
+                    // Format using the newer CSS2 API
+                    $font_parts[] = "family=" . str_replace(' ', '+', $font) . 
+                                   ":ital,wght@0," . $min_weight . ".." . $max_weight . 
+                                   ";1," . $min_weight . ".." . $max_weight;
                 }
-            
-                $all_weights = array_merge($weights, $italic_weights);
-                $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
             }
-        
-            $font_url .= implode("|", $font_parts);
+            
+            $font_url .= implode("&", $font_parts) . "&display=swap";
             update_option('fb_google_fonts_url', $font_url);
         }
     }
