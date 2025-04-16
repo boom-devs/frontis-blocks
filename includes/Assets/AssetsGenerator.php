@@ -424,7 +424,18 @@ class AssetsGenerator {
     public function generate_page_assets($post_id, $post) {
         $this->post_id = $post_id;
         $this->post = $post;
-
+        
+        
+        $templates = array('template-blog', 'archive', 'search', '404');
+        
+        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search' || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') {
+            $this->generate_global_assets();
+            $this->combine_static_assets();
+            $this->get_template_css();
+            $this->generate_all_blocks_assets();
+            $this->get_font_families();
+        }
+        
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
             $this->generate_global_assets();
             $this->combine_static_assets();
