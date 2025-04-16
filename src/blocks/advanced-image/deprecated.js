@@ -12,8 +12,8 @@ const v1_0_3 = {
     save({ attributes }) {
         const {
             blockID,
-            imageUrl,
-            imageAlt,
+            advancedImageUrl,
+            advancedImageAlt,
             linkSwitch,
             linkTargetUrl,
             linkUrl,
@@ -45,17 +45,17 @@ const v1_0_3 = {
                         <div
                             className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
                             <div className="fb-advanced-image-inner">
-                                {imageUrl ? (
+                                {advancedImageUrl ? (
                                     linkSwitch ? (
                                         <a
                                             href={linkUrl}
                                             target={linkTargetUrl ? '_blank' : undefined}
                                             rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
                                         >
-                                            <img src={imageUrl} alt={imageAlt}/>
+                                            <img src={advancedImageUrl} alt={advancedImageAlt}/>
                                         </a>
                                     ) : (
-                                        <img src={imageUrl} alt={imageAlt}/>
+                                        <img src={advancedImageUrl} alt={advancedImageAlt}/>
                                     )
                                 ) : null}
                             </div>
