@@ -10,7 +10,7 @@ const attributes = {
 
     typingTextPrefix: {
         type: "string",
-        default: "This is "
+        default: "We create "
     },
     typingTextPrefixTag: {
         type: "string",
@@ -21,19 +21,19 @@ const attributes = {
         default: [
             {
                 id: 'item-1',
-                typingTextTitle: 'Typing Text 1',
+                typingTextTitle: 'WordPress Plugins',
             },
             {
                 id: 'item-2',
-                typingTextTitle: 'Typing Text 2',
+                typingTextTitle: 'WordPress Themes',
             },
             {
                 id: 'item-3',
-                typingTextTitle: 'Typing Text 3',
+                typingTextTitle: 'WooCommerce Extensions',
             },
             {
                 id: 'item-4',
-                typingTextTitle: 'Typing Text 4',
+                typingTextTitle: 'Custom Web Solutions',
             },
         ],
         items: {
@@ -45,7 +45,7 @@ const attributes = {
                 },
                 typingTextTitle: {
                     type: "string",
-                    default: "Typing Text 1"
+                    default: "WordPress Plugins"
                 },
             }
         }
@@ -63,7 +63,7 @@ const attributes = {
 
     typingTextSuffix: {
         type: "string",
-        default: "Typing Text"
+        default: ""
     },
 
     typingTextSuffixTag: {
