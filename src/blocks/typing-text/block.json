@@ -9,8 +9,7 @@
 	"example": {},
     "supports": {
         "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
+		"align": ["wide", "full"]
     },
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
