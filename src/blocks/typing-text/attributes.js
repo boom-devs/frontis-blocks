@@ -7,6 +7,15 @@ const attributes = {
         type: "string",
         default: "",
     },
+    
+    typingTextAlignment: {
+        type: "object",
+        default: {
+            Desktop: "left",
+            Tablet: "left",
+            Mobile: "left",
+        },
+    },
 
     typingTextPrefix: {
         type: "string",
