@@ -136,6 +136,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         textMobileBorderRadius,
         textBorderRadiusLink,
 
+        // Typing Text Global Z-Index
+        typingTextGlobalZIndex,
+
     } = attributes;
 	
     const deviceType= useDeviceType();
@@ -503,6 +506,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
 
+        .${blockId}.fb-typing-text-main-wrapper {
+            position: relative;
+            ${typingTextGlobalZIndex.Desktop ? `z-index: ${typingTextGlobalZIndex.Desktop};` : ''}
+        }
 
         .${blockId} .fb-typing-text-wrapper {
             ${textDesktopPaddingWidth && textDesktopPadding?.top ? `padding: ${textDesktopPaddingWidth};` : ''}
@@ -582,6 +589,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
+            .${blockId}.fb-typing-text-main-wrapper {
+                ${typingTextGlobalZIndex.Tablet ? `z-index: ${typingTextGlobalZIndex.Tablet};` : ''}
+            }
+
             .${blockId} .fb-typing-text-wrapper {
                 ${textTabletPaddingWidth && textTabletPadding?.top ? `padding: ${textTabletPaddingWidth};` : ''}
                 ${textTabletMarginWidth && textTabletMargin?.top ? `margin: ${textTabletMarginWidth};` : ''}
@@ -605,6 +616,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         @media only screen and (max-width: 767px) {
+
+            .${blockId}.fb-typing-text-main-wrapper {
+                ${typingTextGlobalZIndex.Mobile ? `z-index: ${typingTextGlobalZIndex.Mobile};` : ''}
+            }
+
             .${blockId} .fb-typing-text-wrapper {
                 ${textMobilePaddingWidth && textMobilePadding?.top ? `padding: ${textMobilePaddingWidth};` : ''}
                 ${textMobileMarginWidth && textMobileMargin?.top ? `margin: ${textMobileMarginWidth};` : ''}
@@ -730,6 +746,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     textDesktopBorderRadiusWidth,
     textTabletBorderRadiusWidth,
     textMobileBorderRadiusWidth,
+
+    // Typing Text Global Z-Index
+    typingTextGlobalZIndex,
 
 
     ]);
@@ -1153,6 +1172,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													initialOpen={true}
 													className='fb-setting-z-index-header'
 												>
+
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={typingTextGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ typingTextGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
+
+                                                    />
 													
 												</PanelBody>
 											</div>
