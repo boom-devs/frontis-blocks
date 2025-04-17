@@ -43,6 +43,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 import './editor.scss';
 
@@ -50,13 +51,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
+        typingTextAlignment,
+        typingTextMainTag,
+        typingTextGap,
+        typingTextGapUnits,
         typingTextPrefix,
-        typingTextPrefixTag,
         typingTextItems,
         typingTextCursorSwitch,
         typingTextCursor,
         typingTextSuffix,
-        typingTextSuffixTag,
 
         // Normal Typing Text Style
         typingNormalTextGlobalTypographyData,
@@ -120,6 +123,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         textMobileMargin,
         textMarginLink,
 
+        // Background Color Attributes
+        typingGlobalBgColorSwitcher,
+        typingGlobalBgColor,
+        typingGlobalBgColorHover,
+
         // Typing Text Border
         textBorder,
         textBorderColorSwitcher,
@@ -138,6 +146,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         // Typing Text Global Z-Index
         typingTextGlobalZIndex,
+        typingTextGlobalWraperID,
+        typingTextGlobalWraperClass,
+        typingTextCustomCSS,
 
     } = attributes;
 	
@@ -512,6 +523,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-typing-text-wrapper {
+            display: flex;
+            align-items: center;
+            ${typingTextGap.Desktop && typingTextGapUnits.Desktop ? `gap: ${typingTextGap.Desktop}${typingTextGapUnits.Desktop};` : ''}
+            ${typingTextAlignment.Desktop ? `justify-content: ${typingTextAlignment.Desktop};` : ''}
+            ${typingGlobalBgColor ? `background-color: ${typingGlobalBgColor};` : ''}
             ${textDesktopPaddingWidth && textDesktopPadding?.top ? `padding: ${textDesktopPaddingWidth};` : ''}
             ${textDesktopMarginWidth && textDesktopMargin?.top ? `margin: ${textDesktopMarginWidth};` : ''}
             ${textBorder ? `border: ${textBorder};` : ''}
@@ -519,6 +535,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${textDesktopBorderRadiusWidth && textDesktopBorderRadius?.top ? `border-radius: ${textDesktopBorderRadiusWidth};` : ''}
             ${textBorderColor ? `border-color: ${textBorderColor};` : ''}
             transition: all .3s ease-in-out;
+        }
+        .${blockId} .fb-typing-text-wrapper:hover {
+            ${typingGlobalBgColorHover ? `background-color: ${typingGlobalBgColorHover};` : ''}
+        }
+
+        .${blockId} .fb-typing-text-wrapper .fb-typing-texts:empty {
+            display: none;
         }
 
         .${blockId} .fb-typing-text-wrapper:hover {
@@ -594,6 +617,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-typing-text-wrapper {
+                ${typingTextGap.Tablet && typingTextGapUnits.Tablet ? `gap: ${typingTextGap.Tablet}${typingTextGapUnits.Tablet};` : ''}
+                ${typingTextAlignment.Tablet ? `text-align: ${typingTextAlignment.Tablet};` : ''}
                 ${textTabletPaddingWidth && textTabletPadding?.top ? `padding: ${textTabletPaddingWidth};` : ''}
                 ${textTabletMarginWidth && textTabletMargin?.top ? `margin: ${textTabletMarginWidth};` : ''}
                 ${textTabletBorderWidth && textTabletBorder?.top ? `border-width: ${textTabletBorderWidth};` : ''}
@@ -607,7 +632,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${typingNormalTextGlobalTypoSwitcher.lineHeight === false && typingNormalTextLineHeight.Tablet && typingNormalTextLineHeightUnits.Tablet ? `line-height: ${typingNormalTextLineHeight.Tablet}${typingNormalTextLineHeightUnits.Tablet};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-texts {  
+            .${blockId} .fb-typing-text-wrapper .fb-typing-texts,
+            .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor {  
                 ${typingTextGlobalTypoSwitcher.fontSize === false && typingTextFontSize.Tablet && typingTextFontSizeUnits.Tablet ? `font-size: ${typingTextFontSize.Tablet}${typingTextFontSizeUnits.Tablet};` : ''}
                 ${typingTextGlobalTypoSwitcher.letterSpacing === false && typingTextLetterSpacing.Tablet && typingTextLetterSpacingUnits.Tablet ? `letter-spacing: ${typingTextLetterSpacing.Tablet}${typingTextLetterSpacingUnits.Tablet};` : ''}
                 ${typingTextGlobalTypoSwitcher.lineHeight === false && typingTextLineHeight.Tablet && typingTextLineHeightUnits.Tablet ? `line-height: ${typingTextLineHeight.Tablet}${typingTextLineHeightUnits.Tablet};` : ''}
@@ -622,6 +648,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-typing-text-wrapper {
+                ${typingTextGap.Mobile && typingTextGapUnits.Mobile ? `gap: ${typingTextGap.Mobile}${typingTextGapUnits.Mobile};` : ''}
+                ${typingTextAlignment.Mobile ? `text-align: ${typingTextAlignment.Mobile};` : ''}
                 ${textMobilePaddingWidth && textMobilePadding?.top ? `padding: ${textMobilePaddingWidth};` : ''}
                 ${textMobileMarginWidth && textMobileMargin?.top ? `margin: ${textMobileMarginWidth};` : ''}
                 ${textMobileBorderWidth && textMobileBorder?.top ? `border-width: ${textMobileBorderWidth};` : ''}
@@ -635,7 +663,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${typingNormalTextGlobalTypoSwitcher.lineHeight === false && typingNormalTextLineHeight.Mobile && typingNormalTextLineHeightUnits.Mobile ? `line-height: ${typingNormalTextLineHeight.Mobile}${typingNormalTextLineHeightUnits.Mobile};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-texts {  
+            .${blockId} .fb-typing-text-wrapper .fb-typing-texts,
+            .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor {  
                 ${typingTextGlobalTypoSwitcher.fontSize === false && typingTextFontSize.Mobile && typingTextFontSizeUnits.Mobile ? `font-size: ${typingTextFontSize.Mobile}${typingTextFontSizeUnits.Mobile};` : ''}
                 ${typingTextGlobalTypoSwitcher.letterSpacing === false && typingTextLetterSpacing.Mobile && typingTextLetterSpacingUnits.Mobile ? `letter-spacing: ${typingTextLetterSpacing.Mobile}${typingTextLetterSpacingUnits.Mobile};` : ''}
                 ${typingTextGlobalTypoSwitcher.lineHeight === false && typingTextLineHeight.Mobile && typingTextLineHeightUnits.Mobile ? `line-height: ${typingTextLineHeight.Mobile}${typingTextLineHeightUnits.Mobile};` : ''}
@@ -645,13 +674,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     blockId,
     deviceType,
     blockStyle,
+    typingTextAlignment,
+    typingTextGap,
+    typingTextGapUnits,
     typingTextPrefix,
-    typingTextPrefixTag,
     typingTextItems,
     typingTextCursorSwitch,
     typingTextCursor,
     typingTextSuffix,
-    typingTextSuffixTag,
 
     // Normal Typing Text Style
     typingNormalTextGlobalTypographyData,
@@ -721,6 +751,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     textTabletMarginWidth,
     textMobileMarginWidth,
 
+    // Background Color Attributes
+    typingGlobalBgColorSwitcher,
+    typingGlobalBgColor,
+    typingGlobalBgColorHover,
 
     // Typing Text Border
     textBorder,
@@ -753,12 +787,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     ]);
 
+    const customCss = getCustomCss(typingTextCustomCSS, `.${blockId}`);
+
 
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()}); 
-    }, [allBlockStyle] );
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()}); 
+    }, [allBlockStyle, customCss] );
 
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
     
 
     return (
@@ -796,6 +832,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <>
                                         <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
 
+                                            <FB_ResponsiveAlignmentControl
+                                                label={__("Alignment", "frontis-blocks")}
+                                                globalAlignment={typingTextAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ typingTextAlignment: value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_HtmlTagControl
+                                                label={__("Html Tag", "frontis-blocks")}
+                                                globalHtmlTag={typingTextMainTag}
+                                                setGlobalHtmlTag={(value) => setAttributes({ typingTextMainTag: value })}
+                                            />
+
 											<TextControl
 												label={__("Prefix Text", "frontis-blocks")}
 												value={typingTextPrefix}
@@ -803,11 +853,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												className="fb-typing-text-prefix" 
                                                 help={__("Keep empty to hide.", "frontis-blocks")}
 											/>
-                                            <FB_HtmlTagControl
-                                                label={__("Prefix Tag", "frontis-blocks")}
-                                                globalHtmlTag={typingTextPrefixTag}
-                                                setGlobalHtmlTag={(value) => setAttributes({ typingTextPrefixTag: value })}
-                                            />
 
                                             <BaseControl
                                                 label={__("Text Items", "frontis-blocks")}
@@ -831,7 +876,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         </SortableContext>
                                                     </DndContext>
                                                     <Button isPrimary onClick={handleAddItem}>
-                                                        {__("Add Typing Text Item", "frontis-blocks")}
+                                                        {__("Add Item", "frontis-blocks")}
                                                     </Button>
                                                 </div>
                                             </BaseControl>
@@ -859,10 +904,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												className="fb-typing-text-suffix" 
                                                 help={__("Keep empty to hide.", "frontis-blocks")}
 											/>
-                                            <FB_HtmlTagControl
-                                                label={__("Suffix Tag", "frontis-blocks")}
-                                                globalHtmlTag={typingTextSuffixTag}
-                                                setGlobalHtmlTag={(value) => setAttributes({ typingTextSuffixTag: value })}
+
+                                            <FB_Range
+                                                min={0}
+                                                max={100}
+                                                label={__("Text Gap", "frontis-blocks")}
+                                                rangeValue={typingTextGap}
+                                                onChangeHandler={(value) => setAttributes({ typingTextGap: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ typingTextGapUnits: value })}
+                                                deviceType={deviceType}
+                                                units={typingTextGapUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={"8"}
                                             />
                                         </PanelBody>
 
@@ -1074,92 +1128,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             
                                         </PanelBody>
 
-                                        <PanelBody title={__("Border & Border Radius", "frontis-blocks")} initialOpen={false}>
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={textBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ textBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={textBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ textBorderColorSwitcher: value })}
-                                            />
-
-                                            {textBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={textBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ textBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {textBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={textBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ textBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={textBorderUnitsHandler}
-                                                spacingUnits={textBorderUnits}
-                                                spacingDesktop={textDesktopBorder}
-                                                spacingTablet={textTabletBorder}
-                                                spacingMobile={textMobileBorder}
-                                                handleSpacingUnitHandler={textBorderUnitsChange}
-                                                spacingCombineBtn={textBorderLink}
-                                                spacingCombineBtnHandler={textBorderLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={textBorderRadiusUnitsHandler}
-                                                spacingUnits={textBorderRadiusUnits}
-                                                spacingDesktop={textDesktopBorderRadius}
-                                                spacingTablet={textTabletBorderRadius}
-                                                spacingMobile={textMobileBorderRadius}
-                                                handleSpacingUnitHandler={textBorderRadiusUnitsChange}
-                                                spacingCombineBtn={textBorderRadiusLink}
-                                                spacingCombineBtnHandler={textBorderRadiusLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
-                                        <PanelBody title={__("Padding & Margin", "frontis-blocks")} initialOpen={false}>
-                                            <FB_Spacing
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={textPaddingUnitsHandler}
-                                                spacingUnits={textPaddingUnits}
-                                                spacingDesktop={textDesktopPadding}
-                                                spacingTablet={textTabletPadding}
-                                                spacingMobile={textMobilePadding}
-                                                handleSpacingUnitHandler={textPaddingUnitsChange}
-                                                spacingCombineBtn={textPaddingLink}
-                                                spacingCombineBtnHandler={textPaddingLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={textMarginUnitsHandler}
-                                                spacingUnits={textMarginUnits}
-                                                spacingDesktop={textDesktopMargin}
-                                                spacingTablet={textTabletMargin}
-                                                spacingMobile={textMobileMargin}
-                                                handleSpacingUnitHandler={textMarginUnitsChange}
-                                                spacingCombineBtn={textMarginLink}
-                                                spacingCombineBtnHandler={textMarginLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
-
                                     </>
                                 )}
 
@@ -1186,8 +1154,144 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         isRangeUnit={false}
 
                                                     />
+
+                                                    <FB_InputControl
+														label={__("CSS ID", "frontis-blocks")}
+														value={typingTextGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ typingTextGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
+
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={typingTextGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ typingTextGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
 													
 												</PanelBody>
+
+                                                <PanelBody
+                                                    title={__("Background Color", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_SwitcherControl
+                                                        label={__("Background Color", "frontis-blocks")}
+                                                        globalSwitcher={typingGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ typingGlobalBgColorSwitcher: value })}
+                                                    />
+
+                                                    {typingGlobalBgColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={typingGlobalBgColor}
+                                                            setGlobalColor={(value) => setAttributes({ typingGlobalBgColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {typingGlobalBgColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={typingGlobalBgColorHover}
+                                                            setGlobalColor={(value) => setAttributes({ typingGlobalBgColorHover: value })}
+                                                        />
+                                                    )}
+												</PanelBody>
+                                                
+                                                <PanelBody title={__("Border & Border Radius", "frontis-blocks")} initialOpen={false}>
+                                                    <SelectControl
+                                                        label={__("Border Style", "frontis-blocks")}
+                                                        value={textBorder}
+                                                        options={BORDER_STYLES}
+                                                        onChange={(value) => setAttributes({ textBorder: value })}
+                                                    />
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Border Color", "frontis-blocks")}
+                                                        globalSwitcher={textBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ textBorderColorSwitcher: value })}
+                                                    />
+
+                                                    {textBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={textBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ textBorderColor: value })}
+                                                        />
+                                                    )}
+
+                                                    {textBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={textBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ textBorderHoverColor: value })}
+                                                        />
+                                                    )}
+
+                                                    <FB_Spacing
+                                                        label={__("Border", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={textBorderUnitsHandler}
+                                                        spacingUnits={textBorderUnits}
+                                                        spacingDesktop={textDesktopBorder}
+                                                        spacingTablet={textTabletBorder}
+                                                        spacingMobile={textMobileBorder}
+                                                        handleSpacingUnitHandler={textBorderUnitsChange}
+                                                        spacingCombineBtn={textBorderLink}
+                                                        spacingCombineBtnHandler={textBorderLinkBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                    <FB_Spacing
+                                                        label={__("Border Radius", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={textBorderRadiusUnitsHandler}
+                                                        spacingUnits={textBorderRadiusUnits}
+                                                        spacingDesktop={textDesktopBorderRadius}
+                                                        spacingTablet={textTabletBorderRadius}
+                                                        spacingMobile={textMobileBorderRadius}
+                                                        handleSpacingUnitHandler={textBorderRadiusUnitsChange}
+                                                        spacingCombineBtn={textBorderRadiusLink}
+                                                        spacingCombineBtnHandler={textBorderRadiusLinkBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                </PanelBody>
+                                                <PanelBody title={__("Padding & Margin", "frontis-blocks")} initialOpen={false}>
+                                                    <FB_Spacing
+                                                        label={__("Padding", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={textPaddingUnitsHandler}
+                                                        spacingUnits={textPaddingUnits}
+                                                        spacingDesktop={textDesktopPadding}
+                                                        spacingTablet={textTabletPadding}
+                                                        spacingMobile={textMobilePadding}
+                                                        handleSpacingUnitHandler={textPaddingUnitsChange}
+                                                        spacingCombineBtn={textPaddingLink}
+                                                        spacingCombineBtnHandler={textPaddingLinkBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                    <FB_Spacing
+                                                        label={__("Margin", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={textMarginUnitsHandler}
+                                                        spacingUnits={textMarginUnits}
+                                                        spacingDesktop={textDesktopMargin}
+                                                        spacingTablet={textTabletMargin}
+                                                        spacingMobile={textMobileMargin}
+                                                        handleSpacingUnitHandler={textMarginUnitsChange}
+                                                        spacingCombineBtn={textMarginLink}
+                                                        spacingCombineBtnHandler={textMarginLinkBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                </PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor  
+                                                        value={typingTextCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ typingTextCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
 											</div>
 										</div>
                                     </>

@@ -213,3 +213,102 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Function to initialize scroll tracking for TOC
+function initTOCScrollTracking() {
+    const tocBlocks = document.querySelectorAll('.fb-table-of-contents-block');
+    if (!tocBlocks.length) return;
+
+    // Get all headings that should be tracked
+    const tocBlock = tocBlocks[0]; // Using the first TOC block
+    const minLevel = parseInt(tocBlock.getAttribute('data-min-heading-level') || 2);
+    const maxLevel = parseInt(tocBlock.getAttribute('data-max-heading-level') || 4);
+    
+    // Build selector for headings
+    const headingSelectors = [];
+    for (let i = minLevel; i <= maxLevel; i++) {
+        headingSelectors.push(`h${i}`);
+    }
+    
+    const headingSelector = headingSelectors.join(',');
+    const headings = document.querySelectorAll(headingSelector);
+    
+    if (!headings.length) return;
+    
+    // Get all TOC links
+    const tocLinks = document.querySelectorAll('.fb-toc-container a');
+    if (!tocLinks.length) return;
+    
+    // Create a mapping of heading IDs to TOC links
+    const idToLinkMap = {};
+    tocLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            const id = href.substring(1);
+            idToLinkMap[id] = link;
+        }
+    });
+    
+    // Function to determine which heading is in view
+    function findActiveHeading() {
+        let activeHeadingId = null;
+        const scrollPosition = window.scrollY;
+        const offset = parseInt(tocBlock.getAttribute('data-sticky-offset') || 20) + 50; // Add extra offset for better UX
+        
+        // Find the heading that is currently at the top of the viewport
+        for (let i = 0; i < headings.length; i++) {
+            const heading = headings[i];
+            if (!heading.id) continue;
+            
+            const headingTop = heading.getBoundingClientRect().top + window.scrollY;
+            
+            // Check if we've scrolled past this heading
+            if (scrollPosition >= headingTop - offset) {
+                activeHeadingId = heading.id;
+            } else {
+                // We found the first heading that's below our scroll position
+                break;
+            }
+        }
+        
+        return activeHeadingId;
+    }
+    
+    // Function to update active class on TOC items
+    function updateActiveTOCItem() {
+        const activeHeadingId = findActiveHeading();
+        
+        // Remove active class from all TOC links
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Add active class to the link corresponding to the active heading
+        if (activeHeadingId && idToLinkMap[activeHeadingId]) {
+            idToLinkMap[activeHeadingId].classList.add('active');
+        }
+    }
+    
+    // Listen for scroll events
+    let isScrolling;
+    window.addEventListener('scroll', function() {
+        // Clear the timeout
+        window.clearTimeout(isScrolling);
+        
+        // Set a timeout to run after scrolling ends
+        isScrolling = setTimeout(function() {
+            updateActiveTOCItem();
+        }, 50);
+    });
+    
+    // Initialize active item on page load
+    window.addEventListener('load', updateActiveTOCItem);
+    
+    // Initial call to set active item
+    updateActiveTOCItem();
+}
+
+// Initialize when the DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    initTOCScrollTracking();
+});
