@@ -3,6 +3,13 @@
 namespace FrontisBlocks\Assets;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
+use Sabberworm\CSS\Parser;
+use Sabberworm\CSS\OutputFormat;
+use Sabberworm\CSS\CSSList\CSSList;
+use Sabberworm\CSS\RuleSet\DeclarationBlock;
+use Sabberworm\CSS\CSSList\AtRuleBlockList;
+
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 class AssetsGenerator {
     use Singleton;
@@ -15,6 +22,83 @@ class AssetsGenerator {
     private $gfonts = [];
     private $block_fonts = [];
     private $wp_template_css_content = '';
+
+    public function clean_CSS($css) {
+        $parser = new Parser($css);
+        $document = $parser->parse();
+
+        // Start processing from the document root
+        $this->processCSSList($document);
+
+        // Render cleaned CSS
+        return $document->render(OutputFormat::create()->indentWithSpaces(2));
+    }
+
+    private function processCSSList(CSSList $list) {
+        $contents = $list->getContents();
+        
+        // Step 1: Remove empty or invalid rules and collect declaration blocks
+        $declarationBlocks = [];
+        foreach ($contents as $index => $item) {
+            if ($item instanceof DeclarationBlock) {
+                // Remove empty or invalid rules
+                foreach ($item->getRules() as $rule) {
+                    $value = trim((string)$rule->getValue());
+                    if ($value === '' || $value === ';' || $value === 'Defaultpx') {
+                        $item->removeRule($rule);
+                    }
+                }
+                // Store declaration block if it has rules
+                if (count($item->getRules()) > 0) {
+                    $declarationBlocks[] = $item;
+                } else {
+                    // Remove empty block
+                    $list->remove($item);
+                }
+            } elseif ($item instanceof AtRuleBlockList) {
+                // Recursively process nested at-rules (e.g., media queries)
+                $this->processCSSList($item);
+                // Remove at-rule if it has no contents
+                if (count($item->getContents()) === 0) {
+                    $list->remove($item);
+                }
+            }
+        }
+
+        // Step 2: Group declaration blocks by their rule sets
+        $ruleSetGroups = [];
+        foreach ($declarationBlocks as $block) {
+            // Create a unique key for the rule set based on properties and values
+            $rules = $block->getRules();
+            usort($rules, function($a, $b) {
+                return strcmp($a->getRule(), $b->getRule());
+            }); // Sort rules by property name for consistent comparison
+            $ruleKey = '';
+            foreach ($rules as $rule) {
+                $ruleKey .= $rule->getRule() . ':' . trim((string)$rule->getValue()) . ';';
+            }
+            if (!isset($ruleSetGroups[$ruleKey])) {
+                $ruleSetGroups[$ruleKey] = [];
+            }
+            $ruleSetGroups[$ruleKey][] = $block;
+        }
+
+        // Step 3: Combine selectors for identical rule sets
+        foreach ($ruleSetGroups as $ruleKey => $blocks) {
+            if (count($blocks) > 1) {
+                // Keep the first block and combine selectors
+                $firstBlock = array_shift($blocks);
+                $combinedSelectors = $firstBlock->getSelectors();
+                foreach ($blocks as $block) {
+                    $combinedSelectors = array_merge($combinedSelectors, $block->getSelectors());
+                    // Remove the duplicate block
+                    $list->remove($block);
+                }
+                // Update the first block with combined selectors
+                $firstBlock->setSelectors($combinedSelectors);
+            }
+        }
+    }
 
     public static function generate_root_css($color_data, $typography_data) {
         
@@ -318,7 +402,7 @@ class AssetsGenerator {
             ";
         }
 
-        return $root_css;
+        return $this->clean_CSS($root_css);
     }
 
     public static function generate_global_assets() {
@@ -393,7 +477,7 @@ class AssetsGenerator {
             FROM 
                 {$wpdb->posts} 
             WHERE 
-                post_type IN ('wp_template_part', 'wp_template') 
+                post_type IN ('wp_template') 
                 AND post_status = 'publish' 
             ORDER BY 
                 post_modified DESC"
@@ -407,26 +491,41 @@ class AssetsGenerator {
                $this->generate_wp_template_css($template->post_content);
             }
         }
+    }
 
-        // $used_wp_template = get_post_meta($this->post_id, '_wp_page_template', true);
+    public function generate_header_footer() {
 
-        // if($used_wp_template) {
-        //     $upload_dir = wp_upload_dir();
-        //     $wp_template_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-        //     $wp_tempalte_css_file = $wp_template_dir . '/'.$used_wp_template.'/'.$used_wp_template.'.css';
+        global $wpdb;
+        $query = $wpdb->prepare(
+            "SELECT 
+                ID,
+                post_type,
+                post_name,
+                post_content 
+            FROM 
+                {$wpdb->posts} 
+            WHERE 
+                post_type IN ('wp_template_part') 
+                AND post_status = 'publish' 
+            ORDER BY 
+                post_modified DESC"
+        );
 
-        //     if (file_exists($wp_tempalte_css_file)) {
-        //         $this->css_content .= file_get_contents($wp_tempalte_css_file) . "\n";
-        //     }
-        // }
+        // Execute the query
+        $template_contents = $wpdb->get_results($query);
+
+        if ($template_contents) {
+            foreach ($template_contents as $template) {
+                $this->post = $template;
+                $this->post_id = $template->ID;
+                $this->generate_all_blocks_assets();
+            }
+        }
     }
 
     public function generate_page_assets($post_id, $post) {
         $this->post_id = $post_id;
         $this->post = $post;
-        
-        
-        $templates = array('template-blog', 'archive', 'search', '404');
         
         if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search' || get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') {
             $this->generate_global_assets();
@@ -443,45 +542,51 @@ class AssetsGenerator {
             $this->generate_all_blocks_assets();
             $this->get_font_families();
         }
+
+        $this->generate_header_footer();
     }
 
     public function generate_block_assets($block) {
         if (str_contains($block['blockName'], 'frontis-blocks')) {
-            $single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
-            if(!in_array($block['blockName'], $this->used_blocks)) {
 
-                // Css file
-                $block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
-                if(file_exists($block_static_css_file_path)) {
-                    $this->css_content .= file_get_contents($block_static_css_file_path) . "\n";
+            // if(get_post_type( $this->post_id ) !== 'wp_template_part') {
+                $single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
+                if(!in_array($block['blockName'], $this->used_blocks)) {
+    
+                    // Css file
+                    $block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
+                    if(file_exists($block_static_css_file_path)) {
+                        $this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
+                    }
+    
+                    // Js file
+                    $block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
+                    if(file_exists($block_static_js_file_path)) {
+                        $this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
+                    }
                 }
-
-                // Js file
-                $block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
-                if(file_exists($block_static_js_file_path)) {
-                    $this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
-                }
-            }
-
-            $this->used_blocks[] = $block['blockName'];
-
+    
+                $this->used_blocks[] = $block['blockName'];
+            // }
+            
             // Get the block attributes
             $block_attributes               = $block['attrs'];
             $blockStyle                     = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
 
-            $fonts        = Helper::get_fonts_family( $block_attributes );
-
-            if(!empty($fonts)) {
-                foreach($fonts as $font => $weight) {
-                    if(array_key_exists($font, $this->block_fonts)) {
-                        $this->block_fonts[$font][] = $weight;
-                    } else {
-                        $this->block_fonts[$font][] = $weight;
+            if(get_post_type( $this->post_id ) !== 'wp_template_part') {
+                $fonts        = Helper::get_fonts_family( $block_attributes );
+                if(!empty($fonts)) {
+                    foreach($fonts as $font => $weight) {
+                        if(array_key_exists($font, $this->block_fonts)) {
+                            $this->block_fonts[$font][] = $weight;
+                        } else {
+                            $this->block_fonts[$font][] = $weight;
+                        }
                     }
                 }
             }
 
-            $this->css_content .= $blockStyle . "\n";
+            $this->css_content .= $this->clean_CSS($blockStyle) . "\n";
         }
     }
 
@@ -516,10 +621,12 @@ class AssetsGenerator {
             wp_mkdir_p($css_dir);
         }
         
-        // Add global css
-        $global_css_file = $global_css_dir . '/global/global.css';
-        if(file_exists($global_css_file)) {
-            $this->css_content .= file_get_contents($global_css_file) . "\n";
+        if(get_post_type( $this->post_id ) !== 'wp_template_part') {
+            // Add global css
+            $global_css_file = $global_css_dir . '/global/global.css';
+            if(file_exists($global_css_file)) {
+                $this->css_content .= file_get_contents($global_css_file) . "\n";
+            }
         }
 
         // Css file
