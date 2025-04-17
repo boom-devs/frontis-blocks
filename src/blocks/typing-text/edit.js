@@ -37,7 +37,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const typedTextRef = useRef(null);
 
     useEffect(() => {
-        // যদি typingTextItems না থাকে বা খালি থাকে, তাহলে টাইপিং এফেক্ট চালু হবে না
         if (!typingTextItems || typingTextItems.length === 0) {
             return;
         }
