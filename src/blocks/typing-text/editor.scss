@@ -111,6 +111,10 @@ button {
     }
 }
 
+.fb-typing-text-wrapper {
+    margin: 0 !important;
+}
+
 // editor.scss
 .fb-typing-text-wrapper h1,
 .fb-typing-text-wrapper h2,
@@ -120,6 +124,7 @@ button {
 .fb-typing-text-wrapper h6,
 .fb-typing-text-wrapper p {
     display: inline-block;
+    margin: 0;
 }
 
 .fb-typing-text-cursor {

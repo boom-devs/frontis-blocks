@@ -12,12 +12,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         blockId,
         typingTextAlignment,
         typingTextItems,
+        typingTextMainTag,
         typingTextPrefix,
-        typingTextPrefixTag,
         typingTextCursorSwitch,
         typingTextCursor,
         typingTextSuffix,
-        typingTextSuffixTag,
+
+        typingTextGlobalWraperID,
+        typingTextGlobalWraperClass,
 
     } = attributes;
 
@@ -79,6 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return () => clearTimeout(timeoutId);
     }, [typingTextItems]);
 
+    const Tag = typingTextMainTag ? typingTextMainTag : "div";
+
     return (
         <>
             <Inspector
@@ -96,11 +100,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper`} ref={panelRef}>
-                    <div className="fb-typing-text-wrapper">
+                <div className={`fb-parent-wrapper ${typingTextGlobalWraperClass}`} id={typingTextGlobalWraperID} ref={panelRef}>
+                    <Tag className="fb-typing-text-wrapper">
                         {typingTextPrefix && (
                             <RichText
-                                tagName={typingTextPrefixTag}
+                                tagName="span"
                                 className="fb-typing-text-prefix"
                                 value={typingTextPrefix}
                                 onChange={(value) => setAttributes({ typingTextPrefix: value })}
@@ -109,24 +113,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {typingTextItems && typingTextItems.length > 0 && (
                             <span className="fb-typing-texts" ref={typedTextRef}></span>
                         )}
-                        {typingTextCursorSwitch ? (
+                        {typingTextCursorSwitch && (
                             typingTextCursor && (
                                 <span className="fb-typing-text-cursor">
-                                    {' '}{typingTextCursor}{' '}
+                                    {typingTextCursor}
                                 </span>
                             )
-                        ) : (
-                            <span>{' '}</span>
                         )}
                         {typingTextSuffix && (
                             <RichText
-                                tagName={typingTextSuffixTag}
+                                tagName="span"
                                 className="fb-typing-text-suffix"
                                 value={typingTextSuffix}
                                 onChange={(value) => setAttributes({ typingTextSuffix: value })}
                             />
                         )}
-                    </div>
+                    </Tag>
                 </div>
             </div>
         </>
