@@ -514,7 +514,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-typing-text-wrapper {
-            ${typingTextAlignment.Desktop ? `text-align: ${typingTextAlignment.Desktop};` : ''}
+            display: flex;
+            align-items: center;
+            ${typingTextAlignment.Desktop ? `justify-content: ${typingTextAlignment.Desktop};` : ''}
             ${textDesktopPaddingWidth && textDesktopPadding?.top ? `padding: ${textDesktopPaddingWidth};` : ''}
             ${textDesktopMarginWidth && textDesktopMargin?.top ? `margin: ${textDesktopMarginWidth};` : ''}
             ${textBorder ? `border: ${textBorder};` : ''}
