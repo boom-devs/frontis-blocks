@@ -4,25 +4,29 @@ export default function save({ attributes }) {
     const {
         blockId,
         typingTextItems,
+        typingTextMainTag,
         typingTextPrefix,
-        typingTextPrefixTag,
         typingTextCursorSwitch,
         typingTextCursor,
         typingTextSuffix,
-        typingTextSuffixTag,
+
+        typingTextGlobalWraperID,
+        typingTextGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
         className: `fb-typing-text-main-wrapper ${blockId}`,
     });
+
+    const Tag = typingTextMainTag ? typingTextMainTag : "div";
     
     return (
         <div {...blockProps}>
-            <div className="fb-parent-wrapper">
-                <div className="fb-typing-text-wrapper">
+            <div className={`fb-parent-wrapper ${typingTextGlobalWraperClass}`} id={typingTextGlobalWraperID}>
+                <Tag className="fb-typing-text-wrapper">
                     {typingTextPrefix && (
                         <RichText.Content
-                            tagName={typingTextPrefixTag}
+                            tagName="span"
                             className="fb-typing-text-prefix"
                             value={typingTextPrefix}
                         />
@@ -34,23 +38,21 @@ export default function save({ attributes }) {
                             </span>
                         ))}
                     </span>
-                    {typingTextCursorSwitch ? (
+                    {typingTextCursorSwitch && (
                         typingTextCursor && (
                             <span className="fb-typing-text-cursor">
-                                {' '}{typingTextCursor}{' '}
+                                {typingTextCursor}
                             </span>
                         )
-                    ) : (
-                        <span>{' '}</span>
                     )}
                     {typingTextSuffix && (
                         <RichText.Content
-                            tagName={typingTextSuffixTag}
+                            tagName="span"
                             className="fb-typing-text-suffix"
                             value={typingTextSuffix}
                         />
                     )}
-                </div>
+                </Tag>
             </div>
         </div>
     );

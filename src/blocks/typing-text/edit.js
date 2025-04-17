@@ -1,27 +1,33 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { useRef, useEffect } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import {useDeviceType} from "@Config/displayType";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
+        typingTextAlignment,
         typingTextItems,
+        typingTextMainTag,
         typingTextPrefix,
-        typingTextPrefixTag,
         typingTextCursorSwitch,
         typingTextCursor,
         typingTextSuffix,
-        typingTextSuffixTag,
+
+        typingTextGlobalWraperID,
+        typingTextGlobalWraperClass,
 
     } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-typing-text-main-wrapper ${blockId}`,
     });
+
+    const deviceType = useDeviceType();
 
     /**
      * Manages tab button settings and switches to block settings on click
@@ -33,7 +39,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const typedTextRef = useRef(null);
 
     useEffect(() => {
-        // যদি typingTextItems না থাকে বা খালি থাকে, তাহলে টাইপিং এফেক্ট চালু হবে না
         if (!typingTextItems || typingTextItems.length === 0) {
             return;
         }
@@ -76,6 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return () => clearTimeout(timeoutId);
     }, [typingTextItems]);
 
+    const Tag = typingTextMainTag ? typingTextMainTag : "div";
+
     return (
         <>
             <Inspector
@@ -83,13 +90,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
+
+            <BlockControls>
+                <AlignmentToolbar
+                    value={typingTextAlignment[deviceType]}
+                    onChange={(value) => setAttributes({ typingTextAlignment: { ...typingTextAlignment, [deviceType]: value } })}
+                    controls={['left', 'center', 'right']}
+                />
+            </BlockControls>
             
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper`} ref={panelRef}>
-                    <div className="fb-typing-text-wrapper">
+                <div className={`fb-parent-wrapper ${typingTextGlobalWraperClass}`} id={typingTextGlobalWraperID} ref={panelRef}>
+                    <Tag className="fb-typing-text-wrapper">
                         {typingTextPrefix && (
                             <RichText
-                                tagName={typingTextPrefixTag}
+                                tagName="span"
                                 className="fb-typing-text-prefix"
                                 value={typingTextPrefix}
                                 onChange={(value) => setAttributes({ typingTextPrefix: value })}
@@ -98,24 +113,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         {typingTextItems && typingTextItems.length > 0 && (
                             <span className="fb-typing-texts" ref={typedTextRef}></span>
                         )}
-                        {typingTextCursorSwitch ? (
+                        {typingTextCursorSwitch && (
                             typingTextCursor && (
                                 <span className="fb-typing-text-cursor">
-                                    {' '}{typingTextCursor}{' '}
+                                    {typingTextCursor}
                                 </span>
                             )
-                        ) : (
-                            <span>{' '}</span>
                         )}
                         {typingTextSuffix && (
                             <RichText
-                                tagName={typingTextSuffixTag}
+                                tagName="span"
                                 className="fb-typing-text-suffix"
                                 value={typingTextSuffix}
                                 onChange={(value) => setAttributes({ typingTextSuffix: value })}
                             />
                         )}
-                    </div>
+                    </Tag>
                 </div>
             </div>
         </>

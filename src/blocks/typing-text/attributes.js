@@ -7,14 +7,40 @@ const attributes = {
         type: "string",
         default: "",
     },
+    
+    typingTextAlignment: {
+        type: "object",
+        default: {
+            Desktop: "left",
+            Tablet: "left",
+            Mobile: "left",
+        },
+    },
+
+    typingTextMainTag: {
+        type: "string",
+        default: "span"
+    },
+    typingTextGap: {
+        type: "object",
+        default: {
+            Desktop: "8",
+            Tablet: "8",
+            Mobile: "8"
+        }
+    },
+    typingTextGapUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px"
+        }
+    },
 
     typingTextPrefix: {
         type: "string",
-        default: "We create "
-    },
-    typingTextPrefixTag: {
-        type: "string",
-        default: "span"
+        default: "We create"
     },
     typingTextItems: {
         type: "array",
@@ -64,11 +90,6 @@ const attributes = {
     typingTextSuffix: {
         type: "string",
         default: ""
-    },
-
-    typingTextSuffixTag: {
-        type: "string",
-        default: "span"
     },
 
     /** Start Normal Typing Text Style */
@@ -305,6 +326,19 @@ const attributes = {
     },
     /** End Typing Text Style */
 
+    typingGlobalBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    typingGlobalBgColor: {
+        type: 'string',
+        default: ""
+    },
+    typingGlobalBgColorHover: {
+        type: 'string',
+        default: ""
+    },
+
     /** Start Typing Text Margin & Padding */
     textPaddingUnits: {
         type: 'object',
@@ -489,6 +523,20 @@ const attributes = {
             Tablet: '',
             Mobile: ''
         }
+    },
+    /** Start Class & ID Setting */
+    typingTextGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+    typingTextGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+	/** End Class & ID Setting */
+    typingTextCustomCSS : {
+        type: "string",
+        default: "",
     },
 }
 export default attributes;
