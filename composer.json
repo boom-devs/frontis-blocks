@@ -8,6 +8,7 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "sabberworm/php-css-parser": "^8.8"
+        "sabberworm/php-css-parser": "^8.8",
+        "matthiasmullie/minify": "dev-master"
     }
 }

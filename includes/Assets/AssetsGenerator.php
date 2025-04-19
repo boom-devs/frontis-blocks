@@ -8,6 +8,7 @@ use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\RuleSet\DeclarationBlock;
 use Sabberworm\CSS\CSSList\AtRuleBlockList;
+use MatthiasMullie\Minify\CSS;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -682,10 +683,13 @@ class AssetsGenerator {
             }
         }
 
+        $minifier = new CSS($this->css_content);
+        $minified_css = $minifier->minify();
+
         // Css file
-        $css_file_name = $page_name . '.css';
+        $css_file_name = $page_name . '.min.css';
         $css_file = $css_dir . $css_file_name;
-        file_put_contents($css_file, $this->css_content);
+        file_put_contents($css_file, $minified_css);
 
         // Js file
         $js_file_name = $page_name . '.js';
