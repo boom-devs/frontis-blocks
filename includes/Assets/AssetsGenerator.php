@@ -494,32 +494,40 @@ class AssetsGenerator {
         }
     }
 
-    public function generate_header_footer() {
-
-        global $wpdb;
-        $query = $wpdb->prepare(
-            "SELECT 
-                ID,
-                post_type,
-                post_name,
-                post_content 
-            FROM 
-                {$wpdb->posts} 
-            WHERE 
-                post_type IN ('wp_template_part') 
-                AND post_status = 'publish' 
-            ORDER BY 
-                post_modified DESC"
-        );
-
-        // Execute the query
-        $template_contents = $wpdb->get_results($query);
-
-        if ($template_contents) {
-            foreach ($template_contents as $template) {
-                $this->post = $template;
-                $this->post_id = $template->ID;
-                $this->generate_all_blocks_assets();
+    function generate_active_header_footer() {
+        // Initialize output array
+        $output = [
+            'header' => '',
+            'footer' => ''
+        ];
+    
+        // Get the current theme's template parts
+        $template_parts = $this->get_block_theme_template_parts();
+    
+        // Check for header template part
+        foreach ( $template_parts as $part ) {
+            if ( isset( $part['slug'] ) && $part['slug'] === 'header' ) {
+                // Get the template part post
+                $template_part_post = get_block_template( $part['theme'] . '//' . $part['slug'], 'wp_template_part' );
+                
+                if ( $template_part_post && ! empty( $template_part_post->content ) ) {
+                    // Parse the blocks and render the content
+                    $this->post = get_post($template_part_post->wp_id);
+                    $this->post_id = $template_part_post->wp_id;
+                    $this->generate_all_blocks_assets();
+                }
+            }
+    
+            if ( isset( $part['slug'] ) && $part['slug'] === 'footer' ) {
+                // Get the template part post
+                $template_part_post = get_block_template( $part['theme'] . '//' . $part['slug'], 'wp_template_part' );
+                
+                if ( $template_part_post && ! empty( $template_part_post->content ) ) {
+                    // Parse the blocks and render the content
+                    $this->post = get_post($template_part_post->wp_id);
+                    $this->post_id = $template_part_post->wp_id;
+                    $this->generate_all_blocks_assets();
+                }
             }
         }
     }
@@ -537,6 +545,40 @@ class AssetsGenerator {
         $this->get_font_families();
     }
 
+    function get_block_theme_template_parts() {
+        $template_parts = [];
+        $theme = wp_get_theme()->get_stylesheet();
+    
+        // Query all template parts for the current theme
+        $args = [
+            'post_type'      => 'wp_template_part',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'wp_theme',
+                    'field'    => 'slug',
+                    'terms'    => $theme,
+                ],
+            ],
+        ];
+    
+        $query = new \WP_Query( $args );
+    
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                $template_parts[] = [
+                    'slug'  => get_post()->post_name,
+                    'theme' => $theme,
+                ];
+            }
+            wp_reset_postdata();
+        }
+    
+        return $template_parts;
+    }
+
     public function generate_page_assets($post_id, $post) {
         $this->post_id = $post_id;
         $this->post = $post;
@@ -549,7 +591,7 @@ class AssetsGenerator {
             $this->css_generator_functions(true);
         }
 
-        $this->generate_header_footer();
+        $this->generate_active_header_footer();
     }
 
     public function check_frontis_blocks_used() {
