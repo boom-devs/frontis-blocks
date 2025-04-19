@@ -111,10 +111,10 @@ final class Plugin
 	public function enqueue_header_footer() {
 		$upload_dir = wp_upload_dir();
 
-
 		// Footer
 		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
 		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
+
 		// Css file
 		$css_file_system_path = $footer_frontend_dir .'footer.css';
 		$css_file_url = $footer_frontend_url .'footer.css';
@@ -126,6 +126,7 @@ final class Plugin
 		// Header
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/header/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
+
 		// Css file
 		$css_file_system_path = $frontend_dir .'header.css';
 		$css_file_url = $frontend_url .'header.css';
@@ -135,14 +136,20 @@ final class Plugin
 			wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
 		}
 
+		$header_js_system_path = $frontend_dir .'header.js';
 		$js_file_url = $frontend_url . 'header.js';
-		wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
+		if(file_exists($header_js_system_path)) {	
+			$version = filemtime($header_js_system_path);
+			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
+		}
 	}
 
 	public function enqueue_scripts()
 	{
 		$page_name = Helper::get_page_name();
 		$upload_dir = wp_upload_dir();
+
+		$frntis_block_used = get_post_meta(get_the_ID(), 'page_frontis_block_used', true);
 		
 		if(is_search()) {
 		    $page_name = 'search';
@@ -154,6 +161,14 @@ final class Plugin
 		
 		if(is_404()) {
 		    $page_name = '404';
+		}
+
+		if(is_single()) {
+			$page_name = 'single';
+		}
+
+		if($frntis_block_used !== '') {
+			$page_name = Helper::get_page_name();
 		}
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
