@@ -17,6 +17,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// Photo
 		teamMemberImageUrl,
+		teamMemberImageAlt,
+
 		teamMemberImageOverlaySwitcher,
 
 		// Team Name
@@ -99,7 +101,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl}/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt}/>
 								)}
 								
 								{teamMemberSocialProfileSwitcher === true && 
