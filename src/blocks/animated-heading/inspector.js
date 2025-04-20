@@ -51,63 +51,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
-        typingTextAlignment,
-        typingTextMainTag,
-        typingTextGap,
-        typingTextGapUnits,
-        typingTextPrefix,
-        typingTextItems,
-        typingTextCursorSwitch,
-        typingTextCursor,
-        typingTextSuffix,
+        animatedHeadingAlignment,
+        animatedHeadingMainTag,
+        animatedHeadingGap,
+        animatedHeadingGapUnits,
+        animatedHeadingPrefix,
+        animatedHeadingItems,
+        animatedHeadingCursorSwitch,
+        animatedHeadingCursor,
+        animatedHeadingSuffix,
 
         // Normal Typing Text Style
-        typingNormalTextGlobalTypographyData,
-        typingNormalTextGlobalTypoSwitcher,
-        typingNormalTextGlobalTypoType,
-        typingNormalTextGlobalTypoOption,
-        typingNormalTextFontFamily,
-        typingNormalTextFontSize,
-        typingNormalTextFontSizeUnits,
-        typingNormalTextFontWeight,
-        typingNormalTextFontStyle,
-        typingNormalTextTextTransform,
-        typingNormalTextTextDecoration,
-        typingNormalTextLetterSpacing,
-        typingNormalTextLetterSpacingUnits,
-        typingNormalTextLineHeight,
-        typingNormalTextLineHeightUnits,
+        animatedHeadingNormalTextGlobalTypographyData,
+        animatedHeadingNormalTextGlobalTypoSwitcher,
+        animatedHeadingNormalTextGlobalTypoType,
+        animatedHeadingNormalTextGlobalTypoOption,
+        animatedHeadingNormalTextFontFamily,
+        animatedHeadingNormalTextFontSize,
+        animatedHeadingNormalTextFontSizeUnits,
+        animatedHeadingNormalTextFontWeight,
+        animatedHeadingNormalTextFontStyle,
+        animatedHeadingNormalTextTextTransform,
+        animatedHeadingNormalTextTextDecoration,
+        animatedHeadingNormalTextLetterSpacing,
+        animatedHeadingNormalTextLetterSpacingUnits,
+        animatedHeadingNormalTextLineHeight,
+        animatedHeadingNormalTextLineHeightUnits,
 
-        typingNormalTextColorSwitcher,
-        typingNormalTextColor,
-        typingNormalTextHoverColor,
-        typingNormalTextBgColorSwitcher,
-        typingNormalTextBgColor,
-        typingNormalTextBgColorHover,
+        animatedHeadingNormalTextColorSwitcher,
+        animatedHeadingNormalTextColor,
+        animatedHeadingNormalTextHoverColor,
+        animatedHeadingNormalTextBgColorSwitcher,
+        animatedHeadingNormalTextBgColor,
+        animatedHeadingNormalTextBgColorHover,
 
         // Typing Text Style
-        typingTextGlobalTypographyData,
-        typingTextGlobalTypoSwitcher,
-        typingTextGlobalTypoType,
-        typingTextGlobalTypoOption,
-        typingTextFontFamily,
-        typingTextFontSize,
-        typingTextFontSizeUnits,
-        typingTextFontWeight,
-        typingTextFontStyle,
-        typingTextTextTransform,
-        typingTextTextDecoration,
-        typingTextLetterSpacing,
-        typingTextLetterSpacingUnits,
-        typingTextLineHeight,
-        typingTextLineHeightUnits,
+        animatedHeadingGlobalTypographyData,
+        animatedHeadingGlobalTypoSwitcher,
+        animatedHeadingGlobalTypoType,
+        animatedHeadingGlobalTypoOption,
+        animatedHeadingFontFamily,
+        animatedHeadingFontSize,
+        animatedHeadingFontSizeUnits,
+        animatedHeadingFontWeight,
+        animatedHeadingFontStyle,
+        animatedHeadingTextTransform,
+        animatedHeadingTextDecoration,
+        animatedHeadingLetterSpacing,
+        animatedHeadingLetterSpacingUnits,
+        animatedHeadingLineHeight,
+        animatedHeadingLineHeightUnits,
 
-        typingTextColorSwitcher,
-        typingTextColor,
-        typingTextHoverColor,
-        typingTextBgColorSwitcher,
-        typingTextBgColor,
-        typingTextBgColorHover,
+        animatedHeadingColorSwitcher,
+        animatedHeadingColor,
+        animatedHeadingHoverColor,
+        animatedHeadingBgColorSwitcher,
+        animatedHeadingBgColor,
+        animatedHeadingBgColorHover,
 
         // Padding Attributes
         textPaddingUnits,
@@ -124,9 +124,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         textMarginLink,
 
         // Background Color Attributes
-        typingGlobalBgColorSwitcher,
-        typingGlobalBgColor,
-        typingGlobalBgColorHover,
+        animatedHeadingGlobalBgColorSwitcher,
+        animatedHeadingGlobalBgColor,
+        animatedHeadingGlobalBgColorHover,
 
         // Typing Text Border
         textBorder,
@@ -145,10 +145,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         textBorderRadiusLink,
 
         // Typing Text Global Z-Index
-        typingTextGlobalZIndex,
-        typingTextGlobalWraperID,
-        typingTextGlobalWraperClass,
-        typingTextCustomCSS,
+        animatedHeadingGlobalZIndex,
+        animatedHeadingGlobalWraperID,
+        animatedHeadingGlobalWraperClass,
+        animatedHeadingCustomCSS,
 
     } = attributes;
 	
@@ -157,7 +157,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockId: "fb-typing-text-" + clientId.slice(0, 8),
+                blockId: "fb-animated-Heading-" + clientId.slice(0, 8),
             });
         }
     }, [clientId]);
@@ -165,39 +165,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = typingTextItems.findIndex(item => item.id === active.id);
-            const newIndex = typingTextItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(typingTextItems, oldIndex, newIndex);
-            setAttributes({ typingTextItems: updatedItems });
+            const oldIndex = animatedHeadingItems.findIndex(item => item.id === active.id);
+            const newIndex = animatedHeadingItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(animatedHeadingItems, oldIndex, newIndex);
+            setAttributes({ animatedHeadingItems: updatedItems });
         }
     };
 
 	const handleAddItem = () => {
 		const newItem = {
-			id: `item-${typingTextItems.length + 1}`,
-			typingTextTitle: 'Typing Text ' + (typingTextItems.length + 1),
+			id: `item-${animatedHeadingItems.length + 1}`,
+			animatedHeadingTitle: 'Typing Text ' + (animatedHeadingItems.length + 1),
 		};
 	
-		setAttributes({ typingTextItems: [...typingTextItems, newItem] });
+		setAttributes({ animatedHeadingItems: [...animatedHeadingItems, newItem] });
 	};
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = typingTextItems.map(item => 
+        const updatedItems = animatedHeadingItems.map(item => 
             item.id === id ? { ...item, [key]: value } : item
         );
-        setAttributes({ typingTextItems: updatedItems });
+        setAttributes({ animatedHeadingItems: updatedItems });
     };
 
     const handleDeleteItem = (id) => {
-        const updatedItems = typingTextItems.filter(item => item.id !== id);
-        setAttributes({ typingTextItems: updatedItems });
+        const updatedItems = animatedHeadingItems.filter(item => item.id !== id);
+        setAttributes({ animatedHeadingItems: updatedItems });
     };
 
     const handleDuplicateItem = (id) => {
-        const itemToDuplicate = typingTextItems.find(item => item.id === id);
+        const itemToDuplicate = animatedHeadingItems.find(item => item.id === id);
         if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${typingTextItems.length + 1}` };
-            setAttributes({ typingTextItems: [...typingTextItems, newItem] });
+            const newItem = { ...itemToDuplicate, id: `item-${animatedHeadingItems.length + 1}` };
+            setAttributes({ animatedHeadingItems: [...animatedHeadingItems, newItem] });
         }
     };
 
@@ -507,27 +507,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     useEffect(() => {
-        if (typingNormalTextFontFamily !== 'Default') { 
-            loadGoogleFont(typingNormalTextFontFamily);
+        if (animatedHeadingNormalTextFontFamily !== 'Default') { 
+            loadGoogleFont(animatedHeadingNormalTextFontFamily);
         }
-        if (typingTextFontFamily !== 'Default') {
-            loadGoogleFont(typingTextFontFamily);
+        if (animatedHeadingFontFamily !== 'Default') {
+            loadGoogleFont(animatedHeadingFontFamily);
         }
-    }, [typingNormalTextFontFamily, typingTextFontFamily]);
+    }, [animatedHeadingNormalTextFontFamily, animatedHeadingFontFamily]);
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockId}.fb-typing-text-main-wrapper {
+        .${blockId}.fb-animated-Heading-main-wrapper {
             position: relative;
-            ${typingTextGlobalZIndex.Desktop ? `z-index: ${typingTextGlobalZIndex.Desktop};` : ''}
+            ${animatedHeadingGlobalZIndex.Desktop ? `z-index: ${animatedHeadingGlobalZIndex.Desktop};` : ''}
         }
 
-        .${blockId} .fb-typing-text-wrapper {
+        .${blockId} .fb-animated-Heading-wrapper {
             display: flex;
             align-items: center;
-            ${typingTextGap.Desktop && typingTextGapUnits.Desktop ? `gap: ${typingTextGap.Desktop}${typingTextGapUnits.Desktop};` : ''}
-            ${typingTextAlignment.Desktop ? `justify-content: ${typingTextAlignment.Desktop};` : ''}
-            ${typingGlobalBgColor ? `background-color: ${typingGlobalBgColor};` : ''}
+            ${animatedHeadingGap.Desktop && animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
+            ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
+            ${animatedHeadingGlobalBgColor ? `background-color: ${animatedHeadingGlobalBgColor};` : ''}
             ${textDesktopPaddingWidth && textDesktopPadding?.top ? `padding: ${textDesktopPaddingWidth};` : ''}
             ${textDesktopMarginWidth && textDesktopMargin?.top ? `margin: ${textDesktopMarginWidth};` : ''}
             ${textBorder ? `border: ${textBorder};` : ''}
@@ -536,200 +536,200 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${textBorderColor ? `border-color: ${textBorderColor};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockId} .fb-typing-text-wrapper:hover {
-            ${typingGlobalBgColorHover ? `background-color: ${typingGlobalBgColorHover};` : ''}
+        .${blockId} .fb-animated-Heading-wrapper:hover {
+            ${animatedHeadingGlobalBgColorHover ? `background-color: ${animatedHeadingGlobalBgColorHover};` : ''}
         }
 
-        .${blockId} .fb-typing-text-wrapper .fb-typing-texts:empty {
+        .${blockId} .fb-animated-Heading-wrapper .fb-animatedHeading-texts:empty {
             display: none;
         }
 
-        .${blockId} .fb-typing-text-wrapper:hover {
+        .${blockId} .fb-animated-Heading-wrapper:hover {
             ${textBorderHoverColor ? `border-color: ${textBorderHoverColor};` : ''}
         }
 
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-prefix,
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-suffix {
-            ${typingNormalTextColor ? `color: ${typingNormalTextColor};` : ''}
-            ${typingNormalTextBgColor ? `background-color: ${typingNormalTextBgColor};` : ''}
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-prefix,
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-suffix {
+            ${animatedHeadingNormalTextColor ? `color: ${animatedHeadingNormalTextColor};` : ''}
+            ${animatedHeadingNormalTextBgColor ? `background-color: ${animatedHeadingNormalTextBgColor};` : ''}
 
-            ${typingNormalTextGlobalTypoSwitcher.fontFamily === true && typingNormalTextGlobalTypographyData.fontFamily ? `font-family: ${typingNormalTextGlobalTypographyData.fontFamily};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontSize === true && typingNormalTextGlobalTypographyData.fontSize ? `font-size: ${typingNormalTextGlobalTypographyData.fontSize};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontWeight === true && typingNormalTextGlobalTypographyData.fontWeight ? `font-weight: ${typingNormalTextGlobalTypographyData.fontWeight};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontStyle === true && typingNormalTextGlobalTypographyData.fontStyle ? `font-style: ${typingNormalTextGlobalTypographyData.fontStyle};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.textTransform === true && typingNormalTextGlobalTypographyData.textTransform ? `text-transform: ${typingNormalTextGlobalTypographyData.textTransform};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.textDecoration === true && typingNormalTextGlobalTypographyData.textDecoration ? `text-decoration: ${typingNormalTextGlobalTypographyData.textDecoration};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.letterSpacing === true && typingNormalTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${typingNormalTextGlobalTypographyData.letterSpacing};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.lineHeight === true && typingNormalTextGlobalTypographyData.lineHeight ? `line-height: ${typingNormalTextGlobalTypographyData.lineHeight};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontFamily === true && animatedHeadingNormalTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingNormalTextGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === true && animatedHeadingNormalTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingNormalTextGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontWeight === true && animatedHeadingNormalTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingNormalTextGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontStyle === true && animatedHeadingNormalTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingNormalTextGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textTransform === true && animatedHeadingNormalTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingNormalTextGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textDecoration === true && animatedHeadingNormalTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingNormalTextGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === true && animatedHeadingNormalTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingNormalTextGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === true && animatedHeadingNormalTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingNormalTextGlobalTypographyData.lineHeight};` : ''}
                 
-            ${typingNormalTextGlobalTypoSwitcher.fontFamily === false && typingNormalTextFontFamily && typingNormalTextFontFamily !== 'Default' ? `font-family: ${typingNormalTextFontFamily};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontSize === false && typingNormalTextFontSize.Desktop && typingNormalTextFontSizeUnits.Desktop ? `font-size: ${typingNormalTextFontSize.Desktop}${typingNormalTextFontSizeUnits.Desktop};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontWeight === false && typingNormalTextFontWeight ? `font-weight: ${typingNormalTextFontWeight};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.fontStyle === false && typingNormalTextFontStyle ? `font-style: ${typingNormalTextFontStyle};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.textTransform === false && typingNormalTextTextTransform ? `text-transform: ${typingNormalTextTextTransform};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.textDecoration === false && typingNormalTextTextDecoration ? `text-decoration: ${typingNormalTextTextDecoration};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.letterSpacing === false && typingNormalTextLetterSpacing.Desktop && typingNormalTextLetterSpacingUnits.Desktop ? `letter-spacing: ${typingNormalTextLetterSpacing.Desktop}${typingNormalTextLetterSpacingUnits.Desktop};` : ''}
-            ${typingNormalTextGlobalTypoSwitcher.lineHeight === false && typingNormalTextLineHeight.Desktop && typingNormalTextLineHeightUnits.Desktop ? `line-height: ${typingNormalTextLineHeight.Desktop}${typingNormalTextLineHeightUnits.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontFamily === false && animatedHeadingNormalTextFontFamily && animatedHeadingNormalTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingNormalTextFontFamily};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Desktop && animatedHeadingNormalTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingNormalTextFontSize.Desktop}${animatedHeadingNormalTextFontSizeUnits.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontWeight === false && animatedHeadingNormalTextFontWeight ? `font-weight: ${animatedHeadingNormalTextFontWeight};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontStyle === false && animatedHeadingNormalTextFontStyle ? `font-style: ${animatedHeadingNormalTextFontStyle};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textTransform === false && animatedHeadingNormalTextTextTransform ? `text-transform: ${animatedHeadingNormalTextTextTransform};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textDecoration === false && animatedHeadingNormalTextTextDecoration ? `text-decoration: ${animatedHeadingNormalTextTextDecoration};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Desktop && animatedHeadingNormalTextLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Desktop}${animatedHeadingNormalTextLetterSpacingUnits.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Desktop && animatedHeadingNormalTextLineHeightUnits.Desktop ? `line-height: ${animatedHeadingNormalTextLineHeight.Desktop}${animatedHeadingNormalTextLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
 
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-prefix:hover,
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-suffix:hover {
-            ${typingNormalTextHoverColor ? `color: ${typingNormalTextHoverColor};` : ''}
-            ${typingNormalTextBgColorHover ? `background-color: ${typingNormalTextBgColorHover};` : ''}
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-prefix:hover,
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-suffix:hover {
+            ${animatedHeadingNormalTextHoverColor ? `color: ${animatedHeadingNormalTextHoverColor};` : ''}
+            ${animatedHeadingNormalTextBgColorHover ? `background-color: ${animatedHeadingNormalTextBgColorHover};` : ''}
         }
 
-        .${blockId} .fb-typing-text-wrapper .fb-typing-texts,
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor {
-            ${typingTextColor ? `color: ${typingTextColor};` : ''}
-            ${typingTextBgColor ? `background-color: ${typingTextBgColor};` : ''} 
+        .${blockId} .fb-animated-Heading-wrapper .fb-animatedHeading-texts,
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-cursor {
+            ${animatedHeadingColor ? `color: ${animatedHeadingColor};` : ''}
+            ${animatedHeadingBgColor ? `background-color: ${animatedHeadingBgColor};` : ''} 
 
-            ${typingTextGlobalTypoSwitcher.fontFamily === true && typingTextGlobalTypographyData.fontFamily ? `font-family: ${typingTextGlobalTypographyData.fontFamily};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontSize === true && typingTextGlobalTypographyData.fontSize ? `font-size: ${typingTextGlobalTypographyData.fontSize};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontWeight === true && typingTextGlobalTypographyData.fontWeight ? `font-weight: ${typingTextGlobalTypographyData.fontWeight};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontStyle === true && typingTextGlobalTypographyData.fontStyle ? `font-style: ${typingTextGlobalTypographyData.fontStyle};` : ''}
-            ${typingTextGlobalTypoSwitcher.textTransform === true && typingTextGlobalTypographyData.textTransform ? `text-transform: ${typingTextGlobalTypographyData.textTransform};` : ''}
-            ${typingTextGlobalTypoSwitcher.textDecoration === true && typingTextGlobalTypographyData.textDecoration ? `text-decoration: ${typingTextGlobalTypographyData.textDecoration};` : ''}
-            ${typingTextGlobalTypoSwitcher.letterSpacing === true && typingTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${typingTextGlobalTypographyData.letterSpacing};` : ''}
-            ${typingTextGlobalTypoSwitcher.lineHeight === true && typingTextGlobalTypographyData.lineHeight ? `line-height: ${typingTextGlobalTypographyData.lineHeight};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontFamily === true && animatedHeadingGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontSize === true && animatedHeadingGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontWeight === true && animatedHeadingGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontStyle === true && animatedHeadingGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.textTransform === true && animatedHeadingGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.textDecoration === true && animatedHeadingGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.letterSpacing === true && animatedHeadingGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.lineHeight === true && animatedHeadingGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingGlobalTypographyData.lineHeight};` : ''}
                 
-            ${typingTextGlobalTypoSwitcher.fontFamily === false && typingTextFontFamily && typingTextFontFamily !== 'Default' ? `font-family: ${typingTextFontFamily};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontSize === false && typingTextFontSize.Desktop && typingTextFontSizeUnits.Desktop ? `font-size: ${typingTextFontSize.Desktop}${typingTextFontSizeUnits.Desktop};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontWeight === false && typingTextFontWeight ? `font-weight: ${typingTextFontWeight};` : ''}
-            ${typingTextGlobalTypoSwitcher.fontStyle === false && typingTextFontStyle ? `font-style: ${typingTextFontStyle};` : ''}
-            ${typingTextGlobalTypoSwitcher.textTransform === false && typingTextTextTransform ? `text-transform: ${typingTextTextTransform};` : ''}
-            ${typingTextGlobalTypoSwitcher.textDecoration === false && typingTextTextDecoration ? `text-decoration: ${typingTextTextDecoration};` : ''}
-            ${typingTextGlobalTypoSwitcher.letterSpacing === false && typingTextLetterSpacing.Desktop && typingTextLetterSpacingUnits.Desktop ? `letter-spacing: ${typingTextLetterSpacing.Desktop}${typingTextLetterSpacingUnits.Desktop};` : ''}
-            ${typingTextGlobalTypoSwitcher.lineHeight === false && typingTextLineHeight.Desktop && typingTextLineHeightUnits.Desktop ? `line-height: ${typingTextLineHeight.Desktop}${typingTextLineHeightUnits.Desktop};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontFamily === false && animatedHeadingFontFamily && animatedHeadingFontFamily !== 'Default' ? `font-family: ${animatedHeadingFontFamily};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontSize === false && animatedHeadingFontSize.Desktop && animatedHeadingFontSizeUnits.Desktop ? `font-size: ${animatedHeadingFontSize.Desktop}${animatedHeadingFontSizeUnits.Desktop};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontWeight === false && animatedHeadingFontWeight ? `font-weight: ${animatedHeadingFontWeight};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.fontStyle === false && animatedHeadingFontStyle ? `font-style: ${animatedHeadingFontStyle};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.textTransform === false && animatedHeadingTextTransform ? `text-transform: ${animatedHeadingTextTransform};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.textDecoration === false && animatedHeadingTextDecoration ? `text-decoration: ${animatedHeadingTextDecoration};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.letterSpacing === false && animatedHeadingLetterSpacing.Desktop && animatedHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingLetterSpacing.Desktop}${animatedHeadingLetterSpacingUnits.Desktop};` : ''}
+            ${animatedHeadingGlobalTypoSwitcher.lineHeight === false && animatedHeadingLineHeight.Desktop && animatedHeadingLineHeightUnits.Desktop ? `line-height: ${animatedHeadingLineHeight.Desktop}${animatedHeadingLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
 
-        .${blockId} .fb-typing-text-wrapper .fb-typing-texts:hover,
-        .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor:hover {
-            ${typingTextHoverColor ? `color: ${typingTextHoverColor};` : ''}
-            ${typingTextBgColorHover ? `background-color: ${typingTextBgColorHover};` : ''}
+        .${blockId} .fb-animated-Heading-wrapper .fb-animatedHeading-texts:hover,
+        .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-cursor:hover {
+            ${animatedHeadingHoverColor ? `color: ${animatedHeadingHoverColor};` : ''}
+            ${animatedHeadingBgColorHover ? `background-color: ${animatedHeadingBgColorHover};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockId}.fb-typing-text-main-wrapper {
-                ${typingTextGlobalZIndex.Tablet ? `z-index: ${typingTextGlobalZIndex.Tablet};` : ''}
+            .${blockId}.fb-animated-Heading-main-wrapper {
+                ${animatedHeadingGlobalZIndex.Tablet ? `z-index: ${animatedHeadingGlobalZIndex.Tablet};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper {
-                ${typingTextGap.Tablet && typingTextGapUnits.Tablet ? `gap: ${typingTextGap.Tablet}${typingTextGapUnits.Tablet};` : ''}
-                ${typingTextAlignment.Tablet ? `text-align: ${typingTextAlignment.Tablet};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper {
+                ${animatedHeadingGap.Tablet && animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingAlignment.Tablet ? `text-align: ${animatedHeadingAlignment.Tablet};` : ''}
                 ${textTabletPaddingWidth && textTabletPadding?.top ? `padding: ${textTabletPaddingWidth};` : ''}
                 ${textTabletMarginWidth && textTabletMargin?.top ? `margin: ${textTabletMarginWidth};` : ''}
                 ${textTabletBorderWidth && textTabletBorder?.top ? `border-width: ${textTabletBorderWidth};` : ''}
                 ${textTabletBorderRadiusWidth && textTabletBorderRadius?.top ? `border-radius: ${textTabletBorderRadiusWidth};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-prefix,
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-suffix {
-                ${typingNormalTextGlobalTypoSwitcher.fontSize === false && typingNormalTextFontSize.Tablet && typingNormalTextFontSizeUnits.Tablet ? `font-size: ${typingNormalTextFontSize.Tablet}${typingNormalTextFontSizeUnits.Tablet};` : ''}
-                ${typingNormalTextGlobalTypoSwitcher.letterSpacing === false && typingNormalTextLetterSpacing.Tablet && typingNormalTextLetterSpacingUnits.Tablet ? `letter-spacing: ${typingNormalTextLetterSpacing.Tablet}${typingNormalTextLetterSpacingUnits.Tablet};` : ''}
-                ${typingNormalTextGlobalTypoSwitcher.lineHeight === false && typingNormalTextLineHeight.Tablet && typingNormalTextLineHeightUnits.Tablet ? `line-height: ${typingNormalTextLineHeight.Tablet}${typingNormalTextLineHeightUnits.Tablet};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-prefix,
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-suffix {
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Tablet && animatedHeadingNormalTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingNormalTextFontSize.Tablet}${animatedHeadingNormalTextFontSizeUnits.Tablet};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Tablet && animatedHeadingNormalTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Tablet}${animatedHeadingNormalTextLetterSpacingUnits.Tablet};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Tablet && animatedHeadingNormalTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingNormalTextLineHeight.Tablet}${animatedHeadingNormalTextLineHeightUnits.Tablet};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-texts,
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor {  
-                ${typingTextGlobalTypoSwitcher.fontSize === false && typingTextFontSize.Tablet && typingTextFontSizeUnits.Tablet ? `font-size: ${typingTextFontSize.Tablet}${typingTextFontSizeUnits.Tablet};` : ''}
-                ${typingTextGlobalTypoSwitcher.letterSpacing === false && typingTextLetterSpacing.Tablet && typingTextLetterSpacingUnits.Tablet ? `letter-spacing: ${typingTextLetterSpacing.Tablet}${typingTextLetterSpacingUnits.Tablet};` : ''}
-                ${typingTextGlobalTypoSwitcher.lineHeight === false && typingTextLineHeight.Tablet && typingTextLineHeightUnits.Tablet ? `line-height: ${typingTextLineHeight.Tablet}${typingTextLineHeightUnits.Tablet};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper .fb-animatedHeading-texts,
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-cursor {  
+                ${animatedHeadingGlobalTypoSwitcher.fontSize === false && animatedHeadingFontSize.Tablet && animatedHeadingFontSizeUnits.Tablet ? `font-size: ${animatedHeadingFontSize.Tablet}${animatedHeadingFontSizeUnits.Tablet};` : ''}
+                ${animatedHeadingGlobalTypoSwitcher.letterSpacing === false && animatedHeadingLetterSpacing.Tablet && animatedHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingLetterSpacing.Tablet}${animatedHeadingLetterSpacingUnits.Tablet};` : ''}
+                ${animatedHeadingGlobalTypoSwitcher.lineHeight === false && animatedHeadingLineHeight.Tablet && animatedHeadingLineHeightUnits.Tablet ? `line-height: ${animatedHeadingLineHeight.Tablet}${animatedHeadingLineHeightUnits.Tablet};` : ''}
             }
 
         }
 
         @media only screen and (max-width: 767px) {
 
-            .${blockId}.fb-typing-text-main-wrapper {
-                ${typingTextGlobalZIndex.Mobile ? `z-index: ${typingTextGlobalZIndex.Mobile};` : ''}
+            .${blockId}.fb-animated-Heading-main-wrapper {
+                ${animatedHeadingGlobalZIndex.Mobile ? `z-index: ${animatedHeadingGlobalZIndex.Mobile};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper {
-                ${typingTextGap.Mobile && typingTextGapUnits.Mobile ? `gap: ${typingTextGap.Mobile}${typingTextGapUnits.Mobile};` : ''}
-                ${typingTextAlignment.Mobile ? `text-align: ${typingTextAlignment.Mobile};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper {
+                ${animatedHeadingGap.Mobile && animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingAlignment.Mobile ? `text-align: ${animatedHeadingAlignment.Mobile};` : ''}
                 ${textMobilePaddingWidth && textMobilePadding?.top ? `padding: ${textMobilePaddingWidth};` : ''}
                 ${textMobileMarginWidth && textMobileMargin?.top ? `margin: ${textMobileMarginWidth};` : ''}
                 ${textMobileBorderWidth && textMobileBorder?.top ? `border-width: ${textMobileBorderWidth};` : ''}
                 ${textMobileBorderRadiusWidth && textMobileBorderRadius?.top ? `border-radius: ${textMobileBorderRadiusWidth};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-prefix,
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-suffix {
-                ${typingNormalTextGlobalTypoSwitcher.fontSize === false && typingNormalTextFontSize.Mobile && typingNormalTextFontSizeUnits.Mobile ? `font-size: ${typingNormalTextFontSize.Mobile}${typingNormalTextFontSizeUnits.Mobile};` : ''}
-                ${typingNormalTextGlobalTypoSwitcher.letterSpacing === false && typingNormalTextLetterSpacing.Mobile && typingNormalTextLetterSpacingUnits.Mobile ? `letter-spacing: ${typingNormalTextLetterSpacing.Mobile}${typingNormalTextLetterSpacingUnits.Mobile};` : ''}
-                ${typingNormalTextGlobalTypoSwitcher.lineHeight === false && typingNormalTextLineHeight.Mobile && typingNormalTextLineHeightUnits.Mobile ? `line-height: ${typingNormalTextLineHeight.Mobile}${typingNormalTextLineHeightUnits.Mobile};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-prefix,
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-suffix {
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Mobile && animatedHeadingNormalTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingNormalTextFontSize.Mobile}${animatedHeadingNormalTextFontSizeUnits.Mobile};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Mobile && animatedHeadingNormalTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Mobile}${animatedHeadingNormalTextLetterSpacingUnits.Mobile};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Mobile && animatedHeadingNormalTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingNormalTextLineHeight.Mobile}${animatedHeadingNormalTextLineHeightUnits.Mobile};` : ''}
             }
 
-            .${blockId} .fb-typing-text-wrapper .fb-typing-texts,
-            .${blockId} .fb-typing-text-wrapper .fb-typing-text-cursor {  
-                ${typingTextGlobalTypoSwitcher.fontSize === false && typingTextFontSize.Mobile && typingTextFontSizeUnits.Mobile ? `font-size: ${typingTextFontSize.Mobile}${typingTextFontSizeUnits.Mobile};` : ''}
-                ${typingTextGlobalTypoSwitcher.letterSpacing === false && typingTextLetterSpacing.Mobile && typingTextLetterSpacingUnits.Mobile ? `letter-spacing: ${typingTextLetterSpacing.Mobile}${typingTextLetterSpacingUnits.Mobile};` : ''}
-                ${typingTextGlobalTypoSwitcher.lineHeight === false && typingTextLineHeight.Mobile && typingTextLineHeightUnits.Mobile ? `line-height: ${typingTextLineHeight.Mobile}${typingTextLineHeightUnits.Mobile};` : ''}
+            .${blockId} .fb-animated-Heading-wrapper .fb-animatedHeading-texts,
+            .${blockId} .fb-animated-Heading-wrapper .fb-animated-Heading-cursor {  
+                ${animatedHeadingGlobalTypoSwitcher.fontSize === false && animatedHeadingFontSize.Mobile && animatedHeadingFontSizeUnits.Mobile ? `font-size: ${animatedHeadingFontSize.Mobile}${animatedHeadingFontSizeUnits.Mobile};` : ''}
+                ${animatedHeadingGlobalTypoSwitcher.letterSpacing === false && animatedHeadingLetterSpacing.Mobile && animatedHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingLetterSpacing.Mobile}${animatedHeadingLetterSpacingUnits.Mobile};` : ''}
+                ${animatedHeadingGlobalTypoSwitcher.lineHeight === false && animatedHeadingLineHeight.Mobile && animatedHeadingLineHeightUnits.Mobile ? `line-height: ${animatedHeadingLineHeight.Mobile}${animatedHeadingLineHeightUnits.Mobile};` : ''}
             }
         }
     `, [
     blockId,
     deviceType,
     blockStyle,
-    typingTextAlignment,
-    typingTextGap,
-    typingTextGapUnits,
-    typingTextPrefix,
-    typingTextItems,
-    typingTextCursorSwitch,
-    typingTextCursor,
-    typingTextSuffix,
+    animatedHeadingAlignment,
+    animatedHeadingGap,
+    animatedHeadingGapUnits,
+    animatedHeadingPrefix,
+    animatedHeadingItems,
+    animatedHeadingCursorSwitch,
+    animatedHeadingCursor,
+    animatedHeadingSuffix,
 
     // Normal Typing Text Style
-    typingNormalTextGlobalTypographyData,
-    typingNormalTextGlobalTypoSwitcher,
-    typingNormalTextGlobalTypoType,
-    typingNormalTextGlobalTypoOption,
-    typingNormalTextFontFamily,
-    typingNormalTextFontSize,
-    typingNormalTextFontSizeUnits,
-    typingNormalTextFontWeight,
-    typingNormalTextFontStyle,
-    typingNormalTextTextTransform,
-    typingNormalTextTextDecoration,
-    typingNormalTextLetterSpacing,
-    typingNormalTextLetterSpacingUnits,
-    typingNormalTextLineHeight,
-    typingNormalTextLineHeightUnits,
+    animatedHeadingNormalTextGlobalTypographyData,
+    animatedHeadingNormalTextGlobalTypoSwitcher,
+    animatedHeadingNormalTextGlobalTypoType,
+    animatedHeadingNormalTextGlobalTypoOption,
+    animatedHeadingNormalTextFontFamily,
+    animatedHeadingNormalTextFontSize,
+    animatedHeadingNormalTextFontSizeUnits,
+    animatedHeadingNormalTextFontWeight,
+    animatedHeadingNormalTextFontStyle,
+    animatedHeadingNormalTextTextTransform,
+    animatedHeadingNormalTextTextDecoration,
+    animatedHeadingNormalTextLetterSpacing,
+    animatedHeadingNormalTextLetterSpacingUnits,
+    animatedHeadingNormalTextLineHeight,
+    animatedHeadingNormalTextLineHeightUnits,
 
-    typingNormalTextColorSwitcher,
-    typingNormalTextColor,
-    typingNormalTextHoverColor,
-    typingNormalTextBgColorSwitcher,
-    typingNormalTextBgColor,
-    typingNormalTextBgColorHover,
+    animatedHeadingNormalTextColorSwitcher,
+    animatedHeadingNormalTextColor,
+    animatedHeadingNormalTextHoverColor,
+    animatedHeadingNormalTextBgColorSwitcher,
+    animatedHeadingNormalTextBgColor,
+    animatedHeadingNormalTextBgColorHover,
 
     // Typing Text Style
-    typingTextGlobalTypographyData,
-    typingTextGlobalTypoSwitcher,
-    typingTextGlobalTypoType,
-    typingTextGlobalTypoOption,
-    typingTextFontFamily,
-    typingTextFontSize,
-    typingTextFontSizeUnits,
-    typingTextFontWeight,
-    typingTextFontStyle,
-    typingTextTextTransform,
-    typingTextTextDecoration,
-    typingTextLetterSpacing,
-    typingTextLetterSpacingUnits,
-    typingTextLineHeight,
-    typingTextLineHeightUnits,
+    animatedHeadingGlobalTypographyData,
+    animatedHeadingGlobalTypoSwitcher,
+    animatedHeadingGlobalTypoType,
+    animatedHeadingGlobalTypoOption,
+    animatedHeadingFontFamily,
+    animatedHeadingFontSize,
+    animatedHeadingFontSizeUnits,
+    animatedHeadingFontWeight,
+    animatedHeadingFontStyle,
+    animatedHeadingTextTransform,
+    animatedHeadingTextDecoration,
+    animatedHeadingLetterSpacing,
+    animatedHeadingLetterSpacingUnits,
+    animatedHeadingLineHeight,
+    animatedHeadingLineHeightUnits,
 
-    typingTextColorSwitcher,
-    typingTextColor,
-    typingTextHoverColor,
-    typingTextBgColorSwitcher,
-    typingTextBgColor,
-    typingTextBgColorHover,
+    animatedHeadingColorSwitcher,
+    animatedHeadingColor,
+    animatedHeadingHoverColor,
+    animatedHeadingBgColorSwitcher,
+    animatedHeadingBgColor,
+    animatedHeadingBgColorHover,
 
     // Padding Attributes
     textPaddingUnits,
@@ -752,9 +752,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     textMobileMarginWidth,
 
     // Background Color Attributes
-    typingGlobalBgColorSwitcher,
-    typingGlobalBgColor,
-    typingGlobalBgColorHover,
+    animatedHeadingGlobalBgColorSwitcher,
+    animatedHeadingGlobalBgColor,
+    animatedHeadingGlobalBgColorHover,
 
     // Typing Text Border
     textBorder,
@@ -782,12 +782,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     textMobileBorderRadiusWidth,
 
     // Typing Text Global Z-Index
-    typingTextGlobalZIndex,
+    animatedHeadingGlobalZIndex,
 
 
     ]);
 
-    const customCss = getCustomCss(typingTextCustomCSS, `.${blockId}`);
+    const customCss = getCustomCss(animatedHeadingCustomCSS, `.${blockId}`);
 
 
     useEffect(() => {
@@ -834,34 +834,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_ResponsiveAlignmentControl
                                                 label={__("Alignment", "frontis-blocks")}
-                                                globalAlignment={typingTextAlignment}
-                                                setGlobalAlignment={(value) => setAttributes({ typingTextAlignment: value })}
+                                                globalAlignment={animatedHeadingAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ animatedHeadingAlignment: value })}
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
                                             />
 
                                             <FB_HtmlTagControl
                                                 label={__("Html Tag", "frontis-blocks")}
-                                                globalHtmlTag={typingTextMainTag}
-                                                setGlobalHtmlTag={(value) => setAttributes({ typingTextMainTag: value })}
+                                                globalHtmlTag={animatedHeadingMainTag}
+                                                setGlobalHtmlTag={(value) => setAttributes({ animatedHeadingMainTag: value })}
                                             />
 
 											<TextControl
 												label={__("Prefix Text", "frontis-blocks")}
-												value={typingTextPrefix}
-												onChange={(value) => setAttributes({ typingTextPrefix: value })}
-												className="fb-typing-text-prefix" 
+												value={animatedHeadingPrefix}
+												onChange={(value) => setAttributes({ animatedHeadingPrefix: value })}
+												className="fb-animated-Heading-prefix" 
                                                 help={__("Keep empty to hide.", "frontis-blocks")}
 											/>
 
                                             <BaseControl
                                                 label={__("Text Items", "frontis-blocks")}
                                             >
-                                                <div className="fb-typing-text-items-wrapper">
+                                                <div className="fb-animated-Heading-items-wrapper">
                                                     <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                                        <SortableContext items={typingTextItems.map(item => item.id)}>
+                                                        <SortableContext items={animatedHeadingItems.map(item => item.id)}>
                                                             <ul className='dnd-items-wrapper'>
-                                                                {typingTextItems.map((item, index) => (
+                                                                {animatedHeadingItems.map((item, index) => (
                                                                     <SortableItem
                                                                         key={item.id}
                                                                         id={item.id}
@@ -883,25 +883,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <ToggleControl
                                                 label={__("Cursor Switch", "frontis-blocks")}
-                                                checked={typingTextCursorSwitch}
-                                                onChange={(value) => setAttributes({ typingTextCursorSwitch: value })}
+                                                checked={animatedHeadingCursorSwitch}
+                                                onChange={(value) => setAttributes({ animatedHeadingCursorSwitch: value })}
                                             />
 
-                                            {typingTextCursorSwitch && (
+                                            {animatedHeadingCursorSwitch && (
                                                 <TextControl
                                                     label={__("Cursor", "frontis-blocks")}
-                                                    value={typingTextCursor}
-                                                    onChange={(value) => setAttributes({ typingTextCursor: value })}
-                                                    className="fb-typing-text-cursor" 
+                                                    value={animatedHeadingCursor}
+                                                    onChange={(value) => setAttributes({ animatedHeadingCursor: value })}
+                                                    className="fb-animated-Heading-cursor" 
                                                     help={__("Keep empty to hide.", "frontis-blocks")}
                                                 />
                                             )}
 
 											<TextControl
 												label={__("Suffix Text", "frontis-blocks")}
-												value={typingTextSuffix}
-												onChange={(value) => setAttributes({ typingTextSuffix: value })}
-												className="fb-typing-text-suffix" 
+												value={animatedHeadingSuffix}
+												onChange={(value) => setAttributes({ animatedHeadingSuffix: value })}
+												className="fb-animated-Heading-suffix" 
                                                 help={__("Keep empty to hide.", "frontis-blocks")}
 											/>
 
@@ -909,11 +909,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 min={0}
                                                 max={100}
                                                 label={__("Text Gap", "frontis-blocks")}
-                                                rangeValue={typingTextGap}
-                                                onChangeHandler={(value) => setAttributes({ typingTextGap: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ typingTextGapUnits: value })}
+                                                rangeValue={animatedHeadingGap}
+                                                onChangeHandler={(value) => setAttributes({ animatedHeadingGap: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ animatedHeadingGapUnits: value })}
                                                 deviceType={deviceType}
-                                                units={typingTextGapUnits}
+                                                units={animatedHeadingGapUnits}
                                                 setAttributes={setAttributes}
                                                 rangeStep={1}
                                                 resetFallbackValue={"8"}
@@ -929,52 +929,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_TypographyControl
                                                 globalTypoControlActive={true}
-                                                globalTypoSwitcher={typingNormalTextGlobalTypoSwitcher} 
-                                                storeGlobalTypographyData={(value) => setAttributes({ typingNormalTextGlobalTypographyData: value })}
+                                                globalTypoSwitcher={animatedHeadingNormalTextGlobalTypoSwitcher} 
+                                                storeGlobalTypographyData={(value) => setAttributes({ animatedHeadingNormalTextGlobalTypographyData: value })}
 
-                                                globalTypoType={typingNormalTextGlobalTypoType}
+                                                globalTypoType={animatedHeadingNormalTextGlobalTypoType}
                                                 onChangeGlobalTypoType={(value) => {
                                                     setAttributes({ 
-                                                        typingNormalTextGlobalTypoType: value, 
-                                                        typingNormalTextGlobalTypoSwitcher: value === 'default' ? {...typingNormalTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...typingNormalTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        animatedHeadingNormalTextGlobalTypoType: value, 
+                                                        animatedHeadingNormalTextGlobalTypoSwitcher: value === 'default' ? {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
 
-                                                globalTypoOption={typingNormalTextGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ typingNormalTextGlobalTypoOption: value })}
+                                                globalTypoOption={animatedHeadingNormalTextGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ animatedHeadingNormalTextGlobalTypoOption: value })}
 
-                                                fontFamily={typingNormalTextFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ typingNormalTextFontFamily: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                                                fontFamily={animatedHeadingNormalTextFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ animatedHeadingNormalTextFontFamily: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontSize={typingNormalTextFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ typingNormalTextFontSize: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, fontSize: value && false} })}
+                                                fontSize={animatedHeadingNormalTextFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ animatedHeadingNormalTextFontSize: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontSizeUnits={typingNormalTextFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ typingNormalTextFontSizeUnits: value })}
+                                                fontSizeUnits={animatedHeadingNormalTextFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ animatedHeadingNormalTextFontSizeUnits: value })}
 
-                                                fontWeight={typingNormalTextFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ typingNormalTextFontWeight: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                                                fontWeight={animatedHeadingNormalTextFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ animatedHeadingNormalTextFontWeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                fontStyle={typingNormalTextFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ typingNormalTextFontStyle: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                                                fontStyle={animatedHeadingNormalTextFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ animatedHeadingNormalTextFontStyle: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                textTransform={typingNormalTextTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ typingNormalTextTextTransform: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, textTransform: value && false} })}
+                                                textTransform={animatedHeadingNormalTextTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ animatedHeadingNormalTextTextTransform: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                textDecoration={typingNormalTextTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ typingNormalTextTextDecoration: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                                                textDecoration={animatedHeadingNormalTextTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ animatedHeadingNormalTextTextDecoration: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                letterSpacing={typingNormalTextLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ typingNormalTextLetterSpacing: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                                letterSpacing={animatedHeadingNormalTextLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ animatedHeadingNormalTextLetterSpacing: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                letterSpacingUnits={typingNormalTextLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ typingNormalTextLetterSpacingUnits: value })}
+                                                letterSpacingUnits={animatedHeadingNormalTextLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ animatedHeadingNormalTextLetterSpacingUnits: value })}
 
-                                                lineHeight={typingNormalTextLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ typingNormalTextLineHeight: value, typingNormalTextGlobalTypoSwitcher: {...typingNormalTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                                                lineHeight={animatedHeadingNormalTextLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ animatedHeadingNormalTextLineHeight: value, animatedHeadingNormalTextGlobalTypoSwitcher: {...animatedHeadingNormalTextGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                                                lineHeightUnits={typingNormalTextLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ typingNormalTextLineHeightUnits: value })}
+                                                lineHeightUnits={animatedHeadingNormalTextLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ animatedHeadingNormalTextLineHeightUnits: value })}
 
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
@@ -982,46 +982,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_SwitcherControl
                                                 label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={typingNormalTextColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ typingNormalTextColorSwitcher: value })}
+                                                globalSwitcher={animatedHeadingNormalTextColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ animatedHeadingNormalTextColorSwitcher: value })}
                                             />
 
-                                            {typingNormalTextColorSwitcher === 'normal' && (
+                                            {animatedHeadingNormalTextColorSwitcher === 'normal' && (
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={typingNormalTextColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingNormalTextColor: value })}
+                                                    globalColor={animatedHeadingNormalTextColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextColor: value })}
                                                 />
                                             )}
 
-                                            {typingNormalTextColorSwitcher === 'hover' && ( 
+                                            {animatedHeadingNormalTextColorSwitcher === 'hover' && ( 
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={typingNormalTextHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingNormalTextHoverColor: value })}
+                                                    globalColor={animatedHeadingNormalTextHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextHoverColor: value })}
                                                 />
                                             )}
 
 
                                             <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={typingNormalTextBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ typingNormalTextBgColorSwitcher: value })}
+                                                globalSwitcher={animatedHeadingNormalTextBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ animatedHeadingNormalTextBgColorSwitcher: value })}
                                             />
 
-                                            {typingNormalTextBgColorSwitcher === 'normal' && ( 
+                                            {animatedHeadingNormalTextBgColorSwitcher === 'normal' && ( 
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={typingNormalTextBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingNormalTextBgColor: value })}
+                                                    globalColor={animatedHeadingNormalTextBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextBgColor: value })}
                                                 />
                                             )}
 
-                                            {typingNormalTextBgColorSwitcher === 'hover' && (
+                                            {animatedHeadingNormalTextBgColorSwitcher === 'hover' && (
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={typingNormalTextBgColorHover}
-                                                    setGlobalColor={(value) => setAttributes({ typingNormalTextBgColorHover: value })}
+                                                    globalColor={animatedHeadingNormalTextBgColorHover}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextBgColorHover: value })}
                                                 />
                                             )}
 
@@ -1030,52 +1030,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_TypographyControl
                                                 globalTypoControlActive={true}
-                                                globalTypoSwitcher={typingTextGlobalTypoSwitcher} 
-                                                storeGlobalTypographyData={(value) => setAttributes({ typingTextGlobalTypographyData: value })}
+                                                globalTypoSwitcher={animatedHeadingGlobalTypoSwitcher} 
+                                                storeGlobalTypographyData={(value) => setAttributes({ animatedHeadingGlobalTypographyData: value })}
 
-                                                globalTypoType={typingTextGlobalTypoType}
+                                                globalTypoType={animatedHeadingGlobalTypoType}
                                                 onChangeGlobalTypoType={(value) => {
                                                     setAttributes({ 
-                                                        typingTextGlobalTypoType: value, 
-                                                        typingTextGlobalTypoSwitcher: value === 'default' ? {...typingTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...typingTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                        animatedHeadingGlobalTypoType: value, 
+                                                        animatedHeadingGlobalTypoSwitcher: value === 'default' ? {...animatedHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...animatedHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                                     })
                                                 }}
 
-                                                globalTypoOption={typingTextGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ typingTextGlobalTypoOption: value })}
+                                                globalTypoOption={animatedHeadingGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ animatedHeadingGlobalTypoOption: value })}
 
-                                                fontFamily={typingTextFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ typingTextFontFamily: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                                                fontFamily={animatedHeadingFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ animatedHeadingFontFamily: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                                fontSize={typingTextFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ typingTextFontSize: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, fontSize: value && false} })}
+                                                fontSize={animatedHeadingFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ animatedHeadingFontSize: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                                fontSizeUnits={typingTextFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ typingTextFontSizeUnits: value })}
+                                                fontSizeUnits={animatedHeadingFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ animatedHeadingFontSizeUnits: value })}
 
-                                                fontWeight={typingTextFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ typingTextFontWeight: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                                                fontWeight={animatedHeadingFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ animatedHeadingFontWeight: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                                fontStyle={typingTextFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ typingTextFontStyle: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                                                fontStyle={animatedHeadingFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ animatedHeadingFontStyle: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                                textTransform={typingTextTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ typingTextTextTransform: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, textTransform: value && false} })}
+                                                textTransform={animatedHeadingTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ animatedHeadingTextTransform: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                                textDecoration={typingTextTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ typingTextTextDecoration: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                                                textDecoration={animatedHeadingTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ animatedHeadingTextDecoration: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                                letterSpacing={typingTextLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ typingTextLetterSpacing: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                                letterSpacing={animatedHeadingLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ animatedHeadingLetterSpacing: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                                letterSpacingUnits={typingTextLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ typingTextLetterSpacingUnits: value })}
+                                                letterSpacingUnits={animatedHeadingLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ animatedHeadingLetterSpacingUnits: value })}
 
-                                                lineHeight={typingTextLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ typingTextLineHeight: value, typingTextGlobalTypoSwitcher: {...typingTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                                                lineHeight={animatedHeadingLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ animatedHeadingLineHeight: value, animatedHeadingGlobalTypoSwitcher: {...animatedHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                                                lineHeightUnits={typingTextLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ typingTextLineHeightUnits: value })}
+                                                lineHeightUnits={animatedHeadingLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ animatedHeadingLineHeightUnits: value })}
 
                                                 deviceType={deviceType}
                                                 setAttributes={setAttributes}
@@ -1083,46 +1083,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             <FB_SwitcherControl
                                                 label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={typingTextColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ typingTextColorSwitcher: value })}
+                                                globalSwitcher={animatedHeadingColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ animatedHeadingColorSwitcher: value })}
                                             />
 
-                                            {typingTextColorSwitcher === 'normal' && (
+                                            {animatedHeadingColorSwitcher === 'normal' && (
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={typingTextColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingTextColor: value })}
+                                                    globalColor={animatedHeadingColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingColor: value })}
                                                 />
                                             )}
 
-                                            {typingTextColorSwitcher === 'hover' && ( 
+                                            {animatedHeadingColorSwitcher === 'hover' && ( 
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={typingTextHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingTextHoverColor: value })}
+                                                    globalColor={animatedHeadingHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingHoverColor: value })}
                                                 />
                                             )}
 
 
                                             <FB_SwitcherControl
                                                 label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={typingTextBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ typingTextBgColorSwitcher: value })}
+                                                globalSwitcher={animatedHeadingBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ animatedHeadingBgColorSwitcher: value })}
                                             />
 
-                                            {typingTextBgColorSwitcher === 'normal' && ( 
+                                            {animatedHeadingBgColorSwitcher === 'normal' && ( 
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={typingTextBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ typingTextBgColor: value })}
+                                                    globalColor={animatedHeadingBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingBgColor: value })}
                                                 />
                                             )}
 
-                                            {typingTextBgColorSwitcher === 'hover' && (
+                                            {animatedHeadingBgColorSwitcher === 'hover' && (
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={typingTextBgColorHover}
-                                                    setGlobalColor={(value) => setAttributes({ typingTextBgColorHover: value })}
+                                                    globalColor={animatedHeadingBgColorHover}
+                                                    setGlobalColor={(value) => setAttributes({ animatedHeadingBgColorHover: value })}
                                                 />
                                             )}
                                                             
@@ -1145,8 +1145,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         min={0}
                                                         max={10000000}
                                                         label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={typingTextGlobalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ typingTextGlobalZIndex: value === 0 ? undefined : value })}
+                                                        rangeValue={animatedHeadingGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ animatedHeadingGlobalZIndex: value === 0 ? undefined : value })}
                                                         deviceType={deviceType}
                                                         setAttributes={setAttributes}
                                                         rangeStep={1}
@@ -1157,15 +1157,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                                     <FB_InputControl
 														label={__("CSS ID", "frontis-blocks")}
-														value={typingTextGlobalWraperID}
-														onChangeValue={(value) => setAttributes({ typingTextGlobalWraperID: value })}
+														value={animatedHeadingGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ animatedHeadingGlobalWraperID: value })}
 														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 													/>
 
 													<FB_InputControl
 														label={__("CSS Class", "frontis-blocks")}
-														value={typingTextGlobalWraperClass}
-														onChangeValue={(value) => setAttributes({ typingTextGlobalWraperClass: value })}
+														value={animatedHeadingGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ animatedHeadingGlobalWraperClass: value })}
 														helpText={__("Separate with spaces key.", "frontis-blocks")}
 													/>
 													
@@ -1177,23 +1177,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 >
                                                     <FB_SwitcherControl
                                                         label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={typingGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ typingGlobalBgColorSwitcher: value })}
+                                                        globalSwitcher={animatedHeadingGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ animatedHeadingGlobalBgColorSwitcher: value })}
                                                     />
 
-                                                    {typingGlobalBgColorSwitcher === 'normal' && (
+                                                    {animatedHeadingGlobalBgColorSwitcher === 'normal' && (
                                                         <FB_ColorControl
                                                             label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={typingGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ typingGlobalBgColor: value })}
+                                                            globalColor={animatedHeadingGlobalBgColor}
+                                                            setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBgColor: value })}
                                                         />
                                                     )}
 
-                                                    {typingGlobalBgColorSwitcher === 'hover' && (
+                                                    {animatedHeadingGlobalBgColorSwitcher === 'hover' && (
                                                         <FB_ColorControl
                                                             label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={typingGlobalBgColorHover}
-                                                            setGlobalColor={(value) => setAttributes({ typingGlobalBgColorHover: value })}
+                                                            globalColor={animatedHeadingGlobalBgColorHover}
+                                                            setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBgColorHover: value })}
                                                         />
                                                     )}
 												</PanelBody>
@@ -1288,8 +1288,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     initialOpen={false}
                                                 >
                                                     <FB_CustomCSSEditor  
-                                                        value={typingTextCustomCSS} 
-                                                        onChangeValue={(value) => setAttributes({ typingTextCustomCSS: value })}
+                                                        value={animatedHeadingCustomCSS} 
+                                                        onChangeValue={(value) => setAttributes({ animatedHeadingCustomCSS: value })}
                                                     />
                                                 </PanelBody>
 											</div>
