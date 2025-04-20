@@ -114,18 +114,6 @@ final class Plugin
 	public function enqueue_header_footer() {
 		$upload_dir = wp_upload_dir();
 
-		// Footer
-		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
-		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
-
-		// Css file
-		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
-		$css_file_url = $footer_frontend_url .'footer.min.css';
-		if(file_exists($css_file_system_path)) {	
-			$version = filemtime($css_file_system_path);
-			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
-		}
-
 		// Header
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/header/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
@@ -139,11 +127,30 @@ final class Plugin
 			wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
 		}
 
+		// Footer
+		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
+		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
+
+		// Css file
+		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
+		$css_file_url = $footer_frontend_url .'footer.min.css';
+		if(file_exists($css_file_system_path)) {	
+			$version = filemtime($css_file_system_path);
+			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
+		}
+
 		$header_js_system_path = $frontend_dir .'header.js';
 		$js_file_url = $frontend_url . 'header.js';
 		if(file_exists($header_js_system_path)) {	
 			$version = filemtime($header_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
+		}
+
+		$footer_js_system_path = $frontend_dir .'footer.js';
+		$footer_js_file_url = $frontend_url . 'footer.js';
+		if(file_exists($footer_js_system_path)) {	
+			$version = filemtime($footer_js_system_path);
+			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
 		}
 	}
 
@@ -169,16 +176,21 @@ final class Plugin
 		if(is_search()) {
 		    $page_name = 'search';
 		}
+
+		if(is_page()) {
+			$page_name = 'page';
+		}
 		
 		if(is_404()) {
 		    $page_name = '404';
 		}
 
-		if($frntis_block_used) {
+		// Check page or post assigned by template
+		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+		if($frntis_block_used || $assigned_template !== '') {
 			$page_name = Helper::get_page_name();
 		}
-
-		// var_dump($frntis_block_used);
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
