@@ -103,8 +103,11 @@ final class Plugin
 		if ($google_font_url) {
     		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+    		// echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		// echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+
+			echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap"></noscript>';
 		}
 	}
 
@@ -116,8 +119,8 @@ final class Plugin
 		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
 
 		// Css file
-		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
-		$css_file_url = $footer_frontend_url .'footer.min.css';
+		$css_file_system_path = $footer_frontend_dir .'footer.css';
+		$css_file_url = $footer_frontend_url .'footer.css';
 		if(file_exists($css_file_system_path)) {	
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
@@ -128,8 +131,8 @@ final class Plugin
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir .'header.min.css';
-		$css_file_url = $frontend_url .'header.min.css';
+		$css_file_system_path = $frontend_dir .'header.css';
+		$css_file_url = $frontend_url .'header.css';
 
 		if(file_exists($css_file_system_path)) {	
 			$version = filemtime($css_file_system_path);
@@ -150,33 +153,39 @@ final class Plugin
 		$upload_dir = wp_upload_dir();
 
 		$frntis_block_used = get_post_meta(get_the_ID(), 'page_frontis_block_used', true);
-		
-		if(is_search()) {
-		    $page_name = 'search';
-		}
-		
-		if(is_archive()) {
-		    $page_name = 'archive';
-		}
-		
-		if(is_404()) {
-		    $page_name = '404';
+
+		if(is_home()) {
+			$page_name = 'home';
 		}
 
 		if(is_single()) {
 			$page_name = 'single';
 		}
 
-		if($frntis_block_used !== '') {
+		if(is_archive()) {
+		    $page_name = 'archive';
+		}
+		
+		if(is_search()) {
+		    $page_name = 'search';
+		}
+		
+		if(is_404()) {
+		    $page_name = '404';
+		}
+
+		if($frntis_block_used) {
 			$page_name = Helper::get_page_name();
 		}
+
+		// var_dump($frntis_block_used);
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir . $page_name .'.min.css';
-		$css_file_url = $frontend_url . $page_name .'.min.css';
+		$css_file_system_path = $frontend_dir . $page_name .'.css';
+		$css_file_url = $frontend_url . $page_name .'.css';
 
 		// Js file
 		$js_file_system_path = $frontend_dir . $page_name .'.js';
