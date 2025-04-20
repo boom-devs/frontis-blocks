@@ -404,7 +404,7 @@ class AssetsGenerator {
             ";
         }
 
-        return $this->clean_CSS($root_css);
+        return $root_css;
     }
 
     public static function generate_global_assets() {
@@ -581,18 +581,21 @@ class AssetsGenerator {
     }
 
     public function generate_page_assets($post_id, $post) {
+
+        // Generate header and footer css
+        $this->generate_active_header_footer();
+
+        // Generate template and page css
         $this->post_id = $post_id;
         $this->post = $post;
 
-        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404')) {
+        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home')) {
             $this->css_generator_functions(false);
         }
         
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
             $this->css_generator_functions(true);
         }
-
-        $this->generate_active_header_footer();
     }
 
     public function check_frontis_blocks_used() {
@@ -683,11 +686,16 @@ class AssetsGenerator {
             }
         }
 
+
+        // echo "<pre>";
+        // var_dump($this->css_content);
+        // echo "</pre>";
+
         $minifier = new CSS($this->css_content);
         $minified_css = $minifier->minify();
 
         // Css file
-        $css_file_name = $page_name . '.min.css';
+        $css_file_name = $page_name . '.css';
         $css_file = $css_dir . $css_file_name;
         file_put_contents($css_file, $minified_css);
 

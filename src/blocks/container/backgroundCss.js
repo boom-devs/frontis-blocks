@@ -110,29 +110,8 @@ const backgroundCss = ( attributes, deviceType, clientId, pseudoElementOverlay =
 
 
 		/** Normal Bg from FB Container */
-		containerBgColorSwitcher,
 		containerBgNormalBackgroundType,
 		containerBgNormalClassicColor,
-		containerBgNormalGradientColor,
-		containerBgNormalCustomGradientSwitcher,
-		containerBgNormalCustomGradientInputValue,
-		containerBgNormalBackgroundImageUrl,
-		containerBgNormalBackgroundImagePosition,
-		containerBgNormalBackgroundImageAttachment,
-		containerBgNormalBackgroundImageRepeat,
-		containerBgNormalBackgroundImageSize,
-
-		/** Hover Bg from FB Container */
-		containerBgHoverBackgroundType,
-		containerBgHoverClassicColor,
-		containerBgHoverGradientColor,
-		containerBgHoverCustomGradientSwitcher,
-		containerBgHoverCustomGradientInputValue,
-		containerBgHoverBackgroundImageUrl,
-		containerBgHoverBackgroundImagePosition,
-		containerBgHoverBackgroundImageAttachment,
-		containerBgHoverBackgroundImageRepeat,
-		containerBgHoverBackgroundImageSize,
 	} = attributes;
 
 	const backgroundAttributesDesktop = {

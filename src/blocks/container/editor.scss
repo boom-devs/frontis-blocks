@@ -1,5 +1,3 @@
-@import "./variables";
-
 .frontis-blocks-container-variation-picker {
 	.frontis-blocks-variation-close {
 		font-size: 35px;
@@ -73,7 +71,7 @@
 			font-weight: 400;
 			line-height: 29px;
 			margin-bottom: 4px;
-			color: $spectra-color-heading;
+			color: #1d2327;
 		}
 	}
 
@@ -81,7 +79,7 @@
 		path,
 		rect,
 		circle {
-			stroke: $spectra-color-secondary;
+			stroke: #0063a1;
 		}
 
 		svg {
@@ -91,20 +89,6 @@
 
 	.block-editor-block-variation-picker__variation::before {
 		padding-bottom: 0;
-	}
-
-	.components-placeholder__fieldset {
-		align-items: center;
-		text-align: center;
-		flex-direction: column;
-		max-width: 90%;
-
-		.components-placeholder__instructions {
-			font-size: 13px;
-			line-height: 20px;
-			color: $spectra-color-body;
-			width: 100%;
-		}
 	}
 }
 
