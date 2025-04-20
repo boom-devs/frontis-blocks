@@ -3,53 +3,53 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockId,
-        typingTextItems,
-        typingTextMainTag,
-        typingTextPrefix,
-        typingTextCursorSwitch,
-        typingTextCursor,
-        typingTextSuffix,
+        animatedHeadingItems,
+        animatedHeadingMainTag,
+        animatedHeadingPrefix,
+        animatedHeadingCursorSwitch,
+        animatedHeadingCursor,
+        animatedHeadingSuffix,
 
-        typingTextGlobalWraperID,
-        typingTextGlobalWraperClass,
+        animatedHeadingGlobalWraperID,
+        animatedHeadingGlobalWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-typing-text-main-wrapper ${blockId}`,
+        className: `fb-animated-Heading-main-wrapper ${blockId}`,
     });
 
-    const Tag = typingTextMainTag ? typingTextMainTag : "div";
+    const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
     
     return (
         <div {...blockProps}>
-            <div className={`fb-parent-wrapper ${typingTextGlobalWraperClass}`} id={typingTextGlobalWraperID}>
-                <Tag className="fb-typing-text-wrapper">
-                    {typingTextPrefix && (
+            <div className={`fb-parent-wrapper ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID}>
+                <Tag className="fb-animated-Heading-wrapper">
+                    {animatedHeadingPrefix && (
                         <RichText.Content
                             tagName="span"
-                            className="fb-typing-text-prefix"
-                            value={typingTextPrefix}
+                            className="fb-animated-Heading-prefix"
+                            value={animatedHeadingPrefix}
                         />
                     )}
-                    <span className="fb-typing-texts">
-                        {typingTextItems && typingTextItems.map(item => (
-                            <span key={item.id} className="fb-typing-item">
-                                {item.typingTextTitle}
+                    <span className="fb-animated-Heading-texts">
+                        {animatedHeadingItems && animatedHeadingItems.map(item => (
+                            <span key={item.id} className="fb-animated-Heading-item">
+                                {item.animatedHeadingTitle}
                             </span>
                         ))}
                     </span>
-                    {typingTextCursorSwitch && (
-                        typingTextCursor && (
-                            <span className="fb-typing-text-cursor">
-                                {typingTextCursor}
+                    {animatedHeadingCursorSwitch && (
+                        animatedHeadingCursor && (
+                            <span className="fb-animated-Heading-cursor">
+                                {animatedHeadingCursor}
                             </span>
                         )
                     )}
-                    {typingTextSuffix && (
+                    {animatedHeadingSuffix && (
                         <RichText.Content
                             tagName="span"
-                            className="fb-typing-text-suffix"
-                            value={typingTextSuffix}
+                            className="fb-animated-Heading-suffix"
+                            value={animatedHeadingSuffix}
                         />
                     )}
                 </Tag>

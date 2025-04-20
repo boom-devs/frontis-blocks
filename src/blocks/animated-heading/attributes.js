@@ -8,7 +8,7 @@ const attributes = {
         default: "",
     },
     
-    typingTextAlignment: {
+    animatedHeadingAlignment: {
         type: "object",
         default: {
             Desktop: "left",
@@ -17,11 +17,11 @@ const attributes = {
         },
     },
 
-    typingTextMainTag: {
+    animatedHeadingMainTag: {
         type: "string",
         default: "span"
     },
-    typingTextGap: {
+    animatedHeadingGap: {
         type: "object",
         default: {
             Desktop: "8",
@@ -29,7 +29,7 @@ const attributes = {
             Mobile: "8"
         }
     },
-    typingTextGapUnits: {
+    animatedHeadingGapUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -38,28 +38,28 @@ const attributes = {
         }
     },
 
-    typingTextPrefix: {
+    animatedHeadingPrefix: {
         type: "string",
         default: "We create"
     },
-    typingTextItems: {
+    animatedHeadingItems: {
         type: "array",
         default: [
             {
                 id: 'item-1',
-                typingTextTitle: 'WordPress Plugins',
+                animatedHeadingTitle: 'WordPress Plugins',
             },
             {
                 id: 'item-2',
-                typingTextTitle: 'WordPress Themes',
+                animatedHeadingTitle: 'WordPress Themes',
             },
             {
                 id: 'item-3',
-                typingTextTitle: 'WooCommerce Extensions',
+                animatedHeadingTitle: 'WooCommerce Extensions',
             },
             {
                 id: 'item-4',
-                typingTextTitle: 'Custom Web Solutions',
+                animatedHeadingTitle: 'Custom Web Solutions',
             },
         ],
         items: {
@@ -69,7 +69,7 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                typingTextTitle: {
+                animatedHeadingTitle: {
                     type: "string",
                     default: "WordPress Plugins"
                 },
@@ -77,27 +77,27 @@ const attributes = {
         }
     },
 
-    typingTextCursorSwitch: {
+    animatedHeadingCursorSwitch: {
         type: "boolean",
         default: true
     },
 
-    typingTextCursor: {
+    animatedHeadingCursor: {
         type: "string",
         default: "|"
     },
 
-    typingTextSuffix: {
+    animatedHeadingSuffix: {
         type: "string",
         default: ""
     },
 
     /** Start Normal Typing Text Style */
-    typingNormalTextGlobalTypographyData: {
+    animatedHeadingNormalTextGlobalTypographyData: {
         type: "object",
         default: {}
     },
-    typingNormalTextGlobalTypoSwitcher: {
+    animatedHeadingNormalTextGlobalTypoSwitcher: {
         type: "object",
         default: {
             fontFamily: false,
@@ -110,19 +110,19 @@ const attributes = {
             lineHeight: false,
         },
     },
-    typingNormalTextGlobalTypoType: {
+    animatedHeadingNormalTextGlobalTypoType: {
         type: "string",
         default: 'default',
     },
-    typingNormalTextGlobalTypoOption: {
+    animatedHeadingNormalTextGlobalTypoOption: {
         type: "object",
         default: {label: 'Default', value: 'default'},
     },
-    typingNormalTextFontFamily: {
+    animatedHeadingNormalTextFontFamily: {
         type: "string",
         default: "Default",
     },
-    typingNormalTextFontSize: {
+    animatedHeadingNormalTextFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -130,7 +130,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingNormalTextFontSizeUnits: {
+    animatedHeadingNormalTextFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -138,23 +138,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    typingNormalTextFontWeight : {
+    animatedHeadingNormalTextFontWeight : {
         type: "string",
         default: ""
     },
-    typingNormalTextFontStyle : {
+    animatedHeadingNormalTextFontStyle : {
         type: "string",
         default: ""
     },
-    typingNormalTextTextTransform : {
+    animatedHeadingNormalTextTextTransform : {
         type: "string",
         default: ""
     },
-    typingNormalTextTextDecoration : {
+    animatedHeadingNormalTextTextDecoration : {
         type: "string",
         default: ""
     },
-    typingNormalTextLetterSpacing: {
+    animatedHeadingNormalTextLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -162,7 +162,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingNormalTextLetterSpacingUnits: {
+    animatedHeadingNormalTextLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -170,7 +170,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    typingNormalTextLineHeight: {
+    animatedHeadingNormalTextLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -178,7 +178,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingNormalTextLineHeightUnits: {
+    animatedHeadingNormalTextLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -187,35 +187,35 @@ const attributes = {
         }
     },
 
-    typingNormalTextColorSwitcher : {
+    animatedHeadingNormalTextColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    typingNormalTextColor : {
+    animatedHeadingNormalTextColor : {
         type: "string"
     },
-    typingNormalTextHoverColor: {
+    animatedHeadingNormalTextHoverColor: {
         type: 'string',
     },
-    typingNormalTextBgColorSwitcher: {
+    animatedHeadingNormalTextBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    typingNormalTextBgColor: {
+    animatedHeadingNormalTextBgColor: {
         type: 'string',
     },
-    typingNormalTextBgColorHover: {
+    animatedHeadingNormalTextBgColorHover: {
         type: 'string',
     },
     /** End Normal Typing Text Style */
 
 
     /** Start Typing Text Style */
-    typingTextGlobalTypographyData: {
+    animatedHeadingGlobalTypographyData: {
         type: "object",
         default: {}
     },
-    typingTextGlobalTypoSwitcher: {
+    animatedHeadingGlobalTypoSwitcher: {
         type: "object",
         default: {
             fontFamily: false,
@@ -228,19 +228,19 @@ const attributes = {
             lineHeight: false,
         },
     },
-    typingTextGlobalTypoType: {
+    animatedHeadingGlobalTypoType: {
         type: "string",
         default: 'default',
     },
-    typingTextGlobalTypoOption: {
+    animatedHeadingGlobalTypoOption: {
         type: "object",
         default: {label: 'Default', value: 'default'},
     },
-    typingTextFontFamily: {
+    animatedHeadingFontFamily: {
         type: "string",
         default: "Default",
     },
-    typingTextFontSize: {
+    animatedHeadingFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -248,7 +248,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingTextFontSizeUnits: {
+    animatedHeadingFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -256,23 +256,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    typingTextFontWeight : {
+    animatedHeadingFontWeight : {
         type: "string",
         default: ""
     },
-    typingTextFontStyle : {
+    animatedHeadingFontStyle : {
         type: "string",
         default: ""
     },
-    typingTextTextTransform : {
+    animatedHeadingTextTransform : {
         type: "string",
         default: ""
     },
-    typingTextTextDecoration : {
+    animatedHeadingTextDecoration : {
         type: "string",
         default: ""
     },
-    typingTextLetterSpacing: {
+    animatedHeadingLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -280,7 +280,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingTextLetterSpacingUnits: {
+    animatedHeadingLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -288,7 +288,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    typingTextLineHeight: {
+    animatedHeadingLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -296,7 +296,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    typingTextLineHeightUnits: {
+    animatedHeadingLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -304,37 +304,37 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    typingTextColorSwitcher : {
+    animatedHeadingColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    typingTextColor : {
+    animatedHeadingColor : {
         type: "string"
     },
-    typingTextHoverColor: {
+    animatedHeadingHoverColor: {
         type: 'string',
     },
-    typingTextBgColorSwitcher: {
+    animatedHeadingBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    typingTextBgColor: {
+    animatedHeadingBgColor: {
         type: 'string',
     },
-    typingTextBgColorHover: {
+    animatedHeadingBgColorHover: {
         type: 'string',
     },
     /** End Typing Text Style */
 
-    typingGlobalBgColorSwitcher: {
+    animatedHeadingGlobalBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    typingGlobalBgColor: {
+    animatedHeadingGlobalBgColor: {
         type: 'string',
         default: ""
     },
-    typingGlobalBgColorHover: {
+    animatedHeadingGlobalBgColorHover: {
         type: 'string',
         default: ""
     },
@@ -516,7 +516,7 @@ const attributes = {
     /** End Typing Text Border */
 
     /** Start Typing Text Global Z-Index */
-    typingTextGlobalZIndex : {
+    animatedHeadingGlobalZIndex : {
         type: "object",
         default: {
             Desktop: '',
@@ -525,16 +525,16 @@ const attributes = {
         }
     },
     /** Start Class & ID Setting */
-    typingTextGlobalWraperID : {
+    animatedHeadingGlobalWraperID : {
         type: "string",
         default: ""
     },
-    typingTextGlobalWraperClass : {
+    animatedHeadingGlobalWraperClass : {
         type: "string",
         default: ""
     },
 	/** End Class & ID Setting */
-    typingTextCustomCSS : {
+    animatedHeadingCustomCSS : {
         type: "string",
         default: "",
     },

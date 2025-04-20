@@ -20,7 +20,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.typingTextTitle || __( `Typing Text ${index + 1}`, "frontis-blocks" )}
+                    {item.animatedHeadingTitle || __( `Typing Text ${index + 1}`, "frontis-blocks" )}
                 </span>
 
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
@@ -49,8 +49,8 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 <div className="sortable-item-content">
                     <BaseControl label={__("Typing Text", "frontis-blocks")}>
                         <TextControl 
-                            value={item.typingTextTitle || __( `Typing Text ${index + 1}`, "frontis-blocks" )}
-                            onChange={(value) => handleChangeItem(item.id, 'typingTextTitle', value)}
+                            value={item.animatedHeadingTitle || __( `Typing Text ${index + 1}`, "frontis-blocks" )}
+                            onChange={(value) => handleChangeItem(item.id, 'animatedHeadingTitle', value)}
                         />
                     </BaseControl>
                 </div>
