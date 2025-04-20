@@ -1,0 +1,25 @@
+.fb-typing-text-wrapper {
+    margin: 0 !important;
+}
+
+.fb-typing-text-wrapper h1,
+.fb-typing-text-wrapper h2,
+.fb-typing-text-wrapper h3,
+.fb-typing-text-wrapper h4,
+.fb-typing-text-wrapper h5,
+.fb-typing-text-wrapper h6,
+.fb-typing-text-wrapper p {
+    display: inline-block !important;
+    margin: 0;
+}
+
+
+.fb-typing-text-cursor {
+    font-size: 40px;
+    line-height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.fb-typing-item {
+    display: none;
+}
