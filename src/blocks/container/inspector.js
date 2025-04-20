@@ -499,8 +499,6 @@ const Inspector = (props) => {
         })
     }
 
-    
-
     // container BorderRadiusWidth Function
     const handleContainerBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
