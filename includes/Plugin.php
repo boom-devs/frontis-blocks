@@ -119,8 +119,8 @@ final class Plugin
 		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
 
 		// Css file
-		$css_file_system_path = $footer_frontend_dir .'footer.css';
-		$css_file_url = $footer_frontend_url .'footer.css';
+		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
+		$css_file_url = $footer_frontend_url .'footer.min.css';
 		if(file_exists($css_file_system_path)) {	
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
@@ -131,8 +131,8 @@ final class Plugin
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir .'header.css';
-		$css_file_url = $frontend_url .'header.css';
+		$css_file_system_path = $frontend_dir .'header.min.css';
+		$css_file_url = $frontend_url .'header.min.css';
 
 		if(file_exists($css_file_system_path)) {	
 			$version = filemtime($css_file_system_path);
@@ -184,8 +184,8 @@ final class Plugin
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir . $page_name .'.css';
-		$css_file_url = $frontend_url . $page_name .'.css';
+		$css_file_system_path = $frontend_dir . $page_name .'.min.css';
+		$css_file_url = $frontend_url . $page_name .'.min.css';
 
 		// Js file
 		$js_file_system_path = $frontend_dir . $page_name .'.js';

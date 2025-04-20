@@ -695,7 +695,7 @@ class AssetsGenerator {
         $minified_css = $minifier->minify();
 
         // Css file
-        $css_file_name = $page_name . '.css';
+        $css_file_name = $page_name . '.min.css';
         $css_file = $css_dir . $css_file_name;
         file_put_contents($css_file, $minified_css);
 
