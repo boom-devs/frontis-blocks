@@ -403,8 +403,8 @@ class AssetsGenerator {
                 }
             ";
         }
-
-        return $this->clean_CSS($root_css);
+        
+        return $root_css;
     }
 
     public static function generate_global_assets() {
