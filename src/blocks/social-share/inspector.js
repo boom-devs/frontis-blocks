@@ -13,8 +13,9 @@ import {
     ColorPalette,
     RadioControl
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
+import FBIconPicker from "../../components/icon-picker";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -22,7 +23,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockID,
         shareNetworks,
         displayStyle,
-        alignment
+        alignment,
+        socialIcon,
+        blockStyle
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -47,9 +50,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ shareNetworks: updatedNetworks });
     };
 
+    const socialIconHandler = (iconName) => {
+		setAttributes({ socialIcon: iconName });
+	};
+
+    const fbSocialShareStyle = useMemo(
+		() => `
+        .fb-icon-box-main-wrapper.${blockID} {
+
+        }
+        `,
+		[
+
+        ],
+	);
+    useEffect(() => {
+		setAttributes({
+			blockStyle: `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim(),
+		});
+	}, [fbSocialShareStyle, customCss]);
+
+	const editorStyle = `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim();
+
     return (
         <>
-            
+            <style>
+				{editorStyle}
+			</style> 
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -100,24 +127,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 onChange={(value) => setAttributes({ displayStyle: value })}
                                             />
                                             
-                                            <RadioControl
-                                                label={__("Alignment")}
-                                                selected={alignment}
-                                                options={[
-                                                    { label: 'Left', value: 'left' },
-                                                    { label: 'Center', value: 'center' },
-                                                    { label: 'Right', value: 'right' },
-                                                ]}
-                                                onChange={(value) => setAttributes({ alignment: value })}
+                                        </PanelBody>
+
+                                        <PanelBody title={__("Icons", "frontis-blocks")} initialOpen={true}>
+                                            
+                                            <FBIconPicker
+                                                value={socialIcon}
+                                                setIconHandler={socialIconHandler}
                                             />
                                         </PanelBody>
                                     </>
                                 )}
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
                                             
-                                        </PanelBody>
+                                  Styling       </PanelBody>
                                     </>
                                 )}
                                 {tab.name === "advanced" && (
