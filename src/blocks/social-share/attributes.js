@@ -3,6 +3,10 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     shareNetworks: {
         type: 'array',
         default: [
@@ -25,7 +29,11 @@ const attributes = {
     alignment: {
         type: 'string',
         default: 'left'
-    }
+    },
+    socialIcon: {
+		type: 'string',
+		default: '',
+	},
 };
 
 export default attributes;
