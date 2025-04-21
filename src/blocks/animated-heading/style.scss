@@ -1,0 +1,25 @@
+.fb-animated-Heading-wrapper {
+    margin: 0 !important;
+    will-change: transform;
+
+    .fb-animated-Heading-texts:empty {
+        display: none;
+
+        .fb-animated-Heading-item {
+            display: none;
+        }
+    }
+
+    .fb-animated-Heading-cursor {
+        font-size: 40px;
+        line-height: 40px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    // Combine all heading and paragraph styling into one block for efficiency
+    & h1, & h2, & h3, & h4, & h5, & h6, & p {
+        display: inline-block !important;
+        margin: 0;
+    }
+}
