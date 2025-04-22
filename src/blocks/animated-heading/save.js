@@ -3,6 +3,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockId,
+        animationType,
         animatedHeadingItems,
         animatedHeadingMainTag,
         animatedHeadingPrefix,
@@ -15,40 +16,44 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-animated-Heading-main-wrapper ${blockId}`,
+        className: `fb-animated-heading-main-wrapper ${blockId}`,
     });
 
-    const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
+    const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
     
     return (
         <div {...blockProps}>
-            <div className={`fb-parent-wrapper ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID}>
-                <Tag className="fb-animated-Heading-wrapper">
+            <div className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID} data-animation-type={animationType}>
+                <Tag className="fb-animated-heading-wrapper">
                     {animatedHeadingPrefix && (
                         <RichText.Content
                             tagName="span"
-                            className="fb-animated-Heading-prefix"
+                            className="fb-animated-heading-prefix"
                             value={animatedHeadingPrefix}
                         />
                     )}
-                    <span className="fb-animated-Heading-texts">
-                        {animatedHeadingItems && animatedHeadingItems.map(item => (
-                            <span key={item.id} className="fb-animated-Heading-item">
-                                {item.animatedHeadingTitle}
+
+                    {animationType === "typing" && (
+                        <>
+                            <span className="fb-animated-headings">
+                                {animatedHeadingItems &&animatedHeadingItems.map(item => (
+                                    <span key={item.id} className="fb-animated-heading-item">
+                                        {item.animatedHeadingTitle}
+                                    </span>
+                                ))}
                             </span>
-                        ))}
-                    </span>
-                    {animatedHeadingCursorSwitch && (
-                        animatedHeadingCursor && (
-                            <span className="fb-animated-Heading-cursor">
-                                {animatedHeadingCursor}
-                            </span>
-                        )
+                            {animatedHeadingCursorSwitch &&animatedHeadingCursor && (
+                                <span className="fb-animated-heading-cursor">
+                                    {animatedHeadingCursor}
+                                </span>
+                            )}
+                        </>
                     )}
+
                     {animatedHeadingSuffix && (
                         <RichText.Content
                             tagName="span"
-                            className="fb-animated-Heading-suffix"
+                            className="fb-animated-heading-suffix"
                             value={animatedHeadingSuffix}
                         />
                     )}

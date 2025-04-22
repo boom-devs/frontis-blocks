@@ -111,26 +111,25 @@ button {
     }
 }
 
-.fb-animated-Heading-wrapper {
-    will-change: transform;
+.fb-animated-heading-wrapper {
+    margin: 0;
+}
 
-    .fb-animated-Heading-texts:empty {
-        display: none;
-    }
-    .fb-animated-Heading-item {
-        display: none;
-    }
+// editor.scss
+.fb-animated-heading-wrapper h1,
+.fb-animated-heading-wrapper h2,
+.fb-animated-heading-wrapper h3,
+.fb-animated-heading-wrapper h4,
+.fb-animated-heading-wrapper h5,
+.fb-animated-heading-wrapper h6,
+.fb-animated-heading-wrapper p {
+    display: inline-block;
+    margin: 0;
+}
 
-    .fb-animated-Heading-cursor {
-        font-size: 40px;
-        line-height: 40px;
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    // Combine all heading and paragraph styling into one block for efficiency
-    & h1, & h2, & h3, & h4, & h5, & h6, & p {
-        display: inline-block !important;
-        margin: 0;
-    }
+.fb-animated-heading-cursor {
+    font-size: 40px;
+    line-height: 40px;
+    display: inline-block;
+    vertical-align: middle;
 }
