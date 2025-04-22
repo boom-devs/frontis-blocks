@@ -49,6 +49,16 @@
 
             // Handle Swirl Animation
             if (animationType === 'swirl') {
+
+
+
+                // const dynamicWrapper = document.querySelector('.fb-animated-heading-dynamic-wrapper');
+                // if (dynamicWrapper) {
+                //     // dynamicWrapper.style.width = dynamicWrapper.offsetWidth + 'px';
+                //     console.log('Width of dynamic wrapper:', dynamicWrapper.offsetWidth);
+                // }
+
+
                 const texts = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
                     .map(item => item.textContent).filter(Boolean);
                 
