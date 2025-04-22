@@ -239,7 +239,23 @@ class GlobalSettings extends AjaxBase
      */
     private function update_option($option_name, $type)
     {
-        $updated = update_option($option_name, $_POST['data'], true);
+
+        $new_value = isset($_POST['data']) ? wp_unslash($_POST['data']) : null;
+        $current_value = get_option($option_name);
+
+
+        // var_dump($new_value);
+
+        if (!is_array($new_value)) {
+            wp_send_json_error('Invalid data format.');
+        }
+
+        if ($current_value === $new_value) {
+            wp_send_json_error('No changes detected, option not updated.');
+        }
+
+        // Proceed with update
+        $updated = update_option($option_name, $new_value, true);
 
         if ($updated) {
             $global_colors = get_option($option_name);
@@ -250,7 +266,6 @@ class GlobalSettings extends AjaxBase
 
             wp_send_json_success($data);
         }
-
         wp_send_json_error('Update failed.');
     }
     /**

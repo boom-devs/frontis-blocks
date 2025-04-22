@@ -5205,25 +5205,26 @@ var updateGlobalStyle = /*#__PURE__*/function () {
           });
         case 4:
           response = _context.sent;
+          console.log(response);
           if (response.success) {
-            _context.next = 7;
+            _context.next = 8;
             break;
           }
           throw new Error(response.data || 'Update failed');
-        case 7:
+        case 8:
           return _context.abrupt("return", response);
-        case 10:
-          _context.prev = 10;
+        case 11:
+          _context.prev = 11;
           _context.t0 = _context["catch"](1);
           return _context.abrupt("return", {
             "success": false,
             "data": "Update failed."
           });
-        case 13:
+        case 14:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 10]]);
+    }, _callee, null, [[1, 11]]);
   }));
   return function updateGlobalStyle(_x) {
     return _ref.apply(this, arguments);
