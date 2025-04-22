@@ -82,8 +82,93 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
             typeEffect();
             return () => clearTimeout(timeoutId);
+            
+        }else if (animationType === "swirl") {
+            const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
+            if (texts.length === 0) return;
+    
+            let currentIndex = 0;
+            const container = document.getElementById('animated-heading-wrapper');
+    
+            // 🧹 Clean up previous children if any
+            if (container) {
+                container.innerHTML = "";
+            }
+    
+            function createWordSpan(text, isActive = false) {
+                const wrapper = document.createElement('span');
+                wrapper.className = 'fb-animated-heading-dynamic-text';
+                if (isActive) wrapper.classList.add('fb-animated-heading-text-active');
+    
+                text.split('').forEach((char) => {
+                    const letter = document.createElement('span');
+                    letter.className = 'fb-animated-heading-dynamic-letter';
+    
+                    if (char === ' ') {
+                        letter.innerHTML = '&nbsp;';
+                        letter.style.display = 'inline-block';
+                        letter.style.width = '0.4em';
+                    } else {
+                        letter.textContent = char;
+                    }
+    
+                    wrapper.appendChild(letter);
+                });
+    
+                return wrapper;
+            }
+    
+            function showNextWord() {
+                const oldWord = container.querySelector('.fb-animated-heading-text-active');
+                const newWord = createWordSpan(texts[currentIndex], true);
+                container.appendChild(newWord);
+    
+                const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+                newLetters.forEach((l, i) => {
+                    setTimeout(() => {
+                        l.classList.add('fb-animated-heading-animation-in');
+                    }, i * 30);
+                });
+    
+                if (oldWord) {
+                    oldWord.classList.remove('fb-animated-heading-text-active');
+                    const oldLetters = oldWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+                    oldLetters.forEach((l, i) => {
+                        setTimeout(() => {
+                            l.classList.add('fb-animated-heading-animation-out');
+                        }, i * 30);
+                    });
+    
+                    setTimeout(() => {
+                        oldWord.remove();
+                    }, oldLetters.length * 30 + 500);
+                }
+    
+                currentIndex = (currentIndex + 1) % texts.length;
+            }
+    
+            const firstWord = createWordSpan(texts[currentIndex], true);
+            container.appendChild(firstWord);
+    
+            const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+            firstLetters.forEach((l, i) => {
+                setTimeout(() => {
+                    l.classList.add('fb-animated-heading-animation-in');
+                }, i * 30);
+            });
+    
+            currentIndex = (currentIndex + 1) % texts.length;
+            const intervalId = setInterval(showNextWord, 3000);
+    
+            // ✅ Return Cleanup
+            return () => {
+                clearInterval(intervalId);
+                if (container) {
+                    container.innerHTML = '';
+                }
+            };
         }
-    }, [animatedHeadingItems, animationType]);
+    }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
 
     const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
 
@@ -126,6 +211,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     </span>
                                 )}
                             </>
+                        )}
+                        {animationType === "swirl" && (
+                            <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper"></span>
                         )}
 
                         {animatedHeadingSuffix && (
