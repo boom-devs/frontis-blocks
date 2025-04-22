@@ -10,7 +10,6 @@ export default function save({ attributes }) {
         animatedHeadingCursorSwitch,
         animatedHeadingCursor,
         animatedHeadingSuffix,
-
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
     } = attributes;
@@ -19,11 +18,15 @@ export default function save({ attributes }) {
         className: `fb-animated-heading-main-wrapper ${blockId}`,
     });
 
-    const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
-    
+    const Tag = animatedHeadingMainTag || 'div';
+
     return (
         <div {...blockProps}>
-            <div className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID} data-animation-type={animationType}>
+            <div
+                className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
+                id={animatedHeadingGlobalWraperID}
+                data-animation-type={animationType}
+            >
                 <Tag className="fb-animated-heading-wrapper">
                     {animatedHeadingPrefix && (
                         <RichText.Content
@@ -33,21 +36,34 @@ export default function save({ attributes }) {
                         />
                     )}
 
-                    {animationType === "typing" && (
+                    {animationType === 'typing' && (
                         <>
                             <span className="fb-animated-headings">
-                                {animatedHeadingItems &&animatedHeadingItems.map(item => (
-                                    <span key={item.id} className="fb-animated-heading-item">
-                                        {item.animatedHeadingTitle}
-                                    </span>
-                                ))}
+                                {animatedHeadingItems &&
+                                    animatedHeadingItems.map((item) => (
+                                        <span key={item.id} className="fb-animated-heading-item">
+                                            {item.animatedHeadingTitle}
+                                        </span>
+                                    ))}
                             </span>
-                            {animatedHeadingCursorSwitch &&animatedHeadingCursor && (
+                            {animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                 <span className="fb-animated-heading-cursor">
                                     {animatedHeadingCursor}
                                 </span>
                             )}
                         </>
+                    )}
+
+                    {animationType === 'swirl' && (
+                        <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
+                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                animatedHeadingItems.map((item, index) => (
+                                    <span key={index} className="fb-animated-heading-item">
+                                        {item.animatedHeadingTitle}
+                                    </span>
+                                ))
+                            }
+                        </span>
                     )}
 
                     {animatedHeadingSuffix && (

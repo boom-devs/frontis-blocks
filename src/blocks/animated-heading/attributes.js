@@ -319,7 +319,7 @@ const attributes = {
     },
     animatedHeadingAnimationTextColor : {
         type: "string",
-        default: ""
+        default: "#399CFF"
     },
    animatedHeadingAnimationTextHoverColor: {
         type: 'string',

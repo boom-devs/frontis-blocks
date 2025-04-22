@@ -171,18 +171,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         if (active && over && active.id !== over.id) {
             const oldIndex =animatedHeadingItems.findIndex(item => item.id === active.id);
             const newIndex =animatedHeadingItems.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(typingTextItems, oldIndex, newIndex);
+            const updatedItems = arrayMove(animatedHeadingItems, oldIndex, newIndex);
             setAttributes({animatedHeadingItems: updatedItems });
         }
     };
 
 	const handleAddItem = () => {
 		const newItem = {
-			id: `item-${typingTextItems.length + 1}`,
-			animatedHeadingTitle: 'Text ' + (typingTextItems.length + 1),
+			id: `item-${animatedHeadingItems.length + 1}`,
+			animatedHeadingTitle: 'Text ' + (animatedHeadingItems.length + 1),
 		};
 	
-		setAttributes({animatedHeadingItems: [...typingTextItems, newItem] });
+		setAttributes({animatedHeadingItems: [...animatedHeadingItems, newItem] });
 	};
 
     const handleChangeItem = (id, key, value) => {
@@ -200,8 +200,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleDuplicateItem = (id) => {
         const itemToDuplicate =animatedHeadingItems.find(item => item.id === id);
         if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${typingTextItems.length + 1}` };
-            setAttributes({animatedHeadingItems: [...typingTextItems, newItem] });
+            const newItem = { ...itemToDuplicate, id: `item-${animatedHeadingItems.length + 1}` };
+            setAttributes({animatedHeadingItems: [...animatedHeadingItems, newItem] });
         }
     };
 
@@ -584,18 +584,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-headings,
-        .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor {
+        .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+        .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {
             ${animatedHeadingAnimationTextColor ? `color: ${animatedHeadingAnimationTextColor};` : ''}
             ${animatedHeadingAnimationTextBgColor ? `background-color: ${animatedHeadingAnimationTextBgColor};` : ''} 
 
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === true &&animatedHeadingGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingGlobalTypographyData.fontFamily};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === true &&animatedHeadingGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingGlobalTypographyData.fontSize};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === true &&animatedHeadingGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingGlobalTypographyData.fontWeight};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === true &&animatedHeadingGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingGlobalTypographyData.fontStyle};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === true &&animatedHeadingGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingGlobalTypographyData.textTransform};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === true &&animatedHeadingGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingGlobalTypographyData.textDecoration};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === true &&animatedHeadingGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingGlobalTypographyData.letterSpacing};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === true &&animatedHeadingGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingGlobalTypographyData.lineHeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === true &&animatedHeadingAnimationTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingAnimationTextGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === true &&animatedHeadingAnimationTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingAnimationTextGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === true &&animatedHeadingAnimationTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingAnimationTextGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === true &&animatedHeadingAnimationTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingAnimationTextGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === true &&animatedHeadingAnimationTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingAnimationTextGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === true &&animatedHeadingAnimationTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingAnimationTextGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === true &&animatedHeadingAnimationTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingAnimationTextGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === true &&animatedHeadingAnimationTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingAnimationTextGlobalTypographyData.lineHeight};` : ''}
                 
             ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === false &&animatedHeadingAnimationTextFontFamily &&animatedHeadingAnimationTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingAnimationTextFontFamily};` : ''}
             ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Desktop &&animatedHeadingAnimationTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingAnimationTextFontSize.Desktop}${animatedHeadingAnimationTextFontSizeUnits.Desktop};` : ''}
@@ -609,7 +610,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-headings:hover,
-        .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor:hover {
+        .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor:hover,
+        .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text:hover {
             ${animatedHeadingAnimationTextHoverColor ? `color: ${animatedHeadingAnimationTextHoverColor};` : ''}
             ${animatedHeadingAnimationTextBgColorHover ? `background-color: ${animatedHeadingAnimationTextBgColorHover};` : ''}
         }
@@ -637,7 +639,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-headings,
-            .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor {  
+            .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+            .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Tablet &&animatedHeadingAnimationTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingAnimationTextFontSize.Tablet}${animatedHeadingAnimationTextFontSizeUnits.Tablet};` : ''}
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Tablet &&animatedHeadingAnimationTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Tablet}${animatedHeadingAnimationTextLetterSpacingUnits.Tablet};` : ''}
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Tablet &&animatedHeadingAnimationTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingAnimationTextLineHeight.Tablet}${animatedHeadingAnimationTextLineHeightUnits.Tablet};` : ''}
@@ -668,7 +671,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-headings,
-            .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor {  
+            .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
+            .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Mobile &&animatedHeadingAnimationTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingAnimationTextFontSize.Mobile}${animatedHeadingAnimationTextFontSizeUnits.Mobile};` : ''}
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Mobile &&animatedHeadingAnimationTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Mobile}${animatedHeadingAnimationTextLetterSpacingUnits.Mobile};` : ''}
                 ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Mobile &&animatedHeadingAnimationTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingAnimationTextLineHeight.Mobile}${animatedHeadingAnimationTextLineHeightUnits.Mobile};` : ''}
