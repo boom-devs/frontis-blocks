@@ -167,8 +167,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     container.innerHTML = '';
                 }
             };
+
         }
     }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
+    
 
     const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
 
@@ -190,7 +192,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             
             <div {...blockProps}>
                 <div className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID} ref={panelRef}>
-                    <Tag className="fb-animated-heading-wrapper">
+                    <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
                         {animatedHeadingPrefix && (
                             <RichText
                                 tagName="span"

@@ -27,7 +27,7 @@ export default function save({ attributes }) {
                 id={animatedHeadingGlobalWraperID}
                 data-animation-type={animationType}
             >
-                <Tag className="fb-animated-heading-wrapper">
+                <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
                     {animatedHeadingPrefix && (
                         <RichText.Content
                             tagName="span"
