@@ -204,6 +204,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   gap: 8px;
   padding: 0 16px;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner {
+  margin-bottom: 20px;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
   font-size: 13px;
   font-weight: 500;
@@ -284,7 +287,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   border: 1px solid #E1E3E8;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content {
-  padding-top: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgb(221, 221, 221);
+  padding: 10px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-setting-label-text {
   font-weight: 500;
@@ -439,6 +446,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   display: none !important;
 }
 
+.fb-global-typo-elements-wrap .components-navigator-provider {
+  padding-bottom: 30px;
+}
 .fb-global-typo-elements-wrap .components-navigator-back-button:focus {
   outline: none !important;
   box-shadow: none !important;
@@ -479,6 +489,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   justify-content: space-between;
   border-left: 1px solid #E1E3E8;
   border-right: 1px solid #E1E3E8;
+}
+.fb-global-typo-elements-wrap .components-navigator-screen {
+  overflow: hidden;
+  border-top: 1px solid #E1E3E8;
 }
 .fb-global-typo-elements-wrap .fb-typography-settings .components-base-control {
   width: auto !important;

@@ -286,6 +286,7 @@ function FrontisBlocksSidebar() {
 
   // Fetch and initialize state
   const handleUpdateState = useCallback(async () => {
+    console.log("Initial loaded")
     setIsLoading(true);
     const localStorageKeys = [
       { key: "fb_global_colors", setter: setGlobalColors, defaultValue: themeColors, api: "fb_get_global_colors" },

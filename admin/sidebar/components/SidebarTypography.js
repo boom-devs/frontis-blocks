@@ -99,7 +99,7 @@ const FB_SidebarTypography = ({
 			/>
 			{heading !== 'all' &&
 				<FB_Range
-					min={-200}
+					min={1}
 					max={200}
 					label={__("Font Size", "frontis-blocks")}
 					rangeValue={fontSize}

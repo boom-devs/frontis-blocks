@@ -762,6 +762,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading5Styles = '';
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
+
   var arrayKeys = Object.keys(data);
 
   // Loop through the data to generate CSS for each tag
@@ -772,7 +773,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
     ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach(function (prop) {
       var value = getValue(data[key], prop);
       var typoValue = data[key][prop];
-      if (value !== null) {
+      if (value !== 'null') {
         if (typoValue) {
           rootStyles += "".concat(typoValue.variable, ": ").concat(value, ";\n");
         }
@@ -901,6 +902,7 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var headingGrouped = '';
   var allCombinedStyles = '';
   var styles = '';
+  console.log(fileName);
   if (fileName === 'post.php') {
     headingGrouped = "\n            body .is-root-container h1 {\n                ".concat(heading1Styles, "\n            }\n            body .is-root-container h2 {\n                ").concat(heading2Styles, "\n            }\n            body .is-root-container h3 {\n                ").concat(heading3Styles, "\n            }\n            body .is-root-container h4 {\n                ").concat(heading4Styles, "\n            }\n            body .is-root-container h5 {\n                ").concat(heading5Styles, "\n            }\n            body .is-root-container h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
 
@@ -991,9 +993,10 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
   var styleTag = iframeDocument.getElementById("global-typo");
   if (fileName === 'post.php') {
+    iframe = document.querySelector('iframe[name="editor-canvas"]');
+    console.log(iframe);
     if (deviceType !== 'Desktop') {
       var _iframe6, _iframe7;
-      iframe = document.querySelector('iframe[name="editor-canvas"]');
       iframeDocument = ((_iframe6 = iframe) === null || _iframe6 === void 0 ? void 0 : _iframe6.contentDocument) || ((_iframe7 = iframe) === null || _iframe7 === void 0 || (_iframe7 = _iframe7.contentWindow) === null || _iframe7 === void 0 ? void 0 : _iframe7.document) || document;
       styleTag = iframeDocument.getElementById("global-typo");
       console.log("iframeDocument");
@@ -1240,7 +1243,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     value: fontFamily,
     onChange: handleFontFamilyChange
   }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -200,
+    min: 1,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
     rangeValue: fontSize,
@@ -1383,7 +1386,7 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     fontFamilies = _useState14[0],
     setFontFamilies = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState16 = _slicedToArray(_useState15, 2),
     globalTypography = _useState16[0],
     setGlobalTypography = _useState16[1];
@@ -2061,14 +2064,19 @@ var TypographySettings = function TypographySettings(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
-      if (globalTypoData) {
-        globalTypoData = JSON.parse(globalTypoData);
-        setGlobalTypography(globalTypoData);
+      if (globalTypoData !== 'null' && globalTypoData !== undefined && globalTypoData !== "") {
+        try {
+          var parsedData = JSON.parse(globalTypoData);
+          setGlobalTypography(parsedData);
+        } catch (error) {
+          console.error("Error parsing globalTypoData:", error);
+          setGlobalTypography(typography);
+        }
+      } else {
+        setGlobalTypography(typography);
       }
     }, 1000);
   }, [deviceType]);
-  console.log("globalTypography");
-  console.log(globalTypography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -3314,6 +3322,7 @@ function FrontisBlocksSidebar() {
     return _regeneratorRuntime().wrap(function _callee$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
+          console.log("Initial loaded");
           setIsLoading(true);
           localStorageKeys = [{
             key: "fb_global_colors",
@@ -3360,7 +3369,7 @@ function FrontisBlocksSidebar() {
               return (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(data, deviceType);
             }
           }];
-          _context2.prev = 2;
+          _context2.prev = 3;
           _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
             var _localStorageKeys$_i, key, setter, defaultValue, api, postProcess, localData, res, data;
             return _regeneratorRuntime().wrap(function _loop$(_context) {
@@ -3396,32 +3405,32 @@ function FrontisBlocksSidebar() {
             }, _loop);
           });
           _i = 0, _localStorageKeys = localStorageKeys;
-        case 5:
+        case 6:
           if (!(_i < _localStorageKeys.length)) {
-            _context2.next = 10;
+            _context2.next = 11;
             break;
           }
-          return _context2.delegateYield(_loop(), "t0", 7);
-        case 7:
+          return _context2.delegateYield(_loop(), "t0", 8);
+        case 8:
           _i++;
-          _context2.next = 5;
+          _context2.next = 6;
           break;
-        case 10:
-          _context2.next = 15;
+        case 11:
+          _context2.next = 16;
           break;
-        case 12:
-          _context2.prev = 12;
-          _context2.t1 = _context2["catch"](2);
+        case 13:
+          _context2.prev = 13;
+          _context2.t1 = _context2["catch"](3);
           console.error("Error fetching global settings:", _context2.t1);
-        case 15:
-          _context2.prev = 15;
+        case 16:
+          _context2.prev = 16;
           setIsLoading(false);
-          return _context2.finish(15);
-        case 18:
+          return _context2.finish(16);
+        case 19:
         case "end":
           return _context2.stop();
       }
-    }, _callee, null, [[2, 12, 15, 18]]);
+    }, _callee, null, [[3, 13, 16, 19]]);
   })), [deviceType, themeColors, getAllFontFamilies]);
 
   // Initialize on mount and device type change
