@@ -35,51 +35,6 @@ export default function save({ attributes }) {
         className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
-
-    // Enhanced lazy load script with IntersectionObserver for better performance
-    const lazyLoadScript = `
-    (function() {
-        // Modern browsers with IntersectionObserver
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                        }
-                        if (img.dataset.srcset) {
-                            img.srcset = img.dataset.srcset;
-                            img.removeAttribute('data-srcset');
-                        }
-                        observer.unobserve(img);
-                    }
-                });
-            });
-            
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                observer.observe(img);
-            });
-        } else {
-            // Fallback for older browsers
-            window.addEventListener('load', function() {
-                document.querySelectorAll('img[data-src]').forEach(img => {
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        img.removeAttribute('data-src');
-                    }
-                    if (img.dataset.srcset) {
-                        img.srcset = img.dataset.srcset;
-                        img.removeAttribute('data-srcset');
-                    }
-                });
-            });
-        }
-    })();
-    `;
-
-    // Function to render the image with proper attributes
     // Function to render the image with proper attributes
     const AdvancedImageRender = () => {
         const imgAttributes = {
@@ -125,6 +80,7 @@ export default function save({ attributes }) {
                 <div 
                     className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`}
                     id={advancedImageGlobalWraperID}
+                    data-smart-lazy-load-switcher={smartLazyLoadSwitcher}
                 >
                     <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${imageFit || ''} ${titlePosition || ''}`}>
                         <div className="fb-advanced-image-inner">
@@ -153,9 +109,6 @@ export default function save({ attributes }) {
                     </div>
                 </div>
             </div>
-            { smartLazyLoadSwitcher && (
-                <script dangerouslySetInnerHTML={{ __html: lazyLoadScript }} />
-            )}
         </>
     );
 }

@@ -171,7 +171,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										height={advancedImageDefaultHeight} 
 										src={advancedImageUrl} 
 										alt={advancedImageAlt} 
-										srcset={advancedImageSrcSet || undefined}
+										srcSet={advancedImageSrcSet || undefined}
 									/>
 								)
 							) : (

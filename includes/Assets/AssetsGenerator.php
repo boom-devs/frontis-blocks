@@ -24,7 +24,6 @@ class AssetsGenerator {
     private $block_fonts = [];
     private $wp_template_css_content = '';
     private $frontis_block_used = false;
-    private $blocks_used_in_page = [];
 
     public function clean_CSS($css) {
         $parser = new Parser($css);
@@ -470,12 +469,6 @@ class AssetsGenerator {
     }
 
     public function get_template_css() {
-        $post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
-        $assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
-
-        if($assigned_template !== '') {
-            $post_name = $assigned_template;
-        }
 
         global $wpdb;
         $query = $wpdb->prepare(
@@ -486,12 +479,10 @@ class AssetsGenerator {
             FROM 
                 {$wpdb->posts} 
             WHERE 
-                post_type = 'wp_template' 
+                post_type IN ('wp_template') 
                 AND post_status = 'publish' 
-                AND post_name = %s
             ORDER BY 
-                post_modified DESC",
-            $post_name
+                post_modified DESC"
         );
 
         // Execute the query
@@ -525,10 +516,6 @@ class AssetsGenerator {
                     $this->post = get_post($template_part_post->wp_id);
                     $this->post_id = $template_part_post->wp_id;
                     $this->generate_all_blocks_assets();
-
-                    // Combine and save CSS files
-                    $page_name = $this->post->post_name;
-                    $this->combine_and_save_css_file($page_name);
                 }
             }
     
@@ -541,10 +528,6 @@ class AssetsGenerator {
                     $this->post = get_post($template_part_post->wp_id);
                     $this->post_id = $template_part_post->wp_id;
                     $this->generate_all_blocks_assets();
-
-                    // Combine and save CSS files
-                    $page_name = $this->post->post_name;
-                    $this->combine_and_save_css_file($page_name);
                 }
             }
         }
@@ -554,15 +537,11 @@ class AssetsGenerator {
         $this->generate_global_assets();
         $this->combine_static_assets();
         $this->generate_all_blocks_assets();
-        
+        $this->check_frontis_blocks_used();
+
         if($generate_template_css) {
-            $this->check_frontis_blocks_used();
             $this->get_template_css();
         }
-
-        // Combine and save CSS files
-        $page_name = $this->post->post_name;
-        $this->combine_and_save_css_file($page_name);
 
         $this->get_font_families();
     }
@@ -610,7 +589,7 @@ class AssetsGenerator {
         $this->post_id = $post_id;
         $this->post = $post;
 
-        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
+        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home')) {
             $this->css_generator_functions(false);
         }
         
@@ -620,7 +599,7 @@ class AssetsGenerator {
     }
 
     public function check_frontis_blocks_used() {
-        if(count($this->blocks_used_in_page) > 0) {
+        if(count($this->used_blocks) > 0) {
             update_post_meta($this->post_id, 'page_frontis_block_used', true);
         } else {
             update_post_meta($this->post_id, 'page_frontis_block_used', false);
@@ -652,8 +631,6 @@ class AssetsGenerator {
             $blockStyle                     = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
 
             if(get_post_type( $this->post_id ) !== 'wp_template_part') {
-                $this->blocks_used_in_page[] = $block['blockName'];
-
                 $fonts        = Helper::get_fonts_family( $block_attributes );
                 if(!empty($fonts)) {
                     foreach($fonts as $font => $weight) {
@@ -674,6 +651,10 @@ class AssetsGenerator {
         $post_content = $this->post->post_content;
         $blocks = parse_blocks($post_content);
         $this->get_inner_blocks($blocks);
+
+        // Combine and save CSS files
+        $page_name = $this->post->post_name;
+        $this->combine_and_save_css_file($page_name);
     }
     
     private function get_inner_blocks($blocks) {
@@ -704,6 +685,11 @@ class AssetsGenerator {
                 $this->css_content .= file_get_contents($global_css_file) . "\n";
             }
         }
+
+
+        // echo "<pre>";
+        // var_dump($this->css_content);
+        // echo "</pre>";
 
         $minifier = new CSS($this->css_content);
         $minified_css = $minifier->minify();
