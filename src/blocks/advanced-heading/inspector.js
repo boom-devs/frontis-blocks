@@ -1236,7 +1236,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const subHeadingMobileBorderRadiusWidth = `${subHeadingMobileBorderRadius.top}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.right}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.bottom}${subHeadingBorderRadiusUnits.Mobile} ${subHeadingMobileBorderRadius.left}${subHeadingBorderRadiusUnits.Mobile}`;
     /** End Sub Heading Border Radius */
 
-    	/** Start Icon Border */
+    /** Start Icon Border */
 	const handleHeadingIconBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( headingIconBorderLink ) {
@@ -3462,7 +3462,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                     options={BORDER_STYLES}
                                                     onChange={(value) => setAttributes({ headingIconBorder: value })}
                                             />
-
 
                                             <FB_SwitcherControl
                                                 label={__("Border Color", "frontis-blocks")}
