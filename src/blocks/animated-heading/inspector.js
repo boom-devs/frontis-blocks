@@ -527,10 +527,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-animated-heading-wrapper {
-            display: flex;
-            align-items: center;
-            ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
-            ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
             ${animatedHeadingGlobalBgColor ? `background-color: ${animatedHeadingGlobalBgColor};` : ''}
             ${animatedHeadingGlobalDesktopPaddingWidth && animatedHeadingGlobalDesktopPadding?.top ? `padding: ${animatedHeadingGlobalDesktopPaddingWidth};` : ''}
             ${animatedHeadingGlobalDesktopMarginWidth && animatedHeadingGlobalDesktopMargin?.top ? `margin: ${animatedHeadingGlobalDesktopMarginWidth};` : ''}
@@ -542,15 +538,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockId} .fb-animated-heading-wrapper:hover {
             ${animatedHeadingGlobalBgColorHover ? `background-color: ${animatedHeadingGlobalBgColorHover};` : ''}
+            ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
+        }
+
+        .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+            display: flex;
+            align-items: center;
+            ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
+            ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
+        }
+        .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+            display: block;
+            ${animatedHeadingAlignment.Desktop ? `text-align: ${animatedHeadingAlignment.Desktop};` : ''}
         }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-headings:empty {
             display: none;
         }
 
-        .${blockId} .fb-animated-heading-wrapper:hover {
-            ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
-        }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
         .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-suffix {
@@ -616,6 +621,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${animatedHeadingAnimationTextBgColorHover ? `background-color: ${animatedHeadingAnimationTextBgColorHover};` : ''}
         }
 
+
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.fb-animated-heading-main-wrapper {
@@ -629,6 +635,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${animatedHeadingGlobalTabletMarginWidth && animatedHeadingGlobalTabletMargin?.top ? `margin: ${animatedHeadingGlobalTabletMarginWidth};` : ''}
                 ${animatedHeadingGlobalTabletBorderWidth && animatedHeadingGlobalTabletBorder?.top ? `border-width: ${animatedHeadingGlobalTabletBorderWidth};` : ''}
                 ${animatedHeadingGlobalTabletBorderRadiusWidth && animatedHeadingGlobalTabletBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalTabletBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+                ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingAlignment.Tablet ? `justify-content: ${animatedHeadingAlignment.Tablet};` : ''}
+            }
+            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+                ${animatedHeadingAlignment.Tablet ? `text-align: ${animatedHeadingAlignment.Tablet};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
@@ -661,6 +675,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${animatedHeadingGlobalMobileMarginWidth && animatedHeadingGlobalMobileMargin?.top ? `margin: ${animatedHeadingGlobalMobileMarginWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderWidth && animatedHeadingGlobalMobileBorder?.top ? `border-width: ${animatedHeadingGlobalMobileBorderWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderRadiusWidth && animatedHeadingGlobalMobileBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalMobileBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+                ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingAlignment.Mobile ? `justify-content: ${animatedHeadingAlignment.Mobile};` : ''}
+            }
+
+            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+                ${animatedHeadingAlignment.Mobile ? `text-align: ${animatedHeadingAlignment.Mobile};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
@@ -794,6 +817,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     animatedHeadingGlobalMobileBorderRadiusWidth,
 
 
+
+
     ]);
 
     const customCss = getCustomCss(animatedHeadingCustomCSS, `.${blockId}`);
@@ -897,20 +922,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 </div>
                                             </BaseControl>
 
-                                            <ToggleControl
-                                                label={__("Cursor Switch", "frontis-blocks")}
-                                                checked={animatedHeadingCursorSwitch}
-                                                onChange={(value) => setAttributes({animatedHeadingCursorSwitch: value })}
-                                            />
+                                            {animationType === "typing" && (
+                                                <>
+                                                    <ToggleControl
+                                                            label={__("Cursor Switch", "frontis-blocks")}
+                                                        checked={animatedHeadingCursorSwitch}
+                                                        onChange={(value) => setAttributes({animatedHeadingCursorSwitch: value })}
+                                                    />
 
-                                            {animatedHeadingCursorSwitch && (
-                                                <TextControl
-                                                    label={__("Cursor", "frontis-blocks")}
-                                                    value={animatedHeadingCursor}
-                                                    onChange={(value) => setAttributes({animatedHeadingCursor: value })}
-                                                    className="fb-animated-heading-cursor" 
-                                                    help={__("Keep empty to hide.", "frontis-blocks")}
-                                                />
+                                                    {animatedHeadingCursorSwitch && (
+                                                        <TextControl
+                                                            label={__("Cursor", "frontis-blocks")}
+                                                            value={animatedHeadingCursor}
+                                                            onChange={(value) => setAttributes({animatedHeadingCursor: value })}
+                                                            className="fb-animated-heading-cursor" 
+                                                            help={__("Keep empty to hide.", "frontis-blocks")}
+                                                        />
+                                                    )}
+                                                </>
                                             )}
 
 											<TextControl
@@ -921,19 +950,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 help={__("Keep empty to hide.", "frontis-blocks")}
 											/>
 
-                                            <FB_Range
-                                                min={0}
-                                                max={100}
-                                                label={__("Text Gap", "frontis-blocks")}
-                                                rangeValue={animatedHeadingGap}
-                                                onChangeHandler={(value) => setAttributes({animatedHeadingGap: value })}
-                                                rangeUnitHandler={(value) => setAttributes({animatedHeadingGapUnits: value })}
-                                                deviceType={deviceType}
-                                                units={animatedHeadingGapUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={"8"}
-                                            />
+                                            {animationType === "typing" && (
+                                                <FB_Range
+                                                    min={0}
+                                                    max={100}
+                                                    label={__("Text Gap", "frontis-blocks")}
+                                                    rangeValue={animatedHeadingGap}
+                                                    onChangeHandler={(value) => setAttributes({animatedHeadingGap: value })}
+                                                    rangeUnitHandler={(value) => setAttributes({animatedHeadingGapUnits: value })}
+                                                    deviceType={deviceType}
+                                                    units={animatedHeadingGapUnits}
+                                                    setAttributes={setAttributes}
+                                                    rangeStep={1}
+                                                    resetFallbackValue={"8"}
+                                                />
+                                            )}
                                         </PanelBody>
 
                                     </>

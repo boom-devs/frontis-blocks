@@ -50,15 +50,6 @@
             // Handle Swirl Animation
             if (animationType === 'swirl') {
 
-
-
-                // const dynamicWrapper = document.querySelector('.fb-animated-heading-dynamic-wrapper');
-                // if (dynamicWrapper) {
-                //     // dynamicWrapper.style.width = dynamicWrapper.offsetWidth + 'px';
-                //     console.log('Width of dynamic wrapper:', dynamicWrapper.offsetWidth);
-                // }
-
-
                 const texts = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
                     .map(item => item.textContent).filter(Boolean);
                 
@@ -89,6 +80,16 @@
                     containerWrapper.appendChild(newWord);
 
                     const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+
+                    const totalWidthSubPixel = Array.from(newLetters)
+                    .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
+
+                    const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
+
+                    if (swirlWrapper) {
+                        swirlWrapper.style.width = `${totalWidthSubPixel}px`;
+                    }
+
                     newLetters.forEach((l, i) => {
                         setTimeout(() => {
                             l.classList.add('fb-animated-heading-animation-in');

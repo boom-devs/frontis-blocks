@@ -55,15 +55,19 @@ export default function save({ attributes }) {
                     )}
 
                     {animationType === 'swirl' && (
-                        <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
-                            {animatedHeadingItems && animatedHeadingItems.length > 0 &&
-                                animatedHeadingItems.map((item, index) => (
-                                    <span key={index} className="fb-animated-heading-item">
-                                        {item.animatedHeadingTitle}
-                                    </span>
-                                ))
-                            }
+                        <>
+                        <span className="fb-animated-heading-swirl-wrapper">
+                            <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
+                                {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                    animatedHeadingItems.map((item, index) => (
+                                        <span key={index} className="fb-animated-heading-item">
+                                            {' '}{item.animatedHeadingTitle}{' '}
+                                        </span>
+                                    ))
+                                }
+                            </span>
                         </span>
+                        </>
                     )}
 
                     {animatedHeadingSuffix && (

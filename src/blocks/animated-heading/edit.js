@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef, useEffect, useState } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from "./inspector";
 import './editor.scss';
@@ -35,6 +35,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
+
+
+    const dynamicWrapperRef = useRef( null );
 
     // Ref for the dynamic typed text span
     const typedTextRef = useRef(null);
@@ -124,6 +127,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 container.appendChild(newWord);
     
                 const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+
+
+                const totalWidthSubPixel = Array.from(newLetters)
+                .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
+
+                const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
+
+                if (swirlWrapper) {
+                    swirlWrapper.style.width = `${totalWidthSubPixel}px`;
+                }
+
                 newLetters.forEach((l, i) => {
                     setTimeout(() => {
                         l.classList.add('fb-animated-heading-animation-in');
@@ -170,7 +184,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         }
     }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
-    
 
     const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
 
@@ -215,7 +228,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </>
                         )}
                         {animationType === "swirl" && (
-                            <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper"></span>
+                            <>
+                            {'\u00A0'}
+                            <span className="fb-animated-heading-swirl-wrapper">
+                                <span 
+                                    className="fb-animated-heading-dynamic-wrapper" 
+                                    id="animated-heading-wrapper" 
+                                    ref={dynamicWrapperRef}
+                                ></span>
+                            </span>
+                            {'\u00A0'}
+                            </>
                         )}
 
                         {animatedHeadingSuffix && (
