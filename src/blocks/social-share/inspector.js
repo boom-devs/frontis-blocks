@@ -6,26 +6,23 @@ import {
 import {
     PanelBody,
     TabPanel,
-    ToggleControl,
-    RangeControl,
     SelectControl,
-    ColorPicker,
-    ColorPalette,
-    RadioControl
 } from '@wordpress/components';
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
-import FBIconPicker from "../../components/icon-picker";
+import FB_Range from '@Components/range';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
-        shareNetworks,
-        displayStyle,
-        alignment,
-        socialIcon,
-        blockStyle
+        layoutType,
+        iconSpacing,
+        iconSpacingUnits,
+        iconFontSize,
+        iconFontSizeUnits,
+        iconAlignment
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -39,36 +36,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId, blockID, setAttributes]);
 
-    const updateNetworkStatus = (networkId, enabled) => {
-        const updatedNetworks = shareNetworks.map(network => {
-            if (network.id === networkId) {
-                return { ...network, enabled };
-            }
-            return network;
-        });
-        
-        setAttributes({ shareNetworks: updatedNetworks });
-    };
-
-    const socialIconHandler = (iconName) => {
-		setAttributes({ socialIcon: iconName });
-	};
-
     const fbSocialShareStyle = useMemo(
 		() => `
-        .fb-icon-box-main-wrapper.${blockID} {
-
+        .${blockID} .social-share-parent-container{
+            ${iconAlignment.Desktop ? `justify-content: ${iconAlignment.Desktop};` : ''}
+            ${iconSpacing.Desktop ? `gap: calc(${iconSpacing.Desktop}${iconSpacingUnits.Desktop} + 20px);` : ''}
+        }
+        .${blockID} .social-share-parent-container .block-editor-block-list__layout {
+            ${iconSpacing.Desktop ? `gap: ${iconSpacing.Desktop}${iconSpacingUnits.Desktop};` : ''}
+        }
+        .${blockID} .social-share-parent-container .social-share-child-container .social-share-icon svg {
+            ${iconFontSize.Desktop ? `width: ${iconFontSize.Desktop}${iconFontSizeUnits.Desktop};` : ''}
+            ${iconFontSize.Desktop ? `height: ${iconFontSize.Desktop}${iconFontSizeUnits.Desktop};` : ''}
+        }
+        @media all and (max-width: 1024px){
+            .${blockID} .social-share-parent-container{
+                ${iconAlignment.Tablet ? `justify-content: ${iconAlignment.Tablet};` : ''}
+            }
+            .${blockID} .social-share-parent-container .block-editor-block-list__layout {
+                ${iconSpacing.Tablet ? `gap: ${iconSpacing.Tablet}${iconSpacingUnits.Tablet};` : ''}
+            }
+            .${blockID} .social-share-parent-container .social-share-child-container .social-share-icon svg {
+                ${iconFontSize.Tablet ? `width: ${iconFontSize.Tablet}${iconFontSizeUnits.Tablet};` : ''}
+                ${iconFontSize.Tablet ? `height: ${iconFontSize.Tablet}${iconFontSizeUnits.Tablet};` : ''}
+            }
+        }
+        @media all and (max-width: 767px){
+            .${blockID} .social-share-parent-container{
+                ${iconAlignment.Mobile ? `justify-content: ${iconAlignment.Mobile};` : ''}
+            }
+            .${blockID} .social-share-parent-container .block-editor-block-list__layout {
+                ${iconSpacing.Mobile ? `gap: ${iconSpacing.Mobile}${iconSpacingUnits.Mobile};` : ''}
+            }
+            .${blockID} .social-share-parent-container .social-share-child-container .social-share-icon svg {
+                ${iconFontSize.Mobile ? `width: ${iconFontSize.Mobile}${iconFontSizeUnits.Mobile};` : ''}
+                ${iconFontSize.Mobile ? `height: ${iconFontSize.Mobile}${iconFontSizeUnits.Mobile};` : ''}
+            }
         }
         `,
 		[
-
+            iconSpacing,
+            iconSpacingUnits,
+            iconFontSize,
+            iconFontSizeUnits,
+            iconAlignment
         ],
 	);
     useEffect(() => {
 		setAttributes({
 			blockStyle: `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim(),
 		});
-	}, [fbSocialShareStyle, customCss]);
+	}, [fbSocialShareStyle]);
 
 	const editorStyle = `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim();
 
@@ -104,45 +122,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <div className={"fb-tab-controls " + tab.name}>
                                 {tab.name === 'general' && (
                                     <>
-                                        <PanelBody title={__("Social Networks", "frontis-blocks")} initialOpen={true}>
-                                            {shareNetworks.map(network => (
-                                                <ToggleControl
-                                                    key={network.id}
-                                                    label={network.label}
-                                                    checked={network.enabled}
-                                                    onChange={(enabled) => updateNetworkStatus(network.id, enabled)}
-                                                />
-                                            ))}
+                                        <PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
+                                            <SelectControl
+                                                label={__("Layout Type")}
+                                                value={layoutType}
+                                                options={[
+                                                    { label: 'Horizontal', value: 'horizontal' },
+                                                    { label: 'Vertical', value: 'vertical' },
+                                                ]}
+                                                onChange={(value) => setAttributes({ layoutType: value })}
+                                            />
+                                            <FB_ResponsiveAlignmentControl
+                                                label={__("Alignment", "frontis-blocks")}
+                                                globalAlignment={iconAlignment}
+                                                setGlobalAlignment={(value) => setAttributes({ iconAlignment: value })}
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
                                         </PanelBody>
                                         
-                                        <PanelBody title={__("Display Settings", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Display Style")}
-                                                value={displayStyle}
-                                                options={[
-                                                    { label: 'Icon Only', value: 'icon' },
-                                                    { label: 'Text Only', value: 'text' },
-                                                    { label: 'Icon & Text', value: 'icon-text' },
-                                                ]}
-                                                onChange={(value) => setAttributes({ displayStyle: value })}
-                                            />
-                                            
-                                        </PanelBody>
-
-                                        <PanelBody title={__("Icons", "frontis-blocks")} initialOpen={true}>
-                                            
-                                            <FBIconPicker
-                                                value={socialIcon}
-                                                setIconHandler={socialIconHandler}
-                                            />
-                                        </PanelBody>
                                     </>
                                 )}
                                 {tab.name === "styles" && (
                                     <>
                                         <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
-                                            
-                                  Styling       </PanelBody>
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Icon Size", "frontis-blocks")}
+                                                rangeValue={iconFontSize}
+                                                onChangeHandler={(value) => setAttributes({ iconFontSize: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ iconFontSizeUnits: value })}
+                                                deviceType={deviceType}
+                                                units={iconFontSizeUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                            />
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Icon Spacing", "frontis-blocks")}
+                                                rangeValue={iconSpacing}
+                                                onChangeHandler={(value) => setAttributes({ iconSpacing: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ iconSpacingUnits: value })}
+                                                deviceType={deviceType}
+                                                units={iconSpacingUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                            />
+                                        </PanelBody>
                                     </>
                                 )}
                                 {tab.name === "advanced" && (
