@@ -134,7 +134,11 @@ button {
     vertical-align: middle;
 }
 
-
+.fb-animated-heading-swirl-wrapper {
+    display: inline-block;
+    transition: all .5s ease-in-out;
+    vertical-align: bottom;
+}
 .fb-animated-heading-dynamic-wrapper {
   display: inline-block;
   position: relative;
