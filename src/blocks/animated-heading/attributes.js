@@ -7,8 +7,13 @@ const attributes = {
         type: "string",
         default: "",
     },
+
+    animationType: {
+        type: "string",
+        default: "typing"
+    },
     
-    animatedHeadingAlignment: {
+   animatedHeadingAlignment: {
         type: "object",
         default: {
             Desktop: "left",
@@ -17,11 +22,11 @@ const attributes = {
         },
     },
 
-    animatedHeadingMainTag: {
+   animatedHeadingMainTag: {
         type: "string",
         default: "span"
     },
-    animatedHeadingGap: {
+   animatedHeadingGap: {
         type: "object",
         default: {
             Desktop: "8",
@@ -29,7 +34,7 @@ const attributes = {
             Mobile: "8"
         }
     },
-    animatedHeadingGapUnits: {
+   animatedHeadingGapUnits: {
         type: "object",
         default: {
             Desktop: "px",
@@ -38,28 +43,28 @@ const attributes = {
         }
     },
 
-    animatedHeadingPrefix: {
+   animatedHeadingPrefix: {
         type: "string",
         default: "We create"
     },
-    animatedHeadingItems: {
+   animatedHeadingItems: {
         type: "array",
         default: [
             {
                 id: 'item-1',
-                animatedHeadingTitle: 'WordPress Plugins',
+               animatedHeadingTitle: 'WordPress Plugins',
             },
             {
                 id: 'item-2',
-                animatedHeadingTitle: 'WordPress Themes',
+               animatedHeadingTitle: 'WordPress Themes',
             },
             {
                 id: 'item-3',
-                animatedHeadingTitle: 'WooCommerce Extensions',
+               animatedHeadingTitle: 'WooCommerce Extensions',
             },
             {
                 id: 'item-4',
-                animatedHeadingTitle: 'Custom Web Solutions',
+               animatedHeadingTitle: 'Custom Web Solutions',
             },
         ],
         items: {
@@ -69,7 +74,7 @@ const attributes = {
                     type: "string",
                     default: ""
                 },
-                animatedHeadingTitle: {
+               animatedHeadingTitle: {
                     type: "string",
                     default: "WordPress Plugins"
                 },
@@ -77,22 +82,22 @@ const attributes = {
         }
     },
 
-    animatedHeadingCursorSwitch: {
+   animatedHeadingCursorSwitch: {
         type: "boolean",
         default: true
     },
 
-    animatedHeadingCursor: {
+   animatedHeadingCursor: {
         type: "string",
         default: "|"
     },
 
-    animatedHeadingSuffix: {
+   animatedHeadingSuffix: {
         type: "string",
         default: ""
     },
 
-    /** Start Normal Typing Text Style */
+    /** Start Normal Text Style */
     animatedHeadingNormalTextGlobalTypographyData: {
         type: "object",
         default: {}
@@ -146,11 +151,11 @@ const attributes = {
         type: "string",
         default: ""
     },
-    animatedHeadingNormalTextTextTransform : {
+    animatedHeadingNormalTextTransform : {
         type: "string",
         default: ""
     },
-    animatedHeadingNormalTextTextDecoration : {
+    animatedHeadingNormalTextDecoration : {
         type: "string",
         default: ""
     },
@@ -192,10 +197,12 @@ const attributes = {
         default: "normal"
     },
     animatedHeadingNormalTextColor : {
-        type: "string"
+        type: "string",
+        default: ""
     },
     animatedHeadingNormalTextHoverColor: {
         type: 'string',
+        default: ""
     },
     animatedHeadingNormalTextBgColorSwitcher: {
         type: "string",
@@ -203,19 +210,21 @@ const attributes = {
     },
     animatedHeadingNormalTextBgColor: {
         type: 'string',
+        default: ""
     },
     animatedHeadingNormalTextBgColorHover: {
         type: 'string',
+        default: ""
     },
     /** End Normal Typing Text Style */
 
 
-    /** Start Typing Text Style */
-    animatedHeadingGlobalTypographyData: {
+    /** Start animated heading Text Style */
+   animatedHeadingAnimationTextGlobalTypographyData: {
         type: "object",
         default: {}
     },
-    animatedHeadingGlobalTypoSwitcher: {
+   animatedHeadingAnimationTextGlobalTypoSwitcher: {
         type: "object",
         default: {
             fontFamily: false,
@@ -228,19 +237,19 @@ const attributes = {
             lineHeight: false,
         },
     },
-    animatedHeadingGlobalTypoType: {
+   animatedHeadingAnimationTextGlobalTypoType: {
         type: "string",
         default: 'default',
     },
-    animatedHeadingGlobalTypoOption: {
+   animatedHeadingAnimationTextGlobalTypoOption: {
         type: "object",
         default: {label: 'Default', value: 'default'},
     },
-    animatedHeadingFontFamily: {
+   animatedHeadingAnimationTextFontFamily: {
         type: "string",
         default: "Default",
     },
-    animatedHeadingFontSize: {
+   animatedHeadingAnimationTextFontSize: {
         type: 'object',
         default: {
             Desktop: '',
@@ -248,7 +257,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    animatedHeadingFontSizeUnits: {
+   animatedHeadingAnimationTextFontSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -256,23 +265,23 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    animatedHeadingFontWeight : {
+   animatedHeadingAnimationTextFontWeight : {
         type: "string",
         default: ""
     },
-    animatedHeadingFontStyle : {
+   animatedHeadingAnimationTextFontStyle : {
         type: "string",
         default: ""
     },
-    animatedHeadingTextTransform : {
+   animatedHeadingAnimationTextTransform : {
         type: "string",
         default: ""
     },
-    animatedHeadingTextDecoration : {
+   animatedHeadingAnimationTextDecoration : {
         type: "string",
         default: ""
     },
-    animatedHeadingLetterSpacing: {
+   animatedHeadingAnimationTextLetterSpacing: {
         type: 'object',
         default: {
             Desktop: '',
@@ -280,7 +289,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    animatedHeadingLetterSpacingUnits: {
+   animatedHeadingAnimationTextLetterSpacingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -288,7 +297,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    animatedHeadingLineHeight: {
+   animatedHeadingAnimationTextLineHeight: {
         type: 'object',
         default: {
             Desktop: '',
@@ -296,7 +305,7 @@ const attributes = {
             Mobile: ''
         }
     },
-    animatedHeadingLineHeightUnits: {
+   animatedHeadingAnimationTextLineHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -304,27 +313,60 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    animatedHeadingColorSwitcher : {
+    animatedHeadingAnimationTextColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    animatedHeadingColor : {
-        type: "string"
+    animatedHeadingAnimationTextColor : {
+        type: "string",
+        default: "#399CFF"
     },
-    animatedHeadingHoverColor: {
+   animatedHeadingAnimationTextHoverColor: {
         type: 'string',
+        default: ""
     },
-    animatedHeadingBgColorSwitcher: {
+   animatedHeadingAnimationTextBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    animatedHeadingBgColor: {
+   animatedHeadingAnimationTextBgColor: {
         type: 'string',
+        default: ""
     },
-    animatedHeadingBgColorHover: {
+   animatedHeadingAnimationTextBgColorHover: {
         type: 'string',
+        default: ""
     },
     /** End Typing Text Style */
+
+
+    /** Start Global Z-Index */
+    animatedHeadingGlobalZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    /** End Global Z-Index */
+
+    /** Start Class & ID Setting */
+    animatedHeadingGlobalWraperID : {
+        type: "string",
+        default: ""
+    },
+    animatedHeadingGlobalWraperClass : {
+        type: "string",
+        default: ""
+    },
+    /** End Class & ID Setting */
+    animatedHeadingCustomCSS : {
+        type: "string",
+        default: "",
+    },
+
+    /** Start Global Background Color */
 
     animatedHeadingGlobalBgColorSwitcher: {
         type: "string",
@@ -338,9 +380,11 @@ const attributes = {
         type: 'string',
         default: ""
     },
+    /** End Global Background Color */
 
-    /** Start Typing Text Margin & Padding */
-    textPaddingUnits: {
+
+    /** Start Global Margin & Padding */
+    animatedHeadingGlobalPaddingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -348,7 +392,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    textDesktopPadding: {
+    animatedHeadingGlobalDesktopPadding: { 
         type: "object", 
         default: {
             top: "",
@@ -357,7 +401,7 @@ const attributes = {
             right: "",
         },
     },
-    textTabletPadding: {
+    animatedHeadingGlobalTabletPadding: {
         type: "object", 
         default: {
             top: "",
@@ -366,7 +410,7 @@ const attributes = {
             right: "",
         },
     },
-    textMobilePadding: {
+    animatedHeadingGlobalMobilePadding: {
         type: "object", 
         default: {
             top: "",
@@ -375,11 +419,11 @@ const attributes = {
             right: "",
         },
     },
-    textPaddingLink : {
+    animatedHeadingGlobalPaddingLink : {
         type : "boolean",
         default: true
     },
-    textMarginUnits: {
+    animatedHeadingGlobalMarginUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -387,7 +431,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    textDesktopMargin: {
+    animatedHeadingGlobalDesktopMargin: {
         type: "object", 
         default: {
             top: "0",
@@ -396,7 +440,7 @@ const attributes = {
             right: "0",
         },
     },
-    textTabletMargin: {
+    animatedHeadingGlobalTabletMargin: {
         type: "object", 
         default: {
             top: "0",
@@ -405,7 +449,7 @@ const attributes = {
             right: "0",
         },
     },
-    textMobileMargin: {
+    animatedHeadingGlobalMobileMargin: {
         type: "object", 
         default: {
             top: "0",
@@ -414,28 +458,30 @@ const attributes = {
             right: "0",
         },
     },
-    textMarginLink : {
+    animatedHeadingGlobalMarginLink : {
         type : "boolean",
         default: true
     },
-    /** End Typing Text Margin & Padding */
+    /** End Global Margin & Padding */
 
-    /** Start Typing Text Border */
-    textBorder: {
+    /** Start Global Border */
+    animatedHeadingGlobalBorder: {
         type: 'string',
         default: "none",
     },
-    textBorderColorSwitcher : {
+    animatedHeadingGlobalBorderColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    textBorderColor: {
+    animatedHeadingGlobalBorderColor: {
         type: 'string',
+        default: ""
     },
-    textBorderHoverColor: {
+    animatedHeadingGlobalBorderHoverColor: {
         type: 'string',
+        default: ""
     },
-    textBorderUnits: {
+    animatedHeadingGlobalBorderUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -443,7 +489,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    textDesktopBorder: {
+    animatedHeadingGlobalDesktopBorder: {
         type: "object", 
         default: {
             top: "",
@@ -452,7 +498,7 @@ const attributes = {
             right: "",
         },
     },
-    textTabletBorder: {
+    animatedHeadingGlobalTabletBorder: {
         type: "object", 
         default: {
             top: "",
@@ -461,7 +507,7 @@ const attributes = {
             right: "",
         },
     },
-    textMobileBorder: {
+    animatedHeadingGlobalMobileBorder: {
         type: "object", 
         default: {
             top: "",
@@ -470,11 +516,11 @@ const attributes = {
             right: "",
         },
     },
-    textBorderLink : {
+    animatedHeadingGlobalBorderLink : {
         type : "boolean",
         default: true
     },
-    textBorderRadiusUnits: {
+    animatedHeadingGlobalBorderRadiusUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -482,7 +528,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    textDesktopBorderRadius: {
+    animatedHeadingGlobalDesktopBorderRadius: {
         type: "object", 
         default: {
             top: "",
@@ -491,7 +537,7 @@ const attributes = {
             right: "",
         },
     },
-    textTabletBorderRadius: {
+    animatedHeadingGlobalTabletBorderRadius: {
         type: "object", 
         default: {
             top: "",
@@ -500,7 +546,7 @@ const attributes = {
             right: "",
         },
     },
-    textMobileBorderRadius: {
+    animatedHeadingGlobalMobileBorderRadius: {
         type: "object", 
         default: {
             top: "",
@@ -509,34 +555,10 @@ const attributes = {
             right: "",
         },
     },
-    textBorderRadiusLink : {
+    animatedHeadingGlobalBorderRadiusLink : {
         type : "boolean",
         default: true
     },
-    /** End Typing Text Border */
-
-    /** Start Typing Text Global Z-Index */
-    animatedHeadingGlobalZIndex : {
-        type: "object",
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    /** Start Class & ID Setting */
-    animatedHeadingGlobalWraperID : {
-        type: "string",
-        default: ""
-    },
-    animatedHeadingGlobalWraperClass : {
-        type: "string",
-        default: ""
-    },
-	/** End Class & ID Setting */
-    animatedHeadingCustomCSS : {
-        type: "string",
-        default: "",
-    },
+    /** End Global Border */
 }
 export default attributes;

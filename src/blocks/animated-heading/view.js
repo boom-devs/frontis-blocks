@@ -1,82 +1,141 @@
-(function() {
-    // GSAP TextPlugin রেজিস্টার করা (অবশ্যই GSAP আগে লোড হওয়া উচিত)
-    if (typeof gsap !== 'undefined' && typeof gsap.registerPlugin !== 'undefined' && typeof TextPlugin !== 'undefined') {
-        gsap.registerPlugin(TextPlugin);
-    } else {
-        console.error("GSAP or TextPlugin is missing or not loaded correctly.");
-        return;
-    }
+(function () {
+    function initAnimatedHeading() {
+        const containers = document.querySelectorAll('.fb-animated-heading-container');
 
-    function initTypingEffect() {
-        var containers = document.querySelectorAll('.fb-animated-Heading-texts');
+        containers.forEach((container) => {
+            const animationType = container.getAttribute('data-animation-type');
 
-        containers.forEach(function(container) {
-            var itemElements = container.querySelectorAll('.fb-animated-Heading-item');
-            var items = [];
-            
-            // Get all items and hide the individual elements
-            itemElements.forEach(function(el) {
-                items.push(el.textContent);
-                el.style.display = 'none'; // Hide individual items
-            });
+            // Handle Typing Animation
+            if (animationType === 'typing') {
+                const typingContainer = container.querySelector('.fb-animated-headings');
+                if (!typingContainer) return;
 
-            if (!items.length) return;
+                const itemElements = container.querySelectorAll('.fb-animated-heading-item');
+                const items = Array.from(itemElements).map(el => el.textContent).filter(Boolean);
 
-            // Clear container initially
-            container.textContent = '';
+                if (!items.length) return;
 
-            let currentItem = 0;
-            let charIndex = 0;
-            let isDeleting = false;
+                itemElements.forEach(el => el.style.display = 'none'); // hide original
 
-            // Typing and deleting function using GSAP
-            function typeEffect() {
-                const currentText = items[currentItem];
-                const displayText = currentText.substring(0, charIndex);
+                let currentItem = 0, charIndex = 0, isDeleting = false;
 
-                // GSAP typing animation
-                gsap.to(container, {
-                    text: displayText,
-                    duration: 0.1, // Duration based on text length
-                    ease: "power1.inOut",
-                    onComplete: () => {
-                        if (!isDeleting) {
-                            if (charIndex < currentText.length) {
-                                charIndex++;
-                                typeEffect(); // Continue typing
-                            } else {
-                                isDeleting = true;
-                                setTimeout(typeEffect, 1000); // Wait before deleting
-                            }
+                function typeEffect() {
+                    const currentText = items[currentItem];
+                    const displayText = currentText.substring(0, charIndex);
+                    typingContainer.textContent = displayText;
+
+                    if (!isDeleting) {
+                        if (charIndex < currentText.length) {
+                            charIndex++;
+                            setTimeout(typeEffect, 100);
                         } else {
-                            if (charIndex > 0) {
-                                charIndex--;
-                                typeEffect(); // Continue deleting
-                            } else {
-                                isDeleting = false;
-                                currentItem = (currentItem + 1) % items.length;
-                                setTimeout(typeEffect, 500); // Wait before typing next item
-                            }
+                            isDeleting = true;
+                            setTimeout(typeEffect, 1000);
+                        }
+                    } else {
+                        if (charIndex > 0) {
+                            charIndex--;
+                            setTimeout(typeEffect, 50);
+                        } else {
+                            isDeleting = false;
+                            currentItem = (currentItem + 1) % items.length;
+                            setTimeout(typeEffect, 500);
                         }
                     }
-                });
+                }
+
+                typeEffect();
             }
 
-            typeEffect();
+            // Handle Swirl Animation
+            if (animationType === 'swirl') {
+
+                const texts = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
+                    .map(item => item.textContent).filter(Boolean);
+                
+                if (texts.length === 0) return;
+
+                let currentIndex = 0;
+                const containerWrapper = container.querySelector('#animated-heading-wrapper');
+                containerWrapper.innerHTML = '';
+
+                function createWordSpan(text, isActive = false) {
+                    const wrapper = document.createElement('span');
+                    wrapper.className = 'fb-animated-heading-dynamic-text';
+                    if (isActive) wrapper.classList.add('fb-animated-heading-text-active');
+
+                    text.split('').forEach((char) => {
+                        const letter = document.createElement('span');
+                        letter.className = 'fb-animated-heading-dynamic-letter';
+                        letter.textContent = char === ' ' ? '\u00A0' : char;
+                        wrapper.appendChild(letter);
+                    });
+
+                    return wrapper;
+                }
+
+                function showNextWord() {
+                    const oldWord = containerWrapper.querySelector('.fb-animated-heading-text-active');
+                    const newWord = createWordSpan(texts[currentIndex], true);
+                    containerWrapper.appendChild(newWord);
+
+                    const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+
+                    const totalWidthSubPixel = Array.from(newLetters)
+                    .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
+
+                    const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
+
+                    if (swirlWrapper) {
+                        swirlWrapper.style.width = `${totalWidthSubPixel}px`;
+                    }
+
+                    newLetters.forEach((l, i) => {
+                        setTimeout(() => {
+                            l.classList.add('fb-animated-heading-animation-in');
+                        }, i * 30);
+                    });
+
+                    if (oldWord) {
+                        oldWord.classList.remove('fb-animated-heading-text-active');
+                        const oldLetters = oldWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+                        oldLetters.forEach((l, i) => {
+                            setTimeout(() => {
+                                l.classList.add('fb-animated-heading-animation-out');
+                            }, i * 30);
+                        });
+
+                        setTimeout(() => {
+                            oldWord.remove();
+                        }, oldLetters.length * 30 + 500);
+                    }
+
+                    currentIndex = (currentIndex + 1) % texts.length;
+                }
+
+                const firstWord = createWordSpan(texts[currentIndex], true);
+                containerWrapper.appendChild(firstWord);
+
+                const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+                firstLetters.forEach((l, i) => {
+                    setTimeout(() => {
+                        l.classList.add('fb-animated-heading-animation-in');
+                    }, i * 30);
+                });
+
+                currentIndex = (currentIndex + 1) % texts.length;
+                setInterval(showNextWord, 3000);
+            }
         });
     }
 
-    function setupTypingEffect() {
-        // Wait for the full window load (including images, etc.)
-        window.addEventListener('load', initTypingEffect);
+    function setupAnimatedHeading() {
+        // Init on load
+        window.addEventListener('load', initAnimatedHeading);
 
-        // MutationObserver to handle dynamically added content
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.addedNodes.length || mutation.removedNodes.length) {
-                    initTypingEffect();
-                }
-            });
+        // Dynamic reload (in case of AJAX/Gutenberg preview)
+        const observer = new MutationObserver(() => {
+            initAnimatedHeading();
         });
 
         observer.observe(document.body, {
@@ -85,8 +144,8 @@
         });
     }
 
-    // Initialize typing effect
-    window.reinitTypingEffect = initTypingEffect;
+    // Expose for external reload
+    window.reinitAnimatedHeading = initAnimatedHeading;
 
-    setupTypingEffect();
+    setupAnimatedHeading();
 })();

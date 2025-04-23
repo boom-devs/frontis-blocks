@@ -85,3 +85,8 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
+
+export const ANIMATION_TYPE = [
+	{ label: __("Typing", "frontis-blocks"), value: "typing" },
+	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+];
