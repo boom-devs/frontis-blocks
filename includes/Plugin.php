@@ -209,7 +209,6 @@ final class Plugin
 			'site_url' => site_url(),
 		]);
 		
-		// Localize data specifically for social share block
 		wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
 			'permalink' => get_permalink(),
 			'title' => get_the_title(),

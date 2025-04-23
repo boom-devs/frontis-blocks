@@ -546,7 +546,6 @@ class BlockList
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
                 'child' => 'false',
-<<<<<<< HEAD
             ],
             'animated-heading' => [
                 'slug' => 'animated-heading',
@@ -573,8 +572,6 @@ class BlockList
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
                 'child' => 'false',
-=======
->>>>>>> 1f0a9fa9a7bb9a92ed7d595144e938ddb3e94236
             ]
         ];
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
