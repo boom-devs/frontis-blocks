@@ -1,14 +1,25 @@
 .fb-social-share {
-    .social-share-container {
+    .social-share-parent-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+    }
+    .social-share-container {
+        display: flex;
+        
+        &.horizontal {
+            flex-direction: row;
+            align-items: center;
+        }
+        
+        &.vertical {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     .social-share-button {
         display: inline-flex;
         align-items: center;
-        border-radius: 4px;
         text-decoration: none;
         border: none;
         cursor: pointer;
@@ -25,12 +36,8 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 20px;
-        height: 20px;
 
         svg {
-            width: 100%;
-            height: 100%;
             fill: #717680;
 
             path {
@@ -40,12 +47,10 @@
 
         .custom-icon {
             display: flex;
-            width: 20px;
-            height: 20px;
 
             svg {
-                width: 100%;
-                height: 100%;
+                width: 24px;
+                height: 24px;
                 fill: #717680;
 
                 path {
