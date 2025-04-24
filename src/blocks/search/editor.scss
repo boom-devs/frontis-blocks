@@ -10,6 +10,7 @@
         gap: 1px;
         padding: 12px 24px;
         border-radius: 50px;
+        cursor: pointer;
 
         .fb-search-block-wrapper-inner-input-icon {
             display: flex;
@@ -22,7 +23,6 @@
         font-size: 18px;
         font-weight: 400;
         color: #000;
-        cursor: pointer;
     }
 
     .fb-search-block-wrapper-inner-input-field {
@@ -50,7 +50,8 @@
             font-size: 18px;
             padding: 0 24px;
             color: #000;
-            border-color: #000;
+            border: 1px solid #A4A7AE;
+
         }
 
         // With transition

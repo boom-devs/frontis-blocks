@@ -9,6 +9,7 @@ export default function save({ attributes }) {
 
 		// Photo
 		teamMemberImageUrl,
+		teamMemberImageAlt,
 		teamMemberImageOverlaySwitcher,
 
 		// Team Name
@@ -78,7 +79,7 @@ export default function save({ attributes }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl}/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt}/>
 								)}
 								
 								{teamMemberSocialProfileSwitcher === true && 
@@ -106,22 +107,18 @@ export default function save({ attributes }) {
 								<RichText.Content
 									tagName={teamMemberNameHeadingTag}
 									value={teamMemberName}
-									onChange={(value) => setAttributes({teamMemberName: value})}
-									placeholder={__('Enter Team Member Name', 'frontis-block')}
 									className="fb-team-member-name"
 								/>
 
 								<RichText.Content
 									tagName={'span'}
 									value={teamMemberDesignation}
-									onChange={(value) => setAttributes({teamMemberDesignation: value})}
 									className="fb-team-member-designation"
 								/>
 
 								{ teamMemberDescSwitcher === true && <RichText.Content
 									tagName={'p'}
 									value={teamMemberDesc}
-									onChange={(value) => setAttributes({teamMemberDesc: value})}
 									className="fb-team-member-desc"
 								/> }
 

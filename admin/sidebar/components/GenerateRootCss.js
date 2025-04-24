@@ -35,6 +35,7 @@ const generateCSSVariables = (data, deviceType) => {
     let heading6Styles = '';
 
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
+
     const arrayKeys = Object.keys(data);
 
     // Loop through the data to generate CSS for each tag
@@ -45,9 +46,8 @@ const generateCSSVariables = (data, deviceType) => {
         ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach((prop) => {
             const value = getValue(data[key], prop);
             let typoValue = data[key][prop];
-
-            if (value !== null) {
-
+            
+            if (value !== 'null') {
                 if(typoValue) {
                     rootStyles += `${typoValue.variable}: ${value};\n`;
                 }
@@ -186,6 +186,9 @@ const generateCSSVariables = (data, deviceType) => {
     let headingGrouped = '';
     let allCombinedStyles = '';
     let styles = '';
+
+
+    console.log(fileName);
 
     if(fileName === 'post.php') {
         headingGrouped = `
@@ -428,9 +431,11 @@ const generateCSSVariables = (data, deviceType) => {
     let styleTag = iframeDocument.getElementById("global-typo");
 
     if(fileName === 'post.php') {
+        iframe = document.querySelector('iframe[name="editor-canvas"]');
 
+        console.log(iframe);
         if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
+            
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
 

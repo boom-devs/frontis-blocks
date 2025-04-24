@@ -14,6 +14,10 @@ const attributes = {
 	iconStyle: {
 		type: "string",
 		default: "hamburger"
+	},
+	animation: {
+		type: "string",
+		default: "fade"
 	}
 	
 };

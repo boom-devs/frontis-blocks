@@ -1,0 +1,114 @@
+.fb-simple-navigation-wrapper {
+    .simple-navigation {
+        &.horizontal-position {
+            .menu-items {
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                
+                .menu-item {
+                    margin-right: 20px;
+                    
+                    a {
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        
+                        .nav-icon {
+                            margin-right: 5px;
+                            
+                            &.arrow {
+                                font-size: 12px;
+                            }
+                            
+                            &.dot {
+                                font-size: 16px;
+                            }
+                        }
+                        
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+        
+        &.vertical-position {
+            .menu-items {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                
+                .menu-item {
+                    margin-bottom: 10px;
+                    
+                    a {
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        
+                        .nav-icon {
+                            margin-right: 5px;
+                            
+                            &.arrow {
+                                font-size: 12px;
+                            }
+                            
+                            &.dot {
+                                font-size: 16px;
+                            }
+                        }
+                        
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // Template styles
+    &.template-minimal {
+        .simple-navigation {
+            .menu-items {
+                .menu-item a {
+                    font-weight: normal;
+                    color: #333;
+                }
+            }
+        }
+    }
+    
+    &.template-modern {
+        .simple-navigation {
+            .menu-items {
+                .menu-item {
+                    a {
+                        font-weight: bold;
+                        color: #1a1a1a;
+                        transition: all 0.3s ease;
+                        
+                        &:hover {
+                            color: #0073aa;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    &.template-default {
+        .simple-navigation {
+            .menu-items {
+                .menu-item a {
+                    color: #0073aa;
+                }
+            }
+        }
+    }
+}

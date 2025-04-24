@@ -93,56 +93,118 @@ final class Plugin
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
         add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
+		add_action('wp_head', [$this, 'add_preconnect_to_head']);
+	}
+	
+	function add_preconnect_to_head() {
+
+		// Enqueue google fonts
+		$google_font_url = get_option('fb_google_fonts_url');
+		if ($google_font_url) {
+    		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+    		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+    		// echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		// echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+
+			echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap"></noscript>';
+		}
+	}
+
+	public function enqueue_header_footer() {
+		$upload_dir = wp_upload_dir();
+
+		// Header
+		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/header/';
+		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
+
+		// Css file
+		$css_file_system_path = $frontend_dir .'header.min.css';
+		$css_file_url = $frontend_url .'header.min.css';
+
+		if(file_exists($css_file_system_path)) {	
+			$version = filemtime($css_file_system_path);
+			wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
+		}
+
+		// Footer
+		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
+		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
+
+		// Css file
+		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
+		$css_file_url = $footer_frontend_url .'footer.min.css';
+		if(file_exists($css_file_system_path)) {	
+			$version = filemtime($css_file_system_path);
+			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
+		}
+
+		$header_js_system_path = $frontend_dir .'header.js';
+		$js_file_url = $frontend_url . 'header.js';
+		if(file_exists($header_js_system_path)) {	
+			$version = filemtime($header_js_system_path);
+			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
+		}
+
+		$footer_js_system_path = $frontend_dir .'footer.js';
+		$footer_js_file_url = $frontend_url . 'footer.js';
+		if(file_exists($footer_js_system_path)) {	
+			$version = filemtime($footer_js_system_path);
+			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
+		}
 	}
 
 	public function enqueue_scripts()
 	{
-
-		// Enqueue google fonts
-		$google_font_url = get_option('fb_google_fonts_url');
-
-		if ($google_font_url) {
-			wp_enqueue_style(
-				'frontis-blocks-preconnect',
-				'https://fonts.googleapis.com',
-				[],
-				null
-			);
-
-			wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
-			wp_enqueue_style(
-				'frontis-blocks-google-fonts',
-				$google_font_url,
-				[],
-				FB_VERSION
-			);
-		}
-
 		$page_name = Helper::get_page_name();
+		$upload_dir = wp_upload_dir();
 
-		if($page_name === NULL) {
-			global $pagenow;
-			
-			if($pagenow === 'index.php') {
-				$page_name = 'home';
-			}
+		$frntis_block_used = get_post_meta(get_the_ID(), 'page_frontis_block_used', true);
+
+		if(is_home()) {
+			$page_name = 'home';
 		}
 
-		$upload_dir = wp_upload_dir();
+		if(is_single()) {
+			$page_name = 'single';
+		}
+
+		if(is_archive()) {
+		    $page_name = 'archive';
+		}
+		
+		if(is_search()) {
+		    $page_name = 'search';
+		}
+
+		if(is_page()) {
+			$page_name = 'page';
+		}
+		
+		if(is_404()) {
+		    $page_name = '404';
+		}
+
+		// Check page or post assigned by template
+		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+		if($frntis_block_used || $assigned_template !== '') {
+			$page_name = Helper::get_page_name();
+		}
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir . $page_name .'.css';
-		$css_file_url = $frontend_url . $page_name .'.css';
+		$css_file_system_path = $frontend_dir . $page_name .'.min.css';
+		$css_file_url = $frontend_url . $page_name .'.min.css';
 
 		// Js file
 		$js_file_system_path = $frontend_dir . $page_name .'.js';
 		$js_file_url = $frontend_url . $page_name .'.js';
 
 		// Enqueue frontend css and js
-		if(file_exists($css_file_system_path)) {	
+		if(file_exists($css_file_system_path)) {
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
 		}
@@ -151,6 +213,12 @@ final class Plugin
 			$version = filemtime($js_file_system_path);
 			wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
 		}
+
+		$this->enqueue_header_footer();
+
+		wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', [
+			'site_url' => site_url()
+		]);
 	}
 
 	public function enqueue_editor_scripts()

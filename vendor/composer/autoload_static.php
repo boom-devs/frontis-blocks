@@ -7,6 +7,15 @@ namespace Composer\Autoload;
 class ComposerStaticInitd1a84656a6acb700f27e23c26b1775ba
 {
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Sabberworm\\CSS\\' => 15,
+        ),
+        'M' => 
+        array (
+            'MatthiasMullie\\PathConverter\\' => 29,
+            'MatthiasMullie\\Minify\\' => 22,
+        ),
         'F' => 
         array (
             'FrontisBlocks\\' => 14,
@@ -14,6 +23,18 @@ class ComposerStaticInitd1a84656a6acb700f27e23c26b1775ba
     );
 
     public static $prefixDirsPsr4 = array (
+        'Sabberworm\\CSS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
+        ),
+        'MatthiasMullie\\PathConverter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/path-converter/src',
+        ),
+        'MatthiasMullie\\Minify\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/matthiasmullie/minify/src',
+        ),
         'FrontisBlocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',

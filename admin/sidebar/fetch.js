@@ -26,6 +26,8 @@ export const updateGlobalStyle = async (value, key = 'fb_update_global_colors') 
 			}
 		});
 
+		console.log(response)
+
 		if (!response.success) {
 			throw new Error(response.data || 'Update failed');
 		}

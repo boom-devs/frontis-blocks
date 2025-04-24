@@ -213,7 +213,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					display: flex;
 					gap: 8px;
 					padding: 0 16px;
+
 					.fb-global-header-inner {
+						margin-bottom: 20px;
+
 						h3 {
 							font-size: $medium-font-size-global;
 							font-weight: 500;
@@ -329,7 +332,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 
 			.fb-global-typography-element-content {
-				padding-top: 10px;
+				box-sizing: border-box;
+				width: 100%;
+				overflow: hidden;
+				border: 1px solid rgb(221, 221, 221);
+				padding: 10px;
 
 				.fb-setting-label-text{
 					font-weight: 500;
@@ -551,6 +558,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 .fb-global-typo-elements-wrap {
 	// background: $neutral-color-50;
 
+	.components-navigator-provider {
+		padding-bottom: 30px;
+	}
+
 	.components-navigator-back-button {
 		&:focus {
 			outline: none !important;
@@ -611,6 +622,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 	.components-navigator-screen {
 		//padding-top: 15px;
+		overflow: hidden;
+		border-top: 1px solid $neutral-color-100;
 	}
 
 	.fb-typography-settings {
