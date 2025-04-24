@@ -284,40 +284,47 @@ function FrontisBlocksSidebar() {
     loadGoogleFont(fontsString);
   }, []);
 
-  // Fetch and initialize state
-  const handleUpdateState = useCallback(async () => {
-    console.log("Initial loaded")
-    setIsLoading(true);
-    const localStorageKeys = [
-      { key: "fb_global_colors", setter: setGlobalColors, defaultValue: themeColors, api: "fb_get_global_colors" },
-      { key: "fb_custom_colors", setter: setCustomColors, defaultValue: [], api: "fb_get_custom_colors" },
-      { key: "fb_gradient_colors", setter: setGradientColors, defaultValue: gradientDefaults, api: "fb_get_gradient_colors" },
-      { key: "fb_custom_gradient_colors", setter: setCustomGradientColors, defaultValue: [], api: "fb_get_custom_gradient_colors" },
-      { key: "fb_typography", setter: setTypography, defaultValue: defaultTypography, api: "fb_get_typography" },
-      { key: "fb_custom_typography", setter: setCustomTypography, defaultValue: [], api: "fb_get_custom_typography" },
-      { key: "fb_fontfamilies", setter: setFontFamilies, defaultValue: [], api: "fb_get_fontfamilies", postProcess: getAllFontFamilies },
-      { key: "fb_globaltypo", setter: null, defaultValue: null, api: "fb_get_globaltypo", postProcess: (data) => generateCSSVariables(data, deviceType) },
-    ];
 
-    try {
-      for (const { key, setter, defaultValue, api, postProcess } of localStorageKeys) {
-        const localData = getFbLocalStorage(key);
-        if (!localData || localData.length < 1) {
-          const res = await getGlobalStyle(api);
-          const data = res.success ? res.data : defaultValue;
-          if (setter) setter(data);
-          localStorage.setItem(key, JSON.stringify(data));
-          if (postProcess) setTimeout(() => postProcess(data), 1000);
-        } else {
-          if (setter) setter(localData);
-          if (postProcess) setTimeout(() => postProcess(localData), 1000);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching global settings:", error);
-    } finally {
-      setIsLoading(false);
-    }
+const handleUpdateState = useCallback(async () => {
+	console.log("Initial loaded");
+	setIsLoading(true);
+	const localStorageKeys = [
+	  { key: "fb_global_colors", setter: setGlobalColors, defaultValue: themeColors, api: "fb_get_global_colors" },
+	  { key: "fb_custom_colors", setter: setCustomColors, defaultValue: [], api: "fb_get_custom_colors" },
+	  { key: "fb_gradient_colors", setter: setGradientColors, defaultValue: gradientDefaults, api: "fb_get_gradient_colors" },
+	  { key: "fb_custom_gradient_colors", setter: setCustomGradientColors, defaultValue: [], api: "fb_get_custom_gradient_colors" },
+	  { key: "fb_typography", setter: setTypography, defaultValue: defaultTypography, api: "fb_get_typography" },
+	  { key: "fb_custom_typography", setter: setCustomTypography, defaultValue: [], api: "fb_get_custom_typography" },
+	  { key: "fb_fontfamilies", setter: setFontFamilies, defaultValue: [], api: "fb_get_fontfamilies", postProcess: getAllFontFamilies },
+	  { key: "fb_globaltypo", setter: null, defaultValue: null, api: "fb_get_globaltypo", postProcess: (data) => generateCSSVariables(data, deviceType) },
+	];
+  
+	try {
+	  for (const { key, setter, defaultValue, api, postProcess } of localStorageKeys) {
+		if (key === "fb_global_colors") {
+		  // Forcefully set fb_global_colors to themeColors
+		  setter(themeColors);
+		  localStorage.setItem(key, JSON.stringify(themeColors));
+		  if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
+		} else {
+		  const localData = getFbLocalStorage(key);
+		  if (!localData || localData.length < 1) {
+			const res = await getGlobalStyle(api);
+			const data = res.success ? res.data : defaultValue;
+			if (setter) setter(data);
+			localStorage.setItem(key, JSON.stringify(data));
+			if (postProcess) setTimeout(() => postProcess(data), 1000);
+		  } else {
+			if (setter) setter(localData);
+			if (postProcess) setTimeout(() => postProcess(localData), 1000);
+		  }
+		}
+	  }
+	} catch (error) {
+	  console.error("Error fetching global settings:", error);
+	} finally {
+	  setIsLoading(false);
+	}
   }, [deviceType, themeColors, getAllFontFamilies]);
 
   // Initialize on mount and device type change
