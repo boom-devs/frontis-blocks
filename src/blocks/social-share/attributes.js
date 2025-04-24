@@ -3,6 +3,10 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
     shareNetworks: {
         type: 'array',
         default: [
@@ -25,7 +29,51 @@ const attributes = {
     alignment: {
         type: 'string',
         default: 'left'
-    }
+    },
+    socialIcon: {
+		type: 'string',
+		default: '',
+	},
+    iconFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '18',
+            Mobile: '16'
+        }
+    },
+    iconFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    iconSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '12',
+            Tablet: '10',
+            Mobile: '10'
+        }
+    },
+    iconSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    iconAlignment: {
+        type: "object",
+        default: {
+            Desktop: "left",
+            Tablet: "left",
+            Mobile: "left",
+        },
+    },
 };
 
 export default attributes;

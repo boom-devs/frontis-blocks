@@ -7,27 +7,43 @@ import {
 	PanelBody,
 	TabPanel,
 	SelectControl,
+	ToggleControl
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
-import { store as coreStore } from '@wordpress/core-data';
-import { store as editorStore } from '@wordpress/editor';
+import { useEffect, useState, useMemo } from '@wordpress/element';
+
 import {
-	ANIMATION
+	BORDER_STYLES
 } from "./constants/constants";
+import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import FB_Spacing from '@Components/spacing';
+
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		categorySwitcher,
+		titleSwitcher,
+		postMetaSwitcher
 	} = attributes;
 
 	const deviceType = useDeviceType();
 
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "fb-post-banner-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	return (
 		<>
 			<style>
+				
 			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
@@ -56,20 +72,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls " + tab.name}>
 								{tab.name === 'general' && (
 									<>
-										<PanelBody title={__("Menu Content", "frontis-blocks")} initialOpen={true}>
-											
+										<PanelBody title={__("Post Info", "frontis-blocks")} initialOpen={true}>
+											<ToggleControl
+												label={__("Show Category", "frontis-blocks")}
+												checked={categorySwitcher}
+												onChange={(value) => setAttributes({ categorySwitcher: value })}
+											/>
+											<ToggleControl
+												label={__("Show Title", "frontis-blocks")}
+												checked={titleSwitcher}
+												onChange={(value) => setAttributes({ titleSwitcher: value })}
+											/>
+											<ToggleControl
+												label={__("Show Post Meta", "frontis-blocks")}
+												checked={postMetaSwitcher}
+												onChange={(value) => setAttributes({ postMetaSwitcher: value })}
+											/>
 										</PanelBody>
 									</>
 								)}
 								{tab.name === "styles" && (
 									<>
-										<PanelBody title={__("Menu Styling", "frontis-blocks")} initialOpen={true}>
-											{/* Add styling controls here for the menu */}
-										</PanelBody>
-
-										<PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
-											{/* Add styling controls here for the icon */}
-										</PanelBody>
+										
 									</>
 								)}
 								{tab.name === "advanced" && (
