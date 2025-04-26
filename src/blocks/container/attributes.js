@@ -1574,6 +1574,18 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	containerGlobalCustomCSSValue : { 
+		type: "string",
+		default: "",
+	},
+	containerGlobalCustomCSSID : { 
+		type: "string",
+		default: "",
+	},
+	containerGlobalCustomCSSClass : { 
+		type: "string",
+		default: "",
+	},
 };
 
 export default attributes;

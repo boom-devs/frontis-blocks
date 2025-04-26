@@ -28,7 +28,9 @@ export default function save( props ) {
 		containerType,
 		containerDesktopSwitcher,
 		containerTabletSwitcher,
-		containerMobileSwitcher
+		containerMobileSwitcher,
+		containerGlobalCustomCSSClass,
+		containerGlobalCustomCSSID
 	} = props.attributes;
 
 	const topDividerHtml = 'none' !== topType && (
@@ -123,7 +125,7 @@ export default function save( props ) {
 				{ bottomDividerHtml }
 				{/* Render the content above the Video Background if any and above the Shape Dividers. */}
 				{ isBlockRootParent ? (
-					<div className={`frontis-blocks-container-inner-blocks-wrap`}>
+					<div className={`frontis-blocks-container-inner-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>
 						<InnerBlocks.Content />
 					</div>
 				) : (
