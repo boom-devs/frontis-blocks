@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
@@ -11,6 +11,7 @@ import {
 	TabPanel,
 	ToggleControl
 } from "@wordpress/components";
+import { useEffect } from "@wordpress/element";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -27,6 +28,8 @@ import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
+import FB_InputControl from '@Components/input-control';
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -161,7 +164,11 @@ const Inspector = (props) => {
 			containerGlobalHoverBoxShadowCssValue,
 
 			containerGlobalCustomCSS,
+			containerGlobalCustomCSSValue,
+			containerGlobalCustomCSSID,
+			containerGlobalCustomCSSClass
 		},
+		clientId,
 
 		setAttributes
 	} = props;
@@ -569,6 +576,13 @@ const Inspector = (props) => {
     }
 
 
+	useEffect(() => {
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${p_block_id}`);
+		setAttributes({containerGlobalCustomCSSValue: customCss});
+	}, [containerGlobalCustomCSS, p_block_id]);
+
+
+
 	return (
 		<>
 			<InspectorControls key="controls">
@@ -914,24 +928,24 @@ const Inspector = (props) => {
 													title={__("Advanced", "frontis-blocks")}
 													initialOpen={true}
 												>
-												<FB_Range
-													min={0}
-													max={99999}
-													label={__("Z Index", "frontis-blocks")}
-													rangeValue={containerZIndex}
-													onChangeHandler={containerZindexFn}
-													deviceType={deviceType}
-													rangeStep={1}
-													resetFallbackValue={''}
-													isRangeUnit={false}
-												/>
+													<FB_Range
+														min={0}
+														max={99999}
+														label={__("Z Index", "frontis-blocks")}
+														rangeValue={containerZIndex}
+														onChangeHandler={containerZindexFn}
+														deviceType={deviceType}
+														rangeStep={1}
+														resetFallbackValue={''}
+														isRangeUnit={false}
+													/>
 
-												<SelectControl
-													label={__("Overflow", "frontis-blocks")}
-													value={containerOverflow}
-													options={OVERFLOW_OP}
-													onChange={(value) => setAttributes({ containerOverflow: value })}
-                                                />
+													<SelectControl
+														label={__("Overflow", "frontis-blocks")}
+														value={containerOverflow}
+														options={OVERFLOW_OP}
+														onChange={(value) => setAttributes({ containerOverflow: value })}
+													/>
 
                                                     <FB_PositionControl
                                                         deviceType={deviceType}
@@ -966,6 +980,18 @@ const Inspector = (props) => {
                                                         setVRBottomOffsetUnits={(value) => setAttributes({ containerVRBottomOffsetUnits: value })}
 
                                                         setAttributes={setAttributes}
+                                                    />
+													<FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={containerGlobalCustomCSSID}
+                                                        onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSID: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+													<FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={containerGlobalCustomCSSClass}
+                                                        onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
                                                     />
 												</PanelBody>
 												<PanelBody
