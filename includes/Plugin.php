@@ -103,11 +103,8 @@ final class Plugin
 		if ($google_font_url) {
     		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    		// echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		// echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
-
-			echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap"></noscript>';
+    		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
 		}
 	}
 
