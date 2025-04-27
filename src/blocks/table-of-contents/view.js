@@ -51,12 +51,15 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clear any existing content first to prevent duplication
             tocListContainer.innerHTML = '';
 
-            const tocList = document.createElement('ol');
+            const tocList = document.createElement('ul');
             tocList.className = 'fb-toc-list';
 
             // Add list style
             const listStyle = tocBlock.dataset.listStyle || 'disc';
             tocList.classList.add('list-style-' + listStyle);
+
+            let currentList = tocList; 
+            let lastLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
 
             headings.forEach(function (heading, index) {
                 // Skip headings within the TOC itself
@@ -108,7 +111,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 listItem.appendChild(link);
-                tocList.appendChild(listItem);
+
+                if (level === minLevel) {
+                    // Top-level: numbered
+                    tocList.appendChild(listItem);
+                    currentList = listItem; // For possible sub-lists
+                } else {
+                    // Lower-level: bulleted, indented
+                    let subList = currentList.querySelector('ul');
+                    if (!subList) {
+                        subList = document.createElement('ul');
+                        subList.className = 'fb-toc-sublist';
+                        currentList.appendChild(subList);
+                    }
+                    listItem.style.listStyleType = 'disc';
+                    subList.appendChild(listItem);
+                }
             });
 
             // Only append if there are headings found
