@@ -24,7 +24,7 @@ module.exports = {
 	entry,
 	output: {
 		path: path.resolve(__dirname, 'build'),
-		filename: '[name].js', // এটি `blocks/accordion/index.js` আকারে জেনারেট করবে
+		filename: '[name].js',
 	},
 	resolve: {
 		alias: {

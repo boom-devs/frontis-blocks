@@ -263,6 +263,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		customWidthUnits,
 
+		containerGlobalCustomCSSValue,
+		containerGlobalCustomCSSClass,
+
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -1415,6 +1418,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 		}
 	}
+	styling_css += containerGlobalCustomCSSValue;
 
 	return styling_css;
 }
