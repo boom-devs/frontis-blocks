@@ -279,6 +279,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerBgOverlayHoverBackgroundImageRepeat,
 		containerBgOverlayHoverBackgroundImageSize,
 
+		containerGlobalCustomCSSValue,
+
 	} = attributes;
 
 	// Background Image CSS is now added here as well so that we can generate CSS for the psuedo-element.
@@ -1477,6 +1479,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	);
 
 	styling_css += generateCSS(widthSelectorsMobile, ' ', true, 'mobile');
+
+	styling_css += containerGlobalCustomCSSValue;
 
 	return styling_css;
 }

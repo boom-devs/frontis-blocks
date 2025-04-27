@@ -61,6 +61,8 @@ const Render = ( props ) => {
 			containerTabletSwitcher,
 			containerMobileSwitcher,
 
+			containerGlobalCustomCSSClass,
+			containerGlobalCustomCSSID,
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
@@ -138,7 +140,7 @@ const Render = ( props ) => {
 				) }
 
 				{ isBlockRootParent ? (
-					<div className="frontis-blocks-container-inner-blocks-wrap">
+					<div className={`frontis-blocks-container-inner-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>
 						<InnerBlocks { ...innerBlocksParams } />
 					</div>
 				) : (

@@ -103,28 +103,13 @@ final class Plugin
 		if ($google_font_url) {
     		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
     		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    		// echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		// echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
-
-			echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap"></noscript>';
+    		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
 		}
 	}
 
 	public function enqueue_header_footer() {
 		$upload_dir = wp_upload_dir();
-
-		// Footer
-		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
-		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
-
-		// Css file
-		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
-		$css_file_url = $footer_frontend_url .'footer.min.css';
-		if(file_exists($css_file_system_path)) {	
-			$version = filemtime($css_file_system_path);
-			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
-		}
 
 		// Header
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/header/';
@@ -139,11 +124,30 @@ final class Plugin
 			wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
 		}
 
+		// Footer
+		$footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
+		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
+
+		// Css file
+		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
+		$css_file_url = $footer_frontend_url .'footer.min.css';
+		if(file_exists($css_file_system_path)) {	
+			$version = filemtime($css_file_system_path);
+			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
+		}
+
 		$header_js_system_path = $frontend_dir .'header.js';
 		$js_file_url = $frontend_url . 'header.js';
 		if(file_exists($header_js_system_path)) {	
 			$version = filemtime($header_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
+		}
+
+		$footer_js_system_path = $frontend_dir .'footer.js';
+		$footer_js_file_url = $frontend_url . 'footer.js';
+		if(file_exists($footer_js_system_path)) {	
+			$version = filemtime($footer_js_system_path);
+			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
 		}
 	}
 
@@ -169,16 +173,21 @@ final class Plugin
 		if(is_search()) {
 		    $page_name = 'search';
 		}
+
+		if(is_page()) {
+			$page_name = 'page';
+		}
 		
 		if(is_404()) {
 		    $page_name = '404';
 		}
 
-		if($frntis_block_used) {
+		// Check page or post assigned by template
+		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+		if($frntis_block_used || $assigned_template !== '') {
 			$page_name = Helper::get_page_name();
 		}
-
-		// var_dump($frntis_block_used);
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
@@ -204,30 +213,8 @@ final class Plugin
 
 		$this->enqueue_header_footer();
 
-		// Localize data for all blocks
 		wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', [
-			'site_url' => site_url(),
-		]);
-		
-		wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
-			'permalink' => get_permalink(),
-			'title' => get_the_title(),
-			'network_labels' => [
-				'facebook' => 'Facebook',
-				'twitter' => 'Twitter',
-				'linkedin' => 'LinkedIn',
-				'whatsapp' => 'WhatsApp',
-				'pinterest' => 'Pinterest',
-				'reddit' => 'Reddit',
-			],
-			'share_urls' => [
-				'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
-				'twitter' => 'https://twitter.com/intent/tweet?url=',
-				'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
-				'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
-				'reddit' => 'https://reddit.com/submit?url=',
-				'whatsapp' => 'https://wa.me/?text=',
-			]
+			'site_url' => site_url()
 		]);
 	}
 
