@@ -47,6 +47,16 @@ export default function save({ attributes }) {
 		postGridDesktopSwitcher,
 		postGridTabletSwitcher,
 		postGridMobileSwitcher,
+
+
+		showFilterByTaxonomy,
+        filterSelectedTaxonomy,
+        filterSelectedCat,
+        filterSelectedCatLabel,
+        filterSelectedTag,
+        filterSelectedTagLabel,
+        filerselectedCountSwitcher,
+
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -92,6 +102,14 @@ export default function save({ attributes }) {
 				data-load-more-icon={loadMoreIcon}
 				data-load-more-icon-align={loadMoreIconAlign}
 				data-default-image-url={defaultImageUrl}
+
+				data-show-filter-by-taxonomy={showFilterByTaxonomy}
+				data-filter-selected-taxonomy={filterSelectedTaxonomy}
+				data-filter-selected-cat={filterSelectedCat}
+				data-filter-selected-cat-label={filterSelectedCatLabel}
+				data-filter-selected-tag={filterSelectedTag}
+				data-filter-selected-tag-label={filterSelectedTagLabel}
+				data-filerselected-count-switcher={filerselectedCountSwitcher}
 			>
 				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}>
 					<div className="load_more_button_icon">

@@ -473,9 +473,9 @@ class AssetsGenerator {
         $post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
         $assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
 
-        // if($assigned_template !== '') {
-        //     $post_name = $assigned_template;
-        // }
+        if($assigned_template !== '') {
+            $post_name = $assigned_template;
+        }
 
         global $wpdb;
         $query = $wpdb->prepare(
