@@ -105,6 +105,9 @@ final class Plugin
     		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
     		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
     		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+
+			// echo '<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap" onload="this.onload=null;this.rel=\'stylesheet\'">';
+    		// echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap"></noscript>';
 		}
 	}
 
@@ -183,11 +186,11 @@ final class Plugin
 		}
 
 		// Check page or post assigned by template
-		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+		// $assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
 
-		if($frntis_block_used || $assigned_template !== '') {
-			$page_name = Helper::get_page_name();
-		}
+		// if($frntis_block_used || $assigned_template !== '') {
+		// 	$page_name = Helper::get_page_name();
+		// }
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
