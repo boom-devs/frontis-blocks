@@ -15,7 +15,13 @@ import {
     TextControl,
 } from '@wordpress/components';
 
-import { BORDER_STYLES, POST_SWITCHER, ICON_ALIGN, OVERFLOW_OP } from './constants/constants';
+import { 
+    BORDER_STYLES, 
+    POST_SWITCHER, 
+    ICON_ALIGN, 
+    OVERFLOW_OP,
+    TAXONOMY_OPTIONS
+} from './constants/constants';
 
 /**
  * External Dependencies
@@ -548,6 +554,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridVRTopOffsetUnits,
         postGridVRBottomOffset,
         postGridVRBottomOffsetUnits,
+
+        /** Start Filter By Taxonomy */
+        showFilterByTaxonomy,
+        filterSelectedTaxonomy,
+        filterSelectedCat,
+        filterSelectedCatLabel,
+        filterSelectedTag,
+        filterSelectedTagLabel,
+
+        /** End Filter By Taxonomy */
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -587,15 +603,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start category */
 	const allTaxs = FrontisBlocksData.all_cats;
 	const allTaxonomies = allTaxs[postType];
+    /** End Taxonomies Options */   
 
 	const taxOptions = allTaxonomies?.terms?.category?.map(item => ({
 		value: item.id,
 		label: item.name
 	})) || [];
 
+    const filterTaxOptions = [
+        { value: 0, label: 'All' },
+        ...taxOptions
+    ];
+
     const createOptionFromCategory = (categoryIds) => categoryIds.map(catId => ({
         value: catId,
         label: taxOptions.find(option => option.value === catId)?.label || ''
+    }));
+
+    const createFilterOptionFromCategory = (categoryIds) => categoryIds.map(catId => ({
+        value: catId,
+        label: filterTaxOptions.find(option => option.value === catId)?.label || ''
     }));
 
     const [selectedOption, setSelectedOption] = useState(createOptionFromCategory(selectedCat));
@@ -608,6 +635,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const handleCategoryChange = updateCategorySelection(setSelectedOption, 'selectedCat');
     const handleDeSelectedCategoryChange = updateCategorySelection(setDeSelectedOption, 'deSelectedCat');
+
+    /** Start Filter Category */
+    const [filterSelectedOption, setFilterSelectedOption] = useState(createFilterOptionFromCategory(filterSelectedCat));
+    const handleFilterCategoryChange = updateCategorySelection(setFilterSelectedOption, 'filterSelectedCat');
+    /** End Filter Category */
     /** End category */
 
     /** Start tag */
@@ -616,9 +648,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         label: item.name
     })) || [];
 
+
+    const filterTagOptions = [
+        { value: 0, label: 'All' },
+        ...tagOptions
+    ];
+
     const createOptionFromTag = (tagIds) => tagIds.map(tagId => ({
         value: tagId,
         label: tagOptions.find(option => option.value === tagId)?.label || ''
+    }));
+
+    const createFilterOptionFromTag = (tagIds) => tagIds.map(tagId => ({
+        value: tagId,
+        label: filterTagOptions.find(option => option.value === tagId)?.label || ''
     }));
 
     const [selectedTagOption, setSelectedTagOption] = useState(createOptionFromTag(selectedTag));
@@ -631,7 +674,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const handleTagChange = updateTagSelection(setSelectedTagOption, 'selectedTag');
     const handleDeSelectedTagChange = updateTagSelection(setDeSelectedTagOption, 'deSelectedTag');
-    /** End tag */
+
+
+    /** Start Filter Tag */ 
+    const [filterSelectedTagOption, setFilterSelectedTagOption] = useState(createFilterOptionFromTag(filterSelectedTag));
+    const handleFilterTagChange = updateTagSelection(setFilterSelectedTagOption, 'filterSelectedTag');
+    /** End Filter Tag */
+
+    /** End Tag */
+
+    // Generate filter tab array
+    useEffect(() => {
+        // Filter and return full objects
+        if(filterTaxOptions.length > 0) {
+            const result = filterTaxOptions.filter(item => filterSelectedCat.includes(item.value));
+            setAttributes({
+                filterSelectedCatLabel: result
+            })
+        }
+
+        if(filterTagOptions.length > 0) {
+            const result = filterTagOptions.filter(item => filterSelectedTag.includes(item.value));
+            setAttributes({
+                filterSelectedTagLabel: result
+            })
+        }
+    }, [filterSelectedCat, filterSelectedTag]);
+
+
 
     /** Start author */
     const allAuthors = FrontisBlocksData.all_authors;
@@ -4298,7 +4368,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <div className={"fb-tab-controls" + tab.name}>
                                 {tab.name === 'general' && (
                                     <>
-                                        <div className="fb-advanced-wrapper">
+                                        <div className="fb-setting-general-wrapper">
 
                                             <PanelBody
                                                 title={__("General", "frontis-blocks")}
@@ -4616,6 +4686,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     </>
                                                 )}
                                             </PanelBody>
+
+                                            <PanelBody
+                                                    title={__("Filter By Taxonomy", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+
+                                                    <ToggleControl
+                                                        label={__("Filter", "frontis-blocks")}
+                                                        checked={showFilterByTaxonomy}
+                                                        onChange={(value) => setAttributes({ showFilterByTaxonomy: value })}
+                                                    />
+
+                                                    {showFilterByTaxonomy && (
+
+                                                        <>
+                                                        <BaseControl
+                                                            id="fb-setting-taxonomy"
+                                                            className="fb-setting-taxonomy"
+                                                        >
+                                                            <SelectControl
+                                                                label={__("Select Taxonomy Type", "frontis-blocks")}
+                                                                value={filterSelectedTaxonomy}
+                                                                options={TAXONOMY_OPTIONS}
+                                                                onChange={(value) => setAttributes({ filterSelectedTaxonomy: value })}
+                                                            />
+
+                                                            {filterSelectedTaxonomy === 'category' && (
+                                                                <Select2 
+                                                                    options={filterTaxOptions} 
+                                                                    value={filterSelectedOption}
+                                                                    onChange={handleFilterCategoryChange}
+                                                                    isMulti
+                                                                    className="fb-select2-control"
+                                                                />
+                                                            )}
+                                                            {filterSelectedTaxonomy === 'tag' && ( 
+                                                                <Select2 
+                                                                    options={filterTagOptions} 
+                                                                    value={filterSelectedTagOption}
+                                                                    onChange={handleFilterTagChange}
+                                                                    isMulti
+                                                                    className="fb-select2-control"
+                                                                />
+                                                            )}
+                                                            </BaseControl>
+                                                        </>
+
+                                                    )}
+
+                                            </PanelBody>  
                                             {loadMoreSwitcher && (
                                                 <PanelBody
                                                     title={__("Load More Button", "frontis-blocks")}

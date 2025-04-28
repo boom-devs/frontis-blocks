@@ -14,9 +14,6 @@ if (!defined('ABSPATH')) {
  * @return string Returns the testimonials grid.
  */
 
-// Debug: Log that the render function is being called
-error_log('Masonry Testimonial render.php is being executed');
-
 // Extract attributes
 $block_id = isset($attributes['blockID']) ? $attributes['blockID'] : 'fb-masonry-testimonial-' . uniqid();
 $post_type = isset($attributes['postType']) ? $attributes['postType'] : 'post';
@@ -30,9 +27,6 @@ $text_color = isset($attributes['textColor']) ? $attributes['textColor'] : '';
 $background_color = isset($attributes['backgroundColor']) ? $attributes['backgroundColor'] : '';
 $item_background_color = isset($attributes['itemBackgroundColor']) ? $attributes['itemBackgroundColor'] : '#f4f4f4';
 $animation = isset($attributes['animation']) ? $attributes['animation'] : 'none';
-
-// Debug: Log the attributes
-error_log('Masonry Testimonial attributes: ' . print_r($attributes, true));
 
 // Generate class name
 $class_name = 'fb-masionry-testimonial frontis-block ' . $block_id;
@@ -78,9 +72,6 @@ if ($post_order === 'rand') {
     $args['orderby'] = 'date';
     $args['order'] = ($post_order === 'asc') ? 'ASC' : 'DESC';
 }
-
-// Debug: Log the query arguments
-error_log('Masonry Testimonial query args: ' . print_r($args, true));
 
 // Run the query
 $testimonials_query = new WP_Query($args);
