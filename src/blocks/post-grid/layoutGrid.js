@@ -15,15 +15,19 @@ export default function LayoutGrid({
     showDateSwitcher, 
     postAuthorAvatarSwitcher,
     postImageSize,
-    defaultImageUrl }) {
+    defaultImageUrl,
+
+    }) {
     const src = data.fb_featured_image_src?.[postImageSize]?.[0] || defaultImageUrl;
     const author = data.fb_author_info;
     const title = data.title.rendered;
     const categories = data.fb_category_info;
     const tags = data.fb_post_tag_info;
-    const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';    
-    
+    const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';  
+
+
     return (
+        <>
         <div className="fb_post_grid_wrapper">
             <div className="fb_post_grid_image_wrapper">
                 <div className="fb_post_grid_image">
@@ -85,6 +89,7 @@ export default function LayoutGrid({
                 </div>
             </div>
         </div>
+        </>
     );
 }
 
