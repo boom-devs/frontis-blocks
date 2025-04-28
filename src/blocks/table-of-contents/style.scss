@@ -69,13 +69,13 @@
 .fb-table-of-contents-block .fb-toc-sublist {
     margin-top: 8px;
     margin-bottom: 0;
-    padding-left: 20px;
-    list-style-type: circle;
+    padding-left: 12px;
+    list-style-type: disc;
 }
 
 /* Further nested lists use different bullet style */
 .fb-table-of-contents-block .fb-toc-sublist .fb-toc-sublist {
-    list-style-type: square;
+    list-style-type: disc;
 }
 
 .fb-table-of-contents-block .fb-toc-list li,
@@ -115,11 +115,11 @@
 }
 
 .fb-table-of-contents-block .toc-level-3 {
-    padding-left: 10px;
+    padding-left: 12px;
 }
 
 .fb-table-of-contents-block .toc-level-4 {
-    padding-left: 20px;
+    padding-left: 12px;
 }
 
 .fb-table-of-contents-block .toc-level-5 {
