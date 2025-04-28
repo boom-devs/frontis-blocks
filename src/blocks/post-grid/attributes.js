@@ -17,8 +17,8 @@ const attributes = {
 		default: "post"
 	},
 	postPerPage: {
-		type: "string",
-		default: "6"
+		type: "number",
+		default: 6
 	},
 
 	postSwitcher: {
@@ -2722,6 +2722,10 @@ const attributes = {
 	filterSelectedTagLabel: {
 		type: "array",
 		default: []
+	},
+	filerselectedCountSwitcher: {
+		type: "boolean",
+		default: false
 	},
 	/** End Filter By Taxonomy */
 };
