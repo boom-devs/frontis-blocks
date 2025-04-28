@@ -1,6 +1,6 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import {
@@ -58,8 +58,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         filterSelectedCatLabel,
         filterSelectedTag,
         filterSelectedTagLabel,
+        filerselectedCountSwitcher,
     } = attributes;
 
+    const [allPosts, setAllPosts] = useState([]);
     const [filterCatId, setFilterCatId] = useState(0);
     const [filterTagId, setFilterTagId] = useState(0);
     const blockProps = useBlockProps({
@@ -92,7 +94,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         applyAuthorFilters(query);
 
 		return select('core').getEntityRecords('postType', postType, query);
-	});
+	}, [
+        postType,
+        postPerPage,
+        orderBy,
+        sortOrder,
+        showFilterByTaxonomy,
+        filterSelectedTaxonomy,
+        filterCatId,
+        selectedCat,
+        filterTagId,
+        selectedTag,
+        selectedCatSwitcher,
+        deSelectedCat,
+        selectedTagSwitcher,
+        deSelectedTag,
+        selectedAuthorSwitcher,
+        selectedAuthor,
+        deSelectedAuthor,
+    ]);
+
     /**
     * Old Category & Tag Filtering
     */
@@ -129,29 +150,89 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
+    /**
+     * Handle Category Click
+     */
 	const handleCategoryClick = (category) => {
 		if (category && typeof category.value !== 'undefined') {
 			setFilterCatId(category.value);
 		}
 	};
 
+    /**
+     * Handle Tag Click
+     */
 	const handleTagClick = (tag) => {
 		if (tag && typeof tag.value !== 'undefined') {
 			setFilterTagId(tag.value);
 		}
 	};
 
-    const getCategoryPostCount = (categoryId) => {
-        if (!postLists) return 0;
-        return postLists.filter(post => {
-            if (!post.categories) return false;
-            return post.categories.includes(categoryId);
-        }).length;
-    };
+
+    /**
+     * Get All Posts Count
+     */
+    useEffect(() => {
+        if (postLists && postLists.length > 0 && allPosts.length === 0) {
+            setAllPosts(postLists);
+        }
+    }, [postLists]);
+
+    /**
+     * Get Category Counts
+     */
+    const getCategoryCounts = () => {
+        const counts = {};
     
-    const getAllPostsCount = () => {
-        return postLists ? postLists.length : 0;
+        if (allPosts && Array.isArray(allPosts)) {
+            allPosts.forEach((post) => {
+                if (post.categories && Array.isArray(post.categories)) {
+                    post.categories.forEach((catId) => {
+                        counts[catId] = (counts[catId] || 0) + 1;
+                    });
+                }
+            });
+        }
+    
+        return counts;
     };
+
+    /**
+     * Get Category Counts
+     */
+    const getTagCounts = () => {
+        const counts = {};
+    
+        if (allPosts && Array.isArray(allPosts)) {
+            allPosts.forEach((post) => {
+                if (post.tags && Array.isArray(post.tags)) {
+                    post.tags.forEach((tagId) => {
+                        counts[tagId] = (counts[tagId] || 0) + 1;
+                    });
+                }
+            });
+        }
+    
+        return counts;
+    };
+
+    /**
+     * Get All Posts Count
+     */ 
+    const getAllPostsCount = () => {
+        return allPosts ? allPosts.length : 0;
+    };
+
+    /**
+     * Get Category Counts
+     */
+    const categoryCounts = useMemo(() => getCategoryCounts(), [allPosts]);
+
+    /**
+     * Get Tag Counts
+     */
+    const tagCounts = useMemo(() => getTagCounts(), [allPosts]);
+
 
     return (
         <>
@@ -167,13 +248,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         <>
                             {showFilterByTaxonomy && filterSelectedTaxonomy === 'category' && filterSelectedCatLabel.length > 0 && (
                                 <div className="fb_post_grid_filter_categories">
+                                    
                                     {filterSelectedCatLabel.map((category, idx) => (
                                         <div
                                             key={idx}
                                             className={`fb_post_grid_category ${filterCatId === category.value ? 'active' : ''}`}
                                             onClick={() => handleCategoryClick(category)}
                                         >
-                                            {category.label} ({category.value === 0 ? getAllPostsCount() : getCategoryPostCount(category.value)})
+                                            {category.label} {filerselectedCountSwitcher ? `(${category.value === 0 ? getAllPostsCount() : categoryCounts[category.value] || 0})` : ''}
                                         </div>
                                     ))}
                                 </div>
@@ -187,7 +269,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             className={`fb_post_grid_category ${filterTagId === tag.value ? 'active' : ''}`}
                                             onClick={() => handleTagClick(tag)}
                                         >
-                                            {tag.label}
+                                            {tag.label} {filerselectedCountSwitcher ? `(${tag.value === 0 ? getAllPostsCount() : tagCounts[tag.value] || 0})` : ''}
                                         </div>
                                     ))}
                                 </div>

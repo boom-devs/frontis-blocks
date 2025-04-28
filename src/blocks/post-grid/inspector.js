@@ -562,6 +562,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         filterSelectedCatLabel,
         filterSelectedTag,
         filterSelectedTagLabel,
+        filerselectedCountSwitcher,
 
         /** End Filter By Taxonomy */
 	} = attributes;
@@ -575,6 +576,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+
+    useEffect(() => {
+        setAttributes({ postPerPage: postPerPage === 0 ? undefined : postPerPage });
+    }, [postPerPage]);
 
 
     /** Start post type */
@@ -4580,7 +4586,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <RangeControl
                                                     label={__("Post per page", "frontis-blocks")}
                                                     value={postPerPage}
-                                                    onChange={(value) => setAttributes({ postPerPage: value === 0 ? undefined : value })}
+                                                    onChange={(value) => setAttributes({ postPerPage: value })}
                                                     min={1}
                                                     max={100}
                                                     step={1}
@@ -4730,6 +4736,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     className="fb-select2-control"
                                                                 />
                                                             )}
+                                                            <ToggleControl
+                                                                label={__("Show Selected Count", "frontis-blocks")}
+                                                                checked={filerselectedCountSwitcher}
+                                                                onChange={(value) => setAttributes({ filerselectedCountSwitcher: value })}
+                                                            />
                                                             </BaseControl>
                                                         </>
 
