@@ -1,109 +1,170 @@
-/* Updated styles to fix mobile TOC display */
+/* Updated styles to match second screenshot layout */
 .fb-table-of-contents-block {
     border: 1px solid #D5D7DA;
     border-radius: 16px;
     padding: 20px;
     position: relative;
     background-color: #E9EAEB;
-    .fb-toc-title {
-        margin-top: 0;
-        margin-bottom: 16px;
-        font-size: 1.2em;
-        font-weight: 600;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 8px;
-    }
-    .fb-toc-collapse-toggle {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        cursor: pointer;
-        &.dashicons {
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
-    }
-    .fb-toc-content {
-        overflow-y: auto;
-        &.collapsed {
-            display: none;
-        }
-    }
-    .fb-toc-list {
-        margin: 0;
-        padding-left: 20px;
-        &.list-style-none {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        &.list-style-disc {
-            list-style-type: disc;
-        }
-        &.list-style-circle {
-            list-style-type: circle;
-        }
-        &.list-style-square {
-            list-style-type: square;
-        }
-        &.list-style-decimal {
-            list-style-type: decimal;
-        }
-        li {
-            margin-bottom: 8px;
-            &:has(> a.active) {
-                color: #181D27;
-            } 
-        }
-        a {
-            font-family: "Radio Canada Big";
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 32px;
-            text-decoration: none;
-            color: #535862;
-            &.active{
-                color: #181D27 !important;
-            }
-            &:hover {
-                text-decoration: underline;
-            }
-        }       
-    }
-    .fb-toc-empty {
-        font-style: italic;
-        color: #777;
-    }
-    .fb-toc-mobile-toggle {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #00010B !important;
-        color: white;
-        width: 24px !important;
-        height: 72px !important;
-        border-radius: 0 8px 8px 0 !important;
-        z-index: 999;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-        &.toggle-toc {
-            left: 332px;
-        }
-        .dashicons {
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-    }
+}
+
+.fb-table-of-contents-block .fb-toc-title {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.fb-table-of-contents-block .fb-toc-collapse-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.fb-table-of-contents-block .fb-toc-collapse-toggle.dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.fb-table-of-contents-block .fb-toc-content {
+    overflow-y: auto;
+}
+
+.fb-table-of-contents-block .fb-toc-content.collapsed {
+    display: none;
+}
+
+/* List styles for main list */
+.fb-table-of-contents-block .fb-toc-list {
+    margin: 0;
+    padding-left: 20px;
+    list-style-position: outside;
+}
+
+.fb-table-of-contents-block .fb-toc-list.list-style-none {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.fb-table-of-contents-block .fb-toc-list.list-style-disc {
+    list-style-type: disc;
+}
+
+.fb-table-of-contents-block .fb-toc-list.list-style-circle {
+    list-style-type: circle;
+}
+
+.fb-table-of-contents-block .fb-toc-list.list-style-square {
+    list-style-type: square;
+}
+
+.fb-table-of-contents-block .fb-toc-list.list-style-decimal {
+    list-style-type: decimal;
+}
+
+/* Styles for the nested sublist */
+.fb-table-of-contents-block .fb-toc-sublist {
+    margin-top: 8px;
+    margin-bottom: 0;
+    padding-left: 12px;
+    list-style-type: disc;
+}
+
+/* Further nested lists use different bullet style */
+.fb-table-of-contents-block .fb-toc-sublist .fb-toc-sublist {
+    list-style-type: disc;
+}
+
+.fb-table-of-contents-block .fb-toc-list li,
+.fb-table-of-contents-block .fb-toc-sublist li {
+    margin-bottom: 8px;
+}
+
+.fb-table-of-contents-block .fb-toc-list li:has(> a.active),
+.fb-table-of-contents-block .fb-toc-sublist li:has(> a.active) {
+    color: #181D27;
+} 
+
+.fb-table-of-contents-block .fb-toc-list a,
+.fb-table-of-contents-block .fb-toc-sublist a {
+    font-family: "Radio Canada Big", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    text-decoration: none;
+    color: #535862;
+}
+
+.fb-table-of-contents-block .fb-toc-list a.active,
+.fb-table-of-contents-block .fb-toc-sublist a.active {
+    color: #181D27 !important;
+}
+
+.fb-table-of-contents-block .fb-toc-list a:hover,
+.fb-table-of-contents-block .fb-toc-sublist a:hover {
+    text-decoration: underline;
+}
+
+/* Indent styles to show hierarchy */
+.fb-table-of-contents-block .toc-level-2 {
+    padding-left: 0;
+}
+
+.fb-table-of-contents-block .toc-level-3 {
+    padding-left: 12px;
+}
+
+.fb-table-of-contents-block .toc-level-4 {
+    padding-left: 12px;
+}
+
+.fb-table-of-contents-block .toc-level-5 {
+    padding-left: 30px;
+}
+
+.fb-table-of-contents-block .toc-level-6 {
+    padding-left: 40px;
+}
+
+.fb-table-of-contents-block .fb-toc-empty {
+    font-style: italic;
+    color: #777;
+}
+
+.fb-table-of-contents-block .fb-toc-mobile-toggle {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #00010B !important;
+    color: white;
+    width: 24px !important;
+    height: 72px !important;
+    border-radius: 0 8px 8px 0 !important;
+    z-index: 999;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.fb-table-of-contents-block .fb-toc-mobile-toggle.toggle-toc {
+    left: 332px;
+}
+
+.fb-table-of-contents-block .fb-toc-mobile-toggle .dashicons {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Sticky behavior for desktop */
@@ -184,28 +245,5 @@
         cursor: pointer;
         color: #777;
         z-index: 1001;
-    }
-}
-
-/* New styles for TOC container and list container */
-.fb-toc-container {
-    width: 100%;
-    height: 100%;
-}
-
-.fb-toc-list-container {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-}
-
-.fb-toc-sublist {
-    margin: 0;
-    padding-left: 20px;
-    list-style-type: disc;
-    
-    li {
-        margin-bottom: 4px;
-        font-size: 0.95em;
     }
 }
