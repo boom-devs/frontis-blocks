@@ -91,3 +91,9 @@ export const POST_SWITCHER = [
 	{ label: __('Grid', 'frontis-blocks'), value: 'grid' },
 	{ label: __('List', 'frontis-blocks'), value: 'list' },
 ];
+
+export const TAXONOMY_OPTIONS = [
+	{ label: __('Category', 'frontis-blocks'), value: 'category' },
+	{ label: __('Tag', 'frontis-blocks'), value: 'tag' },
+];
+
