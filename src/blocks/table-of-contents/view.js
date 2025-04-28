@@ -1,20 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     const tocBlocks = document.querySelectorAll('.fb-table-of-contents-block');
 
     tocBlocks.forEach(function (tocBlock) {
-
         const smoothScroll = tocBlock.dataset.smoothScroll === 'true';
         const collapsible = tocBlock.dataset.collapsible === 'true';
         const initialCollapsed = tocBlock.dataset.initialCollapsed === 'true';
-
 
         const mobileToggle = tocBlock.querySelector('.fb-toc-mobile-toggle');
         const collapseToggle = tocBlock.querySelector('.fb-toc-collapse-toggle');
         const tocContent = tocBlock.querySelector('.fb-toc-content');
         const tocContainer = tocBlock.querySelector('.fb-toc-container');
         const tocListContainer = tocBlock.querySelector('.fb-toc-list-container');
-
 
         if (collapsible && initialCollapsed) {
             tocContent.classList.add('collapsed');
@@ -51,16 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clear any existing content first to prevent duplication
             tocListContainer.innerHTML = '';
 
-            const tocList = document.createElement('ul');
-            tocList.className = 'fb-toc-list';
-
-            // Add list style
-            const listStyle = tocBlock.dataset.listStyle || 'disc';
-            tocList.classList.add('list-style-' + listStyle);
-
-            let currentList = tocList; 
-            let lastLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
-
+            // Create nested TOC structure
+            const tocStructure = {};
+            const minLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
+            const maxLevel = parseInt(tocBlock.dataset.maxHeadingLevel || 4);
+            
+            // First pass: collect all headings into a structure
             headings.forEach(function (heading, index) {
                 // Skip headings within the TOC itself
                 if (tocBlock.contains(heading)) return;
@@ -73,65 +65,96 @@ document.addEventListener('DOMContentLoaded', function () {
                 const level = parseInt(heading.tagName.substring(1));
 
                 // Filter by heading level
-                const minLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
-                const maxLevel = parseInt(tocBlock.dataset.maxHeadingLevel || 4);
-
                 if (level < minLevel || level > maxLevel) return;
 
-                // Create list item
-                const listItem = document.createElement('li');
-                listItem.className = 'toc-level-' + level;
-                listItem.style.paddingLeft = ((level - minLevel) * 16) + 'px';
+                // Store heading info in our structure
+                const headingInfo = {
+                    id: heading.id,
+                    text: heading.innerHTML,
+                    level: level,
+                    children: []
+                };
 
-                // Create link
-                const link = document.createElement('a');
-                link.href = '#' + heading.id;
-                link.innerHTML = heading.innerHTML;
-                link.addEventListener('click', function (e) {
-                    if (smoothScroll) {
-                        e.preventDefault();
-                        const targetElement = document.getElementById(heading.id);
+                // Add to our structure
+                if (!tocStructure[level]) {
+                    tocStructure[level] = [];
+                }
+                tocStructure[level].push(headingInfo);
+            });
 
-                        if (targetElement) {
-                            // Smooth scroll to heading
-                            window.scrollTo({
-                                top: targetElement.offsetTop + 600,
-                                behavior: 'smooth'
-                            });
+            // Create main list
+            const mainList = document.createElement('ul');
+            mainList.className = 'fb-toc-list';
+            
+            // Add list style
+            const listStyle = tocBlock.dataset.listStyle || 'disc';
+            mainList.classList.add('list-style-' + listStyle);
 
-                            // Close mobile TOC after clicking
-                            if (window.innerWidth <= 768 && tocBlock.classList.contains('collapsible-mobile')) {
-                                tocBlock.classList.add('mobile-collapsed');
-                                if (tocContainer) {
-                                    tocContainer.classList.add('hidden-mobile');
+            // Function to build nested list items
+            function buildNestedList(level, parentList, indent = 0) {
+                if (!tocStructure[level]) return;
+                
+                tocStructure[level].forEach(function(heading) {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'toc-level-' + level;
+                    
+                    // Create link
+                    const link = document.createElement('a');
+                    link.href = '#' + heading.id;
+                    link.innerHTML = heading.text;
+                    link.addEventListener('click', function (e) {
+                        if (smoothScroll) {
+                            e.preventDefault();
+                            const targetElement = document.getElementById(heading.id);
+
+                            if (targetElement) {
+                                // Smooth scroll to heading
+                                window.scrollTo({
+                                    top: targetElement.offsetTop - 80, // Adjust offset as needed
+                                    behavior: 'smooth'
+                                });
+
+                                // Close mobile TOC after clicking
+                                if (window.innerWidth <= 768 && tocBlock.classList.contains('collapsible-mobile')) {
+                                    tocBlock.classList.add('mobile-collapsed');
+                                    if (tocContainer) {
+                                        tocContainer.classList.add('hidden-mobile');
+                                    }
                                 }
                             }
                         }
+                    });
+
+                    listItem.appendChild(link);
+                    parentList.appendChild(listItem);
+                    
+                    // Check if this heading has child items
+                    if (tocStructure[level + 1]) {
+                        // Look for immediate child headings
+                        const childHeadings = tocStructure[level + 1].filter(child => {
+                            // This is a simplified check - you might need more logic
+                            // to determine parent-child relationships
+                            return true; // For now, consider all next-level headings as children
+                        });
+                        
+                        if (childHeadings.length > 0) {
+                            const childList = document.createElement('ul');
+                            childList.className = 'fb-toc-sublist';
+                            listItem.appendChild(childList);
+                            
+                            // Recursively build child items
+                            buildNestedList(level + 1, childList, indent + 1);
+                        }
                     }
                 });
-
-                listItem.appendChild(link);
-
-                if (level === minLevel) {
-                    // Top-level: numbered
-                    tocList.appendChild(listItem);
-                    currentList = listItem; // For possible sub-lists
-                } else {
-                    // Lower-level: bulleted, indented
-                    let subList = currentList.querySelector('ul');
-                    if (!subList) {
-                        subList = document.createElement('ul');
-                        subList.className = 'fb-toc-sublist';
-                        currentList.appendChild(subList);
-                    }
-                    listItem.style.listStyleType = 'disc';
-                    subList.appendChild(listItem);
-                }
-            });
-
+            }
+            
+            // Start building from the minimum level
+            buildNestedList(minLevel, mainList);
+            
             // Only append if there are headings found
-            if (tocList.childElementCount > 0) {
-                tocListContainer.appendChild(tocList);
+            if (mainList.childElementCount > 0) {
+                tocListContainer.appendChild(mainList);
             } else {
                 const emptyMessage = document.createElement('p');
                 emptyMessage.className = 'fb-toc-empty';
@@ -169,13 +192,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Mobile toggle functionality
         if (mobileToggle && tocContainer) {
-
             mobileToggle.addEventListener('click', function (e) {
                 e.stopPropagation();
 
                 tocBlock.classList.toggle('mobile-collapsed');
                 tocContainer.classList.toggle('hidden-mobile');
-                mobileToggle.classList.toggle('toggle-toc')
+                mobileToggle.classList.toggle('toggle-toc');
                 if (tocContainer.classList.contains('hidden-mobile')) {
                     tocContainer.classList.remove('hidden-mobile');
                 }
@@ -187,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocContainer.classList.add('hidden-mobile');
             }
         }
-
     });
 
     // Close mobile TOC when clicking outside
@@ -207,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 tocBlock.classList.add('mobile-collapsed');
                 tocContainer.classList.add('hidden-mobile');
-                mobileToggle.classList.remove('toggle-toc')
+                mobileToggle.classList.remove('toggle-toc');
             }
         });
     });
