@@ -73,46 +73,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const { useSelect } = wp.data;
 
-    const postLists = useSelect( ( select ) => {
-        const query = {
-            orderby: orderBy,
-            order: sortOrder,
-            per_page: postPerPage,
-        };
+	const postLists = useSelect((select) => {
+		const query = {
+			orderby: orderBy,
+			order: sortOrder,
+			per_page: postPerPage,
+		};
 
-
-
-        // 1. New Filter Priority (only Category/Tag)
-        if (showFilterByTaxonomy && filterSelectedTaxonomy) {
-            if (filterSelectedTaxonomy === 'category' && Array.isArray(filterSelectedCat) && filterSelectedCat.length > 0) {
-                query.categories = filterSelectedCat;
-            } else if (filterSelectedTaxonomy === 'tag' && Array.isArray(filterSelectedTag) && filterSelectedTag.length > 0) {
-                query.tags = filterSelectedTag;
-            }
-        }
-
-        if(filterCatId !== 0) {
-            query.categories = filterCatId;
-        }
+		if (showFilterByTaxonomy) {
+			if (filterSelectedTaxonomy === 'category') {
+				query.categories = filterCatId !== 0 ? filterCatId : filterSelectedCat;
+			} else if (filterSelectedTaxonomy === 'tag') {
+				query.tags = filterTagId !== 0 ? filterTagId : filterSelectedTag;
+			}
+		}
         
-        if(filterCatId === 0) {
-            query.categories = filterSelectedCat;
-        }
-
-        if(filterTagId !== 0) {
-            query.tags = filterTagId;
-        }
-
-        if(filterTagId === 0) {
-            query.tags = filterSelectedTag;
-        }
-
         applyOldCategoryTagFilters(query);
         applyAuthorFilters(query);
 
-        return select('core').getEntityRecords('postType', postType, query);
-    } );
-
+		return select('core').getEntityRecords('postType', postType, query);
+	});
     /**
     * Old Category & Tag Filtering
     */
@@ -149,16 +129,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
-    const handleCategoryClick = (category) => {
-        if (category && typeof category.value !== 'undefined') {
-            setFilterCatId(category.value);
-        }
-    };
+	const handleCategoryClick = (category) => {
+		if (category && typeof category.value !== 'undefined') {
+			setFilterCatId(category.value);
+		}
+	};
 
-    const handleTagClick = (tag) => {
-        if (tag && typeof tag.value !== 'undefined') {
-            setFilterTagId(tag.value);
-        }
+	const handleTagClick = (tag) => {
+		if (tag && typeof tag.value !== 'undefined') {
+			setFilterTagId(tag.value);
+		}
+	};
+
+    const getCategoryPostCount = (categoryId) => {
+        if (!postLists) return 0;
+        return postLists.filter(post => {
+            if (!post.categories) return false;
+            return post.categories.includes(categoryId);
+        }).length;
+    };
+    
+    const getAllPostsCount = () => {
+        return postLists ? postLists.length : 0;
     };
 
     return (
@@ -173,27 +165,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <div {...blockProps}>
                     {postLists.length > 0 ? (
                         <>
-                            {filterSelectedCatLabel.length > 0 && (
+                            {showFilterByTaxonomy && filterSelectedTaxonomy === 'category' && filterSelectedCatLabel.length > 0 && (
                                 <div className="fb_post_grid_filter_categories">
                                     {filterSelectedCatLabel.map((category, idx) => (
                                         <div
+                                            key={idx}
                                             className={`fb_post_grid_category ${filterCatId === category.value ? 'active' : ''}`}
                                             onClick={() => handleCategoryClick(category)}
-                                            key={idx}
                                         >
-                                            {category.label}
+                                            {category.label} ({category.value === 0 ? getAllPostsCount() : getCategoryPostCount(category.value)})
                                         </div>
                                     ))}
                                 </div>
                             )}
-                            
-                            {filterSelectedTagLabel.length > 0 && (
+
+                            {showFilterByTaxonomy && filterSelectedTaxonomy === 'tag' && filterSelectedTagLabel.length > 0 && (
                                 <div className="fb_post_grid_filter_categories">
                                     {filterSelectedTagLabel.map((tag, idx) => (
                                         <div
+                                            key={idx}
                                             className={`fb_post_grid_category ${filterTagId === tag.value ? 'active' : ''}`}
                                             onClick={() => handleTagClick(tag)}
-                                            key={idx}
                                         >
                                             {tag.label}
                                         </div>

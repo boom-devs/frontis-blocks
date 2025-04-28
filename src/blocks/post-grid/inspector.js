@@ -620,6 +620,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         label: taxOptions.find(option => option.value === catId)?.label || ''
     }));
 
+    const createFilterOptionFromCategory = (categoryIds) => categoryIds.map(catId => ({
+        value: catId,
+        label: filterTaxOptions.find(option => option.value === catId)?.label || ''
+    }));
+
     const [selectedOption, setSelectedOption] = useState(createOptionFromCategory(selectedCat));
     const [deSelectedOption, setDeSelectedOption] = useState(createOptionFromCategory(deSelectedCat));
 
@@ -632,7 +637,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleDeSelectedCategoryChange = updateCategorySelection(setDeSelectedOption, 'deSelectedCat');
 
     /** Start Filter Category */
-    const [filterSelectedOption, setFilterSelectedOption] = useState(createOptionFromCategory(filterSelectedCat));
+    const [filterSelectedOption, setFilterSelectedOption] = useState(createFilterOptionFromCategory(filterSelectedCat));
     const handleFilterCategoryChange = updateCategorySelection(setFilterSelectedOption, 'filterSelectedCat');
     /** End Filter Category */
     /** End category */
@@ -654,6 +659,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         label: tagOptions.find(option => option.value === tagId)?.label || ''
     }));
 
+    const createFilterOptionFromTag = (tagIds) => tagIds.map(tagId => ({
+        value: tagId,
+        label: filterTagOptions.find(option => option.value === tagId)?.label || ''
+    }));
+
     const [selectedTagOption, setSelectedTagOption] = useState(createOptionFromTag(selectedTag));
     const [deSelectedTagOption, setDeSelectedTagOption] = useState(createOptionFromTag(deSelectedTag));
 
@@ -667,7 +677,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     /** Start Filter Tag */ 
-    const [filterSelectedTagOption, setFilterSelectedTagOption] = useState(createOptionFromTag(filterSelectedTag));
+    const [filterSelectedTagOption, setFilterSelectedTagOption] = useState(createFilterOptionFromTag(filterSelectedTag));
     const handleFilterTagChange = updateTagSelection(setFilterSelectedTagOption, 'filterSelectedTag');
     /** End Filter Tag */
 
