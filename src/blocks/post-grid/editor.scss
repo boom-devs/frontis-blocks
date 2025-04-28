@@ -262,3 +262,37 @@
 		transform: rotate(360deg);
 	}
 } 
+
+.fb_post_grid_filter_categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	justify-content: center;
+	margin-bottom: 60px;
+
+	.fb_post_grid_category  {
+		border: 1px solid #dddddd9e;
+		border-radius: 4px;
+		color: rgba(35, 37, 41, .5);
+		cursor: pointer;
+		display: inline-block;
+		font-size: 14px;
+		padding: 7px 20px;
+		text-align: center;
+		text-transform: capitalize;
+		transition: all .31s ease;
+		white-space: nowrap;
+		&:hover {
+			background-color: #dddddd9e;
+			color: #15171C;
+		}
+		&.active {
+			background-color: #dddddd9e;
+			color: #15171C;
+		}
+	}
+}
+
+
+
+

@@ -2697,6 +2697,33 @@ const attributes = {
             Mobile: 'px',
         }
     },
+
+	/** Start Filter By Taxonomy */
+	showFilterByTaxonomy: {
+		type: "boolean",
+		default: false,
+	},
+	filterSelectedTaxonomy: {
+		type: "string",
+		default: "category",
+	},
+	filterSelectedCat: {
+		type: "array",
+		default: []
+	},
+	filterSelectedCatLabel: {
+		type: "array",
+		default: []
+	},
+	filterSelectedTag: {
+		type: "array",
+		default: []
+	},
+	filterSelectedTagLabel: {
+		type: "array",
+		default: []
+	},
+	/** End Filter By Taxonomy */
 };
 
 export default attributes;
