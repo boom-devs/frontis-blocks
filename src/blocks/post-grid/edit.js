@@ -223,6 +223,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return allPosts ? allPosts.length : 0;
     };
 
+    console.log(allPosts);
+
     /**
      * Get Category Counts
      */
@@ -252,10 +254,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     {filterSelectedCatLabel.map((category, idx) => (
                                         <div
                                             key={idx}
-                                            className={`fb_post_grid_category ${filterCatId === category.value ? 'active' : ''}`}
+                                            className={`fb_post_grid_filter_category ${filterCatId === category.value ? 'active' : ''}`}
                                             onClick={() => handleCategoryClick(category)}
                                         >
-                                            {category.label} {filerselectedCountSwitcher ? `(${category.value === 0 ? getAllPostsCount() : categoryCounts[category.value] || 0})` : ''}
+                                              <span className="fb-post-grid-filter-category-label">{category.label}</span>
+                                              {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-category-count">({category.value === 0 ? getAllPostsCount() : categoryCounts[category.value] || 0})</span> : ''}
                                         </div>
                                     ))}
                                 </div>
@@ -266,10 +269,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     {filterSelectedTagLabel.map((tag, idx) => (
                                         <div
                                             key={idx}
-                                            className={`fb_post_grid_category ${filterTagId === tag.value ? 'active' : ''}`}
+                                            className={`fb_post_grid_filter_category ${filterTagId === tag.value ? 'active' : ''}`}
                                             onClick={() => handleTagClick(tag)}
                                         >
-                                            {tag.label} {filerselectedCountSwitcher ? `(${tag.value === 0 ? getAllPostsCount() : tagCounts[tag.value] || 0})` : ''}
+                                            <span className="fb-post-grid-filter-tag-label">{tag.label}</span>
+                                            {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-tag-count">({tag.value === 0 ? getAllPostsCount() : tagCounts[tag.value] || 0})</span> : ''}
                                         </div>
                                     ))}
                                 </div>
