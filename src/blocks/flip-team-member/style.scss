@@ -8,6 +8,18 @@
 		position: relative;
 		overflow: hidden;
 
+		&:hover {
+			.fb-team-member-image-wrapper {
+				.fb-team-member-flip-front {
+					transform: rotateY(-180deg);
+				}
+				  
+				.fb-team-member-flip-back {
+					transform: rotateY(0deg);
+				}
+			}
+		}
+
 		.fb-team-member-image-wrapper {
 			.fb-team-member-image-overlay {
 				position: absolute;

@@ -1355,9 +1355,9 @@ const attributes = {
 	teamMemberIconsSpacing: {
 		type : "object",
 		default: {
-			Desktop: '29',
-			Tablet: '29',
-			Mobile: '29'
+			Desktop: '8',
+			Tablet: '8',
+			Mobile: '8'
 		}
 	},
 	teamMemberIconsSpacingUnits: {
