@@ -2715,11 +2715,23 @@ const attributes = {
 		type: "array",
 		default: []
 	},
+	filterSelectedTaxonomyCount: {
+		type: "array",
+		default: []
+	},
 	filterSelectedTag: {
 		type: "array",
 		default: []
 	},
 	filterSelectedTagLabel: {
+		type: "array",
+		default: []
+	},
+	filterSelectedTagCount: {
+		type: "array",
+		default: []
+	},
+	filterAllPostsCount: {
 		type: "array",
 		default: []
 	},

@@ -56,8 +56,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         filterSelectedTaxonomy,
         filterSelectedCat,
         filterSelectedCatLabel,
+        filterSelectedCatCount,
         filterSelectedTag,
         filterSelectedTagLabel,
+        filterSelectedTagCount,
+        filterAllPostsCount,
         filerselectedCountSwitcher,
     } = attributes;
 
@@ -216,25 +219,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return counts;
     };
 
-    /**
-     * Get All Posts Count
-     */ 
-    const getAllPostsCount = () => {
-        return allPosts ? allPosts.length : 0;
-    };
-
-    console.log(allPosts);
-
-    /**
-     * Get Category Counts
-     */
-    const categoryCounts = useMemo(() => getCategoryCounts(), [allPosts]);
-
-    /**
-     * Get Tag Counts
-     */
-    const tagCounts = useMemo(() => getTagCounts(), [allPosts]);
-
+    useEffect(() => {
+        setAttributes({
+            filterAllPostsCount: allPosts.length,
+            filterSelectedCatCount: getCategoryCounts(),
+            filterSelectedTagCount: getTagCounts(),
+        });
+    }, [allPosts]);
 
     return (
         <>
@@ -258,7 +249,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             onClick={() => handleCategoryClick(category)}
                                         >
                                               <span className="fb-post-grid-filter-category-label">{category.label}</span>
-                                              {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-category-count">({category.value === 0 ? getAllPostsCount() : categoryCounts[category.value] || 0})</span> : ''}
+                                              {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-category-count">{' '}{category.value === 0 ? filterAllPostsCount : filterSelectedCatCount[category.value] || 0}</span> : ''}
                                         </div>
                                     ))}
                                 </div>
@@ -273,7 +264,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             onClick={() => handleTagClick(tag)}
                                         >
                                             <span className="fb-post-grid-filter-tag-label">{tag.label}</span>
-                                            {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-tag-count">({tag.value === 0 ? getAllPostsCount() : tagCounts[tag.value] || 0})</span> : ''}
+                                            {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-tag-count">{' '}{tag.value === 0 ? filterAllPostsCount : filterSelectedTagCount[tag.value] || 0}</span> : ''}
                                         </div>
                                     ))}
                                 </div>

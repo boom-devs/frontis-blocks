@@ -1700,9 +1700,9 @@ var TypographySettings = function TypographySettings(props) {
       }, /*#__PURE__*/React.createElement("path", {
         d: "M10.5 13.5L5.5 8.5L10.5 3.5",
         stroke: "currentcolor",
-        "stroke-width": "1.2",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
+        "strokeWidth": "1.2",
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round"
       }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
         fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
         deviceType: deviceType,
@@ -3396,9 +3396,9 @@ function FrontisBlocksSidebarFullSite(props) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M10.5 13.5L5.5 8.5L10.5 3.5",
     stroke: "#404655",
-    "stroke-width": "1.2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    "strokeWidth": "1.2",
+    "strokeLinecap": "round",
+    "strokeLinejoin": "round"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -3421,9 +3421,9 @@ function FrontisBlocksSidebarFullSite(props) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M10.5 13.5L5.5 8.5L10.5 3.5",
     stroke: "#404655",
-    "stroke-width": "1.2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    "strokeWidth": "1.2",
+    "strokeLinecap": "round",
+    "strokeLinejoin": "round"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, "Color"), /*#__PURE__*/React.createElement("p", null, "Available texts, links, Button, Headings global colors"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
@@ -4859,9 +4859,9 @@ var TypographySettings = function TypographySettings(props) {
       }, /*#__PURE__*/React.createElement("path", {
         d: "M10.5 13.5L5.5 8.5L10.5 3.5",
         stroke: "currentcolor",
-        "stroke-width": "1.2",
-        "stroke-linecap": "round",
-        "stroke-linejoin": "round"
+        "strokeWidth": "1.2",
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round"
       }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
         fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
         deviceType: deviceType,
@@ -7384,9 +7384,9 @@ var SiteImportModal = function SiteImportModal(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M10.5 13.5L5.5 8.5L10.5 3.5",
     stroke: "#404655",
-    "stroke-width": "1.2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    "strokeWidth": "1.2",
+    "strokeLinecap": "round",
+    "strokeLinejoin": "round"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_sidebar_components_TypographySettings__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -7409,9 +7409,9 @@ var SiteImportModal = function SiteImportModal(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M10.5 13.5L5.5 8.5L10.5 3.5",
     stroke: "#404655",
-    "stroke-width": "1.2",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    "strokeWidth": "1.2",
+    "strokeLinecap": "round",
+    "strokeLinejoin": "round"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner"
   }, /*#__PURE__*/React.createElement("h3", null, "Color"), /*#__PURE__*/React.createElement("p", null, "Available texts, links, Button, Headings global colors"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
