@@ -504,12 +504,6 @@ class Admin {
         $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
 
-
-        // $show_filter_by_taxonomy = isset($_POST['showFilterByTaxonomy']) ? $_POST['showFilterByTaxonomy'] : false;
-
-        // // var_dump($show_filter_by_taxonomy);
-
-
         ob_start();
 
         // Initial query to select posts based on type and status
