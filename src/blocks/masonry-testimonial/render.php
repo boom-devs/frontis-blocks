@@ -90,7 +90,7 @@ if ($testimonials_query->have_posts()) {
         $excerpt = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 25);
 
         $author_id = get_the_author_meta('ID');
-        $author_name = get_the_author();
+        $author_name = get_the_title();
         $author_role = get_post_meta($post_id, 'author_designation', true) ?: 'Sales and service';
 
         $image_url = '';
