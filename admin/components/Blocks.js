@@ -155,8 +155,8 @@ const Blocks = () => {
             <span className="fb-blocks-search-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
               <g clip-path="url(#clip0_4834_1174)">
-              <circle cx="8.625" cy="8.625" r="7.125" stroke="#6A758E" stroke-width="1.5"/>
-              <path d="M13.875 13.875L16.5 16.5" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="8.625" cy="8.625" r="7.125" stroke="#6A758E" strokeWidth="1.5"/>
+              <path d="M13.875 13.875L16.5 16.5" stroke="#6A758E" strokeWidth="1.5" strokeLinecap="round"/>
               </g>
               <defs>
               <clipPath id="clip0_4834_1174">

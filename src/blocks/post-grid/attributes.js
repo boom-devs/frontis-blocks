@@ -17,8 +17,8 @@ const attributes = {
 		default: "post"
 	},
 	postPerPage: {
-		type: "string",
-		default: "6"
+		type: "number",
+		default: 6
 	},
 
 	postSwitcher: {
@@ -2715,6 +2715,10 @@ const attributes = {
 		type: "array",
 		default: []
 	},
+	filterSelectedTaxonomyCount: {
+		type: "array",
+		default: []
+	},
 	filterSelectedTag: {
 		type: "array",
 		default: []
@@ -2722,6 +2726,18 @@ const attributes = {
 	filterSelectedTagLabel: {
 		type: "array",
 		default: []
+	},
+	filterSelectedTagCount: {
+		type: "array",
+		default: []
+	},
+	filterAllPostsCount: {
+		type: "array",
+		default: []
+	},
+	filerselectedCountSwitcher: {
+		type: "boolean",
+		default: false
 	},
 	/** End Filter By Taxonomy */
 };
