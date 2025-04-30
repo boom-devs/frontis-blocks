@@ -216,6 +216,26 @@ final class Plugin
 		wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', [
 			'site_url' => site_url()
 		]);
+		wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
+			'permalink' => get_permalink(),
+			'title' => get_the_title(),
+			'network_labels' => [
+				'facebook' => 'Facebook',
+				'twitter' => 'Twitter',
+				'linkedin' => 'LinkedIn',
+				'whatsapp' => 'WhatsApp',
+				'pinterest' => 'Pinterest',
+				'reddit' => 'Reddit',
+			],
+			'share_urls' => [
+				'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
+				'twitter' => 'https://twitter.com/intent/tweet?url=',
+				'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
+				'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
+				'reddit' => 'https://reddit.com/submit?url=',
+				'whatsapp' => 'https://wa.me/?text=',
+			]
+		]);
 	}
 
 	public function enqueue_editor_scripts()
