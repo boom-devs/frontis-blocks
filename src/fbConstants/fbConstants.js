@@ -1113,4 +1113,6 @@ export const FONT_FAMILYS = [
     { label: __("Zhi Mang Xing", "frontis-blocks"), value: "Zhi Mang Xing" },
     { label: __("Zilla Slab Highlight", "frontis-blocks"), value: "Zilla Slab Highlight" },
     { label: __("Radio Canada Big", "frontis-blocks"), value: "Radio Canada Big" },
+    { label: __("Manrope", "frontis-blocks"), value: "Manrope" },
+    { label: __("Onest", "frontis-blocks"), value: "Onest" },
 ];

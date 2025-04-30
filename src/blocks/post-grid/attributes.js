@@ -2213,9 +2213,29 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
+	loadMoreType: {
+		type: "string",
+		default: "button"
+	},
 	loadMoreText: {
 		type: "string",
 		default: "Load More"
+	},
+	prevTxt: {
+		type: "string",
+		default: ""
+	},
+	prevTxtIcon: {
+		type: "string",
+		default: ""
+	},
+	nextTxt: {
+		type: "string",
+		default: ""
+	},
+	nextTxtIcon: {
+		type: "string",
+		default: ""
 	},
 	loadMoreIconAlign: {
         type: "string",
