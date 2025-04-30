@@ -1072,7 +1072,7 @@ const TypographySettings = (props) => {
 												>
 													<NavigatorScreen path={`/${item}`}>
 														<NavigatorBackButton className="fb-global-back">
-														<span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> {typographyElements[item]}
+														<span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"></path></svg></span> {typographyElements[item]}
 														</NavigatorBackButton>
 														{/*<p className="note">Typography Controls for <strong>{item}</strong></p>*/}
 

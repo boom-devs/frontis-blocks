@@ -562,6 +562,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         filterSelectedCatLabel,
         filterSelectedTag,
         filterSelectedTagLabel,
+        filerselectedCountSwitcher,
 
         /** End Filter By Taxonomy */
 	} = attributes;
@@ -575,6 +576,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+
+    useEffect(() => {
+        setAttributes({ postPerPage: postPerPage === 0 ? undefined : postPerPage });
+    }, [postPerPage]);
 
 
     /** Start post type */
@@ -730,7 +736,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End author */
 
     /** Start sort order */
-    const [selectedSortOrder, setSelectedSortOrder] = useState({ value: 'desc', label: 'DESC' });
+    const [selectedSortOrder, setSelectedSortOrder] = useState(() => {
+        return attributes.sortOrder === 'asc' 
+            ? { value: 'asc', label: 'ASC' } 
+            : { value: 'desc', label: 'DESC' };
+    });
     /** End sort order */
 
     const handleSortOrderChange = (option) => {
@@ -739,7 +749,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Start order by */
-    const [selectedOrderBy, setSelectedOrderBy] = useState({ value: 'date', label: 'Date' });
+    const [selectedOrderBy, setSelectedOrderBy] = useState(() => {
+        switch (attributes.orderBy) {
+            case 'author':
+                return { value: 'author', label: 'Author' };
+            case 'title':
+                return { value: 'title', label: 'Title' };
+            case 'modified':
+                return { value: 'modified', label: 'Last Modified' };
+            case 'date':
+            default:
+                return { value: 'date', label: 'Date' };
+        }
+    });
 
     const handleOrderByChange = (option) => {
         setSelectedOrderBy(option);
@@ -4550,10 +4572,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 >
                                                     <Select2 
                                                         options={[
-                                                           {value: "date", label: "Date"},
-                                                            {value: "author", label: "Author"},
-                                                            {value: "title", label: "Title"},
-                                                            {value: "modified", label: "Last Modified"}
+                                                            { value: "date", label: "Date" },
+                                                            { value: "author", label: "Author" },
+                                                            { value: "title", label: "Title" },
+                                                            { value: "modified", label: "Last Modified" }
                                                         ]}
                                                         value={selectedOrderBy}
                                                         onChange={handleOrderByChange}
@@ -4568,8 +4590,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 >
                                                     <Select2 
                                                         options={[
-                                                           {value: "asc", label: "ASC"},
-                                                            {value: "desc", label: "DESC"}
+                                                            { value: "asc", label: "ASC" },
+                                                            { value: "desc", label: "DESC" }
                                                         ]}
                                                         value={selectedSortOrder}
                                                         onChange={handleSortOrderChange}
@@ -4580,7 +4602,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <RangeControl
                                                     label={__("Post per page", "frontis-blocks")}
                                                     value={postPerPage}
-                                                    onChange={(value) => setAttributes({ postPerPage: value === 0 ? undefined : value })}
+                                                    onChange={(value) => setAttributes({ postPerPage: value })}
                                                     min={1}
                                                     max={100}
                                                     step={1}
@@ -4730,6 +4752,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                                     className="fb-select2-control"
                                                                 />
                                                             )}
+                                                            <ToggleControl
+                                                                label={__("Show Selected Count", "frontis-blocks")}
+                                                                checked={filerselectedCountSwitcher}
+                                                                onChange={(value) => setAttributes({ filerselectedCountSwitcher: value })}
+                                                            />
                                                             </BaseControl>
                                                         </>
 

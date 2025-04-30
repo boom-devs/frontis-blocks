@@ -57,13 +57,13 @@ $wrapper_attributes = get_block_wrapper_attributes(array('class' => 'fb-post-ban
                 <div class='fb-post-author-meta'>
                     <span class='fb-post-date'><?php echo $post_date; ?></span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M9.66536 7.10001H6.33203" stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M8 5.47333V8.80666" stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                        <path d="M9.66536 7.10001H6.33203" stroke="black" stroke-miterlimit="10" strokeLinecap="round"
+                            strokeLinejoin="round" />
+                        <path d="M8 5.47333V8.80666" stroke="black" stroke-miterlimit="10" strokeLinecap="round"
+                            strokeLinejoin="round" />
                         <path
                             d="M11.2148 1.33334H4.78818C3.36818 1.33334 2.21484 2.49334 2.21484 3.90668V13.3C2.21484 14.5 3.07484 15.0067 4.12818 14.4267L7.38151 12.62C7.72818 12.4267 8.28818 12.4267 8.62818 12.62L11.8815 14.4267C12.9348 15.0133 13.7948 14.5067 13.7948 13.3V3.90668C13.7882 2.49334 12.6348 1.33334 11.2148 1.33334Z"
-                            stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            stroke="black" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </div>
             </div>
