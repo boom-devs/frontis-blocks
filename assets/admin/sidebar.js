@@ -2126,9 +2126,9 @@ var TypographySettings = function TypographySettings(props) {
       }, /*#__PURE__*/React.createElement("path", {
         d: "M10.5 13.5L5.5 8.5L10.5 3.5",
         stroke: "currentcolor",
-        "strokeWidth": "1.2",
-        "strokeLinecap": "round",
-        "strokeLinejoin": "round"
+        strokeWidth: "1.2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
       }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
         fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
         deviceType: deviceType,

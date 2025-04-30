@@ -472,12 +472,12 @@ var Blocks = function Blocks() {
     cy: "8.625",
     r: "7.125",
     stroke: "#6A758E",
-    "strokeWidth": "1.5"
+    strokeWidth: "1.5"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M13.875 13.875L16.5 16.5",
     stroke: "#6A758E",
-    "strokeWidth": "1.5",
-    "strokeLinecap": "round"
+    strokeWidth: "1.5",
+    strokeLinecap: "round"
   })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
     id: "clip0_4834_1174"
   }, /*#__PURE__*/React.createElement("rect", {
