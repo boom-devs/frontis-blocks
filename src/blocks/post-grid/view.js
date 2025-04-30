@@ -295,6 +295,13 @@ document.addEventListener('DOMContentLoaded', function() {
         );
 	});
 
+	// Default Add active class in category
+	document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
+		if (item.getAttribute('data-category-id') === '0') {
+			item.classList.add('active');
+		}
+	});
+
 	const categoryItems = document.querySelectorAll('.fb_post_grid_filter_category');
 
 	categoryItems.forEach((item) => {
@@ -303,6 +310,11 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage = 1;
             filterPost.offset = 0;
 			
+			// Remove active class from all items
+			categoryItems.forEach(el => el.classList.remove('active'));
+
+			// Add active class to the clicked item
+			this.classList.add('active');
 
             // Update filterPost.category
             // filterPost.category = categoryId === '0' ? [] : [categoryId]; // "All" should reset filter
