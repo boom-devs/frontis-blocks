@@ -512,7 +512,6 @@ class Admin {
 
         $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
-var_dump($load_more_type);
         ob_start();
 
         // Initial query to select posts based on type and status
@@ -769,7 +768,7 @@ var_dump($load_more_type);
             if ( $total_pages > $current_page && $show_load_more_switcher === 'true' ) {  ?>
                 <div class="fb_load_more_wrapper" data-loadmore-type="<?php echo esc_attr( $load_more_type ); ?>">
             
-                    <?php if ( $load_more_type === 'button' ) : var_dump("Working three"); ?>
+                    <?php if ( $load_more_type === 'button' ) : ?>
                         <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
             
                     <?php elseif ( $load_more_type === 'pagination' ) : ?>
@@ -786,10 +785,10 @@ var_dump($load_more_type);
                             </button>
             
                             <!-- Page Numbers -->
-                            <?php for ( $i = 1; $i <= $total_pages; $i++ ) :
-                                $active = $i == $current_page ? "active" : ""; ?>
-                                <button class="fb_pagination_item <?php echo esc_attr( $active ); ?>" data-pagenumber="<?php echo esc_attr( $i ); ?>">
-                                    <?php echo esc_html( $i ); ?>
+                            <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
+                                $active = $page == $current_page ? "active" : ""; ?>
+                                <button class="fb_pagination_item <?php echo esc_attr( $active ); ?>" data-pagenumber="<?php echo esc_attr( $page ); ?>">
+                                    <?php echo esc_html( $page ); ?>
                                 </button>
                             <?php endfor; ?>
             
