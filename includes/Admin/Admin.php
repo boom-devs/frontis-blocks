@@ -512,7 +512,7 @@ class Admin {
 
         $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
-
+var_dump($load_more_type);
         ob_start();
 
         // Initial query to select posts based on type and status
@@ -766,10 +766,10 @@ class Admin {
             <?php endforeach;
 
            
-            if ( $total_pages > $current_page && $show_load_more_switcher === 'true' ) { ?>
+            if ( $total_pages > $current_page && $show_load_more_switcher === 'true' ) {  ?>
                 <div class="fb_load_more_wrapper" data-loadmore-type="<?php echo esc_attr( $load_more_type ); ?>">
             
-                    <?php if ( $load_more_type === 'button' ) : ?>
+                    <?php if ( $load_more_type === 'button' ) : var_dump("Working three"); ?>
                         <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
             
                     <?php elseif ( $load_more_type === 'pagination' ) : ?>
