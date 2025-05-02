@@ -2215,7 +2215,7 @@ const attributes = {
 	},
 	loadMoreType: {
 		type: "string",
-		default: "button"
+		default: "pagination"
 	},
 	loadMoreText: {
 		type: "string",
@@ -2227,7 +2227,7 @@ const attributes = {
 	},
 	prevTxtIcon: {
 		type: "string",
-		default: ""
+		default: "angle-left"
 	},
 	nextTxt: {
 		type: "string",
@@ -2235,7 +2235,7 @@ const attributes = {
 	},
 	nextTxtIcon: {
 		type: "string",
-		default: ""
+		default: "angle-right"
 	},
 	loadMoreIconAlign: {
         type: "string",
