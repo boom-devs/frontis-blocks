@@ -40,6 +40,11 @@ export default function save({ attributes }) {
 		loadMoreText,
 		loadMoreIcon,
 		loadMoreIconAlign,
+		loadMoreType,
+		prevTxt,
+		prevTxtIcon,
+		nextTxt,
+		nextTxtIcon,
 
 		postGridGlobalWraperID,
         postGridGlobalWraperClass,
@@ -109,6 +114,11 @@ export default function save({ attributes }) {
 				data-load-more-text={loadMoreText}
 				data-load-more-icon={loadMoreIcon}
 				data-load-more-icon-align={loadMoreIconAlign}
+				data-load-more-type={loadMoreType}
+				data-prev-text={prevTxt}
+				data-prev-icon={prevTxtIcon}
+				data-next-text={nextTxt}
+				data-next-icon={nextTxtIcon}
 				data-default-image-url={defaultImageUrl}
 
 				data-show-filter-by-taxonomy={showFilterByTaxonomy}

@@ -69,10 +69,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postImageSize = parentElement.getAttribute("data-post-image-size");
 
 				const showLoadMoreSwitcher = parentElement.getAttribute("data-show-load-more-switcher");
+				const loadMoreType = parentElement.getAttribute("data-load-more-type");
 				const loadMoreText = parentElement.getAttribute("data-load-more-text");
 				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
 				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
-
+				const prevTxt = parentElement.getAttribute("data-prev-text");
+				const prevTxtIcon = parentElement.getAttribute("data-prev-icon");
+				const nextTxt = parentElement.getAttribute("data-next-text");
+				const nextTxtIcon = parentElement.getAttribute("data-next-icon");
 				const defaultImageUrl = parentElement.getAttribute("data-default-image-url");
 
 				// Increase current page and update offset for the next batch of posts
@@ -108,8 +112,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postImageSize = postImageSize ? postImageSize : 'full';
 				
 				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
-
+				filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
 				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
+				filterPost.prevTxt = prevTxt ? prevTxt : '';
+				filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
+				filterPost.nextTxt = nextTxt ? nextTxt : '';
+				filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
 				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
@@ -117,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
 
 				if (loadMoreIconAlign === 'icon') {
 					document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
@@ -139,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		// filterPost.category = cat ? cat.split(',') : [];
@@ -174,9 +182,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
 
+		filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
 		filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
 		filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 		filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
+
+		filterPost.prevTxt = prevTxt ? prevTxt : '';
+		filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
+		filterPost.nextTxt = nextTxt ? nextTxt : '';
+		filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
 
 		filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
 
@@ -288,11 +302,23 @@ document.addEventListener('DOMContentLoaded', function() {
             block.getAttribute('data-post-author-avatar-switcher'),
             block.getAttribute('data-post-image-size'),
             block.getAttribute('data-show-load-more-switcher'),
+			block.getAttribute('data-load-more-type'),
+			block.getAttribute('data-prev-text'),
+			block.getAttribute('data-prev-icon'),
+			block.getAttribute('data-next-text'),
+			block.getAttribute('data-next-icon'),
             block.getAttribute('data-load-more-text'),
             block.getAttribute('data-load-more-icon'),
             block.getAttribute('data-load-more-icon-align'),
             block.getAttribute('data-default-image-url')
         );
+	});
+
+	// Default Add active class in category
+	document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
+		if (item.getAttribute('data-category-id') === '0') {
+			item.classList.add('active');
+		}
 	});
 
 	const categoryItems = document.querySelectorAll('.fb_post_grid_filter_category');
@@ -303,6 +329,11 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage = 1;
             filterPost.offset = 0;
 			
+			// Remove active class from all items
+			categoryItems.forEach(el => el.classList.remove('active'));
+
+			// Add active class to the clicked item
+			this.classList.add('active');
 
             // Update filterPost.category
             // filterPost.category = categoryId === '0' ? [] : [categoryId]; // "All" should reset filter
@@ -359,6 +390,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreText = parentBlock.getAttribute('data-load-more-text');
                 const loadMoreIcon = parentBlock.getAttribute('data-load-more-icon');
                 const loadMoreIconAlign = parentBlock.getAttribute('data-load-more-icon-align');
+				const loadMoreType = parentBlock.getAttribute('data-load-more-type');
+				const prevTxt = parentBlock.getAttribute('data-prev-text');
+				const prevTxtIcon = parentBlock.getAttribute('data-prev-icon');
+				const nextTxt = parentBlock.getAttribute('data-next-text');
+				const nextTxtIcon = parentBlock.getAttribute('data-next-icon');
                 const defaultImageUrl = parentBlock.getAttribute('data-default-image-url');
 
                 // Clear previous posts
@@ -396,6 +432,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadMoreText,
                     loadMoreIcon,
                     loadMoreIconAlign,
+					loadMoreType,
+					prevTxt,
+					prevTxtIcon,
+					nextTxt,
+					nextTxtIcon,
                     defaultImageUrl
                 );
 			}
