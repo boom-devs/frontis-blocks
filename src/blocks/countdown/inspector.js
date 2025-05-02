@@ -2849,7 +2849,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												<FB_Range
 													min={1}
 													max={4}
-													label={__("Item Gap", "frontis-blocks")}
+													label={__("Column Number", "frontis-blocks")}
 													rangeValue={countDownGrid}
 													onChangeHandler={(value) => setAttributes({ countDownGrid: value })}
 													deviceType={deviceType}

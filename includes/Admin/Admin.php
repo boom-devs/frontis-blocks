@@ -501,8 +501,16 @@ class Admin {
 
         $show_load_more_switcher = isset($_POST['showLoadMoreSwitcher']) ? $_POST['showLoadMoreSwitcher'] : true;
 
-        $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
+        $load_more_type       = isset( $_POST['loadMoreType'] ) ? sanitize_text_field( $_POST['loadMoreType'] ) : 'button';
 
+        $prev_txt            = isset( $_POST['prevTxt'] ) ? sanitize_text_field( $_POST['prevTxt'] ) : '';
+        $prev_txt_icon        = isset( $_POST['prevTxtIcon'] ) ? wp_kses_post( $_POST['prevTxtIcon'] ) : '';
+
+        $next_txt            = isset( $_POST['nextTxt'] ) ? sanitize_text_field( $_POST['nextTxt'] ) : '';
+        $next_txt_icon        = isset( $_POST['nextTxtIcon'] ) ? wp_kses_post( $_POST['nextTxtIcon'] ) : '';
+
+
+        $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
         ob_start();
 
@@ -756,9 +764,47 @@ class Admin {
                 </div>
             <?php endforeach;
 
-            if ($total_pages > $current_page && $show_load_more_switcher == 'true') { ?>
-                <div class="fb_load_more_wrapper">
-                    <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
+           
+            if ( $total_pages > $current_page && $show_load_more_switcher === 'true' ) {  ?>
+                <div class="fb_load_more_wrapper" data-loadmore-type="<?php echo esc_attr( $load_more_type ); ?>">
+            
+                    <?php if ( $load_more_type === 'button' ) : ?>
+                        <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
+            
+                    <?php elseif ( $load_more_type === 'pagination' ) : ?>
+                        <div class="fb_pagination_wrapper" data-current_page="<?php echo esc_attr( $current_page ); ?>" data-total_pages="<?php echo esc_attr( $total_pages ); ?>">
+            
+                            <!-- Previous Button -->
+                            <button class="fb_pagination_item_previous">
+                                <?php if ( !empty( $prev_txt_icon ) ) : ?>
+                                    <span class="icon"><?php echo $prev_txt_icon; ?></span>
+                                <?php endif; ?>
+                                <?php if ( !empty( $prev_txt ) ) : ?>
+                                    <span class="text"><?php echo esc_html( $prev_txt ); ?></span>
+                                <?php endif; ?>
+                            </button>
+            
+                            <!-- Page Numbers -->
+                            <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
+                                $active = $page == $current_page ? "active" : ""; ?>
+                                <button class="fb_pagination_item <?php echo esc_attr( $active ); ?>" data-pagenumber="<?php echo esc_attr( $page ); ?>">
+                                    <?php echo esc_html( $page ); ?>
+                                </button>
+                            <?php endfor; ?>
+            
+                            <!-- Next Button -->
+                            <button class="fb_pagination_item_next">
+                                <?php if ( !empty( $next_txt_icon ) ) : ?>
+                                    <span class="icon"><?php echo $next_txt_icon; ?></span>
+                                <?php endif; ?>
+                                <?php if ( !empty( $next_txt ) ) : ?>
+                                    <span class="text"><?php echo esc_html( $next_txt ); ?></span>
+                                <?php endif; ?>
+                            </button>
+            
+                        </div>
+                    <?php endif; ?>
+            
                 </div>
             <?php }
         } else { ?>
