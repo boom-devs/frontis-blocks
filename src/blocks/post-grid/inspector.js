@@ -20,7 +20,9 @@ import {
     POST_SWITCHER, 
     ICON_ALIGN, 
     OVERFLOW_OP,
-    TAXONOMY_OPTIONS
+    TAXONOMY_OPTIONS,
+    PAGINATION_TYPE,
+    PAGINATION_PREV_NEXT_TYPE
 } from './constants/constants';
 
 /**
@@ -565,6 +567,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         filerselectedCountSwitcher,
 
         /** End Filter By Taxonomy */
+
+
+        /** Start Load More */
+        loadMoreType,
+        paginationPrevNextType,
+        paginationPrevTxt,
+        paginationPrevIcon, 
+        paginationNextTxt,
+        paginationNextIcon,
+        /** End Load More */
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -2857,6 +2869,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({loadMoreIcon: IconName})
 	}
 
+    const prevIconHandler = (IconName) => {
+		setAttributes({paginationPrevIcon: IconName})
+	}
+
+    const nextIconHandler = (IconName) => {
+		setAttributes({paginationNextIcon: IconName})
+	}
+
 
     const allBlockStyle = useMemo(() => `
 
@@ -4765,36 +4785,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             </PanelBody>  
                                             {loadMoreSwitcher && (
                                                 <PanelBody
-                                                    title={__("Load More Button", "frontis-blocks")}
+                                                    title={__("Pagination", "frontis-blocks")}
                                                     initialOpen={false}
                                                 >
-                                                    <TextControl
-                                                        label={__("Load More Text", "frontis-blocks")}
-                                                        value={loadMoreText}
-                                                        onChange={(value) => setAttributes({ loadMoreText: value })}
+                                                    <SelectControl
+                                                        label={__("Pagination Type", "frontis-blocks")}
+                                                        value={loadMoreType}
+                                                        options={PAGINATION_TYPE}
+                                                        onChange={(value) => setAttributes({ loadMoreType: value })}
                                                     />
-                                                    <BaseControl
-                                                        label={__("Icon", "frontis-blocks")}
-                                                            id="fb-setting-text-alignment"
-                                                            className="fb-setting-text-alignment"
-                                                    >
-                                                        <ButtonGroup
-                                                            className="fb-setting-text-alignment-group-btn"
-                                                        >
-                                                            {ICON_ALIGN.map((item, key) => (
-                                                                <Button
-                                                                    key={key}
-                                                                    onClick={() => setAttributes({ loadMoreIconAlign: item.value })}
-                                                                    className={`fb-setting-text-alignment-single-btn ${loadMoreIconAlign === item.value ? 'active' : ''}`}
+                                                    {loadMoreType === 'button' && (
+                                                        <>
+                                                            <TextControl
+                                                                label={__("Load More Text", "frontis-blocks")}
+                                                                value={loadMoreText}
+                                                                onChange={(value) => setAttributes({ loadMoreText: value })}
+                                                            />
+                                                            <BaseControl
+                                                                label={__("Icon", "frontis-blocks")}
+                                                                    id="fb-setting-text-alignment"
+                                                                    className="fb-setting-text-alignment"
+                                                            >
+                                                                <ButtonGroup
+                                                                    className="fb-setting-text-alignment-group-btn"
                                                                 >
-                                                                    {item.label}
-                                                                </Button>
-                                                            ))}
-                                                        </ButtonGroup>
-                                                        {(loadMoreIconAlign === 'icon') && (
-                                                            <FBIconPicker value={loadMoreIcon} setIconHandler={iconHandler} /> 
-                                                        )}
-                                                    </BaseControl>
+                                                                    {ICON_ALIGN.map((item, key) => (
+                                                                        <Button
+                                                                            key={key}
+                                                                            onClick={() => setAttributes({ loadMoreIconAlign: item.value })}
+                                                                            className={`fb-setting-text-alignment-single-btn ${loadMoreIconAlign === item.value ? 'active' : ''}`}
+                                                                        >
+                                                                            {item.label}
+                                                                        </Button>
+                                                                    ))}
+                                                                </ButtonGroup>
+                                                                {(loadMoreIconAlign === 'icon') && (
+                                                                    <FBIconPicker value={loadMoreIcon} setIconHandler={iconHandler} /> 
+                                                                )}
+                                                            </BaseControl>
+                                                        </>
+                                                    )}
+
+                                                    {loadMoreType === 'pagination' && (
+                                                        <>
+                                                            <SelectControl
+                                                                label={__("Type", "frontis-blocks")}
+                                                                value={paginationPrevNextType}
+                                                                options={PAGINATION_PREV_NEXT_TYPE}
+                                                                onChange={(value) => setAttributes({ paginationPrevNextType: value })}
+                                                            />
+
+                                                            {paginationPrevNextType === 'text' && (
+                                                                <>
+                                                                    <TextControl
+                                                                        label={__("Prev Text", "frontis-blocks")}
+                                                                        value={paginationPrevTxt}
+                                                                        onChange={(value) => setAttributes({ paginationPrevTxt: value })}
+                                                                    />
+                                                                    <TextControl
+                                                                        label={__("Next Text", "frontis-blocks")}
+                                                                        value={paginationNextTxt}
+                                                                        onChange={(value) => setAttributes({ paginationNextTxt: value })}
+                                                                    />
+                                                                </>
+                                                            )}
+
+                                                            {paginationPrevNextType === 'icon' && (
+                                                                <>
+                                                                    <BaseControl
+                                                                        label={__("Prev Icon", "frontis-blocks")}
+                                                                    >
+                                                                        <FBIconPicker value={paginationPrevIcon} setIconHandler={prevIconHandler} />
+                                                                    </BaseControl>
+
+                                                            
+                                                                    <BaseControl
+                                                                        label={__("Next Icon", "frontis-blocks")}
+                                                                    >
+                                                                        <FBIconPicker value={paginationNextIcon} setIconHandler={nextIconHandler} />
+                                                                    </BaseControl>
+                                                                </>
+                                                            )}
+                                                        </>
+                                                    )}
+
                                                 </PanelBody>
                                             )}  
                                         </div>

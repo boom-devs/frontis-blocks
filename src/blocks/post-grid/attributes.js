@@ -2215,28 +2215,35 @@ const attributes = {
 	},
 	loadMoreType: {
 		type: "string",
-		default: "pagination"
+		default: "button"
 	},
 	loadMoreText: {
 		type: "string",
 		default: "Load More"
 	},
-	prevTxt: {
+
+	paginationPrevNextType: {
 		type: "string",
-		default: ""
+		default: "icon"
 	},
-	prevTxtIcon: {
+
+	paginationPrevTxt: {
+		type: "string",
+		default: "Prev"
+	},
+	paginationPrevIcon: {
 		type: "string",
 		default: "angle-left"
 	},
-	nextTxt: {
+	paginationNextTxt: {
 		type: "string",
-		default: ""
+		default: "Next"
 	},
-	nextTxtIcon: {
+	paginationNextIcon: {
 		type: "string",
 		default: "angle-right"
 	},
+
 	loadMoreIconAlign: {
         type: "string",
         default: "none",

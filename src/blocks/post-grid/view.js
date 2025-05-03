@@ -73,10 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				const loadMoreText = parentElement.getAttribute("data-load-more-text");
 				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
 				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
-				const prevTxt = parentElement.getAttribute("data-prev-text");
-				const prevTxtIcon = parentElement.getAttribute("data-prev-icon");
-				const nextTxt = parentElement.getAttribute("data-next-text");
-				const nextTxtIcon = parentElement.getAttribute("data-next-icon");
+				const paginationPrevNextType = parentElement.getAttribute("data-pagination-prev-next-type");
+				const paginationPrevTxt = parentElement.getAttribute("data-pagination-prev-text");
+				const paginationPrevIcon = parentElement.getAttribute("data-pagination-prev-icon");
+				const paginationNextTxt = parentElement.getAttribute("data-pagination-next-text");
+				const paginationNextIcon = parentElement.getAttribute("data-pagination-next-icon");
 				const defaultImageUrl = parentElement.getAttribute("data-default-image-url");
 
 				// Increase current page and update offset for the next batch of posts
@@ -114,10 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
 				filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
 				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
-				filterPost.prevTxt = prevTxt ? prevTxt : '';
-				filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
-				filterPost.nextTxt = nextTxt ? nextTxt : '';
-				filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
+				filterPost.paginationPrevNextType = paginationPrevNextType ? paginationPrevNextType : 'icon';
+				filterPost.paginationPrevTxt = paginationPrevTxt ? paginationPrevTxt : '';
+				filterPost.paginationPrevIcon = paginationPrevIcon ? paginationPrevIcon : '';
+				filterPost.paginationNextTxt = paginationNextTxt ? paginationNextTxt : '';
+				filterPost.paginationNextIcon = paginationNextIcon ? paginationNextIcon : '';
 				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
+				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, paginationPrevNextType, paginationPrevTxt, paginationPrevIcon, paginationNextTxt, paginationNextIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
 
 				if (loadMoreIconAlign === 'icon') {
 					document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
@@ -147,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
+	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, paginationPrevNextType, paginationPrevTxt, paginationPrevIcon, paginationNextTxt, paginationNextIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
 		filterPost.post_type = postType;
 		filterPost.block_id = blockId;
 		// filterPost.category = cat ? cat.split(',') : [];
@@ -187,10 +189,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 		filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
-		filterPost.prevTxt = prevTxt ? prevTxt : '';
-		filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
-		filterPost.nextTxt = nextTxt ? nextTxt : '';
-		filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
+		filterPost.paginationPrevNextType = paginationPrevNextType ? paginationPrevNextType : 'icon';
+		filterPost.paginationPrevTxt = paginationPrevTxt ? paginationPrevTxt : '';
+		filterPost.paginationPrevIcon = paginationPrevIcon ? paginationPrevIcon : ''; 
+		filterPost.paginationNextTxt = paginationNextTxt ? paginationNextTxt : '';
+		filterPost.paginationNextIcon = paginationNextIcon ? paginationNextIcon : '';
 
 		filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
 
@@ -389,10 +392,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreIcon = parentBlock.getAttribute('data-load-more-icon');
                 const loadMoreIconAlign = parentBlock.getAttribute('data-load-more-icon-align');
 				const loadMoreType = parentBlock.getAttribute('data-load-more-type');
-				const prevTxt = parentBlock.getAttribute('data-prev-text');
-				const prevTxtIcon = parentBlock.getAttribute('data-prev-icon');
-				const nextTxt = parentBlock.getAttribute('data-next-text');
-				const nextTxtIcon = parentBlock.getAttribute('data-next-icon');
+				const paginationPrevNextType = parentBlock.getAttribute('data-pagination-prev-next-type');
+				const paginationPrevTxt = parentBlock.getAttribute('data-pagination-prev-text');
+				const paginationPrevIcon = parentBlock.getAttribute('data-pagination-prev-icon');
+				const paginationNextTxt = parentBlock.getAttribute('data-pagination-next-text');
+				const paginationNextIcon = parentBlock.getAttribute('data-pagination-next-icon');
                 const defaultImageUrl = parentBlock.getAttribute('data-default-image-url');
 
                 // Clear previous posts
@@ -431,10 +435,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadMoreIcon,
                     loadMoreIconAlign,
 					loadMoreType,
-					prevTxt,
-					prevTxtIcon,
-					nextTxt,
-					nextTxtIcon,
+					paginationPrevNextType,
+					paginationPrevTxt,
+					paginationPrevIcon,
+					paginationNextTxt,
+					paginationNextIcon,
                     defaultImageUrl
                 );
 			}
@@ -489,10 +494,11 @@ document.addEventListener('DOMContentLoaded', function() {
 			loadMoreText         : grid.getAttribute('data-load-more-text') || 'Load More',
 			loadMoreIcon         : grid.getAttribute('data-load-more-icon') || 'angle-right',
 			loadMoreIconAlign    : grid.getAttribute('data-load-more-icon-align') || 'none',
-			prevTxt              : grid.getAttribute('data-prev-text') || '',
-			prevTxtIcon          : grid.getAttribute('data-prev-icon') || '',
-			nextTxt              : grid.getAttribute('data-next-text') || '',
-			nextTxtIcon          : grid.getAttribute('data-next-icon') || '',
+			paginationPrevNextType: grid.getAttribute('data-pagination-prev-next-type') || 'icon',
+			paginationPrevTxt    : grid.getAttribute('data-pagination-prev-text') || '',
+			paginationPrevIcon: grid.getAttribute('data-pagination-prev-icon') || '',
+			paginationNextTxt    : grid.getAttribute('data-pagination-next-text') || '',
+			paginationNextIcon: grid.getAttribute('data-pagination-next-icon') || '',
 			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
 			block_id             : grid.getAttribute('data-block-id')
 		};

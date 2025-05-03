@@ -41,10 +41,11 @@ export default function save({ attributes }) {
 		loadMoreIcon,
 		loadMoreIconAlign,
 		loadMoreType,
-		prevTxt,
-		prevTxtIcon,
-		nextTxt,
-		nextTxtIcon,
+		paginationPrevNextType,
+		paginationPrevTxt,
+		paginationPrevIcon,
+		paginationNextTxt,
+		paginationNextIcon,
 
 		postGridGlobalWraperID,
         postGridGlobalWraperClass,
@@ -115,10 +116,11 @@ export default function save({ attributes }) {
 				data-load-more-icon={loadMoreIcon}
 				data-load-more-icon-align={loadMoreIconAlign}
 				data-load-more-type={loadMoreType}
-				data-prev-text={prevTxt}
-				data-prev-icon={prevTxtIcon}
-				data-next-text={nextTxt}
-				data-next-icon={nextTxtIcon}
+				data-pagination-prev-next-type={paginationPrevNextType}
+				data-pagination-prev-text={paginationPrevTxt}
+				data-pagination-prev-icon={paginationPrevIcon}
+				data-pagination-next-text={paginationNextTxt}
+				data-pagination-next-icon={paginationNextIcon}
 				data-default-image-url={defaultImageUrl}
 
 				data-show-filter-by-taxonomy={showFilterByTaxonomy}
