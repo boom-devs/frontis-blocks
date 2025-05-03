@@ -765,7 +765,7 @@ class Admin {
             <?php endforeach;
 
            
-            if ( $total_pages > $current_page && $show_load_more_switcher === 'true' ) {  ?>
+            if ( $total_pages > 1 && $show_load_more_switcher === 'true' ) {  ?>
                 <div class="fb_load_more_wrapper" data-loadmore-type="<?php echo esc_attr( $load_more_type ); ?>">
             
                     <?php if ( $load_more_type === 'button' ) : ?>
@@ -775,7 +775,7 @@ class Admin {
                         <div class="fb_pagination_wrapper" data-current_page="<?php echo esc_attr( $current_page ); ?>" data-total_pages="<?php echo esc_attr( $total_pages ); ?>">
             
                             <!-- Previous Button -->
-                            <button class="fb_pagination_item_previous">
+                            <button class="fb_pagination_item_previous <?php echo $current_page==1 ? 'disabled' : ''; ?>">
                                 <?php if ( !empty( $prev_txt_icon ) ) : ?>
                                     <span class="icon"><?php echo $prev_txt_icon; ?></span>
                                 <?php endif; ?>
@@ -793,7 +793,7 @@ class Admin {
                             <?php endfor; ?>
             
                             <!-- Next Button -->
-                            <button class="fb_pagination_item_next">
+                            <button class="fb_pagination_item_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
                                 <?php if ( !empty( $next_txt_icon ) ) : ?>
                                     <span class="icon"><?php echo $next_txt_icon; ?></span>
                                 <?php endif; ?>

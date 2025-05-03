@@ -352,8 +352,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.category = [categoryId];
 			}
 
-			console.log('categoryId', categoryId);
-			console.log('categorycat', filterPost.category);
 
             const parentBlock = this.closest('.wp-block-frontis-blocks-post-grid');
 
@@ -441,6 +439,137 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
 			}
 		});
+	});
+
+
+
+
+
+
+
+
+
+	// let currentPage   = 1;      // আলাদা করে রাখলাম, যাতে প্রতিটি গ্রিডের context-এ আপডেট করা যায়
+	let totalPages    = 1;
+	let currentGrid   = null;   // যে গ্রিডে ক্লিক হয়েছে সেটাকে ট্র্যাক করি
+
+	/**
+	 * গ্রিড থেকে ফিল্টার অবজেক্ট বানিয়ে নেয়
+	 */
+	const buildFilterFromGrid = (grid, page = 1) => {
+		const limit = parseInt(grid.getAttribute('data-perpage') || 12, 10);
+		return {
+			offset        : limit * (page - 1),
+			limit         : limit,
+			post_type     : grid.getAttribute('data-post-type') || 'post',
+			currentPage   : page,
+			category      : (grid.getAttribute('data-cat')   || '').split(',').filter(id => id && id !== '0'),
+			post_tag      : (grid.getAttribute('data-tag')   || '').split(',').filter(Boolean),
+			post_author   : (grid.getAttribute('data-author')|| '').split(',').filter(Boolean),
+			deauthor      : (grid.getAttribute('data-deauthor')|| '').split(',').filter(Boolean),
+			detag         : (grid.getAttribute('data-detag') || '').split(',').filter(Boolean),
+			decategory    : (grid.getAttribute('data-decat') || '').split(',').filter(Boolean),
+			orderby       : (grid.getAttribute('data-orderby')|| 'date'),
+			sortorder     : (grid.getAttribute('data-sortorder')|| 'desc'),
+			// 👉 কন্টেন্ট-সংক্রান্ত সুইচারগুলো (প্রয়োজনে বাইরে থেকে পাস করো)
+			postTitleTag  : grid.getAttribute('data-post-title-tag')         || 'h3',
+			postDescriptionTag : grid.getAttribute('data-post-description-tag') || 'p',
+			postDescriptionExcerptLength : grid.getAttribute('data-post-description-excerpt-length') || 10,
+			showExcerptSwitcher  : grid.getAttribute('data-show-excerpt-switcher')   || true,
+			showAuthorSwitcher   : grid.getAttribute('data-show-author-switcher')    || false,
+			showCategorySwitcher : grid.getAttribute('data-show-category-switcher')  || false,
+			showTagSwitcher      : grid.getAttribute('data-show-tag-switcher')       || false,
+			postAuthorPrefixSwitcher : grid.getAttribute('data-post-author-prefix-switcher') || false,
+			postAuthorPrefix     : grid.getAttribute('data-post-author-prefix') || 'Posted By',
+			showDateSwitcher     : grid.getAttribute('data-show-date-switcher')      || true,
+			postAuthorAvatarSwitcher : grid.getAttribute('data-post-author-avatar-switcher') || false,
+			postImageSize        : grid.getAttribute('data-post-image-size') || 'full',
+			showLoadMoreSwitcher : grid.getAttribute('data-show-load-more-switcher') || true,
+			loadMoreType         : grid.getAttribute('data-load-more-type') || 'pagination',
+			loadMoreText         : grid.getAttribute('data-load-more-text') || 'Load More',
+			loadMoreIcon         : grid.getAttribute('data-load-more-icon') || 'angle-right',
+			loadMoreIconAlign    : grid.getAttribute('data-load-more-icon-align') || 'none',
+			prevTxt              : grid.getAttribute('data-prev-text') || '',
+			prevTxtIcon          : grid.getAttribute('data-prev-icon') || '',
+			nextTxt              : grid.getAttribute('data-next-text') || '',
+			nextTxtIcon          : grid.getAttribute('data-next-icon') || '',
+			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
+			block_id             : grid.getAttribute('data-block-id')
+		};
+	};
+
+	/**
+	 * AJAX-এ পোস্ট রিকোয়েস্ট করে কনটেন্ট রিফ্রেশ/অ্যাপেন্ড করে
+	 */
+	const fetchPage = (grid, page) => {
+		const filterPost = buildFilterFromGrid(grid, page);
+		const formData   = new FormData();
+		for (const key in filterPost) {
+			if (filterPost[key] !== '' && filterPost[key] !== null) {
+				// array হলে কমা-সেপারেটেড স্ট্রিং
+				formData.append(key, Array.isArray(filterPost[key]) ? filterPost[key].join(',') : filterPost[key]);
+			}
+		}
+
+		const listEl = grid.querySelector('.fb_post_grid_container');
+		listEl.classList.add('fb_is_loading');  // ছোট্ট লোডার ক্লাস
+
+		fetch(`${FrontisBlocksData.site_url}/wp-json/wp/v2/frontis-blocks/post`, {
+			method : 'POST',
+			body   : formData
+		})
+		.then(r => r.json())
+		.then(({data}) => {
+			// 👉 pagination-এ আমরা পুরোটাই **replace** করি
+			listEl.innerHTML = data.content;
+
+			// নতুন pagination wrapper ধরে রাখি
+			const pagWrap  = listEl.querySelector('.fb_pagination_wrapper');
+			if (pagWrap) {
+				pagWrap.dataset.current_page = data.current_page;
+				pagWrap.dataset.total_pages  = data.total_pages;
+			}
+
+			currentPage = data.current_page;
+			totalPages  = data.total_pages;
+			listEl.classList.remove('fb_is_loading');
+		})
+		.catch(err => {
+			console.error('Pagination fetch error:', err);
+			listEl.classList.remove('fb_is_loading');
+		});
+	};
+
+	/**
+	 * Pagination-এর বাটন ক্লিক হ্যান্ডলার
+	 */
+	document.body.addEventListener('click', e => {
+		const pageBtn = e.target.closest('.fb_pagination_item');
+		const prevBtn = e.target.closest('.fb_pagination_item_previous');
+		const nextBtn = e.target.closest('.fb_pagination_item_next');
+
+		if (!pageBtn && !prevBtn && !nextBtn) return; // pagination ছাড়া অন্য কিছু
+
+		e.preventDefault();
+		currentGrid = e.target.closest('.wp-block-frontis-blocks-post-grid');
+		if (!currentGrid) return;
+
+		const pagWrapper = currentGrid.querySelector('.fb_pagination_wrapper');
+		if (!pagWrapper) return;
+
+		currentPage = parseInt(pagWrapper.dataset.current_page, 10) || 1;
+		totalPages  = parseInt(pagWrapper.dataset.total_pages, 10) || 1;
+
+		if (pageBtn) {
+			currentPage = parseInt(pageBtn.dataset.pagenumber, 10);
+		} else if (prevBtn) {
+			currentPage = Math.max(1, currentPage - 1);
+		} else if (nextBtn) {
+			currentPage = Math.min(totalPages, currentPage + 1);
+		}
+
+		// AJAX-এ নতুন পেজ নিয়ে আসি
+		fetchPage(currentGrid, currentPage);
 	});
 
 
