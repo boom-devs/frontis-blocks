@@ -503,14 +503,20 @@ class Admin {
 
         $load_more_type       = isset( $_POST['loadMoreType'] ) ? sanitize_text_field( $_POST['loadMoreType'] ) : 'button';
 
-        $prev_txt            = isset( $_POST['prevTxt'] ) ? sanitize_text_field( $_POST['prevTxt'] ) : '';
-        $prev_txt_icon        = isset( $_POST['prevTxtIcon'] ) ? wp_kses_post( $_POST['prevTxtIcon'] ) : '';
+        $pagination_prev_next_type = isset($_POST['paginationPrevNextType']) ? $_POST['paginationPrevNextType'] : 'icon';
 
-        $next_txt            = isset( $_POST['nextTxt'] ) ? sanitize_text_field( $_POST['nextTxt'] ) : '';
-        $next_txt_icon        = isset( $_POST['nextTxtIcon'] ) ? wp_kses_post( $_POST['nextTxtIcon'] ) : '';
+        $prev_txt            = isset( $_POST['paginationPrevTxt'] ) ? sanitize_text_field( $_POST['paginationPrevTxt'] ) : ''; 
+        $prev_icon        = isset( $_POST['paginationPrevIcon'] ) ? wp_kses_post( $_POST['paginationPrevIcon'] ) : '';
+
+        $next_txt            = isset( $_POST['paginationNextTxt'] ) ? sanitize_text_field( $_POST['paginationNextTxt'] ) : '';
+        $next_icon        = isset( $_POST['paginationNextIcon'] ) ? wp_kses_post( $_POST['paginationNextIcon'] ) : '';
 
 
         $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
+
+
+        var_dump($pagination_prev_next_type);
+        die();
 
         ob_start();
 
@@ -776,11 +782,16 @@ class Admin {
             
                             <!-- Previous Button -->
                             <button class="fb_pagination_item_previous <?php echo $current_page==1 ? 'disabled' : ''; ?>">
-                                <?php if ( !empty( $prev_txt_icon ) ) : ?>
-                                    <span class="icon"><?php echo $prev_txt_icon; ?></span>
+
+                                <?php if ( $pagination_prev_next_type === 'icon' ) : ?>
+                                    <?php if ( !empty( $prev_icon ) ) : ?>
+                                        <span class="icon"><?php echo $prev_icon; ?></span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ( !empty( $prev_txt ) ) : ?>
-                                    <span class="text"><?php echo esc_html( $prev_txt ); ?></span>
+                                <?php if ( $pagination_prev_next_type === 'text' ) : ?>
+                                    <?php if ( !empty( $prev_txt ) ) : ?>
+                                        <span class="text"><?php echo esc_html( $prev_txt ); ?></span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </button>
             
@@ -794,11 +805,16 @@ class Admin {
             
                             <!-- Next Button -->
                             <button class="fb_pagination_item_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
-                                <?php if ( !empty( $next_txt_icon ) ) : ?>
-                                    <span class="icon"><?php echo $next_txt_icon; ?></span>
+
+                                <?php if ( $pagination_prev_next_type === 'icon' ) : ?>
+                                    <?php if ( !empty( $next_icon ) ) : ?>
+                                        <span class="icon"><?php echo $next_icon; ?></span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                                <?php if ( !empty( $next_txt ) ) : ?>
-                                    <span class="text"><?php echo esc_html( $next_txt ); ?></span>
+                                <?php if ( $pagination_prev_next_type === 'text' ) : ?>
+                                    <?php if ( !empty( $next_txt ) ) : ?>
+                                        <span class="text"><?php echo esc_html( $next_txt ); ?></span>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </button>
             
