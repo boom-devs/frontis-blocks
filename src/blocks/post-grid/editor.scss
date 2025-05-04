@@ -105,6 +105,7 @@
 
 .fb_post_grid_container{
 	.fb_load_more_wrapper{
+		overflow: hidden;
 		.fb_load_more{
 			cursor: pointer;
 			display: inline-flex;
@@ -359,3 +360,4 @@
 		cursor:default;
 	}
 }
+
