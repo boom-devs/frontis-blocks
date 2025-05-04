@@ -515,9 +515,6 @@ class Admin {
         $default_image_url = isset($_POST['defaultImageUrl']) ? $_POST['defaultImageUrl'] : '';
 
 
-        var_dump($pagination_prev_next_type);
-        die();
-
         ob_start();
 
         // Initial query to select posts based on type and status
