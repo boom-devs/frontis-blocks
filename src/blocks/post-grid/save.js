@@ -181,6 +181,12 @@ export default function save({ attributes }) {
 					<div className="load_more_button_icon">
 						{renderSVG(loadMoreIcon)}
 					</div>
+					<div className="fb_pagination_previous_icon">
+						{renderSVG(paginationPrevIcon)}
+					</div>
+					<div className="fb_pagination_next_icon">
+						{renderSVG(paginationNextIcon)}
+					</div>
 				</div>
 				<div className="loading post">
 					{placeholders.map((item) => (
