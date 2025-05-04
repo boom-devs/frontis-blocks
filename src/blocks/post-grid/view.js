@@ -24,17 +24,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	const loadMoreType = parentElement?.getAttribute("data-load-more-type");
 
-	const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat"); // e.g., "4,16,0"
+	const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat");
 	const filterSelectedTag = parentElement?.getAttribute("data-filter-selected-tag");
 	const filterSelectedTaxonomy = parentElement?.getAttribute("data-show-filter-by-taxonomy");
 	const filterAllPostsCount = parentElement?.getAttribute("data-filter-all-posts-count");
 
 	// Set initial filterPost values based on filterSelectedTaxonomy
-	if (filterSelectedTaxonomy === 'true') {
-		filterPost.category = filterSelectedCat && filterSelectedCat !== '0' ? filterSelectedCat.split(',').filter(id => id !== '0') : [];
-		filterPost.post_tag = filterSelectedTag ? filterSelectedTag.split(',') : [];
-		filterPost.limit = filterAllPostsCount || limit;
-	}
+	// if (filterSelectedTaxonomy === 'true') {
+	// 	filterPost.category = filterSelectedCat && filterSelectedCat !== '0' ? filterSelectedCat.split(',').filter(id => id !== '0') : [];
+	// 	filterPost.post_tag = filterSelectedTag ? filterSelectedTag.split(',') : [];
+	// 	filterPost.limit = filterAllPostsCount || limit;
+	// }
 
 	document.body.addEventListener('click', function(event) {
 		if (event.target.closest('.fb_load_more')) {
@@ -243,7 +243,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.detag = detag ? detag.split(',') : [];
 		filterPost.decategory = decategory ? decategory.split(',') : [];
 
-		filterPost.limit = filterSelectedTaxonomy === 'true' ? (filterAllPostsCount || perpage) : perpage;
+		// filterPost.limit = filterSelectedTaxonomy === 'true' ? (filterAllPostsCount || perpage) : perpage;
+		filterPost.limit = perpage;
 
 		filterPost.orderby = orderby ? orderby.split(',') : [];
 		filterPost.sortorder = sortorder ? sortorder.split(',') : [];
@@ -395,8 +396,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		const cat = filterSelectedTaxonomy === 'true' ? filterSelectedCat : block.getAttribute('data-cat');
-        const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : block.getAttribute('data-tag');
+		const cat = block.getAttribute('data-cat');
+        const tag = block.getAttribute('data-tag');
 		loadMorePosts(
             block.getAttribute('data-post-type'),
 			block.getAttribute('data-premade-style'),
@@ -453,9 +454,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			// Update filterPost.category
 			if (categoryId === '0') {
 				// Get all categories from data-filter-selected-cat (e.g., "4,16,0")
-				const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat") || '';
+				const allCategories = parentElement?.getAttribute("data-cat") || '';
 				// Split the string into an array and filter out '0' or invalid entries
-				filterPost.category = filterSelectedCat
+				filterPost.category = allCategories
 					.split(',')
 					.filter(id => id !== '0' && id.trim() !== '')
 					.map(id => id.trim());
@@ -471,13 +472,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const postType = parentBlock.getAttribute('data-post-type');
 				const premadeStyle = parentBlock.getAttribute('data-premade-style');
                 let perpage = parentBlock.getAttribute('data-perpage');
-                if (filterSelectedTaxonomy === 'true') {
-                    perpage = filterAllPostsCount;
-                }
+                // if (filterSelectedTaxonomy === 'true') {
+                //     perpage = filterAllPostsCount;
+                // }
+
+				perpage = perpage || 12;
 
                 const orderby = parentBlock.getAttribute('data-orderby');
                 const sortorder = parentBlock.getAttribute('data-sortorder');
-                const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : parentBlock.getAttribute('data-tag');
+                // const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : parentBlock.getAttribute('data-tag');
+				const tag = parentBlock.getAttribute('data-tag');
                 const author = parentBlock.getAttribute('data-author');
                 const deauthor = parentBlock.getAttribute('data-deauthor');
                 const detag = parentBlock.getAttribute('data-detag');
@@ -558,20 +562,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	});
 
-
-
-
-
-
-
-
-
-	// let currentPage   = 1;      // আলাদা করে রাখলাম, যাতে প্রতিটি গ্রিডের context-এ আপডেট করা যায়
+	// let currentPage   = 1; 
 	let totalPages    = 1;
-	let currentGrid   = null;   // যে গ্রিডে ক্লিক হয়েছে সেটাকে ট্র্যাক করি
+	let currentGrid   = null;   // which grid is clicked
 
 	/**
-	 * গ্রিড থেকে ফিল্টার অবজেক্ট বানিয়ে নেয়
+	 * build filter from grid
 	 */
 	const buildFilterFromGrid = (grid, page = 1) => {
 		const limit = parseInt(grid.getAttribute('data-perpage') || 12, 10);
@@ -589,7 +585,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			decategory    : (grid.getAttribute('data-decat') || '').split(',').filter(Boolean),
 			orderby       : (grid.getAttribute('data-orderby')|| 'date'),
 			sortorder     : (grid.getAttribute('data-sortorder')|| 'desc'),
-			// 👉 কন্টেন্ট-সংক্রান্ত সুইচারগুলো (প্রয়োজনে বাইরে থেকে পাস করো)
 			postTitleTag  : grid.getAttribute('data-post-title-tag')         || 'h3',
 			postDescriptionTag : grid.getAttribute('data-post-description-tag') || 'p',
 			postDescriptionExcerptLength : grid.getAttribute('data-post-description-excerpt-length') || 10,
@@ -609,7 +604,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
 			loadMoreType         : grid.getAttribute('data-load-more-type') || 'pagination',
 			block_id             : grid.getAttribute('data-block-id'),
-
 
 			paginationPrevNextType : grid.getAttribute('data-pagination-prev-next-type') || 'icon',
 			paginationPrevTxt      : grid.getAttribute('data-pagination-prev-text') || 'Prev',
