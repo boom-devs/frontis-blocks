@@ -73,10 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				const loadMoreText = parentElement.getAttribute("data-load-more-text");
 				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
 				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
-				const prevTxt = parentElement.getAttribute("data-prev-text");
-				const prevTxtIcon = parentElement.getAttribute("data-prev-icon");
-				const nextTxt = parentElement.getAttribute("data-next-text");
-				const nextTxtIcon = parentElement.getAttribute("data-next-icon");
 				const defaultImageUrl = parentElement.getAttribute("data-default-image-url");
 
 				// Increase current page and update offset for the next batch of posts
@@ -114,10 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
 				filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
 				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
-				filterPost.prevTxt = prevTxt ? prevTxt : '';
-				filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
-				filterPost.nextTxt = nextTxt ? nextTxt : '';
-				filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
 				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
@@ -125,7 +117,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 				// Call function to load more posts
-				loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl);
+				loadMorePosts(
+					postType, 
+					blockId,
+					cat,
+					perpage,
+					orderby,
+					sortorder,
+					tag,
+					author,
+					deauthor,
+					detag,
+					decategory,
+					postTitleTag,
+					postDescriptionTag,
+					postDescriptionExcerptLength, 
+					showExcerptSwitcher, 
+					showAuthorSwitcher, 
+					showCategorySwitcher, 
+					showTagSwitcher, 
+					postAuthorPrefixSwitcher, 
+					postAuthorPrefix, 
+					showDateSwitcher, 
+					postAuthorAvatarSwitcher, 
+					postImageSize, 
+					showLoadMoreSwitcher, 
+					loadMoreType, 
+					prevTxt, 
+					prevTxtIcon,
+					nextTxt,
+					nextTxtIcon, 
+					loadMoreText, 
+					loadMoreIcon, 
+					loadMoreIconAlign,
+					defaultImageUrl
+				);
 
 				if (loadMoreIconAlign === 'icon') {
 					document.querySelector('.fb_post_grid_container .fb_load_more_outter_wrap').style.display = 'block';
@@ -303,10 +329,12 @@ document.addEventListener('DOMContentLoaded', function() {
             block.getAttribute('data-post-image-size'),
             block.getAttribute('data-show-load-more-switcher'),
 			block.getAttribute('data-load-more-type'),
-			block.getAttribute('data-prev-text'),
+
+			block.getAttribute('data-prev'),
 			block.getAttribute('data-prev-icon'),
 			block.getAttribute('data-next-text'),
 			block.getAttribute('data-next-icon'),
+
             block.getAttribute('data-load-more-text'),
             block.getAttribute('data-load-more-icon'),
             block.getAttribute('data-load-more-icon-align'),
@@ -352,9 +380,6 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.category = [categoryId];
 			}
 
-			console.log('categoryId', categoryId);
-			console.log('categorycat', filterPost.category);
-
             const parentBlock = this.closest('.wp-block-frontis-blocks-post-grid');
 
 			if (parentBlock) {
@@ -391,10 +416,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreIcon = parentBlock.getAttribute('data-load-more-icon');
                 const loadMoreIconAlign = parentBlock.getAttribute('data-load-more-icon-align');
 				const loadMoreType = parentBlock.getAttribute('data-load-more-type');
-				const prevTxt = parentBlock.getAttribute('data-prev-text');
-				const prevTxtIcon = parentBlock.getAttribute('data-prev-icon');
-				const nextTxt = parentBlock.getAttribute('data-next-text');
-				const nextTxtIcon = parentBlock.getAttribute('data-next-icon');
                 const defaultImageUrl = parentBlock.getAttribute('data-default-image-url');
 
                 // Clear previous posts
@@ -433,10 +454,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadMoreIcon,
                     loadMoreIconAlign,
 					loadMoreType,
-					prevTxt,
-					prevTxtIcon,
-					nextTxt,
-					nextTxtIcon,
                     defaultImageUrl
                 );
 			}
@@ -491,10 +508,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			loadMoreText         : grid.getAttribute('data-load-more-text') || 'Load More',
 			loadMoreIcon         : grid.getAttribute('data-load-more-icon') || 'angle-right',
 			loadMoreIconAlign    : grid.getAttribute('data-load-more-icon-align') || 'none',
-			prevTxt              : grid.getAttribute('data-prev-text') || '',
-			prevTxtIcon          : grid.getAttribute('data-prev-icon') || '',
-			nextTxt              : grid.getAttribute('data-next-text') || '',
-			nextTxtIcon          : grid.getAttribute('data-next-icon') || '',
+
+			paginationPrevNextType : grid.getAttribute('data-pagination-prev-next-type') || 'icon',
+			paginationPrevTxt      : grid.getAttribute('data-pagination-prev-text') || 'Prev',
+			paginationPrevIcon     : grid.getAttribute('data-pagination-prev-icon') || 'angle-left',
+			paginationNextTxt      : grid.getAttribute('data-pagination-next-text') || 'Next',
+			paginationNextIcon     : grid.getAttribute('data-pagination-next-icon') || 'angle-right',
+
 			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
 			block_id             : grid.getAttribute('data-block-id')
 		};
