@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		offset: limit * (currentPage - 1),
 		limit: limit,
 		post_type: 'post',
+		premade_style: 'style-1',
 		currentPage: currentPage,
 		category: null,
 		post_tag: null,
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
+				const premadeStyle = parentElement.getAttribute("data-premade-style");
 				const blockId = parentElement.getAttribute("data-block-id");
 				const cat = parentElement.getAttribute("data-cat");
 				const tag = parentElement.getAttribute("data-tag");
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				// Call function to load more posts
 				loadMorePosts(
 					postType,
+					premadeStyle,
 					blockId,
 					cat, 
 					perpage, 
@@ -192,6 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	function loadMorePosts(
 		postType, 
+		premadeStyle,
 		blockId, 
 		cat, 
 		perpage, 
@@ -229,6 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	) {
 		
 		filterPost.post_type = postType;
+		filterPost.premade_style = premadeStyle;
 		filterPost.block_id = blockId;
 		// filterPost.category = cat ? cat.split(',') : [];
 		filterPost.category = cat && cat !== '0' ? cat.split(',').filter(id => id !== '0') : [];
@@ -394,6 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : block.getAttribute('data-tag');
 		loadMorePosts(
             block.getAttribute('data-post-type'),
+			block.getAttribute('data-premade-style'),
             block.getAttribute('data-block-id'),
             cat,
             block.getAttribute('data-perpage'),
@@ -458,14 +464,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.category = [categoryId];
 			}
 
-			console.log('categoryId', categoryId);
-			console.log('categorycat', filterPost.category);
-
             const parentBlock = this.closest('.wp-block-frontis-blocks-post-grid');
 
 			if (parentBlock) {
 				const blockId = parentBlock.getAttribute('data-block-id');
                 const postType = parentBlock.getAttribute('data-post-type');
+				const premadeStyle = parentBlock.getAttribute('data-premade-style');
                 let perpage = parentBlock.getAttribute('data-perpage');
                 if (filterSelectedTaxonomy === 'true') {
                     perpage = filterAllPostsCount;
@@ -514,6 +518,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Call Ajax to load filtered posts
                 loadMorePosts(
                     postType,
+                    premadeStyle,
                     blockId,
                     filterPost.category.join(','),
                     perpage,
@@ -574,6 +579,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			offset        : limit * (page - 1),
 			limit         : limit,
 			post_type     : grid.getAttribute('data-post-type') || 'post',
+			premade_style : grid.getAttribute('data-premade-style') || 'style-1',
 			currentPage   : page,
 			category      : (grid.getAttribute('data-cat')   || '').split(',').filter(id => id && id !== '0'),
 			post_tag      : (grid.getAttribute('data-tag')   || '').split(',').filter(Boolean),
