@@ -4,6 +4,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 export default function save({ attributes }) {
 	const { 
 		blockId,
+		premadeStyle,
 		postType,
 		postPerPage,
 		selectedCat,
@@ -88,6 +89,7 @@ export default function save({ attributes }) {
 			<div
 				{...blockProps}
 				id={blockId}
+				data-premade-style={premadeStyle}
 				data-post-type={postType}
 				data-block-id={blockId}
 				data-perpage={postPerPage}
@@ -180,6 +182,12 @@ export default function save({ attributes }) {
 				<div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}>
 					<div className="load_more_button_icon">
 						{renderSVG(loadMoreIcon)}
+					</div>
+					<div className="fb_pagination_previous_icon">
+						{renderSVG(paginationPrevIcon)}
+					</div>
+					<div className="fb_pagination_next_icon">
+						{renderSVG(paginationNextIcon)}
 					</div>
 				</div>
 				<div className="loading post">

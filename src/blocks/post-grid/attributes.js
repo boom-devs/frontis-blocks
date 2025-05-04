@@ -8,6 +8,10 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	premadeStyle: {
+		type: "string",
+		default: "style-1",
+	},
     deviceType: {
         type: "string",
         default: "Desktop"

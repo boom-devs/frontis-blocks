@@ -17,6 +17,7 @@ import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
+		premadeStyle,
 		postType,
 		postPerPage,
 		selectedCatSwitcher,
@@ -293,6 +294,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         postAuthorAvatarSwitcher={postAuthorAvatarSwitcher}
                                         postImageSize={postImageSize}
                                         defaultImageUrl={defaultImageUrl}
+                                        premadeStyle={premadeStyle}
                                     />
                                 ))}
                             </div>

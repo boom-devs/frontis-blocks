@@ -106,3 +106,10 @@ export const PAGINATION_PREV_NEXT_TYPE = [
 	{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
 	{ label: __('Text', 'frontis-blocks'), value: 'text' },
 ];
+
+export const PREMADE_STYLE = [
+	{ label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+	{ label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+];
+
+

@@ -16,6 +16,7 @@ export default function LayoutGrid({
     postAuthorAvatarSwitcher,
     postImageSize,
     defaultImageUrl,
+    premadeStyle,
 
     }) {
     const src = data.fb_featured_image_src?.[postImageSize]?.[0] || defaultImageUrl;
@@ -28,67 +29,135 @@ export default function LayoutGrid({
 
     return (
         <>
-        <div className="fb_post_grid_wrapper">
-            <div className="fb_post_grid_image_wrapper">
-                <div className="fb_post_grid_image">
-                    <a href={data.link}>
-                        <img src={src} alt={title || "Post image"} />
-                    </a>
+
+
+        {premadeStyle === 'style-1' && (
+            <div className={`fb_post_grid_wrapper fb_post_grid_${premadeStyle}`}>
+                <div className="fb_post_grid_image_wrapper">
+                    <div className="fb_post_grid_image">
+                        <a href={data.link}>
+                            <img src={src} alt={title || "Post image"} />
+                        </a>
+                    </div>
+                </div>
+
+                <div className="fb_post_grid_content_wrapper">
+                    {showAuthorSwitcher && (
+                        <div className="fb_post_grid_author">
+                            {postAuthorAvatarSwitcher && (
+                                <div className="fb_post_grid_author_avatar">
+                                    <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                        <img src={author.avatar} alt={author.name} />
+                                    </a>
+                                </div>
+                            )}
+                            <div className="fb_post_grid_author_info">
+                                <div className="fb_post_grid_author_info_name">
+                                    {postAuthorPrefixSwitcher && (
+                                        <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
+                                    )}
+                                    <div className="fb_post_grid_author_name">
+                                        <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                    </div>
+                                </div>
+                                {showDateSwitcher && (
+                                    <div className="fb_post_grid_date">{author.latest_post_date}</div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {showCategorySwitcher && (
+                        <div className="fb_post_grid_categories">
+                            {categories.map((category, index) => (
+                                <div className="fb_post_grid_category" key={index}>
+                                    <a className="fb_post_grid_category_url" href={category.url}>{category.name}</a>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {showTagSwitcher && (
+                        <div className="fb_post_grid_tags">
+                            {tags.map((tag, index) => (
+                                <div className="fb_post_grid_tag" key={index}>
+                                    <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    <div className="fb_post_grid_content">
+                        <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
+                        {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
+                    </div>
                 </div>
             </div>
+        )}
 
-            <div className="fb_post_grid_content_wrapper">
-                {showAuthorSwitcher && (
-                    <div className="fb_post_grid_author">
-                        {postAuthorAvatarSwitcher && (
-                            <div className="fb_post_grid_author_avatar">
-                                <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
-                                    <img src={author.avatar} alt={author.name} />
-                            </a>
+        {premadeStyle === 'style-2' && (
+            <div className={`fb_post_grid_wrapper fb_post_grid_${premadeStyle}`}>
+                <div className="fb_post_grid_image_wrapper">
+                    <div className="fb_post_grid_image">
+                        <a href={data.link}>
+                            <img src={src} alt={title || "Post image"} />
+                        </a>
+
+                        {showCategorySwitcher && (
+                            <div className="fb_post_grid_categories">
+                                {categories.map((category, index) => (
+                                    <div className="fb_post_grid_category" key={index}>
+                                        <a className="post_category" href={category.url}>{category.name}</a>
+                                    </div>
+                                ))}
                             </div>
                         )}
-                        <div className="fb_post_grid_author_info">
-                            <div className="fb_post_grid_author_info_name">
-                                {postAuthorPrefixSwitcher && (
-                                    <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
-                                )}
-                                <div className="fb_post_grid_author_name">
-                                    <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                        {showTagSwitcher && (
+                            <div className="fb_post_grid_tags">
+                                {tags.map((tag, index) => (
+                                    <div className="fb_post_grid_tag" key={index}>
+                                        <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                    </div>
+                </div>
+
+                <div className="fb_post_grid_content_wrapper">
+                    {showAuthorSwitcher && (
+                        <div className="fb_post_grid_author">
+                            {postAuthorAvatarSwitcher && (
+                                <div className="fb_post_grid_author_avatar">
+                                    <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                        <img src={author.avatar} alt={author.name} />
+                                    </a>
                                 </div>
-                            </div>
-                            {showDateSwitcher && (
-                                <div className="fb_post_grid_date">{author.latest_post_date}</div>
                             )}
+                            <div className="fb_post_grid_author_info">
+                                <div className="fb_post_grid_author_info_name">
+                                    {postAuthorPrefixSwitcher && (
+                                        <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
+                                    )}
+                                    <div className="fb_post_grid_author_name">
+                                        <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                    </div>
+                                </div>
+                                {showDateSwitcher && (
+                                    <div className="fb_post_grid_date">{author.latest_post_date}</div>
+                                )}
+                            </div>
                         </div>
+                    )}
+                    <div className="fb_post_grid_content">
+                        <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
+                        {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                     </div>
-                )}
-
-                {showCategorySwitcher && (
-                    <div className="fb_post_grid_categories">
-                        {categories.map((category, index) => (
-                            <div className="fb_post_grid_category" key={index}>
-                                <a className="fb_post_grid_category_url" href={category.url}>{category.name}</a>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {showTagSwitcher && (
-                    <div className="fb_post_grid_tags">
-                        {tags.map((tag, index) => (
-                            <div className="fb_post_grid_tag" key={index}>
-                                <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <div className="fb_post_grid_content">
-                    <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
-                    {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                 </div>
             </div>
-        </div>
+        )}
+
         </>
     );
 }
