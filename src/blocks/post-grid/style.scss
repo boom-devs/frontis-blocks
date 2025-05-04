@@ -312,6 +312,18 @@
 	justify-content: center;
 	gap: 12px;
 
+	.fb_pagination {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 12px;
+	}
+
+	.fb_pagination_ellipsis {
+		padding: 6px 10px;
+		color: #999;
+	}
+
 	.fb_pagination_item {
 		border: 1px solid #dddddd9e;
 		border-radius: 4px;
