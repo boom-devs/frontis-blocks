@@ -914,12 +914,47 @@ class Admin {
                             </button>
             
                             <!-- Page Numbers -->
-                            <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
+                            <!-- <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
                                 $active = $page == $current_page ? "active" : ""; ?>
                                 <button class="fb_pagination_item <?php echo esc_attr( $active ); ?>" data-pagenumber="<?php echo esc_attr( $page ); ?>">
                                     <?php echo esc_html( $page ); ?>
                                 </button>
-                            <?php endfor; ?>
+                            <?php endfor; ?> -->
+
+
+                            <?php
+                            $range = 2; // current page before and after how many pages
+
+                            echo '<div class="fb_pagination">';
+
+                            if ($total_pages <= 1) return; // if one page then no pagination
+
+                            // if current page is in the middle
+                            // if ($current_page > ($range + 2)) {
+                            //     echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
+                            //     echo '<span class="fb_pagination_ellipsis">...</span>';
+                            // }
+
+                            // loop through page numbers
+                            $start = max(1, $current_page - $range);
+                            $end = min($total_pages, $current_page + $range);
+
+                            for ($page = $start; $page <= $end; $page++) {
+                                $active = $page == $current_page ? 'active' : '';
+                                echo '<button class="fb_pagination_item ' . esc_attr($active) . '" data-pagenumber="' . esc_attr($page) . '">' . esc_html($page) . '</button>';
+                            }
+
+                            // if the last page is far away
+                            if ($current_page < $total_pages - ($range + 2)) {
+                                echo '<span class="fb_pagination_ellipsis">...</span>';
+                                echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
+                            }
+
+                            echo '</div>';
+                            ?>
+
+
+
             
                             <!-- Next Button -->
                             <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
