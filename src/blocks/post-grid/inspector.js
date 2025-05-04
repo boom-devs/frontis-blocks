@@ -22,7 +22,8 @@ import {
     OVERFLOW_OP,
     TAXONOMY_OPTIONS,
     PAGINATION_TYPE,
-    PAGINATION_PREV_NEXT_TYPE
+    PAGINATION_PREV_NEXT_TYPE,
+    PREMADE_STYLE
 } from './constants/constants';
 
 /**
@@ -55,6 +56,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
 		// deviceType,
 		blockStyle,
+		premadeStyle,
 		postType,
 		postPerPage,
 		selectedCatSwitcher,
@@ -3321,6 +3323,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postDateHoverColor ? `color: ${postDateHoverColor};` : ''}
         }
 
+        .${blockId} .fb_post_grid_style-2 .fb_post_grid_image {
+            position: relative;
+        }
+        
+        .${blockId} .fb_post_grid_style-2 .fb_post_grid_categories {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .${blockId} .fb_post_grid_style-2 .fb_post_grid_tags {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -4416,7 +4433,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 title={__("General", "frontis-blocks")}
                                                 initialOpen={true}
                                             >
-
+                                                <SelectControl
+                                                    label={__("Premade Style", "frontis-blocks")}
+                                                    options={PREMADE_STYLE}
+                                                    value={premadeStyle}
+                                                    onChange={(value) => setAttributes({ premadeStyle: value })}
+                                                />
                                                 <BaseControl
                                                     label={__("Element Visibility", "frontis-blocks")}
                                                     className="fb-setting-show-hide-elements"

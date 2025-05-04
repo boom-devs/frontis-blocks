@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		offset: limit * (currentPage - 1),
 		limit: limit,
 		post_type: 'post',
+		premade_style: 'style-1',
 		currentPage: currentPage,
 		category: null,
 		post_tag: null,
@@ -20,17 +21,20 @@ document.addEventListener('DOMContentLoaded', function() {
 	// GLOBAL Parent Block for Settings
 	const parentElement = document.querySelector('.wp-block-frontis-blocks-post-grid');
 
-	const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat"); // e.g., "4,16,0"
+
+	const loadMoreType = parentElement?.getAttribute("data-load-more-type");
+
+	const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat");
 	const filterSelectedTag = parentElement?.getAttribute("data-filter-selected-tag");
 	const filterSelectedTaxonomy = parentElement?.getAttribute("data-show-filter-by-taxonomy");
 	const filterAllPostsCount = parentElement?.getAttribute("data-filter-all-posts-count");
 
 	// Set initial filterPost values based on filterSelectedTaxonomy
-	if (filterSelectedTaxonomy === 'true') {
-		filterPost.category = filterSelectedCat && filterSelectedCat !== '0' ? filterSelectedCat.split(',').filter(id => id !== '0') : [];
-		filterPost.post_tag = filterSelectedTag ? filterSelectedTag.split(',') : [];
-		filterPost.limit = filterAllPostsCount || limit;
-	}
+	// if (filterSelectedTaxonomy === 'true') {
+	// 	filterPost.category = filterSelectedCat && filterSelectedCat !== '0' ? filterSelectedCat.split(',').filter(id => id !== '0') : [];
+	// 	filterPost.post_tag = filterSelectedTag ? filterSelectedTag.split(',') : [];
+	// 	filterPost.limit = filterAllPostsCount || limit;
+	// }
 
 	document.body.addEventListener('click', function(event) {
 		if (event.target.closest('.fb_load_more')) {
@@ -39,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			if (parentElement) {
 				const postType = parentElement.getAttribute("data-post-type");
+				const premadeStyle = parentElement.getAttribute("data-premade-style");
 				const blockId = parentElement.getAttribute("data-block-id");
 				const cat = parentElement.getAttribute("data-cat");
 				const tag = parentElement.getAttribute("data-tag");
@@ -69,11 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				const postImageSize = parentElement.getAttribute("data-post-image-size");
 
 				const showLoadMoreSwitcher = parentElement.getAttribute("data-show-load-more-switcher");
-				const loadMoreType = parentElement.getAttribute("data-load-more-type");
 				const loadMoreText = parentElement.getAttribute("data-load-more-text");
 				const loadMoreIcon = parentElement.getAttribute("data-load-more-icon");
 				const loadMoreIconAlign = parentElement.getAttribute("data-load-more-icon-align");
+
 				const defaultImageUrl = parentElement.getAttribute("data-default-image-url");
+
+
+				const loadMoreType = parentElement.getAttribute("data-load-more-type");
 
 				// Increase current page and update offset for the next batch of posts
 				filterPost.currentPage = currentPage;
@@ -108,29 +116,39 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterPost.postImageSize = postImageSize ? postImageSize : 'full';
 				
 				filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
-				filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
+
 				filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
 				filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 				filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
 				filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
 
+				filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
+
+
+				const paginationPrevNextType = parentElement.getAttribute("data-pagination-prev-next-type");
+				const paginationPrevText = parentElement.getAttribute("data-pagination-prev-text");
+				const paginationPrevIcon = parentElement.getAttribute("data-pagination-prev-icon");
+				const paginationNextText = parentElement.getAttribute("data-pagination-next-text");
+				const paginationNextIcon = parentElement.getAttribute("data-pagination-next-icon");
+
 
 				// Call function to load more posts
 				loadMorePosts(
-					postType, 
+					postType,
+					premadeStyle,
 					blockId,
-					cat,
-					perpage,
-					orderby,
-					sortorder,
-					tag,
-					author,
-					deauthor,
-					detag,
-					decategory,
-					postTitleTag,
-					postDescriptionTag,
+					cat, 
+					perpage, 
+					orderby, 
+					sortorder, 
+					tag, 
+					author, 
+					deauthor, 
+					detag, 
+					decategory, 
+					postTitleTag, 
+					postDescriptionTag, 
 					postDescriptionExcerptLength, 
 					showExcerptSwitcher, 
 					showAuthorSwitcher, 
@@ -142,15 +160,17 @@ document.addEventListener('DOMContentLoaded', function() {
 					postAuthorAvatarSwitcher, 
 					postImageSize, 
 					showLoadMoreSwitcher, 
-					loadMoreType, 
-					prevTxt, 
-					prevTxtIcon,
-					nextTxt,
-					nextTxtIcon, 
 					loadMoreText, 
 					loadMoreIcon, 
-					loadMoreIconAlign,
-					defaultImageUrl
+					loadMoreIconAlign, 
+					defaultImageUrl,
+					loadMoreType,
+
+					paginationPrevNextType,
+					paginationPrevText,
+					paginationPrevIcon,
+					paginationNextText,
+					paginationNextIcon
 				);
 
 				if (loadMoreIconAlign === 'icon') {
@@ -173,8 +193,47 @@ document.addEventListener('DOMContentLoaded', function() {
 		return formData;
 	}
 
-	function loadMorePosts(postType, blockId, cat, perpage, orderby, sortorder, tag, author, deauthor, detag, decategory, postTitleTag, postDescriptionTag, postDescriptionExcerptLength, showExcerptSwitcher, showAuthorSwitcher, showCategorySwitcher, showTagSwitcher, postAuthorPrefixSwitcher, postAuthorPrefix, showDateSwitcher, postAuthorAvatarSwitcher, postImageSize, showLoadMoreSwitcher, loadMoreType, prevTxt, prevTxtIcon, nextTxt, nextTxtIcon, loadMoreText, loadMoreIcon, loadMoreIconAlign, defaultImageUrl) {
+	function loadMorePosts(
+		postType, 
+		premadeStyle,
+		blockId, 
+		cat, 
+		perpage, 
+		orderby, 
+		sortorder, 
+		tag, 
+		author, 
+		deauthor, 
+		detag, 
+		decategory, 
+		postTitleTag, 
+		postDescriptionTag, 
+		postDescriptionExcerptLength, 
+		showExcerptSwitcher, 
+		showAuthorSwitcher, 
+		showCategorySwitcher, 
+		showTagSwitcher, 
+		postAuthorPrefixSwitcher, 
+		postAuthorPrefix, 
+		showDateSwitcher, 
+		postAuthorAvatarSwitcher, 
+		postImageSize, 
+		showLoadMoreSwitcher, 
+		loadMoreText, 
+		loadMoreIcon, 
+		loadMoreIconAlign, 
+		defaultImageUrl,
+		loadMoreType,
+
+		paginationPrevNextType,
+		paginationPrevText,
+		paginationPrevIcon,
+		paginationNextText,
+		paginationNextIcon
+	) {
+		
 		filterPost.post_type = postType;
+		filterPost.premade_style = premadeStyle;
 		filterPost.block_id = blockId;
 		// filterPost.category = cat ? cat.split(',') : [];
 		filterPost.category = cat && cat !== '0' ? cat.split(',').filter(id => id !== '0') : [];
@@ -184,7 +243,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		filterPost.detag = detag ? detag.split(',') : [];
 		filterPost.decategory = decategory ? decategory.split(',') : [];
 
-		filterPost.limit = filterSelectedTaxonomy === 'true' ? (filterAllPostsCount || perpage) : perpage;
+		// filterPost.limit = filterSelectedTaxonomy === 'true' ? (filterAllPostsCount || perpage) : perpage;
+		filterPost.limit = perpage;
 
 		filterPost.orderby = orderby ? orderby.split(',') : [];
 		filterPost.sortorder = sortorder ? sortorder.split(',') : [];
@@ -208,17 +268,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		filterPost.showLoadMoreSwitcher = showLoadMoreSwitcher ? showLoadMoreSwitcher : true;
 
-		filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
 		filterPost.loadMoreText = loadMoreText ? loadMoreText : 'Load More';
 		filterPost.loadMoreIcon = loadMoreIcon ? loadMoreIcon : 'angle-right';
 		filterPost.loadMoreIconAlign = loadMoreIconAlign ? loadMoreIconAlign : 'none';
 
-		filterPost.prevTxt = prevTxt ? prevTxt : '';
-		filterPost.prevTxtIcon = prevTxtIcon ? prevTxtIcon : '';
-		filterPost.nextTxt = nextTxt ? nextTxt : '';
-		filterPost.nextTxtIcon = nextTxtIcon ? nextTxtIcon : '';
-
 		filterPost.defaultImageUrl = defaultImageUrl ? defaultImageUrl : '';
+
+		filterPost.loadMoreType = loadMoreType ? loadMoreType : 'button';
+
+
+		filterPost.paginationPrevNextType = paginationPrevNextType ? paginationPrevNextType : 'button';
+		filterPost.paginationPrevText = paginationPrevText ? paginationPrevText : 'Prev';
+		filterPost.paginationPrevIcon = paginationPrevIcon ? paginationPrevIcon : 'angle-left';
+		filterPost.paginationNextText = paginationNextText ? paginationNextText : 'Next';
+		filterPost.paginationNextIcon = paginationNextIcon ? paginationNextIcon : 'angle-right';
 
 		let formData = convertToAjaxParams(filterPost);
 		let siteUrl = FrontisBlocksData.site_url;
@@ -253,39 +316,71 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				currentPage = currentPage + 1;
 				
-				const loadMoreWrapper = postListElement.querySelector('.fb_load_more');
-				const loadMoreIconWrapper = postListElement.querySelector('.load_more_button_icon');
-				if (loadMoreWrapper) {
-					loadMoreWrapper.innerHTML = `
-						${loadMoreText}
 
-						${
-							loadMoreIconAlign === 'icon'
-								? `<span class="load_more_button_icon_wrap">
-									${loadMoreIconWrapper?.outerHTML || ''}
-									<div class="fb_load_more_outter_wrap">
-										<span class="fb_load_more_loader"></span>
-									</div>
-								</span>`
-								: ''
-						}
-					`;
-				}
+				if(loadMoreType === 'button') {
+					const loadMoreWrapper = postListElement.querySelector('.fb_load_more');
+					const loadMoreIconWrapper = postListElement.querySelector('.load_more_button_icon');
+					if (loadMoreWrapper) {
+						loadMoreWrapper.innerHTML = `
+							${loadMoreText}
 
-				const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
-				if (loadMore) {
-					if (loadMoreIconAlign === 'icon') {
-						const svgElement = loadMore.querySelector('.load_more_button_icon_wrap svg');
-						if (svgElement) {
-							svgElement.style.display = 'block';
-						}
-				
-						const outerWrap = loadMore.querySelector('.fb_load_more_outter_wrap');
-						if (outerWrap) {
-							outerWrap.style.display = 'none';
+							${
+								loadMoreIconAlign === 'icon'
+									? `<span class="load_more_button_icon_wrap">
+										${loadMoreIconWrapper?.outerHTML || ''}
+										<div class="fb_load_more_outter_wrap">
+											<span class="fb_load_more_loader"></span>
+										</div>
+									</span>`
+									: ''
+							}
+						`;
+					}
+
+					const loadMore = document.querySelector('.fb_post_grid_container .fb_load_more');
+					if (loadMore) {
+						if (loadMoreIconAlign === 'icon') {
+							const svgElement = loadMore.querySelector('.load_more_button_icon_wrap svg');
+							if (svgElement) {
+								svgElement.style.display = 'block';
+							}
+					
+							const outerWrap = loadMore.querySelector('.fb_load_more_outter_wrap');
+							if (outerWrap) {
+								outerWrap.style.display = 'none';
+							}
 						}
 					}
 				}
+
+				if(loadMoreType === 'pagination') {
+					const paginationPreviousIconWrapper = postListElement.querySelector('.fb_pagination_previous_icon_Wrapper');
+					const paginationNextIconWrapper = postListElement.querySelector('.fb_pagination_next_icon_Wrapper');
+
+					const paginationPreviousIcon = postGridElement.querySelector('.fb_pagination_previous_icon');
+					const paginationNextIcon = postGridElement.querySelector('.fb_pagination_next_icon');
+
+					if (paginationPreviousIconWrapper) {
+						paginationPreviousIconWrapper.innerHTML = `
+							${
+								paginationPrevNextType === 'icon'
+									? paginationPreviousIcon?.outerHTML || ''
+									: paginationPrevText
+							}
+						`;
+					}
+
+					if (paginationNextIconWrapper) {
+						paginationNextIconWrapper.innerHTML = `
+							${
+								paginationPrevNextType === 'icon'
+									? paginationNextIcon?.outerHTML || ''
+									: paginationNextText
+							}
+						`;
+					}
+				}
+				
 				
 			})
 			.catch(error => {
@@ -301,10 +396,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	const postGridBlocks = document.querySelectorAll('.wp-block-frontis-blocks-post-grid');
 
 	postGridBlocks.forEach(block => {
-		const cat = filterSelectedTaxonomy === 'true' ? filterSelectedCat : block.getAttribute('data-cat');
-        const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : block.getAttribute('data-tag');
+		const cat = block.getAttribute('data-cat');
+        const tag = block.getAttribute('data-tag');
 		loadMorePosts(
             block.getAttribute('data-post-type'),
+			block.getAttribute('data-premade-style'),
             block.getAttribute('data-block-id'),
             cat,
             block.getAttribute('data-perpage'),
@@ -328,25 +424,19 @@ document.addEventListener('DOMContentLoaded', function() {
             block.getAttribute('data-post-author-avatar-switcher'),
             block.getAttribute('data-post-image-size'),
             block.getAttribute('data-show-load-more-switcher'),
-			block.getAttribute('data-load-more-type'),
-
-			block.getAttribute('data-prev'),
-			block.getAttribute('data-prev-icon'),
-			block.getAttribute('data-next-text'),
-			block.getAttribute('data-next-icon'),
-
             block.getAttribute('data-load-more-text'),
             block.getAttribute('data-load-more-icon'),
             block.getAttribute('data-load-more-icon-align'),
-            block.getAttribute('data-default-image-url')
-        );
-	});
+            block.getAttribute('data-default-image-url'),
+			block.getAttribute('data-load-more-type'),
 
-	// Default Add active class in category
-	document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
-		if (item.getAttribute('data-category-id') === '0') {
-			item.classList.add('active');
-		}
+
+			block.getAttribute('data-pagination-prev-next-type'),
+			block.getAttribute('data-pagination-prev-text'),
+			block.getAttribute('data-pagination-prev-icon'),
+			block.getAttribute('data-pagination-next-text'),
+			block.getAttribute('data-pagination-next-icon'),
+        );
 	});
 
 	const categoryItems = document.querySelectorAll('.fb_post_grid_filter_category');
@@ -357,11 +447,6 @@ document.addEventListener('DOMContentLoaded', function() {
             currentPage = 1;
             filterPost.offset = 0;
 			
-			// Remove active class from all items
-			categoryItems.forEach(el => el.classList.remove('active'));
-
-			// Add active class to the clicked item
-			this.classList.add('active');
 
             // Update filterPost.category
             // filterPost.category = categoryId === '0' ? [] : [categoryId]; // "All" should reset filter
@@ -369,9 +454,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			// Update filterPost.category
 			if (categoryId === '0') {
 				// Get all categories from data-filter-selected-cat (e.g., "4,16,0")
-				const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat") || '';
+				const allCategories = parentElement?.getAttribute("data-cat") || '';
 				// Split the string into an array and filter out '0' or invalid entries
-				filterPost.category = filterSelectedCat
+				filterPost.category = allCategories
 					.split(',')
 					.filter(id => id !== '0' && id.trim() !== '')
 					.map(id => id.trim());
@@ -385,14 +470,18 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (parentBlock) {
 				const blockId = parentBlock.getAttribute('data-block-id');
                 const postType = parentBlock.getAttribute('data-post-type');
+				const premadeStyle = parentBlock.getAttribute('data-premade-style');
                 let perpage = parentBlock.getAttribute('data-perpage');
-                if (filterSelectedTaxonomy === 'true') {
-                    perpage = filterAllPostsCount;
-                }
+                // if (filterSelectedTaxonomy === 'true') {
+                //     perpage = filterAllPostsCount;
+                // }
+
+				perpage = perpage || 12;
 
                 const orderby = parentBlock.getAttribute('data-orderby');
                 const sortorder = parentBlock.getAttribute('data-sortorder');
-                const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : parentBlock.getAttribute('data-tag');
+                // const tag = filterSelectedTaxonomy === 'true' ? filterSelectedTag : parentBlock.getAttribute('data-tag');
+				const tag = parentBlock.getAttribute('data-tag');
                 const author = parentBlock.getAttribute('data-author');
                 const deauthor = parentBlock.getAttribute('data-deauthor');
                 const detag = parentBlock.getAttribute('data-detag');
@@ -415,8 +504,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const loadMoreText = parentBlock.getAttribute('data-load-more-text');
                 const loadMoreIcon = parentBlock.getAttribute('data-load-more-icon');
                 const loadMoreIconAlign = parentBlock.getAttribute('data-load-more-icon-align');
-				const loadMoreType = parentBlock.getAttribute('data-load-more-type');
                 const defaultImageUrl = parentBlock.getAttribute('data-default-image-url');
+				const loadMoreType = parentBlock.getAttribute('data-load-more-type');
+
+				const paginationPrevNextType = parentBlock.getAttribute('data-pagination-prev-next-type');
+				const paginationPrevText = parentBlock.getAttribute('data-pagination-prev-text');
+				const paginationPrevIcon = parentBlock.getAttribute('data-pagination-prev-icon');
+				const paginationNextText = parentBlock.getAttribute('data-pagination-next-text');
+				const paginationNextIcon = parentBlock.getAttribute('data-pagination-next-icon');
 
                 // Clear previous posts
                 const postListElement = parentBlock.querySelector('.fb_post_grid_container');
@@ -427,6 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Call Ajax to load filtered posts
                 loadMorePosts(
                     postType,
+                    premadeStyle,
                     blockId,
                     filterPost.category.join(','),
                     perpage,
@@ -453,27 +549,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     loadMoreText,
                     loadMoreIcon,
                     loadMoreIconAlign,
+                    defaultImageUrl,
 					loadMoreType,
-                    defaultImageUrl
+
+					paginationPrevNextType,
+					paginationPrevText,
+					paginationPrevIcon,
+					paginationNextText,
+					paginationNextIcon
                 );
 			}
 		});
 	});
 
-
-
-
-
-
-
-
-
-	// let currentPage   = 1;      // আলাদা করে রাখলাম, যাতে প্রতিটি গ্রিডের context-এ আপডেট করা যায়
+	// let currentPage   = 1; 
 	let totalPages    = 1;
-	let currentGrid   = null;   // যে গ্রিডে ক্লিক হয়েছে সেটাকে ট্র্যাক করি
+	let currentGrid   = null;   // which grid is clicked
 
 	/**
-	 * গ্রিড থেকে ফিল্টার অবজেক্ট বানিয়ে নেয়
+	 * build filter from grid
 	 */
 	const buildFilterFromGrid = (grid, page = 1) => {
 		const limit = parseInt(grid.getAttribute('data-perpage') || 12, 10);
@@ -481,6 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			offset        : limit * (page - 1),
 			limit         : limit,
 			post_type     : grid.getAttribute('data-post-type') || 'post',
+			premade_style : grid.getAttribute('data-premade-style') || 'style-1',
 			currentPage   : page,
 			category      : (grid.getAttribute('data-cat')   || '').split(',').filter(id => id && id !== '0'),
 			post_tag      : (grid.getAttribute('data-tag')   || '').split(',').filter(Boolean),
@@ -490,7 +585,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			decategory    : (grid.getAttribute('data-decat') || '').split(',').filter(Boolean),
 			orderby       : (grid.getAttribute('data-orderby')|| 'date'),
 			sortorder     : (grid.getAttribute('data-sortorder')|| 'desc'),
-			// 👉 কন্টেন্ট-সংক্রান্ত সুইচারগুলো (প্রয়োজনে বাইরে থেকে পাস করো)
 			postTitleTag  : grid.getAttribute('data-post-title-tag')         || 'h3',
 			postDescriptionTag : grid.getAttribute('data-post-description-tag') || 'p',
 			postDescriptionExcerptLength : grid.getAttribute('data-post-description-excerpt-length') || 10,
@@ -504,37 +598,42 @@ document.addEventListener('DOMContentLoaded', function() {
 			postAuthorAvatarSwitcher : grid.getAttribute('data-post-author-avatar-switcher') || false,
 			postImageSize        : grid.getAttribute('data-post-image-size') || 'full',
 			showLoadMoreSwitcher : grid.getAttribute('data-show-load-more-switcher') || true,
-			loadMoreType         : grid.getAttribute('data-load-more-type') || 'pagination',
 			loadMoreText         : grid.getAttribute('data-load-more-text') || 'Load More',
 			loadMoreIcon         : grid.getAttribute('data-load-more-icon') || 'angle-right',
 			loadMoreIconAlign    : grid.getAttribute('data-load-more-icon-align') || 'none',
+			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
+			loadMoreType         : grid.getAttribute('data-load-more-type') || 'pagination',
+			block_id             : grid.getAttribute('data-block-id'),
 
 			paginationPrevNextType : grid.getAttribute('data-pagination-prev-next-type') || 'icon',
 			paginationPrevTxt      : grid.getAttribute('data-pagination-prev-text') || 'Prev',
 			paginationPrevIcon     : grid.getAttribute('data-pagination-prev-icon') || 'angle-left',
 			paginationNextTxt      : grid.getAttribute('data-pagination-next-text') || 'Next',
 			paginationNextIcon     : grid.getAttribute('data-pagination-next-icon') || 'angle-right',
-
-			defaultImageUrl      : grid.getAttribute('data-default-image-url') || '',
-			block_id             : grid.getAttribute('data-block-id')
 		};
 	};
 
 	/**
-	 * AJAX-এ পোস্ট রিকোয়েস্ট করে কনটেন্ট রিফ্রেশ/অ্যাপেন্ড করে
+	 * ajax request to fetch posts
 	 */
 	const fetchPage = (grid, page) => {
 		const filterPost = buildFilterFromGrid(grid, page);
 		const formData   = new FormData();
 		for (const key in filterPost) {
 			if (filterPost[key] !== '' && filterPost[key] !== null) {
-				// array হলে কমা-সেপারেটেড স্ট্রিং
+				// save array as comma separated string
 				formData.append(key, Array.isArray(filterPost[key]) ? filterPost[key].join(',') : filterPost[key]);
 			}
 		}
 
 		const listEl = grid.querySelector('.fb_post_grid_container');
-		listEl.classList.add('fb_is_loading');  // ছোট্ট লোডার ক্লাস
+		listEl.classList.add('fb_is_loading'); 
+
+		/**
+		 * save old icon html
+		 */
+		const prevIconHtml = (listEl.querySelector('.fb_pagination_previous_icon') || {}).outerHTML || '';
+		const nextIconHtml = (listEl.querySelector('.fb_pagination_next_icon')     || {}).outerHTML || '';
 
 		fetch(`${FrontisBlocksData.site_url}/wp-json/wp/v2/frontis-blocks/post`, {
 			method : 'POST',
@@ -542,10 +641,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		})
 		.then(r => r.json())
 		.then(({data}) => {
-			// 👉 pagination-এ আমরা পুরোটাই **replace** করি
+			/**
+			 * replace content
+			 */
 			listEl.innerHTML = data.content;
 
-			// নতুন pagination wrapper ধরে রাখি
+			/**
+			 * replace icon
+			 */
+			const prevWrap = listEl.querySelector('.fb_pagination_previous_icon_Wrapper');
+			const nextWrap = listEl.querySelector('.fb_pagination_next_icon_Wrapper');
+	
+			if (prevWrap) prevWrap.innerHTML = prevIconHtml;
+			if (nextWrap) nextWrap.innerHTML = nextIconHtml;
+
+			/**
+			 * replace pagination wrapper
+			 */
 			const pagWrap  = listEl.querySelector('.fb_pagination_wrapper');
 			if (pagWrap) {
 				pagWrap.dataset.current_page = data.current_page;
@@ -563,14 +675,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	};
 
 	/**
-	 * Pagination-এর বাটন ক্লিক হ্যান্ডলার
+	 * pagination button click handler
 	 */
 	document.body.addEventListener('click', e => {
 		const pageBtn = e.target.closest('.fb_pagination_item');
-		const prevBtn = e.target.closest('.fb_pagination_item_previous');
-		const nextBtn = e.target.closest('.fb_pagination_item_next');
+		const prevBtn = e.target.closest('.fb_pagination_previous');
+		const nextBtn = e.target.closest('.fb_pagination_next');
 
-		if (!pageBtn && !prevBtn && !nextBtn) return; // pagination ছাড়া অন্য কিছু
+		if (!pageBtn && !prevBtn && !nextBtn) return;
 
 		e.preventDefault();
 		currentGrid = e.target.closest('.wp-block-frontis-blocks-post-grid');
@@ -590,7 +702,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			currentPage = Math.min(totalPages, currentPage + 1);
 		}
 
-		// AJAX-এ নতুন পেজ নিয়ে আসি
+		// ajax request to fetch new page
 		fetchPage(currentGrid, currentPage);
 	});
 
