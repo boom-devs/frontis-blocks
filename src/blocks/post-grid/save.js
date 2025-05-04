@@ -116,6 +116,7 @@ export default function save({ attributes }) {
 				data-load-more-icon={loadMoreIcon}
 				data-load-more-icon-align={loadMoreIconAlign}
 				data-load-more-type={loadMoreType}
+				
 				data-pagination-prev-next-type={paginationPrevNextType}
 				data-pagination-prev-text={paginationPrevTxt}
 				data-pagination-prev-icon={paginationPrevIcon}
