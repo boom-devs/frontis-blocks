@@ -930,10 +930,10 @@ class Admin {
                             if ($total_pages <= 1) return; // if one page then no pagination
 
                             // if current page is in the middle
-                            // if ($current_page > ($range + 2)) {
-                            //     echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
-                            //     echo '<span class="fb_pagination_ellipsis">...</span>';
-                            // }
+                            if ($current_page > ($range + 2)) {
+                                echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
+                                echo '<span class="fb_pagination_ellipsis">...</span>';
+                            }
 
                             // loop through page numbers
                             $start = max(1, $current_page - $range);
