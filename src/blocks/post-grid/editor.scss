@@ -343,13 +343,10 @@
 
 .fb_pagination_previous,
 .fb_pagination_next {
-	border: 1px solid #dddddd9e;
-	border-radius: 4px;
-	color: rgba(35, 37, 41, .5);
 	cursor: pointer;
-	display: inline-block;
-	font-size: 14px;
-	padding: 7px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	&:focus {
 		outline: none;
 		box-shadow: none;
