@@ -1877,8 +1877,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           lineHeightUnits: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
             Desktop: 0,
@@ -1887,8 +1887,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           fontSizeUnit: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontWeight: 0,
           fontStyle: 0,
@@ -1901,8 +1901,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           letterSpacingUnit: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           }
         })));
       }
@@ -5036,8 +5036,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           lineHeightUnits: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontSize: {
             Desktop: 0,
@@ -5046,8 +5046,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           fontSizeUnit: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           },
           fontWeight: 0,
           fontStyle: 0,
@@ -5060,8 +5060,8 @@ var TypographySettings = function TypographySettings(props) {
           },
           letterSpacingUnit: {
             Desktop: 'px',
-            Tablet: 'em',
-            Mobile: '%'
+            Tablet: 'px',
+            Mobile: 'px'
           }
         })));
       }
@@ -12314,6 +12314,12 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Radio Canada Big", "frontis-blocks"),
   value: "Radio Canada Big"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Manrope", "frontis-blocks"),
+  value: "Manrope"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Onest", "frontis-blocks"),
+  value: "Onest"
 }];
 
 /***/ }),
