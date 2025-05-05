@@ -923,7 +923,7 @@ class Admin {
 
 
                             <?php
-                            $range = 2; // current page before and after how many pages
+                            $range = 2; // current page before and after how many pages 
 
                             echo '<div class="fb_pagination">';
 
