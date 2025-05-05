@@ -439,6 +439,13 @@ document.addEventListener('DOMContentLoaded', function() {
         );
 	});
 
+	// Default Add active class in category
+	document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
+		if (item.getAttribute('data-category-id') === '0') {
+			item.classList.add('active');
+		}
+	});
+
 	const categoryItems = document.querySelectorAll('.fb_post_grid_filter_category');
 
 	categoryItems.forEach((item) => {
@@ -450,6 +457,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Update filterPost.category
             // filterPost.category = categoryId === '0' ? [] : [categoryId]; // "All" should reset filter
+
+			// Remove active class from all items
+			categoryItems.forEach(el => el.classList.remove('active'));
+
+			// Add active class to the clicked item
+			this.classList.add('active');
+
+			// Update filterPost.category
+			if (categoryId === '0') {
+				// Get all categories from data-filter-selected-cat (e.g., "4,16,0")
+				const filterSelectedCat = parentElement?.getAttribute("data-filter-selected-cat") || '';
+				// Split the string into an array and filter out '0' or invalid entries
+				filterPost.category = filterSelectedCat
+					.split(',')
+					.filter(id => id !== '0' && id.trim() !== '')
+					.map(id => id.trim());
+			} else {
+				// For specific category, set it as the only filter
+				filterPost.category = [categoryId];
+			}
 
 			// Update filterPost.category
 			if (categoryId === '0') {
