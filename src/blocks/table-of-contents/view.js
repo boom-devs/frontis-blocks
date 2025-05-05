@@ -59,7 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Generate ID if missing
                 if (!heading.id) {
-                    heading.id = 'heading-' + index;
+                    const rawText = heading.textContent || 'heading';
+                    const slug = rawText
+                        .toLowerCase()
+                        .trim()
+                        .replace(/[^\w\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-');
+                    heading.id = slug || 'heading-' + index;
                 }
 
                 const level = parseInt(heading.tagName.substring(1));
