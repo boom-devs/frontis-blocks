@@ -1243,8 +1243,8 @@ const TypographySettings = (props) => {
 																	},
 																	lineHeightUnits: {
 																		Desktop: 'px',
-																		Tablet: 'em',
-																		Mobile: '%'
+																		Tablet: 'px',
+																		Mobile: 'px'
 																	},
 																	fontSize: {
 																		Desktop: 0,
@@ -1253,8 +1253,8 @@ const TypographySettings = (props) => {
 																	},
 																	fontSizeUnit: {
 																		Desktop: 'px',
-																		Tablet: 'em',
-																		Mobile: '%'
+																		Tablet: 'px',
+																		Mobile: 'px'
 																	},
 																	fontWeight: 0,
 																	fontStyle: 0,
@@ -1267,8 +1267,8 @@ const TypographySettings = (props) => {
 																	},
 																	letterSpacingUnit: {
 																		Desktop: 'px',
-																		Tablet: 'em',
-																		Mobile: '%'
+																		Tablet: 'px',
+																		Mobile: 'px'
 																	}
 																}
 															})}

@@ -8,6 +8,10 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	premadeStyle: {
+		type: "string",
+		default: "style-1",
+	},
     deviceType: {
         type: "string",
         default: "Desktop"
@@ -2213,10 +2217,37 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
+	loadMoreType: {
+		type: "string",
+		default: "button"
+	},
 	loadMoreText: {
 		type: "string",
 		default: "Load More"
 	},
+
+	paginationPrevNextType: {
+		type: "string",
+		default: "icon"
+	},
+
+	paginationPrevTxt: {
+		type: "string",
+		default: "Prev"
+	},
+	paginationPrevIcon: {
+		type: "string",
+		default: "angle-left"
+	},
+	paginationNextTxt: {
+		type: "string",
+		default: "Next"
+	},
+	paginationNextIcon: {
+		type: "string",
+		default: "angle-right"
+	},
+
 	loadMoreIconAlign: {
         type: "string",
         default: "none",

@@ -97,3 +97,19 @@ export const TAXONOMY_OPTIONS = [
 	{ label: __('Tag', 'frontis-blocks'), value: 'tag' },
 ];
 
+export const PAGINATION_TYPE = [
+	{ label: __('Button', 'frontis-blocks'), value: 'button' },
+	{ label: __('Pagination', 'frontis-blocks'), value: 'pagination' },
+];
+
+export const PAGINATION_PREV_NEXT_TYPE = [
+	{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
+	{ label: __('Text', 'frontis-blocks'), value: 'text' },
+];
+
+export const PREMADE_STYLE = [
+	{ label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+	{ label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+];
+
+
