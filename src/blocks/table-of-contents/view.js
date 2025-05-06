@@ -61,9 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const contentArea = document.querySelector(contentAreaSelectors);
 
-        // If no specific content area is found, try to find the main content area
         if (!contentArea) {
-            // Try to find the main content area by looking for the most likely container
             const possibleContentAreas = document.querySelectorAll('main, [role="main"], .main, .content');
             if (possibleContentAreas.length > 0) {
                 // Use the first matching element that contains headings
@@ -101,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const minLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
             const maxLevel = parseInt(tocBlock.dataset.maxHeadingLevel || 4);
             
-            // First pass: collect all headings into a structure
             headings.forEach(function (heading, index) {
                 // Skip headings within the TOC itself
                 if (tocBlock.contains(heading)) return;
@@ -166,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (targetElement) {
                                 // Smooth scroll to heading
                                 window.scrollTo({
-                                    top: targetElement.offsetTop - 80, // Adjust offset as needed
+                                    top: targetElement.offsetTop + 450,
                                     behavior: 'smooth'
                                 });
 
@@ -186,11 +183,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     
                     // Check if this heading has child items
                     if (tocStructure[level + 1]) {
-                        // Look for immediate child headings
                         const childHeadings = tocStructure[level + 1].filter(child => {
-                            // This is a simplified check - you might need more logic
-                            // to determine parent-child relationships
-                            return true; // For now, consider all next-level headings as children
+                            return true;
                         });
                         
                         if (childHeadings.length > 0) {
@@ -371,7 +365,7 @@ function initTOCScrollTracking() {
     function findActiveHeading() {
         let activeHeadingId = null;
         const scrollPosition = window.scrollY;
-        const offset = parseInt(tocBlock.getAttribute('data-sticky-offset') || 20) + 50; // Add extra offset for better UX
+        const offset = parseInt(tocBlock.getAttribute('data-sticky-offset') || 20) + 50;
         
         // Find the heading that is currently at the top of the viewport
         for (let i = 0; i < headings.length; i++) {
@@ -384,7 +378,6 @@ function initTOCScrollTracking() {
             if (scrollPosition >= headingTop - offset) {
                 activeHeadingId = heading.id;
             } else {
-                // We found the first heading that's below our scroll position
                 break;
             }
         }
@@ -396,12 +389,10 @@ function initTOCScrollTracking() {
     function updateActiveTOCItem() {
         const activeHeadingId = findActiveHeading();
         
-        // Remove active class from all TOC links
         tocLinks.forEach(link => {
             link.classList.remove('active');
         });
         
-        // Add active class to the link corresponding to the active heading
         if (activeHeadingId && idToLinkMap[activeHeadingId]) {
             idToLinkMap[activeHeadingId].classList.add('active');
         }
