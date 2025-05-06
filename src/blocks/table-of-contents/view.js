@@ -1,3 +1,38 @@
+// Function to calculate header height dynamically
+function calculateHeaderHeight() {
+    // Common header selectors in WordPress themes
+    const headerSelectors = [
+        'header', 
+        '.site-header', 
+        '#masthead', 
+        '.header', 
+        '.main-header', 
+        '#site-header',
+        '.navigation-top',
+        '.fixed-header',
+        '.sticky-header'
+    ];
+    
+    let headerHeight = 0;
+    
+    // Check each possible header element
+    for (const selector of headerSelectors) {
+        const headerElement = document.querySelector(selector);
+        if (headerElement) {
+            // Check if header is fixed/sticky using computed style
+            const headerStyle = window.getComputedStyle(headerElement);
+            const position = headerStyle.position;
+            
+            if (position === 'fixed' || position === 'sticky') {
+                headerHeight = Math.max(headerHeight, headerElement.offsetHeight);
+            }
+        }
+    }
+    
+    // Add a small buffer (10px) to ensure heading is clearly visible
+    return headerHeight + 10;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Add initialization flag to prevent multiple initializations
     if (window.fbTOCInitialized) return;
@@ -171,9 +206,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         const targetElement = document.getElementById(item.id);
 
                         if (targetElement) {
-                            // Smooth scroll to heading
+                            // Calculate adaptive offset based on various factors
+                            const headerHeight = calculateHeaderHeight();
+                            const adminBarHeight = document.getElementById('wpadminbar') ? document.getElementById('wpadminbar').offsetHeight : 0;
+                            
+                            // Get user-defined offset from data attribute or use default
+                            const userOffset = parseInt(tocBlock.dataset.scrollOffset) || 20;
+                            
+                            // Calculate final offset combining all factors
+                            const totalOffset = headerHeight + adminBarHeight + userOffset;
+                            
+                            // Smooth scroll to heading with adaptive offset
                             window.scrollTo({
-                                top: targetElement.offsetTop - 50,
+                                top: targetElement.offsetTop - totalOffset,
                                 behavior: 'smooth'
                             });
 
