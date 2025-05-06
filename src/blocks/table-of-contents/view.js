@@ -1,7 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const tocBlocks = document.querySelectorAll('.fb-table-of-contents-block');
+    // Add initialization flag to prevent multiple initializations
+    if (window.fbTOCInitialized) return;
+    window.fbTOCInitialized = true;
 
-    tocBlocks.forEach(function (tocBlock) {
+    const tocBlocks = document.querySelectorAll('.fb-table-of-contents-block');
+    let tocGenerationTimeout;
+
+    // Debounce function to prevent multiple rapid calls
+    function debounce(func, wait) {
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(tocGenerationTimeout);
+                func(...args);
+            };
+            clearTimeout(tocGenerationTimeout);
+            tocGenerationTimeout = setTimeout(later, wait);
+        };
+    }
+
+    // Debounced function to generate TOC
+    const generateTOC = debounce(function(tocBlock) {
+        const tocListContainer = tocBlock.querySelector('.fb-toc-list-container');
+        if (tocListContainer) {
+            tocListContainer.innerHTML = '';
+        }
+
         const smoothScroll = tocBlock.dataset.smoothScroll === 'true';
         const collapsible = tocBlock.dataset.collapsible === 'true';
         const initialCollapsed = tocBlock.dataset.initialCollapsed === 'true';
@@ -10,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const collapseToggle = tocBlock.querySelector('.fb-toc-collapse-toggle');
         const tocContent = tocBlock.querySelector('.fb-toc-content');
         const tocContainer = tocBlock.querySelector('.fb-toc-container');
-        const tocListContainer = tocBlock.querySelector('.fb-toc-list-container');
 
         if (collapsible && initialCollapsed) {
             tocContent.classList.add('collapsed');
@@ -25,15 +47,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Find the content area where we should search for headings
-        const contentArea = document.querySelector('.content-area, .entry-content, #main-content, article');
+        const contentAreaSelectors = [
+            '.content-area',
+            '.entry-content',
+            '#main-content',
+            'article',
+            '.post-content',
+            '.main-content',
+            '.site-content',
+            '.content',
+            '.wp-block-post-content'
+        ].join(',');
 
-        // If no specific content area is found, don't proceed
+        const contentArea = document.querySelector(contentAreaSelectors);
+
+        // If no specific content area is found, try to find the main content area
         if (!contentArea) {
-            console.warn('No content area found for TOC to scan headings.');
+            // Try to find the main content area by looking for the most likely container
+            const possibleContentAreas = document.querySelectorAll('main, [role="main"], .main, .content');
+            if (possibleContentAreas.length > 0) {
+                // Use the first matching element that contains headings
+                for (const area of possibleContentAreas) {
+                    if (area.querySelector('h1, h2, h3, h4, h5, h6')) {
+                        contentArea = area;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // If still no content area is found, don't proceed
+        if (!contentArea) {
+            console.warn('No content area found for TOC to scan headings. Please check your theme structure or contact support.');
             if (tocListContainer) {
                 const emptyMessage = document.createElement('p');
                 emptyMessage.className = 'fb-toc-empty';
-                emptyMessage.textContent = 'Content area not found.';
+                emptyMessage.textContent = 'Content area not found. Please check your theme structure.';
                 tocListContainer.innerHTML = '';
                 tocListContainer.appendChild(emptyMessage);
             }
@@ -215,6 +264,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 tocBlock.classList.add('mobile-collapsed');
                 tocContainer.classList.add('hidden-mobile');
             }
+        }
+    }, 100);
+
+    tocBlocks.forEach(function (tocBlock) {
+        // Initial generation
+        generateTOC(tocBlock);
+
+        // Set up mutation observer to watch for content changes
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList' || mutation.type === 'subtree') {
+                    generateTOC(tocBlock);
+                }
+            });
+        });
+
+        // Start observing the content area for changes
+        const contentArea = document.querySelector(contentAreaSelectors);
+        if (contentArea) {
+            observer.observe(contentArea, {
+                childList: true,
+                subtree: true
+            });
         }
     });
 
