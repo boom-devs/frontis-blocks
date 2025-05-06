@@ -83,7 +83,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const query = {
 			orderby: orderBy,
 			order: sortOrder,
-			per_page: postPerPage,
+			per_page: -1, // Get all posts
 		};
 
 		if (showFilterByTaxonomy) {
@@ -276,7 +276,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 id={postGridGlobalWraperID}
                                 ref={panelRef}
                             >
-                                {postLists.map((item, index) => (
+                                {postLists.slice(0, postPerPage).map((item, index) => (
                                     <LayoutGrid
                                         key={index}
                                         data={item}
