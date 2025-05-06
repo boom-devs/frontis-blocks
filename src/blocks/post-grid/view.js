@@ -299,7 +299,6 @@
 			}
 		}
 	});
-
 	/**
 	 * Category items click
 	 */
@@ -312,6 +311,12 @@
 
 			const categoryId = this.getAttribute('data-category-id');
 			const options = getPostGridOptions(block);
+
+			// Save pagination icons before clearing
+			const prevIconEl = block.querySelector('.fb_pagination_previous_icon');
+			const nextIconEl = block.querySelector('.fb_pagination_next_icon');
+			const prevIconHtml = prevIconEl ? prevIconEl.outerHTML : '';
+			const nextIconHtml = nextIconEl ? nextIconEl.outerHTML : '';
 
 			// Reset page number for this block
 			currentPages[options.blockId] = 1;
@@ -329,14 +334,34 @@
 				options.cat = categoryId;
 			}
 
-			// Clear previous posts
+			// Clear previous posts and show loading skeleton
 			const postListElement = block.querySelector('.fb_post_grid_container');
+			const loadingElement = block.querySelector('.loading.post');
+			
 			if (postListElement) {
 				postListElement.innerHTML = '';
+				// Restore pagination icons
+				postListElement.insertAdjacentHTML('beforeend', prevIconHtml);
+				postListElement.insertAdjacentHTML('beforeend', nextIconHtml);
 			}
 
-			// Load filtered posts
-			loadMorePosts(options);
+			if (loadingElement) {
+				loadingElement.style.display = 'grid';
+			}
+
+			// Add active class to clicked category
+			const allCategoryItems = block.querySelectorAll('.fb_post_grid_filter_category');
+			allCategoryItems.forEach(cat => cat.classList.remove('active'));
+			this.classList.add('active');
+
+			// Load filtered posts with delay to show loading state
+			setTimeout(() => {
+				loadMorePosts(options).then(() => {
+					if (loadingElement) {
+						loadingElement.style.display = 'none';
+					}
+				});
+			}, 300);
 		});
 	});
 
