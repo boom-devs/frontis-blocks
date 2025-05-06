@@ -61,9 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const contentArea = document.querySelector(contentAreaSelectors);
 
-        // If no specific content area is found, try to find the main content area
         if (!contentArea) {
-            // Try to find the main content area by looking for the most likely container
             const possibleContentAreas = document.querySelectorAll('main, [role="main"], .main, .content');
             if (possibleContentAreas.length > 0) {
                 // Use the first matching element that contains headings
@@ -96,12 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
             // Clear any existing content first to prevent duplication
             tocListContainer.innerHTML = '';
 
-            // Create nested TOC structure
-            const tocStructure = {};
+            // Get min and max heading levels
             const minLevel = parseInt(tocBlock.dataset.minHeadingLevel || 2);
             const maxLevel = parseInt(tocBlock.dataset.maxHeadingLevel || 4);
             
-            // First pass: collect all headings into a structure
+            // Store all processed headings for hierarchy
+            const processedHeadings = [];
+            const headingsData = [];
+            
+            // First pass: collect all valid headings and their data
             headings.forEach(function (heading, index) {
                 // Skip headings within the TOC itself
                 if (tocBlock.contains(heading)) return;
@@ -123,21 +124,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Filter by heading level
                 if (level < minLevel || level > maxLevel) return;
 
-                // Store heading info in our structure
-                const headingInfo = {
+                // Add to our processed headings
+                headingsData.push({
                     id: heading.id,
-                    text: heading.innerHTML,
+                    text: heading.textContent,
                     level: level,
-                    children: []
-                };
-
-                // Add to our structure
-                if (!tocStructure[level]) {
-                    tocStructure[level] = [];
-                }
-                tocStructure[level].push(headingInfo);
+                    index: processedHeadings.length
+                });
+                
+                processedHeadings.push(heading);
             });
-
+            
+            if (headingsData.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'fb-toc-empty';
+                emptyMessage.textContent = 'No headings found in the content.';
+                tocListContainer.appendChild(emptyMessage);
+                return;
+            }
+            
             // Create main list
             const mainList = document.createElement('ul');
             mainList.className = 'fb-toc-list';
@@ -145,78 +150,113 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add list style
             const listStyle = tocBlock.dataset.listStyle || 'disc';
             mainList.classList.add('list-style-' + listStyle);
-
-            // Function to build nested list items
-            function buildNestedList(level, parentList, indent = 0) {
-                if (!tocStructure[level]) return;
+            
+            // Build hierarchical structure
+            const hierarchy = [];
+            let currentLevel = null;
+            let currentParent = null;
+            let lastItemAtLevel = {};
+            
+            // Process each heading to build hierarchy
+            headingsData.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'toc-level-' + item.level;
                 
-                tocStructure[level].forEach(function(heading) {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'toc-level-' + level;
-                    
-                    // Create link
-                    const link = document.createElement('a');
-                    link.href = '#' + heading.id;
-                    link.innerHTML = heading.text;
-                    link.addEventListener('click', function (e) {
-                        if (smoothScroll) {
-                            e.preventDefault();
-                            const targetElement = document.getElementById(heading.id);
+                const link = document.createElement('a');
+                link.href = '#' + item.id;
+                link.textContent = item.text;
+                link.addEventListener('click', function (e) {
+                    if (smoothScroll) {
+                        e.preventDefault();
+                        const targetElement = document.getElementById(item.id);
 
-                            if (targetElement) {
-                                // Smooth scroll to heading
-                                window.scrollTo({
-                                    top: targetElement.offsetTop - 80, // Adjust offset as needed
-                                    behavior: 'smooth'
-                                });
+                        if (targetElement) {
+                            // Smooth scroll to heading
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 50,
+                                behavior: 'smooth'
+                            });
 
-                                // Close mobile TOC after clicking
-                                if (window.innerWidth <= 768 && tocBlock.classList.contains('collapsible-mobile')) {
-                                    tocBlock.classList.add('mobile-collapsed');
-                                    if (tocContainer) {
-                                        tocContainer.classList.add('hidden-mobile');
-                                    }
+                            // Close mobile TOC after clicking
+                            if (window.innerWidth <= 768 && tocBlock.classList.contains('collapsible-mobile')) {
+                                tocBlock.classList.add('mobile-collapsed');
+                                if (tocContainer) {
+                                    tocContainer.classList.add('hidden-mobile');
                                 }
                             }
                         }
-                    });
-
-                    listItem.appendChild(link);
-                    parentList.appendChild(listItem);
-                    
-                    // Check if this heading has child items
-                    if (tocStructure[level + 1]) {
-                        // Look for immediate child headings
-                        const childHeadings = tocStructure[level + 1].filter(child => {
-                            // This is a simplified check - you might need more logic
-                            // to determine parent-child relationships
-                            return true; // For now, consider all next-level headings as children
-                        });
-                        
-                        if (childHeadings.length > 0) {
-                            const childList = document.createElement('ul');
-                            childList.className = 'fb-toc-sublist';
-                            listItem.appendChild(childList);
-                            
-                            // Recursively build child items
-                            buildNestedList(level + 1, childList, indent + 1);
-                        }
                     }
                 });
-            }
+                
+                listItem.appendChild(link);
+                
+                // Initialize for first item
+                if (currentLevel === null) {
+                    currentLevel = item.level;
+                    hierarchy.push(listItem);
+                    lastItemAtLevel[item.level] = listItem;
+                    return;
+                }
+                
+                // Handle item with same level as current
+                if (item.level === currentLevel) {
+                    hierarchy.push(listItem);
+                    lastItemAtLevel[item.level] = listItem;
+                }
+                // Handle going deeper in hierarchy
+                else if (item.level > currentLevel) {
+                    // Create sublist if needed
+                    let parentItem = lastItemAtLevel[currentLevel];
+                    let parentList = parentItem.querySelector('ul');
+                    
+                    if (!parentList) {
+                        parentList = document.createElement('ul');
+                        parentList.className = 'fb-toc-sublist';
+                        parentItem.appendChild(parentList);
+                    }
+                    
+                    parentList.appendChild(listItem);
+                    lastItemAtLevel[item.level] = listItem;
+                    currentLevel = item.level;
+                }
+                // Handle going up in hierarchy
+                else if (item.level < currentLevel) {
+                    // Find the correct parent level
+                    currentLevel = item.level;
+                    
+                    // If same level as a previous item, add to main hierarchy
+                    if (currentLevel === minLevel) {
+                        hierarchy.push(listItem);
+                    } else {
+                        // Find the nearest parent level
+                        for (let l = item.level - 1; l >= minLevel; l--) {
+                            if (lastItemAtLevel[l]) {
+                                let parentItem = lastItemAtLevel[l];
+                                let parentList = parentItem.querySelector('ul');
+                                
+                                if (!parentList) {
+                                    parentList = document.createElement('ul');
+                                    parentList.className = 'fb-toc-sublist';
+                                    parentItem.appendChild(parentList);
+                                }
+                                
+                                parentList.appendChild(listItem);
+                                break;
+                            }
+                        }
+                    }
+                    
+                    lastItemAtLevel[item.level] = listItem;
+                }
+            });
             
-            // Start building from the minimum level
-            buildNestedList(minLevel, mainList);
+            // Add all top-level items to the main list
+            hierarchy.forEach(item => {
+                mainList.appendChild(item);
+            });
             
-            // Only append if there are headings found
-            if (mainList.childElementCount > 0) {
-                tocListContainer.appendChild(mainList);
-            } else {
-                const emptyMessage = document.createElement('p');
-                emptyMessage.className = 'fb-toc-empty';
-                emptyMessage.textContent = 'No headings found in the content.';
-                tocListContainer.appendChild(emptyMessage);
-            }
+            // Add the main list to the container
+            tocListContainer.appendChild(mainList);
         } else {
             // No headings found message
             if (tocListContainer) {
@@ -281,6 +321,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Start observing the content area for changes
+        const contentAreaSelectors = [
+            '.content-area',
+            '.entry-content',
+            '#main-content',
+            'article',
+            '.post-content',
+            '.main-content',
+            '.site-content',
+            '.content',
+            '.wp-block-post-content'
+        ].join(',');
+        
         const contentArea = document.querySelector(contentAreaSelectors);
         if (contentArea) {
             observer.observe(contentArea, {
@@ -371,7 +423,7 @@ function initTOCScrollTracking() {
     function findActiveHeading() {
         let activeHeadingId = null;
         const scrollPosition = window.scrollY;
-        const offset = parseInt(tocBlock.getAttribute('data-sticky-offset') || 20) + 50; // Add extra offset for better UX
+        const offset = parseInt(tocBlock.getAttribute('data-sticky-offset') || 20) + 50;
         
         // Find the heading that is currently at the top of the viewport
         for (let i = 0; i < headings.length; i++) {
@@ -384,7 +436,6 @@ function initTOCScrollTracking() {
             if (scrollPosition >= headingTop - offset) {
                 activeHeadingId = heading.id;
             } else {
-                // We found the first heading that's below our scroll position
                 break;
             }
         }
@@ -396,12 +447,10 @@ function initTOCScrollTracking() {
     function updateActiveTOCItem() {
         const activeHeadingId = findActiveHeading();
         
-        // Remove active class from all TOC links
         tocLinks.forEach(link => {
             link.classList.remove('active');
         });
         
-        // Add active class to the link corresponding to the active heading
         if (activeHeadingId && idToLinkMap[activeHeadingId]) {
             idToLinkMap[activeHeadingId].classList.add('active');
         }
