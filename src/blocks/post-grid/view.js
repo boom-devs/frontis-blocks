@@ -316,6 +316,13 @@
 				}
 			}
 
+			// Default Add active class in category
+			document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
+				if (item.getAttribute('data-category-id') === '0') {
+					item.classList.add('active');
+				}
+			});
+
 			loadMorePosts(options);
 		});
 	}
