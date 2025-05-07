@@ -47,6 +47,13 @@
 			filterSelectedTaxonomy: attrs.filterSelectedTaxonomy,
 			filterSelectedCat: attrs.filterSelectedCat,
 			filterSelectedTag: attrs.filterSelectedTag,
+
+			readMoreSwitcher: attrs.readMoreSwitcher,
+			readMoreText: attrs.readMoreText,
+			readMoreIconAlign: attrs.readMoreIconAlign,
+			readMoreIcon: attrs.readMoreIcon,
+			readMoreIconImageUrl: attrs.readMoreIconImageUrl,
+			readMoreIconImageAlt: attrs.readMoreIconImageAlt,
 		};
 	}
 
@@ -108,6 +115,13 @@
 			filterSelectedTaxonomy,
 			filterSelectedCat,
 			filterSelectedTag,
+
+			readMoreSwitcher,
+			readMoreText,
+			readMoreIconAlign,
+			readMoreIcon,
+			readMoreIconImageUrl,
+			readMoreIconImageAlt,
 		} = options;
 
 		let currentPage = currentPages[blockId] || 1;
@@ -163,6 +177,14 @@
 			paginationPrevIcon: paginationPrevIcon || 'angle-left',
 			paginationNextText: paginationNextText || 'Next',
 			paginationNextIcon: paginationNextIcon || 'angle-right',
+
+
+			readMoreSwitcher: readMoreSwitcher || false,
+			readMoreText: readMoreText || 'Read More',
+			readMoreIconAlign: readMoreIconAlign || 'none',
+			readMoreIcon: readMoreIcon || 'angle-right',
+			readMoreIconImageUrl: readMoreIconImageUrl || '',
+			readMoreIconImageAlt: readMoreIconImageAlt || '',
 
 		};
 
@@ -255,6 +277,19 @@
 						`;
 					}
 				}
+
+				if (readMoreSwitcher) {
+					const readMoreIconWrapper = postListElement.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
+					const readMoreIconHTML = options.readMoreIconHTML || '';
+				
+					if (readMoreIconWrapper && readMoreIconHTML) {
+						readMoreIconWrapper.forEach(wrapper => {
+							wrapper.innerHTML = readMoreIconHTML;
+						});
+					}
+				}
+				
+
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
@@ -272,6 +307,14 @@
 
 			const options = getPostGridOptions(block);
 			currentPages[options.blockId] = 1;
+
+			// ✅ Save the Read More icon HTML for initial load
+			if (options.readMoreSwitcher) {
+				const readMoreIcon = block.querySelector('.fb_post_grid_read_more_icon');
+				if (readMoreIcon) {
+					options.readMoreIconHTML = readMoreIcon.outerHTML;
+				}
+			}
 
 			loadMorePosts(options);
 		});
@@ -343,11 +386,23 @@
 			const tagId = this.getAttribute('data-tag-id');
 			const options = getPostGridOptions(block);
 
-			// Save pagination icons before clearing
+			/**
+			 * save old pagination icons html 
+			 */
 			const prevIconEl = block.querySelector('.fb_pagination_previous_icon');
 			const nextIconEl = block.querySelector('.fb_pagination_next_icon');
 			const prevIconHtml = prevIconEl ? prevIconEl.outerHTML : '';
 			const nextIconHtml = nextIconEl ? nextIconEl.outerHTML : '';
+
+			let savedReadMoreIcon = '';
+			if (options.readMoreSwitcher) {
+				const readMoreIcon = block.querySelector('.fb_post_grid_read_more_icon');
+				if (readMoreIcon) {
+					savedReadMoreIcon = readMoreIcon.outerHTML;
+				}
+			}
+			options.readMoreIconHTML = savedReadMoreIcon;
+			
 
 			// Reset page number for this block
 			currentPages[options.blockId] = 1;
@@ -428,7 +483,17 @@
 
 			setTimeout(() => {
 				loadMorePosts(options);
-			
+
+
+
+				// Insert Hello World text after the icon if it's inserted
+				const iconWrapper = postListElement.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
+				if (iconWrapper) {
+					iconWrapper.forEach(wrapper => {
+						wrapper.classList.add('fb_post_grid_read_more_icon_wrapper_hello');
+					});
+				}
+
 				// Hide loading manually after a bit of time (e.g. 600ms)
 				setTimeout(() => {
 					if (loadingElement) {
@@ -503,6 +568,13 @@
 			paginationPrevIcon: grid.getAttribute('data-pagination-prev-icon') || 'angle-left',
 			paginationNextTxt: grid.getAttribute('data-pagination-next-text') || 'Next',
 			paginationNextIcon: grid.getAttribute('data-pagination-next-icon') || 'angle-right',
+
+			readMoreSwitcher: grid.getAttribute('data-read-more-switcher') || false,
+			readMoreText: grid.getAttribute('data-read-more-text') || 'Read More',
+			readMoreIconAlign: grid.getAttribute('data-read-more-icon-align') || 'none',
+			readMoreIcon: grid.getAttribute('data-read-more-icon') || 'angle-right',
+			readMoreIconImageUrl: grid.getAttribute('data-read-more-icon-image-url') || '',
+			readMoreIconImageAlt: grid.getAttribute('data-read-more-icon-image-alt') || '',
 		};
 	};
 
@@ -528,6 +600,11 @@
 		const prevIconHtml = (listEl.querySelector('.fb_pagination_previous_icon') || {}).outerHTML || '';
 		const nextIconHtml = (listEl.querySelector('.fb_pagination_next_icon') || {}).outerHTML || '';
 
+		/**
+		 * save old read more icon html 
+		 */
+		const readMoreIconHtml = (listEl.querySelector('.fb_post_grid_read_more_icon') || {}).outerHTML || '';
+
 		try {
 			const response = await fetch(`${FrontisBlocksData.site_url}/wp-json/wp/v2/frontis-blocks/post`, {
 				method: 'POST',
@@ -538,11 +615,24 @@
 			
 			listEl.innerHTML = data.content;
 
+			/**
+			 * restore pagination icon html 
+			 */
 			const prevWrap = listEl.querySelector('.fb_pagination_previous_icon_Wrapper');
 			const nextWrap = listEl.querySelector('.fb_pagination_next_icon_Wrapper');
 			
 			if (prevWrap) prevWrap.innerHTML = prevIconHtml;
 			if (nextWrap) nextWrap.innerHTML = nextIconHtml;
+
+			/**
+			 * restore read more icon html 
+			 */
+			const readMoreIconWrapper = listEl.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
+			if (readMoreIconWrapper) {
+				readMoreIconWrapper.forEach(wrapper => {
+					wrapper.innerHTML = readMoreIconHtml;
+				});
+			}
 
 			const pagWrap = listEl.querySelector('.fb_pagination_wrapper');
 			if (pagWrap) {

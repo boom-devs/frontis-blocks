@@ -396,3 +396,37 @@
 	}
 }
 
+
+.fb_post_grid_read_more_icon {
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+}
+
+.fb_post_grid_read_more_button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	cursor: pointer;
+	box-sizing: border-box;
+	&:focus {
+		outline: none;
+		box-shadow: none;
+	}
+
+	.fb_post_grid_read_more_icon_wrapper {
+		line-height: 0;
+
+		
+	}
+	.fb_post_grid_read_more_icon_image {
+		height: auto;
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}

@@ -55,7 +55,6 @@ export default function save({ attributes }) {
 		postGridTabletSwitcher,
 		postGridMobileSwitcher,
 
-
 		showFilterByTaxonomy,
         filterSelectedTaxonomy,
         filterSelectedCat,
@@ -66,6 +65,13 @@ export default function save({ attributes }) {
         filterSelectedTagCount,
 		filterAllPostsCount,
         filerselectedCountSwitcher,
+
+		readMoreSwitcher,
+		readMoreText,
+		readMoreIconAlign,
+		readMoreIcon,
+		readMoreIconImageUrl,
+		readMoreIconImageAlt,
 
 	} = attributes;
 
@@ -134,6 +140,13 @@ export default function save({ attributes }) {
 				data-filter-selected-cat={filterSelectedCatString}
 				data-filter-selected-tag={filterSelectedTagString}
 
+				data-read-more-switcher={readMoreSwitcher}
+				data-read-more-text={readMoreText}
+				data-read-more-icon-align={readMoreIconAlign}
+				data-read-more-icon={readMoreIcon}
+				data-read-more-icon-image-url={readMoreIconImageUrl}
+				data-read-more-icon-image-alt={readMoreIconImageAlt}
+
 			>
 
 				{/* Category Filter Render */}
@@ -188,6 +201,10 @@ export default function save({ attributes }) {
 					</div>
 					<div className="fb_pagination_next_icon">
 						{renderSVG(paginationNextIcon)}
+					</div>
+
+					<div className="fb_post_grid_read_more_icon">
+						{renderSVG(readMoreIcon)}
 					</div>
 				</div>
 				<div className="loading post">

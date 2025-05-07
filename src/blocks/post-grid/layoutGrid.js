@@ -1,5 +1,7 @@
 import React from 'react';
 
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+
 export default function LayoutGrid({ 
     data, 
     index,
@@ -18,6 +20,12 @@ export default function LayoutGrid({
     defaultImageUrl,
     premadeStyle,
 
+    readMoreSwitcher,
+    readMoreText,
+    readMoreIconAlign,
+    readMoreIcon,
+    readMoreIconImageUrl,
+    readMoreIconImageAlt,
     }) {
     const src = data.fb_featured_image_src?.[postImageSize]?.[0] || defaultImageUrl;
     const author = data.fb_author_info;
@@ -91,6 +99,35 @@ export default function LayoutGrid({
                         <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                         {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                     </div>
+
+                    {readMoreSwitcher && (
+                        <a href="#" className="fb_post_grid_read_more_button">
+
+                            {readMoreIconAlign !== 'icon-only' && (
+                                <span className="fb_post_grid_read_more_text">{readMoreText}</span>
+                            )}
+
+                            {readMoreIconAlign === 'icon-text' && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}> 
+                                    <div className="fb_post_grid_read_more_icon">{renderSVG(readMoreIcon)}</div>
+                                </div>
+                            )}
+
+                            {readMoreIconAlign === 'image' && readMoreIconImageUrl && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}>
+                                    <div className="fb_post_grid_read_more_icon_image">
+                                        <img src={readMoreIconImageUrl} alt={readMoreIconImageAlt} />
+                                    </div>
+                                </div>
+                            )}
+
+                            {readMoreIconAlign === 'icon-only' && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}> 
+                                    <div className="fb_post_grid_read_more_icon">{renderSVG(readMoreIcon)}</div>
+                                </div>
+                            )}
+                        </a>
+                    )}
                 </div>
             </div>
         )}
@@ -154,6 +191,34 @@ export default function LayoutGrid({
                         <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                         {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                     </div>
+                    {readMoreSwitcher && (
+                        <a href="#" className="fb_post_grid_read_more_button">
+
+                            {readMoreIconAlign !== 'icon-only' && (
+                                <span className="fb_post_grid_read_more_text">{readMoreText}</span>
+                            )}
+
+                            {readMoreIconAlign === 'icon-text' && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}> 
+                                    <div className="fb_post_grid_read_more_icon">{renderSVG(readMoreIcon)}</div>
+                                </div>
+                            )}
+
+                            {readMoreIconAlign === 'image' && readMoreIconImageUrl && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}>
+                                    <div className="fb_post_grid_read_more_icon_image">
+                                        <img src={readMoreIconImageUrl} alt={readMoreIconImageAlt} />
+                                    </div>
+                                </div>
+                            )}
+
+                            {readMoreIconAlign === 'icon-only' && (
+                                <div className={`fb_post_grid_read_more_icon_wrapper`}> 
+                                    <div className="fb_post_grid_read_more_icon">{renderSVG(readMoreIcon)}</div>
+                                </div>
+                            )}
+                        </a>
+                    )}
                 </div>
             </div>
         )}
