@@ -8786,6 +8786,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                         setMobileValue={(value) => setAttributes({ postGridMobileSwitcher: value })}
                                                     />
 												</PanelBody>
+                                                
 
                                                 <PanelBody
 													title={__("Custom CSS", "frontis-blocks")}
