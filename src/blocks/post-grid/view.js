@@ -308,7 +308,7 @@
 			const options = getPostGridOptions(block);
 			currentPages[options.blockId] = 1;
 
-			// ✅ Save the Read More icon HTML for initial load
+			// Save the Read More icon HTML for initial load
 			if (options.readMoreSwitcher) {
 				const readMoreIcon = block.querySelector('.fb_post_grid_read_more_icon');
 				if (readMoreIcon) {
@@ -454,17 +454,6 @@
 
 			setTimeout(() => {
 				loadMorePosts(options);
-
-
-
-				// Insert Hello World text after the icon if it's inserted
-				const iconWrapper = postListElement.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
-				if (iconWrapper) {
-					iconWrapper.forEach(wrapper => {
-						wrapper.classList.add('fb_post_grid_read_more_icon_wrapper_hello');
-					});
-				}
-
 				// Hide loading manually after a bit of time (e.g. 600ms)
 				setTimeout(() => {
 					if (loadingElement) {
