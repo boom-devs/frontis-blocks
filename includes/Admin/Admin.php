@@ -513,6 +513,14 @@ class Admin {
         $premade_style = isset($_POST['premade_style']) ? $_POST['premade_style'] : 'style-1';
 
 
+        $read_more_switcher = isset($_POST['readMoreSwitcher']) ? $_POST['readMoreSwitcher'] : false;
+        $read_more_text = isset($_POST['readMoreText']) ? $_POST['readMoreText'] : 'Read More';
+        $read_more_icon_align = isset($_POST['readMoreIconAlign']) ? $_POST['readMoreIconAlign'] : 'icon';
+        $read_more_icon = isset($_POST['readMoreIcon']) ? $_POST['readMoreIcon'] : 'angle-right';
+        $read_more_icon_image_url = isset($_POST['readMoreIconImageUrl']) ? $_POST['readMoreIconImageUrl'] : '';
+        $read_more_icon_image_alt = isset($_POST['readMoreIconImageAlt']) ? $_POST['readMoreIconImageAlt'] : '';
+
+
         ob_start();
 
         // Initial query to select posts based on type and status
@@ -763,6 +771,36 @@ class Admin {
                                     </<?php echo esc_html($post_description_tag); ?>>
                                 <?php endif; ?>
                             </div>
+
+                            <?php if ($read_more_switcher == 'true'): ?>
+                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" class="fb_post_grid_read_more_button">
+
+                                    <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'icon-text'): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
+                                            
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'image' && $read_more_icon_image_url): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+                                            <div class="fb_post_grid_read_more_icon_image">
+                                                <img src="<?php echo esc_url($read_more_icon_image_url); ?>" alt="<?php echo esc_attr($read_more_icon_image_alt); ?>" />
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'icon-only'): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
+                                            
+                                        </div>
+                                    <?php endif; ?>
+                                </a>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                 <?php endif; ?>
@@ -890,6 +928,36 @@ class Admin {
                                     </<?php echo esc_html($post_description_tag); ?>>
                                 <?php endif; ?>
                             </div>
+
+                            <?php if ($read_more_switcher == 'true'): ?>
+                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" class="fb_post_grid_read_more_button">
+
+                                    <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'icon-text'): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
+                                            
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'image' && $read_more_icon_image_url): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+                                            <div class="fb_post_grid_read_more_icon_image">
+                                                <img src="<?php echo esc_url($read_more_icon_image_url); ?>" alt="<?php echo esc_attr($read_more_icon_image_alt); ?>" />
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($read_more_icon_align === 'icon-only'): ?>
+                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
+                                            
+                                        </div>
+                                    <?php endif; ?>
+                                </a>
+                            <?php endif; ?>
+
                         </div>
                     </div>
                 <?php endif; ?>
