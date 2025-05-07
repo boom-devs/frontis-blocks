@@ -83,10 +83,10 @@ export default function save( props ) {
 
 	const blockProps = {
 		...useBlockProps.save(),
-		id: isBlockRootParent ? (p_block_id || `container-${p_block_id}`) : undefined,
+		id: (p_block_id || `container-${p_block_id}`),
 	};
 
-	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
+	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 	
 	let responsiveClass = '';
 	if(containerDesktopSwitcher){
