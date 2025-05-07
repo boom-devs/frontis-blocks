@@ -1288,7 +1288,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postImageMobileBorderWidth = `${postImageMobileBorder.top}${postImageBorderUnits.Mobile} ${postImageMobileBorder.right}${postImageBorderUnits.Mobile} ${postImageMobileBorder.bottom}${postImageBorderUnits.Mobile} ${postImageMobileBorder.left}${postImageBorderUnits.Mobile}`;
     /** End Image Border */
 
-
     /** Start Image Border Radius */
     const handlePostImageBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
