@@ -63,6 +63,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         filterSelectedTagCount,
         filterAllPostsCount,
         filerselectedCountSwitcher,
+
+        readMoreSwitcher,
+        readMoreText,
+        readMoreIconAlign,
+        readMoreIcon,
+        readMoreIconImageUrl,
+        readMoreIconImageAlt,
+        readMoreIconImageID,
     } = attributes;
 
     const [allPosts, setAllPosts] = useState([]);
@@ -295,6 +303,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         postImageSize={postImageSize}
                                         defaultImageUrl={defaultImageUrl}
                                         premadeStyle={premadeStyle}
+
+                                        readMoreSwitcher={readMoreSwitcher}
+                                        readMoreText={readMoreText}
+                                        readMoreIconAlign={readMoreIconAlign}
+                                        readMoreIcon={readMoreIcon}
+                                        readMoreIconImageUrl={readMoreIconImageUrl}
+                                        readMoreIconImageAlt={readMoreIconImageAlt}
+                                        readMoreIconImageID={readMoreIconImageID}
                                     />
                                 ))}
                             </div>
