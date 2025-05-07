@@ -1324,6 +1324,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 display: inline-flex;
                 align-items: center;
                 ${prefixSuffixSpacing?.Desktop ? `gap: ${prefixSuffixSpacing.Desktop}${prefixSuffixSpacingUnits.Desktop};` : ''}
+                width: 100%;
             }
 
             .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {

@@ -2623,6 +2623,673 @@ const attributes = {
 	},
 	/** End Load More */
 
+	/** Pagination Arrow */
+	paginationArrowSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationArrowSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowAspectRatio: {
+		type: 'boolean',
+		default: true,
+	},
+	paginationArrowBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	paginationArrowNormalClassicColor: {
+		type: "string",
+		default: "#15171C",
+	},
+	paginationArrowNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationArrowNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationArrowNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	paginationArrowHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	paginationArrowHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	paginationArrowHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationArrowHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationArrowHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	paginationArrowPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationArrowDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowTabletPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowMobilePadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationArrowBorder: {
+		type: 'string',
+		default: "none",
+	},
+	paginationArrowBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowBorderColor: {
+		type: 'string',
+	},
+	paginationArrowBorderHoverColor: {
+		type: 'string',
+	},
+	paginationArrowBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowTabletBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowMobileBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	paginationArrowBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationArrowDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationArrowTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	paginationArrowTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	paginationArrowTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	paginationArrowTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	paginationArrowTextFontFamily: { 
+		type: "string",
+		default: "Default",
+	},
+	paginationArrowTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationArrowTextFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowTextFontWeight: {
+		type: "string",
+		default: "600"
+	},
+	paginationArrowTextFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	paginationArrowTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	paginationArrowTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationArrowTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30'
+		}
+	},
+	paginationArrowTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	paginationArrowTextColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowTextColor : {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	paginationArrowTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	paginationArrowIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '14',
+            Tablet: '14',
+            Mobile: '14'
+        }
+    },
+    paginationArrowIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+	paginationArrowIconSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
+        }
+    },
+    paginationArrowIconSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    paginationArrowIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    paginationArrowIconColor: {
+        type: "string",
+        default: "#FFFFFF"
+    },
+    paginationArrowIconHoverColor: {
+        type: 'string',
+        default: ""
+    },
+	// pagination arrow end
+
+	/** Pagination Button Start */
+	paginationBtnSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationBtnSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnAspectRatio: {
+		type: 'boolean',
+		default: true,
+	},
+	paginationBtnBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	paginationBtnNormalClassicColor: {
+		type: "string",
+		default: "#15171C",
+	},
+	paginationBtnNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationBtnNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationBtnNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	paginationBtnHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	paginationBtnHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	paginationBtnHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationBtnHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationBtnHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	paginationBtnPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationBtnDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationBtnTabletPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationBtnMobilePadding: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '12',
+			right: '12',
+		},
+	},
+	paginationBtnPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationBtnBorder: {
+		type: 'string',
+		default: "none",
+	},
+	paginationBtnBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnBorderColor: {
+		type: 'string',
+	},
+	paginationBtnBorderHoverColor: {
+		type: 'string',
+	},
+	paginationBtnBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnTabletBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnMobileBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	paginationBtnBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationBtnDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationBtnTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	paginationBtnTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	paginationBtnTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	paginationBtnTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	paginationBtnTextFontFamily: { 
+		type: "string",
+		default: "Default",
+	},
+	paginationBtnTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationBtnTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationBtnTextFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnTextFontWeight: {
+		type: "string",
+		default: "600"
+	},
+	paginationBtnTextFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	paginationBtnTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	paginationBtnTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationBtnTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	paginationBtnTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	paginationBtnTextColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnTextColor : {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	paginationBtnTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	// pagination btn end
+
+
 	postGridDesktopSwitcher: {
         type: "boolean",
         default: false,

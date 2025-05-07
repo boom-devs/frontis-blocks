@@ -451,8 +451,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		boxShadowPositionCSSHover = '';
 	}
 
-	let containerFlexSelector =
-		'.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap';
+	let containerFlexSelector = '.wp-block-frontis-blocks-container > .frontis-blocks-container-inner-blocks-wrap';
 
 	// if ( ! isBlockRootParent) {
 	// 	containerFlexSelector =
@@ -887,7 +886,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	// End Handle overlay styles.
 
   
-	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}`] = {
+	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
 		...desktopContainerPadding,
@@ -928,18 +927,21 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined
 	};
 
-	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover`] = {
+	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Desktop'),
 	};
 	
-	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:after`] = {
+	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:after`] = {
 		...containerBgOverlayDesktop,
 	};
-	widthSelectorsDesktop[`.frontis-blocks-block-${clientId}:hover:after`] = {
+	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover:after`] = {
 		...containerBgOverlayDesktopHover,
 	};
+	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
+	};
 
-	widthSelectorsTablet[`.frontis-blocks-block-${clientId} `] = {
+	widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthTabletFallback, customWidthUnits['Tablet']),
 		'width': '100%',
 		...tabletContainerPadding,
@@ -970,18 +972,20 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...containerBorderTabletWidthCSS,
 		...containerBorderRadiusTabletWidthCSS,
 	};
-	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:hover`] = {
+	widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Tablet'),
 	};
-	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:after`] = {
+	widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:after`] = {
 		...containerBgOverlayTablet,
 	};
-	widthSelectorsTablet[`.frontis-blocks-block-${clientId}:hover:after`] = {
+	widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover:after`] = {
 		...containerBgOverlayTabletHover,
 	};
+	widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
+	};
 
-
-	widthSelectorsMobile[`.frontis-blocks-block-${clientId} `] = {
+	widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} `] = {
 		'max-width': generateCSSUnit(widthMobileFallback, customWidthUnits['Mobile']),
 		'width': '100%',
 		...mobileContainerPadding,
@@ -1013,16 +1017,18 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...containerBorderRadiusMobileWidthCSS,
 		
 	};
-	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:hover`] = {
+	widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Mobile'),
 	};
-	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:after`] = {
+	widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:after`] = {
 		...containerBgOverlayMobile,
 	};
-	widthSelectorsMobile[`.frontis-blocks-block-${clientId}:hover:after`] = {
+	widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover:after`] = {
 		...containerBgOverlayMobileHover,
 	};
-
+	widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
+	};
 
 	if ((containerType === 'boxed' || containerTypeFull === 'boxed') && containerType !== 'custom') {
 		widthSelectorsDesktop[
