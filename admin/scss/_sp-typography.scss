@@ -203,6 +203,8 @@
 				}
 			}
 			.components-range-control__thumb-wrapper{
+				z-index: unset !important;
+				
 				span{
 					background-color: $primary-color-base;
 				}
