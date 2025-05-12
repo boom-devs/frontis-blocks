@@ -276,6 +276,13 @@
 	justify-content: center;
 	margin-bottom: 60px;
 
+	@media only screen and (max-width: 767px) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px 8px;
+		margin-bottom: 32px;
+	}
+
 	.fb_post_grid_filter_category  {
 		cursor: pointer;
 		color: #000000;
@@ -316,6 +323,13 @@
 			}
 		}
 
+		@media only screen and (max-width: 767px) {
+			font-size: 12px;
+			line-height: 14px;
+			padding: 16px 0;
+			width: 100%;
+		}
+
 		.fb-post-grid-filter-category-count {
 			margin-left: 8px;
 			width: 34px;
@@ -329,6 +343,12 @@
 			font-weight: 700;
 			line-height: 20px;
 			transition: all .3s ease-in-out;
+
+			@media only screen and (max-width: 767px) {
+				font-size: 12px;
+				line-height: 14px;
+				width: 31px;
+			}
 		}
 	}
 }
@@ -354,6 +374,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		gap: 4px;
 	}
 
 	.fb_pagination_ellipsis {

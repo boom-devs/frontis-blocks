@@ -263,13 +263,36 @@
 		transform: rotate(360deg);
 	}
 } 
-
+// .fb_post_grid_filter_categories {
+// 	display: grid;
+// 	grid-template-columns: repeat(2, 1fr);
+// 	gap: 16px 8px;
+// 	margin-bottom: 32px;
+// }
+// .fb_post_grid_filter_categories .fb_post_grid_filter_category {
+// 	font-size: 12px;
+// 	line-height: 14px;
+// 	padding: 16px 0;
+// 	width: 100%;
+// }
+// .fb_post_grid_filter_categories .fb_post_grid_filter_category .fb-post-grid-filter-category-count {
+// 	font-size: 12px;
+// 	line-height: 14px;
+// 	width: 31px;
+// }
 .fb_post_grid_filter_categories {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 16px;
 	justify-content: center;
 	margin-bottom: 60px;
+	
+	@media only screen and (max-width: 767px) {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px 8px;
+		margin-bottom: 32px;
+	}
 
 	.fb_post_grid_filter_category  {
 		cursor: pointer;
@@ -311,6 +334,13 @@
 			}
 		}
 
+		@media only screen and (max-width: 767px) {
+			font-size: 12px;
+			line-height: 14px;
+			padding: 16px 0;
+			width: 100%;
+		}
+
 		.fb-post-grid-filter-category-count {
 			margin-left: 8px;
 			width: 34px;
@@ -324,6 +354,12 @@
 			font-weight: 700;
 			line-height: 18px;
 			transition: all .3s ease-in-out;
+
+			@media only screen and (max-width: 767px) {
+				font-size: 12px;
+				line-height: 14px;
+				width: 31px;
+			}
 		}
 	}
 }
