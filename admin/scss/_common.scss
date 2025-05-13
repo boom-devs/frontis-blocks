@@ -88,3 +88,32 @@
     box-shadow: 0 0 0 2px rgba($warning-color, 0.5);
   }
 }
+
+
+.fb-assets-generation-button-wrapper {
+  position: relative;
+  display: inline-block;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.fb-assets-generation-button {
+  opacity: 0.5;
+}
+.fb-loading-spinner {
+  position: absolute;
+  top: 50%;
+  right: -45px;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid #15171C;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: fb-loading-spinner 1s linear infinite;
+  z-index: 9999;
+}
+
+@keyframes fb-loading-spinner {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

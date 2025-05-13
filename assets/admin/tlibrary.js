@@ -3632,6 +3632,9 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading5Styles = '';
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
+  if (!data) {
+    return false;
+  }
   var arrayKeys = Object.keys(data);
 
   // Loop through the data to generate CSS for each tag

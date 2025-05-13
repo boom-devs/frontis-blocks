@@ -1314,11 +1314,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var rc_switch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rc-switch */ "./node_modules/rc-switch/es/index.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/ConfirmationModal */ "./admin/components/common/ConfirmationModal.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/ConfirmationModal */ "./admin/components/common/ConfirmationModal.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -1339,22 +1338,25 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
 var AssetsGeneration = function AssetsGeneration() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({
       file_generation: false
     }),
     _useState2 = _slicedToArray(_useState, 2),
     options = _useState2[0],
     setOptions = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
     isModalOpen = _useState4[0],
     setIsModalOpen = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoading = _useState6[0],
+    setIsLoading = _useState6[1];
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     fetchOptions();
   }, []);
   var fetchOptions = function fetchOptions() {
@@ -1374,7 +1376,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data;
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error'), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -1385,7 +1387,7 @@ var AssetsGeneration = function AssetsGeneration() {
         }
       },
       error: function error(xhr, status, _error) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(status, " - ").concat(_error), 'frontis-blocks'), {
+        react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(status, " - ").concat(_error), 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -1411,7 +1413,7 @@ var AssetsGeneration = function AssetsGeneration() {
             setOptions(function (prevOptions) {
               return _objectSpread(_objectSpread({}, prevOptions), {}, _defineProperty({}, key, value));
             });
-            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
+            react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
               position: "top-right",
               autoClose: 3000,
               hideProgressBar: false,
@@ -1424,7 +1426,7 @@ var AssetsGeneration = function AssetsGeneration() {
             var _response$data2, _response$data3;
             var errorMessage = ((_response$data2 = response.data) === null || _response$data2 === void 0 ? void 0 : _response$data2.message) || 'Unknown error';
             var errorDetails = ((_response$data3 = response.data) === null || _response$data3 === void 0 ? void 0 : _response$data3.old_value) !== undefined ? " (Old value: ".concat(JSON.stringify(response.data.old_value), ", New value: ").concat(JSON.stringify(response.data.new_value), ", Option name: ").concat(response.data.option_name, ")") : '';
-            react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage).concat(errorDetails), 'frontis-blocks'), {
+            react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage).concat(errorDetails), 'frontis-blocks'), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -1437,7 +1439,7 @@ var AssetsGeneration = function AssetsGeneration() {
         },
         error: function error(xhr, status, _error2) {
           var errorMessage = "".concat(status, " - ").concat(_error2);
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to save option: ".concat(errorMessage), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -1483,10 +1485,11 @@ var AssetsGeneration = function AssetsGeneration() {
       return _ref.apply(this, arguments);
     };
   }();
-  var handleAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+  var handleAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useCallback)(function () {
     setIsModalOpen(true);
   }, []);
-  var confirmAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+  var confirmAssetGeneration = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useCallback)(function () {
+    setIsLoading(true); // Start loading
     setIsModalOpen(false);
     window.jQuery.ajax({
       url: ajaxUrl,
@@ -1496,8 +1499,9 @@ var AssetsGeneration = function AssetsGeneration() {
         security: nonce
       },
       success: function success(response) {
+        setIsLoading(false);
         if (response.success) {
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -1507,7 +1511,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data4;
-          react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
+          react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -1518,7 +1522,8 @@ var AssetsGeneration = function AssetsGeneration() {
         }
       },
       error: function error(xhr, status, _error3) {
-        react_toastify__WEBPACK_IMPORTED_MODULE_5__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
+        setIsLoading(false); // Stop loading
+        react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(status, " - ").concat(_error3), 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -1529,7 +1534,7 @@ var AssetsGeneration = function AssetsGeneration() {
       }
     });
   }, [ajaxUrl, nonce]);
-  var closeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useCallback)(function () {
+  var closeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useCallback)(function () {
     setIsModalOpen(false);
   }, []);
   return /*#__PURE__*/React.createElement("div", {
@@ -1547,11 +1552,14 @@ var AssetsGeneration = function AssetsGeneration() {
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Asset Generation', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Generate assets for your blocks', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-option-input"
+    className: "fb-option-input ".concat(isLoading ? 'fb-assets-generation-button-wrapper' : '')
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    className: "fb-button-primary",
-    onClick: handleAssetGeneration
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Regenerate Asset', 'frontis-blocks')))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: "fb-button-primary ".concat(isLoading ? 'fb-assets-generation-button' : ''),
+    onClick: handleAssetGeneration,
+    disabled: isLoading
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Regenerate Asset', 'frontis-blocks')), isLoading && /*#__PURE__*/React.createElement("span", {
+    className: "fb-loading-spinner"
+  }))), /*#__PURE__*/React.createElement(_common_ConfirmationModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isOpen: isModalOpen,
     onClose: closeModal,
     onConfirm: confirmAssetGeneration,
