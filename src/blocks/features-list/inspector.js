@@ -435,6 +435,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         const updatedItems = FeatureItemList.filter(item => item.id !== id);
         setAttributes({ FeatureItems: updatedItems });
         setFeatureItemList(updatedItems);
+
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = FeatureItemList.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${FeatureItemList.length + 1}` };
+            setAttributes({FeatureItems: [...FeatureItems, newItem] });
+            setFeatureItemList([...FeatureItemList, newItem]);
+        }
     };
 
 
@@ -2349,14 +2359,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 >
                                                     <SortableContext items={FeatureItemList.map(item => item.id)}>
                                                         <ul className='dnd-items-wrapper'>
-                                                            {FeatureItemList.map((item) => (
+                                                            {FeatureItemList.map((item, index) => (
                                                                 <SortableItem
                                                                     key={item.id}
                                                                     id={item.id}
                                                                     item={item}
                                                                     handleChangeItem={handleChangeItem}
                                                                     handleDeleteItem={handleDeleteItem}
-                                                                    setAttributes = {setAttributes}
+                                                                    handleDuplicateItem={handleDuplicateItem}
+                                                                    index={index}
                                                                 />
                                                             ))}
                                                         </ul>
