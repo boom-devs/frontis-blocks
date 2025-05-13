@@ -1113,4 +1113,5 @@ export const FONT_FAMILYS = [
     { label: __("Radio Canada Big", "frontis-blocks"), value: "Radio Canada Big" },
     { label: __("Manrope", "frontis-blocks"), value: "Manrope" },
     { label: __("Onest", "frontis-blocks"), value: "Onest" },
+    { label: __("Inter", "frontis-blocks"), value: "Inter" },
 ];
