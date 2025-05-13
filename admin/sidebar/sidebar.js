@@ -365,16 +365,6 @@ const handleUpdateState = useCallback(async () => {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
 
-  // Mark post as dirty when settings change
-  useEffect(() => {
-    if (isLoading) {
-      if (wp.data.select("core/edit-site")) {
-        editPost({ isDirty: true });
-      } else {
-        wp.data.dispatch("core/editor").editPost({ meta: { _dummy: Date.now() } });
-      }
-    }
-  }, [isLoading, editPost]);
 
   // Color panel array generator
   const colorPanelArray = useCallback((colors, setColor, defaults = []) => {
