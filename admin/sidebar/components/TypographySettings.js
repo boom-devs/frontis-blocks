@@ -28,8 +28,7 @@ const TypographySettings = (props) => {
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
-	const [globalTypography, setGlobalTypography] = useState([])
-	const { editPost } = useDispatch('core/editor');
+	const [globalTypography, setGlobalTypography] = useState([]);
 	const deviceType= useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
@@ -1010,11 +1009,7 @@ const TypographySettings = (props) => {
 
 	useEffect(() => {
 		if(isMount) {
-			if(!!wp.data.select('core/edit-site')) {
-				editPost({ isDirty: true });
-			} else {
-				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-			}
+			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
 	}, [isMount]);
 
