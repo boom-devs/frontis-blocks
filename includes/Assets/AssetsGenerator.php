@@ -39,7 +39,7 @@ class AssetsGenerator {
 
     private function processCSSList(CSSList $list) {
         $contents = $list->getContents();
-        
+
         // Step 1: Remove empty or invalid rules and collect declaration blocks
         $declarationBlocks = [];
         foreach ($contents as $index => $item) {
@@ -104,10 +104,10 @@ class AssetsGenerator {
     }
 
     public static function generate_root_css($color_data, $typography_data) {
-        
+
         $global_colors = "";
         $root_css = "";
-    
+
         // Process base colors
         if (!empty($color_data[0])) {
             $global_colors .= "/* Base Colors */\n";
@@ -173,7 +173,7 @@ class AssetsGenerator {
             if($typography_data) {
                 foreach($array_keys as $key) {
                     if (!isset($typography_data[$key])) continue;
-        
+
                     // Process global properties
                     $globalProps = ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'];
                     foreach($globalProps as $prop) {
@@ -182,7 +182,7 @@ class AssetsGenerator {
                             $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
                             $styleValue = "var({$variable})";
                             $rootStyles .= "{$variable}: {$typography_data[$key][$prop]['value']};\n";
-                            
+
                             switch($key) {
                                 case 'body':
                                     $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
@@ -220,7 +220,7 @@ class AssetsGenerator {
                             }
                         }
                     }
-        
+
                     // Process responsive properties
                     $responsiveProps = ['fontSize', 'letterSpacing', 'lineHeight'];
                     foreach($responsiveProps as $prop) {
@@ -228,13 +228,13 @@ class AssetsGenerator {
                             $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
                             $cssVar = $typography_data[$key][$prop]['variable'];
                             // $rootStyles .= "{$cssVar}: {$data[$key][$prop]['value']};\n";
-        
+
                             // Desktop
                             if (!empty($typography_data[$key][$prop]['value']['Desktop'])) {
                                 $value = $typography_data[$key][$prop]['value']['Desktop'];
                                 $unit = $typography_data[$key][$prop]['unit']['Desktop'];
                                 $desktopStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
-                                
+
                                 switch($key) {
                                     case 'body':
                                         $paragraphStyles .= "{$cssProperty}: var({$cssVar});\n";
@@ -271,14 +271,14 @@ class AssetsGenerator {
                                         break;
                                 }
                             }
-        
+
                             // Tablet
                             if (!empty($typography_data[$key][$prop]['value']['Tablet'])) {
                                 $value = $typography_data[$key][$prop]['value']['Tablet'];
                                 $unit = $typography_data[$key][$prop]['unit']['Tablet'];
                                 $tabletStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
                             }
-        
+
                             // Mobile
                             if (!empty($typography_data[$key][$prop]['value']['Mobile'])) {
                                 $value = $typography_data[$key][$prop]['value']['Mobile'];
@@ -332,7 +332,7 @@ class AssetsGenerator {
                     {$global_colors}
                 }
                 " : "") . "
-                
+
                 " . ($tabletStyles !== '' ? "
                 @media (max-width: 1024px) {
                     :root {
@@ -340,7 +340,7 @@ class AssetsGenerator {
                     }
                 }
                 " : "") . "
-                
+
                 " . ($mobileStyles !== '' ? "
                 @media (max-width: 767px) {
                     :root {
@@ -470,6 +470,10 @@ class AssetsGenerator {
     }
 
     public function get_template_css() {
+
+		var_dump(get_post_type($this->post_id));
+		die();
+
         $post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
         $assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
 
@@ -479,17 +483,17 @@ class AssetsGenerator {
 
         global $wpdb;
         $query = $wpdb->prepare(
-            "SELECT 
+            "SELECT
                 ID,
                 post_type,
-                post_content 
-            FROM 
-                {$wpdb->posts} 
-            WHERE 
-                post_type = 'wp_template' 
-                AND post_status = 'publish' 
+                post_content
+            FROM
+                {$wpdb->posts}
+            WHERE
+                post_type = 'wp_template'
+                AND post_status = 'publish'
                 AND post_name = %s
-            ORDER BY 
+            ORDER BY
                 post_modified DESC",
             $post_name
         );
@@ -510,16 +514,16 @@ class AssetsGenerator {
             'header' => '',
             'footer' => ''
         ];
-    
+
         // Get the current theme's template parts
         $template_parts = $this->get_block_theme_template_parts();
-    
+
         // Check for header template part
         foreach ( $template_parts as $part ) {
             if ( isset( $part['slug'] ) && $part['slug'] === 'header' ) {
                 // Get the template part post
                 $template_part_post = get_block_template( $part['theme'] . '//' . $part['slug'], 'wp_template_part' );
-                
+
                 if ( $template_part_post && ! empty( $template_part_post->content ) ) {
                     // Parse the blocks and render the content
                     $this->post = get_post($template_part_post->wp_id);
@@ -531,11 +535,11 @@ class AssetsGenerator {
                     $this->combine_and_save_css_file($page_name);
                 }
             }
-    
+
             if ( isset( $part['slug'] ) && $part['slug'] === 'footer' ) {
                 // Get the template part post
                 $template_part_post = get_block_template( $part['theme'] . '//' . $part['slug'], 'wp_template_part' );
-                
+
                 if ( $template_part_post && ! empty( $template_part_post->content ) ) {
                     // Parse the blocks and render the content
                     $this->post = get_post($template_part_post->wp_id);
@@ -554,7 +558,7 @@ class AssetsGenerator {
         $this->generate_global_assets();
         $this->combine_static_assets();
         $this->generate_all_blocks_assets();
-        
+
         if($generate_template_css) {
             $this->check_frontis_blocks_used();
             $this->get_template_css();
@@ -570,7 +574,7 @@ class AssetsGenerator {
     function get_block_theme_template_parts() {
         $template_parts = [];
         $theme = wp_get_theme()->get_stylesheet();
-    
+
         // Query all template parts for the current theme
         $args = [
             'post_type'      => 'wp_template_part',
@@ -584,9 +588,9 @@ class AssetsGenerator {
                 ],
             ],
         ];
-    
+
         $query = new \WP_Query( $args );
-    
+
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
@@ -597,7 +601,7 @@ class AssetsGenerator {
             }
             wp_reset_postdata();
         }
-    
+
         return $template_parts;
     }
 
@@ -610,10 +614,12 @@ class AssetsGenerator {
         $this->post_id = $post_id;
         $this->post = $post;
 
+//		var_dump($post->post_name);
+//		die();
         if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
             $this->css_generator_functions(false);
         }
-        
+
         if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
             $this->css_generator_functions(true);
         }
@@ -675,13 +681,13 @@ class AssetsGenerator {
         $blocks = parse_blocks($post_content);
         $this->get_inner_blocks($blocks);
     }
-    
+
     private function get_inner_blocks($blocks) {
         foreach ($blocks as $block) {
             if ($block && isset($block['blockName'])) {
                 $this->generate_block_assets($block);
             }
-            
+
             if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
                 $this->get_inner_blocks($block['innerBlocks']);
             }
@@ -696,7 +702,7 @@ class AssetsGenerator {
         if (!file_exists($css_dir)) {
             wp_mkdir_p($css_dir);
         }
-        
+
         if(get_post_type( $this->post_id ) !== 'wp_template_part') {
             // Add global css
             $global_css_file = $global_css_dir . '/global/global.css';
@@ -744,33 +750,33 @@ class AssetsGenerator {
         if (!empty($fonts_families)) {
             $font_url = "https://fonts.googleapis.com/css?family=";
             $font_parts = [];
-        
+
             foreach ($fonts_families as $font => $weights) {
                 if (strtolower($font) === 'default') {
                     continue;
                 }
-        
+
                 if (!is_array($weights)) {
                     $weights = [$weights]; // Ensure it's an array
                 }
-        
+
                 // Filter out any "default" weights
                 $weights = array_filter($weights, function($weight) {
                     return strtolower($weight) !== 'default';
                 });
-        
+
                 // Ensure 600 and 700 are included
                 $weights = array_unique(array_merge($weights, [600, 700]));
-        
+
                 $italic_weights = [];
                 foreach ($weights as $weight) {
                     $italic_weights[] = $weight . "i"; // Add italic version
                 }
-        
+
                 $all_weights = array_merge($weights, $italic_weights);
                 $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
             }
-        
+
             if (!empty($font_parts)) {
                 $font_url .= implode("|", $font_parts) . "&display=swap";
                 update_option('fb_google_fonts_url', $font_url);
@@ -780,39 +786,39 @@ class AssetsGenerator {
         // if (!empty($fonts_families)) {
         //     $font_url = "https://fonts.googleapis.com/css2?";
         //     $font_parts = [];
-        
+
         //     foreach ($fonts_families as $font => $weights) {
         //         if ($font === 'Default' || $font === 'default') {
         //             continue;
         //         }
-                
+
         //         if (!is_array($weights)) {
         //             $weights = [$weights]; // Ensure it's an array
         //         }
-                
+
         //         // Check if "inherit" is in weights
         //         if (in_array('inherit', $weights) || in_array('..inherit', $weights)) {
         //             // Replace "inherit" with standard weight range
-        //             $font_parts[] = "family=" . str_replace(' ', '+', $font) . 
+        //             $font_parts[] = "family=" . str_replace(' ', '+', $font) .
         //                            ":ital,wght@0,400..700;1,400..700";
         //         } else {
         //             // Ensure 600 and 700 are included
         //             $weights = array_unique(array_merge($weights, [600, 700]));
-                    
+
         //             // Sort weights for proper range formation
         //             sort($weights);
-                    
+
         //             // Find min and max weights for range notation
         //             $min_weight = min($weights);
         //             $max_weight = max($weights);
-                    
+
         //             // Format using the newer CSS2 API
-        //             $font_parts[] = "family=" . str_replace(' ', '+', $font) . 
-        //                            ":ital,wght@0," . $min_weight . ".." . $max_weight . 
+        //             $font_parts[] = "family=" . str_replace(' ', '+', $font) .
+        //                            ":ital,wght@0," . $min_weight . ".." . $max_weight .
         //                            ";1," . $min_weight . ".." . $max_weight;
         //         }
         //     }
-            
+
         //     $font_url .= implode("&", $font_parts) . "&display=swap";
         //     update_option('fb_google_fonts_url', $font_url);
         // }
