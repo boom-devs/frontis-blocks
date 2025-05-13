@@ -470,10 +470,6 @@ class AssetsGenerator {
     }
 
     public function get_template_css() {
-
-		var_dump(get_post_type($this->post_id));
-		die();
-
         $post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
         $assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
 
