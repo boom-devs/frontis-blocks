@@ -7696,6 +7696,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Onest", "frontis-blocks"),
   value: "Onest"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inter", "frontis-blocks"),
+  value: "Inter"
 }];
 
 /***/ }),
