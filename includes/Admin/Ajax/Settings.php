@@ -110,7 +110,6 @@ class Settings extends AjaxBase {
 
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
-			return;
 		}
 
 

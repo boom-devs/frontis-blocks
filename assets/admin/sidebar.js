@@ -1386,7 +1386,7 @@ var TypographySettings = function TypographySettings(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState14 = _slicedToArray(_useState13, 2),
     globalTypography = _useState14[0],
     setGlobalTypography = _useState14[1];
@@ -2056,14 +2056,12 @@ var TypographySettings = function TypographySettings(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
-      if (globalTypoData) {
+      if (globalTypoData !== 'null') {
         globalTypoData = JSON.parse(globalTypoData);
         setGlobalTypography(globalTypoData);
       }
     }, 1000);
   }, [deviceType]);
-  console.log("globalTypography");
-  console.log(globalTypography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
