@@ -4123,8 +4123,6 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     globalTypography = _useState14[0],
     setGlobalTypography = _useState14[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -4774,17 +4772,11 @@ var TypographySettings = function TypographySettings(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      if (!!wp.data.select('core/edit-site')) {
-        editPost({
-          isDirty: true
-        });
-      } else {
-        wp.data.dispatch('core/editor').editPost({
-          meta: {
-            _dummy: new Date().getTime()
-          }
-        });
-      }
+      wp.data.dispatch('core/editor').editPost({
+        meta: {
+          _dummy: new Date().getTime()
+        }
+      });
     }
   }, [isMount]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
