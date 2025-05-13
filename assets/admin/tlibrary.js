@@ -4163,6 +4163,7 @@ var TypographySettings = function TypographySettings(props) {
     var tempTypography = _objectSpread({}, customTypography);
     delete tempTypography[item];
     setCustomTypography(_objectSpread({}, tempTypography));
+    setIsMount(true);
   };
 
   // Body link font typography

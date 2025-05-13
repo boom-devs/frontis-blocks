@@ -71,6 +71,7 @@ const TypographySettings = (props) => {
 		const tempTypography = { ...customTypography }
 		delete tempTypography[item]
 		setCustomTypography({ ...tempTypography })
+		setIsMount(true);
 	};
 
 	// Body link font typography
