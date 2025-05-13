@@ -762,6 +762,9 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading5Styles = '';
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
+  if (!data) {
+    return false;
+  }
   var arrayKeys = Object.keys(data);
 
   // Loop through the data to generate CSS for each tag
@@ -7696,6 +7699,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Onest", "frontis-blocks"),
   value: "Onest"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inter", "frontis-blocks"),
+  value: "Inter"
 }];
 
 /***/ }),
