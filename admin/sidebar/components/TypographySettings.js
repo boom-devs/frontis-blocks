@@ -28,7 +28,7 @@ const TypographySettings = (props) => {
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
-	const [globalTypography, setGlobalTypography] = useState([]);
+	const [globalTypography, setGlobalTypography] = useState(typography);
 	const deviceType= useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
@@ -1024,15 +1024,12 @@ const TypographySettings = (props) => {
 	useEffect(() => {
 		setTimeout(() => {
 			let globalTypoData = localStorage.getItem("fb_globaltypo");
-			if(globalTypoData) {
+			if(globalTypoData !== 'null') {
 				globalTypoData = JSON.parse(globalTypoData);
 				setGlobalTypography(globalTypoData)
 			}
 		}, 1000);
 	}, [deviceType]);
-
-	console.log("globalTypography");
-	console.log(globalTypography);
 
 	return (
 		<>
