@@ -57,6 +57,8 @@
 
                 let currentIndex = 0;
                 const containerWrapper = container.querySelector('#animated-heading-wrapper');
+
+                if (!containerWrapper) return;
                 containerWrapper.innerHTML = '';
 
                 function createWordSpan(text, isActive = false) {
