@@ -981,7 +981,7 @@ const TypographySettings = (props) => {
 				if (customTypography) {
 					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
 					if (response.success) {
-						setCustomTypography(response.data.data);
+						setCustomTypography(response.data.data || {});
 						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
 					}
 				}
@@ -1198,7 +1198,7 @@ const TypographySettings = (props) => {
 										{customTypography && typeof customTypography === 'object' && (
 											<NavigatorProvider initialPath="/">
 												<NavigatorScreen path="/">
-													{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+													{Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map((item, index) => (
 														<div
 															key={index}
 															className="fb-custom-element fb-global-typography-element"
