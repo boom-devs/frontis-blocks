@@ -942,7 +942,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
-			display: flex;
+			${autoFitSwitch ? `display: block;` : `display: flex;`}
 			padding: ${globalDeskPadding};	
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -1164,6 +1164,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			overlayHoverClassicColor,
 			mediaSize,
 			mediaSizeUnits,
+			autoFitSwitch,
 			autoHeightSwitch,
 			mediaHeight,
 			mediaHeightUnits,
