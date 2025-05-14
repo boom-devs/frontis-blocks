@@ -505,13 +505,6 @@ class AssetsGenerator {
     }
 
     function generate_active_header_footer() {
-        // Initialize output array
-        $output = [
-            'header' => '',
-            'footer' => ''
-        ];
-
-        // Get the current theme's template parts
         $template_parts = $this->get_block_theme_template_parts();
 
         // Check for header template part
@@ -610,9 +603,13 @@ class AssetsGenerator {
         $this->post_id = $post_id;
         $this->post = $post;
 
-//		var_dump($post->post_name);
-//		die();
-        if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
+		// Check frontis blocks used inside the post/page
+		$pattern = "/frontis-blocks/i";
+		if(preg_match_all($pattern, $post->post_content) < 1) {
+			return false;
+		}
+
+		if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
             $this->css_generator_functions(false);
         }
 
