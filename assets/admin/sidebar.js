@@ -3369,17 +3369,22 @@ function FrontisBlocksSidebar() {
                   if (postProcess) setTimeout(function () {
                     return postProcess(themeColors);
                   }, 1000);
-                  _context.next = 20;
+                  _context.next = 15;
                   break;
                 case 7:
-                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key);
-                  if (!(!localData || localData.length < 1)) {
-                    _context.next = 18;
-                    break;
-                  }
-                  _context.next = 11;
+                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key); // if (!localData || localData.length < 1) {
+                  // 	const res = await getGlobalStyle(api);
+                  // 	const data = res.success ? res.data : defaultValue;
+                  // 	if (setter) setter(data);
+                  // 	localStorage.setItem(key, JSON.stringify(data));
+                  // 	if (postProcess) setTimeout(() => postProcess(data), 1000);
+                  // } else {
+                  // 	if (setter) setter(localData);
+                  // 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
+                  // }
+                  _context.next = 10;
                   return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.getGlobalStyle)(api);
-                case 11:
+                case 10:
                   res = _context.sent;
                   data = res.success ? res.data : defaultValue;
                   if (setter) setter(data);
@@ -3387,14 +3392,7 @@ function FrontisBlocksSidebar() {
                   if (postProcess) setTimeout(function () {
                     return postProcess(data);
                   }, 1000);
-                  _context.next = 20;
-                  break;
-                case 18:
-                  if (setter) setter(localData);
-                  if (postProcess) setTimeout(function () {
-                    return postProcess(localData);
-                  }, 1000);
-                case 20:
+                case 15:
                 case "end":
                   return _context.stop();
               }
