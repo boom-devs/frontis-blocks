@@ -942,6 +942,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
+			display: flex;
 			padding: ${globalDeskPadding};	
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
