@@ -4728,7 +4728,7 @@ var TypographySettings = function TypographySettings(props) {
             case 9:
               _response = _context.sent;
               if (_response.success) {
-                setCustomTypography(_response.data.data);
+                setCustomTypography(_response.data.data || {});
                 localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
               }
             case 11:
@@ -4995,7 +4995,7 @@ var TypographySettings = function TypographySettings(props) {
       initialPath: "/"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
       path: "/"
-    }, Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
+    }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
       var _customTypography$ite7;
       return /*#__PURE__*/React.createElement("div", {
         key: index,

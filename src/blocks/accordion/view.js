@@ -6,15 +6,22 @@
           const titleWrapper = itemWrapper.querySelector(".fb-accordion-item-title-wrapper");
           const contentWrapper = itemWrapper.querySelector(".fb-accordion-content-wrapper");
 
+          // Check current state
+          const isActive = titleWrapper.classList.contains("active");
+
+          // Set max height
+          if (isActive) {
+            contentWrapper.style.maxHeight = `${contentWrapper.scrollHeight}px`;
+        } else {
+            contentWrapper.style.maxHeight = "0px";
+        }
+
           // Prevent multiple initializations
           if (titleWrapper.hasAttribute('data-accordion-initialized')) return;
           titleWrapper.setAttribute('data-accordion-initialized', 'true');
 
           titleWrapper.addEventListener("click", function(event) {
               event.stopPropagation();
-
-              // Check current state
-              const isActive = titleWrapper.classList.contains("active");
 
               // Reset all accordions at the same level
               const parentAccordion = itemWrapper.closest(".fb-accordion-content-wrapper") || document.body;
