@@ -9,7 +9,8 @@
 	"example": {},
     "supports": {
         "anchor": true,
-		"html": true
+		"html": true,
+		"customClassName": false
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
