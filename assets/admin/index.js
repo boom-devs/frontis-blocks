@@ -1501,6 +1501,7 @@ var AssetsGeneration = function AssetsGeneration() {
       success: function success(response) {
         setIsLoading(false);
         if (response.success) {
+          setIsLoading(false); // Stop loading
           react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(response.data.message, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 3000,
@@ -1511,6 +1512,7 @@ var AssetsGeneration = function AssetsGeneration() {
           });
         } else {
           var _response$data4;
+          setIsLoading(false); // Stop loading
           react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to regenerate files: ".concat(((_response$data4 = response.data) === null || _response$data4 === void 0 ? void 0 : _response$data4.message) || 'Unknown error'), 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
