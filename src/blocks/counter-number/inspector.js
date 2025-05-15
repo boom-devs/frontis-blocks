@@ -225,15 +225,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const deviceType= useDeviceType();
 
+    // Generate unique block ID if not set
 	useEffect(() => {
-		if (!blockID) {
+		if (clientId && typeof clientId === 'string') {
 			setAttributes({
-				blockID: "counter-number" + clientId.slice(0, 8),
+				blockID: "counter-number-" + clientId.slice(0, 8),
 			});
 		}
-	}, [blockID, clientId, setAttributes]);
-
-
+	}, [clientId]);
 
 	// Icon media remove handler
 	const removeCounterMedia = () => {
