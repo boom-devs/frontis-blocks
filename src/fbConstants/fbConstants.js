@@ -1116,5 +1116,4 @@ export const FONT_FAMILYS = [
     { label: __("Manrope", "frontis-blocks"), value: "Manrope" },
     { label: __("Onest", "frontis-blocks"), value: "Onest" },
     { label: __("Inter", "frontis-blocks"), value: "Inter" },
-    
 ];
