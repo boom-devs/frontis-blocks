@@ -4,6 +4,7 @@ import {memo, useEffect} from '@wordpress/element';
 import {select} from '@wordpress/data';
 import backgroundCss from './backgroundCss';
 import {useDeviceType} from "@Config/displayType";
+import getCustomCss from '@Utils/getCustomCss';
 
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
@@ -61,6 +62,8 @@ const Render = ( props ) => {
 			containerTabletSwitcher,
 			containerMobileSwitcher,
 
+			containerGlobalCustomCSS,
+			containerGlobalCustomCSSValue,
 			containerGlobalCustomCSSClass,
 			containerGlobalCustomCSSID,
 	} = attributes;
@@ -96,6 +99,11 @@ const Render = ( props ) => {
 		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } ${responsiveClass}`,
 		style: getContainerBGStyle,
 	} );
+
+	useEffect(() => {
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`);
+		setAttributes({containerGlobalCustomCSSValue: customCss});
+	}, [containerGlobalCustomCSS, blockProps.id]);
 
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
