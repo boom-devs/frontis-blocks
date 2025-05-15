@@ -6,6 +6,7 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Core\FbDatabase;
 use FrontisBlocks\Core\Blocks;
+use FrontisBlocks\Assets\AssetsGenerator;
 
 /**
  * Settings
@@ -109,7 +110,6 @@ class Settings extends AjaxBase {
 
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
-			return;
 		}
 
 
@@ -124,48 +124,58 @@ class Settings extends AjaxBase {
     public function generate_assets() {
         if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
             wp_send_json_error(['message' => 'Invalid nonce'], 400);
-            return;
         }
 
         if (!current_user_can('manage_options')) {
             wp_send_json_error(['message' => 'Insufficient permissions'], 403);
-            return;
         }
 
         // Upload directory path
-        $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
+		$response = $this->get_all_pages_post_ids_with_content();
 
-        // Check if the folder exists
-        if (is_dir($upload_directory)) {
-            // Attempt to delete the folder
-            if ($this->delete_folder($upload_directory)) {
-                $this->get_all_pages_post_ids_with_content();
-                wp_send_json_success(['message' => 'Files regenerated successfully']);
-            } else {
-                wp_send_json_error(['message' => 'Failed to regenerate files'], 500);
-            }
-        } else {
-            wp_send_json_error(['message' => 'Folder does not exist'], 404);
-        }
+		if($response) {
+			wp_send_json_success(['message' => 'CSS generated successfully']);
+		}
+
+		wp_send_json_error(['message' => 'Failed to generate css.'], 500);
     }
 
 
     // Get all pages, posts, custom post, etc post ids and get post content
-    public function get_all_pages_post_ids_with_content() {
-        global $wpdb;
+    public function get_all_pages_post_ids_with_content()
+	{
+		global $wpdb;
 
-        // Query to get all post IDs
-        $query = "SELECT ID, post_content, post_name 
-          FROM {$wpdb->posts} 
-          WHERE post_status = 'publish' 
-          AND post_name != 'wp-global-styles-frontis-theme' 
+		// Query to get all post IDs
+		$query = "SELECT ID, post_content, post_name
+          FROM {$wpdb->posts}
+          WHERE post_status = 'publish'
+          AND post_name != 'wp-global-styles-frontis-theme'
           ORDER BY post_date DESC";
-        $results = $wpdb->get_results($query);
+		$results = $wpdb->get_results($query);
 
-        foreach ($results as $post) {
-            $blocks_instance = Blocks::get_instance();
-            $result = $blocks_instance->get_blocks_on_save($post->ID, $post, true);
-        }
+		$generatedPages = [];
+		foreach ($results as $post) {
+			AssetsGenerator::get_instance()->generate_page_assets($post->ID, $post);
+			$generatedPages[] = $post->post_name;
+		}
+
+		$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
+		$files = glob($upload_directory . "/*");
+
+		if ($files){
+			foreach ($files as $file) {
+				if (is_dir($file)) { // Check if it's a directory
+					if(in_array(basename($file), $generatedPages)){
+						return true;
+					}
+				}
+			}
+		} else {
+			return false;
+		}
+
+		return false;
     }
 
     /**

@@ -28,8 +28,7 @@ const TypographySettings = (props) => {
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
-	const [globalTypography, setGlobalTypography] = useState([])
-	const { editPost } = useDispatch('core/editor');
+	const [globalTypography, setGlobalTypography] = useState(typography);
 	const deviceType= useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
@@ -72,6 +71,7 @@ const TypographySettings = (props) => {
 		const tempTypography = { ...customTypography }
 		delete tempTypography[item]
 		setCustomTypography({ ...tempTypography })
+		setIsMount(true);
 	};
 
 	// Body link font typography
@@ -1010,11 +1010,7 @@ const TypographySettings = (props) => {
 
 	useEffect(() => {
 		if(isMount) {
-			if(!!wp.data.select('core/edit-site')) {
-				editPost({ isDirty: true });
-			} else {
-				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-			}
+			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
 	}, [isMount]);
 
@@ -1029,15 +1025,12 @@ const TypographySettings = (props) => {
 	useEffect(() => {
 		setTimeout(() => {
 			let globalTypoData = localStorage.getItem("fb_globaltypo");
-			if(globalTypoData) {
+			if(globalTypoData !== 'null') {
 				globalTypoData = JSON.parse(globalTypoData);
 				setGlobalTypography(globalTypoData)
 			}
 		}, 1000);
 	}, [deviceType]);
-
-	console.log("globalTypography");
-	console.log(globalTypography);
 
 	return (
 		<>

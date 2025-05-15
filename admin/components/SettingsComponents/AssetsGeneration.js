@@ -78,7 +78,7 @@ const AssetsGeneration = () => {
             resolve(true);
           } else {
             const errorMessage = response.data?.message || 'Unknown error';
-            const errorDetails = response.data?.old_value !== undefined ? 
+            const errorDetails = response.data?.old_value !== undefined ?
               ` (Old value: ${JSON.stringify(response.data.old_value)}, New value: ${JSON.stringify(response.data.new_value)}, Option name: ${response.data.option_name})` : '';
             toast.error(__(`Failed to save option: ${errorMessage}${errorDetails}`, 'frontis-blocks'), {
               position: "top-right",
@@ -135,6 +135,7 @@ const AssetsGeneration = () => {
       success: function(response) {
         setIsLoading(false);
         if (response.success) {
+			setIsLoading(false); // Stop loading
           toast.success(__(response.data.message, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 3000,
@@ -144,6 +145,7 @@ const AssetsGeneration = () => {
             draggable: true,
           });
         } else {
+			setIsLoading(false); // Stop loading
           toast.error(__(`Failed to regenerate files: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 5000,
@@ -175,7 +177,7 @@ const AssetsGeneration = () => {
   return (
     <div className="fb-blocks-settings-options">
       {/* <h3>{__('Assets Generation', 'frontis-blocks')}</h3> */}
-      
+
       <div className="fb-option">
         <div className="fb-option-label">
           <h3>{__('File Generation', 'frontis-blocks')}</h3>
@@ -197,9 +199,9 @@ const AssetsGeneration = () => {
           <h3>{__('Asset Generation', 'frontis-blocks')}</h3>
           <p>{__('Generate assets for your blocks', 'frontis-blocks')}</p>
         </div>
-        <div className={`fb-option-input ${isLoading ? 'fb-assets-generation-button-wrapper' : ''}`}> 
+        <div className={`fb-option-input ${isLoading ? 'fb-assets-generation-button-wrapper' : ''}`}>
           <Button
-            className={`fb-button-primary ${isLoading ? 'fb-assets-generation-button' : ''}`} 
+            className={`fb-button-primary ${isLoading ? 'fb-assets-generation-button' : ''}`}
             onClick={handleAssetGeneration}
             disabled={isLoading}
           >

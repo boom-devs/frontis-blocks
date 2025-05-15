@@ -1386,12 +1386,10 @@ var TypographySettings = function TypographySettings(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState14 = _slicedToArray(_useState13, 2),
     globalTypography = _useState14[0],
     setGlobalTypography = _useState14[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -1432,6 +1430,7 @@ var TypographySettings = function TypographySettings(props) {
     var tempTypography = _objectSpread({}, customTypography);
     delete tempTypography[item];
     setCustomTypography(_objectSpread({}, tempTypography));
+    setIsMount(true);
   };
 
   // Body link font typography
@@ -2041,17 +2040,11 @@ var TypographySettings = function TypographySettings(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      if (!!wp.data.select('core/edit-site')) {
-        editPost({
-          isDirty: true
-        });
-      } else {
-        wp.data.dispatch('core/editor').editPost({
-          meta: {
-            _dummy: new Date().getTime()
-          }
-        });
-      }
+      wp.data.dispatch('core/editor').editPost({
+        meta: {
+          _dummy: new Date().getTime()
+        }
+      });
     }
   }, [isMount]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
@@ -2064,14 +2057,12 @@ var TypographySettings = function TypographySettings(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
-      if (globalTypoData) {
+      if (globalTypoData !== 'null') {
         globalTypoData = JSON.parse(globalTypoData);
         setGlobalTypography(globalTypoData);
       }
     }, 1000);
   }, [deviceType]);
-  console.log("globalTypography");
-  console.log(globalTypography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -3520,23 +3511,6 @@ function FrontisBlocksSidebar() {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
-
-  // Mark post as dirty when settings change
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    if (isLoading) {
-      if (wp.data.select("core/edit-site")) {
-        editPost({
-          isDirty: true
-        });
-      } else {
-        wp.data.dispatch("core/editor").editPost({
-          meta: {
-            _dummy: Date.now()
-          }
-        });
-      }
-    }
-  }, [isLoading, editPost]);
 
   // Color panel array generator
   var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (colors, setColor) {
