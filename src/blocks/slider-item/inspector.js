@@ -15,12 +15,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
 
     useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `fb-slider-${clientId.slice(0, 8)}` });
+        if (clientId && typeof clientId === "string") {
+            setAttributes({ blockId: `fb-slider-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
     
-
     return (
 
         <>

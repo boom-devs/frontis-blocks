@@ -819,6 +819,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonIconImageHeightUnits,
         /** Read More Button */
 
+        thumbnailLinkSwitcher,
+        categoryLinkSwitcher,
+        tagLinkSwitcher,
+        authorLinkSwitcher,
+        titleLinkSwitcher,
+        
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -4355,7 +4361,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postCategoryGap.Desktop ? `gap: ${postCategoryGap.Desktop}${postCategoryGapUnits.Desktop};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_categories a {
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories a,
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories .fb_post_grid_category_name {
             ${postCategoryColor ? `color: ${postCategoryColor};` : ''}
             ${postCategoryBgColor ? `background-color: ${postCategoryBgColor};` : ''}
 
@@ -4384,7 +4391,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_categories a:hover  {
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories a:hover,
+        .${blockId}.fb_post_grid_container .fb_post_grid_categories .fb_post_grid_category_name:hover {
             ${postCategoryHoverColor ? `color: ${postCategoryHoverColor};` : ''}
             ${postCategoryBgHoverColor ? `background-color: ${postCategoryBgHoverColor};` : ''}
             ${postCategoryBorderHoverColor ? `border-color: ${postCategoryBorderHoverColor};` : ''}
@@ -4396,7 +4404,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postTagGap.Desktop ? `gap: ${postTagGap.Desktop}${postTagGapUnits.Desktop};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_tags a {
+        .${blockId}.fb_post_grid_container .fb_post_grid_tags a,
+        .${blockId}.fb_post_grid_container .fb_post_grid_tags .fb_post_grid_tag_name {
             ${postTagColor ? `color: ${postTagColor};` : ''}
             ${postTagBgColor ? `background-color: ${postTagBgColor};` : ''}
 
@@ -4425,7 +4434,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
-        .${blockId}.fb_post_grid_container .fb_post_grid_tags a:hover  {
+        .${blockId}.fb_post_grid_container .fb_post_grid_tags a:hover,
+        .${blockId}.fb_post_grid_container .fb_post_grid_tags .fb_post_grid_tag_name:hover {
             ${postTagHoverColor ? `color: ${postTagHoverColor};` : ''}
             ${postTagBgHoverColor ? `background-color: ${postTagBgHoverColor};` : ''}
             ${postTagBorderHoverColor ? `border-color: ${postTagBorderHoverColor};` : ''}
@@ -4450,6 +4460,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postAuthorAvatarBorderRadiusDesktopWidth && postAuthorAvatarDesktopBorderRadius.top ? `border-radius: ${postAuthorAvatarBorderRadiusDesktopWidth};` : ''}
         }
         .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by,
+        .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
         .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
             ${postAuthorGlobalTypoSwitcher.fontFamily === true && postAuthorGlobalTypographyData.fontFamily ? `font-family: ${postAuthorGlobalTypographyData.fontFamily};` : ''}
             ${postAuthorGlobalTypoSwitcher.fontSize === true && postAuthorGlobalTypographyData.fontSize ? `font-size: ${postAuthorGlobalTypographyData.fontSize};` : ''}
@@ -4477,9 +4488,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by:hover {
             ${postAuthorPrefixHoverColor ? `color: ${postAuthorPrefixHoverColor};` : ''}
         }
+        .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
         .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
             ${postAuthorColor ? `color: ${postAuthorColor};` : ''}
         }
+        .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name:hover,
         .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a:hover {
             ${postAuthorHoverColor ? `color: ${postAuthorHoverColor};` : ''}
         }
@@ -4796,6 +4809,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postAuthorAvatarBorderRadiusTabletWidth && postAuthorAvatarTabletBorderRadius.top ? `border-radius: ${postAuthorAvatarBorderRadiusTabletWidth};` : ''}
             }
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by,
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
                 ${postAuthorGlobalTypoSwitcher.fontSize === false && postAuthorFontSize.Tablet ? `font-size: ${postAuthorFontSize.Tablet}${postAuthorFontSizeUnits.Tablet};` : ''} 
                 ${postAuthorGlobalTypoSwitcher.letterSpacing === false && postAuthorLetterSpacing.Tablet ? `letter-spacing: ${postAuthorLetterSpacing.Tablet}${postAuthorLetterSpacingUnits.Tablet};` : ''}
@@ -4809,9 +4823,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by:hover {
                 ${postAuthorPrefixHoverColor ? `color: ${postAuthorPrefixHoverColor};` : ''}
             }
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
                 ${postAuthorColor ? `color: ${postAuthorColor};` : ''}
             }
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name:hover,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a:hover {
                 ${postAuthorHoverColor ? `color: ${postAuthorHoverColor};` : ''}
             }
@@ -5085,6 +5101,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postAuthorAvatarBorderRadiusMobileWidth && postAuthorAvatarMobileBorderRadius.top? `border-radius: ${postAuthorAvatarBorderRadiusMobileWidth};` : ''}
             }
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by,
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
                 ${postAuthorGlobalTypoSwitcher.fontSize === false && postAuthorFontSize.Mobile ? `font-size: ${postAuthorFontSize.Mobile}${postAuthorFontSizeUnits.Mobile};` : ''} 
                 ${postAuthorGlobalTypoSwitcher.letterSpacing === false && postAuthorLetterSpacing.Mobile ? `letter-spacing: ${postAuthorLetterSpacing.Mobile}${postAuthorLetterSpacingUnits.Mobile};` : ''}
@@ -5098,9 +5115,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_posted_by:hover {
                 ${postAuthorPrefixHoverColor ? `color: ${postAuthorPrefixHoverColor};` : ''}
             }
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a {
                 ${postAuthorColor ? `color: ${postAuthorColor};` : ''}
             }
+            .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name:hover,
             .${blockId}.fb_post_grid_container .fb_post_grid_author_info_name .fb_post_grid_author_name a:hover {
                 ${postAuthorHoverColor ? `color: ${postAuthorHoverColor};` : ''}
             }
@@ -6561,6 +6580,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         </PanelBody>
 
                                         <PanelBody title={__("Thumbnail", "frontis-blocks")} initialOpen={false}>
+
+                                            <ToggleControl
+                                                label={__("Thumbnail Link", "frontis-blocks")}
+                                                checked={thumbnailLinkSwitcher}
+                                                onChange={(value) => setAttributes({ thumbnailLinkSwitcher: value })}
+                                            />
+                                            
                                             <SelectControl
                                                 label={__("Image Size", "frontis-blocks")}
                                                 value={postImageSize}
@@ -6668,6 +6694,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
                                         <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+
+                                            <ToggleControl
+                                                label={__("Title Link", "frontis-blocks")}
+                                                checked={titleLinkSwitcher}
+                                                onChange={(value) => setAttributes({ titleLinkSwitcher: value })}
+                                            />
 
                                             <FB_HtmlTagControl
                                                 label={__("Title Tag", "frontis-blocks")}
@@ -6877,61 +6909,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         </PanelBody>
 
-
                                         <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
 
-                                        <FB_TypographyControl
-                                            globalTypoControlActive={true}
-                                            globalTypoSwitcher={postCategoryGlobalTypoSwitcher}
-                                            storeGlobalTypographyData={(value) => setAttributes({ postCategoryGlobalTypographyData: value })}
+                                            <ToggleControl
+                                                label={__("Category Link", "frontis-blocks")}
+                                                checked={categoryLinkSwitcher}
+                                                onChange={(value) => setAttributes({ categoryLinkSwitcher: value })}
+                                            />
 
-                                            globalTypoType={postCategoryGlobalTypoType}
-                                            onChangeGlobalTypoType={(value) => {
-                                                setAttributes({ 
-                                                    postCategoryGlobalTypoType: value, 
-                                                    postCategoryGlobalTypoSwitcher: value === 'default' ? {...postCategoryGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postCategoryGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                                                })
-                                            }}
+                                            <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={postCategoryGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ postCategoryGlobalTypographyData: value })}
 
-                                            globalTypoOption={postCategoryGlobalTypoOption}
-											onChangeGlobalTypoOption={(value) => setAttributes({ postCategoryGlobalTypoOption: value })}
+                                                globalTypoType={postCategoryGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        postCategoryGlobalTypoType: value, 
+                                                        postCategoryGlobalTypoSwitcher: value === 'default' ? {...postCategoryGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postCategoryGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
 
-                                            fontFamily={postCategoryFontFamily}
-                                            onChangeFontFamily={(value) => setAttributes({ postCategoryFontFamily: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontFamily: value && false} })}
+                                                globalTypoOption={postCategoryGlobalTypoOption}
+                                                onChangeGlobalTypoOption={(value) => setAttributes({ postCategoryGlobalTypoOption: value })}
 
-                                            fontSize={postCategoryFontSize}
-                                            onChangeFontSize={(value) => setAttributes({ postCategoryFontSize: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontSize: value && false} })}
+                                                fontFamily={postCategoryFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ postCategoryFontFamily: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                            fontSizeUnits={postCategoryFontSizeUnits}
-                                            onChangeFontSizeUnit={(value) => setAttributes({ postCategoryFontSizeUnits: value })}
+                                                fontSize={postCategoryFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ postCategoryFontSize: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                            fontWeight={postCategoryFontWeight}
-                                            onChangeFontWeight={(value) => setAttributes({ postCategoryFontWeight: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontWeight: value && false} })}
+                                                fontSizeUnits={postCategoryFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ postCategoryFontSizeUnits: value })}
 
-                                            fontStyle={postCategoryFontStyle}
-                                            onChangeFontStyle={(value) => setAttributes({ postCategoryFontStyle: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontStyle: value && false} })}
+                                                fontWeight={postCategoryFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ postCategoryFontWeight: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                            textTransform={postCategoryTextTransform}
-                                            onChangeTextTransform={(value) => setAttributes({ postCategoryTextTransform: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, textTransform: value && false} })}
+                                                fontStyle={postCategoryFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ postCategoryFontStyle: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                            textDecoration={postCategoryTextDecoration}
-                                            onChangeTextDecoration={(value) => setAttributes({ postCategoryTextDecoration: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, textDecoration: value && false} })}
+                                                textTransform={postCategoryTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ postCategoryTextTransform: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                            letterSpacing={postCategoryLetterSpacing}
-                                            onChangeLetterSpacing={(value) => setAttributes({ postCategoryLetterSpacing: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                                textDecoration={postCategoryTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ postCategoryTextDecoration: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                            letterSpacingUnits={postCategoryLetterSpacingUnits}
-                                            onChangeLetterSpacingUnit={(value) => setAttributes({ postCategoryLetterSpacingUnits: value })}
+                                                letterSpacing={postCategoryLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ postCategoryLetterSpacing: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                            lineHeight={postCategoryLineHeight}
-                                            onChangeLineHeight={(value) => setAttributes({ postCategoryLineHeight: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, lineHeight: value && false} })}
+                                                letterSpacingUnits={postCategoryLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ postCategoryLetterSpacingUnits: value })}
 
-                                            lineHeightUnits={postCategoryLineHeightUnits}
-                                            onChangeLineHeightUnit={(value) => setAttributes({ postCategoryLineHeightUnits: value })}
+                                                lineHeight={postCategoryLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ postCategoryLineHeight: value, postCategoryGlobalTypoSwitcher: {...postCategoryGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                                            deviceType={deviceType}
-                                            setAttributes={setAttributes}
-                                        />
+                                                lineHeightUnits={postCategoryLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ postCategoryLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
 
                                             <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
@@ -7083,58 +7120,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody title={__("Tags", "frontis-blocks")} initialOpen={false}>
 
-                                        <FB_TypographyControl
-                                            globalTypoControlActive={true}
-                                            globalTypoSwitcher={postTagGlobalTypoSwitcher}
-                                            storeGlobalTypographyData={(value) => setAttributes({ postTagGlobalTypographyData: value })}
+                                            <ToggleControl
+                                                label={__("Tag Link", "frontis-blocks")}
+                                                checked={tagLinkSwitcher}
+                                                onChange={(value) => setAttributes({ tagLinkSwitcher: value })}
+                                            />
 
-                                            globalTypoType={postTagGlobalTypoType}
-                                            onChangeGlobalTypoType={(value) => {
-                                                setAttributes({ 
-                                                    postTagGlobalTypoType: value, 
-                                                    postTagGlobalTypoSwitcher: value === 'default' ? {...postTagGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postTagGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                                                })
-                                            }}
+                                            <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={postTagGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ postTagGlobalTypographyData: value })}
 
-                                            globalTypoOption={postTagGlobalTypoOption}
-											onChangeGlobalTypoOption={(value) => setAttributes({ postTagGlobalTypoOption: value })}
+                                                globalTypoType={postTagGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({ 
+                                                        postTagGlobalTypoType: value, 
+                                                        postTagGlobalTypoSwitcher: value === 'default' ? {...postTagGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...postTagGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                                    })
+                                                }}
 
-                                            fontFamily={postTagFontFamily}
-                                            onChangeFontFamily={(value) => setAttributes({ postTagFontFamily: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontFamily: value && false} })}
+                                                globalTypoOption={postTagGlobalTypoOption}
+                                                onChangeGlobalTypoOption={(value) => setAttributes({ postTagGlobalTypoOption: value })}
 
-                                            fontSize={postTagFontSize}
-                                            onChangeFontSize={(value) => setAttributes({ postTagFontSize: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontSize: value && false} })}
+                                                fontFamily={postTagFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ postTagFontFamily: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                                            fontSizeUnits={postTagFontSizeUnits}
-                                            onChangeFontSizeUnit={(value) => setAttributes({ postTagFontSizeUnits: value })}
+                                                fontSize={postTagFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ postTagFontSize: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontSize: value && false} })}
 
-                                            fontWeight={postTagFontWeight}
-                                            onChangeFontWeight={(value) => setAttributes({ postTagFontWeight: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontWeight: value && false} })}
+                                                fontSizeUnits={postTagFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ postTagFontSizeUnits: value })}
 
-                                            fontStyle={postTagFontStyle}
-                                            onChangeFontStyle={(value) => setAttributes({ postTagFontStyle: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontStyle: value && false} })}
+                                                fontWeight={postTagFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ postTagFontWeight: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                                            textTransform={postTagTextTransform}
-                                            onChangeTextTransform={(value) => setAttributes({ postTagTextTransform: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, textTransform: value && false} })}
+                                                fontStyle={postTagFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ postTagFontStyle: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                                            textDecoration={postTagTextDecoration}
-                                            onChangeTextDecoration={(value) => setAttributes({ postTagTextDecoration: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, textDecoration: value && false} })}
+                                                textTransform={postTagTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ postTagTextTransform: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, textTransform: value && false} })}
 
-                                            letterSpacing={postTagLetterSpacing}
-                                            onChangeLetterSpacing={(value) => setAttributes({ postTagLetterSpacing: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                                textDecoration={postTagTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ postTagTextDecoration: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                                            letterSpacingUnits={postTagLetterSpacingUnits}
-                                            onChangeLetterSpacingUnit={(value) => setAttributes({ postTagLetterSpacingUnits: value })}
+                                                letterSpacing={postTagLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ postTagLetterSpacing: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                                            lineHeight={postTagLineHeight}
-                                            onChangeLineHeight={(value) => setAttributes({ postTagLineHeight: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, lineHeight: value && false} })}
+                                                letterSpacingUnits={postTagLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ postTagLetterSpacingUnits: value })}
 
-                                            lineHeightUnits={postTagLineHeightUnits}
-                                            onChangeLineHeightUnit={(value) => setAttributes({ postTagLineHeightUnits: value })}
+                                                lineHeight={postTagLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ postTagLineHeight: value, postTagGlobalTypoSwitcher: {...postTagGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                                            deviceType={deviceType}
-                                            setAttributes={setAttributes}
-                                        />
+                                                lineHeightUnits={postTagLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ postTagLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
 
                                             <FB_SwitcherControl
                                                 label={__("Color", "frontis-blocks")}
@@ -7282,6 +7325,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         </PanelBody>
 
                                         <PanelBody title={__("Author", "frontis-blocks")} initialOpen={false}>
+
+                                            <ToggleControl
+                                                label={__("Author Link", "frontis-blocks")}
+                                                checked={authorLinkSwitcher}
+                                                onChange={(value) => setAttributes({ authorLinkSwitcher: value })}
+                                            />
 
                                             <FB_Range
                                                 min={1}

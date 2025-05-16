@@ -254,10 +254,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
 
     useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `fb-slider-${clientId.slice(0, 8)}` });
-        }
-    }, [clientId]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-slider-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     /** Start Arrows border */
     const handleArrowsBorderUnitChange = ( event, position ) => {

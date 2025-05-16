@@ -112,12 +112,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 	// Generate unique block ID if not set
 	useEffect(() => {
-		if (clientId && typeof clientId === 'string' && !blockID) {
+		if (clientId && typeof clientId === "string") {
 			setAttributes({
 				blockID: "off-canvas-menu-" + clientId.slice(0, 8),
 			});
 		}
-	}, [clientId, blockID, setAttributes]);
+	}, [clientId]);
+	
 
 	// Position options for the menu
 	// const positionOptions = [
