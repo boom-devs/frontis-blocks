@@ -73,6 +73,13 @@ export default function save({ attributes }) {
 		readMoreIconImageUrl,
 		readMoreIconImageAlt,
 
+
+		thumbnailLinkSwitcher,
+		categoryLinkSwitcher,
+		tagLinkSwitcher,
+		authorLinkSwitcher,
+		titleLinkSwitcher,
+
 	} = attributes;
 
 
@@ -146,6 +153,12 @@ export default function save({ attributes }) {
 				data-read-more-icon={readMoreIcon}
 				data-read-more-icon-image-url={readMoreIconImageUrl}
 				data-read-more-icon-image-alt={readMoreIconImageAlt}
+
+				data-thumbnail-link-switcher={thumbnailLinkSwitcher}
+				data-category-link-switcher={categoryLinkSwitcher}
+				data-tag-link-switcher={tagLinkSwitcher}
+				data-author-link-switcher={authorLinkSwitcher}
+				data-title-link-switcher={titleLinkSwitcher}
 
 			>
 

@@ -28,6 +28,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
     
     // Generate unique block ID
+
     useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
