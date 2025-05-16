@@ -54,6 +54,12 @@
 			readMoreIcon: attrs.readMoreIcon,
 			readMoreIconImageUrl: attrs.readMoreIconImageUrl,
 			readMoreIconImageAlt: attrs.readMoreIconImageAlt,
+
+			thumbnailLinkSwitcher: attrs.thumbnailLinkSwitcher,
+			categoryLinkSwitcher: attrs.categoryLinkSwitcher,
+			tagLinkSwitcher: attrs.tagLinkSwitcher,
+			authorLinkSwitcher: attrs.authorLinkSwitcher,
+			titleLinkSwitcher: attrs.titleLinkSwitcher,
 		};
 	}
 
@@ -122,6 +128,12 @@
 			readMoreIcon,
 			readMoreIconImageUrl,
 			readMoreIconImageAlt,
+
+			thumbnailLinkSwitcher,
+			categoryLinkSwitcher,
+			tagLinkSwitcher,
+			authorLinkSwitcher,
+			titleLinkSwitcher,
 		} = options;
 
 		let currentPage = currentPages[blockId] || 1;
@@ -185,6 +197,12 @@
 			readMoreIcon: readMoreIcon || 'angle-right',
 			readMoreIconImageUrl: readMoreIconImageUrl || '',
 			readMoreIconImageAlt: readMoreIconImageAlt || '',
+
+			thumbnailLinkSwitcher: thumbnailLinkSwitcher || true,
+			categoryLinkSwitcher: categoryLinkSwitcher || true,
+			tagLinkSwitcher: tagLinkSwitcher || true,
+			authorLinkSwitcher: authorLinkSwitcher || true,
+			titleLinkSwitcher: titleLinkSwitcher || true,
 
 		};
 
@@ -370,6 +388,7 @@
 			}
 		}
 	});
+
 	/**
 	 * Category items click
 	 */
@@ -542,6 +561,12 @@
 			readMoreIcon: grid.getAttribute('data-read-more-icon') || 'angle-right',
 			readMoreIconImageUrl: grid.getAttribute('data-read-more-icon-image-url') || '',
 			readMoreIconImageAlt: grid.getAttribute('data-read-more-icon-image-alt') || '',
+
+			thumbnailLinkSwitcher: grid.getAttribute('data-thumbnail-link-switcher') || true,
+			categoryLinkSwitcher: grid.getAttribute('data-category-link-switcher') || true,
+			tagLinkSwitcher: grid.getAttribute('data-tag-link-switcher') || true,
+			authorLinkSwitcher: grid.getAttribute('data-author-link-switcher') || true,
+			titleLinkSwitcher: grid.getAttribute('data-title-link-switcher') || true,
 		};
 	};
 

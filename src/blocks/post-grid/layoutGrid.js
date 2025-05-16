@@ -26,6 +26,12 @@ export default function LayoutGrid({
     readMoreIcon,
     readMoreIconImageUrl,
     readMoreIconImageAlt,
+
+    thumbnailLinkSwitcher,
+    categoryLinkSwitcher,
+    tagLinkSwitcher,
+    authorLinkSwitcher,
+    titleLinkSwitcher,
     }) {
     const src = data.fb_featured_image_src?.[postImageSize]?.[0] || defaultImageUrl;
     const author = data.fb_author_info;
@@ -43,9 +49,14 @@ export default function LayoutGrid({
             <div className={`fb_post_grid_wrapper fb_post_grid_${premadeStyle}`}>
                 <div className="fb_post_grid_image_wrapper">
                     <div className="fb_post_grid_image">
-                        <a href={data.link}>
+                        {thumbnailLinkSwitcher && (
+                            <a href={data.link}>
+                                <img src={src} alt={title || "Post image"} />
+                            </a>
+                        )}
+                        {!thumbnailLinkSwitcher && (
                             <img src={src} alt={title || "Post image"} />
-                        </a>
+                        )}
                     </div>
                 </div>
 
@@ -54,9 +65,14 @@ export default function LayoutGrid({
                         <div className="fb_post_grid_author">
                             {postAuthorAvatarSwitcher && (
                                 <div className="fb_post_grid_author_avatar">
-                                    <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                    {authorLinkSwitcher && (
+                                        <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                            <img src={author.avatar} alt={author.name} />
+                                        </a>
+                                    )}
+                                    {!authorLinkSwitcher && (
                                         <img src={author.avatar} alt={author.name} />
-                                    </a>
+                                    )}
                                 </div>
                             )}
                             <div className="fb_post_grid_author_info">
@@ -65,7 +81,12 @@ export default function LayoutGrid({
                                         <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
                                     )}
                                     <div className="fb_post_grid_author_name">
-                                        <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                        {authorLinkSwitcher && (
+                                            <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                        )}
+                                        {!authorLinkSwitcher && (
+                                            author.name
+                                        )}
                                     </div>
                                 </div>
                                 {showDateSwitcher && (
@@ -79,7 +100,12 @@ export default function LayoutGrid({
                         <div className="fb_post_grid_categories">
                             {categories.map((category, index) => (
                                 <div className="fb_post_grid_category" key={index}>
-                                    <a className="fb_post_grid_category_url" href={category.url}>{category.name}</a>
+                                    {categoryLinkSwitcher && (
+                                        <a className="fb_post_grid_category_url" href={category.url}>{category.name}</a>
+                                    )}
+                                    {!categoryLinkSwitcher && (
+                                        <span className="fb_post_grid_category_name">{category.name}</span>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -89,7 +115,12 @@ export default function LayoutGrid({
                         <div className="fb_post_grid_tags">
                             {tags.map((tag, index) => (
                                 <div className="fb_post_grid_tag" key={index}>
-                                    <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                    {tagLinkSwitcher && (
+                                        <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                    )}
+                                    {!tagLinkSwitcher && (
+                                        <span className="fb_post_grid_tag_name">{tag.name}</span>
+                                    )}
                                 </div>
                             ))}
                         </div>
@@ -136,15 +167,25 @@ export default function LayoutGrid({
             <div className={`fb_post_grid_wrapper fb_post_grid_${premadeStyle}`}>
                 <div className="fb_post_grid_image_wrapper">
                     <div className="fb_post_grid_image">
-                        <a href={data.link}>
+                        {thumbnailLinkSwitcher && (
+                            <a href={data.link}>
+                                <img src={src} alt={title || "Post image"} />
+                            </a>
+                        )}
+                        {!thumbnailLinkSwitcher && (
                             <img src={src} alt={title || "Post image"} />
-                        </a>
+                        )}
 
                         {showCategorySwitcher && (
                             <div className="fb_post_grid_categories">
                                 {categories.map((category, index) => (
                                     <div className="fb_post_grid_category" key={index}>
-                                        <a className="post_category" href={category.url}>{category.name}</a>
+                                        {categoryLinkSwitcher && (
+                                            <a className="post_category" href={category.url}>{category.name}</a>
+                                        )}
+                                        {!categoryLinkSwitcher && (
+                                            <span className="fb_post_grid_category_name">{category.name}</span>
+                                        )}
                                     </div>
                                 ))}
                             </div>
@@ -153,7 +194,12 @@ export default function LayoutGrid({
                             <div className="fb_post_grid_tags">
                                 {tags.map((tag, index) => (
                                     <div className="fb_post_grid_tag" key={index}>
-                                        <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                        {tagLinkSwitcher && (
+                                            <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                        )}
+                                        {!tagLinkSwitcher && (
+                                            <span className="fb_post_grid_tag_name">{tag.name}</span>
+                                        )}
                                     </div>
                                 ))}
                             </div>
@@ -167,9 +213,14 @@ export default function LayoutGrid({
                         <div className="fb_post_grid_author">
                             {postAuthorAvatarSwitcher && (
                                 <div className="fb_post_grid_author_avatar">
-                                    <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                    {authorLinkSwitcher && (
+                                        <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                            <img src={author.avatar} alt={author.name} />
+                                        </a>
+                                    )}
+                                    {!authorLinkSwitcher && (
                                         <img src={author.avatar} alt={author.name} />
-                                    </a>
+                                    )}
                                 </div>
                             )}
                             <div className="fb_post_grid_author_info">
@@ -178,7 +229,12 @@ export default function LayoutGrid({
                                         <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
                                     )}
                                     <div className="fb_post_grid_author_name">
-                                        <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                        {authorLinkSwitcher && (
+                                            <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                        )}
+                                        {!authorLinkSwitcher && (
+                                            author.name
+                                        )}
                                     </div>
                                 </div>
                                 {showDateSwitcher && (

@@ -520,6 +520,12 @@ class Admin {
         $read_more_icon_image_url = isset($_POST['readMoreIconImageUrl']) ? $_POST['readMoreIconImageUrl'] : '';
         $read_more_icon_image_alt = isset($_POST['readMoreIconImageAlt']) ? $_POST['readMoreIconImageAlt'] : '';
 
+        $thumbnail_link_switcher = isset($_POST['thumbnailLinkSwitcher']) ? $_POST['thumbnailLinkSwitcher'] : true;
+        $category_link_switcher = isset($_POST['categoryLinkSwitcher']) ? $_POST['categoryLinkSwitcher'] : true;
+        $tag_link_switcher = isset($_POST['tagLinkSwitcher']) ? $_POST['tagLinkSwitcher'] : true;
+        $author_link_switcher = isset($_POST['authorLinkSwitcher']) ? $_POST['authorLinkSwitcher'] : true;
+        $title_link_switcher = isset($_POST['titleLinkSwitcher']) ? $_POST['titleLinkSwitcher'] : true;
+
 
         ob_start();
 
@@ -658,7 +664,7 @@ class Admin {
                                         // If the post has a thumbnail, get the thumbnail image
                                         $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                         $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
-                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
+                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url; 
                                     else :
                                         // If the post doesn't have a thumbnail, use the default image
                                         $image_url = $default_image_url;
@@ -666,11 +672,19 @@ class Admin {
                                     endif;
                                 ?>
 
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                <?php if ($thumbnail_link_switcher == 'true'): ?>
+                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                        <img src="<?php echo esc_url($image_url); ?>"
+                                            srcset="<?php echo esc_attr($image_srcset); ?>"
+                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                        />
+                                    </a>
+                                <?php else: ?>
                                     <img src="<?php echo esc_url($image_url); ?>"
                                         srcset="<?php echo esc_attr($image_srcset); ?>"
-                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
-                                </a>
+                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                    />
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -679,9 +693,10 @@ class Admin {
                                 <div class="fb_post_grid_author">
                                     <?php if ($post_author_avatar_switcher == 'true'): ?>
                                         <div class="fb_post_grid_author_avatar">
-                                            <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                <?php 
+                                            <?php if ($author_link_switcher == 'true'): ?>
+                                                <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                    aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                    <?php 
                                                 echo wp_kses_post(
                                                     get_avatar(
                                                         $single_post->post_author,
@@ -692,6 +707,9 @@ class Admin {
                                                     )
                                                 ); ?>
                                             </a>
+                                            <?php else: ?>
+                                                <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>" alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
+                                            <?php endif; ?>
                                         </div>
                                     <?php endif; ?>
                                     <div class="fb_post_grid_author_info">
@@ -700,10 +718,14 @@ class Admin {
                                                 <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
                                             <?php endif; ?>
                                             <div class="fb_post_grid_author_name">
-                                                <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                <?php if ($author_link_switcher == 'true'): ?>
+                                                    <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
                                                 aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
                                                     <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
-                                                </a>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <?php if ($show_date_switcher == 'true'): ?>
@@ -722,11 +744,15 @@ class Admin {
                                         if ($categories):
                                             foreach ($categories as $category): ?>
                                                 <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                    <a class="fb_post_grid_category_url"
-                                                    href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
-                                                    aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                        <?php echo esc_html($category->name); ?>
-                                                    </a>
+                                                    <?php if ($category_link_switcher == 'true'): ?>
+                                                        <a class="fb_post_grid_category_url"
+                                                            href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                            <?php echo esc_html($category->name); ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                    <?php endif; ?>
                                                 </div>
                                             <?php endforeach;
                                         endif;
@@ -741,11 +767,15 @@ class Admin {
                                         if ($tags):
                                             foreach ($tags as $tag): ?>
                                                 <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                    <a class="fb_post_grid_tag_url"
-                                                    href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-                                                    aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                        <?php echo esc_html($tag->name); ?>
-                                                    </a>
+                                                    <?php if ($tag_link_switcher == 'true'): ?>
+                                                        <a class="fb_post_grid_tag_url"
+                                                            href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                            <?php echo esc_html($tag->name); ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                    <?php endif; ?>
                                                 </div>
                                             <?php endforeach;
                                         endif;
@@ -754,12 +784,17 @@ class Admin {
                             <?php endif; ?>
 
                             <div class="fb_post_grid_content">
-
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                <?php if ($title_link_switcher == 'true'): ?>
+                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                        <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                        <?php echo esc_html($single_post->post_title); ?>
+                                        </<?php echo esc_html($post_title_tag); ?>>
+                                    </a>
+                                <?php else: ?>
                                     <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
                                         <?php echo esc_html($single_post->post_title); ?>
                                     </<?php echo esc_html($post_title_tag); ?>>
-                                </a>
+                                <?php endif; ?>
 
                                 <?php if (!empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true'): ?>
                                     <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
@@ -822,11 +857,19 @@ class Admin {
                                     endif;
                                 ?>
 
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                <?php if ($thumbnail_link_switcher == 'true'): ?>
+                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                        <img src="<?php echo esc_url($image_url); ?>"
+                                            srcset="<?php echo esc_attr($image_srcset); ?>"
+                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                        />
+                                    </a>
+                                <?php else: ?>
                                     <img src="<?php echo esc_url($image_url); ?>"
                                         srcset="<?php echo esc_attr($image_srcset); ?>"
-                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
-                                </a>
+                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                    />
+                                <?php endif; ?>
 
                                 <?php if ($show_category_switcher == 'true'): ?>
                                     <div class="fb_post_grid_categories">
@@ -835,11 +878,15 @@ class Admin {
                                             if ($categories):
                                                 foreach ($categories as $category): ?>
                                                     <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                        <a class="fb_post_grid_category_url"
-                                                        href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
-                                                        aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                            <?php echo esc_html($category->name); ?>
-                                                        </a>
+                                                        <?php if ($category_link_switcher == 'true'): ?>
+                                                            <a class="fb_post_grid_category_url"
+                                                                href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
+                                                                aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                                <?php echo esc_html($category->name); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                        <?php endif; ?>
                                                     </div>
                                                 <?php endforeach;
                                             endif;
@@ -854,11 +901,15 @@ class Admin {
                                             if ($tags):
                                                 foreach ($tags as $tag): ?>
                                                     <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                        <a class="fb_post_grid_tag_url"
-                                                        href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-                                                        aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                            <?php echo esc_html($tag->name); ?>
-                                                        </a>
+                                                        <?php if ($tag_link_switcher == 'true'): ?>
+                                                            <a class="fb_post_grid_tag_url"
+                                                                href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
+                                                                aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                                <?php echo esc_html($tag->name); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                        <?php endif; ?>
                                                     </div>
                                                 <?php endforeach;
                                             endif;
@@ -874,7 +925,8 @@ class Admin {
                                 <div class="fb_post_grid_author">
                                     <?php if ($post_author_avatar_switcher == 'true'): ?>
                                         <div class="fb_post_grid_author_avatar">
-                                            <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                            <?php if ($author_link_switcher == 'true'): ?>
+                                                <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
                                                 aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
                                                 <?php 
                                                 echo wp_kses_post(
@@ -887,6 +939,9 @@ class Admin {
                                                     )
                                                 ); ?>
                                             </a>
+                                            <?php else: ?>
+                                                <img src="<?php echo esc_url(get_avatar_url($single_post->post_author)); ?>" alt="<?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>" />
+                                            <?php endif; ?>
                                         </div>
                                     <?php endif; ?>
                                     <div class="fb_post_grid_author_info">
@@ -895,10 +950,14 @@ class Admin {
                                                 <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
                                             <?php endif; ?>
                                             <div class="fb_post_grid_author_name">
-                                                <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                <?php if ($author_link_switcher == 'true'): ?>
+                                                    <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
                                                 aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
                                                     <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
                                                 </a>
+                                                <?php else: ?>
+                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <?php if ($show_date_switcher == 'true'): ?>
@@ -912,11 +971,17 @@ class Admin {
 
                             <div class="fb_post_grid_content">
 
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                <?php if ($title_link_switcher == 'true'): ?>
+                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                    <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                        <?php echo esc_html($single_post->post_title); ?>
+                                        </<?php echo esc_html($post_title_tag); ?>>
+                                    </a>
+                                <?php else: ?>
                                     <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
                                         <?php echo esc_html($single_post->post_title); ?>
                                     </<?php echo esc_html($post_title_tag); ?>>
-                                </a>
+                                <?php endif; ?>
 
                                 <?php if (!empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true'): ?>
                                     <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">

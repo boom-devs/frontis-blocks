@@ -107,14 +107,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
     
     const deviceType= useDeviceType();
-    
+
     useEffect(() => {
-        if (!blockID) {
-            setAttributes({
-                blockID: "progressbar-" + clientId.slice(0, 8),
-            });
-        }
-    }, [blockID, clientId, setAttributes]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "progressbar-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     /** Start load font */
     useEffect(() => {
