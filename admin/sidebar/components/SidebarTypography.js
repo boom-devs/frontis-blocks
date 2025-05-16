@@ -108,7 +108,7 @@ const FB_SidebarTypography = ({
 					deviceType={deviceType}
 					units={fontSizeUnits}
 					rangeStep={1}
-					resetFallbackValue={''}
+					resetFallbackValue={'16'}
 				/>
 			}
 			<div className='fb_global_typo_wrap'>
