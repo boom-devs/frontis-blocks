@@ -293,8 +293,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-family: "Work Sans", sans-serif;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings {
-  padding: 0;
+  padding: 0 1px;
   margin-top: 10px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container {
+  border-radius: 8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
   outline: none;
@@ -303,6 +306,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   background: #F7F7F7;
   height: unset;
   padding: 6px 12px;
+  border-radius: 8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -324,7 +328,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-range-control__number .components-input-control__container {
   border: 1px solid #399CFF;
   border-radius: 6px;
-  margin-left: 10px;
+  margin-left: 16px;
+  margin-right: -8px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .fb-setting-spacing-label-container {
   margin: 14px 0;
@@ -341,6 +346,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap {
   margin: 0 auto;
   margin-top: 12px;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap .fb-global-typography-element-heading {
+  padding: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content:empty {
   display: none;
