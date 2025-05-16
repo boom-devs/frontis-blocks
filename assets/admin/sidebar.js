@@ -1243,7 +1243,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     value: fontFamily,
     onChange: handleFontFamilyChange
   }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -200,
+    min: 1,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
     rangeValue: fontSize,
@@ -1280,15 +1280,15 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, letterSpacingUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -100,
-    max: 100,
+    min: -20,
+    max: 20,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
     rangeValue: letterSpacing,
     onChangeHandler: handleLetterSpacingChange,
     rangeUnitHandler: handleLetterSpacingUnitChange,
     deviceType: deviceType,
     units: letterSpacingUnits,
-    rangeStep: 1,
+    rangeStep: 0.1,
     resetFallbackValue: ''
   }), lineHeightUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
     min: -200,
