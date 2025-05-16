@@ -1252,7 +1252,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     deviceType: deviceType,
     units: fontSizeUnits,
     rangeStep: 1,
-    resetFallbackValue: ''
+    resetFallbackValue: '16'
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
