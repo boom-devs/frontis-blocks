@@ -339,10 +339,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				}
 
 				.fb-typography-settings {
-					padding: 0;
+					padding: 0 1px;
 					margin-top: 10px;
 
 					.components-input-control__container {
+						border-radius: 8px;
 						.components-input-control__input {
 							&:focus {
 								outline: none;
@@ -353,6 +354,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 							background: $neutral-color-50;
 							height: unset;
 							padding: 6px 12px;
+							border-radius: 8px;
 
 							&:focus {
 								outline: none;
@@ -389,7 +391,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						.components-input-control__container {
 							border: 1px solid $primary-color-base;
 							border-radius: 6px;
-							margin-left: 10px;
+							margin-left: 16px;
+							margin-right: -8px;
 						}
 					}
 
@@ -411,6 +414,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					.fb-global-typography-headings-wrap {
 						margin: 0 auto;
 						margin-top: 12px;
+
+						.fb-global-typography-element-heading {
+							padding: 0;
+						}
 					}
 				}
 
