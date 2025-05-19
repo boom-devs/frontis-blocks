@@ -3093,30 +3093,32 @@
 .fb-inspector-control .fb-setting-global-icon-wrapper.gb-select-control .fb-setting-global-icon-btn {
   border-radius: 6px 6px 6px 6px;
 }
-.fb-inspector-control .fb-url-control-wrapper .fb-url-control-inner-wrapper {
+
+.fb-url-control-wrapper .fb-url-control-inner-wrapper {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.fb-inspector-control .fb-url-control-wrapper .fb-url-control-inner-wrapper .fb-url-control-input {
+.fb-url-control-wrapper .fb-url-control-inner-wrapper .fb-url-control-input {
   flex: 1;
   margin-bottom: 0;
 }
-.fb-inspector-control .fb-url-control-wrapper .fb-url-control-inner-wrapper .fb-url-control-input .components-base-control__field {
+.fb-url-control-wrapper .fb-url-control-inner-wrapper .fb-url-control-input .components-base-control__field {
   margin-bottom: 0;
 }
-.fb-inspector-control .fb-url-control-dropdown-popup {
+
+.fb-url-control-dropdown-popup {
   padding: 0.2rem;
   min-width: 220px;
 }
-.fb-inspector-control .fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner {
+.fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner {
   position: relative;
   z-index: 99999;
 }
-.fb-inspector-control .fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field {
+.fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field {
   margin-bottom: 0;
 }
-.fb-inspector-control .fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field label {
+.fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field label {
   display: block;
   color: #5f5f5f !important;
   font-size: 12px !important;
@@ -3126,7 +3128,7 @@
   min-height: auto;
   text-transform: capitalize !important;
 }
-.fb-inspector-control .fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field .components-toggle-control {
+.fb-url-control-dropdown-popup .fb-url-control-dropdown-popup-inner .components-base-control__field .components-toggle-control {
   margin-bottom: 0 !important;
 }
 
