@@ -1,5 +1,4 @@
 import Editor from '@monaco-editor/react';
-import './editor.lazy.scss';
 
 const FB_CustomCSSEditor = ({ value, onChangeValue}) => {
     return (
