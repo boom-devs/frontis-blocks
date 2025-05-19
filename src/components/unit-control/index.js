@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './editor.lazy.scss';
+// import './editor.lazy.scss';
 
 const FB_RangeUnitsType = ({
 	currentUnit,

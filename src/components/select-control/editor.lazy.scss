@@ -1,24 +1,24 @@
 @import "../../styles/variables";
 
-.fb-select-control {
-	&--layout-inline {
-		.components-select-control {
-			align-items: center;
-			display: grid;
-			grid-template-columns: 50% 50%;
-			margin-bottom: $frontis-control-vertical-gap;
-			color: $frontis-color-body;
-			gap: 0;
-		}
+// .fb-select-control {
+// 	&--layout-inline {
+// 		.components-select-control {
+// 			align-items: center;
+// 			display: grid;
+// 			grid-template-columns: 50% 50%;
+// 			margin-bottom: $frontis-control-vertical-gap;
+// 			color: $frontis-color-body;
+// 			gap: 0;
+// 		}
 
-		.fb-control__header,
-		.fb-control-label,
-		.components-select-control label.components-input-control__label {
-			margin-bottom: 0;
-		}
+// 		.fb-control__header,
+// 		.fb-control-label,
+// 		.components-select-control label.components-input-control__label {
+// 			margin-bottom: 0;
+// 		}
 
-		&:last-child .components-select-control {
-			margin-bottom: 0;
-		}
-	}
-}
+// 		&:last-child .components-select-control {
+// 			margin-bottom: 0;
+// 		}
+// 	}
+// }
