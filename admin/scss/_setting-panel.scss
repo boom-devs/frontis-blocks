@@ -460,6 +460,14 @@
 	}
 }
 
+.fb-setting-input-control-wrapper {
+    margin-bottom: 16px;
+}
+.fb-setting-global-icon-wrapper.gb-select-control{
+    .fb-setting-global-icon-btn{
+        border-radius: 6px 6px 6px 6px;
+    }
+}
 .fb-setting-switcher-container,
 .fb-setting-color-container {
 	.components-base-control.fb-setting-color-setting-wrapper {
