@@ -3055,6 +3055,7 @@
 }
 .fb-inspector-control .components-panel__body .fb-image-upload-btn {
   margin-bottom: 10px;
+  background-image: url(images/transparent-bg-demo.7b6d940d.png);
 }
 .fb-inspector-control .components-panel__body .components-datetime__time .components-base-control {
   margin-bottom: 0;
@@ -3078,6 +3079,14 @@
 }
 .fb-inspector-control .components-datetime__time .components-base-control__field .components-select-control__input {
   padding: 8px 12px !important;
+}
+.fb-inspector-control .fb-custom-css-editor-wrapper .monaco-editor {
+  border-radius: 6px !important;
+  border: 1px solid #ddd !important;
+  overflow: hidden;
+}
+.fb-inspector-control .fb-setting-global-icon-wrapper.gb-select-control .fb-setting-global-icon-btn {
+  border-radius: 6px 6px 6px 6px;
 }
 
 .fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper, .fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
@@ -3174,10 +3183,280 @@
   box-shadow: unset;
 }
 
+.fb_icon_picker_wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker {
+  width: 256px;
+  max-width: 100%;
+  min-height: 96px;
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #e6e7e9;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker .remove {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  line-height: 0;
+  cursor: pointer;
+  z-index: 6;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker .remove svg {
+  fill: #ffffff;
+  width: 18px;
+  height: 18px;
+  background-color: #cccccc;
+  padding: 2.4px;
+  border-radius: 50%;
+  transition: 0.3s background-color linear;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker .icon_placeholder {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker .icon_placeholder svg {
+  height: 30px;
+  width: 30px;
+  fill: #50575e;
+}
+
+.fb_icon_picker_wrapper .fb_icon_picker .Change.icon {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  z-index: 2;
+  transform: translate(0, 24px);
+  transition: 0.2s all ease-in-out;
+  background-color: #f0f0f1;
+  flex: 1;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 24px;
+  color: #50575e;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.fb_icon_picker_wrapper:hover .Change.icon {
+  transform: translate(0, 0);
+}
+
+.fb_icon_picker_wrapper_header {
+  display: flex;
+  align-items: center;
+}
+
+.fb_icon_picker_wrapper_header h2 {
+  font-size: 17px;
+  font-weight: 600;
+  flex-shrink: 0;
+  max-width: 130px;
+  width: 100%;
+}
+
+.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 36px;
+  width: 100%;
+}
+
+.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search svg {
+  z-index: 9999;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 11px;
+  color: #555d66;
+  fill: #555d66;
+  transform: rotateZ(90deg);
+  left: 12px;
+}
+
+.fb_icon_picker_wrapper_header .fb_icon_picker_wrapper_search input[type=text] {
+  position: absolute;
+  left: 0;
+  right: 0;
+  flex-shrink: 0;
+  height: 36px;
+  width: 100%;
+  padding: 7px 12px 7px 38px;
+  border: 1px solid #e6e7e9;
+  margin: 0;
+  border-radius: 2px;
+  color: #1d2327;
+  top: 0;
+}
+
+.fb_icon_picker_wrapper_body {
+  display: flex;
+  margin-top: 30px;
+}
+
+.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories {
+  max-width: 130px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories .fb_icon_picker_wrapper_category {
+  padding: 9px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #1d2327;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  cursor: pointer;
+}
+.fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories .fb_icon_picker_wrapper_category.selected {
+  background-color: #dcf2ff;
+  color: #0063a1;
+}
+
+.fb_icon_picker_icons_list .fb_icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fb_icon_picker_icons_list .fb_icon {
+  width: 80px;
+  height: 80px;
+  background-color: #ffffff;
+  border: 1px solid #e6e7e9;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s transform ease;
+  flex-direction: column;
+  grid-gap: 6px;
+  max-width: 90%;
+  max-height: 90%;
+}
+.fb_icon_picker_icons_list .fb_icon.default {
+  border-color: #007cba;
+  box-shadow: 0 0 0 2px #007cba;
+  pointer-events: none;
+}
+.fb_icon_picker_icons_list .fb_icon.selected {
+  border-color: #007cba;
+  box-shadow: 0 0 0 2px #dcf2ff;
+  pointer-events: none;
+}
+
+.fb_icon_picker_icons_list {
+  flex: 1;
+  padding: 14px;
+  padding-right: 0;
+  border: 1px solid #e6e7e9;
+  border-radius: 2px;
+}
+
+.fb_icon_picker_wrapper_footer {
+  text-align: right;
+}
+
+.fb_icon_picker_wrapper_modal {
+  min-width: 615px !important;
+}
+
+.fb-setting-background-color-container .fb-setting-background-color-panel-wrapper .components-base-control__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fb-setting-background-color-setting-wrapper .components-base-control__field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.fb-setting-background-color-setting-wrapper .components-base-control__field .components-base-control__label {
+  font-size: 13px;
+  text-transform: capitalize;
+}
+
+.fb-setting-background-color-setting-icon-dropdown .fb-setting-background-color-setting-icon-btn {
+  margin: 0;
+  height: 28px;
+  width: 28px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  color: #5f5f5f;
+  background: #FFFFFF;
+}
+.fb-setting-background-color-setting-icon-dropdown .fb-setting-background-color-setting-icon-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.fb-setting-background-color-setting-icon-dropdown .fb-setting-background-color-setting-icon-btn .fb-setting-background-color-setting-icon {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.fb-setting-background-color-setting-icon-dropdown-content {
+  z-index: 99999;
+}
+.fb-setting-background-color-setting-icon-dropdown-content .components-popover__content {
+  padding: 15px;
+  min-width: 260px;
+}
+.fb-setting-background-color-setting-icon-dropdown-content .fb-setting-background-color-popup-wrapper .fb-setting-background-color-popup-inner-wrapper .components-base-control__field {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.fb-setting-background-color-panel-btn {
+  display: flex !important;
+  width: 100%;
+}
+.fb-setting-background-color-panel-btn button.components-button.fb-setting-background-color-panel-btn-switcher {
+  width: 100%;
+  justify-content: center;
+  height: unset;
+  padding: 10px;
+  line-height: 16px;
+  min-height: 30px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5f5f5f !important;
+  box-shadow: inset 0 0 0 1px #D7EBFF !important;
+}
+.fb-setting-background-color-panel-btn button.components-button.fb-setting-background-color-panel-btn-switcher.active {
+  background-color: #D7EBFF !important;
+}
+
+.fb-image-control-wrapper .fb-image-upload-btn {
+  background-image: url(images/transparent-bg-demo.7b6d940d.png);
+}
+
 /** End Admin Panel scss **/
 #frontis-blocks-admin {
   background-color: #f5f7fa;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgb3BhY2l0eT0iMC4zIiBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzU1NDNfMzY3MikiPgo8ZWxsaXBzZSBjeD0iOTYwIiByeD0iNjQ1IiByeT0iMjU4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfNTU0M18zNjcyKSIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfNTU0M18zNjcyIiB4PSItODUiIHk9Ii02NTgiIHdpZHRoPSIyMDkwIiBoZWlnaHQ9IjEzMTYiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjAwIiByZXN1bHQ9ImVmZmVjdDFfZm9yZWdyb3VuZEJsdXJfNTU0M18zNjcyIi8+CjwvZmlsdGVyPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfNTU0M18zNjcyIiB4MT0iMzE1IiB5MT0iMi40MjUyMmUtMDUiIHgyPSIxNjA1IiB5Mj0iLTEuMTI0NjJlLTA1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNDMkUwRkUiLz4KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+CjxzdG9wIG9mZnNldD0iMC41MjUiIHN0b3AtY29sb3I9IiNEMkZERDMiLz4KPHN0b3Agb2Zmc2V0PSIwLjc1IiBzdG9wLWNvbG9yPSIjRkU5MjlDIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxnIG9wYWNpdHk9IjAuMyIgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZl81NTQzXzM2NzIpIj4NCjxlbGxpcHNlIGN4PSI5NjAiIHJ4PSI2NDUiIHJ5PSIyNTgiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl81NTQzXzM2NzIpIi8+DQo8L2c+DQo8ZGVmcz4NCjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZl81NTQzXzM2NzIiIHg9Ii04NSIgeT0iLTY1OCIgd2lkdGg9IjIwOTAiIGhlaWdodD0iMTMxNiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPg0KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4NCjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+DQo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl81NTQzXzM2NzIiLz4NCjwvZmlsdGVyPg0KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzU1NDNfMzY3MiIgeDE9IjMxNSIgeTE9IjIuNDI1MjJlLTA1IiB4Mj0iMTYwNSIgeTI9Ii0xLjEyNDYyZS0wNSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KPHN0b3Agc3RvcC1jb2xvcj0iI0MyRTBGRSIvPg0KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+DQo8c3RvcCBvZmZzZXQ9IjAuNTI1IiBzdG9wLWNvbG9yPSIjRDJGREQzIi8+DQo8c3RvcCBvZmZzZXQ9IjAuNzUiIHN0b3AtY29sb3I9IiNGRTkyOUMiLz4NCjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPg0KPC9saW5lYXJHcmFkaWVudD4NCjwvZGVmcz4NCjwvc3ZnPg0K);
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% auto;
