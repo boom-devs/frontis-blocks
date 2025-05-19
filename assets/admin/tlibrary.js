@@ -7535,7 +7535,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.subscribe)(function () {
     var toplbar = document.querySelector('.edit-post-header-toolbar');
     if (toplbar) {
-      toplbar.appendChild(buttonDiv);
+      // toplbar.appendChild(buttonDiv) // at present its hide. when need development please uncomment this line
     }
   });
 });
