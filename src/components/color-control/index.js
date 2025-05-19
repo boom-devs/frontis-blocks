@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { Button, BaseControl, Dropdown, ColorPicker, ColorPalette, Dashicon, } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
-import './editor.lazy.scss';
+// import './editor.lazy.scss';
 
 
 const FB_ColorControl = ({

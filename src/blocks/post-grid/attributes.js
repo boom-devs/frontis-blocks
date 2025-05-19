@@ -4024,6 +4024,14 @@ const attributes = {
 	/** End Icon Styles */
 
 	/** Start Post URL Settings */
+	customPermalinkSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	customPermalink: {
+		type: "string",
+		default: "",
+	},
 	thumbnailLinkSwitcher: {
 		type: "boolean",
 		default: true,

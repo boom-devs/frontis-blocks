@@ -520,6 +520,9 @@ class Admin {
         $read_more_icon_image_url = isset($_POST['readMoreIconImageUrl']) ? $_POST['readMoreIconImageUrl'] : '';
         $read_more_icon_image_alt = isset($_POST['readMoreIconImageAlt']) ? $_POST['readMoreIconImageAlt'] : '';
 
+        $custom_permalink_switcher = isset($_POST['customPermalinkSwitcher']) ? $_POST['customPermalinkSwitcher'] : false;
+        $custom_permalink = isset($_POST['customPermalink']) ? $_POST['customPermalink'] : '';
+
         $thumbnail_link_switcher = isset($_POST['thumbnailLinkSwitcher']) ? $_POST['thumbnailLinkSwitcher'] : true;
         $category_link_switcher = isset($_POST['categoryLinkSwitcher']) ? $_POST['categoryLinkSwitcher'] : true;
         $tag_link_switcher = isset($_POST['tagLinkSwitcher']) ? $_POST['tagLinkSwitcher'] : true;
@@ -652,8 +655,25 @@ class Admin {
         /** Start Execute the query to get results */
         $results = $wpdb->get_results($final_query);
 
+
+        $get_custom_permalink = '';
+
         if ($results) {
-            foreach($results as $key => $single_post): ?>
+            foreach($results as $key => $single_post): 
+            
+                $permalink = get_permalink($single_post->ID);
+
+                if ($custom_permalink_switcher === 'true') {
+                    // Remove home_url from the permalink to get the relative part
+                    $relative_path = str_replace(home_url('/'), '', $permalink);
+                
+                    // Now add your custom prefix before it
+                    $get_custom_permalink = trailingslashit($custom_permalink) . $relative_path;
+                } else {
+                    $get_custom_permalink = $permalink;
+                }
+
+            ?>
 
                 <?php if($premade_style == 'style-1'): ?>
                     <div class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
@@ -673,7 +693,7 @@ class Admin {
                                 ?>
 
                                 <?php if ($thumbnail_link_switcher == 'true'): ?>
-                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
                                         <img src="<?php echo esc_url($image_url); ?>"
                                             srcset="<?php echo esc_attr($image_srcset); ?>"
                                             alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
@@ -785,7 +805,7 @@ class Admin {
 
                             <div class="fb_post_grid_content">
                                 <?php if ($title_link_switcher == 'true'): ?>
-                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>">
                                         <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
                                         <?php echo esc_html($single_post->post_title); ?>
                                         </<?php echo esc_html($post_title_tag); ?>>
@@ -808,7 +828,7 @@ class Admin {
                             </div>
 
                             <?php if ($read_more_switcher == 'true'): ?>
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" class="fb_post_grid_read_more_button">
+                                <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_read_more_button">
 
                                     <?php if ($read_more_icon_align !== 'icon-only'): ?>
                                         <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
@@ -858,7 +878,7 @@ class Admin {
                                 ?>
 
                                 <?php if ($thumbnail_link_switcher == 'true'): ?>
-                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
                                         <img src="<?php echo esc_url($image_url); ?>"
                                             srcset="<?php echo esc_attr($image_srcset); ?>"
                                             alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
@@ -972,7 +992,7 @@ class Admin {
                             <div class="fb_post_grid_content">
 
                                 <?php if ($title_link_switcher == 'true'): ?>
-                                    <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>">
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>">
                                     <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
                                         <?php echo esc_html($single_post->post_title); ?>
                                         </<?php echo esc_html($post_title_tag); ?>>
@@ -995,7 +1015,7 @@ class Admin {
                             </div>
 
                             <?php if ($read_more_switcher == 'true'): ?>
-                                <a href="<?php echo esc_url(get_permalink($single_post->ID)); ?>" class="fb_post_grid_read_more_button">
+                                <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_read_more_button">
 
                                     <?php if ($read_more_icon_align !== 'icon-only'): ?>
                                         <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
