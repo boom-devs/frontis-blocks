@@ -66,12 +66,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     
     // Generate unique block ID
     useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
+        if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "fb-social-share-child" + clientId.slice(0, 8),
+                blockID: "fb-social-share-child-" + clientId.slice(0, 8),
             });
         }
-    }, [clientId, blockID, setAttributes]);
+    }, [clientId]);
 
     // Available social media types
     const socialMediaTypes = [

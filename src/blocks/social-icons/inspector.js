@@ -227,7 +227,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "fb-Social-" + clientId.slice(0, 8),
+                blockID: "fb-social-icons-" + clientId.slice(0, 8),
             });
         }
     }, [clientId]);

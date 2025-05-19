@@ -14,6 +14,7 @@ use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Utils\Helper;
+use FrontisBlocks\Utils\UpdateNotifier;
 final class Plugin
 {
 	/**
@@ -174,9 +175,9 @@ final class Plugin
 		    $page_name = 'search';
 		}
 
-		if(is_page()) {
-			$page_name = 'page';
-		}
+		// if(is_page()) {
+		// 	$page_name = 'page';
+		// }
 		
 		if(is_404()) {
 		    $page_name = '404';
@@ -185,9 +186,9 @@ final class Plugin
 		// Check page or post assigned by template
 		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
 
-		if($frntis_block_used || $assigned_template !== '') {
-			$page_name = Helper::get_page_name();
-		}
+		// if($frntis_block_used || $assigned_template !== '') {
+		// 	$page_name = Helper::get_page_name();
+		// }
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
@@ -329,6 +330,8 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		SupportSVG::get_instance();
+
+		UpdateNotifier::register();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 

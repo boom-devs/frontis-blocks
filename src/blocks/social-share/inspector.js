@@ -28,13 +28,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
     
     // Generate unique block ID
+
     useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
-            setAttributes({
-                blockID: "fb-social-share" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId, blockID, setAttributes]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-social-share-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     const fbSocialShareStyle = useMemo(
 		() => `
