@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { setDeviceType } from '@Config/displayType';
-import './editor.lazy.scss';
 
 const FB_ResponsiveControl = ({labelText, device}) => {
 

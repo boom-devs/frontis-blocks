@@ -8716,18 +8716,6 @@ var FB_Range = function FB_Range(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/responsive-control/editor.lazy.scss":
-/*!************************************************************!*\
-  !*** ./src/components/responsive-control/editor.lazy.scss ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/responsive-control/index.js":
 /*!****************************************************!*\
   !*** ./src/components/responsive-control/index.js ***!
@@ -8741,8 +8729,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
-
 
 
 var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {

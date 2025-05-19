@@ -5,7 +5,6 @@ import {
     FocalPointPicker,
 } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
-import './editor.lazy.scss';
 
 const FB_ResponsiveBackgroundImageControl = ({
     label = '',
