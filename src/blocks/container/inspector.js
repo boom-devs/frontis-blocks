@@ -28,7 +28,6 @@ import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import FB_InputControl from '@Components/input-control';
 
 const Inspector = (props) => {
@@ -575,14 +574,6 @@ const Inspector = (props) => {
         })
     }
 
-
-	useEffect(() => {
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${p_block_id}`);
-		setAttributes({containerGlobalCustomCSSValue: customCss});
-	}, [containerGlobalCustomCSS, p_block_id]);
-
-
-
 	return (
 		<>
 			<InspectorControls key="controls">
@@ -1126,7 +1117,7 @@ const Inspector = (props) => {
 
 												<PanelBody
 													title={__("Background", "frontis-blocks")}
-													initialOpen={true}
+													initialOpen={false}
 												>
 													<FB_SwitcherControl
 														label={__("Background Type", "frontis-blocks")}

@@ -41,7 +41,25 @@
 			paginationPrevText: attrs.paginationPrevText,
 			paginationPrevIcon: attrs.paginationPrevIcon,
 			paginationNextText: attrs.paginationNextText,
-			paginationNextIcon: attrs.paginationNextIcon
+			paginationNextIcon: attrs.paginationNextIcon,
+
+			showFilterByTaxonomy: attrs.showFilterByTaxonomy,
+			filterSelectedTaxonomy: attrs.filterSelectedTaxonomy,
+			filterSelectedCat: attrs.filterSelectedCat,
+			filterSelectedTag: attrs.filterSelectedTag,
+
+			readMoreSwitcher: attrs.readMoreSwitcher,
+			readMoreText: attrs.readMoreText,
+			readMoreIconAlign: attrs.readMoreIconAlign,
+			readMoreIcon: attrs.readMoreIcon,
+			readMoreIconImageUrl: attrs.readMoreIconImageUrl,
+			readMoreIconImageAlt: attrs.readMoreIconImageAlt,
+
+			thumbnailLinkSwitcher: attrs.thumbnailLinkSwitcher,
+			categoryLinkSwitcher: attrs.categoryLinkSwitcher,
+			tagLinkSwitcher: attrs.tagLinkSwitcher,
+			authorLinkSwitcher: attrs.authorLinkSwitcher,
+			titleLinkSwitcher: attrs.titleLinkSwitcher,
 		};
 	}
 
@@ -97,10 +115,38 @@
 			paginationPrevText,
 			paginationPrevIcon,
 			paginationNextText,
-			paginationNextIcon
+			paginationNextIcon,
+
+			showFilterByTaxonomy,
+			filterSelectedTaxonomy,
+			filterSelectedCat,
+			filterSelectedTag,
+
+			readMoreSwitcher,
+			readMoreText,
+			readMoreIconAlign,
+			readMoreIcon,
+			readMoreIconImageUrl,
+			readMoreIconImageAlt,
+
+			thumbnailLinkSwitcher,
+			categoryLinkSwitcher,
+			tagLinkSwitcher,
+			authorLinkSwitcher,
+			titleLinkSwitcher,
 		} = options;
 
 		let currentPage = currentPages[blockId] || 1;
+
+
+
+		const categories = (showFilterByTaxonomy === 'true' && filterSelectedTaxonomy === 'category')
+		? (filterSelectedCat || '').split(',').filter(id => id && id !== '0')
+		: (cat && cat !== '0' ? cat.split(',').filter(id => id !== '0') : []);
+
+		const tags = (showFilterByTaxonomy === 'true' && filterSelectedTaxonomy === 'tag')
+		? (filterSelectedTag || '').split(',').filter(id => id && id !== '0')
+		: (tag ? tag.split(',') : []);
 
 		/**
 		 * Build filter for fetch request
@@ -112,8 +158,8 @@
 			post_type: postType,
 			premade_style: premadeStyle,
 			block_id: blockId,
-			category: cat && cat !== '0' ? cat.split(',').filter(id => id !== '0') : [],
-			post_tag: tag ? tag.split(',') : [],
+			category: categories,
+			post_tag: tags,
 			post_author: author ? author.split(',') : [],
 			deauthor: deauthor ? deauthor.split(',') : [],
 			detag: detag ? detag.split(',') : [],
@@ -142,7 +188,22 @@
 			paginationPrevText: paginationPrevText || 'Prev',
 			paginationPrevIcon: paginationPrevIcon || 'angle-left',
 			paginationNextText: paginationNextText || 'Next',
-			paginationNextIcon: paginationNextIcon || 'angle-right'
+			paginationNextIcon: paginationNextIcon || 'angle-right',
+
+
+			readMoreSwitcher: readMoreSwitcher || false,
+			readMoreText: readMoreText || 'Read More',
+			readMoreIconAlign: readMoreIconAlign || 'none',
+			readMoreIcon: readMoreIcon || 'angle-right',
+			readMoreIconImageUrl: readMoreIconImageUrl || '',
+			readMoreIconImageAlt: readMoreIconImageAlt || '',
+
+			thumbnailLinkSwitcher: thumbnailLinkSwitcher || true,
+			categoryLinkSwitcher: categoryLinkSwitcher || true,
+			tagLinkSwitcher: tagLinkSwitcher || true,
+			authorLinkSwitcher: authorLinkSwitcher || true,
+			titleLinkSwitcher: titleLinkSwitcher || true,
+
 		};
 
 		/**
@@ -234,6 +295,19 @@
 						`;
 					}
 				}
+
+				if (readMoreSwitcher) {
+					const readMoreIconWrapper = postListElement.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
+					const readMoreIconHTML = options.readMoreIconHTML || '';
+				
+					if (readMoreIconWrapper && readMoreIconHTML) {
+						readMoreIconWrapper.forEach(wrapper => {
+							wrapper.innerHTML = readMoreIconHTML;
+						});
+					}
+				}
+				
+
 			})
 			.catch(error => {
 				console.error('Error fetching posts:', error);
@@ -251,6 +325,21 @@
 
 			const options = getPostGridOptions(block);
 			currentPages[options.blockId] = 1;
+
+			// Save the Read More icon HTML for initial load
+			if (options.readMoreSwitcher) {
+				const readMoreIcon = block.querySelector('.fb_post_grid_read_more_icon');
+				if (readMoreIcon) {
+					options.readMoreIconHTML = readMoreIcon.outerHTML;
+				}
+			}
+
+			// Default Add active class in category
+			document.querySelectorAll('.fb_post_grid_filter_category').forEach(item => {
+				if (item.getAttribute('data-category-id') === '0') {
+					item.classList.add('active');
+				}
+			});
 
 			loadMorePosts(options);
 		});
@@ -299,6 +388,7 @@
 			}
 		}
 	});
+
 	/**
 	 * Category items click
 	 */
@@ -310,13 +400,26 @@
 			if (!block) return;
 
 			const categoryId = this.getAttribute('data-category-id');
+			const tagId = this.getAttribute('data-tag-id');
 			const options = getPostGridOptions(block);
 
-			// Save pagination icons before clearing
+			/**
+			 * save old pagination icons html 
+			 */
 			const prevIconEl = block.querySelector('.fb_pagination_previous_icon');
 			const nextIconEl = block.querySelector('.fb_pagination_next_icon');
 			const prevIconHtml = prevIconEl ? prevIconEl.outerHTML : '';
 			const nextIconHtml = nextIconEl ? nextIconEl.outerHTML : '';
+
+			let savedReadMoreIcon = '';
+			if (options.readMoreSwitcher) {
+				const readMoreIcon = block.querySelector('.fb_post_grid_read_more_icon');
+				if (readMoreIcon) {
+					savedReadMoreIcon = readMoreIcon.outerHTML;
+				}
+			}
+			options.readMoreIconHTML = savedReadMoreIcon;
+			
 
 			// Reset page number for this block
 			currentPages[options.blockId] = 1;
@@ -324,14 +427,35 @@
 			// Update category based on selection
 			if (categoryId === '0') {
 				// Get all categories from data-cat attribute
-				const allCategories = block.getAttribute("data-cat") || '';
+				// const allCategories = block.getAttribute("data-cat") || '';
+				const allCategories = block.getAttribute("data-filter-selected-cat") || '';
 				options.cat = allCategories
 					.split(',')
 					.filter(id => id !== '0' && id.trim() !== '')
 					.map(id => id.trim())
 					.join(',');
+
+					options.filterSelectedCat = options.cat;
 			} else {
 				options.cat = categoryId;
+				options.filterSelectedCat = categoryId;
+			}
+
+			// Update tag based on selection
+			if (tagId === '0') {
+				// Get all tags from data-tag attribute
+				// const allTags = block.getAttribute("data-tag") || '';
+				const allTags = block.getAttribute("data-filter-selected-tag") || '';
+				options.tag = allTags
+					.split(',')
+					.filter(id => id !== '0' && id.trim() !== '')
+					.map(id => id.trim())
+					.join(',');
+
+					options.filterSelectedTag = options.tag;
+			} else {
+				options.tag = tagId;
+				options.filterSelectedTag = tagId;
 			}
 
 			// Clear previous posts and show loading skeleton
@@ -354,13 +478,14 @@
 			allCategoryItems.forEach(cat => cat.classList.remove('active'));
 			this.classList.add('active');
 
-			// Load filtered posts with delay to show loading state
 			setTimeout(() => {
-				loadMorePosts(options).then(() => {
+				loadMorePosts(options);
+				// Hide loading manually after a bit of time (e.g. 600ms)
+				setTimeout(() => {
 					if (loadingElement) {
 						loadingElement.style.display = 'none';
 					}
-				});
+				}, 600);
 			}, 300);
 		});
 	});
@@ -373,15 +498,32 @@
 	let currentGrid = null;
 
 	const buildFilterFromGrid = (grid, page = 1) => {
+		const showFilterByTaxonomy = grid.getAttribute('data-show-filter-by-taxonomy') === 'true';
+		const filterSelectedTaxonomy = grid.getAttribute('data-filter-selected-taxonomy');
+		
 		const limit = parseInt(grid.getAttribute('data-perpage') || 12, 10);
+
 		return {
 			offset: limit * (page - 1),
 			limit,
 			post_type: grid.getAttribute('data-post-type') || 'post',
 			premade_style: grid.getAttribute('data-premade-style') || 'style-1', 
 			currentPage: page,
-			category: (grid.getAttribute('data-cat') || '').split(',').filter(id => id && id !== '0'),
-			post_tag: (grid.getAttribute('data-tag') || '').split(',').filter(Boolean),
+
+			showFilterByTaxonomy: showFilterByTaxonomy,
+			filterSelectedTaxonomy: filterSelectedTaxonomy,
+			filterSelectedCat: grid.getAttribute('data-filter-selected-cat') || '',
+			filterSelectedTag: grid.getAttribute('data-filter-selected-tag') || '',
+
+			category: (showFilterByTaxonomy && filterSelectedTaxonomy === 'category')
+				? (grid.getAttribute('data-filter-selected-cat') || '').split(',').filter(id => id && id !== '0')
+				: (grid.getAttribute('data-cat') || '').split(',').filter(id => id && id !== '0'),
+
+			post_tag: (showFilterByTaxonomy && filterSelectedTaxonomy === 'tag')
+				? (grid.getAttribute('data-filter-selected-tag') || '').split(',').filter(id => id && id !== '0')
+				: (grid.getAttribute('data-tag') || '').split(',').filter(id => id && id !== '0'),
+
+
 			post_author: (grid.getAttribute('data-author') || '').split(',').filter(Boolean),
 			deauthor: (grid.getAttribute('data-deauthor') || '').split(',').filter(Boolean),
 			detag: (grid.getAttribute('data-detag') || '').split(',').filter(Boolean),
@@ -412,6 +554,19 @@
 			paginationPrevIcon: grid.getAttribute('data-pagination-prev-icon') || 'angle-left',
 			paginationNextTxt: grid.getAttribute('data-pagination-next-text') || 'Next',
 			paginationNextIcon: grid.getAttribute('data-pagination-next-icon') || 'angle-right',
+
+			readMoreSwitcher: grid.getAttribute('data-read-more-switcher') || false,
+			readMoreText: grid.getAttribute('data-read-more-text') || 'Read More',
+			readMoreIconAlign: grid.getAttribute('data-read-more-icon-align') || 'none',
+			readMoreIcon: grid.getAttribute('data-read-more-icon') || 'angle-right',
+			readMoreIconImageUrl: grid.getAttribute('data-read-more-icon-image-url') || '',
+			readMoreIconImageAlt: grid.getAttribute('data-read-more-icon-image-alt') || '',
+
+			thumbnailLinkSwitcher: grid.getAttribute('data-thumbnail-link-switcher') || true,
+			categoryLinkSwitcher: grid.getAttribute('data-category-link-switcher') || true,
+			tagLinkSwitcher: grid.getAttribute('data-tag-link-switcher') || true,
+			authorLinkSwitcher: grid.getAttribute('data-author-link-switcher') || true,
+			titleLinkSwitcher: grid.getAttribute('data-title-link-switcher') || true,
 		};
 	};
 
@@ -437,6 +592,11 @@
 		const prevIconHtml = (listEl.querySelector('.fb_pagination_previous_icon') || {}).outerHTML || '';
 		const nextIconHtml = (listEl.querySelector('.fb_pagination_next_icon') || {}).outerHTML || '';
 
+		/**
+		 * save old read more icon html 
+		 */
+		const readMoreIconHtml = (listEl.querySelector('.fb_post_grid_read_more_icon') || {}).outerHTML || '';
+
 		try {
 			const response = await fetch(`${FrontisBlocksData.site_url}/wp-json/wp/v2/frontis-blocks/post`, {
 				method: 'POST',
@@ -447,11 +607,24 @@
 			
 			listEl.innerHTML = data.content;
 
+			/**
+			 * restore pagination icon html 
+			 */
 			const prevWrap = listEl.querySelector('.fb_pagination_previous_icon_Wrapper');
 			const nextWrap = listEl.querySelector('.fb_pagination_next_icon_Wrapper');
 			
 			if (prevWrap) prevWrap.innerHTML = prevIconHtml;
 			if (nextWrap) nextWrap.innerHTML = nextIconHtml;
+
+			/**
+			 * restore read more icon html 
+			 */
+			const readMoreIconWrapper = listEl.querySelectorAll('.fb_post_grid_read_more_icon_wrapper');
+			if (readMoreIconWrapper) {
+				readMoreIconWrapper.forEach(wrapper => {
+					wrapper.innerHTML = readMoreIconHtml;
+				});
+			}
 
 			const pagWrap = listEl.querySelector('.fb_pagination_wrapper');
 			if (pagWrap) {
@@ -461,6 +634,7 @@
 
 			currentPages = data.current_page;
 			totalPages = data.total_pages;
+
 		} catch (err) {
 			console.error('Pagination fetch error:', err);
 		} finally {

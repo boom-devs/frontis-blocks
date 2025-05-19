@@ -162,9 +162,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             }
     
             const firstWord = createWordSpan(texts[currentIndex], true);
-            container.appendChild(firstWord);
-    
-            const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
+            console.log(firstWord);
+            if (container) {
+                container.appendChild(firstWord);
+                const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
             firstLetters.forEach((l, i) => {
                 setTimeout(() => {
                     l.classList.add('fb-animated-heading-animation-in');
@@ -181,6 +182,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     container.innerHTML = '';
                 }
             };
+            }
+    
+            
 
         }
     }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);

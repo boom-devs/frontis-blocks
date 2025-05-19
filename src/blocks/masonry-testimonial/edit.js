@@ -108,6 +108,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 ) : posts && posts.length > 0 ? (
                     posts.map((post) => {
                         const featuredImage = media[post.featured_media];
+                        const brandImage = media[post.brand_image];
+                        const reviewData = media[post.review_data];
                         const author = authors?.find(a => a.id === post.author);
                         
                         const imageUrl = featuredImage?.source_url || '';

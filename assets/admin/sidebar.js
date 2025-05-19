@@ -762,6 +762,9 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
   var heading5Styles = '';
   var heading6Styles = '';
   var combinedHeadingStyles = ''; // Combined styles for "all" headings
+  if (!data) {
+    return false;
+  }
   var arrayKeys = Object.keys(data);
 
   // Loop through the data to generate CSS for each tag
@@ -1240,7 +1243,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     value: fontFamily,
     onChange: handleFontFamilyChange
   }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -200,
+    min: 1,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
     rangeValue: fontSize,
@@ -1249,7 +1252,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     deviceType: deviceType,
     units: fontSizeUnits,
     rangeStep: 1,
-    resetFallbackValue: ''
+    resetFallbackValue: '16'
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
@@ -1277,15 +1280,15 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, letterSpacingUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -100,
-    max: 100,
+    min: -20,
+    max: 20,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
     rangeValue: letterSpacing,
     onChangeHandler: handleLetterSpacingChange,
     rangeUnitHandler: handleLetterSpacingUnitChange,
     deviceType: deviceType,
     units: letterSpacingUnits,
-    rangeStep: 1,
+    rangeStep: 0.1,
     resetFallbackValue: ''
   }), lineHeightUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
     min: -200,
@@ -1383,12 +1386,10 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     fontFamilies = _useState14[0],
     setFontFamilies = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState16 = _slicedToArray(_useState15, 2),
     globalTypography = _useState16[0],
     setGlobalTypography = _useState16[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -1429,6 +1430,7 @@ var TypographySettings = function TypographySettings(props) {
     var tempTypography = _objectSpread({}, customTypography);
     delete tempTypography[item];
     setCustomTypography(_objectSpread({}, tempTypography));
+    setIsMount(true);
   };
 
   // Body link font typography
@@ -1993,7 +1995,7 @@ var TypographySettings = function TypographySettings(props) {
             case 9:
               _response = _context.sent;
               if (_response.success) {
-                setCustomTypography(_response.data.data);
+                setCustomTypography(_response.data.data || {});
                 localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
               }
             case 11:
@@ -2038,17 +2040,11 @@ var TypographySettings = function TypographySettings(props) {
   }, [isAfterSave]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (isMount) {
-      if (!!wp.data.select('core/edit-site')) {
-        editPost({
-          isDirty: true
-        });
-      } else {
-        wp.data.dispatch('core/editor').editPost({
-          meta: {
-            _dummy: new Date().getTime()
-          }
-        });
-      }
+      wp.data.dispatch('core/editor').editPost({
+        meta: {
+          _dummy: new Date().getTime()
+        }
+      });
     }
   }, [isMount]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
@@ -2061,14 +2057,12 @@ var TypographySettings = function TypographySettings(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
-      if (globalTypoData) {
+      if (globalTypoData !== 'null') {
         globalTypoData = JSON.parse(globalTypoData);
         setGlobalTypography(globalTypoData);
       }
     }, 1000);
   }, [deviceType]);
-  console.log("globalTypography");
-  console.log(globalTypography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
     className: "fb-blocks-color-tabs",
     activeClass: "active-tab",
@@ -2268,7 +2262,7 @@ var TypographySettings = function TypographySettings(props) {
       initialPath: "/"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
       path: "/"
-    }, Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
+    }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
       var _customTypography$ite7;
       return /*#__PURE__*/React.createElement("div", {
         key: index,
@@ -3375,17 +3369,22 @@ function FrontisBlocksSidebar() {
                   if (postProcess) setTimeout(function () {
                     return postProcess(themeColors);
                   }, 1000);
-                  _context.next = 20;
+                  _context.next = 15;
                   break;
                 case 7:
-                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key);
-                  if (!(!localData || localData.length < 1)) {
-                    _context.next = 18;
-                    break;
-                  }
-                  _context.next = 11;
+                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key); // if (!localData || localData.length < 1) {
+                  // 	const res = await getGlobalStyle(api);
+                  // 	const data = res.success ? res.data : defaultValue;
+                  // 	if (setter) setter(data);
+                  // 	localStorage.setItem(key, JSON.stringify(data));
+                  // 	if (postProcess) setTimeout(() => postProcess(data), 1000);
+                  // } else {
+                  // 	if (setter) setter(localData);
+                  // 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
+                  // }
+                  _context.next = 10;
                   return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.getGlobalStyle)(api);
-                case 11:
+                case 10:
                   res = _context.sent;
                   data = res.success ? res.data : defaultValue;
                   if (setter) setter(data);
@@ -3393,14 +3392,7 @@ function FrontisBlocksSidebar() {
                   if (postProcess) setTimeout(function () {
                     return postProcess(data);
                   }, 1000);
-                  _context.next = 20;
-                  break;
-                case 18:
-                  if (setter) setter(localData);
-                  if (postProcess) setTimeout(function () {
-                    return postProcess(localData);
-                  }, 1000);
-                case 20:
+                case 15:
                 case "end":
                   return _context.stop();
               }
@@ -3517,23 +3509,6 @@ function FrontisBlocksSidebar() {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
-
-  // Mark post as dirty when settings change
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    if (isLoading) {
-      if (wp.data.select("core/edit-site")) {
-        editPost({
-          isDirty: true
-        });
-      } else {
-        wp.data.dispatch("core/editor").editPost({
-          meta: {
-            _dummy: Date.now()
-          }
-        });
-      }
-    }
-  }, [isLoading, editPost]);
 
   // Color panel array generator
   var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (colors, setColor) {
@@ -7696,6 +7671,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Onest", "frontis-blocks"),
   value: "Onest"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inter", "frontis-blocks"),
+  value: "Inter"
 }];
 
 /***/ }),

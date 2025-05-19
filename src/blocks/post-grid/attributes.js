@@ -2623,6 +2623,673 @@ const attributes = {
 	},
 	/** End Load More */
 
+	/** Pagination Arrow */
+	paginationArrowSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationArrowSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowAspectRatio: {
+		type: 'boolean',
+		default: true,
+	},
+	paginationArrowBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	paginationArrowNormalClassicColor: {
+		type: "string",
+		default: "#15171C",
+	},
+	paginationArrowNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationArrowNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationArrowNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	paginationArrowHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	paginationArrowHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	paginationArrowHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationArrowHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationArrowHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	paginationArrowPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationArrowDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowTabletPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowMobilePadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationArrowPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationArrowBorder: {
+		type: 'string',
+		default: "none",
+	},
+	paginationArrowBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowBorderColor: {
+		type: 'string',
+	},
+	paginationArrowBorderHoverColor: {
+		type: 'string',
+	},
+	paginationArrowBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowTabletBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowMobileBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationArrowBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	paginationArrowBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationArrowDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationArrowBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationArrowTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	paginationArrowTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	paginationArrowTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	paginationArrowTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	paginationArrowTextFontFamily: { 
+		type: "string",
+		default: "Default",
+	},
+	paginationArrowTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationArrowTextFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowTextFontWeight: {
+		type: "string",
+		default: "600"
+	},
+	paginationArrowTextFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	paginationArrowTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	paginationArrowTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationArrowTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationArrowTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '30',
+			Tablet: '30',
+			Mobile: '30'
+		}
+	},
+	paginationArrowTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	paginationArrowTextColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	paginationArrowTextColor : {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	paginationArrowTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	paginationArrowIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '14',
+            Tablet: '14',
+            Mobile: '14'
+        }
+    },
+    paginationArrowIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+	paginationArrowIconSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
+        }
+    },
+    paginationArrowIconSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    paginationArrowIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    paginationArrowIconColor: {
+        type: "string",
+        default: "#FFFFFF"
+    },
+    paginationArrowIconHoverColor: {
+        type: 'string',
+        default: ""
+    },
+	// pagination arrow end
+
+	/** Pagination Button Start */
+	paginationBtnSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationBtnSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnAspectRatio: {
+		type: 'boolean',
+		default: true,
+	},
+	paginationBtnBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnNormalBackgroundType: {   
+		type: "string",
+		default: "classic",
+	},
+	paginationBtnNormalClassicColor: {
+		type: "string",
+		default: "#15171C",
+	},
+	paginationBtnNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationBtnNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationBtnNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	paginationBtnHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	paginationBtnHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	paginationBtnHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationBtnHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationBtnHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	paginationBtnPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationBtnDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationBtnTabletPadding: {
+		type: "object", 
+		default: {
+			top: '7',
+			bottom: '7',
+			left: '15',
+			right: '15',
+		},
+	},
+	paginationBtnMobilePadding: {
+		type: "object", 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '12',
+			right: '12',
+		},
+	},
+	paginationBtnPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationBtnBorder: {
+		type: 'string',
+		default: "none",
+	},
+	paginationBtnBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnBorderColor: {
+		type: 'string',
+	},
+	paginationBtnBorderHoverColor: {
+		type: 'string',
+	},
+	paginationBtnBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnDesktopBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnTabletBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnMobileBorder: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationBtnBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	paginationBtnBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	paginationBtnDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	paginationBtnBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+
+	paginationBtnTextGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	paginationBtnTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	paginationBtnTextGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	paginationBtnTextGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	paginationBtnTextFontFamily: { 
+		type: "string",
+		default: "Default",
+	},
+	paginationBtnTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationBtnTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '16'
+		}
+	},
+	paginationBtnTextFontSizeUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnTextFontWeight: {
+		type: "string",
+		default: "600"
+	},
+	paginationBtnTextFontStyle: {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnTextTransform: { 
+		type: "string",
+		default: "none"
+	},
+	paginationBtnTextDecoration: {
+		type: "string",
+		default: "none"
+	},
+	paginationBtnTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	paginationBtnTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationBtnTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '22',
+			Tablet: '22',
+			Mobile: '22'
+		}
+	},
+	paginationBtnTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	paginationBtnTextColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	paginationBtnTextColor : {
+		type: "string",
+		default: "#FFFFFF"
+	},
+	paginationBtnTextHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	// pagination btn end
+
+
 	postGridDesktopSwitcher: {
         type: "boolean",
         default: false,
@@ -2771,6 +3438,613 @@ const attributes = {
 		default: false
 	},
 	/** End Filter By Taxonomy */
+
+	/** Start Read More */
+	readMoreSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	readMoreText: {
+		type: "string",
+		default: "Read More"
+	},
+	readMoreIconAlign: {
+		type: "string",
+		default: "none"
+	},
+	readMoreIcon: {
+		type: "string",
+		default: "arrow-right"
+	},
+	readMoreIconImageUrl: {
+		type: "string",
+		default: ""
+	},
+	readMoreIconImageAlt: {
+		type: "string",
+		default: ""
+	},	
+	readMoreIconImageID: {
+		type: "string",
+		default: ""
+	},
+	
+	/** End Read More */
+
+	/** Start Button Text Style */
+	buttonWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	buttonWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+
+	buttonGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	buttonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	buttonGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	buttonGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	buttonFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	buttonFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	buttonFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonFontWeight: {
+		type: "string",
+		default: "500"
+	},
+	buttonFontStyle: {
+		type: "string",
+		default: ""
+	},
+	buttonTextTransform: {
+		type: "string",
+		default: ""
+	},
+	buttonTextDecoration: {
+		type: "string",
+		default: ""
+	},
+	buttonLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	buttonLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	buttonLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	buttonColor: {
+		type: "string",
+		default: "#15171C"
+	},
+	buttonHoverColor: {
+		type: 'string',
+	},
+	buttonBgColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	buttonBgColor: {
+		type: "string",
+		default: "#dddddd9e"
+	},
+	buttonBgHoverColor: {
+		type: 'string',
+	},
+	buttonBorder: {
+		type: 'string',
+		default: "none",
+	},
+	buttonBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	buttonBorderColor: {
+		type: 'string',
+	},
+	buttonBorderHoverColor: {
+		type: 'string',
+	},
+	buttonBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonDesktopBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonTabBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMobileBorderWidth: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	buttonBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonDesktopBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "6",
+			bottom: "6",
+			left: "6",
+			right: "6",
+		},
+	},
+	buttonTabBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "6",
+			bottom: "6",
+			left: "6",
+			right: "6",
+		},
+	},
+	buttonMobileBorderRadiusWidth: {
+		type: "object", 
+		default: {
+			top: "6",
+			bottom: "6",
+			left: "6",
+			right: "6",
+		},
+	},
+	buttonBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	buttonBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	buttonBoxShadowValues: { 
+		type: 'array',
+		default: [],
+	},
+	buttonBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	buttonBoxShadowHoverValues: { 
+		type: 'array',
+		default: [],
+	},
+	buttonBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	buttonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '12',
+			bottom: '12',
+			left: '24',
+			right: '24',
+		},
+	},
+	buttonTabPadding: {
+		type: "object", 
+		default: {
+			top: '12',
+			bottom: '12',
+			left: '24',
+			right: '24',
+		},
+	},
+	buttonMobilePadding: {
+		type: "object", 
+		default: {
+			top: '12',
+			bottom: '12',
+			left: '24',
+			right: '24',
+		},
+	},
+	buttonPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	buttonMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "15",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	buttonTabMargin: {
+		type: "object", 
+		default: {
+			top: "15",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	buttonMobileMargin: {
+		type: "object", 
+		default: {
+			top: "15",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	buttonMarginLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Style */    
+
+	/** Icon Styles */
+	buttonIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	buttonIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonIconColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	buttonIconColor: {
+		type: "string",
+		default: "#15171C"
+	},
+	buttonIconHoverColor: {
+		type: 'string',
+		default: ""
+	},
+
+	buttonIconBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonIconBgColor : {
+		type: "string",
+		default: ""
+	},
+	buttonIconBgHoverColor: {
+		type: 'string',
+		default: ""
+	},
+	buttonIconBorder: {
+		type: 'string',
+		default: "none",
+	},
+	buttonIconBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonIconBorderColor: {
+		type: 'string',
+	},
+	buttonIconBorderHoverColor: {
+		type: 'string',
+	},
+	buttonIconBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconBorderDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	buttonIconBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconBorderRadiusDesktop: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderRadiusTablet: {
+		type: "object", 
+		default: {
+			top: '', 
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderRadiusMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	buttonIconGapSize: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
+		}
+	},
+	buttonIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	buttonIconRotateSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	buttonIconRotate: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "", 
+			Mobile: "",
+		}
+	},
+	buttonIconRotateHover: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+
+	buttonImageRotateSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	buttonImageRotate: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "", 
+			Mobile: "",
+		}
+	},
+	buttonImageRotateHover: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+
+	buttonIconImageWidth : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageWidthUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonIconImageHeight : {
+        type: 'object',
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20',
+        }
+    },
+    buttonIconImageHeightUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+	/** End Icon Styles */
+
+	/** Start Post URL Settings */
+	thumbnailLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	categoryLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	tagLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	authorLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	titleLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Post URL Settings */
 };
 
 export default attributes;

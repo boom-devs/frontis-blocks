@@ -129,12 +129,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         
     } = attributes;
 
-
     useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `marquee-carousel-${clientId.slice(0, 8)}` });
-        }
-    }, [clientId]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "marquee-carousel-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     const deviceType = useDeviceType();
 

@@ -34,12 +34,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
 
     useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
+        if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "toc-" + clientId.slice(0, 8),
+                blockID: "fb-table-of-contents-" + clientId.slice(0, 8),
             });
         }
-    }, [clientId, blockID, setAttributes]);
+    }, [clientId]);
 
     return (
         <>
