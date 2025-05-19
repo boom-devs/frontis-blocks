@@ -9,7 +9,6 @@ import {
 } from '@wordpress/components';
 
 import FB_Range from '@Components/range';
-import './editor.lazy.scss';
 
 const FB_ScaleControl = ({
     label = __("Scale", "frontis-blocks"),

@@ -1,7 +1,6 @@
 import { useLayoutEffect, useEffect, useState, useRef } from '@wordpress/element';
 import { SelectControl } from '@wordpress/components';
 import { select } from '@wordpress/data';
-import './editor.lazy.scss';
 import { getIdFromString, getPanelIdFromRef } from '@Utils/Helpers';
 import PropTypes from 'prop-types';
 import { applyFilters } from '@wordpress/hooks';
