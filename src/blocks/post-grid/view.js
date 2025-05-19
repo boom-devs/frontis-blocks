@@ -55,6 +55,9 @@
 			readMoreIconImageUrl: attrs.readMoreIconImageUrl,
 			readMoreIconImageAlt: attrs.readMoreIconImageAlt,
 
+			customPermalinkSwitcher: attrs.customPermalinkSwitcher,
+			customPermalink: attrs.customPermalink,
+
 			thumbnailLinkSwitcher: attrs.thumbnailLinkSwitcher,
 			categoryLinkSwitcher: attrs.categoryLinkSwitcher,
 			tagLinkSwitcher: attrs.tagLinkSwitcher,
@@ -129,6 +132,9 @@
 			readMoreIconImageUrl,
 			readMoreIconImageAlt,
 
+			customPermalinkSwitcher,
+			customPermalink,
+
 			thumbnailLinkSwitcher,
 			categoryLinkSwitcher,
 			tagLinkSwitcher,
@@ -190,13 +196,15 @@
 			paginationNextText: paginationNextText || 'Next',
 			paginationNextIcon: paginationNextIcon || 'angle-right',
 
-
 			readMoreSwitcher: readMoreSwitcher || false,
 			readMoreText: readMoreText || 'Read More',
 			readMoreIconAlign: readMoreIconAlign || 'none',
 			readMoreIcon: readMoreIcon || 'angle-right',
 			readMoreIconImageUrl: readMoreIconImageUrl || '',
 			readMoreIconImageAlt: readMoreIconImageAlt || '',
+
+			customPermalinkSwitcher: customPermalinkSwitcher || false,
+			customPermalink: customPermalink || '',
 
 			thumbnailLinkSwitcher: thumbnailLinkSwitcher || true,
 			categoryLinkSwitcher: categoryLinkSwitcher || true,
@@ -561,6 +569,9 @@
 			readMoreIcon: grid.getAttribute('data-read-more-icon') || 'angle-right',
 			readMoreIconImageUrl: grid.getAttribute('data-read-more-icon-image-url') || '',
 			readMoreIconImageAlt: grid.getAttribute('data-read-more-icon-image-alt') || '',
+
+			customPermalinkSwitcher: grid.getAttribute('data-custom-permalink-switcher') || false,
+			customPermalink: grid.getAttribute('data-custom-permalink') || '',
 
 			thumbnailLinkSwitcher: grid.getAttribute('data-thumbnail-link-switcher') || true,
 			categoryLinkSwitcher: grid.getAttribute('data-category-link-switcher') || true,
