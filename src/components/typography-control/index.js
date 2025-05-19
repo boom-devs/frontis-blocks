@@ -20,7 +20,6 @@ import {
 
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import './editor.lazy.scss';
 import FB_GBSelectControl from '@Components/gb-select-control';
 
 const FB_TypographyControl = ({
