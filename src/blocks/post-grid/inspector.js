@@ -819,6 +819,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonIconImageHeightUnits,
         /** Read More Button */
 
+        customPermalinkSwitcher,
+        customPermalink,
         thumbnailLinkSwitcher,
         categoryLinkSwitcher,
         tagLinkSwitcher,
@@ -6141,6 +6143,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     step={1}
                                                     resetFallbackValue={6}
                                                 />
+                                                <ToggleControl
+                                                    label={__("Custom Permalink", "frontis-blocks")}
+                                                    checked={customPermalinkSwitcher}
+                                                    onChange={(value) => setAttributes({ customPermalinkSwitcher: value })}
+                                                />
+                                                {customPermalinkSwitcher && (
+                                                    <TextControl
+                                                        label={__("Custom Permalink", "frontis-blocks")}
+                                                        value={customPermalink}
+                                                        onChange={(value) => setAttributes({ customPermalink: value })}
+                                                        help={__("Adds a custom prefix to the post URL (e.g., '/news/post-slug'). Applies on frontend only.", "frontis-blocks")}
+                                                    />
+                                                )}
                                             </PanelBody>
 
                                             <PanelBody
