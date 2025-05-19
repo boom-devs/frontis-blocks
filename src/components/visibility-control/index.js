@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
-import './editor.lazy.scss';
+// import './editor.lazy.scss';
 
 
 const FB_VisibilityControl = ({ 
