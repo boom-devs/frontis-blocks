@@ -9,270 +9,319 @@
 
 /** Start Admin Panel scss **/
 .fb-inspector-control {
-    padding: 16px;
-    .components-tab-panel__tabs{
-        margin-bottom: 24px;
-        background-color: $neutral-color-50;
-        border-radius: 8px;
+	padding: 16px;
+
+	.components-tab-panel__tabs {
+		margin-bottom: 24px;
+		background-color: $neutral-color-50;
+		border-radius: 8px;
 		justify-content: space-between;
-        .fb-tab {
+
+		.fb-tab {
 			display: inline-block;
-            font-family: $heading-font-family;
-            font-weight: 600;
-            font-size: $medium-font-size;
-            line-height: 14px;
-            border: 1px solid transparent;
-            border-radius: 0;
-            box-shadow: none;
-            cursor: pointer;
-            height: 46px;
-            padding: 10px 14px;
-            &.general,
-            &.styles,
-            &.advance,
+			font-family: $heading-font-family;
+			font-weight: 600;
+			font-size: $medium-font-size;
+			line-height: 14px;
+			border: 1px solid transparent;
+			border-radius: 0;
+			box-shadow: none;
+			cursor: pointer;
+			height: 46px;
+			padding: 10px 14px;
+
+			&.general,
+			&.styles,
+			&.advance,
 			&.advanced {
-                &.active-tab {
-                    background: $primary-color-100;
-                    border: 1px solid $primary-color-300 !important;
-                    border-radius: 8px;
-                    color: $neutral-color-950;
-                }
-            }
-        }
-		
-    }
-    .components-panel__body{
-		&.is-opened{
+				&.active-tab {
+					background: $primary-color-100;
+					border: 1px solid $primary-color-300 !important;
+					border-radius: 8px;
+					color: $neutral-color-950;
+				}
+			}
+		}
+
+	}
+
+	.components-panel__body {
+		&.is-opened {
 			padding: 0;
 		}
-        border-top: none;
-        margin-top: 0;
-        .components-panel__body-title{
+
+		border-top: none;
+		margin-top: 0;
+
+		.components-panel__body-title {
 			margin: 0;
-            &:hover{
-                background: none;
-            }
-			.components-button{
+
+			&:hover {
+				background: none;
+			}
+
+			.components-button {
 				font-family: $heading-font-family;
 				font-weight: 600;
 				line-height: 16px;
 			}
-        }
-        .components-button{
-            color: $neutral-color-950;
-            border-radius: 6px;
-            background: $neutral-color-100;
-            padding: 12px 16px;
-            height: 50px;
-            margin-bottom: 10px;
-            font-family: $body-font-family;
-            font-size: $medium-font-size;
-            font-weight: 600;
-            line-height: $body-line-height;
-        }
-        .components-base-control__field {
-            .components-base-control__label, label{
-                color: $neutral-color-950;
-                font-family: $body-font-family;
-                font-size: $medium-font-size;
-                font-weight: 400;
-                line-height: $body-line-height;
-                margin: 0 0 10px;
-                min-height: auto;
-                text-transform: capitalize;
-            }
-			
-            .components-text-control__input,
-			.components-textarea-control__input{
+		}
+
+		.components-button {
+			color: $neutral-color-950;
+			border-radius: 6px;
+			background: $neutral-color-100;
+			padding: 12px 16px;
+			height: 50px;
+			margin-bottom: 10px;
+			font-family: $body-font-family;
+			font-size: $medium-font-size;
+			font-weight: 600;
+			line-height: $body-line-height;
+		}
+
+		.components-base-control__field {
+
+			.components-base-control__label,
+			label {
+				color: $neutral-color-950;
 				font-family: $body-font-family;
 				font-size: $medium-font-size;
-                background: $neutral-color-50;
-                border: 1px solid $neutral-color-200;
+				font-weight: 400;
+				line-height: $body-line-height;
+				margin: 0 0 10px;
+				min-height: auto;
+				text-transform: capitalize;
+			}
+
+			.components-text-control__input,
+			.components-textarea-control__input {
+				font-family: $body-font-family;
+				font-size: $medium-font-size;
+				background: $neutral-color-50;
+				border: 1px solid $neutral-color-200;
 				color: $neutral-color;
-            }
-            .components-text-control__input{
-                height: 52px;
-                border-radius: 10px;
-            }
-			.components-textarea-control__input{
+			}
+
+			.components-text-control__input {
+				height: 52px;
+				border-radius: 10px;
+			}
+
+			.components-textarea-control__input {
 				border-radius: 8px;
 			}
-            .components-input-control__container{
-				.components-input-control__input{
+
+			.components-input-control__container {
+				.components-input-control__input {
 					border: 1px solid $primary-color-300;
-					&:focus{
+
+					&:focus {
 						outline: none;
 						border: 1px solid transparent;
 					}
 				}
-                .components-select-control__input{
-                    background: $neutral-color-50;
-                    height: 40px;
+
+				.components-select-control__input {
+					background: $neutral-color-50;
+					height: 40px;
 					border-radius: 8px;
 					padding: 0px 12px;
-					&:focus{
+
+					&:focus {
 						outline: none;
 					}
-                }
-				.components-input-control__backdrop{
+				}
+
+				.components-input-control__backdrop {
 					border: none;
 				}
-            }
-            .components-button-group{
+			}
+
+			.components-button-group {
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-between;
 				border-radius: 8px;
-                background: $neutral-color-50;
-                margin-bottom: 24px;
-                .components-button{
+				background: $neutral-color-50;
+				margin-bottom: 24px;
+
+				.components-button {
 					font-weight: 400;
 					flex-grow: 1;
 					justify-content: center;
-                    padding: 10px 5px;
-                    margin-bottom: 0;
-                    box-shadow: none;
-                    border-radius: 0;
-                    background: none;
+					padding: 10px 5px;
+					margin-bottom: 0;
+					box-shadow: none;
+					border-radius: 0;
+					background: none;
 					border: 1px solid transparent;
-                    &.active{
-                        border-radius: 8px;
-                        border: 1px solid #B0D7FF;
-                        background: #D7EBFF;
-                    }
-                }
-            }
-            .components-dropdown{
-                .components-button{
-                    margin-bottom: 0;
-                    height: 52px;
-					justify-content: center;
-                    &:hover{
-                        background: $primary-color-100;
-                        color: $primary-color;
-                    }
-                }
 
-            }
-            .components-button.fb-setting-background-color-setting-icon-btn,
-            .components-button.fb-setting-color-setting-icon-btn{
-				height: auto;
-                padding: 6px;
+					&.active {
+						border-radius: 8px;
+						border: 1px solid #B0D7FF;
+						background: #D7EBFF;
+					}
+				}
 			}
-        }
-        .fb-setting-color-container{
-            .components-dropdown{
-                .components-button{
-                    height: unset !important;
-                }
-            }
-        }
-		.components-button-group.fb-setting-switcher-panel-btn{
+
+			.components-dropdown {
+				.components-button {
+					margin-bottom: 0;
+					height: 52px;
+					justify-content: center;
+
+					&:hover {
+						background: $primary-color-100;
+						color: $primary-color;
+					}
+				}
+
+			}
+
+			.components-button.fb-setting-background-color-setting-icon-btn,
+			.components-button.fb-setting-color-setting-icon-btn {
+				height: auto;
+				padding: 6px;
+			}
+		}
+
+		.fb-setting-color-container {
+			.components-dropdown {
+				.components-button {
+					height: unset !important;
+				}
+			}
+		}
+
+		.components-button-group.fb-setting-switcher-panel-btn {
 			display: flex;
 			flex-wrap: nowrap;
-			.components-button{
+
+			.components-button {
 				font-size: 14px !important;
 				color: $neutral-color-600 !important;
 				border: 1px solid transparent;
-				&.active{
+
+				&.active {
 					color: $neutral-color-950 !important;
 				}
 			}
 		}
-		.components-button-group.fb-btn-group-text-only{
+
+		.components-button-group.fb-btn-group-text-only {
 			flex-wrap: nowrap;
 			margin-bottom: 16px;
 		}
-		.components-button-group.fb-btn-group-html-tag{
+
+		.components-button-group.fb-btn-group-html-tag {
 			display: grid;
-    		grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(4, 1fr);
 			border-radius: 10px;
-			.components-button{
+
+			.components-button {
 				padding: 8px 10px;
 				border: 1px solid $white-color;
-				&.active{
+
+				&.active {
 					border: 1px solid $white-color;
 					border-radius: 0;
-					&:nth-child(1){
+
+					&:nth-child(1) {
 						border-radius: 10px 0 0 0;
 					}
-					&:nth-child(4){
-						border-radius: 0 10px 0 0 ;
+
+					&:nth-child(4) {
+						border-radius: 0 10px 0 0;
 					}
-					&:nth-child(5){
+
+					&:nth-child(5) {
 						border-radius: 0 0 0 10px;
 					}
-					&:last-child{
+
+					&:last-child {
 						border-radius: 0 0 10px 0;
 					}
 				}
 			}
 		}
-		.components-button.fb-box-shadow-icon-btn{
+
+		.components-button.fb-box-shadow-icon-btn {
 			height: unset !important;
 			padding: 5px;
 		}
-		
-			.dnd-items-wrapper{
-				li.sortable-item{
-					.sortable-header{
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-						background: $neutral-color-50;
-						padding: 12px;
+
+		.dnd-items-wrapper {
+			li.sortable-item {
+				.sortable-header {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					background: $neutral-color-50;
+					padding: 12px;
+					border: none;
+					border-radius: 8px;
+
+					.sortable-sort,
+					.sortable-duplicate,
+					.sortable-delete {
 						border: none;
-						border-radius: 8px;
-						.sortable-sort, .sortable-duplicate, .sortable-delete{
-							border: none;
-							.components-button{
-								background: none;
-								margin-bottom: 0;
-								padding: 0;
-								height: unset;
-							}
+
+						.components-button {
+							background: none;
+							margin-bottom: 0;
+							padding: 0;
+							height: unset;
 						}
 					}
 				}
 			}
-			.fb-feature-wrapper{
-				.components-button.is-primary{
-					font-weight: 500;
-					background: $primary-color-base;
-					color: $white-color;
-					padding: 10px 16px;
-					border-radius: 8px;
-				}
+		}
+
+		.fb-feature-wrapper {
+			.components-button.is-primary {
+				font-weight: 500;
+				background: $primary-color-base;
+				color: $white-color;
+				padding: 10px 16px;
+				border-radius: 8px;
 			}
-			
-		  
-		.components-range-control{
+		}
+
+
+		.components-range-control {
 			.components-range-control__root {
 				position: relative;
-				.components-range-control__number{
+
+				.components-range-control__number {
 					margin-right: -8px;
-					.components-input-control__container{
+
+					.components-input-control__container {
 						width: 100%;
 					}
 				}
-				.components-range-control__wrapper{
-					span{
-						&:nth-child(2){
+
+				.components-range-control__wrapper {
+					span {
+						&:nth-child(2) {
 							height: 2px;
 							background: $neutral-color-200;
 						}
-						&:nth-child(3){
+
+						&:nth-child(3) {
 							height: 2px;
 							background: $primary-color-base;
 						}
 					}
-					.components-range-control__thumb-wrapper{
-						span{
+
+					.components-range-control__thumb-wrapper {
+						span {
 							background-color: $primary-color-base;
 						}
 					}
 				}
-				.components-button.components-range-control__reset{
+
+				.components-button.components-range-control__reset {
 					margin-bottom: 0;
 					height: unset;
 					padding: 0;
@@ -284,100 +333,170 @@
 					padding: 0 10px;
 				}
 			}
-			
+
 		}
-		.components-range-control.default-range{
+
+		.components-range-control.default-range {
 			padding-top: 40px;
 		}
-		.fb-setting-spacing-container{
+
+		.fb-setting-spacing-container {
 			.components-range-control__root {
 				position: relative;
-				.components-range-control__number{
+
+				.components-range-control__number {
 					margin-right: 0;
-					.components-input-control__container{
+
+					.components-input-control__container {
 						width: 100%;
 					}
 				}
 			}
 		}
-		.fb-image-upload-btn{
+
+		.fb-image-upload-btn {
 			margin-bottom: 10px;
 			background-image: url(../../assets/images/transparent-bg-demo.png);
 		}
-		.components-datetime__time{
-			.components-base-control{
+
+		.components-datetime__time {
+			.components-base-control {
 				margin-bottom: 0;
 			}
 		}
-		.components-datetime__date{
+
+		.components-datetime__date {
 			margin-bottom: 10px;
-			.components-button.components-datetime__date__day{
+
+			.components-button.components-datetime__date__day {
 				padding: 0;
 				font-weight: 500;
 			}
-			> div:nth-child(2){
+
+			>div:nth-child(2) {
 				gap: 2px;
 			}
 		}
-		
-    }
-	.components-datetime__time{
-		.components-datetime__time-separator{
-			border-top: 0 ;
-			border-bottom: 0 ;
+
+	}
+
+	.components-datetime__time {
+		.components-datetime__time-separator {
+			border-top: 0;
+			border-bottom: 0;
 		}
-		.components-base-control__field{
-			.components-toggle-group-control{
+
+		.components-base-control__field {
+			.components-toggle-group-control {
 				border-color: $primary-color-300;
 			}
-			.components-select-control__input{
+
+			.components-select-control__input {
 				padding: 8px 12px !important;
 			}
 		}
-		
+
 	}
+
 	.fb-custom-css-editor-wrapper .monaco-editor {
 		border-radius: 6px !important;
 		border: 1px solid $border_color !important;
 		overflow: hidden;
 	}
-	.fb-setting-global-icon-wrapper.gb-select-control{
-		.fb-setting-global-icon-btn{
+
+	.fb-setting-global-icon-wrapper.gb-select-control {
+		.fb-setting-global-icon-btn {
 			border-radius: 6px 6px 6px 6px;
 		}
 	}
-	
+
+	// url control
+	.fb-url-control-wrapper {
+		.fb-url-control-inner-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			.fb-url-control-input {
+				flex: 1;
+				margin-bottom: 0;
+
+				.components-base-control__field {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.fb-url-control-dropdown-popup {
+		padding: 0.2rem;
+		min-width: 220px;
+
+		.fb-url-control-dropdown-popup-inner {
+			position: relative;
+			z-index: 99999;
+
+			.components-base-control__field {
+				margin-bottom: 0;
+
+				label {
+					display: block;
+					color: $secondary_color !important;
+					font-size: 12px !important;
+					font-weight: 500 !important;
+					line-height: 16px !important;
+					margin: 10px 0 !important;
+					min-height: auto;
+					text-transform: capitalize !important;
+				}
+
+				.components-toggle-control {
+					margin-bottom: 0 !important;
+				}
+			}
+		}
+	}
 }
-.fb-setting-switcher-container, .fb-setting-color-container{
-	.components-base-control.fb-setting-color-setting-wrapper{
+
+.fb-setting-switcher-container,
+.fb-setting-color-container {
+	.components-base-control.fb-setting-color-setting-wrapper {
 		margin-bottom: 24px;
-		.components-base-control__label{
+
+		.components-base-control__label {
 			margin: 0;
 		}
 	}
-    .components-button-group{
-        background: $neutral-color-100 !important;
-            .components-button{
-                box-shadow: none !important;
-                &.active{
-                    border: 1px solid $neutral-color-300 !important;
-                    background: $neutral-color-200 !important;
-                }
-            }
-    }
+
+	.components-button-group {
+		background: $neutral-color-100 !important;
+
+		.components-button {
+			box-shadow: none !important;
+
+			&.active {
+				border: 1px solid $neutral-color-300 !important;
+				background: $neutral-color-200 !important;
+			}
+		}
+	}
 }
 
 
-.fb-setting-fontsize-wrapper, .fb-setting-letterspacing-wrapper, .fb-setting-lineheight-wrapper {
+.fb-setting-fontsize-wrapper,
+.fb-setting-letterspacing-wrapper,
+.fb-setting-lineheight-wrapper {
 	.components-range-control__reset {
 		position: absolute;
 		top: -33px;
 		right: 50px;
 		box-shadow: unset;
 		font-size: 10px;
+
 		&:hover {
 			box-shadow: unset !important;
 		}
+
 		&:focus {
 			outline: none !important;
 			box-shadow: none !important;
@@ -389,6 +508,7 @@
 	.fb-setting-color-panel-btn {
 		display: flex !important;
 		width: 100%;
+
 		.fb-setting-color-panel-btn-switchr {
 			width: 100%;
 			justify-content: center;
@@ -400,6 +520,7 @@
 			font-weight: 400;
 			color: $neutral-color-200 !important;
 			box-shadow: inset 0 0 0 1px $background_color;
+
 			&.active {
 				background-color: $background_color;
 			}
@@ -425,19 +546,23 @@
 				border-radius: 8px;
 				color: #50575e;
 				background: $neutral-color-100;
+
 				&:focus {
 					outline: none;
 					box-shadow: none;
 				}
+
 				.fb-setting-color-setting-icon {
 					font-size: 15px;
 					line-height: 20px;
 				}
-				.fb-setting-color-hex{
+
+				.fb-setting-color-hex {
 					text-transform: uppercase;
 					font-weight: 400;
 				}
-				.fb-setting-color-display{
+
+				.fb-setting-color-display {
 					width: 24px;
 					height: 24px;
 					border-radius: 4px;
@@ -448,14 +573,15 @@
 }
 
 .fb-select2-control {
-    input {
-        box-shadow: unset;
+	input {
+		box-shadow: unset;
 
-        &:focus {
-            box-shadow: unset;
-        }
-    }
+		&:focus {
+			box-shadow: unset;
+		}
+	}
 }
+
 // icon picker
 .fb_icon_picker_wrapper {
 	position: relative;
@@ -531,6 +657,7 @@
 .fb_icon_picker_wrapper:hover .Change.icon {
 	transform: translate(0, 0);
 }
+
 // Modal scss
 
 .fb_icon_picker_wrapper_header {
@@ -663,94 +790,104 @@
 .fb_icon_picker_wrapper_modal {
 	min-width: 615px !important;
 }
+
 // position control
 .fb-setting-background-color-container {
-    .fb-setting-background-color-panel-wrapper {
-        .components-base-control__field {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    }
+	.fb-setting-background-color-panel-wrapper {
+		.components-base-control__field {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
 }
 
-.fb-setting-background-color-setting-wrapper{
-    .components-base-control__field {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-        .components-base-control__label {
-            font-size: 13px;
-            text-transform: capitalize;
-        }
-    }
+.fb-setting-background-color-setting-wrapper {
+	.components-base-control__field {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-direction: row;
+
+		.components-base-control__label {
+			font-size: 13px;
+			text-transform: capitalize;
+		}
+	}
 }
 
 .fb-setting-background-color-setting-icon-dropdown {
-    .fb-setting-background-color-setting-icon-btn {
-        margin: 0;
-        height: 28px;
-        width: 28px;
-        padding: 5px;
-        border: 1px solid $border_color;
-        border-radius: 14px;
-        color: $secondary_color;
-        background: $white_color;
-        &:focus {
-            outline: none;
-            box-shadow: none;
-        }
-        .fb-setting-background-color-setting-icon {
-            font-size: 15px;
-            line-height: 20px;
-        }
-    }
+	.fb-setting-background-color-setting-icon-btn {
+		margin: 0;
+		height: 28px;
+		width: 28px;
+		padding: 5px;
+		border: 1px solid $border_color;
+		border-radius: 14px;
+		color: $secondary_color;
+		background: $white_color;
+
+		&:focus {
+			outline: none;
+			box-shadow: none;
+		}
+
+		.fb-setting-background-color-setting-icon {
+			font-size: 15px;
+			line-height: 20px;
+		}
+	}
 }
 
 .fb-setting-background-color-setting-icon-dropdown-content {
-    z-index: 99999;
-    .components-popover__content {
-        padding: 15px;
-        min-width: 260px;
-    }
-    .fb-setting-background-color-popup-wrapper {
-        .fb-setting-background-color-popup-inner-wrapper {
-            .components-base-control__field {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    }
+	z-index: 99999;
+
+	.components-popover__content {
+		padding: 15px;
+		min-width: 260px;
+	}
+
+	.fb-setting-background-color-popup-wrapper {
+		.fb-setting-background-color-popup-inner-wrapper {
+			.components-base-control__field {
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+			}
+		}
+	}
 }
 
 .fb-setting-background-color-panel-btn {
-    display: flex !important;
-    width: 100%;
-    button {
-        &.components-button {
-            &.fb-setting-background-color-panel-btn-switcher {
-                width: 100%;
-                justify-content: center;
-                height: unset;
-                padding: 10px;
-                line-height: 16px;
-                min-height: 30px;
-                font-size: 13px;
-                font-weight: 400;
-                color: $secondary_color !important;
-                box-shadow: inset 0 0 0 1px $background_color !important;
-                &.active {
-                    background-color: $background_color !important;
-                }
-            }
-        }
-    }
+	display: flex !important;
+	width: 100%;
+
+	button {
+		&.components-button {
+			&.fb-setting-background-color-panel-btn-switcher {
+				width: 100%;
+				justify-content: center;
+				height: unset;
+				padding: 10px;
+				line-height: 16px;
+				min-height: 30px;
+				font-size: 13px;
+				font-weight: 400;
+				color: $secondary_color !important;
+				box-shadow: inset 0 0 0 1px $background_color !important;
+
+				&.active {
+					background-color: $background_color !important;
+				}
+			}
+		}
+	}
 }
+
 .fb-image-control-wrapper {
-    .fb-image-upload-btn {
-        background-image: url(../../assets/images/transparent-bg-demo.png);
-    }
+	.fb-image-upload-btn {
+		background-image: url(../../assets/images/transparent-bg-demo.png);
+	}
 }
+
 /** End Admin Panel scss **/
