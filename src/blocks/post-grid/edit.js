@@ -72,6 +72,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         readMoreIconImageAlt,
         readMoreIconImageID,
 
+        customPermalinkSwitcher,
+        customPermalink,
+
         thumbnailLinkSwitcher,
         categoryLinkSwitcher,
         tagLinkSwitcher,
@@ -317,6 +320,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         readMoreIconImageUrl={readMoreIconImageUrl}
                                         readMoreIconImageAlt={readMoreIconImageAlt}
                                         readMoreIconImageID={readMoreIconImageID}
+
+                                        customPermalinkSwitcher={customPermalinkSwitcher}
+                                        customPermalink={customPermalink}
 
                                         thumbnailLinkSwitcher={thumbnailLinkSwitcher}
                                         categoryLinkSwitcher={categoryLinkSwitcher}
