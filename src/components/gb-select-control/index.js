@@ -3,7 +3,6 @@ import { __ } from '@wordpress/i18n';
 import { BaseControl, Button, ButtonGroup, Dropdown, RangeControl, SelectControl } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
-import './editor.lazy.scss';
 
 const FB_GBSelectControl = ({
 	label,
