@@ -2,7 +2,6 @@ import { __ } from '@wordpress/i18n';
 import React, { useState, useEffect } from 'react';
 import Control from './control';
 import { Dashicon, BaseControl, Button, Dropdown} from '@wordpress/components';
-import './editor.lazy.scss';
 
 export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialShadowValue, onBoxShadowStyleChange, isBoxShadow=true }) {
 	const [boxShadow, setBoxShadow] = useState(() => {
