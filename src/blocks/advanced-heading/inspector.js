@@ -2423,50 +2423,49 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         className="fb-advanced-text"
                                                         />
                                                         
-                                                        <Button
+                                                        {/* <Button
                                                         icon="database"
                                                         onClick={() => setIsPopoverVisible(true)}
                                                         label="Insert dynamic content"
-                                                        />
+                                                        /> */}
                                                         
-                                                        {isPopoverVisible && (
-                                                        <Popover
-                                                            onClose={() => setIsPopoverVisible(false)}
-                                                            position="bottom center"
-                                                        >
-                                                            <MenuGroup label="Dynamic Content">
-                                                            <MenuItem
-                                                                onClick={() => {
-                                                                setAttributes({ dynamicContent: 'post_title' });
-                                                                setIsPopoverVisible(false);
-                                                                }}
+                                                        {/* {isPopoverVisible && (
+                                                            <Popover
+                                                                onClose={() => setIsPopoverVisible(false)}
+                                                                position="bottom center"
                                                             >
-                                                                Post Title
-                                                            </MenuItem>
-                                                            <MenuItem
-                                                                onClick={() => {
-                                                                setAttributes({ dynamicContent: 'post_date' });
-                                                                setIsPopoverVisible(false);
-                                                                }}
-                                                            >
-                                                                Post Date
-                                                            </MenuItem>
-                                                            {/* Add more menu items for other dynamic content types */}
-                                                            </MenuGroup>
-                                                            {dynamicContent && (
-                                                            <MenuGroup>
+                                                                <MenuGroup label="Dynamic Content">
                                                                 <MenuItem
-                                                                onClick={() => {
-                                                                    setAttributes({ dynamicContent: '' });
+                                                                    onClick={() => {
+                                                                    setAttributes({ dynamicContent: 'post_title' });
                                                                     setIsPopoverVisible(false);
-                                                                }}
+                                                                    }}
                                                                 >
-                                                                Reset to Static Text
+                                                                    Post Title
                                                                 </MenuItem>
-                                                            </MenuGroup>
-                                                            )}
-                                                        </Popover>
-                                                        )}
+                                                                <MenuItem
+                                                                    onClick={() => {
+                                                                    setAttributes({ dynamicContent: 'post_date' });
+                                                                    setIsPopoverVisible(false);
+                                                                    }}
+                                                                >
+                                                                    Post Date
+                                                                </MenuItem>
+                                                                </MenuGroup>
+                                                                {dynamicContent && (
+                                                                <MenuGroup>
+                                                                    <MenuItem
+                                                                    onClick={() => {
+                                                                        setAttributes({ dynamicContent: '' });
+                                                                        setIsPopoverVisible(false);
+                                                                    }}
+                                                                    >
+                                                                    Reset to Static Text
+                                                                    </MenuItem>
+                                                                </MenuGroup>
+                                                                )}
+                                                            </Popover>
+                                                        )} */}
                                                     </div>
                                                 </div>
                                             </PanelBody>
