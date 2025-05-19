@@ -4,7 +4,6 @@ import {
     BaseControl, 
     SelectControl,
 } from '@wordpress/components';
-import './editor.lazy.scss';
 
 const FB_BackgroundImageControl = ({
     label = '',
