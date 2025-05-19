@@ -8,7 +8,7 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
-import './editor.lazy.scss';
+// import './editor.lazy.scss';
 
 export default function FB_Spacing( {
 	label,

@@ -1,46 +1,52 @@
-import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+
 export default function save({ attributes }) {
+    // Extract attributes with defaults
     const {
-        blockID,
-        smoothScroll,
-        collapsible,
-        initialCollapsed,
-        enableDesktopSticky,
-        enableMobileCollapsible,
-        tocTitle,
-        listStyle,
-        customClass,
-        maxHeight,
-        minHeadingLevel,
-        maxHeadingLevel,
-        stickyOffset
+        blockID = '',
+        customClass = '',
+        tocTitle = 'Table of Contents',
+        minHeadingLevel = 2,
+        maxHeadingLevel = 4,
+        listStyle = 'disc',
+        collapsible = true,
+        initialCollapsed = false,
+        smoothScroll = true,
+        scrollOffset = 20,
+        enableDesktopSticky = false,
+        enableMobileCollapsible = true
     } = attributes;
+    
+    // Build block classes
+    const blockClasses = [
+        'fb-table-of-contents-block',
+        blockID,
+        customClass,
+        enableDesktopSticky ? 'sticky-desktop' : '',
+        enableMobileCollapsible ? 'collapsible-mobile' : ''
+    ].filter(Boolean).join(' ');
+    
     const blockProps = useBlockProps.save({
-        className: `fb-table-of-contents-block ${blockID} ${customClass || ''} ${enableDesktopSticky ? 'sticky-desktop' : ''} ${enableMobileCollapsible ? 'collapsible-mobile' : ''}`,
-        'data-smooth-scroll': smoothScroll ? 'true' : 'false',
-        'data-collapsible': collapsible ? 'true' : 'false',
-        'data-initial-collapsed': initialCollapsed ? 'true' : 'false',
-        'data-list-style': listStyle || 'disc',
-        'data-min-heading-level': minHeadingLevel || 2,
-        'data-max-heading-level': maxHeadingLevel || 4,
-        'data-sticky-offset': stickyOffset || 20
+        className: blockClasses
     });
+    
+    // Store all attributes for server-side rendering
     return (
         <div {...blockProps}>
-            {enableMobileCollapsible && (
-                <div className="fb-toc-mobile-toggle">
-                    <span className="dashicons dashicons-arrow-right-alt2"></span>
-                </div>
-            )}
-            <div className="fb-toc-container">
-                {tocTitle && (
-                    <h2 className="fb-toc-title">{tocTitle || __('Table of Contents', 'frontis-blocks')}</h2>
-                )}
-                <div className={`fb-toc-content ${initialCollapsed && collapsible ? 'collapsed' : ''}`} style={{ maxHeight: maxHeight ? `${maxHeight}px` : 'none' }}>
-                    <div className="fb-toc-list-container"></div>
-                </div>
-            </div>
+            {/* Store all attributes as data attributes */}
+            <div 
+                className="fb-toc-attributes" 
+                data-title={tocTitle}
+                data-min-level={minHeadingLevel}
+                data-max-level={maxHeadingLevel}
+                data-list-style={listStyle}
+                data-collapsible={collapsible.toString()}
+                data-initial-collapsed={initialCollapsed.toString()}
+                data-smooth-scroll={smoothScroll.toString()}
+                data-scroll-offset={scrollOffset}
+                data-sticky-desktop={enableDesktopSticky.toString()}
+                data-collapsible-mobile={enableMobileCollapsible.toString()}
+            />
         </div>
     );
 }
