@@ -111,12 +111,12 @@
 			.components-textarea-control__input {
 				border-radius: 8px;
 			}
-
-			.components-input-control__container {
-				.components-input-control__input {
+            .components-input-control__container{
+				border-radius: 8px;
+				.components-input-control__input{
 					border: 1px solid $primary-color-300;
-
-					&:focus {
+					border-radius: 6px;
+					&:focus{
 						outline: none;
 						border: 1px solid transparent;
 					}
@@ -292,12 +292,11 @@
 		.components-range-control {
 			.components-range-control__root {
 				position: relative;
-
-				.components-range-control__number {
-					margin-right: -8px;
-
-					.components-input-control__container {
+				.components-range-control__number{
+					// margin-right: -8px;
+					.components-input-control__container{
 						width: 100%;
+						border-radius: 6px;
 					}
 				}
 
