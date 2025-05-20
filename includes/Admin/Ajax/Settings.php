@@ -144,6 +144,13 @@ class Settings extends AjaxBase {
     // Get all pages, posts, custom post, etc post ids and get post content
     public function get_all_pages_post_ids_with_content()
 	{
+        $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
+
+        // Delete existing upload directory if it exists
+        if (is_dir($upload_directory)) {
+            $this->delete_folder($upload_directory);
+        }
+
 		global $wpdb;
 
 		// Query to get all post IDs
@@ -180,16 +187,14 @@ class Settings extends AjaxBase {
 
     /**
      * generate_assets_on_activation_update
-     *
-     * @return void
      */
     public function generate_assets_on_activation_update() {
         $response = $this->get_all_pages_post_ids_with_content();
     
         if ($response) {
-            error_log('FrontisBlocks: Assets generated successfully on activation/update.');
+            return true;
         } else {
-            error_log('FrontisBlocks: Failed to generate assets.');
+            return false;
         }
     }
 
