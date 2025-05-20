@@ -515,6 +515,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   padding: 12px;
 }
 .fb-global-typo-elements-wrap .fb-custom-element:first-child {
+  border-top: 1px solid #E1E3E8;
   border-radius: 4px 4px 0 0;
 }
 .fb-global-typo-elements-wrap .fb-custom-element:last-child {
