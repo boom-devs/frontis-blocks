@@ -12273,6 +12273,12 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inter", "frontis-blocks"),
   value: "Inter"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Sans Display", "frontis-blocks"),
+  value: "Noto Sans Display"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Serif Display", "frontis-blocks"),
+  value: "Noto Serif Display"
 }];
 
 /***/ }),
