@@ -211,7 +211,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/flip-box.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'features-list' => [
