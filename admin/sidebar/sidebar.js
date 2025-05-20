@@ -624,16 +624,8 @@ function FrontisBlocksSidebar() {
 										<NavigatorButton path="/typography">
 											<div className="fb-tab-wrapper">
 												<span className="fb-tab-icon">
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														viewBox="0 0 24 24"
-														width="24"
-														height="24"
-													>
-														<path
-															fill="currentcolor"
-															d="M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1. BUDDHA 8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"
-														/>
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z" fill="#15171C" />
 													</svg>
 												</span>
 												<span className="fb-tab-title">
@@ -736,144 +728,138 @@ function FrontisBlocksSidebar() {
 										</p>
 									</div>
 								</div>
-								<TabPanel
-									className="fb-blocks-color-tabs"
-									activeClass="active-tab"
-									onSelect={setActiveTab}
-									tabs={[
-										{ name: "solid", title: __("Solid", "frontis-blocks") },
-										{
-											name: "gradient",
-											title: __("Gradient", "frontis-blocks"),
-										},
-									]}
-								>
-									{(tab) => (
-										<div>
-											{tab.name === "solid" && (
-												<>
-													<PanelColorSettings
-														title={__("Global Colors", "frontis-blocks")}
-														className="fb-color-panel fb-global-color-panel"
-														initialOpen
-														disableAlpha
-														disableCustomGradients={false}
-														colorSettings={colorPanelArray(
-															globalColors,
-															setGlobalColor,
-															themeColors,
-														)}
-													/>
-													{customColors.length > 0 && (
-														<ColorPalletWrapper
-															colorPanelArray={colorPanelArray}
-															customColors={customColors}
-															setCustomColor={setCustomColor}
-															setCustomColors={setCustomColors}
-														/>
-													)}
-													{colorModalOpen && (
-														<Modal
-															title={__("Add Color name", "frontis-blocks")}
-															onRequestClose={() => setColorModalOpen(false)}
-														>
-															<TextControl
-																__nextHasNoMarginBottom
-																__next40pxDefaultSize
-																label={__("Color Name", "frontis-blocks")}
-																value={colorName}
-																onChange={setColorName}
-															/>
-															<Button
-																className="fb-custom-color-btn"
-																onClick={() => setColorModalOpen(false)}
-															>
-																{__("Save", "frontis-blocks")}
-															</Button>
-														</Modal>
-													)}
-													<div className="add-custom-color">
-														<Button
-															className="add-custom-color-btn"
-															onClick={addCustomColor}
-														>
-															{__("Add Custom Color", "frontis-blocks")}{" "}
-															<span>
-																<svg
-																	width="15"
-																	height="14"
-																	viewBox="0 0 15 14"
-																	fill="none"
-																	xmlns="http://www.w3.org/2000/svg"
-																>
-																	<path
-																		d="M7.5 0.75V13.25M13.75 7L1.25 7"
-																		stroke="white"
-																		strokeWidth="1.5"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	/>
-																</svg>
-															</span>
-														</Button>
-													</div>
-												</>
+								{/* Remove TabPanel and display options vertically */}
+								<div className="fb-color-options-vertical">
+									{/* Solid Colors Section */}
+									<div className="fb-color-section">
+										<h3 className="fb-section-title">{__("Solid", "frontis-blocks")}</h3>
+
+										<PanelColorSettings
+											// title={__("Global Colors", "frontis-blocks")}
+											className="fb-color-panel fb-global-color-panel"
+											initialOpen
+											disableAlpha
+											disableCustomGradients={false}
+											colorSettings={colorPanelArray(
+												globalColors,
+												setGlobalColor,
+												themeColors,
 											)}
-											{tab.name === "gradient" && (
-												<>
-													<GradientColorPallet
-														title={__("Gradient Colors", "frontis-blocks")}
-														colors={gradientColors}
-														setColor={setGradientColor}
-														setColors={setGradientColors}
-														wrapperClass="fb-gradient-color-panel"
-														resetAction
-													/>
-													{customGradientColors.length > 0 && (
-														<CustomGradientColorPallet
-															title={__(
-																"Custom Gradient Colors",
-																"frontis-blocks",
-															)}
-															colors={customGradientColors}
-															setColor={setCustomGradientColor}
-															setColors={setCustomGradientColors}
-															wrapperClass="fb-gradient-color-panel"
-															resetAction={false}
-															deleteAction
-															onDelete={deleteCustomGradientColor}
+										/>
+
+										{customColors.length > 0 && (
+											<ColorPalletWrapper
+												colorPanelArray={colorPanelArray}
+												customColors={customColors}
+												setCustomColor={setCustomColor}
+												setCustomColors={setCustomColors}
+											/>
+										)}
+
+										{colorModalOpen && (
+											<Modal
+												title={__("Add Color name", "frontis-blocks")}
+												onRequestClose={() => setColorModalOpen(false)}
+											>
+												<TextControl
+													__nextHasNoMarginBottom
+													__next40pxDefaultSize
+													label={__("Color Name", "frontis-blocks")}
+													value={colorName}
+													onChange={setColorName}
+												/>
+												<Button
+													className="fb-custom-color-btn"
+													onClick={() => setColorModalOpen(false)}
+												>
+													{__("Save", "frontis-blocks")}
+												</Button>
+											</Modal>
+										)}
+
+										<div className="add-custom-color">
+											<Button
+												className="add-custom-color-btn"
+												onClick={addCustomColor}
+											>
+												{__("Add Custom Color", "frontis-blocks")}{" "}
+												<span>
+													<svg
+														width="15"
+														height="14"
+														viewBox="0 0 15 14"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															d="M7.5 0.75V13.25M13.75 7L1.25 7"
+															stroke="white"
+															strokeWidth="1.5"
+															strokeLinecap="round"
+															strokeLinejoin="round"
 														/>
-													)}
-													<div className="add-custom-color">
-														<Button
-															className="add-custom-color-btn"
-															onClick={addCustomGradientColor}
-														>
-															{__("Add Custom Color", "frontis-blocks")}{" "}
-															<span>
-																<svg
-																	width="15"
-																	height="14"
-																	viewBox="0 0 15 14"
-																	fill="none"
-																	xmlns="http://www.w3.org/2000/svg"
-																>
-																	<path
-																		d="M7.5 0.75V13.25M13.75 7L1.25 7"
-																		stroke="white"
-																		strokeWidth="1.5"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	/>
-																</svg>
-															</span>
-														</Button>
-													</div>
-												</>
-											)}
+													</svg>
+												</span>
+											</Button>
 										</div>
-									)}
-								</TabPanel>
+									</div>
+
+									{/* Gradient Section */}
+									<div className="fb-color-section">
+										<h3 className="fb-section-title">{__("Gradient", "frontis-blocks")}</h3>
+
+										<GradientColorPallet
+											// title={__("Gradient Colors", "frontis-blocks")}
+											colors={gradientColors}
+											setColor={setGradientColor}
+											setColors={setGradientColors}
+											wrapperClass="fb-gradient-color-panel"
+											resetAction
+										/>
+
+										{customGradientColors.length > 0 && (
+											<CustomGradientColorPallet
+												title={__(
+													"Custom Gradient Colors",
+													"frontis-blocks",
+												)}
+												colors={customGradientColors}
+												setColor={setCustomGradientColor}
+												setColors={setCustomGradientColors}
+												wrapperClass="fb-gradient-color-panel"
+												resetAction={false}
+												deleteAction
+												onDelete={deleteCustomGradientColor}
+											/>
+										)}
+
+										<div className="add-custom-color">
+											<Button
+												className="add-custom-color-btn"
+												onClick={addCustomGradientColor}
+											>
+												{__("Add Custom Color", "frontis-blocks")}{" "}
+												<span>
+													<svg
+														width="15"
+														height="14"
+														viewBox="0 0 15 14"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg"
+													>
+														<path
+															d="M7.5 0.75V13.25M13.75 7L1.25 7"
+															stroke="white"
+															strokeWidth="1.5"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														/>
+													</svg>
+												</span>
+											</Button>
+										</div>
+									</div>
+								</div>
 							</NavigatorScreen>
 						</NavigatorProvider>
 					</div>

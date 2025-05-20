@@ -376,7 +376,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   margin-bottom: 10px;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .components-navigator-button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   padding: 0;
@@ -393,7 +393,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   fill: none !important;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-blocks-tabs .fb-tab-wrapper .fb-tab-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   color: #1e1e1e;
@@ -407,7 +407,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   gap: 8px;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   color: #0B0C0E;
@@ -415,7 +415,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   margin-top: 9px;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper .fb-global-header-inner p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 20px;
   color: #0B0C0E;
@@ -445,7 +445,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   border-right: 1px solid rgb(221, 221, 221);
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tabs button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   border-bottom: 2px solid transparent;
