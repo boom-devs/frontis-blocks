@@ -4,7 +4,6 @@ import {
     __experimentalInputControl as InputControl
 
 } from '@wordpress/components';
-// import './editor.lazy.scss';
 
 
 const FB_InputControl = ({ label, value, onChangeValue, helpText }) => {
