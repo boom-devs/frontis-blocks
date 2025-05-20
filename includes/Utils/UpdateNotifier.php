@@ -26,17 +26,49 @@ class UpdateNotifier {
     /**
      * Set flag when plugin is updated
      */
+    // public static function on_plugin_update($upgrader, $options) {
+    //     if (
+    //         isset($options['action'], $options['type'], $options['plugins']) &&
+    //         $options['action'] === 'update' &&
+    //         $options['type'] === 'plugin' &&
+    //         in_array(plugin_basename(FRONTIS_BLOCKS_FILE), $options['plugins'], true)
+    //     ) {
+    //         update_option(self::$update_key, true);
+    //         update_option(self::$redirect_key, true);
+    //     }
+    // }
+
+
+    /**
+     * Set flag when plugin is updated or reinstalled
+     */
     public static function on_plugin_update($upgrader, $options) {
         if (
-            isset($options['action'], $options['type'], $options['plugins']) &&
-            $options['action'] === 'update' &&
+            isset($options['type'], $options['action']) &&
             $options['type'] === 'plugin' &&
-            in_array(plugin_basename(FRONTIS_BLOCKS_FILE), $options['plugins'], true)
+            in_array($options['action'], ['update', 'install'], true)
         ) {
-            update_option(self::$update_key, true);
-            update_option(self::$redirect_key, true);
+            $plugin_slug = defined('FRONTIS_BLOCKS_FILE') ? plugin_basename(FRONTIS_BLOCKS_FILE) : 'frontis-blocks/frontis-blocks.php';
+
+            $is_target_plugin = false;
+
+            // Bulk update path (update action)
+            if (!empty($options['plugins']) && is_array($options['plugins'])) {
+                $is_target_plugin = in_array($plugin_slug, $options['plugins'], true);
+            }
+
+            // Single install/update path (install action)
+            if (!$is_target_plugin && !empty($options['plugin'])) {
+                $is_target_plugin = $options['plugin'] === $plugin_slug;
+            }
+
+            if ($is_target_plugin) {
+                update_option(self::$update_key, true);
+                update_option(self::$redirect_key, true);
+            }
         }
     }
+
 
     /**
      * Set install-time notice if plugin is already active
