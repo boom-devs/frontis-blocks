@@ -14,7 +14,7 @@ use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Utils\Helper;
-use FrontisBlocks\Utils\UpdateNotifier;
+use FrontisBlocks\Utils\PluginSetup;
 final class Plugin
 {
 	/**
@@ -22,7 +22,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.0.7';
+	const VERSION = '1.0.8';
 
 	/**
 	 * Plugin slug
@@ -318,6 +318,7 @@ final class Plugin
 	public function init_plugin()
 	{
 		// Additional plugin initialization if needed
+		PluginSetup::get_instance()->init();
 
 		Blocks::get_instance();
 
@@ -330,8 +331,6 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		SupportSVG::get_instance();
-
-		UpdateNotifier::register();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 
@@ -399,7 +398,7 @@ final class Plugin
     /**
      * Handle redirect to settings page after activation
      */
-    public function handle_activation_redirect() {
+    public function handle_activation_redirect() { 
         if (
             get_option('frontis_blocks_do_activation_redirect', false) 
             && current_user_can('manage_options')
