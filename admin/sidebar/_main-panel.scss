@@ -14,6 +14,14 @@
 
                 .fb-panel-section {
                     margin-bottom: 24px;
+
+                    .fb-panel-heading {
+                        font-family: $heading-font-family;
+                        font-size: $medium-font-size-global;
+                        font-weight: 500;
+                        line-height: 16px;
+                        text-transform: capitalize;
+                    }
                 }
             }
 
@@ -111,6 +119,7 @@
                 padding: 0 16px;
                 border-bottom: 1px solid #E1E3E8;
                 margin-bottom: 24px;
+
                 .add-custom-color {
                     text-align: center;
                     padding: 24px 0;
@@ -135,7 +144,8 @@
                         }
                     }
                 }
-                .fb-section-title{
+
+                .fb-section-title {
                     font-family: $heading-font-family;
                     font-size: $medium-font-size-global;
                     font-weight: 500;

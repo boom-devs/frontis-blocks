@@ -18,6 +18,13 @@
 .fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section {
   margin-bottom: 24px;
 }
+.fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: capitalize;
+}
 .fb-global-controls.components-panel .fb-panel-control .fb-tab-element {
   margin-bottom: 10px;
   padding: 0 16px;
