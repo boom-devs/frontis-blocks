@@ -22,8 +22,11 @@ import './editor.scss';
 import {
     BORDER_STYLES,
     EFFECT_OPTIONS,
+    SLIDER_EFFECT_OPTIONS,
+    CAROUSEL_EFFECT_OPTIONS,
     OVERFLOW_OP,
     PAGINATION_TYPE,
+    SLIDER_TYPE,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -40,11 +43,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
-        effect,
         displayArrows,
         displayDots,
         paginationType,
-
+        sliderType,
+        slideEffect,
+        carouselEffect, 
+        carouselPerColumn,
+        carouselPerColumnGap,
+        
         /** Slider Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -1585,7 +1592,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <div className={`fb-tab-controls ${tab.name}`}>
                                 {tab.name === "general" && (
                                     <>
-                                    <PanelBody title={__("Slider Options", "frontis-blocks")} initialOpen>
+                                    <PanelBody title={__("Slider Type", "frontis-blocks")} initialOpen={true}>
+                                        <div className="fb-setting-switcher-container">
+                                            <BaseControl
+                                                label={__("Slider Type", "frontis-blocks")}
+                                                className="fb-setting-switcher-panel-wrapper"
+                                            >
+                                                <ButtonGroup className="fb-setting-switcher-panel-btn">
+                                                    {SLIDER_TYPE.map((item, key) => (
+                                                        <Button
+                                                            key={key}
+                                                            onClick={() => setAttributes({ sliderType: item.value })} 
+                                                            className={`fb-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
+                                        </div>
+                                    </PanelBody>
+
+                                    {sliderType === 'carousel' && (
+                                        <>
+                                        <PanelBody title={__("Carousel Settings", "frontis-blocks")} initialOpen={false}>
+                                            <RangeControl
+                                                label={__('Number of Columns', 'frontis-blocks')}
+                                                value={carouselPerColumn}
+                                                onChange={(value) => setAttributes({ carouselPerColumn: value })}
+                                                min={1}
+                                                max={10}
+                                                step={1}
+                                                initialPosition={1}
+                                            />
+                                            <RangeControl
+                                                label={__('Column Gap (px)', 'frontis-blocks')}
+                                                value={carouselPerColumnGap}
+                                                onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
+                                                min={0}
+                                                max={200}
+                                                step={1}
+                                                initialPosition={1}
+                                            />
+                                            <SelectControl
+                                                label={__('Select Carousel Effect', 'frontis-blocks')}
+                                                value={carouselEffect}
+                                                options={CAROUSEL_EFFECT_OPTIONS}
+                                                onChange={(value) => setAttributes({ carouselEffect: value })}
+                                            />
+                                        </PanelBody>
+                                        </>
+                                    )}
+                                    {sliderType === 'slider' && (
+                                        <PanelBody title={__("Slider Effect", "frontis-blocks")} initialOpen={false}>
+                                            <SelectControl
+                                                label={__('Select Slider Effect', 'frontis-blocks')}
+                                                value={slideEffect}
+                                                options={SLIDER_EFFECT_OPTIONS}
+                                                onChange={(value) => setAttributes({ slideEffect: value })}
+                                            />
+                                        </PanelBody>
+                                    )}
+
+                                    <PanelBody title={__("Slider Options", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
                                             label={ __( 'Enable Loop', 'frontis-blocks' ) }
                                             checked={ loop }
@@ -1647,14 +1716,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             initialPosition={500}
                                         />
                                     </PanelBody>
-                                    <PanelBody title={__("Effect", "frontis-blocks")} initialOpen={false}>
-                                        <SelectControl
-                                            label={__('Slide Effect', 'your-text-domain')}
-                                            value={effect}
-                                            options={EFFECT_OPTIONS}
-                                            onChange={(value) => setAttributes({ effect: value })}
-                                        />
-                                    </PanelBody>
+
                                     <PanelBody title={__("Navigation & Pagination", "frontis-blocks")} initialOpen={false}>
                                         <ToggleControl
                                             label={ __( 'Navigation', 'frontis-blocks' ) }
