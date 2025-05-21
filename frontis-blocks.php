@@ -26,11 +26,6 @@ define( 'FB_PLUGIN_FILE', __FILE__ );
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * Register activation hook
- */
-FrontisBlocks\Utils\PluginSetup::register_activation_hook();
-
-/**
  * Initialize plugin
  */
 function frontis_blocks(){

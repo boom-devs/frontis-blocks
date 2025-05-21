@@ -14,7 +14,8 @@ use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Utils\Helper;
-use FrontisBlocks\Utils\PluginSetup;
+use FrontisBlocks\Utils\UpdateNotifier;
+
 final class Plugin
 {
 	/**
@@ -186,10 +187,6 @@ final class Plugin
 		// Check page or post assigned by template
 		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
 
-		// if($frntis_block_used || $assigned_template !== '') {
-		// 	$page_name = Helper::get_page_name();
-		// }
-
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
@@ -310,6 +307,8 @@ final class Plugin
 	private function init_hooks()
 	{
 		add_action('plugins_loaded', [$this, 'init_plugin']);
+		add_action('plugins_loaded', [$this, 'fb_set_initial_version']);
+		add_action('upgrader_process_complete', [$this, 'fb_on_update'], 10, 2);
 	}
 
 	/**
@@ -318,7 +317,6 @@ final class Plugin
 	public function init_plugin()
 	{
 		// Additional plugin initialization if needed
-		PluginSetup::get_instance()->init();
 
 		Blocks::get_instance();
 
@@ -332,6 +330,8 @@ final class Plugin
 
 		SupportSVG::get_instance();
 
+		UpdateNotifier::register();
+
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 
 	}
@@ -342,6 +342,7 @@ final class Plugin
     public function set_activation_redirect() {
         add_option('frontis_blocks_do_activation_redirect', true);
 		$this->insert_fb_global_colors();
+		$this->fb_on_activate_or_update();
     }
 
 	/**
@@ -392,6 +393,54 @@ final class Plugin
 			add_option($option_name, $modified_colors);
 		} else {
 			update_option($option_name, $modified_colors);
+		}
+	}
+
+
+
+	/**
+	 * Handle plugin activation and update
+	 */
+	public function fb_on_activate_or_update() {
+		update_option('frontis_blocks_version', self::VERSION);
+		Settings::get_instance()->generate_assets_on_activation_update();
+	}
+
+	/**
+	 * Set the version if it was never saved before
+	 */
+	public function fb_set_initial_version() {
+		if (get_option('frontis_blocks_version') === false) {
+			update_option('frontis_blocks_version', self::VERSION);
+		}
+	}
+
+	/**
+	 * Handle plugin update via WordPress plugin updater
+	 */
+	public function fb_on_update($upgrader_object, $options) {
+		if (
+			isset($options['type']) && $options['type'] === 'plugin' &&
+			in_array($options['action'], ['update', 'install'], true)
+		) {
+			// Try both plugin list or single plugin
+			$plugin_slug = defined('FB_PLUGIN_BASENAME') ? FB_PLUGIN_BASENAME : 'frontis-blocks/frontis-blocks.php';
+	
+			$is_target_plugin = false;
+	
+			// Bulk update path (update action)
+			if (!empty($options['plugins']) && is_array($options['plugins'])) {
+				$is_target_plugin = in_array($plugin_slug, $options['plugins'], true);
+			}
+	
+			// Upload path (install action)
+			if (!$is_target_plugin && !empty($options['plugin'])) {
+				$is_target_plugin = $options['plugin'] === $plugin_slug;
+			}
+	
+			if ($is_target_plugin) {
+				$this->fb_on_activate_or_update();
+			}
 		}
 	}
 
