@@ -188,9 +188,29 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       onClick: function onClick() {
         return onDelete(index);
       }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: 'trash'
-    }))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M6.3335 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.6665 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
       anchor: gradientPopoverAnchor,
       className: "fb-gradient-color-popup",
       placement: "right",
@@ -1859,9 +1879,29 @@ var TypographySettings = function TypographySettings(props) {
         onClick: function onClick() {
           return deleteItem(item);
         }
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: 'trash'
-      }))));
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "16",
+        height: "17",
+        viewBox: "0 0 16 17",
+        fill: "none"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M6.3335 11.5V7.5",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M9.6665 11.5V7.5",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      })))));
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -4984,37 +5024,11 @@ var TypographySettings = function TypographySettings(props) {
     })))));
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-heading-wrapper"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-panel-heading"
   }, "Custom"), /*#__PURE__*/React.createElement("div", {
-    className: 'fb-global-typo-elements'
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-typo-elements-wrap"
-  }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-    initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-    path: "/"
-  }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
-    var _customTypography$ite7;
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "fb-custom-element fb-global-typography-element"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-      path: "/".concat(item)
-    }, /*#__PURE__*/React.createElement("span", {
-      className: "font_preview"
-    }, "Aa"), (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      className: "fb-delete-custom-typo"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return deleteItem(item);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-      icon: 'trash'
-    }))));
-  }), /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "add-custom-color-btn",
@@ -5058,7 +5072,7 @@ var TypographySettings = function TypographySettings(props) {
         }
       })));
     }
-  }, "Add Custom Typography", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
     width: "15",
     height: "14",
     viewBox: "0 0 15 14",
@@ -5070,7 +5084,55 @@ var TypographySettings = function TypographySettings(props) {
     strokeWidth: "1.5",
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  })))))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: 'fb-global-typo-elements'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-typo-elements-wrap"
+  }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
+    initialPath: "/"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
+    path: "/"
+  }, Object.keys(customTypography || {}).length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "fb-custom-element-wrapper"
+  }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
+    var _customTypography$ite7;
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "fb-custom-element fb-global-typography-element"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
+      path: "/".concat(item)
+    }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      className: "fb-delete-custom-typo"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'fb-delete',
+      title: "Delete",
+      onClick: function onClick() {
+        return deleteItem(item);
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M6.3335 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.6665 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    })))));
+  }))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
     var _customTypography$ite8, _customTypography$ite9, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18, _customTypography$ite19, _customTypography$ite20;
     return /*#__PURE__*/React.createElement("div", {
       key: index,

@@ -753,61 +753,47 @@ function FrontisBlocksSidebar() {
 												customColors={customColors}
 												setCustomColor={setCustomColor}
 												setCustomColors={setCustomColors}
+												addCustomColor={addCustomColor}
+												colorModalOpen={colorModalOpen}
+												setColorModalOpen={setColorModalOpen}
+												colorName={colorName}
+												setColorName={setColorName}
 											/>
 										)}
+										
 
-										{colorModalOpen && (
-											<Modal
-												title={__("Add Color name", "frontis-blocks")}
-												onRequestClose={() => setColorModalOpen(false)}
-											>
-												<TextControl
-													__nextHasNoMarginBottom
-													__next40pxDefaultSize
-													label={__("Color Name", "frontis-blocks")}
-													value={colorName}
-													onChange={setColorName}
-												/>
-												<Button
-													className="fb-custom-color-btn"
-													onClick={() => setColorModalOpen(false)}
-												>
-													{__("Save", "frontis-blocks")}
-												</Button>
-											</Modal>
-										)}
-
-										<div className="add-custom-color">
-											<Button
-												className="add-custom-color-btn"
-												onClick={addCustomColor}
-											>
-												{__("Add Custom Color", "frontis-blocks")}{" "}
-												<span>
-													<svg
-														width="15"
-														height="14"
-														viewBox="0 0 15 14"
-														fill="none"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path
-															d="M7.5 0.75V13.25M13.75 7L1.25 7"
-															stroke="white"
-															strokeWidth="1.5"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														/>
-													</svg>
-												</span>
-											</Button>
-										</div>
 									</div>
 
 									{/* Gradient Section */}
 									<div className="fb-color-section">
-										<h3 className="fb-section-title">{__("Gradient", "frontis-blocks")}</h3>
-
+										<div className="fb-panel-heading-wrapper">
+											<h3 className="fb-section-title">{__("Gradient", "frontis-blocks")}</h3>
+											<div className="add-custom-color">
+												<Button
+													className="add-custom-color-btn"
+													onClick={addCustomGradientColor}
+												>
+													{/* {__("Add Custom Color", "frontis-blocks")}{" "} */}
+													<span>
+														<svg
+															width="15"
+															height="14"
+															viewBox="0 0 15 14"
+															fill="none"
+															xmlns="http://www.w3.org/2000/svg"
+														>
+															<path
+																d="M7.5 0.75V13.25M13.75 7L1.25 7"
+																stroke="#404655"
+																strokeWidth="1.5"
+																strokeLinecap="round"
+																strokeLinejoin="round"
+															/>
+														</svg>
+													</span>
+												</Button>
+											</div>
+										</div>
 										<GradientColorPallet
 											// title={__("Gradient Colors", "frontis-blocks")}
 											colors={gradientColors}
@@ -833,31 +819,7 @@ function FrontisBlocksSidebar() {
 											/>
 										)}
 
-										<div className="add-custom-color">
-											<Button
-												className="add-custom-color-btn"
-												onClick={addCustomGradientColor}
-											>
-												{__("Add Custom Color", "frontis-blocks")}{" "}
-												<span>
-													<svg
-														width="15"
-														height="14"
-														viewBox="0 0 15 14"
-														fill="none"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path
-															d="M7.5 0.75V13.25M13.75 7L1.25 7"
-															stroke="white"
-															strokeWidth="1.5"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														/>
-													</svg>
-												</span>
-											</Button>
-										</div>
+
 									</div>
 								</div>
 							</NavigatorScreen>

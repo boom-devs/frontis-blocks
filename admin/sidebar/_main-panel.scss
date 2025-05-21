@@ -21,7 +21,35 @@
                         font-weight: 500;
                         line-height: 16px;
                         text-transform: capitalize;
+                        margin-bottom: 24px;
                     }
+
+                    .fb-panel-heading-wrapper {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 24px;
+
+                        .add-custom-color {
+                            .add-custom-color-btn {
+                                svg {
+                                    path {
+                                        stroke: #404655;
+                                    }
+                                }
+                            }
+                        }
+
+                        .fb-panel-heading {
+                            margin-bottom: 0;
+                        }
+
+                        .components-button {
+                            padding: 0;
+                            height: unset;
+                        }
+                    }
+
                 }
             }
 
@@ -31,6 +59,7 @@
             }
 
             .components-navigator-button {
+                font-family: $body-font-family;
                 font-size: $medium-font-size-global;
                 font-weight: 500;
                 line-height: 16px;
@@ -152,6 +181,46 @@
                     line-height: 16px;
                     text-transform: capitalize;
                 }
+
+                .fb-panel-heading-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 24px;
+
+                    .fb-section-title {
+                        margin-bottom: 0;
+                    }
+
+                    .add-custom-color {
+                        padding: 0;
+
+                        .add-custom-color-btn {
+                            background: none;
+                            padding: 0;
+                            &.components-button {
+                                padding: 0;
+                                height: unset;
+                            }
+                        }
+
+                    }
+                }
+                .fb-color-panel{
+                    .components-button{
+                        &.block-editor-panel-color-gradient-settings__dropdown{
+                            padding: 12px;
+                            height: unset;
+                        }
+                    }
+                }
+                &:first-child{
+                    padding-bottom: 12px;
+                }
+                &:last-child{
+                    border-bottom: none;
+                    margin-bottom: 0;
+                }
             }
         }
 
@@ -253,6 +322,26 @@
             .fb-typography-settings {
                 padding: 0 1px;
                 margin-top: 10px;
+
+                .components-base-control__label {
+                    font-family: $heading-font-family;
+                    font-size: $medium-font-size-global;
+                    font-weight: 500;
+                    line-height: 16px;
+                    text-transform: capitalize;
+                    margin-bottom: 4px;
+                }
+
+                .components-text-control__input {
+                    height: unset;
+                    padding: 15px 12px;
+                    border: 1px solid $neutral-color-100;
+                    border-radius: 8px;
+                    font-family: $body-font-family;
+                    font-size: $medium-font-size-global;
+                    font-weight: 400;
+                    line-height: 16px;
+                }
 
                 .components-input-control__container {
                     border-radius: 8px;
@@ -381,6 +470,9 @@
                             font-weight: 400;
                             line-height: 20px;
                         }
+                    }
+                    &.active{
+                        background: $neutral-color-900;
                     }
                 }
 

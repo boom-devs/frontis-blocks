@@ -703,7 +703,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
   padding: 14px 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
-  color: #0B0C0E;
+  color: #050607;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -858,7 +858,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
-  color: #0B0C0E;
+  color: #050607;
   text-transform: capitalize;
   margin-top: 9px;
 }
@@ -866,7 +866,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #0B0C0E;
+  color: #050607;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg {
   fill: none !important;
@@ -1047,7 +1047,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 
 .fb-color-panel.fb-gradient-color-panel .components-panel__row.fb-gradient-color-label {
-  color: #0B0C0E;
+  color: #050607;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
