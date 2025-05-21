@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'FB_PLUGIN_FILE', __FILE__ );
 
 /**
- * Autoloader (via Composer or PSR-4)
+ * Autoloader
  */
 require_once __DIR__ . '/vendor/autoload.php';
 
