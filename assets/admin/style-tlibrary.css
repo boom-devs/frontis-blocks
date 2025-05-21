@@ -410,7 +410,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
-  color: #0B0C0E;
+  color: #050607;
   text-transform: capitalize;
   margin-top: 9px;
 }
@@ -418,7 +418,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #0B0C0E;
+  color: #050607;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-fsi-modal-content-wrapper .fb-global-header-inner-wrapper svg {
   fill: none !important;
