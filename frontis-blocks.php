@@ -21,16 +21,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'FB_PLUGIN_FILE', __FILE__ );
 
 /**
- * Require Autoloader.
- *
- * @since 1.0.0
- * @package Frontis_Blocks
+ * Autoloader (via Composer or PSR-4)
  */
-// Include block registration functions
 require_once __DIR__ . '/vendor/autoload.php';
 
-function wm_frontis_blocks(){
+/**
+ * Register activation hook
+ */
+FrontisBlocks\Utils\PluginSetup::register_activation_hook();
+
+/**
+ * Initialize plugin
+ */
+function frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
 }
 
-wm_frontis_blocks();
+frontis_blocks();

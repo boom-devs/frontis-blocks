@@ -179,6 +179,21 @@ class Settings extends AjaxBase {
     }
 
     /**
+     * generate_assets_on_activation_update
+     *
+     * @return void
+     */
+    public function generate_assets_on_activation_update() {
+        $response = $this->get_all_pages_post_ids_with_content();
+    
+        if ($response) {
+            error_log('FrontisBlocks: Assets generated successfully on activation/update.');
+        } else {
+            error_log('FrontisBlocks: Failed to generate assets.');
+        }
+    }
+
+    /**
      * delete_folder
      *
      * @param string $folder_path
