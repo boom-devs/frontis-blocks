@@ -83,8 +83,27 @@ export const EFFECT_OPTIONS = [
 	{ value: 'creative', label: __('Creative', 'frontis-blocks') },
 ];
 
+
+export const SLIDER_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'fade', label: __('Fade', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+	{ value: 'flip', label: __('Flip', 'frontis-blocks') },
+	{ value: 'creative', label: __('Creative', 'frontis-blocks') },
+];
+
+export const CAROUSEL_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+];
+
 export const PAGINATION_TYPE = [
 	{ value: 'bullets', label: __('Bullets', 'frontis-blocks') },
 	{ value: 'fraction', label: __('Fraction', 'frontis-blocks') },
 	{ value: 'progressbar', label: __('Progress Bar', 'frontis-blocks') }
+];
+
+export const SLIDER_TYPE = [
+	{ value: 'slider', label: __('Slider', 'frontis-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'frontis-blocks') },
 ];
