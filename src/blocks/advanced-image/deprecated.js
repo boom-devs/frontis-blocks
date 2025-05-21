@@ -35,53 +35,55 @@ const v1_0_3 = {
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
+            className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${advancedImageTabletSwitcher ? 'fb-tablet-responsive' : ''} ${advancedImageMobileSwitcher ? 'fb-mobile-responsive' : ''}`,
         });
 
         return (
-            <>
-                <div {...blockProps}>
-                    <div className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
-                        <div
-                            className={`fb-advanced-image ${imageStyle} ${imageSize} ${imageHover} ${imageFit} ${titlePosition}`}>
-                            <div className="fb-advanced-image-inner">
-                                {advancedImageUrl ? (
-                                    linkSwitch ? (
-                                        <a
-                                            href={linkUrl}
-                                            target={linkTargetUrl ? '_blank' : undefined}
-                                            rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
-                                        >
-                                            <img src={advancedImageUrl} alt={advancedImageAlt}/>
-                                        </a>
-                                    ) : (
-                                        <img src={advancedImageUrl} alt={advancedImageAlt}/>
-                                    )
-                                ) : null}
-                            </div>
-                            {displayTitle && titleText && (
-                                <div className="fb-advanced-image-title">
-                                    <div className="fb-advanced-image-title-inner">
+            <div {...blockProps}>
+                <div
+                    className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass || ''}`}
+                    id={advancedImageGlobalWraperID || ''}
+                >
+                    <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${imageFit || ''} ${titlePosition || ''}`}>
+                        <div className="fb-advanced-image-inner">
+                            {advancedImageUrl ? (
+                                linkSwitch ? (
+                                    <a
+                                        href={linkUrl}
+                                        target={linkTargetUrl ? '_blank' : undefined}
+                                        rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
+                                    >
+                                        <img src={advancedImageUrl} alt={advancedImageAlt || ''} />
+                                    </a>
+                                ) : (
+                                    <img src={advancedImageUrl} alt={advancedImageAlt || ''} />
+                                )
+                            ) : null}
+                        </div>
+
+                        {displayTitle && titleText && (
+                            <div className="fb-advanced-image-title">
+                                <div className="fb-advanced-image-title-inner">
                                     <RichText.Content
                                         tagName={titleTag}
                                         value={titleText}
                                         className="fb-advanced-title"
                                     />
-                                    </div>
                                 </div>
-                            )}
-                            {displayCaption && imageCaption && (
-                                <div className="fb-advanced-image-caption">
-                                    <RichText.Content
-                                        tagName="figcaption"
-                                        value={imageCaption}
-                                    />
-                                </div>
-                            )}
-                        </div>
+                            </div>
+                        )}
+
+                        {displayCaption && imageCaption && (
+                            <div className="fb-advanced-image-caption">
+                                <RichText.Content
+                                    tagName="figcaption"
+                                    value={imageCaption}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
-            </>
+            </div>
         );
     },
 };

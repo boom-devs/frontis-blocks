@@ -56,6 +56,11 @@ const v1_0_3 = {
             postGridDesktopSwitcher,
             postGridTabletSwitcher,
             postGridMobileSwitcher,
+
+            paginationPrevIcon,
+            paginationNextIcon,
+            readMoreIcon,
+
         } = attributes;
 
         const blockProps = useBlockProps.save({
@@ -104,6 +109,15 @@ const v1_0_3 = {
                     <div className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`} id={postGridGlobalWraperID}>
                         <div className="load_more_button_icon">
                             {renderSVG(loadMoreIcon)}
+                        </div>
+                        <div className="fb_pagination_previous_icon">
+                            {renderSVG(paginationPrevIcon)}
+                        </div>
+                        <div className="fb_pagination_next_icon">
+                            {renderSVG(paginationNextIcon)}
+                        </div>
+                        <div className="fb_post_grid_read_more_icon">
+                            {renderSVG(readMoreIcon)}
                         </div>
                     </div>
                     <div className="loading post">

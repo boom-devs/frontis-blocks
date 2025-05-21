@@ -3692,7 +3692,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 
 										<PanelBody
-											title={__("Advanced", "frontis-blocks")}
+											title={__("Layout", "frontis-blocks")}
 											initialOpen={true}
 										>
 											<FB_Range

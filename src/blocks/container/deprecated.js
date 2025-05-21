@@ -92,15 +92,18 @@ const v1_0_7 = {
     
         const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : '';
         
-        let responsiveClass = '';
+        let desktopResponsiveClass = '';
+        let tabletResponsiveClass = '';
+        let mobileResponsiveClass = '';
+
         if(containerDesktopSwitcher){
-            responsiveClass = 'fb-desktop-responsive';
+            desktopResponsiveClass = 'fb-desktop-responsive';
         }
         if(containerTabletSwitcher){
-            responsiveClass = 'fb-tablet-responsive';
+            tabletResponsiveClass = 'fb-tablet-responsive';
         }
         if(containerMobileSwitcher){
-            responsiveClass = 'fb-mobile-responsive';
+            mobileResponsiveClass = 'fb-mobile-responsive';
         }
 
         return (
@@ -109,7 +112,9 @@ const v1_0_7 = {
 				className={ classnames(
 					blockProps.className,
 					p_block_id ? `frontis-blocks-${ p_block_id }` : '', // Add class only if p_block_id exists
-					responsiveClass,
+					desktopResponsiveClass,
+                    tabletResponsiveClass,
+                    mobileResponsiveClass,
 					isRootContainerClass
 				) }
 			>
