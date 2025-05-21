@@ -610,6 +610,8 @@ class AssetsGenerator {
         $this->post_id = $post_id;
         $this->post = $post;
 
+//		var_dump($post->post_name);
+//		die();
         if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
             $this->css_generator_functions(false);
         }
@@ -722,24 +724,47 @@ class AssetsGenerator {
         $this->js_content = '';
     }
 
+    public function mergeFontArrays($arrays) {
+    $merged = [];
+    
+    // Iterate through each array
+    foreach ($arrays as $array) {
+        foreach ($array as $fontFamily => $weights) {
+            // Skip 'default' or 'Default' keys
+            if (strtolower($fontFamily) === 'default') {
+                continue;
+            }
+            
+            // Initialize font family in merged array if not exists
+            if (!isset($merged[$fontFamily])) {
+                $merged[$fontFamily] = [];
+            }
+            
+            // Add weights, filtering out 'Default' or empty values
+            foreach ($weights as $weight) {
+                if (strtolower($weight) !== 'default' && $weight !== '') {
+                    $merged[$fontFamily][] = $weight;
+                }
+            }
+            
+            // Remove duplicates and sort weights
+            $merged[$fontFamily] = array_unique($merged[$fontFamily]);
+            sort($merged[$fontFamily]);
+        }
+    }
+    
+    return $merged;
+}
+
+
     public function get_font_families() {
 
         $custom_typography = get_option('fb_custom_typography');
         $typography_data = get_option('fb_typography');
-
         $custom_fonts = Helper::extract_font_families($custom_typography);
         $typography_fonts = Helper::extract_font_families($typography_data);
-
-        $fonts_families = array_merge($custom_fonts, $typography_fonts);
-
-        if(!empty($fonts_families)) {
-            foreach ($fonts_families as $key => $values) {
-                $fonts_families[$key] = array_values(array_unique($values));
-            }
-        }
-
-        $fonts_families = array_merge($fonts_families, $this->block_fonts);
-
+        $fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
+        $fonts_families = $this->mergeFontArrays($fonts_families);
 
         if (!empty($fonts_families)) {
             $font_url = "https://fonts.googleapis.com/css?family=";
