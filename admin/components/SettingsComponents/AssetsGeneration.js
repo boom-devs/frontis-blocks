@@ -184,10 +184,6 @@ const AssetsGeneration = () => {
           <p>{__('Enable automatic file generation', 'frontis-blocks')}</p>
         </div>
         <div className="fb-option-input">
-          {/* <Switch
-            checked={options.file_generation}
-            onChange={() => handleSwitchChange('file_generation')}
-          /> */}
           <p className="fb-button-upcoming">
             {__('Coming Soon', 'frontis-blocks')}
           </p>
