@@ -3077,9 +3077,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-inner-wrapper">
 												<PanelBody
-													title={__("Advanced", "frontis-blocks")}
+													title={__("Layout", "frontis-blocks")}
 													initialOpen={true}
-													className='fb-setting-z-index-header'
+													className='fb-setting-layout-header' 
 												>
 													<FB_Range
                                                         min={0}
