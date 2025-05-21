@@ -1179,7 +1179,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
                                 {tab.name === "advanced" && (
                                     <>
-                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
                                             <FB_Range
                                                 min={0}
                                                 max={10000000}
