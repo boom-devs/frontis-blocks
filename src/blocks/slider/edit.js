@@ -65,8 +65,12 @@ const Edit = (props) => {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
-        effect,
         paginationType,
+        sliderType,
+        slideEffect,
+        carouselEffect,
+        carouselPerColumn,
+        carouselPerColumnGap,
 
         sliderGlobalWraperClass,
 
@@ -159,53 +163,8 @@ const Edit = (props) => {
         }
     };
 
-    // Get effect-specific settings
-    const getEffectSettings = () => {
-        switch (effect) {
-            case 'fade':
-                return {
-                    fadeEffect: {
-                        crossFade: true
-                    }
-                };
-            case 'coverflow':
-                return {
-                    coverflowEffect: {
-                        rotate: 50,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows: true
-                    }
-                };
-            case 'flip':
-                return {
-                    flipEffect: {
-                        slideShadows: true,
-                        limitRotation: true
-                    }
-                };
-            case 'creative':
-                return {
-                    creativeEffect: {
-                        prev: {
-                            translate: [0, 0, -400],
-                        },
-                        next: {
-                            translate: ['100%', 0, 0],
-                        },
-                    }
-                };
-            default:
-                return {
-                    effect: 'slide'
-                };
-        }
-    };
-
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
-        slidesPerView: 1,
         autoplay: autoplay ? {
             delay: autoplaySpeed,
             disableOnInteraction: false,
@@ -214,8 +173,22 @@ const Edit = (props) => {
         } : false,
         speed: transitionSpeed,
         loop: loop,
-        effect: effect,
-        ...getEffectSettings(),
+
+        // Set effect based on sliderType
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+
+        // Carousel-specific settings with default values
+		slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
+		spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+
+        // Creative effect settings if needed
+        ...(slideEffect === 'creative' && {
+            creativeEffect: {
+                prev: { shadow: true, translate: [0, 0, -400] },
+                next: { translate: ['100%', 0, 0] },
+            },
+        }),
+        
         allowTouchMove: allowTouchMove,
         // Add mousewheel configuration
         mousewheel: enableMouseWheel ? {
@@ -240,14 +213,24 @@ const Edit = (props) => {
         transitionSpeed,
         loop,
         allowTouchMove,
-        effect,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
     ]);
 
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
             // Update general settings
-            swiperInstance.params.slidesPerView = 1;
+            // swiperInstance.params.slidesPerView = 1;
+
+            // Update carousel settings
+
+            if (sliderType === 'carousel') {
+                swiperInstance.params.slidesPerView = carouselPerColumn;
+                swiperInstance.params.spaceBetween = carouselPerColumnGap;
+            }
+
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
             swiperInstance.params.allowTouchMove = allowTouchMove;
@@ -296,7 +279,10 @@ const Edit = (props) => {
         reverseDirection,
         transitionSpeed,
         loop,
-        allowTouchMove
+        allowTouchMove,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
     ]);
 
     // Add this new useEffect for pause on hover
