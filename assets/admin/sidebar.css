@@ -2,7 +2,7 @@
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/sidebar/sidebar.scss ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************/
 .fb-global-controls {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
 }
 .fb-global-controls.components-panel {
   border-top: 0;
@@ -19,7 +19,7 @@
   margin-bottom: 24px;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -47,7 +47,7 @@
   padding: 0 16px;
 }
 .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -65,7 +65,7 @@
   fill: none !important;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -91,7 +91,7 @@
   margin-top: 9px;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -119,10 +119,10 @@
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .add-custom-color .add-custom-color-btn {
   padding: 12px 14px;
-  background: #4B9DEF;
+  background: #3991FF;
   height: 44px;
   border-radius: 6px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #FFFFFF;
   font-size: 14px;
@@ -136,7 +136,7 @@
   align-items: center;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-section-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -231,13 +231,13 @@
   padding-top: 10px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .components-navigator-screen .components-button {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-setting-label-text {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -247,7 +247,7 @@
   margin-top: 10px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-base-control__label {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -258,27 +258,28 @@
   height: unset;
   padding: 15px 12px;
   border: 1px solid #E1E3E8;
-  border-radius: 8px;
-  font-family: "Work Sans", sans-serif;
+  border-radius: 4px;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container {
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-input-control__input:focus {
   outline: none;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input {
   height: unset;
-  padding: 15px 12px;
+  padding: 12px;
   border: 1px solid #E1E3E8;
-  border-radius: 8px;
-  font-family: "Work Sans", sans-serif;
+  border-radius: 4px;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 16px;
+  line-height: 20px;
+  height: 44px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -307,7 +308,7 @@
   margin: 14px 0;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -356,7 +357,7 @@
   padding: 11px 22px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap .fb-global-typography-element-heading div {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -385,7 +386,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
   color: #050607;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0px;
@@ -418,7 +419,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-custom-color-panel .compo
   padding-bottom: 0;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-custom-color-panel .components-text {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
@@ -488,7 +489,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button .components-flex-item {
   color: #404655;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -506,10 +507,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn {
   padding: 12px 14px;
-  background: #4B9DEF;
+  background: #3991FF;
   height: 44px;
   border-radius: 6px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #FFFFFF;
   font-size: 14px;
@@ -580,7 +581,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 
 .fb-color-panel.fb-gradient-color-panel .components-panel__row.fb-gradient-color-label {
   color: #050607;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0px;
@@ -602,7 +603,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   align-items: center;
   gap: 8px;
   color: #404655;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -669,6 +670,17 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   justify-content: space-between;
   border-left: 1px solid #E1E3E8;
   border-right: 1px solid #E1E3E8;
+  height: 44px;
+}
+.fb-global-typo-elements-wrap .fb-custom-element.fb-global-typography-element:hover .components-button {
+  color: #3991FF;
+}
+.fb-global-typo-elements-wrap .fb-custom-element.fb-global-typography-element:hover .components-button .font_preview svg {
+  fill: #3991FF;
+}
+.fb-global-typo-elements-wrap .fb-custom-element.fb-global-typography-element:nth-child(2) .components-button .font_preview svg {
+  fill: none;
+  color: #3991FF;
 }
 .fb-global-typo-elements-wrap .fb-custom-element .fb-delete svg {
   fill: none;
@@ -715,10 +727,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 }
 .fb-global-typo-elements-wrap .add-custom-color .add-custom-color-btn {
   padding: 12px 14px;
-  background: #4B9DEF;
+  background: #3991FF;
   height: 44px;
   border-radius: 6px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #FFFFFF;
   font-size: 14px;
@@ -737,7 +749,7 @@ svg#fb-global-panel-icon {
 }
 
 .block-editor-panel-color-gradient-settings__color-name {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;

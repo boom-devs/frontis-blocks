@@ -874,7 +874,7 @@
   align-items: center;
 }
 .fb-blocks-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 42px;
   font-weight: 600;
   line-height: 56px;
@@ -913,7 +913,7 @@
   padding: 18px 20px 18px 50px;
   border: none;
   border-radius: 10px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
@@ -928,8 +928,8 @@
 }
 .fb-blocks-search-input[type=text]:focus {
   outline: none;
-  border-color: #4B9DEF;
-  box-shadow: 0 0 0 1px #4B9DEF;
+  border-color: #3991FF;
+  box-shadow: 0 0 0 1px #3991FF;
 }
 .fb-blocks-search-clear {
   position: absolute;
@@ -948,7 +948,7 @@
   color: #1e1e1e;
 }
 .fb-blocks-button {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
@@ -968,7 +968,7 @@
   margin-left: 16px;
 }
 .fb-blocks-button.fb-blocks-enable-all:hover {
-  background-color: rgb(51.5816326531, 144.25, 236.9183673469);
+  background-color: rgb(31.5, 130.8333333333, 255);
 }
 .fb-blocks-button.fb-blocks-disable-all {
   background-color: #F7F7F7;
@@ -993,10 +993,10 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 13px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 16px;
   color: #555E72;
   display: flex;
   justify-content: space-between;
@@ -1004,7 +1004,7 @@
   gap: 8px;
 }
 .fb-blocks-category-button-title {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
@@ -1029,7 +1029,7 @@
 }
 .fb-blocks-category-button:hover {
   background-color: #EDF5FD;
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-blocks-category-button:hover .fb-blocks-category-button-count {
   background-color: #FFFFFF;
@@ -1037,7 +1037,7 @@
 }
 .fb-blocks-category-button--active {
   background-color: #EDF5FD;
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-blocks-category-button--active .fb-blocks-category-button-count {
   background-color: #FFFFFF;
@@ -1050,7 +1050,7 @@
   margin-bottom: 30px;
 }
 .fb-blocks-category-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 31px;
@@ -1130,7 +1130,7 @@
   flex: 1;
 }
 .fb-block-card-title {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   line-height: 25px;
   font-size: 18px;
   font-weight: 500;
@@ -1142,7 +1142,7 @@
 .fb-block-card-title .fb-block-card-badge {
   padding: 2px 4px;
   border-radius: 4px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 10px;
   font-weight: 600;
   line-height: 11px;
@@ -1174,7 +1174,7 @@
   margin-right: 4px;
 }
 .fb-block-card-link:hover {
-  color: #4B9DEF;
+  color: #3991FF;
   text-decoration: none;
 }
 .fb-block-card-switch {
@@ -1198,7 +1198,7 @@
   left: auto;
 }
 .fb-block-card-switch-label .fb-block-card-upcoming {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 12px;
   font-weight: 600;
   line-height: 15.6px;
@@ -1212,14 +1212,14 @@
 }
 
 .fb-blocks-settings {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   color: #1e1e1e;
   background-color: #FFFFFF;
   border-radius: 14px;
 }
 .fb-blocks-settings .fb-button-upcoming {
   cursor: default;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
@@ -1254,7 +1254,7 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: #555E72;
@@ -1273,7 +1273,7 @@
 }
 .fb-blocks-settings .fb-blocks-settings-tab.active {
   background-color: #EDF5FD;
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-blocks-settings .fb-blocks-settings-content {
   flex-grow: 1;
@@ -1298,17 +1298,17 @@
   flex: 1;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-label h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 14px;
   display: block;
   font-size: 20px;
   color: #15171C;
-  line-height: 1.3;
+  line-height: 20px;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-label p {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: #555E72;
@@ -1327,7 +1327,7 @@
   width: 70px;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input .fb-button-primary {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
@@ -1357,7 +1357,7 @@
   border-radius: 0;
   background-color: transparent;
   padding: 8px 14px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
@@ -1408,7 +1408,7 @@
   border: none;
   border-radius: 8px;
   color: #6A758E;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
@@ -1434,7 +1434,7 @@
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-rollback .fb-button-primary {
   flex: 0 0 auto;
   height: 40px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
@@ -1444,7 +1444,7 @@
   color: #FFFFFF;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-rollback .fb-button-primary:hover {
-  background-color: rgb(28.1632653061, 131.5, 234.8367346939);
+  background-color: rgb(6, 116.6666666667, 255);
   color: #FFFFFF;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input .rc-switch {
@@ -1474,7 +1474,7 @@
 }
 
 .fb-button-primary {
-  background-color: #4B9DEF;
+  background-color: #3991FF;
   color: #f0f0f1;
   border-radius: 4px;
   font-weight: bold;
@@ -1484,7 +1484,7 @@
   cursor: pointer;
 }
 .fb-button-primary:hover {
-  background-color: rgb(28.1632653061, 131.5, 234.8367346939);
+  background-color: rgb(6, 116.6666666667, 255);
 }
 
 .fb-button-error {
@@ -1541,7 +1541,7 @@
   color: #FFFFFF;
   text-decoration: none;
   border-radius: 12px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 25px;
@@ -1635,7 +1635,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 25px;
@@ -1646,7 +1646,7 @@
   margin: 0;
 }
 .fb-blocks-integration .integration-section h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 31px;
@@ -1655,7 +1655,7 @@
   color: #15171C;
 }
 .fb-blocks-integration .integration-section .description {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   line-height: 25px;
   font-weight: 400;
@@ -1669,7 +1669,7 @@
   margin-bottom: 0;
 }
 .fb-blocks-integration .integration-section .recaptcha-version h3 {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   line-height: 25px;
   font-weight: 500;
@@ -1681,7 +1681,7 @@
   margin-bottom: 16px;
 }
 .fb-blocks-integration .components-base-control .components-base-control__label {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   line-height: 19px;
   font-weight: 500;
@@ -1695,20 +1695,20 @@
   border: 1px solid #E1E3E8;
   border-radius: 10px;
   background-color: #F7F7F7;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
   color: #6A758E;
 }
 .fb-blocks-integration .components-base-control .components-text-control__input:focus {
-  box-shadow: 0 0 0 1px #4B9DEF;
-  border-color: #4B9DEF;
+  box-shadow: 0 0 0 1px #3991FF;
+  border-color: #3991FF;
 }
 .fb-blocks-integration .api-documentation {
   display: inline-block;
   text-decoration: none;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   line-height: 19px;
   font-weight: 500;
@@ -1792,7 +1792,7 @@
   gap: 10px;
 }
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column .fb-pricing-type {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 31px;
@@ -1800,7 +1800,7 @@
   margin: 0;
 }
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column .fb-pricing-price {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 32px;
   font-weight: 600px;
   line-height: 41px;
@@ -1808,7 +1808,7 @@
   margin: 0;
 }
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column .fb-pricing-price span {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 25px;
@@ -1817,7 +1817,7 @@
 .fb-blocks-pricing .fb-pricing-header .fb-pricing-column .fb-button {
   width: 226px;
   padding: 14px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 600;
   line-height: 25px;
@@ -1826,7 +1826,7 @@
   margin-top: 24px;
 }
 .fb-blocks-pricing .fb-pricing-header h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 42px;
   line-height: 54px;
   font-weight: 700;
@@ -1835,7 +1835,7 @@
   margin-top: 0;
 }
 .fb-blocks-pricing .fb-pricing-header p {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 25px;
@@ -1884,7 +1884,7 @@
 }
 .fb-blocks-pricing .fb-pricing-body .fb-pricing-row .fb-pricing-column {
   text-align: center;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 25px;
@@ -1980,7 +1980,7 @@
   height: 40px;
 }
 .fb-pro-banner .fb-pro-title-flex h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 32px;
   font-weight: 600;
   color: #050607;
@@ -1988,7 +1988,7 @@
   margin: 0;
 }
 .fb-pro-banner p {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 25px;
@@ -2013,7 +2013,7 @@
   justify-content: space-between;
 }
 .fb-video-banner-content h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 31px;
@@ -2021,7 +2021,7 @@
   margin: 0;
 }
 .fb-video-banner-content p {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -2038,7 +2038,7 @@
   color: #050607;
   border: none;
   border-radius: 10px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
@@ -2075,7 +2075,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .fb-system-requirements h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 31px;
@@ -2086,14 +2086,14 @@
 .fb-system-requirements-list {
   display: flex;
   flex-direction: column;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
 }
 .fb-system-requirements-note {
   margin-top: 24px;
   background-color: #FEF5EA;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .fb-system-requirements-note p {
   font-size: 14px;
@@ -2151,10 +2151,10 @@
 .fb-setting-device-label-wrapper p.fb-setting-label-text {
   flex: 1;
   color: #050607;
-  font-family: "Work Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-family: "Onest", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
   text-transform: capitalize !important;
 }
 
@@ -2425,7 +2425,7 @@
   padding: 6px 10px;
 }
 .fb-setting-units-type .fb-setting-units-current {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 11px;
   font-weight: 400;
   border: none;
@@ -2445,7 +2445,7 @@
   background: #F7F7F7;
   overflow: hidden;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .fb-setting-units-type .fb-setting-units-dropdown .fb-setting-units-option {
   cursor: pointer;
@@ -2455,7 +2455,7 @@
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 11px;
   font-weight: 400;
 }
@@ -2595,7 +2595,7 @@
   gap: 0;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field label {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   display: block;
   color: #050607 !important;
   font-size: 12px !important;
@@ -2607,10 +2607,10 @@
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-base-control__field .components-base-control__label {
   color: #050607;
-  font-family: "Work Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-family: "Onest", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
   margin: 0 0 10px;
   min-height: auto;
   text-transform: capitalize;
@@ -2643,7 +2643,7 @@
   padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-fontsize-wrapper .fb-setting-fontsize-header .fb-setting-fontsize-units .fb-setting-fontsize-units-wrap .fb-setting-fontsize-units-switcher.active {
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header {
   display: flex;
@@ -2673,7 +2673,7 @@
   padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-letterspacing-wrapper .fb-setting-letterspacing-header .fb-setting-letterspacing-units .fb-setting-letterspacing-units-wrap .fb-setting-letterspacing-units-switcher.active {
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header {
   display: flex;
@@ -2703,7 +2703,7 @@
   padding-right: 5px;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .fb-setting-lineheight-wrapper .fb-setting-lineheight-header .fb-setting-lineheight-units .fb-setting-lineheight-units-wrap .fb-setting-lineheight-units-switcher.active {
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-input-control__input {
   border: 1px solid #93C4F5;
@@ -2712,10 +2712,14 @@
   outline: none;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input {
-  background: #F7F7F7;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
   height: unset;
-  border-radius: 8px;
-  padding: 6px 12px;
+  border-radius: 4px;
+  padding: 14px 12px;
+  border: 1px solid #E1E3E8;
 }
 .fb-setting-typography-popup .fb-setting-typography-popup-inner .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -2740,10 +2744,10 @@
 
 .fb-setting-gb-select-control-label {
   color: #050607;
-  font-family: "Work Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-family: "Onest", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
   margin: 0 0 10px;
   min-height: auto;
   text-transform: capitalize;
@@ -2905,7 +2909,7 @@
 }
 .fb-inspector-control .components-tab-panel__tabs .fb-tab {
   display: inline-block;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
@@ -2933,7 +2937,7 @@
   background: none;
 }
 .fb-inspector-control .components-panel__body .components-panel__body-title .components-button {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-weight: 600;
   line-height: 16px;
 }
@@ -2942,27 +2946,27 @@
   border-radius: 6px;
   background: #E1E3E8;
   padding: 12px 16px;
-  height: 50px;
+  height: 44px;
   margin-bottom: 10px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 16px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label,
 .fb-inspector-control .components-panel__body .components-base-control__field label {
   color: #050607;
-  font-family: "Work Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
+  font-family: "Onest", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
   margin: 0 0 10px;
   min-height: auto;
   text-transform: capitalize;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-text-control__input,
 .fb-inspector-control .components-panel__body .components-base-control__field .components-textarea-control__input {
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 13px;
   background: #F7F7F7;
   border: 1px solid #C3C8D2;
@@ -3028,7 +3032,7 @@
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-dropdown .components-button:hover {
   background: #DBEBFC;
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-button.fb-setting-background-color-setting-icon-btn,
 .fb-inspector-control .components-panel__body .components-base-control__field .components-button.fb-setting-color-setting-icon-btn {
@@ -3127,6 +3131,9 @@
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__wrapper span:nth-child(3) {
   height: 2px;
   background: #399CFF;
+}
+.fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__wrapper .components-range-control__thumb-wrapper {
+  margin-top: 8px !important;
 }
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root .components-range-control__wrapper .components-range-control__thumb-wrapper span {
   background-color: #399CFF;
@@ -3615,7 +3622,7 @@
 /** End Admin Panel scss **/
 #frontis-blocks-admin {
   background-color: #f5f7fa;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgb3BhY2l0eT0iMC4zIiBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzU1NDNfMzY3MikiPgo8ZWxsaXBzZSBjeD0iOTYwIiByeD0iNjQ1IiByeT0iMjU4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfNTU0M18zNjcyKSIvPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfNTU0M18zNjcyIiB4PSItODUiIHk9Ii02NTgiIHdpZHRoPSIyMDkwIiBoZWlnaHQ9IjEzMTYiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMjAwIiByZXN1bHQ9ImVmZmVjdDFfZm9yZWdyb3VuZEJsdXJfNTU0M18zNjcyIi8+CjwvZmlsdGVyPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfNTU0M18zNjcyIiB4MT0iMzE1IiB5MT0iMi40MjUyMmUtMDUiIHgyPSIxNjA1IiB5Mj0iLTEuMTI0NjJlLTA1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CjxzdG9wIHN0b3AtY29sb3I9IiNDMkUwRkUiLz4KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+CjxzdG9wIG9mZnNldD0iMC41MjUiIHN0b3AtY29sb3I9IiNEMkZERDMiLz4KPHN0b3Agb2Zmc2V0PSIwLjc1IiBzdG9wLWNvbG9yPSIjRkU5MjlDIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSI2NTgiIHZpZXdCb3g9IjAgMCAxOTIwIDY1OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxnIG9wYWNpdHk9IjAuMyIgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZl81NTQzXzM2NzIpIj4NCjxlbGxpcHNlIGN4PSI5NjAiIHJ4PSI2NDUiIHJ5PSIyNTgiIGZpbGw9InVybCgjcGFpbnQwX2xpbmVhcl81NTQzXzM2NzIpIi8+DQo8L2c+DQo8ZGVmcz4NCjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZl81NTQzXzM2NzIiIHg9Ii04NSIgeT0iLTY1OCIgd2lkdGg9IjIwOTAiIGhlaWdodD0iMTMxNiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPg0KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4NCjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9InNoYXBlIi8+DQo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl81NTQzXzM2NzIiLz4NCjwvZmlsdGVyPg0KPGxpbmVhckdyYWRpZW50IGlkPSJwYWludDBfbGluZWFyXzU1NDNfMzY3MiIgeDE9IjMxNSIgeTE9IjIuNDI1MjJlLTA1IiB4Mj0iMTYwNSIgeTI9Ii0xLjEyNDYyZS0wNSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPg0KPHN0b3Agc3RvcC1jb2xvcj0iI0MyRTBGRSIvPg0KPHN0b3Agb2Zmc2V0PSIwLjI1IiBzdG9wLWNvbG9yPSIjRkZENkE3Ii8+DQo8c3RvcCBvZmZzZXQ9IjAuNTI1IiBzdG9wLWNvbG9yPSIjRDJGREQzIi8+DQo8c3RvcCBvZmZzZXQ9IjAuNzUiIHN0b3AtY29sb3I9IiNGRTkyOUMiLz4NCjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0QwOUFGRiIvPg0KPC9saW5lYXJHcmFkaWVudD4NCjwvZGVmcz4NCjwvc3ZnPg0K);
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% auto;
@@ -3625,7 +3632,7 @@
 
 .frontis-blocks-admin {
   display: flex;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 .frontis-blocks-admin .frontis-blocks-menu-list {
   width: 362px;
@@ -3686,7 +3693,7 @@
 
 .frontis-tab-button.active-tab {
   background-color: #f0f0f1;
-  border-bottom: 2px solid #4B9DEF;
+  border-bottom: 2px solid #3991FF;
 }
 
 .frontis-tab-button svg {
@@ -3751,18 +3758,18 @@
   cursor: pointer;
   transition: all 0.3s ease;
   color: #555E72;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 500;
 }
 .fb-blocks-tab-button:hover {
-  color: #4B9DEF;
+  color: #3991FF;
 }
 .fb-blocks-tab-button.fb-blocks-active-tab {
-  color: #4B9DEF;
+  color: #3991FF;
   background-color: #EDF5FD;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 .fb-blocks-tab-button svg {
   width: 20px;
