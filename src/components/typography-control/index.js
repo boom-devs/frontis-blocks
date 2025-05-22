@@ -215,7 +215,11 @@ const FB_TypographyControl = ({
                 renderContent={() => (
                     <div className="fb-setting-typography-popup">
                         <BaseControl className="fb-setting-typography-popup-inner">
-                            {globalTypoControlActive === true && <BaseControl label={__("Presets", "frontis-blocks")}>
+                            {globalTypoControlActive === true && 
+                            <BaseControl 
+                                label={__("Presets", "frontis-blocks")}
+                                className='fb-typo-spacing'
+                                >
                                 <Select2 
                                     options={GB_TYPO}
                                     value={globalTypoOption}
@@ -227,6 +231,7 @@ const FB_TypographyControl = ({
                             <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
                                 // className={globalTypoSwitcher.fontFamily === true && 'fb-global-typo-active'}
+                                className='fb-typo-spacing'
                             >
                                 <Select2 
                                     options={FONT_FAMILYS}
@@ -237,7 +242,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
 
                             <BaseControl
-                                className={globalTypoSwitcher.fontSize === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.fontSize === true && 'fb-global-typo-active'}`}
                             >
                             <FB_Range
                                 min={0}
@@ -256,7 +261,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
 
                             <BaseControl
-                                className={globalTypoSwitcher.fontWeight === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.fontWeight === true && 'fb-global-typo-active'}`}
                             >
                             <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
@@ -267,7 +272,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
 
                             <BaseControl
-                                className={globalTypoSwitcher.fontStyle === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.fontStyle === true && 'fb-global-typo-active'}`}
                             >
                             <FB_GBSelectControl
                                 label={__("Font Style", "frontis-blocks")}
@@ -278,7 +283,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
                             
                             <BaseControl
-                                className={globalTypoSwitcher.textDecoration === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.textDecoration === true && 'fb-global-typo-active'}`}
                             >
                             <FB_GBSelectControl
                                 label={__("Text Decoration", "frontis-blocks")}
@@ -289,7 +294,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
 
                             <BaseControl
-                                className={globalTypoSwitcher.textTransform === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.textTransform === true && 'fb-global-typo-active'}`}
                             >
                             {/* <FB_GBSelectControl
                                 label={__("Letter Case", "frontis-blocks")}
@@ -319,7 +324,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
                             
                             <BaseControl
-                                className={globalTypoSwitcher.letterSpacing === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.letterSpacing === true && 'fb-global-typo-active'}`}
                             >
                             <FB_Range
                                 min={-20}
@@ -337,7 +342,7 @@ const FB_TypographyControl = ({
                             </BaseControl>
 
                             <BaseControl
-                                className={globalTypoSwitcher.lineHeight === true && 'fb-global-typo-active'}
+                                className={`fb-typo-spacing ${globalTypoSwitcher.lineHeight === true && 'fb-global-typo-active'}`}
                             >
                             <FB_Range
                                 min={0}
