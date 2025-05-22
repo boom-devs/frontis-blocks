@@ -13,7 +13,7 @@ import {
 	FONT_STYLE,
 	TEXT_TRANSFORM,
 	TEXT_DECORATION,
-} from "../../../src/fbConstants/fbConstants";
+} from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
 
@@ -126,18 +126,35 @@ const FB_SidebarTypography = ({
 				/>
 			</div>
 			<div className='fb_global_typo_wrap'>
-				<SelectControl
+				{/* <SelectControl
 					label={__("Text Transform", "frontis-blocks")}
 					options={TEXT_TRANSFORM}
 					value={textTransform}
 					onChange={handleTextTransformChange}
-				/>
+				/> */}
 				<SelectControl
 					label={__("Text Decoration", "frontis-blocks")}
 					options={TEXT_DECORATION}
 					value={textDecoration}
 					onChange={handleTextDecorationChange}
 				/>
+				<div className="fb-letter-case-control">
+					<label className="fb-control-label">{__("Letter Case", "frontis-blocks")}</label>
+					<div className="fb-case-button-group">
+						{TEXT_TRANSFORM.map((option) => (
+							<Button
+								key={option.value}
+								onClick={() => handleTextTransformChange(option.value)}
+								className={`fb-case-button ${
+									textTransform === option.value ? "active" : ""
+								}`}
+								title={option.label}
+							>
+								{option.icon}
+							</Button>
+						))}
+					</div>
+				</div>
 			</div>
 
 			<div className='fb_global_typo_wrap'>
