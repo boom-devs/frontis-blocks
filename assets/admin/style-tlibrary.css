@@ -474,7 +474,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button .components-flex-item {
   color: #404655;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -489,10 +489,10 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn {
   padding: 12px 14px;
-  background: #4B9DEF;
+  background: #3991FF;
   height: 44px;
   border-radius: 6px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #FFFFFF;
   font-size: 14px;
@@ -512,7 +512,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
   font-weight: 500;
   font-size: 11px;
   text-transform: uppercase !important;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings {
   padding: 0;
@@ -554,7 +554,7 @@ body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper 
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
   margin: 10px 0;
   font-weight: 500;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 .fb-fsi-modal-overlay .fb-fsi-modal .fb-global-typography-element-content .components-base-control {
   width: auto;
