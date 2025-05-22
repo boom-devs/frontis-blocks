@@ -16,7 +16,7 @@ import {
     FONT_STYLE,
     TEXT_TRANSFORM,
     TEXT_DECORATION,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
@@ -276,17 +276,6 @@ const FB_TypographyControl = ({
                                 setSelectValue={handleFontStyleChange}
                             />
                             </BaseControl>
-
-                            <BaseControl
-                                className={globalTypoSwitcher.textTransform === true && 'fb-global-typo-active'}
-                            >
-                            <FB_GBSelectControl
-                                label={__("Text Transform", "frontis-blocks")}
-                                controlOptions={TEXT_TRANSFORM}
-                                selectValue={textTransform}
-                                setSelectValue={handleTextTransformChange}
-                            />
-                            </BaseControl>
                             
                             <BaseControl
                                 className={globalTypoSwitcher.textDecoration === true && 'fb-global-typo-active'}
@@ -297,6 +286,36 @@ const FB_TypographyControl = ({
                                 selectValue={textDecoration}
                                 setSelectValue={handleTextDecorationChange}
                             />
+                            </BaseControl>
+
+                            <BaseControl
+                                className={globalTypoSwitcher.textTransform === true && 'fb-global-typo-active'}
+                            >
+                            {/* <FB_GBSelectControl
+                                label={__("Letter Case", "frontis-blocks")}
+                                controlOptions={TEXT_TRANSFORM}
+                                selectValue={textTransform}
+                                setSelectValue={handleTextTransformChange}
+                            /> */}
+
+                                <div className="fb-letter-case-control">
+                                    <label className="fb-control-label">{__("Letter Case", "frontis-blocks")}</label>
+                                    <div className="fb-case-button-group">
+                                        {TEXT_TRANSFORM.map((option) => (
+                                            <Button
+                                                key={option.value}
+                                                onClick={() => handleTextTransformChange(option.value)}
+                                                className={`fb-case-button ${
+                                                    textTransform === option.value ? "active" : ""
+                                                }`}
+                                                title={option.label}
+                                            >
+                                                {option.icon}
+                                            </Button>
+                                        ))}
+                                    </div>
+                                </div>
+
                             </BaseControl>
                             
                             <BaseControl
