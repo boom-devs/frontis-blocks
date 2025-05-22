@@ -64,7 +64,6 @@
     background-color: $white-color;
     border-radius: 16px;
     overflow: hidden;
-    margin-bottom: $spacing-unit * 3 + 6;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: $spacing-unit * 4;
 
@@ -221,9 +220,12 @@
 
 
 .fb-dashboard-icon-card {
+    width: 100%;
     background-color: $white-color;
     padding: 32px;
     border-radius: 16px;
+    box-sizing: border-box;
+    
     .fb-icon-card-title-flex {
         display: flex;
         flex-direction: column;
@@ -441,3 +443,8 @@
           }
       }
 }
+
+.fb-blocks-dashboard-bottom {
+    margin-top: $spacing-unit * 3 + 6;
+}
+
