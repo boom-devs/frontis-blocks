@@ -659,7 +659,7 @@ var Dashboard = function Dashboard() {
     className: "fb-blocks-dashboard"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-dashboard-left"
-  }, window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.ProBanner, null), /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.VideoBanner, null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.VideoBanner, null)), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-dashboard-right"
   }, /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.SystemRequirements, null), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-dashboard-right-bottom"
