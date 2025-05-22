@@ -163,14 +163,17 @@ class Blocks
 	}
 
 	public function get_blocks_on_save($post_id, $post, $update) {
+//		AssetsGenerator::generate_global_assets();
+
 		$pattern = "/frontis-blocks/i";
 		update_post_meta($post_id, 'page_frontis_block_used', false);
 
 		if(preg_match_all($pattern, $post->post_content) > 0) {
 			update_post_meta($post_id, 'page_frontis_block_used', true);
-			if($update){
-				AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
-			}
+		}
+
+		if($update){
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
 		}
 	}
 

@@ -26,6 +26,13 @@ class AssetsGenerator {
     private $frontis_block_used = false;
     private $blocks_used_in_page = [];
 
+
+	// Separate page css generation
+	// Separate template css generation
+	// Separate global css
+	// Separate combine css
+	// Now check page use any custom template then marge the template with the page css also marge the global css and generate the page google font url
+
     public function clean_CSS($css) {
         $parser = new Parser($css);
         $document = $parser->parse();
@@ -102,6 +109,38 @@ class AssetsGenerator {
             }
         }
     }
+
+	public function mergeFontArrays($arrays) {
+		$merged = [];
+
+		// Iterate through each array
+		foreach ($arrays as $array) {
+			foreach ($array as $fontFamily => $weights) {
+				// Skip 'default' or 'Default' keys
+				if (strtolower($fontFamily) === 'default') {
+					continue;
+				}
+
+				// Initialize font family in merged array if not exists
+				if (!isset($merged[$fontFamily])) {
+					$merged[$fontFamily] = [];
+				}
+
+				// Add weights, filtering out 'Default' or empty values
+				foreach ($weights as $weight) {
+					if (strtolower($weight) !== 'default' && $weight !== '') {
+						$merged[$fontFamily][] = $weight;
+					}
+				}
+
+				// Remove duplicates and sort weights
+				$merged[$fontFamily] = array_unique($merged[$fontFamily]);
+				sort($merged[$fontFamily]);
+			}
+		}
+
+		return $merged;
+	}
 
     public static function generate_root_css($color_data, $typography_data) {
 
@@ -436,19 +475,15 @@ class AssetsGenerator {
                 wp_mkdir_p($css_dir);
             }
 
+			if(!rmdir($css_dir)) {
+				wp_mkdir_p($css_dir);
+			}
+
             $css_file_name = 'global.css';
             $css_file = $css_dir . $css_file_name;
             file_put_contents($css_file, $root_css);
         }
     }
-
-	public function check_block_exists($block_name, $css_file, $given_css_file) {
-		if(!in_array($block_name, $this->used_blocks) && basename($css_file) === $given_css_file) {
-			return true;
-		}
-
-		return false;
-	}
 
     public function combine_static_assets() {
         // Css files
@@ -574,14 +609,12 @@ class AssetsGenerator {
     }
 
     public function css_generator_functions() {
-        $this->generate_global_assets();
         $this->generate_all_blocks_assets();
 		$this->combine_static_assets();
 
 		// Combine and save CSS files
         $page_name = $this->post->post_name;
         $this->combine_and_save_css_file($page_name);
-        $this->get_font_families();
     }
 
     function get_block_theme_template_parts() {
@@ -628,11 +661,8 @@ class AssetsGenerator {
 	}
 
     public function generate_page_assets($post_id, $post) {
-
-        // Generate header and footer css
+//		$this->generate_global_assets();
         $this->generate_active_header_footer();
-
-//		var_dump(get_post_type($post_id));
 
 		if(get_post_type($post_id) === 'wp_template_part') {
 			return;
@@ -651,6 +681,8 @@ class AssetsGenerator {
 		} else {
 			$this->css_generator_functions();
 		}
+
+		$this->get_font_families();
 
 //		if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
 //            $this->css_generator_functions(false);
@@ -762,57 +794,48 @@ class AssetsGenerator {
 
     public function get_font_families() {
 
-        $custom_typography = get_option('fb_custom_typography');
-        $typography_data = get_option('fb_typography');
+		$custom_typography = get_option('fb_custom_typography');
+		$typography_data = get_option('fb_typography');
+		$custom_fonts = Helper::extract_font_families($custom_typography);
+		$typography_fonts = Helper::extract_font_families($typography_data);
+		$fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
+		$fonts_families = $this->mergeFontArrays($fonts_families);
 
-        $custom_fonts = Helper::extract_font_families($custom_typography);
-        $typography_fonts = Helper::extract_font_families($typography_data);
+		if (!empty($fonts_families)) {
+			$font_url = "https://fonts.googleapis.com/css?family=";
+			$font_parts = [];
 
-        $fonts_families = array_merge($custom_fonts, $typography_fonts);
+			foreach ($fonts_families as $font => $weights) {
+				if (strtolower($font) === 'default') {
+					continue;
+				}
 
-        if(!empty($fonts_families)) {
-            foreach ($fonts_families as $key => $values) {
-                $fonts_families[$key] = array_values(array_unique($values));
-            }
-        }
+				if (!is_array($weights)) {
+					$weights = [$weights]; // Ensure it's an array
+				}
 
-        $fonts_families = array_merge($fonts_families, $this->block_fonts);
+				// Filter out any "default" weights
+				$weights = array_filter($weights, function($weight) {
+					return strtolower($weight) !== 'default';
+				});
 
-        if (!empty($fonts_families)) {
-            $font_url = "https://fonts.googleapis.com/css?family=";
-            $font_parts = [];
+				// Ensure 600 and 700 are included
+				$weights = array_unique(array_merge($weights, [600, 700]));
 
-            foreach ($fonts_families as $font => $weights) {
-                if (strtolower($font) === 'default') {
-                    continue;
-                }
+				$italic_weights = [];
+				foreach ($weights as $weight) {
+					$italic_weights[] = $weight . "i"; // Add italic version
+				}
 
-                if (!is_array($weights)) {
-                    $weights = [$weights]; // Ensure it's an array
-                }
+				$all_weights = array_merge($weights, $italic_weights);
+				$font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
+			}
 
-                // Filter out any "default" weights
-                $weights = array_filter($weights, function($weight) {
-                    return strtolower($weight) !== 'default';
-                });
-
-                // Ensure 600 and 700 are included
-                $weights = array_unique(array_merge($weights, [600, 700]));
-
-                $italic_weights = [];
-                foreach ($weights as $weight) {
-                    $italic_weights[] = $weight . "i"; // Add italic version
-                }
-
-                $all_weights = array_merge($weights, $italic_weights);
-                $font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
-            }
-
-            if (!empty($font_parts)) {
-                $font_url .= implode("|", $font_parts) . "&display=swap";
-                update_option('fb_google_fonts_url', $font_url);
-            }
-        }
+			if (!empty($font_parts)) {
+				$font_url .= implode("|", $font_parts) . "&display=swap";
+				update_option('fb_google_fonts_url', $font_url);
+			}
+		}
 
         // if (!empty($fonts_families)) {
         //     $font_url = "https://fonts.googleapis.com/css2?";

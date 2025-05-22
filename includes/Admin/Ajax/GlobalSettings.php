@@ -3,6 +3,7 @@
 namespace FrontisBlocks\Admin\Ajax;
 
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Assets\AssetsGenerator;
 
 /**
  * GlobalSettings
@@ -204,6 +205,7 @@ class GlobalSettings extends AjaxBase
         $this->validate_nonce();
         $this->validate_permissions();
         $this->update_option("fb_$option_name", $type);
+
     }
 
     /**
@@ -370,7 +372,7 @@ class GlobalSettings extends AjaxBase
     //     } catch (Exception $e) {
     //         wp_send_json_error('Error: ' . $e->getMessage());
     //     }
-    // }     
+    // }
 
     //demo import for full site
     // public function import_demo_data() {
@@ -430,7 +432,7 @@ class GlobalSettings extends AjaxBase
     //     } catch (Exception $e) {
     //         wp_send_json_error('Error: ' . $e->getMessage());
     //     }
-    // }  
+    // }
 
     // PHP: Import Full Site
     public function import_full_site()
