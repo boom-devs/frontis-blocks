@@ -2003,7 +2003,6 @@
   background-color: #FFFFFF;
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 32px;
 }
@@ -2142,9 +2141,11 @@
 }
 
 .fb-dashboard-icon-card {
+  width: 100%;
   background-color: #FFFFFF;
   padding: 32px;
   border-radius: 16px;
+  box-sizing: border-box;
 }
 .fb-dashboard-icon-card .fb-icon-card-title-flex {
   display: flex;
@@ -2337,6 +2338,10 @@
 .fb-dashboard-cta-card .fb-cat-button.bg-white:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.fb-blocks-dashboard-bottom {
+  margin-top: 30px;
 }
 
 .fb-setting-device-label-wrapper {
