@@ -8,33 +8,13 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import flipBoxItemFrontAttributes from './attributes/flip-box-item-front-attribute.js';
-import flipBoxItemBackAttributes from './attributes/flip-box-item-back-attribute.js';
-import flipBoxFrontIconAttributes from './attributes/flip-box-front-icon-attribute.js';
-import flipBoxBackIconAttributes from './attributes/flip-box-back-icon-attribute.js';
-import flipBoxFrontTitleAttributes from './attributes/flip-box-front-title-attribute.js';
-import flipBoxFrontContentAttributes from './attributes/flip-box-front-content-attribute.js';
-import flipBoxBackButtonAttributes from './attributes/flip-box-back-button-attribute.js';
-import flipBoxBackTitleAttributes from './attributes/flip-box-back-title-attribute.js';
-import flipBoxBackContentAttributes from './attributes/flip-box-back-content-attribute.js';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
+import deprecated from './deprecated.js';
 
-// Merge attributes
-const combinedAttributes = {
-	...attributes,
-	...flipBoxItemFrontAttributes,
-	...flipBoxItemBackAttributes,
-	...flipBoxFrontIconAttributes,
-	...flipBoxBackIconAttributes,
-	...flipBoxFrontTitleAttributes,
-	...flipBoxFrontContentAttributes,
-	...flipBoxBackButtonAttributes,
-	...flipBoxBackTitleAttributes,
-	...flipBoxBackContentAttributes,
-};
 registerBlockType( metadata.name, {
-	attributes: combinedAttributes,
+	attributes,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.flip_box,
+	icon: FB_Block_Icons.info_box,
+	deprecated
 } );

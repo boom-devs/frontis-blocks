@@ -1,29 +1,32 @@
 @import "../scss/variables";
 
 .fb-setting-device-label-wrapper {
-	display: flex;
-	align-items: center;
-	p {
-		margin-bottom: 0;
-		margin-right: 5px;
-		margin-top: 0;
+    display: flex;
+    align-items: center;
 
-		&.fb-setting-label-text {
-			flex: 1;
+    p {
+        margin-bottom: 0;
+        margin-right: 5px;
+        margin-top: 0;
+
+        &.fb-setting-label-text {
+            flex: 1;
             color: $neutral-color-950;
             font-family: $body-font-family;
             font-size: $medium-font-size;
             font-weight: 400;
             line-height: $body-line-height;
             text-transform: capitalize !important;
-		}
-	}
+        }
+    }
 }
+
 .fb-responsive-device-wrapper {
     height: 28px;
     position: relative;
     width: 34px;
     margin-right: 10px;
+
     &.fb-device-switchers-open {
         .fb-responsive-device-inner-wrapper {
             background: $neutral-color-50;
@@ -31,13 +34,15 @@
             position: relative;
             z-index: 11;
         }
+
         .fb-device-switcher {
             height: 28px;
             opacity: 1;
             transform: scale(1);
-            
+
         }
     }
+
     .fb-device-switcher {
         align-items: center;
         border: none !important;
@@ -51,6 +56,7 @@
         transition: .15s;
         height: 0;
         width: 100% !important;
+
         // z-index: 2;
         &.active {
             height: 28px;
@@ -60,16 +66,19 @@
             opacity: 1;
             transform: scale(1);
         }
+
         &:hover {
             background: $neutral-color-100;
         }
-        svg{
+
+        svg {
             width: 16px;
             height: 16px;
             fill: $neutral-color-600;
         }
     }
 }
+
 .fb-image-control-wrapper {
     .fb-setting-device-label-wrapper {
         display: inline-flex;
@@ -80,12 +89,14 @@
     .components-base-control__field {
         display: block;
         margin-bottom: 0;
+
         .components-base-control__label {
             font-size: 13px !important;
             text-transform: capitalize !important;
             margin-bottom: 8px !important;
         }
     }
+
     .fb-image-control {
         background-color: #ccc;
         background-position: 50%;
@@ -97,7 +108,63 @@
         padding: 2px;
         position: relative;
         width: 100%;
+
+        .fb-image-delete {
+            margin: 0 8px !important;
+            padding: 0 !important;
+            position: absolute;
+            right: 0;
+
+            align-items: center;
+            background: none;
+            border: 0;
+            border-radius: 2px;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: inherit;
+            font-weight: 400;
+            height: 36px;
+            text-decoration: none;
+            transition: box-shadow .1s linear;
+
+            svg {
+                fill: none;
+                filter: drop-shadow(1px 1px 3px rgb(100, 100, 100));
+            }
+        }
+
+        .fb-image-replace-btn {
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+            background: hsla(0, 0%, 95%, .749);
+            border-radius: 0 0 6px 6px;
+            bottom: 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            transition: .3s;
+            width: 100%;
+            color: #000;
+            font-size: 13px;
+
+            align-items: center;
+            border: 0;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 400;
+            height: 36px;
+            margin: 0;
+            padding: 6px 12px;
+            text-decoration: none;
+
+            svg {
+                fill: none;
+            }
+        }
     }
+
     .fb-image-upload-btn {
         width: 100%;
         padding: 0;
@@ -126,6 +193,7 @@
         }
     }
 }
+
 .fb-image-control-setting-wrapper {
     .fb-image-control-setting-item-position {
         .fb-setting-device-label-wrapper {
@@ -134,14 +202,17 @@
             margin-bottom: 10px;
         }
     }
+
     .fb-image-control-setting-item {
         margin: 25px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .components-base-control {
             width: 45%;
         }
+
         .fb-setting-device-label-wrapper {
             display: inline-flex;
             align-items: center;
@@ -160,11 +231,13 @@
         .components-focal-point-picker-wrapper {
             width: 100%;
         }
+
         .components-flex {
             &.focal-point-picker__controls {
                 padding-bottom: 3px;
             }
         }
+
         .components-base-control {
             &:where(:not(:last-child)) {
                 margin-bottom: 0;
