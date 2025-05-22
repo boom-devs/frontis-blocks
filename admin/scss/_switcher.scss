@@ -1,0 +1,24 @@
+.fb-setting-switcher-container,
+.fb-setting-color-container {
+    .components-base-control.fb-setting-color-setting-wrapper {
+        margin-bottom: 24px;
+
+        .components-base-control__label {
+            margin: 0;
+        }
+    }
+
+    .components-button-group {
+        background: none !important;
+
+        .components-button {
+            box-shadow: none !important;
+            height: 42px !important;
+
+            &.active {
+                border: none;
+                background: $neutral-color-100 !important;
+            }
+        }
+    }
+}

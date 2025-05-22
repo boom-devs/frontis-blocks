@@ -5,6 +5,8 @@
 @import "sp-typography";
 @import "sp-toggle-control";
 @import "sp-box-shadow";
+@import "popover";
+@import "switcher";
 
 
 /** Start Admin Panel scss **/
@@ -20,7 +22,7 @@
 		.fb-tab {
 			display: inline-block;
 			font-family: $heading-font-family;
-			font-weight: 600;
+			font-weight: $font-weight-600;
 			font-size: $medium-font-size-global;
 			line-height: 16px;
 			border-radius: 0;
@@ -59,7 +61,7 @@
 
 			.components-button {
 				font-family: $heading-font-family;
-				font-weight: 600;
+				font-weight: $font-weight-600;
 				line-height: 16px;
 			}
 		}
@@ -73,10 +75,11 @@
 			margin-bottom: 10px;
 			font-family: $body-font-family;
 			font-size: $medium-font-size;
-			font-weight: 600;
+			font-weight: $font-weight-600;
 			line-height: $body-line-height;
-			&.components-panel__body-toggle{
-				margin-bottom: 24px;
+
+			&.components-panel__body-toggle {
+				margin-bottom: 16px;
 			}
 		}
 
@@ -87,7 +90,7 @@
 				color: $neutral-color-950;
 				font-family: $heading-font-family;
 				font-size: $base-font-size;
-				font-weight: 500;
+				font-weight: $font-weight-500;
 				line-height: 18px;
 				margin: 0 0 14px;
 				min-height: auto;
@@ -111,22 +114,27 @@
 			.components-textarea-control__input {
 				border-radius: 4px;
 			}
-            .components-input-control__container{
+
+			.components-input-control__container {
 				border-radius: 4px;
-				.components-input-control__input{
-					border: 1px solid $primary-color-300;
-					border-radius: 6px;
-					&:focus{
+
+				.components-input-control__input {
+					border: 1px solid $neutral-color-100;
+					border-radius: 4px;
+					height: 44px !important;
+
+					&:focus {
 						outline: none;
 						border: 1px solid transparent;
 					}
 				}
 
 				.components-select-control__input {
-					height: 45px;
+					height: 44px;
 					border-radius: 4px;
 					padding: 0px 12px;
-					border: 1px solid $neutral-color-300;
+					border: 1px solid $neutral-color-100;
+
 					&:focus {
 						outline: none;
 					}
@@ -146,7 +154,7 @@
 				margin-bottom: 24px;
 
 				.components-button {
-					font-weight: 400;
+					font-weight: $font-weight-400;
 					flex-grow: 1;
 					justify-content: center;
 					padding: 10px 5px;
@@ -159,7 +167,7 @@
 					&.active {
 						border-radius: 4px;
 						// border: 1px solid #B0D7FF;
-						background: $neutral-color-100; 
+						background: $neutral-color-100;
 					}
 				}
 			}
@@ -197,6 +205,7 @@
 			display: flex;
 			flex-wrap: nowrap;
 			border: 1px solid $neutral-color-100;
+
 			.components-button {
 				font-size: 14px !important;
 				color: $neutral-color-600 !important;
@@ -260,11 +269,20 @@
 					padding: 12px;
 					border: none;
 					border-radius: 4px;
+					height: 44px;
 
 					.sortable-sort,
 					.sortable-duplicate,
 					.sortable-delete {
 						border: none;
+
+						.components-button {
+							svg {
+								fill: none;
+								width: 16px;
+								height: 16px;
+							}
+						}
 
 						.components-button {
 							background: none;
@@ -273,17 +291,26 @@
 							height: unset;
 						}
 					}
+
+					.sortable-title {
+						font-family: $body-font-family;
+						font-size: $base-font-size;
+						font-weight: $font-weight-500;
+						color: $neutral-color-700;
+						line-height: 18px;
+					}
 				}
 			}
 		}
 
 		.fb-feature-wrapper {
 			.components-button.is-primary {
-				font-weight: 500;
+				font-weight: $font-weight-500;
 				background: $primary-color-base;
 				color: $white-color;
 				padding: 10px 16px;
 				border-radius: 4px;
+				margin-bottom: 24px;
 			}
 		}
 
@@ -291,9 +318,11 @@
 		.components-range-control {
 			.components-range-control__root {
 				position: relative;
-				.components-range-control__number{
+
+				.components-range-control__number {
+
 					// margin-right: -8px;
-					.components-input-control__container{
+					.components-input-control__container {
 						width: 100%;
 						border-radius: 6px;
 					}
@@ -314,6 +343,7 @@
 
 					.components-range-control__thumb-wrapper {
 						margin-top: 8px !important;
+
 						span {
 							background-color: $primary-color-base;
 						}
@@ -369,7 +399,7 @@
 
 			.components-button.components-datetime__date__day {
 				padding: 0;
-				font-weight: 500;
+				font-weight: $font-weight-500;
 			}
 
 			>div:nth-child(2) {
@@ -445,7 +475,7 @@
 				display: block;
 				color: $secondary_color !important;
 				font-size: 12px !important;
-				font-weight: 500 !important;
+				font-weight: $font-weight-500 !important;
 				line-height: 16px !important;
 				margin: 10px 0 !important;
 				min-height: auto;
@@ -460,36 +490,15 @@
 }
 
 .fb-setting-input-control-wrapper {
-    margin-bottom: 16px;
+	margin-bottom: 16px;
 }
-.fb-setting-global-icon-wrapper.gb-select-control{
-    .fb-setting-global-icon-btn{
-        border-radius: 6px 6px 6px 6px;
-    }
-}
-.fb-setting-switcher-container,
-.fb-setting-color-container {
-	.components-base-control.fb-setting-color-setting-wrapper {
-		margin-bottom: 24px;
 
-		.components-base-control__label {
-			margin: 0;
-		}
-	}
-
-	.components-button-group {
-		background: none !important;
-
-		.components-button {
-			box-shadow: none !important;
-
-			&.active {
-				border: none;
-				background: $neutral-color-100 !important;
-			}
-		}
+.fb-setting-global-icon-wrapper.gb-select-control {
+	.fb-setting-global-icon-btn {
+		border-radius: 6px 6px 6px 6px;
 	}
 }
+
 
 
 .fb-setting-fontsize-wrapper,
@@ -525,8 +534,8 @@
 			padding: 10px;
 			line-height: 16px;
 			min-height: 30px;
-			font-size: 13px;
-			font-weight: 400;
+			font-size: $base-font-size;
+			font-weight: $font-weight-400;
 			color: $neutral-color-200 !important;
 			box-shadow: inset 0 0 0 1px $background_color;
 
@@ -554,8 +563,9 @@
 				border: none;
 				border-radius: 4px;
 				color: $neutral-color-950;
-				border:1px solid $neutral-color-100;
+				border: 1px solid $neutral-color-100;
 				background: transparent;
+
 				&:focus {
 					outline: none;
 					box-shadow: none;
@@ -568,7 +578,7 @@
 
 				.fb-setting-color-hex {
 					text-transform: uppercase;
-					font-weight: 400;
+					font-weight: $font-weight-400;
 				}
 
 				.fb-setting-color-display {
@@ -654,8 +664,8 @@
 	transition: 0.2s all ease-in-out;
 	background-color: #f0f0f1;
 	flex: 1;
-	font-size: 13px;
-	font-weight: 400;
+	font-size: $base-font-size;
+	font-weight: $font-weight-400;
 	text-align: center;
 	line-height: 24px;
 	color: #50575e;
@@ -676,7 +686,7 @@
 
 .fb_icon_picker_wrapper_header h2 {
 	font-size: 17px;
-	font-weight: 600;
+	font-weight: $font-weight-600;
 	flex-shrink: 0;
 	max-width: 130px;
 	width: 100%;
@@ -741,7 +751,7 @@
 	color: #1d2327;
 	display: flex;
 	justify-content: space-between;
-	font-size: 13px;
+	font-size: $base-font-size;
 	cursor: pointer;
 
 	&.selected {
@@ -819,7 +829,7 @@
 		flex-direction: row;
 
 		.components-base-control__label {
-			font-size: 13px;
+			font-size: $base-font-size;
 			text-transform: capitalize;
 		}
 	}
@@ -880,8 +890,8 @@
 				padding: 10px;
 				line-height: 16px;
 				min-height: 30px;
-				font-size: 13px;
-				font-weight: 400;
+				font-size: $base-font-size;
+				font-weight: $font-weight-400;
 				color: $secondary_color !important;
 				box-shadow: inset 0 0 0 1px $background_color !important;
 
