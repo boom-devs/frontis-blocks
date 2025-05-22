@@ -1,432 +1,109 @@
-import {RichText, useBlockProps} from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
-import {useRef} from "@wordpress/element";
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-
+import { __ } from "@wordpress/i18n";
+import { useBlockProps, RichText } from "@wordpress/block-editor";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 export default function save({ attributes }) {
 	const {
 		blockID,
-		flipBoxTypeSwitcher,
+		wrapperAlignment,
+		Heading_Text,
+		headingTag,
+		Alignment,
+		Sub_Heading_Switcher,
+		Sub_Heading_Text,
+		
 
-		deviceType,
-		flipBoxFrontTitle,
-		flipBoxFrontTitleHeadingTag,
-		flipBoxBackTitle,
-		flipBoxBackTitleHeadingTag,
+		flip_Button_Switcher,
+		flip_Button_Text,
+		descAlignment,
+		buttonAlignment,
+		
+		icon,
+		mediaSwitcher,
 
+		
+		Sub_Heading_Tag,
+		btnIconPosition,
+		buttonIconSwitcher,
+		btnIcon,
+		flipIconPosition,
+		flipbtnTargetUrl,
+		flipButtonLink,
+		flipIconVerticalPosition,
+		flipCardAlignment,
 
+		flipBoxGlobalWraperID,
+		flipBoxGlobalWraperClass,
 
-		/** Start Flip Box Front Icon Attribute */
-		flipBoxFrontIconMediaSwitcher,
-		flipBoxFrontIconMediaUrl,
-		flipBoxFrontIcon,
-		flipBoxFrontIconFontColor,
-
-		flipBoxFrontIconSize,
-		flipBoxFrontIconSizeUnits,
-		flipBoxFrontIconFontColorSwitcher,
-
-		flipBoxFrontIconFontHoverColor,
-		flipBoxFrontIconBgFontColorSwitcher,
-		flipBoxFrontIconBgFontColor,
-		flipBoxFrontIconBgFontHoverColor,
-
-		flipBoxFrontIconMarginUnits,
-		flipBoxFrontIconMarginDesktop,
-		flipBoxFrontIconMarginTablet,
-		flipBoxFrontIconMarginMobile,
-		flipBoxFrontIconMarginLink,
-
-		flipBoxFrontIconPaddingUnits,
-		flipBoxFrontIconPaddingDesktop,
-		flipBoxFrontIconPaddingTablet,
-		flipBoxFrontIconPaddingMobile,
-		flipBoxFrontIconPaddingLink,
-
-
-		flipBoxFrontIconBorderTypeUnits,
-		flipBoxFrontIconBorderTypeDesktop,
-		flipBoxFrontIconBorderTypeTablet,
-		flipBoxFrontIconBorderTypeMobile,
-		flipBoxFrontIconBorderTypeLink,
-		flipBoxFrontIconBorder,
-		flipBoxFrontIconBorderColorSwitcher,
-		flipBoxFrontIconBorderColor,
-		flipBoxFrontIconBorderHoverColor,
-		flipBoxFrontIconBorderRadiusUnits,
-		flipBoxFrontIconBorderRadiusDesktop,
-		flipBoxFrontIconBorderRadiusTablet,
-		flipBoxFrontIconBorderRadiusMobile,
-		flipBoxFrontIconBorderRadiusLink,
-		/** End Flip Box Front Icon Attribute */
-
-		/** Start Flip Box Back Icon Attribute */
-		flipBoxBackIconMediaSwitcher,
-		flipBoxBackIconMediaUrl,
-		flipBoxBackIcon,
-
-		flipBoxBackIconSize,
-		flipBoxBackIconSizeUnits,
-		flipBoxBackIconFontColorSwitcher,
-		flipBoxBackIconFontColor,
-		flipBoxBackIconFontHoverColor,
-		flipBoxBackIconBgFontColorSwitcher,
-		flipBoxBackIconBgFontColor,
-		flipBoxBackIconBgFontHoverColor,
-
-		flipBoxBackIconMarginUnits,
-		flipBoxBackIconMarginDesktop,
-		flipBoxBackIconMarginTablet,
-		flipBoxBackIconMarginMobile,
-		flipBoxBackIconMarginLink,
-
-		flipBoxBackIconPaddingUnits,
-		flipBoxBackIconPaddingDesktop,
-		flipBoxBackIconPaddingTablet,
-		flipBoxBackIconPaddingMobile,
-		flipBoxBackIconPaddingLink,
-
-
-		flipBoxBackIconBorderTypeUnits,
-		flipBoxBackIconBorderTypeDesktop,
-		flipBoxBackIconBorderTypeTablet,
-		flipBoxBackIconBorderTypeMobile,
-		flipBoxBackIconBorderTypeLink,
-		flipBoxBackIconBorder,
-		flipBoxBackIconBorderColorSwitcher,
-		flipBoxBackIconBorderColor,
-		flipBoxBackIconBorderHoverColor,
-		flipBoxBackIconBorderRadiusUnits,
-		flipBoxBackIconBorderRadiusDesktop,
-		flipBoxBackIconBorderRadiusTablet,
-		flipBoxBackIconBorderRadiusMobile,
-		flipBoxBackIconBorderRadiusLink,
-		/** End Flip Box Back Icon Attribute */
-
-		/** Start Flip Box Back Button Attribute */
-		flipBoxBackButtonText,
-		flipBoxBackButtonUrl,
-		flipBoxBackButtonTargetUrl,
-
-		flipBoxBackButtonFontColorSwitcher,
-		flipBoxBackButtonFontColor,
-		flipBoxBackButtonFontHoverColor,
-
-		flipBoxBackButtonBgFontColorSwitcher,
-		flipBoxBackButtonBgFontColor,
-		flipBoxBackButtonBgFontHoverColor,
-
-		flipBoxBackButtonMarginUnits,
-		flipBoxBackButtonMarginDesktop,
-		flipBoxBackButtonMarginTablet,
-		flipBoxBackButtonMarginMobile,
-		flipBoxBackButtonMarginLink,
-
-		flipBoxBackButtonPaddingUnits,
-		flipBoxBackButtonPaddingDesktop,
-		flipBoxBackButtonPaddingTablet,
-		flipBoxBackButtonPaddingMobile,
-		flipBoxBackButtonPaddingLink,
-
-		flipBoxBackButtonFontFamily,
-		flipBoxBackButtonFontSize,
-		flipBoxBackButtonFontSizeUnits,
-		flipBoxBackButtonFontWeight,
-		flipBoxBackButtonFontStyle,
-		flipBoxBackButtonTextTransform,
-		flipBoxBackButtonTextDecoration,
-		flipBoxBackButtonLetterSpacing,
-		flipBoxBackButtonLetterSpacingUnits,
-		flipBoxBackButtonLineHeight,
-		flipBoxBackButtonLineHeightUnits,
-
-		flipBoxBackButtonBorderTypeUnits,
-		flipBoxBackButtonBorderTypeDesktop,
-		flipBoxBackButtonBorderTypeTablet,
-		flipBoxBackButtonBorderTypeMobile,
-		flipBoxBackButtonBorderTypeLink,
-		flipBoxBackButtonBorder,
-		flipBoxBackButtonBorderColorSwitcher,
-		flipBoxBackButtonBorderColor,
-		flipBoxBackButtonBorderHoverColor,
-		flipBoxBackButtonBorderRadiusUnits,
-		flipBoxBackButtonBorderRadiusDesktop,
-		flipBoxBackButtonBorderRadiusTablet,
-		flipBoxBackButtonBorderRadiusMobile,
-		flipBoxBackButtonBorderRadiusLink,
-
-		flipBoxBackButtonBoxShadowValues,
-		flipBoxBackButtonBoxShadowCssValue,
-
-		flipBoxBackButtonIconAlign,
-		flipBoxBackButtonIcon,
-		/** End Flip Box Back Button Attribute */
-
-
-		/** Start Flip Box Item Front Attribute */
-		flipBoxItemFrontBgFontColorSwitcher,
-		flipBoxItemFrontBgFontColor,
-		flipBoxItemFrontBgFontHoverColor,
-
-		flipBoxItemFrontAlignment,
-
-		flipBoxItemFrontSize,
-		flipBoxItemFrontSizeUnits,
-		flipBoxItemFrontBorderTypeUnits,
-		flipBoxItemFrontBorderTypeDesktop,
-		flipBoxItemFrontBorderTypeTablet,
-		flipBoxItemFrontBorderTypeMobile,
-		flipBoxItemFrontBorderTypeLink,
-		flipBoxItemFrontBorder,
-		flipBoxItemFrontBorderColorSwitcher,
-		flipBoxItemFrontBorderColor,
-		flipBoxItemFrontBorderHoverColor,
-		flipBoxItemFrontBorderRadiusUnits,
-		flipBoxItemFrontBorderRadiusDesktop,
-		flipBoxItemFrontBorderRadiusTablet,
-		flipBoxItemFrontBorderRadiusMobile,
-		flipBoxItemFrontBorderRadiusLink,
-
-		flipBoxItemFrontBoxShadowCssValue,
-
-		flipBoxItemFrontPaddingUnits,
-		flipBoxItemFrontPaddingDesktop,
-		flipBoxItemFrontPaddingTablet,
-		flipBoxItemFrontPaddingMobile,
-		flipBoxItemFrontPaddingLink,
-
-		flipBoxItemFrontBackgroundImageEnabled,
-		flipBoxItemFrontBackgroundImageUrl,
-		flipBoxItemFrontBackgroundImageAlt,
-		flipBoxItemFrontBackgroundImageID,
-
-		flipBoxItemFrontBgImagePositionType,
-		flipBoxItemFrontBgImageAttachmentType,
-		flipBoxItemFrontBgImageRepeatType,
-		flipBoxItemFrontBgImageSizeType,
-
-		/** End Flip Box Item Front Attribute */
-
-
-		/** Start Flip Box Item Back Attribute */
-		flipBoxItemBackBgFontColorSwitcher,
-		flipBoxItemBackBgFontColor,
-		flipBoxItemBackBgFontHoverColor,
-
-		flipBoxItemBackAlignment,
-
-		flipBoxItemBackSize,
-		flipBoxItemBackSizeUnits,
-		flipBoxItemBackBorderTypeUnits,
-		flipBoxItemBackBorderTypeDesktop,
-		flipBoxItemBackBorderTypeTablet,
-		flipBoxItemBackBorderTypeMobile,
-		flipBoxItemBackBorderTypeLink,
-		flipBoxItemBackBorder,
-		flipBoxItemBackBorderColorSwitcher,
-		flipBoxItemBackBorderColor,
-		flipBoxItemBackBorderHoverColor,
-		flipBoxItemBackBorderRadiusUnits,
-		flipBoxItemBackBorderRadiusDesktop,
-		flipBoxItemBackBorderRadiusTablet,
-		flipBoxItemBackBorderRadiusMobile,
-		flipBoxItemBackBorderRadiusLink,
-
-		flipBoxItemBackBoxShadowCssValue,
-
-		flipBoxItemBackPaddingUnits,
-		flipBoxItemBackPaddingDesktop,
-		flipBoxItemBackPaddingTablet,
-		flipBoxItemBackPaddingMobile,
-		flipBoxItemBackPaddingLink,
-
-		flipBoxItemBackBackgroundImageEnabled,
-		flipBoxItemBackBackgroundImageUrl,
-		flipBoxItemBackBackgroundImageAlt,
-		flipBoxItemBackBackgroundImageID,
-
-		flipBoxItemBackBgImagePositionType,
-		flipBoxItemBackBgImageAttachmentType,
-		flipBoxItemBackBgImageRepeatType,
-		flipBoxItemBackBgImageSizeType,
-		/** End Flip Box Item Back Attribute */
-
-		/** Start Flip Box Front Title Attribute */
-		flipBoxFrontTitleFontColorSwitcher,
-		flipBoxFrontTitleFontColor,
-		flipBoxFrontTitleFontHoverColor,
-
-		flipBoxFrontTitleMarginUnits,
-		flipBoxFrontTitleMarginDesktop,
-		flipBoxFrontTitleMarginTablet,
-		flipBoxFrontTitleMarginMobile,
-		flipBoxFrontTitleMarginLink,
-
-		flipBoxFrontTitleFontFamily,
-		flipBoxFrontTitleFontSize,
-		flipBoxFrontTitleFontSizeUnits,
-		flipBoxFrontTitleFontWeight,
-		flipBoxFrontTitleFontStyle,
-		flipBoxFrontTitleTextTransform,
-		flipBoxFrontTitleTextDecoration,
-		flipBoxFrontTitleLetterSpacing,
-		flipBoxFrontTitleLetterSpacingUnits,
-		flipBoxFrontTitleLineHeight,
-		flipBoxFrontTitleLineHeightUnits,
-		/** End Flip Box Front Title Attribute */
-
-		/** Start Flip Box Back Title Attribute */
-		flipBoxBackTitleFontColorSwitcher,
-		flipBoxBackTitleFontColor,
-		flipBoxBackTitleFontHoverColor,
-
-		flipBoxBackTitleMarginUnits,
-		flipBoxBackTitleMarginDesktop,
-		flipBoxBackTitleMarginTablet,
-		flipBoxBackTitleMarginMobile,
-		flipBoxBackTitleMarginLink,
-
-		flipBoxBackTitleFontFamily,
-		flipBoxBackTitleFontSize,
-		flipBoxBackTitleFontSizeUnits,
-		flipBoxBackTitleFontWeight,
-		flipBoxBackTitleFontStyle,
-		flipBoxBackTitleTextTransform,
-		flipBoxBackTitleTextDecoration,
-		flipBoxBackTitleLetterSpacing,
-		flipBoxBackTitleLetterSpacingUnits,
-		flipBoxBackTitleLineHeight,
-		flipBoxBackTitleLineHeightUnits,
-		/** End Flip Box Back Title Attribute */
-
-
-		/** Start Flip Box Front Content Attribute */
-		flipBoxFrontContent,
-		flipBoxFrontContentFontColorSwitcher,
-		flipBoxFrontContentFontColor,
-		flipBoxFrontContentFontHoverColor,
-
-		flipBoxFrontContentMarginUnits,
-		flipBoxFrontContentMarginDesktop,
-		flipBoxFrontContentMarginTablet,
-		flipBoxFrontContentMarginMobile,
-		flipBoxFrontContentMarginLink,
-
-		flipBoxFrontContentFontFamily,
-		flipBoxFrontContentFontSize,
-		flipBoxFrontContentFontSizeUnits,
-		flipBoxFrontContentFontWeight,
-		flipBoxFrontContentFontStyle,
-		flipBoxFrontContentTextTransform,
-		flipBoxFrontContentTextDecoration,
-		flipBoxFrontContentLetterSpacing,
-		flipBoxFrontContentLetterSpacingUnits,
-		flipBoxFrontContentLineHeight,
-		flipBoxFrontContentLineHeightUnits,
-		/** End Flip Box Front Content Attribute */
-
-
-		/** Start Flip Box Back Content Attribute */
-		flipBoxBackContent,
-		flipBoxBackContentFontColorSwitcher,
-		flipBoxBackContentFontColor,
-		flipBoxBackContentFontHoverColor,
-
-		flipBoxBackContentMarginUnits,
-		flipBoxBackContentMarginDesktop,
-		flipBoxBackContentMarginTablet,
-		flipBoxBackContentMarginMobile,
-		flipBoxBackContentMarginLink,
-
-		flipBoxBackContentFontFamily,
-		flipBoxBackContentFontSize,
-		flipBoxBackContentFontSizeUnits,
-		flipBoxBackContentFontWeight,
-		flipBoxBackContentFontStyle,
-		flipBoxBackContentTextTransform,
-		flipBoxBackContentTextDecoration,
-		flipBoxBackContentLetterSpacing,
-		flipBoxBackContentLetterSpacingUnits,
-		flipBoxBackContentLineHeight,
-		flipBoxBackContentLineHeightUnits,
-		/** End Flip Box Back Content Attribute */
-
+		flipBoxDesktopSwitcher,
+		flipBoxTabletSwitcher,
+		flipBoxMobileSwitcher,
 	} = attributes;
 
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		className: `fb-flip-box-main-wrapper ${blockID} ${flipBoxDesktopSwitcher && 'fb-desktop-responsive'} ${flipBoxTabletSwitcher && 'fb-tablet-responsive'} ${flipBoxMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
 
 	return (
-		<div {...blockProps} id={blockID}>
-			<div className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID}`}>
-				<div className={`fb-flip-box-item`}>
-					<div className="fb-flip-box-front">
-						<div className="fb-flip-box-content" style={{textAlign: flipBoxItemFrontAlignment}}>
-							<div className="fb-flip-box-content-inner">
-								<div className={`fb-flip-box-icon-wrapper`}>
-									{flipBoxFrontIconMediaSwitcher === 'image' && attributes.flipBoxFrontIconMediaUrl && (
-										<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxFrontIconMediaUrl}/></div>
-									)}
-									{flipBoxFrontIconMediaSwitcher === 'icon' && (
-										<div className="fb-flip-box-icon">{renderSVG(flipBoxFrontIcon)}</div>
-									)}
-								</div>
-								<RichText.Content
-									tagName={flipBoxFrontTitleHeadingTag}
-									value={flipBoxFrontTitle}
-									className="fb-flip-box-title"
-								/>
-								<RichText.Content
-									tagName={'p'}
-									value={flipBoxFrontContent}
-									className="fb-flip-box-front-content"
-								/>
+		<>
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`} id={flipBoxGlobalWraperID}>
+					<div className={`fb-flip-box-wrapper-inner ${blockID}`}>
+						<div className="fb-flip-media-container">
+							<div className="fb-flip-media-wrapper">
+								{mediaSwitcher === "image" && (
+									<img
+										src={attributes.flipMediaUrl}
+										alt={attributes.flipMediaAlt || ""}
+									/>
+								)}
+								{mediaSwitcher === "icon" && (
+									<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+								)}
 							</div>
 						</div>
-					</div>
-					<div className="fb-flip-box-back">
-						<div className="fb-flip-box-content" style={{textAlign: flipBoxItemBackAlignment}}>
-							<div className="fb-flip-box-content-inner">
-								<div className={`fb-flip-box-icon-wrapper`}>
-									{flipBoxBackIconMediaSwitcher === 'image' && attributes.flipBoxBackIconMediaUrl && (
-										<div className="fb-flip-box-icon-img"><img src={attributes.flipBoxBackIconMediaUrl}/></div>
-									)}
-									{flipBoxBackIconMediaSwitcher === 'icon' && (
-										<div className="fb-flip-box-icon">{renderSVG(flipBoxBackIcon)}</div>
-									)}
-								</div>
+						<div className="fb-flip-box-content-wrapper">
+							<RichText.Content
+								tagName={headingTag}
+								value={Heading_Text}
+								className="fb-heading"
+							/>
+
+							{Sub_Heading_Switcher && (
 								<RichText.Content
-									tagName={flipBoxBackTitleHeadingTag}
-									value={flipBoxBackTitle}
-									className="fb-flip-box-title"
+									tagName={Sub_Heading_Tag}
+									value={Sub_Heading_Text}
+									className="fb-description"
 								/>
-								<RichText.Content
-									tagName={'p'}
-									value={flipBoxBackContent}
-									className="fb-flip-box-back-content"
-								/>
-								{attributes.flipBoxBackButtonText ? (
+							)}
+
+							{flip_Button_Switcher && (
+								<div className="fb-flip-button">
+								<div className="fb-flip-btn-container">
 									<a
-										className="fb-flip-box-back-button"
-										href={flipBoxBackButtonUrl}
-										target={flipBoxBackButtonTargetUrl ? '_blank' : undefined}
-										rel={flipBoxBackButtonTargetUrl ? 'noopener noreferrer' : undefined}
+										href={flipButtonLink} 
+										target={flipbtnTargetUrl ? '_blank' : undefined}
+										rel={flipbtnTargetUrl ? 'noopener noreferrer' : undefined}
+										className="fb-flip-btn-wrapper"
 									>
 										<RichText.Content
-											tagName="span"
-											value={attributes.flipBoxBackButtonText}
-											className="fb-flip-box-back-button-text"
+											value={flip_Button_Text}
+											tagName={"span"}
+											className="fb-flip-button"
 										/>
-										{flipBoxBackButtonIconAlign === 'icon' && (
-											<span className="fb-flip-box-back-button-icon">{renderSVG(flipBoxBackButtonIcon)}</span>
+										
+										{buttonIconSwitcher && (
+											<div className="fb-btn-icon-wrapper">
+												{renderSVG(btnIcon)}
+											</div>
 										)}
 									</a>
-								) : null}
-
-							</div>
+								</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
