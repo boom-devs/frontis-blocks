@@ -54,7 +54,7 @@
         line-height: 25px;
         color: $neutral-color-600;
         margin-top: 24px;
-        margin-bottom: 0;
+        margin-bottom: 32px;
     }
 }
 
@@ -62,7 +62,7 @@
     display: flex;
     flex-direction: column;
     background-color: $white-color;
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
     margin-bottom: $spacing-unit * 3;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -125,6 +125,8 @@
     padding-bottom: 56.25%; // 16:9 aspect ratio
     position: relative;
     overflow: hidden;
+    border-radius: 14px;
+    margin-bottom: 24px;
 
     iframe {
         position: absolute;
@@ -137,7 +139,7 @@
 
 .fb-system-requirements {
     background-color: $white-color;
-    border-radius: 14px;
+    border-radius: 16px;
     padding: $spacing-unit * 4;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
