@@ -703,7 +703,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
   padding: 14px 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
-  color: #0B0C0E;
+  color: #050607;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -750,7 +750,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
   border-right: 1px solid rgb(221, 221, 221);
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   border-bottom: 2px solid transparent;
@@ -823,7 +823,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   padding: 0;
@@ -840,7 +840,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   fill: none !important;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   color: #1e1e1e;
@@ -855,18 +855,18 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
-  color: #0B0C0E;
+  color: #050607;
   text-transform: capitalize;
   margin-top: 9px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #0B0C0E;
+  color: #050607;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg {
   fill: none !important;
@@ -1047,7 +1047,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 
 .fb-color-panel.fb-gradient-color-panel .components-panel__row.fb-gradient-color-label {
-  color: #0B0C0E;
+  color: #050607;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 14px;
   font-weight: 600;
