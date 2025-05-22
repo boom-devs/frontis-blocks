@@ -3153,6 +3153,36 @@
   margin-bottom: 15px;
 }
 
+.components-popover__content .components-select-control__input {
+  height: 44px;
+  border-radius: 4px;
+  padding: 0px 12px;
+  border: 1px solid #E1E3E8;
+}
+
+.fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper,
+.fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
+  margin-bottom: 24px;
+}
+.fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper .components-base-control__label,
+.fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper .components-base-control__label {
+  margin: 0;
+}
+.fb-setting-switcher-container .components-button-group,
+.fb-setting-color-container .components-button-group {
+  background: none !important;
+}
+.fb-setting-switcher-container .components-button-group .components-button,
+.fb-setting-color-container .components-button-group .components-button {
+  box-shadow: none !important;
+  height: 42px !important;
+}
+.fb-setting-switcher-container .components-button-group .components-button.active,
+.fb-setting-color-container .components-button-group .components-button.active {
+  border: none;
+  background: #E1E3E8 !important;
+}
+
 /** Start Admin Panel scss **/
 .fb-inspector-control {
   padding: 16px;
@@ -3210,7 +3240,7 @@
   line-height: 16px;
 }
 .fb-inspector-control .components-panel__body .components-button.components-panel__body-toggle {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label,
 .fb-inspector-control .components-panel__body .components-base-control__field label {
@@ -3242,18 +3272,19 @@
   border-radius: 4px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-input-control__input {
-  border: 1px solid #93C4F5;
-  border-radius: 6px;
+  border: 1px solid #E1E3E8;
+  border-radius: 4px;
+  height: 44px !important;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-input-control__input:focus {
   outline: none;
   border: 1px solid transparent;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-select-control__input {
-  height: 45px;
+  height: 44px;
   border-radius: 4px;
   padding: 0px 12px;
-  border: 1px solid #A6ACBB;
+  border: 1px solid #E1E3E8;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-select-control__input:focus {
   outline: none;
@@ -3355,11 +3386,19 @@
   padding: 12px;
   border: none;
   border-radius: 4px;
+  height: 44px;
 }
 .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort,
 .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate,
 .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete {
   border: none;
+}
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button svg,
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button svg,
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button svg {
+  fill: none;
+  width: 16px;
+  height: 16px;
 }
 .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button,
 .fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button,
@@ -3369,12 +3408,20 @@
   padding: 0;
   height: unset;
 }
+.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #404655;
+  line-height: 18px;
+}
 .fb-inspector-control .components-panel__body .fb-feature-wrapper .components-button.is-primary {
   font-weight: 500;
   background: #399CFF;
   color: #FFFFFF;
   padding: 10px 16px;
   border-radius: 4px;
+  margin-bottom: 24px;
 }
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root {
   position: relative;
@@ -3502,28 +3549,6 @@
   border-radius: 6px 6px 6px 6px;
 }
 
-.fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper,
-.fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper {
-  margin-bottom: 24px;
-}
-.fb-setting-switcher-container .components-base-control.fb-setting-color-setting-wrapper .components-base-control__label,
-.fb-setting-color-container .components-base-control.fb-setting-color-setting-wrapper .components-base-control__label {
-  margin: 0;
-}
-.fb-setting-switcher-container .components-button-group,
-.fb-setting-color-container .components-button-group {
-  background: none !important;
-}
-.fb-setting-switcher-container .components-button-group .components-button,
-.fb-setting-color-container .components-button-group .components-button {
-  box-shadow: none !important;
-}
-.fb-setting-switcher-container .components-button-group .components-button.active,
-.fb-setting-color-container .components-button-group .components-button.active {
-  border: none;
-  background: #E1E3E8 !important;
-}
-
 .fb-setting-fontsize-wrapper .components-range-control__reset,
 .fb-setting-letterspacing-wrapper .components-range-control__reset,
 .fb-setting-lineheight-wrapper .components-range-control__reset {
@@ -3556,7 +3581,7 @@
   padding: 10px;
   line-height: 16px;
   min-height: 30px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   color: #C3C8D2 !important;
   box-shadow: inset 0 0 0 1px #D7EBFF;
@@ -3670,7 +3695,7 @@
   transition: 0.2s all ease-in-out;
   background-color: #f0f0f1;
   flex: 1;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   text-align: center;
   line-height: 24px;
@@ -3749,7 +3774,7 @@
   color: #1d2327;
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
 }
 .fb_icon_picker_wrapper_body .fb_icon_picker_wrapper_categories .fb_icon_picker_wrapper_category.selected {
@@ -3818,7 +3843,7 @@
   flex-direction: row;
 }
 .fb-setting-background-color-setting-wrapper .components-base-control__field .components-base-control__label {
-  font-size: 13px;
+  font-size: 14px;
   text-transform: capitalize;
 }
 
@@ -3865,7 +3890,7 @@
   padding: 10px;
   line-height: 16px;
   min-height: 30px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   color: #5f5f5f !important;
   box-shadow: inset 0 0 0 1px #D7EBFF !important;
