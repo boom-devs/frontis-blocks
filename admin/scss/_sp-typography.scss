@@ -246,6 +246,56 @@
 				}
 			}
 		}
+
+		.fb-letter-case-control {
+			.fb-control-label {
+				font-weight: 600;
+				margin-bottom: 6px;
+				display: block;
+			}
+		
+			.fb-case-button-group {
+				display: flex;
+				border: 1px solid #d1d5db; // light gray border
+				border-radius: 6px;
+				overflow: hidden;
+				background-color: #fff;
+		
+				.fb-case-button {
+					flex: 1;
+					padding: 10px 0;
+					border: none;
+					border-right: 1px solid #d1d5db;
+					background-color: #fff;
+					color: #374151; // slate-700
+					font-size: 16px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					cursor: pointer;
+					transition: background-color 0.2s;
+		
+					svg {
+						width: 20px;
+						height: 20px;
+					}
+		
+					&:last-child {
+						border-right: none;
+					}
+		
+					&:hover {
+						background-color: #f9fafb; // light hover
+					}
+		
+					&.active {
+						background-color: #e5e7eb; // slightly darker for active
+						font-weight: 600;
+					}
+				}
+			}
+		}
+		
 	}
 }
 
