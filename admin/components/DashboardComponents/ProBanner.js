@@ -6,7 +6,7 @@ function ProBanner() {
   return (
       <div className="fb-pro-banner">
           <div className="fb-pro-title-flex">
-              {/* <span>
+              <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none">
                     <path
                         stroke="#F89B2E"
@@ -20,16 +20,16 @@ function ProBanner() {
                         d="M14.604 30.793h10.8"
                         />
                     </svg>
-                </span> */}
-              <h2>{ __('Frontis Blocks – Design Smarter, Faster, and Better with Gutenberg', 'frontis-blocks') }</h2>
+                </span>
+              <h2>{ __('Upgrade to Pro for Access Premium Features!', 'frontis-blocks') }</h2>
           </div>
                 <p>
                     { __(`Frontis Blocks is your ultimate companion for enhancing the WordPress Gutenberg editor. This plugin empowers users with a diverse set of advanced blocks, designed to elevate the functionality and design of your website. Whether you’re a seasoned developer or a beginner exploring WordPress, Frontis Blocks offers an intuitive and flexible solution for crafting responsive, visually stunning, and performance-optimized websites. With a wide range of customizable blocks, Frontis Blocks enables you to add dynamic elements, create engaging layouts, and deliver a professional-grade user experience, all without writing a single line of code.`, 'frontis-blocks') }
                 </p>
-                <p>
+                {/* <p>
                     { __(`Built with performance and usability in mind, Frontis Blocks integrates seamlessly into the Gutenberg editor. The plugin boasts blocks tailored for every need—from feature-rich text formats and media integrations to interactive components like sliders, tabs, and accordions. Each block is designed to simplify your workflow while ensuring that your site loads quickly and ranks higher in search engines. Whether you’re building a personal blog, a business site, or an eCommerce platform, Frontis Blocks is the perfect toolkit to bring your vision to life. Dive into the world of limitless creativity with Frontis Blocks and take your WordPress site to the next level!`, 'frontis-blocks') }
-                </p>
-              {/* {window.frontisBlocksAdmin.isProActive === 'false' && (
+                </p> */}
+              {window.frontisBlocksAdmin.isProActive === 'false' && (
                         <a 
                             href={window.frontisBlocksAdmin.pro_url} 
                             className="fb-upgrade-button"
@@ -38,7 +38,7 @@ function ProBanner() {
                         >
                             Upgrade to Pro <Crown />
                         </a>
-                    )} */}
+                    )}
     </div>
   )
 }

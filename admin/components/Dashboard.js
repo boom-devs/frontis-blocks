@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { ProBanner, SystemRequirements, VideoBanner } from './DashboardComponents';
+import { ProBanner, SystemRequirements, VideoBanner, IconCard } from './DashboardComponents';
 
 const Dashboard = () => {
   return (

@@ -688,7 +688,24 @@ function ProBanner() {
     className: "fb-pro-banner"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-pro-title-flex"
-  }, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Frontis Blocks – Design Smarter, Faster, and Better with Gutenberg', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frontis Blocks is your ultimate companion for enhancing the WordPress Gutenberg editor. This plugin empowers users with a diverse set of advanced blocks, designed to elevate the functionality and design of your website. Whether you\u2019re a seasoned developer or a beginner exploring WordPress, Frontis Blocks offers an intuitive and flexible solution for crafting responsive, visually stunning, and performance-optimized websites. With a wide range of customizable blocks, Frontis Blocks enables you to add dynamic elements, create engaging layouts, and deliver a professional-grade user experience, all without writing a single line of code.", 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Built with performance and usability in mind, Frontis Blocks integrates seamlessly into the Gutenberg editor. The plugin boasts blocks tailored for every need\u2014from feature-rich text formats and media integrations to interactive components like sliders, tabs, and accordions. Each block is designed to simplify your workflow while ensuring that your site loads quickly and ranks higher in search engines. Whether you\u2019re building a personal blog, a business site, or an eCommerce platform, Frontis Blocks is the perfect toolkit to bring your vision to life. Dive into the world of limitless creativity with Frontis Blocks and take your WordPress site to the next level!", 'frontis-blocks')));
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    stroke: "#F89B2E",
+    strokeWidth: 4,
+    d: "m37.296 22.81.413-4.383c.324-3.442.486-5.164-.103-5.875a1.786 1.786 0 0 0-1.215-.662c-.856-.075-1.932 1.15-4.082 3.598-1.113 1.266-1.669 1.899-2.29 1.997a1.662 1.662 0 0 1-1.01-.162c-.573-.288-.955-1.07-1.72-2.636l-4.026-8.25C21.82 3.479 21.099 2 20 2c-1.098 0-1.82 1.479-3.264 4.437l-4.026 8.25c-.764 1.566-1.146 2.348-1.719 2.636-.317.16-.667.216-1.01.162-.621-.098-1.177-.731-2.29-1.997-2.15-2.449-3.226-3.673-4.082-3.598-.463.041-.896.277-1.215.662-.589.711-.427 2.433-.103 5.875l.413 4.384c.68 7.223 1.02 10.834 3.148 13.011C7.981 38 11.172 38 17.552 38h4.896c6.38 0 9.571 0 11.7-2.178 2.128-2.177 2.468-5.789 3.148-13.011Z"
+  }), /*#__PURE__*/React.createElement("path", {
+    stroke: "#F89B2E",
+    strokeLinecap: "round",
+    strokeWidth: 4,
+    d: "M14.604 30.793h10.8"
+  }))), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Upgrade to Pro for Access Premium Features!', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Frontis Blocks is your ultimate companion for enhancing the WordPress Gutenberg editor. This plugin empowers users with a diverse set of advanced blocks, designed to elevate the functionality and design of your website. Whether you\u2019re a seasoned developer or a beginner exploring WordPress, Frontis Blocks offers an intuitive and flexible solution for crafting responsive, visually stunning, and performance-optimized websites. With a wide range of customizable blocks, Frontis Blocks enables you to add dynamic elements, create engaging layouts, and deliver a professional-grade user experience, all without writing a single line of code.", 'frontis-blocks')), window.frontisBlocksAdmin.isProActive === 'false' && /*#__PURE__*/React.createElement("a", {
+    href: window.frontisBlocksAdmin.pro_url,
+    className: "fb-upgrade-button",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, "Upgrade to Pro ", /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_1__.Crown, null)));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProBanner);
 
@@ -806,6 +823,16 @@ var VideoBanner = function VideoBanner() {
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-video-banner"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-video-wrapper"
+  }, /*#__PURE__*/React.createElement("iframe", {
+    width: "100%",
+    height: "100%",
+    src: "https://www.youtube.com/embed/eroWCJodVa8",
+    title: "YouTube video player",
+    frameBorder: "0",
+    allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+    allowFullScreen: true
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-video-banner-content"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Welcome to Frontis Blocks', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('The Frontis Block is a modern content creation tool', 'frontis-blocks'))), /*#__PURE__*/React.createElement("a", {
     className: "fb-create-page-button",
@@ -813,6 +840,38 @@ var VideoBanner = function VideoBanner() {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Create New Page', 'frontis-blocks'), /*#__PURE__*/React.createElement("span", null, "+"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (VideoBanner);
+
+/***/ }),
+
+/***/ "./admin/components/DashboardComponents/iconCard.js":
+/*!**********************************************************!*\
+  !*** ./admin/components/DashboardComponents/iconCard.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+
+function IconCard(icon, title, desc, btnText, btnLink, btnIcon) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-dashboard-icon-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-icon-card-title-flex"
+  }, icon && /*#__PURE__*/React.createElement("span", null, icon), /*#__PURE__*/React.createElement("h2", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(title, 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-icon-card-content-flex"
+  }, /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(desc, 'frontis-blocks')), btnText && /*#__PURE__*/React.createElement("a", {
+    href: btnLink ? btnLink : '#',
+    className: "fb-icon-card-button",
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, btnText ? btnText : 'Read more', btnIcon && /*#__PURE__*/React.createElement("span", null, btnIcon))));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IconCard);
 
 /***/ }),
 
@@ -825,6 +884,7 @@ var VideoBanner = function VideoBanner() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   IconCard: () => (/* reexport safe */ _iconCard__WEBPACK_IMPORTED_MODULE_3__["default"]),
 /* harmony export */   ProBanner: () => (/* reexport safe */ _ProBanner__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   SystemRequirements: () => (/* reexport safe */ _SystemRequirements__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   VideoBanner: () => (/* reexport safe */ _VideoBanner__WEBPACK_IMPORTED_MODULE_2__["default"])
@@ -832,6 +892,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProBanner__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProBanner */ "./admin/components/DashboardComponents/ProBanner.js");
 /* harmony import */ var _SystemRequirements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SystemRequirements */ "./admin/components/DashboardComponents/SystemRequirements.js");
 /* harmony import */ var _VideoBanner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VideoBanner */ "./admin/components/DashboardComponents/VideoBanner.js");
+/* harmony import */ var _iconCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./iconCard */ "./admin/components/DashboardComponents/iconCard.js");
+
 
 
 
@@ -2953,13 +3015,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   All: () => (/* binding */ All),
+/* harmony export */   ArrowRightIcon: () => (/* binding */ ArrowRightIcon),
 /* harmony export */   AssetGenerationIcon: () => (/* binding */ AssetGenerationIcon),
 /* harmony export */   BlockIcon: () => (/* binding */ BlockIcon),
 /* harmony export */   CheckIcon: () => (/* binding */ CheckIcon),
+/* harmony export */   CommunityIcon: () => (/* binding */ CommunityIcon),
 /* harmony export */   Content: () => (/* binding */ Content),
 /* harmony export */   Creative: () => (/* binding */ Creative),
 /* harmony export */   Crown: () => (/* binding */ Crown),
 /* harmony export */   Doc: () => (/* binding */ Doc),
+/* harmony export */   DocumentationIcon: () => (/* binding */ DocumentationIcon),
 /* harmony export */   EditorEnhancementIcon: () => (/* binding */ EditorEnhancementIcon),
 /* harmony export */   EditorOptionIcon: () => (/* binding */ EditorOptionIcon),
 /* harmony export */   FBIcon: () => (/* binding */ FBIcon),
@@ -2972,6 +3037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   OptionsIcon: () => (/* binding */ OptionsIcon),
 /* harmony export */   PerformanceIcon: () => (/* binding */ PerformanceIcon),
 /* harmony export */   PricingIcon: () => (/* binding */ PricingIcon),
+/* harmony export */   RateIcon: () => (/* binding */ RateIcon),
 /* harmony export */   SiteVisibilityIcon: () => (/* binding */ SiteVisibilityIcon),
 /* harmony export */   ThemeFontIcon: () => (/* binding */ ThemeFontIcon),
 /* harmony export */   VersionControlIcon: () => (/* binding */ VersionControlIcon),
@@ -3331,6 +3397,79 @@ var ThemeFontIcon = function ThemeFontIcon() {
     strokeLinejoin: "round",
     strokeWidth: 2,
     d: "M3.891 4.391C2.5 5.782 2.5 8.021 2.5 12.5c0 4.478 0 6.718 1.391 8.109S7.521 22 12 22c4.478 0 6.718 0 8.109-1.391C21.5 19.217 21.5 16.979 21.5 12.5c0-4.478 0-6.718-1.391-8.109C18.717 3 16.479 3 12 3 7.522 3 5.282 3 3.891 4.391Z"
+  }));
+};
+var ArrowRightIcon = function ArrowRightIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "13",
+    height: "12",
+    viewBox: "0 0 13 12",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.62406 0.347125L12.8014 5.52456C12.9338 5.65694 13 5.83044 13 6.00394C13 6.17744 12.9338 6.35094 12.8014 6.48331L7.62397 11.6608C7.35922 11.9256 6.92991 11.9256 6.66516 11.6608C6.40047 11.3961 6.40047 10.9668 6.66516 10.7021L10.6852 6.682L-2.32203 6.682C-2.69644 6.68197 -3 6.37844 -3 6.004C-3 5.62956 -2.69644 5.32603 -2.32203 5.32603L10.6854 5.32603L6.66522 1.30588C6.40053 1.04109 6.40066 0.611813 6.66522 0.347125C6.93 0.0823747 7.35928 0.0823747 7.62406 0.347125Z",
+    fill: "#6A758E"
+  }));
+};
+var CommunityIcon = function CommunityIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("ellipse", {
+    cx: "8.83925",
+    cy: "5.05214",
+    rx: "5.05214",
+    ry: "5.05214",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("ellipse", {
+    cx: "8.84125",
+    cy: "18.9486",
+    rx: "8.84125",
+    ry: "5.05214",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M23.9963 18.9536C23.9963 21.0463 21.4253 22.7427 18.2863 22.7427C19.2111 21.7319 19.847 20.463 19.847 18.9554C19.847 17.446 19.2097 16.176 18.2831 15.1646C21.4221 15.1646 23.9963 16.861 23.9963 18.9536Z",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M20.2072 5.06059C20.2072 7.15326 18.5108 8.8497 16.4181 8.8497C15.9618 8.8497 15.5243 8.76903 15.1191 8.62119C15.7167 7.57023 16.0579 6.35456 16.0579 5.05918C16.0579 3.76476 15.7172 2.54993 15.1205 1.49951C15.5253 1.35197 15.9623 1.27148 16.4181 1.27148C18.5108 1.27148 20.2072 2.96793 20.2072 5.06059Z",
+    fill: "white"
+  }));
+};
+var RateIcon = function RateIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M13.304 23.2653L13.9546 22.1663C14.4591 21.3138 14.7114 20.8876 15.1167 20.6519C15.5219 20.4162 16.0321 20.4074 17.0525 20.3898C18.559 20.3639 19.5038 20.2716 20.2962 19.9434C21.7664 19.3344 22.9344 18.1663 23.5434 16.6962C24.0001 15.5935 24.0001 14.1957 24.0001 11.4V10.2C24.0001 6.27191 24.0001 4.30784 23.1159 2.86502C22.6212 2.05768 21.9424 1.3789 21.1351 0.884163C19.6923 0 17.7282 0 13.8001 0H10.2C6.27191 0 4.30784 0 2.86502 0.884163C2.05768 1.3789 1.3789 2.05768 0.884163 2.86502C0 4.30784 0 6.27191 0 10.2V11.4C0 14.1957 0 15.5935 0.456725 16.6962C1.06569 18.1663 2.23374 19.3344 3.70391 19.9434C4.49628 20.2716 5.44108 20.3639 6.94752 20.3898C7.96794 20.4074 8.47815 20.4162 8.88339 20.6519C9.28862 20.8876 9.54091 21.3138 10.0455 22.1663L10.696 23.2653C11.2758 24.2449 12.7242 24.2449 13.304 23.2653ZM6.60003 9.25774C6.60003 11.3609 9.196 13.5965 10.7881 14.7699C11.3331 15.1716 11.6056 15.3724 12.0001 15.3724C12.3945 15.3724 12.667 15.1716 13.212 14.7699C14.8041 13.5966 17.4001 11.3609 17.4001 9.25773C17.4001 6.04513 14.43 4.84569 12 7.3274C9.57013 4.84569 6.60003 6.04513 6.60003 9.25774Z",
+    fill: "white"
+  }));
+};
+var DocumentationIcon = function DocumentationIcon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M0 9.60003V14.4C0 17.7941 0 19.4912 1.05442 20.5456C1.31522 20.8064 1.61534 21.0027 1.97074 21.1505C1.96268 21.0971 1.95506 21.0436 1.94785 20.99C1.79983 19.889 1.79991 18.5141 1.8 16.9185L1.8 7.19997L1.8 7.08147C1.79991 5.4858 1.79983 4.11093 1.94785 3.00994C1.95505 2.95639 1.96266 2.90294 1.97072 2.84961C1.61533 2.99735 1.31522 3.19365 1.05442 3.45445C0 4.50886 0 6.20592 0 9.60003Z",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M24 9.60003V14.4C24 17.7941 24 19.4912 22.9456 20.5456C22.6848 20.8064 22.3847 21.0027 22.0293 21.1505C22.0373 21.0971 22.0449 21.0436 22.0521 20.99C22.2002 19.889 22.2001 18.5141 22.2 16.9185V7.08148C22.2001 5.4858 22.2002 4.11093 22.0521 3.00994C22.0449 2.95639 22.0373 2.90294 22.0293 2.84961C22.3847 2.99735 22.6848 3.19365 22.9456 3.45445C24 4.50886 24 6.20592 24 9.60003Z",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M4.65402 1.05442C3.59961 2.10883 3.59961 3.80589 3.59961 7.2V16.8C3.59961 20.1941 3.59961 21.8912 4.65402 22.9456C5.70844 24 7.4055 24 10.7996 24H13.1996C16.5937 24 18.2908 24 19.3452 22.9456C20.3996 21.8912 20.3996 20.1941 20.3996 16.8V7.2C20.3996 3.80589 20.3996 2.10883 19.3452 1.05442C18.2908 0 16.5937 0 13.1996 0H10.7996C7.4055 0 5.70844 0 4.65402 1.05442ZM7.49961 18C7.49961 17.5029 7.90255 17.1 8.39961 17.1H11.9996C12.4967 17.1 12.8996 17.5029 12.8996 18C12.8996 18.4971 12.4967 18.9 11.9996 18.9H8.39961C7.90255 18.9 7.49961 18.4971 7.49961 18ZM8.39961 12.3C7.90255 12.3 7.49961 12.7029 7.49961 13.2C7.49961 13.6971 7.90255 14.1 8.39961 14.1H15.5996C16.0967 14.1 16.4996 13.6971 16.4996 13.2C16.4996 12.7029 16.0967 12.3 15.5996 12.3H8.39961ZM7.49961 8.4C7.49961 7.90294 7.90255 7.5 8.39961 7.5H15.5996C16.0967 7.5 16.4996 7.90294 16.4996 8.4C16.4996 8.89706 16.0967 9.3 15.5996 9.3H8.39961C7.90255 9.3 7.49961 8.89706 7.49961 8.4Z",
+    fill: "white"
   }));
 };
 
