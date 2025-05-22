@@ -5,12 +5,14 @@
 		justify-content: space-between;
 		margin: 0;
 		align-items: center;
-        .components-dropdown.fb-setting-dropdown-icon-wrapper{
-            .components-button.fb-setting-dropdown-icon-btn{
-                height: auto;
-                padding: 6px;
-            }
-        }
+
+		.components-dropdown.fb-setting-dropdown-icon-wrapper {
+			.components-button.fb-setting-dropdown-icon-btn {
+				height: auto;
+				padding: 6px;
+			}
+		}
+
 		.fb-setting-typography-icon-dropdown {
 			.fb-setting-typography-icon-btn {
 				margin: 0;
@@ -21,10 +23,12 @@
 				border-radius: 14px;
 				color: #50575e;
 				background: $white_color;
+
 				&:focus {
 					outline: none;
 					box-shadow: none;
 				}
+
 				.fb-setting-typography-icon {
 					font-size: 15px;
 					line-height: 20px;
@@ -37,15 +41,19 @@
 .fb-setting-typography-popup {
 	padding: 0.2rem;
 	min-width: 220px;
+
 	.fb-setting-typography-popup-inner {
 		position: relative;
 		z-index: 99999;
+
 		.components-base-control__field {
 			display: flex;
 			flex-direction: column;
-			.components-flex{
+
+			.components-flex {
 				gap: 0;
 			}
+
 			label {
 				font-family: $heading-font-family;
 				display: block;
@@ -57,22 +65,25 @@
 				min-height: auto;
 				text-transform: capitalize !important;
 			}
+
 			.components-base-control__label {
-                color: $neutral-color-950;
-                font-family: $body-font-family;
-                font-size: $medium-font-size;
-                font-weight: 400;
-                line-height: $body-line-height;
-                margin: 0 0 10px;
-                min-height: auto;
-                text-transform: capitalize;
+				color: $neutral-color-950;
+				font-family: $heading-font-family;
+				font-size: $base-font-size;
+				font-weight: 500;
+				line-height: $body-line-height;
+				margin: 0 0 10px;
+				min-height: auto;
+				text-transform: capitalize;
 			}
 		}
+
 		.fb-setting-fontsize-wrapper {
 			.fb-setting-fontsize-header {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+
 				.fb-setting-fontsize-label {
 					display: block;
 					color: $neutral-color-200;
@@ -83,18 +94,21 @@
 					min-height: auto;
 					text-transform: capitalize;
 				}
+
 				.fb-setting-fontsize-units {
 
 					.fb-setting-fontsize-units-wrap {
 						direction: initial;
 						display: flex;
 						align-items: center;
+
 						.fb-setting-fontsize-units-switcher {
 							box-shadow: unset;
 							font-size: 10px;
 							padding: 0;
 							text-transform: uppercase;
 							padding-right: 5px;
+
 							&.active {
 								color: $primary-color;
 							}
@@ -103,11 +117,13 @@
 				}
 			}
 		}
+
 		.fb-setting-letterspacing-wrapper {
 			.fb-setting-letterspacing-header {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+
 				.fb-setting-letterspacing-label {
 					display: block;
 					color: $neutral-color-200;
@@ -118,17 +134,20 @@
 					min-height: auto;
 					text-transform: capitalize;
 				}
+
 				.fb-setting-letterspacing-units {
 					.fb-setting-letterspacing-units-wrap {
 						direction: initial;
 						display: flex;
 						align-items: center;
+
 						.fb-setting-letterspacing-units-switcher {
 							box-shadow: unset;
 							font-size: 10px;
 							padding: 0;
 							text-transform: uppercase;
 							padding-right: 5px;
+
 							&.active {
 								color: $primary-color;
 							}
@@ -137,11 +156,13 @@
 				}
 			}
 		}
+
 		.fb-setting-lineheight-wrapper {
 			.fb-setting-lineheight-header {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+
 				.fb-setting-lineheight-label {
 					display: block;
 					color: $neutral-color-200;
@@ -152,17 +173,20 @@
 					min-height: auto;
 					text-transform: capitalize;
 				}
+
 				.fb-setting-lineheight-units {
 					.fb-setting-lineheight-units-wrap {
 						direction: initial;
 						display: flex;
 						align-items: center;
+
 						.fb-setting-lineheight-units-switcher {
 							box-shadow: unset;
 							font-size: 10px;
 							padding: 0;
 							text-transform: uppercase;
 							padding-right: 5px;
+
 							&.active {
 								color: $primary-color;
 							}
@@ -171,41 +195,53 @@
 				}
 			}
 		}
-		.components-input-control__container{
-			.components-input-control__input{
+
+		.components-input-control__container {
+			.components-input-control__input {
 				border: 1px solid $primary-color-300;
-				&:focus{
+
+				&:focus {
 					outline: none;
 				}
 			}
-			.components-select-control__input{
-				background: $neutral-color-50;
+
+			.components-select-control__input {
+				font-family: $body-font-family;
+				font-size: $base-font-size;
+				font-weight: 400;
+				line-height: $body-line-height;
 				height: unset;
-				border-radius: 8px;
-				padding: 6px 12px;
-				&:focus{
+				border-radius: 4px;
+				padding: 14px 12px;
+				border: 1px solid #E1E3E8;
+
+				&:focus {
 					outline: none;
 				}
 			}
-			.components-input-control__backdrop{
+
+			.components-input-control__backdrop {
 				border: none;
 			}
 		}
-		.components-range-control__wrapper{
-			span{
-				&:nth-child(2){
+
+		.components-range-control__wrapper {
+			span {
+				&:nth-child(2) {
 					height: 2px;
 					background: $neutral-color-200;
 				}
-				&:nth-child(3){
+
+				&:nth-child(3) {
 					height: 2px;
 					background: $primary-color-base;
 				}
 			}
-			.components-range-control__thumb-wrapper{
+
+			.components-range-control__thumb-wrapper {
 				z-index: unset !important;
-				
-				span{
+
+				span {
 					background-color: $primary-color-base;
 				}
 			}
@@ -215,14 +251,15 @@
 
 .fb-setting-gb-select-control-label {
 	color: $neutral-color-950;
-	font-family: $body-font-family;
-	font-size: $medium-font-size;
-	font-weight: 400;
+	font-family: $heading-font-family;
+	font-size: $base-font-size;
+	font-weight: $font-weight-500;
 	line-height: $body-line-height;
 	margin: 0 0 10px;
 	min-height: auto;
 	text-transform: capitalize;
 }
+
 .components-base-control__field {
 	.components-input-control__container {
 		.components-input-control__input {

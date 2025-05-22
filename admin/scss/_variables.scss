@@ -1,5 +1,5 @@
 // Colors primary
-$primary-color: #4B9DEF;
+$primary-color: #3991FF;
 $primary-color-base: #399CFF;
 $primary-color-50: #EDF5FD;
 $primary-color-100: #DBEBFC;
@@ -65,11 +65,11 @@ $text-muted: #6c6c6c;
 $base-font-size: 14px;
 $unit-font-size: 11px;
 $base-line-height: 1.5;
-$heading-font-family: "Plus Jakarta Sans", sans-serif;
+$heading-font-family: "Onest", sans-serif;
 $heading-font-family-global: "Roboto", sans-serif;
-$body-font-family: "Work Sans", sans-serif;
-$body-line-height: 1.4;
-$heading-line-height: 1.3;
+$body-font-family: "Manrope", sans-serif;
+$body-line-height: 16px;
+$heading-line-height: 20px;
 
 // Font sizes
 $small-font-size: 12px;
@@ -85,6 +85,16 @@ $h4-font-size: 24px;
 $h5-font-size: 20px;
 $h6-font-size: 18px;
 
+//Font weight
+$font-weight-100: 100;
+$font-weight-200: 200;
+$font-weight-300: 300;
+$font-weight-400: 400;
+$font-weight-500: 500;
+$font-weight-600: 600;
+$font-weight-700: 700;
+$font-weight-800: 800;
+$font-weight-900: 900;
 // Spacing
 $spacing-unit: 8px;
 $gutter: $spacing-unit * 3;

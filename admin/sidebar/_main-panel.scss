@@ -336,7 +336,7 @@
                     height: unset;
                     padding: 15px 12px;
                     border: 1px solid $neutral-color-100;
-                    border-radius: 8px;
+                    border-radius: 4px;
                     font-family: $body-font-family;
                     font-size: $medium-font-size-global;
                     font-weight: 400;
@@ -344,7 +344,7 @@
                 }
 
                 .components-input-control__container {
-                    border-radius: 8px;
+                    border-radius: 4px;
 
                     .components-input-control__input {
                         &:focus {
@@ -354,14 +354,14 @@
 
                     .components-select-control__input {
                         height: unset;
-                        padding: 15px 12px;
+                        padding: 12px;
                         border: 1px solid $neutral-color-100;
-                        border-radius: 8px;
+                        border-radius: 4px;
                         font-family: $body-font-family;
                         font-size: $medium-font-size-global;
                         font-weight: 400;
-                        line-height: 16px;
-
+                        line-height: 20px;
+                        height: 44px;
                         &:focus {
                             outline: none;
                         }
