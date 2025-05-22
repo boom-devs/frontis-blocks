@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div className="fb-blocks-dashboard-container">
       <div className="fb-blocks-dashboard">
         <div className="fb-blocks-dashboard-left">
-          {/* {window.frontisBlocksAdmin.isProActive === 'false' && (<ProBanner />)} */}
+          {window.frontisBlocksAdmin.isProActive === 'false' && (<ProBanner />)}
           <VideoBanner />
         </div>
         <div className="fb-blocks-dashboard-right">
