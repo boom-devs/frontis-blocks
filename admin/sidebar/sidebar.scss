@@ -482,6 +482,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		.components-base-control {
 			width: auto !important;
 			margin-left: 0 !important;
+
 		}
 	}
 
@@ -532,4 +533,9 @@ svg#fb-global-panel-icon {
 	font-size: $base-font-size;
 	font-weight: 500;
 	line-height: 16px;
+}
+
+.fb-delete {
+	border-left: 1px solid $neutral-color-100;
+	padding-left: 12px;
 }

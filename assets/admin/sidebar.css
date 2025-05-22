@@ -564,6 +564,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   border: none;
   background: transparent;
   color: #E43242;
+  border-left: 1px solid #E1E3E8;
+  padding-left: 12px;
   cursor: pointer;
 }
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel .block-editor-tools-panel-color-gradient-settings__item .fb-delete-custom-color:first-of-type {
@@ -690,7 +692,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   border-radius: 4px;
 }
 .fb-global-typo-elements-wrap .fb-custom-element-wrapper .fb-custom-element {
-  padding: 14px 12px;
+  padding: 12px 20px 12px 12px;
 }
 .fb-global-typo-elements-wrap .fb-custom-element-wrapper .fb-custom-element:first-child {
   border: none;
@@ -709,6 +711,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 .fb-global-typo-elements-wrap .fb-custom-element-wrapper .fb-custom-element.fb-global-typography-element:last-child {
   border-bottom: none;
   border-radius: none;
+}
+.fb-global-typo-elements-wrap .fb-custom-element-wrapper .fb-custom-element .fb-delete {
+  border-left: 1px solid #E1E3E8;
+  padding-left: 12px;
 }
 .fb-global-typo-elements-wrap .fb-typography-settings .components-base-control {
   width: auto !important;
@@ -753,6 +759,11 @@ svg#fb-global-panel-icon {
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
+}
+
+.fb-delete {
+  border-left: 1px solid #E1E3E8;
+  padding-left: 12px;
 }
 
 /*# sourceMappingURL=sidebar.css.map*/
