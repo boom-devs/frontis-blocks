@@ -396,6 +396,28 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			justify-content: space-between;
 			border-left: 1px solid $neutral-color-100;
 			border-right: 1px solid $neutral-color-100;
+			height: 44px;
+			
+			&:hover{
+				.components-button{
+					color: $primary-color;
+					.font_preview{
+						svg{
+							fill: $primary-color;
+						}
+					}
+				}
+			}
+			&:nth-child(2){
+				.components-button{
+					.font_preview{
+						svg{
+							fill: none;
+							color: $primary-color;
+						}
+					}
+				}
+			}
 		}
 
 		.fb-delete {
