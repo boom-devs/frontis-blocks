@@ -75,6 +75,9 @@
 			font-size: $medium-font-size;
 			font-weight: 600;
 			line-height: $body-line-height;
+			&.components-panel__body-toggle{
+				margin-bottom: 24px;
+			}
 		}
 
 		.components-base-control__field {
@@ -86,7 +89,7 @@
 				font-size: $base-font-size;
 				font-weight: 500;
 				line-height: 18px;
-				margin: 0 0 10px;
+				margin: 0 0 14px;
 				min-height: auto;
 				text-transform: capitalize;
 			}
