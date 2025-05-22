@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { 
-    Button, 
-    BaseControl, 
+import {
+    Button,
+    BaseControl,
     Dropdown,
-    Dashicon, 
+    Dashicon,
     TextControl,
     ToggleControl,
-    TextareaControl, 
+    TextareaControl,
 } from '@wordpress/components';
 
 import FB_ImageControl from '@Components/image-control';
@@ -36,29 +36,39 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         </svg>
     );
 
+    const DuplicateIcon = (
+        <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 48 48" fill="none">
+            <g id="duplicate">
+                <g id="duplicate_2">
+                    <path id="Combined Shape" fill-rule="evenodd" clip-rule="evenodd" d="M29.2827 4.88487C28.7191 4.31826 27.954 4 27.1556 4H14.9996C13.3433 4 11.9996 5.34372 11.9996 7V37C11.9996 38.6563 13.3433 40 14.9996 40H31.9992V41C31.9992 41.5526 31.5521 42 30.9992 42H10.9992C10.4475 42 9.99921 41.5517 9.99921 41V9C9.99921 8.44772 9.55149 8 8.99921 8C8.44692 8 7.99921 8.44772 7.99921 9V41C7.99921 42.6563 9.34292 44 10.9992 44H30.9992C32.657 44 33.9992 42.6568 33.9992 41V40H34.9996C36.6574 40 37.9996 38.6568 37.9996 37V17.0162H39.0226C39.5749 17.0162 40.0226 16.5685 40.0226 16.0162C40.0226 15.4639 39.5749 15.0162 39.0226 15.0162H37.9996V14.888C37.9996 14.0969 37.6859 13.3381 37.1285 12.7747L29.2827 4.88487ZM27.0266 15.0162H35.9996V14.888C35.9996 14.6251 35.8947 14.3713 35.7085 14.1831L27.8646 6.29523C27.6764 6.10599 27.4216 6 27.1556 6H14.9996C14.4479 6 13.9996 6.44828 13.9996 7V37C13.9996 37.5517 14.4479 38 14.9996 38H34.9996C35.5525 38 35.9996 37.5526 35.9996 37V17.0162H26.2286C25.5662 17.0162 25.0266 16.4803 25.0266 15.8162V8.9482C25.0266 8.39592 25.4743 7.9482 26.0266 7.9482C26.5789 7.9482 27.0266 8.39592 27.0266 8.9482V15.0162Z" fill="#000000" />
+                </g>
+            </g>
+        </svg>
+    );
+    
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             <div className="sortable-header">
                 <span className="sortable-title" onClick={toggleOpen}>
-                    {item.title || __( `Marquee Item ${index + 1}`, "frontis-blocks" )} 
+                    {item.title || __(`Marquee Item ${index + 1}`, "frontis-blocks")}
                 </span>
                 <span className="sortable-sort" {...listeners} style={{ cursor: 'grab' }}>
                     <Button icon={MoveIcon} label={__("Sort", "frontis-blocks")} aria-label={__("Move item", "frontis-blocks")} />
                 </span>
                 <span className="sortable-duplicate">
-                    <Button 
-                        icon="admin-page" 
-                        label={__("Duplicate", "frontis-blocks")} 
+                    <Button
+                        icon="admin-page"
+                        label={__("Duplicate", "frontis-blocks")}
                         aria-label={__("Duplicate item", "frontis-blocks")}
-                        onClick={() => handleDuplicateItem(item.id)} 
+                        onClick={() => handleDuplicateItem(item.id)}
                     />
                 </span>
                 <span className="sortable-delete">
-                    <Button 
-                        icon={TrashIcon} 
-                        label={__("Delete", "frontis-blocks")} 
+                    <Button
+                        icon={TrashIcon}
+                        label={__("Delete", "frontis-blocks")}
                         aria-label={__("Delete item", "frontis-blocks")}
-                        onClick={() => handleDeleteItem(item.id)} 
+                        onClick={() => handleDeleteItem(item.id)}
                     />
                 </span>
             </div>
@@ -66,38 +76,38 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
             {isOpen && (
                 <div className="sortable-item-content">
 
-                <BaseControl
-                    className="fb-marquee-carousel-setting-wrapper" 
-                >
-                    <FB_ImageControl 
-                        globalImageUrl={item.marqueeCarouselImageUrl}
-                        setglobalImageUrl={(value) => handleChangeItem(item.id, 'marqueeCarouselImageUrl', value)}
-                        globalImageAlt={item.marqueeCarouselImageAlt}
-                        setglobalImageAlt={(value) => handleChangeItem(item.id, 'marqueeCarouselImageAlt', value)}
-                        globalImageID={item.marqueeCarouselImageID}
-                        setglobalImageID={(value) => handleChangeItem(item.id, 'marqueeCarouselImageID', value)}
-                        isImageSize = {false}
-                    />
-                    <ToggleControl
-                        label={__("Show Content", "frontis-blocks")}
-                        checked={item.showContentSwitcher}
-                        onChange={(value) => handleChangeItem(item.id, 'showContentSwitcher', value)}
-                    />
-                    {item.showContentSwitcher && (
-                        <>
-                            <TextControl
-                                label={__("Text", "frontis-blocks")}
-                                value={item.marqueeCarouselText}
-                                onChange={(value) => handleChangeItem(item.id, 'marqueeCarouselText', value)}
-                            />
-                            <TextControl
-                                label={__("Hover Text", "frontis-blocks")}
-                                value={item.marqueeCarouseHoverText}
-                                onChange={(value) => handleChangeItem(item.id, 'marqueeCarouseHoverText', value)}
-                            />
-                        </>
-                    )}
-                </BaseControl>
+                    <BaseControl
+                        className="fb-marquee-carousel-setting-wrapper"
+                    >
+                        <FB_ImageControl
+                            globalImageUrl={item.marqueeCarouselImageUrl}
+                            setglobalImageUrl={(value) => handleChangeItem(item.id, 'marqueeCarouselImageUrl', value)}
+                            globalImageAlt={item.marqueeCarouselImageAlt}
+                            setglobalImageAlt={(value) => handleChangeItem(item.id, 'marqueeCarouselImageAlt', value)}
+                            globalImageID={item.marqueeCarouselImageID}
+                            setglobalImageID={(value) => handleChangeItem(item.id, 'marqueeCarouselImageID', value)}
+                            isImageSize={false}
+                        />
+                        <ToggleControl
+                            label={__("Show Content", "frontis-blocks")}
+                            checked={item.showContentSwitcher}
+                            onChange={(value) => handleChangeItem(item.id, 'showContentSwitcher', value)}
+                        />
+                        {item.showContentSwitcher && (
+                            <>
+                                <TextControl
+                                    label={__("Text", "frontis-blocks")}
+                                    value={item.marqueeCarouselText}
+                                    onChange={(value) => handleChangeItem(item.id, 'marqueeCarouselText', value)}
+                                />
+                                <TextControl
+                                    label={__("Hover Text", "frontis-blocks")}
+                                    value={item.marqueeCarouseHoverText}
+                                    onChange={(value) => handleChangeItem(item.id, 'marqueeCarouseHoverText', value)}
+                                />
+                            </>
+                        )}
+                    </BaseControl>
                 </div>
             )}
         </li>
