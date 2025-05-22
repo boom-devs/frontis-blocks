@@ -107,14 +107,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
     
     const deviceType= useDeviceType();
-    
+
     useEffect(() => {
-        if (!blockID) {
-            setAttributes({
-                blockID: "progressbar-" + clientId.slice(0, 8),
-            });
-        }
-    }, [blockID, clientId, setAttributes]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "progressbar-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     /** Start load font */
     useEffect(() => {
@@ -659,9 +659,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-advanced-tab-wrapper">
                                             <div className="fb-setting-inner-wrapper">
                                                 <PanelBody
-                                                    title={__("Advanced", "frontis-blocks")}
+                                                    title={__("Layout", "frontis-blocks")}
                                                     initialOpen={true}
-                                                    className='fb-setting-z-index-header'
+                                                    className='fb-setting-layout-header' 
                                                 >
                                                     <FB_Range
                                                         min={0}

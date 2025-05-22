@@ -185,7 +185,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								)}
 								{tab.name === "advanced" && (
 									<>
-										<PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+										<PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
 											{/* Add advanced settings here */}
 										</PanelBody>
 									</>

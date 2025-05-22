@@ -90,6 +90,29 @@ const attributes = {
         default: "bullets"
     },
 
+	sliderType: {
+		type: "string",
+		default: "slider"
+	},
+
+	slideEffect: {
+        "type": "string",
+        "default": "slide"
+    },
+    carouselEffect: {
+        "type": "string",
+        "default": "slide"
+    },
+
+	carouselPerColumn: {
+        type: 'number',
+        default: 2,
+    },
+    carouselPerColumnGap: {
+        type: 'number',
+        default: 20,
+    },
+
 	/** Start Arrows Style */
 	sliderArrowsSize: {
 		type: 'object',

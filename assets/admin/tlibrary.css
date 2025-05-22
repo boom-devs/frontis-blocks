@@ -694,52 +694,6 @@
 }
 
 /*# sourceMappingURL=ReactToastify.css.map */
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/responsive-control/editor.lazy.scss ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
-
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/unit-control/editor.lazy.scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
-
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/range/editor.lazy.scss ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************/
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn {
-  fill: #3c434a;
-  border-radius: 0 6px 6px 0;
-  background-color: #F7F7F7;
-  padding: 6px;
-  border-left: 1px solid #ffffff;
-  height: auto;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:active:not(:disabled) {
-  background-color: #DBEBFC;
-  border-color: #ffffff;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:hover {
-  background-color: #DBEBFC !important;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn:hover svg path {
-  fill: #4B9DEF;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn.global-active {
-  background-color: #DBEBFC;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn.global-active svg path {
-  fill: #4B9DEF;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn svg {
-  width: 16px;
-  height: 16px;
-}
-.fb-setting-global-icon-wrapper .fb-setting-global-icon-btn svg path {
-  fill: #555E72;
-}
-
-.fb-unit-wrapper .fb-reset-button {
-  padding: 0;
-}
 /*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/full-site-import/sidebar.scss ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************/
@@ -749,8 +703,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
   padding: 14px 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header .interface-complementary-area-header__title {
-  color: #0B0C0E;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #050607;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0px;
@@ -796,7 +750,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
   border-right: 1px solid rgb(221, 221, 221);
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tabs button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
   border-bottom: 2px solid transparent;
@@ -825,7 +779,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .compon
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .components-tab-panel__tab-content .components-tools-panel .components-tools-panel-item .components-button .components-flex-item {
   color: #404655;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -840,10 +794,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-custom-color .add-custom-color-btn {
   padding: 12px 14px;
-  background: #4B9DEF;
+  background: #3991FF;
   height: 44px;
   border-radius: 6px;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   color: #FFFFFF;
   font-size: 14px;
@@ -869,7 +823,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .components-navigator-button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   padding: 0;
@@ -886,7 +840,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   fill: none !important;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-tab-wrapper .fb-tab-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 16px;
   color: #1e1e1e;
@@ -901,18 +855,18 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   padding: 0 16px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner h3 {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 16px;
-  color: #0B0C0E;
+  color: #050607;
   text-transform: capitalize;
   margin-top: 9px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper .fb-global-header-inner p {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: #0B0C0E;
+  color: #050607;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-panel-control .fb-global-header-inner-wrapper svg {
   fill: none !important;
@@ -986,7 +940,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   font-weight: 500;
   font-size: 11px;
   text-transform: uppercase !important;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings {
   padding: 0;
@@ -996,7 +950,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   outline: none;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__container .components-select-control__input {
-  background: #F7F7F7;
+  background: #F8F8F8;
   height: unset;
   padding: 6px 12px;
 }
@@ -1028,7 +982,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .fb-typography-settings .components-input-control__label {
   margin: 10px 0;
   font-weight: 500;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control {
   width: auto;
@@ -1093,8 +1047,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 }
 
 .fb-color-panel.fb-gradient-color-panel .components-panel__row.fb-gradient-color-label {
-  color: #0B0C0E;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  color: #050607;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0px;
@@ -1115,7 +1069,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   align-items: center;
   gap: 8px;
   color: #404655;
-  font-family: "Work Sans", sans-serif;
+  font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 14px;
   line-height: 16px;
@@ -1194,7 +1148,7 @@ svg#fb-global-panel-icon {
 }
 
 .block-editor-panel-color-gradient-settings__color-name {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Onest", sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;

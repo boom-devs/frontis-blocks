@@ -71,6 +71,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         readMoreIconImageUrl,
         readMoreIconImageAlt,
         readMoreIconImageID,
+
+        customPermalinkSwitcher,
+        customPermalink,
+
+        thumbnailLinkSwitcher,
+        categoryLinkSwitcher,
+        tagLinkSwitcher,
+        authorLinkSwitcher,
+        titleLinkSwitcher,
     } = attributes;
 
     const [allPosts, setAllPosts] = useState([]);
@@ -311,6 +320,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         readMoreIconImageUrl={readMoreIconImageUrl}
                                         readMoreIconImageAlt={readMoreIconImageAlt}
                                         readMoreIconImageID={readMoreIconImageID}
+
+                                        customPermalinkSwitcher={customPermalinkSwitcher}
+                                        customPermalink={customPermalink}
+
+                                        thumbnailLinkSwitcher={thumbnailLinkSwitcher}
+                                        categoryLinkSwitcher={categoryLinkSwitcher}
+                                        tagLinkSwitcher={tagLinkSwitcher}
+                                        authorLinkSwitcher={authorLinkSwitcher}
+                                        titleLinkSwitcher={titleLinkSwitcher}
                                     />
                                 ))}
                             </div>

@@ -942,6 +942,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
+			${autoFitSwitch ? `display: block;` : `display: flex;`}
 			padding: ${globalDeskPadding};	
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
@@ -1163,6 +1164,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			overlayHoverClassicColor,
 			mediaSize,
 			mediaSizeUnits,
+			autoFitSwitch,
 			autoHeightSwitch,
 			mediaHeight,
 			mediaHeightUnits,
@@ -1761,9 +1763,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 										<div className="fb-setting-advanced-tab-wrapper">
 											<div className="fb-setting-z-index-wrapper">
 												<PanelBody
-													title={__("Z Index", "frontis-blocks")}
+													title={__("Layout", "frontis-blocks")}
 													initialOpen={true}
-													className="fb-setting-z-index-header"
+													className="fb-setting-layout-header" 
 												>
 													
 													<FB_Range

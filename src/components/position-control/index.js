@@ -8,7 +8,6 @@ import {
     SelectControl, 
     
 } from '@wordpress/components';
-import './editor.lazy.scss';
 import FB_Range from '../range';
 
 const FB_PositionControl = ({

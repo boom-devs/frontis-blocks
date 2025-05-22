@@ -23,6 +23,12 @@ export default function save( props ) {
         effect,
         paginationType,
 		sliderGlobalWraperClass,
+        sliderType,
+        slideEffect,
+        carouselEffect,
+        carouselPerColumn,
+        carouselPerColumnGap,
+		
 
 		sliderDesktopSwitcher,
 		sliderTabletSwitcher,
@@ -33,7 +39,14 @@ export default function save( props ) {
 
 	    // Configure Swiper settings for frontend rendering
 		const swiperSettings = JSON.stringify({
-			effect: effect,
+
+			// Set effect based on sliderType
+			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+
+			// Carousel-specific settings with default values
+			slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
+			spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+
 			loop: loop,
 			autoplay: autoplay ? {
 				delay: autoplaySpeed,
@@ -64,7 +77,7 @@ export default function save( props ) {
 			}),
 			
 			// Creative effect settings if needed
-			...(effect === 'creative' && {
+			...(slideEffect === 'creative' && {
 				creativeEffect: {
 					prev: { shadow: true, translate: [0, 0, -400] },
 					next: { translate: ['100%', 0, 0] },

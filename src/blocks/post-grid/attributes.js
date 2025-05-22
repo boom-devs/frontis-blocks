@@ -4022,8 +4022,37 @@ const attributes = {
     },
 
 	/** End Icon Styles */
-	
-	
+
+	/** Start Post URL Settings */
+	customPermalinkSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	customPermalink: {
+		type: "string",
+		default: "",
+	},
+	thumbnailLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	categoryLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	tagLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	authorLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	titleLinkSwitcher: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Post URL Settings */
 };
 
 export default attributes;

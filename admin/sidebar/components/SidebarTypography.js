@@ -13,7 +13,7 @@ import {
 	FONT_STYLE,
 	TEXT_TRANSFORM,
 	TEXT_DECORATION,
-} from "../../../src/fbConstants/fbConstants";
+} from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
 
@@ -99,7 +99,7 @@ const FB_SidebarTypography = ({
 			/>
 			{heading !== 'all' &&
 				<FB_Range
-					min={-200}
+					min={1}
 					max={200}
 					label={__("Font Size", "frontis-blocks")}
 					rangeValue={fontSize}
@@ -108,12 +108,12 @@ const FB_SidebarTypography = ({
 					deviceType={deviceType}
 					units={fontSizeUnits}
 					rangeStep={1}
-					resetFallbackValue={''}
+					resetFallbackValue={'16'}
 				/>
 			}
 			<div className='fb_global_typo_wrap'>
 				<SelectControl
-					label={__("Appearance", "frontis-blocks")}
+					label={__("Font Weight", "frontis-blocks")}
 					options={FONT_WEIGHT}
 					value={fontWeight}
 					onChange={handleFontWeightChange}
@@ -126,32 +126,49 @@ const FB_SidebarTypography = ({
 				/>
 			</div>
 			<div className='fb_global_typo_wrap'>
-				<SelectControl
+				{/* <SelectControl
 					label={__("Text Transform", "frontis-blocks")}
 					options={TEXT_TRANSFORM}
 					value={textTransform}
 					onChange={handleTextTransformChange}
-				/>
+				/> */}
 				<SelectControl
 					label={__("Text Decoration", "frontis-blocks")}
 					options={TEXT_DECORATION}
 					value={textDecoration}
 					onChange={handleTextDecorationChange}
 				/>
+				<div className="fb-letter-case-control">
+					<label className="fb-control-label">{__("Letter Case", "frontis-blocks")}</label>
+					<div className="fb-case-button-group">
+						{TEXT_TRANSFORM.map((option) => (
+							<Button
+								key={option.value}
+								onClick={() => handleTextTransformChange(option.value)}
+								className={`fb-case-button ${
+									textTransform === option.value ? "active" : ""
+								}`}
+								title={option.label}
+							>
+								{option.icon}
+							</Button>
+						))}
+					</div>
+				</div>
 			</div>
 
 			<div className='fb_global_typo_wrap'>
 				{letterSpacingUnits &&
 					<FB_Range
-						min={-100}
-						max={100}
+						min={-20}
+						max={20}
 						label={__("Letter Spacing", "frontis-blocks")}
 						rangeValue={letterSpacing}
 						onChangeHandler={handleLetterSpacingChange}
 						rangeUnitHandler={handleLetterSpacingUnitChange}
 						deviceType={deviceType}
 						units={letterSpacingUnits}
-						rangeStep={1}
+						rangeStep={0.1}
 						resetFallbackValue={''}
 					/>
 				}

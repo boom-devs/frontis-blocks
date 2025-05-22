@@ -129,12 +129,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         
     } = attributes;
 
-
     useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `marquee-carousel-${clientId.slice(0, 8)}` });
-        }
-    }, [clientId]);
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "marquee-carousel-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     const deviceType = useDeviceType();
 
@@ -1178,7 +1179,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
                                 {tab.name === "advanced" && (
                                     <>
-                                        <PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
                                             <FB_Range
                                                 min={0}
                                                 max={10000000}

@@ -73,6 +73,15 @@ export default function save({ attributes }) {
 		readMoreIconImageUrl,
 		readMoreIconImageAlt,
 
+		customPermalinkSwitcher,
+		customPermalink,
+
+		thumbnailLinkSwitcher,
+		categoryLinkSwitcher,
+		tagLinkSwitcher,
+		authorLinkSwitcher,
+		titleLinkSwitcher,
+
 	} = attributes;
 
 
@@ -134,7 +143,7 @@ export default function save({ attributes }) {
 
 				data-show-filter-by-taxonomy={showFilterByTaxonomy}
 				data-filter-selected-taxonomy={filterSelectedTaxonomy}
-				data-filter-all-posts-count={filterAllPostsCount}
+				// data-filter-all-posts-count={filterAllPostsCount}
 				data-filerselected-count-switcher={filerselectedCountSwitcher}
 
 				data-filter-selected-cat={filterSelectedCatString}
@@ -146,6 +155,15 @@ export default function save({ attributes }) {
 				data-read-more-icon={readMoreIcon}
 				data-read-more-icon-image-url={readMoreIconImageUrl}
 				data-read-more-icon-image-alt={readMoreIconImageAlt}
+
+				data-custom-permalink-switcher={customPermalinkSwitcher}
+				data-custom-permalink={customPermalink}
+
+				data-thumbnail-link-switcher={thumbnailLinkSwitcher}
+				data-category-link-switcher={categoryLinkSwitcher}
+				data-tag-link-switcher={tagLinkSwitcher}
+				data-author-link-switcher={authorLinkSwitcher}
+				data-title-link-switcher={titleLinkSwitcher}
 
 			>
 

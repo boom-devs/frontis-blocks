@@ -39,13 +39,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const observerRef = useRef(null);
 	const hasCounted = useRef(false);
 
+	
 	useEffect(() => {
-		if (!blockID) {
-			setAttributes({
-				blockID: "counter-number" + clientId.slice(0, 8),
-			});
-		}
-	}, [blockID, clientId, setAttributes]);
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "counter-number-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
 
 	// Set up Intersection Observer and animation in the editor

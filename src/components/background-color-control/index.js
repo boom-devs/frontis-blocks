@@ -13,7 +13,6 @@ import FB_BackgroundImageControl from '@Components/background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_SwitcherControl from '@Components/switcher-control';
-import './editor.lazy.scss';
 
 const FB_BackgroundColorControl = ({
     label = __("Background Color", "frontis-blocks"),

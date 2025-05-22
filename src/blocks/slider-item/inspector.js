@@ -15,12 +15,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const deviceType = useDeviceType();
 
     useEffect(() => {
-        if (clientId) {
-            setAttributes({ blockId: `fb-slider-${clientId.slice(0, 8)}` });
+        if (clientId && typeof clientId === "string") {
+            setAttributes({ blockId: `fb-slider-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
     
-
     return (
 
         <>
@@ -50,7 +49,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
 
                                 {tab.name === "advanced" && (
-                                    <PanelBody title={__("Advanced", "frontis-blocks")} initialOpen>
+                                    <PanelBody title={__("Layout", "frontis-blocks")} initialOpen>
                                         {/* Add advanced settings here */}
                                     </PanelBody>
                                 )}

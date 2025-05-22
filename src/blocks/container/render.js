@@ -4,6 +4,7 @@ import {memo, useEffect} from '@wordpress/element';
 import {select} from '@wordpress/data';
 import backgroundCss from './backgroundCss';
 import {useDeviceType} from "@Config/displayType";
+import getCustomCss from '@Utils/getCustomCss';
 
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
@@ -61,6 +62,8 @@ const Render = ( props ) => {
 			containerTabletSwitcher,
 			containerMobileSwitcher,
 
+			containerGlobalCustomCSS,
+			containerGlobalCustomCSSValue,
 			containerGlobalCustomCSSClass,
 			containerGlobalCustomCSSID,
 	} = attributes;
@@ -80,22 +83,29 @@ const Render = ( props ) => {
 	
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 
-	let responsiveClass = '';
+	let desktopResponsiveClass = '';
+	let tabletResponsiveClass = '';
+	let mobileResponsiveClass = '';
 	if(containerDesktopSwitcher){
-		responsiveClass = 'fb-desktop-responsive';
+		desktopResponsiveClass = 'fb-desktop-responsive';
 	}
 	if(containerTabletSwitcher){
-		responsiveClass = 'fb-tablet-responsive';
+		tabletResponsiveClass = 'fb-tablet-responsive';
 	}
 	if(containerMobileSwitcher){
-		responsiveClass = 'fb-mobile-responsive';
+		mobileResponsiveClass = 'fb-mobile-responsive';
 	}
 
 	const blockProps = useBlockProps();
 	const modifBlockProps = useBlockProps( {
-		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } ${responsiveClass}`,
+		className: `frontis-blocks-block-${ blockProps.id } ${ hasChildrenClass } frontis-blocks-editor-preview-mode-${ deviceType.toLowerCase } ${ isRootContainerClass } ${desktopResponsiveClass} ${tabletResponsiveClass} ${mobileResponsiveClass}`,
 		style: getContainerBGStyle,
 	} );
+
+	useEffect(() => {
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`);
+		setAttributes({containerGlobalCustomCSSValue: customCss});
+	}, [containerGlobalCustomCSS, blockProps.id]);
 
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {

@@ -7,7 +7,6 @@ import {
     Dashicon,
     ToggleControl
 } from '@wordpress/components';
-import './editor.lazy.scss';
 
 const FB_UrlControl = ({ label, url, onChangeUrl, openInNewTab, onChangeOpenInNewTab }) => {
     const handleUrlChange = (newUrl) => {

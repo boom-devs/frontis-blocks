@@ -188,9 +188,29 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       onClick: function onClick() {
         return onDelete(index);
       }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: 'trash'
-    }))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M6.3335 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.6665 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
       anchor: gradientPopoverAnchor,
       className: "fb-gradient-color-popup",
       placement: "right",
@@ -1859,9 +1879,29 @@ var TypographySettings = function TypographySettings(props) {
         onClick: function onClick() {
           return deleteItem(item);
         }
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: 'trash'
-      }))));
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "16",
+        height: "17",
+        viewBox: "0 0 16 17",
+        fill: "none"
+      }, /*#__PURE__*/React.createElement("path", {
+        d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M6.3335 11.5V7.5",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      }), /*#__PURE__*/React.createElement("path", {
+        d: "M9.6665 11.5V7.5",
+        stroke: "#E43242",
+        "stroke-linecap": "round"
+      })))));
     }), /*#__PURE__*/React.createElement("div", {
       className: "add-custom-color"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
@@ -3904,7 +3944,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../src/fbConstants/fbConstants */ "./src/fbConstants/fbConstants.js");
+/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
 /* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
 
 
@@ -3972,11 +4012,11 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
+    options: _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
     value: fontFamily,
     onChange: handleFontFamilyChange
   }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -200,
+    min: 1,
     max: 200,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
     rangeValue: fontSize,
@@ -3985,43 +4025,53 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     deviceType: deviceType,
     units: fontSizeUnits,
     rangeStep: 1,
-    resetFallbackValue: ''
+    resetFallbackValue: '16'
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Appearance", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
+    options: _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
     value: fontWeight,
     onChange: handleFontWeightChange
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
+    options: _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
     value: fontStyle,
     onChange: handleFontStyleChange
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM,
-    value: textTransform,
-    onChange: handleTextTransformChange
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
+    options: _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
     value: textDecoration,
     onChange: handleTextDecorationChange
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-letter-case-control"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "fb-control-label"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Case", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-case-button-group"
+  }, _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM.map(function (option) {
+    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      key: option.value,
+      onClick: function onClick() {
+        return handleTextTransformChange(option.value);
+      },
+      className: "fb-case-button ".concat(textTransform === option.value ? "active" : ""),
+      title: option.label
+    }, option.icon);
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "fb_global_typo_wrap"
   }, letterSpacingUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: -100,
-    max: 100,
+    min: -20,
+    max: 20,
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
     rangeValue: letterSpacing,
     onChangeHandler: handleLetterSpacingChange,
     rangeUnitHandler: handleLetterSpacingUnitChange,
     deviceType: deviceType,
     units: letterSpacingUnits,
-    rangeStep: 1,
+    rangeStep: 0.1,
     resetFallbackValue: ''
   }), lineHeightUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
     min: -200,
@@ -4728,7 +4778,7 @@ var TypographySettings = function TypographySettings(props) {
             case 9:
               _response = _context.sent;
               if (_response.success) {
-                setCustomTypography(_response.data.data);
+                setCustomTypography(_response.data.data || {});
                 localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
               }
             case 11:
@@ -4796,351 +4846,371 @@ var TypographySettings = function TypographySettings(props) {
       }
     }, 1000);
   }, [deviceType]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
-    className: "fb-blocks-color-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: "elements",
-      title: "Elements"
-    }, {
-      name: "custom",
-      title: "Custom"
-    }]
-  }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "elements" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: 'fb-global-typo-elements'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-global-typo-elements-wrap"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-      initialPath: "/"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/"
-    }, typographyElements && Object.keys(typographyElements).map(function (item, index) {
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-custom-element fb-global-typography-element"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "font_preview"
-      }, /*#__PURE__*/React.createElement("svg", {
-        width: "24",
-        height: "24",
-        viewBox: "0 0 24 24",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z",
-        fill: "currentcolor"
-      }))), typographyElements[item], (typography[item] || item === 'heading' && isHeadingSaved()) && /*#__PURE__*/React.createElement("span", {
-        className: "edit_indecator"
-      })));
-    })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
-      var _typography$item7, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27;
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-global-typography-element-content"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
-        className: "fb-global-back"
-      }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-        width: "16",
-        height: "17",
-        viewBox: "0 0 16 17",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-        stroke: "currentcolor",
-        strokeWidth: "1.2",
-        strokeLinecap: "round",
-        strokeLinejoin: "round"
-      }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
-        __nextHasNoMarginBottom: true,
-        isBlock: true,
-        className: "fb-global-typography-headings-wrap",
-        label: "Select Heading",
-        value: selectedHeading,
-        hideLabelFromVision: true,
-        onChange: function onChange(value) {
-          return setSelectedHeading(value);
-        }
-      }, TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
-          key: headingIndex,
-          className: "fb-global-typography-element-heading ".concat(typography[heading] ? 'edited' : ''),
-          label: TypographyHeadingElements[heading],
-          value: heading
-        });
-      })), TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
-        var _typography$item8, _typography$item9, _typography$item0, _typography$item1, _typography$item10, _typography$item11, _typography$item12, _typography$item13, _typography$item14, _typography$item15, _typography$item16;
-        return /*#__PURE__*/React.createElement("div", {
-          key: headingIndex,
-          style: {
-            display: heading === selectedHeading ? 'block' : 'none'
-          }
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-typography-settings"
-        }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
-          onChangeFontFamily: function onChangeFontFamily(value) {
-            return onChangeHeadingFontFamily(value, item);
-          },
-          fontSize: typography === null || typography === void 0 || (_typography$item9 = typography[item]) === null || _typography$item9 === void 0 || (_typography$item9 = _typography$item9[selectedHeading]) === null || _typography$item9 === void 0 ? void 0 : _typography$item9.fontSize,
-          onChangeFontSize: function onChangeFontSize(value) {
-            return onChangeHeadingFontSize(value, item);
-          },
-          fontSizeUnits: typography === null || typography === void 0 || (_typography$item0 = typography[item]) === null || _typography$item0 === void 0 || (_typography$item0 = _typography$item0[selectedHeading]) === null || _typography$item0 === void 0 ? void 0 : _typography$item0.fontSizeUnit,
-          onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-            return onChangeHeadingFontSizeUnit(value, item);
-          },
-          fontWeight: typography === null || typography === void 0 || (_typography$item1 = typography[item]) === null || _typography$item1 === void 0 || (_typography$item1 = _typography$item1[selectedHeading]) === null || _typography$item1 === void 0 ? void 0 : _typography$item1.fontWeight,
-          onChangeFontWeight: function onChangeFontWeight(value) {
-            return onChangeHeadingFontWeight(value, item);
-          },
-          fontStyle: typography === null || typography === void 0 || (_typography$item10 = typography[item]) === null || _typography$item10 === void 0 || (_typography$item10 = _typography$item10[selectedHeading]) === null || _typography$item10 === void 0 ? void 0 : _typography$item10.fontStyle,
-          onChangeFontStyle: function onChangeFontStyle(value) {
-            return onChangeHeadingFontStyle(value, item);
-          },
-          textTransform: typography === null || typography === void 0 || (_typography$item11 = typography[item]) === null || _typography$item11 === void 0 || (_typography$item11 = _typography$item11[selectedHeading]) === null || _typography$item11 === void 0 ? void 0 : _typography$item11.textTransform,
-          onChangeTextTransform: function onChangeTextTransform(value) {
-            return onChangeHeadingTextTransform(value, item);
-          },
-          textDecoration: typography === null || typography === void 0 || (_typography$item12 = typography[item]) === null || _typography$item12 === void 0 || (_typography$item12 = _typography$item12[selectedHeading]) === null || _typography$item12 === void 0 ? void 0 : _typography$item12.textDecoration,
-          onChangeTextDecoration: function onChangeTextDecoration(value) {
-            return onChangeHeadingTextDecoration(value, item);
-          },
-          letterSpacing: typography === null || typography === void 0 || (_typography$item13 = typography[item]) === null || _typography$item13 === void 0 || (_typography$item13 = _typography$item13[selectedHeading]) === null || _typography$item13 === void 0 ? void 0 : _typography$item13.letterSpacing,
-          onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-            return onChangeHeadingLetterSpacing(value, item);
-          },
-          letterSpacingUnits: typography === null || typography === void 0 || (_typography$item14 = typography[item]) === null || _typography$item14 === void 0 || (_typography$item14 = _typography$item14[selectedHeading]) === null || _typography$item14 === void 0 ? void 0 : _typography$item14.letterSpacingUnit,
-          onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-            return onChangeHeadingLetterSpacingUnit(value, item);
-          },
-          lineHeight: typography === null || typography === void 0 || (_typography$item15 = typography[item]) === null || _typography$item15 === void 0 || (_typography$item15 = _typography$item15[selectedHeading]) === null || _typography$item15 === void 0 ? void 0 : _typography$item15.lineHeight,
-          onChangeLineHeight: function onChangeLineHeight(value) {
-            return onChangeHeadingLineHeight(value, item);
-          },
-          lineHeightUnits: typography === null || typography === void 0 || (_typography$item16 = typography[item]) === null || _typography$item16 === void 0 || (_typography$item16 = _typography$item16[selectedHeading]) === null || _typography$item16 === void 0 ? void 0 : _typography$item16.lineHeightUnits,
-          onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-            return onChangeHeadingLineHeightUnit(value, item);
-          },
-          deviceType: deviceType,
-          heading: selectedHeading
-        })));
-      })), item !== 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-        className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: typography[item],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        fontFamily: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontFamily,
-        onChangeFontFamily: function onChangeFontFamily(value) {
-          return _onChangeFontFamily(value, item);
-        },
-        fontSize: typography === null || typography === void 0 || (_typography$item18 = typography[item]) === null || _typography$item18 === void 0 ? void 0 : _typography$item18.fontSize,
-        onChangeFontSize: function onChangeFontSize(value) {
-          return _onChangeFontSize(value, item);
-        },
-        fontSizeUnits: typography === null || typography === void 0 || (_typography$item19 = typography[item]) === null || _typography$item19 === void 0 ? void 0 : _typography$item19.fontSizeUnit,
-        onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-          return _onChangeFontSizeUnit(value, item);
-        },
-        fontWeight: typography === null || typography === void 0 || (_typography$item20 = typography[item]) === null || _typography$item20 === void 0 ? void 0 : _typography$item20.fontWeight,
-        onChangeFontWeight: function onChangeFontWeight(value) {
-          return _onChangeFontWeight(value, item);
-        },
-        fontStyle: typography === null || typography === void 0 || (_typography$item21 = typography[item]) === null || _typography$item21 === void 0 ? void 0 : _typography$item21.fontStyle,
-        onChangeFontStyle: function onChangeFontStyle(value) {
-          return _onChangeFontStyle(value, item);
-        },
-        textTransform: typography === null || typography === void 0 || (_typography$item22 = typography[item]) === null || _typography$item22 === void 0 ? void 0 : _typography$item22.textTransform,
-        onChangeTextTransform: function onChangeTextTransform(value) {
-          return _onChangeTextTransform(value, item);
-        },
-        textDecoration: typography === null || typography === void 0 || (_typography$item23 = typography[item]) === null || _typography$item23 === void 0 ? void 0 : _typography$item23.textDecoration,
-        onChangeTextDecoration: function onChangeTextDecoration(value) {
-          return _onChangeTextDecoration(value, item);
-        },
-        letterSpacing: typography === null || typography === void 0 || (_typography$item24 = typography[item]) === null || _typography$item24 === void 0 ? void 0 : _typography$item24.letterSpacing,
-        onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-          return _onChangeLetterSpacing(value, item);
-        },
-        letterSpacingUnits: typography === null || typography === void 0 || (_typography$item25 = typography[item]) === null || _typography$item25 === void 0 ? void 0 : _typography$item25.letterSpacingUnit,
-        onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-          return _onChangeLetterSpacingUnit(value, item);
-        },
-        lineHeight: typography === null || typography === void 0 || (_typography$item26 = typography[item]) === null || _typography$item26 === void 0 ? void 0 : _typography$item26.lineHeight,
-        onChangeLineHeight: function onChangeLineHeight(value) {
-          return _onChangeLineHeight(value, item);
-        },
-        lineHeightUnits: typography === null || typography === void 0 || (_typography$item27 = typography[item]) === null || _typography$item27 === void 0 ? void 0 : _typography$item27.lineHeightUnits,
-        onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-          return _onChangeLineHeightUnit(value, item);
-        },
-        deviceType: deviceType
-      })))));
-    }))))), tab.name === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: 'fb-global-typo-elements'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-global-typo-elements-wrap"
-    }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-      initialPath: "/"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/"
-    }, Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite7;
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-custom-element fb-global-typography-element"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "font_preview"
-      }, "Aa"), (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        className: "fb-delete-custom-typo"
-      }, /*#__PURE__*/React.createElement("span", {
-        className: 'fb-delete',
-        title: "Delete",
-        onClick: function onClick() {
-          return deleteItem(item);
-        }
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: 'trash'
-      }))));
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setCustomTypography(_objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, "fb_customtypo_".concat(Math.random().toString(36).substring(2, 7)), {
-          name: "Custom Typography",
-          fontFamily: "default",
-          lineHeight: {
-            Desktop: 0,
-            Tablet: 0,
-            Mobile: 0
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: 0,
-            Tablet: 0,
-            Mobile: 0
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 0,
-          fontStyle: 0,
-          textTransform: 0,
-          textDecoration: 0,
-          letterSpacing: {
-            Desktop: 0,
-            Tablet: 0,
-            Mobile: 0
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        })));
-      }
-    }, "Add Custom Typography", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-typography-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-section"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-panel-heading"
+  }, "Element"), /*#__PURE__*/React.createElement("div", {
+    className: 'fb-global-typo-elements'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-typo-elements-wrap"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
+    initialPath: "/"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
+    path: "/"
+  }, typographyElements && Object.keys(typographyElements).map(function (item, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "fb-custom-element fb-global-typography-element"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
+      path: "/".concat(item)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "font_preview"
+    }, /*#__PURE__*/React.createElement("svg", {
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg"
     }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
+      d: "M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z",
+      fill: "currentcolor"
+    }))), typographyElements[item], (typography[item] || item === 'heading' && isHeadingSaved()) && /*#__PURE__*/React.createElement("span", {
+      className: "edit_indecator"
+    })));
+  })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
+    var _typography$item7, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27;
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "fb-global-typography-element-content"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
+      path: "/".concat(item)
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
+      className: "fb-global-back"
+    }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M10.5 13.5L5.5 8.5L10.5 3.5",
+      stroke: "currentcolor",
+      strokeWidth: "1.2",
       strokeLinecap: "round",
       strokeLinejoin: "round"
-    })))))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite8, _customTypography$ite9, _customTypography$ite0, _customTypography$ite1, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18;
+    }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
+      deviceType: deviceType,
+      fontSize: true
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
+      __nextHasNoMarginBottom: true,
+      isBlock: true,
+      className: "fb-global-typography-headings-wrap",
+      label: "Select Heading",
+      value: selectedHeading,
+      hideLabelFromVision: true,
+      onChange: function onChange(value) {
+        return setSelectedHeading(value);
+      }
+    }, TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
+      return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
+        key: headingIndex,
+        className: "fb-global-typography-element-heading ".concat(typography[heading] ? 'edited' : ''),
+        label: TypographyHeadingElements[heading],
+        value: heading
+      });
+    })), TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
+      var _typography$item8, _typography$item9, _typography$item0, _typography$item1, _typography$item10, _typography$item11, _typography$item12, _typography$item13, _typography$item14, _typography$item15, _typography$item16;
       return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-global-typography-element-content"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: "arrow-left-alt2"
-      }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
-        className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: customTypography[item],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
-        value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
-        onChange: function onChange(value) {
-          return changeCustomTypoName(item, value);
+        key: headingIndex,
+        style: {
+          display: heading === selectedHeading ? 'block' : 'none'
         }
-      }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "fb-typography-settings"
+      }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
         onChangeFontFamily: function onChangeFontFamily(value) {
-          return onChangeCustomFontFamily(value, item);
+          return onChangeHeadingFontFamily(value, item);
         },
-        fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite1 = customTypography[item]) === null || _customTypography$ite1 === void 0 ? void 0 : _customTypography$ite1.fontSize,
+        fontSize: typography === null || typography === void 0 || (_typography$item9 = typography[item]) === null || _typography$item9 === void 0 || (_typography$item9 = _typography$item9[selectedHeading]) === null || _typography$item9 === void 0 ? void 0 : _typography$item9.fontSize,
         onChangeFontSize: function onChangeFontSize(value) {
-          return onChangeCustomFontSize(value, item);
+          return onChangeHeadingFontSize(value, item);
         },
-        fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontSizeUnit,
+        fontSizeUnits: typography === null || typography === void 0 || (_typography$item0 = typography[item]) === null || _typography$item0 === void 0 || (_typography$item0 = _typography$item0[selectedHeading]) === null || _typography$item0 === void 0 ? void 0 : _typography$item0.fontSizeUnit,
         onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-          return onChangeCustomFontSizeUnit(value, item);
+          return onChangeHeadingFontSizeUnit(value, item);
         },
-        fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontWeight,
+        fontWeight: typography === null || typography === void 0 || (_typography$item1 = typography[item]) === null || _typography$item1 === void 0 || (_typography$item1 = _typography$item1[selectedHeading]) === null || _typography$item1 === void 0 ? void 0 : _typography$item1.fontWeight,
         onChangeFontWeight: function onChangeFontWeight(value) {
-          return onChangeCustomFontWeight(value, item);
+          return onChangeHeadingFontWeight(value, item);
         },
-        fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontStyle,
+        fontStyle: typography === null || typography === void 0 || (_typography$item10 = typography[item]) === null || _typography$item10 === void 0 || (_typography$item10 = _typography$item10[selectedHeading]) === null || _typography$item10 === void 0 ? void 0 : _typography$item10.fontStyle,
         onChangeFontStyle: function onChangeFontStyle(value) {
-          return onChangeCustomFontStyle(value, item);
+          return onChangeHeadingFontStyle(value, item);
         },
-        textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.textTransform,
+        textTransform: typography === null || typography === void 0 || (_typography$item11 = typography[item]) === null || _typography$item11 === void 0 || (_typography$item11 = _typography$item11[selectedHeading]) === null || _typography$item11 === void 0 ? void 0 : _typography$item11.textTransform,
         onChangeTextTransform: function onChangeTextTransform(value) {
-          return onChangeCustomTextTransform(value, item);
+          return onChangeHeadingTextTransform(value, item);
         },
-        textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.textDecoration,
+        textDecoration: typography === null || typography === void 0 || (_typography$item12 = typography[item]) === null || _typography$item12 === void 0 || (_typography$item12 = _typography$item12[selectedHeading]) === null || _typography$item12 === void 0 ? void 0 : _typography$item12.textDecoration,
         onChangeTextDecoration: function onChangeTextDecoration(value) {
-          return onChangeCustomTextDecoration(value, item);
+          return onChangeHeadingTextDecoration(value, item);
         },
-        letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.letterSpacing,
+        letterSpacing: typography === null || typography === void 0 || (_typography$item13 = typography[item]) === null || _typography$item13 === void 0 || (_typography$item13 = _typography$item13[selectedHeading]) === null || _typography$item13 === void 0 ? void 0 : _typography$item13.letterSpacing,
         onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-          return onChangeCustomLetterSpacing(value, item);
+          return onChangeHeadingLetterSpacing(value, item);
         },
-        letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.letterSpacingUnit,
+        letterSpacingUnits: typography === null || typography === void 0 || (_typography$item14 = typography[item]) === null || _typography$item14 === void 0 || (_typography$item14 = _typography$item14[selectedHeading]) === null || _typography$item14 === void 0 ? void 0 : _typography$item14.letterSpacingUnit,
         onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-          return onChangeCustomLetterSpacingUnit(value, item);
+          return onChangeHeadingLetterSpacingUnit(value, item);
         },
-        lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.lineHeight,
+        lineHeight: typography === null || typography === void 0 || (_typography$item15 = typography[item]) === null || _typography$item15 === void 0 || (_typography$item15 = _typography$item15[selectedHeading]) === null || _typography$item15 === void 0 ? void 0 : _typography$item15.lineHeight,
         onChangeLineHeight: function onChangeLineHeight(value) {
-          return onChangeCustomLineHeight(value, item);
+          return onChangeHeadingLineHeight(value, item);
         },
-        lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.lineHeightUnits,
+        lineHeightUnits: typography === null || typography === void 0 || (_typography$item16 = typography[item]) === null || _typography$item16 === void 0 || (_typography$item16 = _typography$item16[selectedHeading]) === null || _typography$item16 === void 0 ? void 0 : _typography$item16.lineHeightUnits,
         onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-          return onChangeCustomLineHeightUnit(value, item);
+          return onChangeHeadingLineHeightUnit(value, item);
         },
-        deviceType: deviceType
-      }))));
-    }))))));
-  }));
+        deviceType: deviceType,
+        heading: selectedHeading
+      })));
+    })), item !== 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "fb-typography-settings"
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      fontProps: typography[item],
+      deviceType: deviceType,
+      fontSize: true
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      fontFamily: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontFamily,
+      onChangeFontFamily: function onChangeFontFamily(value) {
+        return _onChangeFontFamily(value, item);
+      },
+      fontSize: typography === null || typography === void 0 || (_typography$item18 = typography[item]) === null || _typography$item18 === void 0 ? void 0 : _typography$item18.fontSize,
+      onChangeFontSize: function onChangeFontSize(value) {
+        return _onChangeFontSize(value, item);
+      },
+      fontSizeUnits: typography === null || typography === void 0 || (_typography$item19 = typography[item]) === null || _typography$item19 === void 0 ? void 0 : _typography$item19.fontSizeUnit,
+      onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
+        return _onChangeFontSizeUnit(value, item);
+      },
+      fontWeight: typography === null || typography === void 0 || (_typography$item20 = typography[item]) === null || _typography$item20 === void 0 ? void 0 : _typography$item20.fontWeight,
+      onChangeFontWeight: function onChangeFontWeight(value) {
+        return _onChangeFontWeight(value, item);
+      },
+      fontStyle: typography === null || typography === void 0 || (_typography$item21 = typography[item]) === null || _typography$item21 === void 0 ? void 0 : _typography$item21.fontStyle,
+      onChangeFontStyle: function onChangeFontStyle(value) {
+        return _onChangeFontStyle(value, item);
+      },
+      textTransform: typography === null || typography === void 0 || (_typography$item22 = typography[item]) === null || _typography$item22 === void 0 ? void 0 : _typography$item22.textTransform,
+      onChangeTextTransform: function onChangeTextTransform(value) {
+        return _onChangeTextTransform(value, item);
+      },
+      textDecoration: typography === null || typography === void 0 || (_typography$item23 = typography[item]) === null || _typography$item23 === void 0 ? void 0 : _typography$item23.textDecoration,
+      onChangeTextDecoration: function onChangeTextDecoration(value) {
+        return _onChangeTextDecoration(value, item);
+      },
+      letterSpacing: typography === null || typography === void 0 || (_typography$item24 = typography[item]) === null || _typography$item24 === void 0 ? void 0 : _typography$item24.letterSpacing,
+      onChangeLetterSpacing: function onChangeLetterSpacing(value) {
+        return _onChangeLetterSpacing(value, item);
+      },
+      letterSpacingUnits: typography === null || typography === void 0 || (_typography$item25 = typography[item]) === null || _typography$item25 === void 0 ? void 0 : _typography$item25.letterSpacingUnit,
+      onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
+        return _onChangeLetterSpacingUnit(value, item);
+      },
+      lineHeight: typography === null || typography === void 0 || (_typography$item26 = typography[item]) === null || _typography$item26 === void 0 ? void 0 : _typography$item26.lineHeight,
+      onChangeLineHeight: function onChangeLineHeight(value) {
+        return _onChangeLineHeight(value, item);
+      },
+      lineHeightUnits: typography === null || typography === void 0 || (_typography$item27 = typography[item]) === null || _typography$item27 === void 0 ? void 0 : _typography$item27.lineHeightUnits,
+      onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
+        return _onChangeLineHeightUnit(value, item);
+      },
+      deviceType: deviceType
+    })))));
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-heading-wrapper"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-panel-heading"
+  }, "Custom"), /*#__PURE__*/React.createElement("div", {
+    className: "add-custom-color"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+    className: "add-custom-color-btn",
+    onClick: function onClick() {
+      return setCustomTypography(_objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, "fb_customtypo_".concat(Math.random().toString(36).substring(2, 7)), {
+        name: "Custom Typography",
+        fontFamily: "default",
+        lineHeight: {
+          Desktop: 0,
+          Tablet: 0,
+          Mobile: 0
+        },
+        lineHeightUnits: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontSize: {
+          Desktop: 0,
+          Tablet: 0,
+          Mobile: 0
+        },
+        fontSizeUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        },
+        fontWeight: 0,
+        fontStyle: 0,
+        textTransform: 0,
+        textDecoration: 0,
+        letterSpacing: {
+          Desktop: 0,
+          Tablet: 0,
+          Mobile: 0
+        },
+        letterSpacingUnit: {
+          Desktop: 'px',
+          Tablet: 'px',
+          Mobile: 'px'
+        }
+      })));
+    }
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    width: "15",
+    height: "14",
+    viewBox: "0 0 15 14",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
+    stroke: "white",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: 'fb-global-typo-elements'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-typo-elements-wrap"
+  }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
+    initialPath: "/"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
+    path: "/"
+  }, Object.keys(customTypography || {}).length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "fb-custom-element-wrapper"
+  }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
+    var _customTypography$ite7;
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "fb-custom-element fb-global-typography-element"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
+      path: "/".concat(item)
+    }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+      className: "fb-delete-custom-typo"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'fb-delete',
+      title: "Delete",
+      onClick: function onClick() {
+        return deleteItem(item);
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M6.3335 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.6665 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    })))));
+  }))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
+    var _customTypography$ite8, _customTypography$ite9, _customTypography$ite0, _customTypography$ite1, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18;
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      className: "fb-global-typography-element-content"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
+      path: "/".concat(item)
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+      icon: "arrow-left-alt2"
+    }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
+      className: "fb-typography-settings"
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      fontProps: customTypography[item],
+      deviceType: deviceType,
+      fontSize: true
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
+      value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
+      onChange: function onChange(value) {
+        return changeCustomTypoName(item, value);
+      }
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
+      onChangeFontFamily: function onChangeFontFamily(value) {
+        return onChangeCustomFontFamily(value, item);
+      },
+      fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite1 = customTypography[item]) === null || _customTypography$ite1 === void 0 ? void 0 : _customTypography$ite1.fontSize,
+      onChangeFontSize: function onChangeFontSize(value) {
+        return onChangeCustomFontSize(value, item);
+      },
+      fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontSizeUnit,
+      onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
+        return onChangeCustomFontSizeUnit(value, item);
+      },
+      fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontWeight,
+      onChangeFontWeight: function onChangeFontWeight(value) {
+        return onChangeCustomFontWeight(value, item);
+      },
+      fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontStyle,
+      onChangeFontStyle: function onChangeFontStyle(value) {
+        return onChangeCustomFontStyle(value, item);
+      },
+      textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.textTransform,
+      onChangeTextTransform: function onChangeTextTransform(value) {
+        return onChangeCustomTextTransform(value, item);
+      },
+      textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.textDecoration,
+      onChangeTextDecoration: function onChangeTextDecoration(value) {
+        return onChangeCustomTextDecoration(value, item);
+      },
+      letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.letterSpacing,
+      onChangeLetterSpacing: function onChangeLetterSpacing(value) {
+        return onChangeCustomLetterSpacing(value, item);
+      },
+      letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.letterSpacingUnit,
+      onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
+        return onChangeCustomLetterSpacingUnit(value, item);
+      },
+      lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.lineHeight,
+      onChangeLineHeight: function onChangeLineHeight(value) {
+        return onChangeCustomLineHeight(value, item);
+      },
+      lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.lineHeightUnits,
+      onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
+        return onChangeCustomLineHeightUnit(value, item);
+      },
+      deviceType: deviceType
+    }))));
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
 
@@ -7535,7 +7605,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.subscribe)(function () {
     var toplbar = document.querySelector('.edit-post-header-toolbar');
     if (toplbar) {
-      toplbar.appendChild(buttonDiv);
+      // toplbar.appendChild(buttonDiv) // at present its hide. when need development please uncomment this line
     }
   });
 });
@@ -8492,18 +8562,6 @@ const c=e=>"number"==typeof e&&!isNaN(e),d=e=>"string"==typeof e,u=e=>"function"
 
 /***/ }),
 
-/***/ "./src/components/range/editor.lazy.scss":
-/*!***********************************************!*\
-  !*** ./src/components/range/editor.lazy.scss ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/range/index.js":
 /*!***************************************!*\
   !*** ./src/components/range/index.js ***!
@@ -8522,7 +8580,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Components_responsive_control__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/responsive-control */ "./src/components/responsive-control/index.js");
 /* harmony import */ var _Components_unit_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/unit-control */ "./src/components/unit-control/index.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/range/editor.lazy.scss");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -8535,7 +8592,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-
 
 
 
@@ -8697,7 +8753,7 @@ var FB_Range = function FB_Range(_ref) {
         xmlns: "http://www.w3.org/2000/svg"
       }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
         "class": "st0",
-        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0 c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0 C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7 c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8 c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3 c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3 c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8 c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3 C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4 c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1 c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
       }))));
     },
     renderContent: function renderContent() {
@@ -8728,18 +8784,6 @@ var FB_Range = function FB_Range(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/responsive-control/editor.lazy.scss":
-/*!************************************************************!*\
-  !*** ./src/components/responsive-control/editor.lazy.scss ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/responsive-control/index.js":
 /*!****************************************************!*\
   !*** ./src/components/responsive-control/index.js ***!
@@ -8753,8 +8797,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/responsive-control/editor.lazy.scss");
-
 
 
 var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
@@ -8837,18 +8879,6 @@ var FB_ResponsiveControl = function FB_ResponsiveControl(_ref) {
 
 /***/ }),
 
-/***/ "./src/components/unit-control/editor.lazy.scss":
-/*!******************************************************!*\
-  !*** ./src/components/unit-control/editor.lazy.scss ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/unit-control/index.js":
 /*!**********************************************!*\
   !*** ./src/components/unit-control/index.js ***!
@@ -8861,14 +8891,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _editor_lazy_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editor.lazy.scss */ "./src/components/unit-control/editor.lazy.scss");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
 
 var FB_RangeUnitsType = function FB_RangeUnitsType(_ref) {
   var currentUnit = _ref.currentUnit,
@@ -9221,19 +9249,44 @@ var FONT_STYLE = [{
 }];
 var TEXT_TRANSFORM = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
-  value: "inherit"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None", "frontis-blocks"),
-  value: "none"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capitalize", "frontis-blocks"),
-  value: "capitalize"
+  value: "none",
+  icon: /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7 11.5h10V13H7z"
+  }))
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Uppercase", "frontis-blocks"),
-  value: "uppercase"
+  value: "uppercase",
+  icon: /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M6.1 6.8L2.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H6.1zm-.8 6.8L7 8.9l1.7 4.7H5.3zm15.1-.7c-.4-.5-.9-.8-1.6-1 .4-.2.7-.5.8-.9.2-.4.3-.9.3-1.4 0-.9-.3-1.6-.8-2-.6-.5-1.3-.7-2.4-.7h-3.5V18h4.2c1.1 0 2-.3 2.6-.8.6-.6 1-1.4 1-2.4-.1-.8-.3-1.4-.6-1.9zm-5.7-4.7h1.8c.6 0 1.1.1 1.4.4.3.2.5.7.5 1.3 0 .6-.2 1.1-.5 1.3-.3.2-.8.4-1.4.4h-1.8V8.2zm4 8c-.4.3-.9.5-1.5.5h-2.6v-3.8h2.6c1.4 0 2 .6 2 1.9.1.6-.1 1-.5 1.4z"
+  }))
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Lowercase", "frontis-blocks"),
-  value: "lowercase"
+  value: "lowercase",
+  icon: /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M11 16.8c-.1-.1-.2-.3-.3-.5v-2.6c0-.9-.1-1.7-.3-2.2-.2-.5-.5-.9-.9-1.2-.4-.2-.9-.3-1.6-.3-.5 0-1 .1-1.5.2s-.9.3-1.2.6l.2 1.2c.4-.3.7-.4 1.1-.5.3-.1.7-.2 1-.2.6 0 1 .1 1.3.4.3.2.4.7.4 1.4-1.2 0-2.3.2-3.3.7s-1.4 1.1-1.4 2.1c0 .7.2 1.2.7 1.6.4.4 1 .6 1.8.6.9 0 1.7-.4 2.4-1.2.1.3.2.5.4.7.1.2.3.3.6.4.3.1.6.1 1.1.1h.1l.2-1.2h-.1c-.4.1-.6 0-.7-.1zM9.2 16c-.2.3-.5.6-.9.8-.3.1-.7.2-1.1.2-.4 0-.7-.1-.9-.3-.2-.2-.3-.5-.3-.9 0-.6.2-1 .7-1.3.5-.3 1.3-.4 2.5-.5v2zm10.6-3.9c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2s-.2 1.4-.6 2z"
+  }))
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Capitalize", "frontis-blocks"),
+  value: "capitalize",
+  icon: /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.1 6.8L3.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H7.1zm-.8 6.8L8 8.9l1.7 4.7H6.3zm14.5-1.5c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2 .1.8-.2 1.4-.6 2z"
+  }))
 }];
 var TEXT_DECORATION = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
@@ -12317,6 +12370,12 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Inter", "frontis-blocks"),
   value: "Inter"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Sans Display", "frontis-blocks"),
+  value: "Noto Sans Display"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Serif Display", "frontis-blocks"),
+  value: "Noto Serif Display"
 }];
 
 /***/ }),
