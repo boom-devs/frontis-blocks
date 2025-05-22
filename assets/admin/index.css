@@ -971,11 +971,11 @@
   background-color: rgb(31.5, 130.8333333333, 255);
 }
 .fb-blocks-button.fb-blocks-disable-all {
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   color: #15171C;
 }
 .fb-blocks-button.fb-blocks-disable-all:hover {
-  background-color: rgb(234.25, 234.25, 234.25);
+  background-color: rgb(235.25, 235.25, 235.25);
 }
 .fb-blocks-category-filter {
   display: flex;
@@ -983,7 +983,7 @@
   gap: 16px;
   margin-bottom: 20px;
   padding: 14px;
-  border: 1px solid #F7F7F7;
+  border: 1px solid #F8F8F8;
   border-radius: 14px;
 }
 .fb-blocks-category-button {
@@ -1108,7 +1108,7 @@
   align-items: center;
   padding: 20px 16px;
   border-radius: 14px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   transition: box-shadow 0.3s;
 }
 .fb-block-card:hover {
@@ -1223,7 +1223,7 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 19.6px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   border-radius: 8px;
   padding: 12px 16px;
   color: #15171C;
@@ -1344,7 +1344,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -1373,7 +1373,7 @@
   justify-content: center;
   padding: 8px 14px;
   background-color: #FFFFFF;
-  border: 1px solid #F7F7F7;
+  border: 1px solid #F8F8F8;
   border-left: none;
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -1404,7 +1404,7 @@
   height: auto;
   width: auto;
   padding: 10px 46px 10px 18px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   border: none;
   border-radius: 8px;
   color: #6A758E;
@@ -1625,7 +1625,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   opacity: 0.6;
 }
 .fb-blocks-integration .integration-section .section-right .fb-button-upcoming {
@@ -1694,7 +1694,7 @@
   padding: 14px 16px;
   border: 1px solid #E1E3E8;
   border-radius: 10px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -2034,7 +2034,7 @@
   display: inline-flex;
   align-items: center;
   padding: 16px 22px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   color: #050607;
   border: none;
   border-radius: 10px;
@@ -2108,7 +2108,7 @@
   display: flex;
   align-items: center;
   padding: 8px 12px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
 }
 .fb-system-requirement-item.good {
   background-color: #F4FCF5;
@@ -2165,7 +2165,7 @@
   margin-right: 10px;
 }
 .fb-responsive-device-wrapper.fb-device-switchers-open .fb-responsive-device-inner-wrapper {
-  background: #F7F7F7;
+  background: #F8F8F8;
   border-radius: 2px;
   position: relative;
   z-index: 11;
@@ -2192,7 +2192,7 @@
 .fb-responsive-device-wrapper .fb-device-switcher.active {
   height: 28px;
   width: 26px;
-  background: #F7F7F7;
+  background: #F8F8F8;
   border-radius: 6px;
   opacity: 1;
   transform: scale(1);
@@ -2382,7 +2382,7 @@
   display: flex;
   align-items: center;
   border-radius: 6px;
-  background: #F7F7F7;
+  background: #F8F8F8;
   height: 28px;
 }
 .fb-unit-wrapper .fb-reset-control-container {
@@ -2954,7 +2954,7 @@
 }
 .fb-inspector-control .components-tab-panel__tabs {
   margin-bottom: 24px;
-  background-color: #F7F7F7;
+  background-color: #F8F8F8;
   border-radius: 4px;
   justify-content: space-between;
 }
@@ -3022,7 +3022,7 @@
 .fb-inspector-control .components-panel__body .components-base-control__field .components-textarea-control__input {
   font-family: "Manrope", sans-serif;
   font-size: 13px;
-  background: #F7F7F7;
+  background: #F8F8F8;
   border: 1px solid #C3C8D2;
   color: #6A758E;
 }
@@ -3061,7 +3061,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   border-radius: 4px;
-  background: #F7F7F7;
+  background: #F8F8F8;
   margin-bottom: 24px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-button-group .components-button {
@@ -3146,7 +3146,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #F7F7F7;
+  background: #F8F8F8;
   padding: 12px;
   border: none;
   border-radius: 4px;
