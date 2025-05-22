@@ -32,7 +32,7 @@ class Blocks
 		$active_blocks = get_option('fb_active_blocks');
 
 		if (!empty($blocks_list)) {
-			foreach ($blocks_list as $block) {	
+			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
 				$complete = $block['complete'];
 				if (is_array($active_blocks) && !empty($active_blocks)) {
@@ -163,8 +163,14 @@ class Blocks
 	}
 
 	public function get_blocks_on_save($post_id, $post, $update) {
-		if($update){
-			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+		$pattern = "/frontis-blocks/i";
+		update_post_meta($post_id, 'page_frontis_block_used', false);
+
+		if(preg_match_all($pattern, $post->post_content) > 0) {
+			update_post_meta($post_id, 'page_frontis_block_used', true);
+			if($update){
+				AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+			}
 		}
 	}
 
@@ -207,7 +213,7 @@ class Blocks
 
         if(!empty($google_fonts)) {
             foreach ($google_fonts as $key => $value) {
-                // unique fonts family 
+                // unique fonts family
                 if(!in_array($value, $this->gfonts)) {
                     $this->gfonts[$value] = $value;
                 }

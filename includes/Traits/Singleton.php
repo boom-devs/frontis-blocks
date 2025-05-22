@@ -1,12 +1,10 @@
 <?php
 
-
 namespace FrontisBlocks\Traits;
 
 trait Singleton{
 
     protected static $instances = array();
-
 
     public static function get_instance( ...$args ) {
 		if ( ! isset( self::$instances[ static::class ] ) ) {

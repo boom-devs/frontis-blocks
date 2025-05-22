@@ -442,6 +442,14 @@ class AssetsGenerator {
         }
     }
 
+	public function check_block_exists($block_name, $css_file, $given_css_file) {
+		if(!in_array($block_name, $this->used_blocks) && basename($css_file) === $given_css_file) {
+			return true;
+		}
+
+		return false;
+	}
+
     public function combine_static_assets() {
         // Css files
         $assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
@@ -449,6 +457,14 @@ class AssetsGenerator {
 
 		if(!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
+				if(
+					(!in_array('frontis-blocks/slider',$this->used_blocks ) ||
+					!in_array('frontis-blocks/slider-item',$this->used_blocks )) &&
+					basename($css_file) === 'swiper-bundle.min.css')
+				{
+					continue;
+				}
+
 				$this->css_content .= file_get_contents($css_file) . "\n";
 			}
 		}
@@ -459,6 +475,20 @@ class AssetsGenerator {
 
 		if(!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
+				if(
+					(!in_array('frontis-blocks/slider',$this->used_blocks ) ||
+					!in_array('frontis-blocks/slider-item',$this->used_blocks )) &&
+					basename($js_file) === 'swiper-bundle.min.js')
+				{
+					continue;
+				}
+
+				if(
+					!in_array('frontis-blocks/advanced-video',$this->used_blocks ) &&
+					basename($js_file) === 'react-player.standalone.min.js')
+				{
+					continue;
+				}
 				$this->js_content .= file_get_contents($js_file) . "\n";
 			}
 		}
@@ -543,20 +573,14 @@ class AssetsGenerator {
         }
     }
 
-    public function css_generator_functions($generate_template_css = false) {
+    public function css_generator_functions() {
         $this->generate_global_assets();
-        $this->combine_static_assets();
         $this->generate_all_blocks_assets();
+		$this->combine_static_assets();
 
-        if($generate_template_css) {
-            $this->check_frontis_blocks_used();
-            $this->get_template_css();
-        }
-
-        // Combine and save CSS files
+		// Combine and save CSS files
         $page_name = $this->post->post_name;
         $this->combine_and_save_css_file($page_name);
-
         $this->get_font_families();
     }
 
@@ -594,28 +618,47 @@ class AssetsGenerator {
         return $template_parts;
     }
 
+
+	public function generate_page_post_css() {
+
+	}
+
+	public function generate_template_css() {
+
+	}
+
     public function generate_page_assets($post_id, $post) {
 
         // Generate header and footer css
         $this->generate_active_header_footer();
 
-        // Generate template and page css
-        $this->post_id = $post_id;
-        $this->post = $post;
+//		var_dump(get_post_type($post_id));
 
-		// Check frontis blocks used inside the post/page
-		$pattern = "/frontis-blocks/i";
-		if(preg_match_all($pattern, $post->post_content) < 1) {
-			return false;
+		if(get_post_type($post_id) === 'wp_template_part') {
+			return;
 		}
 
-		if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
-            $this->css_generator_functions(false);
-        }
+		// Generate template and page css
+        $this->post_id = $post_id;
+        $this->post = $post;
+		$this_post_used_blocks = get_post_meta($post_id, 'page_frontis_block_used', true);
 
-        if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
-            $this->css_generator_functions(true);
-        }
+		if(get_post_type( $this->post_id ) !== 'wp_template') {
+			if($this_post_used_blocks !== "") {
+				$this->generate_page_post_css();
+				$this->generate_template_css();
+			}
+		} else {
+			$this->css_generator_functions();
+		}
+
+//		if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
+//            $this->css_generator_functions(false);
+//        }
+//
+//        if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
+//            $this->css_generator_functions(true);
+//        }
     }
 
     public function check_frontis_blocks_used() {
@@ -627,46 +670,42 @@ class AssetsGenerator {
     }
 
     public function generate_block_assets($block) {
-        if (str_contains($block['blockName'], 'frontis-blocks')) {
-            $single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
-            if(!in_array($block['blockName'], $this->used_blocks)) {
+		if (str_contains($block['blockName'], 'frontis-blocks')) {
+			$single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
+			if (!in_array($block['blockName'], $this->used_blocks)) {
+				// Css file
+				$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
+				if (file_exists($block_static_css_file_path)) {
+					$this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
+				}
 
-                // Css file
-                $block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
-                if(file_exists($block_static_css_file_path)) {
-                    $this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
-                }
+				// Js file
+				$block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
+				if (file_exists($block_static_js_file_path)) {
+					$this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
+				}
+			}
 
-                // Js file
-                $block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/view.js';
-                if(file_exists($block_static_js_file_path)) {
-                    $this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
-                }
-            }
+			$this->used_blocks[] = $block['blockName'];
 
-            $this->used_blocks[] = $block['blockName'];
+			// Get the block attributes
+			$block_attributes = $block['attrs'];
+			$blockStyle = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
+			$this->blocks_used_in_page[] = $block['blockName'];
 
-            // Get the block attributes
-            $block_attributes               = $block['attrs'];
-            $blockStyle                     = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
+			$fonts = Helper::get_fonts_family($block_attributes);
+			if (!empty($fonts)) {
+				foreach ($fonts as $font => $weight) {
+					if (array_key_exists($font, $this->block_fonts)) {
+						$this->block_fonts[$font][] = $weight;
+					} else {
+						$this->block_fonts[$font][] = $weight;
+					}
+				}
+			}
 
-            if(get_post_type( $this->post_id ) !== 'wp_template_part') {
-                $this->blocks_used_in_page[] = $block['blockName'];
-
-                $fonts        = Helper::get_fonts_family( $block_attributes );
-                if(!empty($fonts)) {
-                    foreach($fonts as $font => $weight) {
-                        if(array_key_exists($font, $this->block_fonts)) {
-                            $this->block_fonts[$font][] = $weight;
-                        } else {
-                            $this->block_fonts[$font][] = $weight;
-                        }
-                    }
-                }
-            }
-
-            $this->css_content .= $this->clean_CSS($blockStyle) . "\n";
-        }
+			$this->css_content .= $this->clean_CSS($blockStyle) . "\n";
+		}
     }
 
     public function generate_all_blocks_assets() {
@@ -738,7 +777,6 @@ class AssetsGenerator {
         }
 
         $fonts_families = array_merge($fonts_families, $this->block_fonts);
-
 
         if (!empty($fonts_families)) {
             $font_url = "https://fonts.googleapis.com/css?family=";
