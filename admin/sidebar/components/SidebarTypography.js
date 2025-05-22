@@ -113,7 +113,7 @@ const FB_SidebarTypography = ({
 			}
 			<div className='fb_global_typo_wrap'>
 				<SelectControl
-					label={__("Appearance", "frontis-blocks")}
+					label={__("Font Weight", "frontis-blocks")}
 					options={FONT_WEIGHT}
 					value={fontWeight}
 					onChange={handleFontWeightChange}

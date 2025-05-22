@@ -12,9 +12,9 @@
         &.fb-setting-label-text {
             flex: 1;
             color: $neutral-color-950;
-            font-family: $body-font-family;
-            font-size: $medium-font-size;
-            font-weight: 400;
+            font-family: $heading-font-family;
+            font-size: $base-font-size;
+            font-weight: $font-weight-500;
             line-height: $body-line-height;
             text-transform: capitalize !important;
         }
