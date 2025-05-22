@@ -14,31 +14,28 @@
 	.components-tab-panel__tabs {
 		margin-bottom: 24px;
 		background-color: $neutral-color-50;
-		border-radius: 8px;
+		border-radius: 4px;
 		justify-content: space-between;
 
 		.fb-tab {
 			display: inline-block;
 			font-family: $heading-font-family;
 			font-weight: 600;
-			font-size: $medium-font-size;
-			line-height: 14px;
-			border: 1px solid transparent;
+			font-size: $medium-font-size-global;
+			line-height: 16px;
 			border-radius: 0;
 			box-shadow: none;
 			cursor: pointer;
-			height: 46px;
-			padding: 10px 14px;
+			padding: 16px 12px;
 
 			&.general,
 			&.styles,
 			&.advance,
 			&.advanced {
 				&.active-tab {
-					background: $primary-color-100;
-					border: 1px solid $primary-color-300 !important;
-					border-radius: 8px;
-					color: $neutral-color-950;
+					background: $neutral-color-700;
+					border-radius: 4px;
+					color: $white-color;
 				}
 			}
 		}
@@ -109,10 +106,10 @@
 			}
 
 			.components-textarea-control__input {
-				border-radius: 8px;
+				border-radius: 4px;
 			}
             .components-input-control__container{
-				border-radius: 8px;
+				border-radius: 4px;
 				.components-input-control__input{
 					border: 1px solid $primary-color-300;
 					border-radius: 6px;
@@ -123,11 +120,10 @@
 				}
 
 				.components-select-control__input {
-					background: $neutral-color-50;
-					height: 40px;
-					border-radius: 8px;
+					height: 45px;
+					border-radius: 4px;
 					padding: 0px 12px;
-
+					border: 1px solid $neutral-color-300;
 					&:focus {
 						outline: none;
 					}
@@ -142,7 +138,7 @@
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-between;
-				border-radius: 8px;
+				border-radius: 4px;
 				background: $neutral-color-50;
 				margin-bottom: 24px;
 
@@ -158,9 +154,9 @@
 					border: 1px solid transparent;
 
 					&.active {
-						border-radius: 8px;
-						border: 1px solid #B0D7FF;
-						background: #D7EBFF;
+						border-radius: 4px;
+						// border: 1px solid #B0D7FF;
+						background: $neutral-color-100; 
 					}
 				}
 			}
@@ -197,7 +193,7 @@
 		.components-button-group.fb-setting-switcher-panel-btn {
 			display: flex;
 			flex-wrap: nowrap;
-
+			border: 1px solid $neutral-color-100;
 			.components-button {
 				font-size: 14px !important;
 				color: $neutral-color-600 !important;
@@ -260,7 +256,7 @@
 					background: $neutral-color-50;
 					padding: 12px;
 					border: none;
-					border-radius: 8px;
+					border-radius: 4px;
 
 					.sortable-sort,
 					.sortable-duplicate,
@@ -284,7 +280,7 @@
 				background: $primary-color-base;
 				color: $white-color;
 				padding: 10px 16px;
-				border-radius: 8px;
+				border-radius: 4px;
 			}
 		}
 
@@ -478,14 +474,14 @@
 	}
 
 	.components-button-group {
-		background: $neutral-color-100 !important;
+		background: none !important;
 
 		.components-button {
 			box-shadow: none !important;
 
 			&.active {
-				border: 1px solid $neutral-color-300 !important;
-				background: $neutral-color-200 !important;
+				border: none;
+				background: $neutral-color-100 !important;
 			}
 		}
 	}
@@ -552,10 +548,10 @@
 				width: unset;
 				padding: 6px 6px 6px 10px;
 				border: none;
-				border-radius: 8px;
-				color: #50575e;
-				background: $neutral-color-100;
-
+				border-radius: 4px;
+				color: $neutral-color-950;
+				border:1px solid $neutral-color-100;
+				background: transparent;
 				&:focus {
 					outline: none;
 					box-shadow: none;
