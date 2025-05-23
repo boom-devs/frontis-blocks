@@ -57,7 +57,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                 </span>
                 <span className="sortable-duplicate">
                     <Button
-                        icon="admin-page"
+                        icon={DuplicateIcon}
                         label={__("Duplicate", "frontis-blocks")}
                         aria-label={__("Duplicate item", "frontis-blocks")}
                         onClick={() => handleDuplicateItem(item.id)}
