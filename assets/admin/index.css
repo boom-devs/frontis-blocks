@@ -3012,6 +3012,7 @@
 }
 .fb-letter-case-control .fb-case-button-group .fb-case-button:hover {
   background-color: #E1E3E8;
+  border-radius: 0;
 }
 .fb-letter-case-control .fb-case-button-group .fb-case-button.active {
   background-color: #E1E3E8;
@@ -3272,6 +3273,9 @@
 .fb-inspector-control .components-panel__body.is-opened {
   padding: 0;
 }
+.fb-inspector-control .components-panel__body.is-opened .components-button {
+  background: #E1E3E8;
+}
 .fb-inspector-control .components-panel__body .components-panel__body-title {
   margin: 0;
 }
@@ -3286,7 +3290,7 @@
 .fb-inspector-control .components-panel__body .components-button {
   color: #050607;
   border-radius: 6px;
-  background: #E1E3E8;
+  background: #F8F8F8;
   padding: 12px 16px;
   height: 44px;
   margin-bottom: 10px;
@@ -3296,7 +3300,7 @@
   line-height: 16px;
 }
 .fb-inspector-control .components-panel__body .components-button.components-panel__body-toggle {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label,
 .fb-inspector-control .components-panel__body .components-base-control__field label {
@@ -3330,7 +3334,7 @@
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-input-control__input {
   border: 1px solid #E1E3E8;
   border-radius: 4px;
-  height: 44px !important;
+  height: 32px !important;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-input-control__container .components-input-control__input:focus {
   outline: none;
