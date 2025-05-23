@@ -485,7 +485,11 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		.components-base-control {
 			width: auto !important;
 			margin-left: 0 !important;
-
+		}
+		.fb-typography-settings{
+			.fb-letter-case-control{
+				margin-top: 18px;
+			}
 		}
 	}
 
