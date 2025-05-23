@@ -7,7 +7,7 @@ const VideoBanner = () => {
                 <iframe
                     width="100%"
                     height="100%"
-                    src="https://www.youtube.com/embed/eroWCJodVa8"
+                    src="https://www.youtube.com/embed/8U0K_wMcUPg?si=xneqJlJjVI-8sWod"
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
