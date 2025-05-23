@@ -1,4 +1,5 @@
 import { useState } from '@wordpress/element';
+import { Logo, VersionIcon } from '../icons';
 
 const TabPanel = ({ className, activeClass, onSelect, initialTabName, tabs, children }) => {
 
@@ -13,6 +14,10 @@ const TabPanel = ({ className, activeClass, onSelect, initialTabName, tabs, chil
   return (
     <div className={`fb-blocks-tab-panel ${className}`}>
       <div className="fb-blocks-tab-panel-header">
+        <div className="fb-blocks-tab-panel-header-left">
+          <div className="fb-blocks-tab-panel-logo">
+            <Logo />
+          </div>
         <div className="fb-blocks-tab-list">
           {tabs.map((tab) => (
             <button
@@ -25,7 +30,8 @@ const TabPanel = ({ className, activeClass, onSelect, initialTabName, tabs, chil
             </button>
           ))}
         </div>
-        <div className="fb-blocks-version">Free version: {version}</div>
+        </div>
+        <div className="fb-blocks-version"><span className="fb-version-icon"><VersionIcon /></span> Free version: <span className="fb-version">{version}</span></div>
       </div>
       <div className="fb-blocks-tab-content">
         {children(tabs.find((tab) => tab.name === activeTab))}
