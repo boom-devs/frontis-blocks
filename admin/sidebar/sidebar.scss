@@ -94,6 +94,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		border-right: 1px solid rgb(221, 221, 221);
 		border-left: 1px solid rgb(221, 221, 221);
 		border-radius: 4px;
+		&:nth-child(3){
+			margin-top: 24px;
+		}
 	}
 
 	.fb-blocks-color-tabs {
