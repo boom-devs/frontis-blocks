@@ -54,6 +54,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 		.components-tools-panel-header {
 			padding-bottom: 0;
+			margin-bottom: 12px;
 		}
 
 		.components-text {
@@ -94,7 +95,8 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		border-right: 1px solid rgb(221, 221, 221);
 		border-left: 1px solid rgb(221, 221, 221);
 		border-radius: 4px;
-		&:nth-child(3){
+
+		&:nth-child(3) {
 			margin-top: 24px;
 		}
 	}
@@ -217,7 +219,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		border-bottom: 1px solid $neutral-color-100;
 
 		&:first-child {
-			margin-top: 0;
+			margin-top: 24px;
 		}
 
 		&:last-child {
@@ -234,6 +236,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		align-items: center;
 		justify-content: space-between;
 		padding-right: 12px;
+		margin-top: 0;
 
 		&:first-child {
 			border-radius: 4px 4px 0 0;
@@ -486,8 +489,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			width: auto !important;
 			margin-left: 0 !important;
 		}
-		.fb-typography-settings{
-			.fb-letter-case-control{
+
+		.fb-typography-settings {
+			.fb-letter-case-control {
 				margin-top: 18px;
 			}
 		}
