@@ -450,6 +450,9 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-gradient-color-panel {
   border-left: 1px solid rgb(221, 221, 221);
   border-radius: 4px;
 }
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-gradient-color-panel:nth-child(3) {
+  margin-top: 24px;
+}
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs {
   padding: 0 16px;
 }
