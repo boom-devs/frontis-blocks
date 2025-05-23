@@ -13,15 +13,15 @@ const Dashboard = () => {
         <div className="fb-blocks-dashboard-right">
           <SystemRequirements />
           <div className="fb-blocks-dashboard-right-bottom">
-            <IconCard title="Missing Any Feature?" desc="We’re continually working to enhance Frontis Blocks for your benefit. If you have any suggestions for features that could improve your experience or ideas for new blocks, we’d love to hear from you!" btnText="Request Feature" btnLink="#" />
+            <IconCard title="Missing Any Feature?" desc="We’re continually working to enhance Frontis Blocks for your benefit. If you have any suggestions for features that could improve your experience or ideas for new blocks, we’d love to hear from you!" btnText="Request Feature" btnLink="https://wordpress.org/plugins/frontis-blocks/" />
           </div>
         </div>
       </div>
       <div className="fb-blocks-dashboard-bottom">
         <div className="fb-blocks-dashboard-icon-card-area">
-          <IconCard icon={<DocumentationIcon />} title="Documentation" desc="Documentation provides a comprehensive guide that explains the structure and functionality." btnText="Read More" btnLink="#" btnIcon={<ArrowRightIcon />} />
-          <IconCard icon={<RateIcon />} title="Rate Us" desc="Frontis allows users to provide feedback on their experience with the site or its services." btnText="Read More" btnLink="#" btnIcon={<ArrowRightIcon />} />
-          <IconCard icon={<CommunityIcon />} title="Join The Community" desc="Frontis invites users to become part of an engaged and interactive group." btnText="Read More" btnLink="#" btnIcon={<ArrowRightIcon />} />
+          <IconCard icon={<DocumentationIcon />} title="Documentation" desc="Documentation provides a comprehensive guide that explains the structure and functionality." btnText="Read More" btnLink="https://wordpress.org/plugins/frontis-blocks/" btnIcon={<ArrowRightIcon />} />
+          <IconCard icon={<RateIcon />} title="Rate Us" desc="Frontis allows users to provide feedback on their experience with the site or its services." btnText="Read More" btnLink="https://wordpress.org/support/plugin/frontis-blocks/reviews/" btnIcon={<ArrowRightIcon />} />
+          <IconCard icon={<CommunityIcon />} title="Join The Community" desc="Frontis invites users to become part of an engaged and interactive group." btnText="Read More" btnLink="https://discord.gg/wEVmDvRbad" btnIcon={<ArrowRightIcon />} />
         </div>
         <div className="fb-blocks-dashboard-cta-area">
           <CallToAction />

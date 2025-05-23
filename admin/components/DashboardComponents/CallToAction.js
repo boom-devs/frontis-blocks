@@ -18,7 +18,7 @@ function CallToAction() {
           </div>
           <div className="fb-dashboard-cta-card-right">
                 <a 
-                    href=""
+                    href="https://wordpress.org/plugins/frontis-blocks/"
                     className="fb-cat-button bg-white"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -26,7 +26,7 @@ function CallToAction() {
                     Knowledge Base <DocLinkIcon />
                 </a>
                 <a 
-                    href=""
+                    href="https://wordpress.org/support/plugin/frontis-blocks/"
                     className="fb-cat-button"
                     target="_blank"
                     rel="noopener noreferrer"
