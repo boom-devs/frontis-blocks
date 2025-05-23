@@ -40,12 +40,12 @@ const App = () => {
 
     return (
         <>
-            <div className="fb-header-top">
+            {/* <div className="fb-header-top">
                 <div className="fb-header-top-left">
                     <Logo />
-                    {/* <img src={window.frontisBlocksAdmin.logo} alt="Frontis Blocks" /> */}
+                    <img src={window.frontisBlocksAdmin.logo} alt="Frontis Blocks" />
                 </div>
-                {/* <div className="fb-header-top-right">
+                <div className="fb-header-top-right">
                     {window.frontisBlocksAdmin.isProActive === 'false' && (
                         <a 
                             href={window.frontisBlocksAdmin.pro_url} 
@@ -56,8 +56,8 @@ const App = () => {
                             Upgrade to Pro <Crown />
                         </a>
                     )}
-                </div> */}
-            </div>
+                </div>
+            </div> */}
             <div className="frontis-blocks-admin">
                 <TabPanel
                     className="frontis-blocks-tab-panel"
