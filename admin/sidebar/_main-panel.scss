@@ -3,7 +3,7 @@
 
     &.components-panel {
         border-top: 0;
-        margin-top: 12px;
+        margin-top: 0;
         padding: 16px 0;
 
         .fb-panel-control {
@@ -21,14 +21,14 @@
                         font-weight: 500;
                         line-height: 16px;
                         text-transform: capitalize;
-                        margin-bottom: 24px;
+                        margin-bottom: 12px;
                     }
 
                     .fb-panel-heading-wrapper {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        margin-bottom: 24px;
+                        margin-bottom: 12px;
 
                         .add-custom-color {
                             .add-custom-color-btn {
@@ -113,6 +113,7 @@
                         color: $neutral-color-950;
                         text-transform: capitalize;
                         margin-top: 9px;
+                        margin-bottom: 12px;
                     }
 
                     p {
@@ -121,6 +122,7 @@
                         font-weight: 400;
                         line-height: 20px;
                         color: $neutral-color-950;
+                        margin-bottom: 0;
                     }
                 }
 
@@ -180,13 +182,14 @@
                     font-weight: 500;
                     line-height: 16px;
                     text-transform: capitalize;
+                    margin-bottom: 12px;
                 }
 
                 .fb-panel-heading-wrapper {
                     display: flex;
-                    align-items: center;
+                    align-items: center; 
                     justify-content: space-between;
-                    margin-bottom: 24px;
+                    margin-bottom: 12px;
 
                     .fb-section-title {
                         margin-bottom: 0;
@@ -235,8 +238,8 @@
                 .components-panel__body-toggle {
                     &.components-button {
                         padding: 16px 12px;
-                        background: $neutral-color-100;
-                        border-radius: 6px;
+                        background: $neutral-color-50;
+                        border-radius: 4px;
 
                         .components-panel__arrow {
                             right: 5px;
@@ -353,7 +356,7 @@
                     }
 
                     .components-select-control__input {
-                        height: unset;
+                        color: $neutral-color-700;
                         padding: 12px;
                         border: 1px solid $neutral-color-100;
                         border-radius: 4px;
@@ -414,6 +417,11 @@
                     text-transform: capitalize;
                     margin-bottom: 4px;
                     margin-top: 10px;
+                }
+                .fb_global_typo_wrap{
+                    .fb-letter-case-control{
+                        margin-top: 18px;
+                    }
                 }
             }
 
