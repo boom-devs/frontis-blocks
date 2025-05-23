@@ -2374,7 +2374,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                             onChange={(value) => setAttributes({ TestimonialRatingNumber: value })}
                                                             min={1}
                                                             max={5}
-                                                            allowReset
                                                             resetFallbackValue={5}
                                                         />
                                                     </div>
