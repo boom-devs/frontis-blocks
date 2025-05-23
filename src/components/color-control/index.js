@@ -66,7 +66,10 @@ const FB_ColorControl = ({
                             aria-expanded={isOpen}
                             className="fb-setting-color-setting-icon-btn"
                         >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ 
+                                display: 'flex',
+                                alignItems: 'center', 
+                                ...(globalColor ? { gap: '8px' } : {}) }}>
                                 <span className="fb-setting-color-hex">
                                     {matchedObject !== undefined ? matchedObject.value : globalColor || ''}
                                 </span>
