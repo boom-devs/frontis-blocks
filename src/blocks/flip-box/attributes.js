@@ -19,6 +19,10 @@ const attributes = {
 		type: "string",
 		default: "icon"
 	},
+    flipModeSwitcher : {
+		type: "string",
+		default: "front"
+	},
     flipMediaUrl: {
         type: 'string',
         default: ''
