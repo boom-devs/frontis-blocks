@@ -2398,7 +2398,6 @@
   height: 28px;
   width: 26px;
   background: #F8F8F8;
-  border-radius: 6px;
   opacity: 1;
   transform: scale(1);
 }
@@ -3183,6 +3182,59 @@
   background: #E1E3E8 !important;
 }
 
+.dnd-items-wrapper li.sortable-item .sortable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #F8F8F8;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  height: 44px;
+}
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete {
+  border: none;
+}
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button svg,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button svg,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button svg {
+  fill: none;
+  width: 16px;
+  height: 16px;
+}
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button {
+  background: none;
+  margin-bottom: 0;
+  padding: 0;
+  height: unset;
+}
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button.has-icon,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button.has-icon,
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button.has-icon {
+  justify-content: flex-end;
+  border-radius: 0 !important;
+}
+.dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #404655;
+  line-height: 18px;
+}
+
+.fb-feature-wrapper .components-button.is-primary {
+  font-weight: 500;
+  background: #399CFF;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
 /** Start Admin Panel scss **/
 .fb-inspector-control {
   padding: 16px;
@@ -3377,51 +3429,6 @@
 .fb-inspector-control .components-panel__body .components-button.fb-box-shadow-icon-btn {
   height: unset !important;
   padding: 5px;
-}
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #F8F8F8;
-  padding: 12px;
-  border: none;
-  border-radius: 4px;
-  height: 44px;
-}
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete {
-  border: none;
-}
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button svg,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button svg,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button svg {
-  fill: none;
-  width: 16px;
-  height: 16px;
-}
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort .components-button,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-duplicate .components-button,
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete .components-button {
-  background: none;
-  margin-bottom: 0;
-  padding: 0;
-  height: unset;
-}
-.fb-inspector-control .components-panel__body .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #404655;
-  line-height: 18px;
-}
-.fb-inspector-control .components-panel__body .fb-feature-wrapper .components-button.is-primary {
-  font-weight: 500;
-  background: #399CFF;
-  color: #FFFFFF;
-  padding: 10px 16px;
-  border-radius: 4px;
-  margin-bottom: 24px;
 }
 .fb-inspector-control .components-panel__body .components-range-control .components-range-control__root {
   position: relative;
