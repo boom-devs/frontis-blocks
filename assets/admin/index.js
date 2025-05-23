@@ -667,7 +667,7 @@ var Dashboard = function Dashboard() {
     title: "Missing Any Feature?",
     desc: "We\u2019re continually working to enhance Frontis Blocks for your benefit. If you have any suggestions for features that could improve your experience or ideas for new blocks, we\u2019d love to hear from you!",
     btnText: "Request Feature",
-    btnLink: "#"
+    btnLink: "https://wordpress.org/plugins/frontis-blocks/"
   })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-dashboard-bottom"
   }, /*#__PURE__*/React.createElement("div", {
@@ -677,21 +677,21 @@ var Dashboard = function Dashboard() {
     title: "Documentation",
     desc: "Documentation provides a comprehensive guide that explains the structure and functionality.",
     btnText: "Read More",
-    btnLink: "#",
+    btnLink: "https://wordpress.org/plugins/frontis-blocks/",
     btnIcon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__.ArrowRightIcon, null)
   }), /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.IconCard, {
     icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__.RateIcon, null),
     title: "Rate Us",
     desc: "Frontis allows users to provide feedback on their experience with the site or its services.",
     btnText: "Read More",
-    btnLink: "#",
+    btnLink: "https://wordpress.org/support/plugin/frontis-blocks/reviews/",
     btnIcon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__.ArrowRightIcon, null)
   }), /*#__PURE__*/React.createElement(_DashboardComponents__WEBPACK_IMPORTED_MODULE_1__.IconCard, {
     icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__.CommunityIcon, null),
     title: "Join The Community",
     desc: "Frontis invites users to become part of an engaged and interactive group.",
     btnText: "Read More",
-    btnLink: "#",
+    btnLink: "https://discord.gg/wEVmDvRbad",
     btnIcon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_2__.ArrowRightIcon, null)
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-dashboard-cta-area"
@@ -727,12 +727,12 @@ function CallToAction() {
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Get 24/7 Fastest Support', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("The Frontis Block is a modern content creation tool designed for WordPress for a demographic", 'frontis-blocks')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-dashboard-cta-card-right"
   }, /*#__PURE__*/React.createElement("a", {
-    href: "",
+    href: "https://wordpress.org/plugins/frontis-blocks/",
     className: "fb-cat-button bg-white",
     target: "_blank",
     rel: "noopener noreferrer"
   }, "Knowledge Base ", /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_1__.DocLinkIcon, null)), /*#__PURE__*/React.createElement("a", {
-    href: "",
+    href: "https://wordpress.org/support/plugin/frontis-blocks/",
     className: "fb-cat-button",
     target: "_blank",
     rel: "noopener noreferrer"
@@ -923,7 +923,7 @@ var VideoBanner = function VideoBanner() {
   }, /*#__PURE__*/React.createElement("iframe", {
     width: "100%",
     height: "100%",
-    src: "https://www.youtube.com/embed/eroWCJodVa8",
+    src: "https://www.youtube.com/embed/8U0K_wMcUPg?si=xneqJlJjVI-8sWod",
     title: "YouTube video player",
     frameBorder: "0",
     allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
