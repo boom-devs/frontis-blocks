@@ -120,7 +120,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true', 
                 'child' => 'false',
             ],
             'advanced-video' => [
@@ -224,7 +224,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/flip-box.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'fluent-form' => [
@@ -289,7 +289,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/info-box.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'marquee-carousel' => [
@@ -458,7 +458,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/call-to-action.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'social-share' => [
@@ -471,7 +471,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/social-icons.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'social-share-child' => [
@@ -481,10 +481,10 @@ class BlockList
                 'category' => 'social',
                 'badge' => 'free',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/marquee-carousel.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/social-icons.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true', 
                 'child' => 'false',
             ],
             'table-of-contents' => [
@@ -497,7 +497,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'false',
+                'complete' => 'true',
                 'child' => 'false',
             ],
             'team-member' => [
