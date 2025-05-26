@@ -14,7 +14,6 @@ use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Utils\Helper;
-use FrontisBlocks\Utils\UpdateNotifier;
 
 final class Plugin
 {
@@ -329,8 +328,6 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		SupportSVG::get_instance();
-
-		UpdateNotifier::register();
 
 		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 
