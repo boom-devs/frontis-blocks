@@ -4053,6 +4053,17 @@ const attributes = {
 		default: true,
 	},
 	/** End Post URL Settings */
+
+	/** Start Post Grid Settings */
+	postGridSkeletonBgColor: {
+		type: "string",
+		default: "#f0f0f0",
+	},
+	postGridSkeletonHighlightBgColor: {
+		type: "string",
+		default: "#e0e0e0",
+	},
+	/** End Post Grid Settings */
 };
 
 export default attributes;
