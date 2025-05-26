@@ -9,6 +9,11 @@ export const PRESETS = [
     { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 ];
 
+export const SELECTED_SIDE = [
+	{ label: __("Front", "frontis-blocks"), value: "front" },
+	{ label: __("Back", "frontis-blocks"), value: "back" },
+];
+
 export const mediaType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },

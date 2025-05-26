@@ -47,13 +47,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipbtnTargetUrl,
 		flipIconVerticalPosition,
 		flipCardAlignment,
-
+		flipMediaUrl,
+		flipBackMediaUrl,
 		flipBoxGlobalWraperID,
 		flipBoxGlobalWraperClass,
 
 		flipBoxDesktopSwitcher,
 		flipBoxTabletSwitcher,
 		flipBoxMobileSwitcher,
+
+		flipBack_Button_Switcher,
+		flipBack_Button_Text,
+		flipBack_Button_Link,
+		flipBackBoxBg,
+		flipBackIconPosition,
+		flipBackButtonLink,
+		flipBackbtnTargetUrl,
+		flipBackIconVerticalPosition,
+		flipBackCardAlignment,
+
+		flipBackBoxGlobalWraperID,
+		flipBackBoxGlobalWraperClass,
+
+		flipBackBoxDesktopSwitcher,
+		flipBackBoxTabletSwitcher,
+		flipBackBoxMobileSwitcher,
+		headingTagBack,
+		headingTextBack,
+		flipBackContent,
+		flipBackContentTag,
+		descSwitcherBack,
+		descAlignmentBack,
+		mediaSwitcherBack,
+		iconBack,
+		flipSelectedSide
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -89,18 +116,140 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`} id={flipBoxGlobalWraperID} ref={panelRef}>
-					<div className="fb-flipper-wrapper">
-						<div className="fb-flipbox-front">
+				<div
+					className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`}
+					id={flipBoxGlobalWraperID}
+				>
+					<div className={`fb-flipper-wrapper fb-editor-mode ${flipSelectedSide === 'back' ? 'fb-show-back' : ''}`}>
+						{/* Front Side */}
+						<div className={`fb-flipbox-front ${flipSelectedSide === 'front' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
-								<h2>Front title</h2>
-								<p>Front conent here. lorem ispus inta manderin ustu poshtu</p>
+								<div className="fb-flip-media-container">
+									<div className="fb-flip-media-wrapper">
+										{mediaSwitcher === "image" && (
+											<img src={flipMediaUrl} alt="Front media" />
+										)}
+										{mediaSwitcher === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+										)}
+									</div>
+								</div>
+								<div className="fb-flip-box-content-wrapper">
+									<RichText
+										tagName={headingTag}
+										value={Heading_Text}
+										onChange={(value) =>
+											setAttributes({ Heading_Text: value })
+										}
+										placeholder={__("Flip Heading", "frontis-block")}
+										className="fb-heading"
+									/>
+
+									{descSwitcher && (
+										<RichText
+											tagName={Sub_Heading_Tag}
+											value={Sub_Heading_Text}
+											onChange={(value) =>
+												setAttributes({ Sub_Heading_Text: value })
+											}
+											placeholder={__("flip description", "frontis-block")}
+											className="fb-description"
+										/>
+									)}
+									{flip_Button_Switcher && (
+										<div className="fb-flip-button">
+											<div className="fb-flip-btn-container">
+												<a
+													className="fb-flip-btn-wrapper"
+													href={flipButtonLink}
+													target={flipbtnTargetUrl ? '_blank' : undefined}
+													rel={flipbtnTargetUrl ? 'noopener noreferrer' : undefined}
+													onClick={handleButtonClick}
+												>
+													<RichText
+														value={flip_Button_Text}
+														tagName={"span"}
+														onChange={(value) =>
+															setAttributes({ flip_Button_Text: value })
+														}
+														placeholder={__("flip Button", "frontis-block")}
+													/>
+													{buttonIconSwitcher && (
+														<div className="fb-btn-icon-wrapper">
+															{renderSVG(btnIcon)}
+														</div>
+													)}
+												</a>
+											</div>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
-						<div className="fb-flipbox-back">
+
+						{/* Back Side */}
+						<div className={`fb-flipbox-back ${flipSelectedSide === 'back' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
-								<h2>Back title</h2>
-								<p>Back conent here. lorem ispus inta manderin ustu poshtu</p>
+								<div className="fb-flipBack-media-container">
+									<div className="fb-flipBack-media-wrapper">
+										{mediaSwitcherBack === "image" && (
+											<img src={flipBackMediaUrl} alt="Back media" />
+										)}
+										{mediaSwitcherBack === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(iconBack)}</div>
+										)}
+									</div>
+								</div>
+								<div className="fb-flipBack-box-content-wrapper">
+									<RichText
+										tagName={headingTagBack}
+										value={headingTextBack}
+										onChange={(value) =>
+											setAttributes({ headingTextBack: value })
+										}
+										placeholder={__("Back Title", "frontis-block")}
+										className="fb-heading"
+									/>
+
+									{descSwitcherBack && (
+										<RichText
+											tagName={flipBackContentTag}
+											value={flipBackContent}
+											onChange={(value) =>
+												setAttributes({ flipBackContent: value })
+											}
+											placeholder={__("Back description", "frontis-block")}
+											className="fb-description"
+										/>
+									)}
+									{flipBack_Button_Switcher && (
+										<div className="fb-flipBack-button">
+											<div className="fb-flipBack-btn-container">
+												<a
+													className="fb-flipBack-btn-wrapper"
+													href={flipBackButtonLink}
+													target={flipBackbtnTargetUrl ? '_blank' : undefined}
+													rel={flipBackbtnTargetUrl ? 'noopener noreferrer' : undefined}
+													onClick={handleButtonClick}
+												>
+													<RichText
+														value={flipBack_Button_Text}
+														tagName={"span"}
+														onChange={(value) =>
+															setAttributes({ flipBack_Button_Text: value })
+														}
+														placeholder={__("flipBack Button", "frontis-block")}
+													/>
+													{buttonIconSwitcher && (
+														<div className="fb-btn-icon-wrapper">
+															{renderSVG(btnIcon)}
+														</div>
+													)}
+												</a>
+											</div>
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
