@@ -36,7 +36,8 @@ import {
 	FLIP_ICON_VERTICAL_POSITION,
 	FLIP_WRAP_ALIGNMENT,
 	PRESETS,
-	OVERFLOW_OP
+	OVERFLOW_OP,
+	SELECTED_SIDE
 } from "./constants/constants";
 
 import { useEffect, useMemo } from "@wordpress/element";
@@ -382,6 +383,94 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxVRTopOffsetUnits,
 		flipBoxVRBottomOffset,
 		flipBoxVRBottomOffsetUnits,
+		flipSelectedSide,
+		//Flip Back
+
+		flipBackBoxPresetStyle,
+		flipBack_Button_Switcher,
+		flipBack_Button_Text,
+		flipBack_Button_Link,
+		flipBackBoxPaddingUnits,
+		flipBackBoxDesktopPadding,
+		flipBackBoxTabPadding,
+		flipBackBoxMobilePadding,
+		flipBackBoxBorderUnits,
+		flipBackBoxDesktopBorderWidth,
+		flipBackBoxTabBorderWidth,
+		flipBackBoxMobileBorderWidth,
+
+		flipBackBoxBorderRadiusUnits,
+		flipBackBoxDesktopBorderRadiusWidth,
+		flipBackBoxTabBorderRadiusWidth,
+		flipBackBoxMobileBorderRadiusWidth,
+		flipBackButtonMarginLink,
+		flipBackButtonMarginUnits,
+		flipBackButtonDesktopMargin,
+		flipBackButtonTabMargin,
+		flipBackButtonMobileMargin,
+		flipBackButtonActiveMarginDevice,
+
+		flipBackButtonPaddingUnits,
+		flipBackButtonDesktopPadding,
+		flipBackButtonTabPadding,
+		flipBackButtonMobilePadding,
+		flipBackButtonPaddingLink,
+		flipBackButtonLink,
+		flipBackbtnTargetUrl,
+		flipBackButtonBorder,
+		flipBackBoxMarginUnits,
+		flipBackBoxDesktopMargin,
+		flipBackBoxTabMargin,
+		flipBackBoxMobileMargin,
+		flipBackBoxMarginLink,
+		flipBackButtonBorderUnits,
+		flipBackButtonDesktopBorderWidth,
+		flipBackButtonTabBorderWidth,
+		flipBackButtonMobileBorderWidth,
+		flipBackBtnBorderradiusUnits,
+		flipBackBtnDesktopBorderradiusWidth,
+		flipBackBtnTabBorderradiusWidth,
+		flipBackBtnMobileBorderradiusWidth,
+		flipBackButtonBorderColorSwitcher,
+		flipBackButtonBorderColor,
+		flipBackButtonHoverBorderColor,
+		flipBackIconPosition,
+		flipBackMediaID,
+		flipBackMediaAlt,
+		flipBackMediaUrl,
+		flipBackButtonBorderLink,
+		flipBackIconVerticalPosition,
+		flipBackCardAlignment,
+
+		flipBackBoxDesktopSwitcher,
+		flipBackBoxTabletSwitcher,
+		flipBackBoxMobileSwitcher,
+
+		flipBackBoxGlobalCustomCSS,
+		flipBackBoxGlobalWraperID,
+		flipBackBoxGlobalWraperClass,
+
+		// Position
+		flipBackBoxPositionType,
+		flipBackBoxHZOrientationType,
+		flipBackBoxVROrientationType,
+		flipBackBoxHZLeftOffset,
+		flipBackBoxHZLeftOffsetUnits,
+		flipBackBoxHZRightOffset,
+		flipBackBoxHZRightOffsetUnits,
+		flipBackBoxVRTopOffset,
+		flipBackBoxVRTopOffsetUnits,
+		flipBackBoxVRBottomOffset,
+		flipBackBoxVRBottomOffsetUnits,
+		flipBackSelectedSide,
+		headingTagBack,
+		headingTextBack,
+		flipBackContent,
+		flipBackContentTag,
+		descSwitcherBack,
+		descAlignmentBack,
+		mediaSwitcherBack,
+		iconBack
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -409,6 +498,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
+	};
+
+	const iconHandlerBack = (iconName) => {
+		setAttributes({ iconBack: iconName });
 	};
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
@@ -2354,8 +2447,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBackgroundImagePosition ? `background-position: ${mediaBackgroundImagePosition};` : ""}
 			${mediaBackgroundImageAttachment ? `background-attachment: ${mediaBackgroundImageAttachment};` : ""}
 			${mediaBackgroundImageRepeat ? `background-repeat: ${mediaBackgroundImageRepeat};` : ""}
-			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ""}` 
-			: mediaClassicColor ? `background: ${mediaClassicColor}; ` : ""
+			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ""}`
+					: mediaClassicColor ? `background: ${mediaClassicColor}; ` : ""
 			}
 			${mediaBgWidth.Desktop ? `width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};` : ''}
 			${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
@@ -2386,8 +2479,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaHoverBackgroundImagePosition ? `background-position: ${mediaHoverBackgroundImagePosition};` : ""}
 			${mediaHoverBackgroundImageAttachment ? `background-attachment: ${mediaHoverBackgroundImageAttachment};` : ""}
 			${mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : ""}
-			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : ""} ` 
-			: mediaHoverClassicColor ? `background: ${mediaHoverClassicColor}; ` : ""
+			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : ""} `
+				: mediaHoverClassicColor ? `background: ${mediaHoverClassicColor}; ` : ""
 			}
 			${mediaBorderHoverColor ? `border-color: ${mediaBorderHoverColor};` : ''}
 			transition: all .3s ease-in-out;
@@ -2774,362 +2867,745 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<div className={"fb-tab-controls" + tab.name}>
 								{tab.name === "general" && (
 									<>
-										<div className="fb-presets-wrapper">
+										<div className="fb-flip-selection-wrapper">
 											<PanelBody
-												title={__("Presets", "frontis-block")}
+												title={__("Selected Side", "frontis-block")}
 												initialOpen={true}
 											>
-												<SelectControl
-													label={__("Preset Style", "frontis-blocks")}
-													value={flipBoxPresetStyle}
-													options={PRESETS}
-													onChange={(selected) => changeflipBoxPreset(selected)}
-												/>
+												{/* <SelectControl
+													value={flipSelectedSide}
+													options={SELECTED_SIDE}
+													onChange={(value) =>
+														setAttributes({ flipSelectedSide: value })
+													}
+												/> */}
+												<BaseControl>
+													<ButtonGroup 
+													className="fb-setting-switcher-panel-btn"
+													id="fb-flipbox-sides">
+														{SELECTED_SIDE.map(
+															(item, index) => (
+																<Button
+																	className="fb-setting-switcher-panel-btn-switcher"
+																	key={index}
+																	isPrimary={
+																		flipSelectedSide ===
+																		item.value
+																	}
+																	isSecondary={
+																		flipSelectedSide !==
+																		item.value
+																	}
+																	onClick={() =>
+																		setAttributes({
+																			flipSelectedSide:
+																				item.value,
+																		})
+																	}
+																>
+																	{item.label}
+																</Button>
+															)
+														)}
+													</ButtonGroup>
+												</BaseControl>
 											</PanelBody>
 										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Icon/Image", "frontis-block")}
-												initialOpen={false}
-											>
+										{flipSelectedSide === 'front' && (
+											<div className="fb-flipbox-front-control-wrapper">
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Icon/Image", "frontis-block")}
+														initialOpen={false}
+													>
 
-												<FB_AlignmentControl
-													label={__("Alignment", "frontis-blocks")}
-													globalAlignment={wrapperAlignment}
-													setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
-												/>
-
-												<BaseControl className="fb-sub-heading-position">
-													<SelectControl
-														label={__("Media Type", "frontis-block")}
-														value={mediaSwitcher}
-														options={mediaType}
-														onChange={(value) =>
-															setAttributes({ mediaSwitcher: value })
-														}
-													/>
-												</BaseControl>
-
-												<BaseControl className="fb-media-position">
-													<SelectControl
-														label={__("Media Position", "frontis-block")}
-														value={flipIconPosition}
-														options={FLIP_ICON_POSITION}
-														onChange={(value) =>
-															setAttributes({ flipIconPosition: value })
-														}
-													/>
-												</BaseControl>
-
-												{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
-													<BaseControl className="fb-media-vertical-position">
-														<SelectControl
-															label={__("Card Alignment", "frontis-block")}
-															value={flipCardAlignment}
-															options={FLIP_WRAP_ALIGNMENT}
-															onChange={(value) =>
-																setAttributes({ flipCardAlignment: value })
-															}
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={wrapperAlignment}
+															setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
 														/>
-													</BaseControl>
-												)}
 
-												{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
-													<BaseControl className="fb-media-vertical-position">
-														<SelectControl
-															label={__("Vertical Position", "frontis-block")}
-															value={flipIconVerticalPosition}
-															options={FLIP_ICON_VERTICAL_POSITION}
-															onChange={(value) =>
-																setAttributes({ flipIconVerticalPosition: value })
-															}
-														/>
-													</BaseControl>
-												)}
-
-												<div className="fb-image-upload-field-wrapper">
-													{mediaSwitcher === "image" && (
-														<>
-															<BaseControl
-																label={__("Background Image", "frontis-blocks")}
-																className="fb-advanced-heading-bg-image"
-															>
-																{flipMediaUrl ? (
-																	<div
-																		className="fb-image-avatar-control"
-																		style={{
-																			backgroundImage: `url(${flipMediaUrl})`,
-																		}}
-																	>
-																		<button
-																			className="fb-image-avatar-delete"
-																			onClick={() => {
-																				setAttributes({
-																					flipMediaUrl: null,
-																					flipMediaAlt: null,
-																					flipMediaID: null,
-																				});
-																			}}
-																		>
-																			<svg
-																				width="24"
-																				height="24"
-																				viewBox="0 0 24 24"
-																				fill="none"
-																				xmlns="http://www.w3.org/2000/svg"
-																			>
-																				<path
-																					d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																				<path
-																					d="M15 9L9 15"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																				<path
-																					d="M9 9L15 15"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																			</svg>
-																		</button>
-																		<button
-																			className="fb-image-replace-btn"
-																			onClick={() => {
-																				const mediaUploader = wp.media({
-																					title: __(
-																						"Select or Upload Background Image",
-																						"frontis-blocks",
-																					),
-																					button: {
-																						text: __(
-																							"Use this image",
-																							"frontis-blocks",
-																						),
-																					},
-																					multiple: false,
-																				});
-
-																				mediaUploader.on("select", function () {
-																					const attachment = mediaUploader
-																						.state()
-																						.get("selection")
-																						.first()
-																						.toJSON();
-																					setAttributes({
-																						flipMediaUrl: attachment.url,
-																						flipMediaAlt: attachment.alt,
-																						flipMediaID: attachment.id,
-																					});
-																				});
-
-																				mediaUploader.open();
-																			}}
-																		>
-																			<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
-																			Replace
-																		</button>
-																	</div>
-																) : (
-																	<button
-																		className="fb-image-upload-btn"
-																		onClick={() => {
-																			const mediaUploader = wp.media({
-																				title: __(
-																					"Select or Upload Background Image",
-																					"frontis-blocks",
-																				),
-																				button: {
-																					text: __(
-																						"Use this image",
-																						"frontis-blocks",
-																					),
-																				},
-																				multiple: false,
-																			});
-
-																			mediaUploader.on("select", function () {
-																				const attachment = mediaUploader
-																					.state()
-																					.get("selection")
-																					.first()
-																					.toJSON();
-																				setAttributes({
-																					flipMediaUrl: attachment.url,
-																					flipMediaAlt: attachment.alt,
-																					flipMediaID: attachment.id,
-																				});
-																			});
-
-																			mediaUploader.open();
-																		}}
-																	>
-																		<svg
-																			width="24"
-																			height="24"
-																			xmlns="http://www.w3.org/2000/svg"
-																			fillRule="evenodd"
-																			clipRule="evenodd"
-																		>
-																			<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
-																		</svg>
-																		Upload
-																	</button>
-																)}
-															</BaseControl>
-														</>
-													)}
-
-													{mediaSwitcher === "icon" && (
-														<BaseControl>
-															<FBIconPicker
-																value={icon}
-																setIconHandler={iconHandler}
+														<BaseControl className="fb-sub-heading-position">
+															<SelectControl
+																label={__("Media Type", "frontis-block")}
+																value={mediaSwitcher}
+																options={mediaType}
+																onChange={(value) =>
+																	setAttributes({ mediaSwitcher: value })
+																}
 															/>
 														</BaseControl>
-													)}
-												</div>
-											</PanelBody>
-										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Title", "frontis-block")}
-												initialOpen={false}
-											>
-												<FB_AlignmentControl
-													label={__("Heading Alignment", "frontis-blocks")}
-													globalAlignment={Alignment}
-													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
-												/>
 
-												<FB_HtmlTagControl
-													label={__("Heading Tag", "frontis-blocks")}
-													globalHtmlTag={headingTag}
-													setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
-												/>
+														<BaseControl className="fb-media-position">
+															<SelectControl
+																label={__("Media Position", "frontis-block")}
+																value={flipIconPosition}
+																options={FLIP_ICON_POSITION}
+																onChange={(value) =>
+																	setAttributes({ flipIconPosition: value })
+																}
+															/>
+														</BaseControl>
 
-												<TextareaControl
-													label={__("Heading Text", "frontis-block")}
-													value={Heading_Text}
-													onChange={(value) =>
-														setAttributes({ Heading_Text: value })
-													}
-													className="fb-setting-text"
-												/>
-											</PanelBody>
-										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Description", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Description", "frontis-block")}
-													checked={descSwitcher}
-													onChange={(value) =>
-														setAttributes({ descSwitcher: value })
-													}
-												/>
+														{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
+															<BaseControl className="fb-media-vertical-position">
+																<SelectControl
+																	label={__("Card Alignment", "frontis-block")}
+																	value={flipCardAlignment}
+																	options={FLIP_WRAP_ALIGNMENT}
+																	onChange={(value) =>
+																		setAttributes({ flipCardAlignment: value })
+																	}
+																/>
+															</BaseControl>
+														)}
 
-												{descSwitcher && (
-													<>
+														{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
+															<BaseControl className="fb-media-vertical-position">
+																<SelectControl
+																	label={__("Vertical Position", "frontis-block")}
+																	value={flipIconVerticalPosition}
+																	options={FLIP_ICON_VERTICAL_POSITION}
+																	onChange={(value) =>
+																		setAttributes({ flipIconVerticalPosition: value })
+																	}
+																/>
+															</BaseControl>
+														)}
 
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={descAlignment}
-															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
-														/>
+														<div className="fb-image-upload-field-wrapper">
+															{mediaSwitcher === "image" && (
+																<>
+																	<BaseControl
+																		label={__("Background Image", "frontis-blocks")}
+																		className="fb-advanced-heading-bg-image"
+																	>
+																		{flipMediaUrl ? (
+																			<div
+																				className="fb-image-avatar-control"
+																				style={{
+																					backgroundImage: `url(${flipMediaUrl})`,
+																				}}
+																			>
+																				<button
+																					className="fb-image-avatar-delete"
+																					onClick={() => {
+																						setAttributes({
+																							flipMediaUrl: null,
+																							flipMediaAlt: null,
+																							flipMediaID: null,
+																						});
+																					}}
+																				>
+																					<svg
+																						width="24"
+																						height="24"
+																						viewBox="0 0 24 24"
+																						fill="none"
+																						xmlns="http://www.w3.org/2000/svg"
+																					>
+																						<path
+																							d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																						<path
+																							d="M15 9L9 15"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																						<path
+																							d="M9 9L15 15"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																					</svg>
+																				</button>
+																				<button
+																					className="fb-image-replace-btn"
+																					onClick={() => {
+																						const mediaUploader = wp.media({
+																							title: __(
+																								"Select or Upload Background Image",
+																								"frontis-blocks",
+																							),
+																							button: {
+																								text: __(
+																									"Use this image",
+																									"frontis-blocks",
+																								),
+																							},
+																							multiple: false,
+																						});
 
-														<TextareaControl
-															label={__("Sub Heading Text", "frontis-block")}
-															value={Sub_Heading_Text}
-															onChange={(value) =>
-																setAttributes({ Sub_Heading_Text: value })
-															}
-															className="fb-sub-heading-text"
-														/>
-													</>
-												)}
-											</PanelBody>
-										</div>
+																						mediaUploader.on("select", function () {
+																							const attachment = mediaUploader
+																								.state()
+																								.get("selection")
+																								.first()
+																								.toJSON();
+																							setAttributes({
+																								flipMediaUrl: attachment.url,
+																								flipMediaAlt: attachment.alt,
+																								flipMediaID: attachment.id,
+																							});
+																						});
 
-										{/*Button Element*/}
-										<div className="fb-flip-button-wrapper">
-											<PanelBody
-												title={__("Button", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Button", "frontis-block")}
-													checked={flip_Button_Switcher}
-													onChange={(value) =>
-														setAttributes({ flip_Button_Switcher: value })
-													}
-												/>
+																						mediaUploader.open();
+																					}}
+																				>
+																					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
+																					Replace
+																				</button>
+																			</div>
+																		) : (
+																			<button
+																				className="fb-image-upload-btn"
+																				onClick={() => {
+																					const mediaUploader = wp.media({
+																						title: __(
+																							"Select or Upload Background Image",
+																							"frontis-blocks",
+																						),
+																						button: {
+																							text: __(
+																								"Use this image",
+																								"frontis-blocks",
+																							),
+																						},
+																						multiple: false,
+																					});
 
-												{flip_Button_Switcher && (
-													<>
+																					mediaUploader.on("select", function () {
+																						const attachment = mediaUploader
+																							.state()
+																							.get("selection")
+																							.first()
+																							.toJSON();
+																						setAttributes({
+																							flipMediaUrl: attachment.url,
+																							flipMediaAlt: attachment.alt,
+																							flipMediaID: attachment.id,
+																						});
+																					});
 
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={buttonAlignment}
-															setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
-														/>
-														<TextareaControl
-															label={__("Button Text", "frontis-block")}
-															value={flip_Button_Text}
-															onChange={(value) =>
-																setAttributes({ flip_Button_Text: value })
-															}
-															className="fb-flip-button-text"
-														/>
-														<ToggleControl
-															label={__("Show Icon", "frontis-block")}
-															checked={buttonIconSwitcher}
-															onChange={(value) =>
-																setAttributes({ buttonIconSwitcher: value })
-															}
-														/>
-														{buttonIconSwitcher && (
-															<>
+																					mediaUploader.open();
+																				}}
+																			>
+																				<svg
+																					width="24"
+																					height="24"
+																					xmlns="http://www.w3.org/2000/svg"
+																					fillRule="evenodd"
+																					clipRule="evenodd"
+																				>
+																					<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
+																				</svg>
+																				Upload
+																			</button>
+																		)}
+																	</BaseControl>
+																</>
+															)}
+
+															{mediaSwitcher === "icon" && (
 																<BaseControl>
 																	<FBIconPicker
-																		value={btnIcon}
-																		setIconHandler={buttonIconHandler}
+																		value={icon}
+																		setIconHandler={iconHandler}
 																	/>
 																</BaseControl>
-																<SelectControl
-																	label={__("Icon Position", "frontis-block")}
-																	value={btnIconPosition}
-																	options={ICON_POSITION}
+															)}
+														</div>
+													</PanelBody>
+												</div>
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Title", "frontis-block")}
+														initialOpen={false}
+													>
+														<FB_AlignmentControl
+															label={__("Heading Alignment", "frontis-blocks")}
+															globalAlignment={Alignment}
+															setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+														/>
+
+														<FB_HtmlTagControl
+															label={__("Heading Tag", "frontis-blocks")}
+															globalHtmlTag={headingTag}
+															setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+														/>
+
+														<TextareaControl
+															label={__("Heading Text", "frontis-block")}
+															value={Heading_Text}
+															onChange={(value) =>
+																setAttributes({ Heading_Text: value })
+															}
+															className="fb-setting-text"
+														/>
+													</PanelBody>
+												</div>
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Description", "frontis-block")}
+														initialOpen={false}
+													>
+														<ToggleControl
+															label={__("Show Description", "frontis-block")}
+															checked={descSwitcher}
+															onChange={(value) =>
+																setAttributes({ descSwitcher: value })
+															}
+														/>
+
+														{descSwitcher && (
+															<>
+
+																<FB_AlignmentControl
+																	label={__("Alignment", "frontis-blocks")}
+																	globalAlignment={descAlignment}
+																	setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+																/>
+
+																<TextareaControl
+																	label={__("Sub Heading Text", "frontis-block")}
+																	value={Sub_Heading_Text}
 																	onChange={(value) =>
-																		setAttributes({ btnIconPosition: value })
+																		setAttributes({ Sub_Heading_Text: value })
 																	}
+																	className="fb-sub-heading-text"
 																/>
 															</>
 														)}
+													</PanelBody>
+												</div>
 
-														<BaseControl>
-															<FB_UrlControl
-																url={flipButtonLink}
-																onChangeUrl={(value) =>
-																	setAttributes({ flipButtonLink: value })
-																}
-																openInNewTab={flipbtnTargetUrl}
-																onChangeOpenInNewTab={(value) =>
-																	setAttributes({ flipbtnTargetUrl: value })
+												{/*Button Element*/}
+												<div className="fb-flip-button-wrapper">
+													<PanelBody
+														title={__("Button", "frontis-block")}
+														initialOpen={false}
+													>
+														<ToggleControl
+															label={__("Show Button", "frontis-block")}
+															checked={flip_Button_Switcher}
+															onChange={(value) =>
+																setAttributes({ flip_Button_Switcher: value })
+															}
+														/>
+
+														{flip_Button_Switcher && (
+															<>
+
+																<FB_AlignmentControl
+																	label={__("Alignment", "frontis-blocks")}
+																	globalAlignment={buttonAlignment}
+																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+																/>
+																<TextareaControl
+																	label={__("Button Text", "frontis-block")}
+																	value={flip_Button_Text}
+																	onChange={(value) =>
+																		setAttributes({ flip_Button_Text: value })
+																	}
+																	className="fb-flip-button-text"
+																/>
+																<ToggleControl
+																	label={__("Show Icon", "frontis-block")}
+																	checked={buttonIconSwitcher}
+																	onChange={(value) =>
+																		setAttributes({ buttonIconSwitcher: value })
+																	}
+																/>
+																{buttonIconSwitcher && (
+																	<>
+																		<BaseControl>
+																			<FBIconPicker
+																				value={btnIcon}
+																				setIconHandler={buttonIconHandler}
+																			/>
+																		</BaseControl>
+																		<SelectControl
+																			label={__("Icon Position", "frontis-block")}
+																			value={btnIconPosition}
+																			options={ICON_POSITION}
+																			onChange={(value) =>
+																				setAttributes({ btnIconPosition: value })
+																			}
+																		/>
+																	</>
+																)}
+
+																<BaseControl>
+																	<FB_UrlControl
+																		url={flipButtonLink}
+																		onChangeUrl={(value) =>
+																			setAttributes({ flipButtonLink: value })
+																		}
+																		openInNewTab={flipbtnTargetUrl}
+																		onChangeOpenInNewTab={(value) =>
+																			setAttributes({ flipbtnTargetUrl: value })
+																		}
+																	/>
+																</BaseControl>
+															</>
+														)}
+													</PanelBody>
+												</div>
+											</div>
+										)}
+										{flipSelectedSide === 'back' && (
+											<div className="fb-flipbox-back-control-wrapper">
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Icon/Image", "frontis-block")}
+														initialOpen={false}
+													>
+
+														<FB_AlignmentControl
+															label={__("Alignment", "frontis-blocks")}
+															globalAlignment={wrapperAlignment}
+															setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+														/>
+
+														<BaseControl className="fb-sub-heading-position">
+															<SelectControl
+																label={__("Media Type", "frontis-block")}
+																value={mediaSwitcherBack}
+																options={mediaType}
+																onChange={(value) =>
+																	setAttributes({ mediaSwitcherBack: value })
 																}
 															/>
 														</BaseControl>
-													</>
-												)}
-											</PanelBody>
-										</div>
+
+														<BaseControl className="fb-media-position">
+															<SelectControl
+																label={__("Media Position", "frontis-block")}
+																value={flipBackIconPosition}
+																options={FLIP_ICON_POSITION}
+																onChange={(value) =>
+																	setAttributes({ flipBackIconPosition: value })
+																}
+															/>
+														</BaseControl>
+
+														{(flipBackIconPosition === 'left' || flipBackIconPosition === 'right') && (
+															<BaseControl className="fb-media-vertical-position">
+																<SelectControl
+																	label={__("Card Alignment", "frontis-block")}
+																	value={flipBackCardAlignment}
+																	options={FLIP_WRAP_ALIGNMENT}
+																	onChange={(value) =>
+																		setAttributes({ flipBackCardAlignment: value })
+																	}
+																/>
+															</BaseControl>
+														)}
+
+														{(flipBackIconPosition === 'left' || flipBackIconPosition === 'right') && (
+															<BaseControl className="fb-media-vertical-position">
+																<SelectControl
+																	label={__("Vertical Position", "frontis-block")}
+																	value={flipBackIconVerticalPosition}
+																	options={FLIP_ICON_VERTICAL_POSITION}
+																	onChange={(value) =>
+																		setAttributes({ flipBackIconVerticalPosition: value })
+																	}
+																/>
+															</BaseControl>
+														)}
+
+														<div className="fb-image-upload-field-wrapper">
+															{mediaSwitcherBack === "image" && (
+																<>
+																	<BaseControl
+																		label={__("Background Image", "frontis-blocks")}
+																		className="fb-advanced-heading-bg-image"
+																	>
+																		{flipBackMediaUrl ? (
+																			<div
+																				className="fb-image-avatar-control"
+																				style={{
+																					backgroundImage: `url(${flipBackMediaUrl})`,
+																				}}
+																			>
+																				<button
+																					className="fb-image-avatar-delete"
+																					onClick={() => {
+																						setAttributes({
+																							flipBackMediaUrl: null,
+																							flipBackMediaAlt: null,
+																							flipBackMediaID: null,
+																						});
+																					}}
+																				>
+																					<svg
+																						width="24"
+																						height="24"
+																						viewBox="0 0 24 24"
+																						fill="none"
+																						xmlns="http://www.w3.org/2000/svg"
+																					>
+																						<path
+																							d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																						<path
+																							d="M15 9L9 15"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																						<path
+																							d="M9 9L15 15"
+																							stroke="#4D4D4D"
+																							strokeWidth="1.5"
+																							strokeLinecap="round"
+																						></path>
+																					</svg>
+																				</button>
+																				<button
+																					className="fb-image-replace-btn"
+																					onClick={() => {
+																						const mediaUploader = wp.media({
+																							title: __(
+																								"Select or Upload Background Image",
+																								"frontis-blocks",
+																							),
+																							button: {
+																								text: __(
+																									"Use this image",
+																									"frontis-blocks",
+																								),
+																							},
+																							multiple: false,
+																						});
+
+																						mediaUploader.on("select", function () {
+																							const attachment = mediaUploader
+																								.state()
+																								.get("selection")
+																								.first()
+																								.toJSON();
+																							setAttributes({
+																								flipBackMediaUrl: attachment.url,
+																								flipBackMediaAlt: attachment.alt,
+																								flipBackMediaID: attachment.id,
+																							});
+																						});
+
+																						mediaUploader.open();
+																					}}
+																				>
+																					<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
+																					Replace
+																				</button>
+																			</div>
+																		) : (
+																			<button
+																				className="fb-image-upload-btn"
+																				onClick={() => {
+																					const mediaUploader = wp.media({
+																						title: __(
+																							"Select or Upload Background Image",
+																							"frontis-blocks",
+																						),
+																						button: {
+																							text: __(
+																								"Use this image",
+																								"frontis-blocks",
+																							),
+																						},
+																						multiple: false,
+																					});
+
+																					mediaUploader.on("select", function () {
+																						const attachment = mediaUploader
+																							.state()
+																							.get("selection")
+																							.first()
+																							.toJSON();
+																						setAttributes({
+																							flipBackMediaUrl: attachment.url,
+																							flipBackMediaAlt: attachment.alt,
+																							flipBackMediaID: attachment.id,
+																						});
+																					});
+
+																					mediaUploader.open();
+																				}}
+																			>
+																				<svg
+																					width="24"
+																					height="24"
+																					xmlns="http://www.w3.org/2000/svg"
+																					fillRule="evenodd"
+																					clipRule="evenodd"
+																				>
+																					<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
+																				</svg>
+																				Upload
+																			</button>
+																		)}
+																	</BaseControl>
+																</>
+															)}
+
+															{mediaSwitcherBack === "icon" && (
+																<BaseControl>
+																	<FBIconPicker
+																		value={iconBack}
+																		setIconHandler={iconHandlerBack}
+																	/>
+																</BaseControl>
+															)}
+														</div>
+													</PanelBody>
+												</div>
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Title", "frontis-block")}
+														initialOpen={false}
+													>
+														<FB_AlignmentControl
+															label={__("Heading Alignment", "frontis-blocks")}
+															globalAlignment={Alignment}
+															setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+														/>
+
+														<FB_HtmlTagControl
+															label={__("Heading Tag", "frontis-blocks")}
+															globalHtmlTag={headingTagBack}
+															setGlobalHtmlTag={(value) => setAttributes({ headingTagBack: value })}
+														/>
+
+														<TextareaControl
+															label={__("Heading Text", "frontis-block")}
+															value={headingTextBack}
+															onChange={(value) =>
+																setAttributes({ headingTextBack: value })
+															}
+															className="fb-setting-text"
+														/>
+													</PanelBody>
+												</div>
+												<div className="fb-advanced-wrapper">
+													<PanelBody
+														title={__("Description", "frontis-block")}
+														initialOpen={false}
+													>
+														<ToggleControl
+															label={__("Show Description", "frontis-block")}
+															checked={descSwitcherBack}
+															onChange={(value) =>
+																setAttributes({ descSwitcherBack: value })
+															}
+														/>
+
+														{descSwitcherBack && (
+															<>
+
+																<FB_AlignmentControl
+																	label={__("Alignment", "frontis-blocks")}
+																	globalAlignment={descAlignmentBack}
+																	setGlobalAlignment={(value) => setAttributes({ descAlignmentBack: value })}
+																/>
+
+																<TextareaControl
+																	label={__("Sub Heading Text", "frontis-block")}
+																	value={flipBackContent}
+																	onChange={(value) =>
+																		setAttributes({ flipBackContent: value })
+																	}
+																	className="fb-sub-heading-text"
+																/>
+															</>
+														)}
+													</PanelBody>
+												</div>
+
+												{/*Button Element*/}
+												<div className="fb-flipBack-button-wrapper">
+													<PanelBody
+														title={__("Button", "frontis-block")}
+														initialOpen={false}
+													>
+														<ToggleControl
+															label={__("Show Button", "frontis-block")}
+															checked={flipBack_Button_Switcher}
+															onChange={(value) =>
+																setAttributes({ flipBack_Button_Switcher: value })
+															}
+														/>
+
+														{flipBack_Button_Switcher && (
+															<>
+
+																<FB_AlignmentControl
+																	label={__("Alignment", "frontis-blocks")}
+																	globalAlignment={buttonAlignment}
+																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+																/>
+																<TextareaControl
+																	label={__("Button Text", "frontis-block")}
+																	value={flipBack_Button_Text}
+																	onChange={(value) =>
+																		setAttributes({ flipBack_Button_Text: value })
+																	}
+																	className="fb-flipBack-button-text"
+																/>
+																<ToggleControl
+																	label={__("Show Icon", "frontis-block")}
+																	checked={buttonIconSwitcher}
+																	onChange={(value) =>
+																		setAttributes({ buttonIconSwitcher: value })
+																	}
+																/>
+																{buttonIconSwitcher && (
+																	<>
+																		<BaseControl>
+																			<FBIconPicker
+																				value={btnIcon}
+																				setIconHandler={buttonIconHandler}
+																			/>
+																		</BaseControl>
+																		<SelectControl
+																			label={__("Icon Position", "frontis-block")}
+																			value={btnIconPosition}
+																			options={ICON_POSITION}
+																			onChange={(value) =>
+																				setAttributes({ btnIconPosition: value })
+																			}
+																		/>
+																	</>
+																)}
+
+																<BaseControl>
+																	<FB_UrlControl
+																		url={flipBackButtonLink}
+																		onChangeUrl={(value) =>
+																			setAttributes({ flipBackButtonLink: value })
+																		}
+																		openInNewTab={flipBackbtnTargetUrl}
+																		onChangeOpenInNewTab={(value) =>
+																			setAttributes({ flipBackbtnTargetUrl: value })
+																		}
+																	/>
+																</BaseControl>
+															</>
+														)}
+													</PanelBody>
+												</div>
+											</div>
+										)}
+
 									</>
 								)}
 
@@ -3159,7 +3635,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											/>
 
 											{/*Icon Color */}
-											{mediaSwitcher === "icon" && (
+											{mediaSwitcherBack === "icon" && (
 												<>
 													<FB_SwitcherControl
 														label={__("Icon Color", "frontis-blocks")}
@@ -3377,9 +3853,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 												globalTypoType={headingGlobalTypoType}
 												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														headingGlobalTypoType: value, 
-														headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+													setAttributes({
+														headingGlobalTypoType: value,
+														headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 													})
 												}}
 
@@ -3387,34 +3863,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
 												fontFamily={headingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 												fontSize={headingFontSize}
-												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
 
 												fontSizeUnits={headingFontSizeUnits}
 												onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
 												fontWeight={headingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 												fontStyle={headingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 												textTransform={headingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
 
 												textDecoration={headingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 												letterSpacing={headingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 												letterSpacingUnits={headingLetterSpacingUnits}
 												onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
 												lineHeight={headingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 												lineHeightUnits={headingLineHeightUnits}
 												onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
@@ -3555,9 +4031,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 													globalTypoType={subHeadingGlobalTypoType}
 													onChangeGlobalTypoType={(value) => {
-														setAttributes({ 
-															subHeadingGlobalTypoType: value, 
-															subHeadingGlobalTypoSwitcher: value === 'default' ? {...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+														setAttributes({
+															subHeadingGlobalTypoType: value,
+															subHeadingGlobalTypoSwitcher: value === 'default' ? { ...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 														})
 													}}
 
@@ -3565,34 +4041,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChangeGlobalTypoOption={(value) => setAttributes({ subHeadingGlobalTypoOption: value })}
 
 													fontFamily={subHeadingFontFamily}
-													onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
+													onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 													fontSize={subHeadingFontSize}
-													onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontSize: value && false} })}
+													onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontSize: value && false } })}
 
 													fontSizeUnits={subHeadingFontSizeUnits}
 													onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
 
 													fontWeight={subHeadingFontWeight}
-													onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
+													onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 													fontStyle={subHeadingFontStyle}
-													onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
+													onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 													textTransform={subHeadingTextTransform}
-													onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textTransform: value && false} })}
+													onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, textTransform: value && false } })}
 
 													textDecoration={subHeadingTextDecoration}
-													onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
+													onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 													letterSpacing={subHeadingLetterSpacing}
-													onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
+													onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 													letterSpacingUnits={subHeadingLetterSpacingUnits}
 													onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
 
 													lineHeight={subHeadingLineHeight}
-													onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
+													onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 													lineHeightUnits={subHeadingLineHeightUnits}
 													onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
@@ -3671,9 +4147,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 													globalTypoType={buttonGlobalTypoType}
 													onChangeGlobalTypoType={(value) => {
-														setAttributes({ 
-															buttonGlobalTypoType: value, 
-															buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+														setAttributes({
+															buttonGlobalTypoType: value,
+															buttonGlobalTypoSwitcher: value === 'default' ? { ...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 														})
 													}}
 
@@ -3681,34 +4157,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 													fontFamily={buttonFontFamily}
-													onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+													onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontFamily: value && false } })}
 
 													fontSize={buttonFontSize}
-													onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+													onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontSize: value && false } })}
 
 													fontSizeUnits={buttonFontSizeUnits}
 													onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
 
 													fontWeight={buttonFontWeight}
-													onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+													onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontWeight: value && false } })}
 
 													fontStyle={buttonFontStyle}
-													onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+													onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontStyle: value && false } })}
 
 													textTransform={buttonTextTransform}
-													onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+													onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textTransform: value && false } })}
 
 													textDecoration={buttonTextDecoration}
-													onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+													onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textDecoration: value && false } })}
 
 													letterSpacing={buttonLetterSpacing}
-													onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+													onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 													letterSpacingUnits={buttonLetterSpacingUnits}
 													onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
 
 													lineHeight={buttonLineHeight}
-													onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+													onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, lineHeight: value && false } })}
 
 													lineHeightUnits={buttonLineHeightUnits}
 													onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}

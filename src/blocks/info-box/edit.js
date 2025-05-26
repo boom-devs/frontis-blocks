@@ -12,7 +12,7 @@ import {
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useRef } from "@wordpress/element";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -42,7 +42,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        infoIconPosition,
+		infoIconPosition,
 		infoButtonLink,
 		infobtnTargetUrl,
 		infoIconVerticalPosition,
@@ -61,9 +61,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	// Prevent link navigation in the editor and focus on text
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-    };
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
 
 	/**
 	* Manages tab button settings and switches to block settings on click
@@ -92,16 +92,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
-						<div
-							className="fb-info-media-wrapper"
-						>
-							{mediaSwitcher === "image" && (
-								<img src={attributes.infoMediaUrl} />
-							)}
-							{mediaSwitcher === "icon" && (
-								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
-							)}
-						</div>
+							<div
+								className="fb-info-media-wrapper"
+							>
+								{mediaSwitcher === "image" && (
+									<img src={attributes.infoMediaUrl} />
+								)}
+								{mediaSwitcher === "icon" && (
+									<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+								)}
+							</div>
 						</div>
 						<div className="fb-info-box-content-wrapper">
 							<RichText
@@ -127,31 +127,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							)}
 							{info_Button_Switcher && (
 								<div className="fb-info-button">
-								<div className="fb-info-btn-container">
-								<a
-									className="fb-info-btn-wrapper"
-									href={infoButtonLink} 
-									target={infobtnTargetUrl ? '_blank' : undefined}
-									rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
-									onClick={handleButtonClick}
-								>
-									<RichText
-										value={info_Button_Text}
-										tagName={"span"}
-										onChange={(value) =>
-											setAttributes({ info_Button_Text: value })
-										}
-										placeholder={__("Info Button", "frontis-block")}
-										
-										
-									/>
-									{buttonIconSwitcher && (
-										<div className="fb-btn-icon-wrapper">
-											{renderSVG(btnIcon)}
-										</div>
-									)}
-								</a>
-								</div>
+									<div className="fb-info-btn-container">
+										<a
+											className="fb-info-btn-wrapper"
+											href={infoButtonLink}
+											target={infobtnTargetUrl ? '_blank' : undefined}
+											rel={infobtnTargetUrl ? 'noopener noreferrer' : undefined}
+											onClick={handleButtonClick}
+										>
+											<RichText
+												value={info_Button_Text}
+												tagName={"span"}
+												onChange={(value) =>
+													setAttributes({ info_Button_Text: value })
+												}
+												placeholder={__("Info Button", "frontis-block")}
+
+
+											/>
+											{buttonIconSwitcher && (
+												<div className="fb-btn-icon-wrapper">
+													{renderSVG(btnIcon)}
+												</div>
+											)}
+										</a>
+									</div>
 								</div>
 							)}
 						</div>

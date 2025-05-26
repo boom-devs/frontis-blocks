@@ -3371,8 +3371,9 @@
   background: none;
   border: 1px solid transparent;
 }
-.fb-inspector-control .components-panel__body .components-base-control__field .components-button-group .components-button.active {
+.fb-inspector-control .components-panel__body .components-base-control__field .components-button-group .components-button.active, .fb-inspector-control .components-panel__body .components-base-control__field .components-button-group .components-button.is-primary {
   border-radius: 4px;
+  color: #050607 !important;
   background: #E1E3E8;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-dropdown .components-button {
